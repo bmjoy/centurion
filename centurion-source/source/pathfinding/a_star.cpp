@@ -8,6 +8,7 @@ aStar::aStar() {
 
 std::vector<glm::ivec2> aStar::pathFind(const Location &locStart, const Location &locFinish)
 {
+
 	// list of open (not-yet-checked-out) nodes
 	static std::priority_queue<Node> q[2];
 

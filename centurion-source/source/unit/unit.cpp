@@ -15,7 +15,7 @@ Unit::Unit() {
 void Unit::set_position(float x, float y) {
 	position2D.x = x;
 	position2D.y = y;
-	position3D.x = x; 
+	position3D.x = x;
 	position3D.y = y;
 }
 
@@ -25,7 +25,7 @@ void Unit::create() {
 	entityData = json::parse(path);
 	sprite = USprite(SHD::USPRITE_SHADER_ID);
 	sprite.create(entityData, player_color);
-	
+
 	//Show circle position under unit (Debug only)
 	circlePos2D = Image(SHD::IMAGE_SHADER_ID);
 	circlePos2D.create("assets/ui/mouse/cursor_point.png", "center");
@@ -58,22 +58,22 @@ void Unit::render(glm::mat4 viewMat) {
 	circlePos3D.apply_view_matrix(viewMat);
 
 	GAME::MINIMAP_IS_ACTIVE ? rectanglePath.apply_projection_matrix(GLB::MINIMAP_PROJECTION) : rectanglePath.apply_projection_matrix(GLB::CAMERA_PROJECTION);
-	
+
 	rectanglePath.apply_view_matrix(viewMat);
 
 	model = glm::translate(glm::mat4(1.0f), position2D);
 
-	if (! GAME::MINIMAP_IS_ACTIVE) {
+	if (!GAME::MINIMAP_IS_ACTIVE) {
 		circlePos2D.render(position2D.x, position2D.y);
 		circlePos3D.render(position3D.x, position3D.y);
-		
+
 		sprite.render(model, currentState);
 	}
 
 	for (int i = 0; i < path.size(); i++) {
 		rectanglePath.render(path[i].x * 20.f, path[i].y * 20.f);
 	}
-	
+
 }
 
 void Unit::set_direction() {
@@ -87,14 +87,14 @@ void Unit::set_frame() {
 			frames_counter = 0;
 		}
 	}
-	frames_counter ++;
+	frames_counter++;
 }
 
 void Unit::position_update() {
 	if (is_Moving) {
 		position2D.x += (to_point.x - start_x) / distance * data["movement_speed"];
 		position2D.y += (to_point.y - start_y) / distance * data["movement_speed"];
-		res_distance = sqrt(float((to_point.x - position2D.x)*(to_point.x - position2D.x) + (to_point.y - position2D.y)*(to_point.y - position2D.y)));
+		res_distance = sqrt(float((to_point.x - position2D.x) * (to_point.x - position2D.x) + (to_point.y - position2D.y) * (to_point.y - position2D.y)));
 		if (res_distance < data["movement_speed"]) {
 			is_Moving = false;
 			currentState = "idle";
@@ -104,17 +104,17 @@ void Unit::position_update() {
 
 void Unit::walk_behaviour() {
 	if (GLB::MOUSE_RIGHT) {
-		
+
 		to_point = getZoomedCoords((float)GLB::MOUSE_RIGHT_X, (float)GLB::MOUSE_RIGHT_Y_2D);
 		start_x = position2D.x;
 		start_y = position2D.y;
 
-		distance = sqrt(float((to_point.x - position2D.x)*(to_point.x - position2D.x) + (to_point.y - position2D.y)*(to_point.y - position2D.y)));
+		distance = sqrt(float((to_point.x - position2D.x) * (to_point.x - position2D.x) + (to_point.y - position2D.y) * (to_point.y - position2D.y)));
 		res_distance = distance;
 		angle = atan2(to_point.y - start_y, to_point.x - start_x) * 180 / 3.14159265;
 		if (angle < 0) { angle += 360.0f; }
 		dir = round(angle / 360 * entityData["sprites"][currentState]["directions"]);
-		
+
 		if (distance > data["movement_speed"]) {
 			is_Moving = true;
 			currentState = "walk";
@@ -139,6 +139,14 @@ void Unit::pathfinding() {
 	std::cout << "Finish: " << iEnd << "," << jEnd << std::endl;
 
 	clock_t start = clock();
+
+
+	//fix pathfinding click to 1
+	while (PATH::GRID_MATRIX[iEnd][jEnd] != 0) {
+		iEnd--;
+		jEnd--;
+	}
+
 
 	path = Path.pathFind(Location(iStart, jStart), Location(iEnd, jEnd));
 
