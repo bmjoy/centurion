@@ -1,0 +1,17 @@
+{
+  "spriteList": [ "idle", "walk" ],
+  "sprites": {
+    "idle": {
+      "filePath": "assets/units/hmyrmidon/idle.png",
+      "frames": 11,
+      "directions": 8,
+      "duration": 10
+    },
+    "walk": {
+      "filePath": "assets/units/hmyrmidon/walk.png",
+      "frames": 11,
+      "directions": 8,
+      "duration": 8
+    }
+  }
+}

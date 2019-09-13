@@ -1,0 +1,11 @@
+{
+    "class_name": "rtemple",
+    "path": "assets/buildings/rome/temple/",
+    "sprites": 
+        [
+            {
+                "name":"rtemple.png",
+                "type":"normal"
+            }
+        ]
+}

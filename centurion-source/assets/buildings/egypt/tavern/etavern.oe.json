@@ -1,0 +1,11 @@
+{
+    "class_name": "etavern",
+    "path": "assets/buildings/egypt/tavern/",
+    "sprites": 
+        [
+            {
+                "name":"etavern.png",
+                "type":"normal"
+            }
+        ]
+}

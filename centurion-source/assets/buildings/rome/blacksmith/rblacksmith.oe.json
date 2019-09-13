@@ -1,0 +1,11 @@
+{
+    "class_name": "rblacksmith",
+    "path": "assets/buildings/rome/blacksmith/",
+    "sprites": 
+        [
+            {
+                "name":"rblacksmith.png",
+                "type":"normal"
+            }
+        ]
+}

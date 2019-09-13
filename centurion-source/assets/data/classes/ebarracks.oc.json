@@ -1,0 +1,6 @@
+{
+    "type": "building",
+    "ent_path": "assets/buildings/egypt/barracks/ebarracks.oe.json",
+    "pass_path" : "assets/buildings/egypt/barracks/ebarracks_pass.json"
+    
+}

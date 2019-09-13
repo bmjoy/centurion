@@ -1,0 +1,11 @@
+{
+    "class_name": "etemple",
+    "path": "assets/buildings/egypt/temple/",
+    "sprites": 
+        [
+            {
+                "name":"etemple.png",
+                "type":"normal"
+            }
+        ]
+}

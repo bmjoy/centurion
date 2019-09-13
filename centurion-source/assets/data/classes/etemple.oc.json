@@ -1,0 +1,6 @@
+{
+    "type": "building",
+    "ent_path": "assets/buildings/egypt/temple/etemple.oe.json",
+    "pass_path" : "assets/buildings/egypt/temple/etemple_pass.json"
+    
+}

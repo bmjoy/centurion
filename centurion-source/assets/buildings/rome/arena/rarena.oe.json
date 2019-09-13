@@ -1,0 +1,11 @@
+{
+    "class_name": "rarena",
+    "path": "assets/buildings/rome/arena/",
+    "sprites": 
+        [
+            {
+                "name":"rarena.png",
+                "type":"normal"
+            }
+        ]
+}

@@ -1,0 +1,6 @@
+{
+    "type": "building",
+    "ent_path": "assets/buildings/rome/tavern/rtavern.oe.json",
+    "pass_path" : "assets/buildings/rome/tavern/rtavern_pass.json"
+    
+}

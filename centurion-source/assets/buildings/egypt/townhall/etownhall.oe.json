@@ -1,0 +1,19 @@
+{
+    "class_name": "etownhall",
+    "path": "assets/buildings/egypt/townhall/",
+    "sprites": 
+        [
+            {
+                "name":"etownhall.png",
+                "type":"normal"
+            },
+            {
+                "name":"etownhall_color.png",
+                "type":"color"
+            },
+            {
+                "name":"etownhall_border.png",
+                "type":"border"
+            }
+        ]
+}

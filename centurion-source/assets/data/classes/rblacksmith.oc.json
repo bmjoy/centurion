@@ -1,0 +1,5 @@
+{
+    "type": "building",
+    "ent_path": "assets/buildings/rome/blacksmith/rblacksmith.oe.json",
+    "pass_path" : "assets/buildings/rome/blacksmith/rblacksmith_pass.json"
+}

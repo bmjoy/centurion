@@ -1,0 +1,11 @@
+{
+    "class_name": "ebarracks",
+    "path": "assets/buildings/egypt/barracks/",
+    "sprites": 
+        [
+            {
+                "name":"ebarracks.png",
+                "type":"normal"
+            }
+        ]
+}

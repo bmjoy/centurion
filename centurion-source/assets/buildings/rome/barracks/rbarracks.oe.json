@@ -1,0 +1,11 @@
+{
+    "class_name": "rbarracks",
+    "path": "assets/buildings/rome/barracks/",
+    "sprites": 
+        [
+            {
+                "name":"rbarracks.png",
+                "type":"normal"
+            }
+        ]
+}

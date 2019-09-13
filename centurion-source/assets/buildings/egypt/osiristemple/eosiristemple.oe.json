@@ -1,0 +1,11 @@
+{
+    "class_name": "eosiristemple",
+    "path": "assets/buildings/egypt/osiristemple/",
+    "sprites": 
+        [
+            {
+                "name":"eosiristemple.png",
+                "type":"normal"
+            }
+        ]
+}

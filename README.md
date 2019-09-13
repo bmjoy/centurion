@@ -1,1 +1,1 @@
-# centurion
+# Centurion - A New C++/OpenGL/GLSL Rts Game Engine

@@ -1,0 +1,11 @@
+{
+    "class_name": "rtavern",
+    "path": "assets/buildings/rome/tavern/",
+    "sprites": 
+        [
+            {
+                "name":"rtavern.png",
+                "type":"normal"
+            }
+        ]
+}
