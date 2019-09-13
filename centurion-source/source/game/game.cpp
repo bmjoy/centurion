@@ -97,7 +97,6 @@ void Game::create() {
 
 	selectionRectangle.compile(); 
 	selectionRectangle.init();
-	selectionRectangle.apply_projection_matrix(GLB::CAMERA_PROJECTION);
 
 	unit.set_class("hmyrmidon");
 	unit.set_player(0);
@@ -140,7 +139,7 @@ void Game::run() {
 
 	if (!GAME::GRID_IS_ACTIVE){
 		for (std::map<int, Building>::iterator bld = buildingList.begin(); bld != buildingList.end(); bld++) {
-			bld->second.select(bld->second.picking_id == click_id);
+			if (selectionRectangle.area == 0) { bld->second.select(bld->second.picking_id == click_id); }
 			bld->second.render(projection, view, false);
 		}
 	}
@@ -241,27 +240,28 @@ void Game::go_to_position() {
 void Game::render_selection_rectangle() {
 	if (!GAME::MINIMAP_IS_ACTIVE) {
 		if (GLB::MOUSE_LEFT && cursorInGameScreen()) {
-			sel_rect_coords[0] = GLB::MOUSE_LEFT_X + cameraLastX;
-			sel_rect_coords[1] = GLB::MOUSE_LEFT_Y + cameraLastY;
-			sel_rect_coords[2] = GLB::MOUSE_LEFT_X + cameraLastX;
-			sel_rect_coords[3] = GLB::MOUSE_Y + GAME::CAMERA_POS_Y;
-			sel_rect_coords[4] = GLB::MOUSE_X + GAME::CAMERA_POS_X;
-			sel_rect_coords[5] = GLB::MOUSE_Y + GAME::CAMERA_POS_Y;
-			sel_rect_coords[6] = GLB::MOUSE_X + GAME::CAMERA_POS_X;
-			sel_rect_coords[7] = GLB::MOUSE_LEFT_Y + cameraLastY;
+			sel_rect_coords[0] = GLB::MOUSE_LEFT_X * (float)GLB::WINDOW_WIDTH_ZOOMED/(float)GLB::WINDOW_WIDTH + cameraLastX;
+			sel_rect_coords[1] = GLB::MOUSE_LEFT_Y * (float)GLB::WINDOW_HEIGHT_ZOOMED / (float)GLB::WINDOW_HEIGHT + cameraLastY;
+			sel_rect_coords[2] = GLB::MOUSE_LEFT_X * (float)GLB::WINDOW_WIDTH_ZOOMED / (float)GLB::WINDOW_WIDTH + cameraLastX;
+			sel_rect_coords[3] = GLB::MOUSE_Y * (float)GLB::WINDOW_HEIGHT_ZOOMED / (float)GLB::WINDOW_HEIGHT + GAME::CAMERA_POS_Y;
+			sel_rect_coords[4] = GLB::MOUSE_X * (float)GLB::WINDOW_WIDTH_ZOOMED / (float)GLB::WINDOW_WIDTH + GAME::CAMERA_POS_X;
+			sel_rect_coords[5] = GLB::MOUSE_Y * (float)GLB::WINDOW_HEIGHT_ZOOMED / (float)GLB::WINDOW_HEIGHT + GAME::CAMERA_POS_Y;
+			sel_rect_coords[6] = GLB::MOUSE_X * (float)GLB::WINDOW_WIDTH_ZOOMED / (float)GLB::WINDOW_WIDTH + GAME::CAMERA_POS_X;
+			sel_rect_coords[7] = GLB::MOUSE_LEFT_Y * (float)GLB::WINDOW_HEIGHT_ZOOMED / (float)GLB::WINDOW_HEIGHT + cameraLastY;
 
 			if (GLB::MOUSE_Y < GAME::UI_BOTTOM_HEIGHT) {
 				sel_rect_coords[3] = GAME::UI_BOTTOM_HEIGHT + 1.0f + GAME::CAMERA_POS_Y;
 				sel_rect_coords[5] = GAME::UI_BOTTOM_HEIGHT + 1.0f + GAME::CAMERA_POS_Y;
 			}
 			if (GLB::MOUSE_Y > GLB::WINDOW_HEIGHT - GAME::UI_TOP_HEIGHT) {
-				sel_rect_coords[3] = GLB::WINDOW_HEIGHT - GAME::UI_TOP_HEIGHT - 1.0f + GAME::CAMERA_POS_Y;
-				sel_rect_coords[5] = GLB::WINDOW_HEIGHT - GAME::UI_TOP_HEIGHT - 1.0f + GAME::CAMERA_POS_Y;
+				sel_rect_coords[3] = GLB::WINDOW_HEIGHT_ZOOMED - GAME::UI_TOP_HEIGHT - 1.0f + GAME::CAMERA_POS_Y;
+				sel_rect_coords[5] = GLB::WINDOW_HEIGHT_ZOOMED - GAME::UI_TOP_HEIGHT - 1.0f + GAME::CAMERA_POS_Y;
 			}
+			selectionRectangle.apply_projection_matrix(GLB::CAMERA_PROJECTION);
 			selectionRectangle.create(sel_rect_coords);
 			selectionRectangle.render(view, glm::mat4(1.0f));
 		}
-		else {
+		else{
 			cameraLastX = GAME::CAMERA_POS_X;
 			cameraLastY = GAME::CAMERA_POS_Y;
 		}

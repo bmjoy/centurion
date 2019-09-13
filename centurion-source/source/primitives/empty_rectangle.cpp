@@ -59,6 +59,7 @@ void EmptyRectangle::create(std::array<float, 8> coords) {
 	vertices[18] = (coords[6]); vertices[19] = (coords[7]); vertices[20] = (0.0f);
 	vertices[21] = (coords[0]); vertices[22] = (coords[1]); vertices[23] = (0.0f);
 
+	area=areaSize(coords);
 	glBindVertexArray(VAO);
 	glBindBuffer(GL_ARRAY_BUFFER, VBO);
 	glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
@@ -84,6 +85,12 @@ void EmptyRectangle::render(glm::mat4 viewMat, glm::mat4 modelMat, glm::vec4 col
 	glDrawArrays(GL_LINES, 0, 8);
 	glBindBuffer(GL_ARRAY_BUFFER, 0);
 	glBindVertexArray(0);
+}
+
+int EmptyRectangle::areaSize(std::array<float, 8> coords) {
+	int base = (int)coords[6] - (int)coords[0];
+	int height = (int)coords[3] - (int)coords[1];
+	return base*height;
 }
 
 EmptyRectangle::~EmptyRectangle()
