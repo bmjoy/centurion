@@ -49,6 +49,7 @@ private:
 	glm::vec2 startPoint, endPoint;
 	int pathCount;
 	float getResDistance();
+	float delta;
 
 	bool is_Moving = false;
 	float start_x, start_y;

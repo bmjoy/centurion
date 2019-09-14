@@ -98,14 +98,18 @@ void Unit::position_update() {
 
 		currentState = "walk";
 
+
 		position2D.x += (path[pathCount + 1].x - path[pathCount].x) / distance * data["movement_speed"];
 		position2D.y += (path[pathCount + 1].y - path[pathCount].y) / distance * data["movement_speed"];
 
-		std::cout << "Actual distance: " << getResDistance() << "; Previous distance: " << res_distance << "\n";
+		//std::cout << "Actual distance: " << getResDistance() << "; Previous distance: " << res_distance << "\n";
+
+		delta = getResDistance() - res_distance;
+		std::cout << delta << "\n";
 
 		res_distance = getResDistance();
-	
-		if (res_distance < 20) {	
+
+		if (res_distance < 20 || delta > 0) {	
 
 			pathCount += 1;
 			
@@ -114,9 +118,11 @@ void Unit::position_update() {
 			res_distance = distance;
 
 			// update direction
-			angle = atan2(path[pathCount + 1].y - path[pathCount].y, path[pathCount + 1].x - path[pathCount].x) * 180 / 3.14159265;
-			if (angle < 0) { angle += 360.0f; }
-			dir = round(angle / 360 * entityData["sprites"][currentState]["directions"]);	
+			if (pathCount < path.size() - 2) {
+				angle = atan2(path[pathCount + 1].y - path[pathCount].y, path[pathCount + 1].x - path[pathCount].x) * 180 / 3.14159265;
+				if (angle < 0) { angle += 360.0f; }
+				dir = round(angle / 360 * entityData["sprites"][currentState]["directions"]);
+			}
 		}
 	}
 	if (pathCount == path.size() - 2) {
