@@ -37,6 +37,9 @@ std::vector<glm::ivec2> aStar::pathFind(const Location &locStart, const Location
 
 	finalPath = { };
 
+	finalPath.push_back(glm::ivec2(locFinish.col * PATH::CELL_GRID_SIZE, locFinish.row * PATH::CELL_GRID_SIZE));
+	finalPath.push_back(glm::ivec2(locFinish.col * PATH::CELL_GRID_SIZE, locFinish.row * PATH::CELL_GRID_SIZE));
+
 	// A* search
 	while (!q[qi].empty()) {
 		// get the current node w/ the lowest FValue
@@ -68,8 +71,14 @@ std::vector<glm::ivec2> aStar::pathFind(const Location &locStart, const Location
 				path = c + path;
 				row += iDir[j];
 				col += jDir[j];
-				finalPath.push_back(glm::ivec2(col, row));
+				finalPath.push_back(glm::ivec2(col * PATH::CELL_GRID_SIZE, row * PATH::CELL_GRID_SIZE));
 			}
+
+			// push start location
+			//finalPath.push_back(glm::ivec2(locStart.col* PATH::CELL_GRID_SIZE, locStart.row * PATH::CELL_GRID_SIZE));
+
+			// reverse vector
+			std::reverse(finalPath.begin(), finalPath.end());
 
 			// garbage collection
 			delete pNode1;

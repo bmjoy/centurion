@@ -10,6 +10,7 @@ Unit::Unit() {
 	position3D = glm::vec3(100.0f, 100.0f, 0.0f);
 
 	Path = aStar();
+	pathCount = 0;
 }
 
 void Unit::set_position(float x, float y) {
@@ -31,6 +32,8 @@ void Unit::create() {
 	circlePos2D.create("assets/ui/mouse/cursor_point.png", "center");
 	circlePos3D = Image(SHD::IMAGE_SHADER_ID);
 	circlePos3D.create("assets/ui/mouse/cursor_point.png", "center");
+
+
 	rectanglePath = FilledRectangle(SHD::F_RECTANGLE_SHADER_ID);
 	rectanglePath.set_color(glm::vec4(255.f, 0.f, 0.f, 255.f));
 	rectanglePath.create(20.f, 20.f, "bottom-left");
@@ -43,11 +46,11 @@ void Unit::select(bool b)
 void Unit::render(glm::mat4 viewMat) {
 	set_direction();
 	set_frame();
-	//position_update();
-	//walk_behaviour();
-	//znoise_update();
+	position_update();
+	walk_behaviour();
+	znoise_update();
 
-	if (GLB::MOUSE_RIGHT) pathfinding();
+	//if (GLB::MOUSE_RIGHT) pathfinding();
 
 	sprite.apply_projection_matrix(GLB::CAMERA_PROJECTION);
 	sprite.apply_view_matrix(viewMat);
@@ -71,7 +74,7 @@ void Unit::render(glm::mat4 viewMat) {
 	}
 
 	for (int i = 0; i < path.size(); i++) {
-		rectanglePath.render(path[i].x * 20.f, path[i].y * 20.f);
+		rectanglePath.render(path[i].x, path[i].y);
 	}
 
 }
@@ -91,55 +94,79 @@ void Unit::set_frame() {
 }
 
 void Unit::position_update() {
-	if (is_Moving) {
-		position2D.x += (to_point.x - start_x) / distance * data["movement_speed"];
-		position2D.y += (to_point.y - start_y) / distance * data["movement_speed"];
-		res_distance = sqrt(float((to_point.x - position2D.x) * (to_point.x - position2D.x) + (to_point.y - position2D.y) * (to_point.y - position2D.y)));
-		if (res_distance < data["movement_speed"]) {
-			is_Moving = false;
-			currentState = "idle";
+	if (is_Moving && pathCount < path.size() - 2) {
+
+		currentState = "walk";
+
+		position2D.x += (path[pathCount + 1].x - path[pathCount].x) / distance * data["movement_speed"];
+		position2D.y += (path[pathCount + 1].y - path[pathCount].y) / distance * data["movement_speed"];
+
+		std::cout << "Actual distance: " << getResDistance() << "; Previous distance: " << res_distance << "\n";
+
+		res_distance = getResDistance();
+	
+		if (res_distance < 20) {	
+
+			pathCount += 1;
+			
+			// update distance
+			distance = sqrt(float((path[pathCount + 1].x - path[pathCount].x) * (path[pathCount + 1].x - path[pathCount].x) + (path[pathCount + 1].y - path[pathCount].y) * (path[pathCount + 1].y - path[pathCount].y)));
+			res_distance = distance;
+
+			// update direction
+			angle = atan2(path[pathCount + 1].y - path[pathCount].y, path[pathCount + 1].x - path[pathCount].x) * 180 / 3.14159265;
+			if (angle < 0) { angle += 360.0f; }
+			dir = round(angle / 360 * entityData["sprites"][currentState]["directions"]);	
 		}
 	}
+	if (pathCount == path.size() - 2) {
+		pathCount = 0;
+		is_Moving = false;
+		currentState = "idle";
+	}
+}
+
+float Unit::getResDistance(){
+	return sqrt(float((path[pathCount + 1].x - (int)position2D.x / 20 * 20) * (path[pathCount + 1].x - (int)position2D.x / 20 * 20) + (path[pathCount + 1].y - (int)position2D.y / 20 * 20) * (path[pathCount + 1].y - (int)position2D.y / 20 * 20)));
 }
 
 void Unit::walk_behaviour() {
 	if (GLB::MOUSE_RIGHT) {
 
-		to_point = getZoomedCoords((float)GLB::MOUSE_RIGHT_X, (float)GLB::MOUSE_RIGHT_Y_2D);
-		start_x = position2D.x;
-		start_y = position2D.y;
+		GLB::MOUSE_RIGHT = false;
+		is_Moving = true;
 
-		distance = sqrt(float((to_point.x - position2D.x) * (to_point.x - position2D.x) + (to_point.y - position2D.y) * (to_point.y - position2D.y)));
+		startPoint = glm::vec2((int)position2D.x / 20 * 20, (int)position2D.y / 20 * 20);
+		endPoint = getZoomedCoords((float)GLB::MOUSE_RIGHT_X, (float)GLB::MOUSE_RIGHT_Y_2D);
+
+		// pathfinding
+		path = pathfinding(startPoint, endPoint);
+
+		// set first distance
+		distance = sqrt(float((path[pathCount+1].x - path[pathCount].x) * (path[pathCount + 1].x - path[pathCount].x) + (path[pathCount + 1].y - path[pathCount].y) * (path[pathCount + 1].y - path[pathCount].y)));
 		res_distance = distance;
-		angle = atan2(to_point.y - start_y, to_point.x - start_x) * 180 / 3.14159265;
+		
+		// set initial direction
+		angle = atan2(path[pathCount + 1].y - path[pathCount].y, path[pathCount + 1].x - path[pathCount].x) * 180 / 3.14159265;
 		if (angle < 0) { angle += 360.0f; }
 		dir = round(angle / 360 * entityData["sprites"][currentState]["directions"]);
 
-		if (distance > data["movement_speed"]) {
-			is_Moving = true;
-			currentState = "walk";
-		}
 	}
 }
 
-void Unit::pathfinding() {
 
-	GLB::MOUSE_RIGHT = false;
 
-	to_point = getZoomedCoords((float)GLB::MOUSE_RIGHT_X, (float)GLB::MOUSE_RIGHT_Y_2D);
-	start_x = position2D.x;
-	start_y = position2D.y;
+std::vector<glm::ivec2> Unit::pathfinding(glm::vec2 start, glm::vec2 end) {
 
-	int jStart = (int)start_x / 20;
-	int iStart = (int)start_y / 20;
-	int jEnd = (int)to_point.x / 20;
-	int iEnd = (int)to_point.y / 20;
+	int jStart = (int)start.x / 20;
+	int iStart = (int)start.y / 20;
+	int jEnd = (int)end.x / 20;
+	int iEnd = (int)end.y / 20;
 
 	std::cout << "Start: " << iStart << "," << jStart << std::endl;
 	std::cout << "Finish: " << iEnd << "," << jEnd << std::endl;
 
-	clock_t start = clock();
-
+	clock_t startTime = clock();
 
 	//fix pathfinding click to 1
 	while (PATH::GRID_MATRIX[iEnd][jEnd] != 0) {
@@ -147,12 +174,15 @@ void Unit::pathfinding() {
 		jEnd--;
 	}
 
+	std::vector<glm::ivec2> thePath = Path.pathFind(Location(iStart, jStart), Location(iEnd, jEnd));
 
-	path = Path.pathFind(Location(iStart, jStart), Location(iEnd, jEnd));
-
-	clock_t end = clock();
-	double time = double(end - start);
+	clock_t endTime = clock();
+	double time = double(endTime - startTime);
 	std::cout << "Time (ms): " << time << std::endl;
+
+	
+
+	return thePath;
 }
 
 void Unit::znoise_update() {

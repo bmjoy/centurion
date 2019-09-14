@@ -46,7 +46,10 @@ private:
 	void position_update();
 
 	void walk_behaviour();
-	glm::vec2 to_point;
+	glm::vec2 startPoint, endPoint;
+	int pathCount;
+	float getResDistance();
+
 	bool is_Moving = false;
 	float start_x, start_y;
 	float distance, res_distance;
@@ -58,7 +61,7 @@ private:
 
 	float xPosGrid, yPosGrid;
 
-	void pathfinding();
+	std::vector<glm::ivec2> pathfinding(glm::vec2 start, glm::vec2 end);
 
 	json entityData;
 };
