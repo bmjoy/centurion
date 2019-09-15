@@ -41,6 +41,7 @@ namespace GLB {
 	extern bool CTRL_BUTTON;
 	extern std::vector<glm::vec3> COLORS;
 	extern GLFWwindow *MAIN_WINDOW;
+	extern bool DEBUG;
 }
 
 namespace MAP {
@@ -78,6 +79,7 @@ namespace GAME {
 namespace PATH {
 	extern int CELL_GRID_SIZE;
 	extern int GRID_MATRIX[1000][1500];
+	extern int GRID_MATRIX_2D[1000][1500];
 	extern int CLOSED_NODES[1000][1500];
 	extern int OPEN_NODES[1000][1500];
 	extern int DIR_MAP[1000][1500];

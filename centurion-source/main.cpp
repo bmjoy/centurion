@@ -34,6 +34,7 @@ namespace GLB {
 	bool CTRL_BUTTON = false;
 	std::vector<glm::vec3> COLORS;
 	GLFWwindow *MAIN_WINDOW;
+	bool DEBUG = false;
 }
 
 namespace MAP {
@@ -72,6 +73,7 @@ namespace GAME {
 namespace PATH {
 	int CELL_GRID_SIZE = 20;
 	int GRID_MATRIX[1000][1500] = { 0 };
+	int GRID_MATRIX_2D[1000][1500] = { 0 };
 	int CLOSED_NODES[1000][1500] = { 0 };
 	int OPEN_NODES[1000][1500] = { 0 };
 	int DIR_MAP[1000][1500] = { 0 };
@@ -83,6 +85,7 @@ int main() {
 	std::ifstream settings_path("settings.json");
 	json settings = json::parse(settings_path);
 
+	GLB::DEBUG = (bool)settings["debug"].get<int>();
 	GLB::WINDOW_WIDTH = settings["window_width"];
 	GLB::WINDOW_HEIGHT = settings["window_height"];
 	GLB::WINDOW_WIDTH_ZOOMED = GLB::WINDOW_WIDTH;

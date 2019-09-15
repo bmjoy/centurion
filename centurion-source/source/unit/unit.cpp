@@ -50,8 +50,6 @@ void Unit::render(glm::mat4 viewMat) {
 	walk_behaviour();
 	znoise_update();
 
-	//if (GLB::MOUSE_RIGHT) pathfinding();
-
 	sprite.apply_projection_matrix(GLB::CAMERA_PROJECTION);
 	sprite.apply_view_matrix(viewMat);
 
@@ -64,17 +62,22 @@ void Unit::render(glm::mat4 viewMat) {
 
 	rectanglePath.apply_view_matrix(viewMat);
 
-	model = glm::translate(glm::mat4(1.0f), position2D);
+	model = glm::translate(glm::mat4(1.0f), position3D);
 
 	if (!GAME::MINIMAP_IS_ACTIVE) {
-		circlePos2D.render(position2D.x, position2D.y);
-		circlePos3D.render(position3D.x, position3D.y);
-
 		sprite.render(model, currentState);
 	}
 
-	for (int i = 0; i < path.size(); i++) {
-		rectanglePath.render(path[i].x, path[i].y);
+	/* debug pathfinding and coordinates */
+
+	if (GLB::DEBUG) {
+		for (int i = 0; i < path.size(); i++) {
+			rectanglePath.render(path[i].x, path[i].y);
+		}
+		if (!GAME::MINIMAP_IS_ACTIVE) {
+			circlePos2D.render(position2D.x, position2D.y);
+			circlePos3D.render(position3D.x, position3D.y);
+		}
 	}
 
 }
@@ -175,7 +178,7 @@ std::vector<glm::ivec2> Unit::pathfinding(glm::vec2 start, glm::vec2 end) {
 	clock_t startTime = clock();
 
 	//fix pathfinding click to 1
-	while (PATH::GRID_MATRIX[iEnd][jEnd] != 0) {
+	while (PATH::GRID_MATRIX_2D[iEnd][jEnd] != 0) {
 		iEnd--;
 		jEnd--;
 	}
@@ -195,8 +198,7 @@ void Unit::znoise_update() {
 	znoise = generateNoise(position2D).zNoise;
 
 	position3D.x = position2D.x;
-	position3D.y = position2D.y + znoise;
-	sprite.set_znoise(znoise);
+	position3D.y = position2D.y + znoise - PATH::CELL_GRID_SIZE/2;
 }
 
 Unit::~Unit() {

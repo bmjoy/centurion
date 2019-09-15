@@ -13,7 +13,7 @@ public:
 	void render(glm::mat4 modelMat, std::string state);
 	void set_frame(int f, int mf);
 	void set_direction(int d);
-	void set_znoise(float z);
+	//void set_znoise(float z);
 	~USprite();
 
 private:

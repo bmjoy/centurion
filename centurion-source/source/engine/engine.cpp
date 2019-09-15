@@ -180,22 +180,25 @@ void Engine::fps_sleep() {
 
 void Engine::render_ui() {
 
-	tahoma8_text.set_align();
+	/* DEBUG */
 
-	div_ui.apply_view_matrix();
-	div_ui.set_color(glm::vec4(0.f,0.f,0.f,0.5f));
-	div_ui.render(10.f, GAME::UI_BOTTOM_HEIGHT + 10.f);
+	if (GLB::DEBUG) {
 
-	if (bFPS){
-		tahoma6_text.set_position(glm::vec2(14.0f, GAME::UI_BOTTOM_HEIGHT + 12.f));
-		tahoma6_text.set_text(Fps1);
-		tahoma6_text.render();
+		div_ui.apply_view_matrix();
+		div_ui.set_color(glm::vec4(0.f, 0.f, 0.f, 0.5f));
+		div_ui.render(10.f, GAME::UI_BOTTOM_HEIGHT + 10.f);
 
-		tahoma6_text.set_position(glm::vec2(14.0f, GAME::UI_BOTTOM_HEIGHT + 12.f + 15.f));
-		tahoma6_text.set_text(Mspf1);
-		tahoma6_text.render();
+		if (bFPS) {
+			tahoma6_text.set_position(glm::vec2(14.0f, GAME::UI_BOTTOM_HEIGHT + 12.f));
+			tahoma6_text.set_text(Fps1);
+			tahoma6_text.render();
 
-		if (GLB::GAME){
+			tahoma6_text.set_position(glm::vec2(14.0f, GAME::UI_BOTTOM_HEIGHT + 12.f + 15.f));
+			tahoma6_text.set_text(Mspf1);
+			tahoma6_text.render();
+		}
+
+		if (GLB::GAME) {
 			tahoma6_text.set_position(glm::vec2(14.f, GAME::UI_BOTTOM_HEIGHT + 12.f + 15.f*2.f));
 			tahoma6_text.set_text(
 				"window position: x = "
@@ -211,16 +214,26 @@ void Engine::render_ui() {
 				+ std::to_string((int)getZoomedCoords((float)GLB::MOUSE_X, (float)GLB::MOUSE_Y).y));
 			tahoma6_text.set_position(glm::vec2(14.f, GAME::UI_BOTTOM_HEIGHT + 12.f + 15.f*3.f));
 			tahoma6_text.render();
-
-			tahoma8_text.set_position(glm::vec2(GLB::WINDOW_WIDTH - 99.0f, GLB::WINDOW_HEIGHT - GAME::UI_TOP_HEIGHT - 29.0f));
-			tahoma8_text.set_text(hours_str + ":" + minutes_str + ":" + seconds_str);
-			tahoma8_text.render(glm::vec4(0.f,0.f,0.f,255.f));
-
-			tahoma8_text.set_position(glm::vec2(GLB::WINDOW_WIDTH - 100.0f, GLB::WINDOW_HEIGHT - GAME::UI_TOP_HEIGHT - 28.0f));
-			tahoma8_text.set_text(hours_str + ":" + minutes_str + ":" + seconds_str);
-			tahoma8_text.render(glm::vec4(255.f));
 		}
+
 	}
+
+
+	
+
+	/* TIME */
+	tahoma8_text.set_align();
+	if (GLB::GAME){
+		
+		tahoma8_text.set_position(glm::vec2(GLB::WINDOW_WIDTH - 99.0f, GLB::WINDOW_HEIGHT - GAME::UI_TOP_HEIGHT - 29.0f));
+		tahoma8_text.set_text(hours_str + ":" + minutes_str + ":" + seconds_str);
+		tahoma8_text.render(glm::vec4(0.f,0.f,0.f,255.f));
+
+		tahoma8_text.set_position(glm::vec2(GLB::WINDOW_WIDTH - 100.0f, GLB::WINDOW_HEIGHT - GAME::UI_TOP_HEIGHT - 28.0f));
+		tahoma8_text.set_text(hours_str + ":" + minutes_str + ":" + seconds_str);
+		tahoma8_text.render(glm::vec4(255.f));
+	}
+
 }
 
 Engine::~Engine()

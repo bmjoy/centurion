@@ -12,7 +12,7 @@ uniform int max_directions;
 uniform int max_frames;
 uniform int current_frame;
 uniform int current_dir;
-uniform float znoise;
+//uniform float znoise;
 
 float x, y;
 

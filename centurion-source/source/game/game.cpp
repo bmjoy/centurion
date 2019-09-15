@@ -151,8 +151,12 @@ void Game::run() {
 
 	go_to_position();
 
-	cursor_point.render();
+	if (GLB::DEBUG) {
+		cursor_point.render();
+	}
+	
 	ui.render();
+
 
 	GLB::CAMERA_PROJECTION = glm::ortho(0.0f, (float)GLB::WINDOW_WIDTH_ZOOMED, 0.0f, (float)GLB::WINDOW_HEIGHT_ZOOMED, -(float)GAME::MAP_WIDTH, (float)GAME::MAP_WIDTH);
 }

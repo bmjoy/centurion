@@ -19,7 +19,7 @@ void Surface::create() {
 void Surface::render(glm::mat4 projMat, glm::mat4 viewMat, bool tracing) {
 	terrain.render(projMat, viewMat, tracing);
 
-	if (GAME::GRID_IS_ACTIVE) {
+	if (GAME::GRID_IS_ACTIVE && !tracing) {
 		grid.render(projMat, viewMat);
 	}
 }

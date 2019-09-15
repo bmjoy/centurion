@@ -116,11 +116,11 @@ void USprite::set_direction(int d) {
 	glUseProgram(shaderId);
 	glUniform1i(glGetUniformLocation(shaderId, "current_dir"), d);
 }
-
-void USprite::set_znoise(float z) {
-	glUseProgram(shaderId);
-	glUniform1f(glGetUniformLocation(shaderId, "znoise"), z);
-}
+//
+//void USprite::set_znoise(float z) {
+//	glUseProgram(shaderId);
+//	glUniform1f(glGetUniformLocation(shaderId, "znoise"), z);
+//}
 
 USprite::~USprite()
 {

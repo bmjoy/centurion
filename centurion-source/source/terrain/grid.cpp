@@ -41,15 +41,30 @@ void Grid::create() {
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
 	glBindVertexArray(0);
 
+
 	/* This texture comes from the real grid of 0/1 */
 
+	float zNoise;
+	int yNoise;
 	int grid_sizeX = GAME::MAP_WIDTH / PATH::CELL_GRID_SIZE;
 	int grid_sizeY = GAME::MAP_HEIGHT / PATH::CELL_GRID_SIZE;
 	unsigned char* gridData = new unsigned char[grid_sizeX * grid_sizeY * 4];
+
 	for (int y = 0; y < grid_sizeY; ++y) {
 		for (int x = 0; x < grid_sizeX; ++x) {
 
-			if (PATH::GRID_MATRIX[y][x] == 1) {
+			/* From 3d grid to 2d */
+			/* for pathfinding calculation */
+			zNoise = generateNoise(glm::vec2(x*PATH::CELL_GRID_SIZE, y*PATH::CELL_GRID_SIZE)).zNoise;
+			zNoise = smoothNoise(y*PATH::CELL_GRID_SIZE, zNoise);
+			yNoise = int(y*PATH::CELL_GRID_SIZE + zNoise) / PATH::CELL_GRID_SIZE;
+			if (yNoise < grid_sizeY && yNoise > 0) {
+				PATH::GRID_MATRIX_2D[y][x] = PATH::GRID_MATRIX[yNoise][x];
+			}
+
+			/* save a grid image for debug and graphic purposes*/
+
+			if (PATH::GRID_MATRIX_2D[y][x] == 1) {
 				gridData[(grid_sizeX * (grid_sizeY - 1 - y) + x) * 4 + 0] = 0;
 				gridData[(grid_sizeX * (grid_sizeY - 1 - y) + x) * 4 + 1] = 0;
 				gridData[(grid_sizeX * (grid_sizeY - 1 - y) + x) * 4 + 2] = 0;
@@ -61,6 +76,8 @@ void Grid::create() {
 				gridData[(grid_sizeX * (grid_sizeY - 1 - y) + x) * 4 + 2] = 255;
 				gridData[(grid_sizeX * (grid_sizeY - 1 - y) + x) * 4 + 3] = 0;
 			}
+
+			
 		}
 	}
 

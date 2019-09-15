@@ -77,7 +77,7 @@ std::vector<glm::ivec2> aStar::pathFind(const Location &locStart, const Location
 
 				int p = 0;
 				for (int _i = 0; _i < 8; _i++) {
-					if (PATH::GRID_MATRIX[row+iDir[_i]][col+jDir[_i]] == 1) {
+					if (PATH::GRID_MATRIX_2D[row+iDir[_i]][col+jDir[_i]] == 1) {
 						p++;
 					}
 				}
@@ -108,7 +108,7 @@ std::vector<glm::ivec2> aStar::pathFind(const Location &locStart, const Location
 
 			// if not wall (obstacle) nor in the closed list
 			if (!(iNext < 0 || iNext > IDIM - 1 || jNext < 0 || jNext > JDIM - 1 ||
-				PATH::GRID_MATRIX[iNext][jNext] == 1 || PATH::CLOSED_NODES[iNext][jNext] == 1)) {
+				PATH::GRID_MATRIX_2D[iNext][jNext] == 1 || PATH::CLOSED_NODES[iNext][jNext] == 1)) {
 
 				// generate a child node
 				pNode2 = new Node(Location(iNext, jNext), pNode1->getGValue(), pNode1->getFValue());
