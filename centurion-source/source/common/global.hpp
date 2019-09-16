@@ -42,6 +42,7 @@ namespace GLB {
 	extern std::vector<glm::vec3> COLORS;
 	extern GLFWwindow *MAIN_WINDOW;
 	extern bool DEBUG;
+	extern std::array<float, 8> SELECTION_RECTANGLE_COORDS; //Only a temporar way to test multiple selection
 }
 
 namespace MAP {

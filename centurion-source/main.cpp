@@ -5,9 +5,7 @@
 
 
 // things to do: 
-// 1) prerender of the minimap
-// 2) image.cpp image size could be specified + remove picking function
-// 3) remove picking from filled rectangle 
+// 1) minimap prerender
 
 namespace GLB {
 	int WINDOW_WIDTH = 1024; // 2560
@@ -35,6 +33,7 @@ namespace GLB {
 	std::vector<glm::vec3> COLORS;
 	GLFWwindow *MAIN_WINDOW;
 	bool DEBUG = false;
+	std::array<float, 8> SELECTION_RECTANGLE_COORDS;
 }
 
 namespace MAP {

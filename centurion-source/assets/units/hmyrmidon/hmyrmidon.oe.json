@@ -1,4 +1,6 @@
 {
+  "yOffset": 50,
+  "hitbox": [ 15, 40 ],
   "spriteList": [ "idle", "walk" ],
   "sprites": {
     "idle": {

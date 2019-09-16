@@ -32,7 +32,7 @@ void USprite::create(json eData, glm::vec3 playerColor) {
 		glUniform1i(glGetUniformLocation(shaderId, "max_directions"), entityData["sprites"][state]["directions"]);
 
 		w = textureInfoList[i].x / (float)entityData["sprites"][state]["frames"] / 2.0f;
-		h = textureInfoList[i].y / (float)entityData["sprites"][state]["directions"];
+		h = textureInfoList[i].y / (float)entityData["sprites"][state]["directions"] / 2.0f;
 
 		unsigned int indices[] = {
 			0, 1, 3,   // first triangle
@@ -41,10 +41,10 @@ void USprite::create(json eData, glm::vec3 playerColor) {
 
 		GLfloat vertices[] = {
 			// positions				// uv coords		
-			-w,		0.0f,		0.0f,		0.0f, 1.0,   // in basso a sx
-			w,		0.0f,		0.0f,		1.0, 1.0,    // in basso a dx
-			w,		h,		0.0f,		1.0, 0.0f,   // in alto a dx
-			-w,		h,		0.0f,		0.0f, 0.0f   // in alto a sx
+			-w,		-h,		0.0f,		0.0f,		1.0,   // in basso a sx
+			w,		-h,		0.0f,		1.0,		1.0,    // in basso a dx
+			w,		h,		0.0f,		1.0,		0.0f,   // in alto a dx
+			-w,		h,		0.0f,		0.0f,		0.0f   // in alto a sx
 		};
 
 		glGenVertexArrays(1, &VAO);
@@ -94,6 +94,7 @@ void USprite::render(glm::mat4 modelMat, std::string state) {
 	glUniformMatrix4fv(glGetUniformLocation(shaderId, "model"), 1, GL_FALSE, glm::value_ptr(modelMat));
 	glUniform1i(glGetUniformLocation(shaderId, "picking"), 0);  // disable picking
 	glUniform1i(glGetUniformLocation(shaderId, "texture1"), 0); // texture
+	glUniform1i(glGetUniformLocation(shaderId, "yOffset"), entityData["yOffset"]); // vertical offset
 
 	/* Draw */
 
@@ -116,11 +117,6 @@ void USprite::set_direction(int d) {
 	glUseProgram(shaderId);
 	glUniform1i(glGetUniformLocation(shaderId, "current_dir"), d);
 }
-//
-//void USprite::set_znoise(float z) {
-//	glUseProgram(shaderId);
-//	glUniform1f(glGetUniformLocation(shaderId, "znoise"), z);
-//}
 
 USprite::~USprite()
 {

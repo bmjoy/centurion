@@ -244,7 +244,7 @@ void Game::go_to_position() {
 void Game::render_selection_rectangle() {
 	if (!GAME::MINIMAP_IS_ACTIVE) {
 		if (GLB::MOUSE_LEFT && cursorInGameScreen()) {
-			sel_rect_coords[0] = GLB::MOUSE_LEFT_X * (float)GLB::WINDOW_WIDTH_ZOOMED/(float)GLB::WINDOW_WIDTH + cameraLastX;
+			sel_rect_coords[0] = GLB::MOUSE_LEFT_X * (float)GLB::WINDOW_WIDTH_ZOOMED / (float)GLB::WINDOW_WIDTH + cameraLastX;
 			sel_rect_coords[1] = GLB::MOUSE_LEFT_Y * (float)GLB::WINDOW_HEIGHT_ZOOMED / (float)GLB::WINDOW_HEIGHT + cameraLastY;
 			sel_rect_coords[2] = GLB::MOUSE_LEFT_X * (float)GLB::WINDOW_WIDTH_ZOOMED / (float)GLB::WINDOW_WIDTH + cameraLastX;
 			sel_rect_coords[3] = GLB::MOUSE_Y * (float)GLB::WINDOW_HEIGHT_ZOOMED / (float)GLB::WINDOW_HEIGHT + GAME::CAMERA_POS_Y;
@@ -261,6 +261,7 @@ void Game::render_selection_rectangle() {
 				sel_rect_coords[3] = GLB::WINDOW_HEIGHT_ZOOMED - GAME::UI_TOP_HEIGHT - 1.0f + GAME::CAMERA_POS_Y;
 				sel_rect_coords[5] = GLB::WINDOW_HEIGHT_ZOOMED - GAME::UI_TOP_HEIGHT - 1.0f + GAME::CAMERA_POS_Y;
 			}
+			GLB::SELECTION_RECTANGLE_COORDS = sel_rect_coords;
 			selectionRectangle.apply_projection_matrix(GLB::CAMERA_PROJECTION);
 			selectionRectangle.create(sel_rect_coords);
 			selectionRectangle.render(view, glm::mat4(1.0f));

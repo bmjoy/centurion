@@ -21,18 +21,21 @@ void Unit::set_position(float x, float y) {
 }
 
 void Unit::create() {
-	//sprite.create(states, pathList, frameList, directions);
 	std::ifstream path(data["ent_path"].get<std::string>());
 	entityData = json::parse(path);
 	sprite = USprite(SHD::USPRITE_SHADER_ID);
 	sprite.create(entityData, player_color);
 
-	//Show circle position under unit (Debug only)
+	//Show circle position under the unit (Debug only)
 	circlePos2D = Image(SHD::IMAGE_SHADER_ID);
 	circlePos2D.create("assets/ui/mouse/cursor_point.png", "center");
 	circlePos3D = Image(SHD::IMAGE_SHADER_ID);
 	circlePos3D.create("assets/ui/mouse/cursor_point.png", "center");
 
+	//Show selection hitbox around the unit (Debug only)
+	hitbox = EmptyRectangle();
+	hitbox.compile();
+	hitbox.init();
 
 	rectanglePath = FilledRectangle(SHD::F_RECTANGLE_SHADER_ID);
 	rectanglePath.set_color(glm::vec4(255.f, 0.f, 0.f, 255.f));
@@ -71,6 +74,10 @@ void Unit::render(glm::mat4 viewMat) {
 	/* debug pathfinding and coordinates */
 
 	if (GLB::DEBUG) {
+		hitbox.apply_projection_matrix(GLB::CAMERA_PROJECTION);
+		hitbox.create(getCoords(position3D.x - entityData["hitbox"][0], position3D.y + entityData["hitbox"][1] + entityData["yOffset"], entityData["hitbox"][0]*2, entityData["hitbox"][1]*2));
+		hitbox.render(viewMat, glm::mat4(1.0f), IsInSelectionRect() ? glm::vec4(255.0f, 0.0f, 255.0f, 1.0f) : glm::vec4(255.0f, 242.0f, 0.0f, 1.0f));
+
 		for (int i = 0; i < path.size(); i++) {
 			rectanglePath.render(path[i].x, path[i].y);
 		}
@@ -79,7 +86,20 @@ void Unit::render(glm::mat4 viewMat) {
 			circlePos3D.render(position3D.x, position3D.y);
 		}
 	}
+}
 
+bool Unit::IsInSelectionRect() {
+	if (!GLB::MOUSE_LEFT) { return false; }
+	std::cout << GLB::SELECTION_RECTANGLE_COORDS[3] << "\n";
+	if ((hitbox.rectCoordinates[0] > GLB::SELECTION_RECTANGLE_COORDS[0] && hitbox.rectCoordinates[0] < GLB::SELECTION_RECTANGLE_COORDS[4] &&
+		hitbox.rectCoordinates[1] < GLB::SELECTION_RECTANGLE_COORDS[1] && hitbox.rectCoordinates[1] > GLB::SELECTION_RECTANGLE_COORDS[3]) ||
+		(hitbox.rectCoordinates[4] < GLB::SELECTION_RECTANGLE_COORDS[0] && hitbox.rectCoordinates[4] > GLB::SELECTION_RECTANGLE_COORDS[4] &&
+		hitbox.rectCoordinates[3] < GLB::SELECTION_RECTANGLE_COORDS[3] && hitbox.rectCoordinates[3] > GLB::SELECTION_RECTANGLE_COORDS[5])) {
+		return true;
+	}
+	else {
+		return false;
+	}
 }
 
 void Unit::set_direction() {
@@ -162,8 +182,6 @@ void Unit::walk_behaviour() {
 	}
 }
 
-
-
 std::vector<glm::ivec2> Unit::pathfinding(glm::vec2 start, glm::vec2 end) {
 
 	int jStart = (int)start.x / 20;
@@ -187,8 +205,6 @@ std::vector<glm::ivec2> Unit::pathfinding(glm::vec2 start, glm::vec2 end) {
 	//clock_t endTime = clock();
 	//double time = double(endTime - startTime);
 	//std::cout << "Time (ms): " << time << std::endl;
-
-	
 
 	return thePath;
 }

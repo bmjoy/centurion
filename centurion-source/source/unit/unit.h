@@ -6,7 +6,8 @@
 #include "../game/game_object.h"
 #include "unit_sprite.h"
 #include "../primitives/image.h" //Just for debugging purpose
-#include "../primitives/filled_rectangle.h"//Just for debugging purpose
+#include "../primitives/filled_rectangle.h" //Just for debugging purpose
+#include "../primitives/empty_rectangle.h" //Just for debugging purpose
 #include "../pathfinding/a_star.h"
 
 
@@ -18,6 +19,7 @@ public:
 	void select(bool b);
 	void set_position(float x, float y);
 	void render(glm::mat4 viewMat);
+	bool IsInSelectionRect();
 	~Unit();
 
 private:
@@ -26,6 +28,7 @@ private:
 	Image circlePos3D;
 
 	FilledRectangle rectanglePath;
+	EmptyRectangle hitbox;
 	aStar Path;
 	std::vector<glm::ivec2> path;
 

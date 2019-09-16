@@ -60,6 +60,7 @@ void EmptyRectangle::create(std::array<float, 8> coords) {
 	vertices[21] = (coords[0]); vertices[22] = (coords[1]); vertices[23] = (0.0f);
 
 	area=areaSize(coords);
+	rectCoordinates = coords;
 	glBindVertexArray(VAO);
 	glBindBuffer(GL_ARRAY_BUFFER, VBO);
 	glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
