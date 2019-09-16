@@ -64,26 +64,32 @@ std::vector<glm::ivec2> aStar::pathFind(const Location &locStart, const Location
 
 
 			// generate the path from finish to start from dirMap
-			std::string path = "";
-
+			//std::string path = "";
 			
-
+			
+			int pCount = 2; 
+			bool addPoint;
+			int i;
 			while (!(row == locStart.row && col == locStart.col)) {
+				i = 0; 
+				addPoint = false;
 				j = PATH::DIR_MAP[row][col];
-				c = '0' + (j + NDIR / 2) % NDIR;
-				path = c + path;
 				row += iDir[j];
 				col += jDir[j];
 
-				int p = 0;
-				for (int _i = 0; _i < 8; _i++) {
-					if (PATH::GRID_MATRIX_2D[row+iDir[_i]][col+jDir[_i]] == 1) {
-						p++;
+				while (!addPoint && i != NDIR) {
+					if (PATH::GRID_MATRIX_2D[row + iDir[i]][col + jDir[i]] == 1) {
+						addPoint = true;
 					}
-				}
-				if (p > 0){
-					finalPath.push_back(glm::ivec2(col * PATH::CELL_GRID_SIZE, row * PATH::CELL_GRID_SIZE));
-				}
+					i++;
+				}	
+				if (addPoint){
+					if (pCount == 2) {
+						finalPath.push_back(glm::ivec2(col * PATH::CELL_GRID_SIZE, row * PATH::CELL_GRID_SIZE));
+						pCount = 0;
+					}
+					pCount++;
+				}	
 			}
 
 			// push start location

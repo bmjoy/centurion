@@ -108,7 +108,6 @@ void Unit::position_update() {
 		//std::cout << "Actual distance: " << getResDistance() << "; Previous distance: " << res_distance << "\n";
 
 		delta = getResDistance() - res_distance;
-		std::cout << delta << "\n";
 
 		res_distance = getResDistance();
 
@@ -172,8 +171,8 @@ std::vector<glm::ivec2> Unit::pathfinding(glm::vec2 start, glm::vec2 end) {
 	int jEnd = (int)end.x / 20;
 	int iEnd = (int)end.y / 20;
 
-	std::cout << "Start: " << iStart << "," << jStart << std::endl;
-	std::cout << "Finish: " << iEnd << "," << jEnd << std::endl;
+	//std::cout << "Start: " << iStart << "," << jStart << std::endl;
+	//std::cout << "Finish: " << iEnd << "," << jEnd << std::endl;
 
 	clock_t startTime = clock();
 
@@ -185,9 +184,9 @@ std::vector<glm::ivec2> Unit::pathfinding(glm::vec2 start, glm::vec2 end) {
 
 	std::vector<glm::ivec2> thePath = Path.pathFind(Location(iStart, jStart), Location(iEnd, jEnd));
 
-	clock_t endTime = clock();
-	double time = double(endTime - startTime);
-	std::cout << "Time (ms): " << time << std::endl;
+	//clock_t endTime = clock();
+	//double time = double(endTime - startTime);
+	//std::cout << "Time (ms): " << time << std::endl;
 
 	
 
