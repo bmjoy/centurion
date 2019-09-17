@@ -24,7 +24,6 @@ public:
 
 private:
 	USprite sprite;
-	aStar Path;
 
 	/* unit properties & data */
 	std::string currentState;

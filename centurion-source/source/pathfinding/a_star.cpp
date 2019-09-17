@@ -1,13 +1,6 @@
 #include "a_star.h"
 
-aStar::aStar() {
-	JDIM = 1500;
-	IDIM = 1000;
-	NDIR = 8;
-}
-
-std::vector<glm::ivec2> aStar::pathFind(const Location &locStart, const Location &locFinish)
-{
+std::vector<glm::ivec2> aStar::pathFind(const Location &locStart, const Location &locFinish){
 
 	// list of open (not-yet-checked-out) nodes
 	static std::priority_queue<Node> q[2];
@@ -35,7 +28,7 @@ std::vector<glm::ivec2> aStar::pathFind(const Location &locStart, const Location
 	pNode1->calculateFValue(locFinish);
 	q[qi].push(*pNode1);
 
-	finalPath = { };
+	std::vector<glm::ivec2> finalPath = { };
 
 	finalPath.push_back(glm::ivec2(locFinish.col * PATH::CELL_GRID_SIZE, locFinish.row * PATH::CELL_GRID_SIZE));
 	finalPath.push_back(glm::ivec2(locFinish.col * PATH::CELL_GRID_SIZE, locFinish.row * PATH::CELL_GRID_SIZE));
@@ -49,8 +42,6 @@ std::vector<glm::ivec2> aStar::pathFind(const Location &locStart, const Location
 
 		row = (pNode1->getLocation()).row;
 		col = pNode1->getLocation().col;
-		
-		//std::cout << "row, col=" << row << "," << col << std::endl;
 
 		// remove the node from the open list
 		q[qi].pop();
@@ -62,10 +53,7 @@ std::vector<glm::ivec2> aStar::pathFind(const Location &locStart, const Location
 		// stop searching when the goal state is reached
 		if (row == locFinish.row && col == locFinish.col) {
 
-
 			// generate the path from finish to start from dirMap
-			//std::string path = "";
-			
 			
 			int pCount = 2; 
 			bool addPoint;
@@ -167,11 +155,6 @@ std::vector<glm::ivec2> aStar::pathFind(const Location &locStart, const Location
 	}
 	
 	// no path found
-
 	std::vector<glm::ivec2> emptyPath = { };
 	return emptyPath;
-}
-
-
-aStar::~aStar() {
 }

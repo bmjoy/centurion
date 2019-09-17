@@ -2,7 +2,6 @@
 #include "unit.h"
 
 Unit::Unit() {
-	Path = aStar();
 	dir = 0;
 	frames_counter = 0.0;
 	currentState = "idle";
@@ -201,9 +200,6 @@ std::vector<glm::ivec2> Unit::pathfinding(glm::vec2 start, glm::vec2 end) {
 	int jEnd = (int)end.x / 20;
 	int iEnd = (int)end.y / 20;
 
-	//std::cout << "Start: " << iStart << "," << jStart << std::endl;
-	//std::cout << "Finish: " << iEnd << "," << jEnd << std::endl;
-
 	clock_t startTime = clock();
 
 	//fix pathfinding click to 1
@@ -212,11 +208,7 @@ std::vector<glm::ivec2> Unit::pathfinding(glm::vec2 start, glm::vec2 end) {
 		jEnd--;
 	}
 
-	std::vector<glm::ivec2> thePath = Path.pathFind(Location(iStart, jStart), Location(iEnd, jEnd));
-
-	//clock_t endTime = clock();
-	//double time = double(endTime - startTime);
-	//std::cout << "Time (ms): " << time << std::endl;
+	std::vector<glm::ivec2> thePath = aStar::pathFind(Location(iStart, jStart), Location(iEnd, jEnd));
 
 	return thePath;
 }
