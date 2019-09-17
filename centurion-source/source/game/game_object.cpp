@@ -4,6 +4,7 @@
 
 GObject::GObject()
 {
+	selected = false;
 }
 
 void GObject::set_position(glm::vec3 pos) {

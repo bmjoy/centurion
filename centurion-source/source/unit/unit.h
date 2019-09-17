@@ -16,10 +16,8 @@ class Unit : public GObject
 public:
 	Unit();
 	void create();
-	void select(bool b);
 	void set_position(float x, float y);
-	void render(glm::mat4 viewMat);
-	bool isSelected;
+	void render(glm::mat4 proj, glm::mat4 viewMat, bool picking, int clickID);
 	~Unit();
 
 private:
@@ -53,7 +51,6 @@ private:
 	std::vector<glm::ivec2> pathfinding(glm::vec2 start, glm::vec2 end);
 	
 	/* unit selection */
-	void checkSelRect();
 	bool isInSelRect();
 	
 	/* unit rendering */

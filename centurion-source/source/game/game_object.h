@@ -20,6 +20,7 @@ public:
 
 protected:
 
+	bool selected;
 	glm::vec3 player_color;
 	json data;
 	glm::vec3 position;

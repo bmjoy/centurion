@@ -10,7 +10,7 @@ public:
 	USprite(); 
 	USprite(int shaderID);
 	void create(json eData, glm::vec3 playerColor);
-	void render(glm::mat4 modelMat, std::string state);
+	void render(glm::mat4 modelMat, std::string state, bool picking, int pickingId);
 	void set_frame(int f, int mf);
 	void set_direction(int d);
 	//void set_znoise(float z);

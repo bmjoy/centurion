@@ -10,10 +10,11 @@ void Building::create() {
 	building_sprite.create(json::parse(path), player_color);
 }
 
-void Building::render(glm::mat4 proj, glm::mat4 view, bool picking) {
+void Building::render(glm::mat4 proj, glm::mat4 view, bool picking, int clickID) {
+	selected = (picking_id == clickID);
 	building_sprite.apply_projection_matrix(proj);
 	building_sprite.apply_view_matrix(view);
-	building_sprite.render(position.x, position.y, picking, picking_id);
+	building_sprite.render(position.x, position.y, picking, picking_id, selected);
 }
 
 void Building::create_pass() {
@@ -23,10 +24,6 @@ void Building::create_pass() {
 	building_grid = grid_data["grid"].get<std::vector<std::vector<int>>>();
 
 	updatePassMatrix(building_grid, glm::vec2((int)position.x/ PATH::CELL_GRID_SIZE - building_grid[0].size() / 2, (int)position.y/ PATH::CELL_GRID_SIZE - building_grid.size() / 2));
-}
-
-void Building::select(bool b) {
-	building_sprite.IsSelected = b;
 }
 
 Building::~Building()

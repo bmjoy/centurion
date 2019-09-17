@@ -12,7 +12,6 @@ BSprite::BSprite(int shaderID){
 	vPath = "assets/shaders/bsprite/vertex.glsl";
 	fPath = "assets/shaders/bsprite/fragment.glsl";
 	shaderId = shaderID;
-	IsSelected = false;
 }
 
 void BSprite::create(json ent_data, glm::vec3 playerColor) {
@@ -44,7 +43,7 @@ void BSprite::create(json ent_data, glm::vec3 playerColor) {
 	}
 }
 
-void BSprite::render(float x, float y, bool picking, int pickingId) {
+void BSprite::render(float x, float y, bool picking, int pickingId, bool selected) {
 	glUseProgram(shaderId);
 
 	/* Model Matrix */
@@ -54,7 +53,7 @@ void BSprite::render(float x, float y, bool picking, int pickingId) {
 	/* Uniform Variables */
 	glUniformMatrix4fv(glGetUniformLocation(shaderId, "model"), 1, GL_FALSE, glm::value_ptr(modelMat));
 	glUniform3f(glGetUniformLocation(shaderId, "player_color"), player_color.x / 255.0f, player_color.y / 255.0f, player_color.z / 255.0f);
-	glUniform1i(glGetUniformLocation(shaderId, "selection"), int(IsSelected));
+	glUniform1i(glGetUniformLocation(shaderId, "selection"), int(selected));
 	glUniform1i(glGetUniformLocation(shaderId, "isLayerColor"), 0);
 	glUniform1i(glGetUniformLocation(shaderId, "picking"), int(picking)); // enable/disable picking
 
@@ -127,8 +126,6 @@ void BSprite::render(float x, float y, bool picking, int pickingId) {
 	glBindVertexArray(0);
 }
 
-
-
 void BSprite::genBuffers() {
 	glGenVertexArrays(1, &VAO);
 	glBindVertexArray(VAO);
@@ -150,8 +147,6 @@ void BSprite::genBuffers() {
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
 	glBindVertexArray(0);
 }
-
-
 
 BSprite::~BSprite()
 {

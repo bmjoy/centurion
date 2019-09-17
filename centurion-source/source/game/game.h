@@ -8,7 +8,6 @@
 #include "../terrain/surface.h"
 #include "../primitives/empty_rectangle.h"
 #include "../unit/unit.h"
-#include "../unit/unit_sprite.h"
 #include "../building/building.h"
 #include "../engine/cursor_point.h"
 #include "../engine/window.h"
@@ -21,7 +20,6 @@ public:
 	void set_window(myWindow *wnd) { window = wnd; }
 	void create();
 	void run();
-	std::map<int, Unit> unitList;
 
 	~Game();
 
@@ -34,13 +32,13 @@ private:
 	Surface surface;
 	EmptyRectangle minimapRectangle;
 	EmptyRectangle selectionRectangle;
-	USprite unit_sprite;
 	Unit unit;
 	UIGame ui;
 	CPoint cursor_point;
 
 	Building b;
 	std::map<int, Building> buildingList;
+	std::map<int, Unit> unitList;
 
 	int objectId = 0;
 	int click_id;

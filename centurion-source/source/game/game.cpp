@@ -98,12 +98,18 @@ void Game::create() {
 	selectionRectangle.compile(); 
 	selectionRectangle.init();
 
+	// *********** ROBA PROVVISORIA!!!!!1!!!11! ************
 	unit.set_class("hmyrmidon");
+	unit.set_id(objectId);
 	unit.set_player(0);
 	unit.set_position(GAME::TOWNHALL_POS[0], GAME::TOWNHALL_POS[1] - 1000.f);
 	unit.create();
+	unitList[objectId] = unit;
+	objectId++;
 
 	std::cout << "Unit is ready to fight. \n";
+
+	// *********** FINE DELLA PROVVISORIA ETA' ***************
 
 	ui.create();
 
@@ -139,12 +145,14 @@ void Game::run() {
 
 	if (!GAME::GRID_IS_ACTIVE){
 		for (std::map<int, Building>::iterator bld = buildingList.begin(); bld != buildingList.end(); bld++) {
-			if (selectionRectangle.area == 0) { bld->second.select(bld->second.picking_id == click_id); }
-			bld->second.render(projection, view, false);
+			bld->second.render(projection, view, false, click_id);
+		}
+		if(!GAME::MINIMAP_IS_ACTIVE){
+			for (std::map<int, Unit>::iterator u = unitList.begin(); u != unitList.end(); u++) {
+				u->second.render(projection, view, false, click_id);
+			}
 		}
 	}
-
-	unit.render(view);
 
 	render_selection_rectangle();
 	render_minimap_rectangle();
@@ -178,7 +186,10 @@ void Game::tracing() {
 
 void Game::picking() {
 	for (std::map<int, Building>::iterator bld = buildingList.begin(); bld != buildingList.end(); bld++) {
-		bld->second.render(projection, view, true);
+		bld->second.render(projection, view, true, 0);
+	}
+	for (std::map<int, Unit>::iterator u = unitList.begin(); u != unitList.end(); u++) {
+		u->second.render(projection, view, true, 0);
 	}
 	if (GLB::MOUSE_LEFT) {
 		click_id = get_id();

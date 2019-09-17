@@ -85,16 +85,25 @@ void USprite::create(json eData, glm::vec3 playerColor) {
 	}	
 }
 
-void USprite::render(glm::mat4 modelMat, std::string state) {
+void USprite::render(glm::mat4 modelMat, std::string state, bool picking, int pickingId) {
 
 	glUseProgram(shaderId);
 
 	/* Uniform Variables */
 
 	glUniformMatrix4fv(glGetUniformLocation(shaderId, "model"), 1, GL_FALSE, glm::value_ptr(modelMat));
-	glUniform1i(glGetUniformLocation(shaderId, "picking"), 0);  // disable picking
+	glUniform1i(glGetUniformLocation(shaderId, "picking"), int(picking));
 	glUniform1i(glGetUniformLocation(shaderId, "texture1"), 0); // texture
 	glUniform1i(glGetUniformLocation(shaderId, "yOffset"), entityData["yOffset"]); // vertical offset
+
+	/* PICKING = TRUE */
+
+	if (picking) {
+		r = (pickingId & 0x000000FF) >> 0;
+		g = (pickingId & 0x0000FF00) >> 8;
+		b = (pickingId & 0x00FF0000) >> 16;
+		glUniform4f(glGetUniformLocation(shaderId, "picking_color"), r / 255.0f, g / 255.0f, b / 255.0f, 1.0f);
+	}
 
 	/* Draw */
 

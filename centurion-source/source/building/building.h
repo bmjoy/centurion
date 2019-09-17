@@ -11,8 +11,7 @@ public:
 	Building();
 	void create();
 	void create_pass();
-	void select(bool b);
-	void render(glm::mat4 proj, glm::mat4 view, bool picking);
+	void render(glm::mat4 proj, glm::mat4 view, bool picking, int clickID);
 	~Building();
 
 private:

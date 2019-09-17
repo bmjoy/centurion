@@ -8,7 +8,6 @@ Unit::Unit() {
 	position2D = glm::vec3(0.0f, 0.0f, 0.0f);
 	position3D = glm::vec3(0.0f, 0.0f, 0.0f);
 	pathCount = 0;
-	isSelected = false;
 	is_Moving = false;
 }
 
@@ -41,18 +40,16 @@ void Unit::create() {
 	rectanglePath.create(20.f, 20.f, "bottom-left");
 }
 
-void Unit::select(bool b)
-{
-	isSelected = b;
-}
+void Unit::render(glm::mat4 proj, glm::mat4 viewMat, bool picking, int clickID) {
+	(picking_id == clickID) ? selected = true : selected = isInSelRect();
 
-void Unit::render(glm::mat4 viewMat) {
-	set_direction();
-	set_frame();
-	position_update();
-	walk_behaviour();
-	znoise_update();
-	checkSelRect();
+	if(!picking){
+		set_direction();
+		set_frame();
+		position_update();
+		walk_behaviour();
+		znoise_update();
+	}
 
 	sprite.apply_projection_matrix(GLB::CAMERA_PROJECTION);
 	sprite.apply_view_matrix(viewMat);
@@ -60,7 +57,7 @@ void Unit::render(glm::mat4 viewMat) {
 	model = glm::translate(glm::mat4(1.0f), position3D);
 
 	if (!GAME::MINIMAP_IS_ACTIVE) {
-		sprite.render(model, currentState);
+		sprite.render(model, currentState, picking, picking_id);
 	}
 
 	/* debug pathfinding and coordinates */
@@ -85,14 +82,8 @@ void Unit::render(glm::mat4 viewMat) {
 			hitbox.rectangle.apply_projection_matrix(GLB::CAMERA_PROJECTION);
 			hitbox.coords = getCoords(position3D.x - entityData["hitbox"][0], position3D.y + entityData["hitbox"][1] + entityData["yOffset"], entityData["hitbox"][0] * 2, entityData["hitbox"][1] * 2);
 			hitbox.rectangle.create(hitbox.coords);
-			hitbox.rectangle.render(viewMat, glm::mat4(1.0f), isSelected ? glm::vec4(255.0f, 0.0f, 255.0f, 1.0f) : glm::vec4(255.0f, 242.0f, 0.0f, 1.0f));
+			hitbox.rectangle.render(viewMat, glm::mat4(1.0f), selected ? glm::vec4(255.0f, 0.0f, 255.0f, 1.0f) : glm::vec4(255.0f, 242.0f, 0.0f, 1.0f));
 		}
-	}
-}
-
-void Unit::checkSelRect() {
-	if (GLB::MOUSE_LEFT){
-		isSelected = isInSelRect();
 	}
 }
 
@@ -170,7 +161,7 @@ float Unit::getResDistance(){
 }
 
 void Unit::walk_behaviour() {
-	if (GLB::MOUSE_RIGHT && isSelected) {
+	if (GLB::MOUSE_RIGHT && selected) {
 
 		GLB::MOUSE_RIGHT = false;
 		is_Moving = true;
