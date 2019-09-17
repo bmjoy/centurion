@@ -2,32 +2,31 @@
 
 ## Gameplay
 
-1. The game has a 3D rendering system, and the view will be set on 2.5D, as *Age of Empires*. The camera is on the top, is orthographic and can't be neither zoomed nor rotated.
+1. The game has a 3D rendering system, but its view will be set on 2.5D, like *Age of Empires*. Camera will be orthographic and above the battle field, and it can't be neither zoomed nor rotated.
 
-2. Soldiers and buildings are 3D models, so it's necessary to set a maximum number of troops, in order to avoid too many polygons to render and to ensure performances in terms of fps. This limit is 250 (soldiers and ships). We have at most 8 players, so the limit is 2000 soldiers.
+2. There will be no limitation, initially, to the maximum number of units that can be recruited, as they are sprites; this assumption, however, may change if needed for framerate issues in the future.
 
-3. Excluding wood, clay (for tiles) and some other materials, units and buildings have two particular layers, whose colors depends on the situation:
-    * **Metal**: only for military units and ships, has a color which depends on the respective level. Level 1-5 = dark white/gray; Level 6-11 = white/bright gray; Level 12-17 = bronze; Level 18-1000 = gold.
-    * **Material for clothes/mantles/decorations**: valid for every unit and building, it has the player's color.
+3. Excluding wood, clay (for tiles) and some other materials, units and buildings have two layers, whose colors depends on certain situations:
+    * **Metallic material**: only for military units and ships, it's made up of a color which depends from the combat level. Level 1-5 = dark white/gray; Level 6-11 = white/bright gray; Level 12-17 = bronze; Level 18-1000 = gold.
+    * **Material for clothes/mantles/decorations**: usable in buildings too, includes all the very visible parts (such as drapes, cloaks or clothes) whose hue depends on the color of the player who controls them.
 
-4. The selection system is the same as a typical RTS game. With a single click you can select a unit or building; if you hold down the left mouse button, you will draw a rectangular area and you will select every unit that is into the area, but not buildings. If you select a building or a unit (or a group of units), you can create a shortcut with CTRL+number (1-9). This allows to select the building or the units just clicking on the number selected before.
+4. Selection system will be the same as a typical RTS game: you can select a unit or a building with a single mouse click; you will draw a rectangular area instead, if you will hold down the left mouse button, including every unit that is into this area, but not buildings. You can easily create quick units/buildings selection groups holding CTRL and pressing a number (1-9): this will allows you to select a specific building or a group of units just pressing on the concerning number.
 
-5. In the main menu you can start a game choosing the game mode. 
-
-    * **Adventure**. Here you have to reach the adventure goals, and typically you won't win or lose as in normal conditions. There are rules and a "story" that you have to follow in order to win, generating events that changes the map and units behavior.
-    * **Conquest**. This game mode has the goal of choosing a civilization and conquesting every region, defeating every adjoining enemy step by step. You can set the difficulty level. Every civilization has a specific bonus, and every time you defeat a enemy, the bonus will change (new bonus is that of the conquered civilization). (*Rome*: an hero level 20 + 6000 gold; *Gaul*: 4 Fand's warrior level 12 + Heroes and warriors get experience twice as fast; *Iberia*: warriors heal if they have 10 points of energy + Heroes and warriors will get experience over time; *Carthage*: 4 Elephants + Warriors will get the "Spoils of War" when they kill an enemy; *Egypt*: troops will survive without food + If troops will enter the Townhall, they will receive every Charm; *Britain*: no fog in the game + 30 Archers will be in the townhall, and if they die, you will find another 30 in the townhall every time they die; *Germany*: every warrior will have "Learning" ability + Every townhall will produce an extra amount of food).
-    * **Single player**. Here you can personalize everything:
-        * The map, that can be randomly generated (island, continent, islands, ...) or a predefinite map created in the editor;
-        * The season;
+5. You can start a game choosing the game mode in the main menu.
+    * **Adventure**. You can't win or lose the game following the normal game rules, but you have to rationally use the resources at your disposal to achieve some objectives. Maps have a "story" you have to follow and are ruled by some scripts will change map or units behavior.
+    * **Conquest**. The goal here is to choose a civilization and conquest every region in a vaste territory, proceeding only through neighborhood enemies, step by step: if you would like to fight an harder challenge, you can change the difficulty level. Each civilization has a specific bonus, and each time you will defeat an enemy, you will obtain the conquered civilization benefits. (*Rome*: a level 20 hero + 6,000 gold; *Gaul*: 4 level 12 Fand's warriors + heroes and warriors get experience twice as fast; *Iberia*: warriors heal if they have max energy points + heroes and warriors will get experience over time; *Carthage*: 4 war elephants + warriors will get the "Spoils of War" item when they kill an enemy; *Egypt*: troops will survive without food + troops will receive all Charms item whenever approach the townhall; *Britain*: no fog of war + 30 archers will be spawn in the townhall each time they die; *Germany*: every warrior will have "Learning" skill + all townhalls will produce an extra amount of food).
+    * **Single player**. You can customize everything, here:
+        * Map type, that will be randomly generated (island, continent, islands, ...), or a map created in the editor;
+        * Season;
         * Explored / Not explored;
         * Fog of war / No fog;
         * Low / Normal / High population;
         * Low / Normal / High resources; 
-        * The number of players, their color and civilization, which of them are IAs and which difficulty, and their team;
-    This mode goal is to conquest every enemy fortress; if this happens, the conquered enemy has 2 minutes to try to reconquest at least one Townhall with at least one military unit.
-    * **Multiplayer**. It's the same as single player, but you can play there also with humans players.
+        * Players number, color, civilization, IAs and team;
+    The goal is to conquest every enemy fortress; if this happens, the conquered player, with he has at least one military unit alive, has 2 minutes to try to reconquest at least one townhall, otherwise he will lose the game.
+    * **Multiplayer**. Same as single player, but you can play the game with other humans players.
     
-6. Whatever it is the game mode, the map will contain nature and buildings. Then you can find zones with a lot of grass, zones with mountains or zones with fortresses or sacred sculptures.
+6. A game is played inside a map, whatever the game mode is, namely a realistic landscape in which both nature and the human hand are present: grassy zones with a lot of vegetation, or mountains with snow, will alternate in civilized areas where there will be only buildings and sculptures dedicated to the Gods.
 
 7. By default (and you can deactivate it), during every game seasons will change every two hours and textures will change (also the sun/environment lighting color). In spring/summer, the chance of rain is very low; in autumn the probability is very hight; in winter the probability is the same of autumn, but rain is replaced by snow. You can also decide about the day/night cycle (aesthetic question, but also strategic). 
 
