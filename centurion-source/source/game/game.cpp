@@ -261,7 +261,13 @@ void Game::render_selection_rectangle() {
 				sel_rect_coords[3] = GLB::WINDOW_HEIGHT_ZOOMED - GAME::UI_TOP_HEIGHT - 1.0f + GAME::CAMERA_POS_Y;
 				sel_rect_coords[5] = GLB::WINDOW_HEIGHT_ZOOMED - GAME::UI_TOP_HEIGHT - 1.0f + GAME::CAMERA_POS_Y;
 			}
-			GLB::SELECTION_RECTANGLE_COORDS = sel_rect_coords;
+			
+			GLB::SEL_RECT_COORDS.minX = std::min(sel_rect_coords[0], sel_rect_coords[4]);
+			GLB::SEL_RECT_COORDS.maxX = std::max(sel_rect_coords[0], sel_rect_coords[4]);
+			GLB::SEL_RECT_COORDS.minY = std::min(sel_rect_coords[1], sel_rect_coords[3]);
+			GLB::SEL_RECT_COORDS.maxY = std::max(sel_rect_coords[1], sel_rect_coords[3]);
+
+
 			selectionRectangle.apply_projection_matrix(GLB::CAMERA_PROJECTION);
 			selectionRectangle.create(sel_rect_coords);
 			selectionRectangle.render(view, glm::mat4(1.0f));

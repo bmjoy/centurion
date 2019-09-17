@@ -33,7 +33,7 @@ namespace GLB {
 	std::vector<glm::vec3> COLORS;
 	GLFWwindow *MAIN_WINDOW;
 	bool DEBUG = false;
-	std::array<float, 8> SELECTION_RECTANGLE_COORDS;
+	SelRectPoints SEL_RECT_COORDS;
 }
 
 namespace MAP {

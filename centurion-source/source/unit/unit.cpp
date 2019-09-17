@@ -2,15 +2,15 @@
 #include "unit.h"
 
 Unit::Unit() {
+	Path = aStar();
 	dir = 0;
 	frames_counter = 0.0;
-
 	currentState = "idle";
-	position2D = glm::vec3(100.0f, 100.0f, 0.0f);
-	position3D = glm::vec3(100.0f, 100.0f, 0.0f);
-
-	Path = aStar();
+	position2D = glm::vec3(0.0f, 0.0f, 0.0f);
+	position3D = glm::vec3(0.0f, 0.0f, 0.0f);
 	pathCount = 0;
+	isSelected = false;
+	is_Moving = false;
 }
 
 void Unit::set_position(float x, float y) {
@@ -33,9 +33,9 @@ void Unit::create() {
 	circlePos3D.create("assets/ui/mouse/cursor_point.png", "center");
 
 	//Show selection hitbox around the unit (Debug only)
-	hitbox = EmptyRectangle();
-	hitbox.compile();
-	hitbox.init();
+	hitbox.rectangle = EmptyRectangle();
+	hitbox.rectangle.compile();
+	hitbox.rectangle.init();
 
 	rectanglePath = FilledRectangle(SHD::F_RECTANGLE_SHADER_ID);
 	rectanglePath.set_color(glm::vec4(255.f, 0.f, 0.f, 255.f));
@@ -44,6 +44,7 @@ void Unit::create() {
 
 void Unit::select(bool b)
 {
+	isSelected = b;
 }
 
 void Unit::render(glm::mat4 viewMat) {
@@ -52,18 +53,10 @@ void Unit::render(glm::mat4 viewMat) {
 	position_update();
 	walk_behaviour();
 	znoise_update();
+	checkSelRect();
 
 	sprite.apply_projection_matrix(GLB::CAMERA_PROJECTION);
 	sprite.apply_view_matrix(viewMat);
-
-	circlePos2D.apply_projection_matrix(GLB::CAMERA_PROJECTION);
-	circlePos2D.apply_view_matrix(viewMat);
-	circlePos3D.apply_projection_matrix(GLB::CAMERA_PROJECTION);
-	circlePos3D.apply_view_matrix(viewMat);
-
-	GAME::MINIMAP_IS_ACTIVE ? rectanglePath.apply_projection_matrix(GLB::MINIMAP_PROJECTION) : rectanglePath.apply_projection_matrix(GLB::CAMERA_PROJECTION);
-
-	rectanglePath.apply_view_matrix(viewMat);
 
 	model = glm::translate(glm::mat4(1.0f), position3D);
 
@@ -74,9 +67,14 @@ void Unit::render(glm::mat4 viewMat) {
 	/* debug pathfinding and coordinates */
 
 	if (GLB::DEBUG) {
-		hitbox.apply_projection_matrix(GLB::CAMERA_PROJECTION);
-		hitbox.create(getCoords(position3D.x - entityData["hitbox"][0], position3D.y + entityData["hitbox"][1] + entityData["yOffset"], entityData["hitbox"][0]*2, entityData["hitbox"][1]*2));
-		hitbox.render(viewMat, glm::mat4(1.0f), IsInSelectionRect() ? glm::vec4(255.0f, 0.0f, 255.0f, 1.0f) : glm::vec4(255.0f, 242.0f, 0.0f, 1.0f));
+		circlePos2D.apply_projection_matrix(GLB::CAMERA_PROJECTION);
+		circlePos2D.apply_view_matrix(viewMat);
+
+		circlePos3D.apply_projection_matrix(GLB::CAMERA_PROJECTION);
+		circlePos3D.apply_view_matrix(viewMat);
+
+		GAME::MINIMAP_IS_ACTIVE ? rectanglePath.apply_projection_matrix(GLB::MINIMAP_PROJECTION) : rectanglePath.apply_projection_matrix(GLB::CAMERA_PROJECTION);
+		rectanglePath.apply_view_matrix(viewMat);
 
 		for (int i = 0; i < path.size(); i++) {
 			rectanglePath.render(path[i].x, path[i].y);
@@ -84,22 +82,42 @@ void Unit::render(glm::mat4 viewMat) {
 		if (!GAME::MINIMAP_IS_ACTIVE) {
 			circlePos2D.render(position2D.x, position2D.y);
 			circlePos3D.render(position3D.x, position3D.y);
+
+			hitbox.rectangle.apply_projection_matrix(GLB::CAMERA_PROJECTION);
+			hitbox.coords = getCoords(position3D.x - entityData["hitbox"][0], position3D.y + entityData["hitbox"][1] + entityData["yOffset"], entityData["hitbox"][0] * 2, entityData["hitbox"][1] * 2);
+			hitbox.rectangle.create(hitbox.coords);
+			hitbox.rectangle.render(viewMat, glm::mat4(1.0f), isSelected ? glm::vec4(255.0f, 0.0f, 255.0f, 1.0f) : glm::vec4(255.0f, 242.0f, 0.0f, 1.0f));
 		}
 	}
 }
 
-bool Unit::IsInSelectionRect() {
-	if (!GLB::MOUSE_LEFT) { return false; }
-	std::cout << GLB::SELECTION_RECTANGLE_COORDS[3] << "\n";
-	if ((hitbox.rectCoordinates[0] > GLB::SELECTION_RECTANGLE_COORDS[0] && hitbox.rectCoordinates[0] < GLB::SELECTION_RECTANGLE_COORDS[4] &&
-		hitbox.rectCoordinates[1] < GLB::SELECTION_RECTANGLE_COORDS[1] && hitbox.rectCoordinates[1] > GLB::SELECTION_RECTANGLE_COORDS[3]) ||
-		(hitbox.rectCoordinates[4] < GLB::SELECTION_RECTANGLE_COORDS[0] && hitbox.rectCoordinates[4] > GLB::SELECTION_RECTANGLE_COORDS[4] &&
-		hitbox.rectCoordinates[3] < GLB::SELECTION_RECTANGLE_COORDS[3] && hitbox.rectCoordinates[3] > GLB::SELECTION_RECTANGLE_COORDS[5])) {
-		return true;
+void Unit::checkSelRect() {
+	if (GLB::MOUSE_LEFT){
+		isSelected = isInSelRect();
 	}
-	else {
-		return false;
-	}
+}
+
+bool Unit::isInSelRect() {
+	return(
+		// are the 4 points in selection rectangle ?
+		(hitbox.coords[0] > GLB::SEL_RECT_COORDS.minX && hitbox.coords[0] < GLB::SEL_RECT_COORDS.maxX &&
+			hitbox.coords[1] > GLB::SEL_RECT_COORDS.minY && hitbox.coords[1] < GLB::SEL_RECT_COORDS.maxY) ||
+		(hitbox.coords[2] > GLB::SEL_RECT_COORDS.minX && hitbox.coords[2] < GLB::SEL_RECT_COORDS.maxX &&
+			hitbox.coords[3] > GLB::SEL_RECT_COORDS.minY && hitbox.coords[3] < GLB::SEL_RECT_COORDS.maxY) ||
+		(hitbox.coords[4] > GLB::SEL_RECT_COORDS.minX && hitbox.coords[4] < GLB::SEL_RECT_COORDS.maxX &&
+			hitbox.coords[5] > GLB::SEL_RECT_COORDS.minY && hitbox.coords[5] < GLB::SEL_RECT_COORDS.maxY) ||
+		(hitbox.coords[6] > GLB::SEL_RECT_COORDS.minX && hitbox.coords[6] < GLB::SEL_RECT_COORDS.maxX &&
+			hitbox.coords[7] > GLB::SEL_RECT_COORDS.minY && hitbox.coords[7] < GLB::SEL_RECT_COORDS.maxY) ||
+		// does the sel. rectangle and hitbox rectangle intersect themselves?
+		(hitbox.coords[0] > GLB::SEL_RECT_COORDS.minX && hitbox.coords[0] < GLB::SEL_RECT_COORDS.maxX &&
+			hitbox.coords[3] < GLB::SEL_RECT_COORDS.minY && hitbox.coords[1] > GLB::SEL_RECT_COORDS.maxY) ||
+		(hitbox.coords[4] > GLB::SEL_RECT_COORDS.minX && hitbox.coords[4] < GLB::SEL_RECT_COORDS.maxX &&
+			hitbox.coords[3] < GLB::SEL_RECT_COORDS.minY && hitbox.coords[1] > GLB::SEL_RECT_COORDS.maxY) ||
+		(hitbox.coords[1] > GLB::SEL_RECT_COORDS.minY && hitbox.coords[1] < GLB::SEL_RECT_COORDS.maxY &&
+			hitbox.coords[0] < GLB::SEL_RECT_COORDS.minX && hitbox.coords[4] > GLB::SEL_RECT_COORDS.maxX) ||
+		(hitbox.coords[3] > GLB::SEL_RECT_COORDS.minY && hitbox.coords[3] < GLB::SEL_RECT_COORDS.maxY &&
+			hitbox.coords[0] < GLB::SEL_RECT_COORDS.minX && hitbox.coords[4] > GLB::SEL_RECT_COORDS.maxX)
+		);
 }
 
 void Unit::set_direction() {
@@ -118,17 +136,11 @@ void Unit::set_frame() {
 
 void Unit::position_update() {
 	if (is_Moving && pathCount < path.size() - 2) {
-
 		currentState = "walk";
-
-
 		position2D.x += (path[pathCount + 1].x - path[pathCount].x) / distance * data["movement_speed"];
 		position2D.y += (path[pathCount + 1].y - path[pathCount].y) / distance * data["movement_speed"];
 
-		//std::cout << "Actual distance: " << getResDistance() << "; Previous distance: " << res_distance << "\n";
-
 		delta = getResDistance() - res_distance;
-
 		res_distance = getResDistance();
 
 		if (res_distance < 20 || delta > 0) {	
@@ -159,7 +171,7 @@ float Unit::getResDistance(){
 }
 
 void Unit::walk_behaviour() {
-	if (GLB::MOUSE_RIGHT) {
+	if (GLB::MOUSE_RIGHT && isSelected) {
 
 		GLB::MOUSE_RIGHT = false;
 		is_Moving = true;

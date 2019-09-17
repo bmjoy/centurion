@@ -19,6 +19,13 @@
 #include <iterator>
 #include "../engine/window.h"
 
+struct SelRectPoints {
+	float minX;
+	float maxX;
+	float minY;
+	float maxY;
+};
+
 namespace GLB {
 	extern int WINDOW_WIDTH, WINDOW_HEIGHT;
 	extern int WINDOW_WIDTH_ZOOMED, WINDOW_HEIGHT_ZOOMED;
@@ -42,7 +49,7 @@ namespace GLB {
 	extern std::vector<glm::vec3> COLORS;
 	extern GLFWwindow *MAIN_WINDOW;
 	extern bool DEBUG;
-	extern std::array<float, 8> SELECTION_RECTANGLE_COORDS; //Only a temporar way to test multiple selection
+	extern SelRectPoints SEL_RECT_COORDS; //Only a temporar way to test multiple selection
 }
 
 namespace MAP {

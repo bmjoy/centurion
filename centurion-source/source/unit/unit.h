@@ -19,53 +19,53 @@ public:
 	void select(bool b);
 	void set_position(float x, float y);
 	void render(glm::mat4 viewMat);
-	bool IsInSelectionRect();
+	bool isSelected;
 	~Unit();
 
 private:
 	USprite sprite;
-	Image circlePos2D;
-	Image circlePos3D;
-
-	FilledRectangle rectanglePath;
-	EmptyRectangle hitbox;
 	aStar Path;
-	std::vector<glm::ivec2> path;
 
+	/* unit properties & data */
 	std::string currentState;
+	json entityData;
 
-	glm::mat4 model;
-
-	/* Position */
+	/* unit position */
+	float znoise;
 	glm::vec3 position2D;
 	glm::vec3 position3D;
+	void znoise_update();
 
+	/* unit movement & pathfinding */
+	bool is_Moving;
 	int dir;
 	int frames_counter;
-
+	int pathCount;
+	float angle;
+	float delta;
+	float distance, res_distance;
+	float getResDistance();
+	std::vector<glm::ivec2> path;
+	glm::vec2 startPoint, endPoint;
 	void set_frame();
 	void set_direction();
-
 	void position_update();
-
 	void walk_behaviour();
-	glm::vec2 startPoint, endPoint;
-	int pathCount;
-	float getResDistance();
-	float delta;
-
-	bool is_Moving = false;
-	float start_x, start_y;
-	float distance, res_distance;
-	float angle;
-
-	void znoise_update();
-	float znoise;
-	glm::vec3 values;
-
-	float xPosGrid, yPosGrid;
-
 	std::vector<glm::ivec2> pathfinding(glm::vec2 start, glm::vec2 end);
+	
+	/* unit selection */
+	void checkSelRect();
+	bool isInSelRect();
+	
+	/* unit rendering */
+	glm::mat4 model;
 
-	json entityData;
+	/* debug objects */
+	FilledRectangle rectanglePath;
+	struct HitBox {
+		EmptyRectangle rectangle;
+		std::array<float, 8> coords;
+	} hitbox;
+	Image circlePos2D;
+	Image circlePos3D;
 };
