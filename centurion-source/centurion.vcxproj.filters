@@ -204,6 +204,9 @@
     <ClCompile Include="source\pathfinding\a_star.cpp">
       <Filter>Source Files\pathfinding</Filter>
     </ClCompile>
+    <ClCompile Include="source\unit\unit_functions.cpp">
+      <Filter>Source Files\unit</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="source\building\building.h">
@@ -307,6 +310,9 @@
     </ClInclude>
     <ClInclude Include="source\pathfinding\a_star.h">
       <Filter>Header Files\pathfinding</Filter>
+    </ClInclude>
+    <ClInclude Include="source\unit\unit_functions.h">
+      <Filter>Header Files\unit</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

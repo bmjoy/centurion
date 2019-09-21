@@ -20,7 +20,7 @@ public:
 	void set_window(myWindow *wnd) { window = wnd; }
 	void create();
 	void run();
-
+	int selectedUnitsCount;
 	~Game();
 
 private:

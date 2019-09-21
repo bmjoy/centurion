@@ -22,7 +22,7 @@
     <VCProjectVersion>15.0</VCProjectVersion>
     <ProjectGuid>{29C92E4D-97E2-4049-A35E-F6A42D1C8AB9}</ProjectGuid>
     <RootNamespace>centurion</RootNamespace>
-    <WindowsTargetPlatformVersion>10.0.18362.0</WindowsTargetPlatformVersion>
+    <WindowsTargetPlatformVersion>10.0.17763.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
@@ -253,6 +253,7 @@
     <ClCompile Include="source\terrain\surface.cpp" />
     <ClCompile Include="source\terrain\terrain.cpp" />
     <ClCompile Include="source\unit\unit.cpp" />
+    <ClCompile Include="source\unit\unit_functions.cpp" />
     <ClCompile Include="source\unit\unit_sprite.cpp" />
     <None Include="assets\shaders\bsprite\vertex.glsl">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
@@ -293,6 +294,7 @@
     <ClInclude Include="source\terrain\surface.h" />
     <ClInclude Include="source\terrain\terrain.h" />
     <ClInclude Include="source\unit\unit.h" />
+    <ClInclude Include="source\unit\unit_functions.h" />
     <ClInclude Include="source\unit\unit_sprite.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

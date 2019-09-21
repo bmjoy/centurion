@@ -107,6 +107,14 @@ void Game::create() {
 	unitList[objectId] = unit;
 	objectId++;
 
+	unit.set_class("hmyrmidon");
+	unit.set_id(objectId);
+	unit.set_player(0);
+	unit.set_position(GAME::TOWNHALL_POS[0]+100, GAME::TOWNHALL_POS[1] - 1000.f);
+	unit.create();
+	unitList[objectId] = unit;
+	objectId++;
+
 	std::cout << "Unit is ready to fight. \n";
 
 	// *********** FINE DELLA PROVVISORIA ETA' ***************
@@ -117,6 +125,9 @@ void Game::create() {
 }
 
 void Game::run() {
+
+	selectedUnitsCount = 0;
+
 	/* If minimap is NOT active */
 
 	if (!GAME::MINIMAP_IS_ACTIVE) camera.mouseControl(threshold);
@@ -150,6 +161,7 @@ void Game::run() {
 		if(!GAME::MINIMAP_IS_ACTIVE){
 			for (std::map<int, Unit>::iterator u = unitList.begin(); u != unitList.end(); u++) {
 				u->second.render(projection, view, false, click_id);
+				selectedUnitsCount += (int)u->second.getSelected();
 			}
 		}
 	}

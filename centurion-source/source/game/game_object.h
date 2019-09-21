@@ -13,6 +13,7 @@ public:
 	void set_class(std::string className);
 	void set_player(int playerId);
 	void set_id(int pickingId);
+	bool getSelected() { return selected; }
 	int get_xPos() { return (int)position.x; }
 	int get_yPos() { return (int)position.y; }
 	int picking_id;

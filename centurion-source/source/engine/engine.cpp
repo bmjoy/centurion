@@ -207,12 +207,18 @@ void Engine::render_ui() {
 				+ std::to_string(GLB::MOUSE_Y));
 			tahoma6_text.render();
 
+			tahoma6_text.set_position(glm::vec2(14.f, GAME::UI_BOTTOM_HEIGHT + 12.f + 15.f*3.f));
 			tahoma6_text.set_text(
 				"map position: x = "
 				+ std::to_string((int)getZoomedCoords((float)GLB::MOUSE_X, (float)GLB::MOUSE_Y).x)
 				+ ", y = "
-				+ std::to_string((int)getZoomedCoords((float)GLB::MOUSE_X, (float)GLB::MOUSE_Y).y));
-			tahoma6_text.set_position(glm::vec2(14.f, GAME::UI_BOTTOM_HEIGHT + 12.f + 15.f*3.f));
+				+ std::to_string((int)getZoomedCoords((float)GLB::MOUSE_X, (float)GLB::MOUSE_Y).y));			
+			tahoma6_text.render();
+
+			tahoma6_text.set_position(glm::vec2(14.f, GAME::UI_BOTTOM_HEIGHT + 12.f + 15.f*4.f));
+			tahoma6_text.set_text(
+				"selected units: "
+				+ std::to_string(game.selectedUnitsCount));
 			tahoma6_text.render();
 		}
 

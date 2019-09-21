@@ -1,5 +1,5 @@
 {
-  "yOffset": 50,
+  "yOffset": 30,
   "hitbox": [ 15, 40 ],
   "spriteList": [ "idle", "walk" ],
   "sprites": {
@@ -7,13 +7,13 @@
       "filePath": "assets/units/hmyrmidon/idle.png",
       "frames": 11,
       "directions": 8,
-      "duration": 10
+      "duration": 20
     },
     "walk": {
       "filePath": "assets/units/hmyrmidon/walk.png",
       "frames": 11,
       "directions": 8,
-      "duration": 8
+      "duration": 20
     }
   }
 }
