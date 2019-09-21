@@ -1,0 +1,49 @@
+{
+	"images": [
+        {
+            "name": "background",
+            "clickable": 0,
+            "path": "assets/ui/menu/menu_background.png",
+            "x": 0,
+            "y": 0,
+			"size": "max",
+            "align": "bottom-left"
+        },
+        {
+			"name": "arrowDown",
+            "clickable": 1,
+			"path": "assets/ui/menu/down.png",
+			"x": 270,
+			"y": 650,
+			"size": "auto",
+			"align": "center"
+		},
+        {
+			"name": "arrowUp",
+            "clickable": 1,
+			"path": "assets/ui/menu/up.png",
+			"x": 310,
+			"y": 650,
+			"size": "auto",
+			"align": "center"
+		}
+
+	],
+
+	"buttons": [{
+			"name": "buttonStart",
+			"path": "assets/ui/buttons/button_1.png",
+			"x": -200,
+			"y": 500,
+			"text": "Start"
+		},
+		{
+			"name": "buttonExit",
+			"path": "assets/ui/buttons/button_1.png",
+			"x": -200,
+			"y": 450,
+			"text": "Exit"
+		}
+	]
+    
+}

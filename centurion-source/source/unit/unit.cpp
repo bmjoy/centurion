@@ -10,6 +10,8 @@ Unit::Unit() {
 	pathCount = 0;
 	is_Moving = false;
 	creationTime = 0.f;
+	bool clickSelection = false;
+	bool rectangleSelection = false;
 }
 
 void Unit::set_position(float x, float y) {
@@ -42,7 +44,12 @@ void Unit::create() {
 }
 
 void Unit::render(glm::mat4 proj, glm::mat4 viewMat, bool picking, int clickID) {
-	(picking_id == clickID) ? selected = true : selected = unit::isInSelectionRect(hitbox.coords);
+	clickSelection = (picking_id == clickID);
+	if(GLB::MOUSE_LEFT)	rectangleSelection = unit::isInSelectionRect(hitbox.coords);
+
+	selected = (clickSelection + rectangleSelection > 0);
+
+	std::cout << clickSelection << " + " << rectangleSelection << " = " << selected << "\n";
 
 	if(!picking){
 		unit::updateDirection(&sprite, dir);
@@ -57,6 +64,13 @@ void Unit::render(glm::mat4 proj, glm::mat4 viewMat, bool picking, int clickID) 
 
 	model = glm::translate(glm::mat4(1.0f), position3D);
 	sprite.render(model, currentState, picking, picking_id);
+
+	if (!GLB::DEBUG) {
+		hitbox.rectangle.apply_projection_matrix(GLB::CAMERA_PROJECTION);
+		hitbox.coords = getCoords(position3D.x - entityData["hitbox"][0], position3D.y + entityData["hitbox"][1] + entityData["yOffset"], entityData["hitbox"][0] * 2, entityData["hitbox"][1] * 2);
+		hitbox.rectangle.create(hitbox.coords);
+		hitbox.rectangle.render(viewMat, glm::mat4(1.0f), selected ? glm::vec4(255.0f, 255.0f, 255.0f, 1.0f) : glm::vec4(0.0f, 0.0f, 0.0f, 0.0f));
+	}
 
 	/* debug pathfinding and coordinates */
 

@@ -32,6 +32,8 @@ private:
 	/* unit position */
 	glm::vec3 position2D;
 	glm::vec3 position3D;
+	bool clickSelection;
+	bool rectangleSelection;
 
 	/* unit movement & pathfinding */
 	bool is_Moving;

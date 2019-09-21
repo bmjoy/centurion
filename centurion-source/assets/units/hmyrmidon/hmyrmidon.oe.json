@@ -7,13 +7,13 @@
       "filePath": "assets/units/hmyrmidon/idle.png",
       "frames": 11,
       "directions": 8,
-      "duration": 20
+      "duration": 30
     },
     "walk": {
       "filePath": "assets/units/hmyrmidon/walk.png",
       "frames": 11,
       "directions": 8,
-      "duration": 20
+      "duration": 15
     }
   }
 }
