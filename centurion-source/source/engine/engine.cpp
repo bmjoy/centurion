@@ -218,7 +218,7 @@ void Engine::render_ui() {
 			tahoma6_text.set_position(glm::vec2(14.f, GAME::UI_BOTTOM_HEIGHT + 12.f + 15.f*4.f));
 			tahoma6_text.set_text(
 				"selected units: "
-				+ std::to_string(game.selectedUnitsCount));
+				+ std::to_string(game.getSelectedUnits()));
 			tahoma6_text.render();
 		}
 

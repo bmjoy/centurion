@@ -172,4 +172,12 @@ static glm::vec2 getZoomedCoords(float xCoord, float yCoord) {
 	return glm::vec2(x, y);
 }
 
+static float getYMinimapCoord(float x) {
+	return (float)GLB::WINDOW_HEIGHT * (x - GAME::UI_BOTTOM_HEIGHT) / ((float)GLB::WINDOW_HEIGHT - GAME::UI_BOTTOM_HEIGHT - GAME::UI_TOP_HEIGHT);
+}
+
+static bool cursorInGameScreen() { 
+	return (GLB::MOUSE_LEFT_Y > GAME::UI_BOTTOM_HEIGHT) && (GLB::MOUSE_LEFT_Y < (GLB::WINDOW_HEIGHT - GAME::UI_TOP_HEIGHT)); 
+}
+
 #endif

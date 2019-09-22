@@ -208,7 +208,10 @@
       <Filter>Source Files\unit</Filter>
     </ClCompile>
     <ClCompile Include="source\gui\players_list.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\gui</Filter>
+    </ClCompile>
+    <ClCompile Include="source\game\game_functions.cpp">
+      <Filter>Source Files\game</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -318,7 +321,10 @@
       <Filter>Header Files\unit</Filter>
     </ClInclude>
     <ClInclude Include="source\gui\players_list.h">
-      <Filter>Header Files</Filter>
+      <Filter>Header Files\gui</Filter>
+    </ClInclude>
+    <ClInclude Include="source\game\game_functions.h">
+      <Filter>Header Files\game</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

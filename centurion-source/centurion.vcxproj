@@ -233,6 +233,7 @@
     <ClCompile Include="source\engine\mouse.cpp" />
     <ClCompile Include="source\engine\window.cpp" />
     <ClCompile Include="source\game\game.cpp" />
+    <ClCompile Include="source\game\game_functions.cpp" />
     <ClCompile Include="source\game\game_object.cpp" />
     <ClCompile Include="source\gui\button.cpp" />
     <ClCompile Include="source\gui\div_image.cpp" />
@@ -275,6 +276,7 @@
     <ClInclude Include="source\extern\includes\json.hpp" />
     <ClInclude Include="source\extern\includes\stb_image.h" />
     <ClInclude Include="source\game\game.h" />
+    <ClInclude Include="source\game\game_functions.h" />
     <ClInclude Include="source\game\game_object.h" />
     <ClInclude Include="source\gui\button.h" />
     <ClInclude Include="source\gui\div_image.h" />
