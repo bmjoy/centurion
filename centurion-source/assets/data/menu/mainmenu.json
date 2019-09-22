@@ -16,18 +16,19 @@
         {
             "name": "buttonSinglePlayer",
             "path": "assets/ui/buttons/button_1.png",
-            "x": -200,
-            "y": 500,
+            "x": -150,
+            "y": 600,
             "text": "Single-player"
         },
         
         {
             "name": "buttonQuit",
             "path": "assets/ui/buttons/button_1.png",
-            "x": -200,
-            "y": 450,
+            "x": -150,
+            "y": 75,
             "text": "Quit"
         }
-    ]
-
+    ],
+    
+    "playersList": {}
 }

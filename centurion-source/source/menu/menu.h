@@ -8,7 +8,7 @@
 #include "../gui/button.h"
 #include "../gui/div_image.h"
 #include "../gui/div_text.h"
-
+#include "../gui/players_list.h"
 
 class Menu
 {
@@ -26,18 +26,14 @@ private:
 	std::map<std::string, std::vector<DivImage>> images;
 	std::map<std::string, std::vector<Button>> buttons;
 	std::map<std::string, std::vector<FormInput>> formInputs;
-	std::vector<FormInput> colors_Form;
-	std::vector<FormInput> players_Form;
-	std::vector<FormInput> civiliz_Form;
 	int x, y, w, h;
-	int start_x, start_y, delta_y;
 	std::string s;
 	ISoundEngine* music;
 
 	/* temporary objects */
 	DivImage img;
 	Button btn;
-	DivText text;
+	PlayersList list;
 
 	/* PICKING */
 	std::map<int, std::string> pickingList;

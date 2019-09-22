@@ -46,10 +46,7 @@ void Unit::create() {
 void Unit::render(glm::mat4 proj, glm::mat4 viewMat, bool picking, int clickID) {
 	clickSelection = (picking_id == clickID);
 	if(GLB::MOUSE_LEFT)	rectangleSelection = unit::isInSelectionRect(hitbox.coords);
-
 	selected = (clickSelection + rectangleSelection > 0);
-
-	std::cout << clickSelection << " + " << rectangleSelection << " = " << selected << "\n";
 
 	if(!picking){
 		unit::updateDirection(&sprite, dir);

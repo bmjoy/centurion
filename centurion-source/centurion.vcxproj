@@ -238,6 +238,7 @@
     <ClCompile Include="source\gui\div_image.cpp" />
     <ClCompile Include="source\gui\div_text.cpp" />
     <ClCompile Include="source\gui\form_input.cpp" />
+    <ClCompile Include="source\gui\players_list.cpp" />
     <ClCompile Include="source\gui\ui_game.cpp" />
     <ClCompile Include="source\gui\ui_object.cpp" />
     <ClCompile Include="source\menu\menu.cpp" />
@@ -279,6 +280,7 @@
     <ClInclude Include="source\gui\div_image.h" />
     <ClInclude Include="source\gui\div_text.h" />
     <ClInclude Include="source\gui\form_input.h" />
+    <ClInclude Include="source\gui\players_list.h" />
     <ClInclude Include="source\gui\ui_game.h" />
     <ClInclude Include="source\gui\ui_object.h" />
     <ClInclude Include="source\menu\menu.h" />

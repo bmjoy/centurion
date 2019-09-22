@@ -8,10 +8,7 @@ Menu::Menu(){
 	images = { };
 	buttons = { };
 	pickingList = { };
-	start_x = 50.0f;
-	start_y = 600.0f;
 	num_players = 2;
-	delta_y = 30.f;
 }
 
 void Menu::create() {
@@ -64,40 +61,12 @@ void Menu::create() {
 			buttons[menus[a]].push_back(btn);
 		}
 
-		if (menus[a] == "singleplayer") {
-			text = DivText();
-			text.create("tahoma_8");
-			for (int j = 0; j < GAME::PLAYERS_NUMBER_MAX; j++) {
-
-				//Player color rectangle
-				pickingList[pickingId] = "ColForm_" + std::to_string(j);
-				FormInput col_fi = FormInput(false);
-				col_fi.set_position(glm::vec2(start_x, start_y - delta_y * j));
-				col_fi.set_id(pickingId);
-				col_fi.create(20.f, 20.f, { "" });
-				if (j < 2) { players_color.push_back(j); }
-				else { players_color.push_back(-1); }
-				colors_Form.push_back(col_fi);
-				pickingId++;
-
-				//Player name
-				FormInput p_fi = FormInput(false);
-				p_fi.set_position(glm::vec2(start_x + 50.0f, start_y - delta_y * j));
-				p_fi.create(200.f, 20.f, { "Player " + std::to_string(j + 1) });
-				players_Form.push_back(p_fi);
-
-
-				//Player civilization
-				pickingList[pickingId] = "CivForm_" + std::to_string(j);
-				FormInput c_fi = FormInput(true);
-				c_fi.set_position(glm::vec2(start_x + 280.f, start_y - delta_y * j));
-				c_fi.set_id(pickingId);
-				c_fi.create(150.f, 20.f, GAME::RACES);
-				civiliz_Form.push_back(c_fi);
-				pickingId++;
-			}
+		s = "playersList";
+		if (data[s].size()>0) {
+			list = PlayersList();
+			list.set_position(data[s]["x"], data[s]["y"]);
+			list.create(&pickingList, &pickingId, &players_color);
 		}
-
 	}
 }
 
@@ -111,10 +80,7 @@ void Menu::render() {
 		buttons[currentMenu][i].render(true);
 	}
 	if (currentMenu == "singleplayer") {
-		for (int j = num_players - 1; j >= 0; j--) {
-			colors_Form[j].render(true);
-			civiliz_Form[j].render(true);
-		}
+		list.render(num_players, players_color, true);
 	}
 
 	picking();
@@ -126,19 +92,9 @@ void Menu::render() {
 		buttons[currentMenu][i].render(false);
 	}
 	if (currentMenu == "singleplayer") {
-		text.set_text("Number of players: " + std::to_string(num_players));
-		text.set_position(glm::vec2(start_x + 1.f, start_y + 39.f));
-		text.render(glm::vec4(0.f, 0.f, 0.f, 255.f));
-		text.set_position(glm::vec2(start_x, start_y + 40.f));
-		text.render(glm::vec4(255.f));
-		for (int j = num_players - 1; j >= 0; j--) {
-			colors_Form[j].set_color(glm::vec4(GLB::COLORS[players_color[j]], 1.0f));
-			colors_Form[j].render();
-			players_Form[j].render();
-			civiliz_Form[j].render();
-		}
+		list.render(num_players, players_color, false);
 	}
-
+	
 }
 
 void Menu::picking() {
@@ -148,10 +104,11 @@ void Menu::picking() {
 		clickId = get_id();
 
 		/*------------------------------------------------------------------------------*/
-		if (pickingList[clickId].substr(0, 4) != "CivForm") {
-			for (int k = 0; k < num_players; k++) {
-				civiliz_Form[k].close();
+		if (currentMenu == "singleplayer"){
+			if (pickingList[clickId].substr(0, 4) != "CivForm") {
+				list.close();
 			}
+			list.picking(pickingList, &num_players, &players_color, clickId);
 		}
 		/*------------------------------------------------------------------------------*/
 		if (pickingList[clickId] == "buttonStart") {
@@ -162,10 +119,11 @@ void Menu::picking() {
 			GLB::MAIN_MENU = false;
 			/* save game informations */
 			GAME::PLAYERS_NUMBER = num_players;
+			GAME::PLAYERS_RACE = list.get_races(num_players);
 			for (int i = 0; i < num_players; i++) {
 				GAME::PLAYERS_COLOR.push_back(GLB::COLORS[players_color[i]]);
-				GAME::PLAYERS_RACE.push_back(civiliz_Form[i].selectedText);
 			}
+			
 		}
 		/*------------------------------------------------------------------------------*/
 		if (pickingList[clickId] == "buttonQuit") {
@@ -182,72 +140,7 @@ void Menu::picking() {
 			GLB::MOUSE_LEFT = false;
 			currentMenu = "singleplayer";
 		}
-		/*------------------------------------------------------------------------------*/
-		if (pickingList[clickId] == "arrowDown") {
-			GLB::MOUSE_LEFT = false;
-			if (num_players > 2 && num_players <= 8) {
-				players_color[num_players - 1] = -1;
-				num_players -= 1;
-			}
-		}
-		/*------------------------------------------------------------------------------*/
-		if (pickingList[clickId] == "arrowUp") {
-			GLB::MOUSE_LEFT = false;
-			if (num_players >= 2 && num_players < 8) {
-				num_players += 1;
-				players_color[num_players - 1] = 0;
-				bool c = false;
-				while (!c) {
-					int s = 0;
-					for (int k = 0; k < players_color.size(); k++) {
-						if (players_color[k] == players_color[num_players - 1]) {
-							s++;
-						}
-					}
-					if (s == 1) {
-						c = true;
-					}
-					else {
-						players_color[num_players - 1] ++;
-					}
-				}
-			}
-		}
-		/*------------------------------------------------------------------------------*/
-		for (int j = 0; j < num_players; j++) {
-			if (pickingList[clickId] == "CivForm_" + std::to_string(j)) {
-				int i = int(((float)GLB::MOUSE_LEFT_Y - start_y + delta_y * j) / 20.0)*(-1);
-				GLB::MOUSE_LEFT = false;
-				civiliz_Form[j].open_close();
-
-				if (i > 0) {
-					civiliz_Form[j].select_option(i);
-				}
-			}
-			if (pickingList[clickId] == "ColForm_" + std::to_string(j)) {
-				GLB::MOUSE_LEFT = false;
-				players_color[j] ++;
-				if (players_color[j] == GLB::COLORS.size()) { players_color[j] = 0; }
-				bool c = false;
-				while (!c) {
-					int s = 0;
-					for (int k = 0; k < players_color.size(); k++) {
-						if (players_color[k] == players_color[j]) {
-							s++;
-						}
-					}
-					if (s == 1) {
-						c = true;
-					}
-					else {
-						players_color[j] ++;
-					}
-				}
-			}
-		}
-
 	}
-
 }
 
 
