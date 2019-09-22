@@ -33,9 +33,9 @@ void game::clearBuffers() {
 	glClear(GL_COLOR_BUFFER_BIT);
 }
 
-void game::goToPosition(std::map<int, Building> *bList, Camera *c, bool cursorInGame, double *lastTime, int *clickId, bool *blockMinimap) {
+void game::goToPosition(std::map<int, Building> *bList, Camera *c, double *lastTime, int *clickId, bool *blockMinimap) {
 	if (GAME::MINIMAP_IS_ACTIVE) {
-		if (GLB::MOUSE_LEFT && cursorInGame) {
+		if (GLB::MOUSE_LEFT && cursorInGameScreen()) {
 			cameraToX = GLB::MOUSE_LEFT_X / (float)GLB::WINDOW_WIDTH*(float)GAME::MAP_WIDTH - (float)GLB::WINDOW_WIDTH / 2.0;
 			cameraToY = getYMinimapCoord((float)GLB::MOUSE_LEFT_Y) / (float)GLB::WINDOW_HEIGHT*(float)GAME::MAP_HEIGHT - (float)GLB::WINDOW_HEIGHT / 2.0;
 			/* Double Click detection */
@@ -88,9 +88,9 @@ void game::renderObjects(std::map<int, Building> *bList, std::map<int, Unit> *uL
 	}
 }
 
-void game::renderSelRectangle(EmptyRectangle *rect, std::array<float, 8> *coords, glm::mat4 *view, bool cursorInGame, float *cameraLastX, float *cameraLastY) {
+void game::renderSelRectangle(EmptyRectangle *rect, std::array<float, 8> *coords, glm::mat4 *view, float *cameraLastX, float *cameraLastY) {
 	if (!GAME::MINIMAP_IS_ACTIVE) {
-		if (GLB::MOUSE_LEFT && cursorInGame) {
+		if (GLB::MOUSE_LEFT && cursorInGameScreen()) {
 			(*coords)[0] = GLB::MOUSE_LEFT_X * (float)GLB::WINDOW_WIDTH_ZOOMED / (float)GLB::WINDOW_WIDTH + *cameraLastX;
 			(*coords)[1] = GLB::MOUSE_LEFT_Y * (float)GLB::WINDOW_HEIGHT_ZOOMED / (float)GLB::WINDOW_HEIGHT + *cameraLastY;
 			(*coords)[2] = GLB::MOUSE_LEFT_X * (float)GLB::WINDOW_WIDTH_ZOOMED / (float)GLB::WINDOW_WIDTH + *cameraLastX;

@@ -17,9 +17,9 @@ namespace game {
 	void picking(std::map<int, Building> *bList, std::map<int, Unit> *uList, glm::mat4 *proj, glm::mat4 *view, int *clickId, bool *blockMinimap);
 	void tracing(Surface *s, glm::mat4 *proj, glm::mat4 *view);
 	void clearBuffers();
-	void goToPosition(std::map<int, Building> *bList, Camera *c, bool cursorInGame, double *lastTime, int *clickId, bool *blockMinimap);
+	void goToPosition(std::map<int, Building> *bList, Camera *c, double *lastTime, int *clickId, bool *blockMinimap);
 	void renderObjects(std::map<int, Building> *bList, std::map<int, Unit> *uList, glm::mat4 *proj, glm::mat4 *view, int *clickId, int *selectedUnits);
-	void renderSelRectangle(EmptyRectangle *rect, std::array<float, 8> *coords, glm::mat4 *view, bool cursorInGame, float *cameraLastX, float *cameraLastY);
+	void renderSelRectangle(EmptyRectangle *rect, std::array<float, 8> *coords, glm::mat4 *view, float *cameraLastX, float *cameraLastY);
 	void renderMapRectangle(EmptyRectangle *rect, std::array<float, 8> *coords);
 }
 

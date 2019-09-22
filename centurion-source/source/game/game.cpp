@@ -118,42 +118,34 @@ void Game::create() {
 void Game::run() {
 
 	selectedUnits = 0;
+	camera.keyboardControl();
 
 	/* If minimap is NOT active */
-
-	if (!GAME::MINIMAP_IS_ACTIVE) camera.mouseControl(threshold);
-
 	if (!GAME::MINIMAP_IS_ACTIVE) {		
+		camera.mouseControl(threshold);
 		view = camera.calculateViewMatrix();
 		projection = GLB::CAMERA_PROJECTION;			
 	}
 
 	/* If minimap is active */
-
 	else {
 		view = glm::mat4(1.0f);
 		projection = GLB::MINIMAP_PROJECTION;			
 	}
-	camera.keyboardControl();
 
 	/* Tracing and Picking */
-
 	game::tracing(&surface, &projection, &view);	
 	game::picking(&buildingList, &unitList, &projection, &view, &click_id, &blockMinimap);
 
 	/* Rendering */
-
 	surface.render(projection, view, false);
-	
 	game::renderObjects(&buildingList, &unitList, &projection, &view, &click_id, &selectedUnits);
-	game::renderSelRectangle(&selectionRectangle, &sel_rect_coords, &view, cursorInGameScreen(), &cameraLastX, &cameraLastY);
+	game::renderSelRectangle(&selectionRectangle, &sel_rect_coords, &view, &cameraLastX, &cameraLastY);
 	game::renderMapRectangle(&minimapRectangle, &minimap_rect_coords);
-	
-	game::goToPosition(&buildingList, &camera, cursorInGameScreen(), &lastTime, &click_id, &blockMinimap);
-
 	if (GLB::DEBUG) cursor_point.render();
 	ui.render();
 
+	game::goToPosition(&buildingList, &camera, &lastTime, &click_id, &blockMinimap);
 	GLB::CAMERA_PROJECTION = glm::ortho(0.0f, (float)GLB::WINDOW_WIDTH_ZOOMED, 0.0f, (float)GLB::WINDOW_HEIGHT_ZOOMED, -(float)GAME::MAP_WIDTH, (float)GAME::MAP_WIDTH);
 }
 
