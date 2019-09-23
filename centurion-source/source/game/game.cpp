@@ -2,9 +2,7 @@
 
 
 Game::Game(){
-	surface = Surface();
-	minimapRectangle = EmptyRectangle();
-	selectionRectangle = EmptyRectangle();
+	
 	unit = Unit();
 
 	cameraLastX = 0.0; cameraLastY = 0.0;
@@ -18,7 +16,7 @@ Game::Game(){
 }
 
 void Game::create(std::vector<Player> *ListOfPlayers) {
-
+	surface = new Surface();
 	playersList = ListOfPlayers;
 	mapgen::setPlayerList(ListOfPlayers);
 
@@ -78,7 +76,7 @@ void Game::create(std::vector<Player> *ListOfPlayers) {
 	/*------------------------------------------------------------*/
 	
 
-	surface.create();
+	surface->create();
 	
 
 	/*------------------------------------------------------------*/
@@ -86,11 +84,10 @@ void Game::create(std::vector<Player> *ListOfPlayers) {
 	std::cout << "Terrain has been generated! \n";
 	std::cout << "Min(z) = " << MAP::MIN_Z << "; Max(z) = " << MAP::MAX_Z << std::endl;
 
-	minimapRectangle.compile();
+	minimapRectangle = EmptyRectangle(SHD::E_RECTANGLE_SHADER_ID);
 	minimapRectangle.init();
-	minimapRectangle.apply_projection_matrix(GLB::MINIMAP_PROJECTION);
 
-	selectionRectangle.compile(); 
+	selectionRectangle = EmptyRectangle(SHD::E_RECTANGLE_SHADER_ID);
 	selectionRectangle.init();
 
 	// *********** ROBA PROVVISORIA ***********
@@ -112,7 +109,7 @@ void Game::create(std::vector<Player> *ListOfPlayers) {
 
 	// ****************************************
 
-	ui.create();
+	ui.create(&objectId);
 
 	cursor_point.create();
 	camera.go_to_pos(
@@ -140,19 +137,24 @@ void Game::run() {
 	}
 
 	/* Tracing and Picking */
-	game::tracing(&surface, &projection, &view);	
+	game::tracing(surface, &projection, &view);
 	game::picking(&buildingList, &unitList, &projection, &view, &click_id, &blockMinimap);
+	ui.render(true);
 
 	/* Rendering */
-	surface.render(projection, view, false);
+	surface->render(projection, view, false);
 	game::renderObjects(&buildingList, &unitList, &projection, &view, &click_id, &selectedUnits);
 	game::renderSelRectangle(&selectionRectangle, &sel_rect_coords, &view, &cameraLastX, &cameraLastY);
 	game::renderMapRectangle(&minimapRectangle, &minimap_rect_coords);
 	if (GLB::DEBUG) cursor_point.render();
-	ui.render();
+	ui.render(false);
 
 	game::goToPosition(&buildingList, &camera, &lastTime, &click_id, &blockMinimap);
 	GLB::CAMERA_PROJECTION = glm::ortho(0.0f, (float)GLB::WINDOW_WIDTH_ZOOMED, 0.0f, (float)GLB::WINDOW_HEIGHT_ZOOMED, -(float)GAME::MAP_WIDTH, (float)GAME::MAP_WIDTH);
+}
+
+void Game::clear() {
+	delete surface;
 }
 
 Game::~Game()

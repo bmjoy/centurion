@@ -1,0 +1,19 @@
+{
+	"buttons": [{
+			"name": "menuButtonQuit",
+			"path": "assets/ui/buttons/button_1.png",
+			"x": 0,
+			"y": 0,
+			"text": "Quit"
+		},
+        {
+			"name": "menuButtonClose",
+			"path": "assets/ui/buttons/button_1.png",
+			"x": 0,
+			"y": -50,
+			"text": "Close"
+		}
+	],
+
+	"playersList": {}
+}

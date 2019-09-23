@@ -41,7 +41,7 @@ namespace GLB {
 	extern int MOUSE_LEFT_X, MOUSE_LEFT_Y, MOUSE_RIGHT_X, MOUSE_RIGHT_Y, MOUSE_RIGHT_Y_2D;
 	extern int MOUSE_SCROLL;
 	extern bool MOUSE_SCROLL_BOOL;
-	extern bool UP_KEY, DOWN_KEY, LEFT_KEY, RIGHT_KEY;
+	extern bool UP_KEY, DOWN_KEY, LEFT_KEY, RIGHT_KEY, ESC_KEY;
 	extern bool WIREFRAME;
 	extern float RES_X_RATIO, RES_Y_RATIO;
 	extern float Z_NOISE;
@@ -50,6 +50,7 @@ namespace GLB {
 	extern GLFWwindow *MAIN_WINDOW;
 	extern bool DEBUG;
 	extern SelRectPoints SEL_RECT_COORDS; //Only a temporar way to test multiple selection
+	extern bool GAME_IS_CREATED, MENU_IS_CREATED, GAME_CLEAR;
 }
 
 namespace MAP {
@@ -61,12 +62,14 @@ namespace SHD {
 	extern int IMAGE_SHADER_ID;
 	extern int GRID_SHADER_ID;
 	extern int F_RECTANGLE_SHADER_ID;
+	extern int E_RECTANGLE_SHADER_ID;
 	extern int USPRITE_SHADER_ID;
 	extern int BSPRITE_SHADER_ID;
 	extern int FONT_SHADER_ID;
 }
 
 namespace GAME {
+	extern bool MENU_IS_ACTIVE;
 	extern int PLAYERS_NUMBER;
 	extern int PLAYERS_NUMBER_MAX;
 	extern float TOWNHALL_RADIUS;

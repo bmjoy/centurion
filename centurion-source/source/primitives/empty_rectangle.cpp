@@ -5,6 +5,12 @@ EmptyRectangle::EmptyRectangle() {
 	fPath = "assets/shaders/empty_rectangle/fragment.glsl";
 }
 
+EmptyRectangle::EmptyRectangle(int shaderID) {
+	vPath = "assets/shaders/empty_rectangle/vertex.glsl";
+	fPath = "assets/shaders/empty_rectangle/fragment.glsl";
+	shaderId = shaderID;
+}
+
 void EmptyRectangle::init() {
 
 	for (int i = 0; i < 24; i++) {

@@ -1,0 +1,31 @@
+{
+	"images": [{
+			"name": "background",
+			"clickable": 0,
+			"path": "assets/ui/menu/menu_background.png",
+			"x": 0,
+			"y": 0,
+			"size": "max",
+			"align": "bottom-left"
+		}
+
+	],
+
+	"buttons": [{
+			"name": "buttonSinglePlayer",
+			"path": "assets/ui/buttons/button_1.png",
+			"x": -150,
+			"y": 600,
+			"text": "Single-player"
+		},
+		{
+			"name": "buttonQuit",
+			"path": "assets/ui/buttons/button_1.png",
+			"x": -150,
+			"y": 75,
+			"text": "Quit"
+		}
+	],
+
+	"playersList": {}
+}

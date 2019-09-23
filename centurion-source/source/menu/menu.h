@@ -8,7 +8,7 @@
 #include "../gui/button.h"
 #include "../gui/div_image.h"
 #include "../gui/div_text.h"
-#include "../gui/players_list.h"
+#include "../interface/players_list.h"
 #include "../player/player.h"
 
 class Menu

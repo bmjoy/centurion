@@ -13,6 +13,7 @@ public:
 	Game();
 	void create(std::vector<Player> *ListOfPlayers);
 	void run();
+	void clear();
 	int getSelectedUnits() { return selectedUnits; }
 	~Game();
 
@@ -21,7 +22,7 @@ private:
 	/* OBJECTS */
 	std::vector<Player> *playersList;
 	Camera camera;
-	Surface surface;
+	Surface *surface;
 	EmptyRectangle minimapRectangle;
 	EmptyRectangle selectionRectangle;
 	Building b;

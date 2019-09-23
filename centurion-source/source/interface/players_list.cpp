@@ -32,8 +32,7 @@ void PlayersList::create(std::map<int, std::string> *pickingList, int *pickingId
 	(*pickingId)++;
 	arrowUp.create("center");
 
-	border = EmptyRectangle();
-	border.compile();
+	border = EmptyRectangle(SHD::E_RECTANGLE_SHADER_ID);
 	border.init();
 	border.create(getCoords(x-30, y+80, w, h));
 	border.apply_projection_matrix(GLB::MENU_PROJECTION);

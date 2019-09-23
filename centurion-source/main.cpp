@@ -24,7 +24,7 @@ namespace GLB {
 	int MOUSE_LEFT_X = 0, MOUSE_LEFT_Y = 0, MOUSE_RIGHT_X = 0, MOUSE_RIGHT_Y = 0, MOUSE_RIGHT_Y_2D = 0;
 	int MOUSE_SCROLL = 0;
 	bool MOUSE_SCROLL_BOOL = false;
-	bool UP_KEY = false, DOWN_KEY = false, LEFT_KEY = false, RIGHT_KEY = false;
+	bool UP_KEY = false, DOWN_KEY = false, LEFT_KEY = false, RIGHT_KEY = false, ESC_KEY = false;
 	bool WIREFRAME = false;
 	float RES_X_RATIO;
 	float RES_Y_RATIO;
@@ -34,6 +34,7 @@ namespace GLB {
 	GLFWwindow *MAIN_WINDOW;
 	bool DEBUG = false;
 	SelRectPoints SEL_RECT_COORDS;
+	bool GAME_IS_CREATED = false, MENU_IS_CREATED = false, GAME_CLEAR = false;
 }
 
 namespace MAP {
@@ -45,12 +46,14 @@ namespace SHD {
 	int IMAGE_SHADER_ID = 0;
 	int GRID_SHADER_ID = 0;
 	int F_RECTANGLE_SHADER_ID = 0;
+	int E_RECTANGLE_SHADER_ID = 0;
 	int USPRITE_SHADER_ID = 0;
 	int BSPRITE_SHADER_ID = 0;
 	int FONT_SHADER_ID = 0;
 }
 
 namespace GAME {
+	bool MENU_IS_ACTIVE = false;
 	int MAP_WIDTH = 30000, MAP_HEIGHT = 20000;
 	int PLAYERS_NUMBER = 1;
 	int PLAYERS_NUMBER_MAX = 10;
@@ -103,12 +106,8 @@ int main() {
 		GAME::RACES.push_back(data["races"][i]);
 	}
 
-	int r, g, b;
 	for (int i = 0; i < data["player_colors"].size(); i++) {
-		r = data["player_colors"][i]["r"];
-		g = data["player_colors"][i]["g"];
-		b = data["player_colors"][i]["b"];
-		GLB::COLORS.push_back(glm::vec3(r, g, b));
+		GLB::COLORS.push_back(glm::vec3(data["player_colors"][i]["r"], data["player_colors"][i]["g"], data["player_colors"][i]["b"]));
 	}
 
 	Engine engine = Engine();

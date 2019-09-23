@@ -8,11 +8,11 @@ Engine::Engine(){
 	window = myWindow();
 	
 	image_setup = Image();
-	rectangle_setup = FilledRectangle();
+	f_rectangle_setup = FilledRectangle();
+	e_rectangle_setup = EmptyRectangle();
 	unit_sprite_setup = USprite();
 	building_sprite_setup = BSprite();
 	font_setup = CBitmapFont();
-
 
 	nbFrames = 0; bFPS = false;
 }
@@ -29,17 +29,12 @@ int Engine::launch() {
 	init_objects();
 
 	lastTime = glfwGetTime();
-	bool game_is_created = false;
-	bool menu_is_created = false;
 
 	seconds = 0; seconds_str = "00";
 	minutes = 0; minutes_str = "00";
 	hours = 0; hours_str = "00";
 
 	std::cout << "I am in the while() loop! \n";
-
-
-
 
 	while (!GLB::WINDOW_CLOSE) {
 
@@ -50,16 +45,17 @@ int Engine::launch() {
 		mouse.apply_projection_matrix(GLB::MENU_PROJECTION);
 		
 		if (GLB::MAIN_MENU){
-			if (!menu_is_created){
+			if (!GLB::MENU_IS_CREATED){
 				startMenu.create(&playersList);
-				menu_is_created = true;
+				GLB::MENU_IS_CREATED = true;
 				std::cout << "Menu has been created! \n";
 			}
 			startMenu.render();
 		}
-
+		
 		if (GLB::GAME) {
-			if (!game_is_created) {
+			
+			if (!GLB::GAME_IS_CREATED) {
 
 				glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
 				glClear(GL_COLOR_BUFFER_BIT);
@@ -76,7 +72,7 @@ int Engine::launch() {
 				glfwSwapBuffers(GLB::MAIN_WINDOW);
 
 				game.create(&playersList);
-				game_is_created = true;
+				GLB::GAME_IS_CREATED = true;
 				std::cout << "Game has been created! \n";
 				lastTime2 = glfwGetTime();
 			}			
@@ -85,7 +81,14 @@ int Engine::launch() {
 			calculateTime();
 
 		}
-
+		if (GLB::GAME_CLEAR) {
+			game.clear();
+			GLB::GAME_CLEAR = false;
+			GLB::GAME_IS_CREATED = false;
+			GLB::MENU_IS_CREATED = false;
+			GLB::GAME = false;
+			GLB::MAIN_MENU = true;
+		}
 
 		// ui
 
@@ -106,7 +109,8 @@ int Engine::launch() {
 
 void Engine::compile_shaders() {
 	SHD::IMAGE_SHADER_ID = image_setup.compile();
-	SHD::F_RECTANGLE_SHADER_ID = rectangle_setup.compile();
+	SHD::F_RECTANGLE_SHADER_ID = f_rectangle_setup.compile();
+	SHD::E_RECTANGLE_SHADER_ID = e_rectangle_setup.compile();
 	SHD::USPRITE_SHADER_ID = unit_sprite_setup.compile();
 	SHD::BSPRITE_SHADER_ID = building_sprite_setup.compile();
 	SHD::FONT_SHADER_ID = font_setup.compile();

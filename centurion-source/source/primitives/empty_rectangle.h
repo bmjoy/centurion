@@ -7,6 +7,7 @@ class EmptyRectangle : public Shader
 {
 public:
 	EmptyRectangle();
+	EmptyRectangle(int shaderID);
 	int area = 0;
 	void init();
 	void create(std::array<float, 8> coords);

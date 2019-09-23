@@ -9,6 +9,7 @@
 #include "../game/game.h"
 #include "../primitives/image.h"
 #include "../primitives/filled_rectangle.h"
+#include "../primitives/empty_rectangle.h"
 #include "../building/building_sprite.h"
 #include "../unit/unit_sprite.h"
 
@@ -27,7 +28,8 @@ public:
 private:
 	// compile shaders
 	Image image_setup;
-	FilledRectangle rectangle_setup;
+	FilledRectangle f_rectangle_setup;
+	EmptyRectangle e_rectangle_setup;
 	USprite unit_sprite_setup;
 	BSprite building_sprite_setup;
 	CBitmapFont font_setup;

@@ -2,14 +2,10 @@
 
 FormInput::FormInput(){
 	boolOptions = true;
-	border = EmptyRectangle();
-	optionsBorder = EmptyRectangle();
 }
 
 FormInput::FormInput(bool options){
 	boolOptions = options;
-	border = EmptyRectangle();
-	optionsBorder = EmptyRectangle();
 }
 
 void FormInput::create(float w, float h, std::vector<std::string> options) {
@@ -20,13 +16,13 @@ void FormInput::create(float w, float h, std::vector<std::string> options) {
 	selectedText = options[0];
 
 	coords = getCoords(position.x, position.y, width, height);
-	border.compile();
+	border = EmptyRectangle(SHD::E_RECTANGLE_SHADER_ID);
 	border.init();
 	border.create(coords);
 	border.apply_projection_matrix(GLB::MENU_PROJECTION);
 
 	coords = getCoords(position.x, position.y - height - 1.f, width, height * form_options.size() - 1.0f);
-	optionsBorder.compile();
+	optionsBorder = EmptyRectangle(SHD::E_RECTANGLE_SHADER_ID);
 	optionsBorder.init();
 	optionsBorder.create(coords);
 	optionsBorder.apply_projection_matrix(GLB::MENU_PROJECTION);

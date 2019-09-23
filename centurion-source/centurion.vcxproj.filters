@@ -115,6 +115,12 @@
     <Filter Include="Header Files\player">
       <UniqueIdentifier>{f2c8bc8b-9746-4be2-a28c-9fc80b10bc1c}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\interface">
+      <UniqueIdentifier>{e3865fae-66a6-4666-82bd-ed0c12baafd9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\interface">
+      <UniqueIdentifier>{f775fef9-e31d-462f-88bc-301349d95e3d}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -213,9 +219,6 @@
     <ClCompile Include="source\unit\unit_functions.cpp">
       <Filter>Source Files\unit</Filter>
     </ClCompile>
-    <ClCompile Include="source\gui\players_list.cpp">
-      <Filter>Source Files\gui</Filter>
-    </ClCompile>
     <ClCompile Include="source\game\game_functions.cpp">
       <Filter>Source Files\game</Filter>
     </ClCompile>
@@ -224,6 +227,12 @@
     </ClCompile>
     <ClCompile Include="source\common\map_generation.cpp">
       <Filter>Source Files\common</Filter>
+    </ClCompile>
+    <ClCompile Include="source\interface\players_list.cpp">
+      <Filter>Source Files\interface</Filter>
+    </ClCompile>
+    <ClCompile Include="source\interface\game_menu.cpp">
+      <Filter>Source Files\interface</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -329,9 +338,6 @@
     <ClInclude Include="source\unit\unit_functions.h">
       <Filter>Header Files\unit</Filter>
     </ClInclude>
-    <ClInclude Include="source\gui\players_list.h">
-      <Filter>Header Files\gui</Filter>
-    </ClInclude>
     <ClInclude Include="source\game\game_functions.h">
       <Filter>Header Files\game</Filter>
     </ClInclude>
@@ -340,6 +346,12 @@
     </ClInclude>
     <ClInclude Include="source\common\map_generation.h">
       <Filter>Header Files\common</Filter>
+    </ClInclude>
+    <ClInclude Include="source\interface\players_list.h">
+      <Filter>Header Files\interface</Filter>
+    </ClInclude>
+    <ClInclude Include="source\interface\game_menu.h">
+      <Filter>Header Files\interface</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

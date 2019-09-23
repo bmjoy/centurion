@@ -1,11 +1,11 @@
 #pragma once
 
 #include <global.hpp>
-#include "form_input.h"
+#include "../gui/form_input.h"
 #include "../primitives/empty_rectangle.h"
 #include "../primitives/filled_rectangle.h"
-#include "div_text.h"
-#include "div_image.h"
+#include "../gui/div_text.h"
+#include "../gui/div_image.h"
 
 class PlayersList
 {

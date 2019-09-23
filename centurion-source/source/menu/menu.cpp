@@ -18,7 +18,7 @@ void Menu::create(std::vector<Player> *List) {
 
 	for (int a = 0; a < menus.size(); ++a) {
 
-		std::ifstream path("assets/data/menu/" + menus[a] + ".json");
+		std::ifstream path("assets/data/interface/" + menus[a] + ".json");
 		data = json::parse(path);
 
 		s = "images";

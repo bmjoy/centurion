@@ -54,9 +54,14 @@ void myWindow::handle_keys(GLFWwindow* window, int key, int code, int action, in
 {
 	myWindow* theWindow = static_cast<myWindow*>(glfwGetWindowUserPointer(window));
 
-	// ESC CLOSES THE WINDOW if pressed on main menu
-	if (key == GLFW_KEY_ESCAPE && action == GLFW_PRESS) {
-		GLB::WINDOW_CLOSE = true;
+	if (key == GLFW_KEY_ESCAPE) {
+		if (action == GLFW_PRESS) {
+			GLB::ESC_KEY = true;
+			if (GLB::GAME) GAME::MENU_IS_ACTIVE = !GAME::MENU_IS_ACTIVE;
+		}
+		else if (action == GLFW_RELEASE) {
+			GLB::ESC_KEY = false;
+		}
 	}
 
 	//Arrow keys detection
@@ -137,6 +142,7 @@ void myWindow::handle_keys(GLFWwindow* window, int key, int code, int action, in
 			GLB::CTRL_BUTTON = false;
 		}
 	}
+	
 }
 
 void myWindow::handle_mouse(GLFWwindow* window, double xPos, double yPos)

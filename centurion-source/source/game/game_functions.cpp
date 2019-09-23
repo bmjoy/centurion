@@ -1,18 +1,20 @@
 #include "game_functions.h"
 
 void game::picking(std::map<int, Building> *bList, std::map<int, Unit> *uList, glm::mat4 *proj, glm::mat4 *view, int *clickId, bool *blockMinimap) {
-	for (std::map<int, Building>::iterator bld = (*bList).begin(); bld != (*bList).end(); bld++) {
-		bld->second.render(*proj, *view, true, 0);
-	}
-	for (std::map<int, Unit>::iterator u = (*uList).begin(); u != (*uList).end(); u++) {
-		u->second.render(*proj, *view, true, 0);
-	}
-	if (GLB::MOUSE_LEFT) {
-		*clickId = get_id();
-		if (GAME::MINIMAP_IS_ACTIVE) {
-			*blockMinimap = false;
-			if (*clickId > 0) {
-				*blockMinimap = true;
+	if (!GAME::MENU_IS_ACTIVE){
+		for (std::map<int, Building>::iterator bld = (*bList).begin(); bld != (*bList).end(); bld++) {
+			bld->second.render(*proj, *view, true, 0);
+		}
+		for (std::map<int, Unit>::iterator u = (*uList).begin(); u != (*uList).end(); u++) {
+			u->second.render(*proj, *view, true, 0);
+		}
+		if (GLB::MOUSE_LEFT) {
+			*clickId = get_id();
+			if (GAME::MINIMAP_IS_ACTIVE) {
+				*blockMinimap = false;
+				if (*clickId > 0) {
+					*blockMinimap = true;
+				}
 			}
 		}
 	}
@@ -112,6 +114,7 @@ void game::renderSelRectangle(EmptyRectangle *rect, std::array<float, 8> *coords
 			GLB::SEL_RECT_COORDS.minY = std::min((*coords)[1], (*coords)[3]);
 			GLB::SEL_RECT_COORDS.maxY = std::max((*coords)[1], (*coords)[3]);
 			(*rect).apply_projection_matrix(GLB::CAMERA_PROJECTION);
+			(*rect).apply_view_matrix();
 			(*rect).create(*coords);
 			(*rect).render(*view, glm::mat4(1.0f));
 		}
@@ -131,6 +134,8 @@ void game::renderMapRectangle(EmptyRectangle *rect, std::array<float, 8> *coords
 		(*coords)[6] = GLB::WINDOW_WIDTH_ZOOMED; (*coords)[7] = GLB::WINDOW_HEIGHT_ZOOMED - GAME::UI_TOP_HEIGHT;
 		glm::mat4 model = glm::translate(glm::mat4(1.0f), glm::vec3(GAME::CAMERA_POS_X, GAME::CAMERA_POS_Y, 0.0));
 		(*rect).create(*coords);
+		(*rect).apply_projection_matrix(GLB::MINIMAP_PROJECTION);
+		(*rect).apply_view_matrix();
 		(*rect).render(glm::mat4(1.0f), model);
 	}
 }
