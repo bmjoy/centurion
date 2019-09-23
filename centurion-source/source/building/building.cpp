@@ -7,14 +7,14 @@ Building::Building()
 void Building::create() {
 	std::ifstream path(data["ent_path"].get<std::string>());
 	building_sprite = BSprite(SHD::BSPRITE_SHADER_ID);
-	building_sprite.create(json::parse(path), player_color);
+	building_sprite.create(json::parse(path));
 }
 
-void Building::render(glm::mat4 proj, glm::mat4 view, bool picking, int clickID) {
+void Building::render(glm::mat4 &proj, glm::mat4 &view, bool picking, int clickID) {
 	selected = (picking_id == clickID);
 	building_sprite.apply_projection_matrix(proj);
 	building_sprite.apply_view_matrix(view);
-	building_sprite.render(position.x, position.y, picking, picking_id, selected);
+	building_sprite.render(position.x, position.y, picking, picking_id, selected, &(*player).getPlayerColor());
 }
 
 void Building::create_pass() {

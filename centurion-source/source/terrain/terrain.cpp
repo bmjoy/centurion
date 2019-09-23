@@ -8,7 +8,7 @@ Terrain::Terrain(){
 	path_grass = "assets/terrain/textures/grass1.png";
 	path_road = "assets/terrain/textures/road1.png";
 	path_rock = "assets/terrain/textures/rock1.png";
-	plane_path = "assets/terrain/plane16k.obj";
+	plane_path = "assets/terrain/plane66k.obj";
 }
 
 

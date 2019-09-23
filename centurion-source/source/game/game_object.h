@@ -2,6 +2,7 @@
 
 #include <global.hpp>
 #include <json.hpp>
+#include "../player/player.h"
 
 class GObject
 {
@@ -11,7 +12,7 @@ public:
 	GObject();
 	void set_position(glm::vec3 pos);
 	void set_class(std::string className);
-	void set_player(glm::vec3 Col);
+	void set_player(Player *p);
 	void set_id(int pickingId);
 	bool getSelected() { return selected; }
 	int get_xPos() { return (int)position.x; }
@@ -20,9 +21,8 @@ public:
 	~GObject();
 
 protected:
-
+	Player *player;
 	bool selected;
-	glm::vec3 player_color;
 	json data;
 	glm::vec3 position;
 };

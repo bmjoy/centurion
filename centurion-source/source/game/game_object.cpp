@@ -16,8 +16,8 @@ void GObject::set_class(std::string className) {
 	data = json::parse(path);
 }
 
-void GObject::set_player(glm::vec3 Col) {
-	player_color = Col;
+void GObject::set_player(Player *p) {
+	player = p;
 }
 
 void GObject::set_id(int pickingId) {

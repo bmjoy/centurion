@@ -14,8 +14,7 @@ BSprite::BSprite(int shaderID){
 	shaderId = shaderID;
 }
 
-void BSprite::create(json ent_data, glm::vec3 playerColor) {
-	player_color = playerColor;
+void BSprite::create(json ent_data) {
 
 	genBuffers();
 
@@ -43,7 +42,7 @@ void BSprite::create(json ent_data, glm::vec3 playerColor) {
 	}
 }
 
-void BSprite::render(float x, float y, bool picking, int pickingId, bool selected) {
+void BSprite::render(float x, float y, bool picking, int pickingId, bool selected, glm::vec3 *playerColor) {
 	glUseProgram(shaderId);
 
 	/* Model Matrix */
@@ -52,7 +51,7 @@ void BSprite::render(float x, float y, bool picking, int pickingId, bool selecte
 	
 	/* Uniform Variables */
 	glUniformMatrix4fv(glGetUniformLocation(shaderId, "model"), 1, GL_FALSE, glm::value_ptr(modelMat));
-	glUniform3f(glGetUniformLocation(shaderId, "player_color"), player_color.x / 255.0f, player_color.y / 255.0f, player_color.z / 255.0f);
+	glUniform3f(glGetUniformLocation(shaderId, "player_color"), playerColor->x / 255.0f, playerColor->y / 255.0f, playerColor->z / 255.0f);
 	glUniform1i(glGetUniformLocation(shaderId, "selection"), int(selected));
 	glUniform1i(glGetUniformLocation(shaderId, "isLayerColor"), 0);
 	glUniform1i(glGetUniformLocation(shaderId, "picking"), int(picking)); // enable/disable picking

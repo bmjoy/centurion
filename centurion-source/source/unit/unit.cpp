@@ -25,7 +25,7 @@ void Unit::create() {
 	std::ifstream path(data["ent_path"].get<std::string>());
 	entityData = json::parse(path);
 	sprite = USprite(SHD::USPRITE_SHADER_ID);
-	sprite.create(entityData, player_color);
+	sprite.create(entityData);
 
 	//Show circle position under the unit (Debug only)
 	circlePos = Image(SHD::IMAGE_SHADER_ID);
@@ -43,7 +43,7 @@ void Unit::create() {
 	creationTime = glfwGetTime();
 }
 
-void Unit::render(glm::mat4 proj, glm::mat4 viewMat, bool picking, int clickID) {
+void Unit::render(glm::mat4 &proj, glm::mat4 &view, bool picking, int clickID) {
 	clickSelection = (picking_id == clickID);
 	if(GLB::MOUSE_LEFT)	rectangleSelection = unit::isInSelectionRect(hitbox.coords);
 
@@ -58,26 +58,26 @@ void Unit::render(glm::mat4 proj, glm::mat4 viewMat, bool picking, int clickID) 
 	}
 
 	sprite.apply_projection_matrix(GLB::CAMERA_PROJECTION);
-	sprite.apply_view_matrix(viewMat);
+	sprite.apply_view_matrix(view);
 
 	model = glm::translate(glm::mat4(1.0f), position3D);
-	sprite.render(model, currentState, picking, picking_id);
+	sprite.render(model, currentState, picking, picking_id, &(*player).getPlayerColor());
 
 	if (!GLB::DEBUG) {
 		hitbox.rectangle.apply_projection_matrix(GLB::CAMERA_PROJECTION);
 		hitbox.coords = getCoords(position3D.x - entityData["hitbox"][0], position3D.y + entityData["hitbox"][1] + entityData["yOffset"], entityData["hitbox"][0] * 2, entityData["hitbox"][1] * 2);
 		hitbox.rectangle.create(hitbox.coords);
-		hitbox.rectangle.render(viewMat, glm::mat4(1.0f), selected ? glm::vec4(255.0f, 255.0f, 255.0f, 1.0f) : glm::vec4(0.0f, 0.0f, 0.0f, 0.0f));
+		hitbox.rectangle.render(view, glm::mat4(1.0f), selected ? glm::vec4(255.0f, 255.0f, 255.0f, 1.0f) : glm::vec4(0.0f, 0.0f, 0.0f, 0.0f));
 	}
 
 	/* debug pathfinding and coordinates */
 
 	if (GLB::DEBUG) {
 		circlePos.apply_projection_matrix(GLB::CAMERA_PROJECTION);
-		circlePos.apply_view_matrix(viewMat);
+		circlePos.apply_view_matrix(view);
 
 		GAME::MINIMAP_IS_ACTIVE ? rectanglePath.apply_projection_matrix(GLB::MINIMAP_PROJECTION) : rectanglePath.apply_projection_matrix(GLB::CAMERA_PROJECTION);
-		rectanglePath.apply_view_matrix(viewMat);
+		rectanglePath.apply_view_matrix(view);
 
 		for (int i = 0; i < path.size(); i++) {
 			rectanglePath.render(path[i].x, path[i].y);
@@ -89,7 +89,7 @@ void Unit::render(glm::mat4 proj, glm::mat4 viewMat, bool picking, int clickID) 
 			hitbox.rectangle.apply_projection_matrix(GLB::CAMERA_PROJECTION);
 			hitbox.coords = getCoords(position3D.x - entityData["hitbox"][0], position3D.y + entityData["hitbox"][1] + entityData["yOffset"], entityData["hitbox"][0] * 2, entityData["hitbox"][1] * 2);
 			hitbox.rectangle.create(hitbox.coords);
-			hitbox.rectangle.render(viewMat, glm::mat4(1.0f), selected ? glm::vec4(255.0f, 0.0f, 255.0f, 1.0f) : glm::vec4(255.0f, 242.0f, 0.0f, 1.0f));
+			hitbox.rectangle.render(view, glm::mat4(1.0f), selected ? glm::vec4(255.0f, 0.0f, 255.0f, 1.0f) : glm::vec4(255.0f, 242.0f, 0.0f, 1.0f));
 		}
 	}
 }

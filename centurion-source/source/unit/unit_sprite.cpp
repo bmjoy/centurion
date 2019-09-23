@@ -13,10 +13,9 @@ USprite::USprite(int shaderID){
 	shaderId = shaderID;
 }
 
-void USprite::create(json eData, glm::vec3 playerColor) {
+void USprite::create(json eData) {
 	
 	entityData = eData;
-	player_color = playerColor;
 
 	glUseProgram(shaderId);
 
@@ -85,7 +84,7 @@ void USprite::create(json eData, glm::vec3 playerColor) {
 	}	
 }
 
-void USprite::render(glm::mat4 modelMat, std::string state, bool picking, int pickingId) {
+void USprite::render(glm::mat4 modelMat, std::string state, bool picking, int pickingId, glm::vec3 *playerColor) {
 
 	glUseProgram(shaderId);
 

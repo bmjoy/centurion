@@ -62,7 +62,7 @@ void Game::create(std::vector<Player> *ListOfPlayers) {
 			b = Building();
 			b.set_class(settl_data[r][j]["class"]);
 			b.set_id(objectId);
-			b.set_player((*playersList)[i].getPlayerColor());
+			b.set_player(&(*playersList)[i]);
 
 			b.set_position(glm::vec3(origin.x + (int)settl_data[r][j]["offsetx"], origin.y + (int)settl_data[r][j]["offsety"], 0.0f));
 			b.create();
@@ -96,7 +96,7 @@ void Game::create(std::vector<Player> *ListOfPlayers) {
 	// *********** ROBA PROVVISORIA ***********
 	unit.set_class("hmyrmidon");
 	unit.set_id(objectId);
-	unit.set_player(glm::vec3 (255.f, 0.f, 0.f));
+	unit.set_player(&(*playersList)[0]);
 	unit.set_position((*playersList)[0].getStartPoint().x, (*playersList)[0].getStartPoint().y-1000);
 	unit.create();
 	unitList[objectId] = unit;
@@ -104,7 +104,7 @@ void Game::create(std::vector<Player> *ListOfPlayers) {
 
 	unit.set_class("hmyrmidon");
 	unit.set_id(objectId);
-	unit.set_player(glm::vec3(255.f, 0.f, 0.f));
+	unit.set_player(&(*playersList)[0]);
 	unit.set_position((*playersList)[0].getStartPoint().x + 100, (*playersList)[0].getStartPoint().y - 1000);
 	unit.create();
 	unitList[objectId] = unit;

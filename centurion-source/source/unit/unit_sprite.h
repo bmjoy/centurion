@@ -9,8 +9,8 @@ class USprite : public Shader
 public:
 	USprite(); 
 	USprite(int shaderID);
-	void create(json eData, glm::vec3 playerColor);
-	void render(glm::mat4 modelMat, std::string state, bool picking, int pickingId);
+	void create(json eData);
+	void render(glm::mat4 modelMat, std::string state, bool picking, int pickingId, glm::vec3 *playerColor);
 	void set_frame(int f, int mf);
 	void set_direction(int d);
 	//void set_znoise(float z);
@@ -22,6 +22,5 @@ private:
 	std::string state;
 	std::map<std::string, int> textureIdMap;
 	json entityData;
-	glm::vec3 player_color;
 };
 

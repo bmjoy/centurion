@@ -18,7 +18,7 @@ public:
 	Unit();
 	void create();
 	void set_position(float x, float y);
-	void render(glm::mat4 proj, glm::mat4 viewMat, bool picking, int clickID);
+	void render(glm::mat4 &proj, glm::mat4 &view, bool picking, int clickID);
 	~Unit();
 
 private:

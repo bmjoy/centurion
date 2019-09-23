@@ -10,8 +10,8 @@ class BSprite : public Shader
 public:
 	BSprite();
 	BSprite(int shaderID);
-	void create(json ent_data, glm::vec3 playerColor);
-	void render(float x, float y, bool picking, int pickingId, bool selected = false);
+	void create(json ent_data);
+	void render(float x, float y, bool picking, int pickingId, bool selected, glm::vec3 *playerColor);
 	~BSprite();
 
 private:
@@ -38,7 +38,5 @@ private:
 	int r, g, b;
 
 	void genBuffers();
-
-	glm::vec3 player_color;
 };
 
