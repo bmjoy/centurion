@@ -67,8 +67,8 @@ namespace SHD {
 }
 
 namespace GAME {
-	extern int PLAYERS_NUMBER, PLAYERS_NUMBER_MAX;
-	extern std::vector<float> TOWNHALL_POS;
+	extern int PLAYERS_NUMBER;
+	extern int PLAYERS_NUMBER_MAX;
 	extern float TOWNHALL_RADIUS;
 	extern std::vector<std::string> RACES;
 	extern int ZOOM_CURRENT;
@@ -79,8 +79,6 @@ namespace GAME {
 	extern int CAMERA_POS_X, CAMERA_POS_Y;
 	extern float CAMERA_MOVESPEED;
 	extern bool MINIMAP_IS_ACTIVE;
-	extern std::vector<glm::vec3> PLAYERS_COLOR;
-	extern std::vector<std::string> PLAYERS_RACE;
 	extern bool GRID_IS_ACTIVE;
 }
 

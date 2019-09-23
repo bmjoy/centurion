@@ -17,7 +17,11 @@ Game::Game(){
 
 }
 
-void Game::create() {	
+void Game::create(std::vector<Player> *ListOfPlayers) {
+
+	playersList = ListOfPlayers;
+	mapgen::setPlayerList(ListOfPlayers);
+
 	camera = Camera(glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3(0.0f, 1.0f, 0.0f), -90.0f, 0.0f);
 	std::cout << "Camera has been created. \n";
 
@@ -42,7 +46,7 @@ void Game::create() {
 	/*------------------------------------------------------------*/
 
 	/* DEFINE SETTLEMENTS POSITIONS */
-	GAME::TOWNHALL_POS = define_settlements(GAME::PLAYERS_NUMBER);
+	mapgen::define_settlements();
 
 	/* CREATE SETTLEMENTS */
 	std::ifstream path("assets/data/settlements.json");
@@ -51,14 +55,14 @@ void Game::create() {
 	}
 	settl_data = json::parse(path);
 
-	for (int i = 0; i < GAME::PLAYERS_NUMBER; i++) {
-		r = GAME::PLAYERS_RACE[i];
-		origin = glm::vec2(GAME::TOWNHALL_POS[i * 2], GAME::TOWNHALL_POS[i * 2 + 1]);
+	for (int i = 0; i < (*playersList).size(); i++) {
+		r = (*playersList)[i].getPlayerRace();
+		origin = (*playersList)[i].getStartPoint();
 		for (int j = 0; j < settl_data[r].size(); j++) {
 			b = Building();
 			b.set_class(settl_data[r][j]["class"]);
 			b.set_id(objectId);
-			b.set_player(i);
+			b.set_player((*playersList)[i].getPlayerColor());
 
 			b.set_position(glm::vec3(origin.x + (int)settl_data[r][j]["offsetx"], origin.y + (int)settl_data[r][j]["offsety"], 0.0f));
 			b.create();
@@ -89,30 +93,32 @@ void Game::create() {
 	selectionRectangle.compile(); 
 	selectionRectangle.init();
 
-	// *********** ROBA PROVVISORIA!!!!!1!!!11! ************
+	// *********** ROBA PROVVISORIA ***********
 	unit.set_class("hmyrmidon");
 	unit.set_id(objectId);
-	unit.set_player(0);
-	unit.set_position(GAME::TOWNHALL_POS[0], GAME::TOWNHALL_POS[1] - 1000.f);
+	unit.set_player(glm::vec3 (255.f, 0.f, 0.f));
+	unit.set_position((*playersList)[0].getStartPoint().x, (*playersList)[0].getStartPoint().y-1000);
 	unit.create();
 	unitList[objectId] = unit;
 	objectId++;
 
 	unit.set_class("hmyrmidon");
 	unit.set_id(objectId);
-	unit.set_player(0);
-	unit.set_position(GAME::TOWNHALL_POS[0]+100, GAME::TOWNHALL_POS[1] - 1000.f);
+	unit.set_player(glm::vec3(255.f, 0.f, 0.f));
+	unit.set_position((*playersList)[0].getStartPoint().x + 100, (*playersList)[0].getStartPoint().y - 1000);
 	unit.create();
 	unitList[objectId] = unit;
 	objectId++;
 
-	std::cout << "Unit is ready to fight. \n";
-
-	// *********** FINE DELLA PROVVISORIA ETA' ***************
+	// ****************************************
 
 	ui.create();
 
 	cursor_point.create();
+	camera.go_to_pos(
+		(GLfloat)((*playersList)[0].getStartPoint().x - GLB::WINDOW_WIDTH_ZOOMED/2.f), 
+		(GLfloat)((*playersList)[0].getStartPoint().y - GLB::WINDOW_HEIGHT_ZOOMED / 2.f)
+	);
 }
 
 void Game::run() {

@@ -226,6 +226,7 @@
     <ClCompile Include="main.cpp" />
     <ClCompile Include="source\building\building.cpp" />
     <ClCompile Include="source\building\building_sprite.cpp" />
+    <ClCompile Include="source\common\map_generation.cpp" />
     <ClCompile Include="source\common\shader.cpp" />
     <ClCompile Include="source\engine\camera.cpp" />
     <ClCompile Include="source\engine\cursor_point.cpp" />
@@ -246,6 +247,7 @@
     <ClCompile Include="source\music\music.cpp" />
     <ClCompile Include="source\pathfinding\a_star.cpp" />
     <ClCompile Include="source\pathfinding\node.cpp" />
+    <ClCompile Include="source\player\player.cpp" />
     <ClCompile Include="source\primitives\bitmap_font.cpp" />
     <ClCompile Include="source\primitives\empty_rectangle.cpp" />
     <ClCompile Include="source\primitives\filled_rectangle.cpp" />
@@ -266,7 +268,7 @@
     <ClInclude Include="source\building\building.h" />
     <ClInclude Include="source\building\building_sprite.h" />
     <ClInclude Include="source\common\global.hpp" />
-    <ClInclude Include="source\common\map_generation.hpp" />
+    <ClInclude Include="source\common\map_generation.h" />
     <ClInclude Include="source\common\shader.h" />
     <ClInclude Include="source\engine\camera.h" />
     <ClInclude Include="source\engine\cursor_point.h" />
@@ -289,6 +291,7 @@
     <ClInclude Include="source\music\music.h" />
     <ClInclude Include="source\pathfinding\a_star.h" />
     <ClInclude Include="source\pathfinding\node.h" />
+    <ClInclude Include="source\player\player.h" />
     <ClInclude Include="source\primitives\bitmap_font.h" />
     <ClInclude Include="source\primitives\empty_rectangle.h" />
     <ClInclude Include="source\primitives\filled_rectangle.h" />

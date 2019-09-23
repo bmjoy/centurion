@@ -1,7 +1,7 @@
 #include "unit_functions.h"
 
 void unit::updateZ(glm::vec3 pos2d, glm::vec3 *pos3d) {
-	float zNoise = generateNoise(pos2d).zNoise;	
+	float zNoise = mapgen::generateNoise(pos2d).zNoise;	
 	(*pos3d).x = pos2d.x;
 	(*pos3d).y = pos2d.y + zNoise - PATH::CELL_GRID_SIZE / 2;
 }

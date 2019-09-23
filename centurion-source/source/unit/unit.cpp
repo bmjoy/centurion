@@ -10,8 +10,8 @@ Unit::Unit() {
 	pathCount = 0;
 	is_Moving = false;
 	creationTime = 0.f;
-	bool clickSelection = false;
-	bool rectangleSelection = false;
+	clickSelection = false;
+	rectangleSelection = false;
 }
 
 void Unit::set_position(float x, float y) {
@@ -46,6 +46,7 @@ void Unit::create() {
 void Unit::render(glm::mat4 proj, glm::mat4 viewMat, bool picking, int clickID) {
 	clickSelection = (picking_id == clickID);
 	if(GLB::MOUSE_LEFT)	rectangleSelection = unit::isInSelectionRect(hitbox.coords);
+
 	selected = (clickSelection + rectangleSelection > 0);
 
 	if(!picking){

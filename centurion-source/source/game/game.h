@@ -2,18 +2,16 @@
 
 #include <global.hpp>
 #include <json.hpp>
-
 #include "game_functions.h"
-
 #include "../gui/ui_game.h"
-
+#include "../player/player.h"
 #include "../engine/cursor_point.h"
 
 class Game
 {
 public:
 	Game();
-	void create();
+	void create(std::vector<Player> *ListOfPlayers);
 	void run();
 	int getSelectedUnits() { return selectedUnits; }
 	~Game();
@@ -21,7 +19,7 @@ public:
 private:
 
 	/* OBJECTS */
-
+	std::vector<Player> *playersList;
 	Camera camera;
 	Surface surface;
 	EmptyRectangle minimapRectangle;
@@ -45,5 +43,4 @@ private:
 	glm::mat4 view, projection;
 
 	std::array<float, 8> minimap_rect_coords, sel_rect_coords;	
-	
 };

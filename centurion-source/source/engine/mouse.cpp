@@ -99,7 +99,7 @@ void Mouse::mouse_control(int lastX, int lastY) {
 	GLB::MOUSE_Y = (int)position.y;
 	
 	yzoomed = getZoomedCoords((float)GLB::MOUSE_X, (float)GLB::MOUSE_Y).y;
-	znoise = smoothNoise(yzoomed, GLB::Z_NOISE);
+	znoise = mapgen::smoothNoise(yzoomed, GLB::Z_NOISE);
 	znoise /= (float)GLB::WINDOW_HEIGHT_ZOOMED / (float)GLB::WINDOW_HEIGHT;
 
 	GLB::MOUSE_Y_2D = (GLB::MOUSE_Y - (int)znoise);

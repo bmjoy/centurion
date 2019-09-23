@@ -1,7 +1,7 @@
 #pragma once
 
 #include <global.hpp>
-#include <map_generation.hpp>
+#include <map_generation.h>
 #include <shader.h>
 
 class Mouse : public Shader

@@ -105,12 +105,8 @@ void PlayersList::render(int numPlayers, std::vector<int> players_color, bool pi
 	}
 }
 
-std::vector<std::string> PlayersList::get_races(int num_players) {
-	std::vector<std::string> temp;
-	for (int i = 0; i < num_players; i++) {
-		temp.push_back(civiliz_Form[i].selectedText);
-	}
-	return temp;
+std::string PlayersList::get_race(int i) {
+	return civiliz_Form[i].selectedText;
 }
 
 void PlayersList::close() {

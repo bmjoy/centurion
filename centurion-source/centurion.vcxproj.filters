@@ -109,6 +109,12 @@
     <Filter Include="Header Files\pathfinding">
       <UniqueIdentifier>{5f3d8e15-b77b-47d5-af3a-71a52f32d3d1}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\player">
+      <UniqueIdentifier>{a737048d-13d1-4aee-90c9-a4aa6508f4a5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\player">
+      <UniqueIdentifier>{f2c8bc8b-9746-4be2-a28c-9fc80b10bc1c}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -213,6 +219,12 @@
     <ClCompile Include="source\game\game_functions.cpp">
       <Filter>Source Files\game</Filter>
     </ClCompile>
+    <ClCompile Include="source\player\player.cpp">
+      <Filter>Source Files\player</Filter>
+    </ClCompile>
+    <ClCompile Include="source\common\map_generation.cpp">
+      <Filter>Source Files\common</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="source\building\building.h">
@@ -222,9 +234,6 @@
       <Filter>Header Files\building</Filter>
     </ClInclude>
     <ClInclude Include="source\common\global.hpp">
-      <Filter>Header Files\common</Filter>
-    </ClInclude>
-    <ClInclude Include="source\common\map_generation.hpp">
       <Filter>Header Files\common</Filter>
     </ClInclude>
     <ClInclude Include="source\common\shader.h">
@@ -325,6 +334,12 @@
     </ClInclude>
     <ClInclude Include="source\game\game_functions.h">
       <Filter>Header Files\game</Filter>
+    </ClInclude>
+    <ClInclude Include="source\player\player.h">
+      <Filter>Header Files\player</Filter>
+    </ClInclude>
+    <ClInclude Include="source\common\map_generation.h">
+      <Filter>Header Files\common</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

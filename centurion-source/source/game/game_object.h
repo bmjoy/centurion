@@ -11,7 +11,7 @@ public:
 	GObject();
 	void set_position(glm::vec3 pos);
 	void set_class(std::string className);
-	void set_player(int playerId);
+	void set_player(glm::vec3 Col);
 	void set_id(int pickingId);
 	bool getSelected() { return selected; }
 	int get_xPos() { return (int)position.x; }

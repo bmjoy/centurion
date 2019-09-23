@@ -1,8 +1,4 @@
-#ifndef MAP_GENERATION_H
-#define MAP_GENERATION_H
-
-#include <global.hpp>
-#include <time.h>
+#include <map_generation.h>
 
 /* ----- NOISE FUNCTIONS ----- */
 
@@ -13,18 +9,22 @@
 // the algorithm is based on "Perlin Noise" algorithm
 // check also "Simplex Noise" for a different one but similar result.
 
-static float Random2D(glm::vec2 st) { 	
+void mapgen::setPlayerList(std::vector<Player> *List) {
+	PlayerList = List;
+}
+
+float mapgen::Random2D(glm::vec2 st) {
 	float value = glm::fract(sin(glm::dot(st, glm::vec2(12.9898, 78.233)))* 43758.5453123);
 	return value;
 }
 
-static float Interpolate(float a, float b, float x) {  // cosine interpolation
+float mapgen::Interpolate(float a, float b, float x) {  // cosine interpolation
 	float ft = x * 3.1415927f;
 	float f = (1 - cos(ft)) * 0.5;
 	return  a * (1 - f) + b * f;
 }
 
-static float InterpolatedNoise(int ind, float x, float y) {
+float mapgen::InterpolatedNoise(int ind, float x, float y) {
 	int integer_X = int(floor(x));
 	float fractional_X = glm::fract(x);
 	int integer_Y = int(floor(y));
@@ -39,13 +39,13 @@ static float InterpolatedNoise(int ind, float x, float y) {
 	return Interpolate(i1, i2, fractional_Y);
 }
 
-static float smoothNoise(float y, float z, float alpha = 0.005f, float beta = 1.0f) {
+float mapgen::smoothNoise(float y, float z, float alpha, float beta) {
 	float zSmoothed;
 	zSmoothed = z * beta * tanh(y * alpha) * tanh((GAME::MAP_HEIGHT - y)*alpha);
 	return zSmoothed;
 }
 
-static float perlinNoise(float x, float y, float xy_scale, float z_scale, float x_seed, float y_seed) {
+float mapgen::perlinNoise(float x, float y, float xy_scale, float z_scale, float x_seed, float y_seed) {
 	z_scale *= GAME::MAP_WIDTH;
 	xy_scale /= GAME::MAP_WIDTH;
 
@@ -68,25 +68,18 @@ static float perlinNoise(float x, float y, float xy_scale, float z_scale, float 
 	return z;
 }
 
-struct noiseData {
-	float zNoise;
-	float grassWeight = 1.0f;
-	float roadWeight = 0.0f;
-};
-
-static noiseData generateNoise(glm::vec2 coords, bool normal = false) {
+noiseData mapgen::generateNoise(glm::vec2 coords, bool normal) {
 	noiseData output;
 	float zscale = MAP::ZSCALE;
 	
-
 	normal ? zscale *= 1.5f : zscale *= 1.f;
 	output.zNoise = perlinNoise(coords.x, coords.y, MAP::XYSCALE, zscale, MAP::XSEED, MAP::YSEED);
 
 	/* Townhalls */
 
-	for (int i = 0; i < GAME::PLAYERS_NUMBER; i++) {
-		float xTown = GAME::TOWNHALL_POS[i * 2];
-		float yTown = GAME::TOWNHALL_POS[i * 2 + 1];
+	for (int i = 0; i < (*PlayerList).size(); i++) {
+		float xTown = (*PlayerList)[i].getStartPoint().x;
+		float yTown = (*PlayerList)[i].getStartPoint().y;
 		float dE = distEllipse(coords.x, coords.y, xTown, yTown, GAME::TOWNHALL_RADIUS);
 		if (dE <= 1.0) {
 			output.roadWeight = 1.0f;
@@ -94,11 +87,10 @@ static noiseData generateNoise(glm::vec2 coords, bool normal = false) {
 			output.zNoise *= (dE);
 		}
 	}
-
 	return output;
 }
 
-static glm::vec3 updatedNormals(glm::vec2 pos) {
+glm::vec3 mapgen::updatedNormals(glm::vec2 pos) {
 	glm::vec3 off = glm::vec3(2.0, 2.0, 0.0);
 
 	float hL = generateNoise(glm::vec2(pos.x - off.x, pos.y), true).zNoise;
@@ -112,7 +104,7 @@ static glm::vec3 updatedNormals(glm::vec2 pos) {
 	return N;
 }
 
-static std::vector<float> define_settlements(int N) {
+void mapgen::define_settlements() {
 
 	srand(time(NULL));
 	std::vector<float> townhallPos;
@@ -123,7 +115,7 @@ static std::vector<float> define_settlements(int N) {
 	int min = GAME::TOWNHALL_RADIUS + 100;
 	int max_X = GAME::MAP_WIDTH - GAME::TOWNHALL_RADIUS - 100;
 	int max_Y = GAME::MAP_HEIGHT - GAME::TOWNHALL_RADIUS - 100;
-	for (int n = 0; n < N; n++) {
+	for (int n = 0; n < (*PlayerList).size(); n++) {
 		c = false;
 		while (!c) {
 			a = (float)(rand() % (max_X - min) + min);
@@ -175,7 +167,9 @@ static std::vector<float> define_settlements(int N) {
 			}
 		}
 	}
-	return townhallPos;
-}
 
-#endif
+	for (int i = 0; i < (*PlayerList).size(); i++) {
+		(*PlayerList)[i].setStartPoint(glm::vec2(townhallPos[i * 2], townhallPos[i * 2 + 1]));
+	}
+	//return townhallPos;
+}

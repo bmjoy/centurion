@@ -2,7 +2,7 @@
 #include <assimp/Importer.hpp>
 #include <assimp/scene.h>
 #include <assimp/postprocess.h>
-#include <map_generation.hpp>
+#include <map_generation.h>
 #include <shader.h>
 #include "light.h"
 #include "../gui/div_text.h"

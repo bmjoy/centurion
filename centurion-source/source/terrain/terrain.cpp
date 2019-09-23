@@ -83,10 +83,10 @@ void Terrain::load_mesh(aiMesh * mesh, const aiScene * scene) {
 		glm::vec2 xyCoords = glm::vec2(xCoord, yCoord);
 
 		/* Noise calculation */
-		noiseData nData = generateNoise(glm::vec2(xCoord, yCoord));
+		noiseData nData = mapgen::generateNoise(glm::vec2(xCoord, yCoord));
 
 		zCoord += nData.zNoise;
-		yCoord += smoothNoise(yCoord, nData.zNoise);
+		yCoord += mapgen::smoothNoise(yCoord, nData.zNoise);
 
 		MAP::MIN_Z = std::min(nData.zNoise, MAP::MIN_Z);
 		MAP::MAX_Z = std::max(nData.zNoise, MAP::MAX_Z);
@@ -104,7 +104,7 @@ void Terrain::load_mesh(aiMesh * mesh, const aiScene * scene) {
 		/* NORMALS UPDATE */
 		glm::vec3 oldNormals = glm::vec3(mesh->mNormals[i].x, mesh->mNormals[i].y, mesh->mNormals[i].z);
 		
-		glm::vec3 N = updatedNormals(xyCoords);
+		glm::vec3 N = mapgen::updatedNormals(xyCoords);
 		vertices.insert(vertices.end(), { N.x , N.y , N.z });
 
 		/* Terrain data */

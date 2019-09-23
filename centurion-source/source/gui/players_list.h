@@ -16,7 +16,7 @@ public:
 	void close();
 	void picking(std::map<int, std::string> pickingList, int *numPlayers, std::vector<int> *players_color, int clickId);
 	void render(int numPlayers, std::vector<int> players_color, bool picking);
-	std::vector<std::string> get_races(int num_players);
+	std::string get_race(int i);
 	~PlayersList();
 private:
 	std::vector<FormInput> colors_Form;

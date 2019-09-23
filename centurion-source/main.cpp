@@ -62,10 +62,7 @@ namespace GAME {
 	int CAMERA_POS_X = 0, CAMERA_POS_Y = 0;
 	float CAMERA_MOVESPEED;
 	bool MINIMAP_IS_ACTIVE = false;
-	std::vector<float> TOWNHALL_POS;
 	std::vector<std::string> RACES;
-	std::vector<glm::vec3> PLAYERS_COLOR;
-	std::vector<std::string> PLAYERS_RACE;
 	bool GRID_IS_ACTIVE = false;
 }
 
@@ -87,8 +84,8 @@ int main() {
 	GLB::DEBUG = (bool)settings["debug"].get<int>();
 	GLB::WINDOW_WIDTH = settings["window_width"];
 	GLB::WINDOW_HEIGHT = settings["window_height"];
-	GLB::WINDOW_WIDTH_ZOOMED = GLB::WINDOW_WIDTH;
-	GLB::WINDOW_HEIGHT_ZOOMED = GLB::WINDOW_HEIGHT;
+	GLB::WINDOW_WIDTH_ZOOMED = (int)((float)GLB::WINDOW_WIDTH + (GAME::ZOOM_CURRENT - 1) * GAME::ZOOM_CAMERA_FACTOR);
+	GLB::WINDOW_HEIGHT_ZOOMED = (int)((float)GLB::WINDOW_HEIGHT + (GAME::ZOOM_CURRENT - 1) *  GAME::ZOOM_CAMERA_FACTOR * GLB::WINDOW_HEIGHT / GLB::WINDOW_WIDTH);
 	GLB::MENU_PROJECTION = glm::ortho(0.0f, (float)GLB::WINDOW_WIDTH, 0.0f, (float)GLB::WINDOW_HEIGHT, -100.0f, 100.0f);
 	GLB::CAMERA_PROJECTION = glm::ortho(0.0f, (float)GLB::WINDOW_WIDTH_ZOOMED, 0.0f, (float)GLB::WINDOW_HEIGHT_ZOOMED, -(float)GAME::MAP_WIDTH, (float)GAME::MAP_WIDTH);
 	GLB::RES_X_RATIO = (float)GLB::WINDOW_WIDTH / (float)GAME::MAP_WIDTH;

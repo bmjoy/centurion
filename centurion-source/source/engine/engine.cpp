@@ -51,7 +51,7 @@ int Engine::launch() {
 		
 		if (GLB::MAIN_MENU){
 			if (!menu_is_created){
-				startMenu.create();
+				startMenu.create(&playersList);
 				menu_is_created = true;
 				std::cout << "Menu has been created! \n";
 			}
@@ -75,7 +75,7 @@ int Engine::launch() {
 				tahoma8_text.render();
 				glfwSwapBuffers(GLB::MAIN_WINDOW);
 
-				game.create();
+				game.create(&playersList);
 				game_is_created = true;
 				std::cout << "Game has been created! \n";
 				lastTime2 = glfwGetTime();

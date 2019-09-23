@@ -13,6 +13,7 @@
 #include "../unit/unit_sprite.h"
 
 #include "../gui/div_text.h"
+#include "../player/player.h"
 
 class Engine
 {
@@ -40,6 +41,8 @@ private:
 	DivText tahoma8_text;
 	FilledRectangle div_ui;
 
+	// Players Informations
+	std::vector<Player> playersList;
 
 	// fps
 	double currentTime, lastTime, finalTime;

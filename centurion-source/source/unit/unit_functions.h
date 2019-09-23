@@ -1,5 +1,5 @@
 #include <global.hpp>
-#include <map_generation.hpp>
+#include <map_generation.h>
 #include "../pathfinding/a_star.h"
 #include "unit_sprite.h"
 

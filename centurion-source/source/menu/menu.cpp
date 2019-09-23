@@ -11,8 +11,9 @@ Menu::Menu(){
 	num_players = 2;
 }
 
-void Menu::create() {
-	
+void Menu::create(std::vector<Player> *List) {	
+	playersList = List;
+
 	music = Music().play("assets/music/menu.mp3", true);
 
 	for (int a = 0; a < menus.size(); ++a) {
@@ -119,9 +120,10 @@ void Menu::picking() {
 			GLB::MAIN_MENU = false;
 			/* save game informations */
 			GAME::PLAYERS_NUMBER = num_players;
-			GAME::PLAYERS_RACE = list.get_races(num_players);
 			for (int i = 0; i < num_players; i++) {
-				GAME::PLAYERS_COLOR.push_back(GLB::COLORS[players_color[i]]);
+				Player p = Player();
+				p.create(players_color[i], 0, list.get_race(i), GLB::COLORS[players_color[i]]);
+				(*playersList).push_back(p);				
 			}
 			
 		}
