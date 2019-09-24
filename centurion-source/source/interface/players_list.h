@@ -1,6 +1,8 @@
 #pragma once
 
 #include <global.hpp>
+#include <objects.h>
+
 #include "../gui/form_input.h"
 #include "../primitives/empty_rectangle.h"
 #include "../primitives/filled_rectangle.h"
@@ -24,7 +26,6 @@ private:
 	std::vector<FormInput> civiliz_Form;
 	DivText text;
 	DivImage arrowDown, arrowUp;
-	EmptyRectangle border;
 	FilledRectangle back;
 	int x, y, deltaY, w, h;
 };

@@ -20,9 +20,6 @@ void GameMenu::create(int *pickingId, std::map<int, std::string> *pickingList) {
 	back = FilledRectangle(SHD::F_RECTANGLE_SHADER_ID);
 	back.create(w, h, "top-left");
 
-	border = EmptyRectangle(SHD::E_RECTANGLE_SHADER_ID);
-	border.init();
-	border.create(getCoords(x - w/2.f, y + h/2.f, w, h));
 
 	s = "buttons";
 	for (int i = 0; i < data[s].size(); ++i) {
@@ -60,9 +57,9 @@ void GameMenu::render(bool picking) {
 			back.apply_projection_matrix(GLB::MENU_PROJECTION);
 			back.apply_view_matrix();
 			back.render(x - w / 2.f, y + h / 2.f);
-			border.apply_projection_matrix(GLB::MENU_PROJECTION);
-			border.apply_view_matrix();
-			border.render(glm::mat4(1.0f), glm::mat4(1.0f), glm::vec4(255.f));
+
+			obj::ERectangle()->create(getCoords(x - w / 2.f, y + h / 2.f, w, h));
+			obj::ERectangle()->render(glm::mat4(1.0f), glm::mat4(1.0f), glm::vec4(255.f));
 
 			for (int i = 0; i < buttons.size(); ++i) {
 				buttons[i].render(false);

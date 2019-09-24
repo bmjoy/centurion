@@ -5,6 +5,7 @@
 BSprite::BSprite(){
 	vPath = "assets/shaders/bsprite/vertex.glsl";
 	fPath = "assets/shaders/bsprite/fragment.glsl";
+	modelMat = glm::mat4(1.f);
 }
 
 
@@ -53,25 +54,19 @@ void BSprite::create() {
 			stbi_image_free(data);
 			
 			textureIdMap[fullName] = textureIdList[k];
-			classMap[className] = textureInfoList[k];
+
 			k++;
 		}
 	}	
 
-	std::cout << textureIdMap.size() << "\n";
-	std::cout << classMap.size() << "\n";
-	std::cout << textureInfoList.size() << "\n";
+
 }
 
-void BSprite::render(std::string className, float x, float y, bool picking, int pickingId, bool selected, glm::vec3 *playerColor) {
+void BSprite::render(std::string className, glm::mat4 model, bool picking, int pickingId, bool selected, glm::vec3 *playerColor) {
 	glUseProgram(shaderId);
-	
-	/* Model Matrix */
-	modelMat = glm::scale(glm::mat4(1.0f), glm::vec3((float)classMap[className].x, (float)classMap[className].y, 1.0f));
-	modelMat = glm::translate(modelMat, glm::vec3(x / (float)classMap[className].x, y / (float)classMap[className].y, 0.0f));
-	
+
 	/* Uniform Variables */
-	glUniformMatrix4fv(glGetUniformLocation(shaderId, "model"), 1, GL_FALSE, glm::value_ptr(modelMat));
+	glUniformMatrix4fv(glGetUniformLocation(shaderId, "model"), 1, GL_FALSE, glm::value_ptr(model));
 	glUniform3f(glGetUniformLocation(shaderId, "player_color"), playerColor->x / 255.0f, playerColor->y / 255.0f, playerColor->z / 255.0f);
 	glUniform1i(glGetUniformLocation(shaderId, "selection"), int(selected));
 	glUniform1i(glGetUniformLocation(shaderId, "isLayerColor"), 0);
@@ -93,13 +88,13 @@ void BSprite::render(std::string className, float x, float y, bool picking, int 
 		if (!GAME::MINIMAP_IS_ACTIVE) {
 			glUniform1i(glGetUniformLocation(shaderId, "texture1"), 0);
 			glActiveTexture(GL_TEXTURE0);
-			glBindTexture(GL_TEXTURE_2D, textureIdMap[className + "_" + "normal"]);
+			glBindTexture(GL_TEXTURE_2D, textureIdMap[className + "_normal"]);
 			glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
 		}
-		if (GAME::MINIMAP_IS_ACTIVE && textureIdMap[className + "_" + "border"]) {
+		if (GAME::MINIMAP_IS_ACTIVE && textureIdMap[className + "_border"]) {
 			glUniform1i(glGetUniformLocation(shaderId, "texture1"), 0);
 			glActiveTexture(GL_TEXTURE0);
-			glBindTexture(GL_TEXTURE_2D, textureIdMap[className + "_" + "border"]);
+			glBindTexture(GL_TEXTURE_2D, textureIdMap[className + "_border"]);
 			glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
 		}
 	}
@@ -111,7 +106,7 @@ void BSprite::render(std::string className, float x, float y, bool picking, int 
 			glUniform1i(glGetUniformLocation(shaderId, "minimap"), 0);
 			glUniform1i(glGetUniformLocation(shaderId, "texture1"), 0);
 			glActiveTexture(GL_TEXTURE0);
-			glBindTexture(GL_TEXTURE_2D, textureIdMap[className + "_" + "normal"]);
+			glBindTexture(GL_TEXTURE_2D, textureIdMap[className + "_normal"]);
 			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
 			glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
 		}
@@ -119,24 +114,24 @@ void BSprite::render(std::string className, float x, float y, bool picking, int 
 		else {
 			glUniform1i(glGetUniformLocation(shaderId, "minimap"), 1);
 			
-			if (textureIdMap[className + "_" + "border"]) {
+			if (textureIdMap[className + "_border"]) {
 
 				glUniform1i(glGetUniformLocation(shaderId, "texture1"), 2);
 				glActiveTexture(GL_TEXTURE2);
-				glBindTexture(GL_TEXTURE_2D, textureIdMap[className + "_" + "border"]);
+				glBindTexture(GL_TEXTURE_2D, textureIdMap[className + "_border"]);
 				glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
 
 				glUniform1i(glGetUniformLocation(shaderId, "isLayerColor"), 1);
 				glUniform1i(glGetUniformLocation(shaderId, "texture1"), 1);
 				glActiveTexture(GL_TEXTURE1);
-				glBindTexture(GL_TEXTURE_2D, textureIdMap[className + "_" + "color"]);
+				glBindTexture(GL_TEXTURE_2D, textureIdMap[className + "_color"]);
 				glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
 				glUniform1i(glGetUniformLocation(shaderId, "isLayerColor"), 0);
 			}
 
 			glUniform1i(glGetUniformLocation(shaderId, "texture1"), 0);
 			glActiveTexture(GL_TEXTURE0);
-			glBindTexture(GL_TEXTURE_2D, textureIdMap[className + "_" + "normal"]);
+			glBindTexture(GL_TEXTURE_2D, textureIdMap[className + "_normal"]);
 			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST_MIPMAP_LINEAR);
 			glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
 		}

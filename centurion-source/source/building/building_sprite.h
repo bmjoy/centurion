@@ -13,14 +13,13 @@ public:
 	void addPath(std::string Path) { entPathList.push_back(Path); }
 	std::vector<std::string> entPathList;
 	void create();
-	void render(std::string className, float x, float y, bool picking, int pickingId, bool selected, glm::vec3 *playerColor);
+	void render(std::string className, glm::mat4 model, bool picking, int pickingId, bool selected, glm::vec3 *playerColor);
 	~BSprite();
 
 private:
 
 	
 	std::string texturePath;       // texture path
-	std::map<std::string, glm::vec3> classMap;
 	std::string name;
 
 	unsigned char *data;

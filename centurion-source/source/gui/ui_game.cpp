@@ -25,6 +25,9 @@ void UIGame::create(int *pickingId) {
 
 void UIGame::render(bool pick) {
 	
+	obj::ERectangle()->apply_projection_matrix(GLB::MENU_PROJECTION);
+	obj::ERectangle()->apply_view_matrix();
+
 	if (pick) {
 		gameMenu.render(true);
 

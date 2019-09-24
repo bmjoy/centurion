@@ -22,13 +22,9 @@ public:
 	~FormInput();
 
 private:
-	EmptyRectangle border;
-	EmptyRectangle optionsBorder;
 	FilledRectangle back;
-	//CBitmapFont text;
 	
 	float width, height;
-	std::array<float, 8> coords;
 	std::vector<std::string> form_options;
 	glm::vec4 back_color;
 	

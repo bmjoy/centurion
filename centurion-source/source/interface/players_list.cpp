@@ -31,11 +31,6 @@ void PlayersList::create(std::map<int, std::string> *pickingList, int *pickingId
 	(*pickingId)++;
 	arrowUp.create("center");
 
-	border = EmptyRectangle(SHD::E_RECTANGLE_SHADER_ID);
-	border.init();
-	border.create(getCoords(x-30, y+80, w, h));
-	border.apply_projection_matrix(GLB::MENU_PROJECTION);
-
 	back = FilledRectangle(SHD::F_RECTANGLE_SHADER_ID);
 	back.create(w, h, "top-left");
 	back.apply_projection_matrix(GLB::MENU_PROJECTION);
@@ -73,6 +68,7 @@ void PlayersList::create(std::map<int, std::string> *pickingList, int *pickingId
 }
 
 void PlayersList::render(int numPlayers, std::vector<int> players_color, bool picking) {
+
 	if (picking) {
 		arrowDown.render(true);
 		arrowUp.render(true);
@@ -82,9 +78,12 @@ void PlayersList::render(int numPlayers, std::vector<int> players_color, bool pi
 		}
 	}
 	else {
+
 		back.set_color(glm::vec4(0.f,0.f,0.f,0.5f));
 		back.render(x-30, y+80);
-		border.render(glm::mat4(1.0f), glm::mat4(1.0f), glm::vec4(255.f));
+
+		obj::ERectangle()->create(getCoords(x - 30, y + 80, w, h));
+		obj::ERectangle()->render(glm::mat4(1.0f), glm::mat4(1.0f), glm::vec4(255.f));
 
 		arrowDown.render(false);
 		arrowUp.render(false);

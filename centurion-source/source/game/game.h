@@ -23,8 +23,6 @@ private:
 	std::vector<Player> *playersList;
 	Camera camera;
 	Surface *surface;
-	EmptyRectangle minimapRectangle;
-	EmptyRectangle selectionRectangle;
 	Building b;
 	Unit unit;
 	UIGame ui;

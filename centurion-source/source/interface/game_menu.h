@@ -15,7 +15,6 @@ public:
 	~GameMenu();
 private:
 	Button btn;
-	EmptyRectangle border;
 	FilledRectangle back;
 	std::vector<Button> buttons;
 	json data;
@@ -23,6 +22,5 @@ private:
 	float w, h, x, y;
 	int clickId;
 	bool gameMenuActive;
-	void picking();
 };
 

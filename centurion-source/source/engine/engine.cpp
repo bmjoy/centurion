@@ -7,10 +7,7 @@ Engine::Engine(){
 	
 	image_setup = Image();
 	f_rectangle_setup = FilledRectangle();
-	e_rectangle_setup = EmptyRectangle();
 	unit_sprite_setup = USprite();
-	//building_sprite_setup = BSprite();
-	//font_setup = CBitmapFont();
 
 	nbFrames = 0; bFPS = false;
 }
@@ -48,6 +45,9 @@ int Engine::launch() {
 		
 		if (GLB::MAIN_MENU){
 			if (!GLB::MENU_IS_CREATED){
+
+				obj::ERectangle()->apply_projection_matrix(GLB::MENU_PROJECTION);
+
 				startMenu = new Menu();
 				startMenu->create(&playersList);
 				GLB::MENU_IS_CREATED = true;
@@ -117,7 +117,7 @@ int Engine::launch() {
 void Engine::compile_shaders() {
 	SHD::IMAGE_SHADER_ID = image_setup.compile();
 	SHD::F_RECTANGLE_SHADER_ID = f_rectangle_setup.compile();
-	SHD::E_RECTANGLE_SHADER_ID = e_rectangle_setup.compile();
+	//SHD::E_RECTANGLE_SHADER_ID = e_rectangle_setup.compile();
 	SHD::USPRITE_SHADER_ID = unit_sprite_setup.compile();
 	//SHD::BSPRITE_SHADER_ID = building_sprite_setup.compile();
 	//SHD::FONT_SHADER_ID = font_setup.compile();

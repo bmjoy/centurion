@@ -15,19 +15,6 @@ void FormInput::create(float w, float h, std::vector<std::string> options) {
 	isOpened = false;
 	selectedText = options[0];
 
-	coords = getCoords(position.x, position.y, width, height);
-	border = EmptyRectangle(SHD::E_RECTANGLE_SHADER_ID);
-	border.init();
-	border.create(coords);
-	border.apply_projection_matrix(GLB::MENU_PROJECTION);
-
-	coords = getCoords(position.x, position.y - height - 1.f, width, height * form_options.size() - 1.0f);
-	optionsBorder = EmptyRectangle(SHD::E_RECTANGLE_SHADER_ID);
-	optionsBorder.init();
-	optionsBorder.create(coords);
-	optionsBorder.apply_projection_matrix(GLB::MENU_PROJECTION);
-
-
 	back = FilledRectangle(SHD::F_RECTANGLE_SHADER_ID);
 	back.create(width-1, height-1, "top-left");
 	back.apply_projection_matrix(GLB::MENU_PROJECTION);
@@ -37,7 +24,6 @@ void FormInput::create(float w, float h, std::vector<std::string> options) {
 
 void FormInput::render(bool picking, glm::vec4 border_color) {
 
-	obj::Text()->apply_projection_matrix(GLB::MENU_PROJECTION);
 	obj::Text()->set_align();
 
 	if (picking) {
@@ -52,17 +38,24 @@ void FormInput::render(bool picking, glm::vec4 border_color) {
 	}
 	else {
 		back_color = color; // this comes from uiobject
-		border.render(glm::mat4(1.0f), glm::mat4(1.0f), border_color);
+		
+		obj::ERectangle()->create(getCoords(position.x, position.y, width, height));
+		obj::ERectangle()->render(glm::mat4(1.0f), glm::mat4(1.0f), border_color);
+
 		back.set_color(back_color);
 		back.render(position.x, position.y-1.f);
 		
 		obj::Text()->render("tahoma_8", position.x + 3.f, (position.y - 1.f) - height / 1.5f - 6.f, selectedText);
+		
 		if (boolOptions && isOpened){
 			for (int j = 0; j < form_options.size(); j++) {
 				float y = position.y -1.f - (j + 1)*height + j*1;
-				optionsBorder.render(glm::mat4(1.0f), glm::mat4(1.0f));
+				obj::ERectangle()->create(getCoords(position.x, position.y - height - 1.f, width, height * form_options.size() - 1.0f));
+				obj::ERectangle()->render(glm::mat4(1.0f), glm::mat4(1.0f));
+				
 				back.set_color(back_color);
 				back.render(position.x, y);
+				
 				obj::Text()->render("tahoma_8", position.x + 3.f, y - height / 1.5f - 6.f, form_options[j]);
 			}
 		}

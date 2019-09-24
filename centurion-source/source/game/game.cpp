@@ -61,10 +61,8 @@ void Game::create(std::vector<Player> *ListOfPlayers) {
 			b.set_class(settl_data[r][j]["class"]);
 			b.set_id(objectId);
 			b.set_player(&(*playersList)[i]);
-
 			b.set_position(glm::vec3(origin.x + (int)settl_data[r][j]["offsetx"], origin.y + (int)settl_data[r][j]["offsety"], 0.0f));
-			//b.create();
-			b.create_pass();
+			b.create();
 			
 			buildingList[objectId] = b;
 			objectId++;
@@ -84,11 +82,6 @@ void Game::create(std::vector<Player> *ListOfPlayers) {
 	std::cout << "Terrain has been generated! \n";
 	std::cout << "Min(z) = " << MAP::MIN_Z << "; Max(z) = " << MAP::MAX_Z << std::endl;
 
-	minimapRectangle = EmptyRectangle(SHD::E_RECTANGLE_SHADER_ID);
-	minimapRectangle.init();
-
-	selectionRectangle = EmptyRectangle(SHD::E_RECTANGLE_SHADER_ID);
-	selectionRectangle.init();
 
 	// *********** ROBA PROVVISORIA ***********
 	unit.set_class("hmyrmidon");
@@ -127,7 +120,10 @@ void Game::run() {
 	if (!GAME::MINIMAP_IS_ACTIVE) {		
 		camera.mouseControl(threshold);
 		view = camera.calculateViewMatrix();
-		projection = GLB::CAMERA_PROJECTION;			
+		projection = GLB::CAMERA_PROJECTION;
+
+
+
 	}
 
 	/* If minimap is active */
@@ -135,6 +131,8 @@ void Game::run() {
 		view = glm::mat4(1.0f);
 		projection = GLB::MINIMAP_PROJECTION;			
 	}
+
+	game::applyMatrices(&projection, &view);
 
 	/* Tracing and Picking */
 	game::tracing(surface, &projection, &view);
@@ -144,9 +142,13 @@ void Game::run() {
 	/* Rendering */
 	surface->render(projection, view, false);
 	game::renderObjects(&buildingList, &unitList, &projection, &view, &click_id, &selectedUnits);
-	game::renderSelRectangle(&selectionRectangle, &sel_rect_coords, &view, &cameraLastX, &cameraLastY);
-	game::renderMapRectangle(&minimapRectangle, &minimap_rect_coords);
+	game::renderSelRectangle(&sel_rect_coords, &view, &cameraLastX, &cameraLastY);
+	game::renderMapRectangle(&minimap_rect_coords);
+	
 	if (GLB::DEBUG) cursor_point.render();
+	
+	
+	
 	ui.render(false);
 
 	game::goToPosition(&buildingList, &camera, &lastTime, &click_id, &blockMinimap);

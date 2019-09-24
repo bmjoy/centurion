@@ -1,9 +1,15 @@
 #include "game_functions.h"
 
+void game::applyMatrices(glm::mat4 *proj, glm::mat4 *view) {
+	obj::BuildingSprite()->apply_projection_matrix(*proj);
+	obj::BuildingSprite()->apply_view_matrix(*view);
+}
+
+
 void game::picking(std::map<int, Building> *bList, std::map<int, Unit> *uList, glm::mat4 *proj, glm::mat4 *view, int *clickId, bool *blockMinimap) {
 	if (!GAME::MENU_IS_ACTIVE){
 		for (std::map<int, Building>::iterator bld = (*bList).begin(); bld != (*bList).end(); bld++) {
-			bld->second.render(*proj, *view, true, 0);
+			bld->second.render(true, 0);
 		}
 		for (std::map<int, Unit>::iterator u = (*uList).begin(); u != (*uList).end(); u++) {
 			u->second.render(*proj, *view, true, 0);
@@ -79,7 +85,7 @@ void game::goToPosition(std::map<int, Building> *bList, Camera *c, double *lastT
 void game::renderObjects(std::map<int, Building> *bList, std::map<int, Unit> *uList, glm::mat4 *proj, glm::mat4 *view, int *clickId, int *selectedUnits) {
 	if (!GAME::GRID_IS_ACTIVE) {
 		for (std::map<int, Building>::iterator bld = (*bList).begin(); bld != (*bList).end(); bld++) {
-			bld->second.render(*proj, *view, false, *clickId);
+			bld->second.render(false, *clickId);
 		}
 		if (!GAME::MINIMAP_IS_ACTIVE) {
 			for (std::map<int, Unit>::iterator u = (*uList).begin(); u != (*uList).end(); u++) {
@@ -90,7 +96,7 @@ void game::renderObjects(std::map<int, Building> *bList, std::map<int, Unit> *uL
 	}
 }
 
-void game::renderSelRectangle(EmptyRectangle *rect, std::array<float, 8> *coords, glm::mat4 *view, float *cameraLastX, float *cameraLastY) {
+void game::renderSelRectangle(std::array<float, 8> *coords, glm::mat4 *view, float *cameraLastX, float *cameraLastY) {
 	if (!GAME::MINIMAP_IS_ACTIVE) {
 		if (GLB::MOUSE_LEFT && cursorInGameScreen()) {
 			(*coords)[0] = GLB::MOUSE_LEFT_X * (float)GLB::WINDOW_WIDTH_ZOOMED / (float)GLB::WINDOW_WIDTH + *cameraLastX;
@@ -113,10 +119,10 @@ void game::renderSelRectangle(EmptyRectangle *rect, std::array<float, 8> *coords
 			GLB::SEL_RECT_COORDS.maxX = std::max((*coords)[0], (*coords)[4]);
 			GLB::SEL_RECT_COORDS.minY = std::min((*coords)[1], (*coords)[3]);
 			GLB::SEL_RECT_COORDS.maxY = std::max((*coords)[1], (*coords)[3]);
-			(*rect).apply_projection_matrix(GLB::CAMERA_PROJECTION);
-			(*rect).apply_view_matrix();
-			(*rect).create(*coords);
-			(*rect).render(*view, glm::mat4(1.0f));
+			obj::ERectangle()->apply_projection_matrix(GLB::CAMERA_PROJECTION);
+			obj::ERectangle()->apply_view_matrix();
+			obj::ERectangle()->create(*coords);
+			obj::ERectangle()->render(*view, glm::mat4(1.0f));
 		}
 		else {
 			*cameraLastX = GAME::CAMERA_POS_X;
@@ -125,7 +131,7 @@ void game::renderSelRectangle(EmptyRectangle *rect, std::array<float, 8> *coords
 	}
 }
 
-void game::renderMapRectangle(EmptyRectangle *rect, std::array<float, 8> *coords) {
+void game::renderMapRectangle(std::array<float, 8> *coords) {
 	if (GAME::MINIMAP_IS_ACTIVE) {
 		/* minimap rectangle coordinates */
 		(*coords)[0] = 0.0f;	(*coords)[1] = GLB::WINDOW_HEIGHT_ZOOMED - GAME::UI_TOP_HEIGHT;
@@ -133,9 +139,10 @@ void game::renderMapRectangle(EmptyRectangle *rect, std::array<float, 8> *coords
 		(*coords)[4] = GLB::WINDOW_WIDTH_ZOOMED; (*coords)[5] = GAME::UI_BOTTOM_HEIGHT;
 		(*coords)[6] = GLB::WINDOW_WIDTH_ZOOMED; (*coords)[7] = GLB::WINDOW_HEIGHT_ZOOMED - GAME::UI_TOP_HEIGHT;
 		glm::mat4 model = glm::translate(glm::mat4(1.0f), glm::vec3(GAME::CAMERA_POS_X, GAME::CAMERA_POS_Y, 0.0));
-		(*rect).create(*coords);
-		(*rect).apply_projection_matrix(GLB::MINIMAP_PROJECTION);
-		(*rect).apply_view_matrix();
-		(*rect).render(glm::mat4(1.0f), model);
+		
+		obj::ERectangle()->apply_projection_matrix(GLB::MINIMAP_PROJECTION);
+		obj::ERectangle()->apply_view_matrix();
+		obj::ERectangle()->create(*coords);
+		obj::ERectangle()->render(glm::mat4(1.0f), model);
 	}
 }
