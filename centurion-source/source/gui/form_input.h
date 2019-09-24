@@ -2,9 +2,10 @@
 
 #include <global.hpp>
 
+#include <objects.h>
+
 #include "../primitives/empty_rectangle.h"
 #include "../primitives/filled_rectangle.h"
-#include "../primitives/bitmap_font.h"
 #include "ui_object.h"
 
 class FormInput : public UIObject
@@ -24,7 +25,7 @@ private:
 	EmptyRectangle border;
 	EmptyRectangle optionsBorder;
 	FilledRectangle back;
-	CBitmapFont text;
+	//CBitmapFont text;
 	
 	float width, height;
 	std::array<float, 8> coords;

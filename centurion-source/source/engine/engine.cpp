@@ -2,17 +2,15 @@
 
 
 Engine::Engine(){
-	startMenu = Menu();
 	mouse = Mouse();
-	game = Game();
 	window = myWindow();
 	
 	image_setup = Image();
 	f_rectangle_setup = FilledRectangle();
 	e_rectangle_setup = EmptyRectangle();
 	unit_sprite_setup = USprite();
-	building_sprite_setup = BSprite();
-	font_setup = CBitmapFont();
+	//building_sprite_setup = BSprite();
+	//font_setup = CBitmapFont();
 
 	nbFrames = 0; bFPS = false;
 }
@@ -25,6 +23,9 @@ int Engine::launch() {
 
 	std::cout << "Window has been initialised. \n";
 
+	obj::init();
+
+	readDataClasses();
 	compile_shaders();
 	init_objects();
 
@@ -44,19 +45,25 @@ int Engine::launch() {
 		mouse.mouse_control(window.get_mouse_x(), window.get_mouse_y());
 		mouse.apply_projection_matrix(GLB::MENU_PROJECTION);
 		
+		
 		if (GLB::MAIN_MENU){
 			if (!GLB::MENU_IS_CREATED){
-				startMenu.create(&playersList);
+				startMenu = new Menu();
+				startMenu->create(&playersList);
 				GLB::MENU_IS_CREATED = true;
 				std::cout << "Menu has been created! \n";
+
 			}
-			startMenu.render();
+			startMenu->render();
 		}
-		
+
 		if (GLB::GAME) {
 			
 			if (!GLB::GAME_IS_CREATED) {
 
+				delete startMenu;
+
+				game = new Game();
 				glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
 				glClear(GL_COLOR_BUFFER_BIT);
 
@@ -65,24 +72,24 @@ int Engine::launch() {
 				glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
 				glClear(GL_COLOR_BUFFER_BIT);
 
-				tahoma8_text.set_align("center", "middle");
-				tahoma8_text.set_position(glm::vec2(GLB::WINDOW_WIDTH/2.f, GLB::WINDOW_HEIGHT / 2.f));
-				tahoma8_text.set_text("Game is being created...");
-				tahoma8_text.render();
+				text.set_position(glm::vec2(GLB::WINDOW_WIDTH/2.f, GLB::WINDOW_HEIGHT / 2.f));
+				text.set_text("Game is being created...");
+				text.render("tahoma_8", glm::vec4(255.f), "center", "middle");
 				glfwSwapBuffers(GLB::MAIN_WINDOW);
 
-				game.create(&playersList);
+				game->create(&playersList);
 				GLB::GAME_IS_CREATED = true;
 				std::cout << "Game has been created! \n";
 				lastTime2 = glfwGetTime();
+
 			}			
 			
-			game.run();	
+			game->run();	
 			calculateTime();
 
 		}
 		if (GLB::GAME_CLEAR) {
-			game.clear();
+			delete game;
 			GLB::GAME_CLEAR = false;
 			GLB::GAME_IS_CREATED = false;
 			GLB::MENU_IS_CREATED = false;
@@ -112,11 +119,28 @@ void Engine::compile_shaders() {
 	SHD::F_RECTANGLE_SHADER_ID = f_rectangle_setup.compile();
 	SHD::E_RECTANGLE_SHADER_ID = e_rectangle_setup.compile();
 	SHD::USPRITE_SHADER_ID = unit_sprite_setup.compile();
-	SHD::BSPRITE_SHADER_ID = building_sprite_setup.compile();
-	SHD::FONT_SHADER_ID = font_setup.compile();
+	//SHD::BSPRITE_SHADER_ID = building_sprite_setup.compile();
+	//SHD::FONT_SHADER_ID = font_setup.compile();
+}
+
+void Engine::readDataClasses() {
+
+	std::vector<std::string> files = get_all_files_names_within_folder("assets/data/classes");
+	for (int i = 0; i < files.size(); ++i) {
+		
+		std::ifstream path("assets/data/classes/" + files[i]);
+		json dataClass = json::parse(path);
+
+		if (dataClass["type"] == "building") {			
+			obj::BuildingSprite()->addPath(dataClass["ent_path"]);
+		}
+	}	
 }
 
 void Engine::init_objects() {
+
+	obj::compile();
+	obj::create();
 
 	mouse.compile();
 	mouse.create();
@@ -126,8 +150,10 @@ void Engine::init_objects() {
 	div_ui.apply_projection_matrix(GLB::MENU_PROJECTION);
 	div_ui.create(220.f, 200.f, "bottom-left");
 
-	tahoma6_text.create("tahoma_6");
-	tahoma8_text.create("tahoma_8");
+	text = DivText();
+
+	//tahoma6_text.create("tahoma_6");
+	//tahoma8_text.create("tahoma_8");
 }
 
 
@@ -193,37 +219,37 @@ void Engine::render_ui() {
 		div_ui.render(10.f, GAME::UI_BOTTOM_HEIGHT + 10.f);
 
 		if (bFPS) {
-			tahoma6_text.set_position(glm::vec2(14.0f, GAME::UI_BOTTOM_HEIGHT + 12.f));
-			tahoma6_text.set_text(Fps1);
-			tahoma6_text.render();
+			text.set_position(glm::vec2(14.0f, GAME::UI_BOTTOM_HEIGHT + 12.f));
+			text.set_text(Fps1);
+			text.render("tahoma_6", glm::vec4(255.f), "left", "normal");
 
-			tahoma6_text.set_position(glm::vec2(14.0f, GAME::UI_BOTTOM_HEIGHT + 12.f + 15.f));
-			tahoma6_text.set_text(Mspf1);
-			tahoma6_text.render();
+			text.set_position(glm::vec2(14.0f, GAME::UI_BOTTOM_HEIGHT + 12.f + 15.f));
+			text.set_text(Mspf1);
+			text.render("tahoma_6", glm::vec4(255.f), "left", "normal");
 		}
 
 		if (GLB::GAME) {
-			tahoma6_text.set_position(glm::vec2(14.f, GAME::UI_BOTTOM_HEIGHT + 12.f + 15.f*2.f));
-			tahoma6_text.set_text(
+			text.set_position(glm::vec2(14.f, GAME::UI_BOTTOM_HEIGHT + 12.f + 15.f*2.f));
+			text.set_text(
 				"window position: x = "
 				+ std::to_string(GLB::MOUSE_X)
 				+ ", y = "
 				+ std::to_string(GLB::MOUSE_Y));
-			tahoma6_text.render();
+			text.render("tahoma_6", glm::vec4(255.f), "left", "normal");
 
-			tahoma6_text.set_position(glm::vec2(14.f, GAME::UI_BOTTOM_HEIGHT + 12.f + 15.f*3.f));
-			tahoma6_text.set_text(
+			text.set_position(glm::vec2(14.f, GAME::UI_BOTTOM_HEIGHT + 12.f + 15.f*3.f));
+			text.set_text(
 				"map position: x = "
 				+ std::to_string((int)getZoomedCoords((float)GLB::MOUSE_X, (float)GLB::MOUSE_Y).x)
 				+ ", y = "
 				+ std::to_string((int)getZoomedCoords((float)GLB::MOUSE_X, (float)GLB::MOUSE_Y).y));			
-			tahoma6_text.render();
+			text.render("tahoma_6", glm::vec4(255.f), "left", "normal");
 
-			tahoma6_text.set_position(glm::vec2(14.f, GAME::UI_BOTTOM_HEIGHT + 12.f + 15.f*4.f));
-			tahoma6_text.set_text(
+			text.set_position(glm::vec2(14.f, GAME::UI_BOTTOM_HEIGHT + 12.f + 15.f*4.f));
+			text.set_text(
 				"selected units: "
-				+ std::to_string(game.getSelectedUnits()));
-			tahoma6_text.render();
+				+ std::to_string(game->getSelectedUnits()));
+			text.render("tahoma_6", glm::vec4(255.f), "left", "normal");
 		}
 
 	}
@@ -232,16 +258,15 @@ void Engine::render_ui() {
 	
 
 	/* TIME */
-	tahoma8_text.set_align();
 	if (GLB::GAME){
 		
-		tahoma8_text.set_position(glm::vec2(GLB::WINDOW_WIDTH - 99.0f, GLB::WINDOW_HEIGHT - GAME::UI_TOP_HEIGHT - 29.0f));
-		tahoma8_text.set_text(hours_str + ":" + minutes_str + ":" + seconds_str);
-		tahoma8_text.render(glm::vec4(0.f,0.f,0.f,255.f));
+		text.set_position(glm::vec2(GLB::WINDOW_WIDTH - 99.0f, GLB::WINDOW_HEIGHT - GAME::UI_TOP_HEIGHT - 29.0f));
+		text.set_text(hours_str + ":" + minutes_str + ":" + seconds_str);
+		text.render("tahoma_8", glm::vec4(0.f,0.f,0.f,255.f), "left", "normal");
 
-		tahoma8_text.set_position(glm::vec2(GLB::WINDOW_WIDTH - 100.0f, GLB::WINDOW_HEIGHT - GAME::UI_TOP_HEIGHT - 28.0f));
-		tahoma8_text.set_text(hours_str + ":" + minutes_str + ":" + seconds_str);
-		tahoma8_text.render(glm::vec4(255.f));
+		text.set_position(glm::vec2(GLB::WINDOW_WIDTH - 100.0f, GLB::WINDOW_HEIGHT - GAME::UI_TOP_HEIGHT - 28.0f));
+		text.set_text(hours_str + ":" + minutes_str + ":" + seconds_str);
+		text.render("tahoma_8", glm::vec4(255.f), "left", "normal");
 	}
 
 }

@@ -10,14 +10,19 @@ class BSprite : public Shader
 public:
 	BSprite();
 	BSprite(int shaderID);
-	void create(json ent_data);
-	void render(float x, float y, bool picking, int pickingId, bool selected, glm::vec3 *playerColor);
+	void addPath(std::string Path) { entPathList.push_back(Path); }
+	std::vector<std::string> entPathList;
+	void create();
+	void render(std::string className, float x, float y, bool picking, int pickingId, bool selected, glm::vec3 *playerColor);
 	~BSprite();
 
 private:
 
-	std::string path;       // texture path
 	
+	std::string texturePath;       // texture path
+	std::map<std::string, glm::vec3> classMap;
+	std::string name;
+
 	unsigned char *data;
 	unsigned int indices[6] = {
 		0, 1, 3,   // first triangle

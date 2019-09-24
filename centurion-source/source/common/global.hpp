@@ -181,4 +181,23 @@ static bool cursorInGameScreen() {
 	return (GLB::MOUSE_LEFT_Y > GAME::UI_BOTTOM_HEIGHT) && (GLB::MOUSE_LEFT_Y < (GLB::WINDOW_HEIGHT - GAME::UI_TOP_HEIGHT)); 
 }
 
+static std::vector<std::string> get_all_files_names_within_folder(std::string folder)
+{
+	std::vector<std::string> names;
+	std::string search_path = folder + "/*.*";
+	WIN32_FIND_DATA fd;
+	HANDLE hFind = ::FindFirstFile(search_path.c_str(), &fd);
+	if (hFind != INVALID_HANDLE_VALUE) {
+		do {
+			// read all (real) files in current folder
+			// , delete '!' read other 2 default folder . and ..
+			if (!(fd.dwFileAttributes & FILE_ATTRIBUTE_DIRECTORY)) {
+				names.push_back(fd.cFileName);
+			}
+		} while (::FindNextFile(hFind, &fd));
+		::FindClose(hFind);
+	}
+	return names;
+}
+
 #endif

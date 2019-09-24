@@ -14,7 +14,6 @@ void PlayersList::set_position(int startX, int startY){
 
 void PlayersList::create(std::map<int, std::string> *pickingList, int *pickingId, std::vector<int> *players_color) {
 	text = DivText();
-	text.create("tahoma_8");
 	
 	arrowDown = DivImage();
 	arrowDown.set_img_path("assets/ui/menu/down.png");
@@ -93,9 +92,9 @@ void PlayersList::render(int numPlayers, std::vector<int> players_color, bool pi
 		for (int j = numPlayers - 1; j >= 0; j--) {
 			text.set_text("Number of players: " + std::to_string(numPlayers));
 			text.set_position(glm::vec2(x + 1.f, y + 39.f));
-			text.render(glm::vec4(0.f, 0.f, 0.f, 255.f));
+			text.render("tahoma_8", glm::vec4(0.f, 0.f, 0.f, 255.f), "left", "normal");
 			text.set_position(glm::vec2(x, y + 40.f));
-			text.render(glm::vec4(255.f));
+			text.render("tahoma_8", glm::vec4(255.f), "left", "normal");
 			colors_Form[j].set_color(glm::vec4(GLB::COLORS[players_color[j]], 1.0f));
 			colors_Form[j].render();
 			players_Form[j].render();

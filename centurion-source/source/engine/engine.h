@@ -1,6 +1,8 @@
 #pragma once
 
 #include <iostream>
+#include <objects.h>
+
 
 #include "window.h"
 #include "mouse.h"
@@ -31,16 +33,15 @@ private:
 	FilledRectangle f_rectangle_setup;
 	EmptyRectangle e_rectangle_setup;
 	USprite unit_sprite_setup;
-	BSprite building_sprite_setup;
-	CBitmapFont font_setup;
+	//BSprite building_sprite_setup;
+	//CBitmapFont font_setup;
 
 	// objects 
 	myWindow window;
 	Mouse mouse;
-	Menu startMenu;
-	Game game;
-	DivText tahoma6_text;
-	DivText tahoma8_text;
+	Menu *startMenu;
+	Game *game;
+	DivText text;
 	FilledRectangle div_ui;
 
 	// Players Informations
@@ -67,5 +68,6 @@ private:
 	void calculateTime();
 	void fps_sleep();	
 	void render_ui();
+	void readDataClasses();
 };
 

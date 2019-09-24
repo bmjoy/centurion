@@ -11,7 +11,7 @@ public:
 
 	GObject();
 	void set_position(glm::vec3 pos);
-	void set_class(std::string className);
+	void set_class(std::string class_name);
 	void set_player(Player *p);
 	void set_id(int pickingId);
 	bool getSelected() { return selected; }
@@ -25,5 +25,6 @@ protected:
 	bool selected;
 	json data;
 	glm::vec3 position;
+	std::string className;
 };
 

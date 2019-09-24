@@ -234,6 +234,9 @@
     <ClCompile Include="source\interface\game_menu.cpp">
       <Filter>Source Files\interface</Filter>
     </ClCompile>
+    <ClCompile Include="source\common\objects.cpp">
+      <Filter>Source Files\common</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="source\building\building.h">
@@ -352,6 +355,9 @@
     </ClInclude>
     <ClInclude Include="source\interface\game_menu.h">
       <Filter>Header Files\interface</Filter>
+    </ClInclude>
+    <ClInclude Include="source\common\objects.h">
+      <Filter>Header Files\common</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

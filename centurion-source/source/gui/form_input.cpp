@@ -32,14 +32,14 @@ void FormInput::create(float w, float h, std::vector<std::string> options) {
 	back.create(width-1, height-1, "top-left");
 	back.apply_projection_matrix(GLB::MENU_PROJECTION);
 	back.apply_view_matrix();
-
-	text = CBitmapFont(SHD::FONT_SHADER_ID);
-	text.apply_projection_matrix(GLB::MENU_PROJECTION);
-	text.create("tahoma_8");
 	
 }
 
 void FormInput::render(bool picking, glm::vec4 border_color) {
+
+	obj::Text()->apply_projection_matrix(GLB::MENU_PROJECTION);
+	obj::Text()->set_align();
+
 	if (picking) {
 		back.render(position.x, position.y, true, picking_id);
 
@@ -55,15 +55,15 @@ void FormInput::render(bool picking, glm::vec4 border_color) {
 		border.render(glm::mat4(1.0f), glm::mat4(1.0f), border_color);
 		back.set_color(back_color);
 		back.render(position.x, position.y-1.f);
-		text.render(position.x + 3.f, (position.y - 1.f) - height / 1.5f - 6.f, selectedText);
-
+		
+		obj::Text()->render("tahoma_8", position.x + 3.f, (position.y - 1.f) - height / 1.5f - 6.f, selectedText);
 		if (boolOptions && isOpened){
 			for (int j = 0; j < form_options.size(); j++) {
 				float y = position.y -1.f - (j + 1)*height + j*1;
 				optionsBorder.render(glm::mat4(1.0f), glm::mat4(1.0f));
 				back.set_color(back_color);
 				back.render(position.x, y);
-				text.render(position.x + 3.f, y - height / 1.5f - 6.f, form_options[j]);
+				obj::Text()->render("tahoma_8", position.x + 3.f, y - height / 1.5f - 6.f, form_options[j]);
 			}
 		}
 	}

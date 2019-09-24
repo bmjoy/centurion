@@ -63,7 +63,7 @@ void Game::create(std::vector<Player> *ListOfPlayers) {
 			b.set_player(&(*playersList)[i]);
 
 			b.set_position(glm::vec3(origin.x + (int)settl_data[r][j]["offsetx"], origin.y + (int)settl_data[r][j]["offsety"], 0.0f));
-			b.create();
+			//b.create();
 			b.create_pass();
 			
 			buildingList[objectId] = b;
