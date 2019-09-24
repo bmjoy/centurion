@@ -66,8 +66,6 @@ void BSprite::create() {
 void BSprite::render(std::string className, float x, float y, bool picking, int pickingId, bool selected, glm::vec3 *playerColor) {
 	glUseProgram(shaderId);
 	
-	name = className + "_" + "normal";
-
 	/* Model Matrix */
 	modelMat = glm::scale(glm::mat4(1.0f), glm::vec3((float)classMap[className].x, (float)classMap[className].y, 1.0f));
 	modelMat = glm::translate(modelMat, glm::vec3(x / (float)classMap[className].x, y / (float)classMap[className].y, 0.0f));

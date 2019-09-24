@@ -8,13 +8,12 @@ void Button::create() {
 
 	buttonImage = Image(SHD::IMAGE_SHADER_ID);
 	buttonImage.create("assets/ui/buttons/button_1.png", "center");
-	buttonImage.apply_projection_matrix(GLB::MENU_PROJECTION);
 
 	buttonText = DivText();
 }
 
 void Button::render(bool picking) {
-
+	buttonImage.apply_projection_matrix(GLB::MENU_PROJECTION);
 	if(!picking){
 		buttonImage.render(position.x, position.y);
 		buttonText.set_position(position);

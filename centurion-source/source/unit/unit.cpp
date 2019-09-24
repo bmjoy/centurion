@@ -63,7 +63,7 @@ void Unit::render(glm::mat4 &proj, glm::mat4 &view, bool picking, int clickID) {
 	model = glm::translate(glm::mat4(1.0f), position3D);
 	sprite.render(model, currentState, picking, picking_id, &(*player).getPlayerColor());
 
-	if (!GLB::DEBUG) {
+	if (!GLB::DEBUG && !picking) {
 		hitbox.rectangle.apply_projection_matrix(GLB::CAMERA_PROJECTION);
 		hitbox.coords = getCoords(position3D.x - entityData["hitbox"][0], position3D.y + entityData["hitbox"][1] + entityData["yOffset"], entityData["hitbox"][0] * 2, entityData["hitbox"][1] * 2);
 		hitbox.rectangle.create(hitbox.coords);
@@ -72,7 +72,7 @@ void Unit::render(glm::mat4 &proj, glm::mat4 &view, bool picking, int clickID) {
 
 	/* debug pathfinding and coordinates */
 
-	if (GLB::DEBUG) {
+	if (GLB::DEBUG && !picking) {
 		circlePos.apply_projection_matrix(GLB::CAMERA_PROJECTION);
 		circlePos.apply_view_matrix(view);
 
