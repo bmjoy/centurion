@@ -107,7 +107,7 @@ int Engine::launch() {
 		
 		glfwSwapBuffers(GLB::MAIN_WINDOW);
 		//window.swap_buffers();
-		fps_sleep();
+		//fps_sleep();
 	}
 
 	glfwTerminate(); 
@@ -117,10 +117,7 @@ int Engine::launch() {
 void Engine::compile_shaders() {
 	SHD::IMAGE_SHADER_ID = image_setup.compile();
 	SHD::F_RECTANGLE_SHADER_ID = f_rectangle_setup.compile();
-	//SHD::E_RECTANGLE_SHADER_ID = e_rectangle_setup.compile();
 	SHD::USPRITE_SHADER_ID = unit_sprite_setup.compile();
-	//SHD::BSPRITE_SHADER_ID = building_sprite_setup.compile();
-	//SHD::FONT_SHADER_ID = font_setup.compile();
 }
 
 void Engine::readDataClasses() {

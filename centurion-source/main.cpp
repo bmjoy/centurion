@@ -46,10 +46,7 @@ namespace SHD {
 	int IMAGE_SHADER_ID = 0;
 	int GRID_SHADER_ID = 0;
 	int F_RECTANGLE_SHADER_ID = 0;
-	int E_RECTANGLE_SHADER_ID = 0;
 	int USPRITE_SHADER_ID = 0;
-	int BSPRITE_SHADER_ID = 0;
-	int FONT_SHADER_ID = 0;
 }
 
 namespace GAME {

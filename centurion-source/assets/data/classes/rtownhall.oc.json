@@ -1,5 +1,6 @@
 {
     "type": "building",
     "ent_path": "assets/buildings/rome/townhall/rtownhall.oe.json",
-    "pass_path" : "assets/buildings/rome/townhall/rtownhall_pass.json"
+    "pass_path" : "assets/buildings/rome/townhall/rtownhall_pass.json",
+    "clickable_in_minimap": 1
 }

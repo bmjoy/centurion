@@ -5,7 +5,6 @@
 BSprite::BSprite(){
 	vPath = "assets/shaders/bsprite/vertex.glsl";
 	fPath = "assets/shaders/bsprite/fragment.glsl";
-	modelMat = glm::mat4(1.f);
 }
 
 
@@ -58,19 +57,21 @@ void BSprite::create() {
 			k++;
 		}
 	}	
-
-
 }
 
-void BSprite::render(std::string className, glm::mat4 model, bool picking, int pickingId, bool selected, glm::vec3 *playerColor) {
+GLuint BSprite::getTextureId(std::string className) {
+	return textureIdMap[className + "_normal"];
+}
+
+void BSprite::render(GLuint texID, bool clickable, glm::mat4 model, bool picking, int pickingId, bool selected, glm::vec3 *playerColor) {
 	glUseProgram(shaderId);
 
 	/* Uniform Variables */
 	glUniformMatrix4fv(glGetUniformLocation(shaderId, "model"), 1, GL_FALSE, glm::value_ptr(model));
 	glUniform3f(glGetUniformLocation(shaderId, "player_color"), playerColor->x / 255.0f, playerColor->y / 255.0f, playerColor->z / 255.0f);
-	glUniform1i(glGetUniformLocation(shaderId, "selection"), int(selected));
+	glUniform1i(glGetUniformLocation(shaderId, "selection"), selected);
 	glUniform1i(glGetUniformLocation(shaderId, "isLayerColor"), 0);
-	glUniform1i(glGetUniformLocation(shaderId, "picking"), int(picking)); // enable/disable picking
+	glUniform1i(glGetUniformLocation(shaderId, "picking"), picking); // enable/disable picking
 
 	/* ------ DRAW SPRITES ------ */
 
@@ -88,13 +89,13 @@ void BSprite::render(std::string className, glm::mat4 model, bool picking, int p
 		if (!GAME::MINIMAP_IS_ACTIVE) {
 			glUniform1i(glGetUniformLocation(shaderId, "texture1"), 0);
 			glActiveTexture(GL_TEXTURE0);
-			glBindTexture(GL_TEXTURE_2D, textureIdMap[className + "_normal"]);
+			glBindTexture(GL_TEXTURE_2D, texID); // normal
 			glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
 		}
-		if (GAME::MINIMAP_IS_ACTIVE && textureIdMap[className + "_border"]) {
+		if (GAME::MINIMAP_IS_ACTIVE && clickable) {
 			glUniform1i(glGetUniformLocation(shaderId, "texture1"), 0);
 			glActiveTexture(GL_TEXTURE0);
-			glBindTexture(GL_TEXTURE_2D, textureIdMap[className + "_border"]);
+			glBindTexture(GL_TEXTURE_2D, texID + 2); // border
 			glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
 		}
 	}
@@ -106,7 +107,7 @@ void BSprite::render(std::string className, glm::mat4 model, bool picking, int p
 			glUniform1i(glGetUniformLocation(shaderId, "minimap"), 0);
 			glUniform1i(glGetUniformLocation(shaderId, "texture1"), 0);
 			glActiveTexture(GL_TEXTURE0);
-			glBindTexture(GL_TEXTURE_2D, textureIdMap[className + "_normal"]);
+			glBindTexture(GL_TEXTURE_2D, texID); // normal
 			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
 			glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
 		}
@@ -114,24 +115,24 @@ void BSprite::render(std::string className, glm::mat4 model, bool picking, int p
 		else {
 			glUniform1i(glGetUniformLocation(shaderId, "minimap"), 1);
 			
-			if (textureIdMap[className + "_border"]) {
+			if (clickable) {
 
 				glUniform1i(glGetUniformLocation(shaderId, "texture1"), 2);
-				glActiveTexture(GL_TEXTURE2);
-				glBindTexture(GL_TEXTURE_2D, textureIdMap[className + "_border"]);
+				glActiveTexture(GL_TEXTURE2); 
+				glBindTexture(GL_TEXTURE_2D, texID + 2); // border
 				glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
 
 				glUniform1i(glGetUniformLocation(shaderId, "isLayerColor"), 1);
 				glUniform1i(glGetUniformLocation(shaderId, "texture1"), 1);
 				glActiveTexture(GL_TEXTURE1);
-				glBindTexture(GL_TEXTURE_2D, textureIdMap[className + "_color"]);
+				glBindTexture(GL_TEXTURE_2D, texID + 1); // color
 				glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
 				glUniform1i(glGetUniformLocation(shaderId, "isLayerColor"), 0);
 			}
 
 			glUniform1i(glGetUniformLocation(shaderId, "texture1"), 0);
 			glActiveTexture(GL_TEXTURE0);
-			glBindTexture(GL_TEXTURE_2D, textureIdMap[className + "_normal"]);
+			glBindTexture(GL_TEXTURE_2D, texID); // normal
 			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST_MIPMAP_LINEAR);
 			glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
 		}

@@ -62,10 +62,7 @@ namespace SHD {
 	extern int IMAGE_SHADER_ID;
 	extern int GRID_SHADER_ID;
 	extern int F_RECTANGLE_SHADER_ID;
-	extern int E_RECTANGLE_SHADER_ID;
 	extern int USPRITE_SHADER_ID;
-	extern int BSPRITE_SHADER_ID;
-	extern int FONT_SHADER_ID;
 }
 
 namespace GAME {

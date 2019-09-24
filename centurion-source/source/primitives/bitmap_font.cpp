@@ -103,8 +103,6 @@ void CBitmapFont::render(std::string font, float xPos, float yPos, std::string t
 	glUniform1i(glGetUniformLocation(shaderId, "tex"), 0); // texture
 	glUniform4f(glGetUniformLocation(shaderId, "color"), color.x/255.f, color.y / 255.f, color.z / 255.f, color.w / 255.f);
 
-	
-
 	offset_x = 0.f;
 	total_width = 0.f;
 

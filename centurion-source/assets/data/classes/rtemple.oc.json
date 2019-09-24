@@ -1,6 +1,7 @@
 {
     "type": "building",
     "ent_path": "assets/buildings/rome/temple/rtemple.oe.json",
-    "pass_path" : "assets/buildings/rome/temple/rtemple_pass.json"
+    "pass_path" : "assets/buildings/rome/temple/rtemple_pass.json",
+    "clickable_in_minimap": 0
     
 }

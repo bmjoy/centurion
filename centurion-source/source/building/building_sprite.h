@@ -11,16 +11,15 @@ public:
 	BSprite();
 	BSprite(int shaderID);
 	void addPath(std::string Path) { entPathList.push_back(Path); }
-	std::vector<std::string> entPathList;
+	GLuint getTextureId(std::string className);
 	void create();
-	void render(std::string className, glm::mat4 model, bool picking, int pickingId, bool selected, glm::vec3 *playerColor);
+	void render(GLuint texID, bool clickable, glm::mat4 model, bool picking, int pickingId, bool selected, glm::vec3 *playerColor);
 	~BSprite();
 
 private:
 
-	
+	std::vector<std::string> entPathList;
 	std::string texturePath;       // texture path
-	std::string name;
 
 	unsigned char *data;
 	unsigned int indices[6] = {
@@ -37,8 +36,6 @@ private:
 
 
 	/* matrix transformations */
-	glm::mat4 modelMat;
-
 	int r, g, b;
 
 	void genBuffers();
