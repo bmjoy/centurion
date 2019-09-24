@@ -56,7 +56,7 @@ void Camera::mouseControl(float threshold) {
 	}
 
 	/* MOUSE SCROLLING --> CAMERA ZOOM */
-	if (GLB::GAME && GLB::CTRL_BUTTON && GLB::MOUSE_SCROLL_BOOL) {
+	if (GLB::GAME && !GAME::MENU_IS_ACTIVE && GLB::CTRL_BUTTON && GLB::MOUSE_SCROLL_BOOL) {
 		if (GLB::MOUSE_SCROLL > 0 && GAME::ZOOM_CURRENT > 1.0f) {
 			GAME::ZOOM_CURRENT -= (int)GLB::MOUSE_SCROLL;
 		}

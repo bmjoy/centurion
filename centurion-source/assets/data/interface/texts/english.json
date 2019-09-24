@@ -1,0 +1,13 @@
+{
+  //Main menu
+  "buttonSinglePlayer": "Singleplayer",
+  "buttonQuit": "Exit",
+
+  //Single player menu
+  "buttonStart": "Start",
+  "buttonExit": "Back",
+
+  //In game menu
+  "menuButtonQuit": "Quit",
+  "menuButtonClose": "Close"
+}

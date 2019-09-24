@@ -16,14 +16,14 @@
 			"path": "assets/ui/buttons/button_1.png",
 			"x": -150,
 			"y": 600,
-			"text": "Single-player"
+			"text": "Singleplayer"
 		},
 		{
 			"name": "buttonQuit",
 			"path": "assets/ui/buttons/button_1.png",
 			"x": -150,
 			"y": 75,
-			"text": "Quit"
+			"text": "Exit"
 		}
 	],
 

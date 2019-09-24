@@ -117,7 +117,7 @@ void myWindow::handle_keys(GLFWwindow* window, int key, int code, int action, in
 			std::cout << "Grid OFF! \n";
 		}
 	}
-	if (key == GLFW_KEY_SPACE && action == GLFW_PRESS) {
+	if (key == GLFW_KEY_SPACE && action == GLFW_PRESS && !GAME::MENU_IS_ACTIVE) {
 		 GAME::MINIMAP_IS_ACTIVE = ! GAME::MINIMAP_IS_ACTIVE;
 		if ( GAME::MINIMAP_IS_ACTIVE) {
 			std::cout << "Minimap camera ON! \n";
