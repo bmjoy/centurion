@@ -1,4 +1,4 @@
-#include "players_list.h"
+#include "menu_players_list.h"
 
 
 
@@ -31,10 +31,9 @@ void PlayersList::create(std::map<int, std::string> *pickingList, int *pickingId
 	(*pickingId)++;
 	arrowUp.create("center");
 
-	back = FilledRectangle(SHD::F_RECTANGLE_SHADER_ID);
-	back.create(w, h, "top-left");
-	back.apply_projection_matrix(GLB::MENU_PROJECTION);
-	back.apply_view_matrix();
+	background = gui::Rectangle();
+	background.set_color(glm::vec4(0.f, 0.f, 0.f, 0.5f));
+	background.create("filled", x - 30, y + 80, w, h, "top-left");
 
 	for (int j = 0; j < GAME::PLAYERS_NUMBER_MAX; j++) {
 
@@ -79,11 +78,10 @@ void PlayersList::render(int numPlayers, std::vector<int> players_color, bool pi
 	}
 	else {
 
-		back.set_color(glm::vec4(0.f,0.f,0.f,0.5f));
-		back.render(x-30, y+80);
-
 		obj::ERectangle()->create(getCoords(x - 30, y + 80, w, h));
 		obj::ERectangle()->render(glm::mat4(1.0f), glm::mat4(1.0f), glm::vec4(255.f));
+
+		background.render();
 
 		arrowDown.render(false);
 		arrowUp.render(false);

@@ -4,10 +4,9 @@
 #include <objects.h>
 
 #include "../gui/form_input.h"
-#include "../primitives/empty_rectangle.h"
-#include "../primitives/filled_rectangle.h"
 #include "../gui/div_text.h"
 #include "../gui/div_image.h"
+#include "../gui/rectangle.h"
 
 class PlayersList
 {
@@ -26,7 +25,7 @@ private:
 	std::vector<FormInput> civiliz_Form;
 	DivText text;
 	DivImage arrowDown, arrowUp;
-	FilledRectangle back;
+	gui::Rectangle background;
 	int x, y, deltaY, w, h;
 };
 

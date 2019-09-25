@@ -3,7 +3,7 @@
 #include <global.hpp>
 #include <json.hpp>
 #include "game_functions.h"
-#include "../gui/ui_game.h"
+#include "../interface/game_ui.h"
 #include "../player/player.h"
 #include "../engine/cursor_point.h"
 
@@ -11,6 +11,8 @@ class Game
 {
 public:
 	Game();
+	bool game_is_created() { return gameIsCreated; }
+	void reset() { gameIsCreated = false; }
 	void create(std::vector<Player> *ListOfPlayers);
 	void run();
 	void clear();
@@ -42,4 +44,6 @@ private:
 	glm::mat4 view, projection;
 
 	std::array<float, 8> minimap_rect_coords, sel_rect_coords;	
+
+	bool gameIsCreated;
 };

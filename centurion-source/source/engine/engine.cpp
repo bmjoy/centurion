@@ -6,7 +6,6 @@ Engine::Engine(){
 	window = myWindow();
 	
 	image_setup = Image();
-	f_rectangle_setup = FilledRectangle();
 	unit_sprite_setup = USprite();
 
 	nbFrames = 0; bFPS = false;
@@ -34,6 +33,9 @@ int Engine::launch() {
 
 	std::cout << "I am in the while() loop! \n";
 
+	startMenu = new Menu();
+	game = new Game();
+
 	while (!GLB::WINDOW_CLOSE) {
 
 		glfwPollEvents();
@@ -42,44 +44,39 @@ int Engine::launch() {
 		mouse.mouse_control(window.get_mouse_x(), window.get_mouse_y());
 		mouse.apply_projection_matrix(GLB::MENU_PROJECTION);
 		
+		// ---- MENU ---- //
 		
 		if (GLB::MAIN_MENU){
-			if (!GLB::MENU_IS_CREATED){
+			if (!startMenu->menu_is_created()){
 
 				obj::ERectangle()->apply_projection_matrix(GLB::MENU_PROJECTION);
+				obj::ERectangle()->apply_view_matrix();
 
-				startMenu = new Menu();
+				obj::FRectangle()->apply_projection_matrix(GLB::MENU_PROJECTION);
+				obj::FRectangle()->apply_view_matrix();
+
+				
 				startMenu->create(&playersList);
-				GLB::MENU_IS_CREATED = true;
-				std::cout << "Menu has been created! \n";
-
 			}
 			startMenu->render();
 		}
 
+		// ---- GAME ---- //
+
 		if (GLB::GAME) {
 			
-			if (!GLB::GAME_IS_CREATED) {
+			if (!game->game_is_created()) {
 
-				delete startMenu;
-
-				game = new Game();
-				glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
-				glClear(GL_COLOR_BUFFER_BIT);
-
-				glfwSwapBuffers(GLB::MAIN_WINDOW);
-				
-				glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
-				glClear(GL_COLOR_BUFFER_BIT);
-
-				text.set_position(glm::vec2(GLB::WINDOW_WIDTH/2.f, GLB::WINDOW_HEIGHT / 2.f));
-				text.set_text("Game is being created...");
-				text.render("tahoma_8", glm::vec4(255.f), "center", "middle");
+				clearAndSwapBuffers(GLB::MAIN_WINDOW);
+				{
+					text.set_position(glm::vec2(GLB::WINDOW_WIDTH / 2.f, GLB::WINDOW_HEIGHT / 2.f));
+					text.set_text("Game is being created...");
+					text.render("tahoma_8", glm::vec4(255.f), "center", "middle");
+				}
 				glfwSwapBuffers(GLB::MAIN_WINDOW);
 
 				game->create(&playersList);
-				GLB::GAME_IS_CREATED = true;
-				std::cout << "Game has been created! \n";
+	
 				lastTime2 = glfwGetTime();
 
 			}			
@@ -88,14 +85,19 @@ int Engine::launch() {
 			calculateTime();
 
 		}
+
+		// -------------- //
+
 		if (GLB::GAME_CLEAR) {
-			delete game;
 			GLB::GAME_CLEAR = false;
-			GLB::GAME_IS_CREATED = false;
-			GLB::MENU_IS_CREATED = false;
 			GLB::GAME = false;
 			GLB::MAIN_MENU = true;
+
+			game->reset();
+			startMenu->reset();
 		}
+
+		// -------------- //
 
 		// ui
 
@@ -103,10 +105,8 @@ int Engine::launch() {
 
 		// mouse
 		mouse.render();
-
 		
 		glfwSwapBuffers(GLB::MAIN_WINDOW);
-		//window.swap_buffers();
 		//fps_sleep();
 	}
 
@@ -116,7 +116,6 @@ int Engine::launch() {
 
 void Engine::compile_shaders() {
 	SHD::IMAGE_SHADER_ID = image_setup.compile();
-	SHD::F_RECTANGLE_SHADER_ID = f_rectangle_setup.compile();
 	SHD::USPRITE_SHADER_ID = unit_sprite_setup.compile();
 }
 
@@ -143,14 +142,11 @@ void Engine::init_objects() {
 	mouse.create();
 	std::cout << "Mouse is ready!\n";
 
-	div_ui = FilledRectangle(SHD::F_RECTANGLE_SHADER_ID);
-	div_ui.apply_projection_matrix(GLB::MENU_PROJECTION);
-	div_ui.create(220.f, 200.f, "bottom-left");
-
 	text = DivText();
 
-	//tahoma6_text.create("tahoma_6");
-	//tahoma8_text.create("tahoma_8");
+	background_ui = gui::Rectangle();
+	background_ui.set_color(glm::vec4(0.f, 0.f, 0.f, 0.5f));
+	background_ui.create("filled", 10.f, GAME::UI_BOTTOM_HEIGHT + 10.f, 220.f, 200.f, "bottom-left");
 }
 
 
@@ -211,9 +207,7 @@ void Engine::render_ui() {
 
 	if (GLB::DEBUG) {
 
-		div_ui.apply_view_matrix();
-		div_ui.set_color(glm::vec4(0.f, 0.f, 0.f, 0.5f));
-		div_ui.render(10.f, GAME::UI_BOTTOM_HEIGHT + 10.f);
+		background_ui.render();
 
 		if (bFPS) {
 			text.set_position(glm::vec2(14.0f, GAME::UI_BOTTOM_HEIGHT + 12.f));
@@ -270,4 +264,6 @@ void Engine::render_ui() {
 
 Engine::~Engine()
 {
+	delete startMenu;
+	delete game;
 }

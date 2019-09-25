@@ -1,14 +1,12 @@
 #pragma once
 
 #include <json.hpp>
+#include <objects.h>
+
 #include "../game/game_object.h"
-
 #include "unit_functions.h"
-
-
 #include "../primitives/image.h" //Just for debugging purpose
-#include "../primitives/filled_rectangle.h" //Just for debugging purpose
-#include "../primitives/empty_rectangle.h" //Just for debugging purpose
+#include "../gui/rectangle.h"
 
 
 
@@ -52,9 +50,8 @@ private:
 	glm::mat4 model;
 
 	/* debug objects */
-	FilledRectangle rectanglePath;
+	std::vector<gui::Rectangle> pathQuadsList;
 	struct HitBox {
-		EmptyRectangle rectangle;
 		std::array<float, 8> coords;
 	} hitbox;
 	Image circlePos;

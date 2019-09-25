@@ -2,9 +2,9 @@
 
 #include <global.hpp>
 #include <json.hpp>
-#include "../primitives/filled_rectangle.h"
-#include "../primitives/empty_rectangle.h"
+
 #include "../gui/button.h"
+#include "../gui/rectangle.h"
 
 class GameMenu
 {
@@ -15,7 +15,7 @@ public:
 	~GameMenu();
 private:
 	Button btn;
-	FilledRectangle back;
+	gui::Rectangle background;
 	std::vector<Button> buttons;
 	json data;
 	std::string s;

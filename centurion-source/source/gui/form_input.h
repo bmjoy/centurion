@@ -1,12 +1,10 @@
 #pragma once
 
 #include <global.hpp>
-
 #include <objects.h>
 
-#include "../primitives/empty_rectangle.h"
-#include "../primitives/filled_rectangle.h"
 #include "ui_object.h"
+#include "rectangle.h"
 
 class FormInput : public UIObject
 {
@@ -22,11 +20,10 @@ public:
 	~FormInput();
 
 private:
-	FilledRectangle back;
-	
+	gui::Rectangle back;
+	std::vector<gui::Rectangle> back_options;
 	float width, height;
 	std::vector<std::string> form_options;
-	glm::vec4 back_color;
 	
 	bool boolOptions;
 	bool isOpened;

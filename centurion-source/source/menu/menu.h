@@ -8,13 +8,15 @@
 #include "../gui/button.h"
 #include "../gui/div_image.h"
 #include "../gui/div_text.h"
-#include "../interface/players_list.h"
+#include "../interface/menu_players_list.h"
 #include "../player/player.h"
 
 class Menu
 {
 public:
 	Menu();
+	bool menu_is_created() { return menuIsCreated; }
+	void reset() { menuIsCreated = false; }
 	void create(std::vector<Player> *List);
 	void render();
 	~Menu();
@@ -46,6 +48,7 @@ private:
 	int num_players;
 	std::vector<int> players_color;
 	std::vector<Player> *playersList;
+	bool menuIsCreated;
 
 };
 

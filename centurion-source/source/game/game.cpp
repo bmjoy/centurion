@@ -12,7 +12,7 @@ Game::Game(){
 	lastTime = glfwGetTime();
 	sel_rect_coords = { 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f };
 	minimap_rect_coords = { 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f };
-
+	gameIsCreated = false;
 }
 
 void Game::create(std::vector<Player> *ListOfPlayers) {
@@ -109,6 +109,8 @@ void Game::create(std::vector<Player> *ListOfPlayers) {
 		(GLfloat)((*playersList)[0].getStartPoint().x - GLB::WINDOW_WIDTH_ZOOMED/2.f), 
 		(GLfloat)((*playersList)[0].getStartPoint().y - GLB::WINDOW_HEIGHT_ZOOMED / 2.f)
 	);
+
+	gameIsCreated = true;
 }
 
 void Game::run() {
@@ -121,9 +123,6 @@ void Game::run() {
 		camera.mouseControl(threshold);
 		view = camera.calculateViewMatrix();
 		projection = GLB::CAMERA_PROJECTION;
-
-
-
 	}
 
 	/* If minimap is active */
@@ -148,8 +147,17 @@ void Game::run() {
 	if (GLB::DEBUG) cursor_point.render();
 	
 	
-	
+	// ---- Game UI ---- //
+
+	// apply menu matrices:
+	obj::ERectangle()->apply_projection_matrix(GLB::MENU_PROJECTION);
+	obj::ERectangle()->apply_view_matrix();
+	obj::FRectangle()->apply_projection_matrix(GLB::MENU_PROJECTION);
+	obj::FRectangle()->apply_view_matrix();
+
 	ui.render(false);
+
+	// ----------------- //	
 
 	game::goToPosition(&buildingList, &camera, &lastTime, &click_id, &blockMinimap);
 	GLB::CAMERA_PROJECTION = glm::ortho(0.0f, (float)GLB::WINDOW_WIDTH_ZOOMED, 0.0f, (float)GLB::WINDOW_HEIGHT_ZOOMED, -(float)GAME::MAP_WIDTH, (float)GAME::MAP_WIDTH);

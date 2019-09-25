@@ -12,10 +12,15 @@ EmptyRectangle *obj::ERectangle() {
 	return &obj::eRect;
 }
 
+FilledRectangle *obj::FRectangle() {
+	return &obj::fRect;
+}
+
 void obj::init() {
 	*obj::Text() = CBitmapFont();
 	*obj::BuildingSprite() = BSprite();
 	*obj::ERectangle() = EmptyRectangle();
+	*obj::FRectangle() = FilledRectangle();
 }
 
 void obj::compile() {
@@ -23,11 +28,13 @@ void obj::compile() {
 	id = obj::Text()->compile();
 	id = obj::BuildingSprite()->compile();
 	id = obj::ERectangle()->compile();
+	id = obj::FRectangle()->compile();
 }
 
 void obj::create() {
 	obj::Text()->apply_projection_matrix(GLB::MENU_PROJECTION);
 	obj::Text()->create();
-	obj::BuildingSprite()->create();
 	obj::ERectangle()->init();
+	obj::FRectangle()->init();
+	obj::BuildingSprite()->create();
 }

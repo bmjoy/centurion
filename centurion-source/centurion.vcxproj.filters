@@ -189,9 +189,6 @@
     <ClCompile Include="source\terrain\terrain.cpp">
       <Filter>Source Files\terrain</Filter>
     </ClCompile>
-    <ClCompile Include="source\gui\ui_game.cpp">
-      <Filter>Source Files\gui</Filter>
-    </ClCompile>
     <ClCompile Include="source\gui\ui_object.cpp">
       <Filter>Source Files\gui</Filter>
     </ClCompile>
@@ -228,14 +225,20 @@
     <ClCompile Include="source\common\map_generation.cpp">
       <Filter>Source Files\common</Filter>
     </ClCompile>
-    <ClCompile Include="source\interface\players_list.cpp">
-      <Filter>Source Files\interface</Filter>
-    </ClCompile>
-    <ClCompile Include="source\interface\game_menu.cpp">
-      <Filter>Source Files\interface</Filter>
-    </ClCompile>
     <ClCompile Include="source\common\objects.cpp">
       <Filter>Source Files\common</Filter>
+    </ClCompile>
+    <ClCompile Include="source\gui\rectangle.cpp">
+      <Filter>Source Files\gui</Filter>
+    </ClCompile>
+    <ClCompile Include="source\interface\game_ui.cpp">
+      <Filter>Source Files\interface</Filter>
+    </ClCompile>
+    <ClCompile Include="source\interface\menu_players_list.cpp">
+      <Filter>Source Files\interface</Filter>
+    </ClCompile>
+    <ClCompile Include="source\interface\game_ui_menu.cpp">
+      <Filter>Source Files\interface</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -293,9 +296,6 @@
     <ClInclude Include="source\menu\menu.h">
       <Filter>Header Files\menu</Filter>
     </ClInclude>
-    <ClInclude Include="source\gui\ui_game.h">
-      <Filter>Header Files\gui</Filter>
-    </ClInclude>
     <ClInclude Include="source\gui\ui_object.h">
       <Filter>Header Files\gui</Filter>
     </ClInclude>
@@ -350,14 +350,20 @@
     <ClInclude Include="source\common\map_generation.h">
       <Filter>Header Files\common</Filter>
     </ClInclude>
-    <ClInclude Include="source\interface\players_list.h">
-      <Filter>Header Files\interface</Filter>
-    </ClInclude>
-    <ClInclude Include="source\interface\game_menu.h">
-      <Filter>Header Files\interface</Filter>
-    </ClInclude>
     <ClInclude Include="source\common\objects.h">
       <Filter>Header Files\common</Filter>
+    </ClInclude>
+    <ClInclude Include="source\gui\rectangle.h">
+      <Filter>Header Files\gui</Filter>
+    </ClInclude>
+    <ClInclude Include="source\interface\game_ui.h">
+      <Filter>Header Files\interface</Filter>
+    </ClInclude>
+    <ClInclude Include="source\interface\menu_players_list.h">
+      <Filter>Header Files\interface</Filter>
+    </ClInclude>
+    <ClInclude Include="source\interface\game_ui_menu.h">
+      <Filter>Header Files\interface</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

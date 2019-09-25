@@ -1,9 +1,9 @@
 #pragma once
 
 #include <global.hpp>
-#include "../primitives/filled_rectangle.h"
-#include "../interface/game_menu.h"
-#include "div_text.h"
+#include <objects.h>
+#include "../interface/game_ui_menu.h"
+#include "../gui/rectangle.h"
 
 class UIGame
 {
@@ -15,8 +15,8 @@ public:
 private:
 	int *objectId, clickId;
 	std::map<int, std::string> pickingList;
-	FilledRectangle ui_top;
-	FilledRectangle ui_bottom;
+	gui::Rectangle top_bar;
+	gui::Rectangle bottom_bar;
 	GameMenu gameMenu;
 
 	void picking();

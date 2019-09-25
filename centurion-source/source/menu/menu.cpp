@@ -9,6 +9,7 @@ Menu::Menu(){
 	buttons = { };
 	pickingList = { };
 	num_players = 2;
+	menuIsCreated = false;
 }
 
 void Menu::create(std::vector<Player> *List) {	
@@ -69,6 +70,7 @@ void Menu::create(std::vector<Player> *List) {
 			list.create(&pickingList, &pickingId, &players_color);
 		}
 	}
+	menuIsCreated = true;
 }
 
 

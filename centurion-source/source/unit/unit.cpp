@@ -31,14 +31,6 @@ void Unit::create() {
 	circlePos = Image(SHD::IMAGE_SHADER_ID);
 	circlePos.create("assets/ui/mouse/cursor_point.png", "center");
 
-	//Show selection hitbox around the unit (Debug only)
-	hitbox.rectangle = EmptyRectangle();
-	hitbox.rectangle.compile();
-	hitbox.rectangle.init();
-
-	rectanglePath = FilledRectangle(SHD::F_RECTANGLE_SHADER_ID);
-	rectanglePath.set_color(glm::vec4(255.f, 0.f, 0.f, 255.f));
-	rectanglePath.create(20.f, 20.f, "bottom-left");
 
 	creationTime = glfwGetTime();
 }
@@ -64,10 +56,10 @@ void Unit::render(glm::mat4 &proj, glm::mat4 &view, bool picking, int clickID) {
 	sprite.render(model, currentState, picking, picking_id, &(*player).getPlayerColor());
 
 	if (!GLB::DEBUG && !picking) {
-		hitbox.rectangle.apply_projection_matrix(GLB::CAMERA_PROJECTION);
 		hitbox.coords = getCoords(position3D.x - entityData["hitbox"][0], position3D.y + entityData["hitbox"][1] + entityData["yOffset"], entityData["hitbox"][0] * 2, entityData["hitbox"][1] * 2);
-		hitbox.rectangle.create(hitbox.coords);
-		hitbox.rectangle.render(view, glm::mat4(1.0f), selected ? glm::vec4(255.0f, 255.0f, 255.0f, 1.0f) : glm::vec4(0.0f, 0.0f, 0.0f, 0.0f));
+		obj::ERectangle()->apply_projection_matrix(GLB::CAMERA_PROJECTION);		
+		obj::ERectangle()->create(hitbox.coords);
+		obj::ERectangle()->render(view, glm::mat4(1.0f), selected ? glm::vec4(255.0f, 255.0f, 255.0f, 1.0f) : glm::vec4(0.0f, 0.0f, 0.0f, 0.0f));
 	}
 
 	/* debug pathfinding and coordinates */
@@ -76,20 +68,24 @@ void Unit::render(glm::mat4 &proj, glm::mat4 &view, bool picking, int clickID) {
 		circlePos.apply_projection_matrix(GLB::CAMERA_PROJECTION);
 		circlePos.apply_view_matrix(view);
 
-		GAME::MINIMAP_IS_ACTIVE ? rectanglePath.apply_projection_matrix(GLB::MINIMAP_PROJECTION) : rectanglePath.apply_projection_matrix(GLB::CAMERA_PROJECTION);
-		rectanglePath.apply_view_matrix(view);
+		// **** Rectangle Path **** //
+		
+		GAME::MINIMAP_IS_ACTIVE ? obj::FRectangle()->apply_projection_matrix(GLB::MINIMAP_PROJECTION) : obj::FRectangle()->apply_projection_matrix(GLB::CAMERA_PROJECTION);	
+		obj::FRectangle()->apply_view_matrix(view);
 
-		for (int i = 0; i < path.size(); i++) {
-			rectanglePath.render(path[i].x, path[i].y);
+		for (int i = 0; i < pathQuadsList.size(); i++) {
+			pathQuadsList[i].render();
 		}
+		// ************************ //
+
 		if (!GAME::MINIMAP_IS_ACTIVE) {
 			circlePos.render(position2D.x, position2D.y);
 			circlePos.render(position3D.x, position3D.y);
 
-			hitbox.rectangle.apply_projection_matrix(GLB::CAMERA_PROJECTION);
+			obj::ERectangle()->apply_projection_matrix(GLB::CAMERA_PROJECTION);
 			hitbox.coords = getCoords(position3D.x - entityData["hitbox"][0], position3D.y + entityData["hitbox"][1] + entityData["yOffset"], entityData["hitbox"][0] * 2, entityData["hitbox"][1] * 2);
-			hitbox.rectangle.create(hitbox.coords);
-			hitbox.rectangle.render(view, glm::mat4(1.0f), selected ? glm::vec4(255.0f, 0.0f, 255.0f, 1.0f) : glm::vec4(255.0f, 242.0f, 0.0f, 1.0f));
+			obj::ERectangle()->create(hitbox.coords);
+			obj::ERectangle()->render(view, glm::mat4(1.0f), selected ? glm::vec4(255.0f, 0.0f, 255.0f, 1.0f) : glm::vec4(255.0f, 242.0f, 0.0f, 1.0f));
 		}
 	}
 }
@@ -128,6 +124,8 @@ void Unit::position_update() {
 void Unit::walk_behaviour() {
 	if (GLB::MOUSE_RIGHT && selected) {
 
+		
+
 		//GLB::MOUSE_RIGHT = false;
 		is_Moving = true;
 
@@ -136,6 +134,14 @@ void Unit::walk_behaviour() {
 
 		// pathfinding
 		path = unit::getPath(startPoint, endPoint);
+
+		pathQuadsList = { };
+		for (int i = 0; i < path.size(); i++) {
+			gui::Rectangle tempRect = gui::Rectangle();
+			tempRect.set_color(glm::vec4(255.f, 0.f, 0.f, 255.f));
+			tempRect.create("filled", path[i].x, path[i].y, 20.f, 20.f, "bottom-left");
+			pathQuadsList.push_back(tempRect);
+		}
 
 		// set first distance
 		distance = unit::getDistance(path, pathCount);

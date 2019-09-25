@@ -50,7 +50,7 @@ namespace GLB {
 	extern GLFWwindow *MAIN_WINDOW;
 	extern bool DEBUG;
 	extern SelRectPoints SEL_RECT_COORDS; //Only a temporar way to test multiple selection
-	extern bool GAME_IS_CREATED, MENU_IS_CREATED, GAME_CLEAR;
+	extern bool GAME_CLEAR;
 }
 
 namespace MAP {
@@ -61,7 +61,6 @@ namespace MAP {
 namespace SHD {
 	extern int IMAGE_SHADER_ID;
 	extern int GRID_SHADER_ID;
-	extern int F_RECTANGLE_SHADER_ID;
 	extern int USPRITE_SHADER_ID;
 }
 
@@ -195,6 +194,14 @@ static std::vector<std::string> get_all_files_names_within_folder(std::string fo
 		::FindClose(hFind);
 	}
 	return names;
+}
+
+static void clearAndSwapBuffers(GLFWwindow *window) {
+	glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
+	glClear(GL_COLOR_BUFFER_BIT);
+	glfwSwapBuffers(window);
+	glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
+	glClear(GL_COLOR_BUFFER_BIT);
 }
 
 #endif

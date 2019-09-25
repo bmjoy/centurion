@@ -15,6 +15,7 @@
 #include "../unit/unit_sprite.h"
 
 #include "../gui/div_text.h"
+#include "../gui/rectangle.h"
 #include "../player/player.h"
 
 class Engine
@@ -29,7 +30,6 @@ public:
 private:
 	// compile shaders
 	Image image_setup;
-	FilledRectangle f_rectangle_setup;
 	USprite unit_sprite_setup;
 
 	// objects 
@@ -38,7 +38,7 @@ private:
 	Menu *startMenu;
 	Game *game;
 	DivText text;
-	FilledRectangle div_ui;
+	gui::Rectangle background_ui;
 
 	// Players Informations
 	std::vector<Player> playersList;

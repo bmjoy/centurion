@@ -3,6 +3,7 @@
 UIObject::UIObject()
 {
 	color = glm::vec4(0.0f, 0.0f, 0.0f, 1.0f);
+    picking_id = 0;
 }
 
 void UIObject::set_position(glm::vec2 pos) {
