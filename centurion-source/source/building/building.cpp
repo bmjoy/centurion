@@ -19,8 +19,8 @@ void Building::create() {
 	unsigned char *texture = stbi_load(texturePath.c_str(), &w, &h, &nrChannels, 0);
 	stbi_image_free(texture);
 
-	model = glm::scale(glm::mat4(1.0f), glm::vec3(w, h, 1.0f));
-	model = glm::translate(model, glm::vec3(position.x / w, position.y / h, 0.0f));
+	//model = glm::scale(glm::mat4(1.0f), glm::vec3(w, h, 1.0f));
+	//model = glm::translate(model, glm::vec3(position.x / w, position.y / h, 0.0f));
 
 	clickableInMinimap = (bool)data["clickable_in_minimap"].get<int>();
 	textureID = obj::BuildingSprite()->getTextureId(className);
@@ -29,7 +29,7 @@ void Building::create() {
 void Building::render(bool picking, int clickID) {
 	selected = (picking_id == clickID);
 	
-	obj::BuildingSprite()->render(textureID, clickableInMinimap, model, picking, picking_id, selected, &(*player).getPlayerColor());
+	obj::BuildingSprite()->render(textureID, clickableInMinimap, position.x, position.y, w, h, picking, picking_id, selected, &(*player).getPlayerColor());
 }
 
 Building::~Building()

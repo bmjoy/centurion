@@ -63,15 +63,20 @@ GLuint BSprite::getTextureId(std::string className) {
 	return textureIdMap[className + "_normal"];
 }
 
-void BSprite::render(GLuint texID, bool clickable, glm::mat4 model, bool picking, int pickingId, bool selected, glm::vec3 *playerColor) {
+void BSprite::render(GLuint texID, bool clickable, float x, float y, float w, float h, bool picking, int pickingId, bool selected, glm::vec3 *playerColor) {
 	glUseProgram(shaderId);
 
 	/* Uniform Variables */
-	glUniformMatrix4fv(glGetUniformLocation(shaderId, "model"), 1, GL_FALSE, glm::value_ptr(model));
+	//glUniformMatrix4fv(glGetUniformLocation(shaderId, "model"), 1, GL_FALSE, glm::value_ptr(model));
 	glUniform3f(glGetUniformLocation(shaderId, "player_color"), playerColor->x / 255.0f, playerColor->y / 255.0f, playerColor->z / 255.0f);
 	glUniform1i(glGetUniformLocation(shaderId, "selection"), selected);
 	glUniform1i(glGetUniformLocation(shaderId, "isLayerColor"), 0);
 	glUniform1i(glGetUniformLocation(shaderId, "picking"), picking); // enable/disable picking
+
+	glUniform1f(glGetUniformLocation(shaderId, "x"), x);
+	glUniform1f(glGetUniformLocation(shaderId, "y"), y);
+	glUniform1f(glGetUniformLocation(shaderId, "w"), w);
+	glUniform1f(glGetUniformLocation(shaderId, "h"), h);
 
 	/* ------ DRAW SPRITES ------ */
 

@@ -13,7 +13,7 @@ public:
 	void addPath(std::string Path) { entPathList.push_back(Path); }
 	GLuint getTextureId(std::string className);
 	void create();
-	void render(GLuint texID, bool clickable, glm::mat4 model, bool picking, int pickingId, bool selected, glm::vec3 *playerColor);
+	void render(GLuint texID, bool clickable, float x, float y, float w, float h, bool picking, int pickingId, bool selected, glm::vec3 *playerColor);
 	~BSprite();
 
 private:
