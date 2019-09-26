@@ -7,12 +7,10 @@ CBitmapFont::CBitmapFont() {
 	fPath = "assets/shaders/font/fragment.glsl";
 	h_align = "left";
 	v_align = "normal";
-}
-
-CBitmapFont::CBitmapFont(int shader_id) {
-	shaderId = shader_id;
-	h_align = "left";
-	v_align = "normal";
+	hAlignMap["left"] = 0;
+	hAlignMap["center"] = 1;
+	vAlignMap["normal"] = 0;
+	vAlignMap["middle"] = 1;
 }
 
 void CBitmapFont::set_align(std::string hAlign, std::string vAlign) {
@@ -62,6 +60,7 @@ void CBitmapFont::create() {
 	std::ifstream path_fonts("assets/fonts/fonts.json");
 	json d = json::parse(path_fonts);
 
+	std::map<std::string, json> jsonData;
 	std::string fontName;
 
 	for (int i = 0; i < d["fonts"].size(); i++){
@@ -77,12 +76,12 @@ void CBitmapFont::create() {
 		path = "assets/fonts/" + fontName + ".json";
 
 		std::ifstream json_path(path);
-		font_data[fontName] = json::parse(json_path);
+		jsonData[fontName] = json::parse(json_path);
 
 		glUniform1f(glGetUniformLocation(shaderId, "max_x"), 16.f);
 		glUniform1f(glGetUniformLocation(shaderId, "max_y"), 16.f);
 
-		
+		glUniform1i(glGetUniformLocation(shaderId, "tex"), 0); // texture
 		glGenTextures(1, &textureIdList[i]);
 		glBindTexture(GL_TEXTURE_2D, textureIdList[i]);
 		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
@@ -94,60 +93,53 @@ void CBitmapFont::create() {
 
 		stbi_image_free(data);
 		textureIdMap[fontName] = textureIdList[i];
+
+		/* save json data in struct */
+
+		for (int i = 0; i < 256; ++i) {
+			fontData[fontName].charWidth[i] = jsonData[fontName]["Char " + std::to_string(i) + " Base Width"].get<int>();
+		}
+		fontData[fontName].startChar = jsonData[fontName]["Start Char"].get<int>();
+		fontData[fontName].fontHeight = (float)jsonData[fontName]["Font Height"].get<int>();
+		fontData[fontName].fontWidth = (float)jsonData[fontName]["Font Width"].get<int>();
 	}
 }
 
 void CBitmapFont::render(std::string font, float xPos, float yPos, std::string text, glm::vec4 color) {
 	
 	glUseProgram(shaderId);
-	glUniform1i(glGetUniformLocation(shaderId, "tex"), 0); // texture
 	glUniform4f(glGetUniformLocation(shaderId, "color"), color.x/255.f, color.y / 255.f, color.z / 255.f, color.w / 255.f);
-
-	offset_x = 0.f;
-	total_width = 0.f;
+	glUniform1i(glGetUniformLocation(shaderId, "startChar"), fontData[font].startChar);
+	glUniform1f(glGetUniformLocation(shaderId, "y"), yPos);
+	glUniform1i(glGetUniformLocation(shaderId, "hAlign"), hAlignMap[h_align]);
+	glUniform1i(glGetUniformLocation(shaderId, "vAlign"), vAlignMap[v_align]);
+	glUniform1i(glGetUniformLocation(shaderId, "fontHeight"), fontData[font].fontHeight);
 
 	if (h_align != "left"){
+		total_width = 0;
 		for (int i = 0; i < text.size(); i++) {
-			total_width += (float)font_data[font]["Char " + std::to_string(text.c_str()[i]) + " Base Width"];
+			total_width += fontData[font].charWidth[text.c_str()[i]];
 		}
+		glUniform1i(glGetUniformLocation(shaderId, "totalWidth"), total_width);
 	}
-	
+
 	glBindVertexArray(VAO);
 	glActiveTexture(GL_TEXTURE0);
 	glBindTexture(GL_TEXTURE_2D, textureIdMap[font]);
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, IBO);
 
+	offset_x = 0;
 	for (int i = 0; i < text.size(); i++) {
 		
-		if (h_align == "left" && v_align == "normal") {
-			modelMat = glm::translate(glm::mat4(1.0f), glm::vec3(xPos + offset_x, yPos, 0.0f));
-		}
-		else if (h_align == "center" && v_align == "normal"){
-			modelMat = glm::translate(glm::mat4(1.0f), glm::vec3(xPos + offset_x - total_width / 2.f, yPos, 0.0f));
-		}
-		else if (h_align == "left" && v_align == "middle") {
-			modelMat = glm::translate(glm::mat4(1.0f), glm::vec3(xPos + offset_x, yPos - (float)font_data[font]["Font Height"]/2.f, 0.0f));
-		}
-		else if (h_align == "center" && v_align == "middle") {
-			modelMat = glm::translate(glm::mat4(1.0f), glm::vec3(xPos + offset_x - total_width / 2.f, yPos - (float)font_data[font]["Font Height"] / 2.f, 0.0f));
-		}
-		
-		/* Uniform Variables */
-		glUniformMatrix4fv(glGetUniformLocation(shaderId, "model"), 1, GL_FALSE, glm::value_ptr(modelMat));
-		
-		glUniform1f(glGetUniformLocation(shaderId, "current_x"), (float)((text.c_str()[i] - (int)font_data[font]["Start Char"]) % 16));
-		glUniform1f(glGetUniformLocation(shaderId, "current_y"), (float)((text.c_str()[i] - (int)font_data[font]["Start Char"]) / 16));
-
+		glUniform1f(glGetUniformLocation(shaderId, "x"), xPos + offset_x);
+		glUniform1i(glGetUniformLocation(shaderId, "currentChar"), text.c_str()[i]);
 		glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
 
-		offset_x += float(font_data[font]["Char " + std::to_string(text.c_str()[i]) + " Base Width"].get<int>());
+		offset_x += fontData[font].charWidth[text.c_str()[i]];
 	}
-
-	
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
 	glBindVertexArray(0);
 }
 
 
-CBitmapFont::~CBitmapFont() {
-}
+CBitmapFont::~CBitmapFont() {}

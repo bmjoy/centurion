@@ -8,7 +8,6 @@ class CBitmapFont : public Shader
  {
   public:
    CBitmapFont();
-   CBitmapFont(int shader_id);
    void set_align(std::string hAlign = "left", std::string vAlign = "normal");
    void create();
    int getShaderId() { return shaderId; }
@@ -16,8 +15,21 @@ class CBitmapFont : public Shader
    ~CBitmapFont();
 
  private:
+	 struct CharData {		 
+		 int charWidth[256];
+		 float fontHeight;
+		 float fontWidth;
+		 int startChar;
+	 };
+	 
+	 std::map<std::string, CharData> fontData;
+
 	 std::string h_align, v_align, path;
-	 float offset_x, total_width, avg_height;
+
+	 int total_width;
+	 int offset_x;
 	 glm::mat4 modelMat;
-	 std::map<std::string, json> font_data;
- };
+
+	 std::map<std::string, int> hAlignMap;
+	 std::map<std::string, int> vAlignMap;
+};
