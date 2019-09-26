@@ -2,7 +2,7 @@
 
 #include "ui_object.h"
 #include "../primitives/image.h"
-#include "div_text.h"
+#include "simple_text.h"
 
 class Button : public UIObject
 {
@@ -13,6 +13,6 @@ public:
 	~Button();
 
 private:
-	DivText buttonText;
+	gui::SimpleText buttonText;
 	Image buttonImage;
 };

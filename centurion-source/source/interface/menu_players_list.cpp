@@ -13,8 +13,13 @@ void PlayersList::set_position(int startX, int startY){
 }
 
 void PlayersList::create(std::map<int, std::string> *pickingList, int *pickingId, std::vector<int> *players_color) {
-	text = DivText();
+	number = gui::SimpleText("dynamic", true);
 	
+	text = gui::SimpleText("static");
+	text.create_static("Number of players: ", "tahoma_8", x, y + 40.f, "left", "normal", glm::vec4(255.f));
+	textWidth = text.get_width();
+
+
 	arrowDown = DivImage();
 	arrowDown.set_img_path("assets/ui/menu/down.png");
 	arrowDown.set_position(glm::vec2(x + 240, y + 50));
@@ -86,12 +91,13 @@ void PlayersList::render(int numPlayers, std::vector<int> players_color, bool pi
 		arrowDown.render(false);
 		arrowUp.render(false);
 
+		text.render_static();
+
+		number.set_position(glm::vec2(x + textWidth, y + 40.f));
+		number.set_text(std::to_string(numPlayers));
+		number.render_dynamic("tahoma_8", glm::vec4(255.f, 255.f, 255.f, 255.f), "left", "normal");
+
 		for (int j = numPlayers - 1; j >= 0; j--) {
-			text.set_text("Number of players: " + std::to_string(numPlayers));
-			text.set_position(glm::vec2(x + 1.f, y + 39.f));
-			text.render("tahoma_8", glm::vec4(0.f, 0.f, 0.f, 255.f), "left", "normal");
-			text.set_position(glm::vec2(x, y + 40.f));
-			text.render("tahoma_8", glm::vec4(255.f), "left", "normal");
 			colors_Form[j].set_color(glm::vec4(GLB::COLORS[players_color[j]], 1.0f));
 			colors_Form[j].render();
 			players_Form[j].render();

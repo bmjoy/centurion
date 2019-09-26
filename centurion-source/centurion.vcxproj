@@ -225,7 +225,6 @@
     </None>
     <ClCompile Include="main.cpp" />
     <ClCompile Include="source\building\building.cpp" />
-    <ClCompile Include="source\building\building_sprite.cpp" />
     <ClCompile Include="source\common\map_generation.cpp" />
     <ClCompile Include="source\common\objects.cpp" />
     <ClCompile Include="source\common\shader.cpp" />
@@ -239,10 +238,11 @@
     <ClCompile Include="source\game\game_object.cpp" />
     <ClCompile Include="source\gui\button.cpp" />
     <ClCompile Include="source\gui\div_image.cpp" />
-    <ClCompile Include="source\gui\div_text.cpp" />
+    <ClCompile Include="source\gui\simple_text.cpp" />
     <ClCompile Include="source\gui\form_input.cpp" />
     <ClCompile Include="source\gui\rectangle.cpp" />
     <ClCompile Include="source\gui\ui_object.cpp" />
+    <ClCompile Include="source\interface\debug_ui.cpp" />
     <ClCompile Include="source\interface\game_ui_menu.cpp" />
     <ClCompile Include="source\interface\game_ui.cpp" />
     <ClCompile Include="source\interface\menu_players_list.cpp" />
@@ -252,6 +252,7 @@
     <ClCompile Include="source\pathfinding\node.cpp" />
     <ClCompile Include="source\player\player.cpp" />
     <ClCompile Include="source\primitives\bitmap_font.cpp" />
+    <ClCompile Include="source\primitives\building_sprite.cpp" />
     <ClCompile Include="source\primitives\empty_rectangle.cpp" />
     <ClCompile Include="source\primitives\filled_rectangle.cpp" />
     <ClCompile Include="source\primitives\image.cpp" />
@@ -269,7 +270,6 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="source\building\building.h" />
-    <ClInclude Include="source\building\building_sprite.h" />
     <ClInclude Include="source\common\global.hpp" />
     <ClInclude Include="source\common\map_generation.h" />
     <ClInclude Include="source\common\objects.h" />
@@ -286,10 +286,11 @@
     <ClInclude Include="source\game\game_object.h" />
     <ClInclude Include="source\gui\button.h" />
     <ClInclude Include="source\gui\div_image.h" />
-    <ClInclude Include="source\gui\div_text.h" />
+    <ClInclude Include="source\gui\simple_text.h" />
     <ClInclude Include="source\gui\form_input.h" />
     <ClInclude Include="source\gui\rectangle.h" />
     <ClInclude Include="source\gui\ui_object.h" />
+    <ClInclude Include="source\interface\debug_ui.h" />
     <ClInclude Include="source\interface\game_ui_menu.h" />
     <ClInclude Include="source\interface\game_ui.h" />
     <ClInclude Include="source\interface\menu_players_list.h" />
@@ -299,6 +300,7 @@
     <ClInclude Include="source\pathfinding\node.h" />
     <ClInclude Include="source\player\player.h" />
     <ClInclude Include="source\primitives\bitmap_font.h" />
+    <ClInclude Include="source\primitives\building_sprite.h" />
     <ClInclude Include="source\primitives\empty_rectangle.h" />
     <ClInclude Include="source\primitives\filled_rectangle.h" />
     <ClInclude Include="source\primitives\image.h" />

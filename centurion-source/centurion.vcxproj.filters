@@ -129,9 +129,6 @@
     <ClCompile Include="source\building\building.cpp">
       <Filter>Source Files\building</Filter>
     </ClCompile>
-    <ClCompile Include="source\building\building_sprite.cpp">
-      <Filter>Source Files\building</Filter>
-    </ClCompile>
     <ClCompile Include="source\gui\button.cpp">
       <Filter>Source Files\gui</Filter>
     </ClCompile>
@@ -139,9 +136,6 @@
       <Filter>Source Files\engine</Filter>
     </ClCompile>
     <ClCompile Include="source\gui\div_image.cpp">
-      <Filter>Source Files\gui</Filter>
-    </ClCompile>
-    <ClCompile Include="source\gui\div_text.cpp">
       <Filter>Source Files\gui</Filter>
     </ClCompile>
     <ClCompile Include="source\primitives\empty_rectangle.cpp">
@@ -240,12 +234,18 @@
     <ClCompile Include="source\interface\game_ui_menu.cpp">
       <Filter>Source Files\interface</Filter>
     </ClCompile>
+    <ClCompile Include="source\primitives\building_sprite.cpp">
+      <Filter>Source Files\primitives</Filter>
+    </ClCompile>
+    <ClCompile Include="source\gui\simple_text.cpp">
+      <Filter>Source Files\gui</Filter>
+    </ClCompile>
+    <ClCompile Include="source\interface\debug_ui.cpp">
+      <Filter>Source Files\interface</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="source\building\building.h">
-      <Filter>Header Files\building</Filter>
-    </ClInclude>
-    <ClInclude Include="source\building\building_sprite.h">
       <Filter>Header Files\building</Filter>
     </ClInclude>
     <ClInclude Include="source\common\global.hpp">
@@ -305,9 +305,6 @@
     <ClInclude Include="source\gui\div_image.h">
       <Filter>Header Files\gui</Filter>
     </ClInclude>
-    <ClInclude Include="source\gui\div_text.h">
-      <Filter>Header Files\gui</Filter>
-    </ClInclude>
     <ClInclude Include="source\gui\form_input.h">
       <Filter>Header Files\gui</Filter>
     </ClInclude>
@@ -363,6 +360,15 @@
       <Filter>Header Files\interface</Filter>
     </ClInclude>
     <ClInclude Include="source\interface\game_ui_menu.h">
+      <Filter>Header Files\interface</Filter>
+    </ClInclude>
+    <ClInclude Include="source\primitives\building_sprite.h">
+      <Filter>Header Files\primitives</Filter>
+    </ClInclude>
+    <ClInclude Include="source\gui\simple_text.h">
+      <Filter>Header Files\gui</Filter>
+    </ClInclude>
+    <ClInclude Include="source\interface\debug_ui.h">
       <Filter>Header Files\interface</Filter>
     </ClInclude>
   </ItemGroup>

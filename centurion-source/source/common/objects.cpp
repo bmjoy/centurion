@@ -1,6 +1,6 @@
 #include "objects.h"
 
-CBitmapFont *obj::Text(){ 
+BitmapFont *obj::Text(){
 	return &obj::txt; 
 }
 
@@ -17,7 +17,7 @@ FilledRectangle *obj::FRectangle() {
 }
 
 void obj::init() {
-	*obj::Text() = CBitmapFont();
+	*obj::Text() = BitmapFont();
 	*obj::BuildingSprite() = BSprite();
 	*obj::ERectangle() = EmptyRectangle();
 	*obj::FRectangle() = FilledRectangle();
@@ -33,7 +33,7 @@ void obj::compile() {
 
 void obj::create() {
 	obj::Text()->apply_projection_matrix(GLB::MENU_PROJECTION);
-	obj::Text()->create();
+	obj::Text()->init();
 	obj::ERectangle()->init();
 	obj::FRectangle()->init();
 	obj::BuildingSprite()->create();

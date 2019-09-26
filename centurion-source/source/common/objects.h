@@ -2,13 +2,13 @@
 
 #include "../primitives/empty_rectangle.h"
 #include "../primitives/bitmap_font.h"
-#include "../building/building_sprite.h"
+#include "../primitives/building_sprite.h"
 #include "../primitives/filled_rectangle.h"
 
 namespace obj {
 
-	static CBitmapFont txt;
-	CBitmapFont *Text();
+	static BitmapFont txt;
+	BitmapFont *Text();
 
 	static BSprite bsprite;
 	BSprite *BuildingSprite();

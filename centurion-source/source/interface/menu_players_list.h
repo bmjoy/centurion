@@ -4,7 +4,7 @@
 #include <objects.h>
 
 #include "../gui/form_input.h"
-#include "../gui/div_text.h"
+#include "../gui/simple_text.h"
 #include "../gui/div_image.h"
 #include "../gui/rectangle.h"
 
@@ -23,7 +23,9 @@ private:
 	std::vector<FormInput> colors_Form;
 	std::vector<FormInput> players_Form;
 	std::vector<FormInput> civiliz_Form;
-	DivText text;
+	gui::SimpleText text;
+	float textWidth;
+	gui::SimpleText number;
 	DivImage arrowDown, arrowUp;
 	gui::Rectangle background;
 	int x, y, deltaY, w, h;

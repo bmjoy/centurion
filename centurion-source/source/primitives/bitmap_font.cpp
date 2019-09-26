@@ -2,7 +2,7 @@
 
 #include <stb_image.h>  // manip. texture
 
-CBitmapFont::CBitmapFont() {
+BitmapFont::BitmapFont() {
 	vPath = "assets/shaders/font/vertex.glsl";
 	fPath = "assets/shaders/font/fragment.glsl";
 	h_align = "left";
@@ -13,12 +13,14 @@ CBitmapFont::CBitmapFont() {
 	vAlignMap["middle"] = 1;
 }
 
-void CBitmapFont::set_align(std::string hAlign, std::string vAlign) {
+void BitmapFont::set_align(std::string hAlign, std::string vAlign) {
 	h_align = hAlign;
 	v_align = vAlign;
 }
 
-void CBitmapFont::create() {
+/* Dynamic text */
+
+void BitmapFont::init() {
 
 	glUseProgram(shaderId);
 
@@ -105,15 +107,16 @@ void CBitmapFont::create() {
 	}
 }
 
-void CBitmapFont::render(std::string font, float xPos, float yPos, std::string text, glm::vec4 color) {
+void BitmapFont::render_dynamic(std::string &font, float xPos, float yPos, std::string &text, glm::vec4 &color, bool shadow) {
 	
 	glUseProgram(shaderId);
-	glUniform4f(glGetUniformLocation(shaderId, "color"), color.x/255.f, color.y / 255.f, color.z / 255.f, color.w / 255.f);
 	glUniform1i(glGetUniformLocation(shaderId, "startChar"), fontData[font].startChar);
+	glUniform4f(glGetUniformLocation(shaderId, "color"), color.x / 255.f, color.y / 255.f, color.z / 255.f, color.w / 255.f);
 	glUniform1f(glGetUniformLocation(shaderId, "y"), yPos);
 	glUniform1i(glGetUniformLocation(shaderId, "hAlign"), hAlignMap[h_align]);
 	glUniform1i(glGetUniformLocation(shaderId, "vAlign"), vAlignMap[v_align]);
 	glUniform1i(glGetUniformLocation(shaderId, "fontHeight"), fontData[font].fontHeight);
+	glUniform1i(glGetUniformLocation(shaderId, "shadow"), 0);
 
 	if (h_align != "left"){
 		total_width = 0;
@@ -130,9 +133,13 @@ void CBitmapFont::render(std::string font, float xPos, float yPos, std::string t
 
 	offset_x = 0;
 	for (int i = 0; i < text.size(); i++) {
-		
 		glUniform1f(glGetUniformLocation(shaderId, "x"), xPos + offset_x);
 		glUniform1i(glGetUniformLocation(shaderId, "currentChar"), text.c_str()[i]);
+		if (shadow) {
+			glUniform1i(glGetUniformLocation(shaderId, "shadow"), 1);
+			glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
+			glUniform1i(glGetUniformLocation(shaderId, "shadow"), 0);
+		}
 		glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
 
 		offset_x += fontData[font].charWidth[text.c_str()[i]];
@@ -141,5 +148,59 @@ void CBitmapFont::render(std::string font, float xPos, float yPos, std::string t
 	glBindVertexArray(0);
 }
 
+/* Static text */
 
-CBitmapFont::~CBitmapFont() {}
+txt::StaticData BitmapFont::create_static(std::string &font, std::string &text, float x) {
+	txt::StaticData static_data = txt::StaticData();
+
+	// x positions, chars and total width
+	int totw = 0;
+	for (int i = 0; i < text.size(); i++) {
+		static_data.X.push_back(x + totw);
+		static_data.charList.push_back((GLint)text.c_str()[i]);
+		totw += fontData[font].charWidth[text.c_str()[i]];
+	}	
+	static_data.totalWidth = totw;
+
+	// other information
+	static_data.textureID = textureIdMap[font];
+	static_data.startChar = fontData[font].startChar;
+	static_data.textSize = text.size();
+	static_data.fontHeight = fontData[font].fontHeight;
+
+	return static_data;
+}
+
+void BitmapFont::render_static(txt::StaticData &data) {
+
+	glUseProgram(shaderId);
+	glUniform4f(glGetUniformLocation(shaderId, "color"), data.color.x / 255.f, data.color.y / 255.f, data.color.z / 255.f, data.color.w / 255.f);
+	glUniform1i(glGetUniformLocation(shaderId, "startChar"), data.startChar);
+	glUniform1f(glGetUniformLocation(shaderId, "y"), data.y);
+	glUniform1i(glGetUniformLocation(shaderId, "hAlign"), hAlignMap[h_align]);
+	glUniform1i(glGetUniformLocation(shaderId, "vAlign"), vAlignMap[v_align]);
+	glUniform1i(glGetUniformLocation(shaderId, "fontHeight"), data.fontHeight);
+	glUniform1i(glGetUniformLocation(shaderId, "totalWidth"), data.totalWidth);
+	glUniform1i(glGetUniformLocation(shaderId, "shadow"), 0);
+
+	/* Draw */
+	glBindVertexArray(VAO);
+	glActiveTexture(GL_TEXTURE0);
+	glBindTexture(GL_TEXTURE_2D, data.textureID);
+	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, IBO);
+	for (int i = 0; i < data.textSize; i++) {
+		glUniform1f(glGetUniformLocation(shaderId, "x"), data.X[i]);
+		glUniform1i(glGetUniformLocation(shaderId, "currentChar"), data.charList[i]);
+		if (data.shadow) {
+			glUniform1i(glGetUniformLocation(shaderId, "shadow"), 1);
+			glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
+			glUniform1i(glGetUniformLocation(shaderId, "shadow"), 0);
+		}
+		glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
+		
+	}
+	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
+	glBindVertexArray(0);
+}
+
+BitmapFont::~BitmapFont() {}

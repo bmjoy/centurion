@@ -10,13 +10,13 @@
 #include "../menu/menu.h"
 #include "../game/game.h"
 #include "../primitives/image.h"
-#include "../primitives/filled_rectangle.h"
-#include "../building/building_sprite.h"
 #include "../unit/unit_sprite.h"
 
-#include "../gui/div_text.h"
+#include "../gui/simple_text.h"
 #include "../gui/rectangle.h"
 #include "../player/player.h"
+
+#include "../interface/debug_ui.h"
 
 class Engine
 {
@@ -37,8 +37,11 @@ private:
 	Mouse mouse;
 	Menu *startMenu;
 	Game *game;
-	DivText text;
-	gui::Rectangle background_ui;
+	gui::SimpleText text;
+	gui::SimpleText timeText;
+	//gui::Rectangle background_ui;
+
+	DebugUI debugUI;
 
 	// Players Informations
 	std::vector<Player> playersList;
@@ -46,8 +49,8 @@ private:
 	// fps
 	double currentTime, lastTime, finalTime;
 	int nbFrames;
-	bool bFPS;
-	std::string Fps1, Mspf1;
+	int Fps;
+	int Mpfs;
 
 	//time
 	double lastTime2;

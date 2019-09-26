@@ -17,7 +17,6 @@ public:
 private:
 	std::vector<std::vector<int>> building_grid;
 	int w, h, nrChannels;
-	glm::mat4 model;
 	GLuint textureID;
 	bool clickableInMinimap;
 };

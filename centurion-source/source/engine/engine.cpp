@@ -8,7 +8,9 @@ Engine::Engine(){
 	image_setup = Image();
 	unit_sprite_setup = USprite();
 
-	nbFrames = 0; bFPS = false;
+	nbFrames = 0; 
+	Fps = 0;
+	Mpfs = 0;
 }
 
 
@@ -35,6 +37,9 @@ int Engine::launch() {
 
 	startMenu = new Menu();
 	game = new Game();
+
+	debugUI = DebugUI();
+	debugUI.create();
 
 	while (!GLB::WINDOW_CLOSE) {
 
@@ -71,7 +76,7 @@ int Engine::launch() {
 				{
 					text.set_position(glm::vec2(GLB::WINDOW_WIDTH / 2.f, GLB::WINDOW_HEIGHT / 2.f));
 					text.set_text("Game is being created...");
-					text.render("tahoma_8", glm::vec4(255.f), "center", "middle");
+					text.render_dynamic("tahoma_8", glm::vec4(255.f), "center", "middle");
 				}
 				glfwSwapBuffers(GLB::MAIN_WINDOW);
 
@@ -99,9 +104,8 @@ int Engine::launch() {
 
 		// -------------- //
 
-		// ui
-
-		render_ui();
+		// debug ui
+		debugUI.render(Fps, Mpfs, game->getSelectedUnits());
 
 		// mouse
 		mouse.render();
@@ -142,33 +146,19 @@ void Engine::init_objects() {
 	mouse.create();
 	std::cout << "Mouse is ready!\n";
 
-	text = DivText();
-
-	background_ui = gui::Rectangle();
-	background_ui.set_color(glm::vec4(0.f, 0.f, 0.f, 0.5f));
-	background_ui.create("filled", 10.f, GAME::UI_BOTTOM_HEIGHT + 10.f, 220.f, 200.f, "bottom-left");
+	text = gui::SimpleText("dynamic");
 }
 
 
 void Engine::fps() {
 	currentTime = glfwGetTime();
 	nbFrames++;
-	std::string Fps = "frames/s = ";
-	std::string Mspf = "ms/frame = ";
 
 	if (currentTime - lastTime >= 1.0) { // If last prinf() was more than 1 sec ago
-		Fps1 = Fps.append(std::to_string(double(nbFrames)));
-		Mspf1 = Mspf.append(std::to_string(1000.0 / double(nbFrames)));
+		Fps = nbFrames;
+		Mpfs = 1000 / nbFrames;
+
 		lastTime += 1.0;
-		bFPS = true;
-
-		// here we change the movespeed basing on the "millisecond per frame" measure
-		// because if it's a constant, it will change for every PC 
-		// depending on the "speed" of the while cycle
-		// Obviously we could multiply or add a constant to choose the movespeed
-		
-		//GAME::CAMERA_MOVESPEED = 1000.0 / double(nbFrames);
-
 		nbFrames = 0;
 	}
 }
@@ -205,59 +195,12 @@ void Engine::render_ui() {
 
 	/* DEBUG */
 
-	if (GLB::DEBUG) {
-
-		background_ui.render();
-
-		if (bFPS) {
-			text.set_position(glm::vec2(14.0f, GAME::UI_BOTTOM_HEIGHT + 12.f));
-			text.set_text(Fps1);
-			text.render("tahoma_6", glm::vec4(255.f), "left", "normal");
-
-			text.set_position(glm::vec2(14.0f, GAME::UI_BOTTOM_HEIGHT + 12.f + 15.f));
-			text.set_text(Mspf1);
-			text.render("tahoma_6", glm::vec4(255.f), "left", "normal");
-		}
-
-		if (GLB::GAME) {
-			text.set_position(glm::vec2(14.f, GAME::UI_BOTTOM_HEIGHT + 12.f + 15.f*2.f));
-			text.set_text(
-				"window position: x = "
-				+ std::to_string(GLB::MOUSE_X)
-				+ ", y = "
-				+ std::to_string(GLB::MOUSE_Y));
-			text.render("tahoma_6", glm::vec4(255.f), "left", "normal");
-
-			text.set_position(glm::vec2(14.f, GAME::UI_BOTTOM_HEIGHT + 12.f + 15.f*3.f));
-			text.set_text(
-				"map position: x = "
-				+ std::to_string((int)getZoomedCoords((float)GLB::MOUSE_X, (float)GLB::MOUSE_Y).x)
-				+ ", y = "
-				+ std::to_string((int)getZoomedCoords((float)GLB::MOUSE_X, (float)GLB::MOUSE_Y).y));			
-			text.render("tahoma_6", glm::vec4(255.f), "left", "normal");
-
-			text.set_position(glm::vec2(14.f, GAME::UI_BOTTOM_HEIGHT + 12.f + 15.f*4.f));
-			text.set_text(
-				"selected units: "
-				+ std::to_string(game->getSelectedUnits()));
-			text.render("tahoma_6", glm::vec4(255.f), "left", "normal");
-		}
-
-	}
-
-
-	
-
 	/* TIME */
 	if (GLB::GAME){
 		
-		text.set_position(glm::vec2(GLB::WINDOW_WIDTH - 99.0f, GLB::WINDOW_HEIGHT - GAME::UI_TOP_HEIGHT - 29.0f));
-		text.set_text(hours_str + ":" + minutes_str + ":" + seconds_str);
-		text.render("tahoma_8", glm::vec4(0.f,0.f,0.f,255.f), "left", "normal");
-
-		text.set_position(glm::vec2(GLB::WINDOW_WIDTH - 100.0f, GLB::WINDOW_HEIGHT - GAME::UI_TOP_HEIGHT - 28.0f));
-		text.set_text(hours_str + ":" + minutes_str + ":" + seconds_str);
-		text.render("tahoma_8", glm::vec4(255.f), "left", "normal");
+		timeText.set_position(glm::vec2(GLB::WINDOW_WIDTH - 99.0f, GLB::WINDOW_HEIGHT - GAME::UI_TOP_HEIGHT - 29.0f));
+		timeText.set_text(hours_str + ":" + minutes_str + ":" + seconds_str);
+		timeText.render_dynamic("tahoma_8", glm::vec4(0.f,0.f,0.f,255.f), "left", "normal");
 	}
 
 }

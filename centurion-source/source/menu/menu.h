@@ -7,7 +7,6 @@
 #include "../gui/form_input.h"
 #include "../gui/button.h"
 #include "../gui/div_image.h"
-#include "../gui/div_text.h"
 #include "../interface/menu_players_list.h"
 #include "../player/player.h"
 
