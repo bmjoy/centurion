@@ -27,14 +27,9 @@ private:
 
 	std::map<std::string, std::vector<gui::Image>> images;
 	std::map<std::string, std::vector<gui::Button>> buttons;
-	std::map<std::string, std::vector<FormInput>> formInputs;
-	int x, y, w, h;
-	std::string s;
+	
 	ISoundEngine* music;
 
-	/* temporary objects */
-	gui::Image img;
-	gui::Button btn;
 	PlayersList list;
 
 	/* PICKING */

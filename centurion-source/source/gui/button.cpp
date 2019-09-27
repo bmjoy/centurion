@@ -4,14 +4,13 @@ namespace gui {
 	Button::Button(){
 	}
 
-	void Button::create(std::string imageName, int x, int y) {
+	void Button::create(std::string imageName, std::string Text, int x, int y, int pickingID, glm::vec4 textColor) {
 
 		buttonImage = Image(imageName);
-		buttonImage.set_id(picking_id);
-		buttonImage.create("center", x, y);
+		buttonImage.create("center", x, y, 0, 0, pickingID);
 
 		buttonText = gui::SimpleText("static");
-		buttonText.create_static(text, "tahoma_8", x, y, "center", "middle", glm::vec4(0.f, 0.f, 0.f, 255.f));
+		buttonText.create_static(Text, "tahoma_8", x, y, "center", "middle", textColor);
 	}
 
 	void Button::render(bool picking) {

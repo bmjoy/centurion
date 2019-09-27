@@ -9,7 +9,10 @@ namespace gui {
 		pickingColor = glm::vec4(0.f);
 	}
 
-	void Rectangle::create(std::string Type, float x, float y, float w, float h, std::string origin) {
+	void Rectangle::create(std::string Type, float x, float y, float w, float h, std::string origin, int pickingID) {
+
+		if (x < 0) x += GLB::WINDOW_WIDTH;
+		if (y < 0) y += GLB::WINDOW_HEIGHT;
 
 		type = Type;
 		if (type == "filled") {
@@ -24,23 +27,17 @@ namespace gui {
 			else if (origin == "center") {
 				modelMat = glm::translate(modelMat, glm::vec3((x - w / 2) / w, (y - h / 2) / h, 0.0f));
 			}
-
-			// always set id before create
-
-			pickingColor.r = (picking_id & 0x000000FF) >> 0;
-			pickingColor.g = (picking_id & 0x0000FF00) >> 8;
-			pickingColor.b = (picking_id & 0x00FF0000) >> 16;
-			pickingColor.a = 1.f;
+			pickingColor = glm::vec4(getPickingColorFromID(pickingID), 1.f);
 		}
 	}
 
-	void Rectangle::render(bool picking) {
+	void Rectangle::render(glm::vec4 Color, bool picking) {
 		if (type == "filled") {
 			if (picking) {
 				obj::FRectangle()->render(modelMat, pickingColor);
 			}
 			else {
-				obj::FRectangle()->render(modelMat, color);
+				obj::FRectangle()->render(modelMat, Color);
 			}
 		}
 	}

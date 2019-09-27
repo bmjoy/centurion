@@ -1,27 +1,5 @@
 #include "game_functions.h"
 
-void game::applyGameMatrices(glm::mat4 *proj, glm::mat4 *view) {
-	obj::BSprite()->apply_projection_matrix(*proj);
-	obj::BSprite()->apply_view_matrix(*view);
-	obj::USprite()->apply_projection_matrix(*proj);
-	obj::USprite()->apply_view_matrix(*view);
-	obj::Img()->apply_projection_matrix(*proj);
-	obj::Img()->apply_view_matrix(*view);
-}
-
-void game::applyMenuMatrices() {
-	obj::BSprite()->apply_projection_matrix(GLB::MENU_PROJECTION);
-	obj::BSprite()->apply_view_matrix();
-	obj::USprite()->apply_projection_matrix(GLB::MENU_PROJECTION);
-	obj::USprite()->apply_view_matrix();
-	obj::Img()->apply_projection_matrix(GLB::MENU_PROJECTION);
-	obj::Img()->apply_view_matrix();
-	obj::ERectangle()->apply_projection_matrix(GLB::MENU_PROJECTION);
-	obj::ERectangle()->apply_view_matrix();
-	obj::FRectangle()->apply_projection_matrix(GLB::MENU_PROJECTION);
-	obj::FRectangle()->apply_view_matrix();
-}
-
 void game::picking(std::map<int, Building> *bList, std::map<int, Unit> *uList, glm::mat4 *proj, glm::mat4 *view, int *clickId, bool *blockMinimap) {
 	if (!GAME::MENU_IS_ACTIVE){
 		for (std::map<int, Building>::iterator bld = (*bList).begin(); bld != (*bList).end(); bld++) {
@@ -136,7 +114,7 @@ void game::renderSelRectangle(std::array<float, 8> *coords, glm::mat4 *view, flo
 			GLB::SEL_RECT_COORDS.minY = std::min((*coords)[1], (*coords)[3]);
 			GLB::SEL_RECT_COORDS.maxY = std::max((*coords)[1], (*coords)[3]);
 			obj::ERectangle()->apply_projection_matrix(GLB::CAMERA_PROJECTION);
-			obj::ERectangle()->apply_view_matrix();
+			//obj::ERectangle()->apply_view_matrix();
 			obj::ERectangle()->create(*coords);
 			obj::ERectangle()->render(*view, glm::mat4(1.0f));
 		}

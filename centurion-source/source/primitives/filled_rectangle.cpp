@@ -46,7 +46,7 @@ void FilledRectangle::render(glm::mat4 model, glm::vec4 color) {
 	glUseProgram(shaderId);
 
 	glUniformMatrix4fv(glGetUniformLocation(shaderId, "model"), 1, GL_FALSE, glm::value_ptr(model));
-	glUniform4f(glGetUniformLocation(shaderId, "color"), color.x / 255.0f, color.y / 255.0f, color.z / 255.0f, color.w);
+	glUniform4f(glGetUniformLocation(shaderId, "color"), color.x/255.f, color.y/255.f, color.z/255.f, color.w);
 
 	/* Draw */
 	glBindVertexArray(VAO);

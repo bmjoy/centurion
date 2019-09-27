@@ -77,7 +77,7 @@ void ImageSprite::render(ImageData &imageData, bool picking) {
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, IBO);
 	
 	if (picking) {
-		glUniform4f(glGetUniformLocation(shaderId, "picking_color"), imageData.pickingColor.r, imageData.pickingColor.y, imageData.pickingColor.b, 1.0f);
+		glUniform4f(glGetUniformLocation(shaderId, "picking_color"), imageData.pickingColor.r/255.f, imageData.pickingColor.y/255.f, imageData.pickingColor.b/255.f, 1.0f);
 		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
 		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
 	}

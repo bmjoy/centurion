@@ -14,15 +14,20 @@ Menu::Menu(){
 
 void Menu::create(std::vector<Player> *List) {	
 	playersList = List;
-
 	music = Music().play("assets/music/menu.mp3", true);
+	
+	std::string s;
 
 	for (int a = 0; a < menus.size(); ++a) {
 
 		std::ifstream path("assets/data/interface/" + menus[a] + ".json");
 		data = json::parse(path);
-		s = "images";
 		
+		/* temporary objects */
+		s = "images";
+		gui::Image img;
+		gui::Button btn;
+
 		for (int i = 0; i < data[s].size(); ++i) {
 
 			/* read data from json */
@@ -31,22 +36,20 @@ void Menu::create(std::vector<Player> *List) {
 			std::string size = data[s][i]["size"].get<std::string>();
 			std::string align = data[s][i]["align"].get<std::string>();
 			int clickable = data[s][i]["clickable"].get<int>();
-			int jsonX = data[s][i]["x"].get<int>();
-			int jsonY = data[s][i]["y"].get<int>();
+			int x = data[s][i]["x"].get<int>();
+			int y = data[s][i]["y"].get<int>();
 
 			/* use data */
-			(jsonX >= 0) ? x = jsonX : x = GLB::WINDOW_WIDTH + jsonX;
-			(jsonY >= 0) ? y = jsonY : y = GLB::WINDOW_HEIGHT + jsonY;
-
 			img = gui::Image(imageName);	
-			img.set_id(pickingId * clickable);
-			if (size == "auto") img.create(align, x, y);
-			if (size == "max") img.create(align, x, y, GLB::WINDOW_WIDTH, GLB::WINDOW_HEIGHT);
+			if (size == "auto") img.create(align, x, y, 0, 0, pickingId * clickable);
+			if (size == "max") img.create(align, x, y, GLB::WINDOW_WIDTH, GLB::WINDOW_HEIGHT, pickingId * clickable);
 			images[menus[a]].push_back(img);
 
 			// update picking 
-			pickingList[pickingId * clickable] = name;
-			pickingId += pickingId * clickable;
+			if (clickable) {
+				pickingList[pickingId] = name;
+				pickingId ++;
+			}
 		}
 
 		s = "buttons";
@@ -55,17 +58,12 @@ void Menu::create(std::vector<Player> *List) {
 			/* read data from json */
 			std::string imageName = data[s][i]["image_name"].get<std::string>();
 			std::string jsonText = data[s][i]["text"].get<std::string>();
-			int jsonX = data[s][i]["x"].get<int>();
-			int jsonY = data[s][i]["y"].get<int>();
+			int x = data[s][i]["x"].get<int>();
+			int y = data[s][i]["y"].get<int>();
 
 			/* use data */
-			(jsonX >= 0) ? x = jsonX : x = GLB::WINDOW_WIDTH + jsonX;
-			(jsonY >= 0) ? y = jsonY : y = GLB::WINDOW_HEIGHT + jsonY;
-
 			btn = gui::Button();
-			btn.set_text(jsonText);
-			btn.set_id(pickingId);
-			btn.create(imageName, x, y);
+			btn.create(imageName, jsonText, x, y, pickingId, glm::vec4(0.f, 0.f, 0.f, 255.f));
 			buttons[menus[a]].push_back(btn);
 
 			// update picking 
@@ -76,11 +74,11 @@ void Menu::create(std::vector<Player> *List) {
 		s = "playersList";
 		if (data[s].size()>0) {
 			list = PlayersList();
-			list.set_position(data[s]["x"], data[s]["y"]);
-			list.create(&pickingList, &pickingId, &players_color);
+			list.create(data[s]["x"], data[s]["y"], &pickingList, &pickingId, &players_color);
 		}
 	}
 	menuIsCreated = true;
+	obj::applyMenuMatrices();
 }
 
 
@@ -115,6 +113,8 @@ void Menu::picking() {
 	if (GLB::MOUSE_LEFT) {
 
 		clickId = get_id();
+
+		std::cout << clickId << "\n";
 
 		/*------------------------------------------------------------------------------*/
 		if (currentMenu == "singleplayer"){

@@ -19,6 +19,8 @@ private:
 		std::string seconds_str, minutes_str, hours_str;
 		int seconds, minutes, hours;
 		gui::SimpleText text;
+		float x;
+		float y;
 	} time;
 
 	int *objectId, clickId;

@@ -92,7 +92,7 @@ int main() {
 	std::ifstream data_path("assets/data/data.json");
 	//Close the game if it wasn't able to find or process data.json file
 	if (!data_path.good()) {
-		forceGameClosure("Error code 0x00000001\n\nThe game is unable to find or process DATA file.\nForced application shutdown has started.", "Imper4m");
+		forceGameClosure("Error code 0x00000001\n\nThe game is unable to find or process DATA file.\nForced application shutdown has started.", "Centurion");
 	}
 	json data = json::parse(data_path);
 

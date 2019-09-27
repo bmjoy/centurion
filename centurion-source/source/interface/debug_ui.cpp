@@ -31,14 +31,13 @@ void DebugUI::create() {
 	}
 
 	back = gui::Rectangle();
-	back.set_color(glm::vec4(0.f, 0.f, 0.f, 0.5f));
-	back.create("filled", 10.f, GAME::UI_BOTTOM_HEIGHT + 10.f, 220.f, 200.f, "bottom-left");
+	back.create("filled", 10.f, GAME::UI_BOTTOM_HEIGHT + 10.f, 220.f, 200.f, "bottom-left", 0);
 
 }
 
 void DebugUI::render(int fps, int mpfs, int selUnits) {
 
-	back.render();
+	back.render(glm::vec4(0.f, 0.f, 0.f, 0.5f));
 
 	dynamicTextList[0] = std::to_string(fps);
 	dynamicTextList[1] = std::to_string(mpfs);
@@ -52,9 +51,7 @@ void DebugUI::render(int fps, int mpfs, int selUnits) {
 
 	for (int i = 0; i < n; i++) {
 		staticText[i].render_static();
-		dynamicText.set_position(glm::vec2(startX + 100.f, startY + deltaY * i));
-		dynamicText.set_text(dynamicTextList[i]);
-		dynamicText.render_dynamic("tahoma_6", glm::vec4(255.f), "left", "normal");
+		dynamicText.render_dynamic(dynamicTextList[i], "tahoma_6", startX + 100.f, startY + deltaY * i, glm::vec4(255.f), "left", "normal");
 	}
 }
 

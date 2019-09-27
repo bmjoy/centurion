@@ -202,4 +202,11 @@ static void clearAndSwapBuffers(GLFWwindow *window) {
 	glClear(GL_COLOR_BUFFER_BIT);
 }
 
+static glm::vec3 getPickingColorFromID(int pickingID) {
+	int r = (pickingID & 0x000000FF) >> 0;
+	int g = (pickingID & 0x0000FF00) >> 8;
+	int b = (pickingID & 0x00FF0000) >> 16;
+	return glm::vec3(r, g, b);
+}
+
 #endif

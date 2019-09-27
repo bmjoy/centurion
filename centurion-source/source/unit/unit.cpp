@@ -48,7 +48,7 @@ void Unit::create() {
 
 	//Show circle position under the unit (Debug only)
 	circlePos = gui::Image("circle_pos");
-	circlePos.create("center", 0, 0);
+	circlePos.create("center", 0, 0, 0, 0, 0);
 
 	creationTime = glfwGetTime();
 }
@@ -88,7 +88,7 @@ void Unit::render(glm::mat4 &proj, glm::mat4 &view, bool picking, int clickID) {
 		obj::FRectangle()->apply_view_matrix(view);
 
 		for (int i = 0; i < pathQuadsList.size(); i++) {
-			pathQuadsList[i].render();
+			pathQuadsList[i].render(glm::vec4(255.f, 0.f, 0.f, 255.f));
 		}
 		// ************************ //
 
@@ -153,8 +153,7 @@ void Unit::walk_behaviour() {
 		pathQuadsList = { };
 		for (int i = 0; i < path.size(); i++) {
 			gui::Rectangle tempRect = gui::Rectangle();
-			tempRect.set_color(glm::vec4(255.f, 0.f, 0.f, 255.f));
-			tempRect.create("filled", path[i].x, path[i].y, 20.f, 20.f, "bottom-left");
+			tempRect.create("filled", path[i].x, path[i].y, 20.f, 20.f, "bottom-left", 0);
 			pathQuadsList.push_back(tempRect);
 		}
 

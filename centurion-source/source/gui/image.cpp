@@ -11,11 +11,14 @@ namespace gui {
 		originMap["top-left"] = 2;
 	}
 
-	void Image::create(std::string Origin, float x, float y, float w, float h) {
-		imgData.imageName = imageName;
-		imgData.pickingColor = pickingColor;
-		imgData.origin = originMap[Origin];
+	void Image::create(std::string Origin, float x, float y, float w, float h, int pickingID) {
 
+		if (x < 0) x += GLB::WINDOW_WIDTH;
+		if (y < 0) y += GLB::WINDOW_HEIGHT;
+
+		imgData.imageName = imageName;
+		imgData.pickingColor = getPickingColorFromID(pickingID);
+		imgData.origin = originMap[Origin];
 		imgData.x = x;
 		imgData.y = y;
 

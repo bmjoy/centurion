@@ -49,7 +49,7 @@ void Game::create(std::vector<Player> *ListOfPlayers) {
 	/* CREATE SETTLEMENTS */
 	std::ifstream path("assets/data/settlements.json");
 	if (!path.good()) {
-		forceGameClosure("Error code 0x00000001\n\nThe game is unable to find or process SETTLEMENTS file.\nForced application shutdown has started.", "Imper4m");
+		forceGameClosure("Error code 0x00000001\n\nThe game is unable to find or process SETTLEMENTS file.\nForced application shutdown has started.", "Centurion");
 	}
 	settl_data = json::parse(path);
 
@@ -132,7 +132,7 @@ void Game::run() {
 	}
 
 	// apply game matrices:
-	game::applyGameMatrices(&projection, &view);
+	obj::applyGameMatrices(&projection, &view);
 
 	/* Tracing and Picking */
 	game::tracing(surface, &projection, &view);
@@ -149,7 +149,8 @@ void Game::run() {
 	// ---- Game UI ---- //
 
 	// apply menu matrices:
-	game::applyMenuMatrices();
+	obj::applyMenuMatrices();
+
 	ui.render();
 
 	// ----------------- //	

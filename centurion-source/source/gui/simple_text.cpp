@@ -12,6 +12,9 @@ namespace gui {
 		if (type == "dynamic") {
 			std::cout << "Dynamic text created with static option\n";
 		}
+		if (x < 0) x += GLB::WINDOW_WIDTH;
+		if (y < 0) y += GLB::WINDOW_HEIGHT;
+
 		hAlign = halign;
 		vAlign = valign;
 		data = obj::Text()->create_static(font, text, x);
@@ -28,12 +31,12 @@ namespace gui {
 		obj::Text()->render_static(data);
 	}
 
-	void SimpleText::render_dynamic(std::string Font, glm::vec4 color, std::string halign, std::string valign) {
+	void SimpleText::render_dynamic(std::string text, std::string Font, float x, float y, glm::vec4 color, std::string halign, std::string valign) {
 		if (type == "static") {
 			std::cout << "Static text rendered with dynamic option\n";
 		}
 		obj::Text()->set_align(halign, valign);
-		obj::Text()->render_dynamic(Font, position.x, position.y, text, color, shadow);
+		obj::Text()->render_dynamic(Font, x, y, text, color, shadow);
 	}
 
 	SimpleText::~SimpleText()

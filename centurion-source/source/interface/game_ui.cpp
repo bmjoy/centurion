@@ -7,6 +7,9 @@ UIGame::UIGame()
 	time.seconds = 0; time.seconds_str = "00";
 	time.minutes = 0; time.minutes_str = "00";
 	time.hours = 0; time.hours_str = "00";
+	time.x = GLB::WINDOW_WIDTH - 100.0f;
+	time.y = GLB::WINDOW_HEIGHT - GAME::UI_TOP_HEIGHT - 30.0f;
+
 }
 
 void UIGame::create(int *pickingId) {
@@ -17,12 +20,10 @@ void UIGame::create(int *pickingId) {
 	gameMenu.create(objectId, &pickingList);
 
 	top_bar = gui::Rectangle();
-	top_bar.set_color(glm::vec4(255.0f, 0.0f, 0.0f, 1.0f));
-	top_bar.create("filled", 0.0f, GLB::WINDOW_HEIGHT - GAME::UI_TOP_HEIGHT, GLB::WINDOW_WIDTH, GAME::UI_TOP_HEIGHT, "bottom-left");
+	top_bar.create("filled", 0.0f, GLB::WINDOW_HEIGHT - GAME::UI_TOP_HEIGHT, GLB::WINDOW_WIDTH, GAME::UI_TOP_HEIGHT, "bottom-left", 0);
 
 	bottom_bar = gui::Rectangle();
-	bottom_bar.set_color(glm::vec4(255.0f, 0.0f, 0.0f, 1.0f));
-	bottom_bar.create("filled", 0.0f, 0.0f, GLB::WINDOW_WIDTH, GAME::UI_BOTTOM_HEIGHT, "bottom-left");
+	bottom_bar.create("filled", 0.0f, 0.0f, GLB::WINDOW_WIDTH, GAME::UI_BOTTOM_HEIGHT, "bottom-left", 0);
 
 	time.lastTime = glfwGetTime();
 	time.text = gui::SimpleText("dynamic", true);
@@ -37,13 +38,12 @@ void UIGame::render() {
 	calculateTime();
 	gameMenu.render(false);
 		
-	time.text.set_position(glm::vec2(GLB::WINDOW_WIDTH - 100.0f, GLB::WINDOW_HEIGHT - GAME::UI_TOP_HEIGHT - 30.0f));
-	time.text.set_text(time.hours_str + ":" + time.minutes_str + ":" + time.seconds_str);
-	time.text.render_dynamic("tahoma_8", glm::vec4(255.f, 255.f, 255.f, 255.f), "left", "normal");
+	std::string txt = time.hours_str + ":" + time.minutes_str + ":" + time.seconds_str;
+	time.text.render_dynamic(txt, "tahoma_8", time.x, time.y, glm::vec4(255.f, 255.f, 255.f, 255.f), "left", "normal");
 
 	// Temporary bars:
-	top_bar.render();
-	bottom_bar.render();	
+	top_bar.render(glm::vec4(255.0f, 0.0f, 0.0f, 1.0f));
+	bottom_bar.render(glm::vec4(255.0f, 0.0f, 0.0f, 1.0f));
 }
 
 void UIGame::picking() {

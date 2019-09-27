@@ -41,12 +41,6 @@ int Engine::launch() {
 		if (GLB::MAIN_MENU){
 			if (!startMenu->menu_is_created()){
 
-				obj::ERectangle()->apply_projection_matrix(GLB::MENU_PROJECTION);
-				obj::ERectangle()->apply_view_matrix();
-
-				obj::FRectangle()->apply_projection_matrix(GLB::MENU_PROJECTION);
-				obj::FRectangle()->apply_view_matrix();
-
 				startMenu->create(&playersList);
 			}
 			startMenu->render();
@@ -59,9 +53,7 @@ int Engine::launch() {
 				clearAndSwapBuffers(GLB::MAIN_WINDOW);
 				{
 					text = gui::SimpleText("dynamic");
-					text.set_position(glm::vec2(GLB::WINDOW_WIDTH / 2.f, GLB::WINDOW_HEIGHT / 2.f));
-					text.set_text("Game is being created...");
-					text.render_dynamic("tahoma_8", glm::vec4(255.f), "center", "middle");
+					text.render_dynamic("Game is being created...", "tahoma_8", GLB::WINDOW_WIDTH / 2.f, GLB::WINDOW_HEIGHT / 2.f, glm::vec4(255.f), "center", "middle");
 				}
 				glfwSwapBuffers(GLB::MAIN_WINDOW);
 

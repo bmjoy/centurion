@@ -8,60 +8,48 @@ PlayersList::PlayersList(){
 	h = 400;
 }
 
-void PlayersList::set_position(int startX, int startY){
-	x = startX; y = startY;
-}
-
-void PlayersList::create(std::map<int, std::string> *pickingList, int *pickingId, std::vector<int> *players_color) {
-	number = gui::SimpleText("dynamic", true);
+void PlayersList::create(int startX, int startY, std::map<int, std::string> *pickingList, int *pickingId, std::vector<int> *players_color) {
 	
+	x = startX; y = startY;
+
+	number = gui::SimpleText("dynamic", true);
 	text = gui::SimpleText("static");
 	text.create_static("Number of players: ", "tahoma_8", x, y + 40.f, "left", "normal", glm::vec4(255.f));
 	textWidth = text.get_width();
 
-
 	arrowDown = gui::Image("arrowDown");
-	arrowDown.set_id(*pickingId);
+	arrowDown.create("center", x + 240, y + 50, 0, 0, *pickingId);
 	(*pickingList)[*pickingId] = "arrowDown";
 	(*pickingId)++;
-	arrowDown.create("center", x + 240, y + 50);
-
+	
 	arrowUp = gui::Image("arrowUp");
-	arrowUp.set_id(*pickingId);
+	arrowUp.create("center", x + 280, y + 50, 0, 0, *pickingId);
 	(*pickingList)[*pickingId] = "arrowUp";
 	(*pickingId)++;
-	arrowUp.create("center", x + 280, y + 50);
-
+	
 	background = gui::Rectangle();
-	background.set_color(glm::vec4(0.f, 0.f, 0.f, 0.5f));
-	background.create("filled", x - 30, y + 80, w, h, "top-left");
+	background.create("filled", x - 30, y + 80, w, h, "top-left", 0);
 
 	for (int j = 0; j < GAME::PLAYERS_NUMBER_MAX; j++) {
 
 		//Player color rectangle
 		(*pickingList)[*pickingId] = "ColForm_" + std::to_string(j);
-		FormInput col_fi = FormInput(false);
-		col_fi.set_position(glm::vec2(x, y - deltaY * j));
-		col_fi.set_id(*pickingId);
-		col_fi.create(20.f, 20.f, { "" });
+		gui::FormInput col_fi = gui::FormInput(false);
+		col_fi.create(x, y - deltaY * j, 20.f, 20.f, { "" }, *pickingId);
 		if (j < 2) { (*players_color).push_back(j); }
 		else { (*players_color).push_back(-1); }
 		colors_Form.push_back(col_fi);
 		(*pickingId)++;
 
 		//Player name
-		FormInput p_fi = FormInput(false);
-		p_fi.set_position(glm::vec2(x + 50.0f, y - deltaY * j));
-		p_fi.create(200.f, 20.f, { "Player " + std::to_string(j + 1) });
+		gui::FormInput p_fi = gui::FormInput(false);
+		p_fi.create(x + 50.0f, y - deltaY * j, 200.f, 20.f, { "Player " + std::to_string(j + 1) }, 0);
 		players_Form.push_back(p_fi);
-
 
 		//Player civilization
 		(*pickingList)[*pickingId] = "CivForm_" + std::to_string(j);
-		FormInput c_fi = FormInput(true);
-		c_fi.set_position(glm::vec2(x + 280.f, y - deltaY * j));
-		c_fi.set_id(*pickingId);
-		c_fi.create(150.f, 20.f, GAME::RACES);
+		gui::FormInput c_fi = gui::FormInput(true);
+		c_fi.create(x + 280.f, y - deltaY * j, 150.f, 20.f, GAME::RACES, *pickingId);
 		civiliz_Form.push_back(c_fi);
 		(*pickingId)++;
 	}
@@ -73,8 +61,8 @@ void PlayersList::render(int numPlayers, std::vector<int> players_color, bool pi
 		arrowDown.render(true);
 		arrowUp.render(true);
 		for (int j = numPlayers - 1; j >= 0; j--) {
-			colors_Form[j].render(true);
-			civiliz_Form[j].render(true);
+			colors_Form[j].render(true, glm::vec4());
+			civiliz_Form[j].render(true, glm::vec4());
 		}
 	}
 	else {
@@ -82,22 +70,19 @@ void PlayersList::render(int numPlayers, std::vector<int> players_color, bool pi
 		obj::ERectangle()->create(getCoords(x - 30, y + 80, w, h));
 		obj::ERectangle()->render(glm::mat4(1.0f), glm::mat4(1.0f), glm::vec4(255.f));
 
-		background.render();
+		background.render(glm::vec4(0.f, 0.f, 0.f, 0.5f));
 
 		arrowDown.render(false);
 		arrowUp.render(false);
 
 		text.render_static();
 
-		number.set_position(glm::vec2(x + textWidth, y + 40.f));
-		number.set_text(std::to_string(numPlayers));
-		number.render_dynamic("tahoma_8", glm::vec4(255.f, 255.f, 255.f, 255.f), "left", "normal");
+		number.render_dynamic(std::to_string(numPlayers), "tahoma_8", x + textWidth, y + 40.f, glm::vec4(255.f, 255.f, 255.f, 255.f), "left", "normal");
 
 		for (int j = numPlayers - 1; j >= 0; j--) {
-			colors_Form[j].set_color(glm::vec4(GLB::COLORS[players_color[j]], 1.0f));
-			colors_Form[j].render();
-			players_Form[j].render();
-			civiliz_Form[j].render();
+			colors_Form[j].render(false, glm::vec4(GLB::COLORS[players_color[j]], 1.0f));
+			players_Form[j].render(false, glm::vec4(0.f, 0.f, 0.f, 1.f));
+			civiliz_Form[j].render(false, glm::vec4(0.f, 0.f, 0.f, 1.f));
 		}
 	}
 }

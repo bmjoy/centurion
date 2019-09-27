@@ -20,20 +20,23 @@ void GameMenu::create(int *pickingId, std::map<int, std::string> *pickingList) {
 	s = "buttons";
 	for (int i = 0; i < data[s].size(); ++i) {
 		btn = gui::Button();
-		btn.set_text(data[s][i]["text"].get<std::string>());
-		btn.set_id(*pickingId);
+		btn.create(
+			data[s][i]["image_name"].get<std::string>(), 
+			data[s][i]["text"].get<std::string>(), 
+			x + data[s][i]["x"].get<int>(), 
+			y + data[s][i]["y"].get<int>(), 
+			*pickingId, 
+			glm::vec4(0.f, 0.f, 0.f, 255.f)
+		);
+		buttons.push_back(btn);
 
-		/* picking */
+		/* update picking */
 		(*pickingList)[*pickingId] = data[s][i]["name"].get<std::string>();
 		(*pickingId)++;
-
-		btn.create(data[s][i]["image_name"].get<std::string>(), x + data[s][i]["x"].get<int>(), y + data[s][i]["y"].get<int>());
-		buttons.push_back(btn);
 	}
 
 	background = gui::Rectangle();
-	background.set_color(glm::vec4(0.f, 0.f, 0.f, 0.5f));
-	background.create("filled", x - w / 2.f, y + h / 2.f, w, h, "top-left");
+	background.create("filled", x - w / 2.f, y + h / 2.f, w, h, "top-left", 0);
 }
 
 void GameMenu::render(bool picking) {
@@ -47,7 +50,7 @@ void GameMenu::render(bool picking) {
 		}
 
 		else {
-			background.render();
+			background.render(glm::vec4(0.f, 0.f, 0.f, 0.5f));
 
 			obj::ERectangle()->create(getCoords(x - w / 2.f, y + h / 2.f, w, h));
 			obj::ERectangle()->render(glm::mat4(1.0f), glm::mat4(1.0f), glm::vec4(255.f));

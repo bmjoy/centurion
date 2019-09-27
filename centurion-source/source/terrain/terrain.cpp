@@ -59,13 +59,25 @@ void Terrain::load_mesh(aiMesh * mesh, const aiScene * scene) {
 			glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
 			glClear(GL_COLOR_BUFFER_BIT);
 			//---
-			loadingText.set_position(glm::vec2(GLB::WINDOW_WIDTH / 2.f, GLB::WINDOW_HEIGHT / 2.f));
-			loadingText.set_text("Map generation in progress...");
-			loadingText.render_dynamic("tahoma_8", glm::vec4(255.f), "center", "middle");
+			loadingText.render_dynamic(
+				"Map generation in progress...", 
+				"tahoma_8", 
+				GLB::WINDOW_WIDTH / 2.f, 
+				GLB::WINDOW_HEIGHT / 2.f, 
+				glm::vec4(255.f), 
+				"center", 
+				"middle"
+			);
 			//---
-			loadingText.set_position(glm::vec2(GLB::WINDOW_WIDTH / 2.f, GLB::WINDOW_HEIGHT / 2.f - 50.f));
-			loadingText.set_text(std::to_string(int((float)i/(float)mesh->mNumVertices*100.f)) + "%");
-			loadingText.render_dynamic("tahoma_8", glm::vec4(255.f), "center", "middle");
+			loadingText.render_dynamic(
+				std::to_string(int((float)i / (float)mesh->mNumVertices*100.f)) + "%",
+				"tahoma_8", 
+				GLB::WINDOW_WIDTH / 2.f, 
+				GLB::WINDOW_HEIGHT / 2.f - 50.f, 
+				glm::vec4(255.f), 
+				"center", 
+				"middle"
+			);
 			//---
 			glfwSwapBuffers(GLB::MAIN_WINDOW);
 		}
@@ -122,9 +134,15 @@ void Terrain::load_mesh(aiMesh * mesh, const aiScene * scene) {
 	glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
 	glClear(GL_COLOR_BUFFER_BIT);
 	//---
-	loadingText.set_position(glm::vec2(GLB::WINDOW_WIDTH / 2.f, GLB::WINDOW_HEIGHT / 2.f));
-	loadingText.set_text("Finalizing...");
-	loadingText.render_dynamic("tahoma_8", glm::vec4(255.f), "center", "middle");
+	loadingText.render_dynamic(
+		"Finalizing...",
+		"tahoma_8", 
+		GLB::WINDOW_WIDTH / 2.f, 
+		GLB::WINDOW_HEIGHT / 2.f,
+		glm::vec4(255.f), 
+		"center", 
+		"middle"
+	);
 	//---
 	glfwSwapBuffers(GLB::MAIN_WINDOW);
 
