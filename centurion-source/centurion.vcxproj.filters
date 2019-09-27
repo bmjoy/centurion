@@ -189,9 +189,6 @@
     <ClCompile Include="source\unit\unit.cpp">
       <Filter>Source Files\unit</Filter>
     </ClCompile>
-    <ClCompile Include="source\unit\unit_sprite.cpp">
-      <Filter>Source Files\unit</Filter>
-    </ClCompile>
     <ClCompile Include="source\engine\window.cpp">
       <Filter>Source Files\engine</Filter>
     </ClCompile>
@@ -242,6 +239,12 @@
     </ClCompile>
     <ClCompile Include="source\interface\debug_ui.cpp">
       <Filter>Source Files\interface</Filter>
+    </ClCompile>
+    <ClCompile Include="source\primitives\cursor_image.cpp">
+      <Filter>Source Files\primitives</Filter>
+    </ClCompile>
+    <ClCompile Include="source\primitives\unit_sprite.cpp">
+      <Filter>Source Files\primitives</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -311,9 +314,6 @@
     <ClInclude Include="source\unit\unit.h">
       <Filter>Header Files\unit</Filter>
     </ClInclude>
-    <ClInclude Include="source\unit\unit_sprite.h">
-      <Filter>Header Files\unit</Filter>
-    </ClInclude>
     <ClInclude Include="source\music\music.h">
       <Filter>Header Files\music</Filter>
     </ClInclude>
@@ -370,6 +370,12 @@
     </ClInclude>
     <ClInclude Include="source\interface\debug_ui.h">
       <Filter>Header Files\interface</Filter>
+    </ClInclude>
+    <ClInclude Include="source\primitives\cursor_image.h">
+      <Filter>Header Files\primitives</Filter>
+    </ClInclude>
+    <ClInclude Include="source\primitives\unit_sprite.h">
+      <Filter>Header Files\primitives</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

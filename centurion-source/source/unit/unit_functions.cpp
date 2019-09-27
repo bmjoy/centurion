@@ -6,17 +6,12 @@ void unit::updateZ(glm::vec3 &pos2d, glm::vec3 *pos3d) {
 	(*pos3d).y = pos2d.y + zNoise - PATH::CELL_GRID_SIZE / 2;
 }
 
-void unit::updateFrame(USprite *sprite, float *creationTime, int *frame, int max_frames, int duration) {
-	if (glfwGetTime() - *creationTime >= duration/100.f) {
+void unit::updateFrame(float *creationTime, int *frame, int max_frames, int duration) {
+	if (glfwGetTime() - *creationTime >= duration / 100.f) {
 		(*frame)++;
 		if (*frame == max_frames - 1) *frame = 0;
 		(*creationTime) += duration / 100.f;
 	}
-	(*sprite).set_frame(*frame, max_frames);
-}
-
-void unit::updateDirection(USprite *sprite, int &direction) {
-	(*sprite).set_direction(direction);
 }
 
 bool unit::isInSelectionRect(std::array<float, 8> &coords){

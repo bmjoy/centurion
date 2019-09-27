@@ -2,19 +2,19 @@
 
 #include "building_sprite.h"
 
-BSprite::BSprite(){
+BuildingSprite::BuildingSprite(){
 	vPath = "assets/shaders/bsprite/vertex.glsl";
 	fPath = "assets/shaders/bsprite/fragment.glsl";
 }
 
 
-BSprite::BSprite(int shaderID){
+BuildingSprite::BuildingSprite(int shaderID){
 	vPath = "assets/shaders/bsprite/vertex.glsl";
 	fPath = "assets/shaders/bsprite/fragment.glsl";
 	shaderId = shaderID;
 }
 
-void BSprite::create() {
+void BuildingSprite::create() {
 	
 	glUseProgram(shaderId);
 	genBuffers();
@@ -33,15 +33,15 @@ void BSprite::create() {
 
 			className = ent_data["class_name"].get<std::string>();
 			fullName = className + "_" + ent_data["sprites"][i]["type"].get<std::string>();
-
-			textureIdList.push_back(0);
-			textureInfoList.push_back(glm::ivec3(0, 0, 0));
 			texturePath = ent_data["path"].get<std::string>() + ent_data["sprites"][i]["name"].get<std::string>();
+
+			/* save texture info */
+			textureIdList.push_back(0);
+			textureInfoList.push_back(glm::ivec3(0, 0, 0));	
 			data = stbi_load(texturePath.c_str(), &textureInfoList[k].x, &textureInfoList[k].y, &textureInfoList[k].z, 0);
 			if (!data) { std::cout << "Failed to load texture" << std::endl; }
 
-			/* texture */
-
+			/* load texture to gpu */
 			glGenTextures(1, &textureIdList[k]);
 			glBindTexture(GL_TEXTURE_2D, textureIdList[k]);
 			//glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
@@ -50,8 +50,7 @@ void BSprite::create() {
 			glGenerateMipmap(GL_TEXTURE_2D);
 			glBindTexture(GL_TEXTURE_2D, 0);
 
-			stbi_image_free(data);
-			
+			stbi_image_free(data);			
 			textureIdMap[fullName] = textureIdList[k];
 
 			k++;
@@ -59,11 +58,11 @@ void BSprite::create() {
 	}	
 }
 
-GLuint BSprite::getTextureId(std::string className) {
+GLuint BuildingSprite::getTextureId(std::string className) {
 	return textureIdMap[className + "_normal"];
 }
 
-void BSprite::render(GLuint texID, bool clickable, float x, float y, float w, float h, bool picking, int pickingId, bool selected, glm::vec3 *playerColor) {
+void BuildingSprite::render(GLuint texID, bool clickable, float x, float y, float w, float h, bool picking, int pickingId, bool selected, glm::vec3 *playerColor) {
 	glUseProgram(shaderId);
 
 	/* Uniform Variables */
@@ -147,7 +146,7 @@ void BSprite::render(GLuint texID, bool clickable, float x, float y, float w, fl
 	glBindVertexArray(0);
 }
 
-void BSprite::genBuffers() {
+void BuildingSprite::genBuffers() {
 	glGenVertexArrays(1, &VAO);
 	glBindVertexArray(VAO);
 
@@ -169,6 +168,6 @@ void BSprite::genBuffers() {
 	glBindVertexArray(0);
 }
 
-BSprite::~BSprite()
+BuildingSprite::~BuildingSprite()
 {
 }

@@ -4,6 +4,7 @@
 #include <objects.h>
 #include "../interface/game_ui_menu.h"
 #include "../gui/rectangle.h"
+#include "../gui/simple_text.h"
 
 class UIGame
 {
@@ -13,6 +14,13 @@ public:
 	void render(bool pick);
 	~UIGame();
 private:
+	struct Time {
+		double lastTime;
+		std::string seconds_str, minutes_str, hours_str;
+		int seconds, minutes, hours;
+		gui::SimpleText text;
+	} time;
+
 	int *objectId, clickId;
 	std::map<int, std::string> pickingList;
 	gui::Rectangle top_bar;
@@ -20,5 +28,6 @@ private:
 	GameMenu gameMenu;
 
 	void picking();
+	void calculateTime();
 };
 

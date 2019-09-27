@@ -4,8 +4,12 @@ BitmapFont *obj::Text(){
 	return &obj::txt; 
 }
 
-BSprite *obj::BuildingSprite(){ 
+BuildingSprite *obj::BSprite(){
 	return &obj::bsprite; 
+}
+
+CursorImage *obj::Cursor() {
+	return &obj::cursor;
 }
 
 EmptyRectangle *obj::ERectangle() {
@@ -16,25 +20,36 @@ FilledRectangle *obj::FRectangle() {
 	return &obj::fRect;
 }
 
+UnitSprite *obj::USprite() {
+	return &obj::usprite;
+}
+
 void obj::init() {
 	*obj::Text() = BitmapFont();
-	*obj::BuildingSprite() = BSprite();
+	*obj::BSprite() = BuildingSprite();
+	*obj::Cursor() = CursorImage();
 	*obj::ERectangle() = EmptyRectangle();
 	*obj::FRectangle() = FilledRectangle();
+	*obj::USprite() = UnitSprite();
 }
 
 void obj::compile() {
 	int id;
 	id = obj::Text()->compile();
-	id = obj::BuildingSprite()->compile();
+	id = obj::BSprite()->compile();
 	id = obj::ERectangle()->compile();
 	id = obj::FRectangle()->compile();
+	id = obj::Cursor()->compile();
+	id = obj::USprite()->compile();
 }
 
 void obj::create() {
 	obj::Text()->apply_projection_matrix(GLB::MENU_PROJECTION);
-	obj::Text()->init();
+	obj::Text()->create();
+	obj::Cursor()->apply_projection_matrix(GLB::MENU_PROJECTION);
+	obj::Cursor()->create();
 	obj::ERectangle()->init();
-	obj::FRectangle()->init();
-	obj::BuildingSprite()->create();
+	obj::FRectangle()->create();
+	obj::BSprite()->create();
+	obj::USprite()->create();
 }

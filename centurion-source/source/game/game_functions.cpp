@@ -1,8 +1,10 @@
 #include "game_functions.h"
 
 void game::applyMatrices(glm::mat4 *proj, glm::mat4 *view) {
-	obj::BuildingSprite()->apply_projection_matrix(*proj);
-	obj::BuildingSprite()->apply_view_matrix(*view);
+	obj::BSprite()->apply_projection_matrix(*proj);
+	obj::BSprite()->apply_view_matrix(*view);
+	obj::USprite()->apply_projection_matrix(*proj);
+	obj::USprite()->apply_view_matrix(*view);
 }
 
 
@@ -94,7 +96,7 @@ void game::renderObjects(std::map<int, Building> *bList, std::map<int, Unit> *uL
 			}
 		}
 	}
-}
+} 
 
 void game::renderSelRectangle(std::array<float, 8> *coords, glm::mat4 *view, float *cameraLastX, float *cameraLastY) {
 	if (!GAME::MINIMAP_IS_ACTIVE) {

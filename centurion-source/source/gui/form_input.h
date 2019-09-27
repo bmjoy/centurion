@@ -21,7 +21,8 @@ public:
 
 private:
 	gui::Rectangle back;
-	std::vector<gui::Rectangle> back_options;
+	gui::Rectangle back_options;
+	std::vector<gui::Rectangle> back_options_picking;
 	
 	gui::SimpleText text;
 	std::vector<gui::SimpleText> optionsText;
@@ -34,6 +35,6 @@ private:
 	bool boolOptions;
 	bool isOpened;
 	bool hasText;
-
+	int nOptions;
 };
 

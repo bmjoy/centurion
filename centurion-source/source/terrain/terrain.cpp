@@ -13,8 +13,6 @@ Terrain::Terrain(){
 
 
 void Terrain::create() {
-	//loadingText.create("tahoma_8");
-
 	loadingText = gui::SimpleText("dynamic");
 
 	/* OBJ LOAD */

@@ -20,7 +20,7 @@ void BitmapFont::set_align(std::string hAlign, std::string vAlign) {
 
 /* Dynamic text */
 
-void BitmapFont::init() {
+void BitmapFont::create() {
 
 	glUseProgram(shaderId);
 

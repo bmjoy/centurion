@@ -5,7 +5,7 @@ FilledRectangle::FilledRectangle(){
 	fPath = "assets/shaders/filled_rectangle/fragment.glsl";
 }
 
-void FilledRectangle::init() {
+void FilledRectangle::create() {
 
 	float size = 1.f;
 

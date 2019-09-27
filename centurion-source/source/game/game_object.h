@@ -17,14 +17,15 @@ public:
 	bool getSelected() { return selected; }
 	int get_xPos() { return (int)position.x; }
 	int get_yPos() { return (int)position.y; }
-	int picking_id;
 	~GObject();
 
 protected:
 	Player *player;
+	glm::vec3 pickingColor;
 	bool selected;
 	json data;
 	glm::vec3 position;
 	std::string className;
+	int picking_id;
 };
 

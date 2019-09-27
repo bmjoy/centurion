@@ -20,10 +20,11 @@ public:
 	~Unit();
 
 private:
-	USprite sprite;
+
+	UnitData unitData;
 
 	/* unit properties & data */
-	std::string currentState;
+	std::string currentStateStr;
 	json entityData;
 	float creationTime;
 
@@ -35,8 +36,6 @@ private:
 
 	/* unit movement & pathfinding */
 	bool is_Moving;
-	int dir;
-	int frame;
 	int pathCount;
 	float angle;
 	float delta;
@@ -47,7 +46,6 @@ private:
 	void walk_behaviour();
 	
 	/* unit rendering */
-	glm::mat4 model;
 
 	/* debug objects */
 	std::vector<gui::Rectangle> pathQuadsList;

@@ -48,7 +48,7 @@ void DebugUI::render(int fps, int mpfs, int selUnits) {
 	dynamicTextList[5] = std::to_string((int)getZoomedCoords((float)GLB::MOUSE_X, (float)GLB::MOUSE_Y).x);
 	dynamicTextList[6] = std::to_string(selUnits);
 
-	!GLB::GAME ? n = 2 : n = 6;
+	!GLB::GAME ? n = 2 : n = 7;
 
 	for (int i = 0; i < n; i++) {
 		staticText[i].render_static();

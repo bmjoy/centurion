@@ -19,12 +19,12 @@ void Building::create() {
 	stbi_image_free(texture);
 
 	clickableInMinimap = (bool)data["clickable_in_minimap"].get<int>();
-	textureID = obj::BuildingSprite()->getTextureId(className);
+	textureID = obj::BSprite()->getTextureId(className);
 }
 
 void Building::render(bool picking, int clickID) {
 	selected = (picking_id == clickID);
-	obj::BuildingSprite()->render(textureID, clickableInMinimap, position.x, position.y, w, h, picking, picking_id, selected, &(*player).getPlayerColor());
+	obj::BSprite()->render(textureID, clickableInMinimap, position.x, position.y, w, h, picking, picking_id, selected, player->getPlayerColor());
 }
 
 Building::~Building()

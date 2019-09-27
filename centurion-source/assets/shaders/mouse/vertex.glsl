@@ -6,10 +6,11 @@ layout (location = 1) in vec2 tex;
 out vec2 FragTex;
 
 uniform mat4 projection;
-uniform mat4 model;
+uniform float x;
+uniform float y;
 
 void main()
 {
-    gl_Position = projection * model * vec4(pos.xyz, 1.0);
+    gl_Position = projection * vec4(pos.x + x, pos.y + y, pos.z, 1.0);
 	FragTex = tex;
 }  

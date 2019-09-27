@@ -2,9 +2,11 @@
 #include "unit.h"
 
 Unit::Unit() {
-	dir = 0;
-	frame = 0.0;
-	currentState = "idle";
+	unitData = UnitData();
+	unitData.currentDir = 0;
+	unitData.currentFrame = 0;
+	
+	currentStateStr = "idle";
 	position2D = glm::vec3(0.0f, 0.0f, 0.0f);
 	position3D = glm::vec3(0.0f, 0.0f, 0.0f);
 	pathCount = 0;
@@ -22,38 +24,51 @@ void Unit::set_position(float x, float y) {
 }
 
 void Unit::create() {
+
+	/* store data from entity json */
+	std::string state;
 	std::ifstream path(data["ent_path"].get<std::string>());
 	entityData = json::parse(path);
-	sprite = USprite(SHD::USPRITE_SHADER_ID);
-	sprite.create(entityData);
+
+	unitData.maxDirections = entityData["directions"];
+	for (int i = 0; i < entityData["spriteList"].size(); i++) {
+		state = entityData["spriteList"][i].get<std::string>();
+		unitData.States[state] = i;
+		unitData.Frames[i] = entityData["sprites"][state]["frames"].get<int>();
+		unitData.Durations[i] = entityData["sprites"][state]["duration"].get<int>();
+	}
+	unitData.hitBox[0] = entityData["hitbox"][0].get<int>();
+	unitData.hitBox[1] = entityData["hitbox"][1].get<int>();
+	unitData.yOffset = entityData["yOffset"].get<int>();
+	unitData.playerColor = *(player->getPlayerColor());
+	unitData.pickingColor = pickingColor;
+	unitData.className = className;
+	obj::USprite()->getTextureInfo(&unitData);
 
 	//Show circle position under the unit (Debug only)
 	circlePos = Image(SHD::IMAGE_SHADER_ID);
 	circlePos.create("assets/ui/mouse/cursor_point.png", "center");
 
-
 	creationTime = glfwGetTime();
 }
 
 void Unit::render(glm::mat4 &proj, glm::mat4 &view, bool picking, int clickID) {
+
 	clickSelection = (picking_id == clickID);
 	if(GLB::MOUSE_LEFT)	rectangleSelection = unit::isInSelectionRect(hitbox.coords);
+
+	if (GLB::MOUSE_LEFT) std::cout << clickID << "\n";
 
 	selected = (clickSelection + rectangleSelection > 0);
 
 	if(!picking){
-		unit::updateDirection(&sprite, dir);
-		unit::updateFrame(&sprite, &creationTime, &frame, entityData["sprites"][currentState]["frames"], entityData["sprites"][currentState]["duration"]);
+		unit::updateFrame(&creationTime, &unitData.currentFrame, unitData.Frames[unitData.currentState], unitData.Durations[unitData.currentState]);
 		unit::updateZ(position2D, &position3D);
 		position_update();
 		walk_behaviour();		
 	}
 
-	sprite.apply_projection_matrix(GLB::CAMERA_PROJECTION);
-	sprite.apply_view_matrix(view);
-
-	model = glm::translate(glm::mat4(1.0f), position3D);
-	sprite.render(model, currentState, picking, picking_id, &(*player).getPlayerColor());
+	obj::USprite()->render(unitData, position3D, picking);
 
 	if (!GLB::DEBUG && !picking) {
 		hitbox.coords = getCoords(position3D.x - entityData["hitbox"][0], position3D.y + entityData["hitbox"][1] + entityData["yOffset"], entityData["hitbox"][0] * 2, entityData["hitbox"][1] * 2);
@@ -92,7 +107,9 @@ void Unit::render(glm::mat4 &proj, glm::mat4 &view, bool picking, int clickID) {
 
 void Unit::position_update() {
 	if (is_Moving && pathCount < path.size() - 2) {
-		currentState = "walk";
+		currentStateStr = "walk";
+		unitData.currentState = unitData.States[currentStateStr];
+
 		position2D.x += (path[pathCount + 1].x - path[pathCount].x) / distance * data["movement_speed"];
 		position2D.y += (path[pathCount + 1].y - path[pathCount].y) / distance * data["movement_speed"];
 
@@ -110,21 +127,20 @@ void Unit::position_update() {
 			// update direction
 			if (pathCount < path.size() - 2) {
 				angle = unit::getAngle(path, pathCount);
-				dir = round(angle / 360 * entityData["sprites"][currentState]["directions"]);
+				unitData.currentDir = round(angle / 360 * unitData.maxDirections);
 			}
 		}
 	}
 	if (pathCount == path.size() - 2) {
 		pathCount = 0;
 		is_Moving = false;
-		currentState = "idle";
+		currentStateStr = "idle";
+		unitData.currentState = unitData.States[currentStateStr];
 	}
 }
 
 void Unit::walk_behaviour() {
 	if (GLB::MOUSE_RIGHT && selected) {
-
-		
 
 		//GLB::MOUSE_RIGHT = false;
 		is_Moving = true;
@@ -149,7 +165,7 @@ void Unit::walk_behaviour() {
 		
 		// set initial direction
 		angle = unit::getAngle(path, pathCount);
-		dir = round(angle / 360 * entityData["sprites"][currentState]["directions"]);
+		unitData.currentDir = round(angle / 360 * unitData.maxDirections);
 
 	}
 }

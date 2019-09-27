@@ -32,7 +32,7 @@ class BitmapFont : public Shader
 public:
 	BitmapFont();
 	void set_align(std::string hAlign = "left", std::string vAlign = "normal");
-	void init();
+	void create();
 	void render_dynamic(std::string &font, float xPos, float yPos, std::string &text, glm::vec4 &color, bool shadow);
 	txt::StaticData create_static(std::string &font, std::string &text, float x);
 	void render_static(txt::StaticData &data);

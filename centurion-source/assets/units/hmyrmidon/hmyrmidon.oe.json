@@ -1,18 +1,18 @@
 {
+  "class_name": "hmyrmidon",
   "yOffset": 30,
   "hitbox": [ 15, 40 ],
   "spriteList": [ "idle", "walk" ],
+  "directions": 8,
   "sprites": {
     "idle": {
       "filePath": "assets/units/hmyrmidon/idle.png",
       "frames": 11,
-      "directions": 8,
       "duration": 30
     },
     "walk": {
       "filePath": "assets/units/hmyrmidon/walk.png",
       "frames": 11,
-      "directions": 8,
       "duration": 15
     }
   }

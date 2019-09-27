@@ -13,28 +13,31 @@ void FormInput::create(float w, float h, std::vector<std::string> options) {
 	selectedText = options[0];	
 	hasText = selectedText.size() > 0;
 	mainTextPos = glm::vec2(position.x + 3.f, (position.y - 1.f) - height / 1.5f - 6.f);
+	nOptions = options.size();
 
 	back = gui::Rectangle();
 	back.set_id(picking_id);
-	back.create("filled", position.x, position.y, width - 1, height - 1, "top-left");
+	back.create("filled", position.x, position.y, width, height, "top-left");
 
 	if (boolOptions) { 
 
 		text = gui::SimpleText("dynamic"); // this is for selected text;
 		
+		back_options = gui::Rectangle();
+		back_options.set_color(color);
+		back_options.create("filled", position.x, position.y - height - 1, width, height * nOptions, "top-left");
+
 		for (int j = 0; j < options.size(); j++) {			
 			float y = position.y - 1.f - (j + 1)*height + j;
 			
-			/* options background saved in memory */
-			
+			/* options background saved in memory for picking */
 			gui::Rectangle tempRect = gui::Rectangle();
 			tempRect.set_id(picking_id);
 			tempRect.set_color(color);
 			tempRect.create("filled", position.x, y, width - 1, height - 1, "top-left");
-			back_options.push_back(tempRect);
+			back_options_picking.push_back(tempRect);
 
 			/* options text saved in memory */
-
 			gui::SimpleText tempText = gui::SimpleText("static");
 			tempText.create_static(options[j], "tahoma_8", position.x + 3.f, y - height / 1.5f - 6.f, "left", "normal", glm::vec4(255.f));
 			optionsText.push_back(tempText);
@@ -53,36 +56,40 @@ void FormInput::render(bool picking, glm::vec4 border_color) {
 	if (picking) {
 		back.render(true);
 		if (boolOptions && isOpened) {
-			for (int j = 0; j < back_options.size(); j++) {
-				back_options[j].render(true);
+			for (int j = 0; j < nOptions; j++) {
+				back_options_picking[j].render(true);
 			}
 		}
 	}
 	else {
 
+		back.set_color(color); // this comes from ui object
+		back.render();
+
 		obj::ERectangle()->create(getCoords(position.x, position.y, width, height));
 		obj::ERectangle()->render(glm::mat4(1.0f), glm::mat4(1.0f), border_color);
 
-		back.set_color(color); // this comes from ui object
-		back.render();
-		
 		if (boolOptions) {
+			// selected text
 			text.set_text(selectedText);
 			text.set_position(mainTextPos);
 			text.render_dynamic("tahoma_8", glm::vec4(255.f), "left", "normal");
 			if (isOpened) {
-				for (int j = 0; j < form_options.size(); j++) {
-					float y = position.y - 1.f - (j + 1)*height + j * 1;
-					obj::ERectangle()->create(getCoords(position.x, position.y - height - 1.f, width, height * form_options.size() - 1.0f));
-					obj::ERectangle()->render(glm::mat4(1.0f), glm::mat4(1.0f));
-
-					back_options[j].render();
+				// background
+				back_options.render();
+				// border 
+				obj::ERectangle()->create(getCoords(position.x, position.y - height, width, height * nOptions + 1.0f));
+				obj::ERectangle()->render(glm::mat4(1.0f), glm::mat4(1.0f));
+				// text
+				for (int j = 0; j < nOptions; j++) {
 					optionsText[j].render_static();
 				}
+				
 			}
 		}
 		else {
 			if (hasText) {
+				// selected text
 				text.render_static();
 			}
 		}
@@ -102,6 +109,4 @@ void FormInput::select_option(int i) {
 	selectedText = form_options[i - 1];
 }
 
-FormInput::~FormInput()
-{
-}
+FormInput::~FormInput(){}

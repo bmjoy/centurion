@@ -1,25 +1,42 @@
 #pragma once
 
 #include <global.hpp>
+#include <json.hpp>
 #include <shader.h>
 
-#include <json.hpp>
+struct UnitData {
+	std::map<int, int[2]> spriteSize;
+	std::map<int, int> Frames;
+	std::map<int, int> Durations;
+	std::map<std::string, int> States;
+	glm::vec3 playerColor;
+	glm::vec3 pickingColor;
+	std::string className;
+	int hitBox[2];
+	GLint currentState;
+	int currentFrame;
+	int currentDir;
+	int yOffset;
+	int maxDirections;
+	GLuint textureID;
+};
 
-class BuildingSprite : public Shader
+class UnitSprite : public Shader
 {
 public:
-	BuildingSprite();
-	BuildingSprite(int shaderID);
+	UnitSprite();
+	UnitSprite(int shaderID);
 	void addPath(std::string Path) { entPathList.push_back(Path); }
-	GLuint getTextureId(std::string className);
 	void create();
-	void render(GLuint texID, bool clickable, float x, float y, float w, float h, bool picking, int pickingId, bool selected, glm::vec3 *playerColor);
-	~BuildingSprite();
+	void getTextureInfo(UnitData *uData);
+	void render(UnitData d, glm::vec3 &pos, bool picking);
+	~UnitSprite();
 
 private:
-
 	std::vector<std::string> entPathList;
 	std::string texturePath;       // texture path
+
+	std::map<std::string, int[2]> spriteSize;
 
 	unsigned char *data;
 	unsigned int indices[6] = {
