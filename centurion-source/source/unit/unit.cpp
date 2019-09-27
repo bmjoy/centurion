@@ -1,4 +1,5 @@
 #include "stb_image.h" //Necessary for texture manipulation
+#include "../building/building.h"
 #include "unit.h"
 
 Unit::Unit() {

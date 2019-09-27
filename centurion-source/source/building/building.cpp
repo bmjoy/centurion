@@ -1,5 +1,5 @@
 #include "stb_image.h"  // manip. texture
-
+#include "../unit/unit.h"
 #include "building.h"
 
 Building::Building()
@@ -19,12 +19,31 @@ void Building::create() {
 	stbi_image_free(texture);
 
 	clickableInMinimap = (bool)data["clickable_in_minimap"].get<int>();
+	//selectionSound = (sound)data["selectionSound"].get<std::string>(); TODO
 	textureID = obj::BSprite()->getTextureId(className);
 }
 
 void Building::render(bool picking, int clickID) {
 	selected = (picking_id == clickID);
 	obj::BSprite()->render(textureID, clickableInMinimap, position.x, position.y, w, h, picking, picking_id, selected, player->getPlayerColor());
+}
+
+int Building::UnitsInBuilding(){
+	if (clickableInMinimap) {
+		return unitsInside.size();
+	}
+	else {
+		return 0;
+	}
+}
+
+std::vector<Unit> Building::UnitsInHolder() {
+	if (clickableInMinimap) {
+		return unitsInside;
+	}
+	else {
+		return {};
+	}
 }
 
 Building::~Building()

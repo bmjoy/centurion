@@ -8,6 +8,7 @@
 #include "../gui/rectangle.h"
 #include "../gui/image.h"
 
+class Building;
 
 class Unit : public GObject
 {
