@@ -9,7 +9,6 @@
 
 #include "../menu/menu.h"
 #include "../game/game.h"
-#include "../primitives/image.h"
 
 #include "../gui/simple_text.h"
 #include "../gui/rectangle.h"
@@ -25,10 +24,6 @@ public:
 	~Engine();
 
 private:
-	// compile shaders
-	Image image_setup;         // temporary
-	//USprite unit_sprite_setup; // temporary
-
 	// objects 
 	myWindow window;
 	Mouse *mouse;

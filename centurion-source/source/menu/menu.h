@@ -6,7 +6,7 @@
 #include "../music/music.h"
 #include "../gui/form_input.h"
 #include "../gui/button.h"
-#include "../gui/div_image.h"
+#include "../gui/image.h"
 #include "../interface/menu_players_list.h"
 #include "../player/player.h"
 
@@ -25,16 +25,16 @@ private:
 	std::string currentMenu;
 	std::vector<std::string> menus;
 
-	std::map<std::string, std::vector<DivImage>> images;
-	std::map<std::string, std::vector<Button>> buttons;
+	std::map<std::string, std::vector<gui::Image>> images;
+	std::map<std::string, std::vector<gui::Button>> buttons;
 	std::map<std::string, std::vector<FormInput>> formInputs;
 	int x, y, w, h;
 	std::string s;
 	ISoundEngine* music;
 
 	/* temporary objects */
-	DivImage img;
-	Button btn;
+	gui::Image img;
+	gui::Button btn;
 	PlayersList list;
 
 	/* PICKING */

@@ -20,21 +20,17 @@ void PlayersList::create(std::map<int, std::string> *pickingList, int *pickingId
 	textWidth = text.get_width();
 
 
-	arrowDown = DivImage();
-	arrowDown.set_img_path("assets/ui/menu/down.png");
-	arrowDown.set_position(glm::vec2(x + 240, y + 50));
+	arrowDown = gui::Image("arrowDown");
 	arrowDown.set_id(*pickingId);
 	(*pickingList)[*pickingId] = "arrowDown";
 	(*pickingId)++;
-	arrowDown.create("center");
+	arrowDown.create("center", x + 240, y + 50);
 
-	arrowUp = DivImage();
-	arrowUp.set_img_path("assets/ui/menu/up.png");
-	arrowUp.set_position(glm::vec2(x + 280, y + 50));
+	arrowUp = gui::Image("arrowUp");
 	arrowUp.set_id(*pickingId);
 	(*pickingList)[*pickingId] = "arrowUp";
 	(*pickingId)++;
-	arrowUp.create("center");
+	arrowUp.create("center", x + 280, y + 50);
 
 	background = gui::Rectangle();
 	background.set_color(glm::vec4(0.f, 0.f, 0.f, 0.5f));

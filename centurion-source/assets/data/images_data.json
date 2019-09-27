@@ -1,0 +1,10 @@
+{
+	"image_names": ["button_1", "main_background", "circle_pos", "arrowDown", "arrowUp"],
+	"roots": {
+        "button_1": "assets/ui/buttons/button_1.png",
+        "main_background": "assets/ui/menu/menu_background.png",
+        "circle_pos": "assets/ui/mouse/cursor_point.png",
+        "arrowDown": "assets/ui/menu/down.png",
+        "arrowUp": "assets/ui/menu/up.png"
+    }
+}

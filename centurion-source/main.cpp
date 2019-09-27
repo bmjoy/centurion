@@ -43,9 +43,7 @@ namespace MAP {
 }
 
 namespace SHD {
-	int IMAGE_SHADER_ID = 0;
 	int GRID_SHADER_ID = 0;
-	int USPRITE_SHADER_ID = 0;
 }
 
 namespace GAME {

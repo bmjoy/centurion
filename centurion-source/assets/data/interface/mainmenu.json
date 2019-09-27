@@ -1,8 +1,8 @@
 {
 	"images": [{
 			"name": "background",
+			"image_name": "main_background",
 			"clickable": 0,
-			"path": "assets/ui/menu/menu_background.png",
 			"x": 0,
 			"y": 0,
 			"size": "max",
@@ -13,14 +13,13 @@
 
 	"buttons": [{
 			"name": "buttonSinglePlayer",
-			"path": "assets/ui/buttons/button_1.png",
+			"image_name": "button_1",
 			"x": -150,
 			"y": 600,
 			"text": "Singleplayer"
-		},
-		{
+		}, {
 			"name": "buttonQuit",
-			"path": "assets/ui/buttons/button_1.png",
+			"image_name": "button_1",
 			"x": -150,
 			"y": 75,
 			"text": "Exit"

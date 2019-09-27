@@ -128,15 +128,15 @@ void Game::run() {
 	/* If minimap is active */
 	else {
 		view = glm::mat4(1.0f);
-		projection = GLB::MINIMAP_PROJECTION;			
+		projection = GLB::MINIMAP_PROJECTION;	
 	}
 
-	game::applyMatrices(&projection, &view);
+	// apply game matrices:
+	game::applyGameMatrices(&projection, &view);
 
 	/* Tracing and Picking */
 	game::tracing(surface, &projection, &view);
 	game::picking(&buildingList, &unitList, &projection, &view, &click_id, &blockMinimap);
-	ui.render(true);
 
 	/* Rendering */
 	surface->render(projection, view, false);
@@ -146,16 +146,11 @@ void Game::run() {
 	
 	if (GLB::DEBUG) cursor_point.render();
 	
-	
 	// ---- Game UI ---- //
 
 	// apply menu matrices:
-	obj::ERectangle()->apply_projection_matrix(GLB::MENU_PROJECTION);
-	obj::ERectangle()->apply_view_matrix();
-	obj::FRectangle()->apply_projection_matrix(GLB::MENU_PROJECTION);
-	obj::FRectangle()->apply_view_matrix();
-
-	ui.render(false);
+	game::applyMenuMatrices();
+	ui.render();
 
 	// ----------------- //	
 

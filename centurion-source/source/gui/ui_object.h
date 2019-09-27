@@ -17,6 +17,7 @@ public:
 protected:
 	glm::vec3 position;
 	glm::vec4 color;
+	glm::vec3 pickingColor;
 	std::string img_path;
 	std::string text;
 };

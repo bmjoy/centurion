@@ -135,9 +135,6 @@
     <ClCompile Include="source\engine\camera.cpp">
       <Filter>Source Files\engine</Filter>
     </ClCompile>
-    <ClCompile Include="source\gui\div_image.cpp">
-      <Filter>Source Files\gui</Filter>
-    </ClCompile>
     <ClCompile Include="source\primitives\empty_rectangle.cpp">
       <Filter>Source Files\primitives</Filter>
     </ClCompile>
@@ -155,9 +152,6 @@
     </ClCompile>
     <ClCompile Include="source\terrain\grid.cpp">
       <Filter>Source Files\terrain</Filter>
-    </ClCompile>
-    <ClCompile Include="source\primitives\image.cpp">
-      <Filter>Source Files\primitives</Filter>
     </ClCompile>
     <ClCompile Include="source\primitives\filled_rectangle.cpp">
       <Filter>Source Files\primitives</Filter>
@@ -246,6 +240,12 @@
     <ClCompile Include="source\primitives\unit_sprite.cpp">
       <Filter>Source Files\primitives</Filter>
     </ClCompile>
+    <ClCompile Include="source\primitives\image_sprite.cpp">
+      <Filter>Source Files\primitives</Filter>
+    </ClCompile>
+    <ClCompile Include="source\gui\image.cpp">
+      <Filter>Source Files\gui</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="source\building\building.h">
@@ -259,9 +259,6 @@
     </ClInclude>
     <ClInclude Include="source\engine\engine.h">
       <Filter>Header Files\engine</Filter>
-    </ClInclude>
-    <ClInclude Include="source\primitives\image.h">
-      <Filter>Header Files\primitives</Filter>
     </ClInclude>
     <ClInclude Include="source\primitives\filled_rectangle.h">
       <Filter>Header Files\primitives</Filter>
@@ -303,9 +300,6 @@
       <Filter>Header Files\gui</Filter>
     </ClInclude>
     <ClInclude Include="source\gui\button.h">
-      <Filter>Header Files\gui</Filter>
-    </ClInclude>
-    <ClInclude Include="source\gui\div_image.h">
       <Filter>Header Files\gui</Filter>
     </ClInclude>
     <ClInclude Include="source\gui\form_input.h">
@@ -376,6 +370,15 @@
     </ClInclude>
     <ClInclude Include="source\primitives\unit_sprite.h">
       <Filter>Header Files\primitives</Filter>
+    </ClInclude>
+    <ClInclude Include="source\primitives\image_sprite.h">
+      <Filter>Header Files\primitives</Filter>
+    </ClInclude>
+    <ClInclude Include="source\primitives\primitives.h">
+      <Filter>Header Files\primitives</Filter>
+    </ClInclude>
+    <ClInclude Include="source\gui\image.h">
+      <Filter>Header Files\gui</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

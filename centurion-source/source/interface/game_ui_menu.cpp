@@ -19,9 +19,7 @@ void GameMenu::create(int *pickingId, std::map<int, std::string> *pickingList) {
 
 	s = "buttons";
 	for (int i = 0; i < data[s].size(); ++i) {
-		btn = Button();
-		btn.set_img_path(data[s][i]["path"].get<std::string>());
-		btn.set_position(glm::vec2(x + data[s][i]["x"].get<int>(), y + data[s][i]["y"].get<int>()));
+		btn = gui::Button();
 		btn.set_text(data[s][i]["text"].get<std::string>());
 		btn.set_id(*pickingId);
 
@@ -29,7 +27,7 @@ void GameMenu::create(int *pickingId, std::map<int, std::string> *pickingList) {
 		(*pickingList)[*pickingId] = data[s][i]["name"].get<std::string>();
 		(*pickingId)++;
 
-		btn.create();
+		btn.create(data[s][i]["image_name"].get<std::string>(), x + data[s][i]["x"].get<int>(), y + data[s][i]["y"].get<int>());
 		buttons.push_back(btn);
 	}
 
@@ -49,10 +47,6 @@ void GameMenu::render(bool picking) {
 		}
 
 		else {
-			for (int i = 0; i < buttons.size(); ++i) {
-				buttons[i].render(true);
-			}
-
 			background.render();
 
 			obj::ERectangle()->create(getCoords(x - w / 2.f, y + h / 2.f, w, h));

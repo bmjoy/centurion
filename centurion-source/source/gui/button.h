@@ -1,18 +1,21 @@
 #pragma once
 
 #include "ui_object.h"
-#include "../primitives/image.h"
 #include "simple_text.h"
+#include "image.h"
 
-class Button : public UIObject
-{
-public:
-	Button();
-	void create();
-	void render(bool picking);
-	~Button();
+namespace gui {
+	class Button : public UIObject
+	{
+	public:
+		Button();
+		void create(std::string imageName, int x, int y);
+		void render(bool picking);
+		~Button();
 
-private:
-	gui::SimpleText buttonText;
-	Image buttonImage;
-};
+	private:
+		SimpleText buttonText;
+		Image buttonImage;
+	};
+}
+

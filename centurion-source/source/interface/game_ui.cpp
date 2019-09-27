@@ -28,26 +28,22 @@ void UIGame::create(int *pickingId) {
 	time.text = gui::SimpleText("dynamic", true);
 }
 
-void UIGame::render(bool pick) {
-	
-	if (pick) {
-		gameMenu.render(true);
+void UIGame::render() {
 
-		picking();
-	}
+	gameMenu.render(true);
 
-	else {
-		calculateTime();
-		gameMenu.render(false);
+	picking();
+
+	calculateTime();
+	gameMenu.render(false);
 		
-		time.text.set_position(glm::vec2(GLB::WINDOW_WIDTH - 100.0f, GLB::WINDOW_HEIGHT - GAME::UI_TOP_HEIGHT - 30.0f));
-		time.text.set_text(time.hours_str + ":" + time.minutes_str + ":" + time.seconds_str);
-		time.text.render_dynamic("tahoma_8", glm::vec4(255.f, 255.f, 255.f, 255.f), "left", "normal");
+	time.text.set_position(glm::vec2(GLB::WINDOW_WIDTH - 100.0f, GLB::WINDOW_HEIGHT - GAME::UI_TOP_HEIGHT - 30.0f));
+	time.text.set_text(time.hours_str + ":" + time.minutes_str + ":" + time.seconds_str);
+	time.text.render_dynamic("tahoma_8", glm::vec4(255.f, 255.f, 255.f, 255.f), "left", "normal");
 
-		// Temporary bars:
-		top_bar.render();
-		bottom_bar.render();	
-	}
+	// Temporary bars:
+	top_bar.render();
+	bottom_bar.render();	
 }
 
 void UIGame::picking() {

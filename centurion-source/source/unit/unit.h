@@ -5,9 +5,8 @@
 
 #include "../game/game_object.h"
 #include "unit_functions.h"
-#include "../primitives/image.h" //Just for debugging purpose
 #include "../gui/rectangle.h"
-
+#include "../gui/image.h"
 
 
 class Unit : public GObject
@@ -52,5 +51,5 @@ private:
 	struct HitBox {
 		std::array<float, 8> coords;
 	} hitbox;
-	Image circlePos;
+	gui::Image circlePos;
 };

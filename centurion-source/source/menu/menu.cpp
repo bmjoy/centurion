@@ -21,46 +21,56 @@ void Menu::create(std::vector<Player> *List) {
 
 		std::ifstream path("assets/data/interface/" + menus[a] + ".json");
 		data = json::parse(path);
-
 		s = "images";
+		
 		for (int i = 0; i < data[s].size(); ++i) {
-			img = DivImage();
-			img.set_img_path(data[s][i]["path"].get<std::string>());
-			(data[s][i]["x"].get<int>() >= 0) ? x = data[s][i]["x"].get<int>() : x = GLB::WINDOW_WIDTH + data[s][i]["x"].get<int>();
-			(data[s][i]["y"].get<int>() >= 0) ? y = data[s][i]["y"].get<int>() : y = GLB::WINDOW_HEIGHT + data[s][i]["y"].get<int>();
-			img.set_position(glm::vec2(x, y));
-			
-			/* picking */
-			img.set_id(pickingId * data[s][i]["clickable"].get<int>());
-			pickingList[pickingId * data[s][i]["clickable"].get<int>()] = data[s][i]["name"].get<std::string>();
-			pickingId += pickingId * data[s][i]["clickable"].get<int>();
 
-			if (data[s][i]["size"].get<std::string>() == "auto") {
-				img.create(data[s][i]["align"].get<std::string>());
-			}
-			else if (data[s][i]["size"].get<std::string>() == "max") {
-				img.create(data[s][i]["align"].get<std::string>(), glm::ivec2(GLB::WINDOW_WIDTH, GLB::WINDOW_HEIGHT));
-			}
+			/* read data from json */
+			std::string imageName = data[s][i]["image_name"].get<std::string>();
+			std::string name = data[s][i]["name"].get<std::string>();
+			std::string size = data[s][i]["size"].get<std::string>();
+			std::string align = data[s][i]["align"].get<std::string>();
+			int clickable = data[s][i]["clickable"].get<int>();
+			int jsonX = data[s][i]["x"].get<int>();
+			int jsonY = data[s][i]["y"].get<int>();
 
+			/* use data */
+			(jsonX >= 0) ? x = jsonX : x = GLB::WINDOW_WIDTH + jsonX;
+			(jsonY >= 0) ? y = jsonY : y = GLB::WINDOW_HEIGHT + jsonY;
+
+			img = gui::Image(imageName);	
+			img.set_id(pickingId * clickable);
+			if (size == "auto") img.create(align, x, y);
+			if (size == "max") img.create(align, x, y, GLB::WINDOW_WIDTH, GLB::WINDOW_HEIGHT);
 			images[menus[a]].push_back(img);
+
+			// update picking 
+			pickingList[pickingId * clickable] = name;
+			pickingId += pickingId * clickable;
 		}
 
 		s = "buttons";
 		for (int i = 0; i < data[s].size(); ++i) {
-			btn = Button();
-			btn.set_img_path(data[s][i]["path"].get<std::string>());
-			(data[s][i]["x"].get<int>() >= 0) ? x = data[s][i]["x"].get<int>() : x = GLB::WINDOW_WIDTH + data[s][i]["x"].get<int>();
-			(data[s][i]["y"].get<int>() >= 0) ? y = data[s][i]["y"].get<int>() : y = GLB::WINDOW_HEIGHT + data[s][i]["y"].get<int>();
-			btn.set_position(glm::vec2(x, y));
-			btn.set_text(data[s][i]["text"].get<std::string>());
+
+			/* read data from json */
+			std::string imageName = data[s][i]["image_name"].get<std::string>();
+			std::string jsonText = data[s][i]["text"].get<std::string>();
+			int jsonX = data[s][i]["x"].get<int>();
+			int jsonY = data[s][i]["y"].get<int>();
+
+			/* use data */
+			(jsonX >= 0) ? x = jsonX : x = GLB::WINDOW_WIDTH + jsonX;
+			(jsonY >= 0) ? y = jsonY : y = GLB::WINDOW_HEIGHT + jsonY;
+
+			btn = gui::Button();
+			btn.set_text(jsonText);
 			btn.set_id(pickingId);
-			
-			/* picking */
+			btn.create(imageName, x, y);
+			buttons[menus[a]].push_back(btn);
+
+			// update picking 
 			pickingList[pickingId] = data[s][i]["name"].get<std::string>();
 			pickingId++;
-
-			btn.create();
-			buttons[menus[a]].push_back(btn);
 		}
 
 		s = "playersList";

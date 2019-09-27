@@ -59,9 +59,7 @@ namespace MAP {
 }
 
 namespace SHD {
-	extern int IMAGE_SHADER_ID;
 	extern int GRID_SHADER_ID;
-	extern int USPRITE_SHADER_ID;
 }
 
 namespace GAME {

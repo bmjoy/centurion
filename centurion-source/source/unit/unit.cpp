@@ -46,8 +46,8 @@ void Unit::create() {
 	obj::USprite()->getTextureInfo(&unitData);
 
 	//Show circle position under the unit (Debug only)
-	circlePos = Image(SHD::IMAGE_SHADER_ID);
-	circlePos.create("assets/ui/mouse/cursor_point.png", "center");
+	circlePos = gui::Image("circle_pos");
+	circlePos.create("center", 0, 0);
 
 	creationTime = glfwGetTime();
 }
@@ -57,7 +57,7 @@ void Unit::render(glm::mat4 &proj, glm::mat4 &view, bool picking, int clickID) {
 	clickSelection = (picking_id == clickID);
 	if(GLB::MOUSE_LEFT)	rectangleSelection = unit::isInSelectionRect(hitbox.coords);
 
-	if (GLB::MOUSE_LEFT) std::cout << clickID << "\n";
+	
 
 	selected = (clickSelection + rectangleSelection > 0);
 
@@ -80,8 +80,6 @@ void Unit::render(glm::mat4 &proj, glm::mat4 &view, bool picking, int clickID) {
 	/* debug pathfinding and coordinates */
 
 	if (GLB::DEBUG && !picking) {
-		circlePos.apply_projection_matrix(GLB::CAMERA_PROJECTION);
-		circlePos.apply_view_matrix(view);
 
 		// **** Rectangle Path **** //
 		
@@ -94,8 +92,8 @@ void Unit::render(glm::mat4 &proj, glm::mat4 &view, bool picking, int clickID) {
 		// ************************ //
 
 		if (!GAME::MINIMAP_IS_ACTIVE) {
-			circlePos.render(position2D.x, position2D.y);
-			circlePos.render(position3D.x, position3D.y);
+			circlePos.render(false, position2D.x, position2D.y);
+			circlePos.render(false, position3D.x, position3D.y);
 
 			obj::ERectangle()->apply_projection_matrix(GLB::CAMERA_PROJECTION);
 			hitbox.coords = getCoords(position3D.x - entityData["hitbox"][0], position3D.y + entityData["hitbox"][1] + entityData["yOffset"], entityData["hitbox"][0] * 2, entityData["hitbox"][1] * 2);

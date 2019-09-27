@@ -51,8 +51,6 @@ private:
 		-0.5f,		0.5f,		0.0f,		0.0f, 0.0f   // in alto a sx
 	};
 
-	int r, g, b;
-
 	void genBuffers();
 };
 

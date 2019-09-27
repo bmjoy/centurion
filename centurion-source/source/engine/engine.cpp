@@ -4,8 +4,6 @@
 Engine::Engine(){
 	window = myWindow();
 	
-	image_setup = Image();
-
 	nbFrames = 0; 
 	Fps = 0;
 	Mpfs = 0;
@@ -18,13 +16,8 @@ int Engine::launch() {
 	
 	readDataClasses();
 	
-	compile_shaders(); // temporary
-	
 	obj::compile();
 	obj::create();
-
-	
-
 
 	lastTime = glfwGetTime();
 
@@ -53,7 +46,7 @@ int Engine::launch() {
 
 				obj::FRectangle()->apply_projection_matrix(GLB::MENU_PROJECTION);
 				obj::FRectangle()->apply_view_matrix();
-	
+
 				startMenu->create(&playersList);
 			}
 			startMenu->render();
@@ -65,6 +58,7 @@ int Engine::launch() {
 			if (!game->game_is_created()) {
 				clearAndSwapBuffers(GLB::MAIN_WINDOW);
 				{
+					text = gui::SimpleText("dynamic");
 					text.set_position(glm::vec2(GLB::WINDOW_WIDTH / 2.f, GLB::WINDOW_HEIGHT / 2.f));
 					text.set_text("Game is being created...");
 					text.render_dynamic("tahoma_8", glm::vec4(255.f), "center", "middle");
@@ -104,17 +98,17 @@ int Engine::launch() {
 	return 0;
 }
 
-void Engine::compile_shaders() {
-	SHD::IMAGE_SHADER_ID = image_setup.compile();
-}
-
 void Engine::readDataClasses() {
 
 	std::vector<std::string> files = get_all_files_names_within_folder("assets/data/classes");
+	json dataClass;
+	
+	/* buildings and units */
+
 	for (int i = 0; i < files.size(); ++i) {
 		
 		std::ifstream path("assets/data/classes/" + files[i]);
-		json dataClass = json::parse(path);
+		dataClass = json::parse(path);
 
 		if (dataClass["type"] == "building") {			
 			obj::BSprite()->addPath(dataClass["ent_path"]);
@@ -123,7 +117,19 @@ void Engine::readDataClasses() {
 		if (dataClass["type"] == "unit") {
 			obj::USprite()->addPath(dataClass["ent_path"]);
 		}
-	}	
+	}
+
+	/* images */
+
+	std::ifstream path2("assets/data/images_data.json");
+	dataClass = json::parse(path2);
+
+	for (int i = 0; i < dataClass["image_names"].size(); i++) {
+		std::string imageName = dataClass["image_names"][i].get<std::string>();
+		std::string root = dataClass["roots"][imageName];
+
+		obj::Img()->addPath(imageName, root);
+	}
 }
 
 void Engine::fps() {

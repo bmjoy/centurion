@@ -20,6 +20,10 @@ FilledRectangle *obj::FRectangle() {
 	return &obj::fRect;
 }
 
+ImageSprite *obj::Img() {
+	return &obj::img;
+}
+
 UnitSprite *obj::USprite() {
 	return &obj::usprite;
 }
@@ -30,6 +34,7 @@ void obj::init() {
 	*obj::Cursor() = CursorImage();
 	*obj::ERectangle() = EmptyRectangle();
 	*obj::FRectangle() = FilledRectangle();
+	*obj::Img() = ImageSprite();
 	*obj::USprite() = UnitSprite();
 }
 
@@ -40,6 +45,7 @@ void obj::compile() {
 	id = obj::ERectangle()->compile();
 	id = obj::FRectangle()->compile();
 	id = obj::Cursor()->compile();
+	id = obj::Img()->compile();
 	id = obj::USprite()->compile();
 }
 
@@ -51,5 +57,8 @@ void obj::create() {
 	obj::ERectangle()->init();
 	obj::FRectangle()->create();
 	obj::BSprite()->create();
+	obj::Img()->apply_projection_matrix(GLB::MENU_PROJECTION);
+	obj::Img()->apply_view_matrix();
+	obj::Img()->create();
 	obj::USprite()->create();
 }

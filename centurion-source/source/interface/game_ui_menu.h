@@ -14,9 +14,9 @@ public:
 	void render(bool picking);
 	~GameMenu();
 private:
-	Button btn;
+	gui::Button btn;
 	gui::Rectangle background;
-	std::vector<Button> buttons;
+	std::vector<gui::Button> buttons;
 	json data;
 	std::string s;
 	float w, h, x, y;

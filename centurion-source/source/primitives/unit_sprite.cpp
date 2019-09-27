@@ -19,6 +19,8 @@ void UnitSprite::create() {
 	genBuffers();
 
 	int k = 0;
+	int w, h, nrChannels;
+	GLuint texID;
 
 	std::string className;
 	std::string fullName;
@@ -31,30 +33,31 @@ void UnitSprite::create() {
 
 		for (int i = 0; i < ent_data["spriteList"].size(); i++) {
 
+			w = 0; h = 0; nrChannels = 0; texID = 0;
+
 			className = ent_data["class_name"].get<std::string>();
 			state = ent_data["spriteList"][i].get<std::string>();
 			fullName = className + "_" + state;
 			texturePath = ent_data["sprites"][state]["filePath"].get<std::string>();
 
-			/* save texture info */
-			textureIdList.push_back(0);
-			textureInfoList.push_back(glm::ivec3(0, 0, 0));
-			data = stbi_load(texturePath.c_str(), &textureInfoList[k].x, &textureInfoList[k].y, &textureInfoList[k].z, 0);
+			/* texture info */
+			data = stbi_load(texturePath.c_str(), &w, &h, &nrChannels, 0);
 			if (!data) { std::cout << "Failed to load texture" << std::endl; }
 
 			/* texture */
-			glGenTextures(1, &textureIdList[k]);
-			glBindTexture(GL_TEXTURE_2D, textureIdList[k]);
+			glGenTextures(1, &texID);
+			glBindTexture(GL_TEXTURE_2D, texID);
 			// create texture and generate mipmaps
-			glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, textureInfoList[k].x, textureInfoList[k].y, 0, GL_RGBA, GL_UNSIGNED_BYTE, data);
+			glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, w, h, 0, GL_RGBA, GL_UNSIGNED_BYTE, data);
 			glGenerateMipmap(GL_TEXTURE_2D);
 			glBindTexture(GL_TEXTURE_2D, 0);
 
 			stbi_image_free(data);
-			textureIdMap[fullName] = textureIdList[i];
 
-			spriteSize[fullName][0] = textureInfoList[k].x;
-			spriteSize[fullName][1] = textureInfoList[k].y;
+			/* store information */
+			textureIdMap[fullName] = texID;
+			spriteSize[fullName][0] = w;
+			spriteSize[fullName][1] = h;
 
 			k++;
 		}

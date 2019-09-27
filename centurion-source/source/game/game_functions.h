@@ -14,7 +14,8 @@ namespace game {
 	static bool doubleClick = false;
 	static int clickIdList[2] = { 0, 0 };
 
-	void applyMatrices(glm::mat4 *proj, glm::mat4 *view);
+	void applyGameMatrices(glm::mat4 *proj, glm::mat4 *view);
+	void applyMenuMatrices();
 	void picking(std::map<int, Building> *bList, std::map<int, Unit> *uList, glm::mat4 *proj, glm::mat4 *view, int *clickId, bool *blockMinimap);
 	void tracing(Surface *s, glm::mat4 *proj, glm::mat4 *view);
 	void clearBuffers();

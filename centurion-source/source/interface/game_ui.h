@@ -11,7 +11,7 @@ class UIGame
 public:
 	UIGame();
 	void create(int *pickingId);
-	void render(bool pick);
+	void render();
 	~UIGame();
 private:
 	struct Time {
