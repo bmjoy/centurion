@@ -1,18 +1,20 @@
 #pragma once
 
-#include "ui_object.h"
-#include "../primitives/image.h"
-#include "../primitives/bitmap_font.h"
+#include "simple_text.h"
+#include "image.h"
 
-class Button : public UIObject
-{
-public:
-	Button();
-	void create();
-	void render(bool picking);
-	~Button();
+namespace gui {
+	class Button
+	{
+	public:
+		Button();
+		void create(std::string imageName, std::string Text, int x, int y, int pickingID, glm::vec4 textColor);
+		void render(bool picking);
+		~Button();
 
-private:
-	CBitmapFont buttonText;
-	Image buttonImage;
-};
+	private:
+		SimpleText buttonText;
+		Image buttonImage;
+	};
+}
+

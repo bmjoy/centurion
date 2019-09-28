@@ -22,7 +22,7 @@
     <VCProjectVersion>15.0</VCProjectVersion>
     <ProjectGuid>{29C92E4D-97E2-4049-A35E-F6A42D1C8AB9}</ProjectGuid>
     <RootNamespace>centurion</RootNamespace>
-    <WindowsTargetPlatformVersion>10.0.18362.0</WindowsTargetPlatformVersion>
+    <WindowsTargetPlatformVersion>10.0.17763.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
@@ -225,8 +225,8 @@
     </None>
     <ClCompile Include="main.cpp" />
     <ClCompile Include="source\building\building.cpp" />
-    <ClCompile Include="source\building\building_sprite.cpp" />
     <ClCompile Include="source\common\map_generation.cpp" />
+    <ClCompile Include="source\common\objects.cpp" />
     <ClCompile Include="source\common\shader.cpp" />
     <ClCompile Include="source\engine\camera.cpp" />
     <ClCompile Include="source\engine\cursor_point.cpp" />
@@ -237,29 +237,32 @@
     <ClCompile Include="source\game\game_functions.cpp" />
     <ClCompile Include="source\game\game_object.cpp" />
     <ClCompile Include="source\gui\button.cpp" />
-    <ClCompile Include="source\gui\div_image.cpp" />
-    <ClCompile Include="source\gui\div_text.cpp" />
+    <ClCompile Include="source\gui\image.cpp" />
+    <ClCompile Include="source\gui\simple_text.cpp" />
     <ClCompile Include="source\gui\form_input.cpp" />
-    <ClCompile Include="source\gui\ui_game.cpp" />
-    <ClCompile Include="source\gui\ui_object.cpp" />
-    <ClCompile Include="source\interface\game_menu.cpp" />
-    <ClCompile Include="source\interface\players_list.cpp" />
+    <ClCompile Include="source\gui\rectangle.cpp" />
+    <ClCompile Include="source\interface\debug_ui.cpp" />
+    <ClCompile Include="source\interface\game_ui_menu.cpp" />
+    <ClCompile Include="source\interface\game_ui.cpp" />
+    <ClCompile Include="source\interface\menu_players_list.cpp" />
     <ClCompile Include="source\menu\menu.cpp" />
     <ClCompile Include="source\music\music.cpp" />
     <ClCompile Include="source\pathfinding\a_star.cpp" />
     <ClCompile Include="source\pathfinding\node.cpp" />
     <ClCompile Include="source\player\player.cpp" />
     <ClCompile Include="source\primitives\bitmap_font.cpp" />
+    <ClCompile Include="source\primitives\building_sprite.cpp" />
+    <ClCompile Include="source\primitives\cursor_image.cpp" />
     <ClCompile Include="source\primitives\empty_rectangle.cpp" />
     <ClCompile Include="source\primitives\filled_rectangle.cpp" />
-    <ClCompile Include="source\primitives\image.cpp" />
+    <ClCompile Include="source\primitives\image_sprite.cpp" />
+    <ClCompile Include="source\primitives\unit_sprite.cpp" />
     <ClCompile Include="source\terrain\grid.cpp" />
     <ClCompile Include="source\terrain\light.cpp" />
     <ClCompile Include="source\terrain\surface.cpp" />
     <ClCompile Include="source\terrain\terrain.cpp" />
     <ClCompile Include="source\unit\unit.cpp" />
     <ClCompile Include="source\unit\unit_functions.cpp" />
-    <ClCompile Include="source\unit\unit_sprite.cpp" />
     <None Include="assets\shaders\bsprite\vertex.glsl">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
@@ -267,9 +270,9 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="source\building\building.h" />
-    <ClInclude Include="source\building\building_sprite.h" />
     <ClInclude Include="source\common\global.hpp" />
     <ClInclude Include="source\common\map_generation.h" />
+    <ClInclude Include="source\common\objects.h" />
     <ClInclude Include="source\common\shader.h" />
     <ClInclude Include="source\engine\camera.h" />
     <ClInclude Include="source\engine\cursor_point.h" />
@@ -282,29 +285,33 @@
     <ClInclude Include="source\game\game_functions.h" />
     <ClInclude Include="source\game\game_object.h" />
     <ClInclude Include="source\gui\button.h" />
-    <ClInclude Include="source\gui\div_image.h" />
-    <ClInclude Include="source\gui\div_text.h" />
+    <ClInclude Include="source\gui\image.h" />
+    <ClInclude Include="source\gui\simple_text.h" />
     <ClInclude Include="source\gui\form_input.h" />
-    <ClInclude Include="source\gui\ui_game.h" />
-    <ClInclude Include="source\gui\ui_object.h" />
-    <ClInclude Include="source\interface\game_menu.h" />
-    <ClInclude Include="source\interface\players_list.h" />
+    <ClInclude Include="source\gui\rectangle.h" />
+    <ClInclude Include="source\interface\debug_ui.h" />
+    <ClInclude Include="source\interface\game_ui_menu.h" />
+    <ClInclude Include="source\interface\game_ui.h" />
+    <ClInclude Include="source\interface\menu_players_list.h" />
     <ClInclude Include="source\menu\menu.h" />
     <ClInclude Include="source\music\music.h" />
     <ClInclude Include="source\pathfinding\a_star.h" />
     <ClInclude Include="source\pathfinding\node.h" />
     <ClInclude Include="source\player\player.h" />
     <ClInclude Include="source\primitives\bitmap_font.h" />
+    <ClInclude Include="source\primitives\building_sprite.h" />
+    <ClInclude Include="source\primitives\cursor_image.h" />
     <ClInclude Include="source\primitives\empty_rectangle.h" />
     <ClInclude Include="source\primitives\filled_rectangle.h" />
-    <ClInclude Include="source\primitives\image.h" />
+    <ClInclude Include="source\primitives\primitives.h" />
+    <ClInclude Include="source\primitives\image_sprite.h" />
+    <ClInclude Include="source\primitives\unit_sprite.h" />
     <ClInclude Include="source\terrain\grid.h" />
     <ClInclude Include="source\terrain\light.h" />
     <ClInclude Include="source\terrain\surface.h" />
     <ClInclude Include="source\terrain\terrain.h" />
     <ClInclude Include="source\unit\unit.h" />
     <ClInclude Include="source\unit\unit_functions.h" />
-    <ClInclude Include="source\unit\unit_sprite.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

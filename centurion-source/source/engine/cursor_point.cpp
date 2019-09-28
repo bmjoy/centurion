@@ -5,15 +5,13 @@ CPoint::CPoint()
 }
 
 void CPoint::create() {
-	img = Image(SHD::IMAGE_SHADER_ID);
-	img.create("assets/ui/mouse/cursor_point.png", "center");	
+	img = gui::Image("circle_pos");
+	img.create("center", 0.f, 0.f, 0, 0, 0);	
 }
 
 void CPoint::render() {
 	if (!GAME::MINIMAP_IS_ACTIVE){
-		img.apply_projection_matrix(GLB::MENU_PROJECTION);
-		img.apply_view_matrix();
-		img.render(GLB::MOUSE_X, GLB::MOUSE_Y_2D);
+		img.render(false, GLB::MOUSE_X, GLB::MOUSE_Y_2D);
 	}
 }
 

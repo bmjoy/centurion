@@ -1,6 +1,6 @@
 #pragma once
 
-#include "../primitives/image.h"
+#include "../gui/image.h"
 
 class CPoint
 {
@@ -10,7 +10,7 @@ public:
 	void render();
 	~CPoint();
 private:
-	Image img;
+	gui::Image img;
 	float xPosGrid, yPosGrid;
 };
 

@@ -1,16 +1,14 @@
 #pragma once
 
 #include <json.hpp>
+#include <objects.h>
+
 #include "../game/game_object.h"
-
 #include "unit_functions.h"
+#include "../gui/rectangle.h"
+#include "../gui/image.h"
 
-
-#include "../primitives/image.h" //Just for debugging purpose
-#include "../primitives/filled_rectangle.h" //Just for debugging purpose
-#include "../primitives/empty_rectangle.h" //Just for debugging purpose
-
-
+class Building;
 
 class Unit : public GObject
 {
@@ -22,10 +20,11 @@ public:
 	~Unit();
 
 private:
-	USprite sprite;
+
+	UnitData unitData;
 
 	/* unit properties & data */
-	std::string currentState;
+	std::string currentStateStr;
 	json entityData;
 	float creationTime;
 
@@ -37,8 +36,6 @@ private:
 
 	/* unit movement & pathfinding */
 	bool is_Moving;
-	int dir;
-	int frame;
 	int pathCount;
 	float angle;
 	float delta;
@@ -49,13 +46,12 @@ private:
 	void walk_behaviour();
 	
 	/* unit rendering */
-	glm::mat4 model;
 
 	/* debug objects */
-	FilledRectangle rectanglePath;
+	std::vector<gui::Rectangle> pathQuadsList;
 	struct HitBox {
-		EmptyRectangle rectangle;
+		gui::Rectangle rectangle;
 		std::array<float, 8> coords;
 	} hitbox;
-	Image circlePos;
+	gui::Image circlePos;
 };

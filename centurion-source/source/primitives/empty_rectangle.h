@@ -3,18 +3,20 @@
 #include <global.hpp>
 #include <shader.h>
 
+struct RectangleData {
+	glm::vec4 borderColor, backColor, pickingColor;
+	std::string type;
+	float x, y, w, h;
+	int origin;
+};
+
 class EmptyRectangle : public Shader
 {
 public:
 	EmptyRectangle();
-	EmptyRectangle(int shaderID);
-	int area = 0;
-	void init();
-	void create(std::array<float, 8> coords);
-	void render(glm::mat4 viewMat, glm::mat4 modelMat, glm::vec4 color = glm::vec4(255.0f, 255.0f, 255.0f, 1.0f));
+	void create();
+	void render(RectangleData &data);
 	~EmptyRectangle();
 private:
-	float empty_vertices[24];
 	float vertices[24];
-	int areaSize(std::array<float, 8> coords);
 };

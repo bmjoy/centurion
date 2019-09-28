@@ -50,7 +50,7 @@ namespace GLB {
 	extern GLFWwindow *MAIN_WINDOW;
 	extern bool DEBUG;
 	extern SelRectPoints SEL_RECT_COORDS; //Only a temporar way to test multiple selection
-	extern bool GAME_IS_CREATED, MENU_IS_CREATED, GAME_CLEAR;
+	extern bool GAME_CLEAR;
 }
 
 namespace MAP {
@@ -59,13 +59,7 @@ namespace MAP {
 }
 
 namespace SHD {
-	extern int IMAGE_SHADER_ID;
 	extern int GRID_SHADER_ID;
-	extern int F_RECTANGLE_SHADER_ID;
-	extern int E_RECTANGLE_SHADER_ID;
-	extern int USPRITE_SHADER_ID;
-	extern int BSPRITE_SHADER_ID;
-	extern int FONT_SHADER_ID;
 }
 
 namespace GAME {
@@ -179,6 +173,40 @@ static float getYMinimapCoord(float x) {
 
 static bool cursorInGameScreen() { 
 	return (GLB::MOUSE_LEFT_Y > GAME::UI_BOTTOM_HEIGHT) && (GLB::MOUSE_LEFT_Y < (GLB::WINDOW_HEIGHT - GAME::UI_TOP_HEIGHT)); 
+}
+
+static std::vector<std::string> get_all_files_names_within_folder(std::string folder)
+{
+	std::vector<std::string> names;
+	std::string search_path = folder + "/*.*";
+	WIN32_FIND_DATA fd;
+	HANDLE hFind = ::FindFirstFile(search_path.c_str(), &fd);
+	if (hFind != INVALID_HANDLE_VALUE) {
+		do {
+			// read all (real) files in current folder
+			// , delete '!' read other 2 default folder . and ..
+			if (!(fd.dwFileAttributes & FILE_ATTRIBUTE_DIRECTORY)) {
+				names.push_back(fd.cFileName);
+			}
+		} while (::FindNextFile(hFind, &fd));
+		::FindClose(hFind);
+	}
+	return names;
+}
+
+static void clearAndSwapBuffers(GLFWwindow *window) {
+	glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
+	glClear(GL_COLOR_BUFFER_BIT);
+	glfwSwapBuffers(window);
+	glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
+	glClear(GL_COLOR_BUFFER_BIT);
+}
+
+static glm::vec3 getPickingColorFromID(int pickingID) {
+	int r = (pickingID & 0x000000FF) >> 0;
+	int g = (pickingID & 0x0000FF00) >> 8;
+	int b = (pickingID & 0x00FF0000) >> 16;
+	return glm::vec3(r, g, b);
 }
 
 #endif

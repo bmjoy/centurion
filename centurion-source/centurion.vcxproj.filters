@@ -129,20 +129,11 @@
     <ClCompile Include="source\building\building.cpp">
       <Filter>Source Files\building</Filter>
     </ClCompile>
-    <ClCompile Include="source\building\building_sprite.cpp">
-      <Filter>Source Files\building</Filter>
-    </ClCompile>
     <ClCompile Include="source\gui\button.cpp">
       <Filter>Source Files\gui</Filter>
     </ClCompile>
     <ClCompile Include="source\engine\camera.cpp">
       <Filter>Source Files\engine</Filter>
-    </ClCompile>
-    <ClCompile Include="source\gui\div_image.cpp">
-      <Filter>Source Files\gui</Filter>
-    </ClCompile>
-    <ClCompile Include="source\gui\div_text.cpp">
-      <Filter>Source Files\gui</Filter>
     </ClCompile>
     <ClCompile Include="source\primitives\empty_rectangle.cpp">
       <Filter>Source Files\primitives</Filter>
@@ -161,9 +152,6 @@
     </ClCompile>
     <ClCompile Include="source\terrain\grid.cpp">
       <Filter>Source Files\terrain</Filter>
-    </ClCompile>
-    <ClCompile Include="source\primitives\image.cpp">
-      <Filter>Source Files\primitives</Filter>
     </ClCompile>
     <ClCompile Include="source\primitives\filled_rectangle.cpp">
       <Filter>Source Files\primitives</Filter>
@@ -189,16 +177,7 @@
     <ClCompile Include="source\terrain\terrain.cpp">
       <Filter>Source Files\terrain</Filter>
     </ClCompile>
-    <ClCompile Include="source\gui\ui_game.cpp">
-      <Filter>Source Files\gui</Filter>
-    </ClCompile>
-    <ClCompile Include="source\gui\ui_object.cpp">
-      <Filter>Source Files\gui</Filter>
-    </ClCompile>
     <ClCompile Include="source\unit\unit.cpp">
-      <Filter>Source Files\unit</Filter>
-    </ClCompile>
-    <ClCompile Include="source\unit\unit_sprite.cpp">
       <Filter>Source Files\unit</Filter>
     </ClCompile>
     <ClCompile Include="source\engine\window.cpp">
@@ -228,18 +207,45 @@
     <ClCompile Include="source\common\map_generation.cpp">
       <Filter>Source Files\common</Filter>
     </ClCompile>
-    <ClCompile Include="source\interface\players_list.cpp">
+    <ClCompile Include="source\common\objects.cpp">
+      <Filter>Source Files\common</Filter>
+    </ClCompile>
+    <ClCompile Include="source\gui\rectangle.cpp">
+      <Filter>Source Files\gui</Filter>
+    </ClCompile>
+    <ClCompile Include="source\interface\game_ui.cpp">
       <Filter>Source Files\interface</Filter>
     </ClCompile>
-    <ClCompile Include="source\interface\game_menu.cpp">
+    <ClCompile Include="source\interface\menu_players_list.cpp">
       <Filter>Source Files\interface</Filter>
+    </ClCompile>
+    <ClCompile Include="source\interface\game_ui_menu.cpp">
+      <Filter>Source Files\interface</Filter>
+    </ClCompile>
+    <ClCompile Include="source\primitives\building_sprite.cpp">
+      <Filter>Source Files\primitives</Filter>
+    </ClCompile>
+    <ClCompile Include="source\gui\simple_text.cpp">
+      <Filter>Source Files\gui</Filter>
+    </ClCompile>
+    <ClCompile Include="source\interface\debug_ui.cpp">
+      <Filter>Source Files\interface</Filter>
+    </ClCompile>
+    <ClCompile Include="source\primitives\cursor_image.cpp">
+      <Filter>Source Files\primitives</Filter>
+    </ClCompile>
+    <ClCompile Include="source\primitives\unit_sprite.cpp">
+      <Filter>Source Files\primitives</Filter>
+    </ClCompile>
+    <ClCompile Include="source\primitives\image_sprite.cpp">
+      <Filter>Source Files\primitives</Filter>
+    </ClCompile>
+    <ClCompile Include="source\gui\image.cpp">
+      <Filter>Source Files\gui</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="source\building\building.h">
-      <Filter>Header Files\building</Filter>
-    </ClInclude>
-    <ClInclude Include="source\building\building_sprite.h">
       <Filter>Header Files\building</Filter>
     </ClInclude>
     <ClInclude Include="source\common\global.hpp">
@@ -250,9 +256,6 @@
     </ClInclude>
     <ClInclude Include="source\engine\engine.h">
       <Filter>Header Files\engine</Filter>
-    </ClInclude>
-    <ClInclude Include="source\primitives\image.h">
-      <Filter>Header Files\primitives</Filter>
     </ClInclude>
     <ClInclude Include="source\primitives\filled_rectangle.h">
       <Filter>Header Files\primitives</Filter>
@@ -290,28 +293,13 @@
     <ClInclude Include="source\menu\menu.h">
       <Filter>Header Files\menu</Filter>
     </ClInclude>
-    <ClInclude Include="source\gui\ui_game.h">
-      <Filter>Header Files\gui</Filter>
-    </ClInclude>
-    <ClInclude Include="source\gui\ui_object.h">
-      <Filter>Header Files\gui</Filter>
-    </ClInclude>
     <ClInclude Include="source\gui\button.h">
-      <Filter>Header Files\gui</Filter>
-    </ClInclude>
-    <ClInclude Include="source\gui\div_image.h">
-      <Filter>Header Files\gui</Filter>
-    </ClInclude>
-    <ClInclude Include="source\gui\div_text.h">
       <Filter>Header Files\gui</Filter>
     </ClInclude>
     <ClInclude Include="source\gui\form_input.h">
       <Filter>Header Files\gui</Filter>
     </ClInclude>
     <ClInclude Include="source\unit\unit.h">
-      <Filter>Header Files\unit</Filter>
-    </ClInclude>
-    <ClInclude Include="source\unit\unit_sprite.h">
       <Filter>Header Files\unit</Filter>
     </ClInclude>
     <ClInclude Include="source\music\music.h">
@@ -347,11 +335,44 @@
     <ClInclude Include="source\common\map_generation.h">
       <Filter>Header Files\common</Filter>
     </ClInclude>
-    <ClInclude Include="source\interface\players_list.h">
+    <ClInclude Include="source\common\objects.h">
+      <Filter>Header Files\common</Filter>
+    </ClInclude>
+    <ClInclude Include="source\gui\rectangle.h">
+      <Filter>Header Files\gui</Filter>
+    </ClInclude>
+    <ClInclude Include="source\interface\game_ui.h">
       <Filter>Header Files\interface</Filter>
     </ClInclude>
-    <ClInclude Include="source\interface\game_menu.h">
+    <ClInclude Include="source\interface\menu_players_list.h">
       <Filter>Header Files\interface</Filter>
+    </ClInclude>
+    <ClInclude Include="source\interface\game_ui_menu.h">
+      <Filter>Header Files\interface</Filter>
+    </ClInclude>
+    <ClInclude Include="source\primitives\building_sprite.h">
+      <Filter>Header Files\primitives</Filter>
+    </ClInclude>
+    <ClInclude Include="source\gui\simple_text.h">
+      <Filter>Header Files\gui</Filter>
+    </ClInclude>
+    <ClInclude Include="source\interface\debug_ui.h">
+      <Filter>Header Files\interface</Filter>
+    </ClInclude>
+    <ClInclude Include="source\primitives\cursor_image.h">
+      <Filter>Header Files\primitives</Filter>
+    </ClInclude>
+    <ClInclude Include="source\primitives\unit_sprite.h">
+      <Filter>Header Files\primitives</Filter>
+    </ClInclude>
+    <ClInclude Include="source\primitives\image_sprite.h">
+      <Filter>Header Files\primitives</Filter>
+    </ClInclude>
+    <ClInclude Include="source\primitives\primitives.h">
+      <Filter>Header Files\primitives</Filter>
+    </ClInclude>
+    <ClInclude Include="source\gui\image.h">
+      <Filter>Header Files\gui</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

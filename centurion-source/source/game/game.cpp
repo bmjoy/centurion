@@ -10,9 +10,7 @@ Game::Game(){
 	objectId = 1;
 	blockMinimap = false;
 	lastTime = glfwGetTime();
-	sel_rect_coords = { 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f };
-	minimap_rect_coords = { 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f };
-
+	gameIsCreated = false;
 }
 
 void Game::create(std::vector<Player> *ListOfPlayers) {
@@ -39,6 +37,9 @@ void Game::create(std::vector<Player> *ListOfPlayers) {
 		(float)GAME::MAP_WIDTH
 	);
 
+	selRectangle = gui::Rectangle();
+	selRectangle.create("border", 0, 0, 0, 0, "top-left", 0);
+
 	/*------------------------------------------------------------*/
 	/*------------------------------------------------------------*/
 	/*------------------------------------------------------------*/
@@ -49,7 +50,7 @@ void Game::create(std::vector<Player> *ListOfPlayers) {
 	/* CREATE SETTLEMENTS */
 	std::ifstream path("assets/data/settlements.json");
 	if (!path.good()) {
-		forceGameClosure("Error code 0x00000001\n\nThe game is unable to find or process SETTLEMENTS file.\nForced application shutdown has started.", "Imper4m");
+		forceGameClosure("Error code 0x00000001\n\nThe game is unable to find or process SETTLEMENTS file.\nForced application shutdown has started.", "Centurion");
 	}
 	settl_data = json::parse(path);
 
@@ -61,10 +62,8 @@ void Game::create(std::vector<Player> *ListOfPlayers) {
 			b.set_class(settl_data[r][j]["class"]);
 			b.set_id(objectId);
 			b.set_player(&(*playersList)[i]);
-
 			b.set_position(glm::vec3(origin.x + (int)settl_data[r][j]["offsetx"], origin.y + (int)settl_data[r][j]["offsety"], 0.0f));
 			b.create();
-			b.create_pass();
 			
 			buildingList[objectId] = b;
 			objectId++;
@@ -84,11 +83,6 @@ void Game::create(std::vector<Player> *ListOfPlayers) {
 	std::cout << "Terrain has been generated! \n";
 	std::cout << "Min(z) = " << MAP::MIN_Z << "; Max(z) = " << MAP::MAX_Z << std::endl;
 
-	minimapRectangle = EmptyRectangle(SHD::E_RECTANGLE_SHADER_ID);
-	minimapRectangle.init();
-
-	selectionRectangle = EmptyRectangle(SHD::E_RECTANGLE_SHADER_ID);
-	selectionRectangle.init();
 
 	// *********** ROBA PROVVISORIA ***********
 	unit.set_class("hmyrmidon");
@@ -116,6 +110,10 @@ void Game::create(std::vector<Player> *ListOfPlayers) {
 		(GLfloat)((*playersList)[0].getStartPoint().x - GLB::WINDOW_WIDTH_ZOOMED/2.f), 
 		(GLfloat)((*playersList)[0].getStartPoint().y - GLB::WINDOW_HEIGHT_ZOOMED / 2.f)
 	);
+
+
+	//---------------------------------------
+	gameIsCreated = true;
 }
 
 void Game::run() {
@@ -127,30 +125,40 @@ void Game::run() {
 	if (!GAME::MINIMAP_IS_ACTIVE) {		
 		camera.mouseControl(threshold);
 		view = camera.calculateViewMatrix();
-		projection = GLB::CAMERA_PROJECTION;			
+		projection = GLB::CAMERA_PROJECTION;
 	}
 
 	/* If minimap is active */
 	else {
 		view = glm::mat4(1.0f);
-		projection = GLB::MINIMAP_PROJECTION;			
+		projection = GLB::MINIMAP_PROJECTION;	
 	}
+
+	// apply game matrices:
+	obj::applyGameMatrices(&projection, &view);
 
 	/* Tracing and Picking */
 	game::tracing(surface, &projection, &view);
 	game::picking(&buildingList, &unitList, &projection, &view, &click_id, &blockMinimap);
-	ui.render(true);
 
 	/* Rendering */
 	surface->render(projection, view, false);
-	game::renderObjects(&buildingList, &unitList, &projection, &view, &click_id, &selectedUnits);
-	game::renderSelRectangle(&selectionRectangle, &sel_rect_coords, &view, &cameraLastX, &cameraLastY);
-	game::renderMapRectangle(&minimapRectangle, &minimap_rect_coords);
+	game::renderObjects(&buildingList, &unitList, &selRectangle, &projection, &view, &click_id, &selectedUnits);
+	
 	if (GLB::DEBUG) cursor_point.render();
-	ui.render(false);
+	
+	// ---- Game UI ---- //
+
+	// apply menu matrices:
+	obj::applyMenuMatrices();
+
+	ui.render();
+
+	// ----------------- //	
 
 	game::goToPosition(&buildingList, &camera, &lastTime, &click_id, &blockMinimap);
 	GLB::CAMERA_PROJECTION = glm::ortho(0.0f, (float)GLB::WINDOW_WIDTH_ZOOMED, 0.0f, (float)GLB::WINDOW_HEIGHT_ZOOMED, -(float)GAME::MAP_WIDTH, (float)GAME::MAP_WIDTH);
+	GLB::MOUSE_RIGHT = false;
 }
 
 void Game::clear() {

@@ -6,15 +6,16 @@
 #include "../music/music.h"
 #include "../gui/form_input.h"
 #include "../gui/button.h"
-#include "../gui/div_image.h"
-#include "../gui/div_text.h"
-#include "../interface/players_list.h"
+#include "../gui/image.h"
+#include "../interface/menu_players_list.h"
 #include "../player/player.h"
 
 class Menu
 {
 public:
 	Menu();
+	bool menu_is_created() { return menuIsCreated; }
+	void reset() { menuIsCreated = false; }
 	void create(std::vector<Player> *List);
 	void render();
 	~Menu();
@@ -24,16 +25,11 @@ private:
 	std::string currentMenu;
 	std::vector<std::string> menus;
 
-	std::map<std::string, std::vector<DivImage>> images;
-	std::map<std::string, std::vector<Button>> buttons;
-	std::map<std::string, std::vector<FormInput>> formInputs;
-	int x, y, w, h;
-	std::string s;
+	std::map<std::string, std::vector<gui::Image>> images;
+	std::map<std::string, std::vector<gui::Button>> buttons;
+	
 	ISoundEngine* music;
 
-	/* temporary objects */
-	DivImage img;
-	Button btn;
 	PlayersList list;
 
 	/* PICKING */
@@ -46,6 +42,7 @@ private:
 	int num_players;
 	std::vector<int> players_color;
 	std::vector<Player> *playersList;
+	bool menuIsCreated;
 
 };
 

@@ -5,7 +5,7 @@
 #include <map_generation.h>
 #include <shader.h>
 #include "light.h"
-#include "../gui/div_text.h"
+#include "../gui/simple_text.h"
 #include "../engine/window.h"
 
 class Terrain : public Shader
@@ -19,7 +19,7 @@ public:
 
 private:
 	myWindow *window;
-	DivText loadingText;
+	gui::SimpleText loadingText;
 
 	const char* path_grass;
 	const char* path_road;

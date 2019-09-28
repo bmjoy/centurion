@@ -4,21 +4,46 @@
 #include <shader.h>
 #include <json.hpp>
 
-class CBitmapFont : public Shader 
- {
-  public:
-   CBitmapFont();
-   CBitmapFont(int shader_id);
-   void set_align(std::string hAlign = "left", std::string vAlign = "normal");
-   void create(std::string font);
-   void render(float xPos, float yPos, std::string text, glm::vec4 color = glm::vec4(255.f));
-   ~CBitmapFont();
+namespace txt {
+	struct CharData {
+		int charWidth[256];
+		float fontHeight;
+		float fontWidth;
+		int startChar;
+	};
+
+	struct StaticData {
+		std::vector<float> X;
+		std::vector<GLint> charList;
+		glm::vec4 color;	
+		float y;		
+		int textSize;
+		int totalWidth;
+		int startChar;
+		int fontHeight;
+		GLuint textureID;
+		bool shadow;
+	};
+}
+
+
+class BitmapFont : public Shader 
+{
+public:
+	BitmapFont();
+	void set_align(std::string hAlign = "left", std::string vAlign = "normal");
+	void create();
+	void render_dynamic(std::string &font, float xPos, float yPos, std::string &text, glm::vec4 &color, bool shadow);
+	txt::StaticData create_static(std::string &font, std::string &text, float x);
+	void render_static(txt::StaticData &data);
+	int getShaderId() { return shaderId; }
+	~BitmapFont();
 
  private:
-	 std::string font_name, h_align, v_align, path;
-	 int w, h;
-	 float nrows, ncols, offset_x, total_width, avg_height;
-	 glm::mat4 modelMat;
-	 json font_data;
-	 	 
- };
+	 std::map<std::string, txt::CharData> fontData;
+	 std::string h_align, v_align, path;
+	 int total_width;
+	 int offset_x;
+	 std::map<std::string, int> hAlignMap;
+	 std::map<std::string, int> vAlignMap;
+};

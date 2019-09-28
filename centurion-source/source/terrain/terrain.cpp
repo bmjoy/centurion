@@ -13,13 +13,11 @@ Terrain::Terrain(){
 
 
 void Terrain::create() {
-	loadingText.create("tahoma_8");
-	loadingText.set_align("center", "middle");
-
+	loadingText = gui::SimpleText("dynamic");
 
 	/* OBJ LOAD */
 	Assimp::Importer importer;
-	const aiScene *scene = importer.ReadFile(plane_path, aiProcess_Triangulate | aiProcess_FlipUVs | aiProcess_GenSmoothNormals | aiProcess_JoinIdenticalVertices);
+	const aiScene* scene = importer.ReadFile(plane_path, aiProcess_Triangulate | aiProcess_FlipUVs | aiProcess_GenSmoothNormals | aiProcess_JoinIdenticalVertices);
 	if (!scene) {
 		printf("Model (%s) failed to load: %s", plane_path, importer.GetErrorString());
 		return;
@@ -29,6 +27,7 @@ void Terrain::create() {
 	load_node(scene->mRootNode, scene);
 	//-----------------
 
+	//delete scene;
 
 	create_mesh(&vertices[0], &indices[0], vertices.size(), indices.size());
 	texture();
@@ -47,6 +46,12 @@ void Terrain::load_node(aiNode * node, const aiScene * scene) {
 
 void Terrain::load_mesh(aiMesh * mesh, const aiScene * scene) {
 
+	float *xCoord = new float();
+	float *yCoord = new float();
+	float *zCoord = new float();
+	noiseData *nData = new noiseData;
+	aiFace *face = new aiFace;
+
 	for (size_t i = 0; i < mesh->mNumVertices; i++) {  
 
 		if ((int)i % 3000 == 0) {
@@ -54,13 +59,25 @@ void Terrain::load_mesh(aiMesh * mesh, const aiScene * scene) {
 			glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
 			glClear(GL_COLOR_BUFFER_BIT);
 			//---
-			loadingText.set_position(glm::vec2(GLB::WINDOW_WIDTH / 2.f, GLB::WINDOW_HEIGHT / 2.f));
-			loadingText.set_text("Map generation in progress...");
-			loadingText.render(glm::vec4(255.f));
+			loadingText.render_dynamic(
+				"Map generation in progress...", 
+				"tahoma_8", 
+				GLB::WINDOW_WIDTH / 2.f, 
+				GLB::WINDOW_HEIGHT / 2.f, 
+				glm::vec4(255.f), 
+				"center", 
+				"middle"
+			);
 			//---
-			loadingText.set_position(glm::vec2(GLB::WINDOW_WIDTH / 2.f, GLB::WINDOW_HEIGHT / 2.f - 50.f));
-			loadingText.set_text(std::to_string(int((float)i/(float)mesh->mNumVertices*100.f)) + "%");
-			loadingText.render(glm::vec4(255.f));
+			loadingText.render_dynamic(
+				std::to_string(int((float)i / (float)mesh->mNumVertices*100.f)) + "%",
+				"tahoma_8", 
+				GLB::WINDOW_WIDTH / 2.f, 
+				GLB::WINDOW_HEIGHT / 2.f - 50.f, 
+				glm::vec4(255.f), 
+				"center", 
+				"middle"
+			);
 			//---
 			glfwSwapBuffers(GLB::MAIN_WINDOW);
 		}
@@ -74,24 +91,24 @@ void Terrain::load_mesh(aiMesh * mesh, const aiScene * scene) {
 			So, we just have to push back the Z in order to have a 45° inclination
 		*/
 
-		float xCoord = mesh->mVertices[i].x;
-		float yCoord = mesh->mVertices[i].y;
-		float zCoord = 0.0;
+		*xCoord = mesh->mVertices[i].x;
+		*yCoord = mesh->mVertices[i].y;
+		*zCoord = 0.f;
 
 		/* 45° Inclination */
-		zCoord -= yCoord;
-		glm::vec2 xyCoords = glm::vec2(xCoord, yCoord);
+		(*zCoord) -= (*yCoord);
+		glm::vec2 xyCoords = glm::vec2(*xCoord, *yCoord);
 
 		/* Noise calculation */
-		noiseData nData = mapgen::generateNoise(glm::vec2(xCoord, yCoord));
+		*nData = mapgen::generateNoise(glm::vec2(*xCoord, *yCoord));
 
-		zCoord += nData.zNoise;
-		yCoord += mapgen::smoothNoise(yCoord, nData.zNoise);
+		(*zCoord) += nData->zNoise;
+		(*yCoord) += mapgen::smoothNoise(*yCoord, nData->zNoise);
 
-		MAP::MIN_Z = std::min(nData.zNoise, MAP::MIN_Z);
-		MAP::MAX_Z = std::max(nData.zNoise, MAP::MAX_Z);
+		MAP::MIN_Z = std::min(nData->zNoise, MAP::MIN_Z);
+		MAP::MAX_Z = std::max(nData->zNoise, MAP::MAX_Z);
 
-		vertices.insert(vertices.end(), { xCoord, yCoord, zCoord, nData.zNoise });
+		vertices.insert(vertices.end(), { *xCoord, *yCoord, *zCoord, nData->zNoise });
 
 		/*-----------------------*/
 		// Texture Coords //
@@ -108,7 +125,7 @@ void Terrain::load_mesh(aiMesh * mesh, const aiScene * scene) {
 		vertices.insert(vertices.end(), { N.x , N.y , N.z });
 
 		/* Terrain data */
-		vertices.insert(vertices.end(), { nData.grassWeight,  nData.roadWeight });
+		vertices.insert(vertices.end(), { nData->grassWeight,  nData->roadWeight });
 
 		
 	}
@@ -117,16 +134,28 @@ void Terrain::load_mesh(aiMesh * mesh, const aiScene * scene) {
 	glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
 	glClear(GL_COLOR_BUFFER_BIT);
 	//---
-	loadingText.set_position(glm::vec2(GLB::WINDOW_WIDTH / 2.f, GLB::WINDOW_HEIGHT / 2.f));
-	loadingText.set_text("Finalizing...");
-	loadingText.render(glm::vec4(255.f));
+	loadingText.render_dynamic(
+		"Finalizing...",
+		"tahoma_8", 
+		GLB::WINDOW_WIDTH / 2.f, 
+		GLB::WINDOW_HEIGHT / 2.f,
+		glm::vec4(255.f), 
+		"center", 
+		"middle"
+	);
 	//---
 	glfwSwapBuffers(GLB::MAIN_WINDOW);
 
 	for (size_t i = 0; i < mesh->mNumFaces; i++) {
-		aiFace face = mesh->mFaces[i];
-		for (size_t j = 0; j < face.mNumIndices; j++) { indices.push_back(face.mIndices[j]); }
+		*face = mesh->mFaces[i];
+		for (size_t j = 0; j < face->mNumIndices; j++) { indices.push_back(face->mIndices[j]); }
 	}
+
+	delete xCoord;
+	delete yCoord;
+	delete zCoord;
+	delete nData;
+	delete face;
 }
 
 void Terrain::create_mesh(GLfloat *vertices, unsigned int *indices, unsigned int numOfVertices, unsigned int numOfIndices) {
@@ -168,7 +197,7 @@ void Terrain::texture() {
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, textureInfoList[0].x, textureInfoList[0].y, 0, GL_RGB, GL_UNSIGNED_BYTE, data);
+	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, textureInfoList[0].x, textureInfoList[0].y, 0, GL_RGBA, GL_UNSIGNED_BYTE, data);
 	glGenerateMipmap(GL_TEXTURE_2D);
 	stbi_image_free(data);
 
@@ -182,7 +211,7 @@ void Terrain::texture() {
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, textureInfoList[1].x, textureInfoList[1].y, 0, GL_RGB, GL_UNSIGNED_BYTE, data);
+	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, textureInfoList[1].x, textureInfoList[1].y, 0, GL_RGBA, GL_UNSIGNED_BYTE, data);
 	glGenerateMipmap(GL_TEXTURE_2D);
 	stbi_image_free(data);
 }

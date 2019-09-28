@@ -5,19 +5,22 @@
 
 #include <json.hpp>
 
-class BSprite : public Shader
+class BuildingSprite : public Shader
 {
 public:
-	BSprite();
-	BSprite(int shaderID);
-	void create(json ent_data);
-	void render(float x, float y, bool picking, int pickingId, bool selected, glm::vec3 *playerColor);
-	~BSprite();
+	BuildingSprite();
+	BuildingSprite(int shaderID);
+	void addPath(std::string Path) { entPathList.push_back(Path); }
+	GLuint getTextureId(std::string className);
+	void create();
+	void render(GLuint texID, bool clickable, float x, float y, float w, float h, bool picking, int pickingId, bool selected, glm::vec3 *playerColor);
+	~BuildingSprite();
 
 private:
 
-	std::string path;       // texture path
-	
+	std::vector<std::string> entPathList;
+	std::string texturePath;       // texture path
+
 	unsigned char *data;
 	unsigned int indices[6] = {
 		0, 1, 3,   // first triangle
@@ -30,10 +33,6 @@ private:
 		0.5f,		0.5f,		0.0f,		1.0, 0.0f,   // in alto a dx
 		-0.5f,		0.5f,		0.0f,		0.0f, 0.0f   // in alto a sx
 	};
-
-
-	/* matrix transformations */
-	glm::mat4 modelMat;
 
 	int r, g, b;
 

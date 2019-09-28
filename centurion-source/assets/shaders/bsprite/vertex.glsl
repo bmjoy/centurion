@@ -6,13 +6,15 @@ out vec2 FragTex;
 
 uniform mat4 projection;
 uniform mat4 view;
-uniform mat4 model;
 
-float x, y;
+uniform float x;
+uniform float y;
+uniform float w;
+uniform float h;
 
 void main()
 {
-    gl_Position = projection * view * model * vec4(pos.x, pos.y, pos.z, 1.0);
+    gl_Position = projection * view * vec4(pos.x*w + x, pos.y*h + y, pos.z, 1.0);
 	FragTex = vec2(tex.x, tex.y);
 }  
 

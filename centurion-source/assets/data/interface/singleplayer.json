@@ -2,8 +2,8 @@
 	"images": [
         {
             "name": "background",
-            "clickable": 0,
-            "path": "assets/ui/menu/menu_background.png",
+            "image_name": "main_background",
+            "clickable": 0,            
             "x": 0,
             "y": 0,
 			"size": "max",
@@ -13,14 +13,14 @@
 
 	"buttons": [{
 			"name": "buttonStart",
-			"path": "assets/ui/buttons/button_1.png",
+			"image_name": "button_1",
 			"x": -150,
 			"y": 125,
 			"text": "Start"
 		},
 		{
 			"name": "buttonExit",
-			"path": "assets/ui/buttons/button_1.png",
+			"image_name": "button_1",
 			"x": -150,
 			"y": 75,
 			"text": "Back"

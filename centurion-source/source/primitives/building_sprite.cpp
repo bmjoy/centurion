@@ -2,59 +2,80 @@
 
 #include "building_sprite.h"
 
-BSprite::BSprite(){
+BuildingSprite::BuildingSprite(){
 	vPath = "assets/shaders/bsprite/vertex.glsl";
 	fPath = "assets/shaders/bsprite/fragment.glsl";
 }
 
 
-BSprite::BSprite(int shaderID){
+BuildingSprite::BuildingSprite(int shaderID){
 	vPath = "assets/shaders/bsprite/vertex.glsl";
 	fPath = "assets/shaders/bsprite/fragment.glsl";
 	shaderId = shaderID;
 }
 
-void BSprite::create(json ent_data) {
-
+void BuildingSprite::create() {
+	
+	glUseProgram(shaderId);
 	genBuffers();
+	
+	int k = 0;
 
-	for (int i = 0; i < ent_data["sprites"].size(); i++){
+	std::string className;
+	std::string fullName;
 
-		textureIdList.push_back(0);
-		textureInfoList.push_back(glm::ivec3(0, 0, 0));
-		path = ent_data["path"].get<std::string>() + ent_data["sprites"][i]["name"].get<std::string>();
-		data = stbi_load(path.c_str(), &textureInfoList[i].x, &textureInfoList[i].y, &textureInfoList[i].z, 0);
-		if (!data) { std::cout << "Failed to load texture" << std::endl; }
+	for (int j = 0; j < entPathList.size(); ++j) {
 
-		/* texture */
+		std::ifstream ent_path(entPathList[j]);
+		json ent_data = json::parse(ent_path);
 
-		glGenTextures(1, &textureIdList[i]);
-		glBindTexture(GL_TEXTURE_2D, textureIdList[i]);
-		//glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-		// create texture and generate mipmaps
-		glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, textureInfoList[i].x, textureInfoList[i].y, 0, GL_RGBA, GL_UNSIGNED_BYTE, data);
-		glGenerateMipmap(GL_TEXTURE_2D);
-		glBindTexture(GL_TEXTURE_2D, 0);
+		for (int i = 0; i < ent_data["sprites"].size(); i++) {
 
-		stbi_image_free(data);
+			className = ent_data["class_name"].get<std::string>();
+			fullName = className + "_" + ent_data["sprites"][i]["type"].get<std::string>();
+			texturePath = ent_data["path"].get<std::string>() + ent_data["sprites"][i]["name"].get<std::string>();
 
-		textureIdMap[ent_data["sprites"][i]["type"].get<std::string>()] = textureIdList[i];
-	}
+			/* save texture info */
+			textureIdList.push_back(0);
+			textureInfoList.push_back(glm::ivec3(0, 0, 0));	
+			data = stbi_load(texturePath.c_str(), &textureInfoList[k].x, &textureInfoList[k].y, &textureInfoList[k].z, 0);
+			if (!data) { std::cout << "Failed to load texture" << std::endl; }
+
+			/* load texture to gpu */
+			glGenTextures(1, &textureIdList[k]);
+			glBindTexture(GL_TEXTURE_2D, textureIdList[k]);
+			//glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+			// create texture and generate mipmaps
+			glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, textureInfoList[k].x, textureInfoList[k].y, 0, GL_RGBA, GL_UNSIGNED_BYTE, data);
+			glGenerateMipmap(GL_TEXTURE_2D);
+			glBindTexture(GL_TEXTURE_2D, 0);
+
+			stbi_image_free(data);			
+			textureIdMap[fullName] = textureIdList[k];
+
+			k++;
+		}
+	}	
 }
 
-void BSprite::render(float x, float y, bool picking, int pickingId, bool selected, glm::vec3 *playerColor) {
+GLuint BuildingSprite::getTextureId(std::string className) {
+	return textureIdMap[className + "_normal"];
+}
+
+void BuildingSprite::render(GLuint texID, bool clickable, float x, float y, float w, float h, bool picking, int pickingId, bool selected, glm::vec3 *playerColor) {
 	glUseProgram(shaderId);
 
-	/* Model Matrix */
-	modelMat = glm::scale(glm::mat4(1.0f), glm::vec3((float)textureInfoList[0].x, (float)textureInfoList[0].y, 1.0f));
-	modelMat = glm::translate(modelMat, glm::vec3(x / (float)textureInfoList[0].x, y / (float)textureInfoList[0].y, 0.0f));
-	
 	/* Uniform Variables */
-	glUniformMatrix4fv(glGetUniformLocation(shaderId, "model"), 1, GL_FALSE, glm::value_ptr(modelMat));
+	//glUniformMatrix4fv(glGetUniformLocation(shaderId, "model"), 1, GL_FALSE, glm::value_ptr(model));
 	glUniform3f(glGetUniformLocation(shaderId, "player_color"), playerColor->x / 255.0f, playerColor->y / 255.0f, playerColor->z / 255.0f);
-	glUniform1i(glGetUniformLocation(shaderId, "selection"), int(selected));
+	glUniform1i(glGetUniformLocation(shaderId, "selection"), selected);
 	glUniform1i(glGetUniformLocation(shaderId, "isLayerColor"), 0);
-	glUniform1i(glGetUniformLocation(shaderId, "picking"), int(picking)); // enable/disable picking
+	glUniform1i(glGetUniformLocation(shaderId, "picking"), picking); // enable/disable picking
+
+	glUniform1f(glGetUniformLocation(shaderId, "x"), x);
+	glUniform1f(glGetUniformLocation(shaderId, "y"), y);
+	glUniform1f(glGetUniformLocation(shaderId, "w"), w);
+	glUniform1f(glGetUniformLocation(shaderId, "h"), h);
 
 	/* ------ DRAW SPRITES ------ */
 
@@ -72,13 +93,13 @@ void BSprite::render(float x, float y, bool picking, int pickingId, bool selecte
 		if (!GAME::MINIMAP_IS_ACTIVE) {
 			glUniform1i(glGetUniformLocation(shaderId, "texture1"), 0);
 			glActiveTexture(GL_TEXTURE0);
-			glBindTexture(GL_TEXTURE_2D, textureIdMap["normal"]);
+			glBindTexture(GL_TEXTURE_2D, texID); // normal
 			glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
 		}
-		if (GAME::MINIMAP_IS_ACTIVE && textureIdMap["border"]) {
+		if (GAME::MINIMAP_IS_ACTIVE && clickable) {
 			glUniform1i(glGetUniformLocation(shaderId, "texture1"), 0);
 			glActiveTexture(GL_TEXTURE0);
-			glBindTexture(GL_TEXTURE_2D, textureIdMap["border"]);
+			glBindTexture(GL_TEXTURE_2D, texID + 2); // border
 			glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
 		}
 	}
@@ -90,7 +111,7 @@ void BSprite::render(float x, float y, bool picking, int pickingId, bool selecte
 			glUniform1i(glGetUniformLocation(shaderId, "minimap"), 0);
 			glUniform1i(glGetUniformLocation(shaderId, "texture1"), 0);
 			glActiveTexture(GL_TEXTURE0);
-			glBindTexture(GL_TEXTURE_2D, textureIdMap["normal"]);
+			glBindTexture(GL_TEXTURE_2D, texID); // normal
 			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
 			glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
 		}
@@ -98,24 +119,24 @@ void BSprite::render(float x, float y, bool picking, int pickingId, bool selecte
 		else {
 			glUniform1i(glGetUniformLocation(shaderId, "minimap"), 1);
 			
-			if (textureIdMap["border"]) {
+			if (clickable) {
 
 				glUniform1i(glGetUniformLocation(shaderId, "texture1"), 2);
-				glActiveTexture(GL_TEXTURE2);
-				glBindTexture(GL_TEXTURE_2D, textureIdMap["border"]);
+				glActiveTexture(GL_TEXTURE2); 
+				glBindTexture(GL_TEXTURE_2D, texID + 2); // border
 				glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
 
 				glUniform1i(glGetUniformLocation(shaderId, "isLayerColor"), 1);
 				glUniform1i(glGetUniformLocation(shaderId, "texture1"), 1);
 				glActiveTexture(GL_TEXTURE1);
-				glBindTexture(GL_TEXTURE_2D, textureIdMap["color"]);
+				glBindTexture(GL_TEXTURE_2D, texID + 1); // color
 				glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
 				glUniform1i(glGetUniformLocation(shaderId, "isLayerColor"), 0);
 			}
 
 			glUniform1i(glGetUniformLocation(shaderId, "texture1"), 0);
 			glActiveTexture(GL_TEXTURE0);
-			glBindTexture(GL_TEXTURE_2D, textureIdMap["normal"]);
+			glBindTexture(GL_TEXTURE_2D, texID); // normal
 			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST_MIPMAP_LINEAR);
 			glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
 		}
@@ -125,7 +146,7 @@ void BSprite::render(float x, float y, bool picking, int pickingId, bool selecte
 	glBindVertexArray(0);
 }
 
-void BSprite::genBuffers() {
+void BuildingSprite::genBuffers() {
 	glGenVertexArrays(1, &VAO);
 	glBindVertexArray(VAO);
 
@@ -147,6 +168,6 @@ void BSprite::genBuffers() {
 	glBindVertexArray(0);
 }
 
-BSprite::~BSprite()
+BuildingSprite::~BuildingSprite()
 {
 }
