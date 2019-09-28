@@ -22,8 +22,6 @@ namespace gui {
 	private:
 		gui::Rectangle back;
 		gui::Rectangle back_options;
-		gui::Rectangle border;
-		gui::Rectangle border_options;
 		std::vector<gui::Rectangle> back_options_picking;
 
 		gui::SimpleText text;

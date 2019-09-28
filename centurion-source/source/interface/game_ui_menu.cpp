@@ -36,10 +36,7 @@ void GameMenu::create(int *pickingId, std::map<int, std::string> *pickingList) {
 	}
 
 	background = gui::Rectangle();
-	background.create("filled", x - w / 2.f, y + h / 2.f, w, h, "top-left", 0);
-
-	border = gui::Rectangle();
-	border.create("border", x - w / 2.f, y + h / 2.f, w, h, "top-left", 0);
+	background.create("border-filled", x - w / 2.f, y + h / 2.f, w, h, "top-left", 0);
 }
 
 void GameMenu::render(bool picking) {
@@ -54,7 +51,6 @@ void GameMenu::render(bool picking) {
 
 		else {
 			background.render(glm::vec4(0.f, 0.f, 0.f, 0.5f));
-			border.render(glm::vec4(255.f));
 
 			for (int i = 0; i < buttons.size(); ++i) {
 				buttons[i].render(false);

@@ -28,10 +28,8 @@ void PlayersList::create(int startX, int startY, std::map<int, std::string> *pic
 	(*pickingId)++;
 	
 	background = gui::Rectangle();
-	background.create("filled", x - 30, y + 80, w, h, "top-left", 0);
+	background.create("border-filled", x - 30, y + 80, w, h, "top-left", 0);
 
-	border = gui::Rectangle();
-	border.create("border", x - 30, y + 80, w, h, "top-left", 0);
 
 	for (int j = 0; j < GAME::PLAYERS_NUMBER_MAX; j++) {
 
@@ -71,7 +69,6 @@ void PlayersList::render(int numPlayers, std::vector<int> players_color, bool pi
 	else {
 
 		background.render(glm::vec4(0.f, 0.f, 0.f, 0.5f));
-		border.render(glm::vec4(255.f));
 
 		arrowDown.render(false);
 		arrowUp.render(false);

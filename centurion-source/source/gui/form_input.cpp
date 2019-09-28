@@ -17,18 +17,14 @@ namespace gui {
 		nOptions = options.size();
 
 		back = gui::Rectangle();
-		back.create("filled", x, y, width, height, "top-left", pickingID);
-		border = gui::Rectangle();
-		border.create("border", x, y, width, height, "top-left", pickingID);
+		back.create("border-filled", x, y, width, height, "top-left", pickingID);
 
 		if (boolOptions) {
 
 			text = gui::SimpleText("dynamic"); // this is for selected text;
 
 			back_options = gui::Rectangle();
-			back_options.create("filled", x, y - height - 1, width, height * nOptions, "top-left", 0);
-			border_options = gui::Rectangle();
-			border_options.create("border", x, y - height - 1, width, height * nOptions, "top-left", 0);
+			back_options.create("border-filled", x, y - height - 1, width, height * nOptions, "top-left", 0);
 
 			for (int j = 0; j < options.size(); j++) {
 				float y1 = y - 1.f - (j + 1)*height + j;
@@ -58,14 +54,13 @@ namespace gui {
 			back.render(glm::vec4(), true);
 			if (boolOptions && isOpened) {
 				for (int j = 0; j < nOptions; j++) {
-					back_options_picking[j].render(glm::vec4(), true);
+					back_options_picking[j].render(color, true);
 				}
 			}
 		}
 		else {
 
 			back.render(color, false);
-			border.render(glm::vec4(255.f));
 
 			if (boolOptions) {
 				// selected text
@@ -74,7 +69,6 @@ namespace gui {
 
 					// background and border
 					back_options.render(color, false);
-					border_options.render(glm::vec4(255.f));
 
 					// text
 					for (int j = 0; j < nOptions; j++) {

@@ -43,6 +43,12 @@ namespace gui {
 			data.borderColor = Color;
 			obj::ERectangle()->render(data);
 		}
+		if (data.type == "border-filled") {
+			data.backColor = Color;
+			data.borderColor = glm::vec4(255.f);
+			obj::FRectangle()->render(data, picking);
+			obj::ERectangle()->render(data);
+		}
 	}
 
 	Rectangle::~Rectangle()
