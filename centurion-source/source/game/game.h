@@ -43,7 +43,8 @@ private:
 	glm::vec2 origin;
 	glm::mat4 view, projection;
 
-	std::array<float, 8> minimap_rect_coords, sel_rect_coords;	
+
+	//std::array<float, 8> minimap_rect_coords, sel_rect_coords;	
 
 	bool gameIsCreated;
 };

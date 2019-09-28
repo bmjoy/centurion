@@ -57,7 +57,7 @@ void obj::create() {
 
 	obj::Text()->create();
 	obj::Cursor()->create();
-	obj::ERectangle()->init();
+	obj::ERectangle()->create();
 	obj::FRectangle()->create();
 	obj::BSprite()->create();	
 	obj::Img()->create();

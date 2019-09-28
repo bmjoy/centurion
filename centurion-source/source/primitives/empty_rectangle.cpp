@@ -5,30 +5,7 @@ EmptyRectangle::EmptyRectangle() {
 	fPath = "assets/shaders/empty_rectangle/fragment.glsl";
 }
 
-EmptyRectangle::EmptyRectangle(int shaderID) {
-	vPath = "assets/shaders/empty_rectangle/vertex.glsl";
-	fPath = "assets/shaders/empty_rectangle/fragment.glsl";
-	shaderId = shaderID;
-}
-
-void EmptyRectangle::init() {
-
-	for (int i = 0; i < 24; i++) {
-		empty_vertices[i] = 0.0f;
-	}
-
-	glGenVertexArrays(1, &VAO);
-	glBindVertexArray(VAO);
-	glGenBuffers(1, &VBO);
-	glBindBuffer(GL_ARRAY_BUFFER, VBO);
-	glBufferData(GL_ARRAY_BUFFER, sizeof(empty_vertices), empty_vertices, GL_STATIC_DRAW);
-	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), (void*)0);
-	glEnableVertexAttribArray(0);
-	glBindBuffer(GL_ARRAY_BUFFER, 0);
-	glBindVertexArray(0);
-}
-
-void EmptyRectangle::create(std::array<float, 8> coords) {
+void EmptyRectangle::create() {
 
 	/*
 	x0,y0------x3,y3
@@ -53,20 +30,23 @@ void EmptyRectangle::create(std::array<float, 8> coords) {
 	x0,		y0,		0.0f,
 	*/
 
-	vertices[0] = (coords[0]); vertices[1] = (coords[1]); vertices[2] = (0.0f);
-	vertices[3] = (coords[2]); vertices[4] = (coords[3]-1); vertices[5] = (0.0f);
+	// bottom-left alignment
 
-	vertices[6] = (coords[2]); vertices[7] = (coords[3]); vertices[8] = (0.0f);
-	vertices[9] = (coords[4]); vertices[10] = (coords[5]); vertices[11] = (0.0f);
+	vertices[0] = (0.f); vertices[1] = (1.f); vertices[2] = (0.f);
+	vertices[3] = (0.f); vertices[4] = (0.f); vertices[5] = (0.f);
 
-	vertices[12] = (coords[4]); vertices[13] = (coords[5]); vertices[14] = (0.0f);
-	vertices[15] = (coords[6]); vertices[16] = (coords[7]); vertices[17] = (0.0f);
+	vertices[6] = (0.f); vertices[7] = (0.f); vertices[8] = (0.f);
+	vertices[9] = (1.f); vertices[10] = (0.f); vertices[11] = (0.f);
 
-	vertices[18] = (coords[6]); vertices[19] = (coords[7]); vertices[20] = (0.0f);
-	vertices[21] = (coords[0]); vertices[22] = (coords[1]); vertices[23] = (0.0f);
+	vertices[12] = (1.f); vertices[13] = (0.f); vertices[14] = (0.f);
+	vertices[15] = (1.f); vertices[16] = (1.f); vertices[17] = (0.f);
 
-	area=areaSize(coords);
+	vertices[18] = (1.f); vertices[19] = (1.f); vertices[20] = (0.f);
+	vertices[21] = (0.f); vertices[22] = (1.f); vertices[23] = (0.f);
+
+	glGenVertexArrays(1, &VAO);
 	glBindVertexArray(VAO);
+	glGenBuffers(1, &VBO);
 	glBindBuffer(GL_ARRAY_BUFFER, VBO);
 	glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
 	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), (void*)0);
@@ -75,14 +55,17 @@ void EmptyRectangle::create(std::array<float, 8> coords) {
 	glBindVertexArray(0);
 }
 
-void EmptyRectangle::render(glm::mat4 viewMat, glm::mat4 modelMat, glm::vec4 color) {
+void EmptyRectangle::render(RectangleData &data) {
+	
 	glUseProgram(shaderId);
 
-	/* Uniform Variables */
+	glUniform1f(glGetUniformLocation(shaderId, "x"), data.x);
+	glUniform1f(glGetUniformLocation(shaderId, "y"), data.y);
+	glUniform1f(glGetUniformLocation(shaderId, "w"), data.w);
+	glUniform1f(glGetUniformLocation(shaderId, "h"), data.h);
+	glUniform1i(glGetUniformLocation(shaderId, "origin"), data.origin);
 
-	glUniformMatrix4fv(glGetUniformLocation(shaderId, "model"), 1, GL_FALSE, glm::value_ptr(modelMat));
-	glUniformMatrix4fv(glGetUniformLocation(shaderId, "view"), 1, GL_FALSE, glm::value_ptr(viewMat));
-	glUniform4f(glGetUniformLocation(shaderId, "BorderColor"), color.x / 255.0f, color.y / 255.0f, color.z / 255.0f, color.w);
+	glUniform4f(glGetUniformLocation(shaderId, "BorderColor"), data.borderColor.x / 255.0f, data.borderColor.y / 255.0f, data.borderColor.z / 255.0f, data.borderColor.w);
 
 	/* Draw */
 
@@ -93,11 +76,11 @@ void EmptyRectangle::render(glm::mat4 viewMat, glm::mat4 modelMat, glm::vec4 col
 	glBindVertexArray(0);
 }
 
-int EmptyRectangle::areaSize(std::array<float, 8> coords) {
-	int base = (int)coords[6] - (int)coords[0];
-	int height = (int)coords[3] - (int)coords[1];
-	return base*height;
-}
+//int EmptyRectangle::areaSize(std::array<float, 8> coords) {
+//	int base = (int)coords[6] - (int)coords[0];
+//	int height = (int)coords[3] - (int)coords[1];
+//	return base*height;
+//}
 
 EmptyRectangle::~EmptyRectangle()
 {

@@ -27,6 +27,7 @@ private:
 	std::map<int, std::string> pickingList;
 	gui::Rectangle top_bar;
 	gui::Rectangle bottom_bar;
+	gui::Rectangle minimapRectangle;
 	GameMenu gameMenu;
 
 	void picking();

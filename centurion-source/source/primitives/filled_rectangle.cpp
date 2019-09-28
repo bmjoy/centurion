@@ -1,4 +1,5 @@
 #include "filled_rectangle.h"
+#include "empty_rectangle.h"
 
 FilledRectangle::FilledRectangle(){
 	vPath = "assets/shaders/filled_rectangle/vertex.glsl";
@@ -41,12 +42,23 @@ void FilledRectangle::create() {
 	glBindVertexArray(0);
 }
 
-void FilledRectangle::render(glm::mat4 model, glm::vec4 color) {
+void FilledRectangle::render(RectangleData &data, bool picking) {
 
 	glUseProgram(shaderId);
 
-	glUniformMatrix4fv(glGetUniformLocation(shaderId, "model"), 1, GL_FALSE, glm::value_ptr(model));
-	glUniform4f(glGetUniformLocation(shaderId, "color"), color.x/255.f, color.y/255.f, color.z/255.f, color.w);
+	glUniform1f(glGetUniformLocation(shaderId, "x"), data.x);
+	glUniform1f(glGetUniformLocation(shaderId, "y"), data.y);
+	glUniform1f(glGetUniformLocation(shaderId, "w"), data.w);
+	glUniform1f(glGetUniformLocation(shaderId, "h"), data.h);
+	glUniform1i(glGetUniformLocation(shaderId, "origin"), data.origin);
+
+	if (picking) {
+		glUniform4f(glGetUniformLocation(shaderId, "color"), data.pickingColor.x / 255.0f, data.pickingColor.y / 255.0f, data.pickingColor.z / 255.0f, data.pickingColor.w);
+	}
+	else {
+		glUniform4f(glGetUniformLocation(shaderId, "color"), data.backColor.x / 255.0f, data.backColor.y / 255.0f, data.backColor.z / 255.0f, data.backColor.w);
+	}
+	
 
 	/* Draw */
 	glBindVertexArray(VAO);

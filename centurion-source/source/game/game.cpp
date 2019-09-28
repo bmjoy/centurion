@@ -10,8 +10,8 @@ Game::Game(){
 	objectId = 1;
 	blockMinimap = false;
 	lastTime = glfwGetTime();
-	sel_rect_coords = { 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f };
-	minimap_rect_coords = { 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f };
+	//sel_rect_coords = { 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f };
+	//minimap_rect_coords = { 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f };
 	gameIsCreated = false;
 }
 
@@ -110,6 +110,8 @@ void Game::create(std::vector<Player> *ListOfPlayers) {
 		(GLfloat)((*playersList)[0].getStartPoint().y - GLB::WINDOW_HEIGHT_ZOOMED / 2.f)
 	);
 
+
+	//---------------------------------------
 	gameIsCreated = true;
 }
 
@@ -141,8 +143,8 @@ void Game::run() {
 	/* Rendering */
 	surface->render(projection, view, false);
 	game::renderObjects(&buildingList, &unitList, &projection, &view, &click_id, &selectedUnits);
-	game::renderSelRectangle(&sel_rect_coords, &view, &cameraLastX, &cameraLastY);
-	game::renderMapRectangle(&minimap_rect_coords);
+	//game::renderSelRectangle(&sel_rect_coords, &view, &cameraLastX, &cameraLastY);
+	//game::renderMapRectangle(&minimap_rect_coords);
 	
 	if (GLB::DEBUG) cursor_point.render();
 	

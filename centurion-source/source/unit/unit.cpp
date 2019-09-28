@@ -72,10 +72,10 @@ void Unit::render(glm::mat4 &proj, glm::mat4 &view, bool picking, int clickID) {
 	obj::USprite()->render(unitData, position3D, picking);
 
 	if (!GLB::DEBUG && !picking) {
-		hitbox.coords = getCoords(position3D.x - entityData["hitbox"][0], position3D.y + entityData["hitbox"][1] + entityData["yOffset"], entityData["hitbox"][0] * 2, entityData["hitbox"][1] * 2);
-		obj::ERectangle()->apply_projection_matrix(GLB::CAMERA_PROJECTION);		
-		obj::ERectangle()->create(hitbox.coords);
-		obj::ERectangle()->render(view, glm::mat4(1.0f), selected ? glm::vec4(255.0f, 255.0f, 255.0f, 1.0f) : glm::vec4(0.0f, 0.0f, 0.0f, 0.0f));
+		//hitbox.coords = getCoords(position3D.x - entityData["hitbox"][0], position3D.y + entityData["hitbox"][1] + entityData["yOffset"], entityData["hitbox"][0] * 2, entityData["hitbox"][1] * 2);
+		//obj::ERectangle()->apply_projection_matrix(GLB::CAMERA_PROJECTION);		
+		//obj::ERectangle()->create(hitbox.coords);
+		//obj::ERectangle()->render(view, glm::mat4(1.0f), selected ? glm::vec4(255.0f, 255.0f, 255.0f, 1.0f) : glm::vec4(0.0f, 0.0f, 0.0f, 0.0f));
 	}
 
 	/* debug pathfinding and coordinates */
@@ -96,10 +96,10 @@ void Unit::render(glm::mat4 &proj, glm::mat4 &view, bool picking, int clickID) {
 			circlePos.render(false, position2D.x, position2D.y);
 			circlePos.render(false, position3D.x, position3D.y);
 
-			obj::ERectangle()->apply_projection_matrix(GLB::CAMERA_PROJECTION);
-			hitbox.coords = getCoords(position3D.x - entityData["hitbox"][0], position3D.y + entityData["hitbox"][1] + entityData["yOffset"], entityData["hitbox"][0] * 2, entityData["hitbox"][1] * 2);
-			obj::ERectangle()->create(hitbox.coords);
-			obj::ERectangle()->render(view, glm::mat4(1.0f), selected ? glm::vec4(255.0f, 0.0f, 255.0f, 1.0f) : glm::vec4(255.0f, 242.0f, 0.0f, 1.0f));
+			//obj::ERectangle()->apply_projection_matrix(GLB::CAMERA_PROJECTION);
+			//hitbox.coords = getCoords(position3D.x - entityData["hitbox"][0], position3D.y + entityData["hitbox"][1] + entityData["yOffset"], entityData["hitbox"][0] * 2, entityData["hitbox"][1] * 2);
+			//obj::ERectangle()->create(hitbox.coords);
+			//obj::ERectangle()->render(view, glm::mat4(1.0f), selected ? glm::vec4(255.0f, 0.0f, 255.0f, 1.0f) : glm::vec4(255.0f, 242.0f, 0.0f, 1.0f));
 		}
 	}
 }

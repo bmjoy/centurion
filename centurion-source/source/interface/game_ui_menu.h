@@ -16,6 +16,7 @@ public:
 private:
 	gui::Button btn;
 	gui::Rectangle background;
+	gui::Rectangle border;
 	std::vector<gui::Button> buttons;
 	json data;
 	std::string s;

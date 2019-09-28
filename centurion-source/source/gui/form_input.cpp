@@ -18,6 +18,8 @@ namespace gui {
 
 		back = gui::Rectangle();
 		back.create("filled", x, y, width, height, "top-left", pickingID);
+		border = gui::Rectangle();
+		border.create("border", x, y, width, height, "top-left", pickingID);
 
 		if (boolOptions) {
 
@@ -25,6 +27,8 @@ namespace gui {
 
 			back_options = gui::Rectangle();
 			back_options.create("filled", x, y - height - 1, width, height * nOptions, "top-left", 0);
+			border_options = gui::Rectangle();
+			border_options.create("border", x, y - height - 1, width, height * nOptions, "top-left", 0);
 
 			for (int j = 0; j < options.size(); j++) {
 				float y1 = y - 1.f - (j + 1)*height + j;
@@ -61,19 +65,17 @@ namespace gui {
 		else {
 
 			back.render(color, false);
-
-			obj::ERectangle()->create(getCoords(x, y, width, height));
-			obj::ERectangle()->render(glm::mat4(1.0f), glm::mat4(1.0f), glm::vec4(255.0f, 255.0f, 255.0f, 1.0f));
+			border.render(glm::vec4(255.f));
 
 			if (boolOptions) {
 				// selected text
 				text.render_dynamic(selectedText, "tahoma_8", mainTextPos.x, mainTextPos.y, glm::vec4(255.f), "left", "normal");
 				if (isOpened) {
-					// background
+
+					// background and border
 					back_options.render(color, false);
-					// border 
-					obj::ERectangle()->create(getCoords(x, y - height, width, height * nOptions + 1.0f));
-					obj::ERectangle()->render(glm::mat4(1.0f), glm::mat4(1.0f));
+					border_options.render(glm::vec4(255.f));
+
 					// text
 					for (int j = 0; j < nOptions; j++) {
 						optionsText[j].render_static();

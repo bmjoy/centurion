@@ -113,10 +113,10 @@ void game::renderSelRectangle(std::array<float, 8> *coords, glm::mat4 *view, flo
 			GLB::SEL_RECT_COORDS.maxX = std::max((*coords)[0], (*coords)[4]);
 			GLB::SEL_RECT_COORDS.minY = std::min((*coords)[1], (*coords)[3]);
 			GLB::SEL_RECT_COORDS.maxY = std::max((*coords)[1], (*coords)[3]);
-			obj::ERectangle()->apply_projection_matrix(GLB::CAMERA_PROJECTION);
+			//obj::ERectangle()->apply_projection_matrix(GLB::CAMERA_PROJECTION);
 			//obj::ERectangle()->apply_view_matrix();
-			obj::ERectangle()->create(*coords);
-			obj::ERectangle()->render(*view, glm::mat4(1.0f));
+			//obj::ERectangle()->create(*coords);
+			//obj::ERectangle()->render(*view, glm::mat4(1.0f));
 		}
 		else {
 			*cameraLastX = GAME::CAMERA_POS_X;
@@ -132,11 +132,11 @@ void game::renderMapRectangle(std::array<float, 8> *coords) {
 		(*coords)[2] = 0.0f;	(*coords)[3] = GAME::UI_BOTTOM_HEIGHT;
 		(*coords)[4] = GLB::WINDOW_WIDTH_ZOOMED; (*coords)[5] = GAME::UI_BOTTOM_HEIGHT;
 		(*coords)[6] = GLB::WINDOW_WIDTH_ZOOMED; (*coords)[7] = GLB::WINDOW_HEIGHT_ZOOMED - GAME::UI_TOP_HEIGHT;
-		glm::mat4 model = glm::translate(glm::mat4(1.0f), glm::vec3(GAME::CAMERA_POS_X, GAME::CAMERA_POS_Y, 0.0));
+		//glm::mat4 model = glm::translate(glm::mat4(1.0f), glm::vec3(GAME::CAMERA_POS_X, GAME::CAMERA_POS_Y, 0.0));
 		
-		obj::ERectangle()->apply_projection_matrix(GLB::MINIMAP_PROJECTION);
-		obj::ERectangle()->apply_view_matrix();
-		obj::ERectangle()->create(*coords);
-		obj::ERectangle()->render(glm::mat4(1.0f), model);
+		//obj::ERectangle()->apply_projection_matrix(GLB::MINIMAP_PROJECTION);
+		//obj::ERectangle()->apply_view_matrix();
+		//obj::ERectangle()->create(*coords);
+		//obj::ERectangle()->render(glm::mat4(1.0f), model);
 	}
 }

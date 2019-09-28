@@ -26,6 +26,7 @@ private:
 	gui::SimpleText number;
 	gui::Image arrowDown, arrowUp;
 	gui::Rectangle background;
+	gui::Rectangle border;
 	float textWidth;
 	int x, y, deltaY, w, h;
 };

@@ -27,6 +27,9 @@ void UIGame::create(int *pickingId) {
 
 	time.lastTime = glfwGetTime();
 	time.text = gui::SimpleText("dynamic", true);
+
+	minimapRectangle = gui::Rectangle();
+	minimapRectangle.create("border", 0, 0, 0, 0, "bottom-left", 0);
 }
 
 void UIGame::render() {
@@ -41,6 +44,15 @@ void UIGame::render() {
 	std::string txt = time.hours_str + ":" + time.minutes_str + ":" + time.seconds_str;
 	time.text.render_dynamic(txt, "tahoma_8", time.x, time.y, glm::vec4(255.f, 255.f, 255.f, 255.f), "left", "normal");
 
+	// minimap rectangle:
+	if (GAME::MINIMAP_IS_ACTIVE) {
+		float x = (float)GAME::CAMERA_POS_X / GAME::MAP_WIDTH * GLB::WINDOW_WIDTH;
+		float y = (float)GAME::CAMERA_POS_Y / GAME::MAP_HEIGHT * (GLB::WINDOW_HEIGHT - GAME::UI_BOTTOM_HEIGHT - GAME::UI_TOP_HEIGHT) + GAME::UI_BOTTOM_HEIGHT;
+		float w = (float)GLB::WINDOW_WIDTH_ZOOMED * GLB::WINDOW_WIDTH / GAME::MAP_WIDTH;
+		float h = (float)GLB::WINDOW_HEIGHT_ZOOMED * (GLB::WINDOW_HEIGHT-GAME::UI_BOTTOM_HEIGHT-GAME::UI_TOP_HEIGHT) / GAME::MAP_HEIGHT;
+
+		minimapRectangle.render(glm::vec4(255.f), false, x, y, w, h);
+	}
 	// Temporary bars:
 	top_bar.render(glm::vec4(255.0f, 0.0f, 0.0f, 1.0f));
 	bottom_bar.render(glm::vec4(255.0f, 0.0f, 0.0f, 1.0f));
