@@ -1,7 +1,7 @@
 {
   "class_name": "hmyrmidon",
   "yOffset": 30,
-  "hitbox": [ 30, 80 ],
+  "hitbox": [ 30, 70 ],
   "spriteList": [ "idle", "walk" ],
   "directions": 8,
   "sprites": {

@@ -3,7 +3,6 @@
 #include <global.hpp>
 #include <json.hpp>
 
-#include "../music/music.h"
 #include "../gui/form_input.h"
 #include "../gui/button.h"
 #include "../gui/image.h"
@@ -28,8 +27,6 @@ private:
 	std::map<std::string, std::vector<gui::Image>> images;
 	std::map<std::string, std::vector<gui::Button>> buttons;
 	
-	ISoundEngine* music;
-
 	PlayersList list;
 
 	/* PICKING */

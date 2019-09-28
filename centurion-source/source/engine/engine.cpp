@@ -40,7 +40,7 @@ int Engine::launch() {
 		
 		if (GLB::MAIN_MENU){
 			if (!startMenu->menu_is_created()){
-
+				music = Music().play("assets/music/menu.mp3", true);
 				startMenu->create(&playersList);
 			}
 			startMenu->render();
@@ -50,6 +50,9 @@ int Engine::launch() {
 
 		if (GLB::GAME) {
 			if (!game->game_is_created()) {
+				Music().stop(music);
+				music = Music().play("assets/music/game.mp3", true);
+
 				clearAndSwapBuffers(GLB::MAIN_WINDOW);
 				{
 					text = gui::SimpleText("dynamic");
@@ -68,9 +71,10 @@ int Engine::launch() {
 			GLB::GAME_CLEAR = false;
 			GLB::GAME = false;
 			GLB::MAIN_MENU = true;
-
+			
 			game->reset();
 			startMenu->reset();
+			Music().stop(music);
 		}
 
 		// -------------- //
@@ -83,7 +87,7 @@ int Engine::launch() {
 		
 		glfwSwapBuffers(GLB::MAIN_WINDOW);
 
-		//fps_sleep();
+		fps_sleep();
 	}
 
 	glfwTerminate(); 

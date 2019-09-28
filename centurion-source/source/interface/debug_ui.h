@@ -17,6 +17,7 @@ private:
 	std::array<std::string, 7> dynamicTextList;
 	std::vector<gui::SimpleText> staticText;
 	gui::SimpleText dynamicText;
+	gui::SimpleText debugText;
 	float startX, startY, deltaY;
 	int n;
 

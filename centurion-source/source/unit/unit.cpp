@@ -144,13 +144,13 @@ void Unit::position_update() {
 		is_Moving = false;
 		currentStateStr = "idle";
 		unitData.currentState = unitData.States[currentStateStr];
+		pathQuadsList = { };
 	}
 }
 
 void Unit::walk_behaviour() {
 	if (GLB::MOUSE_RIGHT && selected) {
 
-		//GLB::MOUSE_RIGHT = false;
 		is_Moving = true;
 
 		startPoint = glm::vec2((int)position2D.x / PATH::CELL_GRID_SIZE * PATH::CELL_GRID_SIZE, (int)position2D.y / PATH::CELL_GRID_SIZE * PATH::CELL_GRID_SIZE);

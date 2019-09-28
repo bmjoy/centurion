@@ -14,7 +14,6 @@ Menu::Menu(){
 
 void Menu::create(std::vector<Player> *List) {	
 	playersList = List;
-	music = Music().play("assets/music/menu.mp3", true);
 	
 	std::string s;
 
@@ -125,8 +124,7 @@ void Menu::picking() {
 		}
 		/*------------------------------------------------------------------------------*/
 		if (pickingList[clickId] == "buttonStart") {
-			Music().stop(music);
-			music = Music().play("assets/music/game.mp3", true);
+			
 			GLB::MOUSE_LEFT = false;
 			GLB::GAME = true;
 			GLB::MAIN_MENU = false;
