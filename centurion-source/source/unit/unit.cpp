@@ -46,6 +46,10 @@ void Unit::create() {
 	unitData.className = className;
 	obj::USprite()->getTextureInfo(&unitData);
 
+	// hitbox 
+	hitbox.rectangle = gui::Rectangle();
+	hitbox.rectangle.create("border", 0, 0, unitData.hitBox[0], unitData.hitBox[1], "center", 0);
+
 	//Show circle position under the unit (Debug only)
 	circlePos = gui::Image("circle_pos");
 	circlePos.create("center", 0, 0, 0, 0, 0);
@@ -57,8 +61,6 @@ void Unit::render(glm::mat4 &proj, glm::mat4 &view, bool picking, int clickID) {
 
 	clickSelection = (picking_id == clickID);
 	if(GLB::MOUSE_LEFT)	rectangleSelection = unit::isInSelectionRect(hitbox.coords);
-
-	
 
 	selected = (clickSelection + rectangleSelection > 0);
 
@@ -72,10 +74,15 @@ void Unit::render(glm::mat4 &proj, glm::mat4 &view, bool picking, int clickID) {
 	obj::USprite()->render(unitData, position3D, picking);
 
 	if (!GLB::DEBUG && !picking) {
-		//hitbox.coords = getCoords(position3D.x - entityData["hitbox"][0], position3D.y + entityData["hitbox"][1] + entityData["yOffset"], entityData["hitbox"][0] * 2, entityData["hitbox"][1] * 2);
-		//obj::ERectangle()->apply_projection_matrix(GLB::CAMERA_PROJECTION);		
-		//obj::ERectangle()->create(hitbox.coords);
-		//obj::ERectangle()->render(view, glm::mat4(1.0f), selected ? glm::vec4(255.0f, 255.0f, 255.0f, 1.0f) : glm::vec4(0.0f, 0.0f, 0.0f, 0.0f));
+		hitbox.coords = getCoords(position3D.x - unitData.hitBox[0] / 2.f, position3D.y + unitData.hitBox[1] / 2.f + unitData.yOffset, unitData.hitBox[0], unitData.hitBox[1]);
+		hitbox.rectangle.render(
+			selected ? glm::vec4(255.0f, 255.0f, 255.0f, 1.0f) : glm::vec4(0.0f, 0.0f, 0.0f, 0.0f),
+			0,
+			position3D.x,
+			position3D.y + unitData.yOffset,
+			0,
+			0
+		);
 	}
 
 	/* debug pathfinding and coordinates */
@@ -84,9 +91,6 @@ void Unit::render(glm::mat4 &proj, glm::mat4 &view, bool picking, int clickID) {
 
 		// **** Rectangle Path **** //
 		
-		GAME::MINIMAP_IS_ACTIVE ? obj::FRectangle()->apply_projection_matrix(GLB::MINIMAP_PROJECTION) : obj::FRectangle()->apply_projection_matrix(GLB::CAMERA_PROJECTION);	
-		obj::FRectangle()->apply_view_matrix(view);
-
 		for (int i = 0; i < pathQuadsList.size(); i++) {
 			pathQuadsList[i].render(glm::vec4(255.f, 0.f, 0.f, 255.f));
 		}
@@ -96,10 +100,15 @@ void Unit::render(glm::mat4 &proj, glm::mat4 &view, bool picking, int clickID) {
 			circlePos.render(false, position2D.x, position2D.y);
 			circlePos.render(false, position3D.x, position3D.y);
 
-			//obj::ERectangle()->apply_projection_matrix(GLB::CAMERA_PROJECTION);
-			//hitbox.coords = getCoords(position3D.x - entityData["hitbox"][0], position3D.y + entityData["hitbox"][1] + entityData["yOffset"], entityData["hitbox"][0] * 2, entityData["hitbox"][1] * 2);
-			//obj::ERectangle()->create(hitbox.coords);
-			//obj::ERectangle()->render(view, glm::mat4(1.0f), selected ? glm::vec4(255.0f, 0.0f, 255.0f, 1.0f) : glm::vec4(255.0f, 242.0f, 0.0f, 1.0f));
+			hitbox.coords = getCoords(position3D.x - unitData.hitBox[0] / 2.f, position3D.y + unitData.hitBox[1] / 2.f + unitData.yOffset, unitData.hitBox[0], unitData.hitBox[1]);
+			hitbox.rectangle.render(
+				selected ? glm::vec4(255.0f, 0.0f, 255.0f, 1.0f) : glm::vec4(255.0f, 242.0f, 0.0f, 1.0f),
+				0,
+				position3D.x,
+				position3D.y + unitData.yOffset,
+				0,
+				0
+			);
 		}
 	}
 }

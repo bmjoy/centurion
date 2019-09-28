@@ -10,8 +10,6 @@ Game::Game(){
 	objectId = 1;
 	blockMinimap = false;
 	lastTime = glfwGetTime();
-	//sel_rect_coords = { 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f };
-	//minimap_rect_coords = { 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f };
 	gameIsCreated = false;
 }
 
@@ -38,6 +36,9 @@ void Game::create(std::vector<Player> *ListOfPlayers) {
 		-(float)GAME::MAP_WIDTH, 
 		(float)GAME::MAP_WIDTH
 	);
+
+	selRectangle = gui::Rectangle();
+	selRectangle.create("border", 0, 0, 0, 0, "top-left", 0);
 
 	/*------------------------------------------------------------*/
 	/*------------------------------------------------------------*/
@@ -142,9 +143,7 @@ void Game::run() {
 
 	/* Rendering */
 	surface->render(projection, view, false);
-	game::renderObjects(&buildingList, &unitList, &projection, &view, &click_id, &selectedUnits);
-	//game::renderSelRectangle(&sel_rect_coords, &view, &cameraLastX, &cameraLastY);
-	//game::renderMapRectangle(&minimap_rect_coords);
+	game::renderObjects(&buildingList, &unitList, &selRectangle, &projection, &view, &click_id, &selectedUnits);
 	
 	if (GLB::DEBUG) cursor_point.render();
 	
@@ -159,6 +158,7 @@ void Game::run() {
 
 	game::goToPosition(&buildingList, &camera, &lastTime, &click_id, &blockMinimap);
 	GLB::CAMERA_PROJECTION = glm::ortho(0.0f, (float)GLB::WINDOW_WIDTH_ZOOMED, 0.0f, (float)GLB::WINDOW_HEIGHT_ZOOMED, -(float)GAME::MAP_WIDTH, (float)GAME::MAP_WIDTH);
+	GLB::MOUSE_RIGHT = false;
 }
 
 void Game::clear() {

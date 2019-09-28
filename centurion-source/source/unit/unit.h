@@ -50,6 +50,7 @@ private:
 	/* debug objects */
 	std::vector<gui::Rectangle> pathQuadsList;
 	struct HitBox {
+		gui::Rectangle rectangle;
 		std::array<float, 8> coords;
 	} hitbox;
 	gui::Image circlePos;

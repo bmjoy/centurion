@@ -30,6 +30,16 @@ void main()
         y1 = y - h/2.f;
     }
     
+    if (origin == 3){ // top-right
+        x1 = x - w;
+        y1 = y - h;
+    }
+    
+    if (origin == 4){ // bottom-right
+        x1 = x - w;
+        y1 = y;
+    }
+    
     gl_Position = projection * view * vec4(pos.x * w + x1, pos.y * h + y1, pos.z, 1.0);
     
 }  

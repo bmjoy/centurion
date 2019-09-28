@@ -29,6 +29,7 @@ private:
 	Unit unit;
 	UIGame ui;
 	CPoint cursor_point;
+	gui::Rectangle selRectangle;
 
 	std::map<int, Building> buildingList;
 	std::map<int, Unit> unitList;
@@ -42,9 +43,5 @@ private:
 	std::string r;
 	glm::vec2 origin;
 	glm::mat4 view, projection;
-
-
-	//std::array<float, 8> minimap_rect_coords, sel_rect_coords;	
-
 	bool gameIsCreated;
 };

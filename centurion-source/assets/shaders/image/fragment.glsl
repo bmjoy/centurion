@@ -12,7 +12,8 @@ void main()
 {
     
     if (picking == 1){
-        FragColor = texture(texture1, FragTex).a * picking_color;
+        float alpha = float(1 - int(texture(texture1, FragTex).a == 0.f));
+        FragColor = alpha * picking_color;
     }
     else {
         FragColor = texture(texture1, FragTex);

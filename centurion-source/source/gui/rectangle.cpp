@@ -7,6 +7,8 @@ namespace gui {
 		originMap["bottom-left"] = 0;
 		originMap["top-left"] = 1;
 		originMap["center"] = 2;
+		originMap["top-right"] = 3;
+		originMap["bottom-right"] = 4;
 		data = RectangleData();
 		data.type = "filled";
 	}
