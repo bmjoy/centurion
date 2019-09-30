@@ -228,6 +228,7 @@
     <ClCompile Include="source\common\map_generation.cpp" />
     <ClCompile Include="source\common\objects.cpp" />
     <ClCompile Include="source\common\shader.cpp" />
+    <ClCompile Include="source\editor\editor.cpp" />
     <ClCompile Include="source\engine\camera.cpp" />
     <ClCompile Include="source\engine\cursor_point.cpp" />
     <ClCompile Include="source\engine\engine.cpp" />
@@ -274,6 +275,7 @@
     <ClInclude Include="source\common\map_generation.h" />
     <ClInclude Include="source\common\objects.h" />
     <ClInclude Include="source\common\shader.h" />
+    <ClInclude Include="source\editor\editor.h" />
     <ClInclude Include="source\engine\camera.h" />
     <ClInclude Include="source\engine\cursor_point.h" />
     <ClInclude Include="source\engine\engine.h" />

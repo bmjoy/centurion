@@ -9,6 +9,7 @@
 
 #include "../menu/menu.h"
 #include "../game/game.h"
+#include "../editor/editor.h"
 
 #include "../gui/simple_text.h"
 #include "../gui/rectangle.h"
@@ -29,6 +30,7 @@ private:
 	Mouse *mouse;
 	Menu *startMenu;
 	Game *game;
+	Editor *editor;
 	DebugUI *debugUI;
 	ISoundEngine* music;
 
@@ -45,7 +47,6 @@ private:
 	int Fps;
 	int Mpfs;
 
-	void compile_shaders();  // temporary
 	void fps();
 	void fps_sleep();	
 	void readDataClasses();

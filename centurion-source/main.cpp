@@ -18,6 +18,7 @@ namespace GLB {
 	bool WINDOW_CLOSE = false;
 	bool MAIN_MENU = true;
 	bool GAME = false;
+	bool EDITOR = false;
 	bool MOUSE_LEFT = false, MOUSE_RIGHT = false;
 	bool MOUSE_RELEASE = false;
 	int MOUSE_X = 0, MOUSE_Y = 0, MOUSE_Y_2D = 0;

@@ -121,6 +121,12 @@
     <Filter Include="Source Files\interface">
       <UniqueIdentifier>{f775fef9-e31d-462f-88bc-301349d95e3d}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\editor">
+      <UniqueIdentifier>{5600bf87-3068-4a76-a577-3a1655b1be1b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\editor">
+      <UniqueIdentifier>{9d9de2d3-0e2d-44bd-a6cb-bf2398104fd5}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -242,6 +248,9 @@
     </ClCompile>
     <ClCompile Include="source\primitives\light.cpp">
       <Filter>Source Files\primitives</Filter>
+    </ClCompile>
+    <ClCompile Include="source\editor\editor.cpp">
+      <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -373,6 +382,9 @@
     </ClInclude>
     <ClInclude Include="source\primitives\light.h">
       <Filter>Header Files\primitives</Filter>
+    </ClInclude>
+    <ClInclude Include="source\editor\editor.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
