@@ -256,12 +256,12 @@
     <ClCompile Include="source\primitives\cursor_image.cpp" />
     <ClCompile Include="source\primitives\empty_rectangle.cpp" />
     <ClCompile Include="source\primitives\filled_rectangle.cpp" />
+    <ClCompile Include="source\primitives\grid.cpp" />
     <ClCompile Include="source\primitives\image_sprite.cpp" />
     <ClCompile Include="source\primitives\light.cpp" />
     <ClCompile Include="source\primitives\terrain.cpp" />
     <ClCompile Include="source\primitives\unit_sprite.cpp" />
-    <ClCompile Include="source\terrain\grid.cpp" />
-    <ClCompile Include="source\terrain\surface.cpp" />
+    <ClCompile Include="source\surface\surface.cpp" />
     <ClCompile Include="source\unit\unit.cpp" />
     <ClCompile Include="source\unit\unit_functions.cpp" />
     <None Include="assets\shaders\bsprite\vertex.glsl">
@@ -305,13 +305,13 @@
     <ClInclude Include="source\primitives\cursor_image.h" />
     <ClInclude Include="source\primitives\empty_rectangle.h" />
     <ClInclude Include="source\primitives\filled_rectangle.h" />
+    <ClInclude Include="source\primitives\grid.h" />
     <ClInclude Include="source\primitives\light.h" />
     <ClInclude Include="source\primitives\primitives.h" />
     <ClInclude Include="source\primitives\image_sprite.h" />
     <ClInclude Include="source\primitives\terrain.h" />
     <ClInclude Include="source\primitives\unit_sprite.h" />
-    <ClInclude Include="source\terrain\grid.h" />
-    <ClInclude Include="source\terrain\surface.h" />
+    <ClInclude Include="source\surface\surface.h" />
     <ClInclude Include="source\unit\unit.h" />
     <ClInclude Include="source\unit\unit_functions.h" />
   </ItemGroup>

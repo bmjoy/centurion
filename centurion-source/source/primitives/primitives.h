@@ -8,3 +8,4 @@
 #include "unit_sprite.h"
 #include "image_sprite.h"
 #include "terrain.h"
+#include "grid.h"

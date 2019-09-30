@@ -136,6 +136,28 @@ glm::vec3 mapgen::updatedNormals(glm::vec2 pos) {
 	return N;
 }
 
+void mapgen::generateRandomMap() {
+	for (int i = 0; i < 36895; i++) {
+		float xCoord = mapgen::MapVertices()[i * 10];
+		float yCoord = mapgen::MapVertices()[i * 10 + 1];
+
+		noiseData nData = generateNoise(glm::vec2(xCoord, yCoord), false);
+
+		// update z, y and znoise
+		mapgen::MapVertices()[i * 10 + 2] += nData.zNoise;
+		mapgen::MapVertices()[i * 10 + 1] += mapgen::smoothNoise(yCoord, nData.zNoise); 
+		mapgen::MapVertices()[i * 10 + 3] = nData.zNoise;
+		MAP::MIN_Z = std::min(nData.zNoise, MAP::MIN_Z);
+		MAP::MAX_Z = std::max(nData.zNoise, MAP::MAX_Z);
+
+		// normals
+		glm::vec3 N = mapgen::updatedNormals(glm::vec2(xCoord, yCoord));
+		mapgen::MapVertices()[i * 10 + 6] = N.x;
+		mapgen::MapVertices()[i * 10 + 7] = N.y;
+		mapgen::MapVertices()[i * 10 + 8] = N.z;
+	}
+}
+
 void mapgen::define_settlements() {
 
 	srand(time(NULL));

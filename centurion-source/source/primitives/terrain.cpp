@@ -127,6 +127,26 @@ void Terrain::updateBuffers(float x, float y, std::string type, float q) {
 	glBindVertexArray(0);
 }
 
+void Terrain::createNoise() {
+	mapgen::generateRandomMap();
+
+	glBindVertexArray(VAO);
+	glBindBuffer(GL_ARRAY_BUFFER, VBO);
+	glBufferData(GL_ARRAY_BUFFER, sizeof(*mapgen::MapVertices()) * nVertices, mapgen::MapVertices(), GL_STATIC_DRAW);
+
+	glVertexAttribPointer(0, 4, GL_FLOAT, GL_FALSE, 10 * sizeof(float), (void*)0);
+	glEnableVertexAttribArray(0);
+	glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, 10 * sizeof(float), (void*)(sizeof(float) * 4));
+	glEnableVertexAttribArray(1);
+	glVertexAttribPointer(2, 3, GL_FLOAT, GL_FALSE, 10 * sizeof(float), (void*)(sizeof(float) * 6));
+	glEnableVertexAttribArray(2);
+	glVertexAttribPointer(3, 1, GL_FLOAT, GL_FALSE, 10 * sizeof(float), (void*)(sizeof(float) * 9));
+	glEnableVertexAttribArray(3);
+
+	glBindBuffer(GL_ARRAY_BUFFER, 0);
+	glBindVertexArray(0);
+}
+
 void Terrain::texture() {
 	/* Texture: GRASS */
 	textureIdList.push_back(0);

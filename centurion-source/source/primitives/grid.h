@@ -10,6 +10,7 @@ class Grid : public Shader
 public:
 	Grid();
 	void create();
-	void render(glm::mat4 projMat, glm::mat4 viewMat);
+	void update();
+	void render();
 	~Grid();
 };

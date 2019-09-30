@@ -28,6 +28,9 @@ namespace obj {
 	static Terrain terrain;
 	Terrain *MapTerrain();
 
+	static Grid grid;
+	Grid *MapGrid();
+
 	void applyMenuMatrices();
 	void applyGameMatrices(glm::mat4 *proj, glm::mat4 *view);
 	void init();

@@ -5,7 +5,7 @@ Shader::Shader() {
 	shaderId = 0;
 };
 
-int Shader::compile() {
+void Shader::compile() {
 	// Compile and setup the shader
 	std::string vertexString = ReadFile(vPath);
 	std::string fragmentString = ReadFile(fPath);
@@ -47,8 +47,6 @@ int Shader::compile() {
 	}
 	glDeleteShader(vertexShader);
 	glDeleteShader(fragmentShader);
-
-	return shaderId;
 }
 
 void Shader::apply_projection_matrix(glm::mat4 mat) {

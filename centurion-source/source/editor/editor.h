@@ -2,7 +2,7 @@
 
 #include <global.hpp>
 #include "../engine/camera.h"
-#include "../terrain/surface.h"
+#include "../surface/surface.h"
 
 class Editor
 {

@@ -6,7 +6,7 @@ class Shader
 {
 public:
 	Shader();
-	int compile();
+	void compile();
 	void apply_projection_matrix(glm::mat4 mat = glm::mat4(1.0f));
 	void apply_view_matrix(glm::mat4 mat = glm::mat4(1.0f));
 	void apply_model_matrix(glm::mat4 mat = glm::mat4(1.0f));

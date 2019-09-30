@@ -11,6 +11,7 @@ class Terrain : public Shader
 public:
 	Terrain();
 	void create();
+	void createNoise();
 	void updateBuffers(float x, float y, std::string type, float q);
 	void render(bool tracing);
 	~Terrain();
