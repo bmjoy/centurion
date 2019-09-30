@@ -14,6 +14,7 @@ public:
 	Terrain();
 	void create();
 	void set_window(myWindow *wnd) { window = wnd; }
+	void update_mesh(float x1, float y1);
 	void render(glm::mat4 projMat, glm::mat4 viewMat, bool tracing);
 	~Terrain();
 

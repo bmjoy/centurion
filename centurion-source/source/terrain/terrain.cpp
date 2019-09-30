@@ -8,7 +8,7 @@ Terrain::Terrain(){
 	path_grass = "assets/terrain/textures/grass1.png";
 	path_road = "assets/terrain/textures/road1.png";
 	path_rock = "assets/terrain/textures/rock1.png";
-	plane_path = "assets/terrain/plane66k.obj";
+	plane_path = "assets/terrain/plane.obj";
 }
 
 
@@ -30,6 +30,9 @@ void Terrain::create() {
 	//delete scene;
 
 	create_mesh(&vertices[0], &indices[0], vertices.size(), indices.size());
+	
+	std::cout << vertices.size() << "\n";
+	//update_mesh();
 	texture();
 }
 
@@ -54,7 +57,7 @@ void Terrain::load_mesh(aiMesh * mesh, const aiScene * scene) {
 
 	for (size_t i = 0; i < mesh->mNumVertices; i++) {  
 
-		if ((int)i % 3000 == 0) {
+		if ((int)i % 3072 == 0) {
 			glfwSwapBuffers(GLB::MAIN_WINDOW);
 			glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
 			glClear(GL_COLOR_BUFFER_BIT);
@@ -95,6 +98,12 @@ void Terrain::load_mesh(aiMesh * mesh, const aiScene * scene) {
 		*yCoord = mesh->mVertices[i].y;
 		*zCoord = 0.f;
 
+		/* SAVE VERTEX POSITION */
+		// 405845 / 11 = 36895
+
+		int j = (int)((*yCoord / 128.f) * GAME::MAP_WIDTH / 128.f + (*xCoord / 128.f));
+		MAP::VERTICES_POS[j] = i;
+
 		/* 45° Inclination */
 		(*zCoord) -= (*yCoord);
 		glm::vec2 xyCoords = glm::vec2(*xCoord, *yCoord);
@@ -102,8 +111,8 @@ void Terrain::load_mesh(aiMesh * mesh, const aiScene * scene) {
 		/* Noise calculation */
 		*nData = mapgen::generateNoise(glm::vec2(*xCoord, *yCoord));
 
-		(*zCoord) += nData->zNoise;
-		(*yCoord) += mapgen::smoothNoise(*yCoord, nData->zNoise);
+		//(*zCoord) += nData->zNoise;
+		//(*yCoord) += mapgen::smoothNoise(*yCoord, nData->zNoise);
 
 		MAP::MIN_Z = std::min(nData->zNoise, MAP::MIN_Z);
 		MAP::MAX_Z = std::max(nData->zNoise, MAP::MAX_Z);
@@ -121,15 +130,17 @@ void Terrain::load_mesh(aiMesh * mesh, const aiScene * scene) {
 		/* NORMALS UPDATE */
 		glm::vec3 oldNormals = glm::vec3(mesh->mNormals[i].x, mesh->mNormals[i].y, mesh->mNormals[i].z);
 		
-		glm::vec3 N = mapgen::updatedNormals(xyCoords);
+		//glm::vec3 N = mapgen::updatedNormals(xyCoords);
+		glm::vec3 N = oldNormals;
 		vertices.insert(vertices.end(), { N.x , N.y , N.z });
 
 		/* Terrain data */
 		vertices.insert(vertices.end(), { nData->grassWeight,  nData->roadWeight });
-
-		
+	
 	}
-
+	
+	std::cout << "Number of vertices: " << vertices.size() << "\n";
+	
 	glfwSwapBuffers(GLB::MAIN_WINDOW);
 	glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
 	glClear(GL_COLOR_BUFFER_BIT);
@@ -179,12 +190,38 @@ void Terrain::create_mesh(GLfloat *vertices, unsigned int *indices, unsigned int
 	glEnableVertexAttribArray(2);
 	glVertexAttribPointer(3, 2, GL_FLOAT, GL_FALSE, sizeof(vertices[0]) * 11, (void*)(sizeof(vertices[0]) * 9));
 	glEnableVertexAttribArray(3);
-
 	glBindBuffer(GL_ARRAY_BUFFER, 0);
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
 	glBindVertexArray(0);
 }
 
+void Terrain::update_mesh(float x1, float y1) {
+
+	//float x1 = 128.f;
+	//float y1 = 256.f;
+	int j = (int)((int)y1 / 128 * GAME::MAP_WIDTH / 128.f + (int)x1 / 128);
+	vertices[MAP::VERTICES_POS[j] * 11 + 9] = 0.f;
+	vertices[MAP::VERTICES_POS[j] * 11 + 10] = 1.f;
+	//for (int i = 0; i < 5; i++) {
+	//	
+	//}
+
+
+	glBindVertexArray(VAO);
+	glBindBuffer(GL_ARRAY_BUFFER, VBO);
+	glBufferData(GL_ARRAY_BUFFER, sizeof((&vertices[0])[0]) * vertices.size(), &vertices[0], GL_STATIC_DRAW);
+	glVertexAttribPointer(0, 4, GL_FLOAT, GL_FALSE, sizeof((&vertices[0])[0]) * 11, 0);
+	glEnableVertexAttribArray(0);
+	glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, sizeof((&vertices[0])[0]) * 11, (void*)(sizeof((&vertices[0])[0]) * 4));
+	glEnableVertexAttribArray(1);
+	glVertexAttribPointer(2, 3, GL_FLOAT, GL_FALSE, sizeof((&vertices[0])[0]) * 11, (void*)(sizeof((&vertices[0])[0]) * 6));
+	glEnableVertexAttribArray(2);
+	glVertexAttribPointer(3, 2, GL_FLOAT, GL_FALSE, sizeof((&vertices[0])[0]) * 11, (void*)(sizeof((&vertices[0])[0]) * 9));
+	glEnableVertexAttribArray(3);
+	glBindBuffer(GL_ARRAY_BUFFER, 0);
+	glBindVertexArray(0);
+
+}
 
 void Terrain::texture() {
 	/* Texture: GRASS */

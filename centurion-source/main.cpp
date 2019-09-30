@@ -40,6 +40,7 @@ namespace GLB {
 namespace MAP {
 	float MIN_Z = 0.0f, MAX_Z = 0.0f;
 	float XYSCALE = 80.0f, ZSCALE = 0.025/3.0, XSEED = 0.0, YSEED = 0.0f;
+	int VERTICES_POS[36895] = { 0 };
 }
 
 namespace SHD {
@@ -48,7 +49,7 @@ namespace SHD {
 
 namespace GAME {
 	bool MENU_IS_ACTIVE = false;
-	int MAP_WIDTH = 30000, MAP_HEIGHT = 20000;
+	int MAP_WIDTH = 29952, MAP_HEIGHT = 19968;
 	int PLAYERS_NUMBER = 1;
 	int PLAYERS_NUMBER_MAX = 10;
 	float TOWNHALL_RADIUS = 1875.0f;

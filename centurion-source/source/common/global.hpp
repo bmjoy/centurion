@@ -56,6 +56,7 @@ namespace GLB {
 namespace MAP {
 	extern float MIN_Z, MAX_Z;
 	extern float XYSCALE, ZSCALE, XSEED, YSEED;
+	extern int VERTICES_POS[36895];
 }
 
 namespace SHD {

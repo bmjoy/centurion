@@ -52,8 +52,8 @@ out float rockWeight;
 
 /* Mountains stuff */ 
 
-uniform int nMountains;
-uniform float mountainsPos[1000]; // [x, y, h, r]  h=height, r=radius
+//uniform int nMountains;
+//uniform float mountainsPos[1000]; // [x, y, h, r]  h=height, r=radius
 
 
 /* ----- ----- ----- ----- */
