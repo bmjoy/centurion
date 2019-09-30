@@ -1,9 +1,10 @@
 #pragma once
 
-#include "../primitives/empty_rectangle.h"
-#include "../primitives/bitmap_font.h"
-#include "../primitives/building_sprite.h"
-#include "../primitives/filled_rectangle.h"
-#include "../primitives/cursor_image.h"
-#include "../primitives/unit_sprite.h"
-#include "../primitives/image_sprite.h"
+#include "empty_rectangle.h"
+#include "bitmap_font.h"
+#include "building_sprite.h"
+#include "filled_rectangle.h"
+#include "cursor_image.h"
+#include "unit_sprite.h"
+#include "image_sprite.h"
+#include "terrain.h"

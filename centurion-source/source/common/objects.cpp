@@ -28,6 +28,10 @@ UnitSprite *obj::USprite() {
 	return &obj::usprite;
 }
 
+Terrain *obj::MapTerrain() {
+	return &obj::terrain;
+}
+
 void obj::init() {
 	*obj::Text() = BitmapFont();
 	*obj::BSprite() = BuildingSprite();
@@ -36,6 +40,7 @@ void obj::init() {
 	*obj::FRectangle() = FilledRectangle();
 	*obj::Img() = ImageSprite();
 	*obj::USprite() = UnitSprite();
+	*obj::MapTerrain() = Terrain();
 }
 
 void obj::compile() {
@@ -47,6 +52,7 @@ void obj::compile() {
 	id = obj::Cursor()->compile();
 	id = obj::Img()->compile();
 	id = obj::USprite()->compile();
+	id = obj::MapTerrain()->compile();
 }
 
 void obj::create() {
@@ -62,6 +68,10 @@ void obj::create() {
 	obj::BSprite()->create();	
 	obj::Img()->create();
 	obj::USprite()->create();
+
+	//----
+
+	obj::MapTerrain()->create();
 }
 
 void obj::applyMenuMatrices() {
@@ -84,4 +94,6 @@ void obj::applyGameMatrices(glm::mat4 *proj, glm::mat4 *view) {
 	obj::ERectangle()->apply_view_matrix(*view);
 	obj::FRectangle()->apply_projection_matrix(*proj);
 	obj::FRectangle()->apply_view_matrix(*view);
+	obj::MapTerrain()->apply_projection_matrix(*proj);
+	obj::MapTerrain()->apply_view_matrix(*view);
 }

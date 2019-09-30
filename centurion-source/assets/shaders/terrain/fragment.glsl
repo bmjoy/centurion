@@ -25,7 +25,8 @@ in vec2 FragTex;
 in vec2 FragTexGrass;
 in vec3 FragNorm;
 in float FragCol;
-in float terrainType;
+
+in float grassW, roadW;
 
 /* Uniform Variables Init */
 
@@ -41,14 +42,6 @@ uniform int tracing;
 uniform sampler2D grass1;
 uniform sampler2D road1;
 
-/* Terrain Weights */
-
-in float grassWeight;
-in float roadWeight;
-in float rockWeight;
-
-vec4 terraintex;
-
 /* ----- ----- ----- ----- */
 /*      MAIN FUNCTION      */
 /* ----- ----- ----- ----- */
@@ -59,8 +52,13 @@ void main()
     
     float diffuseFactor = max(dot(FragNorm, normalize(directionalLight.direction)), 0.0f);
     vec4 diffuseColor = vec4(directionalLight.colour, 1.0f) * directionalLight.diffuseIntensity * diffuseFactor;
-   
-    vec4 terraintex = vec4((texture(grass1, FragTexGrass) * (ambientColor + diffuseColor) * (grassWeight) + texture(road1, FragTexGrass) * (ambientColor + diffuseColor) * (roadWeight)).xyz,1.0f);
+    
+    
+    vec4 grassTex = texture(grass1, FragTexGrass) * (ambientColor + diffuseColor);
+    vec4 roadTex = texture(road1, FragTexGrass) * (ambientColor + diffuseColor);
+    
+   vec4 terraintex = grassTex * grassW + roadTex * roadW;
+   terraintex = vec4(terraintex.xyz, 1.f);
     
     if (wireframe==0){
         if (tracing == 1){

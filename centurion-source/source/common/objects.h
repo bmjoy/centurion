@@ -25,6 +25,9 @@ namespace obj {
 	static UnitSprite usprite;
 	UnitSprite *USprite();
 
+	static Terrain terrain;
+	Terrain *MapTerrain();
+
 	void applyMenuMatrices();
 	void applyGameMatrices(glm::mat4 *proj, glm::mat4 *view);
 	void init();

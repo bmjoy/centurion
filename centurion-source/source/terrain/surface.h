@@ -1,10 +1,10 @@
 #pragma once
 
 #include <global.hpp>
+#include <objects.h>
 
 #include "../game/game_object.h"
 #include "../engine/window.h"
-#include "terrain.h"
 #include "grid.h"
 
 class Surface : public GObject
@@ -18,7 +18,6 @@ public:
 
 private:
 	myWindow *window;
-	Terrain terrain;
 	Grid grid;
 };
 

@@ -156,9 +156,6 @@
     <ClCompile Include="source\primitives\filled_rectangle.cpp">
       <Filter>Source Files\primitives</Filter>
     </ClCompile>
-    <ClCompile Include="source\terrain\light.cpp">
-      <Filter>Source Files\terrain</Filter>
-    </ClCompile>
     <ClCompile Include="source\menu\menu.cpp">
       <Filter>Source Files\menu</Filter>
     </ClCompile>
@@ -172,9 +169,6 @@
       <Filter>Source Files\common</Filter>
     </ClCompile>
     <ClCompile Include="source\terrain\surface.cpp">
-      <Filter>Source Files\terrain</Filter>
-    </ClCompile>
-    <ClCompile Include="source\terrain\terrain.cpp">
       <Filter>Source Files\terrain</Filter>
     </ClCompile>
     <ClCompile Include="source\unit\unit.cpp">
@@ -243,6 +237,12 @@
     <ClCompile Include="source\gui\image.cpp">
       <Filter>Source Files\gui</Filter>
     </ClCompile>
+    <ClCompile Include="source\primitives\terrain.cpp">
+      <Filter>Source Files\primitives</Filter>
+    </ClCompile>
+    <ClCompile Include="source\primitives\light.cpp">
+      <Filter>Source Files\primitives</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="source\building\building.h">
@@ -281,13 +281,7 @@
     <ClInclude Include="source\terrain\grid.h">
       <Filter>Header Files\terrain</Filter>
     </ClInclude>
-    <ClInclude Include="source\terrain\terrain.h">
-      <Filter>Header Files\terrain</Filter>
-    </ClInclude>
     <ClInclude Include="source\terrain\surface.h">
-      <Filter>Header Files\terrain</Filter>
-    </ClInclude>
-    <ClInclude Include="source\terrain\light.h">
       <Filter>Header Files\terrain</Filter>
     </ClInclude>
     <ClInclude Include="source\menu\menu.h">
@@ -373,6 +367,12 @@
     </ClInclude>
     <ClInclude Include="source\gui\image.h">
       <Filter>Header Files\gui</Filter>
+    </ClInclude>
+    <ClInclude Include="source\primitives\terrain.h">
+      <Filter>Header Files\primitives</Filter>
+    </ClInclude>
+    <ClInclude Include="source\primitives\light.h">
+      <Filter>Header Files\primitives</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

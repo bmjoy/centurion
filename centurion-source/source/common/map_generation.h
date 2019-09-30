@@ -2,7 +2,7 @@
 
 #include <global.hpp>
 #include <time.h>
-#include "../player/player.h"
+
 
 struct noiseData {
 	float zNoise;
@@ -10,10 +10,29 @@ struct noiseData {
 	float roadWeight = 0.0f;
 };
 
+class Player;
+
 namespace mapgen {
+
+	static float empty_map_vertices[368950];
+	float *EmptyMapVertices();
+
+	static float map_vertices[368950];
+	float *MapVertices();
+
+	static unsigned int indices[219024];
+	unsigned int *Indices();
+
+	static int vertices_pos[36895];
+	int *VerticesPos();
+
+	void reset_map();
+
+	//--------------
 
 	static std::vector<Player> *PlayerList;
 
+	void init();
 	void setPlayerList(std::vector<Player> *List);
 	float Random2D(glm::vec2 st);
 	float Interpolate(float a, float b, float x);

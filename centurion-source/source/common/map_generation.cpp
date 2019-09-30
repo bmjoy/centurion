@@ -1,4 +1,5 @@
 #include <map_generation.h>
+#include "../player/player.h"
 
 /* ----- NOISE FUNCTIONS ----- */
 
@@ -8,6 +9,37 @@
 
 // the algorithm is based on "Perlin Noise" algorithm
 // check also "Simplex Noise" for a different one but similar result.
+
+void mapgen::init() {
+	*mapgen::VerticesPos() = { 0 };
+	*mapgen::Indices() = { 0 };
+	*mapgen::EmptyMapVertices() = { 0.f };
+	*mapgen::MapVertices() = { 0.f };
+}
+
+float *mapgen::EmptyMapVertices(){
+	return empty_map_vertices;
+}
+
+float *mapgen::MapVertices(){
+	return map_vertices;
+}
+
+unsigned int *mapgen::Indices(){
+	return indices;
+}
+
+int *mapgen::VerticesPos(){
+	return vertices_pos;
+}
+
+void mapgen::reset_map() {
+	for (int i = 0; i < 368950; i++) {
+		mapgen::MapVertices()[i] = mapgen::EmptyMapVertices()[i];
+	}
+}
+
+//-------------
 
 void mapgen::setPlayerList(std::vector<Player> *List) {
 	PlayerList = List;

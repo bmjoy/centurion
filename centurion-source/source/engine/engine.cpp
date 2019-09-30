@@ -126,6 +126,7 @@ void Engine::readDataClasses() {
 
 		obj::Img()->addPath(imageName, root);
 	}
+
 }
 
 void Engine::fps() {

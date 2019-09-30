@@ -5,10 +5,6 @@ Surface::Surface()
 }
 
 void Surface::create() {
-	terrain = Terrain();
-	int terrain_shd = terrain.compile();	
-	terrain.create();
-	//terrain.set_window(window);
 
 	grid = Grid();
 	SHD::GRID_SHADER_ID = grid.compile();
@@ -18,14 +14,12 @@ void Surface::create() {
 
 void Surface::render(glm::mat4 projMat, glm::mat4 viewMat, bool tracing) {
 	if (GLB::MOUSE_LEFT && !GAME::MINIMAP_IS_ACTIVE) {
-		float x1 = (GLB::MOUSE_X + GAME::CAMERA_POS_X);
-		float y1 = (GLB::MOUSE_Y + GAME::CAMERA_POS_Y);
-		terrain.update_mesh(x1, y1);
+		float x1 = (GLB::MOUSE_X * GLB::WINDOW_WIDTH_ZOOMED / GLB::WINDOW_WIDTH + GAME::CAMERA_POS_X);
+		float y1 = (GLB::MOUSE_Y * GLB::WINDOW_HEIGHT_ZOOMED / GLB::WINDOW_HEIGHT + GAME::CAMERA_POS_Y);
+		obj::MapTerrain()->updateBuffers(x1, y1, "terrain", 2.f);
 	}
 
-	terrain.render(projMat, viewMat, tracing);
-
-
+	obj::MapTerrain()->render(tracing);
 
 	if (GAME::GRID_IS_ACTIVE && !tracing) {
 		grid.render(projMat, viewMat);
