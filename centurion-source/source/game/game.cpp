@@ -145,13 +145,14 @@ void Game::run() {
 	surface->render(false);
 	game::renderObjects(&buildingList, &unitList, &selRectangle, &projection, &view, &click_id, &selectedUnits);
 	
-	if (GLB::DEBUG) cursor_point.render();
+	
 	
 	// ---- Game UI ---- //
 
 	// apply menu matrices:
 	obj::applyMenuMatrices();
 
+	if (GLB::DEBUG) cursor_point.render();
 	ui.render();
 
 	// ----------------- //	

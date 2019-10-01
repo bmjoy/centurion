@@ -40,7 +40,7 @@ namespace GLB {
 
 namespace MAP {
 	float MIN_Z = 0.0f, MAX_Z = 0.0f;
-	float XYSCALE = 80.0f, ZSCALE = 0.025/3.0, XSEED = 0.0, YSEED = 0.0f;
+	float XYSCALE = 40.0f, ZSCALE = 0.025/3.0, XSEED = 0.0, YSEED = 0.0f;
 	int VERTICES_POS[36895] = { 0 };
 	float VERTICES[368950] = { 0.f };
 	unsigned int INDICES[219024] = { 0 };

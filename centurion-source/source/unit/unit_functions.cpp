@@ -1,9 +1,9 @@
 #include "unit_functions.h"
 
 void unit::updateZ(glm::vec3 &pos2d, glm::vec3 *pos3d) {
-	float zNoise = mapgen::generateNoise(pos2d).zNoise;	
+	float zNoise = mapgen::getNoiseEstimate(pos2d.x, pos2d.y);	
 	(*pos3d).x = pos2d.x;
-	(*pos3d).y = pos2d.y + zNoise - PATH::CELL_GRID_SIZE / 2;
+	(*pos3d).y = pos2d.y + zNoise;
 }
 
 void unit::updateFrame(float *creationTime, int *frame, int max_frames, int duration) {

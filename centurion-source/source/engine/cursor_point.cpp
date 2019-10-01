@@ -1,5 +1,7 @@
 #include "cursor_point.h"
 
+
+
 CPoint::CPoint()
 {
 }

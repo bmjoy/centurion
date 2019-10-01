@@ -106,7 +106,11 @@ void Terrain::genBuffers() {
 void Terrain::updateBuffers(float x, float y, std::string type, float q) {
 
 	int k = verticesPosMap[type];
-	int j = (int)((int)y / 128 * GAME::MAP_WIDTH / 128 + (int)x / 128);
+
+	int x1 = round(x / 128.f);
+	int y1 = round(y / 128.f);
+
+	int j = (int)(y1 * GAME::MAP_WIDTH / 128 + x1);
 
 	mapgen::MapVertices()[mapgen::VerticesPos()[j] * 10 + k] = q;
 

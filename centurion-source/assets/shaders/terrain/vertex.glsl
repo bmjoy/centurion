@@ -15,8 +15,6 @@ layout (location = 1) in vec2 tex;
 layout (location = 2) in vec3 norm;
 layout (location = 3) in float terrain;
 
-vec4 newPos;
-
 /* Noise stuff */
 
 float zNoise;
@@ -68,7 +66,8 @@ void main()
    
     /* RENDERING */
     
-    newPos = vec4(pos.x, pos.y, pos.z, 1.0);
+    vec4 newPos = vec4(pos.x, pos.y + pos.w, pos.z + pos.w, 1.0);
+   // vec4 newPos = vec4(pos.x, pos.y, pos.z, 1.0);
     gl_Position = projection * view * newPos;
     
     /* To Fragment Shader */

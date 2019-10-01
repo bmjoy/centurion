@@ -4,12 +4,6 @@
 #include <time.h>
 
 
-struct noiseData {
-	float zNoise;
-	float grassWeight = 1.0f;
-	float roadWeight = 0.0f;
-};
-
 class Player;
 
 namespace mapgen {
@@ -27,6 +21,7 @@ namespace mapgen {
 	int *VerticesPos();
 
 	void reset_map();
+	float getNoiseEstimate(float x, float y);
 
 	//--------------
 
@@ -40,7 +35,7 @@ namespace mapgen {
 	float smoothNoise(float y, float z, float alpha = 0.005f, float beta = 1.0f);
 	float perlinNoise(float x, float y, float xy_scale, float z_scale, float x_seed, float y_seed);
 	void generateRandomMap();
-	noiseData generateNoise(glm::vec2 coords, bool normal = false);
+	float generateNoise(glm::vec2 coords, bool normal = false);
 	glm::vec3 updatedNormals(glm::vec2 pos);
 	void define_settlements();
 }
