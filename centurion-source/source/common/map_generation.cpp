@@ -34,7 +34,7 @@ int *mapgen::VerticesPos(){
 }
 
 void mapgen::reset_map() {
-	for (int i = 0; i < 368950; i++) {
+	for (int i = 0; i < nVertices*10; i++) {
 		mapgen::MapVertices()[i] = mapgen::EmptyMapVertices()[i];
 	}
 }
@@ -110,16 +110,12 @@ float mapgen::generateNoise(glm::vec2 coords, bool normal) {
 
 glm::vec3 getVertex(int x, int y) {
 
-	int j = mapgen::VerticesPos()[(int)(y/128 * GAME::MAP_WIDTH / 128 + x/128)];
+	int j = mapgen::VerticesPos()[(int)(y/mapgen::grid_size * GAME::MAP_WIDTH / mapgen::grid_size + x/ mapgen::grid_size)];
 
 	float zNoise = mapgen::MapVertices()[j * 10 + 3] * 2;
 	float x1 = mapgen::MapVertices()[j * 10];
 	float y1 = mapgen::MapVertices()[j * 10 + 1] + zNoise;
 	float z1 = mapgen::MapVertices()[j * 10 + 2] + zNoise;
-
-	if (x < 0){
-		std::cout << "x = " << x << " y = " << y << " x1 = " << x1 << " y1 = " << y1 << "\n";
-	}
 	return glm::vec3(x1, y1, z1);
 }
 
@@ -128,50 +124,62 @@ std::array<glm::vec3, 6> getAdjacentVertices(glm::vec2 pos) {
 	std::array<glm::vec3, 6> output;
 
 	output = {
-		getVertex(pos.x, pos.y + 128), // up
-		getVertex(pos.x + 128, pos.y), // right	
-		getVertex(pos.x + 128, pos.y - 128), // down-right
-		getVertex(pos.x, pos.y - 128), // down
-		getVertex(pos.x - 128, pos.y), // left
-		getVertex(pos.x - 128, pos.y + 128), // up-left
+
+		getVertex(pos.x, pos.y - mapgen::grid_size), // down
+		getVertex(pos.x - mapgen::grid_size, pos.y), // left
+		getVertex(pos.x - mapgen::grid_size, pos.y + mapgen::grid_size), // up-left
+		getVertex(pos.x, pos.y + mapgen::grid_size), // up
+		getVertex(pos.x + mapgen::grid_size, pos.y), // right	
+		getVertex(pos.x + mapgen::grid_size, pos.y - mapgen::grid_size), // down-right
 	};
 	return output;
 }
 
 glm::vec3 mapgen::updatedNormals(glm::vec2 pos) {
-	//glm::vec3 off = glm::vec3(2.f, 2.f, 0.0);
-	//float zScale = 1.5f;
+	glm::vec3 off = glm::vec3(2.0, 2.0, 0.0);
 
-	if (pos.x > 128 && pos.x < 29952 - 128 && pos.y > 128 && pos.y < 19968 - 128) {
-		glm::vec3 a = getVertex(pos.x, pos.y);
+	float hL = generateNoise(glm::vec2(pos.x - off.x, pos.y), true);
+	float hR = generateNoise(glm::vec2(pos.x + off.x, pos.y), true);
+	float hD = generateNoise(glm::vec2(pos.x, pos.y - off.y), true);
+	float hU = generateNoise(glm::vec2(pos.x, pos.y + off.y), true);
+	float Nx = hL - hR;
+	float Ny = hD - hU;
+	float Nz = 2.f;
+	glm::vec3 N = glm::normalize(glm::vec3(Nx, Ny, Nz));
+	return N;
 
-		std::array<glm::vec3, 6> adjVertices = getAdjacentVertices(pos);
+	//if (pos.x > 128 && pos.x < 29952 - 128 && pos.y > 128 && pos.y < 19968 - 128) {
+	//	glm::vec3 a = getVertex(pos.x, pos.y);
 
-		glm::vec3 sum(0.f);
+	//	std::array<glm::vec3, 6> adjVertices = getAdjacentVertices(pos);
 
-		for (int i = 0; i < 6; i++) {
-			int j;
-			(i == 0) ? j = 5 : j = i - 1;
+	//	glm::vec3 sum(0.f);
 
-			glm::vec3 side1 = adjVertices[i] - a;
-			glm::vec3 side2 = adjVertices[j] - a;
+	//	for (int i = 0; i < 6; i++) {
+	//		int j;
+	//		(i == 0) ? j = 5 : j = i - 1;
 
-			glm::vec3 normal = glm::cross(side1, side2);
-			//normal = glm::normalize(normal);
+	//		glm::vec3 side1 = adjVertices[i];
+	//		glm::vec3 side2 = adjVertices[j];
 
-			sum += normal;
+	//		glm::vec3 normal = glm::cross(side1, side2);
+	//		//normal = glm::normalize(normal);
 
-		}
-		return glm::normalize(sum);
-	}
+	//		sum += normal;
 
-	else {
-		return glm::vec3(0,0,1);
-	}
+	//	}
+	//	glm::vec3 output = glm::normalize(sum);
+
+	//	return output;
+	//}
+
+	//else {
+	//	return glm::vec3(0,0,1);
+	//}
 }
 
 void mapgen::generateRandomMap() {
-	for (int i = 0; i < 368950; i+=10) {
+	for (int i = 0; i < nVertices*10; i+=10) {
 		float xCoord = mapgen::MapVertices()[i];
 		float yCoord = mapgen::MapVertices()[i + 1];
 
@@ -194,32 +202,32 @@ void mapgen::generateRandomMap() {
 float mapgen::getNoiseEstimate(float x, float y) {
 
 	// bottom left
-	int x0 = (int)x / 128;
-	int y0 = (int)y / 128;
-	int j0 = mapgen::VerticesPos()[(int)(y0 * GAME::MAP_WIDTH / 128 + x0)] * 10 + 3;
+	int x0 = (int)x / mapgen::grid_size;
+	int y0 = (int)y / mapgen::grid_size;
+	int j0 = mapgen::VerticesPos()[(int)(y0 * GAME::MAP_WIDTH / mapgen::grid_size + x0)] * 10 + 3;
 	float z0 = mapgen::MapVertices()[j0];
 
 	// bottom right
 	int x1 = x0 + 1;
 	int y1 = y0;
-	int j1 = mapgen::VerticesPos()[(int)(y1 * GAME::MAP_WIDTH / 128 + x1)] * 10 + 3;
+	int j1 = mapgen::VerticesPos()[(int)(y1 * GAME::MAP_WIDTH / mapgen::grid_size + x1)] * 10 + 3;
 	float z1 = mapgen::MapVertices()[j1];
 
 	// top right
 	int x2 = x1;
 	int y2 = y1 + 1;
-	int j2 = mapgen::VerticesPos()[(int)(y2 * GAME::MAP_WIDTH / 128 + x2)] * 10 + 3;
+	int j2 = mapgen::VerticesPos()[(int)(y2 * GAME::MAP_WIDTH / mapgen::grid_size + x2)] * 10 + 3;
 	float z2 = mapgen::MapVertices()[j2];
 
 	// top left
 	int x3 = x0;
 	int y3 = y2;
-	int j3 = mapgen::VerticesPos()[(int)(y3 * GAME::MAP_WIDTH / 128 + x3)] * 10 + 3;
+	int j3 = mapgen::VerticesPos()[(int)(y3 * GAME::MAP_WIDTH / mapgen::grid_size + x3)] * 10 + 3;
 	float z3 = mapgen::MapVertices()[j3];
 
 	// deltas
-	float dx = x / 128.f - x0;
-	float dy = y / 128.f - y0;
+	float dx = x / mapgen::grid_size - x0;
+	float dy = y / mapgen::grid_size - y0;
 
 	// values 
 	float v0 = z0 * (1 - dx) + z1 * dx; // bottom

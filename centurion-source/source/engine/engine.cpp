@@ -96,7 +96,7 @@ int Engine::launch() {
 		
 		glfwSwapBuffers(GLB::MAIN_WINDOW);
 
-		fps_sleep();
+		//fps_sleep();
 	}
 
 	glfwTerminate(); 

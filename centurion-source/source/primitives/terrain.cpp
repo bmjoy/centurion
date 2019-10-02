@@ -24,8 +24,6 @@ Terrain::Terrain(){
 
 
 void Terrain::create() {
-	nIndices = 219024;
-	nVertices = 368950;
 
 	mapgen::init();
 
@@ -83,11 +81,11 @@ void Terrain::genBuffers() {
 	
 	glGenBuffers(1, &IBO);
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, IBO);
-	glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(*mapgen::Indices()) * nIndices, mapgen::Indices(), GL_STATIC_DRAW);
+	glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(*mapgen::Indices()) * mapgen::nIndices, mapgen::Indices(), GL_STATIC_DRAW);
 	
 	glGenBuffers(1, &VBO);
 	glBindBuffer(GL_ARRAY_BUFFER, VBO);
-	glBufferData(GL_ARRAY_BUFFER, sizeof(*mapgen::MapVertices()) * nVertices, mapgen::MapVertices(), GL_STATIC_DRAW);
+	glBufferData(GL_ARRAY_BUFFER, sizeof(*mapgen::MapVertices()) * mapgen::nVertices * 10, mapgen::MapVertices(), GL_STATIC_DRAW);
 
 	glVertexAttribPointer(0, 4, GL_FLOAT, GL_FALSE, 10 * sizeof(float), (void*)0);
 	glEnableVertexAttribArray(0);
@@ -107,16 +105,16 @@ void Terrain::updateBuffers(float x, float y, std::string type, float q) {
 
 	int k = verticesPosMap[type];
 
-	int x1 = round(x / 128.f);
-	int y1 = round(y / 128.f);
+	int x1 = round(x / (float)mapgen::grid_size);
+	int y1 = round(y / (float)mapgen::grid_size);
 
-	int j = (int)(y1 * GAME::MAP_WIDTH / 128 + x1);
+	int j = (int)(y1 * GAME::MAP_WIDTH / mapgen::grid_size + x1);
 
 	mapgen::MapVertices()[mapgen::VerticesPos()[j] * 10 + k] = q;
 
 	glBindVertexArray(VAO);
 	glBindBuffer(GL_ARRAY_BUFFER, VBO);
-	glBufferData(GL_ARRAY_BUFFER, sizeof(*mapgen::MapVertices()) * nVertices, mapgen::MapVertices(), GL_STATIC_DRAW);
+	glBufferData(GL_ARRAY_BUFFER, sizeof(*mapgen::MapVertices()) * mapgen::nVertices * 10, mapgen::MapVertices(), GL_STATIC_DRAW);
 
 	glVertexAttribPointer(0, 4, GL_FLOAT, GL_FALSE, 10 * sizeof(float), (void*)0);
 	glEnableVertexAttribArray(0);
@@ -136,7 +134,7 @@ void Terrain::createNoise() {
 
 	glBindVertexArray(VAO);
 	glBindBuffer(GL_ARRAY_BUFFER, VBO);
-	glBufferData(GL_ARRAY_BUFFER, sizeof(*mapgen::MapVertices()) * nVertices, mapgen::MapVertices(), GL_STATIC_DRAW);
+	glBufferData(GL_ARRAY_BUFFER, sizeof(*mapgen::MapVertices()) * mapgen::nVertices * 10, mapgen::MapVertices(), GL_STATIC_DRAW);
 
 	glVertexAttribPointer(0, 4, GL_FLOAT, GL_FALSE, 10 * sizeof(float), (void*)0);
 	glEnableVertexAttribArray(0);
@@ -212,7 +210,7 @@ void Terrain::render(bool tracing) {
 		glUniform1f(glGetUniformLocation(shaderId, "maxZ"), MAP::MAX_Z);
 
 		/* Draw */	
-		glDrawElements(GL_TRIANGLES, nIndices, GL_UNSIGNED_INT, 0);
+		glDrawElements(GL_TRIANGLES, mapgen::nIndices, GL_UNSIGNED_INT, 0);
 	}
 
 	/* NORMAL RENDERING */
@@ -239,7 +237,7 @@ void Terrain::render(bool tracing) {
 		glBindTexture(GL_TEXTURE_2D, textureIdList[1]);
 
 		/* Draw */
-		glDrawElements(GL_TRIANGLES, nIndices, GL_UNSIGNED_INT, 0);
+		glDrawElements(GL_TRIANGLES, mapgen::nIndices, GL_UNSIGNED_INT, 0);
 	}
 		
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);

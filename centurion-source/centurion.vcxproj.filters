@@ -243,14 +243,14 @@
     <ClCompile Include="source\primitives\light.cpp">
       <Filter>Source Files\primitives</Filter>
     </ClCompile>
-    <ClCompile Include="source\editor\editor.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="source\primitives\grid.cpp">
       <Filter>Source Files\primitives</Filter>
     </ClCompile>
     <ClCompile Include="source\surface\surface.cpp">
       <Filter>Source Files\surface</Filter>
+    </ClCompile>
+    <ClCompile Include="source\editor\editor.cpp">
+      <Filter>Source Files\editor</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

@@ -28,9 +28,6 @@ private:
 	void genBuffers();
 	
 	void texture();
-
-	int nVertices, nIndices;
-
 	std::map<std::string, int> verticesPosMap;
 
 	// light 

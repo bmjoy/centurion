@@ -13,8 +13,8 @@ public:
 	~DebugUI();
 private:
 	// text
-	std::array<std::string, 7> staticTextList;
-	std::array<std::string, 7> dynamicTextList;
+	std::array<std::string, 10> staticTextList;
+	std::array<std::string, 10> dynamicTextList;
 	std::vector<gui::SimpleText> staticText;
 	gui::SimpleText dynamicText;
 	gui::SimpleText debugText;

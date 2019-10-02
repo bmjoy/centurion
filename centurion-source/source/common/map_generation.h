@@ -8,22 +8,28 @@ class Player;
 
 namespace mapgen {
 
-	static float empty_map_vertices[368950];
+	static const int grid_size = 64;
+	static const int nIndices = 876096;
+	static const int nVertices = 146797;
+
+	static float empty_map_vertices[nVertices*10];
 	float *EmptyMapVertices();
 
-	static float map_vertices[368950];
+	static float map_vertices[nVertices*10];
 	float *MapVertices();
 
-	static unsigned int indices[219024];
+	static unsigned int indices[nIndices];
 	unsigned int *Indices();
 
-	static int vertices_pos[36895];
+	static int vertices_pos[nVertices];
 	int *VerticesPos();
 
 	void reset_map();
 	float getNoiseEstimate(float x, float y);
 
 	//--------------
+
+	
 
 	static std::vector<Player> *PlayerList;
 
