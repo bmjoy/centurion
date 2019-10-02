@@ -110,23 +110,26 @@ void Terrain::updateBuffers(float x, float y, std::string type, float q) {
 
 	int j = (int)(y1 * GAME::MAP_WIDTH / mapgen::grid_size + x1);
 
-	mapgen::MapVertices()[mapgen::VerticesPos()[j] * 10 + k] = q;
+	if (mapgen::MapVertices()[mapgen::VerticesPos()[j] * 10 + k] != q) {
 
-	glBindVertexArray(VAO);
-	glBindBuffer(GL_ARRAY_BUFFER, VBO);
-	glBufferData(GL_ARRAY_BUFFER, sizeof(*mapgen::MapVertices()) * mapgen::nVertices * 10, mapgen::MapVertices(), GL_STATIC_DRAW);
+		mapgen::MapVertices()[mapgen::VerticesPos()[j] * 10 + k] = q;
 
-	glVertexAttribPointer(0, 4, GL_FLOAT, GL_FALSE, 10 * sizeof(float), (void*)0);
-	glEnableVertexAttribArray(0);
-	glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, 10 * sizeof(float), (void*)(sizeof(float) * 4));
-	glEnableVertexAttribArray(1);
-	glVertexAttribPointer(2, 3, GL_FLOAT, GL_FALSE, 10 * sizeof(float), (void*)(sizeof(float) * 6));
-	glEnableVertexAttribArray(2);
-	glVertexAttribPointer(3, 1, GL_FLOAT, GL_FALSE, 10 * sizeof(float), (void*)(sizeof(float) * 9));
-	glEnableVertexAttribArray(3);
+		glBindVertexArray(VAO);
+		glBindBuffer(GL_ARRAY_BUFFER, VBO);
+		glBufferData(GL_ARRAY_BUFFER, sizeof(*mapgen::MapVertices()) * mapgen::nVertices * 10, mapgen::MapVertices(), GL_STATIC_DRAW);
 
-	glBindBuffer(GL_ARRAY_BUFFER, 0);
-	glBindVertexArray(0);
+		glVertexAttribPointer(0, 4, GL_FLOAT, GL_FALSE, 10 * sizeof(float), (void*)0);
+		glEnableVertexAttribArray(0);
+		glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, 10 * sizeof(float), (void*)(sizeof(float) * 4));
+		glEnableVertexAttribArray(1);
+		glVertexAttribPointer(2, 3, GL_FLOAT, GL_FALSE, 10 * sizeof(float), (void*)(sizeof(float) * 6));
+		glEnableVertexAttribArray(2);
+		glVertexAttribPointer(3, 1, GL_FLOAT, GL_FALSE, 10 * sizeof(float), (void*)(sizeof(float) * 9));
+		glEnableVertexAttribArray(3);
+
+		glBindBuffer(GL_ARRAY_BUFFER, 0);
+		glBindVertexArray(0);
+	}
 }
 
 void Terrain::createNoise() {
