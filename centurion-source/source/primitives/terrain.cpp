@@ -7,7 +7,6 @@ Terrain::Terrain(){
 	path_grass = "assets/terrain/textures/grass1.png";
 	path_road = "assets/terrain/textures/road1.png";
 	path_rock = "assets/terrain/textures/rock1.png";
-	plane_path = "assets/terrain/plane.obj";
 
 	verticesPosMap = std::map<std::string, int>();
 	verticesPosMap["x"] = 0;
@@ -31,7 +30,7 @@ void Terrain::create() {
 
 	{
 		std::fstream fin;
-		fin.open("assets/terrain/emptymap/indices");
+		fin.open("assets/terrain/emptymap (normal)/indices");
 		std::string line, number;
 		std::getline(fin, line);
 		std::stringstream s(line);
@@ -44,7 +43,7 @@ void Terrain::create() {
 
 	{
 		std::fstream fin;
-		fin.open("assets/terrain/emptymap/vertices_position");
+		fin.open("assets/terrain/emptymap (normal)/vertices_position");
 		std::string line, number;
 		std::getline(fin, line);
 		std::stringstream s(line);
@@ -57,7 +56,7 @@ void Terrain::create() {
 
 	{
 		std::fstream fin;
-		fin.open("assets/terrain/emptymap/vertices");
+		fin.open("assets/terrain/emptymap (normal)/vertices");
 		std::string line, number;
 		std::getline(fin, line);
 		std::stringstream s(line);

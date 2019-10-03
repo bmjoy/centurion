@@ -8,9 +8,9 @@ class Player;
 
 namespace mapgen {
 
-	static const int grid_size = 64;
-	static const int nIndices = 876096;
-	static const int nVertices = 146797;
+	static const int grid_size = 128;
+	static const int nIndices = 219024;
+	static const int nVertices = 36895;
 
 	static float empty_map_vertices[nVertices*10];
 	float *EmptyMapVertices();

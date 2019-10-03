@@ -20,7 +20,6 @@ private:
 	const char* path_grass;
 	const char* path_road;
 	const char* path_rock;
-	const char* plane_path;
 
 	float randomX, randomY;
 	int randomPos;
