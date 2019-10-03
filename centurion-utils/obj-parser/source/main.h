@@ -1,0 +1,14 @@
+#include <assimp/Importer.hpp>
+#include <assimp/scene.h>
+#include <assimp/postprocess.h>
+#include <Windows.h>
+#include <iostream>
+#include <string>
+#include <fstream>
+#include <sstream>
+#include <vector>
+#include <map>
+#include <array>
+#include <iomanip>
+#include <algorithm>
+#include <iterator>

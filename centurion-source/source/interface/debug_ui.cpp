@@ -9,7 +9,10 @@ DebugUI::DebugUI()
 		"x-window: ",
 		"y-map: ",
 		"x-map: ",
-		"selected units: "
+		"selected units: ",
+		"x-normal: ",
+		"y-normal: ",
+		"z-normal: "
 	};
 	dynamicTextList = { "0" };
 
@@ -38,6 +41,24 @@ void DebugUI::create() {
 }
 
 void DebugUI::render(int fps, int mpfs, int selUnits) {
+	std::stringstream streamx, streamy, streamz;
+	float x, y, xNorm = 0.f, yNorm = 0.f, zNorm = 0.f;
+	bool cursorinGame = (GLB::MOUSE_Y > GAME::UI_BOTTOM_HEIGHT) && (GLB::MOUSE_Y < (GLB::WINDOW_HEIGHT - GAME::UI_TOP_HEIGHT) && GLB::MOUSE_X > 0 && GLB::MOUSE_X < GLB::WINDOW_WIDTH);
+
+
+	if (cursorinGame) {
+		x = (GLB::MOUSE_X * GLB::WINDOW_WIDTH_ZOOMED / GLB::WINDOW_WIDTH + GAME::CAMERA_POS_X);
+		y = (GLB::MOUSE_Y * GLB::WINDOW_HEIGHT_ZOOMED / GLB::WINDOW_HEIGHT + GAME::CAMERA_POS_Y);
+		int x1 = round(x / (float)mapgen::grid_size);
+		int y1 = round(y / (float)mapgen::grid_size);
+		int j = (int)(y1 * GAME::MAP_WIDTH / mapgen::grid_size + x1);
+
+		xNorm = mapgen::MapVertices()[mapgen::VerticesPos()[j] * 10 + 6];
+		yNorm = mapgen::MapVertices()[mapgen::VerticesPos()[j] * 10 + 7];
+		zNorm = mapgen::MapVertices()[mapgen::VerticesPos()[j] * 10 + 8];
+	}
+	
+
 
 	back.render(glm::vec4(0.f, 0.f, 0.f, 0.5f));
 
@@ -50,8 +71,18 @@ void DebugUI::render(int fps, int mpfs, int selUnits) {
 	dynamicTextList[4] = std::to_string((int)getZoomedCoords((float)GLB::MOUSE_X, (float)GLB::MOUSE_Y).y);
 	dynamicTextList[5] = std::to_string((int)getZoomedCoords((float)GLB::MOUSE_X, (float)GLB::MOUSE_Y).x);
 	dynamicTextList[6] = std::to_string(selUnits);
+	
+	
+	streamx << std::fixed << std::setprecision(2) << xNorm;
+	dynamicTextList[7] = streamx.str();
 
-	!GLB::GAME ? n = 2 : n = 7;
+	streamy << std::fixed << std::setprecision(2) << yNorm;
+	dynamicTextList[8] = streamy.str();
+
+	streamz << std::fixed << std::setprecision(2) << zNorm;
+	dynamicTextList[9] = streamz.str();
+
+	!GLB::GAME ? n = 2 : n = dynamicTextList.size();
 
 	for (int i = 0; i < n; i++) {
 		staticText[i].render_static();

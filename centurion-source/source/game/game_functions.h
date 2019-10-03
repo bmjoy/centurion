@@ -3,7 +3,7 @@
 #include <global.hpp>
 #include <objects.h>
 
-#include "../terrain/surface.h"
+#include "../surface/surface.h"
 #include "../building/building.h"
 #include "../unit/unit.h"
 #include "../engine/camera.h"

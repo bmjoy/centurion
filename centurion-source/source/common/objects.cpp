@@ -28,6 +28,14 @@ UnitSprite *obj::USprite() {
 	return &obj::usprite;
 }
 
+Terrain *obj::MapTerrain() {
+	return &obj::terrain;
+}
+
+Grid *obj::MapGrid() {
+	return &obj::grid;
+}
+
 void obj::init() {
 	*obj::Text() = BitmapFont();
 	*obj::BSprite() = BuildingSprite();
@@ -36,17 +44,20 @@ void obj::init() {
 	*obj::FRectangle() = FilledRectangle();
 	*obj::Img() = ImageSprite();
 	*obj::USprite() = UnitSprite();
+	*obj::MapTerrain() = Terrain();
+	*obj::MapGrid() = Grid();
 }
 
 void obj::compile() {
-	int id;
-	id = obj::Text()->compile();
-	id = obj::BSprite()->compile();
-	id = obj::ERectangle()->compile();
-	id = obj::FRectangle()->compile();
-	id = obj::Cursor()->compile();
-	id = obj::Img()->compile();
-	id = obj::USprite()->compile();
+	obj::Text()->compile();
+	obj::BSprite()->compile();
+	obj::ERectangle()->compile();
+	obj::FRectangle()->compile();
+	obj::Cursor()->compile();
+	obj::Img()->compile();
+	obj::USprite()->compile();
+	obj::MapTerrain()->compile();
+	obj::MapGrid()->compile();
 }
 
 void obj::create() {
@@ -62,6 +73,11 @@ void obj::create() {
 	obj::BSprite()->create();	
 	obj::Img()->create();
 	obj::USprite()->create();
+
+	//----
+
+	obj::MapTerrain()->create();
+	obj::MapGrid()->create();
 }
 
 void obj::applyMenuMatrices() {
@@ -84,4 +100,8 @@ void obj::applyGameMatrices(glm::mat4 *proj, glm::mat4 *view) {
 	obj::ERectangle()->apply_view_matrix(*view);
 	obj::FRectangle()->apply_projection_matrix(*proj);
 	obj::FRectangle()->apply_view_matrix(*view);
+	obj::MapTerrain()->apply_projection_matrix(*proj);
+	obj::MapTerrain()->apply_view_matrix(*view);
+	obj::MapGrid()->apply_projection_matrix(*proj);
+	obj::MapGrid()->apply_view_matrix(*view);
 }

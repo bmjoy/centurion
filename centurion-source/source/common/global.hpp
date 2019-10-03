@@ -1,4 +1,4 @@
-#ifndef GLOBAL_H
+﻿#ifndef GLOBAL_H
 #define GLOBAL_H
 
 #include <Windows.h>
@@ -35,6 +35,7 @@ namespace GLB {
 	extern bool WINDOW_CLOSE;
 	extern bool MAIN_MENU;
 	extern bool GAME;
+	extern bool EDITOR;
 	extern bool MOUSE_LEFT, MOUSE_RIGHT;
 	extern bool MOUSE_RELEASE;
 	extern int MOUSE_X, MOUSE_Y, MOUSE_Y_2D;

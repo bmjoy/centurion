@@ -18,6 +18,7 @@ namespace GLB {
 	bool WINDOW_CLOSE = false;
 	bool MAIN_MENU = true;
 	bool GAME = false;
+	bool EDITOR = false;
 	bool MOUSE_LEFT = false, MOUSE_RIGHT = false;
 	bool MOUSE_RELEASE = false;
 	int MOUSE_X = 0, MOUSE_Y = 0, MOUSE_Y_2D = 0;
@@ -48,7 +49,7 @@ namespace SHD {
 
 namespace GAME {
 	bool MENU_IS_ACTIVE = false;
-	int MAP_WIDTH = 30000, MAP_HEIGHT = 20000;
+	int MAP_WIDTH = 29952, MAP_HEIGHT = 19968;
 	int PLAYERS_NUMBER = 1;
 	int PLAYERS_NUMBER_MAX = 10;
 	float TOWNHALL_RADIUS = 1875.0f;

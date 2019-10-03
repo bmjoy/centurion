@@ -74,8 +74,8 @@ void Game::create(std::vector<Player> *ListOfPlayers) {
 	/*------------------------------------------------------------*/
 	/*------------------------------------------------------------*/
 	
-
-	surface->create();
+	surface->createNoise();
+	surface->updateGrid();
 	
 
 	/*------------------------------------------------------------*/
@@ -142,16 +142,17 @@ void Game::run() {
 	game::picking(&buildingList, &unitList, &projection, &view, &click_id, &blockMinimap);
 
 	/* Rendering */
-	surface->render(projection, view, false);
+	surface->render(false);
 	game::renderObjects(&buildingList, &unitList, &selRectangle, &projection, &view, &click_id, &selectedUnits);
 	
-	if (GLB::DEBUG) cursor_point.render();
+	
 	
 	// ---- Game UI ---- //
 
 	// apply menu matrices:
 	obj::applyMenuMatrices();
 
+	if (GLB::DEBUG) cursor_point.render();
 	ui.render();
 
 	// ----------------- //	

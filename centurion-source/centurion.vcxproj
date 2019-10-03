@@ -100,7 +100,7 @@
     </ClCompile>
     <Link>
       <AdditionalLibraryDirectories>$(ProjectDir)source/extern/libraries</AdditionalLibraryDirectories>
-      <AdditionalDependencies>opengl32.lib;glew32.lib;glfw3.lib;assimp.lib;irrKlang.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>opengl32.lib;glew32.lib;glfw3.lib;irrKlang.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -134,7 +134,7 @@
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <AdditionalLibraryDirectories>$(ProjectDir)source/extern/libraries</AdditionalLibraryDirectories>
-      <AdditionalDependencies>opengl32.lib;glew32.lib;glfw3.lib;assimp.lib;irrKlang.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>opengl32.lib;glew32.lib;glfw3.lib;irrKlang.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
@@ -228,6 +228,7 @@
     <ClCompile Include="source\common\map_generation.cpp" />
     <ClCompile Include="source\common\objects.cpp" />
     <ClCompile Include="source\common\shader.cpp" />
+    <ClCompile Include="source\editor\editor.cpp" />
     <ClCompile Include="source\engine\camera.cpp" />
     <ClCompile Include="source\engine\cursor_point.cpp" />
     <ClCompile Include="source\engine\engine.cpp" />
@@ -242,6 +243,7 @@
     <ClCompile Include="source\gui\form_input.cpp" />
     <ClCompile Include="source\gui\rectangle.cpp" />
     <ClCompile Include="source\interface\debug_ui.cpp" />
+    <ClCompile Include="source\interface\editor_menu.cpp" />
     <ClCompile Include="source\interface\game_ui_menu.cpp" />
     <ClCompile Include="source\interface\game_ui.cpp" />
     <ClCompile Include="source\interface\menu_players_list.cpp" />
@@ -255,12 +257,12 @@
     <ClCompile Include="source\primitives\cursor_image.cpp" />
     <ClCompile Include="source\primitives\empty_rectangle.cpp" />
     <ClCompile Include="source\primitives\filled_rectangle.cpp" />
+    <ClCompile Include="source\primitives\grid.cpp" />
     <ClCompile Include="source\primitives\image_sprite.cpp" />
+    <ClCompile Include="source\primitives\light.cpp" />
+    <ClCompile Include="source\primitives\terrain.cpp" />
     <ClCompile Include="source\primitives\unit_sprite.cpp" />
-    <ClCompile Include="source\terrain\grid.cpp" />
-    <ClCompile Include="source\terrain\light.cpp" />
-    <ClCompile Include="source\terrain\surface.cpp" />
-    <ClCompile Include="source\terrain\terrain.cpp" />
+    <ClCompile Include="source\surface\surface.cpp" />
     <ClCompile Include="source\unit\unit.cpp" />
     <ClCompile Include="source\unit\unit_functions.cpp" />
     <None Include="assets\shaders\bsprite\vertex.glsl">
@@ -274,6 +276,7 @@
     <ClInclude Include="source\common\map_generation.h" />
     <ClInclude Include="source\common\objects.h" />
     <ClInclude Include="source\common\shader.h" />
+    <ClInclude Include="source\editor\editor.h" />
     <ClInclude Include="source\engine\camera.h" />
     <ClInclude Include="source\engine\cursor_point.h" />
     <ClInclude Include="source\engine\engine.h" />
@@ -285,11 +288,13 @@
     <ClInclude Include="source\game\game_functions.h" />
     <ClInclude Include="source\game\game_object.h" />
     <ClInclude Include="source\gui\button.h" />
+    <ClInclude Include="source\gui\gui.h" />
     <ClInclude Include="source\gui\image.h" />
     <ClInclude Include="source\gui\simple_text.h" />
     <ClInclude Include="source\gui\form_input.h" />
     <ClInclude Include="source\gui\rectangle.h" />
     <ClInclude Include="source\interface\debug_ui.h" />
+    <ClInclude Include="source\interface\editor_menu.h" />
     <ClInclude Include="source\interface\game_ui_menu.h" />
     <ClInclude Include="source\interface\game_ui.h" />
     <ClInclude Include="source\interface\menu_players_list.h" />
@@ -303,13 +308,13 @@
     <ClInclude Include="source\primitives\cursor_image.h" />
     <ClInclude Include="source\primitives\empty_rectangle.h" />
     <ClInclude Include="source\primitives\filled_rectangle.h" />
+    <ClInclude Include="source\primitives\grid.h" />
+    <ClInclude Include="source\primitives\light.h" />
     <ClInclude Include="source\primitives\primitives.h" />
     <ClInclude Include="source\primitives\image_sprite.h" />
+    <ClInclude Include="source\primitives\terrain.h" />
     <ClInclude Include="source\primitives\unit_sprite.h" />
-    <ClInclude Include="source\terrain\grid.h" />
-    <ClInclude Include="source\terrain\light.h" />
-    <ClInclude Include="source\terrain\surface.h" />
-    <ClInclude Include="source\terrain\terrain.h" />
+    <ClInclude Include="source\surface\surface.h" />
     <ClInclude Include="source\unit\unit.h" />
     <ClInclude Include="source\unit\unit_functions.h" />
   </ItemGroup>

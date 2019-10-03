@@ -23,7 +23,7 @@ void game::picking(std::map<int, Building> *bList, std::map<int, Unit> *uList, g
 void game::tracing(Surface *s, glm::mat4 *proj, glm::mat4 *view) {
 	if (!GAME::MINIMAP_IS_ACTIVE) {
 		unsigned char tracingCol[4];
-		(*s).render(*proj, *view, true);
+		(*s).render(true);
 		glReadPixels(GLB::MOUSE_LEFT_X, GLB::MOUSE_LEFT_Y, 1, 1, GL_RGBA, GL_UNSIGNED_BYTE, &tracingCol);
 		GLB::Z_NOISE = (MAP::MAX_Z - MAP::MIN_Z) * ((float)tracingCol[0] / 255.0) + MAP::MIN_Z;
 		game::clearBuffers();

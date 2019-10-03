@@ -19,7 +19,7 @@ void Menu::create(std::vector<Player> *List) {
 
 	for (int a = 0; a < menus.size(); ++a) {
 
-		std::ifstream path("assets/data/interface/" + menus[a] + ".json");
+		std::ifstream path("assets/data/interface/menu/" + menus[a] + ".json");
 		data = json::parse(path);
 		
 		/* temporary objects */
@@ -136,6 +136,12 @@ void Menu::picking() {
 				(*playersList).push_back(p);				
 			}
 			
+		}
+		/*------------------------------------------------------------------------------*/
+		if (pickingList[clickId] == "buttonEditor") {
+			GLB::MOUSE_LEFT = false;
+			GLB::EDITOR = true;
+			GLB::MAIN_MENU = false;
 		}
 		/*------------------------------------------------------------------------------*/
 		if (pickingList[clickId] == "buttonQuit") {

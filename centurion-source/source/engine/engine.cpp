@@ -21,9 +21,11 @@ int Engine::launch() {
 
 	lastTime = glfwGetTime();
 
+	mouse = new Mouse();
 	startMenu = new Menu();
 	game = new Game();
-	mouse = new Mouse();
+	editor = new Editor();
+	
 	debugUI = new DebugUI();
 	debugUI->create();
 
@@ -79,6 +81,13 @@ int Engine::launch() {
 
 		// -------------- //
 
+		if (GLB::EDITOR) {
+			if (!editor->editor_is_created()) {
+				editor->create();
+			}
+			editor->run();
+		}
+
 		// debug ui
 		if (GLB::DEBUG)	debugUI->render(Fps, Mpfs, game->getSelectedUnits());
 
@@ -126,6 +135,7 @@ void Engine::readDataClasses() {
 
 		obj::Img()->addPath(imageName, root);
 	}
+
 }
 
 void Engine::fps() {

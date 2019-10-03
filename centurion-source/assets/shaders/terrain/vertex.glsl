@@ -13,9 +13,7 @@
 layout (location = 0) in vec4 pos;  // {[pos.x,pos.y,pos.z] pos.w}  the .w is the zNoise
 layout (location = 1) in vec2 tex;
 layout (location = 2) in vec3 norm;
-layout (location = 3) in vec2 weights;
-
-vec4 newPos;
+layout (location = 3) in float terrain;
 
 /* Noise stuff */
 
@@ -44,17 +42,9 @@ out vec2 FragTexGrass;
 out vec3 FragNorm;
 out float FragCol;
 
-/* Terrain Weights */
+/* Terrain */
 
-out float grassWeight;
-out float roadWeight;
-out float rockWeight;
-
-/* Mountains stuff */ 
-
-uniform int nMountains;
-uniform float mountainsPos[1000]; // [x, y, h, r]  h=height, r=radius
-
+out float grassW, roadW;
 
 /* ----- ----- ----- ----- */
 
@@ -73,15 +63,11 @@ float distEllipse(float x, float y, float cx, float cy, float r){
 
 void main() 
 {   
-    /* Weights */
-    
-    grassWeight = weights.x;
-    roadWeight = weights.y;
-    rockWeight = 0.0;
-    
+   
     /* RENDERING */
     
-    newPos = vec4(pos.x, pos.y, pos.z, 1.0);
+    //vec4 newPos = vec4(pos.x, pos.y + pos.w, pos.z + pos.w, 1.0);
+    vec4 newPos = vec4(pos.x, pos.y, pos.z, 1.0);
     gl_Position = projection * view * newPos;
     
     /* To Fragment Shader */
@@ -90,4 +76,14 @@ void main()
 	FragTexGrass = vec2(tex.x*scaleTextX, tex.y*scaleTextY);
     FragNorm = norm;
     FragCol = (pos.w - minZ) / (maxZ - minZ) ; // in (0-1)
+    
+    if(terrain == 1.f){ // grass
+        grassW = 1.f;
+        roadW = 0.f;
+    }
+    
+    if(terrain == 2.f){ // road
+        grassW = 0.f;
+        roadW = 1.f;
+    }
 }

@@ -11,7 +11,7 @@ GameMenu::GameMenu(){
 
 void GameMenu::create(int *pickingId, std::map<int, std::string> *pickingList) {
 
-	std::ifstream path("assets/data/interface/gamemenu.json");
+	std::ifstream path("assets/data/interface/game/menu.json");
 	data = json::parse(path);
 
 	x = GLB::WINDOW_WIDTH / 2.f;

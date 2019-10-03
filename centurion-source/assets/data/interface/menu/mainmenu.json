@@ -1,0 +1,36 @@
+{
+	"images": [{
+			"name": "background",
+			"image_name": "main_background",
+			"clickable": 0,
+			"x": 0,
+			"y": 0,
+			"size": "max",
+			"align": "bottom-left"
+		}
+
+	],
+
+	"buttons": [{
+			"name": "buttonSinglePlayer",
+			"image_name": "button_1",
+			"x": -150,
+			"y": 600,
+			"text": "Singleplayer"
+		}, {
+			"name": "buttonEditor",
+			"image_name": "button_1",
+			"x": -150,
+			"y": 550,
+			"text": "Editor"
+		}, {
+			"name": "buttonQuit",
+			"image_name": "button_1",
+			"x": -150,
+			"y": 75,
+			"text": "Exit"
+		}
+	],
+
+	"playersList": {}
+}

@@ -59,7 +59,7 @@ void BitmapFont::create() {
 
 	/* Texture */
 
-	std::ifstream path_fonts("assets/fonts/fonts.json");
+	std::ifstream path_fonts("assets/data/fonts.json");
 	json d = json::parse(path_fonts);
 
 	std::map<std::string, json> jsonData;

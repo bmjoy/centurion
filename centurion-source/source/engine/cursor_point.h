@@ -1,6 +1,7 @@
 #pragma once
 
 #include "../gui/image.h"
+#include <map_generation.h>
 
 class CPoint
 {
