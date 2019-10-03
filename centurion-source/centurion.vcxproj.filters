@@ -252,6 +252,9 @@
     <ClCompile Include="source\editor\editor.cpp">
       <Filter>Source Files\editor</Filter>
     </ClCompile>
+    <ClCompile Include="source\interface\editor_menu.cpp">
+      <Filter>Source Files\interface</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="source\building\building.h">
@@ -385,6 +388,12 @@
     </ClInclude>
     <ClInclude Include="source\editor\editor.h">
       <Filter>Header Files\editor</Filter>
+    </ClInclude>
+    <ClInclude Include="source\interface\editor_menu.h">
+      <Filter>Header Files\interface</Filter>
+    </ClInclude>
+    <ClInclude Include="source\gui\gui.h">
+      <Filter>Header Files\gui</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

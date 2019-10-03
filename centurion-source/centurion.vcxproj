@@ -243,6 +243,7 @@
     <ClCompile Include="source\gui\form_input.cpp" />
     <ClCompile Include="source\gui\rectangle.cpp" />
     <ClCompile Include="source\interface\debug_ui.cpp" />
+    <ClCompile Include="source\interface\editor_menu.cpp" />
     <ClCompile Include="source\interface\game_ui_menu.cpp" />
     <ClCompile Include="source\interface\game_ui.cpp" />
     <ClCompile Include="source\interface\menu_players_list.cpp" />
@@ -287,11 +288,13 @@
     <ClInclude Include="source\game\game_functions.h" />
     <ClInclude Include="source\game\game_object.h" />
     <ClInclude Include="source\gui\button.h" />
+    <ClInclude Include="source\gui\gui.h" />
     <ClInclude Include="source\gui\image.h" />
     <ClInclude Include="source\gui\simple_text.h" />
     <ClInclude Include="source\gui\form_input.h" />
     <ClInclude Include="source\gui\rectangle.h" />
     <ClInclude Include="source\interface\debug_ui.h" />
+    <ClInclude Include="source\interface\editor_menu.h" />
     <ClInclude Include="source\interface\game_ui_menu.h" />
     <ClInclude Include="source\interface\game_ui.h" />
     <ClInclude Include="source\interface\menu_players_list.h" />

@@ -3,6 +3,7 @@
 #include <global.hpp>
 #include "../engine/camera.h"
 #include "../surface/surface.h"
+#include "../interface/editor_menu.h"
 
 class Editor
 {
@@ -17,6 +18,9 @@ private:
 	Surface *surface;
 	Camera camera;
 	glm::mat4 proj, view;
+	editor::Menu menu;
+
+	int pickingID;
 
 	bool editorIsCreated;
 };
