@@ -3,13 +3,13 @@
 #include <iostream>
 #include <objects.h>
 
-#include "../music/music.h"
 #include "window.h"
 #include "mouse.h"
 
 #include "../menu/menu.h"
 #include "../game/game.h"
 #include "../editor/editor.h"
+#include "../audio/audio_manager.h"
 
 #include "../gui/simple_text.h"
 #include "../gui/rectangle.h"
@@ -32,11 +32,11 @@ private:
 	Game *game;
 	Editor *editor;
 	DebugUI *debugUI;
-	ISoundEngine* music;
 
 	gui::SimpleText text;
 
-	
+	//Audio Manager settings
+	AudioManager audioManager;
 
 	// Players Informations
 	std::vector<Player> playersList;

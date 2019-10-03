@@ -37,9 +37,6 @@
     <Filter Include="Header Files\unit">
       <UniqueIdentifier>{19f67b7f-0919-4fe2-b2f8-47db88287328}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Header Files\music">
-      <UniqueIdentifier>{00c49fb7-0708-4c35-9005-be57a3564aa5}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Header Files\extern">
       <UniqueIdentifier>{670470c3-1bc9-4848-8246-fb2915e33329}</UniqueIdentifier>
     </Filter>
@@ -60,9 +57,6 @@
     </Filter>
     <Filter Include="Source Files\menu">
       <UniqueIdentifier>{6f5e5b9c-c05e-48f8-845b-a9701197e29f}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source Files\music">
-      <UniqueIdentifier>{9d7b770e-e74f-47c1-9a3c-753413d9c75d}</UniqueIdentifier>
     </Filter>
     <Filter Include="Source Files\unit">
       <UniqueIdentifier>{984cbdf2-1517-49e7-9e21-ae59c7fa96a2}</UniqueIdentifier>
@@ -127,6 +121,15 @@
     <Filter Include="Source Files\surface">
       <UniqueIdentifier>{29d38104-38f1-40b0-9df3-2f89caf8cded}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\audio">
+      <UniqueIdentifier>{9d7b770e-e74f-47c1-9a3c-753413d9c75d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\audio">
+      <UniqueIdentifier>{00c49fb7-0708-4c35-9005-be57a3564aa5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\audio\interfaces">
+      <UniqueIdentifier>{52fd4780-8021-4b6e-b3a4-824126b4890b}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -164,9 +167,6 @@
     </ClCompile>
     <ClCompile Include="source\engine\mouse.cpp">
       <Filter>Source Files\engine</Filter>
-    </ClCompile>
-    <ClCompile Include="source\music\music.cpp">
-      <Filter>Source Files\music</Filter>
     </ClCompile>
     <ClCompile Include="source\common\shader.cpp">
       <Filter>Source Files\common</Filter>
@@ -255,6 +255,33 @@
     <ClCompile Include="source\interface\editor_menu.cpp">
       <Filter>Source Files\interface</Filter>
     </ClCompile>
+    <ClCompile Include="source\audio\audio_context.cpp">
+      <Filter>Source Files\audio</Filter>
+    </ClCompile>
+    <ClCompile Include="source\audio\audio_device.cpp">
+      <Filter>Source Files\audio</Filter>
+    </ClCompile>
+    <ClCompile Include="source\audio\audio_manager.cpp">
+      <Filter>Source Files\audio</Filter>
+    </ClCompile>
+    <ClCompile Include="source\audio\audio_player.cpp">
+      <Filter>Source Files\audio</Filter>
+    </ClCompile>
+    <ClCompile Include="source\audio\listener.cpp">
+      <Filter>Source Files\audio</Filter>
+    </ClCompile>
+    <ClCompile Include="source\audio\music.cpp">
+      <Filter>Source Files\audio</Filter>
+    </ClCompile>
+    <ClCompile Include="source\audio\recorder.cpp">
+      <Filter>Source Files\audio</Filter>
+    </ClCompile>
+    <ClCompile Include="source\audio\sound.cpp">
+      <Filter>Source Files\audio</Filter>
+    </ClCompile>
+    <ClCompile Include="source\audio\sound_buffer.cpp">
+      <Filter>Source Files\audio</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="source\building\building.h">
@@ -301,9 +328,6 @@
     </ClInclude>
     <ClInclude Include="source\unit\unit.h">
       <Filter>Header Files\unit</Filter>
-    </ClInclude>
-    <ClInclude Include="source\music\music.h">
-      <Filter>Header Files\music</Filter>
     </ClInclude>
     <ClInclude Include="source\extern\includes\json.hpp">
       <Filter>Header Files\extern</Filter>
@@ -394,6 +418,63 @@
     </ClInclude>
     <ClInclude Include="source\gui\gui.h">
       <Filter>Header Files\gui</Filter>
+    </ClInclude>
+    <ClInclude Include="source\audio\sndfile.hh">
+      <Filter>Header Files\audio</Filter>
+    </ClInclude>
+    <ClInclude Include="source\audio\sound.h">
+      <Filter>Header Files\audio</Filter>
+    </ClInclude>
+    <ClInclude Include="source\audio\sound_buffer.h">
+      <Filter>Header Files\audio</Filter>
+    </ClInclude>
+    <ClInclude Include="source\audio\audio_context.h">
+      <Filter>Header Files\audio</Filter>
+    </ClInclude>
+    <ClInclude Include="source\audio\audio_device.h">
+      <Filter>Header Files\audio</Filter>
+    </ClInclude>
+    <ClInclude Include="source\audio\audio_manager.h">
+      <Filter>Header Files\audio</Filter>
+    </ClInclude>
+    <ClInclude Include="source\audio\audio_player.h">
+      <Filter>Header Files\audio</Filter>
+    </ClInclude>
+    <ClInclude Include="source\audio\listener.h">
+      <Filter>Header Files\audio</Filter>
+    </ClInclude>
+    <ClInclude Include="source\audio\music.h">
+      <Filter>Header Files\audio</Filter>
+    </ClInclude>
+    <ClInclude Include="source\audio\recorder.h">
+      <Filter>Header Files\audio</Filter>
+    </ClInclude>
+    <ClInclude Include="source\audio\sndfile.h">
+      <Filter>Header Files\audio</Filter>
+    </ClInclude>
+    <ClInclude Include="source\audio\interfaces\IMusic.h">
+      <Filter>Header Files\audio\interfaces</Filter>
+    </ClInclude>
+    <ClInclude Include="source\audio\interfaces\IRecorder.h">
+      <Filter>Header Files\audio\interfaces</Filter>
+    </ClInclude>
+    <ClInclude Include="source\audio\interfaces\ISound.h">
+      <Filter>Header Files\audio\interfaces</Filter>
+    </ClInclude>
+    <ClInclude Include="source\audio\interfaces\ISoundBuffer.h">
+      <Filter>Header Files\audio\interfaces</Filter>
+    </ClInclude>
+    <ClInclude Include="source\audio\interfaces\IAudioContext.h">
+      <Filter>Header Files\audio\interfaces</Filter>
+    </ClInclude>
+    <ClInclude Include="source\audio\interfaces\IAudioDevice.h">
+      <Filter>Header Files\audio\interfaces</Filter>
+    </ClInclude>
+    <ClInclude Include="source\audio\interfaces\IAudioPlayer.h">
+      <Filter>Header Files\audio\interfaces</Filter>
+    </ClInclude>
+    <ClInclude Include="source\audio\interfaces\IListener.h">
+      <Filter>Header Files\audio\interfaces</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

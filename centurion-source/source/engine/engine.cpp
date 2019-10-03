@@ -3,6 +3,7 @@
 
 Engine::Engine(){
 	window = myWindow();
+	audioManager = AudioManager();
 	
 	nbFrames = 0; 
 	Fps = 0;
@@ -42,7 +43,7 @@ int Engine::launch() {
 		
 		if (GLB::MAIN_MENU){
 			if (!startMenu->menu_is_created()){
-				music = Music().play("assets/music/menu.mp3", true);
+				audioManager.MusicPlay("assets/music/menu.wav");
 				startMenu->create(&playersList);
 			}
 			startMenu->render();
@@ -52,8 +53,7 @@ int Engine::launch() {
 
 		if (GLB::GAME) {
 			if (!game->game_is_created()) {
-				Music().stop(music);
-				music = Music().play("assets/music/game.mp3", true);
+				/*music = Music().play("assets/music/game.mp3", true);*/
 
 				clearAndSwapBuffers(GLB::MAIN_WINDOW);
 				{
@@ -76,13 +76,13 @@ int Engine::launch() {
 			
 			game->reset();
 			startMenu->reset();
-			Music().stop(music);
 		}
 
 		// -------------- //
 
 		if (GLB::EDITOR) {
 			if (!editor->editor_is_created()) {
+				audioManager.MusicStop();
 				editor->create();
 			}
 			editor->run();
