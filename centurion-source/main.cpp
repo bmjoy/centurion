@@ -36,6 +36,7 @@ namespace GLB {
 	bool DEBUG = false;
 	SelRectPoints SEL_RECT_COORDS;
 	bool GAME_CLEAR = false;
+	LPCSTR GAME_NAME = "Centurion";
 }
 
 namespace MAP {
@@ -73,8 +74,6 @@ namespace PATH {
 	int DIR_MAP[1000][1500] = { 0 };
 }
 
-
-
 int main() {
 	std::ifstream settings_path("settings.json");
 	json settings = json::parse(settings_path);
@@ -93,7 +92,7 @@ int main() {
 	std::ifstream data_path("assets/data/data.json");
 	//Close the game if it wasn't able to find or process data.json file
 	if (!data_path.good()) {
-		forceGameClosure("Error code 0x00000001\n\nThe game is unable to find or process DATA file.\nForced application shutdown has started.", "Centurion");
+		forceGameClosure("Error code 0x00000001\n\nThe game is unable to find or process DATA file.\nForced application shutdown has started.");
 	}
 	json data = json::parse(data_path);
 

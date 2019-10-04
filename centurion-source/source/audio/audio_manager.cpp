@@ -1,5 +1,4 @@
 #include "audio_manager.h"
-#pragma warning(disable: 4996)
 
 AudioManager::AudioManager()
 {
@@ -11,7 +10,7 @@ void AudioManager::MusicPlay(std::string name) {
 	if(device){
 		music = device->CreateMusic();
 		if (!music->LoadFromFile(name.c_str())){
-			MessageBox(NULL, "Error code 0x00000002\n\nThe game is unable to find or process SETTLEMENTS file.\nForced application shutdown has started.", "Centurion", MB_ICONERROR);
+			std::cout << "DEBUG: Impossible to find or parse audio file. No music will be played.\n";
 		}
 		else{
 			std::cout << "DEBUG: Music file detected. Starting the playing function.\n";
@@ -19,7 +18,7 @@ void AudioManager::MusicPlay(std::string name) {
 		}
 	}
 	else {
-		MessageBox(NULL, "Error code 0x00000002\n\nThe game is unable to find or process SETTLEMENTS file.\nForced application shutdown has started.", "Centurion", MB_ICONERROR);
+		showGameWarning("Error code 0x00000002\n\nUnable to find (or communicate with) the audio device.\nNo sound will be played as long as the error persists.");
 	}
 }
 

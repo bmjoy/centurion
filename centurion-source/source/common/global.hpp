@@ -52,6 +52,7 @@ namespace GLB {
 	extern bool DEBUG;
 	extern SelRectPoints SEL_RECT_COORDS; //Only a temporar way to test multiple selection
 	extern bool GAME_CLEAR;
+	extern LPCSTR GAME_NAME;
 }
 
 namespace MAP {
@@ -91,9 +92,13 @@ namespace PATH {
 
 /* GLOBAL FUNCTIONS */
 
-static void forceGameClosure(std::string reason, std::string caption) {
-	MessageBox(NULL, reason.c_str(), caption.c_str(), MB_ICONERROR);
+static void forceGameClosure(std::string reason) {
+	MessageBox(NULL, reason.c_str(), GLB::GAME_NAME, MB_ICONERROR);
 	GLB::WINDOW_CLOSE = true;
+}
+
+static void showGameWarning(std::string reason) {
+	MessageBox(NULL, reason.c_str(), GLB::GAME_NAME, MB_ICONINFORMATION);
 }
 
 static std::string ReadFile(const char* fileLocation) {
@@ -176,8 +181,7 @@ static bool cursorInGameScreen() {
 	return (GLB::MOUSE_LEFT_Y > GAME::UI_BOTTOM_HEIGHT) && (GLB::MOUSE_LEFT_Y < (GLB::WINDOW_HEIGHT - GAME::UI_TOP_HEIGHT)); 
 }
 
-static std::vector<std::string> get_all_files_names_within_folder(std::string folder)
-{
+static std::vector<std::string> get_all_files_names_within_folder(std::string folder){
 	std::vector<std::string> names;
 	std::string search_path = folder + "/*.*";
 	WIN32_FIND_DATA fd;

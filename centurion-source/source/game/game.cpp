@@ -50,7 +50,7 @@ void Game::create(std::vector<Player> *ListOfPlayers) {
 	/* CREATE SETTLEMENTS */
 	std::ifstream path("assets/data/settlements.json");
 	if (!path.good()) {
-		forceGameClosure("Error code 0x00000001\n\nThe game is unable to find or process SETTLEMENTS file.\nForced application shutdown has started.", "Centurion");
+		forceGameClosure("Error code 0x00000001\n\nThe game is unable to find or process SETTLEMENTS file.\nForced application shutdown has started.");
 	}
 	settl_data = json::parse(path);
 
