@@ -282,6 +282,9 @@
     <ClCompile Include="source\audio\sound_buffer.cpp">
       <Filter>Source Files\audio</Filter>
     </ClCompile>
+    <ClCompile Include="source\common\global.cpp">
+      <Filter>Source Files\common</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="source\building\building.h">
@@ -476,6 +479,9 @@
     <ClInclude Include="source\audio\interfaces\IListener.h">
       <Filter>Header Files\audio\interfaces</Filter>
     </ClInclude>
+    <ClInclude Include="source\common\global.h">
+      <Filter>Header Files\common</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="assets\shaders\bsprite\fragment.glsl">
@@ -531,6 +537,9 @@
     </None>
     <None Include="assets\shaders\usprite\vertex.glsl">
       <Filter>Shader Files\usprite</Filter>
+    </None>
+    <None Include="source\common\headers">
+      <Filter>Header Files\common</Filter>
     </None>
   </ItemGroup>
 </Project>

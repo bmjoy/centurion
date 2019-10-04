@@ -1,5 +1,7 @@
 #include "window.h"
 
+using namespace glb;
+
 myWindow::myWindow()
 {
 }
@@ -11,7 +13,7 @@ void myWindow::init() {
 	glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
 	glfwWindowHint(GLFW_RESIZABLE, GL_FALSE);
 
-	mainWindow = glfwCreateWindow(GLB::WINDOW_WIDTH, GLB::WINDOW_HEIGHT, "Centurion", nullptr, nullptr); // Windowed
+	mainWindow = glfwCreateWindow(getParam("window-width"), getParam("window-height"), "Centurion", nullptr, nullptr); // Windowed
 	glfwMakeContextCurrent(mainWindow);
 
 	create_callbacks(); // handle key + mouse input
@@ -149,7 +151,7 @@ void myWindow::handle_mouse(GLFWwindow* window, double xPos, double yPos)
 {
 	myWindow* theWindow = static_cast<myWindow*>(glfwGetWindowUserPointer(window));
 	theWindow->lastX = xPos;
-	double y = fabs(yPos - GLB::WINDOW_HEIGHT);
+	double y = fabs(yPos - getParam("window-height"));
 	theWindow->lastY = y;
 }
 

@@ -1,6 +1,7 @@
 #include "stb_image.h"  // manip. texture
-
 #include "mouse.h"
+
+using namespace glb;
 
 Mouse::Mouse(){
 	currentState = "default";
@@ -20,7 +21,7 @@ void Mouse::mouse_control(int lastX, int lastY) {
 	
 	yzoomed = getZoomedCoords((float)GLB::MOUSE_X, (float)GLB::MOUSE_Y).y;
 	znoise = mapgen::smoothNoise(yzoomed, GLB::Z_NOISE);
-	znoise /= (float)GLB::WINDOW_HEIGHT_ZOOMED / (float)GLB::WINDOW_HEIGHT;
+	znoise /= getParam("window-height-zoomed") / getParam("window-height");
 
 	GLB::MOUSE_Y_2D = (GLB::MOUSE_Y - (int)znoise);
 	

@@ -1,5 +1,7 @@
 #include "editor_menu.h"
 
+using namespace glb;
+
 namespace editor {
 
     Menu::Menu(){
@@ -15,7 +17,7 @@ namespace editor {
 		minPickingID = (*pickingID);
 
         topBar = gui::Rectangle();
-        topBar.create("filled", 0, -barHeight, GLB::WINDOW_WIDTH, barHeight, "bottom-left", 0);
+        topBar.create("filled", 0, -barHeight, getParam("window-width"), barHeight, "bottom-left", 0);
 
         titles["File"].title = "File";
         titles["File"].options = { "Save", "Exit" };
@@ -35,7 +37,7 @@ namespace editor {
 
             titles[s].titleWidth = 75;
             titles[s].titleHeight = barHeight;
-            titles[s].titlePosition = glm::ivec2(titles[s].titleWidth * i, GLB::WINDOW_HEIGHT - titles[s].titleHeight);
+            titles[s].titlePosition = glm::ivec2(titles[s].titleWidth * i, getParam("window-height") - titles[s].titleHeight);
             titles[s].titleBack = gui::Rectangle();
             
             titles[s].titleBack = gui::Rectangle();
@@ -49,7 +51,7 @@ namespace editor {
             titles[s].optionsHeight = barHeight;
             titles[s].optionsOffsetX = 20;
             for (int j = 0; j < titles[s].options.size(); j++) {
-                titles[s].optionsPosition.push_back(glm::ivec2(titles[s].titleWidth * i, GLB::WINDOW_HEIGHT - titles[s].optionsHeight * (j + 2)));
+                titles[s].optionsPosition.push_back(glm::ivec2(titles[s].titleWidth * i, getParam("window-height") - titles[s].optionsHeight * (j + 2)));
 
                 gui::SimpleText tempText = gui::SimpleText("static");
                 tempText.create_static(titles[s].options[j], "inconsolata_8", titles[s].optionsPosition[j].x + 0.5f * titles[s].optionsWidth - titles[s].optionsOffsetX, titles[s].optionsPosition[j].y + 0.5 * titles[s].optionsHeight, "left", "middle", glm::vec4(255.f));
@@ -128,7 +130,7 @@ namespace editor {
             GLint mouseX = GLB::MOUSE_X;
             GLint mouseY = GLB::MOUSE_Y;
 			int clickId = get_id();
-            int pos = ((mouseY - GLB::WINDOW_HEIGHT)*(-1)) / titles["File"].titleHeight;
+            int pos = ((mouseY - getParam("window-height"))*(-1)) / titles["File"].titleHeight;
 
             //---------------------
             //   RESET 

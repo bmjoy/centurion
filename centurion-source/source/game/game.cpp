@@ -1,5 +1,7 @@
 #include "game.h"
 
+using namespace glb;
+
 
 Game::Game(){
 	
@@ -21,8 +23,8 @@ void Game::create(std::vector<Player> *ListOfPlayers) {
 	camera = Camera(glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3(0.0f, 1.0f, 0.0f), -90.0f, 0.0f);
 	std::cout << "Camera has been created. \n";
 
-	float ui_bottom_height_minimap = GAME::MAP_HEIGHT * GAME::UI_BOTTOM_HEIGHT / (GLB::WINDOW_HEIGHT - GAME::UI_BOTTOM_HEIGHT - GAME::UI_TOP_HEIGHT);
-	float ui_top_height_minimap = GAME::MAP_HEIGHT * GAME::UI_TOP_HEIGHT / (GLB::WINDOW_HEIGHT - GAME::UI_BOTTOM_HEIGHT - GAME::UI_TOP_HEIGHT);
+	float ui_bottom_height_minimap = GAME::MAP_HEIGHT * GAME::UI_BOTTOM_HEIGHT / (getParam("window-height") - GAME::UI_BOTTOM_HEIGHT - GAME::UI_TOP_HEIGHT);
+	float ui_top_height_minimap = GAME::MAP_HEIGHT * GAME::UI_TOP_HEIGHT / (getParam("window-height") - GAME::UI_BOTTOM_HEIGHT - GAME::UI_TOP_HEIGHT);
 
 	/* MINIMAP CAMERA */
 	GLB::MINIMAP_PROJECTION = glm::ortho(
@@ -107,8 +109,8 @@ void Game::create(std::vector<Player> *ListOfPlayers) {
 
 	cursor_point.create();
 	camera.go_to_pos(
-		(GLfloat)((*playersList)[0].getStartPoint().x - GLB::WINDOW_WIDTH_ZOOMED/2.f), 
-		(GLfloat)((*playersList)[0].getStartPoint().y - GLB::WINDOW_HEIGHT_ZOOMED / 2.f)
+		(GLfloat)((*playersList)[0].getStartPoint().x - getParam("window-width-zoomed") /2.f),
+		(GLfloat)((*playersList)[0].getStartPoint().y - getParam("window-height-zoomed") / 2.f)
 	);
 
 
@@ -158,7 +160,7 @@ void Game::run() {
 	// ----------------- //	
 
 	game::goToPosition(&buildingList, &camera, &lastTime, &click_id, &blockMinimap);
-	GLB::CAMERA_PROJECTION = glm::ortho(0.0f, (float)GLB::WINDOW_WIDTH_ZOOMED, 0.0f, (float)GLB::WINDOW_HEIGHT_ZOOMED, -(float)GAME::MAP_WIDTH, (float)GAME::MAP_WIDTH);
+	GLB::CAMERA_PROJECTION = glm::ortho(0.0f, getParam("window-width-zoomed"), 0.0f, getParam("window-height-zoomed"), -(float)GAME::MAP_WIDTH, (float)GAME::MAP_WIDTH);
 	GLB::MOUSE_RIGHT = false;
 }
 

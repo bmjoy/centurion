@@ -1,6 +1,6 @@
 #include "game_ui_menu.h"
 
-
+using namespace glb;
 
 GameMenu::GameMenu(){
 
@@ -14,8 +14,8 @@ void GameMenu::create(int *pickingId, std::map<int, std::string> *pickingList) {
 	std::ifstream path("assets/data/interface/game/menu.json");
 	data = json::parse(path);
 
-	x = GLB::WINDOW_WIDTH / 2.f;
-	y = GLB::WINDOW_HEIGHT / 2.f;
+	x = getParam("window-width") / 2.f;
+	y = getParam("window-height") / 2.f;
 
 	s = "buttons";
 	for (int i = 0; i < data[s].size(); ++i) {

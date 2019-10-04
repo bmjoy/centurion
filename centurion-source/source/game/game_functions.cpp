@@ -1,5 +1,7 @@
 #include "game_functions.h"
 
+using namespace glb;
+
 void game::picking(std::map<int, Building> *bList, std::map<int, Unit> *uList, glm::mat4 *proj, glm::mat4 *view, int *clickId, bool *blockMinimap) {
 	if (!GAME::MENU_IS_ACTIVE){
 		for (std::map<int, Building>::iterator bld = (*bList).begin(); bld != (*bList).end(); bld++) {
@@ -38,8 +40,8 @@ void game::clearBuffers() {
 void game::goToPosition(std::map<int, Building> *bList, Camera *c, double *lastTime, int *clickId, bool *blockMinimap) {
 	if (GAME::MINIMAP_IS_ACTIVE) {
 		if (GLB::MOUSE_LEFT && cursorInGameScreen()) {
-			cameraToX = GLB::MOUSE_LEFT_X / (float)GLB::WINDOW_WIDTH*(float)GAME::MAP_WIDTH - (float)GLB::WINDOW_WIDTH / 2.0;
-			cameraToY = getYMinimapCoord((float)GLB::MOUSE_LEFT_Y) / (float)GLB::WINDOW_HEIGHT*(float)GAME::MAP_HEIGHT - (float)GLB::WINDOW_HEIGHT / 2.0;
+			cameraToX = GLB::MOUSE_LEFT_X / getParam("window-width")*(float)GAME::MAP_WIDTH - getParam("window-width") / 2.0;
+			cameraToY = getYMinimapCoord((float)GLB::MOUSE_LEFT_Y) / getParam("window-height")*(float)GAME::MAP_HEIGHT - getParam("window-height") / 2.0;
 			/* Double Click detection */
 			// if you are clicking on a townhall you have to double click 
 			// to move the camera there and quit minimap
@@ -62,8 +64,8 @@ void game::goToPosition(std::map<int, Building> *bList, Camera *c, double *lastT
 				}
 			}
 			if (doubleClick && *clickId > 0) {
-				cameraToX = (*bList)[*clickId].get_xPos() - GLB::WINDOW_WIDTH_ZOOMED / 2;
-				cameraToY = (*bList)[*clickId].get_yPos() - GLB::WINDOW_HEIGHT_ZOOMED / 2;
+				cameraToX = (*bList)[*clickId].get_xPos() - getParam("window-width-zoomed") / 2;
+				cameraToY = (*bList)[*clickId].get_yPos() - getParam("window-height-zoomed") / 2;
 				*blockMinimap = false;
 			}
 			//------------------------------------------------
@@ -94,15 +96,15 @@ void game::renderSelRectangle(gui::Rectangle *selRectangle) {
 	if (!GAME::MINIMAP_IS_ACTIVE) {
 		if (GLB::MOUSE_LEFT && cursorInGameScreen()) {
 
-			float startX = (float)GLB::MOUSE_LEFT_X * GLB::WINDOW_WIDTH_ZOOMED / GLB::WINDOW_WIDTH + cameraLastX;
-			float startY = (float)GLB::MOUSE_LEFT_Y * GLB::WINDOW_HEIGHT_ZOOMED / GLB::WINDOW_HEIGHT + cameraLastY;
-			float lastX = (float)GLB::MOUSE_X * GLB::WINDOW_WIDTH_ZOOMED / GLB::WINDOW_WIDTH + GAME::CAMERA_POS_X;
-			float lastY = (float)GLB::MOUSE_Y * GLB::WINDOW_HEIGHT_ZOOMED / GLB::WINDOW_HEIGHT + GAME::CAMERA_POS_Y;
+			float startX = (float)GLB::MOUSE_LEFT_X * getParam("window-width-zoomed") / getParam("window-width") + cameraLastX;
+			float startY = (float)GLB::MOUSE_LEFT_Y * getParam("window-height-zoomed") / getParam("window-height") + cameraLastY;
+			float lastX = (float)GLB::MOUSE_X * getParam("window-width-zoomed") / getParam("window-width") + GAME::CAMERA_POS_X;
+			float lastY = (float)GLB::MOUSE_Y * getParam("window-height-zoomed") / getParam("window-height") + GAME::CAMERA_POS_Y;
 			if (GLB::MOUSE_Y < GAME::UI_BOTTOM_HEIGHT) {
-				lastY = (float)GAME::UI_BOTTOM_HEIGHT*GLB::WINDOW_HEIGHT_ZOOMED/GLB::WINDOW_HEIGHT + 1.0f + GAME::CAMERA_POS_Y;
+				lastY = (float)GAME::UI_BOTTOM_HEIGHT*getParam("window-height-zoomed") / getParam("window-height") + 1.0f + GAME::CAMERA_POS_Y;
 			}
-			if (GLB::MOUSE_Y > GLB::WINDOW_HEIGHT - GAME::UI_TOP_HEIGHT) {
-				lastY = GLB::WINDOW_HEIGHT_ZOOMED - (float)GAME::UI_TOP_HEIGHT*GLB::WINDOW_HEIGHT_ZOOMED/GLB::WINDOW_HEIGHT - 1.0f + GAME::CAMERA_POS_Y;
+			if (GLB::MOUSE_Y > getParam("window-height") - GAME::UI_TOP_HEIGHT) {
+				lastY = getParam("window-height-zoomed") - (float)GAME::UI_TOP_HEIGHT*getParam("window-height-zoomed") / getParam("window-height") - 1.0f + GAME::CAMERA_POS_Y;
 			}
 
 			float w = (lastX - startX);

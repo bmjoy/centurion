@@ -1,4 +1,5 @@
 #include <global.hpp>
+#include <global.h>
 #include <json.hpp>
 
 #include "source/engine/engine.h"
@@ -8,10 +9,10 @@
 // 1) minimap prerender
 
 namespace GLB {
-	int WINDOW_WIDTH = 1024; // 2560
-	int WINDOW_HEIGHT = 768; // 1440
-	int WINDOW_WIDTH_ZOOMED;
-	int WINDOW_HEIGHT_ZOOMED;
+	//int WINDOW_WIDTH = 1024; // 2560
+	//int WINDOW_HEIGHT = 768; // 1440
+	//int WINDOW_WIDTH_ZOOMED;
+	//int WINDOW_HEIGHT_ZOOMED;
 	glm::mat4 MENU_PROJECTION;
 	glm::mat4 CAMERA_PROJECTION;
 	glm::mat4 MINIMAP_PROJECTION;
@@ -75,18 +76,25 @@ namespace PATH {
 }
 
 int main() {
+
+	using namespace glb;
+
 	std::ifstream settings_path("settings.json");
 	json settings = json::parse(settings_path);
 
 	GLB::DEBUG = (bool)settings["debug"].get<int>();
-	GLB::WINDOW_WIDTH = settings["window_width"];
-	GLB::WINDOW_HEIGHT = settings["window_height"];
-	GLB::WINDOW_WIDTH_ZOOMED = (int)((float)GLB::WINDOW_WIDTH + (GAME::ZOOM_CURRENT - 1) * GAME::ZOOM_CAMERA_FACTOR);
-	GLB::WINDOW_HEIGHT_ZOOMED = (int)((float)GLB::WINDOW_HEIGHT + (GAME::ZOOM_CURRENT - 1) *  GAME::ZOOM_CAMERA_FACTOR * GLB::WINDOW_HEIGHT / GLB::WINDOW_WIDTH);
-	GLB::MENU_PROJECTION = glm::ortho(0.0f, (float)GLB::WINDOW_WIDTH, 0.0f, (float)GLB::WINDOW_HEIGHT, -100.0f, 100.0f);
-	GLB::CAMERA_PROJECTION = glm::ortho(0.0f, (float)GLB::WINDOW_WIDTH_ZOOMED, 0.0f, (float)GLB::WINDOW_HEIGHT_ZOOMED, -(float)GAME::MAP_WIDTH, (float)GAME::MAP_WIDTH);
-	GLB::RES_X_RATIO = (float)GLB::WINDOW_WIDTH / (float)GAME::MAP_WIDTH;
-	GLB::RES_Y_RATIO = (float)GLB::WINDOW_HEIGHT / (float)GAME::MAP_HEIGHT;
+
+	setParam("window-width", (float)settings["window_width"]);
+	setParam("window-height", (float)settings["window_height"]);
+	setParam("window-ratio", getParam("window-width") / getParam("window-height"));
+	setParam("window-width-zoomed", getParam("window-width") + (GAME::ZOOM_CURRENT - 1) * GAME::ZOOM_CAMERA_FACTOR);
+	setParam("window-height-zoomed", getParam("window-height") + (GAME::ZOOM_CURRENT - 1) * GAME::ZOOM_CAMERA_FACTOR / getParam("window-ratio"));
+
+
+	GLB::MENU_PROJECTION = glm::ortho(0.0f, getParam("window-width"), 0.0f, getParam("window-height"), -100.0f, 100.0f);
+	GLB::CAMERA_PROJECTION = glm::ortho(0.0f, getParam("window-width-zoomed"), 0.0f, getParam("window-height-zoomed"), -(float)GAME::MAP_WIDTH, (float)GAME::MAP_WIDTH);
+	GLB::RES_X_RATIO = getParam("window-width") / (float)GAME::MAP_WIDTH;
+	GLB::RES_Y_RATIO = getParam("window-height") / (float)GAME::MAP_HEIGHT;
 	GAME::CAMERA_MOVESPEED = (float)settings["camera_movespeed"];
 
 	std::ifstream data_path("assets/data/data.json");

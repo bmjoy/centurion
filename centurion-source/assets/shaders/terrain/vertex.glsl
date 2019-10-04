@@ -66,8 +66,8 @@ void main()
    
     /* RENDERING */
     
-    //vec4 newPos = vec4(pos.x, pos.y + pos.w, pos.z + pos.w, 1.0);
-    vec4 newPos = vec4(pos.x, pos.y, pos.z, 1.0);
+    vec4 newPos = vec4(pos.x, pos.y + pos.w, pos.z + pos.w, 1.0);
+    //vec4 newPos = vec4(pos.x, pos.y, pos.z, 1.0);
     gl_Position = projection * view * newPos;
     
     /* To Fragment Shader */

@@ -1,8 +1,12 @@
 #pragma once
 
 #include "../primitives/primitives.h"
+#include "../audio/audio_manager.h"
 
 namespace obj {
+
+	static AudioManager audioM;
+	AudioManager *Audio();
 
 	static BitmapFont txt;
 	BitmapFont *Text();
@@ -36,4 +40,5 @@ namespace obj {
 	void init();
 	void compile();
 	void create();
-}
+
+};

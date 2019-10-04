@@ -1,5 +1,7 @@
 #include "surface.h"
 
+using namespace glb;
+
 Surface::Surface()
 {	
 }
@@ -15,8 +17,8 @@ void Surface::updateGrid() {
 void Surface::render(bool tracing) {
 
 	if (GLB::MOUSE_LEFT && GLB::EDITOR) {
-		float x1 = (GLB::MOUSE_X * GLB::WINDOW_WIDTH_ZOOMED / GLB::WINDOW_WIDTH + GAME::CAMERA_POS_X);
-		float y1 = (GLB::MOUSE_Y * GLB::WINDOW_HEIGHT_ZOOMED / GLB::WINDOW_HEIGHT + GAME::CAMERA_POS_Y);
+		float x1 = (GLB::MOUSE_X * getParam("window-width-zoomed") / getParam("window-width") + GAME::CAMERA_POS_X);
+		float y1 = (GLB::MOUSE_Y * getParam("window-height-zoomed") / getParam("window-height") + GAME::CAMERA_POS_Y);
 		obj::MapTerrain()->updateBuffers(x1, y1, "terrain", 2.f);
 	}
 

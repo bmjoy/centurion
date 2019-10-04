@@ -9,7 +9,6 @@
 #include "../menu/menu.h"
 #include "../game/game.h"
 #include "../editor/editor.h"
-#include "../audio/audio_manager.h"
 
 #include "../gui/simple_text.h"
 #include "../gui/rectangle.h"
@@ -34,9 +33,6 @@ private:
 	DebugUI *debugUI;
 
 	gui::SimpleText text;
-
-	//Audio Manager settings
-	AudioManager audioManager;
 
 	// Players Informations
 	std::vector<Player> playersList;

@@ -1,5 +1,7 @@
 #include "image.h"
 
+using namespace glb;
+
 namespace gui {
 	Image::Image(){}
 
@@ -13,8 +15,8 @@ namespace gui {
 
 	void Image::create(std::string Origin, float x, float y, float w, float h, int pickingID) {
 
-		if (x < 0) x += GLB::WINDOW_WIDTH;
-		if (y < 0) y += GLB::WINDOW_HEIGHT;
+		if (x < 0) x += getParam("window-width");
+		if (y < 0) y += getParam("window-height");
 
 		imgData.imageName = imageName;
 		imgData.pickingColor = getPickingColorFromID(pickingID);

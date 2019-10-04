@@ -1,5 +1,6 @@
 #include "Rectangle.h"
 
+using namespace glb;
 
 namespace gui {
 	Rectangle::Rectangle()
@@ -15,8 +16,8 @@ namespace gui {
 
 	void Rectangle::create(std::string Type, float x, float y, float w, float h, std::string origin, int pickingID) {
 
-		if (x < 0) x += GLB::WINDOW_WIDTH;
-		if (y < 0) y += GLB::WINDOW_HEIGHT;
+		if (x < 0) x += getParam("window-width");
+		if (y < 0) y += getParam("window-height");
 
 		data.type = Type;
 		data.x = x;

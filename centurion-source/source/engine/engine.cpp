@@ -1,15 +1,14 @@
 #include "engine.h"
 
+using namespace glb;
 
 Engine::Engine(){
 	window = myWindow();
-	audioManager = AudioManager();
-	
+
 	nbFrames = 0; 
 	Fps = 0;
 	Mpfs = 0;
 }
-
 
 int Engine::launch() {
 	window.init();
@@ -43,7 +42,7 @@ int Engine::launch() {
 		
 		if (GLB::MAIN_MENU){
 			if (!startMenu->menu_is_created()){
-				audioManager.MusicPlay("assets/music/menu.wav");
+				obj::Audio()->MusicPlay("assets/music/menu.wav");
 				startMenu->create(&playersList);
 			}
 			startMenu->render();
@@ -53,12 +52,12 @@ int Engine::launch() {
 
 		if (GLB::GAME) {
 			if (!game->game_is_created()) {
-				/*music = Music().play("assets/music/game.mp3", true);*/
+
 
 				clearAndSwapBuffers(GLB::MAIN_WINDOW);
 				{
 					text = gui::SimpleText("dynamic");
-					text.render_dynamic("Game is being created...", "tahoma_8", GLB::WINDOW_WIDTH / 2.f, GLB::WINDOW_HEIGHT / 2.f, glm::vec4(255.f), "center", "middle");
+					text.render_dynamic("Game is being created...", "tahoma_8", getParam("window-width") / 2.f, getParam("window-height") / 2.f, glm::vec4(255.f), "center", "middle");
 				}
 				glfwSwapBuffers(GLB::MAIN_WINDOW);
 
@@ -82,7 +81,8 @@ int Engine::launch() {
 
 		if (GLB::EDITOR) {
 			if (!editor->editor_is_created()) {
-				audioManager.MusicStop();
+				obj::Audio()->MusicStop();
+
 				editor->create();
 			}
 			editor->run();

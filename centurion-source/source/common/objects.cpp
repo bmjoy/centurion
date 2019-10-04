@@ -1,5 +1,9 @@
 #include "objects.h"
 
+AudioManager *obj::Audio() {
+	return &obj::audioM;
+}
+
 BitmapFont *obj::Text(){
 	return &obj::txt; 
 }
@@ -37,6 +41,7 @@ Grid *obj::MapGrid() {
 }
 
 void obj::init() {
+	*obj::Audio() = AudioManager();
 	*obj::Text() = BitmapFont();
 	*obj::BSprite() = BuildingSprite();
 	*obj::Cursor() = CursorImage();

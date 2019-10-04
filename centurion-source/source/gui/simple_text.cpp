@@ -1,5 +1,7 @@
 #include "simple_text.h"
 
+using namespace glb;
+
 namespace gui {
 	SimpleText::SimpleText(std::string Type, bool Shadow) {
 		type = Type;
@@ -12,8 +14,8 @@ namespace gui {
 		if (type == "dynamic") {
 			std::cout << "Dynamic text created with static option\n";
 		}
-		if (x < 0) x += GLB::WINDOW_WIDTH;
-		if (y < 0) y += GLB::WINDOW_HEIGHT;
+		if (x < 0) x += getParam("window-width");
+		if (y < 0) y += getParam("window-height");
 
 		hAlign = halign;
 		vAlign = valign;

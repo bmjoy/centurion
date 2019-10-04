@@ -1,22 +1,7 @@
 ﻿#ifndef GLOBAL_H
 #define GLOBAL_H
 
-#include <Windows.h>
-#include <iostream>
-#include <string>
-#include <fstream>
-#include <sstream>
-#include <vector>
-#include <map>
-#include <array>
-#include <GL/glew.h>
-#include <GLFW/glfw3.h>
-#include <glm/glm.hpp>
-#include <glm/gtc/matrix_transform.hpp>
-#include <glm/gtc/type_ptr.hpp>
-#include <iomanip>
-#include <algorithm>
-#include <iterator>
+#include <global.h>
 #include "../engine/window.h"
 
 struct SelRectPoints {
@@ -27,8 +12,8 @@ struct SelRectPoints {
 };
 
 namespace GLB {
-	extern int WINDOW_WIDTH, WINDOW_HEIGHT;
-	extern int WINDOW_WIDTH_ZOOMED, WINDOW_HEIGHT_ZOOMED;
+	//extern int WINDOW_WIDTH, WINDOW_HEIGHT;
+	//extern int WINDOW_WIDTH_ZOOMED, WINDOW_HEIGHT_ZOOMED;
 	extern glm::mat4 MENU_PROJECTION;
 	extern glm::mat4 CAMERA_PROJECTION;
 	extern glm::mat4 MINIMAP_PROJECTION;
@@ -168,17 +153,17 @@ static int getGridInfoFromPoint(float x, float y) {
 
 static glm::vec2 getZoomedCoords(float xCoord, float yCoord) {
 	float x, y;
-	x = xCoord * (float)GLB::WINDOW_WIDTH_ZOOMED / (float)GLB::WINDOW_WIDTH + (float)GAME::CAMERA_POS_X;
-	y = yCoord * (float)GLB::WINDOW_HEIGHT_ZOOMED / (float)GLB::WINDOW_HEIGHT + (float)GAME::CAMERA_POS_Y;
+	x = xCoord * glb::getParam("window-width-zoomed") / glb::getParam("window-width") + (float)GAME::CAMERA_POS_X;
+	y = yCoord * glb::getParam("window-height-zoomed") / glb::getParam("window-height") + (float)GAME::CAMERA_POS_Y;
 	return glm::vec2(x, y);
 }
 
 static float getYMinimapCoord(float x) {
-	return (float)GLB::WINDOW_HEIGHT * (x - GAME::UI_BOTTOM_HEIGHT) / ((float)GLB::WINDOW_HEIGHT - GAME::UI_BOTTOM_HEIGHT - GAME::UI_TOP_HEIGHT);
+	return glb::getParam("window-height") * (x - GAME::UI_BOTTOM_HEIGHT) / (glb::getParam("window-height") - GAME::UI_BOTTOM_HEIGHT - GAME::UI_TOP_HEIGHT);
 }
 
 static bool cursorInGameScreen() { 
-	return (GLB::MOUSE_LEFT_Y > GAME::UI_BOTTOM_HEIGHT) && (GLB::MOUSE_LEFT_Y < (GLB::WINDOW_HEIGHT - GAME::UI_TOP_HEIGHT)); 
+	return (GLB::MOUSE_LEFT_Y > GAME::UI_BOTTOM_HEIGHT) && (GLB::MOUSE_LEFT_Y < (glb::getParam("window-height") - GAME::UI_TOP_HEIGHT));
 }
 
 static std::vector<std::string> get_all_files_names_within_folder(std::string folder){
