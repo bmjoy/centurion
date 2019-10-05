@@ -46,13 +46,13 @@ void mapgen::setPlayerList(std::vector<Player> *List) {
 }
 
 float mapgen::Random2D(glm::vec2 st) {
-	float value = glm::fract(sin(glm::dot(st, glm::vec2(12.9898, 78.233)))* 43758.5453123);
+	float value = glm::fract(sin(glm::dot(st, glm::vec2(12.9898f, 78.233f)))* 43758.5453123f);
 	return value;
 }
 
 float mapgen::Interpolate(float a, float b, float x) {  // cosine interpolation
 	float ft = x * 3.1415927f;
-	float f = (1 - cos(ft)) * 0.5;
+	float f = (1.0f - cos(ft)) * 0.5f;
 	return  a * (1 - f) + b * f;
 }
 
@@ -88,7 +88,7 @@ float mapgen::perlinNoise(float x, float y, float xy_scale, float z_scale, float
 	int numOctaves = 1;
 	float persistence = 0.5;
 	float total = 0,
-		frequency = pow(2, numOctaves),
+		frequency = pow(2.0f, numOctaves),
 		amplitude = 1;
 	for (int i = 0; i < numOctaves; ++i) {
 		frequency /= 2;
@@ -192,7 +192,7 @@ void mapgen::generateRandomMap() {
 		MAP::MAX_Z = std::max(zNoise, MAP::MAX_Z);
 
 		// normals
-		glm::vec3 N = mapgen::updatedNormals(glm::vec2(xCoord, yCoord));
+		glm::vec3 N = mapgen::updatedNormals(glm::ivec2((int)xCoord, (int)yCoord));
 		mapgen::MapVertices()[i + 6] = N.x;
 		mapgen::MapVertices()[i + 7] = N.y;
 		mapgen::MapVertices()[i + 8] = N.z;
@@ -242,7 +242,6 @@ float mapgen::getNoiseEstimate(float x, float y) {
 }
 
 void mapgen::define_settlements() {
-
 	srand(time(NULL));
 	std::vector<float> townhallPos;
 	int a, b;

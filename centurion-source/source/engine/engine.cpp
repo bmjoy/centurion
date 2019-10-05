@@ -127,6 +127,9 @@ void Engine::readDataClasses() {
 	/* images */
 
 	std::ifstream path2("assets/data/images_data.json");
+	if (!path2.good()) {
+		forceGameClosure("Error code 0x00000001\n\n  Unable to find or process IMAGES DATA file.\n  Forced application shutdown has started.");
+	}
 	dataClass = json::parse(path2);
 
 	for (int i = 0; i < dataClass["image_names"].size(); i++) {

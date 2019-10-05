@@ -115,7 +115,7 @@ void Menu::picking() {
 
 		clickId = get_id();
 
-		std::cout << clickId << "\n";
+		std::cout << "DEBUG: Click id: " << clickId << "\n";
 
 		/*------------------------------------------------------------------------------*/
 		if (currentMenu == "singleplayer"){

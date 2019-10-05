@@ -60,6 +60,9 @@ void BitmapFont::create() {
 	/* Texture */
 
 	std::ifstream path_fonts("assets/data/fonts.json");
+	if (!path_fonts) {
+		forceGameClosure("Error code 0x00000001\n\n  Unable to find or process FONTS file.\n  Forced application shutdown has started.");
+	}
 	json d = json::parse(path_fonts);
 
 	std::map<std::string, json> jsonData;

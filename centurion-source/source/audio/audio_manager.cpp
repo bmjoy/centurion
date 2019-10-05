@@ -18,7 +18,7 @@ void AudioManager::MusicPlay(std::string name) {
 		}
 	}
 	else {
-		showGameWarning("Error code 0x00000002\n\nUnable to find (or communicate with) the audio device.\nNo sound will be played as long as the error persists.");
+		showGameWarning("Error code 0x00000002\n\n  Unable to find (or communicate with) the audio device.\n  No sound will be played as long as the error persists.");
 	}
 }
 
@@ -40,8 +40,16 @@ void AudioManager::MusicRewind() {
 	}
 }
 
-void AudioManager::MusicLoop(bool loop=false) {
+void AudioManager::MusicLoop(bool loop=true) {
 	music->SetLooping(loop);
+}
+
+void AudioManager::MusicVolume(int value) {
+	music->SetVolume(value);
+}
+
+void AudioManager::Playlist() {
+
 }
 
 bool AudioManager::IsMusicPlaying() {

@@ -7,7 +7,7 @@ AudioPlayer::AudioPlayer(){
 	alSource3f(m_source[0], AL_POSITION, 0, 0, 0);
 	alSource3f(m_source[0], AL_VELOCITY, 0, 0, 0);
 	alSource3f(m_source[0], AL_DIRECTION, 0, 0, 0);
-	this->SetVolume(1);
+	this->SetVolume(100);
 	this->SetPitch(1);
 }
 
@@ -16,7 +16,6 @@ bool AudioPlayer::LoadFromFile(const char *szFile){
 		delete pBuffer;
 	SoundBuffer *Buffer = new SoundBuffer();
 	bool result = Buffer->LoadFromFile(szFile);
-	std::cout << result;
 	this->SetBuffer(Buffer);
 	return result;
 }
@@ -42,7 +41,7 @@ void AudioPlayer::SeekOffset(float offset){
 
 	ALint tot = 0;
 	alGetBufferi(pBuffer->GetBufferID(), AL_SIZE, &tot);
-	alSourcei(m_source[0], AL_BYTE_OFFSET, offset * tot);
+	alSourcei(m_source[0], AL_BYTE_OFFSET, (ALint)offset * tot);
 
 }
 
@@ -120,6 +119,6 @@ void AudioPlayer::SetPitch(float value){
 	alSourcef(m_source[0], AL_PITCH, value);
 }
 
-void AudioPlayer::SetVolume(float value){
+void AudioPlayer::SetVolume(int value){
 	alSourcef(m_source[0], AL_GAIN, value/100.f);
 }

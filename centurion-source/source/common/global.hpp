@@ -90,7 +90,7 @@ static std::string ReadFile(const char* fileLocation) {
 	std::string content;
 	std::ifstream fileStream(fileLocation, std::ios::in);
 	if (!fileStream.is_open()) {
-		printf("Failed to read %s! File doesn't exist.", fileLocation);
+		printf("DEBUG: Failed to read %s! File doesn't exist.", fileLocation);
 		return "";
 	}
 	std::string line = "";

@@ -42,7 +42,7 @@ namespace GLB {
 
 namespace MAP {
 	float MIN_Z = 0.0f, MAX_Z = 0.0f;
-	float XYSCALE = 80.0f, ZSCALE = 0.025/3.0, XSEED = 0.0, YSEED = 0.0f;
+	float XYSCALE = 80.0f, ZSCALE = 0.025f/3.0f, XSEED = 0.0f, YSEED = 0.0f;
 }
 
 namespace SHD {
@@ -79,7 +79,16 @@ int main() {
 
 	using namespace glb;
 
+	//json errorsJson = ...;
+	//map<string, string> errors = errorsJson.get<map<string, string>>();
+	//ifstream error for errorsJson
+
 	std::ifstream settings_path("settings.json");
+	if (!settings_path.good()) {
+		//The correct format should be:
+		//forceGameClosure("  " + errorsJson["NOT_FOUND"] + "\n\n  " + errorText[TRANSLATE];
+		forceGameClosure("  Error code 0x00000001\n\n  Unable to find or process SETTINGS file.\n  Forced application shutdown has started.");
+	}
 	json settings = json::parse(settings_path);
 
 	GLB::DEBUG = (bool)settings["debug"].get<int>();
@@ -90,7 +99,6 @@ int main() {
 	setParam("window-width-zoomed", getParam("window-width") + (GAME::ZOOM_CURRENT - 1) * GAME::ZOOM_CAMERA_FACTOR);
 	setParam("window-height-zoomed", getParam("window-height") + (GAME::ZOOM_CURRENT - 1) * GAME::ZOOM_CAMERA_FACTOR / getParam("window-ratio"));
 
-
 	GLB::MENU_PROJECTION = glm::ortho(0.0f, getParam("window-width"), 0.0f, getParam("window-height"), -100.0f, 100.0f);
 	GLB::CAMERA_PROJECTION = glm::ortho(0.0f, getParam("window-width-zoomed"), 0.0f, getParam("window-height-zoomed"), -(float)GAME::MAP_WIDTH, (float)GAME::MAP_WIDTH);
 	GLB::RES_X_RATIO = getParam("window-width") / (float)GAME::MAP_WIDTH;
@@ -100,7 +108,7 @@ int main() {
 	std::ifstream data_path("assets/data/data.json");
 	//Close the game if it wasn't able to find or process data.json file
 	if (!data_path.good()) {
-		forceGameClosure("Error code 0x00000001\n\nThe game is unable to find or process DATA file.\nForced application shutdown has started.");
+		forceGameClosure("Error code 0x00000001\n\nUnable to find or process DATA file.\nForced application shutdown has started.");
 	}
 	json data = json::parse(data_path);
 

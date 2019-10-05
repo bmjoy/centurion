@@ -3,7 +3,6 @@
 using namespace glb;
 
 GameMenu::GameMenu(){
-
 	w = 300.f;
 	h = 400.f;
 	gameMenuActive = false;
@@ -12,6 +11,9 @@ GameMenu::GameMenu(){
 void GameMenu::create(int *pickingId, std::map<int, std::string> *pickingList) {
 
 	std::ifstream path("assets/data/interface/game/menu.json");
+	if (!path.good()) {
+		forceGameClosure("Error code 0x00000001\n\n  Unable to find or process MENU DATA file.\n  Forced application shutdown has started.");
+	}
 	data = json::parse(path);
 
 	x = getParam("window-width") / 2.f;

@@ -10,6 +10,8 @@ public:
 	void MusicRewind();
 	void MusicLoop(bool loop);
 	void MusicPlay(std::string name);
+	void MusicVolume(int value);
+	void Playlist();
 	bool IsMusicPlaying();
 	bool IsMusicLooping();
 	~AudioManager();

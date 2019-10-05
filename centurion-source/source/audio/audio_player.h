@@ -42,7 +42,7 @@ public:
 	virtual bool IsLooping();
 
 	virtual void SetPitch(float value);
-	virtual void SetVolume(float value);
+	virtual void SetVolume(int value);
 
 	ALuint GetSourceID()
 	{

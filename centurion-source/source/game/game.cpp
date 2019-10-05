@@ -21,7 +21,7 @@ void Game::create(std::vector<Player> *ListOfPlayers) {
 	mapgen::setPlayerList(ListOfPlayers);
 
 	camera = Camera(glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3(0.0f, 1.0f, 0.0f), -90.0f, 0.0f);
-	std::cout << "Camera has been created. \n";
+	std::cout << "DEBUG: Camera has been created.\n";
 
 	float ui_bottom_height_minimap = GAME::MAP_HEIGHT * GAME::UI_BOTTOM_HEIGHT / (getParam("window-height") - GAME::UI_BOTTOM_HEIGHT - GAME::UI_TOP_HEIGHT);
 	float ui_top_height_minimap = GAME::MAP_HEIGHT * GAME::UI_TOP_HEIGHT / (getParam("window-height") - GAME::UI_BOTTOM_HEIGHT - GAME::UI_TOP_HEIGHT);
@@ -52,7 +52,7 @@ void Game::create(std::vector<Player> *ListOfPlayers) {
 	/* CREATE SETTLEMENTS */
 	std::ifstream path("assets/data/settlements.json");
 	if (!path.good()) {
-		forceGameClosure("Error code 0x00000001\n\nThe game is unable to find or process SETTLEMENTS file.\nForced application shutdown has started.");
+		forceGameClosure("  Error code 0x00000001\n\n  Unable to find or process SETTLEMENTS file.\nForced application shutdown has started.");
 	}
 	settl_data = json::parse(path);
 
@@ -82,8 +82,8 @@ void Game::create(std::vector<Player> *ListOfPlayers) {
 
 	/*------------------------------------------------------------*/
 
-	std::cout << "Terrain has been generated! \n";
-	std::cout << "Min(z) = " << MAP::MIN_Z << "; Max(z) = " << MAP::MAX_Z << std::endl;
+	std::cout << "DEBUG: Terrain has been generated!\n";
+	std::cout << "DEBUG: Min(z) = " << MAP::MIN_Z << "; Max(z) = " << MAP::MAX_Z << std::endl;
 
 
 	// *********** ROBA PROVVISORIA ***********

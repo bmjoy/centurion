@@ -28,6 +28,6 @@ public:
 	virtual bool IsLooping() = 0;
 
 	virtual void SetPitch(float value) = 0;
-	virtual void SetVolume(float value) = 0;
+	virtual void SetVolume(int value) = 0;
 };
 #endif
