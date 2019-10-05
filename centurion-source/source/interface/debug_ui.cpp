@@ -51,8 +51,8 @@ void DebugUI::render(int fps, int mpfs, int selUnits) {
 	if (cursorinGame) {
 		x = (GLB::MOUSE_X * getParam("window-width-zoomed") / getParam("window-width") + GAME::CAMERA_POS_X);
 		y = (GLB::MOUSE_Y * getParam("window-height-zoomed") / getParam("window-height") + GAME::CAMERA_POS_Y);
-		int x1 = round(x / (float)mapgen::grid_size);
-		int y1 = round(y / (float)mapgen::grid_size);
+		float x1 = round(x / (float)mapgen::grid_size);
+		float y1 = round(y / (float)mapgen::grid_size);
 		int j = (int)(y1 * GAME::MAP_WIDTH / mapgen::grid_size + x1);
 
 		xNorm = mapgen::MapVertices()[mapgen::VerticesPos()[j] * 10 + 6];
@@ -84,7 +84,7 @@ void DebugUI::render(int fps, int mpfs, int selUnits) {
 	streamz << std::fixed << std::setprecision(2) << zNorm;
 	dynamicTextList[9] = streamz.str();
 
-	!GLB::GAME ? n = 2 : n = dynamicTextList.size();
+	!GLB::GAME ? n = 2 : n = (int)dynamicTextList.size();
 
 	for (int i = 0; i < n; i++) {
 		staticText[i].render_static();

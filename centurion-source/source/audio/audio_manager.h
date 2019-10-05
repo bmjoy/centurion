@@ -9,7 +9,7 @@ public:
 	void MusicPause();
 	void MusicRewind();
 	void MusicLoop(bool loop);
-	void MusicPlay(std::string name);
+	void MusicPlay(std::string name, bool looping = true);
 	void MusicVolume(int value);
 	void Playlist();
 	bool IsMusicPlaying();

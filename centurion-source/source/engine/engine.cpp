@@ -44,6 +44,7 @@ int Engine::launch() {
 			if (!startMenu->menu_is_created()){
 				obj::Audio()->MusicPlay("assets/music/menu.wav");
 				startMenu->create(&playersList);
+				std::cout << "DEBUG: Main menu was created!\n";
 			}
 			startMenu->render();
 		}
@@ -57,7 +58,7 @@ int Engine::launch() {
 				clearAndSwapBuffers(GLB::MAIN_WINDOW);
 				{
 					text = gui::SimpleText("dynamic");
-					text.render_dynamic("Game is being created...", "tahoma_8", getParam("window-width") / 2.f, getParam("window-height") / 2.f, glm::vec4(255.f), "center", "middle");
+					text.render_dynamic("Game is being started...", "tahoma_8", getParam("window-width") / 2.f, getParam("window-height") / 2.f, glm::vec4(255.f), "center", "middle");
 				}
 				glfwSwapBuffers(GLB::MAIN_WINDOW);
 
@@ -155,7 +156,7 @@ void Engine::fps() {
 void Engine::fps_sleep() {
 	finalTime = glfwGetTime();
 	if (finalTime - currentTime < 1.0 / 60.0) {
-		Sleep(1000 * (1.0 / 60.0 - (finalTime - currentTime)));
+		Sleep(DWORD(1000 * (1.0 / 60.0 - (finalTime - currentTime))));
 	}
 }
 

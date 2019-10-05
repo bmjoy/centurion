@@ -19,10 +19,10 @@ bool SoundBuffer::LoadFromFile(const char *szFile){
 	}
 	SetChannels(soundInfo.channels);
 	SetSampleRate(soundInfo.samplerate);
-	SetFrames(soundInfo.frames);
-	SetSampleCount(static_cast<std::size_t>(soundInfo.frames) * soundInfo.channels);
+	SetFrames((unsigned int)soundInfo.frames);
+	SetSampleCount((unsigned int)static_cast<std::size_t>(soundInfo.frames) * soundInfo.channels);
 	short *samples = new short[m_iSampleCount + 1];
-	int readBytes = sf_read_short(sound, &samples[0], m_iSampleCount);
+	int readBytes = (int)sf_read_short(sound, &samples[0], m_iSampleCount);
 	if (readBytes == 0){
 		sf_close(sound);
 		return false;
@@ -50,7 +50,7 @@ unsigned int SoundBuffer::GetSampleCount(){
 }
 
 void SoundBuffer::WriteData(void *data, size_t size){
-	alBufferData(m_buffer[0], m_iSoundFormat, data, size * sizeof(short), m_iSampleRate);
+	alBufferData(m_buffer[0], m_iSoundFormat, data, (ALsizei)size * sizeof(short), m_iSampleRate);
 }
 
 void SoundBuffer::SetSampleRate(unsigned int rate){

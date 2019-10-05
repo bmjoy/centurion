@@ -13,7 +13,7 @@ void myWindow::init() {
 	glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
 	glfwWindowHint(GLFW_RESIZABLE, GL_FALSE);
 
-	mainWindow = glfwCreateWindow(getParam("window-width"), getParam("window-height"), "Centurion", nullptr, nullptr); // Windowed
+	mainWindow = glfwCreateWindow((int)getParam("window-width"), (int)getParam("window-height"), "Centurion", nullptr, nullptr); // Windowed
 	glfwMakeContextCurrent(mainWindow);
 
 	create_callbacks(); // handle key + mouse input
@@ -150,9 +150,9 @@ void myWindow::handle_keys(GLFWwindow* window, int key, int code, int action, in
 void myWindow::handle_mouse(GLFWwindow* window, double xPos, double yPos)
 {
 	myWindow* theWindow = static_cast<myWindow*>(glfwGetWindowUserPointer(window));
-	theWindow->lastX = xPos;
+	theWindow->lastX = (GLfloat)xPos;
 	double y = fabs(yPos - getParam("window-height"));
-	theWindow->lastY = y;
+	theWindow->lastY = (GLfloat)y;
 }
 
 void myWindow::mouse_button_callback(GLFWwindow* window, int button, int action, int mods)
@@ -194,7 +194,7 @@ void myWindow::mouse_button_callback(GLFWwindow* window, int button, int action,
 
 void myWindow::scroll_callback(GLFWwindow* window, double xoffset, double yoffset)
 {
-	GLB::MOUSE_SCROLL = yoffset;
+	GLB::MOUSE_SCROLL = (int)yoffset;
 	GLB::MOUSE_SCROLL_BOOL = true;
 }
 

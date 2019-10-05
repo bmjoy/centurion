@@ -18,12 +18,12 @@ Light::Light(GLfloat red, GLfloat green, GLfloat blue, GLfloat aIntensity, GLflo
 
 void Light::use_light(GLfloat ambientIntensityLocation, GLfloat ambientColorLocation, GLfloat diffuseIntensityLocation, GLfloat directionLocation) {
 	//ambient
-	glUniform3f(ambientColorLocation, colour.x , colour.y, colour.z);
-	glUniform1f(ambientIntensityLocation, ambientIntensity);
+	glUniform3f((GLint)ambientColorLocation, colour.x , colour.y, colour.z);
+	glUniform1f((GLint)ambientIntensityLocation, ambientIntensity);
 
 	//diffuse
-	glUniform3f(directionLocation, direction.x, direction.y, direction.z);
-	glUniform1f(diffuseIntensityLocation, diffuseIntensity);
+	glUniform3f((GLint)directionLocation, direction.x, direction.y, direction.z);
+	glUniform1f((GLint)diffuseIntensityLocation, diffuseIntensity);
 }
 
 Light::~Light(){}

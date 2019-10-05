@@ -36,7 +36,7 @@ ISoundBuffer *Recorder::CopyToBuffer()
 		SoundBuffer* buff = new SoundBuffer();
 		buff->SetSampleRate(44100);
 		buff->WriteData(&samples[0], samples.size());
-		buff->SetSampleCount(samples.size());
+		buff->SetSampleCount((unsigned int)samples.size());
 		samples.resize(0);
 		samples.clear();
 		recorderMutex.unlock();

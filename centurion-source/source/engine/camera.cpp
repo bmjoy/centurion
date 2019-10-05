@@ -81,8 +81,8 @@ void Camera::mouseControl(float threshold) {
 	/* ------------------------------------------- */	
 	setParam("window-width-zoomed", getParam("window-width") + (GAME::ZOOM_CURRENT - 1) * GAME::ZOOM_CAMERA_FACTOR);
 	setParam("window-height-zoomed", getParam("window-height") + (GAME::ZOOM_CURRENT - 1) *  GAME::ZOOM_CAMERA_FACTOR / getParam("window-ratio"));
-	GAME::CAMERA_POS_X = position.x;
-	GAME::CAMERA_POS_Y = position.y;
+	GAME::CAMERA_POS_X = (int)position.x;
+	GAME::CAMERA_POS_Y = (int)position.y;
 }
 
 void Camera::keyboardControl() {
@@ -103,8 +103,8 @@ void Camera::keyboardControl() {
 		position -= up * GAME::CAMERA_MOVESPEED;
 	}
 
-	GAME::CAMERA_POS_X = position.x;
-	GAME::CAMERA_POS_Y = position.y;
+	GAME::CAMERA_POS_X = (int)position.x;
+	GAME::CAMERA_POS_Y = (int)position.y;
 }
 
 void Camera::go_to_pos(GLfloat x, GLfloat y) {

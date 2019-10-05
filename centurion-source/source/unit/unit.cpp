@@ -48,13 +48,13 @@ void Unit::create() {
 
 	// hitbox 
 	hitbox.rectangle = gui::Rectangle();
-	hitbox.rectangle.create("border", 0, 0, unitData.hitBox[0], unitData.hitBox[1], "center", 0);
+	hitbox.rectangle.create("border", 0.0f, 0.0f, (float)unitData.hitBox[0], (float)unitData.hitBox[1], "center", 0);
 
 	//Show circle position under the unit (Debug only)
 	circlePos = gui::Image("circle_pos");
 	circlePos.create("center", 0, 0, 0, 0, 0);
 
-	creationTime = glfwGetTime();
+	creationTime = (float)glfwGetTime();
 }
 
 void Unit::render(glm::mat4 &proj, glm::mat4 &view, bool picking, int clickID) {
@@ -74,7 +74,7 @@ void Unit::render(glm::mat4 &proj, glm::mat4 &view, bool picking, int clickID) {
 	obj::USprite()->render(unitData, position3D, picking);
 
 	if (!GLB::DEBUG && !picking) {
-		hitbox.coords = getCoords(position3D.x - unitData.hitBox[0] / 2.f, position3D.y + unitData.hitBox[1] / 2.f + unitData.yOffset, unitData.hitBox[0], unitData.hitBox[1]);
+		hitbox.coords = getCoords(position3D.x - unitData.hitBox[0] / 2.f, position3D.y + unitData.hitBox[1] / 2.f + unitData.yOffset, (float)unitData.hitBox[0], (float)unitData.hitBox[1]);
 		hitbox.rectangle.render(
 			selected ? glm::vec4(255.0f, 255.0f, 255.0f, 1.0f) : glm::vec4(0.0f, 0.0f, 0.0f, 0.0f),
 			0,
@@ -100,7 +100,7 @@ void Unit::render(glm::mat4 &proj, glm::mat4 &view, bool picking, int clickID) {
 			circlePos.render(false, position2D.x, position2D.y);
 			circlePos.render(false, position3D.x, position3D.y);
 
-			hitbox.coords = getCoords(position3D.x - unitData.hitBox[0] / 2.f, position3D.y + unitData.hitBox[1] / 2.f + unitData.yOffset, unitData.hitBox[0], unitData.hitBox[1]);
+			hitbox.coords = getCoords(position3D.x - unitData.hitBox[0] / 2.f, position3D.y + unitData.hitBox[1] / 2.f + unitData.yOffset, (float)unitData.hitBox[0], (float)unitData.hitBox[1]);
 			hitbox.rectangle.render(
 				selected ? glm::vec4(255.0f, 0.0f, 255.0f, 1.0f) : glm::vec4(255.0f, 242.0f, 0.0f, 1.0f),
 				0,
@@ -135,7 +135,7 @@ void Unit::position_update() {
 			// update direction
 			if (pathCount < path.size() - 2) {
 				angle = unit::getAngle(path, pathCount);
-				unitData.currentDir = round(angle / 360 * unitData.maxDirections);
+				unitData.currentDir = (int)round(angle / 360 * unitData.maxDirections);
 			}
 		}
 	}
@@ -162,7 +162,7 @@ void Unit::walk_behaviour() {
 		pathQuadsList = { };
 		for (int i = 0; i < path.size(); i++) {
 			gui::Rectangle tempRect = gui::Rectangle();
-			tempRect.create("filled", path[i].x, path[i].y, 20.f, 20.f, "bottom-left", 0);
+			tempRect.create("filled", (float)path[i].x, (float)path[i].y, 20.f, 20.f, "bottom-left", 0);
 			pathQuadsList.push_back(tempRect);
 		}
 
@@ -172,7 +172,7 @@ void Unit::walk_behaviour() {
 		
 		// set initial direction
 		angle = unit::getAngle(path, pathCount);
-		unitData.currentDir = round(angle / 360 * unitData.maxDirections);
+		unitData.currentDir = (int)round(angle / 360 * unitData.maxDirections);
 
 	}
 }

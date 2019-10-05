@@ -53,7 +53,7 @@ namespace GAME {
 	extern bool MENU_IS_ACTIVE;
 	extern int PLAYERS_NUMBER;
 	extern int PLAYERS_NUMBER_MAX;
-	extern float TOWNHALL_RADIUS;
+	extern int TOWNHALL_RADIUS;
 	extern std::vector<std::string> RACES;
 	extern int ZOOM_CURRENT;
 	extern float ZOOM_CAMERA_FACTOR;

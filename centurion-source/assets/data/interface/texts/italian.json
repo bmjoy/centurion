@@ -11,6 +11,10 @@
   "menuButtonQuit": "Esci dalla partita",
   "menuButtonClose": "Chiudi il menù",
 
+  //Random words or phrases
+  "gameCreated": "Avvio della partita in corso...",
+  "errorCode": "Codice errore",
+
   //Critical errors
   "errorSettings": "Impossibile trovare o leggere il file SETTINGS.\n  Arresto forzato dell'applicazione in corso...",
   "errorImagesData": "Impossibile trovare o leggere il file IMAGES DATA.\n  Arresto forzato dell'applicazione in corso...",

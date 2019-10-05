@@ -11,6 +11,10 @@
   "menuButtonQuit": "Quit",
   "menuButtonClose": "Close",
 
+  //Random words or phrases
+  "gameCreated":  "Game is being created...",
+  "errorCode":  "Error code",
+
   //Critical errors
   "errorSettings": "Unable to find or process SETTINGS file.\n  Forced application shutdown has started.",
   "errorImagesData": "Unable to find or process IMAGES DATA file.\n  Forced application shutdown has started.",

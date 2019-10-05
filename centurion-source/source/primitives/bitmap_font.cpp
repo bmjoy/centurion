@@ -118,7 +118,7 @@ void BitmapFont::render_dynamic(std::string &font, float xPos, float yPos, std::
 	glUniform1f(glGetUniformLocation(shaderId, "y"), yPos);
 	glUniform1i(glGetUniformLocation(shaderId, "hAlign"), hAlignMap[h_align]);
 	glUniform1i(glGetUniformLocation(shaderId, "vAlign"), vAlignMap[v_align]);
-	glUniform1i(glGetUniformLocation(shaderId, "fontHeight"), fontData[font].fontHeight);
+	glUniform1i(glGetUniformLocation(shaderId, "fontHeight"), (GLint)fontData[font].fontHeight);
 	glUniform1i(glGetUniformLocation(shaderId, "shadow"), 0);
 
 	if (h_align != "left"){
@@ -168,8 +168,8 @@ txt::StaticData BitmapFont::create_static(std::string &font, std::string &text, 
 	// other information
 	static_data.textureID = textureIdMap[font];
 	static_data.startChar = fontData[font].startChar;
-	static_data.textSize = text.size();
-	static_data.fontHeight = fontData[font].fontHeight;
+	static_data.textSize = (int)text.size();
+	static_data.fontHeight = (int)fontData[font].fontHeight;
 
 	return static_data;
 }

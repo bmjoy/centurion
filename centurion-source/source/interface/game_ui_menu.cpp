@@ -25,8 +25,8 @@ void GameMenu::create(int *pickingId, std::map<int, std::string> *pickingList) {
 		btn.create(
 			data[s][i]["image_name"].get<std::string>(), 
 			data[s][i]["text"].get<std::string>(), 
-			x + data[s][i]["x"].get<int>(), 
-			y + data[s][i]["y"].get<int>(), 
+			(int)x + data[s][i]["x"].get<int>(),
+			(int)y + data[s][i]["y"].get<int>(),
 			*pickingId, 
 			glm::vec4(0.f, 0.f, 0.f, 255.f)
 		);

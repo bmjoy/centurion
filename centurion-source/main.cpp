@@ -54,7 +54,7 @@ namespace GAME {
 	int MAP_WIDTH = 29952, MAP_HEIGHT = 19968;
 	int PLAYERS_NUMBER = 1;
 	int PLAYERS_NUMBER_MAX = 10;
-	float TOWNHALL_RADIUS = 1875.0f;
+	int TOWNHALL_RADIUS = 1875;
 	int ZOOM_CURRENT = 8;
 	float ZOOM_CAMERA_FACTOR = 100.0f;
 	float UI_BOTTOM_HEIGHT = 60.0f;
@@ -79,15 +79,20 @@ int main() {
 
 	using namespace glb;
 
-	//json errorsJson = ...;
-	//map<string, string> errors = errorsJson.get<map<string, string>>();
-	//ifstream error for errorsJson
+	//Close the game if it wasn't able to find or process errorCodes.json file
+	std::ifstream errorCodes_path("assets/data/errorCodes.json");
+	if (!errorCodes_path.good()) {
+		forceGameClosure("  Error code 0x00000001\n\n  Unable to find or process ERROR CODES file.\n  Forced application shutdown has started.");
+	}
+	json errorCodes = json::parse(errorCodes_path);
+	std::map<string, string> errorsMap = errorCodes.get<map<string, string>>();
+	setErrors(errorsMap);
 
 	std::ifstream settings_path("settings.json");
 	if (!settings_path.good()) {
 		//The correct format should be:
 		//forceGameClosure("  " + errorsJson["NOT_FOUND"] + "\n\n  " + errorText[TRANSLATE];
-		forceGameClosure("  Error code 0x00000001\n\n  Unable to find or process SETTINGS file.\n  Forced application shutdown has started.");
+		forceGameClosure("  Error code: "  + getErrorCode("NOT_FOUND") + std::string("\n\n  Unable to find or process SETTINGS file.\n  Forced application shutdown has started."));
 	}
 	json settings = json::parse(settings_path);
 
@@ -108,7 +113,7 @@ int main() {
 	std::ifstream data_path("assets/data/data.json");
 	//Close the game if it wasn't able to find or process data.json file
 	if (!data_path.good()) {
-		forceGameClosure("Error code 0x00000001\n\nUnable to find or process DATA file.\nForced application shutdown has started.");
+		forceGameClosure("  Error code:" + getErrorCode("NOT_FOUND") + "\n\n  Unable to find or process DATA file.\nForced application shutdown has started.");
 	}
 	json data = json::parse(data_path);
 

@@ -4,17 +4,19 @@ AudioManager::AudioManager()
 {
 }
 
-void AudioManager::MusicPlay(std::string name) {
+void AudioManager::MusicPlay(std::string name, bool looping) {
 	AudioDevice *device = new AudioDevice();
 
 	if(device){
 		music = device->CreateMusic();
+		MusicStop();
 		if (!music->LoadFromFile(name.c_str())){
 			std::cout << "DEBUG: Impossible to find or parse audio file. No music will be played.\n";
 		}
 		else{
 			std::cout << "DEBUG: Music file detected. Starting the playing function.\n";
 			music->Play();
+			MusicLoop(looping);
 		}
 	}
 	else {
@@ -23,8 +25,16 @@ void AudioManager::MusicPlay(std::string name) {
 }
 
 void AudioManager::MusicStop() {
-	if(music){
+	if (music) {
 		music->Stop();
+		std::cout << "DEBUG: Music variable is working properly.\n";
+		if (IsMusicPlaying()) {
+			std::cout << "DEBUG: Music is playing!\n";
+			music->Stop();
+		}
+		else {
+			std::cout << "DEBUG: Music is not playing!\n";
+		}
 	}
 }
 
@@ -40,7 +50,7 @@ void AudioManager::MusicRewind() {
 	}
 }
 
-void AudioManager::MusicLoop(bool loop=true) {
+void AudioManager::MusicLoop(bool loop) {
 	music->SetLooping(loop);
 }
 

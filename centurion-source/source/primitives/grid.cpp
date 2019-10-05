@@ -14,11 +14,11 @@ void Grid::create() {
 	};
 
 	float vertices[] = {
-		// X,Y,Z									// uv coords		
-		0.f, 0.f, 0.f,								0.f, 1.f,  // in basso a sx
-		GAME::MAP_WIDTH, 0.f, 0.f,					1.f, 1.f,  // in basso a dx
-		GAME::MAP_WIDTH, GAME::MAP_HEIGHT, 0.f,		1.f, 0.f,  // in alto a dx
-		0.f, GAME::MAP_HEIGHT, 0.f,					0.f, 0.f   // in alto a sx
+		// X,Y,Z												// uv coords		
+		0.f, 0.f, 0.f,											0.f, 1.f,  // in basso a sx
+		(float)GAME::MAP_WIDTH, 0.f, 0.f,						1.f, 1.f,  // in basso a dx
+		(float)GAME::MAP_WIDTH, (float)GAME::MAP_HEIGHT, 0.f,	1.f, 0.f,  // in alto a dx
+		0.f, (float)GAME::MAP_HEIGHT, 0.f,						0.f, 0.f   // in alto a sx
 	};
 
 	glGenVertexArrays(1, &VAO);
@@ -44,8 +44,8 @@ void Grid::create() {
 
 	/* This texture comes from the real grid of 0/1 */
 
-	float zNoise;
-	int yNoise;
+	float zNoise = 0.0f;
+	int yNoise = 0;
 	int grid_sizeX = GAME::MAP_WIDTH / PATH::CELL_GRID_SIZE;
 	int grid_sizeY = GAME::MAP_HEIGHT / PATH::CELL_GRID_SIZE;
 	unsigned char* gridData = new unsigned char[grid_sizeX * grid_sizeY * 4];
@@ -75,7 +75,7 @@ void Grid::update() {
 			/* From 3d grid to 2d */
 			/* for pathfinding calculation */
 			zNoise = mapgen::generateNoise(glm::vec2(x*PATH::CELL_GRID_SIZE, y*PATH::CELL_GRID_SIZE));
-			zNoise = mapgen::smoothNoise(y*PATH::CELL_GRID_SIZE, zNoise);
+			zNoise = mapgen::smoothNoise((float)y*PATH::CELL_GRID_SIZE, zNoise);
 			yNoise = int(y*PATH::CELL_GRID_SIZE + zNoise) / PATH::CELL_GRID_SIZE;
 			if (yNoise < grid_sizeY && yNoise > 0) {
 				PATH::GRID_MATRIX_2D[y][x] = PATH::GRID_MATRIX[yNoise][x];

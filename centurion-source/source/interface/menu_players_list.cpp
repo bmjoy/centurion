@@ -14,21 +14,21 @@ void PlayersList::create(int startX, int startY, std::map<int, std::string> *pic
 
 	number = gui::SimpleText("dynamic", true);
 	text = gui::SimpleText("static");
-	text.create_static("Number of players: ", "tahoma_8", x, y + 40.f, "left", "normal", glm::vec4(255.f));
+	text.create_static("Number of players: ", "tahoma_8", (float)x, (float)y + 40.f, "left", "normal", glm::vec4(255.f));
 	textWidth = text.get_width();
 
 	arrowDown = gui::Image("arrowDown");
-	arrowDown.create("center", x + 240, y + 50, 0, 0, *pickingId);
+	arrowDown.create("center", (float)x + 240, (float)y + 50, 0, 0, *pickingId);
 	(*pickingList)[*pickingId] = "arrowDown";
 	(*pickingId)++;
 	
 	arrowUp = gui::Image("arrowUp");
-	arrowUp.create("center", x + 280, y + 50, 0, 0, *pickingId);
+	arrowUp.create("center", (float)x + 280, (float)y + 50, 0, 0, *pickingId);
 	(*pickingList)[*pickingId] = "arrowUp";
 	(*pickingId)++;
 	
 	background = gui::Rectangle();
-	background.create("border-filled", x - 30, y + 80, w, h, "top-left", 0);
+	background.create("border-filled", (float)x - 30, (float)y + 80, (float)w, (float)h, "top-left", 0);
 
 
 	for (int j = 0; j < GAME::PLAYERS_NUMBER_MAX; j++) {
@@ -36,7 +36,7 @@ void PlayersList::create(int startX, int startY, std::map<int, std::string> *pic
 		//Player color rectangle
 		(*pickingList)[*pickingId] = "ColForm_" + std::to_string(j);
 		gui::FormInput col_fi = gui::FormInput(false);
-		col_fi.create(x, y - deltaY * j, 20.f, 20.f, { "" }, *pickingId);
+		col_fi.create((float)x, (float)y - deltaY * j, 20.f, 20.f, { "" }, *pickingId);
 		if (j < 2) { (*players_color).push_back(j); }
 		else { (*players_color).push_back(-1); }
 		colors_Form.push_back(col_fi);
@@ -44,13 +44,13 @@ void PlayersList::create(int startX, int startY, std::map<int, std::string> *pic
 
 		//Player name
 		gui::FormInput p_fi = gui::FormInput(false);
-		p_fi.create(x + 50.0f, y - deltaY * j, 200.f, 20.f, { "Player " + std::to_string(j + 1) }, 0);
+		p_fi.create((float)x + 50.0f, (float)y - deltaY * j, 200.f, 20.f, { "Player " + std::to_string(j + 1) }, 0);
 		players_Form.push_back(p_fi);
 
 		//Player civilization
 		(*pickingList)[*pickingId] = "CivForm_" + std::to_string(j);
 		gui::FormInput c_fi = gui::FormInput(true);
-		c_fi.create(x + 280.f, y - deltaY * j, 150.f, 20.f, GAME::RACES, *pickingId);
+		c_fi.create((float)x + 280.f, (float)y - deltaY * j, 150.f, 20.f, GAME::RACES, *pickingId);
 		civiliz_Form.push_back(c_fi);
 		(*pickingId)++;
 	}

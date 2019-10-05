@@ -104,8 +104,8 @@ void Terrain::updateBuffers(float x, float y, std::string type, float q) {
 
 	int k = verticesPosMap[type];
 
-	int x1 = round(x / (float)mapgen::grid_size);
-	int y1 = round(y / (float)mapgen::grid_size);
+	int x1 = (int)round(x / (float)mapgen::grid_size);
+	int y1 = (int)round(y / (float)mapgen::grid_size);
 
 	int j = (int)(y1 * GAME::MAP_WIDTH / mapgen::grid_size + x1);
 
@@ -224,7 +224,7 @@ void Terrain::render(bool tracing) {
 		uAmbientColor = glGetUniformLocation(shaderId, "directionalLight.colour");
 		uDiffuseIntensity = glGetUniformLocation(shaderId, "directionalLight.diffuseIntensity");
 		uDiffuseDirection = glGetUniformLocation(shaderId, "directionalLight.direction");
-		light.use_light(uAmbientIntensity, uAmbientColor, uDiffuseIntensity, uDiffuseDirection);
+		light.use_light((GLfloat)uAmbientIntensity, (GLfloat)uAmbientColor, (GLfloat)uDiffuseIntensity, (GLfloat)uDiffuseDirection);
 
 		// Texture
 		float scaleTexX = (float)GAME::MAP_WIDTH / (float)textureInfoList[1].x;    // to fix the texture scale

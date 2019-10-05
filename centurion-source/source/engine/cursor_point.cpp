@@ -13,7 +13,7 @@ void CPoint::create() {
 
 void CPoint::render() {
 	if (!GAME::MINIMAP_IS_ACTIVE){
-		img.render(false, GLB::MOUSE_X, GLB::MOUSE_Y_2D);
+		img.render(false, (float)GLB::MOUSE_X, (float)GLB::MOUSE_Y_2D);
 	}
 }
 

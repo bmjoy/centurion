@@ -119,7 +119,7 @@ glm::vec3 getVertex(int x, int y) {
 	return glm::vec3(x1, y1, z1);
 }
 
-std::array<glm::vec3, 6> getAdjacentVertices(glm::vec2 pos) {
+std::array<glm::vec3, 6> getAdjacentVertices(glm::ivec2 pos) {
 
 	std::array<glm::vec3, 6> output;
 
@@ -242,20 +242,20 @@ float mapgen::getNoiseEstimate(float x, float y) {
 }
 
 void mapgen::define_settlements() {
-	srand(time(NULL));
+	srand((unsigned int)time(NULL));
 	std::vector<float> townhallPos;
-	int a, b;
-	bool c;
-	float d;
 	int k = 0;
 	int min = GAME::TOWNHALL_RADIUS + 100;
 	int max_X = GAME::MAP_WIDTH - GAME::TOWNHALL_RADIUS - 100;
 	int max_Y = GAME::MAP_HEIGHT - GAME::TOWNHALL_RADIUS - 100;
+	float a, b;
+	float d;
+	bool c;
 	for (int n = 0; n < (*PlayerList).size(); n++) {
 		c = false;
 		while (!c) {
-			a = (float)(rand() % (max_X - min) + min);
-			b = (float)(rand() % (max_Y - min) + min);
+			a = float(rand() % (max_X - min) + min);
+			b = float(rand() % (max_Y - min) + min);
 
 			if (n == 0) { // 1 PLAYER
 				if (Distance(a, b, GAME::MAP_WIDTH/2.0f, GAME::MAP_HEIGHT/2.0f) > GAME::MAP_HEIGHT / 2.0f) {
@@ -277,7 +277,7 @@ void mapgen::define_settlements() {
 				for (int m = n - 1; m >= 0; m--) {
 					d = Distance(a, b, townhallPos[m * 2], townhallPos[m * 2 + 1]);
 					if (d <= GAME::MAP_HEIGHT * 0.5) {
-						c2 *= false;
+						c2 = c2 * false;
 					}
 				}
 				if (c2) {
@@ -292,7 +292,7 @@ void mapgen::define_settlements() {
 				for (int m = n - 1; m >= 0; m--) {
 					d = Distance(a, b, townhallPos[m * 2], townhallPos[m * 2 + 1]);
 					if (d <= GAME::MAP_HEIGHT * 0.25) {
-						c2 *= false;
+						c2 = c2 * false;
 					}
 				}
 				if (c2) {
@@ -307,5 +307,4 @@ void mapgen::define_settlements() {
 	for (int i = 0; i < (*PlayerList).size(); i++) {
 		(*PlayerList)[i].setStartPoint(glm::vec2(townhallPos[i * 2], townhallPos[i * 2 + 1]));
 	}
-	//return townhallPos;
 }

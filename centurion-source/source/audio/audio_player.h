@@ -35,7 +35,7 @@ public:
 	virtual void Pause();
 	virtual void Rewind();
 
-	virtual bool IsPlaying();
+	bool IsPlaying();
 	virtual bool IsPaused();
 
 	virtual void SetLooping(bool state);

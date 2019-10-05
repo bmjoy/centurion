@@ -27,7 +27,7 @@ void game::tracing(Surface *s, glm::mat4 *proj, glm::mat4 *view) {
 		unsigned char tracingCol[4];
 		(*s).render(true);
 		glReadPixels(GLB::MOUSE_LEFT_X, GLB::MOUSE_LEFT_Y, 1, 1, GL_RGBA, GL_UNSIGNED_BYTE, &tracingCol);
-		GLB::Z_NOISE = (MAP::MAX_Z - MAP::MIN_Z) * ((float)tracingCol[0] / 255.0) + MAP::MIN_Z;
+		GLB::Z_NOISE = (MAP::MAX_Z - MAP::MIN_Z) * ((float)tracingCol[0] / 255.0f) + MAP::MIN_Z;
 		game::clearBuffers();
 	}
 }
@@ -40,8 +40,8 @@ void game::clearBuffers() {
 void game::goToPosition(std::map<int, Building> *bList, Camera *c, double *lastTime, int *clickId, bool *blockMinimap) {
 	if (GAME::MINIMAP_IS_ACTIVE) {
 		if (GLB::MOUSE_LEFT && cursorInGameScreen()) {
-			cameraToX = GLB::MOUSE_LEFT_X / getParam("window-width")*(float)GAME::MAP_WIDTH - getParam("window-width") / 2.0;
-			cameraToY = getYMinimapCoord((float)GLB::MOUSE_LEFT_Y) / getParam("window-height")*(float)GAME::MAP_HEIGHT - getParam("window-height") / 2.0;
+			cameraToX = GLB::MOUSE_LEFT_X / getParam("window-width")*(float)GAME::MAP_WIDTH - getParam("window-width") / 2.0f;
+			cameraToY = getYMinimapCoord((float)GLB::MOUSE_LEFT_Y) / getParam("window-height")*(float)GAME::MAP_HEIGHT - getParam("window-height") / 2.0f;
 			/* Double Click detection */
 			// if you are clicking on a townhall you have to double click 
 			// to move the camera there and quit minimap
@@ -126,8 +126,8 @@ void game::renderSelRectangle(gui::Rectangle *selRectangle) {
 
 		}
 		else {
-			cameraLastX = GAME::CAMERA_POS_X;
-			cameraLastY = GAME::CAMERA_POS_Y;
+			cameraLastX = (float)GAME::CAMERA_POS_X;
+			cameraLastY = (float)GAME::CAMERA_POS_Y;
 			GLB::SEL_RECT_COORDS.minX = 0;
 			GLB::SEL_RECT_COORDS.maxX = 0;
 			GLB::SEL_RECT_COORDS.minY = 0;
