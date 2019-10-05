@@ -5,11 +5,10 @@ AudioManager::AudioManager()
 }
 
 void AudioManager::MusicPlay(std::string name, bool looping) {
-	AudioDevice *device = new AudioDevice();
+	device = new AudioDevice();
 
 	if(device){
 		music = device->CreateMusic();
-		MusicStop();
 		if (!music->LoadFromFile(name.c_str())){
 			std::cout << "DEBUG: Impossible to find or parse audio file. No music will be played.\n";
 		}
@@ -26,6 +25,7 @@ void AudioManager::MusicPlay(std::string name, bool looping) {
 
 void AudioManager::MusicStop() {
 	if (music) {
+		delete device;
 		music->Stop();
 		std::cout << "DEBUG: Music variable is working properly.\n";
 		if (IsMusicPlaying()) {

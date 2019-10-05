@@ -53,7 +53,7 @@ int Engine::launch() {
 
 		if (GLB::GAME) {
 			if (!game->game_is_created()) {
-
+				obj::Audio()->MusicStop();
 
 				clearAndSwapBuffers(GLB::MAIN_WINDOW);
 				{

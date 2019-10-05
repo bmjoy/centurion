@@ -18,4 +18,5 @@ public:
 
 private:
 	IMusic *music;
+	AudioDevice *device;
 };
