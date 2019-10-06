@@ -10,17 +10,11 @@
     during mesh creation (look for glBindVertexArray and glVertexAttribPointer)
 */
 
-layout (location = 0) in vec4 pos;  // {[pos.x,pos.y,pos.z] pos.w}  the .w is the zNoise
+layout (location = 0) in vec3 pos;
 layout (location = 1) in vec2 tex;
-layout (location = 2) in vec3 norm;
-layout (location = 3) in float terrain;
-
-/* Noise stuff */
-
-float zNoise;
-float zScale;
-float xyScale;
-float zOffset;
+layout (location = 2) in float zNoise;
+layout (location = 3) in vec3 norm;
+layout (location = 4) in float terrain;
 
 /* Uniform Variables Init */
 
@@ -65,8 +59,8 @@ void main()
 {   
    
     /* RENDERING */
-    int offset = 0; 
-    vec4 newPos = vec4(pos.x - offset, pos.y + pos.w - offset, pos.z + pos.w, 1.0);
+    int offset = 256; 
+    vec4 newPos = vec4(pos.x - offset, pos.y + zNoise - offset, pos.z + zNoise, 1.0);
     //vec4 newPos = vec4(pos.x, pos.y, pos.z, 1.0);
     gl_Position = projection * view * newPos;
     
@@ -75,7 +69,7 @@ void main()
     FragTex = tex;
 	FragTexGrass = vec2(tex.x*scaleTextX, tex.y*scaleTextY);
     FragNorm = norm;
-    FragCol = (pos.w - minZ) / (maxZ - minZ) ; // in (0-1)
+    FragCol = (zNoise - minZ) / (maxZ - minZ) ; // in (0-1)
     
     if(terrain == 1.f){ // grass
         grassW = 1.f;

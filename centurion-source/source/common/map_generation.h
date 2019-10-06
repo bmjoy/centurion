@@ -3,6 +3,22 @@
 #include <global.hpp>
 #include <time.h>
 
+/*------------------------------------------------------
+	vertices[] = 
+		   0        1        2        3          4     
+		xCoord,  yCoord,  zCoord, xTexCoord, yTexCoord
+	
+
+	heights[] = 
+		   0      1      2      3
+		zNoise, xNorm, yNorm, zNorm
+	
+
+	textures[] =   
+	         0
+	    textureType
+	
+------------------------------------------------------*/
 
 class Player;
 
@@ -13,16 +29,19 @@ namespace mapgen {
 	};
 
 	static const int grid_size = 128;
-	static const int nIndices = 219024;
-	static const int nVertices = 36895;
-	static const int mapWidth = 29952 + 0;
-	static const int mapHeight = 19968 + 0;
+	static const int nIndices = 228480;
+	static const int nVertices = 38479;
+	static const int mapWidth = 30464;  // 29952 + 128*4
+	static const int mapHeight = 20480; // 19968 + 128*4
 
-	static float empty_map_vertices[nVertices*10];
-	float *EmptyMapVertices();
-
-	static float map_vertices[nVertices*10];
+	static float map_vertices[nVertices * 5];
 	float *MapVertices();
+
+	static float map_textures[nVertices];
+	float *MapTextures();
+
+	static float map_heights[nVertices * 4];
+	float *MapHeights();
 
 	static unsigned int indices[nIndices];
 	unsigned int *Indices();
@@ -32,6 +51,8 @@ namespace mapgen {
 
 	void reset_map();
 	float getNoiseEstimate(float x, float y);
+
+	int getVertexPos(int x, int y);
 
 	glm::vec3 getVertex(int x, int y);
 	std::array<mapgen::Triangle, 6> getAdjacentTriangles(glm::ivec2 pos);

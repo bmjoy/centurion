@@ -1,2 +1,4 @@
-Number of vertices: 38718
-Number of indices: 229908
+Number of vertices: 38479
+Number of indices: 228480
+Grid size: 128
+Map width: 30464

@@ -2,7 +2,7 @@
 
 std::string fileName;
 int gridSize;
-int mapWidth = 29952 + 256;
+int mapWidth;
 
 void load_node(aiNode * node, const aiScene * scene);
 void load_mesh(aiMesh *mesh, const aiScene *scene);
@@ -11,11 +11,16 @@ void load_mesh(aiMesh *mesh, const aiScene *scene);
 
 int main() {
 
+	
+
 	std::cout << "File name: ";
 	std::cin >> fileName;
 
 	std::cout << "Grid size: ";
 	std::cin >> gridSize;
+
+	std::cout << "Map width: ";
+	std::cin >> mapWidth;
 
 	/* OBJ LOAD */
 	Assimp::Importer importer;
@@ -57,7 +62,9 @@ void load_mesh(aiMesh * mesh, const aiScene * scene) {
 	/*-----------------------------------------------------------------------------*/
 
 	int nVertices = mesh->mNumVertices;
-	std::ofstream myfile("output-folder/vertices");
+	std::ofstream verticesFile("output-folder/vertices");
+	std::ofstream heightsFile("output-folder/heights");
+	std::ofstream texturesFile("output-folder/textures");
 	std::cout << "\nVertices analysis in progress...\n\n";
 
 	std::vector<unsigned int> vertices_pos(nVertices, 0);
@@ -78,13 +85,31 @@ void load_mesh(aiMesh * mesh, const aiScene * scene) {
 		/* 45° Inclination */
 		zCoord -= yCoord;
 		
-		if (myfile.is_open())
+		if (verticesFile.is_open())
 		{
 			if (i == 0) {
-				myfile << xCoord << "," << yCoord << "," << zCoord << "," << zNoise << "," << xTexCoord << "," << yTexCoord << "," << xNorm << "," << yNorm << "," << zNorm << "," << type;
+				verticesFile << xCoord << "," << yCoord << "," << zCoord << "," << xTexCoord << "," << yTexCoord;
 			}
 			else {
-				myfile << "," << xCoord << "," << yCoord << "," << zCoord << "," << zNoise << "," << xTexCoord << "," << yTexCoord << "," << xNorm << "," << yNorm << "," << zNorm << "," << type;
+				verticesFile << "," << xCoord << "," << yCoord << "," << zCoord << "," << xTexCoord << "," << yTexCoord;
+			}
+		}
+		if (heightsFile.is_open())
+		{
+			if (i == 0) {
+				heightsFile << zNoise << "," << xNorm << "," << yNorm << "," << zNorm;
+			}
+			else {
+				heightsFile << "," << zNoise << "," << xNorm << "," << yNorm << "," << zNorm;
+			}
+		}
+		if (texturesFile.is_open())
+		{
+			if (i == 0) {
+				texturesFile << type;
+			}
+			else {
+				texturesFile << "," << type;
 			}
 		}
 
@@ -99,7 +124,9 @@ void load_mesh(aiMesh * mesh, const aiScene * scene) {
 		}
 	}
 	std::cout << "100%";
-	myfile.close();
+	verticesFile.close();
+	heightsFile.close();
+	texturesFile.close();
 
 	/*-----------------------------------------------------------------------------*/
 	/*-----------------------------------------------------------------------------*/
@@ -173,6 +200,8 @@ void load_mesh(aiMesh * mesh, const aiScene * scene) {
 	{
 		myfile4 << "Number of vertices: " << nVertices << "\n";
 		myfile4 << "Number of indices: " << nIndices << "\n";
+		myfile4 << "Grid size: " << gridSize << "\n";
+		myfile4 << "Map width: " << mapWidth << "\n";
 	}
 	myfile4.close();
 

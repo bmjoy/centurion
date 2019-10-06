@@ -7,18 +7,6 @@ Terrain::Terrain(){
 	path_grass = "assets/terrain/textures/grass1.png";
 	path_road = "assets/terrain/textures/road1.png";
 	path_rock = "assets/terrain/textures/rock1.png";
-
-	verticesPosMap = std::map<std::string, int>();
-	verticesPosMap["x"] = 0;
-	verticesPosMap["y"] = 1;
-	verticesPosMap["z"] = 2;
-	verticesPosMap["zNoise"] = 3;
-	verticesPosMap["xTex"] = 4;
-	verticesPosMap["yTex"] = 5;
-	verticesPosMap["xNorm"] = 6;
-	verticesPosMap["yNorm"] = 7;
-	verticesPosMap["zNorm"] = 8;
-	verticesPosMap["terrain"] = 9;
 }
 
 
@@ -30,7 +18,7 @@ void Terrain::create() {
 
 	{
 		std::fstream fin;
-		fin.open("assets/terrain/emptymap (normal)/indices");
+		fin.open("assets/terrain/emptymap (normal-offset)/indices");
 		std::string line, number;
 		std::getline(fin, line);
 		std::stringstream s(line);
@@ -40,10 +28,9 @@ void Terrain::create() {
 			i++;
 		}
 	}
-
 	{
 		std::fstream fin;
-		fin.open("assets/terrain/emptymap (normal)/vertices_position");
+		fin.open("assets/terrain/emptymap (normal-offset)/vertices_pos");
 		std::string line, number;
 		std::getline(fin, line);
 		std::stringstream s(line);
@@ -53,106 +40,25 @@ void Terrain::create() {
 			i++;
 		}
 	}
-
 	{
 		std::fstream fin;
-		fin.open("assets/terrain/emptymap (normal)/vertices");
+		fin.open("assets/terrain/emptymap (normal-offset)/vertices");
 		std::string line, number;
 		std::getline(fin, line);
 		std::stringstream s(line);
 		int i = 0;
 		while (std::getline(s, number, ',')) {
-			mapgen::EmptyMapVertices()[i] = std::stof(number);
+			mapgen::MapVertices()[i] = std::stof(number);
 			i++;
 		}
 	}
-
 	mapgen::reset_map();
 
 	genBuffers();
-	texture();
+	genTexture();
 }
 
-
-void Terrain::genBuffers() {
-	glGenVertexArrays(1, &VAO);
-	glBindVertexArray(VAO);
-	
-	glGenBuffers(1, &IBO);
-	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, IBO);
-	glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(*mapgen::Indices()) * mapgen::nIndices, mapgen::Indices(), GL_STATIC_DRAW);
-	
-	glGenBuffers(1, &VBO);
-	glBindBuffer(GL_ARRAY_BUFFER, VBO);
-	glBufferData(GL_ARRAY_BUFFER, sizeof(*mapgen::MapVertices()) * mapgen::nVertices * 10, mapgen::MapVertices(), GL_STATIC_DRAW);
-
-	glVertexAttribPointer(0, 4, GL_FLOAT, GL_FALSE, 10 * sizeof(float), (void*)0);
-	glEnableVertexAttribArray(0);
-	glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, 10 * sizeof(float), (void*)(sizeof(float) * 4));
-	glEnableVertexAttribArray(1);
-	glVertexAttribPointer(2, 3, GL_FLOAT, GL_FALSE, 10 * sizeof(float), (void*)(sizeof(float) * 6));
-	glEnableVertexAttribArray(2);
-	glVertexAttribPointer(3, 1, GL_FLOAT, GL_FALSE, 10 * sizeof(float), (void*)(sizeof(float) * 9));
-	glEnableVertexAttribArray(3);
-	
-	glBindBuffer(GL_ARRAY_BUFFER, 0);
-	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
-	glBindVertexArray(0);
-}
-
-void Terrain::updateBuffers(float x, float y, std::string type, float q) {
-
-	int k = verticesPosMap[type];
-
-	int x1 = (int)round(x / (float)mapgen::grid_size);
-	int y1 = (int)round(y / (float)mapgen::grid_size);
-
-	int j = (int)(y1 * GAME::MAP_WIDTH / mapgen::grid_size + x1);
-
-	//if (mapgen::MapVertices()[mapgen::VerticesPos()[j] * 10 + k] != q) {
-	if (true) {
-		mapgen::MapVertices()[mapgen::VerticesPos()[j] * 10 + k] += q;
-		mapgen::updateNormal((int)x, (int)y);
-
-		glBindVertexArray(VAO);
-		glBindBuffer(GL_ARRAY_BUFFER, VBO);
-		glBufferData(GL_ARRAY_BUFFER, sizeof(*mapgen::MapVertices()) * mapgen::nVertices * 10, mapgen::MapVertices(), GL_STATIC_DRAW);
-
-		glVertexAttribPointer(0, 4, GL_FLOAT, GL_FALSE, 10 * sizeof(float), (void*)0);
-		glEnableVertexAttribArray(0);
-		glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, 10 * sizeof(float), (void*)(sizeof(float) * 4));
-		glEnableVertexAttribArray(1);
-		glVertexAttribPointer(2, 3, GL_FLOAT, GL_FALSE, 10 * sizeof(float), (void*)(sizeof(float) * 6));
-		glEnableVertexAttribArray(2);
-		glVertexAttribPointer(3, 1, GL_FLOAT, GL_FALSE, 10 * sizeof(float), (void*)(sizeof(float) * 9));
-		glEnableVertexAttribArray(3);
-
-		glBindBuffer(GL_ARRAY_BUFFER, 0);
-		glBindVertexArray(0);
-	}
-}
-
-void Terrain::createNoise() {
-	mapgen::generateRandomMap();
-
-	glBindVertexArray(VAO);
-	glBindBuffer(GL_ARRAY_BUFFER, VBO);
-	glBufferData(GL_ARRAY_BUFFER, sizeof(*mapgen::MapVertices()) * mapgen::nVertices * 10, mapgen::MapVertices(), GL_STATIC_DRAW);
-
-	glVertexAttribPointer(0, 4, GL_FLOAT, GL_FALSE, 10 * sizeof(float), (void*)0);
-	glEnableVertexAttribArray(0);
-	glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, 10 * sizeof(float), (void*)(sizeof(float) * 4));
-	glEnableVertexAttribArray(1);
-	glVertexAttribPointer(2, 3, GL_FLOAT, GL_FALSE, 10 * sizeof(float), (void*)(sizeof(float) * 6));
-	glEnableVertexAttribArray(2);
-	glVertexAttribPointer(3, 1, GL_FLOAT, GL_FALSE, 10 * sizeof(float), (void*)(sizeof(float) * 9));
-	glEnableVertexAttribArray(3);
-
-	glBindBuffer(GL_ARRAY_BUFFER, 0);
-	glBindVertexArray(0);
-}
-
-void Terrain::texture() {
+void Terrain::genTexture() {
 	/* Texture: GRASS */
 	textureIdList.push_back(0);
 	textureInfoList.push_back(glm::ivec3(0, 0, 0));
@@ -181,8 +87,6 @@ void Terrain::texture() {
 	glGenerateMipmap(GL_TEXTURE_2D);
 	stbi_image_free(data);
 }
-
-
 
 void Terrain::render(bool tracing) {
 	glUseProgram(shaderId);
@@ -248,6 +152,70 @@ void Terrain::render(bool tracing) {
 	glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
 }
 
+void Terrain::genBuffers() {
+	glGenVertexArrays(1, &VAO);
+	glBindVertexArray(VAO);
+	glGenBuffers(1, &IBO);
+	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, IBO);
+	glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(*mapgen::Indices()) * mapgen::nIndices, mapgen::Indices(), GL_STATIC_DRAW);
+	/* Vertices VBO */
+	glGenBuffers(1, &VerticesVBO);
+	glBindBuffer(GL_ARRAY_BUFFER, VerticesVBO);
+	glBufferData(GL_ARRAY_BUFFER, sizeof(*mapgen::MapVertices()) * mapgen::nVertices * 5, mapgen::MapVertices(), GL_STATIC_DRAW);
+	// xCoord, yCoord, zCoord 
+	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 5 * sizeof(float), (void*)0);
+	glEnableVertexAttribArray(0);
+	// xTexCoord, yTexCoord
+	glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, 5 * sizeof(float), (void*)(sizeof(float) * 3));
+	glEnableVertexAttribArray(1);
+	glBindBuffer(GL_ARRAY_BUFFER, 0);
+	/* Heights VBO */
+	glGenBuffers(1, &HeightsVBO);
+	glBindBuffer(GL_ARRAY_BUFFER, HeightsVBO);
+	glBufferData(GL_ARRAY_BUFFER, sizeof(*mapgen::MapHeights()) * mapgen::nVertices * 4, mapgen::MapHeights(), GL_STATIC_DRAW);
+	// zNoise
+	glVertexAttribPointer(2, 1, GL_FLOAT, GL_FALSE, 4 * sizeof(float), (void*)0);
+	glEnableVertexAttribArray(2);
+	// xNorm, yNorm, zNorm
+	glVertexAttribPointer(3, 3, GL_FLOAT, GL_FALSE, 4 * sizeof(float), (void*)(sizeof(float) * 1));
+	glEnableVertexAttribArray(3);
+	glBindBuffer(GL_ARRAY_BUFFER, 0);
+	/* Textures VBO */
+	glGenBuffers(1, &TexturesVBO);
+	glBindBuffer(GL_ARRAY_BUFFER, TexturesVBO);
+	glBufferData(GL_ARRAY_BUFFER, sizeof(*mapgen::MapTextures()) * mapgen::nVertices, mapgen::MapTextures(), GL_STATIC_DRAW);
+	// textureType
+	glVertexAttribPointer(4, 1, GL_FLOAT, GL_FALSE, sizeof(float), (void*)0);
+	glEnableVertexAttribArray(4);
+	glBindBuffer(GL_ARRAY_BUFFER, 0);
+	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
+	glBindVertexArray(0);
+}
+
+void Terrain::updateHeightsBuffer() {
+	glBindVertexArray(VAO);
+	glBindBuffer(GL_ARRAY_BUFFER, HeightsVBO);
+	glBufferData(GL_ARRAY_BUFFER, sizeof(*mapgen::MapHeights()) * mapgen::nVertices * 4, mapgen::MapHeights(), GL_STATIC_DRAW);
+	// zNoise
+	glVertexAttribPointer(2, 1, GL_FLOAT, GL_FALSE, 4 * sizeof(float), (void*)0);
+	glEnableVertexAttribArray(2);
+	// xNorm, yNorm, zNorm
+	glVertexAttribPointer(3, 3, GL_FLOAT, GL_FALSE, 4 * sizeof(float), (void*)(sizeof(float) * 1));
+	glEnableVertexAttribArray(3);
+	glBindBuffer(GL_ARRAY_BUFFER, 0);
+	glBindVertexArray(0);
+}
+
+void Terrain::updateTextureBuffer() {
+	glBindVertexArray(VAO);
+	glBindBuffer(GL_ARRAY_BUFFER, TexturesVBO);
+	glBufferData(GL_ARRAY_BUFFER, sizeof(*mapgen::MapTextures()) * mapgen::nVertices, mapgen::MapTextures(), GL_STATIC_DRAW);
+	// textureType
+	glVertexAttribPointer(4, 1, GL_FLOAT, GL_FALSE, sizeof(float), (void*)0);
+	glEnableVertexAttribArray(4);
+	glBindBuffer(GL_ARRAY_BUFFER, 0);
+	glBindVertexArray(0);
+}
 
 Terrain::~Terrain()
 {
