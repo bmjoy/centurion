@@ -81,7 +81,7 @@ void Unit::render(glm::mat4 &proj, glm::mat4 &view, bool picking, int clickID) {
 	obj::USprite()->render(unitData, position3D, picking);
 
 	
-	if (!GLB::DEBUG && !picking) {
+	if (glb::getBoolean("debug") && !picking) {
 		hitbox.coords = getCoords(position3D.x - unitData.hitBox[0] / 2.f, position3D.y + unitData.hitBox[1] / 2.f + unitData.yOffset, (float)unitData.hitBox[0], (float)unitData.hitBox[1]);
 		/*hitbox.rectangle.render(
 			selected ? glm::vec4(255.0f, 255.0f, 255.0f, 1.0f) : glm::vec4(0.0f, 0.0f, 0.0f, 0.0f),
@@ -95,7 +95,7 @@ void Unit::render(glm::mat4 &proj, glm::mat4 &view, bool picking, int clickID) {
 
 	/* debug pathfinding and coordinates */
 
-	if (GLB::DEBUG && !picking) {
+	if (glb::getBoolean("debug") && !picking) {
 
 		// **** Rectangle Path **** //
 		

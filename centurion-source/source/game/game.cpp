@@ -154,7 +154,7 @@ void Game::run() {
 	// apply menu matrices:
 	obj::applyMenuMatrices();
 
-	if (GLB::DEBUG) cursor_point.render();
+	if (getBoolean("debug")) cursor_point.render();
 	ui.render();
 
 	// ----------------- //	

@@ -9,8 +9,11 @@ namespace glb {
     static map<string, float> params;
     void setParam(string param, float value);
     float getParam(string param);
+	void setBoolean(string param, bool value);
+	bool getBoolean(string param);
 
 	static map<string, string> errors;
+	static map<string, bool> booleans;
 	void setErrors(map<string, string> errorsMap);
 	string getErrorCode(string error);
 	

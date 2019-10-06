@@ -34,7 +34,7 @@ namespace GLB {
 	bool CTRL_BUTTON = false;
 	std::vector<glm::vec3> COLORS;
 	GLFWwindow *MAIN_WINDOW;
-	bool DEBUG = false;
+	//bool DEBUG = false;
 	SelRectPoints SEL_RECT_COORDS;
 	bool GAME_CLEAR = false;
 	LPCSTR GAME_NAME = "Centurion";
@@ -96,8 +96,7 @@ int main() {
 	}
 	json settings = json::parse(settings_path);
 
-	GLB::DEBUG = (bool)settings["debug"].get<int>();
-
+	setBoolean("debug", (bool)settings["debug"].get<int>());
 	setParam("window-width", (float)settings["window_width"]);
 	setParam("window-height", (float)settings["window_height"]);
 	setParam("window-ratio", getParam("window-width") / getParam("window-height"));

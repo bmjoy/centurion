@@ -34,7 +34,7 @@ namespace GLB {
 	extern bool CTRL_BUTTON;
 	extern std::vector<glm::vec3> COLORS;
 	extern GLFWwindow *MAIN_WINDOW;
-	extern bool DEBUG;
+	//extern bool DEBUG;
 	extern SelRectPoints SEL_RECT_COORDS; //Only a temporar way to test multiple selection
 	extern bool GAME_CLEAR;
 	extern LPCSTR GAME_NAME;

@@ -10,6 +10,12 @@ namespace glb {
     float getParam(string param){
         return params[param];
     }
+	void setBoolean(string param, bool value) {
+		booleans[param] = value;
+	}
+	bool getBoolean(string param) {
+		return booleans[param];
+	}
 	void setErrors(map<string, string> errorsMap) {
 		errors = errorsMap;
 	}

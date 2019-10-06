@@ -90,7 +90,7 @@ int Engine::launch() {
 		}
 
 		// debug ui
-		if (GLB::DEBUG)	debugUI->render(Fps, Mpfs, game->getSelectedUnits());
+		if (getBoolean("debug"))	debugUI->render(Fps, Mpfs, game->getSelectedUnits());
 
 		// mouse
 		mouse->render();
