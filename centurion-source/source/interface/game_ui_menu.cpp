@@ -1,9 +1,8 @@
 #include "game_ui_menu.h"
 
-
+using namespace glb;
 
 GameMenu::GameMenu(){
-
 	w = 300.f;
 	h = 400.f;
 	gameMenuActive = false;
@@ -12,10 +11,13 @@ GameMenu::GameMenu(){
 void GameMenu::create(int *pickingId, std::map<int, std::string> *pickingList) {
 
 	std::ifstream path("assets/data/interface/game/menu.json");
+	if (!path.good()) {
+		forceGameClosure("Error code 0x00000001\n\n  Unable to find or process MENU DATA file.\n  Forced application shutdown has started.");
+	}
 	data = json::parse(path);
 
-	x = GLB::WINDOW_WIDTH / 2.f;
-	y = GLB::WINDOW_HEIGHT / 2.f;
+	x = getParam("window-width") / 2.f;
+	y = getParam("window-height") / 2.f;
 
 	s = "buttons";
 	for (int i = 0; i < data[s].size(); ++i) {
@@ -23,8 +25,8 @@ void GameMenu::create(int *pickingId, std::map<int, std::string> *pickingList) {
 		btn.create(
 			data[s][i]["image_name"].get<std::string>(), 
 			data[s][i]["text"].get<std::string>(), 
-			x + data[s][i]["x"].get<int>(), 
-			y + data[s][i]["y"].get<int>(), 
+			(int)x + data[s][i]["x"].get<int>(),
+			(int)y + data[s][i]["y"].get<int>(),
 			*pickingId, 
 			glm::vec4(0.f, 0.f, 0.f, 255.f)
 		);

@@ -97,10 +97,11 @@
       <SDLCheck>true</SDLCheck>
       <ConformanceMode>true</ConformanceMode>
       <AdditionalIncludeDirectories>$(ProjectDir)source/extern/includes;$(ProjectDir)source/common</AdditionalIncludeDirectories>
+      <DisableSpecificWarnings>4250</DisableSpecificWarnings>
     </ClCompile>
     <Link>
       <AdditionalLibraryDirectories>$(ProjectDir)source/extern/libraries</AdditionalLibraryDirectories>
-      <AdditionalDependencies>opengl32.lib;glew32.lib;glfw3.lib;irrKlang.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>opengl32.lib;glew32.lib;glfw3.lib;OpenAL32.lib;libsndfile-1.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -129,12 +130,13 @@
       <SDLCheck>true</SDLCheck>
       <ConformanceMode>true</ConformanceMode>
       <AdditionalIncludeDirectories>$(ProjectDir)source/extern/includes;$(ProjectDir)source/common</AdditionalIncludeDirectories>
+      <DisableSpecificWarnings>4250</DisableSpecificWarnings>
     </ClCompile>
     <Link>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <AdditionalLibraryDirectories>$(ProjectDir)source/extern/libraries</AdditionalLibraryDirectories>
-      <AdditionalDependencies>opengl32.lib;glew32.lib;glfw3.lib;irrKlang.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>opengl32.lib;glew32.lib;glfw3.lib;OpenAL32.lib;libsndfile-1.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
@@ -224,7 +226,17 @@
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
     </None>
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="source\audio\audio_context.cpp" />
+    <ClCompile Include="source\audio\audio_device.cpp" />
+    <ClCompile Include="source\audio\audio_manager.cpp" />
+    <ClCompile Include="source\audio\audio_player.cpp" />
+    <ClCompile Include="source\audio\listener.cpp" />
+    <ClCompile Include="source\audio\music.cpp" />
+    <ClCompile Include="source\audio\recorder.cpp" />
+    <ClCompile Include="source\audio\sound.cpp" />
+    <ClCompile Include="source\audio\sound_buffer.cpp" />
     <ClCompile Include="source\building\building.cpp" />
+    <ClCompile Include="source\common\global.cpp" />
     <ClCompile Include="source\common\map_generation.cpp" />
     <ClCompile Include="source\common\objects.cpp" />
     <ClCompile Include="source\common\shader.cpp" />
@@ -248,7 +260,6 @@
     <ClCompile Include="source\interface\game_ui.cpp" />
     <ClCompile Include="source\interface\menu_players_list.cpp" />
     <ClCompile Include="source\menu\menu.cpp" />
-    <ClCompile Include="source\music\music.cpp" />
     <ClCompile Include="source\pathfinding\a_star.cpp" />
     <ClCompile Include="source\pathfinding\node.cpp" />
     <ClCompile Include="source\player\player.cpp" />
@@ -269,9 +280,30 @@
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
     </None>
+    <None Include="source\common\headers" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="source\audio\audio_context.h" />
+    <ClInclude Include="source\audio\audio_device.h" />
+    <ClInclude Include="source\audio\audio_manager.h" />
+    <ClInclude Include="source\audio\audio_player.h" />
+    <ClInclude Include="source\audio\interfaces\IAudioContext.h" />
+    <ClInclude Include="source\audio\interfaces\IAudioDevice.h" />
+    <ClInclude Include="source\audio\interfaces\IAudioPlayer.h" />
+    <ClInclude Include="source\audio\interfaces\IListener.h" />
+    <ClInclude Include="source\audio\interfaces\IMusic.h" />
+    <ClInclude Include="source\audio\interfaces\IRecorder.h" />
+    <ClInclude Include="source\audio\interfaces\ISound.h" />
+    <ClInclude Include="source\audio\interfaces\ISoundBuffer.h" />
+    <ClInclude Include="source\audio\listener.h" />
+    <ClInclude Include="source\audio\music.h" />
+    <ClInclude Include="source\audio\recorder.h" />
+    <ClInclude Include="source\audio\sndfile.h" />
+    <ClInclude Include="source\audio\sndfile.hh" />
+    <ClInclude Include="source\audio\sound.h" />
+    <ClInclude Include="source\audio\sound_buffer.h" />
     <ClInclude Include="source\building\building.h" />
+    <ClInclude Include="source\common\global.h" />
     <ClInclude Include="source\common\global.hpp" />
     <ClInclude Include="source\common\map_generation.h" />
     <ClInclude Include="source\common\objects.h" />
@@ -299,7 +331,6 @@
     <ClInclude Include="source\interface\game_ui.h" />
     <ClInclude Include="source\interface\menu_players_list.h" />
     <ClInclude Include="source\menu\menu.h" />
-    <ClInclude Include="source\music\music.h" />
     <ClInclude Include="source\pathfinding\a_star.h" />
     <ClInclude Include="source\pathfinding\node.h" />
     <ClInclude Include="source\player\player.h" />

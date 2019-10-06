@@ -1,5 +1,7 @@
 #include "debug_ui.h"
 
+using namespace glb;
+
 DebugUI::DebugUI()
 {
 	staticTextList = {
@@ -10,9 +12,9 @@ DebugUI::DebugUI()
 		"y-map: ",
 		"x-map: ",
 		"selected units: ",
-		"x-normal: ",
+		"z-normal: ",
 		"y-normal: ",
-		"z-normal: "
+		"x-normal: "
 	};
 	dynamicTextList = { "0" };
 
@@ -43,14 +45,14 @@ void DebugUI::create() {
 void DebugUI::render(int fps, int mpfs, int selUnits) {
 	std::stringstream streamx, streamy, streamz;
 	float x, y, xNorm = 0.f, yNorm = 0.f, zNorm = 0.f;
-	bool cursorinGame = (GLB::MOUSE_Y > GAME::UI_BOTTOM_HEIGHT) && (GLB::MOUSE_Y < (GLB::WINDOW_HEIGHT - GAME::UI_TOP_HEIGHT) && GLB::MOUSE_X > 0 && GLB::MOUSE_X < GLB::WINDOW_WIDTH);
+	bool cursorinGame = (GLB::MOUSE_Y > GAME::UI_BOTTOM_HEIGHT) && (GLB::MOUSE_Y < (getParam("window-height") - GAME::UI_TOP_HEIGHT) && GLB::MOUSE_X > 0 && GLB::MOUSE_X < getParam("window-width"));
 
 
 	if (cursorinGame) {
-		x = (GLB::MOUSE_X * GLB::WINDOW_WIDTH_ZOOMED / GLB::WINDOW_WIDTH + GAME::CAMERA_POS_X);
-		y = (GLB::MOUSE_Y * GLB::WINDOW_HEIGHT_ZOOMED / GLB::WINDOW_HEIGHT + GAME::CAMERA_POS_Y);
-		int x1 = round(x / (float)mapgen::grid_size);
-		int y1 = round(y / (float)mapgen::grid_size);
+		x = (GLB::MOUSE_X * getParam("window-width-zoomed") / getParam("window-width") + GAME::CAMERA_POS_X);
+		y = (GLB::MOUSE_Y * getParam("window-height-zoomed") / getParam("window-height") + GAME::CAMERA_POS_Y);
+		float x1 = round(x / (float)mapgen::grid_size);
+		float y1 = round(y / (float)mapgen::grid_size);
 		int j = (int)(y1 * GAME::MAP_WIDTH / mapgen::grid_size + x1);
 
 		xNorm = mapgen::MapVertices()[mapgen::VerticesPos()[j] * 10 + 6];
@@ -73,16 +75,16 @@ void DebugUI::render(int fps, int mpfs, int selUnits) {
 	dynamicTextList[6] = std::to_string(selUnits);
 	
 	
-	streamx << std::fixed << std::setprecision(2) << xNorm;
+	streamx << std::fixed << std::setprecision(2) << zNorm;
 	dynamicTextList[7] = streamx.str();
 
 	streamy << std::fixed << std::setprecision(2) << yNorm;
 	dynamicTextList[8] = streamy.str();
 
-	streamz << std::fixed << std::setprecision(2) << zNorm;
+	streamz << std::fixed << std::setprecision(2) << xNorm;
 	dynamicTextList[9] = streamz.str();
 
-	!GLB::GAME ? n = 2 : n = dynamicTextList.size();
+	!GLB::GAME ? n = 2 : n = (int)dynamicTextList.size();
 
 	for (int i = 0; i < n; i++) {
 		staticText[i].render_static();

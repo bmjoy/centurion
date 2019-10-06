@@ -14,7 +14,7 @@ namespace gui {
 		selectedText = options[0];
 		hasText = selectedText.size() > 0;
 		mainTextPos = glm::vec2(x + 3.f, (y - 1.f) - height / 1.5f - 6.f);
-		nOptions = options.size();
+		nOptions = (int)options.size();
 
 		back = gui::Rectangle();
 		back.create("border-filled", x, y, width, height, "top-left", pickingID);

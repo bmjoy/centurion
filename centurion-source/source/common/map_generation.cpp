@@ -46,13 +46,13 @@ void mapgen::setPlayerList(std::vector<Player> *List) {
 }
 
 float mapgen::Random2D(glm::vec2 st) {
-	float value = glm::fract(sin(glm::dot(st, glm::vec2(12.9898, 78.233)))* 43758.5453123);
+	float value = glm::fract(sin(glm::dot(st, glm::vec2(12.9898f, 78.233f)))* 43758.5453123f);
 	return value;
 }
 
 float mapgen::Interpolate(float a, float b, float x) {  // cosine interpolation
 	float ft = x * 3.1415927f;
-	float f = (1 - cos(ft)) * 0.5;
+	float f = (1.0f - cos(ft)) * 0.5f;
 	return  a * (1 - f) + b * f;
 }
 
@@ -88,7 +88,7 @@ float mapgen::perlinNoise(float x, float y, float xy_scale, float z_scale, float
 	int numOctaves = 1;
 	float persistence = 0.5;
 	float total = 0,
-		frequency = pow(2, numOctaves),
+		frequency = pow(2.0f, numOctaves),
 		amplitude = 1;
 	for (int i = 0; i < numOctaves; ++i) {
 		frequency /= 2;
@@ -103,15 +103,13 @@ float mapgen::perlinNoise(float x, float y, float xy_scale, float z_scale, float
 float mapgen::generateNoise(glm::vec2 coords, bool normal) {
 	float zscale = MAP::ZSCALE;
 	
-	normal ? zscale *= 1.5f : zscale *= 2.f;
+	normal ? zscale *= 1.5f : zscale *= 1.f;
 	float zNoise = perlinNoise(coords.x, coords.y, MAP::XYSCALE, zscale, MAP::XSEED, MAP::YSEED);
 	return zNoise;
 }
 
-glm::vec3 getVertex(int x, int y) {
-
-	int j = mapgen::VerticesPos()[(int)(y/mapgen::grid_size * GAME::MAP_WIDTH / mapgen::grid_size + x/ mapgen::grid_size)];
-
+glm::vec3 mapgen::getVertex(int x, int y) {
+	int j = mapgen::VerticesPos()[(int)(y/mapgen::grid_size * mapgen::mapWidth / mapgen::grid_size + x/ mapgen::grid_size)];
 	float zNoise = mapgen::MapVertices()[j * 10 + 3] * 2;
 	float x1 = mapgen::MapVertices()[j * 10];
 	float y1 = mapgen::MapVertices()[j * 10 + 1] + zNoise;
@@ -119,63 +117,104 @@ glm::vec3 getVertex(int x, int y) {
 	return glm::vec3(x1, y1, z1);
 }
 
-std::array<glm::vec3, 6> getAdjacentVertices(glm::vec2 pos) {
+std::array<mapgen::Triangle, 6> mapgen::getAdjacentTriangles(glm::ivec2 pos) {
+	int gap = mapgen::grid_size;
+	std::array<mapgen::Triangle, 6> triangles;
+	triangles[0] = {
+		getVertex(pos.x, pos.y), getVertex(pos.x - gap, pos.y),getVertex(pos.x - gap, pos.y + gap),
+	};
+	triangles[1] = {
+		getVertex(pos.x, pos.y), getVertex(pos.x - gap, pos.y + gap), getVertex(pos.x, pos.y + gap)
+	};
+	triangles[2] = {
+		getVertex(pos.x, pos.y), getVertex(pos.x, pos.y + gap), getVertex(pos.x + gap, pos.y)
+	};
+	triangles[3] = {
+		getVertex(pos.x, pos.y), getVertex(pos.x + gap, pos.y), getVertex(pos.x + gap, pos.y - gap)
+	};
+	triangles[4] = {
+		getVertex(pos.x, pos.y), getVertex(pos.x + gap, pos.y - gap),getVertex(pos.x, pos.y - gap),
+	};
+	triangles[5] = {
+		getVertex(pos.x, pos.y), getVertex(pos.x, pos.y - gap), getVertex(pos.x - gap, pos.y)
+	};
+	return triangles;
+}
 
-	std::array<glm::vec3, 6> output;
+glm::vec3 mapgen::calculateTriangleNormal(mapgen::Triangle T) {
+	glm::vec3 N = glm::cross(T.c - T.a, T.b - T.a);
+	return N;
+}
 
+std::vector<glm::ivec2> mapgen::getAdjacentVertices(glm::ivec2 pos) {
+	int gap = mapgen::grid_size;
+	std::vector<glm::ivec2> output;
 	output = {
-
-		getVertex(pos.x, pos.y - mapgen::grid_size), // down
-		getVertex(pos.x - mapgen::grid_size, pos.y), // left
-		getVertex(pos.x - mapgen::grid_size, pos.y + mapgen::grid_size), // up-left
-		getVertex(pos.x, pos.y + mapgen::grid_size), // up
-		getVertex(pos.x + mapgen::grid_size, pos.y), // right	
-		getVertex(pos.x + mapgen::grid_size, pos.y - mapgen::grid_size), // down-right
+		glm::ivec2(pos.x - gap, pos.y), // left
+		glm::ivec2(pos.x - gap, pos.y + gap), // up-left
+		glm::ivec2(pos.x, pos.y + gap), // up
+		glm::ivec2(pos.x + gap, pos.y), // right 
+		glm::ivec2(pos.x + gap, pos.y - gap), // down-right
+		glm::ivec2(pos.x, pos.y - gap), // down
 	};
 	return output;
 }
 
-glm::vec3 mapgen::updatedNormals(glm::vec2 pos) {
-	glm::vec3 off = glm::vec3(2.0, 2.0, 0.0);
+void mapgen::updateNormal(int x, int y) {
+	std::vector<glm::ivec2> vertices = mapgen::getAdjacentVertices(glm::ivec2(x, y));
+	vertices.push_back(glm::ivec2(x, y));
+	
+	for (int i = 0; i < 7; i++) {
+		glm::ivec2 pos = glm::ivec2(vertices[i].x, vertices[i].y);
+		int j = mapgen::VerticesPos()[(pos.y / mapgen::grid_size * mapgen::mapWidth / mapgen::grid_size + pos.x / mapgen::grid_size)] * 10;
 
-	float hL = generateNoise(glm::vec2(pos.x - off.x, pos.y), true);
-	float hR = generateNoise(glm::vec2(pos.x + off.x, pos.y), true);
-	float hD = generateNoise(glm::vec2(pos.x, pos.y - off.y), true);
-	float hU = generateNoise(glm::vec2(pos.x, pos.y + off.y), true);
-	float Nx = hL - hR;
-	float Ny = hD - hU;
-	float Nz = 2.f;
-	glm::vec3 N = glm::normalize(glm::vec3(Nx, Ny, Nz));
-	return N;
+		if (pos.x > mapgen::grid_size && pos.x < mapgen::mapWidth - mapgen::grid_size && pos.y > mapgen::grid_size && pos.y < mapgen::mapHeight - mapgen::grid_size) {
 
-	//if (pos.x > 128 && pos.x < 29952 - 128 && pos.y > 128 && pos.y < 19968 - 128) {
-	//	glm::vec3 a = getVertex(pos.x, pos.y);
+			std::array<mapgen::Triangle, 6> adjacentTriangles = getAdjacentTriangles(pos);
+			glm::vec3 sum(0.f);
+			for (int k = 0; k < 6; k++) {
+				glm::vec3 normal = calculateTriangleNormal(adjacentTriangles[k]);
+				sum += normal;
+			}
+			glm::vec3 N = glm::normalize(sum);
 
-	//	std::array<glm::vec3, 6> adjVertices = getAdjacentVertices(pos);
+			mapgen::MapVertices()[j + 6] = N.x;
+			mapgen::MapVertices()[j + 7] = N.y;
+			mapgen::MapVertices()[j + 8] = N.z;
+		}
+		else {
+			mapgen::MapVertices()[j + 6] = 0.f;
+			mapgen::MapVertices()[j + 7] = 0.f;
+			mapgen::MapVertices()[j + 8] = 1.f;
+		}
+	}
+}
 
-	//	glm::vec3 sum(0.f);
+void mapgen::updateAllNormals() {
+	for (int i = 0; i < nVertices * 10; i += 10) {
+		float xCoord = mapgen::MapVertices()[i];
+		float yCoord = mapgen::MapVertices()[i + 1];
+		glm::ivec2 pos = glm::ivec2(int(xCoord), int(yCoord));	
+		if (pos.x > mapgen::grid_size && pos.x < mapgen::mapWidth - mapgen::grid_size && pos.y > mapgen::grid_size && pos.y < mapgen::mapHeight - mapgen::grid_size) {
+			std::array<mapgen::Triangle, 6> adjacentTriangles = getAdjacentTriangles(pos);
+			glm::vec3 sum(0.f);
 
-	//	for (int i = 0; i < 6; i++) {
-	//		int j;
-	//		(i == 0) ? j = 5 : j = i - 1;
+			for (int k = 0; k < 6; k++) {
+				glm::vec3 normal = calculateTriangleNormal(adjacentTriangles[k]);
+				sum += normal;
+			}
+			glm::vec3 N = glm::normalize(sum);
 
-	//		glm::vec3 side1 = adjVertices[i];
-	//		glm::vec3 side2 = adjVertices[j];
-
-	//		glm::vec3 normal = glm::cross(side1, side2);
-	//		//normal = glm::normalize(normal);
-
-	//		sum += normal;
-
-	//	}
-	//	glm::vec3 output = glm::normalize(sum);
-
-	//	return output;
-	//}
-
-	//else {
-	//	return glm::vec3(0,0,1);
-	//}
+			mapgen::MapVertices()[i + 6] = N.x;
+			mapgen::MapVertices()[i + 7] = N.y;
+			mapgen::MapVertices()[i + 8] = N.z;
+		}
+		else {
+			mapgen::MapVertices()[i + 6] = -0.41f;
+			mapgen::MapVertices()[i + 7] = 0.04f;
+			mapgen::MapVertices()[i + 8] = 0.9f;
+		}
+	}
 }
 
 void mapgen::generateRandomMap() {
@@ -190,13 +229,8 @@ void mapgen::generateRandomMap() {
 		mapgen::MapVertices()[i + 3] = zNoise;
 		MAP::MIN_Z = std::min(zNoise, MAP::MIN_Z);
 		MAP::MAX_Z = std::max(zNoise, MAP::MAX_Z);
-
-		// normals
-		glm::vec3 N = mapgen::updatedNormals(glm::vec2(xCoord, yCoord));
-		mapgen::MapVertices()[i + 6] = N.x;
-		mapgen::MapVertices()[i + 7] = N.y;
-		mapgen::MapVertices()[i + 8] = N.z;
 	}
+	mapgen::updateAllNormals();
 }
 
 float mapgen::getNoiseEstimate(float x, float y) {
@@ -204,25 +238,25 @@ float mapgen::getNoiseEstimate(float x, float y) {
 	// bottom left
 	int x0 = (int)x / mapgen::grid_size;
 	int y0 = (int)y / mapgen::grid_size;
-	int j0 = mapgen::VerticesPos()[(int)(y0 * GAME::MAP_WIDTH / mapgen::grid_size + x0)] * 10 + 3;
+	int j0 = mapgen::VerticesPos()[(int)(y0 * mapgen::mapWidth / mapgen::grid_size + x0)] * 10 + 3;
 	float z0 = mapgen::MapVertices()[j0];
 
 	// bottom right
 	int x1 = x0 + 1;
 	int y1 = y0;
-	int j1 = mapgen::VerticesPos()[(int)(y1 * GAME::MAP_WIDTH / mapgen::grid_size + x1)] * 10 + 3;
+	int j1 = mapgen::VerticesPos()[(int)(y1 * mapgen::mapWidth / mapgen::grid_size + x1)] * 10 + 3;
 	float z1 = mapgen::MapVertices()[j1];
 
 	// top right
 	int x2 = x1;
 	int y2 = y1 + 1;
-	int j2 = mapgen::VerticesPos()[(int)(y2 * GAME::MAP_WIDTH / mapgen::grid_size + x2)] * 10 + 3;
+	int j2 = mapgen::VerticesPos()[(int)(y2 * mapgen::mapWidth / mapgen::grid_size + x2)] * 10 + 3;
 	float z2 = mapgen::MapVertices()[j2];
 
 	// top left
 	int x3 = x0;
 	int y3 = y2;
-	int j3 = mapgen::VerticesPos()[(int)(y3 * GAME::MAP_WIDTH / mapgen::grid_size + x3)] * 10 + 3;
+	int j3 = mapgen::VerticesPos()[(int)(y3 * mapgen::mapWidth / mapgen::grid_size + x3)] * 10 + 3;
 	float z3 = mapgen::MapVertices()[j3];
 
 	// deltas
@@ -242,21 +276,20 @@ float mapgen::getNoiseEstimate(float x, float y) {
 }
 
 void mapgen::define_settlements() {
-
-	srand(time(NULL));
+	srand((unsigned int)time(NULL));
 	std::vector<float> townhallPos;
-	int a, b;
-	bool c;
-	float d;
 	int k = 0;
 	int min = GAME::TOWNHALL_RADIUS + 100;
 	int max_X = GAME::MAP_WIDTH - GAME::TOWNHALL_RADIUS - 100;
 	int max_Y = GAME::MAP_HEIGHT - GAME::TOWNHALL_RADIUS - 100;
+	float a, b;
+	float d;
+	bool c;
 	for (int n = 0; n < (*PlayerList).size(); n++) {
 		c = false;
 		while (!c) {
-			a = (float)(rand() % (max_X - min) + min);
-			b = (float)(rand() % (max_Y - min) + min);
+			a = float(rand() % (max_X - min) + min);
+			b = float(rand() % (max_Y - min) + min);
 
 			if (n == 0) { // 1 PLAYER
 				if (Distance(a, b, GAME::MAP_WIDTH/2.0f, GAME::MAP_HEIGHT/2.0f) > GAME::MAP_HEIGHT / 2.0f) {
@@ -278,7 +311,7 @@ void mapgen::define_settlements() {
 				for (int m = n - 1; m >= 0; m--) {
 					d = Distance(a, b, townhallPos[m * 2], townhallPos[m * 2 + 1]);
 					if (d <= GAME::MAP_HEIGHT * 0.5) {
-						c2 *= false;
+						c2 = c2 * false;
 					}
 				}
 				if (c2) {
@@ -293,7 +326,7 @@ void mapgen::define_settlements() {
 				for (int m = n - 1; m >= 0; m--) {
 					d = Distance(a, b, townhallPos[m * 2], townhallPos[m * 2 + 1]);
 					if (d <= GAME::MAP_HEIGHT * 0.25) {
-						c2 *= false;
+						c2 = c2 * false;
 					}
 				}
 				if (c2) {
@@ -308,5 +341,4 @@ void mapgen::define_settlements() {
 	for (int i = 0; i < (*PlayerList).size(); i++) {
 		(*PlayerList)[i].setStartPoint(glm::vec2(townhallPos[i * 2], townhallPos[i * 2 + 1]));
 	}
-	//return townhallPos;
 }

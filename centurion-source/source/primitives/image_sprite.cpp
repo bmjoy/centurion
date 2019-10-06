@@ -54,8 +54,8 @@ void ImageSprite::create() {
 
 void ImageSprite::getImageData(ImageData *d) {
 	(*d).textureID = textureIdMap[d->imageName];
-	(*d).w = imageSize[textureIdMap[d->imageName]][0];
-	(*d).h = imageSize[textureIdMap[d->imageName]][1];
+	(*d).w = (float)imageSize[textureIdMap[d->imageName]][0];
+	(*d).h = (float)imageSize[textureIdMap[d->imageName]][1];
 }
 
 void ImageSprite::render(ImageData &imageData, bool picking) {

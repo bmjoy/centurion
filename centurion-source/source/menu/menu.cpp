@@ -1,5 +1,7 @@
 #include "menu.h"
 
+using namespace glb;
+
 Menu::Menu(){
 	currentMenu = "mainmenu";
 	menus = { "mainmenu", "singleplayer" };
@@ -40,8 +42,8 @@ void Menu::create(std::vector<Player> *List) {
 
 			/* use data */
 			img = gui::Image(imageName);	
-			if (size == "auto") img.create(align, x, y, 0, 0, pickingId * clickable);
-			if (size == "max") img.create(align, x, y, GLB::WINDOW_WIDTH, GLB::WINDOW_HEIGHT, pickingId * clickable);
+			if (size == "auto") img.create(align, (float)x, (float)y, 0.0f, 0.0f, pickingId * clickable);
+			if (size == "max") img.create(align, (float)x, (float)y, getParam("window-width"), getParam("window-height"), pickingId * clickable);
 			images[menus[a]].push_back(img);
 
 			// update picking 
@@ -113,7 +115,7 @@ void Menu::picking() {
 
 		clickId = get_id();
 
-		std::cout << clickId << "\n";
+		std::cout << "DEBUG: Click id: " << clickId << "\n";
 
 		/*------------------------------------------------------------------------------*/
 		if (currentMenu == "singleplayer"){

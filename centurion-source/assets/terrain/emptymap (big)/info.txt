@@ -1,0 +1,3 @@
+Number of vertices: 146797
+Number of indices: 876096
+Grid size: 64

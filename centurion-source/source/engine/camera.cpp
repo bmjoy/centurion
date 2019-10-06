@@ -1,5 +1,6 @@
 #include "camera.h"
 
+using namespace glb;
 
 Camera::Camera() {}
 
@@ -29,28 +30,28 @@ void Camera::mouseControl(float threshold) {
 	abs_x = GLB::MOUSE_X + position.x;
 	abs_y = GLB::MOUSE_Y + position.y;
 
-	threshold_x = GAME::MAP_WIDTH - 2*GAME::CAMERA_MOVESPEED + (GLB::WINDOW_WIDTH_ZOOMED - GLB::WINDOW_WIDTH);
-	threshold_y = GAME::MAP_HEIGHT - 2*GAME::CAMERA_MOVESPEED + (GLB::WINDOW_HEIGHT_ZOOMED - GLB::WINDOW_HEIGHT);
+	threshold_x = GAME::MAP_WIDTH - 2 * GAME::CAMERA_MOVESPEED + (getParam("window-width-zoomed") - getParam("window-width"));
+	threshold_y = GAME::MAP_HEIGHT - 2 * GAME::CAMERA_MOVESPEED + (getParam("window-height-zoomed") - getParam("window-height"));
 
 	//Left margin
 	if (GLB::MOUSE_X <= threshold && (abs_x > threshold) && GLB::MOUSE_X > 0) {
 		position -= right * GAME::CAMERA_MOVESPEED;
 	}
 	//Right margin
-	if (GLB::MOUSE_X >= (GLB::WINDOW_WIDTH - threshold) && (abs_x < threshold_x) && GLB::MOUSE_X < GLB::WINDOW_WIDTH) {
-		if (position.x < GAME::MAP_WIDTH - GLB::WINDOW_WIDTH_ZOOMED){
+	if (GLB::MOUSE_X >= (getParam("window-width") - threshold) && (abs_x < threshold_x) && GLB::MOUSE_X < getParam("window-width")) {
+		if (position.x < GAME::MAP_WIDTH - getParam("window-width-zoomed")){
 			position += right * GAME::CAMERA_MOVESPEED;
 		}
 	}
 	//Top margin
-	if (GLB::MOUSE_Y >= (GLB::WINDOW_HEIGHT - threshold) && abs_y < (threshold_y + GAME::UI_TOP_HEIGHT* GLB::WINDOW_HEIGHT_ZOOMED / GLB::WINDOW_HEIGHT) && GLB::MOUSE_Y < GLB::WINDOW_HEIGHT) {
-		if (position.y < (GAME::MAP_HEIGHT - GLB::WINDOW_HEIGHT_ZOOMED + GAME::UI_TOP_HEIGHT* GLB::WINDOW_HEIGHT_ZOOMED / GLB::WINDOW_HEIGHT)) {
+	if (GLB::MOUSE_Y >= (getParam("window-height") - threshold) && abs_y < (threshold_y + GAME::UI_TOP_HEIGHT* getParam("window-height-zoomed") / getParam("window-height-zoomed")) && GLB::MOUSE_Y < getParam("window-height")) {
+		if (position.y < (GAME::MAP_HEIGHT - getParam("window-height-zoomed") + GAME::UI_TOP_HEIGHT* getParam("window-height-zoomed") / getParam("window-height"))) {
 			position += up * GAME::CAMERA_MOVESPEED;
 		}
 	}
 	//Bottom margin
-	if (GLB::MOUSE_Y <= threshold && abs_y > (threshold-GAME::UI_BOTTOM_HEIGHT* GLB::WINDOW_HEIGHT_ZOOMED / GLB::WINDOW_HEIGHT) && GLB::MOUSE_Y > 0) {
-		if (position.y > (0 - GAME::UI_BOTTOM_HEIGHT* GLB::WINDOW_HEIGHT_ZOOMED / GLB::WINDOW_HEIGHT)) {
+	if (GLB::MOUSE_Y <= threshold && abs_y > (threshold-GAME::UI_BOTTOM_HEIGHT* getParam("window-height-zoomed") / getParam("window-height")) && GLB::MOUSE_Y > 0) {
+		if (position.y > (0 - GAME::UI_BOTTOM_HEIGHT* getParam("window-height-zoomed") / getParam("window-height"))) {
 			position -= up * GAME::CAMERA_MOVESPEED;
 		}
 	}
@@ -68,20 +69,20 @@ void Camera::mouseControl(float threshold) {
 		
 	}
 
-	if (position.x > GAME::MAP_WIDTH - GLB::WINDOW_WIDTH_ZOOMED - GAME::CAMERA_MOVESPEED) {
-		position.x = GAME::MAP_WIDTH - GLB::WINDOW_WIDTH_ZOOMED - GAME::CAMERA_MOVESPEED;
+	if (position.x > GAME::MAP_WIDTH - getParam("window-width-zoomed") - GAME::CAMERA_MOVESPEED) {
+		position.x = GAME::MAP_WIDTH - getParam("window-width-zoomed") - GAME::CAMERA_MOVESPEED;
 	}
-	if (position.y < -GAME::UI_BOTTOM_HEIGHT * GLB::WINDOW_HEIGHT_ZOOMED / GLB::WINDOW_HEIGHT) {
-		position.y = -GAME::UI_BOTTOM_HEIGHT * GLB::WINDOW_HEIGHT_ZOOMED / GLB::WINDOW_HEIGHT;
+	if (position.y < -GAME::UI_BOTTOM_HEIGHT * getParam("window-height-zoomed") / getParam("window-height")) {
+		position.y = -GAME::UI_BOTTOM_HEIGHT * getParam("window-height-zoomed") / getParam("window-height");
 	}
-	if (position.y > GAME::MAP_HEIGHT - GLB::WINDOW_HEIGHT_ZOOMED + GAME::UI_TOP_HEIGHT * GLB::WINDOW_HEIGHT_ZOOMED / GLB::WINDOW_HEIGHT) {
-		position.y = GAME::MAP_HEIGHT - GLB::WINDOW_HEIGHT_ZOOMED + GAME::UI_TOP_HEIGHT * GLB::WINDOW_HEIGHT_ZOOMED / GLB::WINDOW_HEIGHT;
+	if (position.y > GAME::MAP_HEIGHT - getParam("window-height-zoomed") + GAME::UI_TOP_HEIGHT * getParam("window-height-zoomed") / getParam("window-height")) {
+		position.y = GAME::MAP_HEIGHT - getParam("window-height-zoomed") + GAME::UI_TOP_HEIGHT * getParam("window-height-zoomed") / getParam("window-height");
 	}
 	/* ------------------------------------------- */	
-	GLB::WINDOW_WIDTH_ZOOMED = (int)((float)GLB::WINDOW_WIDTH + (GAME::ZOOM_CURRENT - 1) * GAME::ZOOM_CAMERA_FACTOR);
-	GLB::WINDOW_HEIGHT_ZOOMED = (int)((float)GLB::WINDOW_HEIGHT + (GAME::ZOOM_CURRENT - 1) *  GAME::ZOOM_CAMERA_FACTOR * GLB::WINDOW_HEIGHT / GLB::WINDOW_WIDTH);
-	GAME::CAMERA_POS_X = position.x;
-	GAME::CAMERA_POS_Y = position.y;
+	setParam("window-width-zoomed", getParam("window-width") + (GAME::ZOOM_CURRENT - 1) * GAME::ZOOM_CAMERA_FACTOR);
+	setParam("window-height-zoomed", getParam("window-height") + (GAME::ZOOM_CURRENT - 1) *  GAME::ZOOM_CAMERA_FACTOR / getParam("window-ratio"));
+	GAME::CAMERA_POS_X = (int)position.x;
+	GAME::CAMERA_POS_Y = (int)position.y;
 }
 
 void Camera::keyboardControl() {
@@ -90,27 +91,27 @@ void Camera::keyboardControl() {
 		position -= right * GAME::CAMERA_MOVESPEED;
 	}
 	//Right margin 
-	if (GLB::RIGHT_KEY && position.x < GAME::MAP_WIDTH - GLB::WINDOW_WIDTH_ZOOMED) {
+	if (GLB::RIGHT_KEY && position.x < GAME::MAP_WIDTH - getParam("window-width-zoomed")) {
 		position += right * GAME::CAMERA_MOVESPEED;
 	}
 	//Bottom margin 
-	if (GLB::UP_KEY && (position.y < (GAME::MAP_HEIGHT - GLB::WINDOW_HEIGHT_ZOOMED + GAME::UI_TOP_HEIGHT* GLB::WINDOW_HEIGHT_ZOOMED / GLB::WINDOW_HEIGHT))) {
+	if (GLB::UP_KEY && (position.y < (GAME::MAP_HEIGHT - getParam("window-height-zoomed") + GAME::UI_TOP_HEIGHT* getParam("window-height-zoomed") / getParam("window-height")))) {
 		position += up * GAME::CAMERA_MOVESPEED;
 	}
 	//Bottom margin 
-	if (GLB::DOWN_KEY && (position.y > (0 - GAME::UI_BOTTOM_HEIGHT* GLB::WINDOW_HEIGHT_ZOOMED / GLB::WINDOW_HEIGHT))) {
+	if (GLB::DOWN_KEY && (position.y > (0 - GAME::UI_BOTTOM_HEIGHT* getParam("window-height-zoomed") / getParam("window-height")))) {
 		position -= up * GAME::CAMERA_MOVESPEED;
 	}
 
-	GAME::CAMERA_POS_X = position.x;
-	GAME::CAMERA_POS_Y = position.y;
+	GAME::CAMERA_POS_X = (int)position.x;
+	GAME::CAMERA_POS_Y = (int)position.y;
 }
 
 void Camera::go_to_pos(GLfloat x, GLfloat y) {
 	if (x < 0.0) { x = 0; }
-	else if (x > GAME::MAP_WIDTH - GLB::WINDOW_WIDTH) { x = GAME::MAP_WIDTH - GLB::WINDOW_WIDTH_ZOOMED; }
+	else if (x > GAME::MAP_WIDTH - getParam("window-width")) { x = GAME::MAP_WIDTH - getParam("window-width-zoomed"); }
 	if (y < 0.0) { y = 0; }
-	else if (y > GAME::MAP_HEIGHT - GLB::WINDOW_HEIGHT) { y = GAME::MAP_HEIGHT - GLB::WINDOW_HEIGHT_ZOOMED; }
+	else if (y > GAME::MAP_HEIGHT - getParam("window-height")) { y = GAME::MAP_HEIGHT - getParam("window-height-zoomed"); }
 
 	position.x = x;
 	position.y = y;

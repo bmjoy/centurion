@@ -1,5 +1,7 @@
 #include "simple_text.h"
 
+using namespace glb;
+
 namespace gui {
 	SimpleText::SimpleText(std::string Type, bool Shadow) {
 		type = Type;
@@ -10,10 +12,10 @@ namespace gui {
 
 	void SimpleText::create_static(std::string text, std::string font, float x, float y, std::string halign, std::string valign, glm::vec4 color) {
 		if (type == "dynamic") {
-			std::cout << "Dynamic text created with static option\n";
+			std::cout << "DEBUG: Dynamic text created with static option\n";
 		}
-		if (x < 0) x += GLB::WINDOW_WIDTH;
-		if (y < 0) y += GLB::WINDOW_HEIGHT;
+		if (x < 0) x += getParam("window-width");
+		if (y < 0) y += getParam("window-height");
 
 		hAlign = halign;
 		vAlign = valign;
@@ -25,7 +27,7 @@ namespace gui {
 
 	void SimpleText::render_static() {
 		if (type == "dynamic") {
-			std::cout << "Dynamic text rendered with static option\n";
+			std::cout << "DEBUG: Dynamic text rendered with static option\n";
 		}	
 		obj::Text()->set_align(hAlign, vAlign);		
 		obj::Text()->render_static(data);
@@ -33,7 +35,7 @@ namespace gui {
 
 	void SimpleText::render_dynamic(std::string text, std::string Font, float x, float y, glm::vec4 color, std::string halign, std::string valign) {
 		if (type == "static") {
-			std::cout << "Static text rendered with dynamic option\n";
+			std::cout << "DEBUG: Static text rendered with dynamic option\n";
 		}
 		obj::Text()->set_align(halign, valign);
 		obj::Text()->render_dynamic(Font, x, y, text, color, shadow);
@@ -43,5 +45,3 @@ namespace gui {
 	{
 	}
 }
-
-

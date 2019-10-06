@@ -13,6 +13,9 @@ void Building::create() {
 	updatePassMatrix(building_grid, glm::vec2((int)position.x / PATH::CELL_GRID_SIZE - building_grid[0].size() / 2, (int)position.y / PATH::CELL_GRID_SIZE - building_grid.size() / 2));
 
 	std::ifstream path_ent(data["ent_path"].get<std::string>());
+	if (!path_ent.good()) {
+		//showGameWarning("Error code 0x00000002\n\n  Unable to find (or communicate with) the audio device.\n  No sound will be played as long as the error persists.");
+	}
 	json ent_data = json::parse(path_ent);
 	std::string texturePath = ent_data["path"].get<std::string>() + ent_data["sprites"][0]["name"].get<std::string>();
 	unsigned char *texture = stbi_load(texturePath.c_str(), &w, &h, &nrChannels, 0);
@@ -25,12 +28,12 @@ void Building::create() {
 
 void Building::render(bool picking, int clickID) {
 	selected = (picking_id == clickID);
-	obj::BSprite()->render(textureID, clickableInMinimap, position.x, position.y, w, h, picking, picking_id, selected, player->getPlayerColor());
+	obj::BSprite()->render(textureID, clickableInMinimap, position.x, position.y, (float)w, (float)h, picking, picking_id, selected, player->getPlayerColor());
 }
 
 int Building::UnitsInBuilding(){
 	if (clickableInMinimap) {
-		return unitsInside.size();
+		return (int)unitsInside.size();
 	}
 	else {
 		return 0;

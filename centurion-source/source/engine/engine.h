@@ -3,7 +3,6 @@
 #include <iostream>
 #include <objects.h>
 
-#include "../music/music.h"
 #include "window.h"
 #include "mouse.h"
 
@@ -32,11 +31,8 @@ private:
 	Game *game;
 	Editor *editor;
 	DebugUI *debugUI;
-	ISoundEngine* music;
 
 	gui::SimpleText text;
-
-	
 
 	// Players Informations
 	std::vector<Player> playersList;

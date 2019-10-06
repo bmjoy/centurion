@@ -1,6 +1,6 @@
 #include "editor.h"
 
-
+using namespace glb;
 
 Editor::Editor(){
 	editorIsCreated = false;
@@ -42,7 +42,7 @@ void Editor::run() {
 	menu.render(false);
 
 	obj::applyMenuMatrices();
-	GLB::CAMERA_PROJECTION = glm::ortho(0.0f, (float)GLB::WINDOW_WIDTH_ZOOMED, 0.0f, (float)GLB::WINDOW_HEIGHT_ZOOMED, -(float)GAME::MAP_WIDTH, (float)GAME::MAP_WIDTH);
+	GLB::CAMERA_PROJECTION = glm::ortho(0.0f, getParam("window-width-zoomed"), 0.0f, getParam("window-height-zoomed"), -(float)GAME::MAP_WIDTH, (float)GAME::MAP_WIDTH);
 }
 
 Editor::~Editor(){

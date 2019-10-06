@@ -1,14 +1,14 @@
 #include "game_ui.h"
 
-
+using namespace glb;
 
 UIGame::UIGame()
 {
 	time.seconds = 0; time.seconds_str = "00";
 	time.minutes = 0; time.minutes_str = "00";
 	time.hours = 0; time.hours_str = "00";
-	time.x = GLB::WINDOW_WIDTH - 100.0f;
-	time.y = GLB::WINDOW_HEIGHT - GAME::UI_TOP_HEIGHT - 30.0f;
+	time.x = getParam("window-width") - 100.0f;
+	time.y = getParam("window-height") - GAME::UI_TOP_HEIGHT - 30.0f;
 
 }
 
@@ -20,10 +20,10 @@ void UIGame::create(int *pickingId) {
 	gameMenu.create(objectId, &pickingList);
 
 	top_bar = gui::Rectangle();
-	top_bar.create("filled", 0.0f, GLB::WINDOW_HEIGHT - GAME::UI_TOP_HEIGHT, GLB::WINDOW_WIDTH, GAME::UI_TOP_HEIGHT, "bottom-left", 0);
+	top_bar.create("filled", 0.0f, getParam("window-height") - GAME::UI_TOP_HEIGHT, getParam("window-width"), GAME::UI_TOP_HEIGHT, "bottom-left", 0);
 
 	bottom_bar = gui::Rectangle();
-	bottom_bar.create("filled", 0.0f, 0.0f, GLB::WINDOW_WIDTH, GAME::UI_BOTTOM_HEIGHT, "bottom-left", 0);
+	bottom_bar.create("filled", 0.0f, 0.0f, getParam("window-width"), GAME::UI_BOTTOM_HEIGHT, "bottom-left", 0);
 
 	time.lastTime = glfwGetTime();
 	time.text = gui::SimpleText("dynamic", true);
@@ -46,10 +46,10 @@ void UIGame::render() {
 
 	// minimap rectangle:
 	if (GAME::MINIMAP_IS_ACTIVE) {
-		float x = (float)GAME::CAMERA_POS_X / GAME::MAP_WIDTH * GLB::WINDOW_WIDTH;
-		float y = (float)GAME::CAMERA_POS_Y / GAME::MAP_HEIGHT * (GLB::WINDOW_HEIGHT - GAME::UI_BOTTOM_HEIGHT - GAME::UI_TOP_HEIGHT) + GAME::UI_BOTTOM_HEIGHT;
-		float w = (float)GLB::WINDOW_WIDTH_ZOOMED * GLB::WINDOW_WIDTH / GAME::MAP_WIDTH;
-		float h = (float)GLB::WINDOW_HEIGHT_ZOOMED * (GLB::WINDOW_HEIGHT-GAME::UI_BOTTOM_HEIGHT-GAME::UI_TOP_HEIGHT) / GAME::MAP_HEIGHT;
+		float x = (float)GAME::CAMERA_POS_X / GAME::MAP_WIDTH * getParam("window-width");
+		float y = (float)GAME::CAMERA_POS_Y / GAME::MAP_HEIGHT * (getParam("window-height") - GAME::UI_BOTTOM_HEIGHT - GAME::UI_TOP_HEIGHT) + GAME::UI_BOTTOM_HEIGHT;
+		float w = getParam("window-width-zoomed") * getParam("window-width") / GAME::MAP_WIDTH;
+		float h = getParam("window-height-zoomed") * (getParam("window-height") -GAME::UI_BOTTOM_HEIGHT-GAME::UI_TOP_HEIGHT) / GAME::MAP_HEIGHT;
 
 		minimapRectangle.render(glm::vec4(255.f), false, x, y, w, h);
 	}

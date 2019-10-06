@@ -1,6 +1,7 @@
 #include "stb_image.h"  // manip. texture
-
 #include "mouse.h"
+
+using namespace glb;
 
 Mouse::Mouse(){
 	currentState = "default";
@@ -20,7 +21,7 @@ void Mouse::mouse_control(int lastX, int lastY) {
 	
 	yzoomed = getZoomedCoords((float)GLB::MOUSE_X, (float)GLB::MOUSE_Y).y;
 	znoise = mapgen::smoothNoise(yzoomed, GLB::Z_NOISE);
-	znoise /= (float)GLB::WINDOW_HEIGHT_ZOOMED / (float)GLB::WINDOW_HEIGHT;
+	znoise /= getParam("window-height-zoomed") / getParam("window-height");
 
 	GLB::MOUSE_Y_2D = (GLB::MOUSE_Y - (int)znoise);
 	
@@ -31,7 +32,7 @@ void Mouse::mouse_control(int lastX, int lastY) {
 	}
 	else {
 		currentState = "left";
-		printf("You have left-clicked on (X=%d, Y=%d)\n", GLB::MOUSE_LEFT_X, GLB::MOUSE_LEFT_Y);
+		printf("DEBUG: You have left-clicked on (X=%d, Y=%d)\n", GLB::MOUSE_LEFT_X, GLB::MOUSE_LEFT_Y);
 	}
 
 	if (!GLB::MOUSE_RIGHT) {
@@ -41,7 +42,7 @@ void Mouse::mouse_control(int lastX, int lastY) {
 	}
 	else {
 		currentState = "right";
-		printf("You have right-clicked on (X=%d, Y=%d)\n", GLB::MOUSE_RIGHT_X, GLB::MOUSE_RIGHT_Y);
+		printf("DEBUG: You have right-clicked on (X=%d, Y=%d)\n", GLB::MOUSE_RIGHT_X, GLB::MOUSE_RIGHT_Y);
 	}
 
 	if (GLB::MOUSE_RELEASE) {

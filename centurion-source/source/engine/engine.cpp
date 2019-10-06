@@ -1,14 +1,14 @@
 #include "engine.h"
 
+using namespace glb;
 
 Engine::Engine(){
 	window = myWindow();
-	
+
 	nbFrames = 0; 
 	Fps = 0;
 	Mpfs = 0;
 }
-
 
 int Engine::launch() {
 	window.init();
@@ -42,8 +42,9 @@ int Engine::launch() {
 		
 		if (GLB::MAIN_MENU){
 			if (!startMenu->menu_is_created()){
-				music = Music().play("assets/music/menu.mp3", true);
+				obj::Audio()->MusicPlay("assets/music/menu.wav");
 				startMenu->create(&playersList);
+				std::cout << "DEBUG: Main menu was created!\n";
 			}
 			startMenu->render();
 		}
@@ -52,13 +53,12 @@ int Engine::launch() {
 
 		if (GLB::GAME) {
 			if (!game->game_is_created()) {
-				Music().stop(music);
-				music = Music().play("assets/music/game.mp3", true);
+				obj::Audio()->MusicStop();
 
 				clearAndSwapBuffers(GLB::MAIN_WINDOW);
 				{
 					text = gui::SimpleText("dynamic");
-					text.render_dynamic("Game is being created...", "tahoma_8", GLB::WINDOW_WIDTH / 2.f, GLB::WINDOW_HEIGHT / 2.f, glm::vec4(255.f), "center", "middle");
+					text.render_dynamic("Game is being started...", "tahoma_8", getParam("window-width") / 2.f, getParam("window-height") / 2.f, glm::vec4(255.f), "center", "middle");
 				}
 				glfwSwapBuffers(GLB::MAIN_WINDOW);
 
@@ -76,13 +76,14 @@ int Engine::launch() {
 			
 			game->reset();
 			startMenu->reset();
-			Music().stop(music);
 		}
 
 		// -------------- //
 
 		if (GLB::EDITOR) {
 			if (!editor->editor_is_created()) {
+				obj::Audio()->MusicStop();
+
 				editor->create();
 			}
 			editor->run();
@@ -127,6 +128,9 @@ void Engine::readDataClasses() {
 	/* images */
 
 	std::ifstream path2("assets/data/images_data.json");
+	if (!path2.good()) {
+		forceGameClosure("Error code 0x00000001\n\n  Unable to find or process IMAGES DATA file.\n  Forced application shutdown has started.");
+	}
 	dataClass = json::parse(path2);
 
 	for (int i = 0; i < dataClass["image_names"].size(); i++) {
@@ -152,7 +156,7 @@ void Engine::fps() {
 void Engine::fps_sleep() {
 	finalTime = glfwGetTime();
 	if (finalTime - currentTime < 1.0 / 60.0) {
-		Sleep(1000 * (1.0 / 60.0 - (finalTime - currentTime)));
+		Sleep(DWORD(1000 * (1.0 / 60.0 - (finalTime - currentTime))));
 	}
 }
 

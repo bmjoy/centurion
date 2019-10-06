@@ -1,5 +1,7 @@
 #include "window.h"
 
+using namespace glb;
+
 myWindow::myWindow()
 {
 }
@@ -11,7 +13,7 @@ void myWindow::init() {
 	glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
 	glfwWindowHint(GLFW_RESIZABLE, GL_FALSE);
 
-	mainWindow = glfwCreateWindow(GLB::WINDOW_WIDTH, GLB::WINDOW_HEIGHT, "Centurion", nullptr, nullptr); // Windowed
+	mainWindow = glfwCreateWindow((int)getParam("window-width"), (int)getParam("window-height"), "Centurion", nullptr, nullptr); // Windowed
 	glfwMakeContextCurrent(mainWindow);
 
 	create_callbacks(); // handle key + mouse input
@@ -101,29 +103,29 @@ void myWindow::handle_keys(GLFWwindow* window, int key, int code, int action, in
 	if (key == GLFW_KEY_Z && action == GLFW_PRESS) {
 		GLB::WIREFRAME = !GLB::WIREFRAME;
 		if (GLB::WIREFRAME) {
-			std::cout << "Wireframe ON! \n";
+			std::cout << "DEBUG: Wireframe ON!\n";
 		}
 		else {
-			std::cout << "Wireframe OFF! \n";
+			std::cout << "DEBUG: Wireframe OFF! \n";
 		}
 	}
 	// Grid
 	if (key == GLFW_KEY_G && action == GLFW_PRESS) {
 		GAME::GRID_IS_ACTIVE = !GAME::GRID_IS_ACTIVE;
 		if (GAME::GRID_IS_ACTIVE) {
-			std::cout << "Grid ON! \n";
+			std::cout << "DEBUG: Grid ON!\n";
 		}
 		else {
-			std::cout << "Grid OFF! \n";
+			std::cout << "DEBUG: Grid OFF!\n";
 		}
 	}
 	if (key == GLFW_KEY_SPACE && action == GLFW_PRESS && !GAME::MENU_IS_ACTIVE) {
 		 GAME::MINIMAP_IS_ACTIVE = ! GAME::MINIMAP_IS_ACTIVE;
 		if ( GAME::MINIMAP_IS_ACTIVE) {
-			std::cout << "Minimap camera ON! \n";
+			std::cout << "DEBUG: Minimap camera ON!\n";
 		}
 		else {
-			std::cout << "Minimap camera OFF! \n";
+			std::cout << "DEBUG: Minimap camera OFF!\n";
 		}
 	}
 	if (key >= 0 && key < 1024) {  // is the key valid? true/false
@@ -148,9 +150,9 @@ void myWindow::handle_keys(GLFWwindow* window, int key, int code, int action, in
 void myWindow::handle_mouse(GLFWwindow* window, double xPos, double yPos)
 {
 	myWindow* theWindow = static_cast<myWindow*>(glfwGetWindowUserPointer(window));
-	theWindow->lastX = xPos;
-	double y = fabs(yPos - GLB::WINDOW_HEIGHT);
-	theWindow->lastY = y;
+	theWindow->lastX = (GLfloat)xPos;
+	double y = fabs(yPos - getParam("window-height"));
+	theWindow->lastY = (GLfloat)y;
 }
 
 void myWindow::mouse_button_callback(GLFWwindow* window, int button, int action, int mods)
@@ -181,10 +183,10 @@ void myWindow::mouse_button_callback(GLFWwindow* window, int button, int action,
 		if (button == GLFW_MOUSE_BUTTON_MIDDLE && action == GLFW_PRESS) {
 			 GAME::MINIMAP_IS_ACTIVE =! GAME::MINIMAP_IS_ACTIVE;
 			if (GAME::MINIMAP_IS_ACTIVE) {
-				std::cout << "Minimap camera ON! \n";
+				std::cout << "DEBUG: Minimap camera ON!\n";
 			}
 			else {
-				std::cout << "Minimap camera OFF! \n";
+				std::cout << "DEBUG: Minimap camera OFF!\n";
 			}
 		}
 	}
@@ -192,7 +194,7 @@ void myWindow::mouse_button_callback(GLFWwindow* window, int button, int action,
 
 void myWindow::scroll_callback(GLFWwindow* window, double xoffset, double yoffset)
 {
-	GLB::MOUSE_SCROLL = yoffset;
+	GLB::MOUSE_SCROLL = (int)yoffset;
 	GLB::MOUSE_SCROLL_BOOL = true;
 }
 
