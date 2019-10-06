@@ -13,5 +13,9 @@ namespace glb {
 	static map<string, string> errors;
 	void setErrors(map<string, string> errorsMap);
 	string getErrorCode(string error);
-    
+	
+	/* reading/saving map data */
+	void readIndicesData(unsigned int *indices, string path);
+	void readVerticesData(float *vertices, string path);
+	void readVerticesPosData(int *verticesPos, string path);
 };

@@ -30,10 +30,10 @@ namespace gui {
 
 	void Rectangle::render(glm::vec4 Color, bool picking, float x, float y, float w, float h, int origin) {
 
-		if (x != 0) data.x = x;
-		if (y != 0) data.y = y;
-		if (w != 0) data.w = w;
-		if (h != 0) data.h = h;
+		if (x != 0.001f) data.x = x;
+		if (y != 0.001f) data.y = y;
+		if (w != 0.001f) data.w = w;
+		if (h != 0.001f) data.h = h;
 		if (origin != -1) data.origin = origin;
 
 		if (data.type == "filled") {

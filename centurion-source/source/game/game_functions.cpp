@@ -40,8 +40,8 @@ void game::clearBuffers() {
 void game::goToPosition(std::map<int, Building> *bList, Camera *c, double *lastTime, int *clickId, bool *blockMinimap) {
 	if (GAME::MINIMAP_IS_ACTIVE) {
 		if (GLB::MOUSE_LEFT && cursorInGameScreen()) {
-			cameraToX = GLB::MOUSE_LEFT_X / getParam("window-width")*(float)GAME::MAP_WIDTH - getParam("window-width") / 2.0f;
-			cameraToY = getYMinimapCoord((float)GLB::MOUSE_LEFT_Y) / getParam("window-height")*(float)GAME::MAP_HEIGHT - getParam("window-height") / 2.0f;
+			cameraToX = GLB::MOUSE_LEFT_X / getParam("window-width")*(float)GAME::MAP_WIDTH - getParam("window-width-zoomed") / 2.f;
+			cameraToY = getYMinimapCoord((float)GLB::MOUSE_LEFT_Y) / getParam("window-height")*(float)GAME::MAP_HEIGHT - getParam("window-height-zoomed") / 2.f;
 			/* Double Click detection */
 			// if you are clicking on a townhall you have to double click 
 			// to move the camera there and quit minimap
@@ -64,12 +64,13 @@ void game::goToPosition(std::map<int, Building> *bList, Camera *c, double *lastT
 				}
 			}
 			if (doubleClick && *clickId > 0) {
-				cameraToX = (*bList)[*clickId].get_xPos() - getParam("window-width-zoomed") / 2;
-				cameraToY = (*bList)[*clickId].get_yPos() - getParam("window-height-zoomed") / 2;
+				cameraToX = (*bList)[*clickId].get_xPos() - getParam("window-width-zoomed") / 2.f;
+				cameraToY = (*bList)[*clickId].get_yPos() - getParam("window-height-zoomed") / 2.f;
 				*blockMinimap = false;
 			}
 			//------------------------------------------------
 			if (! (*blockMinimap)) {
+
 				(*c).go_to_pos(cameraToX, cameraToY);
 				GAME::MINIMAP_IS_ACTIVE = false;
 			}

@@ -49,8 +49,10 @@ void UIGame::render() {
 		float x = (float)GAME::CAMERA_POS_X / GAME::MAP_WIDTH * getParam("window-width");
 		float y = (float)GAME::CAMERA_POS_Y / GAME::MAP_HEIGHT * (getParam("window-height") - GAME::UI_BOTTOM_HEIGHT - GAME::UI_TOP_HEIGHT) + GAME::UI_BOTTOM_HEIGHT;
 		float w = getParam("window-width-zoomed") * getParam("window-width") / GAME::MAP_WIDTH;
-		float h = getParam("window-height-zoomed") * (getParam("window-height") -GAME::UI_BOTTOM_HEIGHT-GAME::UI_TOP_HEIGHT) / GAME::MAP_HEIGHT;
-
+		float h = getParam("window-height-zoomed") * (getParam("window-height") - GAME::UI_BOTTOM_HEIGHT - GAME::UI_TOP_HEIGHT) / GAME::MAP_HEIGHT;
+		x = std::max(x, 1.f);
+		y = std::max(y, GAME::UI_BOTTOM_HEIGHT + 1.f);
+		y = std::min(y, getParam("window-height") - GAME::UI_TOP_HEIGHT - h);
 		minimapRectangle.render(glm::vec4(255.f), false, x, y, w, h);
 	}
 	// Temporary bars:

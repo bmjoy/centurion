@@ -109,9 +109,9 @@ void Camera::keyboardControl() {
 
 void Camera::go_to_pos(GLfloat x, GLfloat y) {
 	if (x < 0.0) { x = 0; }
-	else if (x > GAME::MAP_WIDTH - getParam("window-width")) { x = GAME::MAP_WIDTH - getParam("window-width-zoomed"); }
+	else if (x > GAME::MAP_WIDTH - getParam("window-width-zoomed")) { x = GAME::MAP_WIDTH - getParam("window-width-zoomed"); }
 	if (y < 0.0) { y = 0; }
-	else if (y > GAME::MAP_HEIGHT - getParam("window-height")) { y = GAME::MAP_HEIGHT - getParam("window-height-zoomed"); }
+	else if (y > GAME::MAP_HEIGHT - getParam("window-height-zoomed")) { y = GAME::MAP_HEIGHT - getParam("window-height-zoomed"); }
 
 	position.x = x;
 	position.y = y;

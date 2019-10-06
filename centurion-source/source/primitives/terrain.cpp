@@ -1,6 +1,8 @@
 #include "terrain.h"
 #include "stb_image.h" 
 
+using namespace glb;
+
 Terrain::Terrain(){
 	vPath = "assets/shaders/terrain/vertex.glsl";
 	fPath = "assets/shaders/terrain/fragment.glsl";
@@ -16,44 +18,11 @@ void Terrain::create() {
 
 	// Read and store indices and vertices position information //
 
-	{
-		std::fstream fin;
-		fin.open("assets/terrain/emptymap (normal-offset)/indices");
-		std::string line, number;
-		std::getline(fin, line);
-		std::stringstream s(line);
-		int i = 0;
-		while (std::getline(s, number, ',')) {
-			mapgen::Indices()[i] = (unsigned int)std::stoi(number);
-			i++;
-		}
-	}
-	{
-		std::fstream fin;
-		fin.open("assets/terrain/emptymap (normal-offset)/vertices_pos");
-		std::string line, number;
-		std::getline(fin, line);
-		std::stringstream s(line);
-		int i = 0;
-		while (std::getline(s, number, ',')) {
-			mapgen::VerticesPos()[i] = std::stoi(number);
-			i++;
-		}
-	}
-	{
-		std::fstream fin;
-		fin.open("assets/terrain/emptymap (normal-offset)/vertices");
-		std::string line, number;
-		std::getline(fin, line);
-		std::stringstream s(line);
-		int i = 0;
-		while (std::getline(s, number, ',')) {
-			mapgen::MapVertices()[i] = std::stof(number);
-			i++;
-		}
-	}
-	mapgen::reset_map();
+	readIndicesData(mapgen::Indices(), "assets/terrain/emptymap (normal-offset)/indices");
+	readVerticesData(mapgen::MapVertices(), "assets/terrain/emptymap (normal-offset)/vertices");
+	readVerticesPosData(mapgen::VerticesPos(), "assets/terrain/emptymap (normal-offset)/vertices_pos");
 
+	mapgen::reset_map();
 	genBuffers();
 	genTexture();
 }
