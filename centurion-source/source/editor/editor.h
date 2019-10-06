@@ -20,6 +20,8 @@ private:
 	glm::mat4 proj, view;
 	editor::Menu menu;
 
+	gui::Circle circle;
+
 	int pickingID;
 
 	bool editorIsCreated;

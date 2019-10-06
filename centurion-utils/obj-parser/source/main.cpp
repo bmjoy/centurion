@@ -49,7 +49,7 @@ void load_node(aiNode * node, const aiScene * scene) {
 
 void load_mesh(aiMesh * mesh, const aiScene * scene) {
 
-	int xCoord, yCoord, zCoord, zNoise;
+	int xCoord, yCoord, zNoise;
 	float xTexCoord, yTexCoord;
 	int xNorm, yNorm, zNorm;
 	int type;
@@ -73,7 +73,6 @@ void load_mesh(aiMesh * mesh, const aiScene * scene) {
 
 		xCoord = round(mesh->mVertices[i].x);
 		yCoord = round(mesh->mVertices[i].y);
-		zCoord = 0;
 		zNoise = 0;
 		xTexCoord = mesh->mTextureCoords[0][i].x;
 		yTexCoord = mesh->mTextureCoords[0][i].y;
@@ -83,15 +82,15 @@ void load_mesh(aiMesh * mesh, const aiScene * scene) {
 		type = 1;
 
 		/* 45° Inclination */
-		zCoord -= yCoord;
+		//zCoord -= yCoord;
 		
 		if (verticesFile.is_open())
 		{
 			if (i == 0) {
-				verticesFile << xCoord << "," << yCoord << "," << zCoord << "," << xTexCoord << "," << yTexCoord;
+				verticesFile << xCoord << "," << yCoord << "," << xTexCoord << "," << yTexCoord;
 			}
 			else {
-				verticesFile << "," << xCoord << "," << yCoord << "," << zCoord << "," << xTexCoord << "," << yTexCoord;
+				verticesFile << "," << xCoord << "," << yCoord << "," << xTexCoord << "," << yTexCoord;
 			}
 		}
 		if (heightsFile.is_open())

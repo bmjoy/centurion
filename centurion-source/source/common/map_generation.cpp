@@ -17,23 +17,18 @@ void mapgen::init() {
 	*mapgen::MapHeights() = { 0.f };
 	*mapgen::MapTextures() = { 1.f };
 }
-
 float *mapgen::MapVertices(){
 	return map_vertices;
 }
-
 float *mapgen::MapTextures() {
 	return map_textures;
 }
-
 float *mapgen::MapHeights() {
 	return map_heights;
 }
-
 unsigned int *mapgen::Indices(){
 	return indices;
 }
-
 int *mapgen::VerticesPos(){
 	return vertices_pos;
 }
@@ -201,17 +196,17 @@ void mapgen::updateNormal(int x, int y) {
 			mapgen::MapHeights()[j*4 + 3] = N.z;
 		}
 		else {
-			mapgen::MapHeights()[j*4 + 1] = 0.f;
-			mapgen::MapHeights()[j*4 + 2] = 0.f;
-			mapgen::MapHeights()[j*4 + 3] = 1.f;
+			mapgen::MapHeights()[j * 4 + 1] = 0.f;
+			mapgen::MapHeights()[j * 4 + 2] = 0.f;
+			mapgen::MapHeights()[j * 4 + 3] = 1.f;
 		}
 	}
 }
 
 void mapgen::updateAllNormals() {
 	for (int i = 0; i < nVertices; i++) {
-		float xCoord = mapgen::MapVertices()[i*5];
-		float yCoord = mapgen::MapVertices()[i*5 + 1];
+		float xCoord = mapgen::MapVertices()[i * 4];
+		float yCoord = mapgen::MapVertices()[i * 4 + 1];
 		glm::ivec2 pos = glm::ivec2(int(xCoord), int(yCoord));	
 		if (pos.x > mapgen::grid_size && pos.x < mapgen::mapWidth - mapgen::grid_size && pos.y > mapgen::grid_size && pos.y < mapgen::mapHeight - mapgen::grid_size) {
 			std::array<mapgen::Triangle, 6> adjacentTriangles = getAdjacentTriangles(pos);
@@ -237,14 +232,14 @@ void mapgen::updateAllNormals() {
 
 void mapgen::generateRandomMap() {
 	for (int i = 0; i < nVertices; i++) {
-		float xCoord = mapgen::MapVertices()[i*5];
-		float yCoord = mapgen::MapVertices()[i*5 + 1];
+		float xCoord = mapgen::MapVertices()[i * 4];
+		float yCoord = mapgen::MapVertices()[i * 4 + 1];
 
 		float zNoise = generateNoise(glm::vec2(xCoord, yCoord), false);
 		zNoise = mapgen::smoothNoise(yCoord, zNoise);
 
 		// update znoise
-		mapgen::MapHeights()[i*4] = zNoise;
+		mapgen::MapHeights()[i * 4] = zNoise;
 		MAP::MIN_Z = std::min(zNoise, MAP::MIN_Z);
 		MAP::MAX_Z = std::max(zNoise, MAP::MAX_Z);
 	}

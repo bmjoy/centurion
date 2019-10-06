@@ -37,7 +37,7 @@ namespace editor {
         gui::Rectangle topBar;
         glm::vec4 barColor;
         std::map<std::string, menuData> titles;
-        std::array<std::string, 2> titlesList;
+        std::array<std::string, 3> titlesList;
         std::map<std::string, int>pickingList;
 
         int barHeight;

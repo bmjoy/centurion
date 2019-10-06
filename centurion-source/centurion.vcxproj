@@ -250,6 +250,7 @@
     <ClCompile Include="source\game\game_functions.cpp" />
     <ClCompile Include="source\game\game_object.cpp" />
     <ClCompile Include="source\gui\button.cpp" />
+    <ClCompile Include="source\gui\circle.cpp" />
     <ClCompile Include="source\gui\image.cpp" />
     <ClCompile Include="source\gui\simple_text.cpp" />
     <ClCompile Include="source\gui\form_input.cpp" />
@@ -266,6 +267,7 @@
     <ClCompile Include="source\primitives\bitmap_font.cpp" />
     <ClCompile Include="source\primitives\building_sprite.cpp" />
     <ClCompile Include="source\primitives\cursor_image.cpp" />
+    <ClCompile Include="source\primitives\empty_circle.cpp" />
     <ClCompile Include="source\primitives\empty_rectangle.cpp" />
     <ClCompile Include="source\primitives\filled_rectangle.cpp" />
     <ClCompile Include="source\primitives\grid.cpp" />
@@ -320,6 +322,7 @@
     <ClInclude Include="source\game\game_functions.h" />
     <ClInclude Include="source\game\game_object.h" />
     <ClInclude Include="source\gui\button.h" />
+    <ClInclude Include="source\gui\circle.h" />
     <ClInclude Include="source\gui\gui.h" />
     <ClInclude Include="source\gui\image.h" />
     <ClInclude Include="source\gui\simple_text.h" />
@@ -337,6 +340,7 @@
     <ClInclude Include="source\primitives\bitmap_font.h" />
     <ClInclude Include="source\primitives\building_sprite.h" />
     <ClInclude Include="source\primitives\cursor_image.h" />
+    <ClInclude Include="source\primitives\empty_circle.h" />
     <ClInclude Include="source\primitives\empty_rectangle.h" />
     <ClInclude Include="source\primitives\filled_rectangle.h" />
     <ClInclude Include="source\primitives\grid.h" />

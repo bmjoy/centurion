@@ -11,7 +11,7 @@ namespace gui {
 	public:
 		Rectangle();
 		void create(std::string type, float x, float y, float w, float h, std::string origin, int pickingID);
-		void render(glm::vec4 Color, bool picking = false, float x = 0.001f, float y = 0.001f, float w = 0.001f, float h = 0.001f, int origin = -1);
+		void render(glm::vec4 Color, bool picking = false, float x = 0.f, float y = 0.f, float w = 0.f, float h = 0.f, int origin = -1);
 		~Rectangle();
 	private:
 		RectangleData data;

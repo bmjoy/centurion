@@ -20,6 +20,9 @@ namespace obj {
 	static EmptyRectangle eRect;
 	EmptyRectangle *ERectangle();
 
+	static EmptyCircle eCircle;
+	EmptyCircle *ECircle();
+
 	static FilledRectangle fRect;
 	FilledRectangle *FRectangle();
 

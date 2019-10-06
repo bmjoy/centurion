@@ -16,6 +16,9 @@ CursorImage *obj::Cursor() {
 	return &obj::cursor;
 }
 
+EmptyCircle *obj::ECircle() {
+	return &obj::eCircle;
+}
 EmptyRectangle *obj::ERectangle() {
 	return &obj::eRect;
 }
@@ -45,6 +48,7 @@ void obj::init() {
 	*obj::Text() = BitmapFont();
 	*obj::BSprite() = BuildingSprite();
 	*obj::Cursor() = CursorImage();
+	*obj::ECircle() = EmptyCircle();
 	*obj::ERectangle() = EmptyRectangle();
 	*obj::FRectangle() = FilledRectangle();
 	*obj::Img() = ImageSprite();
@@ -56,6 +60,7 @@ void obj::init() {
 void obj::compile() {
 	obj::Text()->compile();
 	obj::BSprite()->compile();
+	obj::ECircle()->compile();
 	obj::ERectangle()->compile();
 	obj::FRectangle()->compile();
 	obj::Cursor()->compile();
@@ -73,6 +78,7 @@ void obj::create() {
 
 	obj::Text()->create();
 	obj::Cursor()->create();
+	obj::ECircle()->create();
 	obj::ERectangle()->create();
 	obj::FRectangle()->create();
 	obj::BSprite()->create();	
@@ -88,6 +94,8 @@ void obj::create() {
 void obj::applyMenuMatrices() {
 	obj::Img()->apply_projection_matrix(GLB::MENU_PROJECTION);
 	obj::Img()->apply_view_matrix();
+	obj::ECircle()->apply_projection_matrix(GLB::MENU_PROJECTION);
+	obj::ECircle()->apply_view_matrix();
 	obj::ERectangle()->apply_projection_matrix(GLB::MENU_PROJECTION);
 	obj::ERectangle()->apply_view_matrix();
 	obj::FRectangle()->apply_projection_matrix(GLB::MENU_PROJECTION);
@@ -101,6 +109,8 @@ void obj::applyGameMatrices(glm::mat4 *proj, glm::mat4 *view) {
 	obj::USprite()->apply_view_matrix(*view);
 	obj::Img()->apply_projection_matrix(*proj);
 	obj::Img()->apply_view_matrix(*view);
+	obj::ECircle()->apply_projection_matrix(*proj);
+	obj::ECircle()->apply_view_matrix(*view);
 	obj::ERectangle()->apply_projection_matrix(*proj);
 	obj::ERectangle()->apply_view_matrix(*view);
 	obj::FRectangle()->apply_projection_matrix(*proj);

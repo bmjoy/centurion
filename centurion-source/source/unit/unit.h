@@ -5,8 +5,7 @@
 
 #include "../game/game_object.h"
 #include "unit_functions.h"
-#include "../gui/rectangle.h"
-#include "../gui/image.h"
+#include "../gui/gui.h"
 
 class Building;
 
@@ -33,6 +32,9 @@ private:
 	glm::vec3 position3D;
 	bool clickSelection;
 	bool rectangleSelection;
+
+	/* unit circle if selected */
+	gui::Circle selectionCircle;
 
 	/* unit movement & pathfinding */
 	bool is_Moving;

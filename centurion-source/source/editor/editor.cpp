@@ -14,12 +14,14 @@ void Editor::create() {
 	*/
 
 	surface = new Surface();
-	//
 
 	camera = Camera(glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3(0.0f, 1.0f, 0.0f), -90.0f, 0.0f);
 
 	menu = editor::Menu();
 	menu.create(&pickingID);
+
+	circle = gui::Circle();
+	circle.create("border", 0.f, 0.f, 300.f, 200.f, 8.f, "center");
 
 	editorIsCreated = true;
 }
@@ -38,10 +40,11 @@ void Editor::run() {
 
 	obj::applyMenuMatrices();
 
+	/* temporary : it will be in editor UI */
+	circle.render(glm::vec4(255.f), (float)GLB::MOUSE_X, (float)GLB::MOUSE_Y);
 	menu.render(true);
 	menu.render(false);
 
-	obj::applyMenuMatrices();
 	GLB::CAMERA_PROJECTION = glm::ortho(0.0f, getParam("window-width-zoomed"), 0.0f, getParam("window-height-zoomed"), -(float)GAME::MAP_WIDTH, (float)GAME::MAP_WIDTH);
 }
 

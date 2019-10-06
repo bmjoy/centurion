@@ -7,7 +7,7 @@ namespace editor {
     Menu::Menu(){
         barHeight = 30;
         barColor = glm::vec4(60.f, 68.f, 104.f, 255.f);
-        titlesList = { "File", "Edit" };
+        titlesList = { "File", "Edit", "Tools" };
         menuIsOpened = false;
 		maxPickingID = 0;
 		minPickingID = 0;
@@ -24,6 +24,9 @@ namespace editor {
 
         titles["Edit"].title = "Edit";
         titles["Edit"].options = { "Edit1", "Edit2", "Edit3" };
+
+		titles["Tools"].title = "Tools";
+		titles["Tools"].options = { "Tools1", "Tools2", "Tools3" };
 
         for (int i = 0; i < titles.size(); i++) {
             std::string s = titlesList[i];

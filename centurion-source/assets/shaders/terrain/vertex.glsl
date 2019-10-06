@@ -10,7 +10,7 @@
     during mesh creation (look for glBindVertexArray and glVertexAttribPointer)
 */
 
-layout (location = 0) in vec3 pos;
+layout (location = 0) in vec2 pos;
 layout (location = 1) in vec2 tex;
 layout (location = 2) in float zNoise;
 layout (location = 3) in vec3 norm;
@@ -60,7 +60,7 @@ void main()
    
     /* RENDERING */
     int offset = 256; 
-    vec4 newPos = vec4(pos.x - offset, pos.y + zNoise - offset, pos.z + zNoise, 1.0);
+    vec4 newPos = vec4(pos.x - offset, pos.y + zNoise - offset, pos.y *(-1.f) + zNoise, 1.0);
     //vec4 newPos = vec4(pos.x, pos.y, pos.z, 1.0);
     gl_Position = projection * view * newPos;
     

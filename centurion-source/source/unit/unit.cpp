@@ -46,6 +46,9 @@ void Unit::create() {
 	unitData.className = className;
 	obj::USprite()->getTextureInfo(&unitData);
 
+	selectionCircle = gui::Circle();
+	selectionCircle.create("border", 0.f, 0.f, 35.f, 23.f, 8.f, "center");
+
 	// hitbox 
 	hitbox.rectangle = gui::Rectangle();
 	hitbox.rectangle.create("border", 0.0f, 0.0f, (float)unitData.hitBox[0], (float)unitData.hitBox[1], "center", 0);
@@ -71,18 +74,23 @@ void Unit::render(glm::mat4 &proj, glm::mat4 &view, bool picking, int clickID) {
 		walk_behaviour();		
 	}
 
+	
+	if (selected) {
+		selectionCircle.render(glm::vec4(255.f, 255.f, 255.f, 0.8f), position3D.x, position3D.y);
+	}
 	obj::USprite()->render(unitData, position3D, picking);
 
+	
 	if (!GLB::DEBUG && !picking) {
 		hitbox.coords = getCoords(position3D.x - unitData.hitBox[0] / 2.f, position3D.y + unitData.hitBox[1] / 2.f + unitData.yOffset, (float)unitData.hitBox[0], (float)unitData.hitBox[1]);
-		hitbox.rectangle.render(
+		/*hitbox.rectangle.render(
 			selected ? glm::vec4(255.0f, 255.0f, 255.0f, 1.0f) : glm::vec4(0.0f, 0.0f, 0.0f, 0.0f),
 			0,
 			position3D.x,
 			position3D.y + unitData.yOffset,
 			0,
 			0
-		);
+		);*/
 	}
 
 	/* debug pathfinding and coordinates */
@@ -98,17 +106,18 @@ void Unit::render(glm::mat4 &proj, glm::mat4 &view, bool picking, int clickID) {
 
 		if (!GAME::MINIMAP_IS_ACTIVE) {
 			circlePos.render(false, position2D.x, position2D.y);
-			circlePos.render(false, position3D.x, position3D.y);
+			//circlePos.render(false, position3D.x, position3D.y);
 
+			
 			hitbox.coords = getCoords(position3D.x - unitData.hitBox[0] / 2.f, position3D.y + unitData.hitBox[1] / 2.f + unitData.yOffset, (float)unitData.hitBox[0], (float)unitData.hitBox[1]);
-			hitbox.rectangle.render(
+			/*hitbox.rectangle.render(
 				selected ? glm::vec4(255.0f, 0.0f, 255.0f, 1.0f) : glm::vec4(255.0f, 242.0f, 0.0f, 1.0f),
 				0,
 				position3D.x,
 				position3D.y + unitData.yOffset,
 				0,
 				0
-			);
+			);*/
 		}
 	}
 }

@@ -1,6 +1,7 @@
 #pragma once
 
 #include "empty_rectangle.h"
+#include "empty_circle.h"
 #include "bitmap_font.h"
 #include "building_sprite.h"
 #include "filled_rectangle.h"

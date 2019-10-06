@@ -5,8 +5,8 @@
 
 /*------------------------------------------------------
 	vertices[] = 
-		   0        1        2        3          4     
-		xCoord,  yCoord,  zCoord, xTexCoord, yTexCoord
+		   0        1        2          3     
+		xCoord,  yCoord, xTexCoord, yTexCoord
 	
 
 	heights[] = 
@@ -34,7 +34,7 @@ namespace mapgen {
 	static const int mapWidth = 30464;  // 29952 + 128*4
 	static const int mapHeight = 20480; // 19968 + 128*4
 
-	static float map_vertices[nVertices * 5];
+	static float map_vertices[nVertices * 4];
 	float *MapVertices();
 
 	static float map_textures[nVertices];

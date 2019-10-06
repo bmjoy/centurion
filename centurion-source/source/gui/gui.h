@@ -5,5 +5,5 @@
 #include "image.h"
 #include "rectangle.h"
 #include "simple_text.h"
-
+#include "circle.h"
 

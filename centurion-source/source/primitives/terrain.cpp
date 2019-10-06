@@ -18,9 +18,9 @@ void Terrain::create() {
 
 	// Read and store indices and vertices position information //
 
-	readIndicesData(mapgen::Indices(), "assets/terrain/emptymap (normal-offset)/indices");
-	readVerticesData(mapgen::MapVertices(), "assets/terrain/emptymap (normal-offset)/vertices");
-	readVerticesPosData(mapgen::VerticesPos(), "assets/terrain/emptymap (normal-offset)/vertices_pos");
+	readIndicesData(mapgen::Indices(), "assets/terrain/emptymap/indices");
+	readVerticesData(mapgen::MapVertices(), "assets/terrain/emptymap/vertices");
+	readVerticesPosData(mapgen::VerticesPos(), "assets/terrain/emptymap/vertices_pos");
 
 	mapgen::reset_map();
 	genBuffers();
@@ -130,12 +130,12 @@ void Terrain::genBuffers() {
 	/* Vertices VBO */
 	glGenBuffers(1, &VerticesVBO);
 	glBindBuffer(GL_ARRAY_BUFFER, VerticesVBO);
-	glBufferData(GL_ARRAY_BUFFER, sizeof(*mapgen::MapVertices()) * mapgen::nVertices * 5, mapgen::MapVertices(), GL_STATIC_DRAW);
-	// xCoord, yCoord, zCoord 
-	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 5 * sizeof(float), (void*)0);
+	glBufferData(GL_ARRAY_BUFFER, sizeof(*mapgen::MapVertices()) * mapgen::nVertices * 4, mapgen::MapVertices(), GL_STATIC_DRAW);
+	// xCoord, yCoord 
+	glVertexAttribPointer(0, 2, GL_FLOAT, GL_FALSE, 4 * sizeof(float), (void*)0);
 	glEnableVertexAttribArray(0);
 	// xTexCoord, yTexCoord
-	glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, 5 * sizeof(float), (void*)(sizeof(float) * 3));
+	glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, 4 * sizeof(float), (void*)(sizeof(float) * 2));
 	glEnableVertexAttribArray(1);
 	glBindBuffer(GL_ARRAY_BUFFER, 0);
 	/* Heights VBO */
