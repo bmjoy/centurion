@@ -12,9 +12,9 @@ DebugUI::DebugUI()
 		"y-map: ",
 		"x-map: ",
 		"selected units: ",
-		"x-normal: ",
+		"z-normal: ",
 		"y-normal: ",
-		"z-normal: "
+		"x-normal: "
 	};
 	dynamicTextList = { "0" };
 
@@ -75,13 +75,13 @@ void DebugUI::render(int fps, int mpfs, int selUnits) {
 	dynamicTextList[6] = std::to_string(selUnits);
 	
 	
-	streamx << std::fixed << std::setprecision(2) << xNorm;
+	streamx << std::fixed << std::setprecision(2) << zNorm;
 	dynamicTextList[7] = streamx.str();
 
 	streamy << std::fixed << std::setprecision(2) << yNorm;
 	dynamicTextList[8] = streamy.str();
 
-	streamz << std::fixed << std::setprecision(2) << zNorm;
+	streamz << std::fixed << std::setprecision(2) << xNorm;
 	dynamicTextList[9] = streamz.str();
 
 	!GLB::GAME ? n = 2 : n = (int)dynamicTextList.size();

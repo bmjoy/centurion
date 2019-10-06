@@ -109,9 +109,10 @@ void Terrain::updateBuffers(float x, float y, std::string type, float q) {
 
 	int j = (int)(y1 * GAME::MAP_WIDTH / mapgen::grid_size + x1);
 
-	if (mapgen::MapVertices()[mapgen::VerticesPos()[j] * 10 + k] != q) {
-
-		mapgen::MapVertices()[mapgen::VerticesPos()[j] * 10 + k] = q;
+	//if (mapgen::MapVertices()[mapgen::VerticesPos()[j] * 10 + k] != q) {
+	if (true) {
+		mapgen::MapVertices()[mapgen::VerticesPos()[j] * 10 + k] += q;
+		mapgen::updateNormal((int)x, (int)y);
 
 		glBindVertexArray(VAO);
 		glBindBuffer(GL_ARRAY_BUFFER, VBO);

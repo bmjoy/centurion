@@ -2,7 +2,7 @@
 
 std::string fileName;
 int gridSize;
-int mapWidth = 29952;
+int mapWidth = 29952 + 256;
 
 void load_node(aiNode * node, const aiScene * scene);
 void load_mesh(aiMesh *mesh, const aiScene *scene);
@@ -168,7 +168,7 @@ void load_mesh(aiMesh * mesh, const aiScene * scene) {
 	/*-----------------------------------------------------------------------------*/
 	/*-----------------------------------------------------------------------------*/
 
-	std::ofstream myfile4("output-folder/info");
+	std::ofstream myfile4("output-folder/info.txt");
 	if (myfile4.is_open())
 	{
 		myfile4 << "Number of vertices: " << nVertices << "\n";
