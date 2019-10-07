@@ -1,0 +1,119 @@
+#pragma once
+
+#include <objects>
+
+namespace gui {
+
+	using namespace std;
+	using namespace glm;
+
+	/*
+		IMAGE
+	*/
+
+	class Image	{
+	public:
+		Image();
+		Image(string ImageName);
+		void create(string Origin, float x, float y, float w, float h, int pickingID);
+		void render(bool picking, float x = 0.f, float y = 0.f);
+		~Image();
+	private:
+		ImageData imgData;
+		string imageName;
+		map<string, int> originMap;
+	};
+
+	/*
+		SIMPLE TEXT
+	*/
+
+	class SimpleText {
+	public:
+		SimpleText(string Type = "static", bool Shadow = false);
+		void create_static(string text, string font, float x, float y, string halign, string valign, vec4 color);
+		void render_static();
+		void render_dynamic(string text, string Font, float x, float y, vec4 color, string halign, string valign);
+		float get_width() { return (float)data.totalWidth; }
+		~SimpleText();
+	private:
+		string type;
+		txt::StaticData data;
+		string hAlign, vAlign;
+		bool shadow;
+	};
+
+	/*
+		RECTANGLE
+	*/
+
+	class Rectangle	{
+	public:
+		Rectangle();
+		void create(string type, float x, float y, float w, float h, string origin, int pickingID);
+		void render(vec4 Color, bool picking = false, float x = 0.f, float y = 0.f, float w = 0.f, float h = 0.f, int origin = -1);
+		~Rectangle();
+	private:
+		RectangleData data;
+		map<string, int> originMap;
+	};
+
+	/*
+		CIRCLE
+	*/
+
+	class Circle {
+	public:
+		Circle();
+		void create(string type, float x, float y, float w, float h, float borderWidth, string origin);
+		void render(vec4 Color, float x = 0.f, float y = 0.f, float w = 0.f, float h = 0.f, int origin = -1);
+		~Circle();
+	private:
+		CircleData data;
+		map<string, int> originMap;
+	};
+
+	/*
+		BUTTON
+	*/
+
+	class Button {
+	public:
+		Button();
+		void create(string imageName, string Text, int x, int y, int pickingID, vec4 textColor);
+		void render(bool picking);
+		~Button();
+	private:
+		SimpleText buttonText;
+		Image buttonImage;
+	};
+
+	/*
+		FORM INPUT
+	*/
+
+	class FormInput	{
+	public:
+		FormInput(bool options = true);
+		void create(float x, float y, float w, float h, vector<string> options, int pickingID);
+		void render(bool picking, vec4 color);
+		void open_close();
+		void close();
+		void select_option(int i);
+		string selectedText;
+		~FormInput();
+	private:
+		Rectangle back;
+		Rectangle back_options;
+		vector<Rectangle> back_options_picking;
+		SimpleText text;
+		vector<SimpleText> optionsText;
+		float width, height, x, y;
+		vector<string> form_options;
+		vec2 mainTextPos;
+		bool boolOptions;
+		bool isOpened;
+		bool hasText;
+		int nOptions;
+	};
+}

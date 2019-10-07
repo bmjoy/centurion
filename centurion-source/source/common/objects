@@ -1,6 +1,6 @@
 #pragma once
 
-#include "../primitives/primitives.h"
+#include <primitives>
 #include "../audio/audio_manager.h"
 
 namespace obj {

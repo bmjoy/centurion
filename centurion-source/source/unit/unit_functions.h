@@ -1,7 +1,7 @@
 #include <global.hpp>
 #include <mapgen>
 #include "../pathfinding/a_star.h"
-#include "../primitives/unit_sprite.h"
+#include <primitives>
 
 /* UNIT FUNCTIONS */
 

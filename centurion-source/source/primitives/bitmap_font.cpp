@@ -1,6 +1,7 @@
-#include "bitmap_font.h"
-
-#include <stb_image.h>  // manip. texture
+#include <primitives>
+#include <stb_image.h>
+#include <global.hpp>
+#include <json.hpp>
 
 BitmapFont::BitmapFont() {
 	vPath = "assets/shaders/font/vertex.glsl";

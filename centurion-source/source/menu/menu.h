@@ -3,9 +3,7 @@
 #include <global.hpp>
 #include <json.hpp>
 
-#include "../gui/form_input.h"
-#include "../gui/button.h"
-#include "../gui/image.h"
+#include <gui>
 #include "../interface/menu_players_list.h"
 #include "../player/player.h"
 

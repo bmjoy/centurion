@@ -1,5 +1,5 @@
-#include "grid.h"
-
+#include <primitives>
+#include <mapgen>
 #include "../pathfinding/a_star.h"
 
 Grid::Grid()

@@ -1,7 +1,6 @@
+#include <primitives>
 #define STB_IMAGE_IMPLEMENTATION  
 #include <stb_image.h>  // manip. texture
-
-#include "image_sprite.h"
 
 ImageSprite::ImageSprite(){
 	vPath = "assets/shaders/image/vertex.glsl";

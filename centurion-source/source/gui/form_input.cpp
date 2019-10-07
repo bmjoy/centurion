@@ -1,19 +1,24 @@
-#include "form_input.h"
+#include <gui>
 
 namespace gui {
+
+	using namespace std;
+	using namespace glm;
+	using namespace glb;
+
 	FormInput::FormInput(bool options) {
 		boolOptions = options;
 		hasText = true;
 	}
 
-	void FormInput::create(float xPos, float yPos, float w, float h, std::vector<std::string> options, int pickingID) {
+	void FormInput::create(float xPos, float yPos, float w, float h, vector<string> options, int pickingID) {
 
 		width = w; height = h; x = xPos; y = yPos;
 		form_options = options;
 		isOpened = false;
 		selectedText = options[0];
 		hasText = selectedText.size() > 0;
-		mainTextPos = glm::vec2(x + 3.f, (y - 1.f) - height / 1.5f - 6.f);
+		mainTextPos = vec2(x + 3.f, (y - 1.f) - height / 1.5f - 6.f);
 		nOptions = (int)options.size();
 
 		back = gui::Rectangle();
@@ -36,22 +41,21 @@ namespace gui {
 
 				/* options text saved in memory */
 				gui::SimpleText tempText = gui::SimpleText("static");
-				tempText.create_static(options[j], "tahoma_8", x + 3.f, y1 - height / 1.5f - 6.f, "left", "normal", glm::vec4(255.f));
+				tempText.create_static(options[j], "tahoma_8", x + 3.f, y1 - height / 1.5f - 6.f, "left", "normal", vec4(255.f));
 				optionsText.push_back(tempText);
 			}
 		}
 		else { // in this case the forminput cannot be opened
 			if (hasText) {
 				text = gui::SimpleText("static");
-				text.create_static(options[0], "tahoma_8", mainTextPos.x, mainTextPos.y, "left", "normal", glm::vec4(255.f));
+				text.create_static(options[0], "tahoma_8", mainTextPos.x, mainTextPos.y, "left", "normal", vec4(255.f));
 			}
 		}
 	}
-
-	void FormInput::render(bool picking, glm::vec4 color) {
+	void FormInput::render(bool picking, vec4 color) {
 
 		if (picking) {
-			back.render(glm::vec4(), true);
+			back.render(vec4(), true);
 			if (boolOptions && isOpened) {
 				for (int j = 0; j < nOptions; j++) {
 					back_options_picking[j].render(color, true);
@@ -64,7 +68,7 @@ namespace gui {
 
 			if (boolOptions) {
 				// selected text
-				text.render_dynamic(selectedText, "tahoma_8", mainTextPos.x, mainTextPos.y, glm::vec4(255.f), "left", "normal");
+				text.render_dynamic(selectedText, "tahoma_8", mainTextPos.x, mainTextPos.y, vec4(255.f), "left", "normal");
 				if (isOpened) {
 
 					// background and border
@@ -86,13 +90,9 @@ namespace gui {
 		}
 	}
 
-	void FormInput::open_close() {
-		isOpened = !isOpened;
-	}
+	void FormInput::open_close() { isOpened = !isOpened; }
 
-	void FormInput::close() {
-		isOpened = false;
-	}
+	void FormInput::close() { isOpened = false;	}
 
 	void FormInput::select_option(int i) {
 		isOpened = false;

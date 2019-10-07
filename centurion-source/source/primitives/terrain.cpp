@@ -1,5 +1,7 @@
-#include "terrain.h"
-#include "stb_image.h" 
+#include <primitives>
+#include <stb_image.h>
+#include <mapgen>
+#include <global.hpp>
 
 using namespace glb;
 

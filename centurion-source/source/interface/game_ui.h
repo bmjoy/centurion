@@ -3,8 +3,7 @@
 #include <global.hpp>
 #include <objects>
 #include "../interface/game_ui_menu.h"
-#include "../gui/rectangle.h"
-#include "../gui/simple_text.h"
+#include <gui>
 
 class UIGame
 {

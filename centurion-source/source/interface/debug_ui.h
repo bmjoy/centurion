@@ -1,8 +1,7 @@
 #pragma once
 
 #include <global.hpp>
-#include "../gui/simple_text.h"
-#include "../gui/rectangle.h"
+#include <gui>
 
 class DebugUI
 {

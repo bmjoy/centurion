@@ -4,6 +4,8 @@ using namespace glb;
 
 namespace game {
 
+	SelRectPoints *SelRectCoords() { return &selRectCoords; }
+
 	void picking(std::map<int, Building> *bList, std::map<int, Unit> *uList, glm::mat4 *proj, glm::mat4 *view, int *clickId, bool *blockMinimap) {
 		if (!GAME::MENU_IS_ACTIVE){
 			for (std::map<int, Building>::iterator bld = (*bList).begin(); bld != (*bList).end(); bld++) {
@@ -121,20 +123,20 @@ namespace game {
 
 				if (abs(w) > 2 && abs(h) > 2) {
 					selRectangle->render(glm::vec4(255.f), 0, startX, startY, abs(w), abs(h), origin);
-					SelRectCoords()->minX = std::min(startX, lastX);
-					SelRectCoords()->maxX = std::max(startX, lastX);
-					SelRectCoords()->minY = std::min(startY, lastY);
-					SelRectCoords()->maxY = std::max(startY, lastY);
+					(*SelRectCoords()).minX = std::min(startX, lastX);
+					(*SelRectCoords()).maxX = std::max(startX, lastX);
+					(*SelRectCoords()).minY = std::min(startY, lastY);
+					(*SelRectCoords()).maxY = std::max(startY, lastY);
 				}
 
 			}
 			else {
 				cameraLastX = (float)GAME::CAMERA_POS_X;
 				cameraLastY = (float)GAME::CAMERA_POS_Y;
-				SelRectCoords()->minX = 0;
-				SelRectCoords()->maxX = 0;
-				SelRectCoords()->minY = 0;
-				SelRectCoords()->maxY = 0;
+				(*SelRectCoords()).minX = 0;
+				(*SelRectCoords()).maxX = 0;
+				(*SelRectCoords()).minY = 0;
+				(*SelRectCoords()).maxY = 0;
 			}
 		}
 	}

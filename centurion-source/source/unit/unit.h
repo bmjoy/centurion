@@ -5,7 +5,7 @@
 
 #include "../game/game_object.h"
 #include "unit_functions.h"
-#include "../gui/gui.h"
+#include <gui>
 
 class Building;
 

@@ -3,8 +3,7 @@
 #include <global.hpp>
 #include <json.hpp>
 
-#include "../gui/button.h"
-#include "../gui/rectangle.h"
+#include <gui>
 
 class GameMenu
 {

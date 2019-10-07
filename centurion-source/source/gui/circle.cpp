@@ -1,10 +1,12 @@
-#include "circle.h"
-
-using namespace glb;
+#include <gui>
 
 namespace gui {
-	Circle::Circle()
-	{
+
+	using namespace std;
+	using namespace glm;
+	using namespace glb;
+
+	Circle::Circle() {
 		originMap["bottom-left"] = 0;
 		originMap["top-left"] = 1;
 		originMap["center"] = 2;
@@ -14,11 +16,9 @@ namespace gui {
 		data.type = "filled";
 	}
 
-	void Circle::create(std::string Type, float x, float y, float w, float h, float borderWidth, std::string origin) {
-
+	void Circle::create(string Type, float x, float y, float w, float h, float borderWidth, string origin) {
 		if (x < 0) x += getParam("window-width");
 		if (y < 0) y += getParam("window-height");
-
 		data.type = Type;
 		data.x = x;
 		data.y = y;
@@ -27,22 +27,17 @@ namespace gui {
 		data.origin = originMap[origin];
 		data.borderWidth = borderWidth;
 	}
-
-	void Circle::render(glm::vec4 Color, float x, float y, float w, float h, int origin) {
-
+	void Circle::render(vec4 Color, float x, float y, float w, float h, int origin) {
 		if (x != 0.f) data.x = x;
 		if (y != 0.f) data.y = y;
 		if (w != 0.f) data.w = w;
 		if (h != 0.f) data.h = h;
 		if (origin != -1) data.origin = origin;
-
 		if (data.type == "border") {
 			data.borderColor = Color;
 			obj::ECircle()->render(data);
 		}
 	}
 
-	Circle::~Circle()
-	{
-	}
+	Circle::~Circle(){}
 }

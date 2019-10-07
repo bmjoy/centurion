@@ -1,5 +1,6 @@
 #include "../building/building.h"
 #include <math>
+#include "../game/game_functions.h"
 #include "stb_image.h" //Necessary for texture manipulation
 #include "../pathfinding/a_star.h"
 
@@ -67,13 +68,12 @@ void Unit::create() {
 
 void Unit::render(glm::mat4 &proj, glm::mat4 &view, bool picking, int clickID) {
 	
-	hitbox.coords = get_rectangle_coords(position3D.x - unitData.hitBox[0] / 2.f, position3D.y + unitData.hitBox[1] / 2.f + unitData.yOffset, (float)unitData.hitBox[0], (float)unitData.hitBox[1]);
-
 	clickSelection = (picking_id == clickID);
-	if(GLB::MOUSE_LEFT)	rectangleSelection = unit::isInSelectionRect(hitbox.coords);
-
+	if (GLB::MOUSE_LEFT) rectangleSelection = unit::isInSelectionRect(hitbox.coords);
 	selected = (clickSelection + rectangleSelection > 0);
 	
+	hitbox.coords = get_rectangle_coords(position3D.x - unitData.hitBox[0] / 2.f, position3D.y + unitData.hitBox[1] / 2.f + unitData.yOffset, (float)unitData.hitBox[0], (float)unitData.hitBox[1]);
+
 	if(!picking){
 		unit::updateFrame(&creationTime, &unitData.currentFrame, unitData.Frames[unitData.currentState], unitData.Durations[unitData.currentState]);
 		unit::updateZ(position2D, &position3D);
@@ -81,17 +81,19 @@ void Unit::render(glm::mat4 &proj, glm::mat4 &view, bool picking, int clickID) {
 		walk_behaviour();		
 	}
 	
-	if (selected) {
-		selectionCircle.render(glm::vec4(255.f, 255.f, 255.f, 0.8f), position3D.x, position3D.y);
+	if (!GAME::MINIMAP_IS_ACTIVE){
+		if (selected) {
+			selectionCircle.render(glm::vec4(255.f, 255.f, 255.f, 0.8f), position3D.x, position3D.y);
+		}
+		obj::USprite()->render(unitData, position3D, picking);
+		
 	}
-	obj::USprite()->render(unitData, position3D, picking);
 
 	/* debug pathfinding and coordinates */
 
 	if (glb::getBoolean("debug") && !picking) {
 
-		// **** Rectangle Path **** //
-		
+		// **** Rectangle Path **** //	
 		for (int i = 0; i < pathQuadsList.size(); i++) {
 			pathQuadsList[i].render(glm::vec4(255.f, 0.f, 0.f, 255.f));
 		}
@@ -99,6 +101,14 @@ void Unit::render(glm::mat4 &proj, glm::mat4 &view, bool picking, int clickID) {
 
 		if (!GAME::MINIMAP_IS_ACTIVE) {
 			circlePos.render(false, position2D.x, position2D.y);
+			hitbox.rectangle.render(
+				selected ? glm::vec4(255.0f, 0.0f, 255.0f, 1.0f) : glm::vec4(255.0f, 242.0f, 0.0f, 1.0f),
+				0,
+				position3D.x,
+				position3D.y + unitData.yOffset,
+				0,
+				0
+			);
 		}
 	}
 }

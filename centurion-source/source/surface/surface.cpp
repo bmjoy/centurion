@@ -1,4 +1,5 @@
 #include "surface.h"
+#include <mapgen>
 
 using namespace glb;
 

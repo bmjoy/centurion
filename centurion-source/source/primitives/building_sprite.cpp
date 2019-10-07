@@ -1,6 +1,7 @@
-#include "stb_image.h"  // manip. texture
-
-#include "building_sprite.h"
+#include <primitives>
+#include <stb_image.h>
+#include <json.hpp>
+#include <global.hpp>
 
 BuildingSprite::BuildingSprite(){
 	vPath = "assets/shaders/bsprite/vertex.glsl";

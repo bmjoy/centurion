@@ -1,8 +1,11 @@
-#include "rectangle.h"
-
-using namespace glb;
+#include <gui>
 
 namespace gui {
+
+	using namespace std;
+	using namespace glm;
+	using namespace glb;
+
 	Rectangle::Rectangle()
 	{
 		originMap["bottom-left"] = 0;
@@ -13,8 +16,7 @@ namespace gui {
 		data = RectangleData();
 		data.type = "filled";
 	}
-
-	void Rectangle::create(std::string Type, float x, float y, float w, float h, std::string origin, int pickingID) {
+	void Rectangle::create(string Type, float x, float y, float w, float h, string origin, int pickingID) {
 
 		if (x < 0) x += getParam("window-width");
 		if (y < 0) y += getParam("window-height");
@@ -25,10 +27,9 @@ namespace gui {
 		data.w = w;
 		data.h = h;
 		data.origin = originMap[origin];
-		data.pickingColor = glm::vec4(getPickingColorFromID(pickingID), 1.f);
+		data.pickingColor = vec4(getPickingColorFromID(pickingID), 1.f);
 	}
-
-	void Rectangle::render(glm::vec4 Color, bool picking, float x, float y, float w, float h, int origin) {
+	void Rectangle::render(vec4 Color, bool picking, float x, float y, float w, float h, int origin) {
 
 		if (x != 0.f) data.x = x;
 		if (y != 0.f) data.y = y;
@@ -46,7 +47,7 @@ namespace gui {
 		}
 		if (data.type == "border-filled") {
 			data.backColor = Color;
-			data.borderColor = glm::vec4(255.f);
+			data.borderColor = vec4(255.f);
 			obj::FRectangle()->render(data, picking);
 			obj::ERectangle()->render(data);
 		}

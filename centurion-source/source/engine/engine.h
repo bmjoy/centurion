@@ -1,7 +1,7 @@
 #pragma once
 
-#include <iostream>
 #include <objects>
+#include <gui>
 
 #include "window.h"
 #include "mouse.h"
@@ -10,8 +10,6 @@
 #include "../game/game.h"
 #include "../editor/editor.h"
 
-#include "../gui/simple_text.h"
-#include "../gui/rectangle.h"
 #include "../player/player.h"
 
 #include "../interface/debug_ui.h"

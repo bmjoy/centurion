@@ -1,6 +1,6 @@
-#include "stb_image.h"  // manip. texture
-
-#include "unit_sprite.h"
+#include <primitives>
+#include <stb_image.h>
+#include <json.hpp>
 
 UnitSprite::UnitSprite(){
 	vPath = "assets/shaders/usprite/vertex.glsl";
@@ -97,15 +97,13 @@ void UnitSprite::render(UnitData d, glm::vec3 &pos, bool picking) {
 
 	/* Draw */
 
-	if (!GAME::MINIMAP_IS_ACTIVE){
-		glBindVertexArray(VAO);
-		glActiveTexture(GL_TEXTURE0);
-		glBindTexture(GL_TEXTURE_2D, d.textureID + d.currentState);
-		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, IBO);
-		glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
-		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
-		glBindVertexArray(0);
-	}
+	glBindVertexArray(VAO);
+	glActiveTexture(GL_TEXTURE0);
+	glBindTexture(GL_TEXTURE_2D, d.textureID + d.currentState);
+	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, IBO);
+	glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
+	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
+	glBindVertexArray(0);
 }
 
 void UnitSprite::genBuffers() {

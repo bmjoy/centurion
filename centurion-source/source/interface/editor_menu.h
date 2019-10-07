@@ -4,7 +4,7 @@
 #include <objects>
 #include <global.hpp>
 
-#include "../gui/gui.h"
+#include <gui>
 
 namespace editor {
     struct menuData {

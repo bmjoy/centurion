@@ -3,10 +3,7 @@
 #include <global.hpp>
 #include <objects>
 
-#include "../gui/form_input.h"
-#include "../gui/simple_text.h"
-#include "../gui/image.h"
-#include "../gui/rectangle.h"
+#include <gui>
 
 class PlayersList
 {

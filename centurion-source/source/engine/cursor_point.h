@@ -1,6 +1,6 @@
 #pragma once
 
-#include "../gui/image.h"
+#include <gui>
 #include <mapgen>
 
 class CPoint

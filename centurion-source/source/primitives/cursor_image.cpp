@@ -1,7 +1,5 @@
-#include "stb_image.h"  // manip. texture
-#include "cursor_image.h"
-
-
+#include <primitives>
+#include <stb_image.h>
 
 CursorImage::CursorImage(){
 	vPath = "assets/shaders/mouse/vertex.glsl";

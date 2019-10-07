@@ -7,14 +7,14 @@
 #include "../building/building.h"
 #include "../unit/unit.h"
 #include "../engine/camera.h"
-#include "../gui/rectangle.h"
+#include <gui>
 
 namespace game {
 
 	struct SelRectPoints { float minX, maxX, minY, maxY; };
 
 	static SelRectPoints selRectCoords;
-	static SelRectPoints *SelRectCoords() { return &selRectCoords; }
+	SelRectPoints *SelRectCoords();
 	static int clickCount = 0;
 	static float cameraToX = 0.f, cameraToY = 0.f;
 	static bool doubleClick = false;

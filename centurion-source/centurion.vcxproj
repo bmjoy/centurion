@@ -270,6 +270,7 @@
     <ClCompile Include="source\primitives\grid.cpp" />
     <ClCompile Include="source\primitives\image_sprite.cpp" />
     <ClCompile Include="source\primitives\light.cpp" />
+    <ClCompile Include="source\primitives\shader.cpp" />
     <ClCompile Include="source\primitives\terrain.cpp" />
     <ClCompile Include="source\primitives\unit_sprite.cpp" />
     <ClCompile Include="source\surface\surface.cpp" />
@@ -284,6 +285,7 @@
       <DeploymentContent Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</DeploymentContent>
       <DeploymentContent Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</DeploymentContent>
     </ClInclude>
+    <None Include="source\common\gui" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="source\audio\audio_context.h" />
@@ -311,7 +313,7 @@
     <ClInclude Include="source\common\mapgen" />
     <ClInclude Include="source\common\math" />
     <ClInclude Include="source\common\objects" />
-    <ClInclude Include="source\common\shader" />
+    <ClInclude Include="source\common\primitives" />
     <ClInclude Include="source\editor\editor.h" />
     <ClInclude Include="source\engine\camera.h" />
     <ClInclude Include="source\engine\cursor_point.h" />
@@ -323,13 +325,6 @@
     <ClInclude Include="source\game\game.h" />
     <ClInclude Include="source\game\game_functions.h" />
     <ClInclude Include="source\game\game_object.h" />
-    <ClInclude Include="source\gui\button.h" />
-    <ClInclude Include="source\gui\circle.h" />
-    <ClInclude Include="source\gui\gui.h" />
-    <ClInclude Include="source\gui\image.h" />
-    <ClInclude Include="source\gui\simple_text.h" />
-    <ClInclude Include="source\gui\form_input.h" />
-    <ClInclude Include="source\gui\rectangle.h" />
     <ClInclude Include="source\interface\debug_ui.h" />
     <ClInclude Include="source\interface\editor_menu.h" />
     <ClInclude Include="source\interface\game_ui_menu.h" />
@@ -339,18 +334,6 @@
     <ClInclude Include="source\pathfinding\a_star.h" />
     <ClInclude Include="source\pathfinding\node.h" />
     <ClInclude Include="source\player\player.h" />
-    <ClInclude Include="source\primitives\bitmap_font.h" />
-    <ClInclude Include="source\primitives\building_sprite.h" />
-    <ClInclude Include="source\primitives\cursor_image.h" />
-    <ClInclude Include="source\primitives\empty_circle.h" />
-    <ClInclude Include="source\primitives\empty_rectangle.h" />
-    <ClInclude Include="source\primitives\filled_rectangle.h" />
-    <ClInclude Include="source\primitives\grid.h" />
-    <ClInclude Include="source\primitives\light.h" />
-    <ClInclude Include="source\primitives\primitives.h" />
-    <ClInclude Include="source\primitives\image_sprite.h" />
-    <ClInclude Include="source\primitives\terrain.h" />
-    <ClInclude Include="source\primitives\unit_sprite.h" />
     <ClInclude Include="source\surface\surface.h" />
     <ClInclude Include="source\unit\unit.h" />
     <ClInclude Include="source\unit\unit_functions.h" />

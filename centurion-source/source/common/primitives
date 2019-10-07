@@ -1,0 +1,359 @@
+#pragma once
+
+#include <global>
+
+/* 
+	SHADER
+*/
+
+class Shader{
+public:
+    Shader();
+    void compile();
+    void apply_projection_matrix(glm::mat4 mat = glm::mat4(1.0f));
+    void apply_view_matrix(glm::mat4 mat = glm::mat4(1.0f));
+    void apply_model_matrix(glm::mat4 mat = glm::mat4(1.0f));
+    ~Shader();
+
+protected:
+    const char* vPath;
+    const char* fPath;
+    int shaderId;
+    GLuint VAO, VBO, IBO;
+    std::vector<GLuint> textureIdList;
+    std::map<std::string, GLuint> textureIdMap;
+    std::vector<glm::ivec3> textureInfoList; // width, height, nrChannels
+
+private:
+    int success;
+    char infoLog[512];
+    int vertexShader, fragmentShader;
+    const GLchar* vShaderCode;
+    const GLchar* fShaderCode;
+};
+
+/*
+	BITMAP TEXT
+*/
+
+namespace txt {
+	struct CharData {
+		int charWidth[256];
+		float fontHeight;
+		float fontWidth;
+		int startChar;
+	};
+
+	struct StaticData {
+		std::vector<float> X;
+		std::vector<GLint> charList;
+		glm::vec4 color;
+		float y;
+		int textSize;
+		int totalWidth;
+		int startChar;
+		int fontHeight;
+		GLuint textureID;
+		bool shadow;
+	};
+}
+
+
+class BitmapFont : public Shader
+{
+public:
+	BitmapFont();
+	void set_align(std::string hAlign = "left", std::string vAlign = "normal");
+	void create();
+	void render_dynamic(std::string &font, float xPos, float yPos, std::string &text, glm::vec4 &color, bool shadow);
+	txt::StaticData create_static(std::string &font, std::string &text, float x);
+	void render_static(txt::StaticData &data);
+	int getShaderId() { return shaderId; }
+	~BitmapFont();
+
+private:
+	std::map<std::string, txt::CharData> fontData;
+	std::string h_align, v_align, path;
+	int total_width;
+	int offset_x;
+	std::map<std::string, int> hAlignMap;
+	std::map<std::string, int> vAlignMap;
+};
+
+/*
+	BUILDING SPRITE
+*/
+
+class BuildingSprite : public Shader
+{
+public:
+	BuildingSprite();
+	BuildingSprite(int shaderID);
+	void addPath(std::string Path) { entPathList.push_back(Path); }
+	GLuint getTextureId(std::string className);
+	void create();
+	void render(GLuint texID, bool clickable, float x, float y, float w, float h, bool picking, int pickingId, bool selected, glm::vec3 *playerColor);
+	~BuildingSprite();
+
+private:
+
+	std::vector<std::string> entPathList;
+	std::string texturePath;       // texture path
+
+	unsigned char *data;
+	unsigned int indices[6] = {
+		0, 1, 3,   // first triangle
+		1, 2, 3    // second triangle
+	};
+	GLfloat vertices[20] = {
+		// positions				// uv coords		
+		-0.5f,		-0.5f,		0.0f,		0.0f, 1.0,   // in basso a sx
+		0.5f,		-0.5f,		0.0f,		1.0, 1.0,    // in basso a dx
+		0.5f,		0.5f,		0.0f,		1.0, 0.0f,   // in alto a dx
+		-0.5f,		0.5f,		0.0f,		0.0f, 0.0f   // in alto a sx
+	};
+
+	int r, g, b;
+
+	void genBuffers();
+};
+
+/*
+	CURSOR IMAGE
+*/
+
+class CursorImage : public Shader
+{
+public:
+	CursorImage();
+	void create();
+	void render(float x, float y, std::string &currentState);
+	~CursorImage();
+private:
+	float w, h;
+	/* texture variables */
+	std::string initPath;
+	std::array<std::string, 3> texturePaths;
+	std::array<std::string, 3> textureNames;
+};
+
+/*
+	EMPTY CIRCLE
+*/
+
+struct CircleData {
+	glm::vec4 borderColor, backColor;
+	std::string type;
+	float x, y, w, h;
+	float borderWidth;
+	int origin;
+};
+
+class EmptyCircle : public Shader
+{
+public:
+	EmptyCircle();
+	void create();
+	void render(CircleData &data);
+	~EmptyCircle();
+};
+
+/*
+	EMPTY RECTANGLE
+*/
+
+struct RectangleData {
+	glm::vec4 borderColor, backColor, pickingColor;
+	std::string type;
+	float x, y, w, h;
+	int origin;
+};
+
+class EmptyRectangle : public Shader
+{
+public:
+	EmptyRectangle();
+	void create();
+	void render(RectangleData &data);
+	~EmptyRectangle();
+private:
+	float vertices[24];
+};
+
+/*
+	FILLED RECTANGLE
+*/
+
+class FilledRectangle : public Shader
+{
+public:
+	FilledRectangle();
+	void create();
+	void render(RectangleData &data, bool picking);
+	~FilledRectangle();
+};
+
+/*
+	GRID
+*/
+
+class Grid : public Shader
+{
+public:
+	Grid();
+	void create();
+	void update();
+	void render();
+	~Grid();
+};
+
+/*
+	IMAGE SPRITE
+*/
+
+struct ImageData {
+	glm::vec3 pickingColor;
+	std::string imageName;
+	float x, y, w, h;
+	int origin;
+	GLuint textureID;
+};
+
+class ImageSprite : public Shader
+{
+public:
+	ImageSprite();
+	void addPath(std::string imageName, std::string path) { imagesPathMap[imageName] = path; }
+	void create();
+	void getImageData(ImageData *d);
+	void render(ImageData &imageData, bool picking = false);
+	~ImageSprite();
+
+private:
+	std::map<std::string, std::string> imagesPathMap;
+	std::map<GLuint, int[2]> imageSize;
+
+	unsigned char *data;
+	unsigned int indices[6] = {
+		0, 1, 3,   // first triangle
+		1, 2, 3    // second triangle
+	};
+	GLfloat vertices[20] = {
+		// positions			// uv coords		
+		0.f,	0.f,	0.f,	0.f, 1.f,	// in basso a sx
+		1.f,	0.f,	0.f,	1.f, 1.f,	// in basso a dx
+		1.f,	1.f,	0.f,	1.f, 0.f,	// in alto a dx
+		0.f,	1.f,	0.f,	0.f, 0.f	// in alto a sx
+	};
+
+	void genBuffers();
+};
+
+/*
+	LIGHT
+*/
+
+class Light
+{
+public:
+	Light();
+	Light(GLfloat red, GLfloat green, GLfloat blue, GLfloat aIntensity,  //ambient
+		GLfloat xDir, GLfloat yDir, GLfloat zDir, GLfloat dIntensity); //diffuse
+
+	void use_light(GLfloat ambientIntensityLocation, GLfloat ambientColorLocation,  //ambient
+		GLfloat diffuseIntensityLocation, GLfloat directionLocation);    //diffuse
+	~Light();
+private:
+	// ambient light
+	glm::vec3 colour;
+	GLfloat ambientIntensity;
+
+	// diffuse light
+	glm::vec3 direction;
+	GLfloat diffuseIntensity;
+};
+
+/*
+	TERRAIN
+*/
+
+class Terrain : public Shader
+{
+public:
+	Terrain();
+	void create();
+	void updateHeightsBuffer();
+	void updateTextureBuffer();
+	void render(bool tracing);
+	~Terrain();
+
+private:
+	const char* path_grass;
+	const char* path_road;
+	const char* path_rock;
+	float randomX, randomY;
+	GLuint VerticesVBO, HeightsVBO, TexturesVBO;
+	int randomPos;
+
+	void genBuffers();
+	void genTexture();
+
+
+	// light 
+	Light light = Light(1.0f, 1.0f, 1.0f, 0.0f,   // ambient light
+		0.0f, 0.0f, 1.0f, 1.0f);  // diffuse light (important for pseudo shadows)
+};
+
+/*
+	UNIT SPRITE
+*/
+
+struct UnitData {
+	std::map<int, int[2]> spriteSize;
+	std::map<int, int> Frames;
+	std::map<int, int> Durations;
+	std::map<std::string, int> States;
+	glm::vec3 playerColor;
+	glm::vec3 pickingColor;
+	std::string className;
+	int hitBox[2];
+	GLint currentState;
+	int currentFrame;
+	int currentDir;
+	int yOffset;
+	int maxDirections;
+	GLuint textureID;
+};
+
+class UnitSprite : public Shader
+{
+public:
+	UnitSprite();
+	UnitSprite(int shaderID);
+	void addPath(std::string Path) { entPathList.push_back(Path); }
+	void create();
+	void getTextureInfo(UnitData *uData);
+	void render(UnitData d, glm::vec3 &pos, bool picking);
+	~UnitSprite();
+
+private:
+	std::vector<std::string> entPathList;
+	std::string texturePath;       // texture path
+
+	std::map<std::string, int[2]> spriteSize;
+
+	unsigned char *data;
+	unsigned int indices[6] = {
+		0, 1, 3,   // first triangle
+		1, 2, 3    // second triangle
+	};
+	GLfloat vertices[20] = {
+		// positions				// uv coords		
+		-0.5f,		-0.5f,		0.0f,		0.0f, 1.0,   // in basso a sx
+		0.5f,		-0.5f,		0.0f,		1.0, 1.0,    // in basso a dx
+		0.5f,		0.5f,		0.0f,		1.0, 0.0f,   // in alto a dx
+		-0.5f,		0.5f,		0.0f,		0.0f, 0.0f   // in alto a sx
+	};
+
+	void genBuffers();
+};
