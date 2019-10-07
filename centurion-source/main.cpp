@@ -6,15 +6,6 @@
 // things to do: 
 // 1) minimap prerender
 
-namespace glb {
-	void setErrors(map<string, string> errorsMap) { errors = errorsMap; }
-	string getErrorCode(string error) { return errors[error]; }
-	void setParam(string param, float value) { params[param] = value; }
-	float getParam(string param) { return params[param]; }
-	void setBoolean(string param, bool value) { booleans[param] = value; }
-	bool getBoolean(string param) { return booleans[param]; }
-}
-
 namespace GLB {
 	glm::mat4 MENU_PROJECTION;
 	glm::mat4 CAMERA_PROJECTION;

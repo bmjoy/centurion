@@ -1,7 +1,7 @@
 #pragma once
 
 #include <global.hpp>
-#include <objects.h>
+#include <objects>
 
 #include "../gui/form_input.h"
 #include "../gui/simple_text.h"

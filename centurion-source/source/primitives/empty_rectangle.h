@@ -1,7 +1,7 @@
 #pragma once
 
 #include <global.hpp>
-#include <shader.h>
+#include <shader>
 
 struct RectangleData {
 	glm::vec4 borderColor, backColor, pickingColor;

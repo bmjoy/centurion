@@ -2,7 +2,7 @@
 
 #include <global.hpp>
 #include <json.hpp>
-#include <shader.h>
+#include <shader>
 
 struct UnitData {
 	std::map<int, int[2]> spriteSize;

@@ -168,9 +168,6 @@
     <ClCompile Include="source\engine\mouse.cpp">
       <Filter>Source Files\engine</Filter>
     </ClCompile>
-    <ClCompile Include="source\common\shader.cpp">
-      <Filter>Source Files\common</Filter>
-    </ClCompile>
     <ClCompile Include="source\unit\unit.cpp">
       <Filter>Source Files\unit</Filter>
     </ClCompile>
@@ -197,12 +194,6 @@
     </ClCompile>
     <ClCompile Include="source\player\player.cpp">
       <Filter>Source Files\player</Filter>
-    </ClCompile>
-    <ClCompile Include="source\common\map_generation.cpp">
-      <Filter>Source Files\common</Filter>
-    </ClCompile>
-    <ClCompile Include="source\common\objects.cpp">
-      <Filter>Source Files\common</Filter>
     </ClCompile>
     <ClCompile Include="source\gui\rectangle.cpp">
       <Filter>Source Files\gui</Filter>
@@ -288,15 +279,15 @@
     <ClCompile Include="source\gui\circle.cpp">
       <Filter>Source Files\gui</Filter>
     </ClCompile>
+    <ClCompile Include="source\common\common.cpp">
+      <Filter>Source Files\common</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="source\building\building.h">
       <Filter>Header Files\building</Filter>
     </ClInclude>
     <ClInclude Include="source\common\global.hpp">
-      <Filter>Header Files\common</Filter>
-    </ClInclude>
-    <ClInclude Include="source\common\shader.h">
       <Filter>Header Files\common</Filter>
     </ClInclude>
     <ClInclude Include="source\engine\engine.h">
@@ -361,12 +352,6 @@
     </ClInclude>
     <ClInclude Include="source\player\player.h">
       <Filter>Header Files\player</Filter>
-    </ClInclude>
-    <ClInclude Include="source\common\map_generation.h">
-      <Filter>Header Files\common</Filter>
-    </ClInclude>
-    <ClInclude Include="source\common\objects.h">
-      <Filter>Header Files\common</Filter>
     </ClInclude>
     <ClInclude Include="source\gui\rectangle.h">
       <Filter>Header Files\gui</Filter>
@@ -495,6 +480,15 @@
       <Filter>Header Files\common</Filter>
     </ClInclude>
     <ClInclude Include="source\common\global">
+      <Filter>Header Files\common</Filter>
+    </ClInclude>
+    <ClInclude Include="source\common\shader">
+      <Filter>Header Files\common</Filter>
+    </ClInclude>
+    <ClInclude Include="source\common\objects">
+      <Filter>Header Files\common</Filter>
+    </ClInclude>
+    <ClInclude Include="source\common\mapgen">
       <Filter>Header Files\common</Filter>
     </ClInclude>
   </ItemGroup>

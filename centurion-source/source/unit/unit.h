@@ -1,7 +1,7 @@
 #pragma once
 
 #include <json.hpp>
-#include <objects.h>
+#include <objects>
 
 #include "../game/game_object.h"
 #include "unit_functions.h"

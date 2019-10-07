@@ -1,8 +1,8 @@
 #pragma once
 
 #include <global.hpp>
-#include <map_generation.h>
-#include <objects.h>
+#include <mapgen>
+#include <objects>
 
 class Mouse
 {

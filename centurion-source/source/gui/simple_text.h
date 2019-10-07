@@ -1,7 +1,7 @@
 #pragma once
 
 #include <global.hpp>
-#include <objects.h>
+#include <objects>
 
 namespace gui {
 	class SimpleText

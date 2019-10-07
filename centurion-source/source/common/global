@@ -17,7 +17,7 @@ namespace glb {
 	/* error codes*/
 	static map<string, string> errors;
 	
-	/* the definitions of these functions are in main.cpp */
+	/* the definitions of these functions are in common.cpp */
 	void setParam(string param, float value);
 	float getParam(string param);
 	void setBoolean(string param, bool value);

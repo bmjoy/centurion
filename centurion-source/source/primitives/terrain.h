@@ -1,6 +1,6 @@
 #pragma once
-#include <map_generation.h>
-#include <shader.h>
+#include <mapgen>
+#include <shader>
 #include "light.h"
 
 class Terrain : public Shader

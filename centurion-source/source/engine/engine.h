@@ -1,7 +1,7 @@
 #pragma once
 
 #include <iostream>
-#include <objects.h>
+#include <objects>
 
 #include "window.h"
 #include "mouse.h"

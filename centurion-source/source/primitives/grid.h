@@ -1,9 +1,9 @@
 #pragma once
 
 #include <global.hpp>
-#include <shader.h>
+#include <shader>
 #include <stb_image.h>
-#include <map_generation.h>
+#include <mapgen>
 
 class Grid : public Shader
 {
