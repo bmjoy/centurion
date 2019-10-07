@@ -12,8 +12,6 @@ struct SelRectPoints {
 };
 
 namespace GLB {
-	//extern int WINDOW_WIDTH, WINDOW_HEIGHT;
-	//extern int WINDOW_WIDTH_ZOOMED, WINDOW_HEIGHT_ZOOMED;
 	extern glm::mat4 MENU_PROJECTION;
 	extern glm::mat4 CAMERA_PROJECTION;
 	extern glm::mat4 MINIMAP_PROJECTION;
@@ -34,7 +32,6 @@ namespace GLB {
 	extern bool CTRL_BUTTON;
 	extern std::vector<glm::vec3> COLORS;
 	extern GLFWwindow *MAIN_WINDOW;
-	//extern bool DEBUG;
 	extern SelRectPoints SEL_RECT_COORDS; //Only a temporar way to test multiple selection
 	extern bool GAME_CLEAR;
 	extern LPCSTR GAME_NAME;
@@ -64,15 +61,6 @@ namespace GAME {
 	extern float CAMERA_MOVESPEED;
 	extern bool MINIMAP_IS_ACTIVE;
 	extern bool GRID_IS_ACTIVE;
-}
-
-namespace PATH {
-	extern int CELL_GRID_SIZE;
-	extern int GRID_MATRIX[1000][1500];
-	extern int GRID_MATRIX_2D[1000][1500];
-	extern int CLOSED_NODES[1000][1500];
-	extern int OPEN_NODES[1000][1500];
-	extern int DIR_MAP[1000][1500];
 }
 
 /* GLOBAL FUNCTIONS */
@@ -135,20 +123,6 @@ static int get_id() {
 		data[1] * 256 +
 		data[2] * 256 * 256;
 	return pickedID;
-}
-
-static void updatePassMatrix(std::vector<std::vector<int>> mat, glm::vec2 position){
-	for (int i = 0; i < mat.size(); i++) {
-		for (int j = 0; j < mat[0].size(); j++) {
-			if(PATH::GRID_MATRIX[((int)mat.size() - i) + (int)position.y][j + (int)position.x] == 0){
-				PATH::GRID_MATRIX[((int)mat.size() - i) + (int)position.y][j + (int)position.x] = mat[i][j];
-			}
-		}
-	}
-}
-
-static int getGridInfoFromPoint(float x, float y) {
-	return PATH::GRID_MATRIX[(int)x / PATH::CELL_GRID_SIZE][(int)y / PATH::CELL_GRID_SIZE];
 }
 
 static glm::vec2 getZoomedCoords(float xCoord, float yCoord) {

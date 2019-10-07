@@ -9,10 +9,6 @@
 // 1) minimap prerender
 
 namespace GLB {
-	//int WINDOW_WIDTH = 1024; // 2560
-	//int WINDOW_HEIGHT = 768; // 1440
-	//int WINDOW_WIDTH_ZOOMED;
-	//int WINDOW_HEIGHT_ZOOMED;
 	glm::mat4 MENU_PROJECTION;
 	glm::mat4 CAMERA_PROJECTION;
 	glm::mat4 MINIMAP_PROJECTION;
@@ -34,7 +30,6 @@ namespace GLB {
 	bool CTRL_BUTTON = false;
 	std::vector<glm::vec3> COLORS;
 	GLFWwindow *MAIN_WINDOW;
-	//bool DEBUG = false;
 	SelRectPoints SEL_RECT_COORDS;
 	bool GAME_CLEAR = false;
 	LPCSTR GAME_NAME = "Centurion";
@@ -51,7 +46,7 @@ namespace SHD {
 
 namespace GAME {
 	bool MENU_IS_ACTIVE = false;
-	int MAP_WIDTH = 29952, MAP_HEIGHT = 19968;
+	int MAP_WIDTH = 30000, MAP_HEIGHT = 20000;
 	int PLAYERS_NUMBER = 1;
 	int PLAYERS_NUMBER_MAX = 10;
 	int TOWNHALL_RADIUS = 1875;
@@ -64,15 +59,6 @@ namespace GAME {
 	bool MINIMAP_IS_ACTIVE = false;
 	std::vector<std::string> RACES;
 	bool GRID_IS_ACTIVE = false;
-}
-
-namespace PATH {
-	int CELL_GRID_SIZE = 20;
-	int GRID_MATRIX[1000][1500] = { 0 };
-	int GRID_MATRIX_2D[1000][1500] = { 0 };
-	int CLOSED_NODES[1000][1500] = { 0 };
-	int OPEN_NODES[1000][1500] = { 0 };
-	int DIR_MAP[1000][1500] = { 0 };
 }
 
 int main() {

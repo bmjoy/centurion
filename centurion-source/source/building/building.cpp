@@ -2,15 +2,15 @@
 #include "../unit/unit.h"
 #include "building.h"
 
-Building::Building()
-{
-}
+#include "../pathfinding/a_star.h"
+
+Building::Building(){}
 
 void Building::create() {
 	std::ifstream path_scan(data["pass_path"].get<std::string>());
 	json grid_data = json::parse(path_scan);
 	building_grid = grid_data["grid"].get<std::vector<std::vector<int>>>();
-	updatePassMatrix(building_grid, glm::vec2((int)position.x / PATH::CELL_GRID_SIZE - building_grid[0].size() / 2, (int)position.y / PATH::CELL_GRID_SIZE - building_grid.size() / 2));
+	aStar::updatePassMatrix(building_grid, glm::vec2((int)position.x / aStar::cellGridSize - building_grid[0].size() / 2, (int)position.y / aStar::cellGridSize - building_grid.size() / 2));
 
 	std::ifstream path_ent(data["ent_path"].get<std::string>());
 	if (!path_ent.good()) {

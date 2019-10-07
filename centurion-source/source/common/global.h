@@ -21,4 +21,5 @@ namespace glb {
 	void readIndicesData(unsigned int *indices, string path);
 	void readVerticesData(float *vertices, string path);
 	void readVerticesPosData(int *verticesPos, string path);
+
 };

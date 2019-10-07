@@ -1,5 +1,7 @@
 #include "grid.h"
 
+#include "../pathfinding/a_star.h"
+
 Grid::Grid()
 {
 	vPath = "assets/shaders/terrain/vertex_grid.glsl";
@@ -46,8 +48,8 @@ void Grid::create() {
 
 	float zNoise = 0.0f;
 	int yNoise = 0;
-	int grid_sizeX = GAME::MAP_WIDTH / PATH::CELL_GRID_SIZE;
-	int grid_sizeY = GAME::MAP_HEIGHT / PATH::CELL_GRID_SIZE;
+	int grid_sizeX = GAME::MAP_WIDTH / aStar::cellGridSize;
+	int grid_sizeY = GAME::MAP_HEIGHT / aStar::cellGridSize;
 	unsigned char* gridData = new unsigned char[grid_sizeX * grid_sizeY * 4];
 
 	gridData = { 0 };
@@ -65,8 +67,8 @@ void Grid::update() {
 
 	float zNoise;
 	int yNoise;
-	int grid_sizeX = GAME::MAP_WIDTH / PATH::CELL_GRID_SIZE;
-	int grid_sizeY = GAME::MAP_HEIGHT / PATH::CELL_GRID_SIZE;
+	int grid_sizeX = GAME::MAP_WIDTH / aStar::cellGridSize;
+	int grid_sizeY = GAME::MAP_HEIGHT / aStar::cellGridSize;
 	unsigned char* gridData = new unsigned char[grid_sizeX * grid_sizeY * 4];
 
 	for (int y = 0; y < grid_sizeY; ++y) {
@@ -74,16 +76,16 @@ void Grid::update() {
 
 			/* From 3d grid to 2d */
 			/* for pathfinding calculation */
-			zNoise = mapgen::generateNoise(glm::vec2(x*PATH::CELL_GRID_SIZE, y*PATH::CELL_GRID_SIZE));
-			zNoise = mapgen::smoothNoise((float)y*PATH::CELL_GRID_SIZE, zNoise);
-			yNoise = int(y*PATH::CELL_GRID_SIZE + zNoise) / PATH::CELL_GRID_SIZE;
+			zNoise = mapgen::generateNoise(glm::vec2(x*aStar::cellGridSize, y*aStar::cellGridSize));
+			zNoise = mapgen::smoothNoise((float)y*aStar::cellGridSize, zNoise);
+			yNoise = int(y*aStar::cellGridSize + zNoise) / aStar::cellGridSize;
 			if (yNoise < grid_sizeY && yNoise > 0) {
-				PATH::GRID_MATRIX_2D[y][x] = PATH::GRID_MATRIX[yNoise][x];
+				aStar::GridMatrix2D()[y * aStar::gridWidth + x] = aStar::GridMatrix()[yNoise * aStar::gridWidth + x];
 			}
 
 			/* save a grid image for debug and graphic purposes*/
 
-			if (PATH::GRID_MATRIX_2D[y][x] == 1) {
+			if (aStar::GridMatrix2D()[y * aStar::gridWidth + x] == 1) {
 				gridData[(grid_sizeX * (grid_sizeY - 1 - y) + x) * 4 + 0] = 0;
 				gridData[(grid_sizeX * (grid_sizeY - 1 - y) + x) * 4 + 1] = 0;
 				gridData[(grid_sizeX * (grid_sizeY - 1 - y) + x) * 4 + 2] = 0;

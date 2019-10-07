@@ -2,6 +2,8 @@
 #include "../building/building.h"
 #include "unit.h"
 
+#include "../pathfinding/a_star.h"
+
 Unit::Unit() {
 	unitData = UnitData();
 	unitData.currentDir = 0;
@@ -162,7 +164,7 @@ void Unit::walk_behaviour() {
 
 		is_Moving = true;
 
-		startPoint = glm::vec2((int)position2D.x / PATH::CELL_GRID_SIZE * PATH::CELL_GRID_SIZE, (int)position2D.y / PATH::CELL_GRID_SIZE * PATH::CELL_GRID_SIZE);
+		startPoint = glm::vec2((int)position2D.x / aStar::cellGridSize * aStar::cellGridSize, (int)position2D.y / aStar::cellGridSize * aStar::cellGridSize);
 		endPoint = getZoomedCoords((float)GLB::MOUSE_RIGHT_X, (float)GLB::MOUSE_RIGHT_Y_2D);
 
 		// pathfinding

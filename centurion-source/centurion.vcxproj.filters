@@ -494,6 +494,9 @@
     <ClInclude Include="source\gui\circle.h">
       <Filter>Header Files\gui</Filter>
     </ClInclude>
+    <ClInclude Include="source\common\headers">
+      <Filter>Header Files\common</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="assets\shaders\bsprite\fragment.glsl">
@@ -549,9 +552,6 @@
     </None>
     <None Include="assets\shaders\usprite\vertex.glsl">
       <Filter>Shader Files\usprite</Filter>
-    </None>
-    <None Include="source\common\headers">
-      <Filter>Header Files\common</Filter>
     </None>
   </ItemGroup>
 </Project>

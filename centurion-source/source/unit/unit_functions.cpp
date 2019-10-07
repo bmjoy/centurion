@@ -1,5 +1,7 @@
 #include "unit_functions.h"
 
+#include "../pathfinding/a_star.h"
+
 void unit::updateZ(glm::vec3 &pos2d, glm::vec3 *pos3d) {
 	float zNoise = mapgen::getNoiseEstimate(pos2d.x, pos2d.y);	
 	(*pos3d).x = pos2d.x;
@@ -50,19 +52,19 @@ float unit::getDistance(std::vector<glm::ivec2> &path, int &n) {
 }
 
 float unit::getResDistance(std::vector<glm::ivec2> &path, int &n, glm::vec3 &pos2d) {
-	float deltaX = (float)path[n+1].x - (int)pos2d.x / PATH::CELL_GRID_SIZE * PATH::CELL_GRID_SIZE;
-	float deltaY = (float)path[n+1].y - (int)pos2d.y / PATH::CELL_GRID_SIZE * PATH::CELL_GRID_SIZE;
+	float deltaX = (float)path[n+1].x - (int)pos2d.x / aStar::cellGridSize * aStar::cellGridSize;
+	float deltaY = (float)path[n+1].y - (int)pos2d.y / aStar::cellGridSize * aStar::cellGridSize;
 	return sqrt(deltaX * deltaX + deltaY * deltaY);
 }
 
 std::vector<glm::ivec2> unit::getPath(glm::vec2 &start, glm::vec2 &end) {
-	int jStart = (int)start.x / PATH::CELL_GRID_SIZE;
-	int iStart = (int)start.y / PATH::CELL_GRID_SIZE;
-	int jEnd = (int)end.x / PATH::CELL_GRID_SIZE;
-	int iEnd = (int)end.y / PATH::CELL_GRID_SIZE;
+	int jStart = (int)start.x / aStar::cellGridSize;
+	int iStart = (int)start.y / aStar::cellGridSize;
+	int jEnd = (int)end.x / aStar::cellGridSize;
+	int iEnd = (int)end.y / aStar::cellGridSize;
 
 	//fix pathfinding click to 1
-	while (PATH::GRID_MATRIX_2D[iEnd][jEnd] != 0) {
+	while (aStar::GridMatrix2D()[iEnd * aStar::gridWidth + jEnd] != 0) {
 		iEnd--;
 		jEnd--;
 	}
