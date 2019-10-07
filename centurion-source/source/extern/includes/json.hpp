@@ -2,7 +2,7 @@
 
 #include <nlohmann/json.hpp>
 #include <iostream>
-#include <global.hpp>
+#include <global>
 
 /* https://github.com/nlohmann/json */
 
@@ -18,7 +18,7 @@ public:
 	}
 
 	json static pathfile_to_document(std::string path) {
-		return string_to_document(ReadFile(path.c_str()).c_str());
+		return string_to_document(glb::ReadFile(path.c_str()).c_str());
 	}
 };
 

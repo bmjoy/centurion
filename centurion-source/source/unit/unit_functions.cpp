@@ -1,6 +1,9 @@
 #include "unit_functions.h"
 
 #include "../pathfinding/a_star.h"
+#include "../game/game_functions.h"
+
+using namespace game;
 
 void unit::updateZ(glm::vec3 &pos2d, glm::vec3 *pos3d) {
 	float zNoise = mapgen::getNoiseEstimate(pos2d.x, pos2d.y);	
@@ -19,23 +22,23 @@ void unit::updateFrame(float *creationTime, int *frame, int max_frames, int dura
 bool unit::isInSelectionRect(std::array<float, 8> &coords){
 	return(
 		// are the 4 points in selection rectangle ?
-		(coords[0] > GLB::SEL_RECT_COORDS.minX && coords[0] < GLB::SEL_RECT_COORDS.maxX &&
-			coords[1] > GLB::SEL_RECT_COORDS.minY && coords[1] < GLB::SEL_RECT_COORDS.maxY) ||
-		(coords[2] > GLB::SEL_RECT_COORDS.minX && coords[2] < GLB::SEL_RECT_COORDS.maxX &&
-			coords[3] > GLB::SEL_RECT_COORDS.minY && coords[3] < GLB::SEL_RECT_COORDS.maxY) ||
-		(coords[4] > GLB::SEL_RECT_COORDS.minX && coords[4] < GLB::SEL_RECT_COORDS.maxX &&
-			coords[5] > GLB::SEL_RECT_COORDS.minY && coords[5] < GLB::SEL_RECT_COORDS.maxY) ||
-		(coords[6] > GLB::SEL_RECT_COORDS.minX && coords[6] < GLB::SEL_RECT_COORDS.maxX &&
-			coords[7] > GLB::SEL_RECT_COORDS.minY && coords[7] < GLB::SEL_RECT_COORDS.maxY) ||
+		(coords[0] > SelRectCoords()->minX && coords[0] < SelRectCoords()->maxX &&
+			coords[1] > SelRectCoords()->minY && coords[1] < SelRectCoords()->maxY) ||
+		(coords[2] > SelRectCoords()->minX && coords[2] < SelRectCoords()->maxX &&
+			coords[3] > SelRectCoords()->minY && coords[3] < SelRectCoords()->maxY) ||
+		(coords[4] > SelRectCoords()->minX && coords[4] < SelRectCoords()->maxX &&
+			coords[5] > SelRectCoords()->minY && coords[5] < SelRectCoords()->maxY) ||
+		(coords[6] > SelRectCoords()->minX && coords[6] < SelRectCoords()->maxX &&
+			coords[7] > SelRectCoords()->minY && coords[7] < SelRectCoords()->maxY) ||
 		// does the sel. rectangle and hitbox rectangle intersect themselves?
-		(coords[0] > GLB::SEL_RECT_COORDS.minX && coords[0] < GLB::SEL_RECT_COORDS.maxX &&
-			coords[3] < GLB::SEL_RECT_COORDS.minY && coords[1] > GLB::SEL_RECT_COORDS.maxY) ||
-		(coords[4] > GLB::SEL_RECT_COORDS.minX && coords[4] < GLB::SEL_RECT_COORDS.maxX &&
-			coords[3] < GLB::SEL_RECT_COORDS.minY && coords[1] > GLB::SEL_RECT_COORDS.maxY) ||
-		(coords[1] > GLB::SEL_RECT_COORDS.minY && coords[1] < GLB::SEL_RECT_COORDS.maxY &&
-			coords[0] < GLB::SEL_RECT_COORDS.minX && coords[4] > GLB::SEL_RECT_COORDS.maxX) ||
-		(coords[3] > GLB::SEL_RECT_COORDS.minY && coords[3] < GLB::SEL_RECT_COORDS.maxY &&
-			coords[0] < GLB::SEL_RECT_COORDS.minX && coords[4] > GLB::SEL_RECT_COORDS.maxX)
+		(coords[0] > SelRectCoords()->minX && coords[0] < SelRectCoords()->maxX &&
+			coords[3] < SelRectCoords()->minY && coords[1] > SelRectCoords()->maxY) ||
+		(coords[4] > SelRectCoords()->minX && coords[4] < SelRectCoords()->maxX &&
+			coords[3] < SelRectCoords()->minY && coords[1] > SelRectCoords()->maxY) ||
+		(coords[1] > SelRectCoords()->minY && coords[1] < SelRectCoords()->maxY &&
+			coords[0] < SelRectCoords()->minX && coords[4] > SelRectCoords()->maxX) ||
+		(coords[3] > SelRectCoords()->minY && coords[3] < SelRectCoords()->maxY &&
+			coords[0] < SelRectCoords()->minX && coords[4] > SelRectCoords()->maxX)
 		);
 }
 

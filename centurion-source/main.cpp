@@ -1,12 +1,19 @@
 #include <global.hpp>
-#include <global.h>
 #include <json.hpp>
 
 #include "source/engine/engine.h"
 
-
 // things to do: 
 // 1) minimap prerender
+
+namespace glb {
+	void setErrors(map<string, string> errorsMap) { errors = errorsMap; }
+	string getErrorCode(string error) { return errors[error]; }
+	void setParam(string param, float value) { params[param] = value; }
+	float getParam(string param) { return params[param]; }
+	void setBoolean(string param, bool value) { booleans[param] = value; }
+	bool getBoolean(string param) { return booleans[param]; }
+}
 
 namespace GLB {
 	glm::mat4 MENU_PROJECTION;
@@ -30,7 +37,6 @@ namespace GLB {
 	bool CTRL_BUTTON = false;
 	std::vector<glm::vec3> COLORS;
 	GLFWwindow *MAIN_WINDOW;
-	SelRectPoints SEL_RECT_COORDS;
 	bool GAME_CLEAR = false;
 	LPCSTR GAME_NAME = "Centurion";
 }

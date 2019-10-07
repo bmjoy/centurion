@@ -121,20 +121,20 @@ namespace game {
 
 				if (abs(w) > 2 && abs(h) > 2) {
 					selRectangle->render(glm::vec4(255.f), 0, startX, startY, abs(w), abs(h), origin);
-					GLB::SEL_RECT_COORDS.minX = std::min(startX, lastX);
-					GLB::SEL_RECT_COORDS.maxX = std::max(startX, lastX);
-					GLB::SEL_RECT_COORDS.minY = std::min(startY, lastY);
-					GLB::SEL_RECT_COORDS.maxY = std::max(startY, lastY);
+					SelRectCoords()->minX = std::min(startX, lastX);
+					SelRectCoords()->maxX = std::max(startX, lastX);
+					SelRectCoords()->minY = std::min(startY, lastY);
+					SelRectCoords()->maxY = std::max(startY, lastY);
 				}
 
 			}
 			else {
 				cameraLastX = (float)GAME::CAMERA_POS_X;
 				cameraLastY = (float)GAME::CAMERA_POS_Y;
-				GLB::SEL_RECT_COORDS.minX = 0;
-				GLB::SEL_RECT_COORDS.maxX = 0;
-				GLB::SEL_RECT_COORDS.minY = 0;
-				GLB::SEL_RECT_COORDS.maxY = 0;
+				SelRectCoords()->minX = 0;
+				SelRectCoords()->maxX = 0;
+				SelRectCoords()->minY = 0;
+				SelRectCoords()->maxY = 0;
 			}
 		}
 	}

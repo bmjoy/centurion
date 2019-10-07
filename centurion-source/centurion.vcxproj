@@ -236,7 +236,6 @@
     <ClCompile Include="source\audio\sound.cpp" />
     <ClCompile Include="source\audio\sound_buffer.cpp" />
     <ClCompile Include="source\building\building.cpp" />
-    <ClCompile Include="source\common\global.cpp" />
     <ClCompile Include="source\common\map_generation.cpp" />
     <ClCompile Include="source\common\objects.cpp" />
     <ClCompile Include="source\common\shader.cpp" />
@@ -309,9 +308,10 @@
     <ClInclude Include="source\audio\sound.h" />
     <ClInclude Include="source\audio\sound_buffer.h" />
     <ClInclude Include="source\building\building.h" />
-    <ClInclude Include="source\common\global.h" />
+    <ClInclude Include="source\common\global" />
     <ClInclude Include="source\common\global.hpp" />
     <ClInclude Include="source\common\map_generation.h" />
+    <ClInclude Include="source\common\math" />
     <ClInclude Include="source\common\objects.h" />
     <ClInclude Include="source\common\shader.h" />
     <ClInclude Include="source\editor\editor.h" />

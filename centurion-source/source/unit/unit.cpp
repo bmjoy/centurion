@@ -1,8 +1,11 @@
-#include "stb_image.h" //Necessary for texture manipulation
 #include "../building/building.h"
+#include <math>
+#include "stb_image.h" //Necessary for texture manipulation
+#include "../pathfinding/a_star.h"
+
 #include "unit.h"
 
-#include "../pathfinding/a_star.h"
+using namespace math;
 
 Unit::Unit() {
 	unitData = UnitData();
@@ -63,37 +66,25 @@ void Unit::create() {
 }
 
 void Unit::render(glm::mat4 &proj, glm::mat4 &view, bool picking, int clickID) {
+	
+	hitbox.coords = get_rectangle_coords(position3D.x - unitData.hitBox[0] / 2.f, position3D.y + unitData.hitBox[1] / 2.f + unitData.yOffset, (float)unitData.hitBox[0], (float)unitData.hitBox[1]);
 
 	clickSelection = (picking_id == clickID);
 	if(GLB::MOUSE_LEFT)	rectangleSelection = unit::isInSelectionRect(hitbox.coords);
 
 	selected = (clickSelection + rectangleSelection > 0);
-
+	
 	if(!picking){
 		unit::updateFrame(&creationTime, &unitData.currentFrame, unitData.Frames[unitData.currentState], unitData.Durations[unitData.currentState]);
 		unit::updateZ(position2D, &position3D);
 		position_update();
 		walk_behaviour();		
 	}
-
 	
 	if (selected) {
 		selectionCircle.render(glm::vec4(255.f, 255.f, 255.f, 0.8f), position3D.x, position3D.y);
 	}
 	obj::USprite()->render(unitData, position3D, picking);
-
-	
-	if (glb::getBoolean("debug") && !picking) {
-		hitbox.coords = getCoords(position3D.x - unitData.hitBox[0] / 2.f, position3D.y + unitData.hitBox[1] / 2.f + unitData.yOffset, (float)unitData.hitBox[0], (float)unitData.hitBox[1]);
-		/*hitbox.rectangle.render(
-			selected ? glm::vec4(255.0f, 255.0f, 255.0f, 1.0f) : glm::vec4(0.0f, 0.0f, 0.0f, 0.0f),
-			0,
-			position3D.x,
-			position3D.y + unitData.yOffset,
-			0,
-			0
-		);*/
-	}
 
 	/* debug pathfinding and coordinates */
 
@@ -108,18 +99,6 @@ void Unit::render(glm::mat4 &proj, glm::mat4 &view, bool picking, int clickID) {
 
 		if (!GAME::MINIMAP_IS_ACTIVE) {
 			circlePos.render(false, position2D.x, position2D.y);
-			//circlePos.render(false, position3D.x, position3D.y);
-
-			
-			hitbox.coords = getCoords(position3D.x - unitData.hitBox[0] / 2.f, position3D.y + unitData.hitBox[1] / 2.f + unitData.yOffset, (float)unitData.hitBox[0], (float)unitData.hitBox[1]);
-			/*hitbox.rectangle.render(
-				selected ? glm::vec4(255.0f, 0.0f, 255.0f, 1.0f) : glm::vec4(255.0f, 242.0f, 0.0f, 1.0f),
-				0,
-				position3D.x,
-				position3D.y + unitData.yOffset,
-				0,
-				0
-			);*/
 		}
 	}
 }

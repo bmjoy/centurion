@@ -40,16 +40,6 @@ out float FragCol;
 
 out float grassW, roadW;
 
-/* ----- ----- ----- ----- */
-
-// this function calculate the value of the equation
-// of the ellipse (x-cx)^2 / r^2 + ((1.5))*(y-cy)^2 / r^2 = 1  
-// 1.5 --> because the plane is inclined 45 degrees and then scaled x2 on y
-// and we want a circular form on the map for each townhall
-
-float distEllipse(float x, float y, float cx, float cy, float r){
-    return ((x-cx)*(x-cx)/(r*r) + 1.5*(y-cy)*(y-cy)/(r*r));
-}
 
 /* ----- ----- ----- ----- */
 /*      MAIN FUNCTION      */
@@ -61,7 +51,6 @@ void main()
     /* RENDERING */
     int offset = 256; 
     vec4 newPos = vec4(pos.x - offset, pos.y + zNoise - offset, pos.y *(-1.f) + zNoise, 1.0);
-    //vec4 newPos = vec4(pos.x, pos.y, pos.z, 1.0);
     gl_Position = projection * view * newPos;
     
     /* To Fragment Shader */

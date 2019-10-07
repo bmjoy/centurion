@@ -10,6 +10,11 @@
 #include "../gui/rectangle.h"
 
 namespace game {
+
+	struct SelRectPoints { float minX, maxX, minY, maxY; };
+
+	static SelRectPoints selRectCoords;
+	static SelRectPoints *SelRectCoords() { return &selRectCoords; }
 	static int clickCount = 0;
 	static float cameraToX = 0.f, cameraToY = 0.f;
 	static bool doubleClick = false;

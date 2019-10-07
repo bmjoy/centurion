@@ -12,7 +12,7 @@ void myWindow::init() {
 	glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
 	glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
 	glfwWindowHint(GLFW_RESIZABLE, GL_FALSE);
-
+	std::cout << getParam("window-width") << " " << getParam("window-height") << "\n";
 	mainWindow = glfwCreateWindow((int)getParam("window-width"), (int)getParam("window-height"), "Centurion", nullptr, nullptr); // Windowed
 	glfwMakeContextCurrent(mainWindow);
 

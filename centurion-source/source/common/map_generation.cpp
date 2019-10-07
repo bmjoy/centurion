@@ -1,6 +1,10 @@
 #include <map_generation.h>
 #include "../player/player.h"
 
+#include <math>
+
+using namespace math;
+
 /* ----- NOISE FUNCTIONS ----- */
 
 // the main function is Perlin().
@@ -291,6 +295,7 @@ float mapgen::getNoiseEstimate(float x, float y) {
 }
 
 void mapgen::define_settlements() {
+
 	srand((unsigned int)time(NULL));
 	std::vector<float> townhallPos;
 	int k = 0;
@@ -307,14 +312,14 @@ void mapgen::define_settlements() {
 			b = float(rand() % (max_Y - min) + min);
 
 			if (n == 0) { // 1 PLAYER
-				if (Distance(a, b, GAME::MAP_WIDTH/2.0f, GAME::MAP_HEIGHT/2.0f) > GAME::MAP_HEIGHT / 2.0f) {
+				if (euclidean_distance(a, b, GAME::MAP_WIDTH/2.0f, GAME::MAP_HEIGHT/2.0f) > GAME::MAP_HEIGHT / 2.0f) {
 					townhallPos.push_back(a);
 					townhallPos.push_back(b);
 					c = true;
 				}
 			}
 			if (n == 1) { // 2 PLAYERS
-				d = Distance(a, b, townhallPos[n - 1], townhallPos[n]);
+				d = euclidean_distance(a, b, townhallPos[n - 1], townhallPos[n]);
 				if (d > GAME::MAP_HEIGHT * 0.5) {
 					townhallPos.push_back(a);
 					townhallPos.push_back(b);
@@ -324,7 +329,7 @@ void mapgen::define_settlements() {
 			if (n == 2 || n == 3) { // 3 & 4 PLAYERS
 				bool c2 = true;
 				for (int m = n - 1; m >= 0; m--) {
-					d = Distance(a, b, townhallPos[m * 2], townhallPos[m * 2 + 1]);
+					d = euclidean_distance(a, b, townhallPos[m * 2], townhallPos[m * 2 + 1]);
 					if (d <= GAME::MAP_HEIGHT * 0.5) {
 						c2 = c2 * false;
 					}
@@ -339,7 +344,7 @@ void mapgen::define_settlements() {
 
 				bool c2 = true;
 				for (int m = n - 1; m >= 0; m--) {
-					d = Distance(a, b, townhallPos[m * 2], townhallPos[m * 2 + 1]);
+					d = euclidean_distance(a, b, townhallPos[m * 2], townhallPos[m * 2 + 1]);
 					if (d <= GAME::MAP_HEIGHT * 0.25) {
 						c2 = c2 * false;
 					}

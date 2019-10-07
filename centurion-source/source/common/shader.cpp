@@ -7,8 +7,8 @@ Shader::Shader() {
 
 void Shader::compile() {
 	// Compile and setup the shader
-	std::string vertexString = ReadFile(vPath);
-	std::string fragmentString = ReadFile(fPath);
+	std::string vertexString = glb::ReadFile(vPath);
+	std::string fragmentString = glb::ReadFile(fPath);
 	vShaderCode = vertexString.c_str();
 	fShaderCode = fragmentString.c_str();
 

@@ -282,9 +282,6 @@
     <ClCompile Include="source\audio\sound_buffer.cpp">
       <Filter>Source Files\audio</Filter>
     </ClCompile>
-    <ClCompile Include="source\common\global.cpp">
-      <Filter>Source Files\common</Filter>
-    </ClCompile>
     <ClCompile Include="source\primitives\empty_circle.cpp">
       <Filter>Source Files\primitives</Filter>
     </ClCompile>
@@ -485,9 +482,6 @@
     <ClInclude Include="source\audio\interfaces\IListener.h">
       <Filter>Header Files\audio\interfaces</Filter>
     </ClInclude>
-    <ClInclude Include="source\common\global.h">
-      <Filter>Header Files\common</Filter>
-    </ClInclude>
     <ClInclude Include="source\primitives\empty_circle.h">
       <Filter>Header Files\primitives</Filter>
     </ClInclude>
@@ -495,6 +489,12 @@
       <Filter>Header Files\gui</Filter>
     </ClInclude>
     <ClInclude Include="source\common\headers">
+      <Filter>Header Files\common</Filter>
+    </ClInclude>
+    <ClInclude Include="source\common\math">
+      <Filter>Header Files\common</Filter>
+    </ClInclude>
+    <ClInclude Include="source\common\global">
       <Filter>Header Files\common</Filter>
     </ClInclude>
   </ItemGroup>
