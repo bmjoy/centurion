@@ -1,4 +1,4 @@
-#include "window.h"
+#include <engine>
 
 using namespace glb;
 
@@ -10,7 +10,7 @@ void myWindow::init() {
 	glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
 	glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
 	glfwWindowHint(GLFW_RESIZABLE, GL_FALSE);
-	mainWindow = glfwCreateWindow((int)getParam("window-width"), (int)getParam("window-height"), "Centurion", nullptr, nullptr); // Windowed
+	mainWindow = glfwCreateWindow((int)getParam("window-width"), (int)getParam("window-height"), gameNameSTR.c_str(), nullptr, nullptr); // Windowed
 	glfwMakeContextCurrent(mainWindow);
 
 	create_callbacks(); // handle key + mouse input

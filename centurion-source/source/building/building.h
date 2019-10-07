@@ -2,7 +2,7 @@
 
 #include <global.hpp>
 #include <json.hpp>
-#include <objects>
+#include <global.hpp>
 #include "../game/game_object.h"
 
 class Unit;

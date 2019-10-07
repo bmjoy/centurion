@@ -2,7 +2,6 @@
 #define H_AUDIOPLAYER
 
 #include <cstdlib>
-#include <global.hpp>
 #include <iostream>
 #include <windows.h>
 #include <OpenAL/al.h>

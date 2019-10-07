@@ -1,8 +1,7 @@
 #pragma once
 
 #include <global.hpp>
-#include <objects>
-
+#include <global.hpp>
 #include "../game/game_object.h"
 
 class Surface : public GObject

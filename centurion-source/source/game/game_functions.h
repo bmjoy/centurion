@@ -1,13 +1,12 @@
 #pragma once
 
 #include <global.hpp>
-#include <objects>
-
+#include <engine>
 #include "../surface/surface.h"
 #include "../building/building.h"
 #include "../unit/unit.h"
-#include "../engine/camera.h"
-#include <gui>
+
+
 
 namespace game {
 

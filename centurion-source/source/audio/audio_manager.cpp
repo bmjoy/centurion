@@ -1,13 +1,12 @@
-#include "audio_manager.h"
+#include <global.hpp>
 
-AudioManager::AudioManager()
-{
-}
+using namespace glb;
+
+AudioManager::AudioManager(){}
 
 void AudioManager::MusicPlay(std::string name, bool looping) {
 	device = new AudioDevice();
-
-	if(device){
+	if (device){
 		music = device->CreateMusic();
 		if (!music->LoadFromFile(name.c_str())){
 			std::cout << "DEBUG: Impossible to find or parse audio file. No music will be played.\n";
@@ -25,7 +24,9 @@ void AudioManager::MusicPlay(std::string name, bool looping) {
 
 void AudioManager::MusicStop() {
 	if (music) {
-		delete device;
+		if (device){
+			delete device;
+		}
 		music->Stop();
 		std::cout << "DEBUG: Music variable is working properly.\n";
 		if (IsMusicPlaying()) {
@@ -75,6 +76,8 @@ bool AudioManager::IsMusicLooping() {
 	}
 }
 
-AudioManager::~AudioManager()
-{
+AudioManager::~AudioManager(){
+	if (device) {
+		delete device;
+	}
 }

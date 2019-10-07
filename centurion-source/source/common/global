@@ -1,97 +1,95 @@
 ﻿#pragma once
 
 #include <headers>
+#include <primitives>
+
+using namespace std;
+using namespace glm;
+
+//
+//	NAMESPACE GLOBAL
+//	FOR GLOBAL VARIABLES, PARAMETERS AND FUNCTIONS
+//
 
 namespace glb {
-
-    using namespace std;
-    
-	/*======================== GLOBAL VARIABLES =======================*/
-
-	/* global parameters*/
-    static map<string, float> params;
-
-	/* global booleans */
-	static map<string, bool> booleans;
-	
-	/* error codes*/
-	static map<string, string> errors;
-	
-	/* the definitions of these functions are in common.cpp */
+	static const string gameNameSTR = "Centurion";
+	static const LPCSTR gameNameLPCSTR = "Centurion";
+    static map<string, float> params; // global parameters
+	static map<string, bool> booleans; // global booleans
+	static map<string, string> errors; // error codes
 	void setParam(string param, float value);
 	float getParam(string param);
 	void setBoolean(string param, bool value);
 	bool getBoolean(string param);
 	void setErrors(map<string, string> errorsMap);
 	string getErrorCode(string error);
+	void saveLog();
 
-	/*======================== GLOBAL FUNCTIONS ========================*/
+	// reading/saving map data 
+	void readIndicesData(unsigned int *indices, string path);
+	void readVerticesData(float *vertices, string path);
+	void readVerticesPosData(int *verticesPos, string path);
+	string ReadFile(const char* fileLocation);
+	vector<string> get_all_files_names_within_folder(string folder);
 
-	/* reading/saving map data */
-	static void readIndicesData(unsigned int *indices, string path) {
-		std::fstream fin;
-		fin.open(path);
-		std::string line, number;
-		std::getline(fin, line);
-		std::stringstream s(line);
-		int i = 0;
-		while (std::getline(s, number, ',')) {
-			indices[i] = (unsigned int)std::stoi(number);
-			i++;
-		}
-	}
-	static void readVerticesData(float *vertices, string path) {
-		std::fstream fin;
-		fin.open(path);
-		std::string line, number;
-		std::getline(fin, line);
-		std::stringstream s(line);
-		int i = 0;
-		while (std::getline(s, number, ',')) {
-			vertices[i] = std::stof(number);
-			i++;
-		}
-	}
-	static void readVerticesPosData(int *verticesPos, string path) {
-		std::fstream fin;
-		fin.open(path);
-		std::string line, number;
-		std::getline(fin, line);
-		std::stringstream s(line);
-		int i = 0;
-		while (std::getline(s, number, ',')) {
-			verticesPos[i] = std::stoi(number);
-			i++;
-		}
-	}
-	static std::string ReadFile(const char* fileLocation) {
-		std::string content;
-		std::ifstream fileStream(fileLocation, std::ios::in);
-		if (!fileStream.is_open()) {
-			printf("DEBUG: Failed to read %s! File doesn't exist.", fileLocation);
-			return "";
-		}
-		std::string line = "";
-		while (!fileStream.eof())		{
-			std::getline(fileStream, line);
-			content.append(line + "\n");
-		}
-		fileStream.close();
-		return content;
-	}
-	static std::vector<std::string> get_all_files_names_within_folder(std::string folder) {
-		std::vector<std::string> names;
-		std::string search_path = folder + "/*.*";
-		WIN32_FIND_DATA fd;
-		HANDLE hFind = ::FindFirstFile(search_path.c_str(), &fd);
-		if (hFind != INVALID_HANDLE_VALUE) {
-			do {
-				if (!(fd.dwFileAttributes & FILE_ATTRIBUTE_DIRECTORY)) {
-					names.push_back(fd.cFileName);
-				}
-			} while (::FindNextFile(hFind, &fd));
-			::FindClose(hFind);
-		}
-		return names;
-	}
+	// other functions 
+	float getYMinimapCoord(float x);
+	bool cursorInGameScreen();
+	void clearAndSwapBuffers(GLFWwindow *window);
+	int get_id();
+	vec3 getPickingColorFromID(int pickingID);
+	vec2 getZoomedCoords(float xCoord, float yCoord);
+	void forceGameClosure(string reason);
+	void showGameWarning(string reason);
+};
+
+//------------------------------------------------------------------------------
+//------------------------------------------------------------------------------
+//------------------------------------------------------------------------------
+
+//
+//	NAMESPACE OBJECTS
+//	FOR OBJECTS THAT COMMUNICATE WITH AUDIO/GRAPHIC DRIVERS
+//
+
+namespace obj {
+
+	static AudioManager audioM;
+	AudioManager *Audio();
+
+	static BitmapFont txt;
+	BitmapFont *Text();
+
+	static BuildingSprite bsprite;
+	BuildingSprite *BSprite();
+
+	static CursorImage cursor;
+	CursorImage *Cursor();
+
+	static EmptyRectangle eRect;
+	EmptyRectangle *ERectangle();
+
+	static EmptyCircle eCircle;
+	EmptyCircle *ECircle();
+
+	static FilledRectangle fRect;
+	FilledRectangle *FRectangle();
+
+	static ImageSprite img;
+	ImageSprite *Img();
+
+	static UnitSprite usprite;
+	UnitSprite *USprite();
+
+	static Terrain terrain;
+	Terrain *MapTerrain();
+
+	static Grid grid;
+	Grid *MapGrid();
+
+	void applyMenuMatrices();
+	void applyGameMatrices(mat4 *proj, mat4 *view);
+	void init();
+	void compile();
+	void create();
 };

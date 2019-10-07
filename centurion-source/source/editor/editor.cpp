@@ -41,7 +41,7 @@ void Editor::run() {
 	obj::applyMenuMatrices();
 
 	/* temporary : it will be in editor UI */
-	circle.render(glm::vec4(255.f), (float)GLB::MOUSE_X, (float)GLB::MOUSE_Y);
+	circle.render(glm::vec4(255.f), getParam("mouse-x-position"), getParam("mouse-y-position"));
 	menu.render(true);
 	menu.render(false);
 

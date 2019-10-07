@@ -1,6 +1,32 @@
 #pragma once
 
-#include <global>
+#include <headers>
+#include "../audio/music.h"
+
+/*
+	AUDIO MANAGER
+*/
+
+class AudioManager
+{
+
+public:
+	AudioManager();
+	void MusicStop();
+	void MusicPause();
+	void MusicRewind();
+	void MusicLoop(bool loop);
+	void MusicPlay(std::string name, bool looping = true);
+	void MusicVolume(int value);
+	void Playlist();
+	bool IsMusicPlaying();
+	bool IsMusicLooping();
+	~AudioManager();
+
+private:
+	IMusic *music;
+	AudioDevice *device;
+};
 
 /* 
 	SHADER

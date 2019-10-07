@@ -16,7 +16,7 @@ DebugUI::DebugUI()
 	dynamicTextList = { "0" };
 
 	startX = 14.f;
-	startY = GAME::UI_BOTTOM_HEIGHT + 12.f;
+	startY = getParam("ui-bottom-height") + 12.f;
 	deltaY = 15.f;
 }
 
@@ -34,7 +34,7 @@ void DebugUI::create() {
 	}
 
 	back = gui::Rectangle();
-	back.create("border-filled", 10.f, GAME::UI_BOTTOM_HEIGHT + 10.f, 186, 200.f, "bottom-left", 0);
+	back.create("border-filled", 10.f, getParam("ui-bottom-height") + 10.f, 186, 200.f, "bottom-left", 0);
 	
 	
 }
@@ -46,10 +46,10 @@ void DebugUI::render(int fps, int mpfs, int selUnits) {
 
 	dynamicTextList[0] = std::to_string(fps);
 	dynamicTextList[1] = std::to_string(mpfs);
-	dynamicTextList[2] = std::to_string(GLB::MOUSE_Y);
-	dynamicTextList[3] = std::to_string(GLB::MOUSE_X);
-	dynamicTextList[4] = std::to_string((int)getZoomedCoords((float)GLB::MOUSE_X, (float)GLB::MOUSE_Y).y);
-	dynamicTextList[5] = std::to_string((int)getZoomedCoords((float)GLB::MOUSE_X, (float)GLB::MOUSE_Y).x);
+	dynamicTextList[2] = std::to_string((int)getParam("mouse-y-position"));
+	dynamicTextList[3] = std::to_string((int)getParam("mouse-x-position"));
+	dynamicTextList[4] = std::to_string((int)getZoomedCoords(getParam("mouse-x-position"), getParam("mouse-y-position")).y);
+	dynamicTextList[5] = std::to_string((int)getZoomedCoords(getParam("mouse-x-position"), getParam("mouse-y-position")).x);
 	dynamicTextList[6] = std::to_string(selUnits);
 
 	!GLB::GAME ? n = 2 : n = (int)dynamicTextList.size();

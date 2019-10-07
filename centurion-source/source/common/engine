@@ -1,0 +1,142 @@
+#pragma once
+
+#include <gui>
+
+using namespace std;
+using namespace glm;
+
+class Menu;
+class Game;
+class Editor;
+class DebugUI;
+class Player;
+
+//
+//	CAMERA
+//
+
+class Camera
+{
+public:
+	Camera();
+	vec3 position;
+	Camera(vec3 startPosition, vec3 startUp, GLfloat startYaw, GLfloat startPitch);
+	void mouseControl(float threshold);
+	void keyboardControl();
+	void go_to_pos(GLfloat x, GLfloat y);
+	mat4 calculateViewMatrix();
+	~Camera();
+private:
+	vec3 front;
+	vec3 up;
+	vec3 right;
+	vec3 worldUp;
+
+	GLfloat yaw;
+	GLfloat pitch;
+
+	float threshold_x, threshold_y, abs_x, abs_y;
+	void update();
+};
+
+//
+//	WINDOW
+//
+
+class myWindow
+{
+public:
+	myWindow();
+
+	void init();
+	void swap_buffers() { glfwSwapBuffers(mainWindow); }
+	void clear_buffers();
+	GLFWwindow *get_GLFW_window() { return mainWindow; }
+	void create_callbacks();
+	int get_mouse_x() { return (int)lastX; };
+	int get_mouse_y() { return (int)lastY; };
+	bool* getKeys() { return keys; }
+	~myWindow();
+
+private:
+	GLFWwindow *mainWindow;
+	GLint bufferWidth, bufferHeight;
+
+	bool keys[1024];
+
+	static void handle_mouse(GLFWwindow* window, double xPos, double yPos);
+	static void handle_keys(GLFWwindow* window, int key, int code, int action, int mode);
+	static void mouse_button_callback(GLFWwindow* window, int button, int action, int mods);
+	static void scroll_callback(GLFWwindow* window, double xoffset, double yoffset);
+	// input mouse
+	GLfloat lastX;
+	GLfloat lastY;
+};
+
+//
+//	MOUSE
+//
+
+class Mouse
+{
+public:
+	Mouse();
+	void render();
+	void mouse_control(int lastX, int lastY);
+	~Mouse();
+
+private:
+	float znoise;
+	float yzoomed;
+
+	vec3 position;
+	string currentState;
+};
+
+//
+//	CURSOR POINT
+//
+
+class CPoint
+{
+public:
+	CPoint();
+	void create();
+	void render();
+	~CPoint();
+private:
+	gui::Image img;
+	float xPosGrid, yPosGrid;
+};
+
+//
+// ENGINE
+//
+
+class Engine {
+public:
+	Engine();
+	int launch();
+	~Engine();
+
+private:
+	// objects 
+	myWindow window;
+	Mouse *mouse;
+	Menu *startMenu;
+	Game *game;
+	Editor *editor;
+	DebugUI *debugUI;
+	gui::SimpleText text;
+
+	// Players Informations
+	vector<Player> playersList;
+
+	// fps
+	double currentTime, lastTime, finalTime;
+	int nbFrames, Fps, Mpfs;
+
+	void fps();
+	void fps_sleep();
+	void readDataClasses();
+};

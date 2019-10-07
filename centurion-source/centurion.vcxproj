@@ -140,6 +140,17 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="source\engine\cursor_image.cpp" />
+    <ClCompile Include="source\global.cpp" />
+    <ClCompile Include="source\gui\bitmap_font.cpp" />
+    <ClCompile Include="source\gui\empty_circle.cpp" />
+    <ClCompile Include="source\gui\empty_rectangle.cpp" />
+    <ClCompile Include="source\gui\filled_rectangle.cpp" />
+    <ClCompile Include="source\gui\image_sprite.cpp" />
+    <ClCompile Include="source\math.cpp" />
+    <ClCompile Include="source\shader.cpp" />
+    <ClCompile Include="source\surface\mapgen.cpp" />
+    <ClCompile Include="source\unit\unit_sprite.cpp" />
     <None Include="assets\shaders\bsprite\fragment.glsl">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
       <FileType>Document</FileType>
@@ -236,7 +247,7 @@
     <ClCompile Include="source\audio\sound.cpp" />
     <ClCompile Include="source\audio\sound_buffer.cpp" />
     <ClCompile Include="source\building\building.cpp" />
-    <ClCompile Include="source\common\common.cpp" />
+    <ClCompile Include="source\building\building_sprite.cpp" />
     <ClCompile Include="source\editor\editor.cpp" />
     <ClCompile Include="source\engine\camera.cpp" />
     <ClCompile Include="source\engine\cursor_point.cpp" />
@@ -261,19 +272,10 @@
     <ClCompile Include="source\pathfinding\a_star.cpp" />
     <ClCompile Include="source\pathfinding\node.cpp" />
     <ClCompile Include="source\player\player.cpp" />
-    <ClCompile Include="source\primitives\bitmap_font.cpp" />
-    <ClCompile Include="source\primitives\building_sprite.cpp" />
-    <ClCompile Include="source\primitives\cursor_image.cpp" />
-    <ClCompile Include="source\primitives\empty_circle.cpp" />
-    <ClCompile Include="source\primitives\empty_rectangle.cpp" />
-    <ClCompile Include="source\primitives\filled_rectangle.cpp" />
-    <ClCompile Include="source\primitives\grid.cpp" />
-    <ClCompile Include="source\primitives\image_sprite.cpp" />
-    <ClCompile Include="source\primitives\light.cpp" />
-    <ClCompile Include="source\primitives\shader.cpp" />
-    <ClCompile Include="source\primitives\terrain.cpp" />
-    <ClCompile Include="source\primitives\unit_sprite.cpp" />
+    <ClCompile Include="source\surface\grid.cpp" />
+    <ClCompile Include="source\surface\light.cpp" />
     <ClCompile Include="source\surface\surface.cpp" />
+    <ClCompile Include="source\surface\terrain.cpp" />
     <ClCompile Include="source\unit\unit.cpp" />
     <ClCompile Include="source\unit\unit_functions.cpp" />
     <None Include="assets\shaders\bsprite\vertex.glsl">
@@ -285,6 +287,7 @@
       <DeploymentContent Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</DeploymentContent>
       <DeploymentContent Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</DeploymentContent>
     </ClInclude>
+    <None Include="source\common\engine" />
     <None Include="source\common\gui" />
   </ItemGroup>
   <ItemGroup>
@@ -312,7 +315,6 @@
     <ClInclude Include="source\common\global.hpp" />
     <ClInclude Include="source\common\mapgen" />
     <ClInclude Include="source\common\math" />
-    <ClInclude Include="source\common\objects" />
     <ClInclude Include="source\common\primitives" />
     <ClInclude Include="source\editor\editor.h" />
     <ClInclude Include="source\engine\camera.h" />

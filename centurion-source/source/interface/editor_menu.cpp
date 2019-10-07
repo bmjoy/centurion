@@ -130,8 +130,8 @@ namespace editor {
     void Menu::picking() {
 
         if (GLB::MOUSE_LEFT) {
-            GLint mouseX = GLB::MOUSE_X;
-            GLint mouseY = GLB::MOUSE_Y;
+            GLint mouseX = (GLint)getParam("mouse-x-position");
+            GLint mouseY = (GLint)getParam("mouse-y-position");
 			int clickId = get_id();
             int pos = (int)((mouseY - getParam("window-height"))*(-1)) / titles["File"].titleHeight;
 
@@ -171,6 +171,8 @@ namespace editor {
 
                 if (pos == 2) { // exit
                     titles["File"].isOpened = false;
+					GLB::MOUSE_LEFT = false;
+					GLB::RESET = true;
 					GLB::EDITOR = false;
 					GLB::MAIN_MENU = true;
 					for (int i = 0; i < titles.size(); i++) {
@@ -178,7 +180,7 @@ namespace editor {
 						titles[s].isOpened = false;
 						menuIsOpened = false;
 					}
-                }	
+                }					
             }
 
             //---------------------
@@ -201,7 +203,7 @@ namespace editor {
 
     bool Menu::isHover(glm::vec2 pos, int w, int h) {
 
-        if ((GLB::MOUSE_X > pos.x) && (GLB::MOUSE_X < pos.x + w) && (GLB::MOUSE_Y > pos.y) && (GLB::MOUSE_Y < pos.y + h)) {
+        if ((getParam("mouse-x-position") > pos.x) && (getParam("mouse-x-position") < pos.x + w) && (getParam("mouse-y-position") > pos.y) && (getParam("mouse-y-position") < pos.y + h)) {
             return true;
         }
         else {

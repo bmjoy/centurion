@@ -1,7 +1,7 @@
 #pragma once
 
 #include <global.hpp>
-#include "../engine/camera.h"
+#include <engine>
 #include "../surface/surface.h"
 #include "../interface/editor_menu.h"
 
@@ -10,6 +10,7 @@ class Editor
 public:
 	Editor();
 	bool editor_is_created() { return editorIsCreated; }
+	void reset() { editorIsCreated = false; }
 	void create();
 	void run();
 	~Editor();

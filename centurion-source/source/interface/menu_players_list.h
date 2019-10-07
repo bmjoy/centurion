@@ -1,8 +1,7 @@
 #pragma once
 
 #include <global.hpp>
-#include <objects>
-
+#include <global.hpp>
 #include <gui>
 
 class PlayersList

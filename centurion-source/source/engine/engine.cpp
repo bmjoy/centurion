@@ -1,4 +1,10 @@
-#include "engine.h"
+#include <engine>
+
+#include "../menu/menu.h"
+#include "../game/game.h"
+#include "../editor/editor.h"
+#include "../player/player.h"
+#include "../interface/debug_ui.h"
 
 using namespace glb;
 
@@ -69,13 +75,15 @@ int Engine::launch() {
 
 		// -------------- //
 
-		if (GLB::GAME_CLEAR) {
-			GLB::GAME_CLEAR = false;
+		if (GLB::RESET) {
+			GLB::RESET = false;
 			GLB::GAME = false;
+			GLB::EDITOR = false;
 			GLB::MAIN_MENU = true;
 			
 			game->reset();
 			startMenu->reset();
+			editor->reset();
 		}
 
 		// -------------- //

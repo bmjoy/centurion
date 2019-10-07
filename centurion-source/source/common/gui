@@ -1,6 +1,5 @@
 #pragma once
-
-#include <objects>
+#include <global.hpp>
 
 namespace gui {
 

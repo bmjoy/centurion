@@ -23,8 +23,8 @@ void Game::create(std::vector<Player> *ListOfPlayers) {
 	camera = Camera(glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3(0.0f, 1.0f, 0.0f), -90.0f, 0.0f);
 	std::cout << "DEBUG: Camera has been created.\n";
 
-	float ui_bottom_height_minimap = GAME::MAP_HEIGHT * GAME::UI_BOTTOM_HEIGHT / (getParam("window-height") - GAME::UI_BOTTOM_HEIGHT - GAME::UI_TOP_HEIGHT);
-	float ui_top_height_minimap = GAME::MAP_HEIGHT * GAME::UI_TOP_HEIGHT / (getParam("window-height") - GAME::UI_BOTTOM_HEIGHT - GAME::UI_TOP_HEIGHT);
+	float ui_bottom_height_minimap = GAME::MAP_HEIGHT * getParam("ui-bottom-height") / (getParam("window-height") - getParam("ui-bottom-height") - getParam("ui-top-height"));
+	float ui_top_height_minimap = GAME::MAP_HEIGHT * getParam("ui-top-height") / (getParam("window-height") - getParam("ui-bottom-height") - getParam("ui-top-height"));
 
 	/* MINIMAP CAMERA */
 	GLB::MINIMAP_PROJECTION = glm::ortho(

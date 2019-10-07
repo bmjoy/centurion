@@ -2,7 +2,6 @@
 #define GLOBAL_H
 
 #include <global>
-#include "../engine/window.h"
 
 namespace GLB {
 	extern glm::mat4 MENU_PROJECTION;
@@ -14,8 +13,6 @@ namespace GLB {
 	extern bool EDITOR;
 	extern bool MOUSE_LEFT, MOUSE_RIGHT;
 	extern bool MOUSE_RELEASE;
-	extern int MOUSE_X, MOUSE_Y, MOUSE_Y_2D;
-	extern int MOUSE_LEFT_X, MOUSE_LEFT_Y, MOUSE_RIGHT_X, MOUSE_RIGHT_Y, MOUSE_RIGHT_Y_2D;
 	extern int MOUSE_SCROLL;
 	extern bool MOUSE_SCROLL_BOOL;
 	extern bool UP_KEY, DOWN_KEY, LEFT_KEY, RIGHT_KEY, ESC_KEY;
@@ -25,8 +22,7 @@ namespace GLB {
 	extern bool CTRL_BUTTON;
 	extern std::vector<glm::vec3> COLORS;
 	extern GLFWwindow *MAIN_WINDOW;
-	extern bool GAME_CLEAR;
-	extern LPCSTR GAME_NAME;
+	extern bool RESET;
 }
 
 namespace MAP {
@@ -46,64 +42,10 @@ namespace GAME {
 	extern std::vector<std::string> RACES;
 	extern int ZOOM_CURRENT;
 	extern float ZOOM_CAMERA_FACTOR;
-	extern float UI_BOTTOM_HEIGHT;
-	extern float UI_TOP_HEIGHT;
 	extern int MAP_WIDTH, MAP_HEIGHT;
-	extern int CAMERA_POS_X, CAMERA_POS_Y;
 	extern float CAMERA_MOVESPEED;
 	extern bool MINIMAP_IS_ACTIVE;
 	extern bool GRID_IS_ACTIVE;
-}
-
-/* GLOBAL FUNCTIONS */
-
-static void forceGameClosure(std::string reason) {
-	MessageBox(NULL, reason.c_str(), GLB::GAME_NAME, MB_ICONERROR);
-	GLB::WINDOW_CLOSE = true;
-}
-
-static void showGameWarning(std::string reason) {
-	MessageBox(NULL, reason.c_str(), GLB::GAME_NAME, MB_ICONINFORMATION);
-}
-
-static int get_id() {
-	unsigned char data[4];
-	glReadPixels(GLB::MOUSE_LEFT_X, GLB::MOUSE_LEFT_Y, 1, 1, GL_RGBA, GL_UNSIGNED_BYTE, &data);
-	int pickedID =
-		data[0] +
-		data[1] * 256 +
-		data[2] * 256 * 256;
-	return pickedID;
-}
-
-static glm::vec2 getZoomedCoords(float xCoord, float yCoord) {
-	float x, y;
-	x = xCoord * glb::getParam("window-width-zoomed") / glb::getParam("window-width") + (float)GAME::CAMERA_POS_X;
-	y = yCoord * glb::getParam("window-height-zoomed") / glb::getParam("window-height") + (float)GAME::CAMERA_POS_Y;
-	return glm::vec2(x, y);
-}
-
-static float getYMinimapCoord(float x) {
-	return glb::getParam("window-height") * (x - GAME::UI_BOTTOM_HEIGHT) / (glb::getParam("window-height") - GAME::UI_BOTTOM_HEIGHT - GAME::UI_TOP_HEIGHT);
-}
-
-static bool cursorInGameScreen() { 
-	return (GLB::MOUSE_LEFT_Y > GAME::UI_BOTTOM_HEIGHT) && (GLB::MOUSE_LEFT_Y < (glb::getParam("window-height") - GAME::UI_TOP_HEIGHT));
-}
-
-static void clearAndSwapBuffers(GLFWwindow *window) {
-	glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
-	glClear(GL_COLOR_BUFFER_BIT);
-	glfwSwapBuffers(window);
-	glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
-	glClear(GL_COLOR_BUFFER_BIT);
-}
-
-static glm::vec3 getPickingColorFromID(int pickingID) {
-	int r = (pickingID & 0x000000FF) >> 0;
-	int g = (pickingID & 0x0000FF00) >> 8;
-	int b = (pickingID & 0x00FF0000) >> 16;
-	return glm::vec3(r, g, b);
 }
 
 #endif

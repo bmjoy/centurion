@@ -1,6 +1,6 @@
 #include "menu_players_list.h"
 
-
+using namespace glb;
 
 PlayersList::PlayersList(){
 	deltaY = 30;
@@ -131,7 +131,7 @@ void PlayersList::picking(std::map<int, std::string> pickingList, int *numPlayer
 	
 	for (int j = 0; j < *numPlayers; j++) {
 		if (pickingList[clickId] == "CivForm_" + std::to_string(j)) {
-			int i = int(((float)GLB::MOUSE_LEFT_Y - y + deltaY * j) / 20.0)*(-1);
+			int i = int((getParam("mouse-y-leftclick") - y + deltaY * j) / 20.0)*(-1);
 			GLB::MOUSE_LEFT = false;
 			civiliz_Form[j].open_close();
 

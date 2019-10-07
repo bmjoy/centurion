@@ -3,6 +3,8 @@
 #include <global.hpp>
 #include <json.hpp>
 
+using namespace glb;
+
 BitmapFont::BitmapFont() {
 	vPath = "assets/shaders/font/vertex.glsl";
 	fPath = "assets/shaders/font/fragment.glsl";

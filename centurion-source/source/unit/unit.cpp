@@ -7,6 +7,7 @@
 #include "unit.h"
 
 using namespace math;
+using namespace glb;
 
 Unit::Unit() {
 	unitData = UnitData();
@@ -154,7 +155,7 @@ void Unit::walk_behaviour() {
 		is_Moving = true;
 
 		startPoint = glm::vec2((int)position2D.x / aStar::cellGridSize * aStar::cellGridSize, (int)position2D.y / aStar::cellGridSize * aStar::cellGridSize);
-		endPoint = getZoomedCoords((float)GLB::MOUSE_RIGHT_X, (float)GLB::MOUSE_RIGHT_Y_2D);
+		endPoint = getZoomedCoords(getParam("mouse-x-rightclick"), getParam("mouse-y-2D-rightclick"));
 
 		// pathfinding
 		path = unit::getPath(startPoint, endPoint);

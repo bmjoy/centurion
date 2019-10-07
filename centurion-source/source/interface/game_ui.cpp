@@ -8,7 +8,7 @@ UIGame::UIGame()
 	time.minutes = 0; time.minutes_str = "00";
 	time.hours = 0; time.hours_str = "00";
 	time.x = getParam("window-width") - 100.0f;
-	time.y = getParam("window-height") - GAME::UI_TOP_HEIGHT - 30.0f;
+	time.y = getParam("window-height") - getParam("ui-top-height") - 30.0f;
 
 }
 
@@ -20,10 +20,10 @@ void UIGame::create(int *pickingId) {
 	gameMenu.create(objectId, &pickingList);
 
 	top_bar = gui::Rectangle();
-	top_bar.create("filled", 0.0f, getParam("window-height") - GAME::UI_TOP_HEIGHT, getParam("window-width"), GAME::UI_TOP_HEIGHT, "bottom-left", 0);
+	top_bar.create("filled", 0.0f, getParam("window-height") - getParam("ui-top-height"), getParam("window-width"), getParam("ui-top-height"), "bottom-left", 0);
 
 	bottom_bar = gui::Rectangle();
-	bottom_bar.create("filled", 0.0f, 0.0f, getParam("window-width"), GAME::UI_BOTTOM_HEIGHT, "bottom-left", 0);
+	bottom_bar.create("filled", 0.0f, 0.0f, getParam("window-width"), getParam("ui-bottom-height"), "bottom-left", 0);
 
 	time.lastTime = glfwGetTime();
 	time.text = gui::SimpleText("dynamic", true);
@@ -46,13 +46,13 @@ void UIGame::render() {
 
 	// minimap rectangle:
 	if (GAME::MINIMAP_IS_ACTIVE) {
-		float x = (float)GAME::CAMERA_POS_X / GAME::MAP_WIDTH * getParam("window-width");
-		float y = (float)GAME::CAMERA_POS_Y / GAME::MAP_HEIGHT * (getParam("window-height") - GAME::UI_BOTTOM_HEIGHT - GAME::UI_TOP_HEIGHT) + GAME::UI_BOTTOM_HEIGHT;
+		float x = getParam("camera-x-position") / GAME::MAP_WIDTH * getParam("window-width");
+		float y = getParam("camera-y-position") / GAME::MAP_HEIGHT * (getParam("window-height") - getParam("ui-bottom-height") - getParam("ui-top-height")) + getParam("ui-bottom-height");
 		float w = getParam("window-width-zoomed") * getParam("window-width") / GAME::MAP_WIDTH;
-		float h = getParam("window-height-zoomed") * (getParam("window-height") - GAME::UI_BOTTOM_HEIGHT - GAME::UI_TOP_HEIGHT) / GAME::MAP_HEIGHT;
+		float h = getParam("window-height-zoomed") * (getParam("window-height") - getParam("ui-bottom-height") - getParam("ui-top-height")) / GAME::MAP_HEIGHT;
 		x = std::max(x, 1.f);
-		y = std::max(y, GAME::UI_BOTTOM_HEIGHT + 1.f);
-		y = std::min(y, getParam("window-height") - GAME::UI_TOP_HEIGHT - h);
+		y = std::max(y, getParam("ui-bottom-height") + 1.f);
+		y = std::min(y, getParam("window-height") - getParam("ui-top-height") - h);
 		minimapRectangle.render(glm::vec4(255.f), false, x, y, w, h);
 	}
 	// Temporary bars:
@@ -70,7 +70,7 @@ void UIGame::picking() {
 		}
 		if (pickingList[clickId] == "menuButtonQuit") {
 			GAME::MENU_IS_ACTIVE = false;
-			GLB::GAME_CLEAR = true;
+			GLB::RESET = true;
 			GLB::MOUSE_LEFT = false;
 		}
 

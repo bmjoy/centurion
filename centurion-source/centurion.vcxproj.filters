@@ -19,9 +19,6 @@
     <Filter Include="Header Files\common">
       <UniqueIdentifier>{fd0bb532-3102-4522-8ece-cb442ec0dda9}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Header Files\engine">
-      <UniqueIdentifier>{8682a697-4af4-4c53-9e32-10b5895eb6d0}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Header Files\game">
       <UniqueIdentifier>{e085c77f-a075-42c6-96bb-4af4e7ea316d}</UniqueIdentifier>
     </Filter>
@@ -37,9 +34,6 @@
     <Filter Include="Source Files\building">
       <UniqueIdentifier>{8777aa53-6553-4d66-918c-4e8e11dd2a11}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source Files\common">
-      <UniqueIdentifier>{df81176d-4587-4491-ba96-601e9eab1906}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Source Files\engine">
       <UniqueIdentifier>{4857b0f1-6f03-449c-9185-d2b343215f0a}</UniqueIdentifier>
     </Filter>
@@ -54,9 +48,6 @@
     </Filter>
     <Filter Include="Source Files\unit">
       <UniqueIdentifier>{984cbdf2-1517-49e7-9e21-ae59c7fa96a2}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source Files\primitives">
-      <UniqueIdentifier>{919f3278-0385-450c-a6e5-461649ff309c}</UniqueIdentifier>
     </Filter>
     <Filter Include="Shader Files">
       <UniqueIdentifier>{3ce97d02-2958-4a71-bfb1-19102bd5a086}</UniqueIdentifier>
@@ -124,6 +115,9 @@
     <Filter Include="Header Files\audio\interfaces">
       <UniqueIdentifier>{52fd4780-8021-4b6e-b3a4-824126b4890b}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\engine">
+      <UniqueIdentifier>{ae492b79-1f30-42e3-b2b4-07c9bdcdf394}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -138,9 +132,6 @@
     <ClCompile Include="source\engine\camera.cpp">
       <Filter>Source Files\engine</Filter>
     </ClCompile>
-    <ClCompile Include="source\primitives\empty_rectangle.cpp">
-      <Filter>Source Files\primitives</Filter>
-    </ClCompile>
     <ClCompile Include="source\engine\engine.cpp">
       <Filter>Source Files\engine</Filter>
     </ClCompile>
@@ -152,9 +143,6 @@
     </ClCompile>
     <ClCompile Include="source\game\game_object.cpp">
       <Filter>Source Files\game</Filter>
-    </ClCompile>
-    <ClCompile Include="source\primitives\filled_rectangle.cpp">
-      <Filter>Source Files\primitives</Filter>
     </ClCompile>
     <ClCompile Include="source\menu\menu.cpp">
       <Filter>Source Files\menu</Filter>
@@ -170,9 +158,6 @@
     </ClCompile>
     <ClCompile Include="source\engine\cursor_point.cpp">
       <Filter>Source Files\engine</Filter>
-    </ClCompile>
-    <ClCompile Include="source\primitives\bitmap_font.cpp">
-      <Filter>Source Files\primitives</Filter>
     </ClCompile>
     <ClCompile Include="source\pathfinding\node.cpp">
       <Filter>Source Files\pathfinding</Filter>
@@ -201,35 +186,14 @@
     <ClCompile Include="source\interface\game_ui_menu.cpp">
       <Filter>Source Files\interface</Filter>
     </ClCompile>
-    <ClCompile Include="source\primitives\building_sprite.cpp">
-      <Filter>Source Files\primitives</Filter>
-    </ClCompile>
     <ClCompile Include="source\gui\simple_text.cpp">
       <Filter>Source Files\gui</Filter>
     </ClCompile>
     <ClCompile Include="source\interface\debug_ui.cpp">
       <Filter>Source Files\interface</Filter>
     </ClCompile>
-    <ClCompile Include="source\primitives\cursor_image.cpp">
-      <Filter>Source Files\primitives</Filter>
-    </ClCompile>
-    <ClCompile Include="source\primitives\unit_sprite.cpp">
-      <Filter>Source Files\primitives</Filter>
-    </ClCompile>
-    <ClCompile Include="source\primitives\image_sprite.cpp">
-      <Filter>Source Files\primitives</Filter>
-    </ClCompile>
     <ClCompile Include="source\gui\image.cpp">
       <Filter>Source Files\gui</Filter>
-    </ClCompile>
-    <ClCompile Include="source\primitives\terrain.cpp">
-      <Filter>Source Files\primitives</Filter>
-    </ClCompile>
-    <ClCompile Include="source\primitives\light.cpp">
-      <Filter>Source Files\primitives</Filter>
-    </ClCompile>
-    <ClCompile Include="source\primitives\grid.cpp">
-      <Filter>Source Files\primitives</Filter>
     </ClCompile>
     <ClCompile Include="source\surface\surface.cpp">
       <Filter>Source Files\surface</Filter>
@@ -267,17 +231,53 @@
     <ClCompile Include="source\audio\sound_buffer.cpp">
       <Filter>Source Files\audio</Filter>
     </ClCompile>
-    <ClCompile Include="source\primitives\empty_circle.cpp">
-      <Filter>Source Files\primitives</Filter>
-    </ClCompile>
     <ClCompile Include="source\gui\circle.cpp">
       <Filter>Source Files\gui</Filter>
     </ClCompile>
-    <ClCompile Include="source\common\common.cpp">
-      <Filter>Source Files\common</Filter>
+    <ClCompile Include="source\surface\terrain.cpp">
+      <Filter>Source Files\surface</Filter>
     </ClCompile>
-    <ClCompile Include="source\primitives\shader.cpp">
-      <Filter>Source Files\primitives</Filter>
+    <ClCompile Include="source\surface\light.cpp">
+      <Filter>Source Files\surface</Filter>
+    </ClCompile>
+    <ClCompile Include="source\surface\grid.cpp">
+      <Filter>Source Files\surface</Filter>
+    </ClCompile>
+    <ClCompile Include="source\building\building_sprite.cpp">
+      <Filter>Source Files\building</Filter>
+    </ClCompile>
+    <ClCompile Include="source\unit\unit_sprite.cpp">
+      <Filter>Source Files\unit</Filter>
+    </ClCompile>
+    <ClCompile Include="source\engine\cursor_image.cpp">
+      <Filter>Source Files\engine</Filter>
+    </ClCompile>
+    <ClCompile Include="source\gui\image_sprite.cpp">
+      <Filter>Source Files\gui</Filter>
+    </ClCompile>
+    <ClCompile Include="source\gui\bitmap_font.cpp">
+      <Filter>Source Files\gui</Filter>
+    </ClCompile>
+    <ClCompile Include="source\gui\empty_circle.cpp">
+      <Filter>Source Files\gui</Filter>
+    </ClCompile>
+    <ClCompile Include="source\gui\empty_rectangle.cpp">
+      <Filter>Source Files\gui</Filter>
+    </ClCompile>
+    <ClCompile Include="source\gui\filled_rectangle.cpp">
+      <Filter>Source Files\gui</Filter>
+    </ClCompile>
+    <ClCompile Include="source\shader.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="source\surface\mapgen.cpp">
+      <Filter>Source Files\surface</Filter>
+    </ClCompile>
+    <ClCompile Include="source\math.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="source\global.cpp">
+      <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -286,18 +286,6 @@
     </ClInclude>
     <ClInclude Include="source\common\global.hpp">
       <Filter>Header Files\common</Filter>
-    </ClInclude>
-    <ClInclude Include="source\engine\engine.h">
-      <Filter>Header Files\engine</Filter>
-    </ClInclude>
-    <ClInclude Include="source\engine\camera.h">
-      <Filter>Header Files\engine</Filter>
-    </ClInclude>
-    <ClInclude Include="source\engine\mouse.h">
-      <Filter>Header Files\engine</Filter>
-    </ClInclude>
-    <ClInclude Include="source\engine\window.h">
-      <Filter>Header Files\engine</Filter>
     </ClInclude>
     <ClInclude Include="source\game\game.h">
       <Filter>Header Files\game</Filter>
@@ -316,9 +304,6 @@
     </ClInclude>
     <ClInclude Include="source\extern\includes\stb_image.h">
       <Filter>Header Files\extern</Filter>
-    </ClInclude>
-    <ClInclude Include="source\engine\cursor_point.h">
-      <Filter>Header Files\engine</Filter>
     </ClInclude>
     <ClInclude Include="source\pathfinding\node.h">
       <Filter>Header Files\pathfinding</Filter>
@@ -422,14 +407,26 @@
     <ClInclude Include="source\common\global">
       <Filter>Header Files\common</Filter>
     </ClInclude>
-    <ClInclude Include="source\common\objects">
-      <Filter>Header Files\common</Filter>
-    </ClInclude>
     <ClInclude Include="source\common\mapgen">
       <Filter>Header Files\common</Filter>
     </ClInclude>
     <ClInclude Include="source\common\primitives">
       <Filter>Header Files\common</Filter>
+    </ClInclude>
+    <ClInclude Include="source\engine\camera.h">
+      <Filter>Header Files\engine</Filter>
+    </ClInclude>
+    <ClInclude Include="source\engine\cursor_point.h">
+      <Filter>Header Files\engine</Filter>
+    </ClInclude>
+    <ClInclude Include="source\engine\engine.h">
+      <Filter>Header Files\engine</Filter>
+    </ClInclude>
+    <ClInclude Include="source\engine\mouse.h">
+      <Filter>Header Files\engine</Filter>
+    </ClInclude>
+    <ClInclude Include="source\engine\window.h">
+      <Filter>Header Files\engine</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -488,6 +485,9 @@
       <Filter>Shader Files\usprite</Filter>
     </None>
     <None Include="source\common\gui">
+      <Filter>Header Files\common</Filter>
+    </None>
+    <None Include="source\common\engine">
       <Filter>Header Files\common</Filter>
     </None>
   </ItemGroup>
