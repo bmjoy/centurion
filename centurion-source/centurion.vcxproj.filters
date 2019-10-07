@@ -115,9 +115,6 @@
     <Filter Include="Header Files\audio\interfaces">
       <UniqueIdentifier>{52fd4780-8021-4b6e-b3a4-824126b4890b}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Header Files\engine">
-      <UniqueIdentifier>{ae492b79-1f30-42e3-b2b4-07c9bdcdf394}</UniqueIdentifier>
-    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -412,21 +409,6 @@
     </ClInclude>
     <ClInclude Include="source\common\primitives">
       <Filter>Header Files\common</Filter>
-    </ClInclude>
-    <ClInclude Include="source\engine\camera.h">
-      <Filter>Header Files\engine</Filter>
-    </ClInclude>
-    <ClInclude Include="source\engine\cursor_point.h">
-      <Filter>Header Files\engine</Filter>
-    </ClInclude>
-    <ClInclude Include="source\engine\engine.h">
-      <Filter>Header Files\engine</Filter>
-    </ClInclude>
-    <ClInclude Include="source\engine\mouse.h">
-      <Filter>Header Files\engine</Filter>
-    </ClInclude>
-    <ClInclude Include="source\engine\window.h">
-      <Filter>Header Files\engine</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

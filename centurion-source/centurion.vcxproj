@@ -317,11 +317,6 @@
     <ClInclude Include="source\common\math" />
     <ClInclude Include="source\common\primitives" />
     <ClInclude Include="source\editor\editor.h" />
-    <ClInclude Include="source\engine\camera.h" />
-    <ClInclude Include="source\engine\cursor_point.h" />
-    <ClInclude Include="source\engine\engine.h" />
-    <ClInclude Include="source\engine\mouse.h" />
-    <ClInclude Include="source\engine\window.h" />
     <ClInclude Include="source\extern\includes\json.hpp" />
     <ClInclude Include="source\extern\includes\stb_image.h" />
     <ClInclude Include="source\game\game.h" />
