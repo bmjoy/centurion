@@ -38,8 +38,6 @@ namespace glb {
 	float getYMinimapCoord(float x);
 	bool cursorInGameScreen();
 	void clearAndSwapBuffers(GLFWwindow *window);
-	int get_id();
-	vec3 getPickingColorFromID(int pickingID);
 	vec2 getZoomedCoords(float xCoord, float yCoord);
 	void forceGameClosure(string reason);
 	void showGameWarning(string reason);

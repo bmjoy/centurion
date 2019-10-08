@@ -1,4 +1,5 @@
 #include <gui>
+#include <picking>
 
 namespace gui {
 

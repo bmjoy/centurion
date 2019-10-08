@@ -1,16 +1,15 @@
 #pragma once
 
 #include <global.hpp>
-#include <global.hpp>
 #include <gui>
 
 class PlayersList
 {
 public:
 	PlayersList();
-	void create(int startX, int startY, std::map<int, std::string> *pickingList, int *pickingId, std::vector<int> *players_color);
+	void create(int startX, int startY, std::vector<int> *players_color);
 	void close();
-	void picking(std::map<int, std::string> pickingList, int *numPlayers, std::vector<int> *players_color, int clickId);
+	void picking(int *numPlayers, std::vector<int> *players_color, int clickId);
 	void render(int numPlayers, std::vector<int> players_color, bool picking);
 	std::string get_race(int i);
 	~PlayersList();

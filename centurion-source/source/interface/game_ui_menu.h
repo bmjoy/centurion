@@ -9,7 +9,7 @@ class GameMenu
 {
 public:
 	GameMenu();
-	void create(int *pickingId, std::map<int, std::string> *pickingList);
+	void create();
 	void render(bool picking);
 	~GameMenu();
 private:
@@ -19,7 +19,6 @@ private:
 	json data;
 	std::string s;
 	float w, h, x, y;
-	int clickId;
 	bool gameMenuActive;
 };
 

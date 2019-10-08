@@ -26,18 +26,12 @@ private:
 	std::map<std::string, std::vector<gui::Button>> buttons;
 	
 	PlayersList list;
-
-	/* PICKING */
-	std::map<int, std::string> pickingList;
-	int pickingId, clickId;
 	void picking();
 
 	/* INFORMATIONS */
-
 	int num_players;
 	std::vector<int> players_color;
 	std::vector<Player> *playersList;
 	bool menuIsCreated;
-
 };
 

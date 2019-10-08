@@ -1,5 +1,7 @@
 #include "editor_menu.h"
 
+#include <picking>
+
 using namespace glb;
 
 namespace editor {
@@ -13,8 +15,8 @@ namespace editor {
 		minPickingID = 0;
     }
 
-    void EditorMenu::create(int *pickingID) {
-		minPickingID = (*pickingID);
+    void EditorMenu::create() {
+		minPickingID = getPickingID();
 
         topBar = gui::Rectangle();
         topBar.create("filled", 0.0f, (float)-barHeight, getParam("window-width"), (float)barHeight, "bottom-left", 0);
@@ -31,7 +33,7 @@ namespace editor {
         for (int i = 0; i < titles.size(); i++) {
             std::string s = titlesList[i];
             /* title */
-            titles[s].pickingID = *pickingID;
+            titles[s].pickingID = getPickingID();
             titles[s].pickingColor = glm::vec4(getPickingColorFromID(titles[s].pickingID), 255.f);
             pickingList[titles[s].title] = titles[s].pickingID;
 
@@ -67,9 +69,9 @@ namespace editor {
 
             titles[s].isOpened = false;
 
-			(*pickingID)++;
+			increasePickingID();
         }
-		maxPickingID = (*pickingID);
+		maxPickingID = getPickingID();
     }
 
     void EditorMenu::render(bool pick) {

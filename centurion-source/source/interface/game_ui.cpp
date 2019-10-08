@@ -1,5 +1,7 @@
 #include "game_ui.h"
 
+#include <picking>
+
 using namespace glb;
 
 UIGame::UIGame()
@@ -12,12 +14,10 @@ UIGame::UIGame()
 
 }
 
-void UIGame::create(int *pickingId) {
-
-	objectId = pickingId;
+void UIGame::create() {
 
 	gameMenu = GameMenu();
-	gameMenu.create(objectId, &pickingList);
+	gameMenu.create();
 
 	top_bar = gui::Rectangle();
 	top_bar.create("filled", 0.0f, getParam("window-height") - getParam("ui-top-height"), getParam("window-width"), getParam("ui-top-height"), "bottom-left", 0);
@@ -62,12 +62,13 @@ void UIGame::render() {
 }
 
 void UIGame::picking() {
-	clickId = get_id();
-	if (pickingList[clickId] == "menuButtonClose") {
+	int clickId = get_id();
+	string clickName = getPickedObjectName(clickId);
+	if (clickName == "menuButtonClose") {
 		GAME::MENU_IS_ACTIVE = false;
 		GLB::MOUSE_LEFT = false;
 	}
-	if (pickingList[clickId] == "menuButtonQuit") {
+	if (clickName == "menuButtonQuit") {
 		GAME::MENU_IS_ACTIVE = false;
 		GLB::RESET = true;
 		GLB::MOUSE_LEFT = false;

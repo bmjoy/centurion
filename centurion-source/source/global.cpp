@@ -112,21 +112,6 @@ namespace glb {
 		glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
 		glClear(GL_COLOR_BUFFER_BIT);
 	}
-	int get_id() {
-		unsigned char data[4];
-		glReadPixels((GLint)glb::getParam("mouse-x-leftclick"), (GLint)glb::getParam("mouse-y-leftclick"), 1, 1, GL_RGBA, GL_UNSIGNED_BYTE, &data);
-		int pickedID =
-			data[0] +
-			data[1] * 256 +
-			data[2] * 256 * 256;
-		return pickedID;
-	}
-	vec3 getPickingColorFromID(int pickingID) {
-		int r = (pickingID & 0x000000FF) >> 0;
-		int g = (pickingID & 0x0000FF00) >> 8;
-		int b = (pickingID & 0x00FF0000) >> 16;
-		return vec3(r, g, b);
-	}
 	vec2 getZoomedCoords(float xCoord, float yCoord) {
 		float x = xCoord * getParam("window-width-zoomed") / getParam("window-width") + getParam("camera-x-position");
 		float y = yCoord * getParam("window-height-zoomed") / getParam("window-height") + getParam("camera-y-position");

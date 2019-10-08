@@ -63,6 +63,24 @@ void Grid::create() {
 	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA8, grid_sizeX, grid_sizeY, 0, GL_RGBA, GL_UNSIGNED_BYTE, (GLvoid*)gridData);
 }
 
+void Grid::reset() {
+	int grid_sizeX = GAME::MAP_WIDTH / astar::cellGridSize;
+	int grid_sizeY = GAME::MAP_HEIGHT / astar::cellGridSize;
+	unsigned char* gridData = new unsigned char[grid_sizeX * grid_sizeY * 4];
+	for (int y = 0; y < grid_sizeY; ++y) {
+		for (int x = 0; x < grid_sizeX; ++x) {
+			gridData[(grid_sizeX * (grid_sizeY - 1 - y) + x) * 4 + 0] = 255;
+			gridData[(grid_sizeX * (grid_sizeY - 1 - y) + x) * 4 + 1] = 255;
+			gridData[(grid_sizeX * (grid_sizeY - 1 - y) + x) * 4 + 2] = 255;
+			gridData[(grid_sizeX * (grid_sizeY - 1 - y) + x) * 4 + 3] = 0;
+		}
+	}
+	glBindTexture(GL_TEXTURE_2D, textureIdList[0]);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
+	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA8, grid_sizeX, grid_sizeY, 0, GL_RGBA, GL_UNSIGNED_BYTE, (GLvoid*)gridData);
+}
+
 void Grid::update() {
 	/* This texture comes from the real grid of 0/1 */
 
@@ -101,9 +119,6 @@ void Grid::update() {
 		}
 	}
 
-	textureIdList.push_back(0);
-
-	glGenTextures(1, &textureIdList[0]);
 	glBindTexture(GL_TEXTURE_2D, textureIdList[0]);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);

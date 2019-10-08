@@ -1,6 +1,7 @@
 #include <editor>
 #include <surface>
 #include <engine>
+#include <picking>
 #include "../interface/editor_menu.h"
 
 using namespace glb;
@@ -8,14 +9,17 @@ using namespace glb;
 namespace editor {
 	Editor::Editor(){
 		editorIsCreated = false;
-		pickingID = 1;
 	}
 	void Editor::create() {
+		resetPicking();
 		surface = new Surface();
 		camera = new Camera(glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3(0.0f, 1.0f, 0.0f), -90.0f, 0.0f);
 		menu = new editor::EditorMenu();
-		menu->create(&pickingID);
 		circle = gui::Circle();
+
+		surface->reset();
+		menu->create();
+		
 		circle.create("border", 0.f, 0.f, 300.f, 200.f, 8.f, "center");
 		editorIsCreated = true;
 	}

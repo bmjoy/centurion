@@ -143,6 +143,7 @@
     <ClCompile Include="source\global.cpp" />
     <ClCompile Include="source\math.cpp" />
     <ClCompile Include="source\object.cpp" />
+    <ClCompile Include="source\picking.cpp" />
     <ClCompile Include="source\primitives\audio_manager.cpp" />
     <ClCompile Include="source\primitives\bitmap_font.cpp" />
     <ClCompile Include="source\primitives\building_sprite.cpp" />
@@ -292,6 +293,7 @@
     <None Include="source\common\gui" />
     <None Include="source\common\object" />
     <None Include="source\common\pathfinding" />
+    <None Include="source\common\picking" />
     <None Include="source\common\player" />
     <None Include="source\common\surface" />
   </ItemGroup>

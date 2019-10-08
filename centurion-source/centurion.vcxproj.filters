@@ -255,6 +255,9 @@
     <ClCompile Include="source\pathfinding\astar.cpp">
       <Filter>Source Files\pathfinding</Filter>
     </ClCompile>
+    <ClCompile Include="source\picking.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="source\common\global.hpp">
@@ -428,6 +431,9 @@
       <Filter>Header Files\common</Filter>
     </None>
     <None Include="source\common\pathfinding">
+      <Filter>Header Files\common</Filter>
+    </None>
+    <None Include="source\common\picking">
       <Filter>Header Files\common</Filter>
     </None>
   </ItemGroup>

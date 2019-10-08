@@ -2,6 +2,7 @@
 #include <engine>
 #include <player>
 #include <surface>
+#include <picking>
 #include "../interface/game_ui.h"
 
 using namespace glb;

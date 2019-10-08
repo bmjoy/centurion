@@ -45,9 +45,9 @@ namespace game {
 
 		double lastTime;
 		float threshold, cameraLastX, cameraLastY;
-		int objectId, click_id, selectedUnits;
+		int selectedUnits;
 		bool blockMinimap;
-
+		int click_id;
 		json settl_data;
 		string r;
 		vec2 origin;

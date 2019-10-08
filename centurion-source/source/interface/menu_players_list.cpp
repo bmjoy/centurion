@@ -1,5 +1,7 @@
 #include "menu_players_list.h"
 
+#include <picking>
+
 using namespace glb;
 
 PlayersList::PlayersList(){
@@ -8,7 +10,7 @@ PlayersList::PlayersList(){
 	h = 400;
 }
 
-void PlayersList::create(int startX, int startY, std::map<int, std::string> *pickingList, int *pickingId, std::vector<int> *players_color) {
+void PlayersList::create(int startX, int startY, std::vector<int> *players_color) {
 	
 	x = startX; y = startY;
 
@@ -18,14 +20,15 @@ void PlayersList::create(int startX, int startY, std::map<int, std::string> *pic
 	textWidth = text.get_width();
 
 	arrowDown = gui::Image("arrowDown");
-	arrowDown.create("center", (float)x + 240, (float)y + 50, 0, 0, *pickingId);
-	(*pickingList)[*pickingId] = "arrowDown";
-	(*pickingId)++;
+	arrowDown.create("center", (float)x + 240, (float)y + 50, 0, 0, getPickingID());
+
+	addValueToPickingListUI(getPickingID(), "arrowDown");
+	increasePickingID();
 	
 	arrowUp = gui::Image("arrowUp");
-	arrowUp.create("center", (float)x + 280, (float)y + 50, 0, 0, *pickingId);
-	(*pickingList)[*pickingId] = "arrowUp";
-	(*pickingId)++;
+	arrowUp.create("center", (float)x + 280, (float)y + 50, 0, 0, getPickingID());
+	addValueToPickingListUI(getPickingID(), "arrowUp");
+	increasePickingID();
 	
 	background = gui::Rectangle();
 	background.create("border-filled", (float)x - 30, (float)y + 80, (float)w, (float)h, "top-left", 0);
@@ -34,13 +37,13 @@ void PlayersList::create(int startX, int startY, std::map<int, std::string> *pic
 	for (int j = 0; j < GAME::PLAYERS_NUMBER_MAX; j++) {
 
 		//Player color rectangle
-		(*pickingList)[*pickingId] = "ColForm_" + std::to_string(j);
+		addValueToPickingListUI(getPickingID(), "ColForm_" + std::to_string(j));
 		gui::FormInput col_fi = gui::FormInput(false);
-		col_fi.create((float)x, (float)y - deltaY * j, 20.f, 20.f, { "" }, *pickingId);
+		col_fi.create((float)x, (float)y - deltaY * j, 20.f, 20.f, { "" }, getPickingID());
 		if (j < 2) { (*players_color).push_back(j); }
 		else { (*players_color).push_back(-1); }
 		colors_Form.push_back(col_fi);
-		(*pickingId)++;
+		increasePickingID();
 
 		//Player name
 		gui::FormInput p_fi = gui::FormInput(false);
@@ -48,11 +51,11 @@ void PlayersList::create(int startX, int startY, std::map<int, std::string> *pic
 		players_Form.push_back(p_fi);
 
 		//Player civilization
-		(*pickingList)[*pickingId] = "CivForm_" + std::to_string(j);
+		addValueToPickingListUI(getPickingID(), "CivForm_" + std::to_string(j));
 		gui::FormInput c_fi = gui::FormInput(true);
-		c_fi.create((float)x + 280.f, (float)y - deltaY * j, 150.f, 20.f, GAME::RACES, *pickingId);
+		c_fi.create((float)x + 280.f, (float)y - deltaY * j, 150.f, 20.f, GAME::RACES, getPickingID());
 		civiliz_Form.push_back(c_fi);
-		(*pickingId)++;
+		increasePickingID();
 	}
 }
 
@@ -67,16 +70,11 @@ void PlayersList::render(int numPlayers, std::vector<int> players_color, bool pi
 		}
 	}
 	else {
-
 		background.render(glm::vec4(0.f, 0.f, 0.f, 0.5f));
-
 		arrowDown.render(false);
 		arrowUp.render(false);
-
 		text.render_static();
-
 		number.render_dynamic(std::to_string(numPlayers), "tahoma_8", x + textWidth, y + 40.f, glm::vec4(255.f, 255.f, 255.f, 255.f), "left", "normal");
-
 		for (int j = numPlayers - 1; j >= 0; j--) {
 			colors_Form[j].render(false, glm::vec4(GLB::COLORS[players_color[j]], 1.0f));
 			players_Form[j].render(false, glm::vec4(0.f, 0.f, 0.f, 1.f));
@@ -95,9 +93,11 @@ void PlayersList::close() {
 	}
 }
 
-void PlayersList::picking(std::map<int, std::string> pickingList, int *numPlayers, std::vector<int> *players_color, int clickId) {
+void PlayersList::picking(int *numPlayers, std::vector<int> *players_color, int clickId) {
 	
-	if (pickingList[clickId] == "arrowDown") {
+	std::string clickedName = getPickedObjectName(clickId);
+
+	if (clickedName == "arrowDown") {
 		GLB::MOUSE_LEFT = false;
 		if (*numPlayers > 2 && *numPlayers <= 8) {
 			(*players_color)[*numPlayers - 1] = -1;
@@ -105,7 +105,7 @@ void PlayersList::picking(std::map<int, std::string> pickingList, int *numPlayer
 		}
 	}
 	
-	if (pickingList[clickId] == "arrowUp") {
+	if (clickedName == "arrowUp") {
 		GLB::MOUSE_LEFT = false;
 		if (*numPlayers >= 2 && *numPlayers < 8) {
 			(*numPlayers) += 1;
@@ -130,7 +130,7 @@ void PlayersList::picking(std::map<int, std::string> pickingList, int *numPlayer
 	
 	
 	for (int j = 0; j < *numPlayers; j++) {
-		if (pickingList[clickId] == "CivForm_" + std::to_string(j)) {
+		if (clickedName == "CivForm_" + std::to_string(j)) {
 			int i = int((getParam("mouse-y-leftclick") - y + deltaY * j) / 20.0)*(-1);
 			GLB::MOUSE_LEFT = false;
 			civiliz_Form[j].open_close();
@@ -139,7 +139,7 @@ void PlayersList::picking(std::map<int, std::string> pickingList, int *numPlayer
 				civiliz_Form[j].select_option(i);
 			}
 		}
-		if (pickingList[clickId] == "ColForm_" + std::to_string(j)) {
+		if (clickedName == "ColForm_" + std::to_string(j)) {
 			GLB::MOUSE_LEFT = false;
 			(*players_color)[j] ++;
 			if ((*players_color)[j] == GLB::COLORS.size()) { (*players_color)[j] = 0; }

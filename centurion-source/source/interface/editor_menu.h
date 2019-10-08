@@ -28,7 +28,7 @@ namespace editor {
     {
     public:
 		EditorMenu();
-        void create(int *pickingID);
+        void create();
         void render(bool pick);
         ~EditorMenu();
     private:

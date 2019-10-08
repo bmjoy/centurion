@@ -2,6 +2,7 @@
 #include <engine>
 #include <surface>
 #include <player>
+#include <picking>
 #include "../interface/game_ui.h"
 
 using namespace glb;
@@ -17,12 +18,14 @@ namespace game {
 		ui = new UIGame();
 		cameraLastX = 0.0; cameraLastY = 0.0;
 		threshold = 20.0f;   // Camera Movement Threshold	
-		objectId = 1;
 		blockMinimap = false;
 		lastTime = glfwGetTime();
 		gameIsCreated = false;
 	}
 	void Game::create(vector<Player> *ListOfPlayers) {
+
+		resetPicking();
+
 		surface = new Surface();
 		playersList = ListOfPlayers;
 		mapgen::setPlayerList(ListOfPlayers);
@@ -69,13 +72,13 @@ namespace game {
 			for (int j = 0; j < settl_data[r].size(); j++) {
 				b = new Building();
 				b->set_class(settl_data[r][j]["class"]);
-				b->set_id(objectId);
+				b->set_id(getPickingID());
 				b->set_player(&(*playersList)[i]);
 				b->set_position(vec3(origin.x + (int)settl_data[r][j]["offsetx"], origin.y + (int)settl_data[r][j]["offsety"], 0.0f));
 				b->create();
 			
-				buildingList[objectId] = *b;
-				objectId++;
+				buildingList[getPickingID()] = *b;
+				increasePickingID();
 			}
 		}
 
@@ -95,24 +98,24 @@ namespace game {
 
 		// *********** ROBA PROVVISORIA ***********
 		u->set_class("hmyrmidon");
-		u->set_id(objectId);
+		u->set_id(getPickingID());
 		u->set_player(&(*playersList)[0]);
 		u->set_position((*playersList)[0].getStartPoint().x, (*playersList)[0].getStartPoint().y-1000);
 		u->create();
-		unitList[objectId] = *u;
-		objectId++;
+		unitList[getPickingID()] = *u;
+		increasePickingID();;
 
 		u->set_class("hmyrmidon");
-		u->set_id(objectId);
+		u->set_id(getPickingID());
 		u->set_player(&(*playersList)[0]);
 		u->set_position((*playersList)[0].getStartPoint().x + 100, (*playersList)[0].getStartPoint().y - 1000);
 		u->create();
-		unitList[objectId] = *u;
-		objectId++;
+		unitList[getPickingID()] = *u;
+		increasePickingID();
 
 		// ****************************************
 
-		ui->create(&objectId);
+		ui->create();
 
 		camera->go_to_pos(
 			(GLfloat)((*playersList)[0].getStartPoint().x - getParam("window-width-zoomed") /2.f),
@@ -125,7 +128,6 @@ namespace game {
 	}
 
 	void Game::run() {
-
 		selectedUnits = 0;
 		camera->keyboardControl();
 

@@ -5,6 +5,12 @@ using namespace glb;
 
 Surface::Surface(){}
 
+void Surface::reset() {
+	mapgen::reset_map();
+	obj::MapGrid()->reset();
+	obj::MapTerrain()->updateHeightsBuffer();
+}
+
 void Surface::createNoise() {
 	mapgen::generateRandomMap();
 	obj::MapTerrain()->updateHeightsBuffer();

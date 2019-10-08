@@ -1,5 +1,7 @@
 #include "game_ui_menu.h"
 
+#include <picking>
+
 using namespace glb;
 
 GameMenu::GameMenu(){
@@ -8,7 +10,7 @@ GameMenu::GameMenu(){
 	gameMenuActive = false;
 }
 
-void GameMenu::create(int *pickingId, std::map<int, std::string> *pickingList) {
+void GameMenu::create() {
 
 	std::ifstream path("assets/data/interface/game/menu.json");
 	if (!path.good()) {
@@ -27,14 +29,14 @@ void GameMenu::create(int *pickingId, std::map<int, std::string> *pickingList) {
 			data[s][i]["text"].get<std::string>(), 
 			(int)x + data[s][i]["x"].get<int>(),
 			(int)y + data[s][i]["y"].get<int>(),
-			*pickingId, 
+			getPickingID(), 
 			glm::vec4(0.f, 0.f, 0.f, 255.f)
 		);
 		buttons.push_back(btn);
 
 		/* update picking */
-		(*pickingList)[*pickingId] = data[s][i]["name"].get<std::string>();
-		(*pickingId)++;
+		addValueToPickingListUI(getPickingID(), data[s][i]["name"].get<std::string>());
+		increasePickingID();
 	}
 
 	background = gui::Rectangle();
