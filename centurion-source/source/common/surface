@@ -1,0 +1,79 @@
+#pragma once
+
+#include <headers>
+
+using namespace std;
+using namespace glm;
+
+/*------------------------------------------------------
+	These variables contain the information about the map:
+
+	vertices[] = xCoord,  yCoord, xTexCoord, yTexCoord
+	heights[] = zNoise, xNorm, yNorm, zNorm
+	textures[] = textureType
+------------------------------------------------------*/
+
+namespace mapgen {
+	static const int grid_size = 128;
+	static const int nIndices = 228480;
+	static const int nVertices = 38479;
+	static const int mapWidth = 30464;  // 29952 + 128*4
+	static const int mapHeight = 20480; // 19968 + 128*4
+	static float map_vertices[nVertices * 4];
+	static float map_textures[nVertices];
+	static float map_heights[nVertices * 4];
+	static unsigned int indices[nIndices];
+	static int vertices_pos[nVertices];
+}
+
+//
+//	SURFACE CLASS --> source/surface/surface.cpp
+//
+
+class Surface
+{
+public:
+	Surface();
+	void createNoise();
+	void updateGrid();
+	void render(bool tracing);
+	~Surface();
+};
+
+//
+//	MAP GENERATION FUNCTIONS --> source/surface/mapgen.cpp
+//
+
+class Player;
+
+namespace mapgen {
+	struct Triangle {
+		vec3 a, b, c;
+	};
+	float *MapVertices();
+	float *MapTextures();
+	float *MapHeights();
+	unsigned int *Indices();
+	int *VerticesPos();
+	void reset_map();
+	float getNoiseEstimate(float x, float y);
+	int getVertexPos(int x, int y);
+	vec3 getVertex(int x, int y);
+	array<Triangle, 6> getAdjacentTriangles(ivec2 pos);
+	vec3 calculateTriangleNormal(Triangle T);
+	vector<ivec2> getAdjacentVertices(ivec2 pos);
+	void updateAllNormals();
+	void updateNormal(int x, int y);
+
+	static vector<Player> *PlayerList;
+	void init();
+	void setPlayerList(vector<Player> *List);
+	float Random2D(vec2 st);
+	float Interpolate(float a, float b, float x);
+	float InterpolatedNoise(int ind, float x, float y);
+	float smoothNoise(float y, float z, float alpha = 0.005f, float beta = 1.0f);
+	float perlinNoise(float x, float y, float xy_scale, float z_scale, float x_seed, float y_seed);
+	void generateRandomMap();
+	float generateNoise(vec2 coords, bool normal = false);
+	void define_settlements();
+}

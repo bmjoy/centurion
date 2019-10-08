@@ -1,5 +1,5 @@
-#include <global>
-#include <mapgen>
+#include <global.hpp>
+#include <surface>
 #include <math>
 
 /* ----- GLOBAL ----- */

@@ -4,7 +4,7 @@ using namespace glb;
 
 namespace editor {
 
-    Menu::Menu(){
+	EditorMenu::EditorMenu(){
         barHeight = 30;
         barColor = glm::vec4(60.f, 68.f, 104.f, 255.f);
         titlesList = { "File", "Edit", "Tools" };
@@ -13,7 +13,7 @@ namespace editor {
 		minPickingID = 0;
     }
 
-    void Menu::create(int *pickingID) {
+    void EditorMenu::create(int *pickingID) {
 		minPickingID = (*pickingID);
 
         topBar = gui::Rectangle();
@@ -72,10 +72,10 @@ namespace editor {
 		maxPickingID = (*pickingID);
     }
 
-    void Menu::render(bool pick) {
+    void EditorMenu::render(bool pick) {
         
         /* picking rendering */
-        if (pick){
+        if (pick && GLB::MOUSE_LEFT){
             for (int i = 0; i < titles.size(); i++) {
                 std::string s = titlesList[i];
                 titles[s].titleBack.render(titles[s].pickingColor);
@@ -127,81 +127,79 @@ namespace editor {
         }
     }
 
-    void Menu::picking() {
+    void EditorMenu::picking() {
 
-        if (GLB::MOUSE_LEFT) {
-            GLint mouseX = (GLint)getParam("mouse-x-position");
-            GLint mouseY = (GLint)getParam("mouse-y-position");
-			int clickId = get_id();
-            int pos = (int)((mouseY - getParam("window-height"))*(-1)) / titles["File"].titleHeight;
+        GLint mouseX = (GLint)getParam("mouse-x-position");
+        GLint mouseY = (GLint)getParam("mouse-y-position");
+		int clickId = get_id();
+        int pos = (int)((mouseY - getParam("window-height"))*(-1)) / titles["File"].titleHeight;
 
-            //---------------------
-            //   RESET 
-            //---------------------
+        //---------------------
+        //   RESET 
+        //---------------------
 
-            if (clickId < minPickingID || clickId > maxPickingID) {
-                for (int i = 0; i < titles.size(); i++) {
-                    std::string s = titlesList[i];
-                    titles[s].isOpened = false;
-                    menuIsOpened = false;
-                }
+        if (clickId < minPickingID || clickId > maxPickingID) {
+            for (int i = 0; i < titles.size(); i++) {
+                std::string s = titlesList[i];
+                titles[s].isOpened = false;
+                menuIsOpened = false;
             }
+        }
 
-            //---------------------
-            //    FILE
-            //---------------------
+        //---------------------
+        //    FILE
+        //---------------------
 
-            if (pickingList["File"] == clickId) {
-                if (pos == 0) {
-                    titles["File"].isOpened = true;
-                    menuIsOpened = true;
-                    for (int j = 0; j < titles.size(); j++) {
-                        std::string s = titlesList[j];
-                        if (s != "File") titles[s].isOpened = false;
-                    }
-                }
-                //---------------------
-                //    SAVE
-
-                if (pos == 1) { // save
-                    titles["File"].isOpened = false;
-                }
-                //---------------------
-                //    EXIT
-
-                if (pos == 2) { // exit
-                    titles["File"].isOpened = false;
-					GLB::MOUSE_LEFT = false;
-					GLB::RESET = true;
-					GLB::EDITOR = false;
-					GLB::MAIN_MENU = true;
-					for (int i = 0; i < titles.size(); i++) {
-						std::string s = titlesList[i];
-						titles[s].isOpened = false;
-						menuIsOpened = false;
-					}
-                }					
-            }
-
-            //---------------------
-            //    EDIT
-            //---------------------
-
-            if (pickingList["Edit"] == clickId) {
-                titles["Edit"].isOpened = true;
+        if (pickingList["File"] == clickId) {
+            if (pos == 0) {
+                titles["File"].isOpened = true;
                 menuIsOpened = true;
                 for (int j = 0; j < titles.size(); j++) {
                     std::string s = titlesList[j];
-                    if (s != "Edit") titles[s].isOpened = false;
+                    if (s != "File") titles[s].isOpened = false;
                 }
             }
+            //---------------------
+            //    SAVE
 
+            if (pos == 1) { // save
+                titles["File"].isOpened = false;
+            }
             //---------------------
-            //---------------------
+            //    EXIT
+
+            if (pos == 2) { // exit
+                titles["File"].isOpened = false;
+				GLB::MOUSE_LEFT = false;
+				GLB::RESET = true;
+				GLB::EDITOR = false;
+				GLB::MAIN_MENU = true;
+				for (int i = 0; i < titles.size(); i++) {
+					std::string s = titlesList[i];
+					titles[s].isOpened = false;
+					menuIsOpened = false;
+				}
+            }					
         }
+
+        //---------------------
+        //    EDIT
+        //---------------------
+
+        if (pickingList["Edit"] == clickId) {
+            titles["Edit"].isOpened = true;
+            menuIsOpened = true;
+            for (int j = 0; j < titles.size(); j++) {
+                std::string s = titlesList[j];
+                if (s != "Edit") titles[s].isOpened = false;
+            }
+        }
+
+        //---------------------
+        //---------------------
     }
 
-    bool Menu::isHover(glm::vec2 pos, int w, int h) {
+    bool EditorMenu::isHover(glm::vec2 pos, int w, int h) {
 
         if ((getParam("mouse-x-position") > pos.x) && (getParam("mouse-x-position") < pos.x + w) && (getParam("mouse-y-position") > pos.y) && (getParam("mouse-y-position") < pos.y + h)) {
             return true;
@@ -211,6 +209,6 @@ namespace editor {
         }
     }
 
-    Menu::~Menu(){
+	EditorMenu::~EditorMenu(){
     }
 }

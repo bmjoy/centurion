@@ -1,6 +1,4 @@
-#include "player.h"
-
-
+#include <player>
 
 Player::Player(){
 	id = 0;

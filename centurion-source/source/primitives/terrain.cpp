@@ -1,6 +1,6 @@
 #include <primitives>
 #include <stb_image.h>
-#include <mapgen>
+#include <surface>
 #include <global.hpp>
 
 using namespace glb;

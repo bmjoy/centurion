@@ -5,7 +5,7 @@
 
 #include <gui>
 #include "../interface/menu_players_list.h"
-#include "../player/player.h"
+#include <player>
 
 class Menu
 {

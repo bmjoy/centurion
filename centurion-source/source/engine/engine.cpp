@@ -1,12 +1,13 @@
 #include <engine>
-
+#include <editor>
+#include <game>
+#include <player>
 #include "../menu/menu.h"
-#include "../game/game.h"
-#include "../editor/editor.h"
-#include "../player/player.h"
 #include "../interface/debug_ui.h"
 
 using namespace glb;
+using namespace game;
+using namespace editor;
 
 Engine::Engine(){
 	window = myWindow();
@@ -29,7 +30,7 @@ int Engine::launch() {
 
 	mouse = new Mouse();
 	startMenu = new Menu();
-	game = new Game();
+	newGame = new Game();
 	editor = new Editor();
 	
 	debugUI = new DebugUI();
@@ -58,7 +59,7 @@ int Engine::launch() {
 		// ---- GAME ---- //
 
 		if (GLB::GAME) {
-			if (!game->game_is_created()) {
+			if (!newGame->game_is_created()) {
 				obj::Audio()->MusicStop();
 
 				clearAndSwapBuffers(GLB::MAIN_WINDOW);
@@ -68,9 +69,9 @@ int Engine::launch() {
 				}
 				glfwSwapBuffers(GLB::MAIN_WINDOW);
 
-				game->create(&playersList);
+				newGame->create(&playersList);
 			}						
-			game->run();	
+			newGame->run();
 		}
 
 		// -------------- //
@@ -81,7 +82,7 @@ int Engine::launch() {
 			GLB::EDITOR = false;
 			GLB::MAIN_MENU = true;
 			
-			game->reset();
+			newGame->reset();
 			startMenu->reset();
 			editor->reset();
 		}
@@ -91,14 +92,13 @@ int Engine::launch() {
 		if (GLB::EDITOR) {
 			if (!editor->editor_is_created()) {
 				obj::Audio()->MusicStop();
-
 				editor->create();
 			}
 			editor->run();
 		}
 
 		// debug ui
-		if (getBoolean("debug"))	debugUI->render(Fps, Mpfs, game->getSelectedUnits());
+		if (getBoolean("debug"))	debugUI->render(Fps, Mpfs, newGame->getSelectedUnits());
 
 		// mouse
 		mouse->render();
@@ -171,7 +171,8 @@ void Engine::fps_sleep() {
 Engine::~Engine()
 {
 	delete startMenu;
-	delete game;
+	newGame->clear();
+	delete newGame;
 	delete mouse;
 	delete debugUI;
 }

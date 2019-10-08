@@ -1,0 +1,43 @@
+#pragma once
+
+#include <gui>
+#include <json.hpp>
+#include <object>
+
+using namespace std;
+using namespace glm;
+
+class Camera;
+class Surface;
+class UIGame;
+class Player;
+
+namespace editor {
+
+	class EditorMenu; //temporary
+
+	//
+	//	EDITOR CLASS --> source/editor/editor.cpp
+	//
+
+	class Editor
+	{
+	public:
+		Editor();
+		bool editor_is_created() { return editorIsCreated; }
+		void reset() { editorIsCreated = false; }
+		void create();
+		void run();
+		~Editor();
+	private:
+
+		Surface *surface;
+		Camera *camera;
+		glm::mat4 proj, view;
+		EditorMenu *menu;
+		gui::Circle circle;
+		int pickingID;
+		bool editorIsCreated;
+	};
+
+}

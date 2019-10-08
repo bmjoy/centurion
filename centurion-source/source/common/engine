@@ -5,18 +5,18 @@
 using namespace std;
 using namespace glm;
 
+namespace editor { class Editor; }
+namespace game { class Game; }
+
 class Menu;
-class Game;
-class Editor;
 class DebugUI;
 class Player;
 
 //
-//	CAMERA
+//	CAMERA --> source/engine/camera.cpp
 //
 
-class Camera
-{
+class Camera {
 public:
 	Camera();
 	vec3 position;
@@ -40,7 +40,7 @@ private:
 };
 
 //
-//	WINDOW
+//	WINDOW --> source/engine/window.cpp
 //
 
 class myWindow
@@ -74,43 +74,26 @@ private:
 };
 
 //
-//	MOUSE
+//	MOUSE --> source/engine/mouse.cpp
 //
 
 class Mouse
 {
 public:
 	Mouse();
+	void create();
 	void render();
 	void mouse_control(int lastX, int lastY);
 	~Mouse();
-
-private:
-	float znoise;
-	float yzoomed;
-
-	vec3 position;
-	string currentState;
-};
-
-//
-//	CURSOR POINT
-//
-
-class CPoint
-{
-public:
-	CPoint();
-	void create();
-	void render();
-	~CPoint();
 private:
 	gui::Image img;
-	float xPosGrid, yPosGrid;
+	vec3 position;
+	string currentState;
+	float znoise, yzoomed, xPosGrid, yPosGrid;
 };
 
 //
-// ENGINE
+// ENGINE --> source/engine/engine.cpp
 //
 
 class Engine {
@@ -124,8 +107,8 @@ private:
 	myWindow window;
 	Mouse *mouse;
 	Menu *startMenu;
-	Game *game;
-	Editor *editor;
+	game::Game *newGame;
+	editor::Editor *editor;
 	DebugUI *debugUI;
 	gui::SimpleText text;
 

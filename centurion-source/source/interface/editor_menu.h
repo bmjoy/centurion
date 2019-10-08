@@ -24,13 +24,13 @@ namespace editor {
         bool isOpened;
     };
 
-    class Menu
+    class EditorMenu
     {
     public:
-        Menu();
+		EditorMenu();
         void create(int *pickingID);
         void render(bool pick);
-        ~Menu();
+        ~EditorMenu();
     private:
         gui::Rectangle topBar;
         glm::vec4 barColor;

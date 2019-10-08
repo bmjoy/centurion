@@ -7,7 +7,7 @@ namespace gui {
 	using namespace glm;
 
 	/*
-		IMAGE
+		IMAGE --> source/gui/image.cpp
 	*/
 
 	class Image	{
@@ -24,7 +24,7 @@ namespace gui {
 	};
 
 	/*
-		SIMPLE TEXT
+		SIMPLE TEXT --> source/gui/simple_text.cpp
 	*/
 
 	class SimpleText {
@@ -43,7 +43,7 @@ namespace gui {
 	};
 
 	/*
-		RECTANGLE
+		RECTANGLE --> source/gui/rectangle.cpp
 	*/
 
 	class Rectangle	{
@@ -58,7 +58,7 @@ namespace gui {
 	};
 
 	/*
-		CIRCLE
+		CIRCLE --> source/gui/circle.cpp
 	*/
 
 	class Circle {
@@ -73,7 +73,7 @@ namespace gui {
 	};
 
 	/*
-		BUTTON
+		BUTTON --> source/gui/button.cpp
 	*/
 
 	class Button {
@@ -88,7 +88,7 @@ namespace gui {
 	};
 
 	/*
-		FORM INPUT
+		FORM INPUT --> source/gui/form_input.cpp
 	*/
 
 	class FormInput	{

@@ -1,0 +1,80 @@
+#pragma once 
+
+#include <gui>
+#include <json.hpp>
+#include <object>
+
+using namespace std;
+using namespace glm;
+
+class Camera;
+class Surface;
+class UIGame;
+class Player;
+
+namespace game {
+
+	using namespace unit;
+	using namespace building;
+
+	//
+	//	GAME CLASS --> source/game/game.cpp
+	//
+
+	class Game {
+	public:
+		Game();
+		bool game_is_created() { return gameIsCreated; }
+		void reset() { gameIsCreated = false; }
+		void create(vector<Player> *ListOfPlayers);
+		void run();
+		void clear();
+		int getSelectedUnits() { return selectedUnits; }
+		~Game();
+	private:
+		vector<Player> *playersList;
+		Camera *camera;
+		Surface *surface;
+		Building *b;
+		Unit *u;
+		UIGame *ui;
+		gui::Rectangle selRectangle;
+
+		map<int, Building> buildingList;
+		map<int, Unit> unitList;
+
+		double lastTime;
+		float threshold, cameraLastX, cameraLastY;
+		int objectId, click_id, selectedUnits;
+		bool blockMinimap;
+
+		json settl_data;
+		string r;
+		vec2 origin;
+		mat4 view, projection;
+		bool gameIsCreated;
+	};
+	
+	//
+	// GAME FUNCTIONS --> source/game/game_functions.cpp
+	//
+	
+	struct SelRectPoints { float minX, maxX, minY, maxY; };
+
+	static SelRectPoints selRectCoords;
+	SelRectPoints *SelRectCoords();
+	static int clickCount = 0;
+	static float cameraToX = 0.f, cameraToY = 0.f;
+	static bool doubleClick = false;
+	static int clickIdList[2] = { 0, 0 };
+	static float cameraLastX = 0.f;
+	static float cameraLastY = 0.f;
+
+	void picking(std::map<int, Building> *bList, std::map<int, Unit> *uList, glm::mat4 *proj, glm::mat4 *view, int *clickId, bool *blockMinimap);
+	void tracing(Surface *s, glm::mat4 *proj, glm::mat4 *view);
+	void clearBuffers();
+	void goToPosition(std::map<int, Building> *bList, Camera *c, double *lastTime, int *clickId, bool *blockMinimap);
+	void renderObjects(std::map<int, Building> *bList, std::map<int, Unit> *uList, gui::Rectangle *selRectangle, glm::mat4 *proj, glm::mat4 *view, int *clickId, int *selectedUnits);
+	void renderSelRectangle(gui::Rectangle *selRectangle);
+
+};

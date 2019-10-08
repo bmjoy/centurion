@@ -1,17 +1,24 @@
 #include <engine>
 #include <stb_image.h>
-#include <mapgen>
+#include <surface>
 
 using namespace glb;
 
 Mouse::Mouse(){
 	currentState = "default";
 }
-
+void Mouse::create() {
+	img = gui::Image("circle_pos");
+	img.create("center", 0.f, 0.f, 0, 0, 0);
+}
 void Mouse::render() {
 	obj::Cursor()->render(position.x, position.y, currentState);
+	if (GLB::GAME){
+		if (!GAME::MINIMAP_IS_ACTIVE) {
+			img.render(false, getParam("mouse-x-position"), getParam("mouse-y-2D-position"));
+		}
+	}
 }
-
 void Mouse::mouse_control(int lastX, int lastY) {
 
 	position.x = (GLfloat)lastX;

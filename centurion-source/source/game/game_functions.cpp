@@ -1,17 +1,25 @@
-#include "game_functions.h"
+#include <game>
+#include <engine>
+#include <player>
+#include <surface>
+#include "../interface/game_ui.h"
 
 using namespace glb;
+using namespace std;
+using namespace glm;
+using namespace unit;
+using namespace building;
 
 namespace game {
 
 	SelRectPoints *SelRectCoords() { return &selRectCoords; }
 
-	void picking(std::map<int, Building> *bList, std::map<int, Unit> *uList, glm::mat4 *proj, glm::mat4 *view, int *clickId, bool *blockMinimap) {
-		if (!GAME::MENU_IS_ACTIVE){
-			for (std::map<int, Building>::iterator bld = (*bList).begin(); bld != (*bList).end(); bld++) {
+	void picking(map<int, Building> *bList, map<int, Unit> *uList, mat4 *proj, mat4 *view, int *clickId, bool *blockMinimap) {
+		if (!GAME::MENU_IS_ACTIVE && GLB::MOUSE_LEFT){
+			for (map<int, Building>::iterator bld = (*bList).begin(); bld != (*bList).end(); bld++) {
 				bld->second.render(true, 0);
 			}
-			for (std::map<int, Unit>::iterator u = (*uList).begin(); u != (*uList).end(); u++) {
+			for (map<int, Unit>::iterator u = (*uList).begin(); u != (*uList).end(); u++) {
 				u->second.render(*proj, *view, true, 0);
 			}
 			if (GLB::MOUSE_LEFT) {
@@ -26,7 +34,7 @@ namespace game {
 		}
 	}
 
-	void tracing(Surface *s, glm::mat4 *proj, glm::mat4 *view) {
+	void tracing(Surface *s, mat4 *proj, mat4 *view) {
 		if (!GAME::MINIMAP_IS_ACTIVE) {
 			unsigned char tracingCol[4];
 			(*s).render(true);
@@ -41,7 +49,7 @@ namespace game {
 		glClear(GL_COLOR_BUFFER_BIT);
 	}
 
-	void goToPosition(std::map<int, Building> *bList, Camera *c, double *lastTime, int *clickId, bool *blockMinimap) {
+	void goToPosition(map<int, Building> *bList, Camera *c, double *lastTime, int *clickId, bool *blockMinimap) {
 		if (GAME::MINIMAP_IS_ACTIVE) {
 			if (GLB::MOUSE_LEFT && cursorInGameScreen()) {
 				cameraToX = getParam("mouse-x-leftclick") / getParam("window-width")*(float)GAME::MAP_WIDTH - getParam("window-width-zoomed") / 2.f;
@@ -83,12 +91,12 @@ namespace game {
 		}
 	}
 
-	void renderObjects(std::map<int, Building> *bList, std::map<int, Unit> *uList, gui::Rectangle *selRectangle, glm::mat4 *proj, glm::mat4 *view, int *clickId, int *selectedUnits) {
-		for (std::map<int, Building>::iterator bld = bList->begin(); bld != bList->end(); bld++) {
+	void renderObjects(map<int, Building> *bList, map<int, Unit> *uList, gui::Rectangle *selRectangle, mat4 *proj, mat4 *view, int *clickId, int *selectedUnits) {
+		for (map<int, Building>::iterator bld = bList->begin(); bld != bList->end(); bld++) {
 			bld->second.render(false, *clickId);
 		}
 		if (!GAME::MINIMAP_IS_ACTIVE) {
-			for (std::map<int, Unit>::iterator u = uList->begin(); u != uList->end(); u++) {
+			for (map<int, Unit>::iterator u = uList->begin(); u != uList->end(); u++) {
 				u->second.render(*proj, *view, false, *clickId);
 				(*selectedUnits) += (int)u->second.getSelected();
 			}
@@ -122,7 +130,7 @@ namespace game {
 				if (w < 0 && h < 0) origin = 3; // top-right
 
 				if (abs(w) > 2 && abs(h) > 2) {
-					selRectangle->render(glm::vec4(255.f), 0, startX, startY, abs(w), abs(h), origin);
+					selRectangle->render(vec4(255.f), 0, startX, startY, abs(w), abs(h), origin);
 					(*SelRectCoords()).minX = std::min(startX, lastX);
 					(*SelRectCoords()).maxX = std::max(startX, lastX);
 					(*SelRectCoords()).minY = std::min(startY, lastY);

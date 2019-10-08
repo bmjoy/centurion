@@ -1,53 +1,49 @@
-#include "editor.h"
+#include <editor>
+#include <surface>
+#include <engine>
+#include "../interface/editor_menu.h"
 
 using namespace glb;
 
-Editor::Editor(){
-	editorIsCreated = false;
-	pickingID = 1;
-}
+namespace editor {
+	Editor::Editor(){
+		editorIsCreated = false;
+		pickingID = 1;
+	}
+	void Editor::create() {
+		surface = new Surface();
+		camera = new Camera(glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3(0.0f, 1.0f, 0.0f), -90.0f, 0.0f);
+		menu = new editor::EditorMenu();
+		menu->create(&pickingID);
+		circle = gui::Circle();
+		circle.create("border", 0.f, 0.f, 300.f, 200.f, 8.f, "center");
+		editorIsCreated = true;
+	}
+	void Editor::run() {
+		camera->keyboardControl();
+		camera->mouseControl(2.0f);
 
-void Editor::create() {
+		proj = GLB::CAMERA_PROJECTION;
+		view = camera->calculateViewMatrix();
 
-	/*
-		instructions
-	*/
+		obj::applyGameMatrices(&proj, &view);
+		surface->render(false);
 
-	surface = new Surface();
+		//-----------------------------
 
-	camera = Camera(glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3(0.0f, 1.0f, 0.0f), -90.0f, 0.0f);
+		obj::applyMenuMatrices();
 
-	menu = editor::Menu();
-	menu.create(&pickingID);
+		/* temporary : it will be in editor UI */
+		circle.render(glm::vec4(255.f), getParam("mouse-x-position"), getParam("mouse-y-position"));
+		menu->render(true);
+		menu->render(false);
 
-	circle = gui::Circle();
-	circle.create("border", 0.f, 0.f, 300.f, 200.f, 8.f, "center");
+		GLB::CAMERA_PROJECTION = glm::ortho(0.0f, getParam("window-width-zoomed"), 0.0f, getParam("window-height-zoomed"), -(float)GAME::MAP_WIDTH, (float)GAME::MAP_WIDTH);
+	}
 
-	editorIsCreated = true;
-}
-
-void Editor::run() {
-	camera.keyboardControl();
-	camera.mouseControl(2.0f);
-
-	proj = GLB::CAMERA_PROJECTION;
-	view = camera.calculateViewMatrix();
-
-	obj::applyGameMatrices(&proj, &view);
-	surface->render(false);
-
-	//-----------------------------
-
-	obj::applyMenuMatrices();
-
-	/* temporary : it will be in editor UI */
-	circle.render(glm::vec4(255.f), getParam("mouse-x-position"), getParam("mouse-y-position"));
-	menu.render(true);
-	menu.render(false);
-
-	GLB::CAMERA_PROJECTION = glm::ortho(0.0f, getParam("window-width-zoomed"), 0.0f, getParam("window-height-zoomed"), -(float)GAME::MAP_WIDTH, (float)GAME::MAP_WIDTH);
-}
-
-Editor::~Editor(){
-	delete surface;
+	Editor::~Editor(){
+		delete surface;
+		delete menu;
+		delete camera;
+	}
 }

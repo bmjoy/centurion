@@ -140,17 +140,22 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="source\engine\cursor_image.cpp" />
     <ClCompile Include="source\global.cpp" />
-    <ClCompile Include="source\gui\bitmap_font.cpp" />
-    <ClCompile Include="source\gui\empty_circle.cpp" />
-    <ClCompile Include="source\gui\empty_rectangle.cpp" />
-    <ClCompile Include="source\gui\filled_rectangle.cpp" />
-    <ClCompile Include="source\gui\image_sprite.cpp" />
     <ClCompile Include="source\math.cpp" />
-    <ClCompile Include="source\shader.cpp" />
-    <ClCompile Include="source\surface\mapgen.cpp" />
-    <ClCompile Include="source\unit\unit_sprite.cpp" />
+    <ClCompile Include="source\object.cpp" />
+    <ClCompile Include="source\primitives\audio_manager.cpp" />
+    <ClCompile Include="source\primitives\bitmap_font.cpp" />
+    <ClCompile Include="source\primitives\building_sprite.cpp" />
+    <ClCompile Include="source\primitives\cursor_image.cpp" />
+    <ClCompile Include="source\primitives\empty_circle.cpp" />
+    <ClCompile Include="source\primitives\empty_rectangle.cpp" />
+    <ClCompile Include="source\primitives\filled_rectangle.cpp" />
+    <ClCompile Include="source\primitives\grid.cpp" />
+    <ClCompile Include="source\primitives\image_sprite.cpp" />
+    <ClCompile Include="source\primitives\light.cpp" />
+    <ClCompile Include="source\primitives\shader.cpp" />
+    <ClCompile Include="source\primitives\terrain.cpp" />
+    <ClCompile Include="source\primitives\unit_sprite.cpp" />
     <None Include="assets\shaders\bsprite\fragment.glsl">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
       <FileType>Document</FileType>
@@ -239,7 +244,6 @@
     <ClCompile Include="main.cpp" />
     <ClCompile Include="source\audio\audio_context.cpp" />
     <ClCompile Include="source\audio\audio_device.cpp" />
-    <ClCompile Include="source\audio\audio_manager.cpp" />
     <ClCompile Include="source\audio\audio_player.cpp" />
     <ClCompile Include="source\audio\listener.cpp" />
     <ClCompile Include="source\audio\music.cpp" />
@@ -247,16 +251,13 @@
     <ClCompile Include="source\audio\sound.cpp" />
     <ClCompile Include="source\audio\sound_buffer.cpp" />
     <ClCompile Include="source\building\building.cpp" />
-    <ClCompile Include="source\building\building_sprite.cpp" />
     <ClCompile Include="source\editor\editor.cpp" />
     <ClCompile Include="source\engine\camera.cpp" />
-    <ClCompile Include="source\engine\cursor_point.cpp" />
     <ClCompile Include="source\engine\engine.cpp" />
     <ClCompile Include="source\engine\mouse.cpp" />
     <ClCompile Include="source\engine\window.cpp" />
     <ClCompile Include="source\game\game.cpp" />
     <ClCompile Include="source\game\game_functions.cpp" />
-    <ClCompile Include="source\game\game_object.cpp" />
     <ClCompile Include="source\gui\button.cpp" />
     <ClCompile Include="source\gui\circle.cpp" />
     <ClCompile Include="source\gui\image.cpp" />
@@ -269,13 +270,11 @@
     <ClCompile Include="source\interface\game_ui.cpp" />
     <ClCompile Include="source\interface\menu_players_list.cpp" />
     <ClCompile Include="source\menu\menu.cpp" />
-    <ClCompile Include="source\pathfinding\a_star.cpp" />
+    <ClCompile Include="source\pathfinding\astar.cpp" />
     <ClCompile Include="source\pathfinding\node.cpp" />
     <ClCompile Include="source\player\player.cpp" />
-    <ClCompile Include="source\surface\grid.cpp" />
-    <ClCompile Include="source\surface\light.cpp" />
+    <ClCompile Include="source\surface\mapgen.cpp" />
     <ClCompile Include="source\surface\surface.cpp" />
-    <ClCompile Include="source\surface\terrain.cpp" />
     <ClCompile Include="source\unit\unit.cpp" />
     <ClCompile Include="source\unit\unit_functions.cpp" />
     <None Include="assets\shaders\bsprite\vertex.glsl">
@@ -287,13 +286,18 @@
       <DeploymentContent Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</DeploymentContent>
       <DeploymentContent Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</DeploymentContent>
     </ClInclude>
+    <None Include="source\common\editor" />
     <None Include="source\common\engine" />
+    <None Include="source\common\game" />
     <None Include="source\common\gui" />
+    <None Include="source\common\object" />
+    <None Include="source\common\pathfinding" />
+    <None Include="source\common\player" />
+    <None Include="source\common\surface" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="source\audio\audio_context.h" />
     <ClInclude Include="source\audio\audio_device.h" />
-    <ClInclude Include="source\audio\audio_manager.h" />
     <ClInclude Include="source\audio\audio_player.h" />
     <ClInclude Include="source\audio\interfaces\IAudioContext.h" />
     <ClInclude Include="source\audio\interfaces\IAudioDevice.h" />
@@ -310,30 +314,18 @@
     <ClInclude Include="source\audio\sndfile.hh" />
     <ClInclude Include="source\audio\sound.h" />
     <ClInclude Include="source\audio\sound_buffer.h" />
-    <ClInclude Include="source\building\building.h" />
     <ClInclude Include="source\common\global" />
     <ClInclude Include="source\common\global.hpp" />
-    <ClInclude Include="source\common\mapgen" />
     <ClInclude Include="source\common\math" />
     <ClInclude Include="source\common\primitives" />
-    <ClInclude Include="source\editor\editor.h" />
     <ClInclude Include="source\extern\includes\json.hpp" />
     <ClInclude Include="source\extern\includes\stb_image.h" />
-    <ClInclude Include="source\game\game.h" />
-    <ClInclude Include="source\game\game_functions.h" />
-    <ClInclude Include="source\game\game_object.h" />
     <ClInclude Include="source\interface\debug_ui.h" />
     <ClInclude Include="source\interface\editor_menu.h" />
     <ClInclude Include="source\interface\game_ui_menu.h" />
     <ClInclude Include="source\interface\game_ui.h" />
     <ClInclude Include="source\interface\menu_players_list.h" />
     <ClInclude Include="source\menu\menu.h" />
-    <ClInclude Include="source\pathfinding\a_star.h" />
-    <ClInclude Include="source\pathfinding\node.h" />
-    <ClInclude Include="source\player\player.h" />
-    <ClInclude Include="source\surface\surface.h" />
-    <ClInclude Include="source\unit\unit.h" />
-    <ClInclude Include="source\unit\unit_functions.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

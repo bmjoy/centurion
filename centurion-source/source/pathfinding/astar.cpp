@@ -1,6 +1,6 @@
-#include "a_star.h"
+#include <pathfinding>
 
-namespace aStar {
+namespace astar {
 
 	int *GridMatrix() { return gridMatrix; }
 	int *GridMatrix2D() { return gridMatrix2D; }

@@ -85,17 +85,22 @@ void Menu::create(std::vector<Player> *List) {
 
 void Menu::render() {
 
-	for (int i = 0; i < images[currentMenu].size(); ++i) {
-		images[currentMenu][i].render(true);
-	}
-	for (int i = 0; i < buttons[currentMenu].size(); ++i) {
-		buttons[currentMenu][i].render(true);
-	}
-	if (currentMenu == "singleplayer") {
-		list.render(num_players, players_color, true);
+	/* picking */
+
+	if (GLB::MOUSE_LEFT){
+		for (int i = 0; i < images[currentMenu].size(); ++i) {
+			images[currentMenu][i].render(true);
+		}
+		for (int i = 0; i < buttons[currentMenu].size(); ++i) {
+			buttons[currentMenu][i].render(true);
+		}
+		if (currentMenu == "singleplayer") {
+			list.render(num_players, players_color, true);
+		}
+		picking();
 	}
 
-	picking();
+	/* rendering */
 
 	for (int i = 0; i < images[currentMenu].size(); ++i) {
 		images[currentMenu][i].render(false);
@@ -110,57 +115,52 @@ void Menu::render() {
 }
 
 void Menu::picking() {
+	clickId = get_id();
+	std::cout << "DEBUG: Click id: " << clickId << "\n";
 
-	if (GLB::MOUSE_LEFT) {
-
-		clickId = get_id();
-
-		std::cout << "DEBUG: Click id: " << clickId << "\n";
-
-		/*------------------------------------------------------------------------------*/
-		if (currentMenu == "singleplayer"){
-			if (pickingList[clickId].substr(0, 4) != "CivForm") {
-				list.close();
-			}
-			list.picking(pickingList, &num_players, &players_color, clickId);
+	/*------------------------------------------------------------------------------*/
+	if (currentMenu == "singleplayer"){
+		if (pickingList[clickId].substr(0, 4) != "CivForm") {
+			list.close();
 		}
-		/*------------------------------------------------------------------------------*/
-		if (pickingList[clickId] == "buttonStart") {
+		list.picking(pickingList, &num_players, &players_color, clickId);
+	}
+	/*------------------------------------------------------------------------------*/
+	if (pickingList[clickId] == "buttonStart") {
 			
-			GLB::MOUSE_LEFT = false;
-			GLB::GAME = true;
-			GLB::MAIN_MENU = false;
-			/* save game informations */
-			GAME::PLAYERS_NUMBER = num_players;
-			for (int i = 0; i < num_players; i++) {
-				Player p = Player();
-				p.create(players_color[i], 0, list.get_race(i), GLB::COLORS[players_color[i]]);
-				(*playersList).push_back(p);				
-			}
+		GLB::MOUSE_LEFT = false;
+		GLB::GAME = true;
+		GLB::MAIN_MENU = false;
+		/* save game informations */
+		GAME::PLAYERS_NUMBER = num_players;
+		for (int i = 0; i < num_players; i++) {
+			Player p = Player();
+			p.create(players_color[i], 0, list.get_race(i), GLB::COLORS[players_color[i]]);
+			(*playersList).push_back(p);				
+		}
 			
-		}
-		/*------------------------------------------------------------------------------*/
-		if (pickingList[clickId] == "buttonEditor") {
-			GLB::MOUSE_LEFT = false;
-			GLB::EDITOR = true;
-			GLB::MAIN_MENU = false;
-		}
-		/*------------------------------------------------------------------------------*/
-		if (pickingList[clickId] == "buttonQuit") {
-			GLB::MOUSE_LEFT = false;
-			saveLog();
-			GLB::WINDOW_CLOSE = true;
-		}
-		/*------------------------------------------------------------------------------*/
-		if (pickingList[clickId] == "buttonExit") {
-			GLB::MOUSE_LEFT = false;
-			currentMenu = "mainmenu";
-		}
-		/*------------------------------------------------------------------------------*/
-		if (pickingList[clickId] == "buttonSinglePlayer") {
-			GLB::MOUSE_LEFT = false;
-			currentMenu = "singleplayer";
-		}
+	}
+	/*------------------------------------------------------------------------------*/
+	if (pickingList[clickId] == "buttonEditor") {
+		GLB::MOUSE_LEFT = false;
+		GLB::EDITOR = true;
+		GLB::MAIN_MENU = false;
+	}
+	/*------------------------------------------------------------------------------*/
+	if (pickingList[clickId] == "buttonQuit") {
+		GLB::MOUSE_LEFT = false;
+		saveLog();
+		GLB::WINDOW_CLOSE = true;
+	}
+	/*------------------------------------------------------------------------------*/
+	if (pickingList[clickId] == "buttonExit") {
+		GLB::MOUSE_LEFT = false;
+		currentMenu = "mainmenu";
+	}
+	/*------------------------------------------------------------------------------*/
+	if (pickingList[clickId] == "buttonSinglePlayer") {
+		GLB::MOUSE_LEFT = false;
+		currentMenu = "singleplayer";
 	}
 }
 

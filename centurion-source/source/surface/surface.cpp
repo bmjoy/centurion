@@ -1,11 +1,9 @@
-#include "surface.h"
-#include <mapgen>
+#include <surface>
+#include <global.hpp>
 
 using namespace glb;
 
-Surface::Surface()
-{	
-}
+Surface::Surface(){}
 
 void Surface::createNoise() {
 	mapgen::generateRandomMap();

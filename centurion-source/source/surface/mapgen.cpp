@@ -1,6 +1,7 @@
-#include <mapgen>
+#include <surface>
 #include <math>
 #include <global.hpp>
+#include <player>
 
 namespace mapgen {
 	void init() {

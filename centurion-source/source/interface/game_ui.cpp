@@ -34,9 +34,10 @@ void UIGame::create(int *pickingId) {
 
 void UIGame::render() {
 
-	gameMenu.render(true);
-
-	picking();
+	if (GLB::MOUSE_LEFT){
+		gameMenu.render(true);
+		picking();
+	}
 
 	calculateTime();
 	gameMenu.render(false);
@@ -61,19 +62,15 @@ void UIGame::render() {
 }
 
 void UIGame::picking() {
-	if (GLB::MOUSE_LEFT) {
-
-		clickId = get_id();
-		if (pickingList[clickId] == "menuButtonClose") {
-			GAME::MENU_IS_ACTIVE = false;
-			GLB::MOUSE_LEFT = false;
-		}
-		if (pickingList[clickId] == "menuButtonQuit") {
-			GAME::MENU_IS_ACTIVE = false;
-			GLB::RESET = true;
-			GLB::MOUSE_LEFT = false;
-		}
-
+	clickId = get_id();
+	if (pickingList[clickId] == "menuButtonClose") {
+		GAME::MENU_IS_ACTIVE = false;
+		GLB::MOUSE_LEFT = false;
+	}
+	if (pickingList[clickId] == "menuButtonQuit") {
+		GAME::MENU_IS_ACTIVE = false;
+		GLB::RESET = true;
+		GLB::MOUSE_LEFT = false;
 	}
 }
 
