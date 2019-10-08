@@ -44,23 +44,19 @@ void GameMenu::create() {
 }
 
 void GameMenu::render(bool picking) {
-
-	if (GAME::MENU_IS_ACTIVE) {
-
-		if (picking) {
-			for (int i = 0; i < buttons.size(); ++i) {
-				buttons[i].render(true);
-			}
+	if (picking) {
+		for (int i = 0; i < buttons.size(); ++i) {
+			buttons[i].render(true);
 		}
-
-		else {
-			background.render(glm::vec4(0.f, 0.f, 0.f, 0.5f));
-
-			for (int i = 0; i < buttons.size(); ++i) {
-				buttons[i].render(false);
-			}
-		}		
 	}
+
+	else {
+		background.render(glm::vec4(0.f, 0.f, 0.f, 0.5f));
+
+		for (int i = 0; i < buttons.size(); ++i) {
+			buttons[i].render(false);
+		}
+	}		
 }
 
 GameMenu::~GameMenu(){}
