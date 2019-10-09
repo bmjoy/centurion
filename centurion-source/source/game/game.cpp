@@ -49,9 +49,10 @@ namespace game {
 		mapgen::define_settlements();
 
 		/* CREATE SETTLEMENTS */
+		//Close the game if it wasn't able to find or process settlements.json file
 		ifstream path("assets/data/settlements.json");
 		if (!path.good()) {
-			forceGameClosure("  Error code 0x00000001\n\n  Unable to find or process SETTLEMENTS file.\nForced application shutdown has started.");
+			forceGameClosure("NOT_FOUND", "errorSettlements");
 		}
 		settl_data = json::parse(path);
 

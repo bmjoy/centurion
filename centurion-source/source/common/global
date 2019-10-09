@@ -14,6 +14,7 @@ using namespace glm;
 //
 
 namespace glb {
+	extern string language;
 	extern mat4 menuProjection;
 	extern mat4 cameraProjection;
 	extern mat4 minimapProjection;
@@ -28,14 +29,18 @@ namespace glb {
     static map<string, float> params; // global parameters
 	static map<string, bool> booleans; // global booleans
 	static map<string, string> errors; // error codes
+	static map<string, string> translations; // translated texts
 	void setParam(string param, float value);
 	float getParam(string param);
 	void setBoolean(string param, bool value);
 	bool getBoolean(string param);
 	void setErrors(map<string, string> errorsMap);
+	void setTranslations(map<string, string> translationsMap);
 	string getErrorCode(string error);
+	string getTranslation(string code);
 	void initParams();
 	void saveLog();
+	void translateTexts();
 
 	// reading/saving map data 
 	void readIndicesData(unsigned int *indices, string path);
@@ -49,7 +54,7 @@ namespace glb {
 	bool cursorInGameScreen();
 	void clearAndSwapBuffers(GLFWwindow *window);
 	vec2 getZoomedCoords(float xCoord, float yCoord);
-	void forceGameClosure(string reason);
+	void forceGameClosure(string errorCode, string errorText);
 	void showGameWarning(string reason);
 };
 

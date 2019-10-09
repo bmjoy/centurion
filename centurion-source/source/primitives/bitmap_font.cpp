@@ -61,10 +61,10 @@ void BitmapFont::create() {
 	glBindVertexArray(0);
 
 	/* Texture */
-
+	//Close the game if it wasn't able to find or process fonts.json file
 	std::ifstream path_fonts("assets/data/fonts.json");
 	if (!path_fonts) {
-		forceGameClosure("Error code 0x00000001\n\n  Unable to find or process FONTS file.\n  Forced application shutdown has started.");
+		forceGameClosure("NOT_FOUND" , "errorFonts");
 	}
 	json d = json::parse(path_fonts);
 

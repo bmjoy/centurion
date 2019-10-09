@@ -2,5 +2,6 @@
     "debug":1,
     "window_width":1366,
     "window_height":768,
-    "camera_movespeed":10
+    "camera_movespeed":10,
+    "language": "italiano"
 }

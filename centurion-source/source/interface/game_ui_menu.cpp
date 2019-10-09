@@ -12,9 +12,10 @@ GameMenu::GameMenu(){
 
 void GameMenu::create() {
 
+	//Close the game if it wasn't able to find or process menu.json file
 	std::ifstream path("assets/data/interface/game/menu.json");
 	if (!path.good()) {
-		forceGameClosure("Error code 0x00000001\n\n  Unable to find or process MENU DATA file.\n  Forced application shutdown has started.");
+		forceGameClosure("NOT_FOUND" , "errorMenuData");
 	}
 	data = json::parse(path);
 

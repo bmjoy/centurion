@@ -11,7 +11,8 @@ using namespace std;
 using namespace game;
 
 namespace glb {
-    
+
+	string language = "english"; //Default value
     mat4 menuProjection;
 	mat4 cameraProjection;
 	mat4 minimapProjection;
@@ -27,12 +28,19 @@ namespace glb {
 	float getParam(string param) { return params[param]; }
 	void setBoolean(string param, bool value) { booleans[param] = value; }
 	bool getBoolean(string param) { return booleans[param]; }
+	void setTranslations(map<string, string> translationsMap) { translations = translationsMap; }
+	string getTranslation(string code) { return translations[code]; }
 
 	void initParams() {
 		//Close the game if it wasn't able to find or process errorCodes.json file
 		ifstream errorCodes_path("assets/data/errorCodes.json");
 		if (!errorCodes_path.good()) {
-			forceGameClosure("  Error code: " + getErrorCode("NOT_FOUND") + string("\n\n  Unable to find or process ERROR CODES file.\n  Forced application shutdown has started."));
+			map<string, string> tempMap;
+			tempMap["NOT_FOUND"] = "0x00000001";
+			tempMap["noFile"] = "Unable to find or process ERROR CODES file.\n  Forced application shutdown has started.";
+			setErrors(tempMap);
+			setTranslations(tempMap);
+			forceGameClosure("NOT_FOUND" , "noFile");
 		}
 		json errorCodes = json::parse(errorCodes_path);
 		map<string, string> errorsMap = errorCodes.get<map<string, string>>();
@@ -40,12 +48,12 @@ namespace glb {
 
 		ifstream settings_path("settings.json");
 		if (!settings_path.good()) {
-			//The correct format should be:
-			//forceGameClosure("  " + errorsJson["NOT_FOUND"] + "\n\n  " + errorText[TRANSLATE];
-			forceGameClosure("  Error code: " + getErrorCode("NOT_FOUND") + string("\n\n  Unable to find or process SETTINGS file.\n  Forced application shutdown has started."));
+			forceGameClosure("NOT_FOUND" , "errorSettings");
 		}
 		json settings = json::parse(settings_path);
 
+		language = settings["language"].get<string>();
+		translateTexts();
 		setBoolean("debug", (bool)settings["debug"].get<int>());
 		setParam("window-width", (float)settings["window_width"]);
 		setParam("window-height", (float)settings["window_height"]);
@@ -77,8 +85,8 @@ namespace glb {
 
 		ifstream data_path("assets/data/data.json");
 		//Close the game if it wasn't able to find or process data.json file
-		if (!data_path.good()) {
-			forceGameClosure("  Error code:" + getErrorCode("NOT_FOUND") + "\n\n  Unable to find or process DATA file.\nForced application shutdown has started.");
+		if (data_path.good()) {
+			forceGameClosure("NOT_FOUND" , "errorData");
 		}
 		json data = json::parse(data_path);
 
@@ -110,6 +118,31 @@ namespace glb {
 		}
 		logFile.close();
 	}
+
+	void translateTexts() {
+		ifstream translationTable_path("assets/data/interface/texts/"+language+".json");
+		if (translationTable_path.good()) {
+			json tJson = json::parse(translationTable_path);
+			map<string, string> translationsMap = tJson.get<map<string, string>>();
+			setTranslations(translationsMap);
+		}
+		else {
+			language = "english";
+			ifstream translationTable_path("assets/data/interface/texts/" + language + ".json");
+			if (translationTable_path.good()) {
+				json tJson = json::parse(translationTable_path);
+				map<string, string> translationsMap = tJson.get<map<string, string>>();
+				setTranslations(translationsMap);
+			}
+			else {
+				map<string, string> tempMap;
+				tempMap["noFile"] = "Unable to find or process ENGLISH language file.\n  Forced application shutdown has started.";
+				setTranslations(tempMap);
+				forceGameClosure("NOT_FOUND", "noFile");
+			}
+		}
+	}
+
 	void readIndicesData(unsigned int *indices, string path) {
 		fstream fin;
 		fin.open(path);
@@ -194,8 +227,9 @@ namespace glb {
 		float y = yCoord * getParam("window-height-zoomed") / getParam("window-height") + getParam("camera-y-position");
 		return vec2(x, y);
 	}
-	void forceGameClosure(string reason) {
-		MessageBox(NULL, reason.c_str(), gameNameLPCSTR, MB_ICONERROR);
+	void forceGameClosure(string errorCode, string errorText) {
+		string text = "  " + getTranslation("errorCode") + ": " + getErrorCode(errorCode) + "\n\n  " + getTranslation(errorText);
+		MessageBox(NULL, (LPCSTR)text.c_str(), gameNameLPCSTR, MB_ICONERROR);
 		setBoolean("window-should-close", true);
 	}
 	void showGameWarning(string reason) {

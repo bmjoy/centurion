@@ -1,27 +1,17 @@
-{
-  //Main menu
+ï»¿{
   "buttonSinglePlayer": "Giocatore singolo",
   "buttonQuit": "Esci dal gioco",
-
-  //Single player menu
   "buttonStart": "Avvia",
   "buttonExit": "Indietro",
-
-  //In game menu
   "menuButtonQuit": "Esci dalla partita",
-  "menuButtonClose": "Chiudi il menù",
-
-  //Random words or phrases
+  "menuButtonClose": "Chiudi il menu",
   "gameCreated": "Avvio della partita in corso...",
   "errorCode": "Codice errore",
-
-  //Critical errors
   "errorSettings": "Impossibile trovare o leggere il file SETTINGS.\n  Arresto forzato dell'applicazione in corso...",
+  "errorData": "Impossibile trovare o leggerÃ© il file DATA.\n  Arresto forzato dell'applicazione in corso...",
   "errorImagesData": "Impossibile trovare o leggere il file IMAGES DATA.\n  Arresto forzato dell'applicazione in corso...",
   "errorSettlements": "Impossibile trovare o leggere il file SETTLEMENTS.\n  Arresto forzato dell'applicazione in corso...",
   "errorMenuData": "Impossibile trovare o leggere il file MENU DATA.\n  Arresto forzato dell'applicazione in corso...",
   "errorFonts": "Impossibile trovare o leggere il file FONTS.\n  Arresto forzato dell'applicazione in corso...",
-
-  //Warnings
-  "warningAudioDevice": "Impossibile trovare (o comunicare con) il dispositivo audio.\n  Nessun sarà riprodotto alcun suono finché l'errore persiste."
+  "warningAudioDevice": "Impossibile trovare (o comunicare con) il dispositivo audio.\n  Nessun sara riprodotto alcun suono finche l'errore persiste."
 }

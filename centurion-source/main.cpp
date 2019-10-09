@@ -4,5 +4,10 @@
 int main() {
 
 	glb::initParams();
-	return engine::ENGINE()->launch();
+	if (!glb::getBoolean("window-should-close")) {
+		return engine::ENGINE()->launch();
+	}
+	else {
+		return 0;
+	}
 }

@@ -1,27 +1,17 @@
 {
-  //Main menu
   "buttonSinglePlayer": "Singleplayer",
   "buttonQuit": "Exit",
-
-  //Single player menu
   "buttonStart": "Start",
   "buttonExit": "Back",
-
-  //In game menu
   "menuButtonQuit": "Quit",
   "menuButtonClose": "Close",
-
-  //Random words or phrases
   "gameCreated":  "Game is being created...",
   "errorCode":  "Error code",
-
-  //Critical errors
   "errorSettings": "Unable to find or process SETTINGS file.\n  Forced application shutdown has started.",
+  "errorData": "Unable to find or process DATA file.\n  Forced application shutdown has started.",
   "errorImagesData": "Unable to find or process IMAGES DATA file.\n  Forced application shutdown has started.",
   "errorSettlements": "Unable to find or process SETTLEMENTS file.\n  Forced application shutdown has started.",
   "errorMenuData": "Unable to find or process MENU DATA file.\n  Forced application shutdown has started.",
   "errorFonts": "Unable to find or process FONTS file.\n  Forced application shutdown has started.",
-
-  //Warnings
   "warningAudioDevice": "Unable to find (or communicate with) the audio device.\n  No sound will be played as long as the error persists."
 }
