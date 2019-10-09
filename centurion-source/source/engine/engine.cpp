@@ -107,7 +107,7 @@ namespace engine {
 		
 			glfwSwapBuffers(MainWindow);
 
-			//fps_sleep();
+			fps_sleep();
 		}
 
 		glfwTerminate(); 
