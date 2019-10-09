@@ -45,7 +45,6 @@ namespace game {
 		selRectangle.create("border", 0, 0, 0, 0, "top-left", 0);
 
 		/*------------------------------------------------------------*/
-
 		/* DEFINE SETTLEMENTS POSITIONS */
 		mapgen::define_settlements();
 
@@ -76,27 +75,21 @@ namespace game {
 		surface = new Surface();
 		surface->createNoise();
 		surface->updateGrid();
-		cout << "DEBUG: Terrain has been generated!\n";
-		cout << "DEBUG: Min(z) = " << mapgen::minZ << "; Max(z) = " << mapgen::maxZ << endl;
-	
+
 		/*------------------------------------------------------------*/
 		// *********** ROBA PROVVISORIA ***********
-		Unit u = Unit();
-		u.set_class("hmyrmidon");
-		u.set_id(getPickingID());
-		u.set_player(&playersList[0]);
-		u.set_position(playersList[0].getStartPoint().x, playersList[0].getStartPoint().y-1000);
-		u.create();
-		units[getPickingID()] = u;
-		increasePickingID();;
-
-		u.set_class("hmyrmidon");
-		u.set_id(getPickingID());
-		u.set_player(&playersList[0]);
-		u.set_position(playersList[0].getStartPoint().x + 100, playersList[0].getStartPoint().y - 1000);
-		u.create();
-		units[getPickingID()] = u;
-		increasePickingID();
+		for (int i = 0; i < 5; i++){
+			for (int j = 0; j < 5; j++){
+				Unit u = Unit();
+				u.set_class("hmyrmidon");
+				u.set_id(getPickingID());
+				u.set_player(&playersList[0]);
+				u.set_position(playersList[0].getStartPoint().x+i*50, playersList[0].getStartPoint().y-1000-j*50);
+				u.create();
+				units[getPickingID()] = u;
+				increasePickingID();
+			}
+		}
 		// ****************************************
 
 		ui = new UIGame();
@@ -137,22 +130,25 @@ namespace game {
 
 		/* Rendering */
 		surface->render(false);
-		renderObjects(&selRectangle, click_id);
+		renderObjects(click_id);
 
 		// ---- Game UI ---- //
 
 		// apply menu matrices:
 		obj::applyMenuMatrices();
-
 		ui->render();
 
 		// ----------------- //	
 
-		//goToPosition( &lastTime, click_id, &blockMinimap);
+		goToPosition(&lastTime, click_id, &blockMinimap);
 		glb::cameraProjection = ortho(0.0f, getParam("window-width-zoomed"), 0.0f, getParam("window-height-zoomed"), -(float)mapWidth, (float)mapWidth);
 		
+
+		// reset mouse-right and mouse-left to improve fps
+		// excluding some cases
+
 		setBoolean("mouse-right", false);
-		setBoolean("mouse-left", false); // temporary
+		setBoolean("mouse-left", false);
 	}
 
 	void Game::clear() {

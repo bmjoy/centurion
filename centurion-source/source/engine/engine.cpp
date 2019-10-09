@@ -5,6 +5,8 @@
 #include <menu>
 #include "../interface/debug_ui.h"
 
+using namespace std;
+using namespace glm;
 using namespace glb;
 using namespace menu;
 using namespace game;
@@ -54,7 +56,7 @@ namespace engine {
 				if (!MENU()->menu_is_created()){
 					obj::Audio()->MusicPlay("assets/music/menu.wav");
 					MENU()->create();
-					std::cout << "DEBUG: Main menu was created!\n";
+					cout << "DEBUG: Main menu was created!\n";
 				}
 				MENU()->render();
 			}
@@ -68,7 +70,7 @@ namespace engine {
 					clearAndSwapBuffers(MainWindow);
 					{
 						text = gui::SimpleText("dynamic");
-						text.render_dynamic("Game is being started...", "tahoma_8", getParam("window-width") / 2.f, getParam("window-height") / 2.f, glm::vec4(255.f), "center", "middle");
+						text.render_dynamic("Game is being started...", "tahoma_8", getParam("window-width") / 2.f, getParam("window-height") / 2.f, vec4(255.f), "center", "middle");
 					}
 					glfwSwapBuffers(MainWindow);
 
@@ -105,7 +107,7 @@ namespace engine {
 		
 			glfwSwapBuffers(MainWindow);
 
-			fps_sleep();
+			//fps_sleep();
 		}
 
 		glfwTerminate(); 
@@ -114,14 +116,14 @@ namespace engine {
 
 	void Engine::readDataClasses() {
 
-		std::vector<std::string> files = get_all_files_names_within_folder("assets/data/classes");
+		vector<string> files = get_all_files_names_within_folder("assets/data/classes");
 		json dataClass;
 	
 		/* buildings and units */
 
 		for (int i = 0; i < files.size(); ++i) {
 		
-			std::ifstream path("assets/data/classes/" + files[i]);
+			ifstream path("assets/data/classes/" + files[i]);
 			dataClass = json::parse(path);
 
 			if (dataClass["type"] == "building") {			
@@ -135,15 +137,15 @@ namespace engine {
 
 		/* images */
 
-		std::ifstream path2("assets/data/images_data.json");
+		ifstream path2("assets/data/images_data.json");
 		if (!path2.good()) {
 			forceGameClosure("Error code 0x00000001\n\n  Unable to find or process IMAGES DATA file.\n  Forced application shutdown has started.");
 		}
 		dataClass = json::parse(path2);
 
 		for (int i = 0; i < dataClass["image_names"].size(); i++) {
-			std::string imageName = dataClass["image_names"][i].get<std::string>();
-			std::string root = dataClass["roots"][imageName];
+			string imageName = dataClass["image_names"][i].get<string>();
+			string root = dataClass["roots"][imageName];
 
 			obj::Img()->addPath(imageName, root);
 		}

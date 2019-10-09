@@ -165,10 +165,12 @@ void myWindow::mouse_button_callback(GLFWwindow* window, int button, int action,
 		if (action == GLFW_PRESS) {
 			setBoolean("mouse-left", true);
 			setBoolean("mouse-release", false);
+			if (ENGINE()->getEnvironment() != "menu") setBoolean("mouse-left-pressed", true);
 		}
 		else if (action == GLFW_RELEASE) {
 			setBoolean("mouse-left", false);
 			setBoolean("mouse-release", true);
+			if (ENGINE()->getEnvironment() != "menu") setBoolean("mouse-left-pressed", false);
 		}
 	}
 	if (button == GLFW_MOUSE_BUTTON_RIGHT) {

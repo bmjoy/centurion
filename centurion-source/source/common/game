@@ -28,10 +28,11 @@ namespace game {
 	extern int currentZoomCamera;
 	extern float zoomCameraFactor;
 	extern float townhallRadius;
+	extern bool selRectangleIsActive;
 
 	extern map<int, Building> buildings;
 	extern map<int, Unit> units;
-	extern map<int, Unit> selectedUnits;
+	extern vector<Unit> selectedUnits;
 
 	extern vector<Player> playersList;
 
@@ -48,12 +49,11 @@ namespace game {
 		void run();
 		void clear();
 		int getSelectedUnits() { return (int)selectedUnits.size(); }
+		gui::Rectangle selRectangle;
 		~Game();
 	private:
 		Surface *surface;
 		UIGame *ui;
-		gui::Rectangle selRectangle;
-
 		double lastTime;
 		float threshold, cameraLastX, cameraLastY;
 		bool blockMinimap;
@@ -73,7 +73,10 @@ namespace game {
 	// GAME FUNCTIONS --> source/game/game_functions.cpp
 	//
 	
-	struct SelRectPoints { float minX, maxX, minY, maxY; };
+	struct SelRectPoints {
+		float startX, startY, lastX, lastY;
+		float minX, maxX, minY, maxY; 
+	};
 
 	static SelRectPoints selRectCoords;
 	SelRectPoints *SelRectCoords();
@@ -88,7 +91,7 @@ namespace game {
 	void tracing(Surface *s);
 	void clearBuffers();
 	void goToPosition(double *lastTime, int clickId, bool *blockMinimap);
-	void renderObjects(gui::Rectangle *selRectangle, int clickId);
-	void renderSelRectangle(gui::Rectangle *selRectangle);
+	void renderObjects(int clickId);
+	void renderSelRectangle();
 	void setMinimapProjection();
 };

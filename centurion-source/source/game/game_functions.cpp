@@ -28,30 +28,29 @@ namespace game {
 	int currentZoomCamera = 8;
 	float zoomCameraFactor = 100.f;
 	float townhallRadius = 1875.f;
-	
+	bool selRectangleIsActive = false;
+
 	map<int, Building> buildings = { };
 	map<int, Unit> units = { };
-	map<int, Unit> selectedUnits = { };
+	vector<Unit> selectedUnits = { };
 
 	vector<Player> playersList;
 
 	SelRectPoints *SelRectCoords() { return &selRectCoords; }
 
 	void picking(int *clickId, bool *blockMinimap) {
-		if (!gameMenuStatus && getBoolean("mouse-left")){
+		if (!gameMenuStatus && getBoolean("mouse-left") && !selRectangleIsActive){
 			for (map<int, Building>::iterator bld = buildings.begin(); bld != buildings.end(); bld++) {
 				bld->second.render(true, 0);
 			}
 			for (map<int, Unit>::iterator u = units.begin(); u != units.end(); u++) {
 				u->second.render(true, 0);
-			}
-			if (getBoolean("mouse-left")) {
-				*clickId = get_id();
-				if (gameMinimapStatus) {					
-					*blockMinimap = false;
-					if (*clickId > 0) {
-						*blockMinimap = true;
-					}
+			}	
+			*clickId = get_id();
+			if (gameMinimapStatus) {					
+				*blockMinimap = false;
+				if (*clickId > 0) {
+					*blockMinimap = true;
 				}
 			}
 		}
@@ -105,45 +104,47 @@ namespace game {
 				}
 				//------------------------------------------------
 				if (! (*blockMinimap)) {
-
 					CAMERA()->go_to_pos(cameraToX, cameraToY);
 					gameMinimapStatus = false;
+					setBoolean("mouse-left", false);
 				}
 			}
 		}
 	}
 
-	void renderObjects(gui::Rectangle *selRectangle, int clickId) {
+	void renderObjects(int clickId) {
 		for (map<int, Building>::iterator bld = buildings.begin(); bld != buildings.end(); bld++) {
 			bld->second.render(false, clickId);
 		}
 		if (!gameMinimapStatus) {
 			for (map<int, Unit>::iterator u = units.begin(); u != units.end(); u++) {
 				u->second.render(false, clickId);
-				if (u->second.isSelected())	  selectedUnits[u->first] = u->second;
+				//if (u->second.isSelected())	  selectedUnits.push_back(u->second);
 			}
 		}
-		renderSelRectangle(selRectangle);
+		renderSelRectangle();
 	} 
 
 
-	void renderSelRectangle(gui::Rectangle *selRectangle) {
+	void renderSelRectangle() {
 		if (!gameMinimapStatus) {
-			if (getBoolean("mouse-left") && cursorInGameScreen()) {
-
-				float startX = getParam("mouse-x-leftclick") * getParam("window-width-zoomed") / getParam("window-width") + cameraLastX;
-				float startY = getParam("mouse-y-leftclick") * getParam("window-height-zoomed") / getParam("window-height") + cameraLastY;
-				float lastX = getParam("mouse-x-position") * getParam("window-width-zoomed") / getParam("window-width") + getParam("camera-x-position");
-				float lastY = getParam("mouse-y-position") * getParam("window-height-zoomed") / getParam("window-height") + getParam("camera-y-position");
+			if (getBoolean("mouse-left-pressed")) {
+				if (!selRectangleIsActive){
+					cout << "DEBUG: Selection rectangle enabled.\n";
+					(*SelRectCoords()).startX = getParam("mouse-x-leftclick") * getParam("window-width-zoomed") / getParam("window-width") + cameraLastX;
+					(*SelRectCoords()).startY = getParam("mouse-y-leftclick") * getParam("window-height-zoomed") / getParam("window-height") + cameraLastY;
+				}
+				(*SelRectCoords()).lastX = getParam("mouse-x-position") * getParam("window-width-zoomed") / getParam("window-width") + getParam("camera-x-position");
+				(*SelRectCoords()).lastY = getParam("mouse-y-position") * getParam("window-height-zoomed") / getParam("window-height") + getParam("camera-y-position");
 				if (getParam("mouse-y-position") < getParam("ui-bottom-height")) {
-					lastY = getParam("ui-bottom-height")*getParam("window-height-zoomed") / getParam("window-height") + 1.0f + getParam("camera-y-position");
+					(*SelRectCoords()).lastY = getParam("ui-bottom-height")*getParam("window-height-zoomed") / getParam("window-height") + 1.0f + getParam("camera-y-position");
 				}
 				if (getParam("mouse-y-position") > getParam("window-height") - getParam("ui-top-height")) {
-					lastY = getParam("window-height-zoomed") - getParam("ui-top-height")*getParam("window-height-zoomed") / getParam("window-height") - 1.0f + getParam("camera-y-position");
+					(*SelRectCoords()).lastY = getParam("window-height-zoomed") - getParam("ui-top-height")*getParam("window-height-zoomed") / getParam("window-height") - 1.0f + getParam("camera-y-position");
 				}
 
-				float w = (lastX - startX);
-				float h = (lastY - startY);
+				float w = ((*SelRectCoords()).lastX - (*SelRectCoords()).startX);
+				float h = ((*SelRectCoords()).lastY - (*SelRectCoords()).startY);
 
 				int origin = 0;
 				if (w > 0 && h > 0) origin = 0; // bottom-left
@@ -151,22 +152,35 @@ namespace game {
 				if (w < 0 && h > 0) origin = 4; // bottom-right
 				if (w < 0 && h < 0) origin = 3; // top-right
 
-				if (abs(w) > 2 && abs(h) > 2) {
-					selRectangle->render(vec4(255.f), 0, startX, startY, abs(w), abs(h), origin);
-					(*SelRectCoords()).minX = std::min(startX, lastX);
-					(*SelRectCoords()).maxX = std::max(startX, lastX);
-					(*SelRectCoords()).minY = std::min(startY, lastY);
-					(*SelRectCoords()).maxY = std::max(startY, lastY);
+				if (abs(w) > 1 && abs(h) > 1){
+					GAME()->selRectangle.render(vec4(255.f), 0, (*SelRectCoords()).startX, (*SelRectCoords()).startY, abs(w), abs(h), origin);
+					(*SelRectCoords()).minX = std::min((*SelRectCoords()).startX, (*SelRectCoords()).lastX);
+					(*SelRectCoords()).maxX = std::max((*SelRectCoords()).startX, (*SelRectCoords()).lastX);
+					(*SelRectCoords()).minY = std::min((*SelRectCoords()).startY, (*SelRectCoords()).lastY);
+					(*SelRectCoords()).maxY = std::max((*SelRectCoords()).startY, (*SelRectCoords()).lastY);
 				}
-
+				else {
+					(*SelRectCoords()).minX = -0.1f;
+					(*SelRectCoords()).maxX = -0.1f;
+					(*SelRectCoords()).minY = -0.1f;
+					(*SelRectCoords()).maxY = -0.1f;
+				}
+				
+				selRectangleIsActive = true;
 			}
 			else {
+				if (selRectangleIsActive) cout << "DEBUG: Selection rectangle disabled.\n";
 				cameraLastX = getParam("camera-x-position");
 				cameraLastY = getParam("camera-y-position");
-				(*SelRectCoords()).minX = 0;
-				(*SelRectCoords()).maxX = 0;
-				(*SelRectCoords()).minY = 0;
-				(*SelRectCoords()).maxY = 0;
+				(*SelRectCoords()).startX = -0.1f;
+				(*SelRectCoords()).startY = -0.1f;
+				(*SelRectCoords()).lastX = -0.1f;
+				(*SelRectCoords()).lastY = -0.1f;
+				(*SelRectCoords()).minX = -0.1f;
+				(*SelRectCoords()).maxX = -0.1f;
+				(*SelRectCoords()).minY = -0.1f;
+				(*SelRectCoords()).maxY = -0.1f;
+				selRectangleIsActive = false;
 			}
 		}
 	}

@@ -71,7 +71,7 @@ namespace unit {
 	void Unit::render(bool picking, int clickID) {
 	
 		clickSelection = (picking_id == clickID);
-		if (getBoolean("mouse-left")) rectangleSelection = unit::isInSelectionRect(hitbox.coords);
+		if (selRectangleIsActive) rectangleSelection = unit::isInSelectionRect(hitbox.coords);
 		selected = (clickSelection + rectangleSelection > 0);
 	
 		hitbox.coords = get_rectangle_coords(position3D.x - unitData.hitBox[0] / 2.f, position3D.y + unitData.hitBox[1] / 2.f + unitData.yOffset, (float)unitData.hitBox[0], (float)unitData.hitBox[1]);

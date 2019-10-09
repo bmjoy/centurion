@@ -37,14 +37,16 @@ void UIGame::create() {
 }
 
 void UIGame::render() {
+	calculateTime();
+
 	if (gameMenuStatus){
 		if (getBoolean("mouse-left")){
 			gameMenu.render(true);
 			picking();
 		}
-		calculateTime();
 		gameMenu.render(false);
 	}
+	
 
 	std::string txt = time.hours_str + ":" + time.minutes_str + ":" + time.seconds_str;
 	time.text.render_dynamic(txt, "tahoma_8", time.x, time.y, glm::vec4(255.f, 255.f, 255.f, 255.f), "left", "normal");
