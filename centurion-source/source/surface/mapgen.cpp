@@ -51,10 +51,6 @@ namespace mapgen {
 
 	//-------------
 
-	void setPlayerList(std::vector<Player> *List) {
-		PlayerList = List;
-	}
-
 	float Random2D(glm::vec2 st) {
 		float value = glm::fract(sin(glm::dot(st, glm::vec2(12.9898f, 78.233f)))* 43758.5453123f);
 		return value;
@@ -303,7 +299,7 @@ namespace mapgen {
 		float a, b;
 		float d;
 		bool c;
-		for (int n = 0; n < (*PlayerList).size(); n++) {
+		for (int n = 0; n < playersList.size(); n++) {
 			c = false;
 			while (!c) {
 				a = float(rand() % (max_X - min) + min);
@@ -356,8 +352,8 @@ namespace mapgen {
 			}
 		}
 
-		for (int i = 0; i < (*PlayerList).size(); i++) {
-			(*PlayerList)[i].setStartPoint(glm::vec2(townhallPos[i * 2], townhallPos[i * 2 + 1]));
+		for (int i = 0; i < playersList.size(); i++) {
+			playersList[i].setStartPoint(glm::vec2(townhallPos[i * 2], townhallPos[i * 2 + 1]));
 		}
 	}
 }

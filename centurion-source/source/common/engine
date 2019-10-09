@@ -5,9 +5,6 @@
 using namespace std;
 using namespace glm;
 
-namespace editor { class Editor; }
-
-class Menu;
 class DebugUI;
 class Player;
 
@@ -106,14 +103,10 @@ namespace engine {
 		// objects 
 		myWindow window;
 		Mouse *mouse;
-		Menu *startMenu;
-		editor::Editor *editor;
 		DebugUI *debugUI;
 		gui::SimpleText text;
 		string environment;
 
-		// Players Informations
-		vector<Player> playersList;
 		// fps
 		double currentTime, lastTime, finalTime;
 		int nbFrames, Fps, Mpfs;
@@ -125,4 +118,7 @@ namespace engine {
 
 	static Engine myengine; 
 	Engine *ENGINE(); // -> definition in engine.cpp
+
+	static Camera mycamera;
+	Camera *CAMERA(); // -> definition in engine.cpp
 };

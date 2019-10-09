@@ -1,0 +1,40 @@
+#pragma once
+
+#include <gui>
+#include <json.hpp>
+
+using namespace std;
+using namespace glm;
+
+class PlayersList;
+
+namespace menu {
+	class Menu
+	{
+	public:
+		Menu();
+		bool menu_is_created() { return menuIsCreated; }
+		void reset() { menuIsCreated = false; }
+		void create();
+		void render();
+		~Menu();
+
+	private:
+		json data;
+		string currentMenu;
+		vector<string> menus;
+		map<string, vector<gui::Image>> images;
+		map<string, vector<gui::Button>> buttons;
+	
+		PlayersList *list;
+		void picking();
+
+		/* INFORMATIONS */
+		int num_players;
+		vector<int> players_color;
+		bool menuIsCreated;
+	};
+
+	static Menu mymenu;
+	Menu *MENU();
+}

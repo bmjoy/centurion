@@ -68,7 +68,7 @@ namespace unit {
 		creationTime = (float)glfwGetTime();
 	}
 
-	void Unit::render(glm::mat4 &proj, glm::mat4 &view, bool picking, int clickID) {
+	void Unit::render(bool picking, int clickID) {
 	
 		clickSelection = (picking_id == clickID);
 		if (getBoolean("mouse-left")) rectangleSelection = unit::isInSelectionRect(hitbox.coords);

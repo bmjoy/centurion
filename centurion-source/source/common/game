@@ -7,14 +7,16 @@
 using namespace std;
 using namespace glm;
 
-class Camera;
 class Surface;
 class UIGame;
 class Player;
 
 namespace game {
 
-	/* global game variables */
+	using namespace unit;
+	using namespace building;
+
+	// global game variables  --> see source/game/game_functions.cpp
 
 	extern bool gameMenuStatus;
 	extern bool gameMinimapStatus;
@@ -27,8 +29,11 @@ namespace game {
 	extern float zoomCameraFactor;
 	extern float townhallRadius;
 
-	using namespace unit;
-	using namespace building;
+	extern map<int, Building> buildings;
+	extern map<int, Unit> units;
+	extern map<int, Unit> selectedUnits;
+
+	extern vector<Player> playersList;
 
 	//
 	//	GAME CLASS --> source/game/game.cpp
@@ -39,24 +44,18 @@ namespace game {
 		Game();
 		bool game_is_created() { return gameIsCreated; }
 		void reset();
-		void create(vector<Player> *ListOfPlayers);
+		void create();
 		void run();
 		void clear();
-		int getSelectedUnits() { return selectedUnits; }
+		int getSelectedUnits() { return (int)selectedUnits.size(); }
 		~Game();
 	private:
-		vector<Player> *playersList;
-		Camera *camera;
 		Surface *surface;
 		UIGame *ui;
 		gui::Rectangle selRectangle;
 
-		map<int, Building> buildingList;
-		map<int, Unit> unitList;
-
 		double lastTime;
 		float threshold, cameraLastX, cameraLastY;
-		int selectedUnits;
 		bool blockMinimap;
 		int click_id;
 		json settl_data;
@@ -85,11 +84,11 @@ namespace game {
 	static float cameraLastX = 0.f;
 	static float cameraLastY = 0.f;
 
-	void picking(std::map<int, Building> *bList, std::map<int, Unit> *uList, glm::mat4 *proj, glm::mat4 *view, int *clickId, bool *blockMinimap);
-	void tracing(Surface *s, glm::mat4 *proj, glm::mat4 *view);
+	void picking(int *clickId, bool *blockMinimap);
+	void tracing(Surface *s);
 	void clearBuffers();
-	void goToPosition(std::map<int, Building> *bList, Camera *c, double *lastTime, int *clickId, bool *blockMinimap);
-	void renderObjects(std::map<int, Building> *bList, std::map<int, Unit> *uList, gui::Rectangle *selRectangle, glm::mat4 *proj, glm::mat4 *view, int *clickId, int *selectedUnits);
+	void goToPosition(double *lastTime, int clickId, bool *blockMinimap);
+	void renderObjects(gui::Rectangle *selRectangle, int clickId);
 	void renderSelRectangle(gui::Rectangle *selRectangle);
-
+	void setMinimapProjection();
 };

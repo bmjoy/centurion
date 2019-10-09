@@ -2,15 +2,17 @@
 #include <editor>
 #include <game>
 #include <player>
-#include "../menu/menu.h"
+#include <menu>
 #include "../interface/debug_ui.h"
 
 using namespace glb;
+using namespace menu;
 using namespace game;
 using namespace editor;
 
 namespace engine {
 	Engine *ENGINE() { return &myengine; }
+	Camera *CAMERA() { return &mycamera; }
 
 	Engine::Engine(){
 		window = myWindow();
@@ -32,10 +34,9 @@ namespace engine {
 
 		lastTime = glfwGetTime();
 
+		*CAMERA() = Camera(vec3(0.0f, 0.0f, 0.0f), vec3(0.0f, 1.0f, 0.0f), -90.0f, 0.0f);
 		mouse = new Mouse();
-		startMenu = new Menu();
 		init();
-		editor = new Editor();
 	
 		debugUI = new DebugUI();
 		debugUI->create();
@@ -46,16 +47,16 @@ namespace engine {
 			window.clear_buffers();
 			fps();
 			mouse->mouse_control(window.get_mouse_x(), window.get_mouse_y());
-		
+
 			// ---- MENU ---- //
 		
 			if (environment == "menu"){
-				if (!startMenu->menu_is_created()){
+				if (!MENU()->menu_is_created()){
 					obj::Audio()->MusicPlay("assets/music/menu.wav");
-					startMenu->create(&playersList);
+					MENU()->create();
 					std::cout << "DEBUG: Main menu was created!\n";
 				}
-				startMenu->render();
+				MENU()->render();
 			}
 
 			// ---- GAME ---- //
@@ -71,7 +72,7 @@ namespace engine {
 					}
 					glfwSwapBuffers(MainWindow);
 
-					GAME()->create(&playersList);
+					GAME()->create();
 				}						
 				GAME()->run();
 			}
@@ -79,20 +80,20 @@ namespace engine {
 			// -------------- //
 
 			if (environment == "editor") {
-				if (!editor->editor_is_created()) {
+				if (!EDITOR()->editor_is_created()) {
 					obj::Audio()->MusicStop();
-					editor->create();
+					EDITOR()->create();
 				}
-				editor->run();
+				EDITOR()->run();
 			}
 
 			// -------------- //
 
 			if (reset) {
 				reset = false;				
-				if (environment == "editor") editor->reset();
+				if (environment == "editor") EDITOR()->reset();
 				if (environment == "game") GAME()->reset();
-				startMenu->reset();				
+				MENU()->reset();
 				environment = "menu";
 			}
 
@@ -167,9 +168,7 @@ namespace engine {
 		}
 	}
 
-	Engine::~Engine()
-	{
-		delete startMenu;		
+	Engine::~Engine(){		
 		delete mouse;
 		delete debugUI;
 	}

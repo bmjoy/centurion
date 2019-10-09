@@ -16,9 +16,6 @@
     <Filter Include="Header Files\common">
       <UniqueIdentifier>{fd0bb532-3102-4522-8ece-cb442ec0dda9}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Header Files\menu">
-      <UniqueIdentifier>{b3cb51aa-bdbc-4c6e-b6d1-7463e06a6417}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Header Files\extern">
       <UniqueIdentifier>{670470c3-1bc9-4848-8246-fb2915e33329}</UniqueIdentifier>
     </Filter>
@@ -258,11 +255,14 @@
     <ClCompile Include="source\picking.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="source\editor\editor_functions.cpp">
+      <Filter>Source Files\editor</Filter>
+    </ClCompile>
+    <ClCompile Include="source\menu\menu_functions.cpp">
+      <Filter>Source Files\menu</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="source\menu\menu.h">
-      <Filter>Header Files\menu</Filter>
-    </ClInclude>
     <ClInclude Include="source\extern\includes\json.hpp">
       <Filter>Header Files\extern</Filter>
     </ClInclude>
@@ -431,6 +431,9 @@
       <Filter>Header Files\common</Filter>
     </None>
     <None Include="source\common\picking">
+      <Filter>Header Files\common</Filter>
+    </None>
+    <None Include="source\common\menu">
       <Filter>Header Files\common</Filter>
     </None>
   </ItemGroup>

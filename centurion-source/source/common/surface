@@ -55,8 +55,6 @@ public:
 //	MAP GENERATION FUNCTIONS --> source/surface/mapgen.cpp
 //
 
-class Player;
-
 namespace mapgen {
 	struct Triangle {
 		vec3 a, b, c;
@@ -76,9 +74,7 @@ namespace mapgen {
 	void updateAllNormals();
 	void updateNormal(int x, int y);
 
-	static vector<Player> *PlayerList;
 	void init();
-	void setPlayerList(vector<Player> *List);
 	float Random2D(vec2 st);
 	float Interpolate(float a, float b, float x);
 	float InterpolatedNoise(int ind, float x, float y);

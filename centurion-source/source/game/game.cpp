@@ -8,6 +8,7 @@
 using namespace glb;
 using namespace std;
 using namespace glm;
+using namespace engine;
 using namespace unit;
 using namespace building;
 
@@ -19,8 +20,12 @@ namespace game {
 		blockMinimap = false;
 		lastTime = glfwGetTime();
 		gameIsCreated = false;
+		click_id = 0;
 	}
 	void Game::reset() {
+		units = { };
+		selectedUnits = { };
+		buildings = { };
 		blockMinimap = false;
 		gameIsCreated = false;
 		gameMenuStatus = false;
@@ -28,36 +33,17 @@ namespace game {
 		gameGridStatus = false;
 		clear();
 	}
-	void Game::create(vector<Player> *ListOfPlayers) {
+	void Game::create() {
 
 		resetPicking();
-		playersList = ListOfPlayers;
-		mapgen::setPlayerList(ListOfPlayers);		
-		cout << "DEBUG: Camera has been created.\n";
-
-		camera = new Camera(vec3(0.0f, 0.0f, 0.0f), vec3(0.0f, 1.0f, 0.0f), -90.0f, 0.0f);
-
-		float ui_bottom_height_minimap = mapHeight * getParam("ui-bottom-height") / (getParam("window-height") - getParam("ui-bottom-height") - getParam("ui-top-height"));
-		float ui_top_height_minimap = mapHeight * getParam("ui-top-height") / (getParam("window-height") - getParam("ui-bottom-height") - getParam("ui-top-height"));
-
-		/* MINIMAP CAMERA */
-		glb::minimapProjection = ortho(
-			0.0f,
-			(float)mapWidth,
-
-			// add and subtract ui height
-			ui_bottom_height_minimap * (-1.0f),
-			mapHeight + ui_top_height_minimap,
-
-			-(float)mapWidth, 
-			(float)mapWidth
-		);
+		units = { };
+		buildings = { };	
+		
+		setMinimapProjection();
 
 		selRectangle = gui::Rectangle();
 		selRectangle.create("border", 0, 0, 0, 0, "top-left", 0);
 
-		/*------------------------------------------------------------*/
-		/*------------------------------------------------------------*/
 		/*------------------------------------------------------------*/
 
 		/* DEFINE SETTLEMENTS POSITIONS */
@@ -70,77 +56,69 @@ namespace game {
 		}
 		settl_data = json::parse(path);
 
-		for (int i = 0; i < (*playersList).size(); i++) {
-			r = (*playersList)[i].getPlayerRace();
-			origin = (*playersList)[i].getStartPoint();
+		for (int i = 0; i < playersList.size(); i++) {
+			r = playersList[i].getPlayerRace();
+			origin = playersList[i].getStartPoint();
 			for (int j = 0; j < settl_data[r].size(); j++) {
 				Building b = Building();
 				b.set_class(settl_data[r][j]["class"]);
 				b.set_id(getPickingID());
-				b.set_player(&(*playersList)[i]);
+				b.set_player(&playersList[i]);
 				b.set_position(vec3(origin.x + (int)settl_data[r][j]["offsetx"], origin.y + (int)settl_data[r][j]["offsety"], 0.0f));
 				b.create();
 			
-				buildingList[getPickingID()] = b;
+				buildings[getPickingID()] = b;
 				increasePickingID();
 			}
 		}
-
-		/*------------------------------------------------------------*/
-		/*------------------------------------------------------------*/
 		/*------------------------------------------------------------*/
 		
 		surface = new Surface();
 		surface->createNoise();
 		surface->updateGrid();
-	
-
-		/*------------------------------------------------------------*/
-
 		cout << "DEBUG: Terrain has been generated!\n";
 		cout << "DEBUG: Min(z) = " << mapgen::minZ << "; Max(z) = " << mapgen::maxZ << endl;
-
-
+	
+		/*------------------------------------------------------------*/
 		// *********** ROBA PROVVISORIA ***********
 		Unit u = Unit();
 		u.set_class("hmyrmidon");
 		u.set_id(getPickingID());
-		u.set_player(&(*playersList)[0]);
-		u.set_position((*playersList)[0].getStartPoint().x, (*playersList)[0].getStartPoint().y-1000);
+		u.set_player(&playersList[0]);
+		u.set_position(playersList[0].getStartPoint().x, playersList[0].getStartPoint().y-1000);
 		u.create();
-		unitList[getPickingID()] = u;
+		units[getPickingID()] = u;
 		increasePickingID();;
 
 		u.set_class("hmyrmidon");
 		u.set_id(getPickingID());
-		u.set_player(&(*playersList)[0]);
-		u.set_position((*playersList)[0].getStartPoint().x + 100, (*playersList)[0].getStartPoint().y - 1000);
+		u.set_player(&playersList[0]);
+		u.set_position(playersList[0].getStartPoint().x + 100, playersList[0].getStartPoint().y - 1000);
 		u.create();
-		unitList[getPickingID()] = u;
+		units[getPickingID()] = u;
 		increasePickingID();
 		// ****************************************
 
 		ui = new UIGame();
 		ui->create();
 
-		camera->go_to_pos(
-			(GLfloat)((*playersList)[0].getStartPoint().x - getParam("window-width-zoomed") /2.f),
-			(GLfloat)((*playersList)[0].getStartPoint().y - getParam("window-height-zoomed") / 2.f)
+		CAMERA()->go_to_pos(
+			(GLfloat)(playersList[0].getStartPoint().x - getParam("window-width-zoomed") /2.f),
+			(GLfloat)(playersList[0].getStartPoint().y - getParam("window-height-zoomed") / 2.f)
 		);
-
 
 		//---------------------------------------
 		gameIsCreated = true;
 	}
 
 	void Game::run() {
-		selectedUnits = 0;
-		camera->keyboardControl();
+		selectedUnits = { };
+		CAMERA()->keyboardControl();
 
 		/* If minimap is NOT active */
 		if (!gameMinimapStatus) {		
-			camera->mouseControl(threshold);
-			view = camera->calculateViewMatrix();
+			CAMERA()->mouseControl(threshold);
+			view = CAMERA()->calculateViewMatrix();
 			projection = glb::cameraProjection;
 		}
 
@@ -154,15 +132,13 @@ namespace game {
 		obj::applyGameMatrices(&projection, &view);
 
 		/* Tracing and Picking */
-		tracing(surface, &projection, &view);
-		picking(&buildingList, &unitList, &projection, &view, &click_id, &blockMinimap);
+		tracing(surface);
+		picking(&click_id, &blockMinimap);
 
 		/* Rendering */
 		surface->render(false);
-		renderObjects(&buildingList, &unitList, &selRectangle, &projection, &view, &click_id, &selectedUnits);
-	
-	
-	
+		renderObjects(&selRectangle, click_id);
+
 		// ---- Game UI ---- //
 
 		// apply menu matrices:
@@ -172,7 +148,7 @@ namespace game {
 
 		// ----------------- //	
 
-		goToPosition(&buildingList, camera, &lastTime, &click_id, &blockMinimap);
+		//goToPosition( &lastTime, click_id, &blockMinimap);
 		glb::cameraProjection = ortho(0.0f, getParam("window-width-zoomed"), 0.0f, getParam("window-height-zoomed"), -(float)mapWidth, (float)mapWidth);
 		
 		setBoolean("mouse-right", false);
@@ -182,7 +158,6 @@ namespace game {
 	void Game::clear() {
 		delete surface;
 		delete ui;
-		delete camera;
 	}
 
 	Game::~Game()

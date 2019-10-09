@@ -6,6 +6,7 @@
 #include "../interface/editor_menu.h"
 
 using namespace glb;
+using namespace engine;
 using namespace game;
 
 namespace editor {
@@ -15,7 +16,6 @@ namespace editor {
 	void Editor::create() {
 		resetPicking();
 		surface = new Surface();
-		camera = new Camera(glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3(0.0f, 1.0f, 0.0f), -90.0f, 0.0f);
 		menu = new editor::EditorMenu();
 		circle = gui::Circle();
 
@@ -26,11 +26,11 @@ namespace editor {
 		editorIsCreated = true;
 	}
 	void Editor::run() {
-		camera->keyboardControl();
-		camera->mouseControl(2.0f);
+		CAMERA()->keyboardControl();
+		CAMERA()->mouseControl(2.0f);
 
 		proj = glb::cameraProjection;
-		view = camera->calculateViewMatrix();
+		view = CAMERA()->calculateViewMatrix();
 
 		obj::applyGameMatrices(&proj, &view);
 		surface->render(false);
@@ -53,6 +53,5 @@ namespace editor {
 	Editor::~Editor(){
 		delete surface;
 		delete menu;
-		delete camera;
 	}
 }

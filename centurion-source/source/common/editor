@@ -7,7 +7,6 @@
 using namespace std;
 using namespace glm;
 
-class Camera;
 class Surface;
 class UIGame;
 class Player;
@@ -30,9 +29,7 @@ namespace editor {
 		void run();
 		~Editor();
 	private:
-
 		Surface *surface;
-		Camera *camera;
 		glm::mat4 proj, view;
 		EditorMenu *menu;
 		gui::Circle circle;
@@ -40,4 +37,6 @@ namespace editor {
 		bool editorIsCreated;
 	};
 
-}
+	static Editor myeditor;
+	Editor *EDITOR();
+};

@@ -22,7 +22,7 @@ public:
 	void set_class(string class_name);
 	void set_player(Player *p);
 	void set_id(int pickingId);
-	bool getSelected() { return selected; }
+	bool isSelected() { return selected; }
 	int get_xPos() { return (int)position.x; }
 	int get_yPos() { return (int)position.y; }
 	~GObject();
@@ -75,7 +75,7 @@ namespace unit {
 		Unit();
 		void create();
 		void set_position(float x, float y);
-		void render(mat4 &proj, mat4 &view, bool picking, int clickID);
+		void render(bool picking, int clickID);
 		~Unit();
 	private:
 		UnitData unitData;

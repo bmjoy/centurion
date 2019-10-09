@@ -1,172 +1,179 @@
-#include "menu.h"
-
+#include <menu>
+#include <global>
+#include <player>
 #include <picking>
 #include <engine>
 #include <game>
+
+#include "../interface/menu_players_list.h"
 
 using namespace glb;
 using namespace std;
 using namespace engine;
 using namespace game;
 
-Menu::Menu(){
-	currentMenu = "mainmenu";
-	menus = { "mainmenu", "singleplayer" };
-	images = { };
-	buttons = { };
-	num_players = 2;
-	menuIsCreated = false;
-}
+namespace menu {
 
-void Menu::create(vector<Player> *List) {	
-	
-	resetPicking();
-	
-	playersList = List;
-	string s;
-	for (int a = 0; a < menus.size(); ++a) {
+	Menu::Menu(){
+		list = new PlayersList();
+		currentMenu = "mainmenu";
+		menus = { "mainmenu", "singleplayer" };
+		images = { };
+		buttons = { };
+		num_players = 2;
+		menuIsCreated = false;
+	}
 
-		ifstream path("assets/data/interface/menu/" + menus[a] + ".json");
-		data = json::parse(path);
+	void Menu::create() {	
+	
+		resetPicking();
+	
+		string s;
+		for (int a = 0; a < menus.size(); ++a) {
+
+			ifstream path("assets/data/interface/menu/" + menus[a] + ".json");
+			data = json::parse(path);
 		
-		/* temporary objects */
-		s = "images";
-		gui::Image img;
-		gui::Button btn;
+			/* temporary objects */
+			s = "images";
+			gui::Image img;
+			gui::Button btn;
 
-		for (int i = 0; i < data[s].size(); ++i) {
+			for (int i = 0; i < data[s].size(); ++i) {
 
-			/* read data from json */
-			string imageName = data[s][i]["image_name"].get<string>();
-			string name = data[s][i]["name"].get<string>();
-			string size = data[s][i]["size"].get<string>();
-			string align = data[s][i]["align"].get<string>();
-			int clickable = data[s][i]["clickable"].get<int>();
-			int x = data[s][i]["x"].get<int>();
-			int y = data[s][i]["y"].get<int>();
+				/* read data from json */
+				string imageName = data[s][i]["image_name"].get<string>();
+				string name = data[s][i]["name"].get<string>();
+				string size = data[s][i]["size"].get<string>();
+				string align = data[s][i]["align"].get<string>();
+				int clickable = data[s][i]["clickable"].get<int>();
+				int x = data[s][i]["x"].get<int>();
+				int y = data[s][i]["y"].get<int>();
 
-			/* use data */
-			img = gui::Image(imageName);	
-			if (size == "auto") img.create(align, (float)x, (float)y, 0.0f, 0.0f, getPickingID() * clickable);
-			if (size == "max") img.create(align, (float)x, (float)y, getParam("window-width"), getParam("window-height"), pickingID * clickable);
-			images[menus[a]].push_back(img);
+				/* use data */
+				img = gui::Image(imageName);	
+				if (size == "auto") img.create(align, (float)x, (float)y, 0.0f, 0.0f, getPickingID() * clickable);
+				if (size == "max") img.create(align, (float)x, (float)y, getParam("window-width"), getParam("window-height"), pickingID * clickable);
+				images[menus[a]].push_back(img);
 
-			// update picking 
-			if (clickable) {
+				// update picking 
+				if (clickable) {
+					addValueToPickingListUI(getPickingID(), name);
+					increasePickingID();
+				}
+			}
+
+			s = "buttons";
+			for (int i = 0; i < data[s].size(); ++i) {
+
+				/* read data from json */
+				string imageName = data[s][i]["image_name"].get<string>();
+				string jsonText = data[s][i]["text"].get<string>();
+				string name = data[s][i]["name"].get<string>();
+				int x = data[s][i]["x"].get<int>();
+				int y = data[s][i]["y"].get<int>();
+
+				/* use data */
+				btn = gui::Button();
+				btn.create(imageName, jsonText, x, y, getPickingID(), glm::vec4(0.f, 0.f, 0.f, 255.f));
+				buttons[menus[a]].push_back(btn);
+
+				// update picking 
 				addValueToPickingListUI(getPickingID(), name);
 				increasePickingID();
 			}
+
+			s = "playersList";
+			if (data[s].size()>0) {
+				
+				list->create(data[s]["x"], data[s]["y"], &players_color);
+			}
 		}
-
-		s = "buttons";
-		for (int i = 0; i < data[s].size(); ++i) {
-
-			/* read data from json */
-			string imageName = data[s][i]["image_name"].get<string>();
-			string jsonText = data[s][i]["text"].get<string>();
-			string name = data[s][i]["name"].get<string>();
-			int x = data[s][i]["x"].get<int>();
-			int y = data[s][i]["y"].get<int>();
-
-			/* use data */
-			btn = gui::Button();
-			btn.create(imageName, jsonText, x, y, getPickingID(), glm::vec4(0.f, 0.f, 0.f, 255.f));
-			buttons[menus[a]].push_back(btn);
-
-			// update picking 
-			addValueToPickingListUI(getPickingID(), name);
-			increasePickingID();
-		}
-
-		s = "playersList";
-		if (data[s].size()>0) {
-			list = PlayersList();
-			list.create(data[s]["x"], data[s]["y"], &players_color);
-		}
+		menuIsCreated = true;
+		obj::applyMenuMatrices();
 	}
-	menuIsCreated = true;
-	obj::applyMenuMatrices();
-}
 
 
-void Menu::render() {
+	void Menu::render() {
 
-	/* picking */
+		/* picking */
 
-	if (getBoolean("mouse-left")){
+		if (getBoolean("mouse-left")){
+			for (int i = 0; i < images[currentMenu].size(); ++i) {
+				images[currentMenu][i].render(true);
+			}
+			for (int i = 0; i < buttons[currentMenu].size(); ++i) {
+				buttons[currentMenu][i].render(true);
+			}
+			if (currentMenu == "singleplayer") {
+				list->render(num_players, players_color, true);
+			}
+			picking();
+		}
+
+		/* rendering */
+
 		for (int i = 0; i < images[currentMenu].size(); ++i) {
-			images[currentMenu][i].render(true);
+			images[currentMenu][i].render(false);
 		}
 		for (int i = 0; i < buttons[currentMenu].size(); ++i) {
-			buttons[currentMenu][i].render(true);
+			buttons[currentMenu][i].render(false);
 		}
 		if (currentMenu == "singleplayer") {
-			list.render(num_players, players_color, true);
+			list->render(num_players, players_color, false);
 		}
-		picking();
-	}
-
-	/* rendering */
-
-	for (int i = 0; i < images[currentMenu].size(); ++i) {
-		images[currentMenu][i].render(false);
-	}
-	for (int i = 0; i < buttons[currentMenu].size(); ++i) {
-		buttons[currentMenu][i].render(false);
-	}
-	if (currentMenu == "singleplayer") {
-		list.render(num_players, players_color, false);
-	}
 	
-	setBoolean("mouse-right", false);
-	setBoolean("mouse-left", false); 
-}
+		setBoolean("mouse-right", false);
+		setBoolean("mouse-left", false); 
+	}
 
-void Menu::picking() {
-	int clickId = get_id();
-	string clickName = getPickedObjectName(clickId);
-	cout << "DEBUG: Click id: " << clickId << " --> " + clickName + "\n";
+	void Menu::picking() {
+		int clickId = get_id();
+		string clickName = getPickedObjectName(clickId);
+		cout << "DEBUG: Click id: " << clickId << " --> " + clickName + "\n";
 
-	/*------------------------------------------------------------------------------*/
-	if (currentMenu == "singleplayer"){
-		if (clickName.substr(0, 4) != "CivForm") {
-			list.close();
+		/*------------------------------------------------------------------------------*/
+		if (currentMenu == "singleplayer"){
+			if (clickName.substr(0, 4) != "CivForm") {
+				list->close();
+			}
+			list->picking(&num_players, &players_color, clickId);
 		}
-		list.picking(&num_players, &players_color, clickId);
-	}
-	/*------------------------------------------------------------------------------*/
-	if (clickName == "buttonStart") {
+		/*------------------------------------------------------------------------------*/
+		if (clickName == "buttonStart") {
 			
-		setBoolean("mouse-left", false);
-		ENGINE()->setEnvironment("game");
-		/* save game informations */
-		game::playersNumber = num_players;
-		for (int i = 0; i < num_players; i++) {
-			Player p = Player();
-			p.create(players_color[i], 0, list.get_race(i), glb::colors[players_color[i]]);
-			(*playersList).push_back(p);				
-		}		
+			setBoolean("mouse-left", false);
+			ENGINE()->setEnvironment("game");
+			/* save game informations */
+			game::playersNumber = num_players;
+			for (int i = 0; i < num_players; i++) {
+				Player p = Player();
+				p.create(players_color[i], 0, list->get_race(i), glb::colors[players_color[i]]);
+				playersList.push_back(p);
+			}		
+		}
+		/*------------------------------------------------------------------------------*/
+		if (clickName == "buttonEditor") {
+			ENGINE()->setEnvironment("editor");
+		}
+		/*------------------------------------------------------------------------------*/
+		if (clickName == "buttonQuit") {
+			saveLog();
+			setBoolean("window-should-close", true);
+		}
+		/*------------------------------------------------------------------------------*/
+		if (clickName == "buttonExit") {
+			currentMenu = "mainmenu";
+		}
+		/*------------------------------------------------------------------------------*/
+		if (clickName == "buttonSinglePlayer") {
+			currentMenu = "singleplayer";
+		}
 	}
-	/*------------------------------------------------------------------------------*/
-	if (clickName == "buttonEditor") {
-		ENGINE()->setEnvironment("editor");
-	}
-	/*------------------------------------------------------------------------------*/
-	if (clickName == "buttonQuit") {
-		saveLog();
-		setBoolean("window-should-close", true);
-	}
-	/*------------------------------------------------------------------------------*/
-	if (clickName == "buttonExit") {
-		currentMenu = "mainmenu";
-	}
-	/*------------------------------------------------------------------------------*/
-	if (clickName == "buttonSinglePlayer") {
-		currentMenu = "singleplayer";
-	}
-}
 
 
-Menu::~Menu()
-{
+	Menu::~Menu(){
+		delete list;
+	}
+
 }
