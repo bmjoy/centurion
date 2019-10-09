@@ -13,19 +13,35 @@ using namespace building;
 
 namespace game {
 
+	Game *GAME() { return &mygame; }
+	void init() { *GAME() = Game(); }
+
+	bool gameMenuStatus = false;
+	bool gameMinimapStatus = false;
+	bool gameGridStatus = false;
+	int mapWidth = 30000;
+	int mapHeight = 20000;
+	float cameraMovespeed = 10.f;
+	int playersNumber = 1;
+	int maxPlayersNumber = 10;
+	int currentZoomCamera = 8;
+	float zoomCameraFactor = 100.f;
+	float townhallRadius = 1875.f;
+	
+
 	SelRectPoints *SelRectCoords() { return &selRectCoords; }
 
 	void picking(map<int, Building> *bList, map<int, Unit> *uList, mat4 *proj, mat4 *view, int *clickId, bool *blockMinimap) {
-		if (!GAME::MENU_IS_ACTIVE && GLB::MOUSE_LEFT){
+		if (!gameMenuStatus && getBoolean("mouse-left")){
 			for (map<int, Building>::iterator bld = (*bList).begin(); bld != (*bList).end(); bld++) {
 				bld->second.render(true, 0);
 			}
 			for (map<int, Unit>::iterator u = (*uList).begin(); u != (*uList).end(); u++) {
 				u->second.render(*proj, *view, true, 0);
 			}
-			if (GLB::MOUSE_LEFT) {
+			if (getBoolean("mouse-left")) {
 				*clickId = get_id();
-				if (GAME::MINIMAP_IS_ACTIVE) {
+				if (gameMinimapStatus) {
 					*blockMinimap = false;
 					if (*clickId > 0) {
 						*blockMinimap = true;
@@ -36,12 +52,12 @@ namespace game {
 	}
 
 	void tracing(Surface *s, mat4 *proj, mat4 *view) {
-		if (!GAME::MINIMAP_IS_ACTIVE) {
+		if (!gameMinimapStatus) {
 			unsigned char tracingCol[4];
 			(*s).render(true);
 			glReadPixels((GLint)getParam("mouse-x-leftclick"), (GLint)getParam("mouse-y-leftclick"), 1, 1, GL_RGBA, GL_UNSIGNED_BYTE, &tracingCol);
-			GLB::Z_NOISE = (MAP::MAX_Z - MAP::MIN_Z) * ((float)tracingCol[0] / 255.0f) + MAP::MIN_Z;
-			game::clearBuffers();
+			mapgen::mouseZNoise = (mapgen::maxZ - mapgen::minZ) * ((float)tracingCol[0] / 255.0f) + mapgen::minZ;
+			clearBuffers();
 		}
 	}
 
@@ -51,10 +67,10 @@ namespace game {
 	}
 
 	void goToPosition(map<int, Building> *bList, Camera *c, double *lastTime, int *clickId, bool *blockMinimap) {
-		if (GAME::MINIMAP_IS_ACTIVE) {
-			if (GLB::MOUSE_LEFT && cursorInGameScreen()) {
-				cameraToX = getParam("mouse-x-leftclick") / getParam("window-width")*(float)GAME::MAP_WIDTH - getParam("window-width-zoomed") / 2.f;
-				cameraToY = getYMinimapCoord(getParam("mouse-y-leftclick")) / getParam("window-height")*(float)GAME::MAP_HEIGHT - getParam("window-height-zoomed") / 2.f;
+		if (gameMinimapStatus) {
+			if (getBoolean("mouse-left") && cursorInGameScreen()) {
+				cameraToX = getParam("mouse-x-leftclick") / getParam("window-width")*(float)mapWidth - getParam("window-width-zoomed") / 2.f;
+				cameraToY = getYMinimapCoord(getParam("mouse-y-leftclick")) / getParam("window-height")*(float)mapHeight - getParam("window-height-zoomed") / 2.f;
 				/* Double Click detection */
 				// if you are clicking on a townhall you have to double click 
 				// to move the camera there and quit minimap
@@ -85,9 +101,8 @@ namespace game {
 				if (! (*blockMinimap)) {
 
 					(*c).go_to_pos(cameraToX, cameraToY);
-					GAME::MINIMAP_IS_ACTIVE = false;
+					gameMinimapStatus = false;
 				}
-				GLB::MOUSE_LEFT = false;
 			}
 		}
 	}
@@ -96,19 +111,19 @@ namespace game {
 		for (map<int, Building>::iterator bld = bList->begin(); bld != bList->end(); bld++) {
 			bld->second.render(false, *clickId);
 		}
-		if (!GAME::MINIMAP_IS_ACTIVE) {
+		if (!gameMinimapStatus) {
 			for (map<int, Unit>::iterator u = uList->begin(); u != uList->end(); u++) {
 				u->second.render(*proj, *view, false, *clickId);
 				(*selectedUnits) += (int)u->second.getSelected();
 			}
 		}
-		game::renderSelRectangle(selRectangle);
+		renderSelRectangle(selRectangle);
 	} 
 
 
 	void renderSelRectangle(gui::Rectangle *selRectangle) {
-		if (!GAME::MINIMAP_IS_ACTIVE) {
-			if (GLB::MOUSE_LEFT && cursorInGameScreen()) {
+		if (!gameMinimapStatus) {
+			if (getBoolean("mouse-left") && cursorInGameScreen()) {
 
 				float startX = getParam("mouse-x-leftclick") * getParam("window-width-zoomed") / getParam("window-width") + cameraLastX;
 				float startY = getParam("mouse-y-leftclick") * getParam("window-height-zoomed") / getParam("window-height") + cameraLastY;

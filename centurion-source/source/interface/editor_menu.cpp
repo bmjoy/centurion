@@ -1,8 +1,10 @@
 #include "editor_menu.h"
 
 #include <picking>
+#include <engine>
 
 using namespace glb;
+using namespace engine;
 
 namespace editor {
 
@@ -77,10 +79,10 @@ namespace editor {
     void EditorMenu::render(bool pick) {
         
         /* picking rendering */
-        if (pick && GLB::MOUSE_LEFT){
+        if (pick && getBoolean("mouse-left")){
             for (int i = 0; i < titles.size(); i++) {
                 std::string s = titlesList[i];
-                titles[s].titleBack.render(titles[s].pickingColor);
+				titles[s].titleBack.render(titles[s].pickingColor);
                 if (titles[s].isOpened) {
                     for (int j = 0; j < titles[s].options.size(); j++) {
                         titles[s].optionsBack[j].render(titles[s].pickingColor);
@@ -171,11 +173,8 @@ namespace editor {
             //    EXIT
 
             if (pos == 2) { // exit
-                titles["File"].isOpened = false;
-				GLB::MOUSE_LEFT = false;
-				GLB::RESET = true;
-				GLB::EDITOR = false;
-				GLB::MAIN_MENU = true;
+                titles["File"].isOpened = false;				
+				ENGINE()->Reset();
 				for (int i = 0; i < titles.size(); i++) {
 					std::string s = titlesList[i];
 					titles[s].isOpened = false;

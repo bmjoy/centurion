@@ -14,6 +14,10 @@ using namespace glm;
 ------------------------------------------------------*/
 
 namespace mapgen {
+	extern float mouseZNoise; // for 2d coord calculation
+	extern float minZ;
+	extern float maxZ;
+
 	static const int grid_size = 128;
 	static const int nIndices = 228480;
 	static const int nVertices = 38479;
@@ -24,6 +28,12 @@ namespace mapgen {
 	static float map_heights[nVertices * 4];
 	static unsigned int indices[nIndices];
 	static int vertices_pos[nVertices];
+
+	/* noise parameters */
+	static float XYSCALE = 80.0f;
+	static float ZSCALE = 0.025f / 3.0f;
+	static float XSEED = 0.0f;
+	static float YSEED = 0.0f;
 }
 
 //

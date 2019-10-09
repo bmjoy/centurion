@@ -13,40 +13,44 @@ using namespace building;
 
 namespace game {
 
-	Game::Game(){
-		u = new Unit();
-		ui = new UIGame();
+	Game::Game(){			
 		cameraLastX = 0.0; cameraLastY = 0.0;
 		threshold = 20.0f;   // Camera Movement Threshold	
 		blockMinimap = false;
 		lastTime = glfwGetTime();
 		gameIsCreated = false;
 	}
+	void Game::reset() {
+		blockMinimap = false;
+		gameIsCreated = false;
+		gameMenuStatus = false;
+		gameMinimapStatus = false;
+		gameGridStatus = false;
+		clear();
+	}
 	void Game::create(vector<Player> *ListOfPlayers) {
 
 		resetPicking();
-
-		surface = new Surface();
 		playersList = ListOfPlayers;
-		mapgen::setPlayerList(ListOfPlayers);
-
-		camera = new Camera(vec3(0.0f, 0.0f, 0.0f), vec3(0.0f, 1.0f, 0.0f), -90.0f, 0.0f);
+		mapgen::setPlayerList(ListOfPlayers);		
 		cout << "DEBUG: Camera has been created.\n";
 
-		float ui_bottom_height_minimap = GAME::MAP_HEIGHT * getParam("ui-bottom-height") / (getParam("window-height") - getParam("ui-bottom-height") - getParam("ui-top-height"));
-		float ui_top_height_minimap = GAME::MAP_HEIGHT * getParam("ui-top-height") / (getParam("window-height") - getParam("ui-bottom-height") - getParam("ui-top-height"));
+		camera = new Camera(vec3(0.0f, 0.0f, 0.0f), vec3(0.0f, 1.0f, 0.0f), -90.0f, 0.0f);
+
+		float ui_bottom_height_minimap = mapHeight * getParam("ui-bottom-height") / (getParam("window-height") - getParam("ui-bottom-height") - getParam("ui-top-height"));
+		float ui_top_height_minimap = mapHeight * getParam("ui-top-height") / (getParam("window-height") - getParam("ui-bottom-height") - getParam("ui-top-height"));
 
 		/* MINIMAP CAMERA */
-		GLB::MINIMAP_PROJECTION = ortho(
+		glb::minimapProjection = ortho(
 			0.0f,
-			(float)GAME::MAP_WIDTH,
+			(float)mapWidth,
 
 			// add and subtract ui height
 			ui_bottom_height_minimap * (-1.0f),
-			GAME::MAP_HEIGHT + ui_top_height_minimap,
+			mapHeight + ui_top_height_minimap,
 
-			-(float)GAME::MAP_WIDTH, 
-			(float)GAME::MAP_WIDTH
+			-(float)mapWidth, 
+			(float)mapWidth
 		);
 
 		selRectangle = gui::Rectangle();
@@ -70,14 +74,14 @@ namespace game {
 			r = (*playersList)[i].getPlayerRace();
 			origin = (*playersList)[i].getStartPoint();
 			for (int j = 0; j < settl_data[r].size(); j++) {
-				b = new Building();
-				b->set_class(settl_data[r][j]["class"]);
-				b->set_id(getPickingID());
-				b->set_player(&(*playersList)[i]);
-				b->set_position(vec3(origin.x + (int)settl_data[r][j]["offsetx"], origin.y + (int)settl_data[r][j]["offsety"], 0.0f));
-				b->create();
+				Building b = Building();
+				b.set_class(settl_data[r][j]["class"]);
+				b.set_id(getPickingID());
+				b.set_player(&(*playersList)[i]);
+				b.set_position(vec3(origin.x + (int)settl_data[r][j]["offsetx"], origin.y + (int)settl_data[r][j]["offsety"], 0.0f));
+				b.create();
 			
-				buildingList[getPickingID()] = *b;
+				buildingList[getPickingID()] = b;
 				increasePickingID();
 			}
 		}
@@ -85,7 +89,8 @@ namespace game {
 		/*------------------------------------------------------------*/
 		/*------------------------------------------------------------*/
 		/*------------------------------------------------------------*/
-	
+		
+		surface = new Surface();
 		surface->createNoise();
 		surface->updateGrid();
 	
@@ -93,28 +98,29 @@ namespace game {
 		/*------------------------------------------------------------*/
 
 		cout << "DEBUG: Terrain has been generated!\n";
-		cout << "DEBUG: Min(z) = " << MAP::MIN_Z << "; Max(z) = " << MAP::MAX_Z << endl;
+		cout << "DEBUG: Min(z) = " << mapgen::minZ << "; Max(z) = " << mapgen::maxZ << endl;
 
 
 		// *********** ROBA PROVVISORIA ***********
-		u->set_class("hmyrmidon");
-		u->set_id(getPickingID());
-		u->set_player(&(*playersList)[0]);
-		u->set_position((*playersList)[0].getStartPoint().x, (*playersList)[0].getStartPoint().y-1000);
-		u->create();
-		unitList[getPickingID()] = *u;
+		Unit u = Unit();
+		u.set_class("hmyrmidon");
+		u.set_id(getPickingID());
+		u.set_player(&(*playersList)[0]);
+		u.set_position((*playersList)[0].getStartPoint().x, (*playersList)[0].getStartPoint().y-1000);
+		u.create();
+		unitList[getPickingID()] = u;
 		increasePickingID();;
 
-		u->set_class("hmyrmidon");
-		u->set_id(getPickingID());
-		u->set_player(&(*playersList)[0]);
-		u->set_position((*playersList)[0].getStartPoint().x + 100, (*playersList)[0].getStartPoint().y - 1000);
-		u->create();
-		unitList[getPickingID()] = *u;
+		u.set_class("hmyrmidon");
+		u.set_id(getPickingID());
+		u.set_player(&(*playersList)[0]);
+		u.set_position((*playersList)[0].getStartPoint().x + 100, (*playersList)[0].getStartPoint().y - 1000);
+		u.create();
+		unitList[getPickingID()] = u;
 		increasePickingID();
-
 		// ****************************************
 
+		ui = new UIGame();
 		ui->create();
 
 		camera->go_to_pos(
@@ -132,28 +138,28 @@ namespace game {
 		camera->keyboardControl();
 
 		/* If minimap is NOT active */
-		if (!GAME::MINIMAP_IS_ACTIVE) {		
+		if (!gameMinimapStatus) {		
 			camera->mouseControl(threshold);
 			view = camera->calculateViewMatrix();
-			projection = GLB::CAMERA_PROJECTION;
+			projection = glb::cameraProjection;
 		}
 
 		/* If minimap is active */
 		else {
 			view = mat4(1.0f);
-			projection = GLB::MINIMAP_PROJECTION;	
+			projection = glb::minimapProjection;	
 		}
 
 		// apply game matrices:
 		obj::applyGameMatrices(&projection, &view);
 
 		/* Tracing and Picking */
-		game::tracing(surface, &projection, &view);
-		game::picking(&buildingList, &unitList, &projection, &view, &click_id, &blockMinimap);
+		tracing(surface, &projection, &view);
+		picking(&buildingList, &unitList, &projection, &view, &click_id, &blockMinimap);
 
 		/* Rendering */
 		surface->render(false);
-		game::renderObjects(&buildingList, &unitList, &selRectangle, &projection, &view, &click_id, &selectedUnits);
+		renderObjects(&buildingList, &unitList, &selRectangle, &projection, &view, &click_id, &selectedUnits);
 	
 	
 	
@@ -166,20 +172,20 @@ namespace game {
 
 		// ----------------- //	
 
-		game::goToPosition(&buildingList, camera, &lastTime, &click_id, &blockMinimap);
-		GLB::CAMERA_PROJECTION = ortho(0.0f, getParam("window-width-zoomed"), 0.0f, getParam("window-height-zoomed"), -(float)GAME::MAP_WIDTH, (float)GAME::MAP_WIDTH);
-		GLB::MOUSE_RIGHT = false;
+		goToPosition(&buildingList, camera, &lastTime, &click_id, &blockMinimap);
+		glb::cameraProjection = ortho(0.0f, getParam("window-width-zoomed"), 0.0f, getParam("window-height-zoomed"), -(float)mapWidth, (float)mapWidth);
+		
+		setBoolean("mouse-right", false);
+		setBoolean("mouse-left", false); // temporary
 	}
 
 	void Game::clear() {
 		delete surface;
-		delete u;
-		delete b;
 		delete ui;
 		delete camera;
 	}
 
 	Game::~Game()
-	{
+	{		
 	}
 }

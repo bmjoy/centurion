@@ -1,8 +1,12 @@
 #include "game_ui.h"
 
 #include <picking>
+#include <engine>
+#include <game>
 
 using namespace glb;
+using namespace engine;
+using namespace game;
 
 UIGame::UIGame()
 {
@@ -33,8 +37,8 @@ void UIGame::create() {
 }
 
 void UIGame::render() {
-	if (GAME::MENU_IS_ACTIVE){
-		if (GLB::MOUSE_LEFT){
+	if (gameMenuStatus){
+		if (getBoolean("mouse-left")){
 			gameMenu.render(true);
 			picking();
 		}
@@ -46,11 +50,11 @@ void UIGame::render() {
 	time.text.render_dynamic(txt, "tahoma_8", time.x, time.y, glm::vec4(255.f, 255.f, 255.f, 255.f), "left", "normal");
 
 	// minimap rectangle:
-	if (GAME::MINIMAP_IS_ACTIVE) {
-		float x = getParam("camera-x-position") / GAME::MAP_WIDTH * getParam("window-width");
-		float y = getParam("camera-y-position") / GAME::MAP_HEIGHT * (getParam("window-height") - getParam("ui-bottom-height") - getParam("ui-top-height")) + getParam("ui-bottom-height");
-		float w = getParam("window-width-zoomed") * getParam("window-width") / GAME::MAP_WIDTH;
-		float h = getParam("window-height-zoomed") * (getParam("window-height") - getParam("ui-bottom-height") - getParam("ui-top-height")) / GAME::MAP_HEIGHT;
+	if (gameMinimapStatus) {
+		float x = getParam("camera-x-position") / mapWidth * getParam("window-width");
+		float y = getParam("camera-y-position") / mapHeight * (getParam("window-height") - getParam("ui-bottom-height") - getParam("ui-top-height")) + getParam("ui-bottom-height");
+		float w = getParam("window-width-zoomed") * getParam("window-width") / mapWidth;
+		float h = getParam("window-height-zoomed") * (getParam("window-height") - getParam("ui-bottom-height") - getParam("ui-top-height")) / mapHeight;
 		x = std::max(x, 1.f);
 		y = std::max(y, getParam("ui-bottom-height") + 1.f);
 		y = std::min(y, getParam("window-height") - getParam("ui-top-height") - h);
@@ -65,13 +69,11 @@ void UIGame::picking() {
 	int clickId = get_id();
 	string clickName = getPickedObjectName(clickId);
 	if (clickName == "menuButtonClose") {
-		GAME::MENU_IS_ACTIVE = false;
-		GLB::MOUSE_LEFT = false;
+		gameMenuStatus = false;
 	}
 	if (clickName == "menuButtonQuit") {
-		GAME::MENU_IS_ACTIVE = false;
-		GLB::RESET = true;
-		GLB::MOUSE_LEFT = false;
+		gameMenuStatus = false;
+		ENGINE()->Reset();
 	}
 }
 

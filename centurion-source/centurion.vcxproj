@@ -317,7 +317,6 @@
     <ClInclude Include="source\audio\sound.h" />
     <ClInclude Include="source\audio\sound_buffer.h" />
     <ClInclude Include="source\common\global" />
-    <ClInclude Include="source\common\global.hpp" />
     <ClInclude Include="source\common\math" />
     <ClInclude Include="source\common\primitives" />
     <ClInclude Include="source\extern\includes\json.hpp" />

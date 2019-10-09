@@ -1,9 +1,17 @@
 #include <surface>
 #include <math>
-#include <global.hpp>
+#include <global>
+#include <game>
 #include <player>
 
+using namespace game;
+
 namespace mapgen {
+
+	float mouseZNoise = 0.f;
+	float minZ = 0.f;
+	float maxZ = 0.f;
+
 	void init() {
 		*VerticesPos() = { 0 };
 		*Indices() = { 0 };
@@ -75,13 +83,13 @@ namespace mapgen {
 
 	float smoothNoise(float y, float z, float alpha, float beta) {
 		float zSmoothed;
-		zSmoothed = z * beta * tanh(y * alpha) * tanh((GAME::MAP_HEIGHT - y)*alpha);
+		zSmoothed = z * beta * tanh(y * alpha) * tanh((mapHeight - y)*alpha);
 		return zSmoothed;
 	}
 
 	float perlinNoise(float x, float y, float xy_scale, float z_scale, float x_seed, float y_seed) {
-		z_scale *= GAME::MAP_WIDTH;
-		xy_scale /= GAME::MAP_WIDTH;
+		z_scale *= mapWidth;
+		xy_scale /= mapWidth;
 
 		x += x_seed;
 		y += y_seed;
@@ -103,10 +111,10 @@ namespace mapgen {
 	}
 
 	float generateNoise(glm::vec2 coords, bool normal) {
-		float zscale = MAP::ZSCALE;
+		float zscale = ZSCALE;
 
 		normal ? zscale *= 1.5f : zscale *= 1.f;
-		float zNoise = perlinNoise(coords.x, coords.y, MAP::XYSCALE, zscale, MAP::XSEED, MAP::YSEED);
+		float zNoise = perlinNoise(coords.x, coords.y, XYSCALE, zscale, XSEED, YSEED);
 		return zNoise;
 	}
 
@@ -234,8 +242,8 @@ namespace mapgen {
 
 			// update znoise
 			MapHeights()[i * 4] = zNoise;
-			MAP::MIN_Z = std::min(zNoise, MAP::MIN_Z);
-			MAP::MAX_Z = std::max(zNoise, MAP::MAX_Z);
+			minZ = std::min(zNoise, minZ);
+			maxZ = std::max(zNoise, maxZ);
 		}
 		updateAllNormals();
 	}
@@ -289,9 +297,9 @@ namespace mapgen {
 		srand((unsigned int)time(NULL));
 		std::vector<float> townhallPos;
 		int k = 0;
-		int min = GAME::TOWNHALL_RADIUS + 100;
-		int max_X = GAME::MAP_WIDTH - GAME::TOWNHALL_RADIUS - 100;
-		int max_Y = GAME::MAP_HEIGHT - GAME::TOWNHALL_RADIUS - 100;
+		int min = (int)townhallRadius + 100;
+		int max_X = mapWidth - (int)townhallRadius - 100;
+		int max_Y = mapHeight - (int)townhallRadius - 100;
 		float a, b;
 		float d;
 		bool c;
@@ -302,7 +310,7 @@ namespace mapgen {
 				b = float(rand() % (max_Y - min) + min);
 
 				if (n == 0) { // 1 PLAYER
-					if (math::euclidean_distance(a, b, GAME::MAP_WIDTH / 2.0f, GAME::MAP_HEIGHT / 2.0f) > GAME::MAP_HEIGHT / 2.0f) {
+					if (math::euclidean_distance(a, b, mapWidth / 2.0f, mapHeight / 2.0f) > mapHeight / 2.0f) {
 						townhallPos.push_back(a);
 						townhallPos.push_back(b);
 						c = true;
@@ -310,7 +318,7 @@ namespace mapgen {
 				}
 				if (n == 1) { // 2 PLAYERS
 					d = math::euclidean_distance(a, b, townhallPos[n - 1], townhallPos[n]);
-					if (d > GAME::MAP_HEIGHT * 0.5) {
+					if (d > mapHeight * 0.5) {
 						townhallPos.push_back(a);
 						townhallPos.push_back(b);
 						c = true;
@@ -320,7 +328,7 @@ namespace mapgen {
 					bool c2 = true;
 					for (int m = n - 1; m >= 0; m--) {
 						d = math::euclidean_distance(a, b, townhallPos[m * 2], townhallPos[m * 2 + 1]);
-						if (d <= GAME::MAP_HEIGHT * 0.5) {
+						if (d <= mapHeight * 0.5) {
 							c2 = c2 * false;
 						}
 					}
@@ -335,7 +343,7 @@ namespace mapgen {
 					bool c2 = true;
 					for (int m = n - 1; m >= 0; m--) {
 						d = math::euclidean_distance(a, b, townhallPos[m * 2], townhallPos[m * 2 + 1]);
-						if (d <= GAME::MAP_HEIGHT * 0.25) {
+						if (d <= mapHeight * 0.25) {
 							c2 = c2 * false;
 						}
 					}

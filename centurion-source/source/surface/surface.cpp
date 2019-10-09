@@ -1,7 +1,10 @@
 #include <surface>
-#include <global.hpp>
+#include <global>
+#include <engine>
+#include <game>
 
 using namespace glb;
+using namespace game;
 
 Surface::Surface(){}
 
@@ -22,16 +25,16 @@ void Surface::updateGrid() {
 
 void Surface::render(bool tracing) {
 
-	if (GLB::MOUSE_LEFT && GLB::EDITOR) {
+	/*if (getBoolean("mouse-left")) {
 		float x1 = (getParam("mouse-x-position") * getParam("window-width-zoomed") / getParam("window-width") + getParam("camera-x-position"));
 		float y1 = (getParam("mouse-y-position") * getParam("window-height-zoomed") / getParam("window-height") + getParam("camera-y-position"));
-		//obj::MapTerrain()->updateBuffers(x1, y1, "terrain", 2.f);
-		//obj::MapTerrain()->updateBuffers(x1, y1, "zNoise", 10.f);
-	}
+		obj::MapTerrain()->updateBuffers(x1, y1, "terrain", 2.f);
+		obj::MapTerrain()->updateBuffers(x1, y1, "zNoise", 10.f);
+	}*/
 
 	obj::MapTerrain()->render(tracing);
 
-	if (GAME::GRID_IS_ACTIVE && !tracing) {
+	if (gameGridStatus && !tracing) {
 		obj::MapGrid()->render();
 	}
 }

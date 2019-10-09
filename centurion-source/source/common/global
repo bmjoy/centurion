@@ -14,6 +14,15 @@ using namespace glm;
 //
 
 namespace glb {
+	extern mat4 menuProjection;
+	extern mat4 cameraProjection;
+	extern mat4 minimapProjection;
+
+	extern GLFWwindow *MainWindow;
+
+	extern vector<vec3> colors;
+	extern vector<string> races;
+
 	static const string gameNameSTR = "Centurion";
 	static const LPCSTR gameNameLPCSTR = "Centurion";
     static map<string, float> params; // global parameters
@@ -25,6 +34,7 @@ namespace glb {
 	bool getBoolean(string param);
 	void setErrors(map<string, string> errorsMap);
 	string getErrorCode(string error);
+	void initParams();
 	void saveLog();
 
 	// reading/saving map data 

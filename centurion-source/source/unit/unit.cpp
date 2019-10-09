@@ -7,6 +7,7 @@
 
 using namespace math;
 using namespace glb;
+using namespace game;
 
 namespace unit {
 	Unit::Unit() {
@@ -70,7 +71,7 @@ namespace unit {
 	void Unit::render(glm::mat4 &proj, glm::mat4 &view, bool picking, int clickID) {
 	
 		clickSelection = (picking_id == clickID);
-		if (GLB::MOUSE_LEFT) rectangleSelection = unit::isInSelectionRect(hitbox.coords);
+		if (getBoolean("mouse-left")) rectangleSelection = unit::isInSelectionRect(hitbox.coords);
 		selected = (clickSelection + rectangleSelection > 0);
 	
 		hitbox.coords = get_rectangle_coords(position3D.x - unitData.hitBox[0] / 2.f, position3D.y + unitData.hitBox[1] / 2.f + unitData.yOffset, (float)unitData.hitBox[0], (float)unitData.hitBox[1]);
@@ -82,7 +83,7 @@ namespace unit {
 			walk_behaviour();		
 		}
 	
-		if (!GAME::MINIMAP_IS_ACTIVE){
+		if (!gameMinimapStatus){
 			if (selected) {
 				selectionCircle.render(glm::vec4(255.f, 255.f, 255.f, 0.8f), position3D.x, position3D.y);
 			}
@@ -100,7 +101,7 @@ namespace unit {
 			}
 			// ************************ //
 
-			if (!GAME::MINIMAP_IS_ACTIVE) {
+			if (!gameMinimapStatus) {
 				circlePos.render(false, position2D.x, position2D.y);
 				hitbox.rectangle.render(
 					selected ? glm::vec4(255.0f, 0.0f, 255.0f, 1.0f) : glm::vec4(255.0f, 242.0f, 0.0f, 1.0f),
@@ -150,7 +151,7 @@ namespace unit {
 	}
 
 	void Unit::walk_behaviour() {
-		if (GLB::MOUSE_RIGHT && selected) {
+		if (getBoolean("mouse-right") && selected) {
 
 			is_Moving = true;
 

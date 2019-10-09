@@ -1,9 +1,13 @@
 #include "menu.h"
 
 #include <picking>
+#include <engine>
+#include <game>
 
 using namespace glb;
 using namespace std;
+using namespace engine;
+using namespace game;
 
 Menu::Menu(){
 	currentMenu = "mainmenu";
@@ -89,7 +93,7 @@ void Menu::render() {
 
 	/* picking */
 
-	if (GLB::MOUSE_LEFT){
+	if (getBoolean("mouse-left")){
 		for (int i = 0; i < images[currentMenu].size(); ++i) {
 			images[currentMenu][i].render(true);
 		}
@@ -114,6 +118,8 @@ void Menu::render() {
 		list.render(num_players, players_color, false);
 	}
 	
+	setBoolean("mouse-right", false);
+	setBoolean("mouse-left", false); 
 }
 
 void Menu::picking() {
@@ -131,37 +137,31 @@ void Menu::picking() {
 	/*------------------------------------------------------------------------------*/
 	if (clickName == "buttonStart") {
 			
-		GLB::MOUSE_LEFT = false;
-		GLB::GAME = true;
-		GLB::MAIN_MENU = false;
+		setBoolean("mouse-left", false);
+		ENGINE()->setEnvironment("game");
 		/* save game informations */
-		GAME::PLAYERS_NUMBER = num_players;
+		game::playersNumber = num_players;
 		for (int i = 0; i < num_players; i++) {
 			Player p = Player();
-			p.create(players_color[i], 0, list.get_race(i), GLB::COLORS[players_color[i]]);
+			p.create(players_color[i], 0, list.get_race(i), glb::colors[players_color[i]]);
 			(*playersList).push_back(p);				
 		}		
 	}
 	/*------------------------------------------------------------------------------*/
 	if (clickName == "buttonEditor") {
-		GLB::MOUSE_LEFT = false;
-		GLB::EDITOR = true;
-		GLB::MAIN_MENU = false;
+		ENGINE()->setEnvironment("editor");
 	}
 	/*------------------------------------------------------------------------------*/
 	if (clickName == "buttonQuit") {
-		GLB::MOUSE_LEFT = false;
 		saveLog();
-		GLB::WINDOW_CLOSE = true;
+		setBoolean("window-should-close", true);
 	}
 	/*------------------------------------------------------------------------------*/
 	if (clickName == "buttonExit") {
-		GLB::MOUSE_LEFT = false;
 		currentMenu = "mainmenu";
 	}
 	/*------------------------------------------------------------------------------*/
 	if (clickName == "buttonSinglePlayer") {
-		GLB::MOUSE_LEFT = false;
 		currentMenu = "singleplayer";
 	}
 }

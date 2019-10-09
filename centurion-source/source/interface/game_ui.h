@@ -1,7 +1,6 @@
 #pragma once
 
-#include <global.hpp>
-#include <global.hpp>
+#include <global>
 #include "../interface/game_ui_menu.h"
 #include <gui>
 

@@ -1,6 +1,9 @@
 #include <engine>
+#include <game>
 
 using namespace glb;
+using namespace engine;
+using namespace game;
 
 myWindow::myWindow(){}
 
@@ -10,8 +13,8 @@ void myWindow::init() {
 	glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
 	glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
 	glfwWindowHint(GLFW_RESIZABLE, GL_FALSE);
-	mainWindow = glfwCreateWindow((int)getParam("window-width"), (int)getParam("window-height"), gameNameSTR.c_str(), nullptr, nullptr); // Windowed
-	glfwMakeContextCurrent(mainWindow);
+	MainWindow = glfwCreateWindow((int)getParam("window-width"), (int)getParam("window-height"), gameNameSTR.c_str(), nullptr, nullptr); // Windowed
+	glfwMakeContextCurrent(MainWindow);
 
 	create_callbacks(); // handle key + mouse input
 
@@ -19,34 +22,34 @@ void myWindow::init() {
 	glewExperimental = GL_TRUE;
 	glewInit();
 
-	glfwGetFramebufferSize(mainWindow, &bufferWidth, &bufferHeight);
+	glfwGetFramebufferSize(MainWindow, &bufferWidth, &bufferHeight);
 
 	// Define the viewport dimensions
 	glViewport(0, 0, bufferWidth, bufferHeight);
 
-	glfwSetWindowUserPointer(mainWindow, this); // this function is for taking inputs
+	glfwSetWindowUserPointer(MainWindow, this); // this function is for taking inputs
 
 	// Set OpenGL options
 	glEnable(GL_CULL_FACE);
 	glEnable(GL_BLEND);
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-	glfwSetInputMode(mainWindow, GLFW_CURSOR, GLFW_CURSOR_HIDDEN);	// hide the mouse cursor in the window
+	glfwSetInputMode(MainWindow, GLFW_CURSOR, GLFW_CURSOR_HIDDEN);	// hide the mouse cursor in the window
 }
 
 void myWindow::clear_buffers() {
 	glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
 	glClear(GL_COLOR_BUFFER_BIT);
 
-	if (glfwWindowShouldClose(mainWindow)) {
-		GLB::WINDOW_CLOSE = true;
+	if (glfwWindowShouldClose(MainWindow)) {
+		setBoolean("window-should-close", true);
 	}
 }
 
 void myWindow::create_callbacks() { // important for taking the keyboard / mouse input 
-	glfwSetKeyCallback(mainWindow, handle_keys);
-	glfwSetCursorPosCallback(mainWindow, handle_mouse);
-	glfwSetMouseButtonCallback(mainWindow, mouse_button_callback);
-	glfwSetScrollCallback(mainWindow, scroll_callback);
+	glfwSetKeyCallback(MainWindow, handle_keys);
+	glfwSetCursorPosCallback(MainWindow, handle_mouse);
+	glfwSetMouseButtonCallback(MainWindow, mouse_button_callback);
+	glfwSetScrollCallback(MainWindow, scroll_callback);
 }
 
 void myWindow::handle_keys(GLFWwindow* window, int key, int code, int action, int mode) 
@@ -55,51 +58,53 @@ void myWindow::handle_keys(GLFWwindow* window, int key, int code, int action, in
 
 	if (key == GLFW_KEY_ESCAPE) {
 		if (action == GLFW_PRESS) {
-			GLB::ESC_KEY = true;
-			if (GLB::GAME) GAME::MENU_IS_ACTIVE = !GAME::MENU_IS_ACTIVE;
+			setBoolean("esc-key", true);
+			if (ENGINE()->getEnvironment() == "game") {
+				gameMenuStatus = !gameMenuStatus;
+			}
 		}
 		else if (action == GLFW_RELEASE) {
-			GLB::ESC_KEY = false;
+			setBoolean("esc-key", false);
 		}
 	}
 
 	//Arrow keys detection
 	if (key == GLFW_KEY_UP) {
 		if (action == GLFW_PRESS) {
-			GLB::UP_KEY = true;
+			setBoolean("up-key", true);
 		}
 		if (action == GLFW_RELEASE) {
-			GLB::UP_KEY = false;
+			setBoolean("up-key", false);
 		}
 	}
 	if (key == GLFW_KEY_DOWN) {
 		if (action == GLFW_PRESS) {
-			GLB::DOWN_KEY = true;
+			setBoolean("down-key", true);
 		}
 		if (action == GLFW_RELEASE) {
-			GLB::DOWN_KEY = false;
+			setBoolean("down-key", false);
 		}
 	}
 	if (key == GLFW_KEY_LEFT) {
 		if (action == GLFW_PRESS) {
-			GLB::LEFT_KEY = true;
+			setBoolean("left-key", true);
 		}
 		if (action == GLFW_RELEASE) {
-			GLB::LEFT_KEY = false;
+			setBoolean("left-key", false);
 		}
 	}
 	if (key == GLFW_KEY_RIGHT) {
 		if (action == GLFW_PRESS) {
-			GLB::RIGHT_KEY = true;
+			setBoolean("right-key", true);
 		}
 		if (action == GLFW_RELEASE) {
-			GLB::RIGHT_KEY = false;
+			setBoolean("right-key", false);
 		}
 	}
 	// Wireframe
 	if (key == GLFW_KEY_Z && action == GLFW_PRESS) {
-		GLB::WIREFRAME = !GLB::WIREFRAME;
-		if (GLB::WIREFRAME) {
+		setBoolean("wireframe", !getBoolean("wireframe"));
+		if (getBoolean("wireframe")) {
 			std::cout << "DEBUG: Wireframe ON!\n";
 		}
 		else {
@@ -108,17 +113,17 @@ void myWindow::handle_keys(GLFWwindow* window, int key, int code, int action, in
 	}
 	// Grid
 	if (key == GLFW_KEY_G && action == GLFW_PRESS) {
-		GAME::GRID_IS_ACTIVE = !GAME::GRID_IS_ACTIVE;
-		if (GAME::GRID_IS_ACTIVE) {
+		gameGridStatus = !gameGridStatus;
+		if (gameGridStatus) {
 			std::cout << "DEBUG: Grid ON!\n";
 		}
 		else {
 			std::cout << "DEBUG: Grid OFF!\n";
 		}
 	}
-	if (key == GLFW_KEY_SPACE && action == GLFW_PRESS && !GAME::MENU_IS_ACTIVE) {
-		 GAME::MINIMAP_IS_ACTIVE = ! GAME::MINIMAP_IS_ACTIVE;
-		if ( GAME::MINIMAP_IS_ACTIVE) {
+	if (key == GLFW_KEY_SPACE && action == GLFW_PRESS && !gameMenuStatus) {
+		gameMinimapStatus = !gameMinimapStatus;
+		if (gameMinimapStatus) {
 			std::cout << "DEBUG: Minimap camera ON!\n";
 		}
 		else {
@@ -135,10 +140,10 @@ void myWindow::handle_keys(GLFWwindow* window, int key, int code, int action, in
 	}
 	if ((key == GLFW_KEY_LEFT_CONTROL || key == GLFW_KEY_RIGHT_CONTROL)) {
 		if (action == GLFW_PRESS) {
-			GLB::CTRL_BUTTON = true;
+			setBoolean("ctrl-key", true);
 		}
 		else if (action == GLFW_RELEASE) {
-			GLB::CTRL_BUTTON = false;
+			setBoolean("ctrl-key", false);
 		}
 	}
 	
@@ -158,28 +163,28 @@ void myWindow::mouse_button_callback(GLFWwindow* window, int button, int action,
 
 	if (button == GLFW_MOUSE_BUTTON_LEFT) {
 		if (action == GLFW_PRESS) {
-			GLB::MOUSE_LEFT = true;
-			GLB::MOUSE_RELEASE = false;
+			setBoolean("mouse-left", true);
+			setBoolean("mouse-release", false);
 		}
 		else if (action == GLFW_RELEASE) {
-			GLB::MOUSE_LEFT = false;
-			GLB::MOUSE_RELEASE = true;
+			setBoolean("mouse-left", false);
+			setBoolean("mouse-release", true);
 		}
 	}
 	if (button == GLFW_MOUSE_BUTTON_RIGHT) {
 		if (action == GLFW_PRESS) {
-			GLB::MOUSE_RIGHT = true;
-			GLB::MOUSE_RELEASE = false;
+			setBoolean("mouse-right", true);
+			setBoolean("mouse-release", false);
 		}
 		else if (action == GLFW_RELEASE) {
-			GLB::MOUSE_RIGHT = false;
-			GLB::MOUSE_RELEASE = true;
+			setBoolean("mouse-right", false);
+			setBoolean("mouse-release", true);
 		}
 	}
-	if (GLB::GAME){
+	if (ENGINE()->getEnvironment() == "game") {
 		if (button == GLFW_MOUSE_BUTTON_MIDDLE && action == GLFW_PRESS) {
-			 GAME::MINIMAP_IS_ACTIVE =! GAME::MINIMAP_IS_ACTIVE;
-			if (GAME::MINIMAP_IS_ACTIVE) {
+			gameMinimapStatus = !gameMinimapStatus;
+			if (gameMinimapStatus) {
 				std::cout << "DEBUG: Minimap camera ON!\n";
 			}
 			else {
@@ -191,8 +196,8 @@ void myWindow::mouse_button_callback(GLFWwindow* window, int button, int action,
 
 void myWindow::scroll_callback(GLFWwindow* window, double xoffset, double yoffset)
 {
-	GLB::MOUSE_SCROLL = (int)yoffset;
-	GLB::MOUSE_SCROLL_BOOL = true;
+	setParam("mouse-scroll", (float)yoffset);
+	setBoolean("mouse-scroll-bool", true);
 }
 
 myWindow::~myWindow()

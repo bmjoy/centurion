@@ -1,10 +1,12 @@
 #include <editor>
 #include <surface>
 #include <engine>
+#include <game>
 #include <picking>
 #include "../interface/editor_menu.h"
 
 using namespace glb;
+using namespace game;
 
 namespace editor {
 	Editor::Editor(){
@@ -27,7 +29,7 @@ namespace editor {
 		camera->keyboardControl();
 		camera->mouseControl(2.0f);
 
-		proj = GLB::CAMERA_PROJECTION;
+		proj = glb::cameraProjection;
 		view = camera->calculateViewMatrix();
 
 		obj::applyGameMatrices(&proj, &view);
@@ -42,7 +44,10 @@ namespace editor {
 		menu->render(true);
 		menu->render(false);
 
-		GLB::CAMERA_PROJECTION = glm::ortho(0.0f, getParam("window-width-zoomed"), 0.0f, getParam("window-height-zoomed"), -(float)GAME::MAP_WIDTH, (float)GAME::MAP_WIDTH);
+		glb::cameraProjection = glm::ortho(0.0f, getParam("window-width-zoomed"), 0.0f, getParam("window-height-zoomed"), -(float)mapWidth, (float)mapWidth);
+
+		setBoolean("mouse-right", false);
+		setBoolean("mouse-left", false); // temporary
 	}
 
 	Editor::~Editor(){

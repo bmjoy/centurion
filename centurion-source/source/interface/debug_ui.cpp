@@ -1,6 +1,9 @@
 #include "debug_ui.h"
+#include <engine>
+#include <game>
 
 using namespace glb;
+using namespace engine;
 
 DebugUI::DebugUI()
 {
@@ -52,7 +55,7 @@ void DebugUI::render(int fps, int mpfs, int selUnits) {
 	dynamicTextList[5] = std::to_string((int)getZoomedCoords(getParam("mouse-x-position"), getParam("mouse-y-position")).x);
 	dynamicTextList[6] = std::to_string(selUnits);
 
-	!GLB::GAME ? n = 2 : n = (int)dynamicTextList.size();
+	!(ENGINE()->getEnvironment() == "game") ? n = 2 : n = (int)dynamicTextList.size();
 
 	for (int i = 0; i < n; i++) {
 		staticText[i].render_static();

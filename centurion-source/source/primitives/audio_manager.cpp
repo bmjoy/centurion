@@ -1,4 +1,4 @@
-#include <global.hpp>
+#include <global>
 
 using namespace glb;
 

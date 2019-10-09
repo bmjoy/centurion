@@ -6,7 +6,6 @@ using namespace std;
 using namespace glm;
 
 namespace editor { class Editor; }
-namespace game { class Game; }
 
 class Menu;
 class DebugUI;
@@ -49,9 +48,7 @@ public:
 	myWindow();
 
 	void init();
-	void swap_buffers() { glfwSwapBuffers(mainWindow); }
 	void clear_buffers();
-	GLFWwindow *get_GLFW_window() { return mainWindow; }
 	void create_callbacks();
 	int get_mouse_x() { return (int)lastX; };
 	int get_mouse_y() { return (int)lastY; };
@@ -59,9 +56,7 @@ public:
 	~myWindow();
 
 private:
-	GLFWwindow *mainWindow;
 	GLint bufferWidth, bufferHeight;
-
 	bool keys[1024];
 
 	static void handle_mouse(GLFWwindow* window, double xPos, double yPos);
@@ -96,30 +91,38 @@ private:
 // ENGINE --> source/engine/engine.cpp
 //
 
-class Engine {
-public:
-	Engine();
-	int launch();
-	~Engine();
+namespace engine {
 
-private:
-	// objects 
-	myWindow window;
-	Mouse *mouse;
-	Menu *startMenu;
-	game::Game *newGame;
-	editor::Editor *editor;
-	DebugUI *debugUI;
-	gui::SimpleText text;
+	class Engine {
+	public:
+		Engine();
+		void Reset() { reset = true; }
+		void setEnvironment(string s) { environment = s; }
+		string getEnvironment() { return environment; }
+		int launch();
+		~Engine();
 
-	// Players Informations
-	vector<Player> playersList;
+	private:
+		// objects 
+		myWindow window;
+		Mouse *mouse;
+		Menu *startMenu;
+		editor::Editor *editor;
+		DebugUI *debugUI;
+		gui::SimpleText text;
+		string environment;
 
-	// fps
-	double currentTime, lastTime, finalTime;
-	int nbFrames, Fps, Mpfs;
+		// Players Informations
+		vector<Player> playersList;
+		// fps
+		double currentTime, lastTime, finalTime;
+		int nbFrames, Fps, Mpfs;
+		bool reset;
+		void fps();
+		void fps_sleep();
+		void readDataClasses();
+	};
 
-	void fps();
-	void fps_sleep();
-	void readDataClasses();
+	static Engine myengine; 
+	Engine *ENGINE(); // -> definition in engine.cpp
 };

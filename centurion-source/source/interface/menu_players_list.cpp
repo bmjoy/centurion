@@ -1,8 +1,12 @@
 #include "menu_players_list.h"
 
+#include <engine>
+#include <game>
 #include <picking>
 
+using namespace engine;
 using namespace glb;
+using namespace game;
 
 PlayersList::PlayersList(){
 	deltaY = 30;
@@ -34,7 +38,7 @@ void PlayersList::create(int startX, int startY, std::vector<int> *players_color
 	background.create("border-filled", (float)x - 30, (float)y + 80, (float)w, (float)h, "top-left", 0);
 
 
-	for (int j = 0; j < GAME::PLAYERS_NUMBER_MAX; j++) {
+	for (int j = 0; j < maxPlayersNumber; j++) {
 
 		//Player color rectangle
 		addValueToPickingListUI(getPickingID(), "ColForm_" + std::to_string(j));
@@ -53,7 +57,7 @@ void PlayersList::create(int startX, int startY, std::vector<int> *players_color
 		//Player civilization
 		addValueToPickingListUI(getPickingID(), "CivForm_" + std::to_string(j));
 		gui::FormInput c_fi = gui::FormInput(true);
-		c_fi.create((float)x + 280.f, (float)y - deltaY * j, 150.f, 20.f, GAME::RACES, getPickingID());
+		c_fi.create((float)x + 280.f, (float)y - deltaY * j, 150.f, 20.f, glb::races, getPickingID());
 		civiliz_Form.push_back(c_fi);
 		increasePickingID();
 	}
@@ -76,7 +80,7 @@ void PlayersList::render(int numPlayers, std::vector<int> players_color, bool pi
 		text.render_static();
 		number.render_dynamic(std::to_string(numPlayers), "tahoma_8", x + textWidth, y + 40.f, glm::vec4(255.f, 255.f, 255.f, 255.f), "left", "normal");
 		for (int j = numPlayers - 1; j >= 0; j--) {
-			colors_Form[j].render(false, glm::vec4(GLB::COLORS[players_color[j]], 1.0f));
+			colors_Form[j].render(false, glm::vec4(glb::colors[players_color[j]], 1.0f));
 			players_Form[j].render(false, glm::vec4(0.f, 0.f, 0.f, 1.f));
 			civiliz_Form[j].render(false, glm::vec4(0.f, 0.f, 0.f, 1.f));
 		}
@@ -88,7 +92,7 @@ std::string PlayersList::get_race(int i) {
 }
 
 void PlayersList::close() {
-	for (int k = 0; k < GAME::PLAYERS_NUMBER_MAX; k++) {
+	for (int k = 0; k < maxPlayersNumber; k++) {
 		civiliz_Form[k].close();
 	}
 }
@@ -98,7 +102,6 @@ void PlayersList::picking(int *numPlayers, std::vector<int> *players_color, int 
 	std::string clickedName = getPickedObjectName(clickId);
 
 	if (clickedName == "arrowDown") {
-		GLB::MOUSE_LEFT = false;
 		if (*numPlayers > 2 && *numPlayers <= 8) {
 			(*players_color)[*numPlayers - 1] = -1;
 			(*numPlayers) -= 1;
@@ -106,7 +109,6 @@ void PlayersList::picking(int *numPlayers, std::vector<int> *players_color, int 
 	}
 	
 	if (clickedName == "arrowUp") {
-		GLB::MOUSE_LEFT = false;
 		if (*numPlayers >= 2 && *numPlayers < 8) {
 			(*numPlayers) += 1;
 			(*players_color)[*numPlayers - 1] = 0;
@@ -132,7 +134,6 @@ void PlayersList::picking(int *numPlayers, std::vector<int> *players_color, int 
 	for (int j = 0; j < *numPlayers; j++) {
 		if (clickedName == "CivForm_" + std::to_string(j)) {
 			int i = int((getParam("mouse-y-leftclick") - y + deltaY * j) / 20.0)*(-1);
-			GLB::MOUSE_LEFT = false;
 			civiliz_Form[j].open_close();
 
 			if (i > 0) {
@@ -140,9 +141,8 @@ void PlayersList::picking(int *numPlayers, std::vector<int> *players_color, int 
 			}
 		}
 		if (clickedName == "ColForm_" + std::to_string(j)) {
-			GLB::MOUSE_LEFT = false;
 			(*players_color)[j] ++;
-			if ((*players_color)[j] == GLB::COLORS.size()) { (*players_color)[j] = 0; }
+			if ((*players_color)[j] == glb::colors.size()) { (*players_color)[j] = 0; }
 			bool c = false;
 			while (!c) {
 				int s = 0;

@@ -1,7 +1,7 @@
 #pragma once
 
 
-#include <global.hpp>
+#include <global>
 #include <gui>
 
 namespace editor {

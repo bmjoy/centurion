@@ -1,5 +1,5 @@
 #include <primitives>
-#include <global.hpp>
+#include <global>
 
 Shader::Shader() {
 	VAO = 0; VBO = 0; IBO = 0;

@@ -14,6 +14,19 @@ class Player;
 
 namespace game {
 
+	/* global game variables */
+
+	extern bool gameMenuStatus;
+	extern bool gameMinimapStatus;
+	extern bool gameGridStatus;
+	extern int mapWidth, mapHeight;
+	extern int playersNumber;
+	extern int maxPlayersNumber;
+	extern float cameraMovespeed;
+	extern int currentZoomCamera;
+	extern float zoomCameraFactor;
+	extern float townhallRadius;
+
 	using namespace unit;
 	using namespace building;
 
@@ -25,7 +38,7 @@ namespace game {
 	public:
 		Game();
 		bool game_is_created() { return gameIsCreated; }
-		void reset() { gameIsCreated = false; }
+		void reset();
 		void create(vector<Player> *ListOfPlayers);
 		void run();
 		void clear();
@@ -35,8 +48,6 @@ namespace game {
 		vector<Player> *playersList;
 		Camera *camera;
 		Surface *surface;
-		Building *b;
-		Unit *u;
 		UIGame *ui;
 		gui::Rectangle selRectangle;
 
@@ -55,6 +66,10 @@ namespace game {
 		bool gameIsCreated;
 	};
 	
+	static Game mygame;
+	Game *GAME(); // --> definition in game_functions.cpp
+	void init();
+
 	//
 	// GAME FUNCTIONS --> source/game/game_functions.cpp
 	//

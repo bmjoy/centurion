@@ -1,9 +1,11 @@
 #include <primitives>
 #include <stb_image.h>
+#include <game>
 #include <surface>
-#include <global.hpp>
+#include <global>
 
 using namespace glb;
+using namespace game;
 
 Terrain::Terrain(){
 	vPath = "assets/shaders/terrain/vertex.glsl";
@@ -63,8 +65,8 @@ void Terrain::render(bool tracing) {
 	glUseProgram(shaderId);
 
 	// Wireframe
-	glUniform1i(glGetUniformLocation(shaderId, "wireframe"), int(GLB::WIREFRAME));
-	if (GLB::WIREFRAME && !tracing) {
+	glUniform1i(glGetUniformLocation(shaderId, "wireframe"), int(getBoolean("wireframe")));
+	if (getBoolean("wireframe") && !tracing) {
 		glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
 	}
 	else {
@@ -84,8 +86,8 @@ void Terrain::render(bool tracing) {
 	/* TRACING */
 
 	if (tracing) {
-		glUniform1f(glGetUniformLocation(shaderId, "minZ"), MAP::MIN_Z);
-		glUniform1f(glGetUniformLocation(shaderId, "maxZ"), MAP::MAX_Z);
+		glUniform1f(glGetUniformLocation(shaderId, "minZ"), mapgen::minZ);
+		glUniform1f(glGetUniformLocation(shaderId, "maxZ"), mapgen::maxZ);
 
 		/* Draw */	
 		glDrawElements(GL_TRIANGLES, mapgen::nIndices, GL_UNSIGNED_INT, 0);
@@ -103,8 +105,8 @@ void Terrain::render(bool tracing) {
 		light.use_light((GLfloat)uAmbientIntensity, (GLfloat)uAmbientColor, (GLfloat)uDiffuseIntensity, (GLfloat)uDiffuseDirection);
 
 		// Texture
-		float scaleTexX = (float)GAME::MAP_WIDTH / (float)textureInfoList[1].x;    // to fix the texture scale
-		float scaleTexY = (float)GAME::MAP_HEIGHT / (float)textureInfoList[1].y;
+		float scaleTexX = (float)mapWidth / (float)textureInfoList[1].x;    // to fix the texture scale
+		float scaleTexY = (float)mapHeight / (float)textureInfoList[1].y;
 		glUniform1f(glGetUniformLocation(shaderId, "scaleTextX"), scaleTexX);
 		glUniform1f(glGetUniformLocation(shaderId, "scaleTextY"), scaleTexY);
 		glUniform1i(glGetUniformLocation(shaderId, "grass1"), 0);

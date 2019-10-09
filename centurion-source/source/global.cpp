@@ -1,19 +1,96 @@
-#include <global.hpp>
+#include <global>
 #include <surface>
 #include <math>
+#include <json.hpp>
+#include <game>
 
 /* ----- GLOBAL ----- */
 
+using namespace glb;
 using namespace std;
-using namespace glm;
+using namespace game;
 
 namespace glb {
+    
+    mat4 menuProjection;
+	mat4 cameraProjection;
+	mat4 minimapProjection;
+
+	GLFWwindow *MainWindow;
+
+	vector<vec3> colors;
+	vector<string> races;
+
 	void setErrors(map<string, string> errorsMap) { errors = errorsMap; }
 	string getErrorCode(string error) { return errors[error]; }
 	void setParam(string param, float value) { params[param] = value; }
 	float getParam(string param) { return params[param]; }
 	void setBoolean(string param, bool value) { booleans[param] = value; }
 	bool getBoolean(string param) { return booleans[param]; }
+
+	void initParams() {
+		//Close the game if it wasn't able to find or process errorCodes.json file
+		ifstream errorCodes_path("assets/data/errorCodes.json");
+		if (!errorCodes_path.good()) {
+			forceGameClosure("  Error code: " + getErrorCode("NOT_FOUND") + string("\n\n  Unable to find or process ERROR CODES file.\n  Forced application shutdown has started."));
+		}
+		json errorCodes = json::parse(errorCodes_path);
+		map<string, string> errorsMap = errorCodes.get<map<string, string>>();
+		setErrors(errorsMap);
+
+		ifstream settings_path("settings.json");
+		if (!settings_path.good()) {
+			//The correct format should be:
+			//forceGameClosure("  " + errorsJson["NOT_FOUND"] + "\n\n  " + errorText[TRANSLATE];
+			forceGameClosure("  Error code: " + getErrorCode("NOT_FOUND") + string("\n\n  Unable to find or process SETTINGS file.\n  Forced application shutdown has started."));
+		}
+		json settings = json::parse(settings_path);
+
+		setBoolean("debug", (bool)settings["debug"].get<int>());
+		setParam("window-width", (float)settings["window_width"]);
+		setParam("window-height", (float)settings["window_height"]);
+		setParam("window-ratio", getParam("window-width") / getParam("window-height"));
+		setParam("window-width-zoomed", getParam("window-width") + (currentZoomCamera - 1) * zoomCameraFactor);
+		setParam("window-height-zoomed", getParam("window-height") + (currentZoomCamera - 1) * zoomCameraFactor / getParam("window-ratio"));
+
+		setParam("ui-bottom-height", 60.f);
+		setParam("ui-top-height", 100.f);
+
+		setBoolean("window-should-close", false);
+		setBoolean("wireframe", false);
+		setBoolean("mouse-left", false);
+		setBoolean("mouse-right", false);
+		setBoolean("mouse-release", false);
+		setBoolean("mouse-scroll-bool", false);
+		setParam("mouse-scroll", 0.f);
+
+		setBoolean("up-key", false);
+		setBoolean("down-key", false);
+		setBoolean("right-key", false);
+		setBoolean("left-key", false);
+		setBoolean("esc-key", false);
+		setBoolean("ctrl-key", false);
+
+
+		menuProjection = glm::ortho(0.0f, getParam("window-width"), 0.0f, getParam("window-height"), -100.0f, 100.0f);
+		cameraProjection = glm::ortho(0.0f, getParam("window-width-zoomed"), 0.0f, getParam("window-height-zoomed"), -(float)mapWidth, (float)mapWidth);
+
+		ifstream data_path("assets/data/data.json");
+		//Close the game if it wasn't able to find or process data.json file
+		if (!data_path.good()) {
+			forceGameClosure("  Error code:" + getErrorCode("NOT_FOUND") + "\n\n  Unable to find or process DATA file.\nForced application shutdown has started.");
+		}
+		json data = json::parse(data_path);
+
+		for (int i = 0; i < data["races"].size(); i++) {
+			glb::races.push_back(data["races"][i]);
+		}
+
+		for (int i = 0; i < data["player_colors"].size(); i++) {
+			vec3 color = vec3(data["player_colors"][i]["r"], data["player_colors"][i]["g"], data["player_colors"][i]["b"]);
+			glb::colors.push_back(color);
+		}
+	}
 
 	void saveLog() {
 		ofstream logFile("logs/global.log");		
@@ -119,7 +196,7 @@ namespace glb {
 	}
 	void forceGameClosure(string reason) {
 		MessageBox(NULL, reason.c_str(), gameNameLPCSTR, MB_ICONERROR);
-		GLB::WINDOW_CLOSE = true;
+		setBoolean("window-should-close", true);
 	}
 	void showGameWarning(string reason) {
 		MessageBox(NULL, reason.c_str(), gameNameLPCSTR, MB_ICONINFORMATION);
@@ -168,8 +245,8 @@ namespace obj {
         MapGrid()->compile();
     }
     void create() {
-        Text()->apply_projection_matrix(GLB::MENU_PROJECTION);
-        Cursor()->apply_projection_matrix(GLB::MENU_PROJECTION);
+        Text()->apply_projection_matrix(glb::menuProjection);
+        Cursor()->apply_projection_matrix(glb::menuProjection);
 
         //----
 
@@ -189,13 +266,13 @@ namespace obj {
     }
 
     void applyMenuMatrices() {
-        Img()->apply_projection_matrix(GLB::MENU_PROJECTION);
+        Img()->apply_projection_matrix(glb::menuProjection);
         Img()->apply_view_matrix();
-        ECircle()->apply_projection_matrix(GLB::MENU_PROJECTION);
+        ECircle()->apply_projection_matrix(glb::menuProjection);
         ECircle()->apply_view_matrix();
-        ERectangle()->apply_projection_matrix(GLB::MENU_PROJECTION);
+        ERectangle()->apply_projection_matrix(glb::menuProjection);
         ERectangle()->apply_view_matrix();
-        FRectangle()->apply_projection_matrix(GLB::MENU_PROJECTION);
+        FRectangle()->apply_projection_matrix(glb::menuProjection);
         FRectangle()->apply_view_matrix();
     }
     void applyGameMatrices(mat4 *proj, mat4 *view) {

@@ -1,6 +1,6 @@
 #include <primitives>
 #include <stb_image.h>
-#include <global.hpp>
+#include <global>
 #include <json.hpp>
 
 using namespace glb;
