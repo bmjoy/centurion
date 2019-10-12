@@ -163,6 +163,11 @@ txt::StaticData BitmapFont::create_static(std::string &font, std::string &text, 
 	int totw = 0;
 	for (int i = 0; i < text.size(); i++) {
 		static_data.X.push_back(x + totw);
+		/*const int wideLength = sizeof(text.c_str()[i]);
+		WCHAR wstr[wideLength];
+		MultiByteToWideChar(CP_UTF8, 0, (LPCCH)text.c_str()[i], wideLength, wstr, wideLength);*/
+		//char c = text.c_str()[i];
+		//wchar_t tc = (wchar_t)c;
 		static_data.charList.push_back((GLint)text.c_str()[i]);
 		totw += fontData[font].charWidth[text.c_str()[i]];
 	}	

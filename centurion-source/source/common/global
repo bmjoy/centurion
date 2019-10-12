@@ -25,7 +25,7 @@ namespace glb {
 	extern vector<string> races;
 
 	static const string gameNameSTR = "Centurion";
-	static const LPCSTR gameNameLPCSTR = "Centurion";
+	static const LPCWSTR gameNameLPCWSTR = L"Centurion";
     static map<string, float> params; // global parameters
 	static map<string, bool> booleans; // global booleans
 	static map<string, string> errors; // error codes

@@ -85,7 +85,7 @@ namespace glb {
 
 		ifstream data_path("assets/data/data.json");
 		//Close the game if it wasn't able to find or process data.json file
-		if (data_path.good()) {
+		if (!data_path.good()) {
 			forceGameClosure("NOT_FOUND" , "errorData");
 		}
 		json data = json::parse(data_path);
@@ -229,11 +229,18 @@ namespace glb {
 	}
 	void forceGameClosure(string errorCode, string errorText) {
 		string text = "  " + getTranslation("errorCode") + ": " + getErrorCode(errorCode) + "\n\n  " + getTranslation(errorText);
-		MessageBox(NULL, (LPCSTR)text.c_str(), gameNameLPCSTR, MB_ICONERROR);
+		const int wideLength = sizeof(text.c_str())*128;
+		WCHAR wstr[wideLength];
+		MultiByteToWideChar(CP_UTF8, 0, text.c_str(), wideLength, wstr, wideLength);
+		MessageBoxW(NULL, wstr, gameNameLPCWSTR, MB_ICONERROR);
 		setBoolean("window-should-close", true);
 	}
-	void showGameWarning(string reason) {
-		MessageBox(NULL, reason.c_str(), gameNameLPCSTR, MB_ICONINFORMATION);
+	void showGameWarning(string warningText) {
+		string text = "  " + warningText;
+		const int wideLength = sizeof(text.c_str()) * 128;
+		WCHAR wstr[wideLength];
+		MultiByteToWideChar(CP_UTF8, 0, text.c_str(), wideLength, wstr, wideLength);
+		MessageBoxW(NULL, wstr, gameNameLPCWSTR, MB_ICONINFORMATION);
 	}
 };
 
