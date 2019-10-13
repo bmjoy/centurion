@@ -2,6 +2,8 @@
 #include <stb_image.h>
 #include <global>
 #include <json.hpp>
+#include <codecvt>
+#include <locale>
 
 using namespace glb;
 
@@ -16,7 +18,7 @@ BitmapFont::BitmapFont() {
 	vAlignMap["middle"] = 1;
 }
 
-void BitmapFont::set_align(std::string hAlign, std::string vAlign) {
+void BitmapFont::set_align(string hAlign, string vAlign) {
 	h_align = hAlign;
 	v_align = vAlign;
 }
@@ -62,28 +64,28 @@ void BitmapFont::create() {
 
 	/* Texture */
 	//Close the game if it wasn't able to find or process fonts.json file
-	std::ifstream path_fonts("assets/data/fonts.json");
+	ifstream path_fonts("assets/data/fonts.json");
 	if (!path_fonts) {
 		forceGameClosure("NOT_FOUND" , "errorFonts");
 	}
 	json d = json::parse(path_fonts);
 
-	std::map<std::string, json> jsonData;
-	std::string fontName;
+	map<string, json> jsonData;
+	string fontName;
 
 	for (int i = 0; i < d["fonts"].size(); i++){
-		fontName = d["fonts"][i].get<std::string>();
+		fontName = d["fonts"][i].get<string>();
 		path = "assets/fonts/" + fontName + ".png";
 		
 		// load image
 		textureIdList.push_back(0);
-		textureInfoList.push_back(glm::ivec3(0, 0, 0));
+		textureInfoList.push_back(ivec3(0, 0, 0));
 		unsigned char *data = stbi_load(path.c_str(), &textureInfoList[i].x, &textureInfoList[i].y, &textureInfoList[i].z, 0);
-		if (!data) { std::cout << "Failed to load texture" << std::endl; }
+		if (!data) { cout << "Failed to load texture" << endl; }
 
 		path = "assets/fonts/" + fontName + ".json";
 
-		std::ifstream json_path(path);
+		ifstream json_path(path);
 		jsonData[fontName] = json::parse(json_path);
 
 		glUniform1f(glGetUniformLocation(shaderId, "max_x"), 16.f);
@@ -105,7 +107,7 @@ void BitmapFont::create() {
 		/* save json data in struct */
 
 		for (int i = 0; i < 256; ++i) {
-			fontData[fontName].charWidth[i] = jsonData[fontName]["Char " + std::to_string(i) + " Base Width"].get<int>();
+			fontData[fontName].charWidth[i] = jsonData[fontName]["Char " + to_string(i) + " Base Width"].get<int>();
 		}
 		fontData[fontName].startChar = jsonData[fontName]["Start Char"].get<int>();
 		fontData[fontName].fontHeight = (float)jsonData[fontName]["Font Height"].get<int>();
@@ -113,7 +115,7 @@ void BitmapFont::create() {
 	}
 }
 
-void BitmapFont::render_dynamic(std::string &font, float xPos, float yPos, std::string &text, glm::vec4 &color, bool shadow) {
+void BitmapFont::render_dynamic(string &font, float xPos, float yPos, string &text, vec4 &color, bool shadow) {
 	
 	glUseProgram(shaderId);
 	glUniform1i(glGetUniformLocation(shaderId, "startChar"), fontData[font].startChar);
@@ -123,11 +125,16 @@ void BitmapFont::render_dynamic(std::string &font, float xPos, float yPos, std::
 	glUniform1i(glGetUniformLocation(shaderId, "vAlign"), vAlignMap[v_align]);
 	glUniform1i(glGetUniformLocation(shaderId, "fontHeight"), (GLint)fontData[font].fontHeight);
 	glUniform1i(glGetUniformLocation(shaderId, "shadow"), 0);
+	wstring_convert<codecvt_utf8_utf16<wchar_t>> converter;
+	wstring wtext = converter.from_bytes(text);
 
 	if (h_align != "left"){
 		total_width = 0;
-		for (int i = 0; i < text.size(); i++) {
-			total_width += fontData[font].charWidth[text.c_str()[i]];
+		for (int i = 0; i < wtext.size(); i++) {
+			GLint codepoint = GLint(wtext[i]);
+			if (codepoint > 0){
+				total_width += fontData[font].charWidth[codepoint];
+			}
 		}
 		glUniform1i(glGetUniformLocation(shaderId, "totalWidth"), total_width);
 	}
@@ -138,9 +145,9 @@ void BitmapFont::render_dynamic(std::string &font, float xPos, float yPos, std::
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, IBO);
 
 	offset_x = 0;
-	for (int i = 0; i < text.size(); i++) {
+	for (int i = 0; i < wtext.size(); i++) {
 		glUniform1f(glGetUniformLocation(shaderId, "x"), xPos + offset_x);
-		glUniform1i(glGetUniformLocation(shaderId, "currentChar"), text.c_str()[i]);
+		glUniform1i(glGetUniformLocation(shaderId, "currentChar"), wtext[i]);
 		if (shadow) {
 			glUniform1i(glGetUniformLocation(shaderId, "shadow"), 1);
 			glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
@@ -148,7 +155,7 @@ void BitmapFont::render_dynamic(std::string &font, float xPos, float yPos, std::
 		}
 		glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
 
-		offset_x += fontData[font].charWidth[text.c_str()[i]];
+		offset_x += fontData[font].charWidth[wtext[i]];
 	}
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
 	glBindVertexArray(0);
@@ -156,29 +163,29 @@ void BitmapFont::render_dynamic(std::string &font, float xPos, float yPos, std::
 
 /* Static text */
 
-txt::StaticData BitmapFont::create_static(std::string &font, std::string &text, float x) {
+txt::StaticData BitmapFont::create_static(string &font, string &text, float x) {
 	txt::StaticData static_data = txt::StaticData();
+	wstring_convert<codecvt_utf8_utf16<wchar_t>> converter;
+	wstring wtext = converter.from_bytes(text);
 
 	// x positions, chars and total width
 	int totw = 0;
-	for (int i = 0; i < text.size(); i++) {
+
+	for (int i = 0; i < wtext.size(); i++) {
 		static_data.X.push_back(x + totw);
-		/*const int wideLength = sizeof(text.c_str()[i]);
-		WCHAR wstr[wideLength];
-		MultiByteToWideChar(CP_UTF8, 0, (LPCCH)text.c_str()[i], wideLength, wstr, wideLength);*/
-		//char c = text.c_str()[i];
-		//wchar_t tc = (wchar_t)c;
-		static_data.charList.push_back((GLint)text.c_str()[i]);
-		totw += fontData[font].charWidth[text.c_str()[i]];
+		GLint codepoint = GLint(wtext[i]);
+		if (codepoint > 0){
+			static_data.charList.push_back(codepoint);
+			totw += fontData[font].charWidth[codepoint];
+		}
 	}	
 	static_data.totalWidth = totw;
 
 	// other information
 	static_data.textureID = textureIdMap[font];
 	static_data.startChar = fontData[font].startChar;
-	static_data.textSize = (int)text.size();
+	static_data.textSize = (int)wtext.size();
 	static_data.fontHeight = (int)fontData[font].fontHeight;
-
 	return static_data;
 }
 
