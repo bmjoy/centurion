@@ -70,9 +70,13 @@ namespace txt {
 		int startChar;
 	};
 
+	struct Character {
+		int x, y, width, height, xoffset, yoffset, xadvance, line_height, base_width;
+	};
+
 	struct StaticData {
 		vector<float> X;
-		vector<GLint> charList;
+		vector<Character> charList;
 		vec4 color;
 		float y;
 		int textSize;
@@ -98,7 +102,8 @@ public:
 	~BitmapFont();
 
 private:
-	map<string, txt::CharData> fontData;
+	map<int, txt::Character> fontData[10];
+	map<string, int> fontIdMap;
 	string h_align, v_align, path;
 	int total_width;
 	int offset_x;
