@@ -52,7 +52,7 @@ namespace game {
 		//Close the game if it wasn't able to find or process settlements.json file
 		ifstream path("assets/data/settlements.json");
 		if (!path.good()) {
-			forceGameClosure("NOT_FOUND", "errorSettlements");
+			forceGameClosure("NOT_FOUND", "ERROR_settlements");
 		}
 		settl_data = json::parse(path);
 

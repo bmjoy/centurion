@@ -36,6 +36,7 @@ namespace glb {
 	bool getBoolean(string param);
 	void setErrors(map<string, string> errorsMap);
 	void setTranslations(map<string, string> translationsMap);
+	void replaceTranslation(string code, string value);
 	string getErrorCode(string error);
 	string getTranslation(string code);
 	void initParams();

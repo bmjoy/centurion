@@ -29,6 +29,7 @@ namespace glb {
 	void setBoolean(string param, bool value) { booleans[param] = value; }
 	bool getBoolean(string param) { return booleans[param]; }
 	void setTranslations(map<string, string> translationsMap) { translations = translationsMap; }
+	void replaceTranslation(string code, string value) { translations[code] = value; }
 	string getTranslation(string code) { return translations[code]; }
 
 	void initParams() {
@@ -48,11 +49,12 @@ namespace glb {
 
 		ifstream settings_path("settings.json");
 		if (!settings_path.good()) {
-			forceGameClosure("NOT_FOUND" , "errorSettings");
+			forceGameClosure("NOT_FOUND" , "ERROR_settings");
 		}
 		json settings = json::parse(settings_path);
 
 		language = settings["language"].get<string>();
+		cout << "DEBUG: Current language: " << language << "\n";
 		translateTexts();
 		setBoolean("debug", (bool)settings["debug"].get<int>());
 		setParam("window-width", (float)settings["window_width"]);
@@ -86,12 +88,13 @@ namespace glb {
 		ifstream data_path("assets/data/data.json");
 		//Close the game if it wasn't able to find or process data.json file
 		if (!data_path.good()) {
-			forceGameClosure("NOT_FOUND" , "errorData");
+			forceGameClosure("NOT_FOUND" , "ERROR_data");
 		}
 		json data = json::parse(data_path);
 
 		for (int i = 0; i < data["races"].size(); i++) {
-			glb::races.push_back(data["races"][i]);
+			string race = data["races"][i].get<string>();
+			glb::races.push_back(getTranslation("RACE_" + race));
 		}
 
 		for (int i = 0; i < data["player_colors"].size(); i++) {
@@ -120,25 +123,26 @@ namespace glb {
 	}
 
 	void translateTexts() {
-		ifstream translationTable_path("assets/data/interface/texts/"+language+".json");
+		ifstream translationTable_path("assets/data/interface/texts/english.json");
 		if (translationTable_path.good()) {
 			json tJson = json::parse(translationTable_path);
 			map<string, string> translationsMap = tJson.get<map<string, string>>();
 			setTranslations(translationsMap);
 		}
 		else {
-			language = "english";
-			ifstream translationTable_path("assets/data/interface/texts/" + language + ".json");
-			if (translationTable_path.good()) {
-				json tJson = json::parse(translationTable_path);
-				map<string, string> translationsMap = tJson.get<map<string, string>>();
-				setTranslations(translationsMap);
-			}
-			else {
-				map<string, string> tempMap;
-				tempMap["noFile"] = "Unable to find or process ENGLISH language file.\n  Forced application shutdown has started.";
-				setTranslations(tempMap);
-				forceGameClosure("NOT_FOUND", "noFile");
+			map<string, string> tempMap;
+			tempMap["noFile"] = "Unable to find or process ENGLISH language file.\n  Forced application shutdown has started.";
+			setTranslations(tempMap);
+			forceGameClosure("NOT_FOUND", "noFile");
+		}
+		if (language != "english") {
+			ifstream localTranslations_path("assets/data/interface/texts/" + language + ".json");
+			if (localTranslations_path.good()) {
+				json tJson = json::parse(localTranslations_path);
+				map<string, string> localTranslationsMap = tJson.get<map<string, string>>();
+				for (map<string, string>::iterator i = localTranslationsMap.begin(); i != localTranslationsMap.end(); i++) {
+					replaceTranslation(i->first, i->second);
+				}
 			}
 		}
 	}
@@ -228,7 +232,8 @@ namespace glb {
 		return vec2(x, y);
 	}
 	void forceGameClosure(string errorCode, string errorText) {
-		string text = "  " + getTranslation("errorCode") + ": " + getErrorCode(errorCode) + "\n\n  " + getTranslation(errorText);
+		string eC = getTranslation("WORD_errorCode") == "" ? "Error code" : getTranslation("WORD_errorCode");
+		string text = "  " + eC + ": " + getErrorCode(errorCode) + "\n\n  " + getTranslation(errorText);
 		const int wideLength = sizeof(text.c_str())*128;
 		WCHAR wstr[wideLength];
 		MultiByteToWideChar(CP_UTF8, 0, text.c_str(), wideLength, wstr, wideLength);
@@ -236,7 +241,7 @@ namespace glb {
 		setBoolean("window-should-close", true);
 	}
 	void showGameWarning(string warningText) {
-		string text = "  " + warningText;
+		string text = "  " + getTranslation(warningText);
 		const int wideLength = sizeof(text.c_str()) * 128;
 		WCHAR wstr[wideLength];
 		MultiByteToWideChar(CP_UTF8, 0, text.c_str(), wideLength, wstr, wideLength);

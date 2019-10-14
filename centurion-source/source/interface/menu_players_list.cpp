@@ -20,7 +20,7 @@ void PlayersList::create(int startX, int startY, std::vector<int> *players_color
 
 	number = gui::SimpleText("dynamic", true);
 	text = gui::SimpleText("static");
-	text.create_static("Number of players: ", "tahoma_8", (float)x, (float)y + 40.f, "left", "normal", glm::vec4(255.f));
+	text.create_static(getTranslation("WORD_playersNumber")+ ":  ", "tahoma_8", (float)x, (float)y + 40.f, "left", "normal", glm::vec4(255.f));
 	textWidth = text.get_width();
 
 	arrowDown = gui::Image("arrowDown");
@@ -51,7 +51,7 @@ void PlayersList::create(int startX, int startY, std::vector<int> *players_color
 
 		//Player name
 		gui::FormInput p_fi = gui::FormInput(false);
-		p_fi.create((float)x + 50.0f, (float)y - deltaY * j, 200.f, 20.f, { "Player " + std::to_string(j + 1) }, 0);
+		p_fi.create((float)x + 50.0f, (float)y - deltaY * j, 200.f, 20.f, { getTranslation("WORD_player") + " " + std::to_string(j + 1) }, 0);
 		players_Form.push_back(p_fi);
 
 		//Player civilization

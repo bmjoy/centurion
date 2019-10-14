@@ -68,14 +68,14 @@ namespace menu {
 
 				/* read data from json */
 				string imageName = data[s][i]["image_name"].get<string>();
-				string jsonText = data[s][i]["text"].get<string>();
 				string name = data[s][i]["name"].get<string>();
+				string buttonText = getTranslation(name);
 				int x = data[s][i]["x"].get<int>();
 				int y = data[s][i]["y"].get<int>();
 
 				/* use data */
 				btn = gui::Button();
-				btn.create(imageName, jsonText, x, y, getPickingID(), glm::vec4(0.f, 0.f, 0.f, 255.f));
+				btn.create(imageName, buttonText, x, y, getPickingID(), glm::vec4(0.f, 0.f, 0.f, 255.f));
 				buttons[menus[a]].push_back(btn);
 
 				// update picking 
@@ -140,7 +140,7 @@ namespace menu {
 			list->picking(&num_players, &players_color, clickId);
 		}
 		/*------------------------------------------------------------------------------*/
-		if (clickName == "buttonStart") {
+		if (clickName == "SINGLEPLAYER_buttonStart") {
 			
 			setBoolean("mouse-left", false);
 			ENGINE()->setEnvironment("game");
@@ -153,20 +153,20 @@ namespace menu {
 			}		
 		}
 		/*------------------------------------------------------------------------------*/
-		if (clickName == "buttonEditor") {
+		if (clickName == "MAINMENU_buttonEditor") {
 			ENGINE()->setEnvironment("editor");
 		}
 		/*------------------------------------------------------------------------------*/
-		if (clickName == "buttonQuit") {
+		if (clickName == "MAINMENU_buttonQuit") {
 			saveLog();
 			setBoolean("window-should-close", true);
 		}
 		/*------------------------------------------------------------------------------*/
-		if (clickName == "buttonExit") {
+		if (clickName == "SINGLEPLAYER_buttonExit") {
 			currentMenu = "mainmenu";
 		}
 		/*------------------------------------------------------------------------------*/
-		if (clickName == "buttonSinglePlayer") {
+		if (clickName == "MAINMENU_buttonSinglePlayer") {
 			currentMenu = "singleplayer";
 		}
 	}

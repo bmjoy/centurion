@@ -70,10 +70,10 @@ void UIGame::render() {
 void UIGame::picking() {
 	int clickId = get_id();
 	string clickName = getPickedObjectName(clickId);
-	if (clickName == "menuButtonClose") {
+	if (clickName == "GAME_pauseMenuButtonClose") {
 		gameMenuStatus = false;
 	}
-	if (clickName == "menuButtonQuit") {
+	if (clickName == "GAME_pauseMenuButtonQuit") {
 		gameMenuStatus = false;
 		ENGINE()->Reset();
 	}

@@ -1,17 +1,28 @@
 ﻿{
-  "buttonSinglePlayer": "Giocatore singolo",
-  "buttonQuit": "Esci dal gioco",
-  "buttonStart": "Avvia",
-  "buttonExit": "Indietro",
-  "menuButtonQuit": "Esci dalla partita",
-  "menuButtonClose": "Chiudi il menù",
-  "gameCreated": "Avvio della partita in corso...",
-  "errorCode": "Codice errore",
-  "errorSettings": "Impossibile trovare o leggere il file SETTINGS.\n  Arresto forzato dell'applicazione in corso...",
-  "errorData": "Impossibile trovare o leggere il file DATA.\n  Arresto forzato dell'applicazione in corso...",
-  "errorImagesData": "Impossibile trovare o leggere il file IMAGES DATA.\n  Arresto forzato dell'applicazione in corso...",
-  "errorSettlements": "Impossibile trovare o leggere il file SETTLEMENTS.\n  Arresto forzato dell'applicazione in corso...",
-  "errorMenuData": "Impossibile trovare o leggere il file MENU DATA.\n  Arresto forzato dell'applicazione in corso...",
-  "errorFonts": "Impossibile trovare o leggere il file FONTS.\n  Arresto forzato dell'applicazione in corso...",
-  "warningAudioDevice": "Impossibile trovare (o comunicare con) il dispositivo audio.\n  Nessun sarà riprodotto alcun suono finché l'errore persiste."
+  "MAINMENU_buttonSinglePlayer": "Giocatore singolo",
+  "MAINMENU_buttonEditor": "Editor",
+  "MAINMENU_buttonQuit": "Esci dal gioco",
+
+  "SINGLEPLAYER_buttonStart": "Avvia la partita",
+  "SINGLEPLAYER_buttonExit": "Menù principale",
+
+  "GAME_pauseMenuButtonQuit": "Esci dalla partita",
+  "GAME_pauseMenuButtonClose": "Chiudi il menù",
+
+  "WORD_gameStarted": "Avvio della partita in corso...",
+  "WORD_player": "Giocatore",
+  "WORD_playersNumber": "Numero di giocatori",
+  "WORD_errorCode": "Codice errore",
+
+  "RACE_Rome": "Roma",
+  "RACE_Egypt": "Egitto",
+
+  "ERROR_settings": "Impossibile trovare o leggere il file SETTINGS.\n  Arresto forzato dell'applicazione in corso...",
+  "ERROR_data": "Impossibile trovare o leggere il file DATA.\n  Arresto forzato dell'applicazione in corso...",
+  "ERROR_imagesData": "Impossibile trovare o leggere il file IMAGES DATA.\n  Arresto forzato dell'applicazione in corso...",
+  "ERROR_settlements": "Impossibile trovare o leggere il file SETTLEMENTS.\n  Arresto forzato dell'applicazione in corso...",
+  "ERROR_menuData": "Impossibile trovare o leggere il file MENU DATA.\n  Arresto forzato dell'applicazione in corso...",
+  "ERROR_fonts": "Impossibile trovare o leggere il file FONTS.\n  Arresto forzato dell'applicazione in corso...",
+
+  "WARNING_audioDevice": "Impossibile trovare (o comunicare con) il dispositivo audio.\n  Nessun sarà riprodotto alcun suono finché l'errore persiste."
 }

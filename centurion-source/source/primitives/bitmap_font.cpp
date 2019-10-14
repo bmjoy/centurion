@@ -66,7 +66,7 @@ void BitmapFont::create() {
 	//Close the game if it wasn't able to find or process fonts.json file
 	ifstream path_fonts("assets/data/fonts.json");
 	if (!path_fonts) {
-		forceGameClosure("NOT_FOUND" , "errorFonts");
+		forceGameClosure("NOT_FOUND" , "ERROR_fonts");
 	}
 	json d = json::parse(path_fonts);
 

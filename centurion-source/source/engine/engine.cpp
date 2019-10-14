@@ -70,7 +70,7 @@ namespace engine {
 					clearAndSwapBuffers(MainWindow);
 					{
 						text = gui::SimpleText("dynamic");
-						text.render_dynamic("Game is being started...", "tahoma_8", getParam("window-width") / 2.f, getParam("window-height") / 2.f, vec4(255.f), "center", "middle");
+						text.render_dynamic(getTranslation("WORD_gameStarted"), "tahoma_8", getParam("window-width") / 2.f, getParam("window-height") / 2.f, vec4(255.f), "center", "middle");
 					}
 					glfwSwapBuffers(MainWindow);
 
@@ -139,7 +139,7 @@ namespace engine {
 
 		ifstream path2("assets/data/images_data.json");
 		if (!path2.good()) {
-			forceGameClosure("NOT_FOUND", "errorImagesData");
+			forceGameClosure("NOT_FOUND", "ERROR_imagesData");
 		}
 		dataClass = json::parse(path2);
 

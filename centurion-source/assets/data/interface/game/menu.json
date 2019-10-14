@@ -1,13 +1,13 @@
 {
 	"buttons": [{
-			"name": "menuButtonQuit",
+			"name": "GAME_pauseMenuButtonQuit",
 			"image_name": "button_1",
 			"x": 0,
 			"y": 0,
 			"text": "Quit"
 		},
         {
-			"name": "menuButtonClose",
+			"name": "GAME_pauseMenuButtonClose",
 			"image_name": "button_1",
 			"x": 0,
 			"y": -50,

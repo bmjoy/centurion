@@ -18,7 +18,7 @@ void AudioManager::MusicPlay(std::string name, bool looping) {
 		}
 	}
 	else {
-		showGameWarning("Error code 0x00000002\n\n  Unable to find (or communicate with) the audio device.\n  No sound will be played as long as the error persists.");
+		showGameWarning("WARNING_audioDevice");
 	}
 }
 

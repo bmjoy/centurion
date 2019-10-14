@@ -15,7 +15,7 @@ void GameMenu::create() {
 	//Close the game if it wasn't able to find or process menu.json file
 	std::ifstream path("assets/data/interface/game/menu.json");
 	if (!path.good()) {
-		forceGameClosure("NOT_FOUND" , "errorMenuData");
+		forceGameClosure("NOT_FOUND" , "ERROR_menuData");
 	}
 	data = json::parse(path);
 
@@ -27,7 +27,7 @@ void GameMenu::create() {
 		btn = gui::Button();
 		btn.create(
 			data[s][i]["image_name"].get<std::string>(), 
-			data[s][i]["text"].get<std::string>(), 
+			getTranslation(data[s][i]["name"].get<std::string>()), 
 			(int)x + data[s][i]["x"].get<int>(),
 			(int)y + data[s][i]["y"].get<int>(),
 			getPickingID(), 
