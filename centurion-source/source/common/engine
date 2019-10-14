@@ -5,7 +5,6 @@
 using namespace std;
 using namespace glm;
 
-class DebugUI;
 class Player;
 
 //
@@ -103,7 +102,6 @@ namespace engine {
 		// objects 
 		myWindow window;
 		Mouse *mouse;
-		DebugUI *debugUI;
 		gui::SimpleText text;
 		string environment;
 

@@ -4,7 +4,7 @@
 #include <game>
 #include <global>
 #include <player>
-#include "../interface/menu_players_list.h"
+#include <interface>
 
 using namespace glb;
 using namespace engine;
@@ -54,4 +54,4 @@ namespace menu {
 			currentMenu = "singleplayer";
 		}
 	}
-}
+};

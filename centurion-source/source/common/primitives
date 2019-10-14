@@ -63,6 +63,9 @@ private:
 */
 
 namespace txt {
+
+	bool isArabic(int codepoint);
+
 	struct CharData {
 		int charWidth[256];
 		float fontHeight;
@@ -77,13 +80,13 @@ namespace txt {
 	struct StaticData {
 		vector<float> X;
 		vector<Character> charList;
+		vector<GLint> textureIDs;
 		vec4 color;
 		float y;
 		int textSize;
 		int totalWidth;
 		int startChar;
 		int fontHeight;
-		GLuint textureID;
 		bool shadow;
 	};
 };

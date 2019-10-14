@@ -3,7 +3,7 @@
 #include <player>
 #include <surface>
 #include <picking>
-#include "../interface/game_ui.h"
+#include <interface>
 
 using namespace glb;
 using namespace std;
@@ -15,7 +15,6 @@ using namespace building;
 namespace game {
 
 	Game *GAME() { return &mygame; }
-	void init() { *GAME() = Game(); }
 
 	bool gameMenuStatus = false;
 	bool gameMinimapStatus = false;

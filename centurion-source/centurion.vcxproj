@@ -298,6 +298,7 @@
     <None Include="source\common\engine" />
     <None Include="source\common\game" />
     <None Include="source\common\gui" />
+    <None Include="source\common\interface" />
     <None Include="source\common\menu" />
     <None Include="source\common\object" />
     <None Include="source\common\pathfinding" />
@@ -329,11 +330,6 @@
     <ClInclude Include="source\common\primitives" />
     <ClInclude Include="source\extern\includes\json.hpp" />
     <ClInclude Include="source\extern\includes\stb_image.h" />
-    <ClInclude Include="source\interface\debug_ui.h" />
-    <ClInclude Include="source\interface\editor_menu.h" />
-    <ClInclude Include="source\interface\game_ui_menu.h" />
-    <ClInclude Include="source\interface\game_ui.h" />
-    <ClInclude Include="source\interface\menu_players_list.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

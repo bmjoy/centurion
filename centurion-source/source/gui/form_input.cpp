@@ -18,7 +18,7 @@ namespace gui {
 		isOpened = false;
 		selectedText = options[0];
 		hasText = selectedText.size() > 0;
-		mainTextPos = vec2(x + 3.f, (y - 1.f) - height / 1.5f - 6.f);
+		mainTextPos = vec2(x + 2.f, (y - 1.f) - height / 1.5f - 5.f);
 		nOptions = (int)options.size();
 
 		back = gui::Rectangle();
@@ -41,14 +41,14 @@ namespace gui {
 
 				/* options text saved in memory */
 				gui::SimpleText tempText = gui::SimpleText("static");
-				tempText.create_static(getTranslation(options[j]), "tahoma_8", x + 3.f, y1 - height / 1.5f - 6.f, "left", "normal", vec4(255.f));
+				tempText.create_static(getTranslation(options[j]), "tahoma_15px", x + 2.f, y1 - height / 1.5f - 5.f, "left", "normal", vec4(255.f));
 				optionsText.push_back(tempText);
 			}
 		}
 		else { // in this case the forminput cannot be opened
 			if (hasText) {
 				text = gui::SimpleText("static");
-				text.create_static(getTranslation(options[0]), "tahoma_8", mainTextPos.x, mainTextPos.y, "left", "normal", vec4(255.f));
+				text.create_static(getTranslation(options[0]), "tahoma_15px", mainTextPos.x, mainTextPos.y, "left", "normal", vec4(255.f));
 			}
 		}
 	}
@@ -68,7 +68,7 @@ namespace gui {
 
 			if (boolOptions) {
 				// selected text
-				text.render_dynamic(getTranslation(selectedText), "tahoma_8", mainTextPos.x, mainTextPos.y, vec4(255.f), "left", "normal");
+				text.render_dynamic(getTranslation(selectedText), "tahoma_15px", mainTextPos.x, mainTextPos.y, vec4(255.f), "left", "normal");
 				if (isOpened) {
 
 					// background and border

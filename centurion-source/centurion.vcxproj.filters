@@ -70,9 +70,6 @@
     <Filter Include="Source Files\player">
       <UniqueIdentifier>{a737048d-13d1-4aee-90c9-a4aa6508f4a5}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Header Files\interface">
-      <UniqueIdentifier>{e3865fae-66a6-4666-82bd-ed0c12baafd9}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Source Files\interface">
       <UniqueIdentifier>{f775fef9-e31d-462f-88bc-301349d95e3d}</UniqueIdentifier>
     </Filter>
@@ -281,21 +278,6 @@
     <ClInclude Include="source\extern\includes\stb_image.h">
       <Filter>Header Files\extern</Filter>
     </ClInclude>
-    <ClInclude Include="source\interface\game_ui.h">
-      <Filter>Header Files\interface</Filter>
-    </ClInclude>
-    <ClInclude Include="source\interface\menu_players_list.h">
-      <Filter>Header Files\interface</Filter>
-    </ClInclude>
-    <ClInclude Include="source\interface\game_ui_menu.h">
-      <Filter>Header Files\interface</Filter>
-    </ClInclude>
-    <ClInclude Include="source\interface\debug_ui.h">
-      <Filter>Header Files\interface</Filter>
-    </ClInclude>
-    <ClInclude Include="source\interface\editor_menu.h">
-      <Filter>Header Files\interface</Filter>
-    </ClInclude>
     <ClInclude Include="source\audio\sndfile.hh">
       <Filter>Header Files\audio</Filter>
     </ClInclude>
@@ -446,6 +428,9 @@
       <Filter>Header Files\common</Filter>
     </None>
     <None Include="source\common\menu">
+      <Filter>Header Files\common</Filter>
+    </None>
+    <None Include="source\common\interface">
       <Filter>Header Files\common</Filter>
     </None>
   </ItemGroup>

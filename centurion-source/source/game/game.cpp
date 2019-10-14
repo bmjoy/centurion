@@ -1,9 +1,9 @@
 #include <game>
+#include <interface>
 #include <engine>
 #include <surface>
 #include <player>
 #include <picking>
-#include "../interface/game_ui.h"
 
 using namespace glb;
 using namespace std;
@@ -18,7 +18,6 @@ namespace game {
 		cameraLastX = 0.0; cameraLastY = 0.0;
 		threshold = 20.0f;   // Camera Movement Threshold	
 		blockMinimap = false;
-		lastTime = glfwGetTime();
 		gameIsCreated = false;
 		click_id = 0;
 	}
@@ -34,7 +33,7 @@ namespace game {
 		clear();
 	}
 	void Game::create() {
-
+		
 		resetPicking();
 		units = { };
 		buildings = { };	
@@ -59,7 +58,6 @@ namespace game {
 
 		for (int i = 0; i < playersList.size(); i++) {
 			r = playersList[i].getPlayerRace();
-			cout << r << endl;
 			origin = playersList[i].getStartPoint();
 			for (int j = 0; j < settl_data[r].size(); j++) {
 				Building b = Building();
@@ -105,6 +103,7 @@ namespace game {
 
 		//---------------------------------------
 		gameIsCreated = true;
+		lastTime = glfwGetTime();
 	}
 
 	void Game::run() {

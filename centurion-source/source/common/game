@@ -8,10 +8,11 @@ using namespace std;
 using namespace glm;
 
 class Surface;
-class UIGame;
 class Player;
 
 namespace game {
+	
+	class UIGame;
 
 	using namespace unit;
 	using namespace building;
@@ -67,7 +68,6 @@ namespace game {
 	
 	static Game mygame;
 	Game *GAME(); // --> definition in game_functions.cpp
-	void init();
 
 	//
 	// GAME FUNCTIONS --> source/game/game_functions.cpp

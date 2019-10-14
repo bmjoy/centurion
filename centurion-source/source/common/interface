@@ -1,0 +1,198 @@
+#include <headers>
+#include <gui>
+
+using namespace std;
+using namespace glm;
+
+//----------------------------------------------------------------------------------
+//----------------------------------------------------------------------------------
+//----------------------------------------------------------------------------------
+
+/*
+	---- DEBUG UI ----
+	It shows some useful informations about the engine
+	For example FPS, selected units, mouse position, etc.
+*/
+
+namespace debug {
+
+	class DebugUI {
+	public:
+		DebugUI();
+		void create();
+		void render(int fps, int mpfs, int selUnits);
+		~DebugUI();
+	private:
+		// text
+		array<string, 10> staticTextList;
+		array<string, 10> dynamicTextList;
+		vector<gui::SimpleText> staticText;
+		gui::SimpleText dynamicText;
+		gui::SimpleText debugText[2];
+		float startX, startY, deltaY;
+		int n;
+		// background
+		gui::Rectangle back;
+	};
+
+	static DebugUI mydebugui;
+	DebugUI *DEBUG_UI();
+
+};
+
+//----------------------------------------------------------------------------------
+//----------------------------------------------------------------------------------
+//----------------------------------------------------------------------------------
+
+/*
+	---- MENU UI  ----
+	Most of the menu UI comes from the JSON files contained in assets/data/interface/
+	But some parts are implemented here, e.g. the player list
+*/
+
+namespace menu {
+
+	//
+	//	PLAYERS LIST
+	//
+
+	class PlayersList {
+	public:
+		PlayersList();
+		void create(int startX, int startY, vector<int> *players_color);
+		void close();
+		void picking(int *numPlayers, vector<int> *players_color, int clickId);
+		void render(int numPlayers, vector<int> players_color, bool picking);
+		string get_race(int i);
+		~PlayersList();
+	private:
+		vector<gui::FormInput> colors_Form;
+		vector<gui::FormInput> players_Form;
+		vector<gui::FormInput> civiliz_Form;
+		gui::SimpleText text;
+		gui::SimpleText number;
+		gui::Image arrowDown, arrowUp;
+		gui::Rectangle background;
+		float textWidth;
+		int x, y, deltaY, w, h;
+	};
+};
+
+//----------------------------------------------------------------------------------
+//----------------------------------------------------------------------------------
+//----------------------------------------------------------------------------------
+
+/*
+	---- GAME UI ----
+*/
+
+namespace game {
+
+	//
+	//	GAME MENU
+	//
+
+	class GameMenu {
+	public:
+		GameMenu();
+		void create();
+		void render(bool picking);
+		~GameMenu();
+	private:
+		gui::Button btn;
+		gui::Rectangle background;
+		vector<gui::Button> buttons;
+		string s;
+		float w, h, x, y;
+		bool gameMenuActive;
+	};
+
+	//
+	//	GAME UI (Container class)
+	//
+
+	class UIGame {
+	public:
+		UIGame();
+		void create();
+		void render();
+		~UIGame();
+	private:
+		struct Time {
+			double lastTime;
+			string seconds_str, minutes_str, hours_str;
+			int seconds, minutes, hours;
+			gui::SimpleText text;
+			float x;
+			float y;
+		} time;
+
+		gui::Rectangle top_bar;
+		gui::Rectangle bottom_bar;
+		gui::Rectangle minimapRectangle;
+		GameMenu gameMenu;
+
+		void picking(); // this function is here: source/picking/gameui_picking.cpp
+		void calculateTime();
+	};
+};
+
+
+//----------------------------------------------------------------------------------
+//----------------------------------------------------------------------------------
+//----------------------------------------------------------------------------------
+
+/*
+	---- EDITOR UI ----
+	It consists of:
+	1) Editor menu (on the top bar);
+	2) Editor tools 
+*/
+
+
+namespace editor {
+
+	//
+	//	EDITOR MENU
+	//
+
+	struct menuData {
+		vector<string> options;
+		vector<gui::Rectangle> optionsBack;
+		vector<gui::SimpleText> optionsText;
+		vector<ivec2> optionsPosition;
+		gui::Rectangle titleBack;
+		gui::SimpleText titleText;
+		vec4 color;
+		vec4 hoverColor;
+		vec4 pickingColor;
+		ivec2 titlePosition;
+		string title;
+		int titleWidth, titleHeight;
+		int optionsWidth, optionsHeight;
+		int optionsOffsetX;	
+		int pickingID;
+		bool isOpened;
+	};
+
+	class EditorMenu {
+	public:
+		EditorMenu();
+		void create();
+		void render(bool pick);
+		~EditorMenu();
+	private:
+		gui::Rectangle topBar;
+		vec4 barColor;
+		map<string, menuData> titles;
+		array<string, 3> titlesList;
+		map<string, int>pickingList;
+		int barHeight;
+		int minPickingID, maxPickingID;
+		bool menuIsOpened;		
+
+		void picking(); // this function is here: source/picking/editormenu_picking.cpp
+		bool isHover(vec2 pos, int w, int h); // idem
+	};
+};
+

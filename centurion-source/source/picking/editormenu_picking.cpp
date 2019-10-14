@@ -1,5 +1,4 @@
-#include "../interface/editor_menu.h"
-
+#include <interface>
 #include <picking>
 #include <engine>
 
@@ -99,4 +98,4 @@ namespace editor {
             return false;
         }
     }
-}
+};

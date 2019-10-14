@@ -4,8 +4,7 @@
 #include <picking>
 #include <engine>
 #include <game>
-
-#include "../interface/menu_players_list.h"
+#include <interface>
 
 using namespace glb;
 using namespace std;

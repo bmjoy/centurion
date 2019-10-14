@@ -3,7 +3,7 @@
 #include <engine>
 #include <game>
 #include <picking>
-#include "../interface/editor_menu.h"
+#include <interface>
 
 using namespace glb;
 using namespace engine;

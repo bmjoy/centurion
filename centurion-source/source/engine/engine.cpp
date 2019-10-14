@@ -3,7 +3,7 @@
 #include <game>
 #include <player>
 #include <menu>
-#include "../interface/debug_ui.h"
+#include <interface>
 
 using namespace std;
 using namespace glm;
@@ -11,6 +11,7 @@ using namespace glb;
 using namespace menu;
 using namespace game;
 using namespace editor;
+using namespace debug;
 
 namespace engine {
 	Engine *ENGINE() { return &myengine; }
@@ -38,10 +39,9 @@ namespace engine {
 
 		*CAMERA() = Camera(vec3(0.0f, 0.0f, 0.0f), vec3(0.0f, 1.0f, 0.0f), -90.0f, 0.0f);
 		mouse = new Mouse();
-		init();
-	
-		debugUI = new DebugUI();
-		debugUI->create();
+		
+		//game::init();
+		DEBUG_UI()->create();
 
 		while (!getBoolean("window-should-close")) {
 
@@ -70,7 +70,7 @@ namespace engine {
 					clearAndSwapBuffers(MainWindow);
 					{
 						text = gui::SimpleText("dynamic");
-						text.render_dynamic(getTranslation("WORD_gameStarted"), "tahoma_8", getParam("window-width") / 2.f, getParam("window-height") / 2.f, vec4(255.f), "center", "middle");
+						text.render_dynamic(getTranslation("WORD_gameStarted"), "tahoma_15px", getParam("window-width") / 2.f, getParam("window-height") / 2.f, vec4(255.f), "center", "middle");
 					}
 					glfwSwapBuffers(MainWindow);
 
@@ -100,7 +100,7 @@ namespace engine {
 			}
 
 			// debug ui
-			if (getBoolean("debug"))	debugUI->render(Fps, Mpfs, GAME()->getSelectedUnits());
+			if (getBoolean("debug"))	DEBUG_UI()->render(Fps, Mpfs, GAME()->getSelectedUnits());
 
 			// mouse
 			mouse->render();
@@ -172,6 +172,5 @@ namespace engine {
 
 	Engine::~Engine(){		
 		delete mouse;
-		delete debugUI;
 	}
 }
