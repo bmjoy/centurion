@@ -28,10 +28,10 @@ namespace game {
 	float zoomCameraFactor = 100.f;
 	float townhallRadius = 1875.f;
 	bool selRectangleIsActive = false;
+	int selectedUnits = 0;
 
 	map<int, Building> buildings = { };
 	map<int, Unit> units = { };
-	vector<Unit> selectedUnits = { };
 
 	vector<Player> playersList;
 
@@ -119,7 +119,7 @@ namespace game {
 		if (!gameMinimapStatus) {
 			for (map<int, Unit>::iterator u = units.begin(); u != units.end(); u++) {
 				u->second.render(false, clickId);
-				//if (u->second.isSelected())	  selectedUnits.push_back(u->second);
+				if (u->second.isSelected())	  selectedUnits++;
 			}
 		}
 		renderSelRectangle();

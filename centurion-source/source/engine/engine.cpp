@@ -39,8 +39,7 @@ namespace engine {
 
 		*CAMERA() = Camera(vec3(0.0f, 0.0f, 0.0f), vec3(0.0f, 1.0f, 0.0f), -90.0f, 0.0f);
 		mouse = new Mouse();
-		
-		//game::init();
+
 		DEBUG_UI()->create();
 
 		while (!getBoolean("window-should-close")) {
@@ -79,7 +78,7 @@ namespace engine {
 				GAME()->run();
 			}
 
-			// -------------- //
+			// ---- EDITOR ---- //
 
 			if (environment == "editor") {
 				if (!EDITOR()->editor_is_created()) {
@@ -100,7 +99,7 @@ namespace engine {
 			}
 
 			// debug ui
-			if (getBoolean("debug"))	DEBUG_UI()->render(Fps, Mpfs, GAME()->getSelectedUnits());
+			if (getBoolean("debug"))	DEBUG_UI()->render(Fps, Mpfs, selectedUnits);
 
 			// mouse
 			mouse->render();

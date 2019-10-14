@@ -67,7 +67,7 @@ namespace debug {
 
 		for (int i = 0; i < n; i++) {
 			staticText[i].render_static();
-			dynamicText.render_dynamic(dynamicTextList[i], "couriernew_15px", startX + 135.f, startY + deltaY * i, vec4(255.f), "left", "normal");
+			dynamicText.render_dynamic(dynamicTextList[i], "couriernew_15px", startX + 150.f, startY + deltaY * i, vec4(255.f), "left", "normal");
 		}
 	}
 

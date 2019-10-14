@@ -107,7 +107,7 @@ namespace game {
 	}
 
 	void Game::run() {
-		selectedUnits = { };
+		selectedUnits = 0;
 		CAMERA()->keyboardControl();
 
 		/* If minimap is NOT active */
