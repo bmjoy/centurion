@@ -15,15 +15,13 @@
 			"name": "SINGLEPLAYER_buttonStart",
 			"image_name": "button_1",
 			"x": -150,
-			"y": 125,
-			"text": "Start"
+			"y": 125
 		},
 		{
 			"name": "SINGLEPLAYER_buttonExit",
 			"image_name": "button_1",
 			"x": -150,
-			"y": 75,
-			"text": "Back"
+			"y": 75
 		}
 	],
     
