@@ -107,6 +107,7 @@ namespace game {
 					CAMERA()->go_to_pos(cameraToX, cameraToY);
 					gameMinimapStatus = false;
 					setBoolean("mouse-left", false);
+					setBoolean("mouse-left-pressed", false);
 				}
 			}
 		}

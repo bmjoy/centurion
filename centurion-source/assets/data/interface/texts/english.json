@@ -10,7 +10,14 @@
   "GAME_pauseMenuButtonClose": "Close",
 
   "WORD_gameStarted": "Game is being started...",
-  "WORD_player": "Player",
+  "WORD_player_1": "Player 1",
+  "WORD_player_2": "Player 2",
+  "WORD_player_3": "Player 3",
+  "WORD_player_4": "Player 4",
+  "WORD_player_5": "Player 5",
+  "WORD_player_6": "Player 6",
+  "WORD_player_7": "Player 7",
+  "WORD_player_8": "Player 8",
   "WORD_playersNumber": "Number of players",
   "WORD_errorCode": "Error code",
 

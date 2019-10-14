@@ -1,5 +1,5 @@
 {
-    "races": ["Rome", "Egypt"],
+    "races": ["RACE_Rome", "RACE_Egypt"],
     "player_colors": [
             {"r": 255, "g": 23, "b": 23},
             {"r": 255, "g": 255, "b": 0},

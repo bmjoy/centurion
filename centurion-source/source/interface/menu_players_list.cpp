@@ -51,7 +51,7 @@ void PlayersList::create(int startX, int startY, std::vector<int> *players_color
 
 		//Player name
 		gui::FormInput p_fi = gui::FormInput(false);
-		p_fi.create((float)x + 50.0f, (float)y - deltaY * j, 200.f, 20.f, { getTranslation("WORD_player") + " " + std::to_string(j + 1) }, 0);
+		p_fi.create((float)x + 50.0f, (float)y - deltaY * j, 200.f, 20.f, { "WORD_player_" + std::to_string(j + 1) }, 0);
 		players_Form.push_back(p_fi);
 
 		//Player civilization

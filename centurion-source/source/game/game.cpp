@@ -40,6 +40,7 @@ namespace game {
 		buildings = { };	
 		
 		setMinimapProjection();
+		setBoolean("mouse-left-pressed", false);
 
 		selRectangle = gui::Rectangle();
 		selRectangle.create("border", 0, 0, 0, 0, "top-left", 0);
@@ -58,6 +59,7 @@ namespace game {
 
 		for (int i = 0; i < playersList.size(); i++) {
 			r = playersList[i].getPlayerRace();
+			cout << r << endl;
 			origin = playersList[i].getStartPoint();
 			for (int j = 0; j < settl_data[r].size(); j++) {
 				Building b = Building();

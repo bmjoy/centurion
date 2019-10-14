@@ -147,7 +147,10 @@
     <ClCompile Include="source\math.cpp" />
     <ClCompile Include="source\menu\menu_functions.cpp" />
     <ClCompile Include="source\object.cpp" />
-    <ClCompile Include="source\picking.cpp" />
+    <ClCompile Include="source\picking\editormenu_picking.cpp" />
+    <ClCompile Include="source\picking\gameui_picking.cpp" />
+    <ClCompile Include="source\picking\mainmenu_picking.cpp" />
+    <ClCompile Include="source\picking\picking.cpp" />
     <ClCompile Include="source\primitives\audio_manager.cpp" />
     <ClCompile Include="source\primitives\bitmap_font.cpp" />
     <ClCompile Include="source\primitives\building_sprite.cpp" />

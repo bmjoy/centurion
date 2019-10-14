@@ -10,7 +10,14 @@
   "GAME_pauseMenuButtonClose": "Chiudi il menù",
 
   "WORD_gameStarted": "Avvio della partita in corso...",
-  "WORD_player": "Giocatore",
+  "WORD_player_1": "Giocatore 1",
+  "WORD_player_2": "Giocatore 2",
+  "WORD_player_3": "Giocatore 3",
+  "WORD_player_4": "Giocatore 4",
+  "WORD_player_5": "Giocatore 5",
+  "WORD_player_6": "Giocatore 6",
+  "WORD_player_7": "Giocatore 7",
+  "WORD_player_8": "Giocatore 8",
   "WORD_playersNumber": "Numero di giocatori",
   "WORD_errorCode": "Codice errore",
 

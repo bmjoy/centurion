@@ -93,8 +93,7 @@ namespace glb {
 		json data = json::parse(data_path);
 
 		for (int i = 0; i < data["races"].size(); i++) {
-			string race = data["races"][i].get<string>();
-			glb::races.push_back(getTranslation("RACE_" + race));
+			glb::races.push_back(data["races"][i].get<string>());
 		}
 
 		for (int i = 0; i < data["player_colors"].size(); i++) {

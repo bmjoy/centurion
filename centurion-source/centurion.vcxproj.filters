@@ -94,6 +94,9 @@
     <Filter Include="Source Files\primitives">
       <UniqueIdentifier>{7544753c-c7b5-4c53-b891-33f775a026b8}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\picking">
+      <UniqueIdentifier>{c285b1d1-3a64-4327-b215-8460e4967b7c}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -252,14 +255,23 @@
     <ClCompile Include="source\pathfinding\astar.cpp">
       <Filter>Source Files\pathfinding</Filter>
     </ClCompile>
-    <ClCompile Include="source\picking.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="source\editor\editor_functions.cpp">
       <Filter>Source Files\editor</Filter>
     </ClCompile>
     <ClCompile Include="source\menu\menu_functions.cpp">
       <Filter>Source Files\menu</Filter>
+    </ClCompile>
+    <ClCompile Include="source\picking\picking.cpp">
+      <Filter>Source Files\picking</Filter>
+    </ClCompile>
+    <ClCompile Include="source\picking\mainmenu_picking.cpp">
+      <Filter>Source Files\picking</Filter>
+    </ClCompile>
+    <ClCompile Include="source\picking\gameui_picking.cpp">
+      <Filter>Source Files\picking</Filter>
+    </ClCompile>
+    <ClCompile Include="source\picking\editormenu_picking.cpp">
+      <Filter>Source Files\picking</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

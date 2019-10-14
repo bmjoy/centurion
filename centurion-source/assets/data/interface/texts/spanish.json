@@ -1,0 +1,35 @@
+﻿{
+  "MAINMENU_buttonSinglePlayer": "Un jugador",
+  "MAINMENU_buttonEditor": "Editor",
+  "MAINMENU_buttonQuit": "Salir",
+
+  "SINGLEPLAYER_buttonStart": "Empezar",
+  "SINGLEPLAYER_buttonExit": "Menú principal",
+
+  "GAME_pauseMenuButtonQuit": "Salir",
+  "GAME_pauseMenuButtonClose": "Cerrar",
+
+  "WORD_gameStarted": "El juego se está iniciando ...",
+  "WORD_player_1": "Jugador 1",
+  "WORD_player_2": "Jugador 2",
+  "WORD_player_3": "Jugador 3",
+  "WORD_player_4": "Jugador 4",
+  "WORD_player_5": "Jugador 5",
+  "WORD_player_6": "Jugador 6",
+  "WORD_player_7": "Jugador 7",
+  "WORD_player_8": "Jugador 8",
+  "WORD_playersNumber": "Número de jugadores",
+  "WORD_errorCode": "Código de error",
+
+  "RACE_Rome": "Roma",
+  "RACE_Egypt": "Egipto",
+
+  "ERROR_settings": "No se puede encontrar o procesar el fichero SETTINGS.\n  La aplicación va a ser cerrada automáticamente.",
+  "ERROR_data": "No se puede encontrar o procesar el fichero DATA.\n  La aplicación va a ser cerrada automáticamente.",
+  "ERROR_imagesData": "No se puede encontrar o procesar el fichero IMAGES DATA.\n  La aplicación va a ser cerrada automáticamente.",
+  "ERROR_settlements": "No se puede encontrar o procesar el fichero SETTLEMENTS.\n  La aplicación va a ser cerrada automáticamente.",
+  "ERROR_menuData": "No se puede encontrar o procesar el fichero MENU DATA.\n  La aplicación va a ser cerrada automáticamente.",
+  "ERROR_fonts": "No se puede encontrar o procesar el fichero FONTS.\n  La aplicación va a ser cerrada automáticamente.",
+
+  "WARNING_audioDevice": "No se puede encontrar (o comunicar con) el dispositivo de audio.\n  No se reproducirá ningún sonido mientras persista el error."
+}

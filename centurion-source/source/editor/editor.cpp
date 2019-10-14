@@ -29,21 +29,22 @@ namespace editor {
 		CAMERA()->keyboardControl();
 		CAMERA()->mouseControl(2.0f);
 
+		// editor ui picking */
+		obj::applyMenuMatrices();
+		menu->render(true);
+
+		//-----------------------------
+		/* normal rendering */
 		proj = glb::cameraProjection;
 		view = CAMERA()->calculateViewMatrix();
-
 		obj::applyGameMatrices(&proj, &view);
 		surface->render(false);
 
-		//-----------------------------
-
+		// editor UI normal rendering
 		obj::applyMenuMatrices();
-
-		/* temporary : it will be in editor UI */
-		circle.render(glm::vec4(255.f), getParam("mouse-x-position"), getParam("mouse-y-position"));
-		menu->render(true);
+		circle.render(glm::vec4(255.f), getParam("mouse-x-position"), getParam("mouse-y-position")); /* temporary : it will be in editor UI */
 		menu->render(false);
-
+		
 		glb::cameraProjection = glm::ortho(0.0f, getParam("window-width-zoomed"), 0.0f, getParam("window-height-zoomed"), -(float)mapWidth, (float)mapWidth);
 
 		setBoolean("mouse-right", false);

@@ -1,0 +1,57 @@
+#include <menu>
+#include <picking>
+#include <engine>
+#include <game>
+#include <global>
+#include <player>
+#include "../interface/menu_players_list.h"
+
+using namespace glb;
+using namespace engine;
+using namespace game;
+
+namespace menu {
+	void Menu::picking() {
+		int clickId = get_id();
+		string clickName = getPickedObjectName(clickId);
+		cout << "DEBUG: Click id: " << clickId << " --> " + clickName + "\n";
+
+		/*------------------------------------------------------------------------------*/
+		if (currentMenu == "singleplayer") {
+			if (clickName.substr(0, 4) != "CivForm") {
+				list->close();
+			}
+			list->picking(&num_players, &players_color, clickId);
+		}
+		/*------------------------------------------------------------------------------*/
+		if (clickName == "SINGLEPLAYER_buttonStart") {
+
+			setBoolean("mouse-left", false);
+			ENGINE()->setEnvironment("game");
+			/* save game informations */
+			game::playersNumber = num_players;
+			for (int i = 0; i < num_players; i++) {
+				Player p = Player();
+				p.create(players_color[i], 0, list->get_race(i), glb::colors[players_color[i]]);
+				playersList.push_back(p);
+			}
+		}
+		/*------------------------------------------------------------------------------*/
+		if (clickName == "MAINMENU_buttonEditor") {
+			ENGINE()->setEnvironment("editor");
+		}
+		/*------------------------------------------------------------------------------*/
+		if (clickName == "MAINMENU_buttonQuit") {
+			saveLog();
+			setBoolean("window-should-close", true);
+		}
+		/*------------------------------------------------------------------------------*/
+		if (clickName == "SINGLEPLAYER_buttonExit") {
+			currentMenu = "mainmenu";
+		}
+		/*------------------------------------------------------------------------------*/
+		if (clickName == "MAINMENU_buttonSinglePlayer") {
+			currentMenu = "singleplayer";
+		}
+	}
+}

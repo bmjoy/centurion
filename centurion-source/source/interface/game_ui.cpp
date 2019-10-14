@@ -42,7 +42,8 @@ void UIGame::render() {
 	if (gameMenuStatus){
 		if (getBoolean("mouse-left")){
 			gameMenu.render(true);
-			picking();
+
+			picking(); // --> source/picking/gameui_picking.cpp
 		}
 		gameMenu.render(false);
 	}
@@ -65,18 +66,6 @@ void UIGame::render() {
 	// Temporary bars:
 	top_bar.render(glm::vec4(255.0f, 0.0f, 0.0f, 1.0f));
 	bottom_bar.render(glm::vec4(255.0f, 0.0f, 0.0f, 1.0f));
-}
-
-void UIGame::picking() {
-	int clickId = get_id();
-	string clickName = getPickedObjectName(clickId);
-	if (clickName == "GAME_pauseMenuButtonClose") {
-		gameMenuStatus = false;
-	}
-	if (clickName == "GAME_pauseMenuButtonQuit") {
-		gameMenuStatus = false;
-		ENGINE()->Reset();
-	}
 }
 
 void UIGame::calculateTime() {
