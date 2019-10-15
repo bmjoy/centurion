@@ -80,7 +80,7 @@ namespace txt {
 	struct StaticData {
 		vector<float> X;
 		vector<Character> charList;
-		vector<GLint> textureIDs;
+		GLint textureID;
 		vec4 color;
 		float y;
 		int textSize;

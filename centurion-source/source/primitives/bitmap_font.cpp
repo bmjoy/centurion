@@ -132,6 +132,7 @@ void BitmapFont::create() {
 void BitmapFont::render_dynamic(string &font, float xPos, float yPos, string &text, vec4 &color, bool shadow) {
 	
 	int fontID;
+	GLint textureID;
 
 	glUseProgram(shaderId);
 	glUniform4f(glGetUniformLocation(shaderId, "color"), color.x / 255.f, color.y / 255.f, color.z / 255.f, color.w / 255.f);
@@ -142,7 +143,9 @@ void BitmapFont::render_dynamic(string &font, float xPos, float yPos, string &te
 	glUniform1i(glGetUniformLocation(shaderId, "shadow"), 0);
 	wstring_convert<codecvt_utf8_utf16<wchar_t>> converter;
 	wstring wtext = converter.from_bytes(text);
-
+	
+	textureIdMap[font];
+	fontID = fontIdMap[font];
 	if (language == "arabic" && txt::isArabic((GLint)wtext[0])) {
 		wstring wtext_copy = wtext;
 		int k = 0;
@@ -150,31 +153,29 @@ void BitmapFont::render_dynamic(string &font, float xPos, float yPos, string &te
 			wtext[k] = wtext_copy[i];
 			k++;
 		}
+		textureID = textureIdMap["arabic_15px"];
+		fontID = fontIdMap["arabic_15px"];
 	}
 
 	if (h_align != "left"){
 		total_width = 0;
 		for (int i = 0; i < wtext.size(); i++) {
-			txt::isArabic(wtext[i]) ? fontID = fontIdMap["arabic_15px"] : fontID = fontIdMap[font];
 			total_width += fontData[fontID][wtext[i]].xadvance;
 		}
 		glUniform1i(glGetUniformLocation(shaderId, "totalWidth"), total_width);
 	}
 
 	glBindVertexArray(VAO);
-	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, IBO);
+	
 	glActiveTexture(GL_TEXTURE0);
+
+	
+	glBindTexture(GL_TEXTURE_2D, textureIdMap[font]);
+
+	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, IBO);
 	offset_x = 0;
 	for (int i = 0; i < wtext.size(); i++) {
 		GLint codepoint = GLint(wtext[i]);
-		if (txt::isArabic(codepoint)) {
-			glBindTexture(GL_TEXTURE_2D, textureIdMap["arabic_15px"]);
-			fontID = fontIdMap["arabic_15px"];
-		}
-		else {
-			glBindTexture(GL_TEXTURE_2D, textureIdMap[font]);
-			fontID = fontIdMap[font];
-		}
 		glUniform1f(glGetUniformLocation(shaderId, "x"), xPos + offset_x);
 		glUniform1i(glGetUniformLocation(shaderId, "char_xpos"), fontData[fontID][codepoint].x);
 		glUniform1i(glGetUniformLocation(shaderId, "char_ypos"), fontData[fontID][codepoint].y);
@@ -201,6 +202,9 @@ txt::StaticData BitmapFont::create_static(string &font, string &text, float x) {
 	wstring_convert<codecvt_utf8_utf16<wchar_t>> converter;
 	wstring wtext = converter.from_bytes(text);
 
+	int fontID;
+	fontID = fontIdMap[font];
+	static_data.textureID = textureIdMap[font];
 	if (language == "arabic" && txt::isArabic((GLint)wtext[0])) {
 		wstring wtext_copy = wtext;
 		int k = 0;
@@ -208,22 +212,16 @@ txt::StaticData BitmapFont::create_static(string &font, string &text, float x) {
 			wtext[k] = wtext_copy[i];
 			k++;
 		}
+		fontID = fontIdMap["arabic_15px"];
+		static_data.textureID = textureIdMap["arabic_15px"];
 	}
 
 	// x positions, chars and total width
-	int fontID;
+	
 	int totw = 0;
 	for (int i = 0; i < wtext.size(); i++) {
 		static_data.X.push_back(x + totw);
 		GLint codepoint = GLint(wtext[i]);
-		if (txt::isArabic(codepoint)) {
-			static_data.textureIDs.push_back(textureIdMap["arabic_15px"]);
-			fontID = fontIdMap["arabic_15px"];
-		}
-		else {
-			static_data.textureIDs.push_back(textureIdMap[font]);
-			fontID = fontIdMap[font];
-		}
 		static_data.charList.push_back(fontData[fontID][codepoint]);
 		totw += (fontData[fontID][codepoint].xadvance + fontData[fontID][codepoint].xoffset);
 	}	
@@ -248,10 +246,10 @@ void BitmapFont::render_static(txt::StaticData &data) {
 
 	/* Draw */
 	glBindVertexArray(VAO);
-	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, IBO);
 	glActiveTexture(GL_TEXTURE0);
+	glBindTexture(GL_TEXTURE_2D, data.textureID);
+	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, IBO);
 	for (int i = 0; i < data.textSize; i++) {
-		glBindTexture(GL_TEXTURE_2D, data.textureIDs[i]);
 		glUniform1f(glGetUniformLocation(shaderId, "x"), data.X[i]);
 		glUniform1i(glGetUniformLocation(shaderId, "char_xpos"), data.charList[i].x);
 		glUniform1i(glGetUniformLocation(shaderId, "char_ypos"), data.charList[i].y);

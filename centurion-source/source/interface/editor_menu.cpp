@@ -49,7 +49,7 @@ namespace editor {
             titles[s].titleBack = gui::Rectangle();
             titles[s].titleBack.create("filled", (float)titles[s].titlePosition.x, (float)titles[s].titlePosition.y, (float)titles[s].titleWidth, (float)titles[s].titleHeight, "bottom-left", titles[s].pickingID);
             titles[s].titleText = gui::SimpleText("static");
-            titles[s].titleText.create_static(titles[s].title, "tahoma_15px", titles[s].titlePosition.x + 0.5f * titles[s].titleWidth, titles[s].titlePosition.y + 0.5f * titles[s].titleHeight, "center", "middle", glm::vec4(255.f));
+            titles[s].titleText.create_static(titles[s].title, "tahomabold_13px", titles[s].titlePosition.x + 0.5f * titles[s].titleWidth, titles[s].titlePosition.y + 0.5f * titles[s].titleHeight, "center", "middle", glm::vec4(255.f));
             
 
             /* options */
@@ -60,7 +60,7 @@ namespace editor {
                 titles[s].optionsPosition.push_back(glm::ivec2(titles[s].titleWidth * i, getParam("window-height") - titles[s].optionsHeight * (j + 2)));
 
                 gui::SimpleText tempText = gui::SimpleText("static");
-                tempText.create_static(titles[s].options[j], "tahoma_15px", titles[s].optionsPosition[j].x + 0.5f * titles[s].optionsWidth - titles[s].optionsOffsetX, titles[s].optionsPosition[j].y + 0.5f * titles[s].optionsHeight, "left", "middle", glm::vec4(255.f));
+                tempText.create_static(titles[s].options[j], "tahomabold_13px", titles[s].optionsPosition[j].x + 0.5f * titles[s].optionsWidth - titles[s].optionsOffsetX, titles[s].optionsPosition[j].y + 0.5f * titles[s].optionsHeight, "left", "middle", glm::vec4(255.f));
                 titles[s].optionsText.push_back(tempText);
 
                 gui::Rectangle tempRect = gui::Rectangle();

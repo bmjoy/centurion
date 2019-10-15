@@ -2,14 +2,14 @@
 fileVersion=1
 
 # font settings
-fontName=Times New Roman
+fontName=Tahoma
 fontFile=
 charSet=0
-fontSize=-16
+fontSize=-13
 aa=1
 scaleH=100
 useSmoothing=1
-isBold=0
+isBold=1
 isItalic=0
 useUnicode=1
 disableBoxChars=1
@@ -50,7 +50,7 @@ invB=0
 outlineThickness=0
 
 # selected chars
-chars=1536-1564,1566-1791,1872-1919,2208-2228,2275-2303,64336-64449,64467-64511,64606-64611,64754-64756
-chars=64828-64831,65010,65012,65018-65021,65136-65140,65142-65276
+chars=32-126,160-591,688-887,890-895,900-906,908,910-929,931-1279,8192-8207,8210-8226,8230,8234-8240,8242
+chars=8243-8244,8249-8250,8252-8254,8260,8286-8287,8298-8303
 
 # imported icon images

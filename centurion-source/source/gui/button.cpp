@@ -11,7 +11,7 @@ namespace gui {
 		buttonImage = Image(imageName);
 		buttonImage.create("center", (float)x, (float)y, 0, 0, pickingID);
 		buttonText = SimpleText("static");
-		buttonText.create_static(Text, "tahomabold_15px", (float)x, (float)y, "center", "middle", textColor);
+		buttonText.create_static(Text, "tahomabold_13px", (float)x, (float)y, "center", "middle", textColor);
 	}
 	void Button::render(bool picking) {
 		buttonImage.render(picking);
