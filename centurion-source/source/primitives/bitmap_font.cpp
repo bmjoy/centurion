@@ -9,7 +9,7 @@ using namespace glb;
 
 namespace txt {
 	bool isArabic(int codepoint) {
-		return ((codepoint >= 1537 && codepoint <= 2303) || (codepoint >= 64336 && codepoint <= 65276));
+		return ((codepoint >= 1537 && codepoint <= 2303) || (codepoint >= 64336 && codepoint <= 65276) || (codepoint == 32));
 	}
 };
 

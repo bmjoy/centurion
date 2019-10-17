@@ -140,7 +140,9 @@ namespace glb {
 				json tJson = json::parse(localTranslations_path);
 				map<string, string> localTranslationsMap = tJson.get<map<string, string>>();
 				for (map<string, string>::iterator i = localTranslationsMap.begin(); i != localTranslationsMap.end(); i++) {
-					replaceTranslation(i->first, i->second);
+					if (i->second.size() > 0){
+						replaceTranslation(i->first, i->second);
+					}
 				}
 			}
 		}
