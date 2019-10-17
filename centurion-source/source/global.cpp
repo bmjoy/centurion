@@ -184,6 +184,42 @@ namespace glb {
 			i++;
 		}
 	}
+	void saveCurrentScenario(string name) {
+		// create a folder which will contain all scenario files
+		string path = "scenarios/" + name;
+		_mkdir(path.c_str());
+
+		// save heights 
+		ofstream heightsFile(path+"/heights");
+		if (heightsFile.is_open()) {
+			for (int i = 0; i < mapgen::nVertices; i += 4)
+				if (i == 0) {
+					heightsFile << mapgen::MapHeights()[i] << "," << mapgen::MapHeights()[i + 1] << "," << mapgen::MapHeights()[i + 2] << "," << mapgen::MapHeights()[i + 3];
+				}
+				else {
+					heightsFile << "," << mapgen::MapHeights()[i] << "," << mapgen::MapHeights()[i + 1] << "," << mapgen::MapHeights()[i + 2] << "," << mapgen::MapHeights()[i + 3];
+				}
+		}
+		heightsFile.close();
+
+		// save texture type
+		ofstream textureFile(path + "/texture");
+		if (textureFile.is_open()) {
+			for (int i = 0; i < mapgen::nVertices; i ++)
+				if (i == 0) {
+					textureFile << mapgen::MapTextures()[i];
+				}
+				else {
+					textureFile << "," << mapgen::MapTextures()[i];
+				}
+		}
+		textureFile.close();
+
+		cout << "DEBUG: The map is saved with the following name: " + name << endl;
+	}
+	//-----------------------------------------------------------------------------
+	//-----------------------------------------------------------------------------
+	//-----------------------------------------------------------------------------
 	string ReadFile(const char* fileLocation) {
 		string content;
 		ifstream fileStream(fileLocation, ios::in);

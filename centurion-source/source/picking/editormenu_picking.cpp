@@ -43,19 +43,25 @@ namespace editor {
             //    SAVE
 
             if (pos == 1) { // save
-                titles["File"].isOpened = false;
+
+				saveCurrentScenario("editor_map");
+
+				for (int i = 0; i < titles.size(); i++) {
+					std::string s = titlesList[i];
+					titles[s].isOpened = false;
+				}
+				menuIsOpened = false;
             }
             //---------------------
             //    EXIT
 
-            if (pos == 2) { // exit
-                titles["File"].isOpened = false;				
+            if (pos == 2) { // exit				
 				ENGINE()->Reset();
 				for (int i = 0; i < titles.size(); i++) {
 					std::string s = titlesList[i];
-					titles[s].isOpened = false;
-					menuIsOpened = false;
+					titles[s].isOpened = false;					
 				}
+				menuIsOpened = false;
             }					
         }
 
