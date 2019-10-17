@@ -4,8 +4,8 @@
       "base-height":15
    },
    "characters":[
-   {"id":32,"x":490,"y":490,"width":10,"height":18,"xoffset":0,"yoffset":0,"xadvance":9},
-      {"id":1536,"x":54,"y":21,"width":16,"height":20,"xoffset":0,"yoffset":0,"xadvance":15},
+{"id":32,"x":490,"y":490,"width":10,"height":18,"xoffset":0,"yoffset":0,"xadvance":9},
+{"id":1536,"x":54,"y":21,"width":16,"height":20,"xoffset":0,"yoffset":0,"xadvance":15},
 {"id":1537,"x":35,"y":0,"width":22,"height":20,"xoffset":0,"yoffset":0,"xadvance":21},
 {"id":1538,"x":156,"y":105,"width":11,"height":20,"xoffset":0,"yoffset":0,"xadvance":10},
 {"id":1539,"x":104,"y":0,"width":21,"height":20,"xoffset":0,"yoffset":0,"xadvance":20},

@@ -98,8 +98,8 @@ public:
 	BitmapFont();
 	void set_align(string hAlign = "left", string vAlign = "normal");
 	void create();
-	void render_dynamic(string &font, float xPos, float yPos, string &text, vec4 &color, bool shadow);
-	txt::StaticData create_static(string &font, string &text, float x);
+	void render_dynamic(string &font, float xPos, float yPos, string &text, vec4 &color, bool shadow, bool bold = false);
+	txt::StaticData create_static(string &font, string &text, float x, bool bold = false);
 	void render_static(txt::StaticData &data);
 	int getShaderId() { return shaderId; }
 	~BitmapFont();

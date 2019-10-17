@@ -1,9 +1,10 @@
 {
     "fonts": [
         "arabic_15px",
+        "arabic_15px_bold",
+        "tahoma_13px_bold",
         "tahoma_15px",
-        "tahomabold_13px",
-        "tahomabold_15px",
+        "tahoma_15px_bold",
         "couriernew_15px"
     ]
 }

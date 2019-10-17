@@ -122,7 +122,7 @@ namespace glb {
 	}
 
 	void translateTexts() {
-		ifstream translationTable_path("assets/data/interface/texts/english.json");
+		ifstream translationTable_path("assets/translations/english.json");
 		if (translationTable_path.good()) {
 			json tJson = json::parse(translationTable_path);
 			map<string, string> translationsMap = tJson.get<map<string, string>>();
@@ -135,7 +135,7 @@ namespace glb {
 			forceGameClosure("NOT_FOUND", "noFile");
 		}
 		if (language != "english") {
-			ifstream localTranslations_path("assets/data/interface/texts/" + language + ".json");
+			ifstream localTranslations_path("assets/translations/" + language + ".json");
 			if (localTranslations_path.good()) {
 				json tJson = json::parse(localTranslations_path);
 				map<string, string> localTranslationsMap = tJson.get<map<string, string>>();
