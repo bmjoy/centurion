@@ -19,10 +19,7 @@ namespace menu{
 	
 		x = startX; y = startY;
 
-		number = gui::SimpleText("dynamic", true);
-		text = gui::SimpleText("static");
-		text.create_static(getTranslation("WORD_playersNumber")+ ":  ", "tahoma_15px", (float)x, (float)y + 40.f, "left", "normal", glm::vec4(255.f));
-		textWidth = text.get_width();
+		dynamicText = gui::SimpleText("dynamic", true);
 
 		arrowDown = gui::Image("arrowDown");
 		arrowDown.create("center", (float)x + 240, (float)y + 50, 0, 0, getPickingID());
@@ -78,8 +75,13 @@ namespace menu{
 			background.render(glm::vec4(0.f, 0.f, 0.f, 0.5f));
 			arrowDown.render(false);
 			arrowUp.render(false);
-			text.render_static();
-			number.render_dynamic(std::to_string(numPlayers), "tahoma_15px", x + textWidth, y + 40.f, glm::vec4(255.f, 255.f, 255.f, 255.f), "left", "normal");
+			//if (language != "arabic") {
+				dynamicText.render_dynamic(getTranslation("WORD_playersNumber") + ": " + std::to_string(numPlayers), "tahoma_15px", x * 1.f, y + 40.f, glm::vec4(255.f, 255.f, 255.f, 255.f), "left", "normal");
+				//dynamicText.render_dynamic(getTranslation("WORD_playersNumber"), "tahoma_15px", x * 1.f, y + 40.f, glm::vec4(255.f, 255.f, 255.f, 255.f), "left", "normal");
+			//}
+			//else {
+				//dynamicText.render_dynamic(std::to_string(numPlayers) + " " + getTranslation("WORD_playersNumber"), "tahoma_15px", x * 1.f, y + 40.f, glm::vec4(255.f, 255.f, 255.f, 255.f), "left", "normal");
+			//}
 			for (int j = numPlayers - 1; j >= 0; j--) {
 				colors_Form[j].render(false, glm::vec4(glb::colors[players_color[j]], 1.0f));
 				players_Form[j].render(false, glm::vec4(0.f, 0.f, 0.f, 1.f));

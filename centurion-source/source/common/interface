@@ -69,8 +69,7 @@ namespace menu {
 		vector<gui::FormInput> colors_Form;
 		vector<gui::FormInput> players_Form;
 		vector<gui::FormInput> civiliz_Form;
-		gui::SimpleText text;
-		gui::SimpleText number;
+		gui::SimpleText dynamicText;
 		gui::Image arrowDown, arrowUp;
 		gui::Rectangle background;
 		float textWidth;

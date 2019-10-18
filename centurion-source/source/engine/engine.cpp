@@ -137,7 +137,7 @@ namespace engine {
 		/* images */
 
 		ifstream path2("assets/data/images_data.json");
-		if (!path2.good()) {
+		if (path2.good()) {
 			forceGameClosure("NOT_FOUND", "ERROR_imagesData");
 		}
 		dataClass = json::parse(path2);

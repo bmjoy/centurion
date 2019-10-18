@@ -269,8 +269,9 @@ namespace glb {
 		return vec2(x, y);
 	}
 	void forceGameClosure(string errorCode, string errorText) {
-		string eC = getTranslation("WORD_errorCode") == "" ? "Error code" : getTranslation("WORD_errorCode");
+		string eC = (getTranslation("WORD_errorCode") == "") ? "Error code" : getTranslation("WORD_errorCode");
 		string text = "  " + eC + ": " + getErrorCode(errorCode) + "\n\n  " + getTranslation(errorText);
+		if (language == "arabic") text = "  " + getErrorCode(errorCode)+ ": " + eC + "\n\n  " + getTranslation(errorText);
 		const int wideLength = sizeof(text.c_str())*128;
 		WCHAR wstr[wideLength];
 		MultiByteToWideChar(CP_UTF8, 0, text.c_str(), wideLength, wstr, wideLength);
