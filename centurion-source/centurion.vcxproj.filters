@@ -94,6 +94,9 @@
     <Filter Include="Source Files\picking">
       <UniqueIdentifier>{c285b1d1-3a64-4327-b215-8460e4967b7c}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\audio\vorbis">
+      <UniqueIdentifier>{3f286ea6-3dbc-4e58-ab28-17869728873e}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -270,6 +273,9 @@
     <ClCompile Include="source\picking\editormenu_picking.cpp">
       <Filter>Source Files\picking</Filter>
     </ClCompile>
+    <ClCompile Include="source\audio\vorbis\ogg_vorbis.cpp">
+      <Filter>Source Files\audio</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="source\extern\includes\json.hpp">
@@ -343,6 +349,18 @@
     </ClInclude>
     <ClInclude Include="source\common\primitives">
       <Filter>Header Files\common</Filter>
+    </ClInclude>
+    <ClInclude Include="source\audio\vorbis\vorbis_file.h">
+      <Filter>Header Files\audio\vorbis</Filter>
+    </ClInclude>
+    <ClInclude Include="source\audio\vorbis\codec.h">
+      <Filter>Header Files\audio\vorbis</Filter>
+    </ClInclude>
+    <ClInclude Include="source\audio\vorbis\ogg.h">
+      <Filter>Header Files\audio\vorbis</Filter>
+    </ClInclude>
+    <ClInclude Include="source\audio\vorbis\os_types.h">
+      <Filter>Header Files\audio\vorbis</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

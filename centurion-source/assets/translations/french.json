@@ -1,5 +1,5 @@
 ﻿{
-  "MAINMENU_buttonSinglePlayer": "Joueur unique",
+  "MAINMENU_buttonSinglePlayer": "Un joueur",
   "MAINMENU_buttonEditor": "Éditeur",
   "MAINMENU_buttonQuit": "Sortir du jeu",
   
@@ -31,5 +31,5 @@
   "ERROR_menuData": "Impossible de trouver ou de traiter le fichier MENU DATA.\n  L’arrêt forcé de l’application a commencé.",
   "ERROR_fonts": "Impossible de trouver ou de traiter le fichier FONT.\n  L’arrêt forcé de l’application a commencé.",
 
-  "WARNING_audioDevice": "Impossible de trouver (ou de communiquer avec) le périphérique audio.\n Ne sera joué aucun son tant que l'erreur persiste."
+  "WARNING_audioDevice": "Impossible de trouver (ou de communiquer avec) le périphérique audio.\n Aucun son sera reproduit tant que l'erreur persiste."
 }

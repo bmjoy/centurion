@@ -53,7 +53,7 @@ namespace engine {
 		
 			if (environment == "menu"){
 				if (!MENU()->menu_is_created()){
-					obj::Audio()->MusicPlay("assets/music/menu.wav");
+					obj::Audio()->MusicPlay("assets/music/menu.ogg");
 					MENU()->create();
 					cout << "DEBUG: Main menu was created!\n";
 				}

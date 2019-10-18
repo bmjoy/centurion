@@ -22,7 +22,7 @@
     <VCProjectVersion>15.0</VCProjectVersion>
     <ProjectGuid>{29C92E4D-97E2-4049-A35E-F6A42D1C8AB9}</ProjectGuid>
     <RootNamespace>centurion</RootNamespace>
-    <WindowsTargetPlatformVersion>10.0.17763.0</WindowsTargetPlatformVersion>
+    <WindowsTargetPlatformVersion>10.0.18362.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
@@ -142,6 +142,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="source\audio\vorbis\ogg_vorbis.cpp" />
     <ClCompile Include="source\editor\editor_functions.cpp" />
     <ClCompile Include="source\global.cpp" />
     <ClCompile Include="source\math.cpp" />
@@ -289,6 +290,10 @@
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
     </None>
+    <ClInclude Include="source\audio\vorbis\codec.h" />
+    <ClInclude Include="source\audio\vorbis\ogg.h" />
+    <ClInclude Include="source\audio\vorbis\os_types.h" />
+    <ClInclude Include="source\audio\vorbis\vorbis_file.h" />
     <ClInclude Include="source\common\headers">
       <FileType>Document</FileType>
       <DeploymentContent Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</DeploymentContent>
