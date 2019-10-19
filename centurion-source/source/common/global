@@ -24,8 +24,8 @@ namespace glb {
 	extern vector<vec3> colors;
 	extern vector<string> races;
 
-	extern int CharCodepointPressed; // for text input
-	extern bool KeyCode[GLFW_KEY_LAST];       // for text input
+	extern int CharCodepointPressed;	// for text input
+	extern bool KeyCode[GLFW_KEY_LAST];	// for text input
 
 	static const string gameNameSTR = "Centurion";
 	static const LPCWSTR gameNameLPCWSTR = L"Centurion";

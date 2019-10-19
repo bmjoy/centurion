@@ -58,12 +58,10 @@ void myWindow::character_callback(GLFWwindow* window, unsigned int codepoint) {
 	CharCodepointPressed = (int)codepoint;
 }
 
-void myWindow::handle_keys(GLFWwindow* window, int key, int code, int action, int mode) 
-{
+void myWindow::handle_keys(GLFWwindow* window, int key, int code, int action, int mode) {
 	myWindow* theWindow = static_cast<myWindow*>(glfwGetWindowUserPointer(window));
 	
-	KeyCode[key] = (action == GLFW_PRESS || action != GLFW_RELEASE);
-	
+	KeyCode[key] = (action == GLFW_PRESS || action == GLFW_REPEAT);
 
 	if (key == GLFW_KEY_ESCAPE) {
 		if (action == GLFW_PRESS) {
@@ -77,39 +75,6 @@ void myWindow::handle_keys(GLFWwindow* window, int key, int code, int action, in
 		}
 	}
 
-	//Arrow keys detection
-	if (key == GLFW_KEY_UP) {
-		if (action == GLFW_PRESS) {
-			setBoolean("up-key", true);
-		}
-		if (action == GLFW_RELEASE) {
-			setBoolean("up-key", false);
-		}
-	}
-	if (key == GLFW_KEY_DOWN) {
-		if (action == GLFW_PRESS) {
-			setBoolean("down-key", true);
-		}
-		if (action == GLFW_RELEASE) {
-			setBoolean("down-key", false);
-		}
-	}
-	if (key == GLFW_KEY_LEFT) {
-		if (action == GLFW_PRESS) {
-			setBoolean("left-key", true);
-		}
-		if (action == GLFW_RELEASE) {
-			setBoolean("left-key", false);
-		}
-	}
-	if (key == GLFW_KEY_RIGHT) {
-		if (action == GLFW_PRESS) {
-			setBoolean("right-key", true);
-		}
-		if (action == GLFW_RELEASE) {
-			setBoolean("right-key", false);
-		}
-	}
 	// Wireframe
 	if (key == GLFW_KEY_Z && action == GLFW_PRESS) {
 		setBoolean("wireframe", !getBoolean("wireframe"));
@@ -155,7 +120,6 @@ void myWindow::handle_keys(GLFWwindow* window, int key, int code, int action, in
 			setBoolean("ctrl-key", false);
 		}
 	}
-	
 }
 
 void myWindow::handle_mouse(GLFWwindow* window, double xPos, double yPos)

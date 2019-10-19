@@ -2,12 +2,27 @@
   "MAINMENU_buttonSinglePlayer": "Un joueur",
   "MAINMENU_buttonEditor": "Éditeur",
   "MAINMENU_buttonQuit": "Sortir du jeu",
-  
+
   "SINGLEPLAYER_buttonStart": "Commencer le jeu!",
   "SINGLEPLAYER_buttonExit": "Menu principal",
 
   "GAME_pauseMenuButtonQuit": "Sortir du jeu",
   "GAME_pauseMenuButtonClose": "Fermer le menu",
+
+  "EDITOR_File": "Fichier",
+  "EDITOR_FileNew": "Nouveau",
+  "EDITOR_FileOpen": "Ouvrir",
+  "EDITOR_FileSave": "Enregistrer",
+  "EDITOR_FileExit": "Sortir",
+  "EDITOR_Tools": "Outils",
+  "EDITOR_Edit": "Éditer",
+  "EDITOR_newMapButtonClose": "Fermer",
+  "EDITOR_newMapButtonCreate": "Creér",
+  "EDITOR_openMapButtonClose": "Fermer",
+  "EDITOR_openMapButtonOpen": "Ouvrir",
+  "EDITOR_newScenario": "Crée a nouveau scénario",
+  "EDITOR_newScenarioName": "Choisir un nom pour le scénario (30 caractères maximum).",
+  "EDITOR_defaultMapName": "Sans titre",
 
   "WORD_gameStarted": "Le jeu commence...",
   "WORD_player_1": "Joueur 1",

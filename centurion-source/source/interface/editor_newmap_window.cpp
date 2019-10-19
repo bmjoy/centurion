@@ -33,9 +33,9 @@ namespace editor {
 		increasePickingID();
 
 		buttons_text[0] = gui::SimpleText("static");
-		buttons_text[0].create_static("Close", "tahoma_13px", startX + 58.f, startY - 171.f, "center", "middle", vec4(255.f), "bold");
+		buttons_text[0].create_static(getTranslation("EDITOR_newMapButtonClose"), "tahoma_13px", startX + 58.f, startY - 171.f, "center", "middle", vec4(255.f), "bold");
 		buttons_text[1] = gui::SimpleText("static");
-		buttons_text[1].create_static("Create", "tahoma_13px", startX + 314.f, startY - 171.f, "center", "middle", vec4(255.f), "bold");
+		buttons_text[1].create_static(getTranslation("EDITOR_newMapButtonCreate"), "tahoma_13px", startX + 314.f, startY - 171.f, "center", "middle", vec4(255.f), "bold");
 
 		textinput_back = gui::Image("newmapwindow_textinput");
 		textinput_back.create("top-left", startX, startY, 0, 0, getPickingID());
@@ -43,11 +43,11 @@ namespace editor {
 		increasePickingID();
 
 		text[0] = gui::SimpleText("static");
-		text[0].create_static("Create new scenario", "tahoma_15px", startX + 15.f, startY - 25.f, "left", "normal", vec4(255), "bold");
+		text[0].create_static(getTranslation("EDITOR_newScenario"), "tahoma_15px", startX + 15.f, startY - 25.f, "left", "normal", vec4(255), "bold");
 		text[1] = gui::SimpleText("static");
-		text[1].create_static("Choose the scenario name (max 30 characters).", "tahoma_15px", startX + 15.f, startY - 85.f, "left", "normal", vec4(255), "normal");
+		text[1].create_static(getTranslation("EDITOR_newScenarioName"), "tahoma_15px", startX + 15.f, startY - 85.f, "left", "normal", vec4(255), "normal");
 
-		currentMapName = "Untitled";
+		currentMapName = getTranslation("EDITOR_defaultMapName");
 		text_input.create(currentMapName, startX + 21.f, startY - 131.f, 30);
 		text_input.active();
 	}
@@ -76,8 +76,7 @@ namespace editor {
 				text_input.render();
 			}
 			currentMapName = text_input.get_text();
-		}
-		
+		}	
 	}
 
 	NewMapWindow::~NewMapWindow() {}

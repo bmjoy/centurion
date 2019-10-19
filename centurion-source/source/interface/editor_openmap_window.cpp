@@ -18,6 +18,8 @@ namespace editor {
 	
 	void OpenMapWindow::create() {
 
+		IsWindowOpened = true;
+
 		back_image = gui::Image("openmapwindow_back");
 		back_image.create("center", getParam("window-width") / 2.f, getParam("window-height") / 2.f, 0, 0, 0);
 		availableScenarios = get_all_folders_names_within_folder("scenarios");
@@ -43,9 +45,9 @@ namespace editor {
 		increasePickingID();
 
 		buttons_text[0] = gui::SimpleText("static");
-		buttons_text[0].create_static("Close", "tahoma_13px", startX + 58.f, startY - 468.f, "center", "middle", vec4(255.f), "bold");
+		buttons_text[0].create_static(getTranslation("EDITOR_openMapButtonClose"), "tahoma_13px", startX + 58.f, startY - 468.f, "center", "middle", vec4(255.f), "bold");
 		buttons_text[1] = gui::SimpleText("static");
-		buttons_text[1].create_static("Open", "tahoma_13px", startX + 314.f, startY - 468.f, "center", "middle", vec4(255.f), "bold");
+		buttons_text[1].create_static(getTranslation("EDITOR_openMapButtonOpen"), "tahoma_13px", startX + 314.f, startY - 468.f, "center", "middle", vec4(255.f), "bold");
 
 		selectedID = -1;
 	}
@@ -88,11 +90,20 @@ namespace editor {
 				picking();
 			}
 			if (!pick) {
+				if (KeyCode[GLFW_KEY_UP]) {
+					if (selectedID > 0) {
+						selectedID--;
+					}
+				}
+				if (KeyCode[GLFW_KEY_DOWN]) {
+					if (selectedID < availableScenarios.size() - 1) {
+						selectedID++;
+					}
+				}
 				back_image.render(false);
 				for (int i = 0; i < availableScenarios.size(); i++) {
 					if (i == selectedID) {
 						map_list.back_options[i].render(vec4(0, 0, 0, 0.5f));
-
 					}
 					map_list.text_options[i].render_static();					
 				}

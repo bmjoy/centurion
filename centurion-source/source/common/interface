@@ -162,6 +162,7 @@ namespace editor {
 	extern string currentMapName;
 	extern bool OpenMapWindowIsOpen;
 	extern bool OpenMapWindowUpdate;
+	extern bool IsWindowOpened;
 	extern vector<string> availableScenarios;
 
 	struct menuData {

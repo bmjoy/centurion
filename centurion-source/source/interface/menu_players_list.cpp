@@ -75,7 +75,7 @@ namespace menu{
 			background.render(glm::vec4(0.f, 0.f, 0.f, 0.5f));
 			arrowDown.render(false);
 			arrowUp.render(false);
-			dynamicText.render_dynamic(getTranslation("WORD_playersNumber") + ": " + std::to_string(numPlayers), "tahoma_15px", x * 1.f, y + 40.f, glm::vec4(255.f, 255.f, 255.f, 255.f), "left", "normal");
+			dynamicText.render_dynamic(getTranslation("WORD_playersNumber") + ": " + std::to_string(numPlayers), "tahoma_15px", x * 1.f + 5.f, y + 40.f, glm::vec4(255.f, 255.f, 255.f, 255.f), "left", "normal");
 			for (int j = numPlayers - 1; j >= 0; j--) {
 				colors_Form[j].render(false, glm::vec4(glb::colors[players_color[j]], 1.0f));
 				players_Form[j].render(false, glm::vec4(0.f, 0.f, 0.f, 1.f));

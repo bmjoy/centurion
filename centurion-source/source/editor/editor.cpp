@@ -12,6 +12,7 @@ using namespace game;
 namespace editor {
 	Editor::Editor(){
 		editorIsCreated = false;
+		IsWindowOpened = false;
 	}
 	void Editor::create() {
 		resetPicking();
@@ -47,6 +48,14 @@ namespace editor {
 
 		setBoolean("mouse-right", false);
 		setBoolean("mouse-left", false); // temporary
+
+		if (IsWindowOpened) {
+			KeyCode[GLFW_KEY_BACKSPACE] = false;
+			KeyCode[GLFW_KEY_UP] = false;
+			KeyCode[GLFW_KEY_DOWN] = false;
+			KeyCode[GLFW_KEY_LEFT] = false;
+			KeyCode[GLFW_KEY_RIGHT] = false;
+		}
 	}
 
 	Editor::~Editor(){
