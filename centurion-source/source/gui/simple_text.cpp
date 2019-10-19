@@ -49,5 +49,19 @@ namespace gui {
 		}
 	}
 
+	float SimpleText::get_width(int pos) {
+		float tot_width = 0.f;
+		if (pos == 0) {
+			tot_width = (float)data.totalWidth;
+		}
+		else {
+			int j = std::min(pos, data.textSize);
+			for (int i = 0; i < j; ++i) {
+				tot_width += data.charsWidth[i];
+			}
+		}
+		return tot_width;
+	}
+
 	SimpleText::~SimpleText(){}
 };

@@ -232,6 +232,7 @@ txt::StaticData BitmapFont::create_static(string &font, string &text, float x, b
 		if (language == "arabic" && txt::isArabic((GLint)wtext[0])) codepoint = GLint(wtext[wtext.size() - i - 1]);
 		else codepoint = GLint(wtext[i]);
 		static_data.charList.push_back(fontData[fontID][codepoint]);
+		static_data.charsWidth.push_back(fontData[fontID][codepoint].xadvance + letterspacing);
 		totw += (fontData[fontID][codepoint].xadvance + letterspacing);
 	}	
 	static_data.totalWidth = totw;

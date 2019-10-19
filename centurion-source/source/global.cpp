@@ -23,7 +23,7 @@ namespace glb {
 	vector<string> races;
 
 	int CharCodepointPressed = -1; // for text input
-	int KeyCodePressed = -1;       // for text input
+	bool KeyCode[GLFW_KEY_LAST] = { false }; // for text input
 
 	void setErrors(map<string, string> errorsMap) { errors = errorsMap; }
 	string getErrorCode(string error) { return errors[error]; }

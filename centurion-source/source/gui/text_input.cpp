@@ -10,21 +10,41 @@ namespace gui {
 
 	TextInput::TextInput() {}
 	
-	void TextInput::create() {
+	void TextInput::create(string text, float x, float y, int maxChars) {
+		xPos = x; yPos = y; max_chars = maxChars;
+		
 		current_text = "prova";
-		dynamic_text = gui::SimpleText("dynamic");
+		static_text = gui::SimpleText("static");
+		static_text.create_static(text, "tahoma_15px", xPos, yPos, "left", "normal", vec4(255.f));
+		current_text = text;
+
+		text_cursor.create("filled", 0, 0, 2.f, 15.f, "bottom-left", 0);
+		cursorPosition = (int)text.size();
 	}
 
 	void TextInput::render() {
-		if (CharCodepointPressed != -1){
-			wstring_convert<codecvt_utf8_utf16<wchar_t>> converter;
-			wstring wchar = L" ";
-			wchar[0] = CharCodepointPressed;
-			string c = converter.to_bytes(wchar);
-			current_text += c;
-		}
-		dynamic_text.render_dynamic(current_text, "tahoma_15px", 100.f, 100.f, vec4(255.f), "left", "normal");
+		if (is_active) {
 
+			if (CharCodepointPressed != -1 && current_text.size() <= max_chars){
+				wstring_convert<codecvt_utf8_utf16<wchar_t>> converter;
+				wstring wchar = L" ";
+				wchar[0] = CharCodepointPressed;
+				string c = converter.to_bytes(wchar);
+				current_text += c;
+				cursorPosition++;
+				static_text.create_static(current_text, "tahoma_15px", xPos, yPos, "left", "normal", vec4(255.f));
+			}
+
+			if (KeyCode[GLFW_KEY_BACKSPACE] && current_text.size() > 0) {
+				current_text.erase(current_text.end() - 1);
+				cursorPosition--;
+				static_text.create_static(current_text, "tahoma_15px", xPos, yPos, "left", "normal", vec4(255.f));
+			}
+
+			text_cursor.render(vec4(255.f), false, xPos + static_text.get_width(cursorPosition), yPos);
+		}
+		
+		static_text.render_static();
 	}
 
 	TextInput::~TextInput() {}

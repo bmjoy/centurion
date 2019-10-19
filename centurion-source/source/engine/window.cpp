@@ -61,7 +61,9 @@ void myWindow::character_callback(GLFWwindow* window, unsigned int codepoint) {
 void myWindow::handle_keys(GLFWwindow* window, int key, int code, int action, int mode) 
 {
 	myWindow* theWindow = static_cast<myWindow*>(glfwGetWindowUserPointer(window));
-	KeyCodePressed = code;
+	
+	KeyCode[key] = (action == GLFW_PRESS || action != GLFW_RELEASE);
+	
 
 	if (key == GLFW_KEY_ESCAPE) {
 		if (action == GLFW_PRESS) {

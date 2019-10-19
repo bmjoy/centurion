@@ -1,6 +1,7 @@
 #include <interface>
 #include <picking>
 #include <engine>
+#include <surface>
 
 using namespace glb;
 using namespace engine;
@@ -48,6 +49,9 @@ namespace editor {
 
 			if (pos == 1) {
 
+				NewMapWindowIsOpen = true;
+				NewMapResetText = true;
+
 				for (int i = 0; i < titles.size(); i++) {
 					std::string s = titlesList[i];
 					titles[s].isOpened = false;
@@ -75,7 +79,7 @@ namespace editor {
 
             if (pos == 3) { // save
 
-				saveCurrentScenario("editor_map");
+				saveCurrentScenario(currentMapName);
 
 				for (int i = 0; i < titles.size(); i++) {
 					std::string s = titlesList[i];
@@ -163,10 +167,45 @@ namespace editor {
 			if (selectedID != -1) {
 				cout << "DEBUG: You've chosen the following scenario to open: " + availableScenarios[selectedID] << endl;
 				openScenario(availableScenarios[selectedID]);
+				currentMapName = availableScenarios[selectedID];
 				obj::MapTerrain()->updateHeightsBuffer();
 				obj::MapTerrain()->updateTextureBuffer();
 				OpenMapWindowIsOpen = false;
 			}
+		}
+	}
+
+	/*--------------------------*/
+	/*      NEW MAP WINDOW      */
+	/*--------------------------*/
+
+	void NewMapWindow::picking() {
+		GLint mouseX = (GLint)getParam("mouse-x-position");
+		GLint mouseY = (GLint)getParam("mouse-y-position");
+		int clickId = get_id();
+		string clickName = getPickedObjectName(clickId);
+
+		text_input.active();
+
+		if (clickName == "NewMapWindow_close") { // CLOSE
+			NewMapWindowIsOpen = false;
+		}
+
+		if (clickName == "NewMapWindow_textclick") {
+			text_input.active();
+		}
+		else {
+			text_input.active(false);
+		}
+
+		if (clickName == "NewMapWindow_create") { // CREATE
+
+			cout << "DEBUG: You've set the following map name: " + text_input.get_text() << endl;
+			
+			mapgen::reset_map();
+			obj::MapTerrain()->updateHeightsBuffer();
+			obj::MapTerrain()->updateTextureBuffer();
+			NewMapWindowIsOpen = false;
 		}
 	}
 };

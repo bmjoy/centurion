@@ -104,8 +104,8 @@ namespace engine {
 			// mouse
 			mouse->render();
 			
-			KeyCodePressed = -1;
 			CharCodepointPressed = -1;
+			for (int i = 0; i < GLFW_KEY_LAST; i++) KeyCode[i] = false;
 
 			glfwSwapBuffers(MainWindow);
 

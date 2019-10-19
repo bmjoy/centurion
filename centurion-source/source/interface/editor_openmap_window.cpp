@@ -17,14 +17,17 @@ namespace editor {
 	}
 	
 	void OpenMapWindow::create() {
-		startX = 400.f;
-		startY = 600.f;
+
 		back_image = gui::Image("openmapwindow_back");
-		back_image.create("top-left", startX, startY, 0, 0, 0);
+		back_image.create("center", getParam("window-width") / 2.f, getParam("window-height") / 2.f, 0, 0, 0);
 		availableScenarios = get_all_folders_names_within_folder("scenarios");
 		map_list.padding_left = 15.f;
 		map_list.padding_top = 15.f;
 		map_list.option_height = 25.f;
+
+		// startX and startY are TOP-LEFT coordinates (as in Paint)
+		startX = getParam("window-width") / 2.f - back_image.getImageSize().x / 2.f;
+		startY = getParam("window-height") / 2.f + back_image.getImageSize().y / 2.f;
 
 		map_list.pickingID = getPickingID();
 		increasePickingID();
@@ -58,7 +61,7 @@ namespace editor {
 			string font = "tahoma_15px";
 			float x = startX + map_list.padding_left;
 			float y = startY - map_list.padding_top - (i + 1) * map_list.option_height;
-			tempText.create_static(availableScenarios[i], font, x, y + 5.f, "left", "normal", vec4(255.f));
+			tempText.create_static(availableScenarios[i], font, x + 5.f, y + 5.f, "left", "normal", vec4(255.f));
 			map_list.text_options.push_back(tempText);
 
 			/* options rectangles */
@@ -84,19 +87,19 @@ namespace editor {
 				buttons[1].render(true);
 				picking();
 			}
-			else {
+			if (!pick) {
 				back_image.render(false);
 				for (int i = 0; i < availableScenarios.size(); i++) {
 					if (i == selectedID) {
 						map_list.back_options[i].render(vec4(0, 0, 0, 0.5f));
 
 					}
-					map_list.text_options[i].render_static();
-					buttons[0].render(false);
-					buttons[1].render(false);
-					buttons_text[0].render_static();
-					buttons_text[1].render_static();
+					map_list.text_options[i].render_static();					
 				}
+				buttons[0].render(false);
+				buttons[1].render(false);
+				buttons_text[0].render_static();
+				buttons_text[1].render_static();
 			}
 		}
 	}

@@ -157,6 +157,9 @@ namespace editor {
 	
 	// editor variables 
 
+	extern bool NewMapWindowIsOpen;
+	extern bool NewMapResetText;
+	extern string currentMapName;
 	extern bool OpenMapWindowIsOpen;
 	extern bool OpenMapWindowUpdate;
 	extern vector<string> availableScenarios;
@@ -239,10 +242,17 @@ namespace editor {
 	public:
 		NewMapWindow();
 		void create();
-		void render();
+		void render(bool pick);
 		~NewMapWindow();
 	private:
 		gui::TextInput text_input;
+		gui::Image back_image;
+		gui::Image buttons[2];
+		gui::Image textinput_back;
+		gui::SimpleText buttons_text[2];
+		gui::SimpleText text[2];
+		float startX, startY;
+		void picking();
 	};
 
 	//

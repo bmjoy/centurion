@@ -29,7 +29,7 @@ void main()
     float current_y = float(char_ypos);
     float x1, y1;
     
-    if (hAlign == 0) x1 = x + 5.f;
+    if (hAlign == 0) x1 = x;
     else if (hAlign == 1) x1 = x - totalWidth / 2.f;
     
     if (vAlign == 0) y1 = y + fontHeight;

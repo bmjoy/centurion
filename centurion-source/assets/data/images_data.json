@@ -1,6 +1,7 @@
 {
-	"image_names": ["button_1", "main_background", "circle_pos", "arrowDown", "arrowUp", 
-                    "openmapwindow_back","openmapwindow_buttonleft","openmapwindow_buttonright"],
+	"image_names": ["button_1", "main_background", "circle_pos", "arrowDown", "arrowUp",
+		"openmapwindow_back", "openmapwindow_buttonleft", "openmapwindow_buttonright",
+		"newmapwindow_back", "newmapwindow_buttonleft", "newmapwindow_buttonright", "newmapwindow_textinput"],
 	"roots": {
 		"button_1": "assets/ui/buttons/button_1.png",
 		"main_background": "assets/ui/menu/menu_background.png",
@@ -9,6 +10,10 @@
 		"arrowUp": "assets/ui/menu/up.png",
 		"openmapwindow_back": "assets/ui/editor/openmapwindow_back.png",
 		"openmapwindow_buttonleft": "assets/ui/editor/openmapwindow_buttonleft.png",
-		"openmapwindow_buttonright": "assets/ui/editor/openmapwindow_buttonright.png"
+		"openmapwindow_buttonright": "assets/ui/editor/openmapwindow_buttonright.png",
+		"newmapwindow_back": "assets/ui/editor/newmapwindow_back.png",
+		"newmapwindow_buttonleft": "assets/ui/editor/newmapwindow_buttonleft.png",
+		"newmapwindow_buttonright": "assets/ui/editor/newmapwindow_buttonright.png",
+		"newmapwindow_textinput": "assets/ui/editor/newmapwindow_textinput.png"
 	}
 }

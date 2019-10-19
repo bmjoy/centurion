@@ -20,9 +20,7 @@ namespace editor {
 	void EditorUI::render(bool picking) {
 		editor_menu.render(picking);
 		open_map_window.render(picking);
-		if (!picking){
-			new_map_window.render();
-		}
+		new_map_window.render(picking);
 	}
 
 	EditorUI::~EditorUI() {}
