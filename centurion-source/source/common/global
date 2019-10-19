@@ -49,7 +49,9 @@ namespace glb {
 	void readVerticesPosData(int *verticesPos, string path);
 	string ReadFile(const char* fileLocation);
 	vector<string> get_all_files_names_within_folder(string folder);
+	vector<string> get_all_folders_names_within_folder(string folder);
 	void saveCurrentScenario(string name);
+	void openScenario(string name);
 
 
 	// other functions 

@@ -7,6 +7,10 @@ using namespace engine;
 
 namespace editor {
 
+	/*----------------*/
+	/*      MENU      */
+	/*----------------*/
+
     void EditorMenu::picking() {
 
         GLint mouseX = (GLint)getParam("mouse-x-position");
@@ -39,10 +43,37 @@ namespace editor {
                     if (s != "File") titles[s].isOpened = false;
                 }
             }
+			//---------------------
+		    //    NEW
+
+			if (pos == 1) {
+
+				for (int i = 0; i < titles.size(); i++) {
+					std::string s = titlesList[i];
+					titles[s].isOpened = false;
+				}
+				menuIsOpened = false;
+			}
+
+			//---------------------
+		    //    OPEN
+
+			if (pos == 2) {
+
+				OpenMapWindowIsOpen = true;
+				OpenMapWindowUpdate = true;
+
+				for (int i = 0; i < titles.size(); i++) {
+					std::string s = titlesList[i];
+					titles[s].isOpened = false;
+				}
+				menuIsOpened = false;
+			}
+
             //---------------------
             //    SAVE
 
-            if (pos == 1) { // save
+            if (pos == 3) { // save
 
 				saveCurrentScenario("editor_map");
 
@@ -55,7 +86,7 @@ namespace editor {
             //---------------------
             //    EXIT
 
-            if (pos == 2) { // exit				
+            if (pos == 4) { // exit				
 				ENGINE()->Reset();
 				for (int i = 0; i < titles.size(); i++) {
 					std::string s = titlesList[i];
@@ -104,4 +135,38 @@ namespace editor {
             return false;
         }
     }
+
+	/*---------------------------*/
+	/*      OPEN MAP WINDOW      */
+	/*---------------------------*/
+
+	void OpenMapWindow::picking() {
+		GLint mouseX = (GLint)getParam("mouse-x-position");
+		GLint mouseY = (GLint)getParam("mouse-y-position");
+		int clickId = get_id();
+		string clickName = getPickedObjectName(clickId);
+		int pos = (int)((mouseY - startY + map_list.padding_top)*(-1)) / (int)map_list.option_height;
+
+		if (clickName != "OpenMapWindow_open") selectedID = -1;
+
+		if (clickId == map_list.pickingID) {
+			if (pos >= 0) {
+				selectedID = pos;
+			}
+		}
+
+		if (clickName == "OpenMapWindow_close") { // CLOSE
+			OpenMapWindowIsOpen = false;
+		}
+
+		if (clickName == "OpenMapWindow_open") { // OPEN
+			if (selectedID != -1) {
+				cout << "DEBUG: You've chosen the following scenario to open: " + availableScenarios[selectedID] << endl;
+				openScenario(availableScenarios[selectedID]);
+				obj::MapTerrain()->updateHeightsBuffer();
+				obj::MapTerrain()->updateTextureBuffer();
+				OpenMapWindowIsOpen = false;
+			}
+		}
+	}
 };

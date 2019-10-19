@@ -23,7 +23,7 @@ namespace editor {
         topBar.create("filled", 0.0f, (float)-barHeight, getParam("window-width"), (float)barHeight, "bottom-left", 0);
 
         titles["File"].title = "File";
-        titles["File"].options = { "Save", "Exit" };
+        titles["File"].options = { "New", "Open", "Save", "Exit" };
 
         titles["Edit"].title = "Edit";
         titles["Edit"].options = { "Edit1", "Edit2", "Edit3" };

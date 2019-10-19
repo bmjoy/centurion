@@ -192,7 +192,7 @@ namespace glb {
 		// save heights 
 		ofstream heightsFile(path+"/heights");
 		if (heightsFile.is_open()) {
-			for (int i = 0; i < mapgen::nVertices; i += 4)
+			for (int i = 0; i < mapgen::nVertices * 4; i += 4)
 				if (i == 0) {
 					heightsFile << mapgen::MapHeights()[i] << "," << mapgen::MapHeights()[i + 1] << "," << mapgen::MapHeights()[i + 2] << "," << mapgen::MapHeights()[i + 3];
 				}
@@ -216,6 +216,35 @@ namespace glb {
 		textureFile.close();
 
 		cout << "DEBUG: The map is saved with the following name: " + name << endl;
+	}
+	void openScenario(string name) {
+		
+		// read heights
+		{
+			fstream fin;
+			fin.open("scenarios/" + name + "/heights");
+			string line, number;
+			getline(fin, line);
+			stringstream s(line);
+			int i = 0;
+			while (getline(s, number, ',')) {
+				mapgen::MapHeights()[i] = stof(number);
+				i++;
+			}
+		}
+		// read texture
+		{
+			fstream fin;
+			fin.open("scenarios/" + name + "/texture");
+			string line, number;
+			getline(fin, line);
+			stringstream s(line);
+			int i = 0;
+			while (getline(s, number, ',')) {
+				mapgen::MapTextures()[i] = stof(number);
+				i++;
+			}
+		}
 	}
 	//-----------------------------------------------------------------------------
 	//-----------------------------------------------------------------------------
@@ -247,6 +276,26 @@ namespace glb {
 				}
 			} while (::FindNextFile(hFind, &fd));
 			::FindClose(hFind);
+		}
+		return names;
+	}
+	vector<string> get_all_folders_names_within_folder(string folder){
+		vector<string> names;
+		WIN32_FIND_DATA findfiledata;
+		HANDLE hFind = INVALID_HANDLE_VALUE;
+		char fullpath[MAX_PATH];
+		GetFullPathName(folder.c_str(), MAX_PATH, fullpath, 0);
+		string fp(fullpath);
+
+		hFind = FindFirstFile((LPCSTR)(fp + "\\*").c_str(), &findfiledata);
+		if (hFind != INVALID_HANDLE_VALUE) {
+			do {
+				if ((findfiledata.dwFileAttributes | FILE_ATTRIBUTE_DIRECTORY) == FILE_ATTRIBUTE_DIRECTORY
+					&& (findfiledata.cFileName[0] != '.'))
+				{
+					names.push_back(findfiledata.cFileName);
+				}
+			} while (FindNextFile(hFind, &findfiledata) != 0);
 		}
 		return names;
 	}

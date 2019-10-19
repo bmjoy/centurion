@@ -154,6 +154,12 @@ namespace editor {
 	//
 	//	EDITOR MENU
 	//
+	
+	// editor variables 
+
+	extern bool OpenMapWindowIsOpen;
+	extern bool OpenMapWindowUpdate;
+	extern vector<string> availableScenarios;
 
 	struct menuData {
 		vector<string> options;
@@ -193,5 +199,54 @@ namespace editor {
 		void picking(); // this function is here: source/picking/editormenu_picking.cpp
 		bool isHover(vec2 pos, int w, int h); // idem
 	};
+
+	//
+	//  OPEN MAP WINDOW
+	//
+
+	struct MapList {
+		vector<gui::Rectangle> back_options;
+		vector<gui::SimpleText> text_options;
+		gui::Rectangle back_picking;
+		float padding_left, padding_top;
+		float option_height;
+		int pickingID;
+	};
+
+	class OpenMapWindow {
+	public:
+		OpenMapWindow();
+		void create();
+		void update();
+		void render(bool pick);
+		~OpenMapWindow();
+	private:
+		gui::Image back_image;
+		gui::Image buttons[2];
+		gui::SimpleText buttons_text[2];
+		vec4 back_color;
+		float startX, startY;
+		MapList map_list;
+		void picking();
+		int selectedID;
+	};
+
+	//
+	//  EDITOR UI (CONTAINER)
+	//
+
+	class EditorUI {
+	public:
+		EditorUI();
+		void create();
+		void render(bool picking);
+		~EditorUI();
+	private:
+		EditorMenu editor_menu;
+		OpenMapWindow open_map_window;
+	};
+
+	static EditorUI myeditorUI;
+	EditorUI *EDITOR_UI();
 };
 

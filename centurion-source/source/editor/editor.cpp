@@ -16,13 +16,11 @@ namespace editor {
 	void Editor::create() {
 		resetPicking();
 		surface = new Surface();
-		menu = new editor::EditorMenu();
-		circle = gui::Circle();
 
 		surface->reset();
-		menu->create();
+		EDITOR_UI()->create();
 		
-		circle.create("border", 0.f, 0.f, 300.f, 200.f, 8.f, "center");
+		//circle.create("border", 0.f, 0.f, 300.f, 200.f, 8.f, "center");
 		editorIsCreated = true;
 	}
 	void Editor::run() {
@@ -31,7 +29,7 @@ namespace editor {
 
 		// editor ui picking */
 		obj::applyMenuMatrices();
-		menu->render(true);
+		EDITOR_UI()->render(true);
 
 		//-----------------------------
 		/* normal rendering */
@@ -42,8 +40,8 @@ namespace editor {
 
 		// editor UI normal rendering
 		obj::applyMenuMatrices();
-		circle.render(glm::vec4(255.f), getParam("mouse-x-position"), getParam("mouse-y-position")); /* temporary : it will be in editor UI */
-		menu->render(false);
+		//circle.render(glm::vec4(255.f), getParam("mouse-x-position"), getParam("mouse-y-position")); /* temporary : it will be in editor UI */
+		EDITOR_UI()->render(false);
 		
 		glb::cameraProjection = glm::ortho(0.0f, getParam("window-width-zoomed"), 0.0f, getParam("window-height-zoomed"), -(float)mapWidth, (float)mapWidth);
 
@@ -53,6 +51,5 @@ namespace editor {
 
 	Editor::~Editor(){
 		delete surface;
-		delete menu;
 	}
 }

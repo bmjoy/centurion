@@ -13,8 +13,6 @@ class Player;
 
 namespace editor {
 
-	class EditorMenu; //temporary
-
 	//
 	//	EDITOR CLASS --> source/editor/editor.cpp
 	//
@@ -31,8 +29,7 @@ namespace editor {
 	private:
 		Surface *surface;
 		glm::mat4 proj, view;
-		EditorMenu *menu;
-		gui::Circle circle;
+		
 		int pickingID;
 		bool editorIsCreated;
 	};
