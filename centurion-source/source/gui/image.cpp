@@ -35,5 +35,4 @@ namespace gui {
 	}
 
 	Image::~Image()	{}
-}
-
+};

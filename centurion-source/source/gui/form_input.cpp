@@ -100,4 +100,4 @@ namespace gui {
 	}
 
 	FormInput::~FormInput() {}
-}
+};

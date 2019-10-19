@@ -59,6 +59,7 @@ private:
 	static void handle_keys(GLFWwindow* window, int key, int code, int action, int mode);
 	static void mouse_button_callback(GLFWwindow* window, int button, int action, int mods);
 	static void scroll_callback(GLFWwindow* window, double xoffset, double yoffset);
+	static void character_callback(GLFWwindow* window, unsigned int codepoint);
 	// input mouse
 	GLfloat lastX;
 	GLfloat lastY;

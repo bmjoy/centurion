@@ -19,4 +19,4 @@ namespace gui {
 	}
 
 	Button::~Button(){}
-}
+};

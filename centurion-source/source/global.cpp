@@ -22,6 +22,9 @@ namespace glb {
 	vector<vec3> colors;
 	vector<string> races;
 
+	int CharCodepointPressed = -1; // for text input
+	int KeyCodePressed = -1;       // for text input
+
 	void setErrors(map<string, string> errorsMap) { errors = errorsMap; }
 	string getErrorCode(string error) { return errors[error]; }
 	void setParam(string param, float value) { params[param] = value; }

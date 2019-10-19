@@ -282,6 +282,12 @@
     <ClCompile Include="source\picking\editor_picking.cpp">
       <Filter>Source Files\picking</Filter>
     </ClCompile>
+    <ClCompile Include="source\gui\text_input.cpp">
+      <Filter>Source Files\gui</Filter>
+    </ClCompile>
+    <ClCompile Include="source\interface\editor_newmap_window.cpp">
+      <Filter>Source Files\interface</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="source\extern\includes\json.hpp">

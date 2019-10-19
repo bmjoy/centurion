@@ -103,7 +103,10 @@ namespace engine {
 
 			// mouse
 			mouse->render();
-		
+			
+			KeyCodePressed = -1;
+			CharCodepointPressed = -1;
+
 			glfwSwapBuffers(MainWindow);
 
 			fps_sleep();

@@ -232,6 +232,20 @@ namespace editor {
 	};
 
 	//
+	//	NEW MAP WINDOW
+	//
+
+	class NewMapWindow {
+	public:
+		NewMapWindow();
+		void create();
+		void render();
+		~NewMapWindow();
+	private:
+		gui::TextInput text_input;
+	};
+
+	//
 	//  EDITOR UI (CONTAINER)
 	//
 
@@ -244,6 +258,7 @@ namespace editor {
 	private:
 		EditorMenu editor_menu;
 		OpenMapWindow open_map_window;
+		NewMapWindow new_map_window;
 	};
 
 	static EditorUI myeditorUI;

@@ -50,4 +50,4 @@ namespace gui {
 	}
 
 	SimpleText::~SimpleText(){}
-}
+};

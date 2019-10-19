@@ -40,4 +40,4 @@ namespace gui {
 	}
 
 	Circle::~Circle(){}
-}
+};

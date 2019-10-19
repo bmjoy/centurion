@@ -24,6 +24,9 @@ namespace glb {
 	extern vector<vec3> colors;
 	extern vector<string> races;
 
+	extern int CharCodepointPressed; // for text input
+	extern int KeyCodePressed;       // for text input
+
 	static const string gameNameSTR = "Centurion";
 	static const LPCWSTR gameNameLPCWSTR = L"Centurion";
     static map<string, float> params; // global parameters
@@ -42,7 +45,7 @@ namespace glb {
 	void initParams();
 	void saveLog();
 	void translateTexts();
-
+	
 	// reading/saving map data 
 	void readIndicesData(unsigned int *indices, string path);
 	void readVerticesData(float *vertices, string path);

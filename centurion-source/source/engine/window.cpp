@@ -50,11 +50,18 @@ void myWindow::create_callbacks() { // important for taking the keyboard / mouse
 	glfwSetCursorPosCallback(MainWindow, handle_mouse);
 	glfwSetMouseButtonCallback(MainWindow, mouse_button_callback);
 	glfwSetScrollCallback(MainWindow, scroll_callback);
+	glfwSetCharCallback(MainWindow, character_callback);
+}
+
+void myWindow::character_callback(GLFWwindow* window, unsigned int codepoint) {
+	myWindow* theWindow = static_cast<myWindow*>(glfwGetWindowUserPointer(window));
+	CharCodepointPressed = (int)codepoint;
 }
 
 void myWindow::handle_keys(GLFWwindow* window, int key, int code, int action, int mode) 
 {
 	myWindow* theWindow = static_cast<myWindow*>(glfwGetWindowUserPointer(window));
+	KeyCodePressed = code;
 
 	if (key == GLFW_KEY_ESCAPE) {
 		if (action == GLFW_PRESS) {

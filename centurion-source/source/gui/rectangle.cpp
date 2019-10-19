@@ -54,7 +54,6 @@ namespace gui {
 		}
 	}
 
-	Rectangle::~Rectangle()
-	{
-	}
-}
+	Rectangle::~Rectangle() {}
+
+};

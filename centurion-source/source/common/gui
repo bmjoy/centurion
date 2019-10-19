@@ -115,4 +115,21 @@ namespace gui {
 		bool hasText;
 		int nOptions;
 	};
+
+	/*
+		TEXT INPUT --> source/gui/text_input.cpp
+	*/
+
+	class TextInput {
+	public:
+		TextInput();
+		void create();
+		void render();
+		~TextInput();
+	private:
+		gui::Rectangle text_cursor;
+		gui::SimpleText dynamic_text;
+		string current_text;
+
+	};
 }

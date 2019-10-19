@@ -145,6 +145,8 @@
     <ClCompile Include="source\audio\vorbis\ogg_vorbis.cpp" />
     <ClCompile Include="source\editor\editor_functions.cpp" />
     <ClCompile Include="source\global.cpp" />
+    <ClCompile Include="source\gui\text_input.cpp" />
+    <ClCompile Include="source\interface\editor_newmap_window.cpp" />
     <ClCompile Include="source\interface\editor_openmap_window.cpp" />
     <ClCompile Include="source\interface\editor_ui.cpp" />
     <ClCompile Include="source\math.cpp" />
