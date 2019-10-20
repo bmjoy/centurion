@@ -12,7 +12,6 @@ using namespace game;
 namespace editor {
 	Editor::Editor(){
 		editorIsCreated = false;
-		IsWindowOpened = false;
 	}
 	void Editor::create() {
 		resetPicking();

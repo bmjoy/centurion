@@ -8,8 +8,6 @@ using namespace engine;
 
 namespace editor {
 
-	bool IsWindowOpened = false;
-
 	/*----------------*/
 	/*      MENU      */
 	/*----------------*/
@@ -214,6 +212,7 @@ namespace editor {
 			obj::MapTerrain()->updateHeightsBuffer();
 			obj::MapTerrain()->updateTextureBuffer();
 			NewMapWindowIsOpen = false;
+			IsWindowOpened = false;
 		}
 	}
 };

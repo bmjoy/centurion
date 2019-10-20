@@ -8,10 +8,6 @@ using namespace engine;
 
 namespace editor {
 
-	bool NewMapWindowIsOpen = true;
-	bool NewMapResetText = false;
-	string currentMapName;
-
 	NewMapWindow::NewMapWindow() {}
 	
 	void NewMapWindow::create() {
@@ -49,7 +45,10 @@ namespace editor {
 
 		currentMapName = getTranslation("EDITOR_defaultMapName");
 		text_input.create(currentMapName, startX + 21.f, startY - 131.f, 30);
+		
+		// per default when you open the editor, the window is opened
 		text_input.active();
+		IsWindowOpened = true; 
 	}
 
 	void NewMapWindow::render(bool pick) {

@@ -8,17 +8,11 @@ using namespace engine;
 
 namespace editor {
 
-	bool OpenMapWindowIsOpen = false;
-	bool OpenMapWindowUpdate = false;
-	vector<string> availableScenarios;
-
 	OpenMapWindow::OpenMapWindow() {
 		back_color = glm::vec4(60.f, 68.f, 104.f, 255.f);
 	}
 	
 	void OpenMapWindow::create() {
-
-		IsWindowOpened = true;
 
 		back_image = gui::Image("openmapwindow_back");
 		back_image.create("center", getParam("window-width") / 2.f, getParam("window-height") / 2.f, 0, 0, 0);

@@ -11,7 +11,6 @@ Camera::Camera() {}
 
 Camera::Camera(glm::vec3 startPosition, glm::vec3 startUp, GLfloat startYaw, GLfloat startPitch){
 	position = startPosition;
-	IsWindowOpened = false;
 
 	worldUp = startUp;
 	yaw = startYaw;

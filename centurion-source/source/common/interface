@@ -155,15 +155,18 @@ namespace editor {
 	//	EDITOR MENU
 	//
 	
-	// editor variables 
+	// extern editor variables 
+	// all the definitions are in source/editor/editor_functions.cpp
 
+	extern bool IsWindowOpened;
 	extern bool NewMapWindowIsOpen;
 	extern bool NewMapResetText;
 	extern string currentMapName;
 	extern bool OpenMapWindowIsOpen;
 	extern bool OpenMapWindowUpdate;
-	extern bool IsWindowOpened;
 	extern vector<string> availableScenarios;
+
+	//---------------------------------------------------
 
 	struct menuData {
 		vector<string> options;
