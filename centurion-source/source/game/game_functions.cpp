@@ -37,7 +37,7 @@ namespace game {
 
 	SelRectPoints *SelRectCoords() { return &selRectCoords; }
 
-	void picking(int *clickId, bool *blockMinimap) {
+	void renderObjectsPicking(bool *blockMinimap) {
 		if (!gameMenuStatus && getBoolean("mouse-left") && !selRectangleIsActive){
 			for (map<int, Building>::iterator bld = buildings.begin(); bld != buildings.end(); bld++) {
 				bld->second.render(true, 0);
@@ -45,10 +45,10 @@ namespace game {
 			for (map<int, Unit>::iterator u = units.begin(); u != units.end(); u++) {
 				u->second.render(true, 0);
 			}	
-			*clickId = get_id();
+			leftClickID = get_id();
 			if (gameMinimapStatus) {					
 				*blockMinimap = false;
-				if (*clickId > 0) {
+				if (leftClickID > 0) {
 					*blockMinimap = true;
 				}
 			}
@@ -70,35 +70,16 @@ namespace game {
 		glClear(GL_COLOR_BUFFER_BIT);
 	}
 
-	void goToPosition(double *lastTime, int clickId, bool *blockMinimap) {
+	void goToPosition(bool *blockMinimap) {
 		if (gameMinimapStatus) {
 			if (getBoolean("mouse-left") && cursorInGameScreen()) {
 				cameraToX = getParam("mouse-x-leftclick") / getParam("window-width")*(float)mapWidth - getParam("window-width-zoomed") / 2.f;
 				cameraToY = getYMinimapCoord(getParam("mouse-y-leftclick")) / getParam("window-height")*(float)mapHeight - getParam("window-height-zoomed") / 2.f;
-				/* Double Click detection */
 				// if you are clicking on a townhall you have to double click 
 				// to move the camera there and quit minimap
-				if (glfwGetTime() - *lastTime > 1.0f) { clickCount = 0; }
-				if (clickCount == 0) {
-					clickCount++;
-					clickIdList[0] = clickId;
-					*lastTime = glfwGetTime();
-					doubleClick = false;
-				}
-				else if (clickCount == 1) {
-					if (glfwGetTime() - *lastTime < 1.0f) {
-						clickIdList[1] = clickId;
-						if (clickIdList[1] == clickIdList[0]) {
-							doubleClick = true;
-						}
-						else {
-							clickIdList[0] = clickId;
-						}
-					}
-				}
-				if (doubleClick && clickId > 0) {
-					cameraToX = buildings[clickId].get_xPos() - getParam("window-width-zoomed") / 2.f;
-					cameraToY = buildings[clickId].get_yPos() - getParam("window-height-zoomed") / 2.f;
+				if (leftClickID > 0 && hasDoubleClicked()) {
+					cameraToX = buildings[leftClickID].get_xPos() - getParam("window-width-zoomed") / 2.f;
+					cameraToY = buildings[leftClickID].get_yPos() - getParam("window-height-zoomed") / 2.f;
 					*blockMinimap = false;
 				}
 				//------------------------------------------------
@@ -112,13 +93,13 @@ namespace game {
 		}
 	}
 
-	void renderObjects(int clickId) {
+	void renderObjects() {
 		for (map<int, Building>::iterator bld = buildings.begin(); bld != buildings.end(); bld++) {
-			bld->second.render(false, clickId);
+			bld->second.render(false, leftClickID);
 		}
 		if (!gameMinimapStatus) {
 			for (map<int, Unit>::iterator u = units.begin(); u != units.end(); u++) {
-				u->second.render(false, clickId);
+				u->second.render(false, leftClickID);
 				if (u->second.isSelected())	  selectedUnits++;
 			}
 		}

@@ -13,17 +13,16 @@ namespace editor {
 	/*----------------*/
 
 	void EditorMenu::picking() {
-
 		GLint mouseX = (GLint)getParam("mouse-x-position");
 		GLint mouseY = (GLint)getParam("mouse-y-position");
-		int clickId = get_id();
+		leftClickID = get_id();
 		int pos = (int)((mouseY - getParam("window-height"))*(-1)) / titles["File"].titleHeight;
 
 		//---------------------
 		//   RESET 
 		//---------------------
 
-		if (clickId < minPickingID || clickId > maxPickingID) {
+		if (leftClickID < minPickingID || leftClickID > maxPickingID) {
 			for (int i = 0; i < titles.size(); i++) {
 				std::string s = titlesList[i];
 				titles[s].isOpened = false;
@@ -32,11 +31,12 @@ namespace editor {
 		}
 
 		if (!IsWindowOpened) {
+			
 			//---------------------
 			//    FILE
 			//---------------------
 
-			if (pickingList["File"] == clickId) {
+			if (pickingList["File"] == leftClickID) {
 				if (pos == 0) {
 					titles["File"].isOpened = !titles["File"].isOpened;
 					menuIsOpened = !menuIsOpened;
@@ -107,7 +107,7 @@ namespace editor {
 			//    EDIT
 			//---------------------
 
-			if (pickingList["Edit"] == clickId) {
+			if (pickingList["Edit"] == leftClickID) {
 				titles["Edit"].isOpened = !titles["Edit"].isOpened;
 				menuIsOpened = !menuIsOpened;
 				for (int j = 0; j < titles.size(); j++) {
@@ -120,7 +120,7 @@ namespace editor {
 			//    TOOLS
 			//---------------------
 
-			if (pickingList["Tools"] == clickId) {
+			if (pickingList["Tools"] == leftClickID) {
 				titles["Tools"].isOpened = !titles["Tools"].isOpened;
 				menuIsOpened = !menuIsOpened;
 				for (int j = 0; j < titles.size(); j++) {
@@ -151,17 +151,30 @@ namespace editor {
 	void OpenMapWindow::picking() {
 		GLint mouseX = (GLint)getParam("mouse-x-position");
 		GLint mouseY = (GLint)getParam("mouse-y-position");
-		int clickId = get_id();
-		string clickName = getPickedObjectName(clickId);
+		leftClickID = get_id();
+		string clickName = getPickedObjectName(leftClickID);
 		int pos = (int)((mouseY - startY + map_list.padding_top)*(-1)) / (int)map_list.option_height;
 
-		if (clickName != "OpenMapWindow_open") selectedID = -1;
+		//Find a better way to clickName != "OpenMapWindow_open") selectedID = -1, by including elements list too
+		//otherwise selectedID will be reset to -1 every second and double click won't work properly
+		//if (clickName != "OpenMapWindow_open") selectedID = -1;
 
-		if (clickId == map_list.pickingID) {
+		if (selectedID != -1 && selectedID == pos && hasDoubleClicked()) {
+			cout << "DEBUG: You've chosen the following scenario to open: " + availableScenarios[selectedID] << endl;
+			openScenario(availableScenarios[selectedID]);
+			currentMapName = availableScenarios[selectedID];
+			obj::MapTerrain()->updateHeightsBuffer();
+			obj::MapTerrain()->updateTextureBuffer();
+			OpenMapWindowIsOpen = false;
+			IsWindowOpened = false;
+		}
+		cout << selectedID << "\n";
+		if (leftClickID == map_list.pickingID) {
 			if (pos >= 0) {
 				selectedID = pos;
 			}
 		}
+		
 
 		if (clickName == "OpenMapWindow_close") { // CLOSE
 			OpenMapWindowIsOpen = false;
@@ -176,6 +189,7 @@ namespace editor {
 				obj::MapTerrain()->updateHeightsBuffer();
 				obj::MapTerrain()->updateTextureBuffer();
 				OpenMapWindowIsOpen = false;
+				IsWindowOpened = false;
 			}
 		}
 	}

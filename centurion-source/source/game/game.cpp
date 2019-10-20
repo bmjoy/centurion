@@ -19,7 +19,6 @@ namespace game {
 		threshold = 20.0f;   // Camera Movement Threshold	
 		blockMinimap = false;
 		gameIsCreated = false;
-		click_id = 0;
 	}
 	void Game::reset() {
 		units = { };
@@ -103,7 +102,8 @@ namespace game {
 
 		//---------------------------------------
 		gameIsCreated = true;
-		lastTime = glfwGetTime();
+		leftClickID = 0;
+		resetDoubleClickTime();
 	}
 
 	void Game::run() {
@@ -128,11 +128,11 @@ namespace game {
 
 		/* Tracing and Picking */
 		tracing(surface);
-		picking(&click_id, &blockMinimap);
+		renderObjectsPicking(&blockMinimap);
 
 		/* Rendering */
 		surface->render(false);
-		renderObjects(click_id);
+		renderObjects();
 
 		// ---- Game UI ---- //
 
@@ -142,7 +142,7 @@ namespace game {
 
 		// ----------------- //	
 
-		goToPosition(&lastTime, click_id, &blockMinimap);
+		goToPosition(&blockMinimap);
 		glb::cameraProjection = ortho(0.0f, getParam("window-width-zoomed"), 0.0f, getParam("window-height-zoomed"), -(float)mapWidth, (float)mapWidth);
 		
 

@@ -40,7 +40,6 @@ void Mouse::mouse_control(int lastX, int lastY) {
 	if (!getBoolean("mouse-left")) {
 		setParam("mouse-x-leftclick", getParam("mouse-x-position"));
 		setParam("mouse-y-leftclick", getParam("mouse-y-position"));
-		
 	}
 	else {
 		currentState = "left";

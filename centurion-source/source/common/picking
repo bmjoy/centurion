@@ -6,6 +6,8 @@ using namespace std;
 using namespace glm;
 
 namespace glb {
+	
+	extern int leftClickID;
 
 	static int pickingID = 1;
 	void increasePickingID();
@@ -17,4 +19,14 @@ namespace glb {
 	void resetPicking();
 	int get_id();
 	vec3 getPickingColorFromID(int pickingID);
+	
+	//Double clicking section
+	struct doubleClickData {
+		double lastTime = 0;
+		int clickCount = 0;
+		int clickIdList[2] = { 0, 0 };
+	};
+	static doubleClickData dCD;
+	void resetDoubleClickTime();
+	bool hasDoubleClicked();
 };

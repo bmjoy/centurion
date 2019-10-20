@@ -122,16 +122,14 @@ void myWindow::handle_keys(GLFWwindow* window, int key, int code, int action, in
 	}
 }
 
-void myWindow::handle_mouse(GLFWwindow* window, double xPos, double yPos)
-{
+void myWindow::handle_mouse(GLFWwindow* window, double xPos, double yPos){
 	myWindow* theWindow = static_cast<myWindow*>(glfwGetWindowUserPointer(window));
 	theWindow->lastX = (GLfloat)xPos;
 	double y = fabs(yPos - getParam("window-height"));
 	theWindow->lastY = (GLfloat)y;
 }
 
-void myWindow::mouse_button_callback(GLFWwindow* window, int button, int action, int mods)
-{
+void myWindow::mouse_button_callback(GLFWwindow* window, int button, int action, int mods){
 	myWindow* theWindow = static_cast<myWindow*>(glfwGetWindowUserPointer(window));
 
 	if (button == GLFW_MOUSE_BUTTON_LEFT) {

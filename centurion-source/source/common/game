@@ -54,10 +54,10 @@ namespace game {
 	private:
 		Surface *surface;
 		UIGame *ui;
-		double lastTime;
+		//double lastTime;
 		float threshold, cameraLastX, cameraLastY;
 		bool blockMinimap;
-		int click_id;
+		/*int click_id;*/
 		json settl_data;
 		string r;
 		vec2 origin;
@@ -79,18 +79,15 @@ namespace game {
 
 	static SelRectPoints selRectCoords;
 	SelRectPoints *SelRectCoords();
-	static int clickCount = 0;
 	static float cameraToX = 0.f, cameraToY = 0.f;
-	static bool doubleClick = false;
-	static int clickIdList[2] = { 0, 0 };
 	static float cameraLastX = 0.f;
 	static float cameraLastY = 0.f;
 
-	void picking(int *clickId, bool *blockMinimap);
+	void renderObjectsPicking(bool *blockMinimap);
 	void tracing(Surface *s);
 	void clearBuffers();
-	void goToPosition(double *lastTime, int clickId, bool *blockMinimap);
-	void renderObjects(int clickId);
+	void goToPosition(bool *blockMinimap);
+	void renderObjects();
 	void renderSelRectangle();
 	void setMinimapProjection();
 };

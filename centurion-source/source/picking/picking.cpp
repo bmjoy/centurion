@@ -5,10 +5,12 @@ using namespace std;
 using namespace glm;
 
 namespace glb {
+	int leftClickID = 0;
 	void increasePickingID() { pickingID++; }
 	int getPickingID() { return pickingID; }
 	void addValueToPickingListUI(int pick, string value) { pickingListUI[pick] = value; }
 	string getPickedObjectName(int pick) { return pickingListUI[pick]; }
+	void resetDoubleClickTime() { dCD.lastTime = glfwGetTime(); }
 	void resetPicking() {
 		pickingID = 1;
 		pickingListUI = { };
@@ -16,6 +18,7 @@ namespace glb {
 	}
 	int get_id() {
 		unsigned char data[4];
+		//Edit the following line because you can get id with both left and right click
 		glReadPixels((GLint)getParam("mouse-x-leftclick"), (GLint)getParam("mouse-y-leftclick"), 1, 1, GL_RGBA, GL_UNSIGNED_BYTE, &data);
 		int pickedID =
 			data[0] +
@@ -28,5 +31,28 @@ namespace glb {
 		int g = (pickingID & 0x0000FF00) >> 8;
 		int b = (pickingID & 0x00FF0000) >> 16;
 		return vec3(r, g, b);
+	}
+	bool hasDoubleClicked() {
+		bool output = false;
+
+		if (glfwGetTime() - dCD.lastTime > 1.0f) { dCD.clickCount = 0; }
+		if (dCD.clickCount == 0) {
+			dCD.clickCount++;
+			dCD.clickIdList[0] = leftClickID;
+			dCD.lastTime = glfwGetTime();
+			output = false;
+		}
+		else if (dCD.clickCount == 1) {
+			if (glfwGetTime() - dCD.lastTime < 1.0f) {
+				dCD.clickIdList[1] = leftClickID;
+				if (dCD.clickIdList[1] == dCD.clickIdList[0]) {
+					output = true;
+				}
+				else {
+					dCD.clickIdList[0] = leftClickID;
+				}
+			}
+		}
+		return output;
 	}
 };

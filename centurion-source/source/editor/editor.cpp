@@ -54,6 +54,7 @@ namespace editor {
 			KeyCode[GLFW_KEY_DOWN] = false;
 			KeyCode[GLFW_KEY_LEFT] = false;
 			KeyCode[GLFW_KEY_RIGHT] = false;
+			//resetDoubleClickTime();
 		}
 	}
 
