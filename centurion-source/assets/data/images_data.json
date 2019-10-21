@@ -1,7 +1,9 @@
 {
 	"image_names": ["button_1", "main_background", "circle_pos", "arrowDown", "arrowUp",
 		"openmapwindow_back", "openmapwindow_buttonleft", "openmapwindow_buttonright",
-		"newmapwindow_back", "newmapwindow_buttonleft", "newmapwindow_buttonright", "newmapwindow_textinput"],
+		"newmapwindow_back", "newmapwindow_buttonleft", "newmapwindow_buttonright", "newmapwindow_textinput",
+        "addobjectwindow_back", "addobjectwindow_button1", 
+        "addobjectwindow_button2", "addobjectwindow_arrowleft", "addobjectwindow_arrowright"],
 	"roots": {
 		"button_1": "assets/ui/buttons/button_1.png",
 		"main_background": "assets/ui/menu/menu_background.png",
@@ -14,6 +16,11 @@
 		"newmapwindow_back": "assets/ui/editor/newmapwindow_back.png",
 		"newmapwindow_buttonleft": "assets/ui/editor/newmapwindow_buttonleft.png",
 		"newmapwindow_buttonright": "assets/ui/editor/newmapwindow_buttonright.png",
-		"newmapwindow_textinput": "assets/ui/editor/newmapwindow_textinput.png"
+		"newmapwindow_textinput": "assets/ui/editor/newmapwindow_textinput.png",
+		"addobjectwindow_back": "assets/ui/editor/addobjectwindow_back.png",
+		"addobjectwindow_button1": "assets/ui/editor/addobjectwindow_button1.png",
+		"addobjectwindow_button2": "assets/ui/editor/addobjectwindow_button2.png",
+		"addobjectwindow_arrowleft": "assets/ui/editor/addobjectwindow_arrowleft.png",
+		"addobjectwindow_arrowright": "assets/ui/editor/addobjectwindow_arrowright.png"
 	}
 }

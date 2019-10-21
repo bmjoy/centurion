@@ -261,6 +261,27 @@ namespace editor {
 	};
 
 	//
+	//	EDITOR ADD OBJECT WINDOW
+	//
+
+	class AddObjectWindow {
+	public:
+		AddObjectWindow();
+		void create();
+		void render(bool pick);
+		~AddObjectWindow();
+	private:
+		gui::Image back_image;		
+		gui::Image arrows[2];
+		gui::Image buttons[2];
+		gui::SimpleText buttons_text[2];
+		float startX, startY;
+		ivec2 back_size;
+		void picking();
+	};
+
+
+	//
 	//  EDITOR UI (CONTAINER)
 	//
 
@@ -274,6 +295,7 @@ namespace editor {
 		EditorMenu editor_menu;
 		OpenMapWindow open_map_window;
 		NewMapWindow new_map_window;
+		AddObjectWindow add_object_window;
 	};
 
 	static EditorUI myeditorUI;
