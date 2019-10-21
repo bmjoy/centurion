@@ -53,6 +53,8 @@ namespace glb {
 	string ReadFile(const char* fileLocation);
 	vector<string> get_all_files_names_within_folder(string folder);
 	vector<string> get_all_folders_names_within_folder(string folder);
+	struct file_info {string name, path;};
+	vector<file_info> get_all_files_names_within_subfolders(string const &folder_name, string const &file_extension = "");
 	void saveCurrentScenario(string name);
 	void openScenario(string name);
 

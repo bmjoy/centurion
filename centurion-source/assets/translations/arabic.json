@@ -1,6 +1,6 @@
 ﻿{
   "MAINMENU_buttonSinglePlayer": "ﻻﻋﺐ ﻣﻔﺮﺩ",
-  "MAINMENU_buttonEditor": "Editor",
+  "MAINMENU_buttonEditor": "ﻣﺤﺮر اﻟﺨﺮاﺋﻄ",
   "MAINMENU_buttonQuit": "ﺧﺮوج",
   
   "SINGLEPLAYER_buttonStart": "اﺑﺪٲ اﻟﻠﻌﺒﺔ",
@@ -9,6 +9,26 @@
   "GAME_pauseMenuButtonQuit": "اﻟﺨﺮﻮج ﻣﻦ اﻟﻠﻌﺒﺔ",
   "GAME_pauseMenuButtonClose": "أﻏﻠﻖ اﻟﻘﺎﺋﻤﺔ اﻟﺮﺋﻴﺴﻴﺔ",
 
+  "EDITOR_File": "ﻣﻠﻒ",
+  "EDITOR_FileNew": "ﺟﺪﻳﺪ",
+  "EDITOR_FileOpen": "ﻓﺘﺢ",
+  "EDITOR_FileSave": "ﺣﻔﻆ",
+  "EDITOR_FileExit": "ﺧﺮوج",
+  "EDITOR_Edit": "ﺗﻌﺪﻳﻞ",
+  "EDITOR_Edit_UpdateNormals": "",
+  "EDITOR_Tools": "اﻷدوات",
+  "EDITOR_Tools_AddObject": "",
+  "EDITOR_newMapButtonClose": "أﻏﻟﻖ",
+  "EDITOR_newMapButtonCreate": "إﻧﺸﺎء",
+  "EDITOR_openMapButtonClose": "أﻏﻟﻖ",
+  "EDITOR_openMapButtonOpen": "ﻓﺘﺢ",
+  "EDITOR_newScenario": "إﻧﺸﺎء اﻟﺴﻴﻨﺎرﻳﻮ ﺟﺪﻳﺪ",
+  "EDITOR_newScenarioName": "(اﺧﺘﻴﺎر اﺳﻢ ﻟﻠﺴﻴﻨﺎرﻳﻮ (ﻣﺎﻛﺲ 30 اﺣﺮڧ",
+  "EDITOR_defaultMapName": "ﺑﺪون ﻋﻨﻮان",
+  "EDITOR_buildings": "",
+  "EDITOR_units": "",
+  "EDITOR_decorations": "",
+  
   "WORD_gameStarted": "...ﺑﺪء اﻟﻠﻌﺒﺔ",
   "WORD_player_1": "ﻻﻋﺐ ۱",
   "WORD_player_2": "ﻻﻋﺐ ٢",
@@ -21,15 +41,17 @@
   "WORD_playersNumber": "ﻋﺪد اﻟﻼﻋﺒﻴﻦ",
   "WORD_errorCode": "رﻣﺰ ﺧﺎﻃﺊ",
 
-  "RACE_Rome": "روﻣﺎ",
-  "RACE_Egypt": "ﻣﺼﺮ",
+  "RACE_rome": "روﻣﺎ",
+  "RACE_egypt": "ﻣﺼﺮ",
 
-  "ERROR_settings": ".اﻹﻏﻼق ٳﻟﺰاﻣﻲ ﻟﻠﺘﻄﺒﻴﻖ SETTINGS.\n .ﻏﻴﺮ ﻗﺎدر ﻋﻟﻰ اﻟﻌﺜﻮر أو ﻗﺮاءة اﻟﻤﻠﻒ",
-  "ERROR_data": ".ﻹﻏﻼق ٳﻟﺰاﻣﻲ ﻟﻠﺘﻄﺒﻴﻖ DATA.\n .ﻏﻴﺮ ﻗﺎدر ﻋﻟﻰ اﻟﻌﺜﻮر أو ﻗﺮاءة اﻟﻤﻠﻒ",
-  "ERROR_imagesData": ".ﻏﻴﺮ ﻗﺎدر ﻋﻟﻰ اﻟﻌﺜﻮر أو ﻗﺮاءة اﻟﻤﻠﻒ IMAGES DATA.\n.اﻹﻏﻼق ٳﻟﺰاﻣﻲ ﻟﻠﺘﻄﺒﻴﻖ",
-  "ERROR_settlements": ".ﻹﻏﻼق ٳﻟﺰاﻣﻲ ﻟﻠﺘﻄﺒﻴﻖ SETTLEMENTS.\n .ﻏﻴﺮ ﻗﺎدر ﻋﻟﻰ اﻟﻌﺜﻮر أو ﻗﺮاءة اﻟﻤﻠﻒ",
-  "ERROR_menuData": ".ﻹﻏﻼق ٳﻟﺰاﻣﻲ ﻟﻠﺘﻄﺒﻴﻖ MENU DATA.\n .ﻏﻴﺮ ﻗﺎدر ﻋﻟﻰ اﻟﻌﺜﻮر أو ﻗﺮاءة اﻟﻤﻠﻒ",
-  "ERROR_fonts": ".ﻹﻏﻼق ٳﻟﺰاﻣﻲ ﻟﻠﺘﻄﺒﻴﻖ FONTS.\n .ﻏﻴﺮ ﻗﺎدر ﻋﻟﻰ اﻟﻌﺜﻮر أو ﻗﺮاءة اﻟﻤﻠﻒ",
+  "CLASS_rtownhall": "",
+  
+  "ERROR_settings": ".ﻏﻴﺮ ﻗﺎدر ﻋﻟﻰ اﻟﻌﺜﻮر أو ﻗﺮاءة اﻟﻤﻠﻒ. SETTINGS.\n .اﻹﻏﻼق ٳﻟﺰاﻣﻲ ﻟﻠﺘﻄﺒﻴﻖ",
+  "ERROR_data": ".ﻏﻴﺮ ﻗﺎدر ﻋﻟﻰ اﻟﻌﺜﻮر أو ﻗﺮاءة اﻟﻤﻠﻒ. DATA.\n .اﻹﻏﻼق ٳﻟﺰاﻣﻲ ﻟﻠﺘﻄﺒﻴﻖ",
+  "ERROR_imagesData": "ﻏﻴﺮ ﻗﺎدر ﻋﻟﻰ اﻟﻌﺜﻮر أو ﻗﺮاءة اﻟﻤﻠﻒ. IMAGES DATA.\n اﻹﻏﻼق ٳﻟﺰاﻣﻲ ﻟﻠﺘﻄﺒﻴﻖ",
+  "ERROR_settlements": ".ﻏﻴﺮ ﻗﺎدر ﻋﻟﻰ اﻟﻌﺜﻮر أو ﻗﺮاءة اﻟﻤﻠﻒ. SETTLEMENTS file.\n .اﻹﻏﻼق ٳﻟﺰاﻣﻲ ﻟﻠﺘﻄﺒﻴﻖ",
+  "ERROR_menuData": ".ﻏﻴﺮ ﻗﺎدر ﻋﻟﻰ اﻟﻌﺜﻮر أو ﻗﺮاءة اﻟﻤﻠﻒ. MENU DATA file.\n .اﻹﻏﻼق ٳﻟﺰاﻣﻲ ﻟﻠﺘﻄﺒﻴﻖ",
+  "ERROR_fonts": ".ﻏﻴﺮ ﻗﺎدر ﻋﻟﻰ اﻟﻌﺜﻮر أو ﻗﺮاءة اﻟﻤﻠﻒ. FONTS file.\n .اﻹﻏﻼق ٳﻟﺰاﻣﻲ ﻟﻠﺘﻄﺒﻴﻖ",
 
-  "WARNING_audioDevice": ""
+  "WARNING_audioDevice": "audio.\n ﻏﻴﺮ ﻗﺎدر ﻋﻟﻰ اﻟﻌﺜﻮر أو (اﻟﺗﻮاﺻﻞ) ٳﻟﻰ اﻟﺠﻬﺎز اﻟﺼﻮﺗﻲ. ﻹﻏﻼق ٳﻟﺰاﻣﻲ ﻟﻠﺘﻄﺒﻴﻖ"
 }

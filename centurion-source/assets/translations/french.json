@@ -1,4 +1,4 @@
-﻿{
+{
   "MAINMENU_buttonSinglePlayer": "Un joueur",
   "MAINMENU_buttonEditor": "Éditeur",
   "MAINMENU_buttonQuit": "Sortir du jeu",
@@ -25,7 +25,10 @@
   "EDITOR_newScenario": "Crée a nouveau scénario",
   "EDITOR_newScenarioName": "Choisir un nom pour le scénario (30 caractères maximum).",
   "EDITOR_defaultMapName": "Sans titre",
-
+  "EDITOR_buildings": "Buildings",
+  "EDITOR_units": "Units",
+  "EDITOR_decorations": "Decorations",
+  
   "WORD_gameStarted": "Le jeu commence...",
   "WORD_player_1": "Joueur 1",
   "WORD_player_2": "Joueur 2",
@@ -38,9 +41,11 @@
   "WORD_playersNumber": "Nombre de joueurs",
   "WORD_errorCode": "Code d'erreur",
 
-  "RACE_Rome": "Rome",
-  "RACE_Egypt": "Egypte",
+  "RACE_rome": "Rome",
+  "RACE_egypt": "Egypte",
 
+  "CLASS_rtownhall": "Roman Townhall",
+  
   "ERROR_settings": "Impossible de trouver ou de traiter le fichier SETTINGS.\n  L’arrêt forcé de l’application a commencé.",
   "ERROR_data": "Impossible de trouver ou de traiter le fichier DATA.\n  L’arrêt forcé de l’application a commencé.",
   "ERROR_imagesData": "Impossible de trouver ou de traiter le fichier IMAGES DATA.\n  L’arrêt forcé de l’application a commencé.",

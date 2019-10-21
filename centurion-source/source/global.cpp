@@ -302,6 +302,54 @@ namespace glb {
 		}
 		return names;
 	}
+	vector<file_info> get_all_files_names_within_subfolders(string const &folder_name, string const &file_extension) {
+		HANDLE finder;          // for FindFirstFile
+		WIN32_FIND_DATA file;   // data about current file.
+		priority_queue<string, vector<string>,
+			greater<string> > dirs;
+		dirs.push(folder_name); // start with passed directory 
+		vector<file_info> output;
+		do {
+			string path = dirs.top();// retrieve directory to search
+			dirs.pop();
+			if (path[path.size() - 1] != '\\')  // normalize the name.
+				path += "\\";
+			string const fmask = "*";
+			string mask = path + fmask;    // create mask for searching
+			// First search for files:
+			if (INVALID_HANDLE_VALUE == (finder = FindFirstFile(mask.c_str(), &file)))
+				continue;
+			do {
+				if (!(file.dwFileAttributes & FILE_ATTRIBUTE_DIRECTORY)) {
+					file_info fileInfo;
+					fileInfo.name = file.cFileName;
+					fileInfo.path = path + file.cFileName;
+					if (file_extension == "") {
+						fileInfo.name = fileInfo.name.substr(0, fileInfo.name.find_last_of("."));
+						output.push_back(fileInfo);
+					}
+					else {
+						string fullname = file.cFileName;
+						string fileExt = fullname.substr(fullname.find_last_of(".") + 1);
+						if (fileExt == file_extension) {
+							fileInfo.name = fileInfo.name.substr(0, fileInfo.name.find_last_of("."));
+							output.push_back(fileInfo);
+						}
+					}
+				}
+			} while (FindNextFile(finder, &file));
+			FindClose(finder);
+			// Then search for subdirectories:
+			if (INVALID_HANDLE_VALUE == (finder = FindFirstFile((path + "*").c_str(), &file)))
+				continue;
+			do {
+				if ((file.dwFileAttributes & FILE_ATTRIBUTE_DIRECTORY) && (file.cFileName[0] != '.'))
+					dirs.push(path + file.cFileName);
+			} while (FindNextFile(finder, &file));
+			FindClose(finder);
+		} while (!dirs.empty());
+		return output;
+	}
 	float getYMinimapCoord(float x) {
 		return getParam("window-height") * (x - getParam("ui-bottom-height")) / (getParam("window-height") - getParam("ui-bottom-height") - getParam("ui-top-height"));
 	}

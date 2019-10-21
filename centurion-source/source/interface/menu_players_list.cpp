@@ -130,7 +130,7 @@ namespace menu{
 	
 		for (int j = 0; j < *numPlayers; j++) {
 			if (clickedName == "CivForm_" + std::to_string(j)) {
-				int i = int((getParam("mouse-y-leftclick") - y + deltaY * j) / 20.0)*(-1);
+				int i = civiliz_Form[j].get_clicked_option();
 				civiliz_Form[j].open_close();
 
 				if (i > 0) {
@@ -157,7 +157,6 @@ namespace menu{
 				}
 			}
 		}
-
 	}
 
 	PlayersList::~PlayersList()

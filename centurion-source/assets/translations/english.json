@@ -1,4 +1,4 @@
-﻿{
+{
   "MAINMENU_buttonSinglePlayer": "Singleplayer",
   "MAINMENU_buttonEditor": "Editor",
   "MAINMENU_buttonQuit": "Exit",
@@ -25,6 +25,9 @@
   "EDITOR_newScenario": "Create new scenario",
   "EDITOR_newScenarioName": "Choose a name for the scenario\n(max 30 characters).",
   "EDITOR_defaultMapName": "Untitled",
+  "EDITOR_buildings": "Buildings",
+  "EDITOR_units": "Units",
+  "EDITOR_decorations": "Decorations",
 
   "WORD_gameStarted": "Game is being started...",
   "WORD_player_1": "Player 1",
@@ -38,9 +41,11 @@
   "WORD_playersNumber": "Number of players",
   "WORD_errorCode": "Error code",
 
-  "RACE_Rome": "Rome",
-  "RACE_Egypt": "Egypt",
-
+  "RACE_rome": "Rome",
+  "RACE_egypt": "Egypt",
+  
+  "CLASS_rtownhall": "Roman Townhall",
+  
   "ERROR_settings": "Unable to find or process SETTINGS file.\n  Forced application shutdown has started.",
   "ERROR_data": "Unable to find or process DATA file.\n  Forced application shutdown has started.",
   "ERROR_imagesData": "Unable to find or process IMAGES DATA file.\n  Forced application shutdown has started.",

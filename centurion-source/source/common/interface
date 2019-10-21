@@ -166,6 +166,8 @@ namespace editor {
 	extern bool OpenMapWindowUpdate;
 	extern vector<string> availableScenarios;
 	extern bool AddObjectWindowIsOpen;
+	extern bool AddObjectWindowUpdateForm1and2;
+	extern bool AddObjectWindowUpdateForm2;
 
 	//---------------------------------------------------
 
@@ -272,13 +274,18 @@ namespace editor {
 		void render(bool pick);
 		~AddObjectWindow();
 	private:
-		gui::Image back_image;		
+		gui::Image back_image;	
+		gui::Image object_thumbnail;
 		gui::Image arrows[2];
 		gui::Image buttons[2];
 		gui::SimpleText buttons_text[2];
+		gui::FormInput objectForms[3];
 		float startX, startY;
+		int pickingIDs[3];
+		string formSelectedTexts[3];
 		ivec2 back_size;
 		void picking();
+		void update();
 	};
 
 

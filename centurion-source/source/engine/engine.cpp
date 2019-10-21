@@ -138,19 +138,10 @@ namespace engine {
 
 		/* images */
 
-		ifstream path2("assets/data/images_data.json");
-		if (!path2.good()) {
-			forceGameClosure("NOT_FOUND", "ERROR_imagesData");
-		}
-		dataClass = json::parse(path2);
+		vector<file_info> imagesInfoList = get_all_files_names_within_subfolders("assets\\ui", "png");
 
-		for (int i = 0; i < dataClass["image_names"].size(); i++) {
-			string imageName = dataClass["image_names"][i].get<string>();
-			string root = dataClass["roots"][imageName];
-
-			obj::Img()->addPath(imageName, root);
-		}
-
+		for (int i = 0; i < imagesInfoList.size(); i++)
+			obj::Img()->addPath(imagesInfoList[i].name, imagesInfoList[i].path);
 	}
 
 	void Engine::fps() {

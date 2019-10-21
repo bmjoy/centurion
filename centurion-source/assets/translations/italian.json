@@ -1,4 +1,4 @@
-﻿{
+{
   "MAINMENU_buttonSinglePlayer": "Giocatore singolo",
   "MAINMENU_buttonEditor": "Editor",
   "MAINMENU_buttonQuit": "Esci dal gioco",
@@ -25,7 +25,10 @@
   "EDITOR_newScenario": "Crea nuovo scenario",
   "EDITOR_newScenarioName": "Scegli un nome per lo scenario (max 30 caratteri).",
   "EDITOR_defaultMapName": "Senza titolo",
-
+  "EDITOR_buildings": "Strutture",
+  "EDITOR_units": "Unità",
+  "EDITOR_decorations": "Decorazioni",
+  
   "WORD_gameStarted": "Avvio della partita in corso...",
   "WORD_player_1": "Giocatore 1",
   "WORD_player_2": "Giocatore 2",
@@ -38,9 +41,11 @@
   "WORD_playersNumber": "Numero di giocatori",
   "WORD_errorCode": "Codice errore",
 
-  "RACE_Rome": "Roma",
-  "RACE_Egypt": "Egitto",
+  "RACE_rome": "Roma",
+  "RACE_egypt": "Egitto",
 
+  "CLASS_rtownhall": "Foro romano",
+  
   "ERROR_settings": "Impossibile trovare o leggere il file SETTINGS.\n  Arresto forzato dell'applicazione in corso...",
   "ERROR_data": "Impossibile trovare o leggere il file DATA.\n  Arresto forzato dell'applicazione in corso...",
   "ERROR_imagesData": "Impossibile trovare o leggere il file IMAGES DATA.\n  Arresto forzato dell'applicazione in corso...",

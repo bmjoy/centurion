@@ -12,6 +12,8 @@ namespace editor {
 	bool NewMapResetText = false;
 	string currentMapName;
 	bool AddObjectWindowIsOpen = false;
+	bool AddObjectWindowUpdateForm1and2 = false;
+	bool AddObjectWindowUpdateForm2 = false;
 
 	Editor *EDITOR() { return &myeditor; }
 
