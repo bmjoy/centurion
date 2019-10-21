@@ -165,6 +165,7 @@ namespace editor {
 	extern bool OpenMapWindowIsOpen;
 	extern bool OpenMapWindowUpdate;
 	extern vector<string> availableScenarios;
+	extern bool AddObjectWindowIsOpen;
 
 	//---------------------------------------------------
 

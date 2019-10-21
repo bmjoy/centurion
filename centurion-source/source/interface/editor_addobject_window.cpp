@@ -12,7 +12,6 @@ namespace editor {
 	AddObjectWindow::AddObjectWindow() {}
 	
 	void AddObjectWindow::create() {
-
 		back_size.x = 790; back_size.y = 260;
 
 		back_image = gui::Image("addobjectwindow_back");
@@ -46,14 +45,10 @@ namespace editor {
 		arrows[1].create("top-left", startX, startY, 0, 0, getPickingID());
 		addValueToPickingListUI(getPickingID(), "AddObjWindow_rightarrow");
 		increasePickingID();
-
-
-		IsWindowOpened = true; 
 	}
 
 	void AddObjectWindow::render(bool pick) {
-
-		if (NewMapWindowIsOpen) {
+		if (AddObjectWindowIsOpen) {
 			if (pick && getBoolean("mouse-left")) {
 				buttons[0].render(true);
 				buttons[1].render(true);

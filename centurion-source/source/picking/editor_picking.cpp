@@ -49,7 +49,6 @@ namespace editor {
 				//    NEW
 
 				if (pos == 1) {
-
 					NewMapWindowIsOpen = true;
 					NewMapResetText = true;
 					IsWindowOpened = true;
@@ -65,7 +64,6 @@ namespace editor {
 				//    OPEN
 
 				if (pos == 2) {
-
 					OpenMapWindowIsOpen = true;
 					OpenMapWindowUpdate = true;
 					IsWindowOpened = true;
@@ -81,7 +79,6 @@ namespace editor {
 				//    SAVE
 
 				if (pos == 3) { // save
-
 					saveCurrentScenario(currentMapName);
 
 					for (int i = 0; i < titles.size(); i++) {
@@ -108,7 +105,6 @@ namespace editor {
 			//---------------------
 
 			if (pickingList["Edit"] == leftClickID) {
-
 				if (pos == 0){
 					titles["Edit"].isOpened = !titles["Edit"].isOpened;
 					menuIsOpened = !menuIsOpened;
@@ -118,8 +114,10 @@ namespace editor {
 					}
 				}
 
-				if (pos == 1) { // Update normals
+				//---------------------
+				//    UPDATE NORMALS
 
+				if (pos == 1) { // Update normals
 					mapgen::updateAllNormals();
 					obj::MapTerrain()->updateHeightsBuffer();
 
@@ -136,11 +134,27 @@ namespace editor {
 			//---------------------
 
 			if (pickingList["Tools"] == leftClickID) {
-				titles["Tools"].isOpened = !titles["Tools"].isOpened;
-				menuIsOpened = !menuIsOpened;
-				for (int j = 0; j < titles.size(); j++) {
-					std::string s = titlesList[j];
-					if (s != "Tools") titles[s].isOpened = false;
+				if (pos == 0) {
+					titles["Tools"].isOpened = !titles["Tools"].isOpened;
+					menuIsOpened = !menuIsOpened;
+					for (int j = 0; j < titles.size(); j++) {
+						std::string s = titlesList[j];
+						if (s != "Tools") titles[s].isOpened = false;
+					}
+				}
+
+				//---------------------
+				//    ADD OBJECT
+
+				if (pos == 1) { // Add Object
+					AddObjectWindowIsOpen = true;
+					IsWindowOpened = true;
+
+					for (int i = 0; i < titles.size(); i++) {
+						std::string s = titlesList[i];
+						titles[s].isOpened = false;
+					}
+					menuIsOpened = false;
 				}
 			}
 
@@ -209,7 +223,6 @@ namespace editor {
 		text_input.active();
 
 		if (clickName == "NewMapWindow_close") { // CLOSE
-
 			currentMapName = text_input.get_text();
 
 			NewMapWindowIsOpen = false;

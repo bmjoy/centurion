@@ -13,7 +13,6 @@ namespace editor {
 	}
 	
 	void OpenMapWindow::create() {
-
 		back_image = gui::Image("openmapwindow_back");
 		back_image.create("center", getParam("window-width") / 2.f, getParam("window-height") / 2.f, 0, 0, 0);
 		availableScenarios = get_all_folders_names_within_folder("scenarios");
