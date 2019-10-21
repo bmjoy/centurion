@@ -28,7 +28,7 @@ namespace editor {
         titles["File"].options = { "New", "Open", "Save", "Exit" };
 
         titles["Edit"].title = "Edit";
-        titles["Edit"].options = { "Edit1", "Edit2", "Edit3" };
+        titles["Edit"].options = { "UpdateNormals", "Edit2", "Edit3" };
 
 		titles["Tools"].title = "Tools";
 		titles["Tools"].options = { "Tools1", "Tools2", "Tools3" };

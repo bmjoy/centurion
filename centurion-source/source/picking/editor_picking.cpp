@@ -108,11 +108,26 @@ namespace editor {
 			//---------------------
 
 			if (pickingList["Edit"] == leftClickID) {
-				titles["Edit"].isOpened = !titles["Edit"].isOpened;
-				menuIsOpened = !menuIsOpened;
-				for (int j = 0; j < titles.size(); j++) {
-					std::string s = titlesList[j];
-					if (s != "Edit") titles[s].isOpened = false;
+
+				if (pos == 0){
+					titles["Edit"].isOpened = !titles["Edit"].isOpened;
+					menuIsOpened = !menuIsOpened;
+					for (int j = 0; j < titles.size(); j++) {
+						std::string s = titlesList[j];
+						if (s != "Edit") titles[s].isOpened = false;
+					}
+				}
+
+				if (pos == 1) { // Update normals
+
+					mapgen::updateAllNormals();
+					obj::MapTerrain()->updateHeightsBuffer();
+
+					for (int i = 0; i < titles.size(); i++) {
+						std::string s = titlesList[i];
+						titles[s].isOpened = false;
+					}
+					menuIsOpened = false;
 				}
 			}
 
@@ -155,33 +170,20 @@ namespace editor {
 		string clickName = getPickedObjectName(leftClickID);
 		int pos = (int)((mouseY - startY + map_list.padding_top)*(-1)) / (int)map_list.option_height;
 
-		//Find a better way to clickName != "OpenMapWindow_open") selectedID = -1, by including elements list too
-		//otherwise selectedID will be reset to -1 every second and double click won't work properly
-		//if (clickName != "OpenMapWindow_open") selectedID = -1;
+		if (leftClickID == 0) selectedID = -1;
 
-		if (selectedID != -1 && selectedID == pos && hasDoubleClicked()) {
-			cout << "DEBUG: You've chosen the following scenario to open: " + availableScenarios[selectedID] << endl;
-			openScenario(availableScenarios[selectedID]);
-			currentMapName = availableScenarios[selectedID];
-			obj::MapTerrain()->updateHeightsBuffer();
-			obj::MapTerrain()->updateTextureBuffer();
-			OpenMapWindowIsOpen = false;
-			IsWindowOpened = false;
-		}
-		cout << selectedID << "\n";
 		if (leftClickID == map_list.pickingID) {
 			if (pos >= 0) {
 				selectedID = pos;
 			}
 		}
 		
-
 		if (clickName == "OpenMapWindow_close") { // CLOSE
 			OpenMapWindowIsOpen = false;
 			IsWindowOpened = false;
 		}
 
-		if (clickName == "OpenMapWindow_open") { // OPEN
+		if (clickName == "OpenMapWindow_open" || (selectedID == pos && hasDoubleClicked())) { // OPEN
 			if (selectedID != -1) {
 				cout << "DEBUG: You've chosen the following scenario to open: " + availableScenarios[selectedID] << endl;
 				openScenario(availableScenarios[selectedID]);
@@ -207,6 +209,9 @@ namespace editor {
 		text_input.active();
 
 		if (clickName == "NewMapWindow_close") { // CLOSE
+
+			currentMapName = text_input.get_text();
+
 			NewMapWindowIsOpen = false;
 			IsWindowOpened = false;
 		}
@@ -221,7 +226,10 @@ namespace editor {
 		if (clickName == "NewMapWindow_create") { // CREATE
 
 			cout << "DEBUG: You've set the following map name: " + text_input.get_text() << endl;
-			
+
+			currentMapName = text_input.get_text();
+			saveCurrentScenario(currentMapName);
+
 			mapgen::reset_map();
 			obj::MapTerrain()->updateHeightsBuffer();
 			obj::MapTerrain()->updateTextureBuffer();

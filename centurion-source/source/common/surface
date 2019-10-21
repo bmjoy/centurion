@@ -67,7 +67,7 @@ namespace mapgen {
 	void reset_map();
 	float getNoiseEstimate(float x, float y);
 	int getVertexPos(int x, int y);
-	vec3 getVertex(int x, int y);
+	vec3 getVertex(int x, int y, bool isNormal);
 	array<Triangle, 6> getAdjacentTriangles(ivec2 pos);
 	vec3 calculateTriangleNormal(Triangle T);
 	vector<ivec2> getAdjacentVertices(ivec2 pos);

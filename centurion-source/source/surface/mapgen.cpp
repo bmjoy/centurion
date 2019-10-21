@@ -45,7 +45,7 @@ namespace mapgen {
 			MapHeights()[i * 4] = 0.f;
 			MapHeights()[i * 4 + 1] = 0.f;
 			MapHeights()[i * 4 + 2] = 0.f;
-			MapHeights()[i * 4 + 3] = 1.f;
+			MapHeights()[i * 4 + 3] = 0.707107f;
 		}
 	}
 
@@ -119,9 +119,11 @@ namespace mapgen {
 		return j;
 	}
 
-	glm::vec3 getVertex(int x, int y) {
+	glm::vec3 getVertex(int x, int y, bool isNormal) {
 		int j = getVertexPos(x, y);
-		float zNoise = MapHeights()[j * 4];
+		float intensity;
+		isNormal ? intensity = 1.5f : intensity = 1.f;
+		float zNoise = MapHeights()[j * 4] * intensity;
 		float x1 = (float)x;
 		float y1 = (float)y + zNoise;
 		float z1 = (float)y*(-1.f) + zNoise;
@@ -132,22 +134,22 @@ namespace mapgen {
 		int gap = grid_size;
 		std::array<Triangle, 6> triangles;
 		triangles[0] = {
-			getVertex(pos.x, pos.y), getVertex(pos.x - gap, pos.y),getVertex(pos.x - gap, pos.y + gap),
+			getVertex(pos.x, pos.y, true), getVertex(pos.x - gap, pos.y, true),getVertex(pos.x - gap, pos.y + gap, true),
 		};
 		triangles[1] = {
-			getVertex(pos.x, pos.y), getVertex(pos.x - gap, pos.y + gap), getVertex(pos.x, pos.y + gap)
+			getVertex(pos.x, pos.y, true), getVertex(pos.x - gap, pos.y + gap, true), getVertex(pos.x, pos.y + gap, true)
 		};
 		triangles[2] = {
-			getVertex(pos.x, pos.y), getVertex(pos.x, pos.y + gap), getVertex(pos.x + gap, pos.y)
+			getVertex(pos.x, pos.y, true), getVertex(pos.x, pos.y + gap, true), getVertex(pos.x + gap, pos.y, true)
 		};
 		triangles[3] = {
-			getVertex(pos.x, pos.y), getVertex(pos.x + gap, pos.y), getVertex(pos.x + gap, pos.y - gap)
+			getVertex(pos.x, pos.y, true), getVertex(pos.x + gap, pos.y, true), getVertex(pos.x + gap, pos.y - gap, true)
 		};
 		triangles[4] = {
-			getVertex(pos.x, pos.y), getVertex(pos.x + gap, pos.y - gap),getVertex(pos.x, pos.y - gap),
+			getVertex(pos.x, pos.y, true), getVertex(pos.x + gap, pos.y - gap, true),getVertex(pos.x, pos.y - gap, true),
 		};
 		triangles[5] = {
-			getVertex(pos.x, pos.y), getVertex(pos.x, pos.y - gap), getVertex(pos.x - gap, pos.y)
+			getVertex(pos.x, pos.y, true), getVertex(pos.x, pos.y - gap, true), getVertex(pos.x - gap, pos.y, true)
 		};
 		return triangles;
 	}
@@ -196,7 +198,7 @@ namespace mapgen {
 			else {
 				MapHeights()[j * 4 + 1] = 0.f;
 				MapHeights()[j * 4 + 2] = 0.f;
-				MapHeights()[j * 4 + 3] = 1.f;
+				MapHeights()[j * 4 + 3] = 0.707107f;
 			}
 		}
 	}
@@ -223,7 +225,7 @@ namespace mapgen {
 			else {
 				MapHeights()[i * 4 + 1] = 0.f;
 				MapHeights()[i * 4 + 2] = 0.f;
-				MapHeights()[i * 4 + 3] = 1.f;
+				MapHeights()[i * 4 + 3] = 0.707107f;
 			}
 		}
 	}

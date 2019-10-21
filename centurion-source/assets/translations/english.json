@@ -15,6 +15,7 @@
   "EDITOR_FileSave": "Save",
   "EDITOR_FileExit": "Exit",
   "EDITOR_Edit": "Edit",
+  "EDITOR_EditUpdateNormals": "Update Normals",
   "EDITOR_Tools": "Tools",
   "EDITOR_newMapButtonClose": "Close",
   "EDITOR_newMapButtonCreate": "Create",

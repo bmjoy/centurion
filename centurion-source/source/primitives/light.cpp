@@ -13,7 +13,7 @@ Light::Light(GLfloat red, GLfloat green, GLfloat blue, GLfloat aIntensity, GLflo
 	ambientIntensity = aIntensity;
 
 	direction = glm::vec3(xDir, yDir, zDir);
-	diffuseIntensity = dIntensity;
+	diffuseIntensity = dIntensity * 1.25f;
 }
 
 void Light::use_light(GLfloat ambientIntensityLocation, GLfloat ambientColorLocation, GLfloat diffuseIntensityLocation, GLfloat directionLocation) {
