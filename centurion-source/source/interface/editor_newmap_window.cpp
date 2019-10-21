@@ -48,6 +48,7 @@ namespace editor {
 		
 		// per default when you open the editor, the window is opened
 		text_input.active();
+		NewMapWindowIsOpen = true;
 		IsWindowOpened = true; 
 	}
 

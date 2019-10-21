@@ -170,6 +170,7 @@ namespace editor {
 
 	struct menuData {
 		vector<string> options;
+		vector<string> hotkeys;
 		vector<gui::Rectangle> optionsBack;
 		vector<gui::SimpleText> optionsText;
 		vector<ivec2> optionsPosition;

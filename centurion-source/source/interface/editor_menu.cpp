@@ -26,12 +26,15 @@ namespace editor {
 
         titles["File"].title = "File";
         titles["File"].options = { "New", "Open", "Save", "Exit" };
+        titles["File"].hotkeys = { "CTRL+N", "CTRL+O", "CTRL+S", "Esc" };
 
         titles["Edit"].title = "Edit";
         titles["Edit"].options = { "UpdateNormals", "Edit2", "Edit3" };
+        titles["Edit"].hotkeys = { "", "", "" };
 
 		titles["Tools"].title = "Tools";
 		titles["Tools"].options = { "Tools1", "Tools2", "Tools3" };
+		titles["Tools"].hotkeys = { "", "", "" };
 
 		float titlesPos = 0.f;
 
@@ -67,7 +70,7 @@ namespace editor {
                 titles[s].optionsPosition.push_back(ivec2(titlesPos, getParam("window-height") - titles[s].optionsHeight * (j + 2)));
 
                 gui::SimpleText tempText = gui::SimpleText("static");
-                tempText.create_static(getTranslation("EDITOR_" + titles[s].title + titles[s].options[j]), "tahoma_13px", titles[s].optionsPosition[j].x + 0.5f * titles[s].optionsWidth - titles[s].optionsOffsetX, titles[s].optionsPosition[j].y + 0.5f * titles[s].optionsHeight, "left", "middle", vec4(255.f), "bold");
+                tempText.create_static(getTranslation("EDITOR_" + titles[s].title + titles[s].options[j]) + "    " + titles[s].hotkeys[j], "tahoma_13px", titles[s].optionsPosition[j].x + 0.5f * titles[s].optionsWidth - titles[s].optionsOffsetX, titles[s].optionsPosition[j].y + 0.5f * titles[s].optionsHeight, "left", "middle", vec4(255.f), "bold");
                 titles[s].optionsText.push_back(tempText);
 
                 gui::Rectangle tempRect = gui::Rectangle();
