@@ -59,10 +59,8 @@
   
   "ERROR_settings": "Impossibile trovare o leggere il file SETTINGS.\n  Arresto forzato dell'applicazione in corso...",
   "ERROR_data": "Impossibile trovare o leggere il file DATA.\n  Arresto forzato dell'applicazione in corso...",
-  "ERROR_imagesData": "Impossibile trovare o leggere il file IMAGES DATA.\n  Arresto forzato dell'applicazione in corso...",
   "ERROR_settlements": "Impossibile trovare o leggere il file SETTLEMENTS.\n  Arresto forzato dell'applicazione in corso...",
   "ERROR_menuData": "Impossibile trovare o leggere il file MENU DATA.\n  Arresto forzato dell'applicazione in corso...",
-  "ERROR_fonts": "Impossibile trovare o leggere il file FONTS.\n  Arresto forzato dell'applicazione in corso...",
 
   "WARNING_audioDevice": "Impossibile trovare (o comunicare con) il dispositivo audio.\n  Nessun sarà riprodotto alcun suono finché l'errore persiste."
 }

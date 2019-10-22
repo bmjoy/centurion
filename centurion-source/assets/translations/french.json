@@ -59,10 +59,8 @@
   
   "ERROR_settings": "Impossible de trouver ou de traiter le fichier SETTINGS.\n  L’arrêt forcé de l’application a commencé.",
   "ERROR_data": "Impossible de trouver ou de traiter le fichier DATA.\n  L’arrêt forcé de l’application a commencé.",
-  "ERROR_imagesData": "Impossible de trouver ou de traiter le fichier IMAGES DATA.\n  L’arrêt forcé de l’application a commencé.",
   "ERROR_settlements": "Impossible de trouver ou de traiter le fichier SETTLEMENTS.\n  L’arrêt forcé de l’application a commencé.",
   "ERROR_menuData": "Impossible de trouver ou de traiter le fichier MENU DATA.\n  L’arrêt forcé de l’application a commencé.",
-  "ERROR_fonts": "Impossible de trouver ou de traiter le fichier FONT.\n  L’arrêt forcé de l’application a commencé.",
 
   "WARNING_audioDevice": "Impossible de trouver (ou de communiquer avec) le périphérique audio.\n Aucun son sera reproduit tant que l'erreur persiste."
 }

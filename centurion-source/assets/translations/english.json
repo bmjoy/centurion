@@ -59,10 +59,8 @@
   
   "ERROR_settings": "Unable to find or process SETTINGS file.\n  Forced application shutdown has started.",
   "ERROR_data": "Unable to find or process DATA file.\n  Forced application shutdown has started.",
-  "ERROR_imagesData": "Unable to find or process IMAGES DATA file.\n  Forced application shutdown has started.",
   "ERROR_settlements": "Unable to find or process SETTLEMENTS file.\n  Forced application shutdown has started.",
   "ERROR_menuData": "Unable to find or process MENU DATA file.\n  Forced application shutdown has started.",
-  "ERROR_fonts": "Unable to find or process FONTS file.\n  Forced application shutdown has started.",
 
   "WARNING_audioDevice": "Unable to find (or communicate with) the audio device.\n  No sound will be played as long as the error persists."
 }

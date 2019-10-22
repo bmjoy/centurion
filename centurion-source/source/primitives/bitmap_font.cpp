@@ -69,17 +69,13 @@ void BitmapFont::create() {
 	glBindVertexArray(0);
 
 	/* Texture */
-	//Close the game if it wasn't able to find or process fonts.json file
-	ifstream path_fonts("assets/data/fonts.json");
-	if (!path_fonts) {
-		forceGameClosure("NOT_FOUND" , "ERROR_fonts");
-	}
-	json d = json::parse(path_fonts);
-	map<string, json> jsonData;
-	string fontName;
 
-	for (int i = 0; i < d["fonts"].size(); i++){
-		fontName = d["fonts"][i].get<string>();
+	vector<file_info> fonts = get_all_files_names_within_subfolders("assets\\fonts", "png");
+	string fontName;
+	map<string, json> jsonData;
+
+	for (int i = 0; i < fonts.size(); i++){
+		fontName = fonts[i].name;
 		path = "assets/fonts/" + fontName + ".png";
 
 		// load image

@@ -59,10 +59,8 @@
 
   "ERROR_settings": "No se puede encontrar o procesar el fichero SETTINGS.\n  La aplicación va a ser cerrada automáticamente.",
   "ERROR_data": "No se puede encontrar o procesar el fichero DATA.\n  La aplicación va a ser cerrada automáticamente.",
-  "ERROR_imagesData": "No se puede encontrar o procesar el fichero IMAGES DATA.\n  La aplicación va a ser cerrada automáticamente.",
   "ERROR_settlements": "No se puede encontrar o procesar el fichero SETTLEMENTS.\n  La aplicación va a ser cerrada automáticamente.",
   "ERROR_menuData": "No se puede encontrar o procesar el fichero MENU DATA.\n  La aplicación va a ser cerrada automáticamente.",
-  "ERROR_fonts": "No se puede encontrar o procesar el fichero FONTS.\n  La aplicación va a ser cerrada automáticamente.",
 
   "WARNING_audioDevice": "No se puede encontrar (o comunicar con) el dispositivo de audio.\n  No se reproducirá ningún sonido mientras persista el error."
 }
