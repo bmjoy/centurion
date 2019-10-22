@@ -28,6 +28,7 @@ namespace editor {
 		void reset() { editorIsCreated = false; }
 		void create();
 		void run();
+		void handleKeyboardControls();
 		~Editor();
 	private:
 		Surface *surface;

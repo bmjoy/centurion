@@ -74,14 +74,6 @@ namespace glb {
 		setBoolean("mouse-scroll-bool", false);
 		setParam("mouse-scroll", 0.f);
 
-		setBoolean("up-key", false);
-		setBoolean("down-key", false);
-		setBoolean("right-key", false);
-		setBoolean("left-key", false);
-		setBoolean("esc-key", false);
-		setBoolean("ctrl-key", false);
-
-
 		menuProjection = glm::ortho(0.0f, getParam("window-width"), 0.0f, getParam("window-height"), -100.0f, 100.0f);
 		cameraProjection = glm::ortho(0.0f, getParam("window-width-zoomed"), 0.0f, getParam("window-height-zoomed"), -(float)mapWidth, (float)mapWidth);
 
@@ -214,7 +206,6 @@ namespace glb {
 				}
 		}
 		textureFile.close();
-
 		cout << "DEBUG: The map is saved with the following name: " + name << endl;
 	}
 	void openScenario(string name) {

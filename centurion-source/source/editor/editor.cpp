@@ -29,19 +29,10 @@ namespace editor {
 		editorIsCreated = true;
 	}
 	void Editor::run() {
-
 		/* Keyboard control */
-
 		if (!IsWindowOpened) { // TODO: merge all these in a function in Editor->Editor_functions.cpp
 			CAMERA()->keyboardControl();
-			if (KeyCode[GLFW_KEY_SPACE]) {
-				game::gameMinimapStatus = !game::gameMinimapStatus;
-				KeyCode[GLFW_KEY_SPACE] = false;
-			}
-			if (KeyCode[GLFW_KEY_Z]) {
-				setBoolean("wireframe", !getBoolean("wireframe"));
-				KeyCode[GLFW_KEY_Z] = false;
-			}
+			handleKeyboardControls();
 		}
 
 		/* If minimap is NOT active */
@@ -66,7 +57,7 @@ namespace editor {
 		/* normal rendering */
 		obj::applyGameMatrices(&proj, &view);
 
-		game::renderObjectsPicking();
+		if (!IsWindowOpened) game::renderObjectsPicking();
 
 		surface->render(false);
 		game::renderObjects();
@@ -74,9 +65,8 @@ namespace editor {
 		// editor UI normal rendering
 		obj::applyMenuMatrices();
 		EDITOR_UI()->render(false);
-		
 
-		game::goToPosition();
+		if(game::gameMinimapStatus) game::goToPosition();
 		glb::cameraProjection = glm::ortho(0.0f, getParam("window-width-zoomed"), 0.0f, getParam("window-height-zoomed"), -(float)game::mapWidth, (float)game::mapWidth);
 
 		setBoolean("mouse-right", false);
@@ -88,6 +78,35 @@ namespace editor {
 			KeyCode[GLFW_KEY_DOWN] = false;
 			KeyCode[GLFW_KEY_LEFT] = false;
 			KeyCode[GLFW_KEY_RIGHT] = false;
+		}
+	}
+
+	void Editor::handleKeyboardControls() {
+		//CTRL Hotkeys
+		if (KeyCode[GLFW_KEY_LEFT_CONTROL] || KeyCode[GLFW_KEY_RIGHT_CONTROL]) {
+			if (KeyCode[GLFW_KEY_N]) { NewMapWindowIsOpen = true; NewMapResetText = true; IsWindowOpened = true; }
+			if (KeyCode[GLFW_KEY_O]) { OpenMapWindowIsOpen = true; OpenMapWindowUpdate = true; IsWindowOpened = true; }
+			if (KeyCode[GLFW_KEY_S]) { saveCurrentScenario(currentMapName); }
+			if (KeyCode[GLFW_KEY_A]) { AddObjectWindowIsOpen = true; }	
+		}
+
+		if (KeyCode[GLFW_KEY_ESCAPE]) {
+			//if () {
+				ENGINE()->Reset();
+			//}
+			/*else {
+				//Give access to titles variable in editor_picking and call function "closeMenu"
+				menuIsOpened = false;
+			}*/
+		}
+
+		if (KeyCode[GLFW_KEY_SPACE]) {
+			game::gameMinimapStatus = !game::gameMinimapStatus;
+			KeyCode[GLFW_KEY_SPACE] = false;
+		}
+		if (KeyCode[GLFW_KEY_Z]) {
+			setBoolean("wireframe", !getBoolean("wireframe"));
+			KeyCode[GLFW_KEY_Z] = false;
 		}
 	}
 

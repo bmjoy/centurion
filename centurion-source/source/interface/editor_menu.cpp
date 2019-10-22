@@ -34,7 +34,7 @@ namespace editor {
 
 		titles["Tools"].title = "Tools";
 		titles["Tools"].options = { "AddObject", "Tools2", "Tools3" };
-		titles["Tools"].hotkeys = { "", "", "" };
+		titles["Tools"].hotkeys = { "CTRL+A", "", "" };
 
 		float titlesPos = 0.f;
 

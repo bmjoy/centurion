@@ -31,7 +31,6 @@ void Camera::update(){
 }
 
 void Camera::mouseControl(float threshold) {
-
 	abs_x = getParam("mouse-x-position") + position.x;
 	abs_y = getParam("mouse-y-position") + position.y;
 
@@ -65,7 +64,7 @@ void Camera::mouseControl(float threshold) {
 	}
 
 	/* MOUSE SCROLLING --> CAMERA ZOOM */
-	if ((ENGINE()->getEnvironment() == "game") && !gameMenuStatus && getBoolean("ctrl-key") && getBoolean("mouse-scroll-bool")) {
+	if (!gameMenuStatus && (KeyCode[GLFW_KEY_LEFT_CONTROL] || KeyCode[GLFW_KEY_RIGHT_CONTROL]) && getBoolean("mouse-scroll-bool")) {
 		if (getParam("mouse-scroll") > 0 && currentZoomCamera > 1.0f) {
 			currentZoomCamera -= (int)getParam("mouse-scroll");
 		}

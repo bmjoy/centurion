@@ -33,7 +33,6 @@ namespace editor {
 		}
 
 		if (!IsWindowOpened) {
-			
 			//---------------------
 			//    FILE
 			//---------------------
@@ -53,6 +52,7 @@ namespace editor {
 				if (pos == 1) {
 					NewMapWindowIsOpen = true;
 					NewMapResetText = true;
+					AddObjectWindowIsOpen = false;
 					IsWindowOpened = true;
 
 					for (int i = 0; i < titles.size(); i++) {
@@ -68,6 +68,7 @@ namespace editor {
 				if (pos == 2) {
 					OpenMapWindowIsOpen = true;
 					OpenMapWindowUpdate = true;
+					AddObjectWindowIsOpen = false;
 					IsWindowOpened = true;
 
 					for (int i = 0; i < titles.size(); i++) {
@@ -150,7 +151,6 @@ namespace editor {
 
 				if (pos == 1) { // Add Object
 					AddObjectWindowIsOpen = true;
-					IsWindowOpened = true;
 
 					for (int i = 0; i < titles.size(); i++) {
 						std::string s = titlesList[i];
@@ -165,8 +165,14 @@ namespace editor {
 		}
 	}
 
-    bool EditorMenu::isHover(glm::vec2 pos, int w, int h) {
+	//void EditorMenu::closeMenu() {
+	/*	for (int i = 0; i < titles.size(); i++) {
+			std::string s = titlesList[i];
+			titles[s].isOpened = false;
+		}*/
+	//}
 
+    bool EditorMenu::isHover(glm::vec2 pos, int w, int h) {
         if ((getParam("mouse-x-position") > pos.x) && (getParam("mouse-x-position") < pos.x + w) && (getParam("mouse-y-position") > pos.y) && (getParam("mouse-y-position") < pos.y + h)) {
             return true;
         }
@@ -239,7 +245,6 @@ namespace editor {
 		}
 
 		if (clickName == "NewMapWindow_create") { // CREATE
-
 			cout << "DEBUG: You've set the following map name: " + text_input.get_text() << endl;
 			currentMapName = text_input.get_text();
 			
@@ -251,6 +256,10 @@ namespace editor {
 			obj::MapTerrain()->updateTextureBuffer();
 			NewMapWindowIsOpen = false;
 			IsWindowOpened = false;
+			//This section should be replaced with a question asking for overwriting
+			struct stat info;
+			string sPath = "scenarios/" + currentMapName;
+			if (stat(sPath.c_str(), &info) == 0) MessageBox(NULL, "Selected name already exists.\nMap will be overwritten.", "Centurion", MB_ICONINFORMATION);
 			saveCurrentScenario(currentMapName);
 		}
 	}

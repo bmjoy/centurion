@@ -39,17 +39,15 @@ namespace game {
 	SelRectPoints *SelRectCoords() { return &selRectCoords; }
 
 	void tracing(Surface *s) {
-		if (!gameMinimapStatus) {
-			unsigned char tracingCol[4];
-			(*s).render(true);
-			glReadPixels((GLint)getParam("mouse-x-leftclick"), (GLint)getParam("mouse-y-leftclick"), 1, 1, GL_RGBA, GL_UNSIGNED_BYTE, &tracingCol);
-			mapgen::mouseZNoise = (mapgen::maxZ - mapgen::minZ) * ((float)tracingCol[0] / 255.0f) + mapgen::minZ;
-			clearBuffers();
-		}
+		unsigned char tracingCol[4];
+		(*s).render(true);
+		glReadPixels((GLint)getParam("mouse-x-leftclick"), (GLint)getParam("mouse-y-leftclick"), 1, 1, GL_RGBA, GL_UNSIGNED_BYTE, &tracingCol);
+		mapgen::mouseZNoise = (mapgen::maxZ - mapgen::minZ) * ((float)tracingCol[0] / 255.0f) + mapgen::minZ;
+		clearBuffers();
 	}
 
 	void renderObjectsPicking() {
-		if (!gameMenuStatus && getBoolean("mouse-left") && !selRectangleIsActive){
+		if (getBoolean("mouse-left") && !selRectangleIsActive){
 			for (map<int, Building>::iterator bld = buildings.begin(); bld != buildings.end(); bld++) {
 				bld->second.render(true, 0);
 			}
@@ -76,7 +74,7 @@ namespace game {
 				if (u->second.isSelected())	  selectedUnits++;
 			}
 		}
-		renderSelRectangle();
+		if (!gameMinimapStatus && !editor::IsWindowOpened)	renderSelRectangle();
 	}
 
 	void clearBuffers() {
@@ -85,84 +83,79 @@ namespace game {
 	}
 
 	void goToPosition() {
-		if (gameMinimapStatus) {
-			if (getBoolean("mouse-left") && cursorInGameScreen()) {
-				cameraToX = getParam("mouse-x-leftclick") / getParam("window-width")*(float)mapWidth - getParam("window-width-zoomed") / 2.f;
-				cameraToY = getYMinimapCoord(getParam("mouse-y-leftclick")) / getParam("window-height")*(float)mapHeight - getParam("window-height-zoomed") / 2.f;
-				// if you are clicking on a townhall you have to double click 
-				// to move the camera there and quit minimap
-				if (leftClickID > 0 && hasDoubleClicked()) {
-					cameraToX = buildings[leftClickID].get_xPos() - getParam("window-width-zoomed") / 2.f;
-					cameraToY = buildings[leftClickID].get_yPos() - getParam("window-height-zoomed") / 2.f;
-					blockMinimap = false;
-				}
-				//------------------------------------------------
-				if (!blockMinimap) {
-					CAMERA()->go_to_pos(cameraToX, cameraToY);
-					gameMinimapStatus = false;
-					setBoolean("mouse-left", false);
-					setBoolean("mouse-left-pressed", false);
-				}
+		if (getBoolean("mouse-left") && cursorInGameScreen()) {
+			cameraToX = getParam("mouse-x-leftclick") / getParam("window-width")*(float)mapWidth - getParam("window-width-zoomed") / 2.f;
+			cameraToY = getYMinimapCoord(getParam("mouse-y-leftclick")) / getParam("window-height")*(float)mapHeight - getParam("window-height-zoomed") / 2.f;
+			// if you are clicking on a townhall you have to double click 
+			// to move the camera there and quit minimap
+			if (leftClickID > 0 && hasDoubleClicked()) {
+				cameraToX = buildings[leftClickID].get_xPos() - getParam("window-width-zoomed") / 2.f;
+				cameraToY = buildings[leftClickID].get_yPos() - getParam("window-height-zoomed") / 2.f;
+				blockMinimap = false;
+			}
+			//------------------------------------------------
+			if (!blockMinimap) {
+				CAMERA()->go_to_pos(cameraToX, cameraToY);
+				gameMinimapStatus = false;
+				setBoolean("mouse-left", false);
+				setBoolean("mouse-left-pressed", false);
 			}
 		}
 	}
 
 	void renderSelRectangle() {
-		if (!gameMinimapStatus) {
-			if (getBoolean("mouse-left-pressed")) {
-				if (!selRectangleIsActive){
-					cout << "DEBUG: Selection rectangle enabled.\n";
-					(*SelRectCoords()).startX = getParam("mouse-x-leftclick") * getParam("window-width-zoomed") / getParam("window-width") + cameraLastX;
-					(*SelRectCoords()).startY = getParam("mouse-y-leftclick") * getParam("window-height-zoomed") / getParam("window-height") + cameraLastY;
-				}
-				(*SelRectCoords()).lastX = getParam("mouse-x-position") * getParam("window-width-zoomed") / getParam("window-width") + getParam("camera-x-position");
-				(*SelRectCoords()).lastY = getParam("mouse-y-position") * getParam("window-height-zoomed") / getParam("window-height") + getParam("camera-y-position");
-				if (getParam("mouse-y-position") < getParam("ui-bottom-height")) {
-					(*SelRectCoords()).lastY = getParam("ui-bottom-height")*getParam("window-height-zoomed") / getParam("window-height") + 1.0f + getParam("camera-y-position");
-				}
-				if (getParam("mouse-y-position") > getParam("window-height") - getParam("ui-top-height")) {
-					(*SelRectCoords()).lastY = getParam("window-height-zoomed") - getParam("ui-top-height")*getParam("window-height-zoomed") / getParam("window-height") - 1.0f + getParam("camera-y-position");
-				}
+		if (getBoolean("mouse-left-pressed")) {
+			if (!selRectangleIsActive){
+				cout << "DEBUG: Selection rectangle enabled.\n";
+				(*SelRectCoords()).startX = getParam("mouse-x-leftclick") * getParam("window-width-zoomed") / getParam("window-width") + cameraLastX;
+				(*SelRectCoords()).startY = getParam("mouse-y-leftclick") * getParam("window-height-zoomed") / getParam("window-height") + cameraLastY;
+			}
+			(*SelRectCoords()).lastX = getParam("mouse-x-position") * getParam("window-width-zoomed") / getParam("window-width") + getParam("camera-x-position");
+			(*SelRectCoords()).lastY = getParam("mouse-y-position") * getParam("window-height-zoomed") / getParam("window-height") + getParam("camera-y-position");
+			if (getParam("mouse-y-position") < getParam("ui-bottom-height")) {
+				(*SelRectCoords()).lastY = getParam("ui-bottom-height")*getParam("window-height-zoomed") / getParam("window-height") + 1.0f + getParam("camera-y-position");
+			}
+			if (getParam("mouse-y-position") > getParam("window-height") - getParam("ui-top-height")) {
+				(*SelRectCoords()).lastY = getParam("window-height-zoomed") - getParam("ui-top-height")*getParam("window-height-zoomed") / getParam("window-height") - 1.0f + getParam("camera-y-position");
+			}
 
-				float w = ((*SelRectCoords()).lastX - (*SelRectCoords()).startX);
-				float h = ((*SelRectCoords()).lastY - (*SelRectCoords()).startY);
+			float w = ((*SelRectCoords()).lastX - (*SelRectCoords()).startX);
+			float h = ((*SelRectCoords()).lastY - (*SelRectCoords()).startY);
 
-				int origin = 0;
-				if (w > 0 && h > 0) origin = 0; // bottom-left
-				if (w > 0 && h < 0) origin = 1; // top-left
-				if (w < 0 && h > 0) origin = 4; // bottom-right
-				if (w < 0 && h < 0) origin = 3; // top-right
+			int origin = 0;
+			if (w > 0 && h > 0) origin = 0; // bottom-left
+			if (w > 0 && h < 0) origin = 1; // top-left
+			if (w < 0 && h > 0) origin = 4; // bottom-right
+			if (w < 0 && h < 0) origin = 3; // top-right
 
-				if (abs(w) > 1 && abs(h) > 1){
-					GAME()->selRectangle.render(vec4(255.f), 0, (*SelRectCoords()).startX, (*SelRectCoords()).startY, abs(w), abs(h), origin);
-					(*SelRectCoords()).minX = std::min((*SelRectCoords()).startX, (*SelRectCoords()).lastX);
-					(*SelRectCoords()).maxX = std::max((*SelRectCoords()).startX, (*SelRectCoords()).lastX);
-					(*SelRectCoords()).minY = std::min((*SelRectCoords()).startY, (*SelRectCoords()).lastY);
-					(*SelRectCoords()).maxY = std::max((*SelRectCoords()).startY, (*SelRectCoords()).lastY);
-				}
-				else {
-					(*SelRectCoords()).minX = -0.1f;
-					(*SelRectCoords()).maxX = -0.1f;
-					(*SelRectCoords()).minY = -0.1f;
-					(*SelRectCoords()).maxY = -0.1f;
-				}
-				
-				selRectangleIsActive = true;
+			if (abs(w) > 1 && abs(h) > 1){
+				GAME()->selRectangle.render(vec4(255.f), 0, (*SelRectCoords()).startX, (*SelRectCoords()).startY, abs(w), abs(h), origin);
+				(*SelRectCoords()).minX = std::min((*SelRectCoords()).startX, (*SelRectCoords()).lastX);
+				(*SelRectCoords()).maxX = std::max((*SelRectCoords()).startX, (*SelRectCoords()).lastX);
+				(*SelRectCoords()).minY = std::min((*SelRectCoords()).startY, (*SelRectCoords()).lastY);
+				(*SelRectCoords()).maxY = std::max((*SelRectCoords()).startY, (*SelRectCoords()).lastY);
 			}
 			else {
-				if (selRectangleIsActive) cout << "DEBUG: Selection rectangle disabled.\n";
-				cameraLastX = getParam("camera-x-position");
-				cameraLastY = getParam("camera-y-position");
-				(*SelRectCoords()).startX = -0.1f;
-				(*SelRectCoords()).startY = -0.1f;
-				(*SelRectCoords()).lastX = -0.1f;
-				(*SelRectCoords()).lastY = -0.1f;
 				(*SelRectCoords()).minX = -0.1f;
 				(*SelRectCoords()).maxX = -0.1f;
 				(*SelRectCoords()).minY = -0.1f;
 				(*SelRectCoords()).maxY = -0.1f;
-				selRectangleIsActive = false;
-			}
+			}	
+			selRectangleIsActive = true;
+		}
+		else {
+			if (selRectangleIsActive) cout << "DEBUG: Selection rectangle disabled.\n";
+			cameraLastX = getParam("camera-x-position");
+			cameraLastY = getParam("camera-y-position");
+			(*SelRectCoords()).startX = -0.1f;
+			(*SelRectCoords()).startY = -0.1f;
+			(*SelRectCoords()).lastX = -0.1f;
+			(*SelRectCoords()).lastY = -0.1f;
+			(*SelRectCoords()).minX = -0.1f;
+			(*SelRectCoords()).maxX = -0.1f;
+			(*SelRectCoords()).minY = -0.1f;
+			(*SelRectCoords()).maxY = -0.1f;
+			selRectangleIsActive = false;
 		}
 	}
 

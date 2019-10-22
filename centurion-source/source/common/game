@@ -49,6 +49,7 @@ namespace game {
 		bool game_is_created() { return gameIsCreated; }
 		void reset();
 		void create();
+		void handleKeyboardControls();
 		void run();
 		void clear();
 		gui::Rectangle selRectangle;
