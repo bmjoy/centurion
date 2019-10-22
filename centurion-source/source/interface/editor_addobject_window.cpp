@@ -2,6 +2,7 @@
 #include <picking>
 #include <engine>
 #include <surface>
+#include <editor>
 
 using namespace glb;
 using namespace engine;
@@ -65,6 +66,7 @@ namespace editor {
 		increasePickingID();
 
 		AddObjectWindowUpdateForm2 = true;
+		addingObject = false;
 	}
 	void AddObjectWindow::update() {
 		formSelectedTexts[0] = objectForms[0].selectedText.substr(7); // buildings/units/decoration
@@ -105,6 +107,8 @@ namespace editor {
 		selectedObject = formSelectedTexts[0] + "_" + formSelectedTexts[1] + "_" + formSelectedTexts[2];
 		object_thumbnail = gui::Image(selectedObject);
 		object_thumbnail.create("center", getParam("window-width") / 2.f, back_size.y / 2.f, 0, 0, 0);
+		
+		prepareObject(formSelectedTexts[0], formSelectedTexts[2]);
 	}
 
 	void AddObjectWindow::render(bool pick) {
@@ -112,7 +116,17 @@ namespace editor {
 		if (AddObjectWindowUpdateForm1and2 || AddObjectWindowUpdateForm2) update();
 
 		if (AddObjectWindowIsOpen) {
-			if (pick && getBoolean("mouse-left")) {
+
+			if (addingObject) {
+				insertingObject(formSelectedTexts[0], formSelectedTexts[2]);
+
+				if (getBoolean("mouse-left")) {
+					addingObject = false;
+					addObject(formSelectedTexts[0]);
+				}
+			}
+
+			if (pick && getBoolean("mouse-left") && !addingObject) {
 				buttons[0].render(true);
 				buttons[1].render(true);
 				arrows[0].render(true);
@@ -134,6 +148,8 @@ namespace editor {
 				buttons_text[1].render_static();				
 			}
 		}	
+
+		if (getBoolean("mouse-right")) addingObject = false;
 	}
 
 	AddObjectWindow::~AddObjectWindow() {}

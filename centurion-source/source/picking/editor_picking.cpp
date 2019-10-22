@@ -2,6 +2,7 @@
 #include <picking>
 #include <engine>
 #include <surface>
+#include <editor>
 
 using namespace glb;
 using namespace engine;
@@ -297,6 +298,11 @@ namespace editor {
 		if (clickName == "AddObjWindow_rightarrow") { // CLOSE
 			objectForms[2].select_next();
 			update();
+		}
+
+		if (clickName == "AddObjWindow_add") { // CLOSE
+			addingObject = true;
+			setBoolean("mouse-left", false);
 		}
 	}
 };

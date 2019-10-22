@@ -13,6 +13,9 @@ class Player;
 
 namespace editor {
 
+	using namespace unit;
+	using namespace building;
+
 	//
 	//	EDITOR CLASS --> source/editor/editor.cpp
 	//
@@ -36,4 +39,20 @@ namespace editor {
 
 	static Editor myeditor;
 	Editor *EDITOR();
+
+	// 
+	//	EDITOR FUNCTIONS
+	//
+
+	extern array<Player, 8> playersList;
+	extern Unit unitTemp;
+	extern Building buildingTemp;
+	extern map<int, Building> buildings;
+	extern map<int, Unit> units;
+
+	void prepareObject(string type, string classname);
+	void insertingObject(string type, string classname);
+	void addObject(string type);
+	void renderObjectsPicking();
+	void renderObjects();
 };

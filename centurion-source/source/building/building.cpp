@@ -9,6 +9,21 @@ using namespace glm;
 namespace building {
 	Building::Building(){}
 
+	void Building::prepare() {
+		
+		ifstream path_ent(data["ent_path"].get<string>());
+		if (!path_ent.good()) {
+			//showGameWarning("Error code 0x00000002\n\n  Unable to find (or communicate with) the audio device.\n  No sound will be played as long as the error persists.");
+		}
+		json ent_data = json::parse(path_ent);
+		string texturePath = ent_data["path"].get<string>() + ent_data["sprites"][0]["name"].get<string>();
+		unsigned char *texture = stbi_load(texturePath.c_str(), &w, &h, &nrChannels, 0);
+		stbi_image_free(texture);
+
+		clickableInMinimap = (bool)data["clickable_in_minimap"].get<int>();
+		//selectionSound = (sound)data["selectionSound"].get<string>(); TODO
+		textureID = obj::BSprite()->getTextureId(className);
+	}
 	void Building::create() {
 		ifstream path_scan(data["pass_path"].get<string>());
 		json grid_data = json::parse(path_scan);

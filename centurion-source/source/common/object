@@ -45,6 +45,7 @@ namespace building {
 	{
 	public:
 		Building();
+		void prepare();
 		void create();
 		void render(bool picking, int clickID);
 		int UnitsInBuilding();

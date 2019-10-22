@@ -7,7 +7,7 @@
 
 using namespace glb;
 using namespace engine;
-using namespace game;
+//using namespace game;
 
 namespace editor {
 	Editor::Editor(){
@@ -19,7 +19,7 @@ namespace editor {
 
 		surface->reset();
 		EDITOR_UI()->create();
-		
+
 		//circle.create("border", 0.f, 0.f, 300.f, 200.f, 8.f, "center");
 		editorIsCreated = true;
 	}
@@ -36,14 +36,18 @@ namespace editor {
 		proj = glb::cameraProjection;
 		view = CAMERA()->calculateViewMatrix();
 		obj::applyGameMatrices(&proj, &view);
+
+		renderObjectsPicking();
+
 		surface->render(false);
+		renderObjects();
 
 		// editor UI normal rendering
 		obj::applyMenuMatrices();
 		//circle.render(glm::vec4(255.f), getParam("mouse-x-position"), getParam("mouse-y-position")); /* temporary : it will be in editor UI */
 		EDITOR_UI()->render(false);
 		
-		glb::cameraProjection = glm::ortho(0.0f, getParam("window-width-zoomed"), 0.0f, getParam("window-height-zoomed"), -(float)mapWidth, (float)mapWidth);
+		glb::cameraProjection = glm::ortho(0.0f, getParam("window-width-zoomed"), 0.0f, getParam("window-height-zoomed"), -(float)game::mapWidth, (float)game::mapWidth);
 
 		setBoolean("mouse-right", false);
 		setBoolean("mouse-left", false); // temporary
