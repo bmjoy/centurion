@@ -18,6 +18,7 @@
   "EDITOR_Edit_UpdateNormals": "",
   "EDITOR_Tools": "اﻷدوات",
   "EDITOR_Tools_AddObject": "",
+  "EDITOR_addObjectButtonAdd": "",
   "EDITOR_newMapButtonClose": "أﻏﻟﻖ",
   "EDITOR_newMapButtonCreate": "إﻧﺸﺎء",
   "EDITOR_openMapButtonClose": "أﻏﻟﻖ",
@@ -28,6 +29,18 @@
   "EDITOR_buildings": "",
   "EDITOR_units": "",
   "EDITOR_decorations": "",
+  "EDITORTREE_CLASS_ebarracks": "",
+  "EDITORTREE_CLASS_eblacksmith": "",
+  "EDITORTREE_CLASS_eosiristemple": "",
+  "EDITORTREE_CLASS_etavern": "",
+  "EDITORTREE_CLASS_etemple": "",
+  "EDITORTREE_CLASS_etownhall": "",
+  "EDITORTREE_CLASS_rarena": "",
+  "EDITORTREE_CLASS_rbarracks": "",
+  "EDITORTREE_CLASS_rblacksmith": "",
+  "EDITORTREE_CLASS_rtavern": "",
+  "EDITORTREE_CLASS_rtemple": "",
+  "EDITORTREE_CLASS_rtownhall": "",
   
   "WORD_gameStarted": "...ﺑﺪء اﻟﻠﻌﺒﺔ",
   "WORD_player_1": "ﻻﻋﺐ ۱",
@@ -43,8 +56,6 @@
 
   "RACE_rome": "روﻣﺎ",
   "RACE_egypt": "ﻣﺼﺮ",
-
-  "CLASS_rtownhall": "",
   
   "ERROR_settings": ".ﻏﻴﺮ ﻗﺎدر ﻋﻟﻰ اﻟﻌﺜﻮر أو ﻗﺮاءة اﻟﻤﻠﻒ. SETTINGS.\n .اﻹﻏﻼق ٳﻟﺰاﻣﻲ ﻟﻠﺘﻄﺒﻴﻖ",
   "ERROR_data": ".ﻏﻴﺮ ﻗﺎدر ﻋﻟﻰ اﻟﻌﺜﻮر أو ﻗﺮاءة اﻟﻤﻠﻒ. DATA.\n .اﻹﻏﻼق ٳﻟﺰاﻣﻲ ﻟﻠﺘﻄﺒﻴﻖ",

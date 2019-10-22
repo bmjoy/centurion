@@ -1,5 +1,7 @@
 {
     "type": "building",
+    "race": "egypt",
+    "class_name": "ebarracks",
     "ent_path": "assets/buildings/egypt/barracks/ebarracks.oe.json",
     "pass_path" : "assets/buildings/egypt/barracks/ebarracks_pass.json",
     "clickable_in_minimap": 0

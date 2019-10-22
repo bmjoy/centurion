@@ -18,6 +18,7 @@
   "EDITOR_Edit_UpdateNormals": "",
   "EDITOR_Tools": "",
   "EDITOR_Tools_AddObject": "",
+  "EDITOR_addObjectButtonAdd": "",
   "EDITOR_newMapButtonClose": "",
   "EDITOR_newMapButtonCreate": "",
   "EDITOR_openMapButtonClose": "",
@@ -28,6 +29,18 @@
   "EDITOR_buildings": "",
   "EDITOR_units": "",
   "EDITOR_decorations": "",
+  "EDITORTREE_CLASS_ebarracks": "",
+  "EDITORTREE_CLASS_eblacksmith": "",
+  "EDITORTREE_CLASS_eosiristemple": "",
+  "EDITORTREE_CLASS_etavern": "",
+  "EDITORTREE_CLASS_etemple": "",
+  "EDITORTREE_CLASS_etownhall": "",
+  "EDITORTREE_CLASS_rarena": "",
+  "EDITORTREE_CLASS_rbarracks": "",
+  "EDITORTREE_CLASS_rblacksmith": "",
+  "EDITORTREE_CLASS_rtavern": "",
+  "EDITORTREE_CLASS_rtemple": "",
+  "EDITORTREE_CLASS_rtownhall": "",
   
   "WORD_gameStarted": "El juego se está iniciando ...",
   "WORD_player_1": "Jugador 1",
@@ -43,8 +56,6 @@
 
   "RACE_rome": "Roma",
   "RACE_egypt": "Egipto",
-  
-  "CLASS_rtownhall": "",
 
   "ERROR_settings": "No se puede encontrar o procesar el fichero SETTINGS.\n  La aplicación va a ser cerrada automáticamente.",
   "ERROR_data": "No se puede encontrar o procesar el fichero DATA.\n  La aplicación va a ser cerrada automáticamente.",

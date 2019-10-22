@@ -129,6 +129,12 @@ namespace engine {
 
 			if (dataClass["type"] == "building") {			
 				obj::BSprite()->addPath(dataClass["ent_path"]);
+
+				/* editor object string list */
+				EditorObjectStringListForm0[i] = "buildings";
+				EditorObjectStringListForm1[i] = dataClass["race"].get<string>();
+				EditorObjectStringListForm2[i] = dataClass["class_name"].get<string>();
+
 			}
 
 			if (dataClass["type"] == "unit") {

@@ -63,18 +63,35 @@ namespace editor {
             titles[s].titleText.create_static(getTranslation("EDITOR_" + titles[s].title), "tahoma_13px", titles[s].titlePosition.x + 0.5f * titles[s].titleWidth, titles[s].titlePosition.y + 0.5f * titles[s].titleHeight, "center", "middle", vec4(255.f), "bold");
             
             /* options */
-            titles[s].optionsWidth = 100;
+			int charMaxWidth = 15;
+			int maxOptionWordSize = 0;
+			string option_temp;
+			for (int j = 0; j < titles[s].options.size(); j++) {
+				option_temp = getTranslation("EDITOR_" + titles[s].title + "_" + titles[s].options[j]);
+				maxOptionWordSize = std::max(maxOptionWordSize, (int)option_temp.size());
+			}
+            titles[s].optionsWidth = std::max(charMaxWidth * maxOptionWordSize, 200);
+
+			int maxHotKeyWordSize = 0;
+			for (int j = 0; j < titles[s].hotkeys.size(); j++)
+				maxHotKeyWordSize = std::max(maxHotKeyWordSize, (int)titles[s].hotkeys[j].size());
+			titles[s].optionsHotKeysWidth = charMaxWidth * maxHotKeyWordSize;
+
             titles[s].optionsHeight = barHeight;
             titles[s].optionsOffsetX = 20;
+
             for (int j = 0; j < titles[s].options.size(); j++) {
                 titles[s].optionsPosition.push_back(ivec2(titlesPos, getParam("window-height") - titles[s].optionsHeight * (j + 2)));
 
                 gui::SimpleText tempText = gui::SimpleText("static");
-                tempText.create_static(getTranslation("EDITOR_" + titles[s].title + "_" + titles[s].options[j]) + "    " + titles[s].hotkeys[j], "tahoma_13px", titles[s].optionsPosition[j].x + 0.5f * titles[s].optionsWidth - titles[s].optionsOffsetX, titles[s].optionsPosition[j].y + 0.5f * titles[s].optionsHeight, "left", "middle", vec4(255.f), "bold");
+                tempText.create_static(getTranslation("EDITOR_" + titles[s].title + "_" + titles[s].options[j]), "tahoma_13px", titles[s].optionsPosition[j].x + titles[s].optionsOffsetX*1.f, titles[s].optionsPosition[j].y + 0.5f * titles[s].optionsHeight, "left", "middle", vec4(255.f), "bold");
                 titles[s].optionsText.push_back(tempText);
 
+				tempText.create_static(titles[s].hotkeys[j], "tahoma_13px", titles[s].optionsPosition[j].x + titles[s].optionsOffsetX + titles[s].optionsWidth*1.f, titles[s].optionsPosition[j].y + 0.5f * titles[s].optionsHeight, "left", "middle", vec4(255.f), "bold");
+				titles[s].optionsHotKeysText.push_back(tempText);
+
                 gui::Rectangle tempRect = gui::Rectangle();
-                tempRect.create("filled", (float)titles[s].optionsPosition[j].x, (float)titles[s].optionsPosition[j].y, (float)titles[s].optionsWidth, (float)titles[s].optionsHeight, "bottom-left", titles[s].pickingID);
+                tempRect.create("filled", (float)titles[s].optionsPosition[j].x, (float)titles[s].optionsPosition[j].y, (float)titles[s].optionsWidth + (float)titles[s].optionsHotKeysWidth, (float)titles[s].optionsHeight, "bottom-left", titles[s].pickingID);
                 titles[s].optionsBack.push_back(tempRect);
             }
             titles[s].isOpened = false;
@@ -133,6 +150,7 @@ namespace editor {
                             titles[s].optionsBack[j].render(titles[s].color);
                         }
                         titles[s].optionsText[j].render_static();
+                        titles[s].optionsHotKeysText[j].render_static();
                     }
                 }
             }

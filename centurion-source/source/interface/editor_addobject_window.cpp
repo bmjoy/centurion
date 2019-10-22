@@ -17,9 +17,6 @@ namespace editor {
 		back_image = gui::Image("addobjectwindow_back");
 		back_image.create("center", getParam("window-width")/2.f, back_size.y / 2.f, 0, 0, 0);
 
-		object_thumbnail = gui::Image("buildings_rome_rtownhall");
-		object_thumbnail.create("center", getParam("window-width") / 2.f, back_size.y / 2.f, 0, 0, 0);
-
 		// startX and startY are TOP-LEFT coordinates (as in Paint)
 		startX = getParam("window-width") / 2.f - back_image.getImageSize().x / 2.f;
 		startY = back_size.y / 2.f + back_image.getImageSize().y / 2.f;
@@ -35,9 +32,9 @@ namespace editor {
 		increasePickingID();
 
 		buttons_text[0] = gui::SimpleText("static");
-		buttons_text[0].create_static(getTranslation("EDITOR_newMapButtonClose"), "tahoma_13px", startX + 725.f, startY - 28.f, "center", "middle", vec4(255.f), "bold");
+		buttons_text[0].create_static(getTranslation("EDITOR_addObjectButtonAdd"), "tahoma_13px", startX + 725.f, startY - 28.f, "center", "middle", vec4(255.f), "bold");
 		buttons_text[1] = gui::SimpleText("static");
-		buttons_text[1].create_static(getTranslation("EDITOR_newMapButtonCreate"), "tahoma_13px", startX + 725.f, startY - 233.f, "center", "middle", vec4(255.f), "bold");
+		buttons_text[1].create_static(getTranslation("EDITOR_newMapButtonClose"), "tahoma_13px", startX + 725.f, startY - 233.f, "center", "middle", vec4(255.f), "bold");
 
 		arrows[0] = gui::Image("addobjectwindow_arrowleft");
 		arrows[0].create("top-left", startX, startY, 0, 0, getPickingID());
@@ -51,7 +48,7 @@ namespace editor {
 
 		objectForms[0] = gui::FormInput(true);
 		pickingIDs[0] = getPickingID();
-		objectForms[0].create(startX + 11.f, startY - 11.f, 150.f, 20.f, { "EDITOR_buildings", "EDITOR_units", "EDITOR_decorations" }, pickingIDs[0]);
+		objectForms[0].create(startX + 11.f, startY - 11.f, 150.f, 20.f, { "EDITOR_buildings" }, pickingIDs[0]);
 		addValueToPickingListUI(pickingIDs[0], "AddObjWindow_form0");
 		increasePickingID();
 
@@ -70,18 +67,46 @@ namespace editor {
 		AddObjectWindowUpdateForm2 = true;
 	}
 	void AddObjectWindow::update() {
-		if (AddObjectWindowUpdateForm2) {
-			objectForms[2].create(startX + 11.f, startY - 11.f - 30.f * 2, 150.f, 20.f, glb::races, pickingIDs[2]);
+		formSelectedTexts[0] = objectForms[0].selectedText.substr(7); // buildings/units/decoration
+
+		if (AddObjectWindowUpdateForm1and2) {
+			vector<string> form1Options;
+			for (int i = 1; i < NumberOfObjects; i++) {
+				if ((EditorObjectStringListForm0[i] == formSelectedTexts[0])){
+					if (formSelectedTexts[0] == "buildings" || formSelectedTexts[0] == "units")
+						form1Options.push_back("RACE_" + EditorObjectStringListForm2[i]);
+				}
+			}
+			if (form1Options.size() > 0){
+				sort(form1Options.begin(), form1Options.end());
+				form1Options.erase(unique(form1Options.begin(), form1Options.end()), form1Options.end());
+			}
+			else form1Options = { "" };
+			AddObjectWindowUpdateForm1and2 = false;
+			AddObjectWindowUpdateForm2 = true;
 		}
 
-		formSelectedTexts[0] = objectForms[0].selectedText.substr(7);
-		formSelectedTexts[1] = objectForms[1].selectedText.substr(5);
+		formSelectedTexts[1] = objectForms[1].selectedText.substr(5); // rome,egypt,...
 
-		cout << formSelectedTexts[0] + "_" + formSelectedTexts[1] << endl;
+		if (AddObjectWindowUpdateForm2) {
+			vector<string> form2Options;
+			for (int i = 1; i < NumberOfObjects; i++) {
+				if ((EditorObjectStringListForm0[i] == formSelectedTexts[0]) && (EditorObjectStringListForm1[i] == formSelectedTexts[1]))
+					form2Options.push_back("EDITORTREE_CLASS_" + EditorObjectStringListForm2[i]);
+			}
+			if (form2Options.size() == 0)
+				form2Options = { "" };
+			objectForms[2].create(startX + 11.f, startY - 11.f - 30.f * 2, 150.f, 20.f, form2Options, pickingIDs[2]);
+			AddObjectWindowUpdateForm2 = false;
+		}
 
-		AddObjectWindowUpdateForm1and2 = false;
-		AddObjectWindowUpdateForm2 = false;
+		formSelectedTexts[2] = objectForms[2].selectedText.substr(17); // rtownhall,...
+
+		selectedObject = formSelectedTexts[0] + "_" + formSelectedTexts[1] + "_" + formSelectedTexts[2];
+		object_thumbnail = gui::Image(selectedObject);
+		object_thumbnail.create("center", getParam("window-width") / 2.f, back_size.y / 2.f, 0, 0, 0);
 	}
+
 	void AddObjectWindow::render(bool pick) {
 
 		if (AddObjectWindowUpdateForm1and2 || AddObjectWindowUpdateForm2) update();
@@ -109,28 +134,6 @@ namespace editor {
 				buttons_text[1].render_static();				
 			}
 		}	
-	}
-	void AddObjectWindow::picking() {
-		GLint mouseX = (GLint)getParam("mouse-x-position");
-		GLint mouseY = (GLint)getParam("mouse-y-position");
-		leftClickID = get_id();
-		string clickName = getPickedObjectName(leftClickID);
-
-		if (leftClickID == 0) {
-			for (int j = 0; j < 3; j++)
-				objectForms[j].close();
-		}
-
-		for (int j = 0; j < 3; j++){
-			if (clickName == "AddObjWindow_form" + to_string(j)) {
-				int i = objectForms[j].get_clicked_option();
-				objectForms[j].open_close();
-				if (i > 0) objectForms[j].select_option(i);
-				for (int k = 0; k < 3; k++)
-					if (k != j)
-						objectForms[k].close();
-			}
-		}		
 	}
 
 	AddObjectWindow::~AddObjectWindow() {}

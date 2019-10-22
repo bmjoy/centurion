@@ -100,6 +100,8 @@ namespace gui {
 		void open_close();
 		void close();
 		void select_option(int i);
+		void select_next();
+		void select_previous();
 		int get_clicked_option();
 		string selectedText;
 		~FormInput();
@@ -116,6 +118,7 @@ namespace gui {
 		bool isOpened;
 		bool hasText;
 		int nOptions;
+		int selectedTextID;
 	};
 
 	/*

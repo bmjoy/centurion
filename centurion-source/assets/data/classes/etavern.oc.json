@@ -1,5 +1,7 @@
 {
     "type": "building",
+    "race": "egypt",
+    "class_name": "etavern",
     "ent_path": "assets/buildings/egypt/tavern/etavern.oe.json",
     "pass_path" : "assets/buildings/egypt/tavern/etavern_pass.json",
     "clickable_in_minimap": 0

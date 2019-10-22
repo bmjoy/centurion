@@ -1,4 +1,5 @@
 #include <editor>
+#include <interface>
 
 namespace editor {
 
@@ -14,6 +15,10 @@ namespace editor {
 	bool AddObjectWindowIsOpen = false;
 	bool AddObjectWindowUpdateForm1and2 = false;
 	bool AddObjectWindowUpdateForm2 = false;
+
+	string EditorObjectStringListForm0[NumberOfObjects] = { "" };
+	string EditorObjectStringListForm1[NumberOfObjects] = { "" };
+	string EditorObjectStringListForm2[NumberOfObjects] = { "" };
 
 	Editor *EDITOR() { return &myeditor; }
 

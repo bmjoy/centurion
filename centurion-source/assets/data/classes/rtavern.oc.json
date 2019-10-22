@@ -1,5 +1,7 @@
 {
     "type": "building",
+    "race": "rome",
+    "class_name": "rtavern",
     "ent_path": "assets/buildings/rome/tavern/rtavern.oe.json",
     "pass_path" : "assets/buildings/rome/tavern/rtavern_pass.json",
     "clickable_in_minimap": 0

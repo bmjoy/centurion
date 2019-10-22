@@ -250,4 +250,53 @@ namespace editor {
 			IsWindowOpened = false;
 		}
 	}
+
+	/*--------------------------*/
+	/*      ADD OBJ WINDOW      */
+	/*--------------------------*/
+
+	void AddObjectWindow::picking() {
+		GLint mouseX = (GLint)getParam("mouse-x-position");
+		GLint mouseY = (GLint)getParam("mouse-y-position");
+		leftClickID = get_id();
+		string clickName = getPickedObjectName(leftClickID);
+
+		if (leftClickID == 0) 
+			for (int j = 0; j < 3; j++)
+				objectForms[j].close();
+
+		for (int j = 0; j < 3; j++) {
+			if (clickName == "AddObjWindow_form" + to_string(j)) {
+				int i = objectForms[j].get_clicked_option();
+				objectForms[j].open_close();
+				if (i > 0) {
+					objectForms[j].select_option(i);
+					if (j == 0)
+						AddObjectWindowUpdateForm1and2 = true;
+					if (j == 1)
+						AddObjectWindowUpdateForm2 = true;
+					if (j == 2)
+						update();
+				}
+				for (int k = 0; k < 3; k++)
+					if (k != j)
+						objectForms[k].close();
+			}
+		}
+
+		if (clickName == "AddObjWindow_close") { // CLOSE
+			AddObjectWindowIsOpen = false;
+			IsWindowOpened = false;
+		}
+
+		if (clickName == "AddObjWindow_leftarrow") { // CLOSE
+			objectForms[2].select_previous();
+			update();
+		}
+
+		if (clickName == "AddObjWindow_rightarrow") { // CLOSE
+			objectForms[2].select_next();
+			update();
+		}
+	}
 };

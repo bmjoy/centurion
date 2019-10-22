@@ -16,8 +16,8 @@ namespace gui {
 		width = w; height = h; x = xPos; y = yPos;
 		form_options = options;
 		isOpened = false;
-		selectedText = options[0];
-		hasText = selectedText.size() > 0;
+		selectedTextID = 0;
+		hasText = form_options[selectedTextID].size() > 0;
 		mainTextPos = vec2(x + 2.f, (y - 1.f) - height / 1.5f - 5.f);
 		nOptions = (int)options.size();
 
@@ -34,7 +34,7 @@ namespace gui {
 			back_options = gui::Rectangle();
 			back_options.create("border-filled", x, y - height - 1, width, height * nOptions, "top-left", 0);
 
-			for (int j = 0; j < options.size(); j++) {
+			for (int j = 0; j < nOptions; j++) {
 				float y1 = y - 1.f - (j + 1)*height + j;
 
 				/* options background saved in memory for picking */
@@ -44,18 +44,18 @@ namespace gui {
 
 				/* options text saved in memory */
 				gui::SimpleText tempText = gui::SimpleText("static");
-				//tempText.create_static(getTranslation(options[j]), "tahoma_15px", x + 2.f, y1 - height / 1.5f - 5.f, "left", "normal", vec4(255.f));
-				tempText.create_static(options[j], "tahoma_15px", x + 2.f, y1 - height / 1.5f - 5.f, "left", "normal", vec4(255.f));
+				tempText.create_static(getTranslation(form_options[j]), "tahoma_15px", x + 2.f, y1 - height / 1.5f - 5.f, "left", "normal", vec4(255.f));
 				optionsText.push_back(tempText);
 			}
 		}
 		else { // in this case the forminput cannot be opened
 			if (hasText) {
 				text = gui::SimpleText("static");
-				//text.create_static(getTranslation(options[0]), "tahoma_15px", mainTextPos.x, mainTextPos.y, "left", "normal", vec4(255.f));
-				text.create_static(options[0], "tahoma_15px", mainTextPos.x, mainTextPos.y, "left", "normal", vec4(255.f));
+	
+				text.create_static(getTranslation(form_options[selectedTextID]), "tahoma_15px", mainTextPos.x, mainTextPos.y, "left", "normal", vec4(255.f));
 			}
 		}
+		selectedText = form_options[selectedTextID];
 	}
 	void FormInput::render(bool picking, vec4 color) {
 
@@ -73,8 +73,7 @@ namespace gui {
 
 			if (boolOptions) {
 				// selected text
-				//text.render_dynamic(getTranslation(selectedText), "tahoma_15px", mainTextPos.x, mainTextPos.y, vec4(255.f), "left", "normal");
-				text.render_dynamic(selectedText, "tahoma_15px", mainTextPos.x, mainTextPos.y, vec4(255.f), "left", "normal");
+				text.render_dynamic(getTranslation(selectedText), "tahoma_15px", mainTextPos.x, mainTextPos.y, vec4(255.f), "left", "normal");
 				if (isOpened) {
 
 					// background and border
@@ -102,12 +101,23 @@ namespace gui {
 
 	void FormInput::select_option(int i) {
 		isOpened = false;
-		selectedText = form_options[i - 1];
+		selectedTextID = i - 1;
+		selectedText = form_options[selectedTextID];
 	}
 
 	int FormInput::get_clicked_option() {
 		int i = int((getParam("mouse-y-leftclick") - y) / height)*(-1);
 		return i;
+	}
+	void FormInput::select_next() {
+		if (selectedTextID < form_options.size() - 1) selectedTextID++;
+		else selectedTextID = 0;
+		selectedText = form_options[selectedTextID];
+	}
+	void FormInput::select_previous() {
+		if (selectedTextID > 0) selectedTextID--;
+		else selectedTextID = (int)form_options.size() - 1;
+		selectedText = form_options[selectedTextID];
 	}
 
 	FormInput::~FormInput() {}

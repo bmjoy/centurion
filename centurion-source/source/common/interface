@@ -169,6 +169,11 @@ namespace editor {
 	extern bool AddObjectWindowUpdateForm1and2;
 	extern bool AddObjectWindowUpdateForm2;
 
+	static const int NumberOfObjects = 100;
+	extern string EditorObjectStringListForm0[NumberOfObjects];
+	extern string EditorObjectStringListForm1[NumberOfObjects];
+	extern string EditorObjectStringListForm2[NumberOfObjects];
+
 	//---------------------------------------------------
 
 	struct menuData {
@@ -176,6 +181,7 @@ namespace editor {
 		vector<string> hotkeys;
 		vector<gui::Rectangle> optionsBack;
 		vector<gui::SimpleText> optionsText;
+		vector<gui::SimpleText> optionsHotKeysText;
 		vector<ivec2> optionsPosition;
 		gui::Rectangle titleBack;
 		gui::SimpleText titleText;
@@ -185,7 +191,7 @@ namespace editor {
 		ivec2 titlePosition;
 		string title;
 		int titleWidth, titleHeight;
-		int optionsWidth, optionsHeight;
+		int optionsWidth, optionsHeight, optionsHotKeysWidth;
 		int optionsOffsetX;	
 		int pickingID;
 		bool isOpened;
@@ -283,6 +289,7 @@ namespace editor {
 		float startX, startY;
 		int pickingIDs[3];
 		string formSelectedTexts[3];
+		string selectedObject;
 		ivec2 back_size;
 		void picking();
 		void update();

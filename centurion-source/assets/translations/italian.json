@@ -18,6 +18,7 @@
   "EDITOR_Edit_UpdateNormals": "Ricalcola Normali",
   "EDITOR_Tools": "Strumenti",
   "EDITOR_Tools_AddObject": "Aggiungi oggetto",
+  "EDITOR_addObjectButtonAdd": "Inserisci",
   "EDITOR_newMapButtonClose": "Chiudi",
   "EDITOR_newMapButtonCreate": "Crea",
   "EDITOR_openMapButtonClose": "Chiudi",
@@ -28,6 +29,18 @@
   "EDITOR_buildings": "Strutture",
   "EDITOR_units": "Unità",
   "EDITOR_decorations": "Decorazioni",
+  "EDITORTREE_CLASS_ebarracks": "Caserma",
+  "EDITORTREE_CLASS_eblacksmith": "Fucina",
+  "EDITORTREE_CLASS_eosiristemple": "Tempio di Osiris",
+  "EDITORTREE_CLASS_etavern": "Taverna",
+  "EDITORTREE_CLASS_etemple": "Tempio",
+  "EDITORTREE_CLASS_etownhall": "Foro",
+  "EDITORTREE_CLASS_rarena": "Arena",
+  "EDITORTREE_CLASS_rbarracks": "Caserma",
+  "EDITORTREE_CLASS_rblacksmith": "Fucina",
+  "EDITORTREE_CLASS_rtavern": "Taverna",
+  "EDITORTREE_CLASS_rtemple": "Tempio",
+  "EDITORTREE_CLASS_rtownhall": "Foro",
   
   "WORD_gameStarted": "Avvio della partita in corso...",
   "WORD_player_1": "Giocatore 1",
@@ -43,8 +56,6 @@
 
   "RACE_rome": "Roma",
   "RACE_egypt": "Egitto",
-
-  "CLASS_rtownhall": "Foro romano",
   
   "ERROR_settings": "Impossibile trovare o leggere il file SETTINGS.\n  Arresto forzato dell'applicazione in corso...",
   "ERROR_data": "Impossibile trovare o leggere il file DATA.\n  Arresto forzato dell'applicazione in corso...",
