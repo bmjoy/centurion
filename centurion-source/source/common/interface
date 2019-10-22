@@ -168,6 +168,7 @@ namespace editor {
 	extern bool AddObjectWindowIsOpen;
 	extern bool AddObjectWindowUpdateForm1and2;
 	extern bool AddObjectWindowUpdateForm2;
+	extern bool menuIsOpened;
 
 	static const int NumberOfObjects = 100;
 	extern string EditorObjectStringListForm0[NumberOfObjects];
@@ -210,8 +211,7 @@ namespace editor {
 		array<string, 3> titlesList;
 		map<string, int>pickingList;
 		int barHeight;
-		int minPickingID, maxPickingID;
-		bool menuIsOpened;		
+		int minPickingID, maxPickingID;	
 
 		void picking(); // this function is here: source/picking/editormenu_picking.cpp
 		bool isHover(vec2 pos, int w, int h); // idem
@@ -312,6 +312,7 @@ namespace editor {
 		OpenMapWindow open_map_window;
 		NewMapWindow new_map_window;
 		AddObjectWindow add_object_window;
+		gui::Rectangle minimapRectangle;
 	};
 
 	static EditorUI myeditorUI;

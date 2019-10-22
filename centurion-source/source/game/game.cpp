@@ -15,8 +15,6 @@ using namespace building;
 namespace game {
 
 	Game::Game(){			
-		cameraLastX = 0.0; cameraLastY = 0.0;
-		threshold = 20.0f;   // Camera Movement Threshold	
 		blockMinimap = false;
 		gameIsCreated = false;
 	}
@@ -29,7 +27,7 @@ namespace game {
 		gameMenuStatus = false;
 		gameMinimapStatus = false;
 		gameGridStatus = false;
-		clear();
+		blockMinimap = false;
 	}
 	void Game::create() {
 		
@@ -37,6 +35,8 @@ namespace game {
 		units = { };
 		buildings = { };	
 		
+		setParam("ui-bottom-height", 60.f);
+		setParam("ui-top-height", 100.f);
 		setMinimapProjection();
 		setBoolean("mouse-left-pressed", false);
 
@@ -112,7 +112,7 @@ namespace game {
 
 		/* If minimap is NOT active */
 		if (!gameMinimapStatus) {		
-			CAMERA()->mouseControl(threshold);
+			CAMERA()->mouseControl(cameraThreshold);
 			view = CAMERA()->calculateViewMatrix();
 			projection = glb::cameraProjection;
 		}
@@ -128,7 +128,7 @@ namespace game {
 
 		/* Tracing and Picking */
 		tracing(surface);
-		renderObjectsPicking(&blockMinimap);
+		renderObjectsPicking();
 
 		/* Rendering */
 		surface->render(false);
@@ -142,7 +142,7 @@ namespace game {
 
 		// ----------------- //	
 
-		goToPosition(&blockMinimap);
+		goToPosition();
 		glb::cameraProjection = ortho(0.0f, getParam("window-width-zoomed"), 0.0f, getParam("window-height-zoomed"), -(float)mapWidth, (float)mapWidth);
 		
 

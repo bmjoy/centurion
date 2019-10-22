@@ -4,6 +4,7 @@
 #include <global>
 #include <picking>
 #include <player>
+#include <game>
 
 using namespace building;
 using namespace unit;
@@ -13,6 +14,7 @@ namespace editor {
 
 	/* extern variables definitions */
 
+    bool menuIsOpened = false;
 	bool IsWindowOpened = false;
 	bool OpenMapWindowIsOpen = false;
 	bool OpenMapWindowUpdate = false;
@@ -31,8 +33,6 @@ namespace editor {
 	array<Player, 8> playersList;
 	Unit unitTemp;
 	Building buildingTemp;
-	map<int, Building> buildings;
-	map<int, Unit> units;
 
 	Editor *EDITOR() { return &myeditor; }
 
@@ -62,28 +62,8 @@ namespace editor {
 			buildingTemp.set_position(vec3(x, y, 0.f));
 			buildingTemp.set_id(getPickingID());
 			buildingTemp.create();
-			buildings[getPickingID()] = buildingTemp;
+			game::buildings[getPickingID()] = buildingTemp;
 			increasePickingID();
-		}
-	}
-	void renderObjectsPicking() {
-		if (!IsWindowOpened && getBoolean("mouse-left")) {
-			for (map<int, Building>::iterator bld = buildings.begin(); bld != buildings.end(); bld++) {
-				bld->second.render(true, 0);
-			}
-			for (map<int, Unit>::iterator u = units.begin(); u != units.end(); u++) {
-				u->second.render(true, 0);
-			}
-			leftClickID = get_id();
-		}
-	}
-	void renderObjects() {
-		for (map<int, Building>::iterator bld = buildings.begin(); bld != buildings.end(); bld++) {
-			bld->second.render(false, leftClickID);
-		}
-
-		for (map<int, Unit>::iterator u = units.begin(); u != units.end(); u++) {
-			u->second.render(false, leftClickID);
 		}
 	}
 }

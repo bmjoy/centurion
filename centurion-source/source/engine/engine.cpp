@@ -93,7 +93,7 @@ namespace engine {
 			if (reset) {
 				reset = false;				
 				if (environment == "editor") EDITOR()->reset();
-				if (environment == "game") GAME()->reset();
+				if (environment == "game") { GAME()->reset(); GAME()->clear(); }
 				MENU()->reset();
 				environment = "menu";
 			}

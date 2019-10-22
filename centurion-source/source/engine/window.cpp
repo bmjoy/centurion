@@ -76,7 +76,7 @@ void myWindow::handle_keys(GLFWwindow* window, int key, int code, int action, in
 	}
 
 	// Wireframe
-	if (key == GLFW_KEY_Z && action == GLFW_PRESS) {
+	if (key == GLFW_KEY_Z && action == GLFW_PRESS && ENGINE()->getEnvironment() == "game") {
 		setBoolean("wireframe", !getBoolean("wireframe"));
 		if (getBoolean("wireframe")) {
 			std::cout << "DEBUG: Wireframe ON!\n";
@@ -95,7 +95,7 @@ void myWindow::handle_keys(GLFWwindow* window, int key, int code, int action, in
 			std::cout << "DEBUG: Grid OFF!\n";
 		}
 	}
-	if (key == GLFW_KEY_SPACE && action == GLFW_PRESS && !gameMenuStatus) {
+	if (key == GLFW_KEY_SPACE && action == GLFW_PRESS && !gameMenuStatus && ENGINE()->getEnvironment() == "game") {
 		gameMinimapStatus = !gameMinimapStatus;
 		if (gameMinimapStatus) {
 			std::cout << "DEBUG: Minimap camera ON!\n";

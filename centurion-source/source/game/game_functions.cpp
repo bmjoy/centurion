@@ -28,6 +28,7 @@ namespace game {
 	float zoomCameraFactor = 100.f;
 	float townhallRadius = 1875.f;
 	bool selRectangleIsActive = false;
+	bool blockMinimap = false;
 	int selectedUnits = 0;
 
 	map<int, Building> buildings = { };
@@ -36,24 +37,6 @@ namespace game {
 	vector<Player> playersList;
 
 	SelRectPoints *SelRectCoords() { return &selRectCoords; }
-
-	void renderObjectsPicking(bool *blockMinimap) {
-		if (!gameMenuStatus && getBoolean("mouse-left") && !selRectangleIsActive){
-			for (map<int, Building>::iterator bld = buildings.begin(); bld != buildings.end(); bld++) {
-				bld->second.render(true, 0);
-			}
-			for (map<int, Unit>::iterator u = units.begin(); u != units.end(); u++) {
-				u->second.render(true, 0);
-			}	
-			leftClickID = get_id();
-			if (gameMinimapStatus) {					
-				*blockMinimap = false;
-				if (leftClickID > 0) {
-					*blockMinimap = true;
-				}
-			}
-		}
-	}
 
 	void tracing(Surface *s) {
 		if (!gameMinimapStatus) {
@@ -65,29 +48,19 @@ namespace game {
 		}
 	}
 
-	void clearBuffers() {
-		glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
-		glClear(GL_COLOR_BUFFER_BIT);
-	}
-
-	void goToPosition(bool *blockMinimap) {
-		if (gameMinimapStatus) {
-			if (getBoolean("mouse-left") && cursorInGameScreen()) {
-				cameraToX = getParam("mouse-x-leftclick") / getParam("window-width")*(float)mapWidth - getParam("window-width-zoomed") / 2.f;
-				cameraToY = getYMinimapCoord(getParam("mouse-y-leftclick")) / getParam("window-height")*(float)mapHeight - getParam("window-height-zoomed") / 2.f;
-				// if you are clicking on a townhall you have to double click 
-				// to move the camera there and quit minimap
-				if (leftClickID > 0 && hasDoubleClicked()) {
-					cameraToX = buildings[leftClickID].get_xPos() - getParam("window-width-zoomed") / 2.f;
-					cameraToY = buildings[leftClickID].get_yPos() - getParam("window-height-zoomed") / 2.f;
-					*blockMinimap = false;
-				}
-				//------------------------------------------------
-				if (! (*blockMinimap)) {
-					CAMERA()->go_to_pos(cameraToX, cameraToY);
-					gameMinimapStatus = false;
-					setBoolean("mouse-left", false);
-					setBoolean("mouse-left-pressed", false);
+	void renderObjectsPicking() {
+		if (!gameMenuStatus && getBoolean("mouse-left") && !selRectangleIsActive){
+			for (map<int, Building>::iterator bld = buildings.begin(); bld != buildings.end(); bld++) {
+				bld->second.render(true, 0);
+			}
+			for (map<int, Unit>::iterator u = units.begin(); u != units.end(); u++) {
+				u->second.render(true, 0);
+			}	
+			leftClickID = get_id();
+			if (gameMinimapStatus) {					
+				blockMinimap = false;
+				if (leftClickID > 0) {
+					blockMinimap = true;
 				}
 			}
 		}
@@ -104,8 +77,35 @@ namespace game {
 			}
 		}
 		renderSelRectangle();
-	} 
+	}
 
+	void clearBuffers() {
+		glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
+		glClear(GL_COLOR_BUFFER_BIT);
+	}
+
+	void goToPosition() {
+		if (gameMinimapStatus) {
+			if (getBoolean("mouse-left") && cursorInGameScreen()) {
+				cameraToX = getParam("mouse-x-leftclick") / getParam("window-width")*(float)mapWidth - getParam("window-width-zoomed") / 2.f;
+				cameraToY = getYMinimapCoord(getParam("mouse-y-leftclick")) / getParam("window-height")*(float)mapHeight - getParam("window-height-zoomed") / 2.f;
+				// if you are clicking on a townhall you have to double click 
+				// to move the camera there and quit minimap
+				if (leftClickID > 0 && hasDoubleClicked()) {
+					cameraToX = buildings[leftClickID].get_xPos() - getParam("window-width-zoomed") / 2.f;
+					cameraToY = buildings[leftClickID].get_yPos() - getParam("window-height-zoomed") / 2.f;
+					blockMinimap = false;
+				}
+				//------------------------------------------------
+				if (!blockMinimap) {
+					CAMERA()->go_to_pos(cameraToX, cameraToY);
+					gameMinimapStatus = false;
+					setBoolean("mouse-left", false);
+					setBoolean("mouse-left-pressed", false);
+				}
+			}
+		}
+	}
 
 	void renderSelRectangle() {
 		if (!gameMinimapStatus) {

@@ -3,6 +3,7 @@
 #include <engine>
 #include <surface>
 #include <editor>
+#include <game>
 
 using namespace glb;
 using namespace engine;
@@ -242,8 +243,8 @@ namespace editor {
 			cout << "DEBUG: You've set the following map name: " + text_input.get_text() << endl;
 			currentMapName = text_input.get_text();
 			
-			buildings = { };
-			units = { };
+			game::buildings = { };
+			game::units = { };
 
 			mapgen::reset_map();
 			obj::MapTerrain()->updateHeightsBuffer();

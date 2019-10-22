@@ -66,9 +66,6 @@ namespace glb {
 		setParam("window-width-zoomed", getParam("window-width") + (currentZoomCamera - 1) * zoomCameraFactor);
 		setParam("window-height-zoomed", getParam("window-height") + (currentZoomCamera - 1) * zoomCameraFactor / getParam("window-ratio"));
 
-		setParam("ui-bottom-height", 60.f);
-		setParam("ui-top-height", 100.f);
-
 		setBoolean("window-should-close", false);
 		setBoolean("wireframe", false);
 		setBoolean("mouse-left", false);

@@ -7,28 +7,56 @@
 
 using namespace glb;
 using namespace engine;
-//using namespace game;
 
 namespace editor {
 	Editor::Editor(){
-		editorIsCreated = false;
+		editorIsCreated = false;	
 	}
 	void Editor::create() {
 		resetPicking();
 		surface = new Surface();
 
-		buildings = { };
-		units = { };
+		game::GAME()->reset();
+		setParam("ui-bottom-height", 0.f);
+		setParam("ui-top-height", 30.f);
+		game::setMinimapProjection();
 
 		surface->reset();
 		EDITOR_UI()->create();
+		game::GAME()->selRectangle = gui::Rectangle();
+		game::GAME()->selRectangle.create("border", 0, 0, 0, 0, "top-left", 0);
 
-		//circle.create("border", 0.f, 0.f, 300.f, 200.f, 8.f, "center");
 		editorIsCreated = true;
 	}
 	void Editor::run() {
-		CAMERA()->keyboardControl();
-		CAMERA()->mouseControl(2.0f);
+
+		/* Keyboard control */
+
+		if (!IsWindowOpened) { // TODO: merge all these in a function in Editor->Editor_functions.cpp
+			CAMERA()->keyboardControl();
+			if (KeyCode[GLFW_KEY_SPACE]) {
+				game::gameMinimapStatus = !game::gameMinimapStatus;
+				KeyCode[GLFW_KEY_SPACE] = false;
+			}
+			if (KeyCode[GLFW_KEY_Z]) {
+				setBoolean("wireframe", !getBoolean("wireframe"));
+				KeyCode[GLFW_KEY_Z] = false;
+			}
+		}
+
+		/* If minimap is NOT active */
+		if (!game::gameMinimapStatus) {
+			if (!IsWindowOpened && getParam("mouse-y-position") < getParam("window-height") - 30.f && !menuIsOpened) 
+				CAMERA()->mouseControl(game::cameraThreshold);
+			view = CAMERA()->calculateViewMatrix();
+			proj = glb::cameraProjection;
+		}
+
+		/* If minimap is active */
+		else {
+			view = mat4(1.0f);
+			proj = glb::minimapProjection;
+		}
 
 		// editor ui picking */
 		obj::applyMenuMatrices();
@@ -36,20 +64,19 @@ namespace editor {
 
 		//-----------------------------
 		/* normal rendering */
-		proj = glb::cameraProjection;
-		view = CAMERA()->calculateViewMatrix();
 		obj::applyGameMatrices(&proj, &view);
 
-		renderObjectsPicking();
+		game::renderObjectsPicking();
 
 		surface->render(false);
-		renderObjects();
+		game::renderObjects();
 
 		// editor UI normal rendering
 		obj::applyMenuMatrices();
-		//circle.render(glm::vec4(255.f), getParam("mouse-x-position"), getParam("mouse-y-position")); /* temporary : it will be in editor UI */
 		EDITOR_UI()->render(false);
 		
+
+		game::goToPosition();
 		glb::cameraProjection = glm::ortho(0.0f, getParam("window-width-zoomed"), 0.0f, getParam("window-height-zoomed"), -(float)game::mapWidth, (float)game::mapWidth);
 
 		setBoolean("mouse-right", false);

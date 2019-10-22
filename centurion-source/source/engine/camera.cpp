@@ -38,28 +38,29 @@ void Camera::mouseControl(float threshold) {
 	threshold_x = mapWidth - 2 * cameraMovespeed + (getParam("window-width-zoomed") - getParam("window-width"));
 	threshold_y = mapHeight - 2 * cameraMovespeed + (getParam("window-height-zoomed") - getParam("window-height"));
 
+	float threshold_top = threshold;
+	if (ENGINE()->getEnvironment() == "editor") threshold_top += 30.f;
+
 	//Left margin
-	if (!IsWindowOpened) {
-		if (getParam("mouse-x-position") <= threshold && (abs_x > threshold) && getParam("mouse-x-position") > 0) {
-			position -= right * cameraMovespeed;
+	if (getParam("mouse-x-position") <= threshold && (abs_x > threshold) && getParam("mouse-x-position") > 0) {
+		position -= right * cameraMovespeed;
+	}
+	//Right margin
+	if (getParam("mouse-x-position") >= (getParam("window-width") - threshold) && (abs_x < threshold_x) && getParam("mouse-x-position") < getParam("window-width")) {
+		if (position.x < mapWidth - getParam("window-width-zoomed")) {
+			position += right * cameraMovespeed;
 		}
-		//Right margin
-		if (getParam("mouse-x-position") >= (getParam("window-width") - threshold) && (abs_x < threshold_x) && getParam("mouse-x-position") < getParam("window-width")) {
-			if (position.x < mapWidth - getParam("window-width-zoomed")) {
-				position += right * cameraMovespeed;
-			}
+	}
+	//Top margin
+	if (getParam("mouse-y-position") >= (getParam("window-height") - threshold_top) && abs_y < (threshold_y + getParam("ui-top-height")* getParam("window-height-zoomed") / getParam("window-height-zoomed")) && getParam("mouse-y-position") < getParam("window-height")) {
+		if (position.y < (mapHeight - getParam("window-height-zoomed") + getParam("ui-top-height")* getParam("window-height-zoomed") / getParam("window-height"))) {
+			position += up * cameraMovespeed;
 		}
-		//Top margin
-		if (getParam("mouse-y-position") >= (getParam("window-height") - threshold) && abs_y < (threshold_y + getParam("ui-top-height")* getParam("window-height-zoomed") / getParam("window-height-zoomed")) && getParam("mouse-y-position") < getParam("window-height")) {
-			if (position.y < (mapHeight - getParam("window-height-zoomed") + getParam("ui-top-height")* getParam("window-height-zoomed") / getParam("window-height"))) {
-				position += up * cameraMovespeed;
-			}
-		}
-		//Bottom margin
-		if (getParam("mouse-y-position") <= threshold && abs_y > (threshold - getParam("ui-bottom-height")* getParam("window-height-zoomed") / getParam("window-height")) && getParam("mouse-y-position") > 0) {
-			if (position.y > (0 - getParam("ui-bottom-height")* getParam("window-height-zoomed") / getParam("window-height"))) {
-				position -= up * cameraMovespeed;
-			}
+	}
+	//Bottom margin
+	if (getParam("mouse-y-position") <= threshold && abs_y > (threshold - getParam("ui-bottom-height")* getParam("window-height-zoomed") / getParam("window-height")) && getParam("mouse-y-position") > 0) {
+		if (position.y > (0 - getParam("ui-bottom-height")* getParam("window-height-zoomed") / getParam("window-height"))) {
+			position -= up * cameraMovespeed;
 		}
 	}
 
@@ -92,27 +93,25 @@ void Camera::mouseControl(float threshold) {
 }
 
 void Camera::keyboardControl() {
-	if (!IsWindowOpened){
-		//Left margin
-		if (KeyCode[GLFW_KEY_LEFT] && position.x > 0) {
-			position -= right * cameraMovespeed;
-		}
-		//Right margin 
-		if (KeyCode[GLFW_KEY_RIGHT] && position.x < mapWidth - getParam("window-width-zoomed")) {
-			position += right * cameraMovespeed;
-		}
-		//Top margin 
-		if (KeyCode[GLFW_KEY_UP] && (position.y < (mapHeight - getParam("window-height-zoomed") + getParam("ui-top-height")* getParam("window-height-zoomed") / getParam("window-height")))) {
-			position += up * cameraMovespeed;
-		}
-		//Bottom margin 
-		if (KeyCode[GLFW_KEY_DOWN] && (position.y > (0 - getParam("ui-bottom-height")* getParam("window-height-zoomed") / getParam("window-height")))) {
-			position -= up * cameraMovespeed;
-		}
-
-		setParam("camera-x-position", position.x);
-		setParam("camera-y-position", position.y);
+	//Left margin
+	if (KeyCode[GLFW_KEY_LEFT] && position.x > 0) {
+		position -= right * cameraMovespeed;
 	}
+	//Right margin 
+	if (KeyCode[GLFW_KEY_RIGHT] && position.x < mapWidth - getParam("window-width-zoomed")) {
+		position += right * cameraMovespeed;
+	}
+	//Top margin 
+	if (KeyCode[GLFW_KEY_UP] && (position.y < (mapHeight - getParam("window-height-zoomed") + getParam("ui-top-height")* getParam("window-height-zoomed") / getParam("window-height")))) {
+		position += up * cameraMovespeed;
+	}
+	//Bottom margin 
+	if (KeyCode[GLFW_KEY_DOWN] && (position.y > (0 - getParam("ui-bottom-height")* getParam("window-height-zoomed") / getParam("window-height")))) {
+		position -= up * cameraMovespeed;
+	}
+
+	setParam("camera-x-position", position.x);
+	setParam("camera-y-position", position.y);
 }
 
 void Camera::go_to_pos(GLfloat x, GLfloat y) {
