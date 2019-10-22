@@ -107,29 +107,6 @@ namespace game {
 		resetDoubleClickTime();
 	}
 
-	void Game::handleKeyboardControls() {
-		//Open or close minimap
-		if (KeyCode[GLFW_KEY_SPACE]) {
-			gameMinimapStatus = !gameMinimapStatus;
-			gameMinimapStatus ? std::cout << "DEBUG: Minimap camera ON!\n" : std::cout << "DEBUG: Minimap camera OFF!\n";
-		}
-		//Open in-game menu
-		if (KeyCode[GLFW_KEY_ESCAPE]) {
-			gameMenuStatus = !gameMenuStatus;
-			gameMinimapStatus ? std::cout << "DEBUG: Pause Menu ON!\n" : std::cout << "DEBUG: Pause Menu OFF!\n";
-		}
-		// Wireframe
-		if (KeyCode[GLFW_KEY_Z]) {
-			setBoolean("wireframe", !getBoolean("wireframe"));
-			getBoolean("wireframe") ? std::cout << "DEBUG: Wireframe ON!\n" : std::cout << "DEBUG: Wireframe OFF! \n";
-		}
-		// Grid
-		if (KeyCode[GLFW_KEY_G]) {
-			gameGridStatus = !gameGridStatus;
-			gameGridStatus ? std::cout << "DEBUG: Grid ON!\n" : std::cout << "DEBUG: Grid OFF!\n";
-		}
-	}
-
 	void Game::run() {
 		selectedUnits = 0;
 		CAMERA()->keyboardControl();
@@ -155,7 +132,7 @@ namespace game {
 
 		/* Tracing and Picking */
 		if(!gameMinimapStatus) tracing(surface);
-		renderObjectsPicking();
+		if(!gameMenuStatus) renderObjectsPicking();
 
 		/* Rendering */
 		surface->render(false);
@@ -174,10 +151,9 @@ namespace game {
 		
 
 		// reset mouse-right and mouse-left to improve fps
-		// excluding some cases
-
 		setBoolean("mouse-right", false);
 		setBoolean("mouse-left", false);
+		setBoolean("mouse-middle", false);
 	}
 
 	void Game::clear() {
@@ -185,7 +161,5 @@ namespace game {
 		delete ui;
 	}
 
-	Game::~Game()
-	{		
-	}
+	Game::~Game() {}
 }

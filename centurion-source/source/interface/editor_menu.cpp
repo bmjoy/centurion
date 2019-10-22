@@ -50,7 +50,7 @@ namespace editor {
 
 			/* temporary static text to calculate the width */
 			gui::SimpleText temptext = gui::SimpleText("static");
-			temptext.create_static(getTranslation("EDITOR_" + titles[s].title), "tahoma_13px", 0, 0, "center", "middle", vec4(255), "bold");
+			temptext.create_static(getTranslation("EDITOR_" + titles[s].title), "tahoma_13px", 0, 0, "center", "middle", vec4(255), "normal");
 
             titles[s].titleWidth = std::max(int(temptext.get_width()) + 20, 60);
             titles[s].titleHeight = barHeight;
@@ -60,7 +60,7 @@ namespace editor {
             titles[s].titleBack = gui::Rectangle();
             titles[s].titleBack.create("filled", (float)titles[s].titlePosition.x, (float)titles[s].titlePosition.y, (float)titles[s].titleWidth, (float)titles[s].titleHeight, "bottom-left", titles[s].pickingID);
             titles[s].titleText = gui::SimpleText("static");
-            titles[s].titleText.create_static(getTranslation("EDITOR_" + titles[s].title), "tahoma_13px", titles[s].titlePosition.x + 0.5f * titles[s].titleWidth, titles[s].titlePosition.y + 0.5f * titles[s].titleHeight, "center", "middle", vec4(255.f), "bold");
+            titles[s].titleText.create_static(getTranslation("EDITOR_" + titles[s].title), "tahoma_13px", titles[s].titlePosition.x + 0.5f * titles[s].titleWidth, titles[s].titlePosition.y + 0.5f * titles[s].titleHeight, "center", "middle", vec4(255.f), "normal");
             
             /* options */
 			int charMaxWidth = 15;
@@ -84,10 +84,10 @@ namespace editor {
                 titles[s].optionsPosition.push_back(ivec2(titlesPos, getParam("window-height") - titles[s].optionsHeight * (j + 2)));
 
                 gui::SimpleText tempText = gui::SimpleText("static");
-                tempText.create_static(getTranslation("EDITOR_" + titles[s].title + "_" + titles[s].options[j]), "tahoma_13px", titles[s].optionsPosition[j].x + titles[s].optionsOffsetX*1.f, titles[s].optionsPosition[j].y + 0.5f * titles[s].optionsHeight, "left", "middle", vec4(255.f), "bold");
+                tempText.create_static(getTranslation("EDITOR_" + titles[s].title + "_" + titles[s].options[j]), "tahoma_13px", titles[s].optionsPosition[j].x + titles[s].optionsOffsetX*1.f, titles[s].optionsPosition[j].y + 0.5f * titles[s].optionsHeight, "left", "middle", vec4(255.f), "normal");
                 titles[s].optionsText.push_back(tempText);
 
-				tempText.create_static(titles[s].hotkeys[j], "tahoma_13px", titles[s].optionsPosition[j].x + titles[s].optionsOffsetX + titles[s].optionsWidth*1.f, titles[s].optionsPosition[j].y + 0.5f * titles[s].optionsHeight, "left", "middle", vec4(255.f), "bold");
+				tempText.create_static(titles[s].hotkeys[j], "tahoma_13px", titles[s].optionsPosition[j].x + titles[s].optionsOffsetX + titles[s].optionsWidth*1.f, titles[s].optionsPosition[j].y + 0.5f * titles[s].optionsHeight, "left", "middle", vec4(255.f), "normal");
 				titles[s].optionsHotKeysText.push_back(tempText);
 
                 gui::Rectangle tempRect = gui::Rectangle();

@@ -8,6 +8,7 @@ using namespace glm;
 namespace glb {
 	
 	extern int leftClickID;
+	extern int rightClickID;
 
 	static int pickingID = 1;
 	void increasePickingID();
@@ -17,7 +18,7 @@ namespace glb {
 	void addValueToPickingListUI(int pick, string value);
 	string getPickedObjectName(int pick);
 	void resetPicking();
-	int get_id();
+	int get_id(string LeftRight = "left");
 	vec3 getPickingColorFromID(int pickingID);
 	
 	//Double clicking section

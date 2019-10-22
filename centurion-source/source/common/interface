@@ -14,6 +14,9 @@ using namespace glm;
 	For example FPS, selected units, mouse position, etc.
 */
 
+namespace building { class Building; }
+namespace unit { class Unit; }
+
 namespace debug {
 
 	class DebugUI {
@@ -161,6 +164,8 @@ namespace editor {
 	extern bool IsWindowOpened;
 	extern bool NewMapWindowIsOpen;
 	extern bool NewMapResetText;
+	extern bool PropertiesWindowIsOpen;
+	extern bool PropertiesWindowResetText;
 	extern string currentMapName;
 	extern bool OpenMapWindowIsOpen;
 	extern bool OpenMapWindowUpdate;
@@ -296,6 +301,29 @@ namespace editor {
 		bool addingObject;
 	};
 
+	//
+	//	PROPERTIES WINDOW
+	//
+
+	class PropertiesWindow {
+	public:
+		PropertiesWindow();
+		void create();
+		void render(bool pick);
+		~PropertiesWindow();
+	private:
+		gui::TextInput text_input;
+		gui::Image back_image;
+		gui::Image buttons[2];
+		gui::Image textinput_back;
+		gui::SimpleText buttons_text[2];
+		gui::SimpleText text[2];
+		float startX, startY;
+		void picking();
+		building::Building *building_pointer;
+		unit::Unit *unit_pointer;
+		string type;
+	};
 
 	//
 	//  EDITOR UI (CONTAINER)
@@ -312,6 +340,7 @@ namespace editor {
 		OpenMapWindow open_map_window;
 		NewMapWindow new_map_window;
 		AddObjectWindow add_object_window;
+		PropertiesWindow properties_window;
 		gui::Rectangle minimapRectangle;
 	};
 

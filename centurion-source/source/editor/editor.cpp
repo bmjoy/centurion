@@ -70,7 +70,8 @@ namespace editor {
 		glb::cameraProjection = glm::ortho(0.0f, getParam("window-width-zoomed"), 0.0f, getParam("window-height-zoomed"), -(float)game::mapWidth, (float)game::mapWidth);
 
 		setBoolean("mouse-right", false);
-		setBoolean("mouse-left", false); // temporary
+		setBoolean("mouse-left", false); 
+		setBoolean("mouse-middle", false);
 
 		if (IsWindowOpened) {
 			KeyCode[GLFW_KEY_BACKSPACE] = false;
@@ -78,35 +79,6 @@ namespace editor {
 			KeyCode[GLFW_KEY_DOWN] = false;
 			KeyCode[GLFW_KEY_LEFT] = false;
 			KeyCode[GLFW_KEY_RIGHT] = false;
-		}
-	}
-
-	void Editor::handleKeyboardControls() {
-		//CTRL Hotkeys
-		if (KeyCode[GLFW_KEY_LEFT_CONTROL] || KeyCode[GLFW_KEY_RIGHT_CONTROL]) {
-			if (KeyCode[GLFW_KEY_N]) { NewMapWindowIsOpen = true; NewMapResetText = true; IsWindowOpened = true; }
-			if (KeyCode[GLFW_KEY_O]) { OpenMapWindowIsOpen = true; OpenMapWindowUpdate = true; IsWindowOpened = true; }
-			if (KeyCode[GLFW_KEY_S]) { saveCurrentScenario(currentMapName); }
-			if (KeyCode[GLFW_KEY_A]) { AddObjectWindowIsOpen = true; }	
-		}
-
-		if (KeyCode[GLFW_KEY_ESCAPE]) {
-			//if () {
-				ENGINE()->Reset();
-			//}
-			/*else {
-				//Give access to titles variable in editor_picking and call function "closeMenu"
-				menuIsOpened = false;
-			}*/
-		}
-
-		if (KeyCode[GLFW_KEY_SPACE]) {
-			game::gameMinimapStatus = !game::gameMinimapStatus;
-			KeyCode[GLFW_KEY_SPACE] = false;
-		}
-		if (KeyCode[GLFW_KEY_Z]) {
-			setBoolean("wireframe", !getBoolean("wireframe"));
-			KeyCode[GLFW_KEY_Z] = false;
 		}
 	}
 

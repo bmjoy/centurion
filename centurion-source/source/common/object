@@ -25,6 +25,11 @@ public:
 	bool isSelected() { return selected; }
 	int get_xPos() { return (int)position.x; }
 	int get_yPos() { return (int)position.y; }
+	string get_class() { return className; }
+	string get_name() { return name; }
+	void set_name(string Name) { name = Name; }
+	string get_type() { return type; }
+	void set_type(string Type) { type = Type; }
 	~GObject();
 protected:
 	Player *player;
@@ -34,6 +39,7 @@ protected:
 	vec3 position;
 	string className;
 	int picking_id;
+	string name, type;
 };
 
 //

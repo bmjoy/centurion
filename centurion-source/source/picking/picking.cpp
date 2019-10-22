@@ -6,6 +6,8 @@ using namespace glm;
 
 namespace glb {
 	int leftClickID = 0;
+	int rightClickID = 0;
+
 	void increasePickingID() { pickingID++; }
 	int getPickingID() { return pickingID; }
 	void addValueToPickingListUI(int pick, string value) { pickingListUI[pick] = value; }
@@ -16,10 +18,13 @@ namespace glb {
 		pickingListUI = { };
 		pickingListUI[0] = "background";
 	}
-	int get_id() {
+	int get_id(string LeftRight) {
 		unsigned char data[4];
 		//Edit the following line because you can get id with both left and right click
-		glReadPixels((GLint)getParam("mouse-x-leftclick"), (GLint)getParam("mouse-y-leftclick"), 1, 1, GL_RGBA, GL_UNSIGNED_BYTE, &data);
+		if (LeftRight == "left")
+			glReadPixels((GLint)getParam("mouse-x-leftclick"), (GLint)getParam("mouse-y-leftclick"), 1, 1, GL_RGBA, GL_UNSIGNED_BYTE, &data);
+		if (LeftRight == "right")
+			glReadPixels((GLint)getParam("mouse-x-rightclick"), (GLint)getParam("mouse-y-rightclick"), 1, 1, GL_RGBA, GL_UNSIGNED_BYTE, &data);
 		int pickedID =
 			data[0] +
 			data[1] * 256 +

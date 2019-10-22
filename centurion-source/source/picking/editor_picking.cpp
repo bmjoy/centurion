@@ -4,6 +4,7 @@
 #include <surface>
 #include <editor>
 #include <game>
+#include <object>
 
 using namespace glb;
 using namespace engine;
@@ -17,14 +18,14 @@ namespace editor {
 	void EditorMenu::picking() {
 		GLint mouseX = (GLint)getParam("mouse-x-position");
 		GLint mouseY = (GLint)getParam("mouse-y-position");
-		leftClickID = get_id();
+		int leftClick_ID = get_id();
 		int pos = (int)((mouseY - getParam("window-height"))*(-1)) / titles["File"].titleHeight;
 
 		//---------------------
 		//   RESET 
 		//---------------------
 
-		if (leftClickID < minPickingID || leftClickID > maxPickingID) {
+		if (leftClick_ID < minPickingID || leftClick_ID > maxPickingID) {
 			for (int i = 0; i < titles.size(); i++) {
 				std::string s = titlesList[i];
 				titles[s].isOpened = false;
@@ -37,7 +38,7 @@ namespace editor {
 			//    FILE
 			//---------------------
 
-			if (pickingList["File"] == leftClickID) {
+			if (pickingList["File"] == leftClick_ID) {
 				if (pos == 0) {
 					titles["File"].isOpened = !titles["File"].isOpened;
 					menuIsOpened = !menuIsOpened;
@@ -107,7 +108,7 @@ namespace editor {
 			//    EDIT
 			//---------------------
 
-			if (pickingList["Edit"] == leftClickID) {
+			if (pickingList["Edit"] == leftClick_ID) {
 				if (pos == 0){
 					titles["Edit"].isOpened = !titles["Edit"].isOpened;
 					menuIsOpened = !menuIsOpened;
@@ -136,7 +137,7 @@ namespace editor {
 			//    TOOLS
 			//---------------------
 
-			if (pickingList["Tools"] == leftClickID) {
+			if (pickingList["Tools"] == leftClick_ID) {
 				if (pos == 0) {
 					titles["Tools"].isOpened = !titles["Tools"].isOpened;
 					menuIsOpened = !menuIsOpened;
@@ -188,13 +189,13 @@ namespace editor {
 	void OpenMapWindow::picking() {
 		GLint mouseX = (GLint)getParam("mouse-x-position");
 		GLint mouseY = (GLint)getParam("mouse-y-position");
-		leftClickID = get_id();
-		string clickName = getPickedObjectName(leftClickID);
+		int leftClick_ID = get_id();
+		string clickName = getPickedObjectName(leftClick_ID);
 		int pos = (int)((mouseY - startY + map_list.padding_top)*(-1)) / (int)map_list.option_height;
 
-		if (leftClickID == 0) selectedID = -1;
+		if (leftClick_ID == 0) selectedID = -1;
 
-		if (leftClickID == map_list.pickingID) {
+		if (leftClick_ID == map_list.pickingID) {
 			if (pos >= 0) {
 				selectedID = pos;
 			}
@@ -225,10 +226,8 @@ namespace editor {
 	void NewMapWindow::picking() {
 		GLint mouseX = (GLint)getParam("mouse-x-position");
 		GLint mouseY = (GLint)getParam("mouse-y-position");
-		int clickId = get_id();
-		string clickName = getPickedObjectName(clickId);
-
-		text_input.active();
+		int leftClick_ID = get_id();
+		string clickName = getPickedObjectName(leftClick_ID);
 
 		if (clickName == "NewMapWindow_close") { // CLOSE
 			currentMapName = text_input.get_text();
@@ -237,12 +236,7 @@ namespace editor {
 			IsWindowOpened = false;
 		}
 
-		if (clickName == "NewMapWindow_textclick") {
-			text_input.active();
-		}
-		else {
-			text_input.active(false);
-		}
+		text_input.active(clickName == "NewMapWindow_textclick");
 
 		if (clickName == "NewMapWindow_create") { // CREATE
 			cout << "DEBUG: You've set the following map name: " + text_input.get_text() << endl;
@@ -271,10 +265,10 @@ namespace editor {
 	void AddObjectWindow::picking() {
 		GLint mouseX = (GLint)getParam("mouse-x-position");
 		GLint mouseY = (GLint)getParam("mouse-y-position");
-		leftClickID = get_id();
-		string clickName = getPickedObjectName(leftClickID);
+		int leftClick_ID = get_id();
+		string clickName = getPickedObjectName(leftClick_ID);
 
-		if (leftClickID == 0) 
+		if (leftClick_ID == 0)
 			for (int j = 0; j < 3; j++)
 				objectForms[j].close();
 
@@ -315,6 +309,30 @@ namespace editor {
 		if (clickName == "AddObjWindow_add") { // CLOSE
 			addingObject = true;
 			setBoolean("mouse-left", false);
+		}
+	}
+
+	/*-----------------------------*/
+	/*      PROPERTIES WINDOW      */
+	/*-----------------------------*/
+
+	void PropertiesWindow::picking() {
+		GLint mouseX = (GLint)getParam("mouse-x-position");
+		GLint mouseY = (GLint)getParam("mouse-y-position");
+		int leftClick_ID = get_id();
+		string clickName = getPickedObjectName(leftClick_ID);
+
+		text_input.active(clickName == "PropertiesWindow_textclick");
+
+		if (clickName == "PropertiesWindow_abort") { // ABORT
+			PropertiesWindowIsOpen = false;
+			IsWindowOpened = false;
+		}
+		if (clickName == "PropertiesWindow_apply") { // APPLY
+			if (type == "building")
+				building_pointer->set_name(text_input.get_text());
+			PropertiesWindowIsOpen = false;
+			IsWindowOpened = false;
 		}
 	}
 };

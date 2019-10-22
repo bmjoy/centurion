@@ -13,7 +13,8 @@ void myWindow::init() {
 	glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
 	glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
 	glfwWindowHint(GLFW_RESIZABLE, GL_FALSE);
-	MainWindow = glfwCreateWindow((int)getParam("window-width"), (int)getParam("window-height"), gameNameSTR.c_str(), nullptr, nullptr); // Windowed
+	//MainWindow = glfwCreateWindow((int)getParam("window-width"), (int)getParam("window-height"), gameNameSTR.c_str(), nullptr, nullptr); // Windowed
+	MainWindow = glfwCreateWindow((int)getParam("window-width"), (int)getParam("window-height"), gameNameSTR.c_str(), glfwGetPrimaryMonitor(), nullptr); // full screen
 	glfwMakeContextCurrent(MainWindow);
 
 	create_callbacks(); // handle key + mouse input
@@ -96,15 +97,12 @@ void myWindow::mouse_button_callback(GLFWwindow* window, int button, int action,
 			setBoolean("mouse-release", true);
 		}
 	}
-	if (ENGINE()->getEnvironment() == "game") {
-		if (button == GLFW_MOUSE_BUTTON_MIDDLE && action == GLFW_PRESS) {
-			gameMinimapStatus = !gameMinimapStatus;
-			if (gameMinimapStatus) {
-				std::cout << "DEBUG: Minimap camera ON!\n";
-			}
-			else {
-				std::cout << "DEBUG: Minimap camera OFF!\n";
-			}
+	if (button == GLFW_MOUSE_BUTTON_MIDDLE) {
+		if (action == GLFW_PRESS) {
+			setBoolean("mouse-middle", true);
+		}
+		else if (action == GLFW_RELEASE) {
+			setBoolean("mouse-middle", false);
 		}
 	}
 }

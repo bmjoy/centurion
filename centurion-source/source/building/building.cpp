@@ -42,6 +42,8 @@ namespace building {
 		clickableInMinimap = (bool)data["clickable_in_minimap"].get<int>();
 		//selectionSound = (sound)data["selectionSound"].get<string>(); TODO
 		textureID = obj::BSprite()->getTextureId(className);
+
+		name = className + "_" + to_string(picking_id);
 	}
 
 	void Building::render(bool picking, int clickID) {
