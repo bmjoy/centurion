@@ -19,10 +19,11 @@ namespace editor {
 	}
 
 	void EditorUI::render(bool picking) {
-		editor_menu.render(picking);
 		open_map_window.render(picking);
 		new_map_window.render(picking);
 		add_object_window.render(picking);
+
+		editor_menu.render(picking); // always the last
 	}
 
 	EditorUI::~EditorUI() {}

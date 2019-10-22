@@ -240,15 +240,17 @@ namespace editor {
 		if (clickName == "NewMapWindow_create") { // CREATE
 
 			cout << "DEBUG: You've set the following map name: " + text_input.get_text() << endl;
-
 			currentMapName = text_input.get_text();
-			saveCurrentScenario(currentMapName);
+			
+			buildings = { };
+			units = { };
 
 			mapgen::reset_map();
 			obj::MapTerrain()->updateHeightsBuffer();
 			obj::MapTerrain()->updateTextureBuffer();
 			NewMapWindowIsOpen = false;
 			IsWindowOpened = false;
+			saveCurrentScenario(currentMapName);
 		}
 	}
 

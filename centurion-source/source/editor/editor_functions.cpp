@@ -31,8 +31,8 @@ namespace editor {
 	array<Player, 8> playersList;
 	Unit unitTemp;
 	Building buildingTemp;
-	map<int, Building> buildings = { };
-	map<int, Unit> units = { };
+	map<int, Building> buildings;
+	map<int, Unit> units;
 
 	Editor *EDITOR() { return &myeditor; }
 
@@ -48,8 +48,8 @@ namespace editor {
 		}
 	}
 	void insertingObject(string type, string classname) {
-		float x = getParam("mouse-x-position") * getParam("window-width-zoomed") / getParam("window-width");
-		float y = getParam("mouse-y-position")* getParam("window-height-zoomed") / getParam("window-height");
+		float x = getParam("mouse-x-position") * getParam("window-width-zoomed") / getParam("window-width") + getParam("camera-x-position");
+		float y = getParam("mouse-y-position") * getParam("window-height-zoomed") / getParam("window-height") + getParam("camera-y-position");
 		if (type == "buildings") {
 			buildingTemp.set_position(vec3(x, y, 0.f));
 			buildingTemp.render(false, 0);
@@ -78,7 +78,6 @@ namespace editor {
 		}
 	}
 	void renderObjects() {
-		cout << "ciao" << buildings.size() << endl;
 		for (map<int, Building>::iterator bld = buildings.begin(); bld != buildings.end(); bld++) {
 			bld->second.render(false, leftClickID);
 		}

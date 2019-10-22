@@ -17,6 +17,9 @@ namespace editor {
 		resetPicking();
 		surface = new Surface();
 
+		buildings = { };
+		units = { };
+
 		surface->reset();
 		EDITOR_UI()->create();
 
