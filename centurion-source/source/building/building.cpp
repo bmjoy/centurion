@@ -7,7 +7,9 @@ using namespace std;
 using namespace glm;
 
 namespace building {
-	Building::Building(){}
+	Building::Building(){
+		type = "building";
+	}
 
 	void Building::prepare() {
 		
@@ -24,7 +26,7 @@ namespace building {
 		//selectionSound = (sound)data["selectionSound"].get<string>(); TODO
 		textureID = obj::BSprite()->getTextureId(className);
 	}
-	void Building::create() {
+	void Building::create(string Name) {
 		ifstream path_scan(data["pass_path"].get<string>());
 		json grid_data = json::parse(path_scan);
 		building_grid = grid_data["grid"].get<vector<vector<int>>>();
@@ -43,7 +45,7 @@ namespace building {
 		//selectionSound = (sound)data["selectionSound"].get<string>(); TODO
 		textureID = obj::BSprite()->getTextureId(className);
 
-		name = className + "_" + to_string(picking_id);
+		(Name == "") ? name = className + "_" + to_string(picking_id) : name = Name;
 	}
 
 	void Building::render(bool picking, int clickID) {

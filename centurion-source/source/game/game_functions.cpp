@@ -34,7 +34,7 @@ namespace game {
 	map<int, Building> buildings = { };
 	map<int, Unit> units = { };
 
-	vector<Player> playersList;
+	array<Player, 8> playersList;
 
 	SelRectPoints *SelRectCoords() { return &selRectCoords; }
 

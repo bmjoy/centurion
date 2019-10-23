@@ -209,6 +209,9 @@ namespace editor {
 		if (clickName == "OpenMapWindow_open" || (selectedID == pos && hasDoubleClicked())) { // OPEN
 			if (selectedID != -1) {
 				cout << "DEBUG: You've chosen the following scenario to open: " + availableScenarios[selectedID] << endl;
+				game::buildings = { };
+				game::units = { };
+				
 				openScenario(availableScenarios[selectedID]);
 				currentMapName = availableScenarios[selectedID];
 				obj::MapTerrain()->updateHeightsBuffer();

@@ -1,8 +1,10 @@
 #include <object>
 #include <player>
+#include <game>
 
 using namespace std;
 using namespace glm;
+using namespace game;
 
 GObject::GObject(){
 	selected = false;
@@ -15,8 +17,8 @@ void GObject::set_class(string class_name) {
 	data = json::parse(path);
 	className = class_name;
 }
-void GObject::set_player(Player *p) {
-	player = p;
+void GObject::set_player(int player_id) {
+	player = &playersList[player_id];
 }
 void GObject::set_id(int pickingId) {
 	picking_id = pickingId;

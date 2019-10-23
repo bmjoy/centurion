@@ -3,6 +3,8 @@
 #include <math>
 #include <json.hpp>
 #include <game>
+#include <picking>
+#include <object>
 
 /* ----- GLOBAL ----- */
 
@@ -206,6 +208,25 @@ namespace glb {
 				}
 		}
 		textureFile.close();
+
+		// save objects
+		ofstream objectsFile(path + "/objects");
+		if (objectsFile.is_open()) {
+			for (map<int, Building>::iterator bld = game::buildings.begin(); bld != game::buildings.end(); bld++) {
+				objectsFile << bld->second.get_type() << ",";
+				objectsFile << bld->second.get_class() << ",";
+				objectsFile << bld->second.get_name() << ",";
+				objectsFile << bld->second.get_playerID() << ",";
+				objectsFile << bld->second.get_position().x << ",";
+				objectsFile << bld->second.get_position().y;
+				objectsFile << "\n";
+			}
+			/*for (map<int, Unit>::iterator u = units.begin(); u != units.end(); u++) {
+				u->second.render(true, 0);
+			}*/
+		}
+		objectsFile.close();
+
 		cout << "DEBUG: The map is saved with the following name: " + name << endl;
 	}
 	void openScenario(string name) {
@@ -234,6 +255,37 @@ namespace glb {
 			while (getline(s, number, ',')) {
 				mapgen::MapTextures()[i] = stof(number);
 				i++;
+			}
+		}
+		// read objects
+		{
+			fstream fin;
+			fin.open("scenarios/" + name + "/objects");
+			string line, value;			
+			while (getline(fin, line)){
+				string objectsInfo[6];
+				stringstream s(line);
+				int i = 0;
+				while (getline(s, value, ',')) {
+					objectsInfo[i] = value;
+					i++;
+				}
+				string type = objectsInfo[0];
+				string className = objectsInfo[1];
+				string name = objectsInfo[2];
+				int playerID = stoi(objectsInfo[3]);
+				float xPos = stof(objectsInfo[4]);
+				float yPos = stof(objectsInfo[5]);
+				if (type == "building") {
+					building::Building b = building::Building();
+					b.set_class(className);
+					b.set_player(playerID);
+					b.set_position(vec3(xPos, yPos, 0.f));
+					b.set_id(getPickingID());
+					b.create(name);
+					game::buildings[getPickingID()] = b;
+					increasePickingID();
+				}
 			}
 		}
 	}

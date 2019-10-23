@@ -33,7 +33,7 @@ namespace menu {
 			for (int i = 0; i < num_players; i++) {
 				Player p = Player();
 				p.create(players_color[i], 0, list->get_race(i), glb::colors[players_color[i]]);
-				playersList.push_back(p);
+				playersList[i] = p;
 			}
 		}
 		/*------------------------------------------------------------------------------*/

@@ -63,7 +63,7 @@ namespace game {
 				Building b = Building();
 				b.set_class(settl_data[r][j]["class"]);
 				b.set_id(getPickingID());
-				b.set_player(&playersList[i]);
+				b.set_player(i);
 				b.set_position(vec3(origin.x + (int)settl_data[r][j]["offsetx"], origin.y + (int)settl_data[r][j]["offsety"], 0.0f));
 				b.create();
 			
@@ -84,7 +84,7 @@ namespace game {
 				Unit u = Unit();
 				u.set_class("hmyrmidon");
 				u.set_id(getPickingID());
-				u.set_player(&playersList[0]);
+				u.set_player(0);
 				u.set_position(playersList[0].getStartPoint().x+i*50, playersList[0].getStartPoint().y-1000-j*50);
 				u.create();
 				units[getPickingID()] = u;

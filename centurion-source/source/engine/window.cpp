@@ -13,8 +13,8 @@ void myWindow::init() {
 	glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
 	glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
 	glfwWindowHint(GLFW_RESIZABLE, GL_FALSE);
-	//MainWindow = glfwCreateWindow((int)getParam("window-width"), (int)getParam("window-height"), gameNameSTR.c_str(), nullptr, nullptr); // Windowed
-	MainWindow = glfwCreateWindow((int)getParam("window-width"), (int)getParam("window-height"), gameNameSTR.c_str(), glfwGetPrimaryMonitor(), nullptr); // full screen
+	MainWindow = glfwCreateWindow((int)getParam("window-width"), (int)getParam("window-height"), gameNameSTR.c_str(), nullptr, nullptr); // Windowed
+	//MainWindow = glfwCreateWindow((int)getParam("window-width"), (int)getParam("window-height"), gameNameSTR.c_str(), glfwGetPrimaryMonitor(), nullptr); // full screen
 	glfwMakeContextCurrent(MainWindow);
 
 	create_callbacks(); // handle key + mouse input

@@ -3,12 +3,12 @@
 #include <gui>
 #include <json.hpp>
 #include <object>
+#include <player>
 
 using namespace std;
 using namespace glm;
 
 class Surface;
-class Player;
 
 namespace game {
 	
@@ -37,7 +37,7 @@ namespace game {
 	extern map<int, Building> buildings;
 	extern map<int, Unit> units;
 
-	extern vector<Player> playersList;
+	extern array<Player,8> playersList;
 
 	//
 	//	GAME CLASS --> source/game/game.cpp

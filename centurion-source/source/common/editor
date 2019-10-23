@@ -44,7 +44,6 @@ namespace editor {
 	//	EDITOR FUNCTIONS
 	//
 
-	extern array<Player, 8> playersList;
 	extern Unit unitTemp;
 	extern Building buildingTemp;
 
