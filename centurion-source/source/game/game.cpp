@@ -146,7 +146,7 @@ namespace game {
 
 		// ----------------- //	
 
-		goToPosition();
+		if(gameMinimapStatus) goToPosition();
 		glb::cameraProjection = ortho(0.0f, getParam("window-width-zoomed"), 0.0f, getParam("window-height-zoomed"), -(float)mapWidth, (float)mapWidth);
 		
 

@@ -100,7 +100,7 @@ namespace game {
 				if (u->second.isSelected())	  selectedUnits++;
 			}
 		}
-		if (!gameMinimapStatus && !editor::IsWindowOpened)	renderSelRectangle();
+		if (!gameMinimapStatus && !editor::IsWindowOpened && !editor::menuIsOpened)	renderSelRectangle();
 	}
 
 	void clearBuffers() {

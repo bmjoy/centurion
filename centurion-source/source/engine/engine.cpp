@@ -105,7 +105,7 @@ namespace engine {
 			mouse->render();
 			
 			CharCodepointPressed = -1;
-
+			resetKeyCodes();
 			glfwSwapBuffers(MainWindow);
 
 			fps_sleep();
@@ -148,6 +148,10 @@ namespace engine {
 
 		for (int i = 0; i < imagesInfoList.size(); i++)
 			obj::Img()->addPath(imagesInfoList[i].name, imagesInfoList[i].path);
+	}
+
+	void Engine::resetKeyCodes() {
+		KeyCode[GLFW_KEY_SPACE] = false;
 	}
 
 	void Engine::fps() {

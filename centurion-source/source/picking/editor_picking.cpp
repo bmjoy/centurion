@@ -94,7 +94,8 @@ namespace editor {
 				//---------------------
 				//    EXIT
 
-				if (pos == 4) { // exit				
+				if (pos == 4) { // exit
+					setBoolean("mouse-left-pressed", false);
 					ENGINE()->Reset();
 					for (int i = 0; i < titles.size(); i++) {
 						std::string s = titlesList[i];

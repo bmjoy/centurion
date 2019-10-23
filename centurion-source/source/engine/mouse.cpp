@@ -24,7 +24,6 @@ void Mouse::render() {
 	}
 }
 void Mouse::mouse_control(int lastX, int lastY) {
-
 	position.x = (GLfloat)lastX;
 	position.y = (GLfloat)lastY;
 

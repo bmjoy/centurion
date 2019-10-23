@@ -93,6 +93,7 @@ namespace engine {
 	class Engine {
 	public:
 		Engine();
+		int pressingTimer;
 		void Reset() { reset = true; }
 		void setEnvironment(string s) { environment = s; }
 		string getEnvironment() { return environment; }
@@ -110,6 +111,7 @@ namespace engine {
 		double currentTime, lastTime, finalTime;
 		int nbFrames, Fps, Mpfs;
 		bool reset;
+		void resetKeyCodes();
 		void fps();
 		void fps_sleep();
 		void readDataClasses();
