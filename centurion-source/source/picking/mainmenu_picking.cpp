@@ -31,7 +31,7 @@ namespace menu {
 		/*------------------------------------------------------------------------------*/
 		if (clickName == "MAINMENU_buttonOptions") {
 			currentMenu = "options";
-			options->previous_language = language;
+			options->currentLan = language;
 		}
 		/*------------------------------------------------------------------------------*/
 		if (clickName == "MAINMENU_buttonQuit") {
@@ -58,11 +58,11 @@ namespace menu {
 		}
 		/*------------------------------------------------------------------------------*/
 		if (clickName == "OPTIONS_buttonSave") {
+			changeLanguage(options->currentLan);
 			currentMenu = "mainmenu";
 		}
 		/*------------------------------------------------------------------------------*/
 		if (clickName == "OPTIONS_buttonCancel") {
-			if (options->previous_language != language) changeLanguage(options->previous_language);
 			currentMenu = "mainmenu";
 		}
 	}

@@ -156,7 +156,7 @@ namespace glb {
 	void changeLanguage(string lan) {
 		language = lan;
 		read_translation_tables();
-		menu::MENU()->reset();
+		menu::MENU()->update();
 		cout << "DEBUG : Language changed to " + lan << endl;
 	}
 

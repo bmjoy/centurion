@@ -63,10 +63,7 @@ namespace menu {
 			languages.open_close();
 			if (i > 0) {
 				languages.select_option(i);
-				string currentLang = languages.selectedText.substr(5);
-				if (language != currentLang) {
-					changeLanguage(currentLang);					
-				}
+				currentLan = languages.selectedText.substr(5);
 			}
 		}
 	}

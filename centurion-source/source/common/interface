@@ -88,12 +88,12 @@ namespace menu {
 		GlobalOptions();
 		void create();		
 		void render(bool pick);
-		string previous_language;
+		string currentLan;
 		~GlobalOptions();
 	private:
 		gui::Rectangle back;
 		gui::SimpleText text[10];
-		gui::FormInput languages;
+		gui::FormInput languages;	
 		float startX, startY;
 		void picking();
 	};

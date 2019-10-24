@@ -19,6 +19,7 @@ namespace menu {
 		bool menu_is_created() { return menuIsCreated; }
 		void reset();
 		void create();
+		void update();
 		void render();
 		~Menu();
 
