@@ -104,11 +104,13 @@ namespace game {
 		//---------------------------------------
 		gameIsCreated = true;
 		leftClickID = 0;
+		leftClickID_UI = 0;
 		resetDoubleClickTime();
 	}
 
 	void Game::run() {
 		selectedUnits = 0;
+		leftClickID_UI = 0;
 		CAMERA()->keyboardControl();
 
 		/* Keyboard controls handling*/

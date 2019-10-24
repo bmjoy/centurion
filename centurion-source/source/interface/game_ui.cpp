@@ -42,15 +42,12 @@ namespace game {
 	void UIGame::render() {
 		calculateTime();
 
-		if (gameMenuStatus) {
-			if (getBoolean("mouse-left")) {
-				gameMenu.render(true);
-
-				picking(); // --> source/picking/gameui_picking.cpp
-			}
-			gameMenu.render(false);
+		if (getBoolean("mouse-left")) {
+			if (gameMenuStatus) gameMenu.render(true);
+			picking(); // --> source/picking/gameui_picking.cpp		
 		}
-
+		
+		if (gameMenuStatus) gameMenu.render(false);
 
 		string txt = time.hours_str + ":" + time.minutes_str + ":" + time.seconds_str;
 		time.text.render_dynamic(txt, "tahoma_15px", time.x, time.y, vec4(255.f, 255.f, 255.f, 255.f), "left", "normal");

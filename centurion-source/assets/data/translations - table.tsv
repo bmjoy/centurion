@@ -1,19 +1,20 @@
 string_name	english	italian	spanish	french	arabic
 MAINMENU_buttonSinglePlayer	Singleplayer	Giocatore singolo	Un jugador	Un joueur	ﻻﻋﺐ ﻣﻔﺮﺩ
 MAINMENU_buttonEditor	Editor	Editor	Editor	Éditeur	ﻣﺤﺮر اﻟﺨﺮاﺋﻄ
-MAINMENU_buttonOptions	Options	Opzioni	Opciones		
+MAINMENU_buttonOptions	Options	Opzioni	Opciones	Options	
 MAINMENU_buttonQuit	Exit	Esci dal gioco	Salir	Sortir du jeu	ﺧﺮوج
 SINGLEPLAYER_buttonStart	Start!	Avvia la partita!	Empezar!	Commencer le jeu!	اﺑﺪٲ اﻟﻠﻌﺒﺔ
 SINGLEPLAYER_buttonExit	Back to menu	Menù principale	Menú principal	Menu principal	اﻟﻘﺎﺋﻤﺔ اﻟﺮﺋﻴﺴﻴﺔ
-OPTIONS_buttonSave	Save	Salva	Guardar		
-OPTIONS_buttonCancel	Cancel	Annulla	Anular		
-OPTIONS_Title	Options	Opzioni	Opciones		
-OPTIONS_LanguageText	Language	Lingua	Idioma		
-LANG_english	English	Inglese	Inglés		
-LANG_italian	Italian	Italiano	italiano		
-LANG_spanish	Spanish	Spagnolo	Español		
-LANG_french	French	Francese	Francés		
-LANG_arabic	Arabic	Arabica	Arábica		
+OPTIONS_buttonApply	Apply	Applica	Aplicar	Appliquer	
+OPTIONS_buttonSave	Save	Salva	Guardar	Sauver	
+OPTIONS_buttonCancel	Cancel	Annulla	Anular	Annuler	
+OPTIONS_Title	Options	Opzioni	Opciones	Options	
+OPTIONS_LanguageText	Language	Lingua	Idioma	Langue	
+LANG_english	English	Inglese	Inglés	Anglais	
+LANG_italian	Italian	Italiano	Italiano	Italien	
+LANG_spanish	Spanish	Spagnolo	Español	Espagnol	
+LANG_french	French	Francese	Francés	Français	
+LANG_arabic	Arabic	Arabo	Arábica	Arabe	
 GAME_pauseMenuButtonQuit	Quit	Esci dalla partita	Salir	Sortir du jeu	اﻟﺨﺮﻮج ﻣﻦ اﻟﻠﻌﺒﺔ
 GAME_pauseMenuButtonClose	Close	Chiudi il menù	Cerrar	Fermer le menu	أﻏﻠﻖ اﻟﻘﺎﺋﻤﺔ اﻟﺮﺋﻴﺴﻴﺔ
 EDITOR_File	File	File	Archivo	Fichier	ﻣﻠﻒ

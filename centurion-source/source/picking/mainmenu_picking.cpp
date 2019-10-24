@@ -57,8 +57,14 @@ namespace menu {
 			}
 		}
 		/*------------------------------------------------------------------------------*/
+		if (clickName == "OPTIONS_buttonApply") {
+			if (language != options->currentLan)
+				changeLanguage(options->currentLan);
+		}
+		/*------------------------------------------------------------------------------*/
 		if (clickName == "OPTIONS_buttonSave") {
-			changeLanguage(options->currentLan);
+			if (language != options->currentLan)
+				changeLanguage(options->currentLan);
 			currentMenu = "mainmenu";
 		}
 		/*------------------------------------------------------------------------------*/

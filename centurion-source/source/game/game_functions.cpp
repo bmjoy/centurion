@@ -100,6 +100,7 @@ namespace game {
 				if (u->second.isSelected())	  selectedUnits++;
 			}
 		}
+		cout << gameMinimapStatus << " " << editor::IsWindowOpened << " " << editor::menuIsOpened << " " << editor::TerrainBrushIsActive << " " << leftClickID_UI << endl;
 		if (!gameMinimapStatus && !editor::IsWindowOpened && !editor::menuIsOpened && !editor::TerrainBrushIsActive && leftClickID_UI == 0)	renderSelRectangle();
 	}
 
