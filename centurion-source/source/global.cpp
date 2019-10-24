@@ -58,7 +58,7 @@ namespace glb {
 		language = settings["language"].get<string>();
 		cout << "DEBUG: Current language: " << language << "\n";
 		read_translation_tables();
-		set_translation_table();
+		//set_translation_table();
 
 		setBoolean("debug", (bool)settings["debug"].get<int>());
 		setParam("window-width", (float)settings["window_width"]);
@@ -116,7 +116,11 @@ namespace glb {
 
 	void read_translation_tables() {
 		ifstream fin("assets/data/translations.tsv");
-		if (fin.good()) {
+		if (!fin.good()) {
+			translation_table_current["temp"] = "Unable to find or process TRANSLATIONS file.\n  Forced application shutdown has started.";
+			forceGameClosure("NOT_FOUND", translation_table_current["temp"]);
+		}
+		else {
 			string line, value;
 			int row = 0;
 			while (getline(fin, line)) {
@@ -129,10 +133,10 @@ namespace glb {
 						i++;
 					}
 					translation_table_english[values[0]] = values[1];
-					translation_table_italian[values[0]] = values[2];
-					translation_table_spanish[values[0]] = values[3];
-					translation_table_french[values[0]] = values[4];
-					translation_table_arabic[values[0]] = values[5];
+					values[2] == "" ? translation_table_italian[values[0]] = values[1] : translation_table_italian[values[0]] = values[2];
+					values[3] == "" ? translation_table_italian[values[0]] = values[1] : translation_table_italian[values[0]] = values[3];
+					values[4] == "" ? translation_table_italian[values[0]] = values[1] : translation_table_italian[values[0]] = values[4];
+					values[5] == "" ? translation_table_italian[values[0]] = values[1] : translation_table_italian[values[0]] = values[5];
 				}
 				row++;
 			}

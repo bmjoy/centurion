@@ -93,7 +93,6 @@ namespace engine {
 	class Engine {
 	public:
 		Engine();
-		int pressingTimer;
 		void Reset() { reset = true; }
 		void setEnvironment(string s) { environment = s; }
 		string getEnvironment() { return environment; }

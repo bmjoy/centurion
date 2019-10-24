@@ -80,22 +80,11 @@ void myWindow::mouse_button_callback(GLFWwindow* window, int button, int action,
 			setBoolean("mouse-left", true);
 			setBoolean("mouse-release", false);
 			setBoolean("mouse-left-pressed", true);
-			/*if (ENGINE()->pressingTimer >= 30) {
-				if (ENGINE()->getEnvironment() != "menu" && cursorInGameScreen()) setBoolean("mouse-left-pressed", true);
-			}
-			else {
-				ENGINE()->pressingTimer++;
-				cout << ENGINE()->pressingTimer++ << "\n";
-			}*/
 		}
 		else if (action == GLFW_RELEASE) {
 			setBoolean("mouse-left", false);
 			setBoolean("mouse-release", true);
 			setBoolean("mouse-left-pressed", false);
-			/*ENGINE()->pressingTimer = 0;
-			if (ENGINE()->getEnvironment() != "menu") {
-				setBoolean("mouse-left-pressed", false);
-			}*/
 		}
 	}
 	if (button == GLFW_MOUSE_BUTTON_RIGHT) {
