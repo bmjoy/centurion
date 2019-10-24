@@ -33,18 +33,12 @@ namespace glb {
 	static map<string, bool> booleans; // global booleans
 	static map<string, string> errors; // error codes
 	static map<string, string> translation_table_current;
-	static map<string, string> translation_table_english;
-	static map<string, string> translation_table_italian;
-	static map<string, string> translation_table_spanish;
-	static map<string, string> translation_table_french;
-	static map<string, string> translation_table_arabic;
 	void setParam(string param, float value);
 	float getParam(string param);
 	void setBoolean(string param, bool value);
 	bool getBoolean(string param);
 	void setErrors(map<string, string> errorsMap);
 	string getErrorCode(string error);
-	void set_translation_table();
 	string getTranslation(string code);
 	void initParams();
 	void saveLog();

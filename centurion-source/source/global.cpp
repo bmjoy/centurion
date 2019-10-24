@@ -58,7 +58,6 @@ namespace glb {
 		language = settings["language"].get<string>();
 		cout << "DEBUG: Current language: " << language << "\n";
 		read_translation_tables();
-		//set_translation_table();
 
 		setBoolean("debug", (bool)settings["debug"].get<int>());
 		setParam("window-width", (float)settings["window_width"]);
@@ -115,41 +114,40 @@ namespace glb {
 	}
 
 	void read_translation_tables() {
-		ifstream fin("assets/data/translations.tsv");
+		ifstream fin("assets/data/translations - table.tsv");
 		if (!fin.good()) {
 			translation_table_current["temp"] = "Unable to find or process TRANSLATIONS file.\n  Forced application shutdown has started.";
 			forceGameClosure("NOT_FOUND", translation_table_current["temp"]);
 		}
 		else {
 			string line, value;
+			int currentlang = 0;
+			int nLanguages = 0;
 			int row = 0;
 			while (getline(fin, line)) {
-				if (row > 0){
-					string values[6];
+				if (row == 0) { // first row
+					stringstream s(line);
+					while (getline(s, value, '\t')) {
+						if (value == language) currentlang = nLanguages;
+						nLanguages++;
+					}
+				}
+				if (row > 0) {
+					vector<string> values(nLanguages, "");
 					stringstream s(line);
 					int i = 0;
 					while (getline(s, value, '\t')) {
 						values[i] = value;
 						i++;
 					}
-					translation_table_english[values[0]] = values[1];
-					values[2] == "" ? translation_table_italian[values[0]] = values[1] : translation_table_italian[values[0]] = values[2];
-					values[3] == "" ? translation_table_italian[values[0]] = values[1] : translation_table_italian[values[0]] = values[3];
-					values[4] == "" ? translation_table_italian[values[0]] = values[1] : translation_table_italian[values[0]] = values[4];
-					values[5] == "" ? translation_table_italian[values[0]] = values[1] : translation_table_italian[values[0]] = values[5];
+					string key = values[0];
+					string eng = values[1];
+					string current = values[currentlang];
+					(current != "") ? translation_table_current[key] = current : translation_table_current[key] = eng;
 				}
 				row++;
 			}
 		}
-	}
-
-	void set_translation_table() {
-		translation_table_current = { };
-		if (language == "english") translation_table_current = translation_table_english;
-		if (language == "italian") translation_table_current = translation_table_italian;
-		if (language == "spanish") translation_table_current = translation_table_spanish;
-		if (language == "french") translation_table_current = translation_table_french;
-		if (language == "arabic") translation_table_current = translation_table_arabic;
 	}
 
 	void readIndicesData(unsigned int *indices, string path) {
