@@ -18,6 +18,7 @@
   "EDITOR_Edit_UpdateNormals": "Recalculer les normales",
   "EDITOR_Tools": "Outils",
   "EDITOR_Tools_AddObject": "Ajouter un objet",
+  "EDITOR_Tools_TerrainBrush": "",
   "EDITOR_addObjectButtonAdd": "",
   "EDITOR_newMapButtonClose": "Fermer",
   "EDITOR_newMapButtonCreate": "Creér",
@@ -45,6 +46,8 @@
   "EDITORTREE_CLASS_rtavern": "",
   "EDITORTREE_CLASS_rtemple": "",
   "EDITORTREE_CLASS_rtownhall": "",
+  "EDITORBRUSH_grass1": "",
+  "EDITORBRUSH_road1": "",
   
   "WORD_gameStarted": "Le jeu commence...",
   "WORD_player_1": "Joueur 1",

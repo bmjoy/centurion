@@ -8,6 +8,7 @@ using namespace glm;
 namespace glb {
 	
 	extern int leftClickID;
+	extern int leftClickID_UI;
 	extern int rightClickID;
 
 	static int pickingID = 1;

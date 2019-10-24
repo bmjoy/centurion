@@ -12,6 +12,7 @@ void Surface::reset() {
 	mapgen::reset_map();
 	obj::MapGrid()->reset();
 	obj::MapTerrain()->updateHeightsBuffer();
+	obj::MapTerrain()->updateTextureBuffer();
 }
 
 void Surface::createNoise() {

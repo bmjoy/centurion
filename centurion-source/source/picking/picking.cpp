@@ -6,6 +6,7 @@ using namespace glm;
 
 namespace glb {
 	int leftClickID = 0;
+	int leftClickID_UI = 0;
 	int rightClickID = 0;
 
 	void increasePickingID() { pickingID++; }

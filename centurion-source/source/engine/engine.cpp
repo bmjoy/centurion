@@ -152,6 +152,9 @@ namespace engine {
 
 	void Engine::resetKeyCodes() {
 		KeyCode[GLFW_KEY_SPACE] = false;
+		KeyCode[GLFW_KEY_Z] = false;
+		KeyCode[GLFW_KEY_A] = false;
+		KeyCode[GLFW_KEY_T] = false;
 	}
 
 	void Engine::fps() {

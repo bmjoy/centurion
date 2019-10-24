@@ -117,15 +117,6 @@ namespace editor {
 
 		if (AddObjectWindowIsOpen) {
 
-			if (addingObject) {
-				insertingObject(formSelectedTexts[0], formSelectedTexts[2]);
-
-				if (getBoolean("mouse-left")) {
-					addingObject = false;
-					addObject(formSelectedTexts[0]);
-				}
-			}
-
 			if (pick && getBoolean("mouse-left") && !addingObject) {
 				buttons[0].render(true);
 				buttons[1].render(true);
@@ -135,6 +126,16 @@ namespace editor {
 					objectForms[j].render(true, glm::vec4());
 				picking();
 			}
+
+			if (addingObject) {
+				insertingObject(formSelectedTexts[0], formSelectedTexts[2]);
+
+				if (getBoolean("mouse-left")) {
+					addingObject = false;
+					addObject(formSelectedTexts[0]);
+				}
+			}
+
 			if (!pick) {
 				back_image.render(false);
 				object_thumbnail.render(false);

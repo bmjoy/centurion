@@ -18,6 +18,7 @@
   "EDITOR_Edit_UpdateNormals": "",
   "EDITOR_Tools": "",
   "EDITOR_Tools_AddObject": "",
+  "EDITOR_Tools_TerrainBrush": "",
   "EDITOR_addObjectButtonAdd": "",
   "EDITOR_newMapButtonClose": "",
   "EDITOR_newMapButtonCreate": "",
@@ -45,6 +46,8 @@
   "EDITORTREE_CLASS_rtavern": "",
   "EDITORTREE_CLASS_rtemple": "",
   "EDITORTREE_CLASS_rtownhall": "",
+  "EDITORBRUSH_grass1": "",
+  "EDITORBRUSH_road1": "",
   
   "WORD_gameStarted": "El juego se está iniciando ...",
   "WORD_player_1": "Jugador 1",

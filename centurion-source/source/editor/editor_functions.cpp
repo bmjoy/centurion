@@ -6,6 +6,7 @@
 #include <player>
 #include <game>
 #include <engine>
+#include <surface>
 
 using namespace building;
 using namespace unit;
@@ -28,6 +29,8 @@ namespace editor {
 	bool AddObjectWindowUpdateForm2 = false;
 	bool PropertiesWindowIsOpen = false;
 	bool PropertiesWindowResetText = false;
+	bool TerrainBrushWindowIsOpen = false;
+	bool TerrainBrushIsActive = false;
 
 	string EditorObjectStringListForm0[NumberOfObjects] = { "" };
 	string EditorObjectStringListForm1[NumberOfObjects] = { "" };
@@ -44,7 +47,9 @@ namespace editor {
 			if (KeyCode[GLFW_KEY_N]) { NewMapWindowIsOpen = true; NewMapResetText = true; IsWindowOpened = true; }
 			if (KeyCode[GLFW_KEY_O]) { OpenMapWindowIsOpen = true; OpenMapWindowUpdate = true; IsWindowOpened = true; }
 			if (KeyCode[GLFW_KEY_S]) { saveCurrentScenario(currentMapName); }
-			if (KeyCode[GLFW_KEY_A]) { AddObjectWindowIsOpen = true; }
+			if (KeyCode[GLFW_KEY_A]) { AddObjectWindowIsOpen = !AddObjectWindowIsOpen; }
+			if (KeyCode[GLFW_KEY_T]) { TerrainBrushIsActive = !TerrainBrushWindowIsOpen; TerrainBrushWindowIsOpen = !TerrainBrushWindowIsOpen;
+			}
 		}
 		if (KeyCode[GLFW_KEY_ESCAPE]) {
 			//if () {
@@ -57,12 +62,12 @@ namespace editor {
 		}
 		if (KeyCode[GLFW_KEY_SPACE] || getBoolean("mouse-middle")) {
 			game::gameMinimapStatus = !game::gameMinimapStatus;
-			KeyCode[GLFW_KEY_SPACE] = false;
+			//KeyCode[GLFW_KEY_SPACE] = false;
 			game::gameMinimapStatus ? std::cout << "DEBUG: Minimap ON!\n" : std::cout << "DEBUG: Minimap OFF!\n";
 		}
 		if (KeyCode[GLFW_KEY_Z]) {
 			setBoolean("wireframe", !getBoolean("wireframe"));
-			KeyCode[GLFW_KEY_Z] = false;
+			//KeyCode[GLFW_KEY_Z] = false;
 			getBoolean("wireframe") ? std::cout << "DEBUG: Wireframe ON!\n" : std::cout << "DEBUG: Wireframe OFF! \n";
 		}
 	}
@@ -96,6 +101,20 @@ namespace editor {
 			game::buildings[getPickingID()] = buildingTemp;
 			increasePickingID();
 			setBoolean("mouse-left", false);
+		}
+	}
+	void changeTerrain(int terrainType) {
+		float x1 = (getParam("mouse-x-position") * getParam("window-width-zoomed") / getParam("window-width") + getParam("camera-x-position"));
+		float y1 = (getParam("mouse-y-position") * getParam("window-height-zoomed") / getParam("window-height") + getParam("camera-y-position"));
+		float type = float(terrainType);
+		
+		int x = int(round(x1 / mapgen::grid_size)) * mapgen::grid_size + mapgen::grid_size * 2;
+		int y = int(round(y1 / mapgen::grid_size)) * mapgen::grid_size + mapgen::grid_size * 2;
+		int j = mapgen::getVertexPos(x, y);
+	
+		if (mapgen::MapTextures()[j] != type){
+			mapgen::MapTextures()[j] = type;
+			obj::MapTerrain()->updateTextureBuffer();
 		}
 	}
 }

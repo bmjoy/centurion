@@ -100,7 +100,7 @@ namespace game {
 				if (u->second.isSelected())	  selectedUnits++;
 			}
 		}
-		if (!gameMinimapStatus && !editor::IsWindowOpened && !editor::menuIsOpened)	renderSelRectangle();
+		if (!gameMinimapStatus && !editor::IsWindowOpened && !editor::menuIsOpened && !editor::TerrainBrushIsActive && leftClickID_UI == 0)	renderSelRectangle();
 	}
 
 	void clearBuffers() {

@@ -173,6 +173,8 @@ namespace editor {
 	extern bool AddObjectWindowIsOpen;
 	extern bool AddObjectWindowUpdateForm1and2;
 	extern bool AddObjectWindowUpdateForm2;
+	extern bool TerrainBrushWindowIsOpen;
+	extern bool TerrainBrushIsActive;
 	extern bool menuIsOpened;
 
 	static const int NumberOfObjects = 100;
@@ -326,6 +328,25 @@ namespace editor {
 	};
 
 	//
+	//	TERRAIN BRUSH WINDOW
+	//
+
+	class TerrainBrushWindow {
+	public:
+		TerrainBrushWindow();
+		void create();
+		void render(bool pick);
+		~TerrainBrushWindow();
+	private:
+		map<string, int> terrainMap;
+		gui::Rectangle back;
+		gui::FormInput form1;
+		gui::Circle circle;
+		float startX, startY;
+		void picking();
+	};
+
+	//
 	//  EDITOR UI (CONTAINER)
 	//
 
@@ -341,6 +362,7 @@ namespace editor {
 		NewMapWindow new_map_window;
 		AddObjectWindow add_object_window;
 		PropertiesWindow properties_window;
+		TerrainBrushWindow terrainbrush_window;
 		gui::Rectangle minimapRectangle;
 	};
 

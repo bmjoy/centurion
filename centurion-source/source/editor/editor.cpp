@@ -25,6 +25,7 @@ namespace editor {
 		EDITOR_UI()->create();
 		game::GAME()->selRectangle = gui::Rectangle();
 		game::GAME()->selRectangle.create("border", 0, 0, 0, 0, "top-left", 0);
+		setBoolean("mouse-left-pressed", false);
 
 		editorIsCreated = true;
 	}

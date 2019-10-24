@@ -8,8 +8,8 @@ using namespace engine;
 
 namespace game {
 	void UIGame::picking() {
-		int clickId = get_id();
-		string clickName = getPickedObjectName(clickId);
+		leftClickID_UI = get_id();
+		string clickName = getPickedObjectName(leftClickID_UI);
 		if (clickName == "GAME_pauseMenuButtonClose") {
 			gameMenuStatus = false;
 		}

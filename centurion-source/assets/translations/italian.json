@@ -17,7 +17,8 @@
   "EDITOR_Edit": "Modifica",
   "EDITOR_Edit_UpdateNormals": "Ricalcola Normali",
   "EDITOR_Tools": "Strumenti",
-  "EDITOR_Tools_AddObject": "Aggiungi oggetto",
+  "EDITOR_Tools_AddObject": "Attiva/Disattiva la finestra Aggiungi oggetto",
+  "EDITOR_Tools_TerrainBrush": "Attiva/Disattiva i pennelli dei terreni",
   "EDITOR_addObjectButtonAdd": "Inserisci",
   "EDITOR_newMapButtonClose": "Chiudi",
   "EDITOR_newMapButtonCreate": "Crea",
@@ -45,6 +46,8 @@
   "EDITORTREE_CLASS_rtavern": "Taverna",
   "EDITORTREE_CLASS_rtemple": "Tempio",
   "EDITORTREE_CLASS_rtownhall": "Foro",
+  "EDITORBRUSH_grass1": "Erba 1",
+  "EDITORBRUSH_road1": "Strada 1",
   
   "WORD_gameStarted": "Avvio della partita in corso...",
   "WORD_player_1": "Giocatore 1",
