@@ -51,26 +51,15 @@ namespace glb {
 		map<string, string> errorsMap = errorCodes.get<map<string, string>>();
 		setErrors(errorsMap);
 
-		ifstream settings_path("settings.json");
-		if (!settings_path.good()) {
-			forceGameClosure("NOT_FOUND" , "ERROR_settings");
-		}
-		json settings = json::parse(settings_path);
-
-		language = settings["language"].get<string>();
-		cout << "DEBUG: Current language: " << language << "\n";
+		read_settings();				
 		read_translation_tables();
 
-		setBoolean("debug", (bool)settings["debug"].get<int>());
-		setParam("window-width", (float)settings["window_width"]);
-		setParam("window-height", (float)settings["window_height"]);
-		setParam("window-ratio", getParam("window-width") / getParam("window-height"));
 		setParam("window-width-zoomed", getParam("window-width") + (currentZoomCamera - 1) * zoomCameraFactor);
 		setParam("window-height-zoomed", getParam("window-height") + (currentZoomCamera - 1) * zoomCameraFactor / getParam("window-ratio"));
-
 		setBoolean("window-should-close", false);
 		setBoolean("wireframe", false);
 		setBoolean("mouse-left", false);
+		setBoolean("mouse-left-pressed", false);
 		setBoolean("mouse-right", false);
 		setBoolean("mouse-release", false);
 		setBoolean("mouse-scroll-bool", false);
@@ -94,6 +83,48 @@ namespace glb {
 			vec3 color = vec3(data["player_colors"][i]["r"], data["player_colors"][i]["g"], data["player_colors"][i]["b"]);
 			glb::colors.push_back(color);
 		}
+	}
+
+	void read_settings() {
+		ifstream fin("settings");
+		if (!fin.good()) {
+			// default values
+			setParam("window-width", 1366.f);
+			setParam("window-height", 768.f);
+			setParam("camera-movespeed", 10.f);
+			language = "english";
+			setBoolean("debug", false);
+			save_settings();
+		}
+		else {
+			string line, value;
+			while (getline(fin, line)) {
+				if (line[0] == '[') continue;
+				string values[2];
+				stringstream s(line);
+				int i = 0;
+				while (getline(s, values[i], '=')) i++;
+				if (values[0] == "window-width") setParam(values[0], stof(values[1]));
+				if (values[0] == "window-height") setParam(values[0], stof(values[1]));
+				if (values[0] == "camera-movespeed") setParam(values[0], stof(values[1]));
+				if (values[0] == "language") language = values[1];
+				if (values[0] == "debug") setBoolean("debug", (bool)stoi(values[1]));
+			}
+		}
+		cout << "DEBUG: Current language: " << language << "\n";
+	}
+
+	void save_settings() {
+		ofstream fout("settings");
+		if (fout.is_open()) {
+			fout << "[Settings]\n\n";
+			fout << "window-width=" << getParam("window-width") << "\n";
+			fout << "window-height=" << getParam("window-height") << "\n";
+			fout << "camera-movespeed=" << getParam("camera-movespeed") << "\n";
+			fout << "language=" << language << "\n";
+			fout << "debug=" << getBoolean("debug") << "\n";
+		}
+		fout.close();
 	}
 
 	void saveLog() {

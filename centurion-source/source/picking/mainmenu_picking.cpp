@@ -60,12 +60,14 @@ namespace menu {
 		if (clickName == "OPTIONS_buttonApply") {
 			if (language != options->currentLan)
 				changeLanguage(options->currentLan);
+			save_settings();
 		}
 		/*------------------------------------------------------------------------------*/
 		if (clickName == "OPTIONS_buttonSave") {
 			if (language != options->currentLan)
 				changeLanguage(options->currentLan);
 			currentMenu = "mainmenu";
+			save_settings();
 		}
 		/*------------------------------------------------------------------------------*/
 		if (clickName == "OPTIONS_buttonCancel") {
