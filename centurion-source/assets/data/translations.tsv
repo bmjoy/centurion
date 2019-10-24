@@ -1,0 +1,65 @@
+string_name	english	italian	spanish	french	arabic
+MAINMENU_buttonSinglePlayer	Singleplayer	Giocatore singolo	Un jugador	Un joueur	ﻻﻋﺐ ﻣﻔﺮﺩ
+MAINMENU_buttonEditor	Editor	Editor	Editor	Éditeur	ﻣﺤﺮر اﻟﺨﺮاﺋﻄ
+MAINMENU_buttonQuit	Exit	Esci dal gioco	Salir	Sortir du jeu	ﺧﺮوج
+SINGLEPLAYER_buttonStart	Start!	Avvia la partita!	Empezar!	Commencer le jeu!	اﺑﺪٲ اﻟﻠﻌﺒﺔ
+SINGLEPLAYER_buttonExit	Back to menu	Menù principale	Menú principal	Menu principal	اﻟﻘﺎﺋﻤﺔ اﻟﺮﺋﻴﺴﻴﺔ
+GAME_pauseMenuButtonQuit	Quit	Esci dalla partita	Salir	Sortir du jeu	اﻟﺨﺮﻮج ﻣﻦ اﻟﻠﻌﺒﺔ
+GAME_pauseMenuButtonClose	Close	Chiudi il menù	Cerrar	Fermer le menu	أﻏﻠﻖ اﻟﻘﺎﺋﻤﺔ اﻟﺮﺋﻴﺴﻴﺔ
+EDITOR_File	File	File		Fichier	ﻣﻠﻒ
+EDITOR_File_New	New	Nuovo		Nouveau	ﺟﺪﻳﺪ
+EDITOR_File_Open	Open	Apri		Ouvrir	ﻓﺘﺢ
+EDITOR_File_Save	Save	Salva		Enregistrer	ﺣﻔﻆ
+EDITOR_File_Exit	Exit	Esci		Sortir	ﺧﺮوج
+EDITOR_Edit	Edit	Modifica		Éditer	ﺗﻌﺪﻳﻞ
+EDITOR_Edit_UpdateNormals	Update Normals	Ricalcola Normali		Recalculer les normales	
+EDITOR_Tools	Tools	Strumenti		Outils	اﻷدوات
+EDITOR_Tools_AddObject	Toggle "Add Object" window	Attiva/Disattiva la finestra "Aggiungi oggetto"		Activer/Désactiver la fenêtre "Ajouter un objet"	
+EDITOR_Tools_TerrainBrush	Toggle terrain brushes	Attiva/Disattiva i pennelli dei terreni		Activer/Désactiver les brosses de terrain	
+EDITOR_addObjectButtonAdd	Add	Aggiungi		Ajouter	
+EDITOR_newMapButtonClose	Close	Chiudi		Fermer	أﻏﻟﻖ
+EDITOR_newMapButtonCreate	Create	Crea		Creér	إﻧﺸﺎء
+EDITOR_openMapButtonClose	Close	Chiudi		Fermer	أﻏﻟﻖ
+EDITOR_openMapButtonOpen	Open	Apri		Ouvrir	ﻓﺘﺢ
+EDITOR_newScenario	Create new scenario	Crea nuovo scenario		Crée a nouveau scénario	إﻧﺸﺎء اﻟﺴﻴﻨﺎرﻳﻮ ﺟﺪﻳﺪ
+EDITOR_newScenarioName	Choose a name for the scenario\n(max 30 characters).	Scegli un nome per lo scenario (max 30 caratteri).		Choisir un nom pour le scénario (30 caractères maximum).	(اﺧﺘﻴﺎر اﺳﻢ ﻟﻠﺴﻴﻨﺎرﻳﻮ (ﻣﺎﻛﺲ 30 اﺣﺮڧ
+EDITOR_properties	Object properties	Proprietà dell'oggetto		Propriétés de l'objet	
+EDITOR_propertiesName	Object name:	Nome dell'oggetto:		Nom de l'objet	
+EDITOR_propertiesApply	Apply	Applica		Appliquer	
+EDITOR_propertiesAbort	Abort	Annulla		Annuler	
+EDITOR_defaultMapName	Untitled	Senza titolo		Sans titre	ﺑﺪون ﻋﻨﻮان
+EDITOR_buildings	Buildings	Strutture		Édifices	
+EDITOR_units	Units	Unità		Unités	
+EDITOR_decorations	Decorations	Decorazioni		Décorations	
+EDITORTREE_CLASS_ebarracks	Barracks	Caserma		Caserne	
+EDITORTREE_CLASS_eblacksmith	Blacksmith	Fucina		Forge	
+EDITORTREE_CLASS_eosiristemple	Temple of Osiris	Tempio di Osiris		Temple de Osiris	
+EDITORTREE_CLASS_etavern	Tavern	Taverna		Auberge	
+EDITORTREE_CLASS_etemple	Temple	Tempio		Temple	
+EDITORTREE_CLASS_etownhall	Townhall	Foro		Mairie	
+EDITORTREE_CLASS_rarena	Arena	Arena		Arène	
+EDITORTREE_CLASS_rbarracks	Barracks	Caserma		Caserne	
+EDITORTREE_CLASS_rblacksmith	Blacksmith	Fucina		Forge	
+EDITORTREE_CLASS_rtavern	Tavern	Taverna		Auberge	
+EDITORTREE_CLASS_rtemple	Temple	Tempio		Temple	
+EDITORTREE_CLASS_rtownhall	Townhall	Foro		Mairie	
+EDITORBRUSH_grass1	Grass 1	Erba 1		Herbe 1	
+EDITORBRUSH_road1	Road 1	Strada 1		Route 1	
+WORD_gameStarted	Game is being started...	Avvio della partita in corso...	El juego se está iniciando...	Le jeu commence...	...ﺑﺪء اﻟﻠﻌﺒﺔ
+WORD_player_1	Player 1	Giocatore 1	Jugador 1	Joueur 1	ﻻﻋﺐ ۱
+WORD_player_2	Player 2	Giocatore 2	Jugador 2	Joueur 2	ﻻﻋﺐ ٢
+WORD_player_3	Player 3	Giocatore 3	Jugador 3	Joueur 3	ﻻﻋﺐ ٣
+WORD_player_4	Player 4	Giocatore 4	Jugador 4	Joueur 4	ﻻﻋﺐ ٤
+WORD_player_5	Player 5	Giocatore 5	Jugador 5	Joueur 5	ﻻﻋﺐ ٥
+WORD_player_6	Player 6	Giocatore 6	Jugador 6	Joueur 6	ﻻﻋﺐ ٦
+WORD_player_7	Player 7	Giocatore 7	Jugador 7	Joueur 7	ﻻﻋﺐ ٧
+WORD_player_8	Player 8	Giocatore 8	Jugador 8	Joueur 8	ﻻﻋﺐ ٨
+WORD_playersNumber	Number of players	Numero di giocatori	Número de jugadores	Nombre de joueurs	ﻋﺪد اﻟﻼﻋﺒﻴﻦ
+WORD_errorCode	Error code	Codice errore	Código de error	Code d'erreur	رﻣﺰ ﺧﺎﻃﺊ
+RACE_rome	Rome	Roma	Roma	Rome	روﻣﺎ
+RACE_egypt	Egypt	Egitto	Egipto	Egypte	ﻣﺼﺮ
+ERROR_settings	Unable to find or process SETTINGS file.\nForced application shutdown has started.	Impossibile trovare o leggere il file SETTINGS.\nArresto forzato dell'applicazione in corso...	No se puede encontrar o procesar el fichero SETTINGS.\nLa aplicación va a ser cerrada automáticamente.	Impossible de trouver ou de traiter le fichier SETTINGS.\nL’arrêt forcé de l’application a commencé.	.ﻏﻴﺮ ﻗﺎدر ﻋﻟﻰ اﻟﻌﺜﻮر أو ﻗﺮاءة اﻟﻤﻠﻒ. SETTINGS.\n .اﻹﻏﻼق ٳﻟﺰاﻣﻲ ﻟﻠﺘﻄﺒﻴﻖ
+ERROR_data	Unable to find or process DATA file.\nForced application shutdown has started.	Impossibile trovare o leggere il file DATA.\nArresto forzato dell'applicazione in corso...	No se puede encontrar o procesar el fichero DATA.\nLa aplicación va a ser cerrada automáticamente.	Impossible de trouver ou de traiter le fichier DATA.\nL’arrêt forcé de l’application a commencé.	.ﻏﻴﺮ ﻗﺎدر ﻋﻟﻰ اﻟﻌﺜﻮر أو ﻗﺮاءة اﻟﻤﻠﻒ. DATA.\n .اﻹﻏﻼق ٳﻟﺰاﻣﻲ ﻟﻠﺘﻄﺒﻴﻖ
+ERROR_settlements	Unable to find or process SETTLEMENTS file.\nForced application shutdown has started.	Impossibile trovare o leggere il file SETTLEMENTS.\nArresto forzato dell'applicazione in corso...	No se puede encontrar o procesar el fichero SETTLEMENTS.\nLa aplicación va a ser cerrada automáticamente.	Impossible de trouver ou de traiter le fichier SETTLEMENTS.\nL’arrêt forcé de l’application a commencé.	.ﻏﻴﺮ ﻗﺎدر ﻋﻟﻰ اﻟﻌﺜﻮر أو ﻗﺮاءة اﻟﻤﻠﻒ. SETTLEMENTS file.\n .اﻹﻏﻼق ٳﻟﺰاﻣﻲ ﻟﻠﺘﻄﺒﻴﻖ
+ERROR_menuData	Unable to find or process MENU DATA file.\nForced application shutdown has started.	Impossibile trovare o leggere il file MENU DATA.\nArresto forzato dell'applicazione in corso...	No se puede encontrar o procesar el fichero MENU DATA.\nLa aplicación va a ser cerrada automáticamente.	Impossible de trouver ou de traiter le fichier MENU DATA.\nL’arrêt forcé de l’application a commencé.	.ﻏﻴﺮ ﻗﺎدر ﻋﻟﻰ اﻟﻌﺜﻮر أو ﻗﺮاءة اﻟﻤﻠﻒ. MENU DATA file.\n .اﻹﻏﻼق ٳﻟﺰاﻣﻲ ﻟﻠﺘﻄﺒﻴﻖ
+WARNING_audioDevice	Unable to find (or communicate with) the audio device.\nNo sound will be played as long as the error persists.	Impossibile trovare (o comunicare con) il dispositivo audio.\nNessun sarà riprodotto alcun suono finché l'errore persiste.	No se puede encontrar (o comunicar con) el dispositivo de audio.\nNo se reproducirá ningún sonido mientras persista el error.	Impossible de trouver (ou de communiquer avec) le périphérique audio.\n Aucun son sera reproduit tant que l'erreur persiste.	audio.\n ﻏﻴﺮ ﻗﺎدر ﻋﻟﻰ اﻟﻌﺜﻮر أو (اﻟﺗﻮاﺻﻞ) ٳﻟﻰ اﻟﺠﻬﺎز اﻟﺼﻮﺗﻲ. ﻹﻏﻼق ٳﻟﺰاﻣﻲ ﻟﻠﺘﻄﺒﻴﻖ

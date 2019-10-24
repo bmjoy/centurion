@@ -33,9 +33,7 @@ namespace glb {
 	float getParam(string param) { return params[param]; }
 	void setBoolean(string param, bool value) { booleans[param] = value; }
 	bool getBoolean(string param) { return booleans[param]; }
-	void setTranslations(map<string, string> translationsMap) { translations = translationsMap; }
-	void replaceTranslation(string code, string value) { translations[code] = value; }
-	string getTranslation(string code) { return translations[code]; }
+	string getTranslation(string code) { return translation_table_current[code]; }
 
 	void initParams() {
 		//Close the game if it wasn't able to find or process errorCodes.json file
@@ -43,9 +41,8 @@ namespace glb {
 		if (!errorCodes_path.good()) {
 			map<string, string> tempMap;
 			tempMap["NOT_FOUND"] = "0x00000001";
-			tempMap["noFile"] = "Unable to find or process ERROR CODES file.\n  Forced application shutdown has started.";
+			translation_table_current["noFile"] = "Unable to find or process ERROR CODES file.\n  Forced application shutdown has started.";
 			setErrors(tempMap);
-			setTranslations(tempMap);
 			forceGameClosure("NOT_FOUND" , "noFile");
 		}
 		json errorCodes = json::parse(errorCodes_path);
@@ -60,7 +57,9 @@ namespace glb {
 
 		language = settings["language"].get<string>();
 		cout << "DEBUG: Current language: " << language << "\n";
-		translateTexts();
+		read_translation_tables();
+		set_translation_table();
+
 		setBoolean("debug", (bool)settings["debug"].get<int>());
 		setParam("window-width", (float)settings["window_width"]);
 		setParam("window-height", (float)settings["window_height"]);
@@ -115,31 +114,38 @@ namespace glb {
 		logFile.close();
 	}
 
-	void translateTexts() {
-		ifstream translationTable_path("assets/translations/english.json");
-		if (translationTable_path.good()) {
-			json tJson = json::parse(translationTable_path);
-			map<string, string> translationsMap = tJson.get<map<string, string>>();
-			setTranslations(translationsMap);
-		}
-		else {
-			map<string, string> tempMap;
-			tempMap["noFile"] = "Unable to find or process ENGLISH language file.\n  Forced application shutdown has started.";
-			setTranslations(tempMap);
-			forceGameClosure("NOT_FOUND", "noFile");
-		}
-		if (language != "english") {
-			ifstream localTranslations_path("assets/translations/" + language + ".json");
-			if (localTranslations_path.good()) {
-				json tJson = json::parse(localTranslations_path);
-				map<string, string> localTranslationsMap = tJson.get<map<string, string>>();
-				for (map<string, string>::iterator i = localTranslationsMap.begin(); i != localTranslationsMap.end(); i++) {
-					if (i->second.size() > 0){
-						replaceTranslation(i->first, i->second);
+	void read_translation_tables() {
+		ifstream fin("assets/data/translations.tsv");
+		if (fin.good()) {
+			string line, value;
+			int row = 0;
+			while (getline(fin, line)) {
+				if (row > 0){
+					string values[6];
+					stringstream s(line);
+					int i = 0;
+					while (getline(s, value, '\t')) {
+						values[i] = value;
+						i++;
 					}
+					translation_table_english[values[0]] = values[1];
+					translation_table_italian[values[0]] = values[2];
+					translation_table_spanish[values[0]] = values[3];
+					translation_table_french[values[0]] = values[4];
+					translation_table_arabic[values[0]] = values[5];
 				}
+				row++;
 			}
 		}
+	}
+
+	void set_translation_table() {
+		translation_table_current = { };
+		if (language == "english") translation_table_current = translation_table_english;
+		if (language == "italian") translation_table_current = translation_table_italian;
+		if (language == "spanish") translation_table_current = translation_table_spanish;
+		if (language == "french") translation_table_current = translation_table_french;
+		if (language == "arabic") translation_table_current = translation_table_arabic;
 	}
 
 	void readIndicesData(unsigned int *indices, string path) {
