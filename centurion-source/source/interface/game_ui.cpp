@@ -39,33 +39,34 @@ namespace game {
 		minimapRectangle.create("border", 0, 0, 0, 0, "bottom-left", 0);
 	}
 
-	void UIGame::render() {
-		calculateTime();
-
-		if (getBoolean("mouse-left")) {
+	void UIGame::render(bool pick) {
+		if (pick && getBoolean("mouse-left")) {
 			if (gameMenuStatus) gameMenu.render(true);
-			picking(); // --> source/picking/gameui_picking.cpp		
+			picking(); // --> source/picking/gameui_picking.cpp  
 		}
-		
-		if (gameMenuStatus) gameMenu.render(false);
 
-		string txt = time.hours_str + ":" + time.minutes_str + ":" + time.seconds_str;
-		time.text.render_dynamic(txt, "tahoma_15px", time.x, time.y, vec4(255.f, 255.f, 255.f, 255.f), "left", "normal");
+		if (!pick) {
+			if (gameMenuStatus) { gameMenu.render(false); }
 
-		// minimap rectangle:
-		if (gameMinimapStatus) {
-			float x = getParam("camera-x-position") / mapWidth * getParam("window-width");
-			float y = getParam("camera-y-position") / mapHeight * (getParam("window-height") - getParam("ui-bottom-height") - getParam("ui-top-height")) + getParam("ui-bottom-height");
-			float w = getParam("window-width-zoomed") * getParam("window-width") / mapWidth;
-			float h = getParam("window-height-zoomed") * (getParam("window-height") - getParam("ui-bottom-height") - getParam("ui-top-height")) / mapHeight;
-			x = std::max(x, 1.f);
-			y = std::max(y, getParam("ui-bottom-height") + 1.f);
-			y = std::min(y, getParam("window-height") - getParam("ui-top-height") - h);
-			minimapRectangle.render(vec4(255.f), false, x, y, w, h);
+			calculateTime();
+			string txt = time.hours_str + ":" + time.minutes_str + ":" + time.seconds_str;
+			time.text.render_dynamic(txt, "tahoma_15px", time.x, time.y, vec4(255.f, 255.f, 255.f, 255.f), "left", "normal");
+
+			// minimap rectangle:
+			if (gameMinimapStatus) {
+				float x = getParam("camera-x-position") / mapWidth * getParam("window-width");
+				float y = getParam("camera-y-position") / mapHeight * (getParam("window-height") - getParam("ui-bottom-height") - getParam("ui-top-height")) + getParam("ui-bottom-height");
+				float w = getParam("window-width-zoomed") * getParam("window-width") / mapWidth;
+				float h = getParam("window-height-zoomed") * (getParam("window-height") - getParam("ui-bottom-height") - getParam("ui-top-height")) / mapHeight;
+				x = std::max(x, 1.f);
+				y = std::max(y, getParam("ui-bottom-height") + 1.f);
+				y = std::min(y, getParam("window-height") - getParam("ui-top-height") - h);
+				minimapRectangle.render(vec4(255.f), false, x, y, w, h);
+			}
+			// Temporary bars:
+			top_bar.render(vec4(255.0f, 0.0f, 0.0f, 1.0f));
+			bottom_bar.render(vec4(255.0f, 0.0f, 0.0f, 1.0f));
 		}
-		// Temporary bars:
-		top_bar.render(vec4(255.0f, 0.0f, 0.0f, 1.0f));
-		bottom_bar.render(vec4(255.0f, 0.0f, 0.0f, 1.0f));
 	}
 
 	void UIGame::calculateTime() {

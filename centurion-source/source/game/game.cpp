@@ -130,11 +130,12 @@ namespace game {
 		}
 
 		// apply game matrices:
+		ui->render(true);
 		obj::applyGameMatrices(&projection, &view);
 
 		/* Tracing and Picking */
-		if(!gameMinimapStatus) tracing(surface);
 		if(!gameMenuStatus) renderObjectsPicking();
+		if (!gameMinimapStatus) tracing(surface);
 
 		/* Rendering */
 		surface->render(false);
@@ -144,7 +145,7 @@ namespace game {
 
 		// apply menu matrices:
 		obj::applyMenuMatrices();
-		ui->render();
+		ui->render(false);
 
 		// ----------------- //	
 

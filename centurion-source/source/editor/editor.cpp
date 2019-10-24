@@ -51,7 +51,6 @@ namespace editor {
 		}
 
 		// editor ui picking */
-		obj::applyMenuMatrices();
 		EDITOR_UI()->render(true);
 
 		//-----------------------------

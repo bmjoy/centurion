@@ -136,7 +136,7 @@ namespace game {
 	public:
 		UIGame();
 		void create();
-		void render();
+		void render(bool pick);
 		~UIGame();
 	private:
 		struct Time {

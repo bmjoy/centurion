@@ -158,6 +158,7 @@ namespace glb {
 		read_translation_tables();
 		menu::MENU()->update();
 		cout << "DEBUG : Language changed to " + lan << endl;
+		cout << "DEBUG : Settings file updated!" << endl;
 	}
 
 	void readIndicesData(unsigned int *indices, string path) {
@@ -172,6 +173,7 @@ namespace glb {
 			i++;
 		}
 	}
+
 	void readVerticesData(float *vertices, string path) {
 		fstream fin;
 		fin.open(path);
@@ -184,6 +186,7 @@ namespace glb {
 			i++;
 		}
 	}
+
 	void readVerticesPosData(int *verticesPos, string path) {
 		fstream fin;
 		fin.open(path);
@@ -248,7 +251,6 @@ namespace glb {
 		cout << "DEBUG: The map is saved with the following name: " + name << endl;
 	}
 	void openScenario(string name) {
-		
 		// read heights
 		{
 			fstream fin;
