@@ -7,13 +7,13 @@ SINGLEPLAYER_buttonStart	Start!	Avvia la partita!	Empezar!	Commencer le jeu!	ا�
 SINGLEPLAYER_buttonExit	Back to menu	Menù principale	Menú principal	Menu principal	اﻟﻘﺎﺋﻤﺔ اﻟﺮﺋﻴﺴﻴﺔ
 OPTIONS_buttonSave	Save	Salva	Guardar		
 OPTIONS_buttonCancel	Cancel	Annulla	Anular		
-OPTIONS_Title	Options	Opzioni	Opctiones		
+OPTIONS_Title	Options	Opzioni	Opciones		
 OPTIONS_LanguageText	Language	Lingua	Idioma		
-LANG_english	English	Inglese			
-LANG_italian	Italian	Italiano			
-LANG_spanish	Spanish	Spagnolo			
-LANG_french	French	Francese			
-LANG_arabic	Arabic	Arabico			
+LANG_english	English	Inglese	Inglés		
+LANG_italian	Italian	Italiano	italiano		
+LANG_spanish	Spanish	Spagnolo	Español		
+LANG_french	French	Francese	Francés		
+LANG_arabic	Arabic	Arabica	Arábica		
 GAME_pauseMenuButtonQuit	Quit	Esci dalla partita	Salir	Sortir du jeu	اﻟﺨﺮﻮج ﻣﻦ اﻟﻠﻌﺒﺔ
 GAME_pauseMenuButtonClose	Close	Chiudi il menù	Cerrar	Fermer le menu	أﻏﻠﻖ اﻟﻘﺎﺋﻤﺔ اﻟﺮﺋﻴﺴﻴﺔ
 EDITOR_File	File	File	Archivo	Fichier	ﻣﻠﻒ
@@ -32,7 +32,7 @@ EDITOR_newMapButtonCreate	Create	Crea	Crear	Creér	إﻧﺸﺎء
 EDITOR_openMapButtonClose	Close	Chiudi	Cerrar	Fermer	أﻏﻟﻖ
 EDITOR_openMapButtonOpen	Open	Apri	Abierto	Ouvrir	ﻓﺘﺢ
 EDITOR_newScenario	Create new scenario	Crea nuovo scenario	Crear nuevo escenario	Crée a nouveau scénario	إﻧﺸﺎء اﻟﺴﻴﻨﺎرﻳﻮ ﺟﺪﻳﺪ
-EDITOR_newScenarioName	Choose a name for the scenario (max 30 characters).	Scegli un nome per lo scenario (max 30 caratteri).	Elegir un nombre para el escenario (máximo 30 caracteres).	Choisir un nom pour le scénario (30 caractères maximum).	اﺧﺘﻴﺎر اﺳﻢ ﻟﻠﺴﻴﻨﺎرﻳﻮ )ﻣﺎﻛﺲ 03 اﺣﺮڧ(
+EDITOR_newScenarioName	Choose a name (max 30 characters).	Scegli un nome (max 30 caratteri).	Elegir un nombre (máximo 30 caracteres).	Choisir un nom (30 caractères maximum).	اﺧﺘﻴﺎر اﺳﻢ ﻟﻠﺴﻴﻨﺎرﻳﻮ )ﻣﺎﻛﺲ 03 اﺣﺮڧ(
 EDITOR_properties	Object properties	Proprietà dell'oggetto	Propiedades del objeto	Propriétés de l'objet	
 EDITOR_propertiesName	Object name:	Nome dell'oggetto:	Nombre del objeto:	Nom de l'objet	
 EDITOR_propertiesApply	Apply	Applica	Aplicar	Appliquer	

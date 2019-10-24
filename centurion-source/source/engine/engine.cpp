@@ -111,6 +111,8 @@ namespace engine {
 			fps_sleep();
 		}
 
+		if (MENU()->menu_is_created()) MENU()->reset();
+
 		glfwTerminate(); 
 		return 0;
 	}

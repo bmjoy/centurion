@@ -14,8 +14,6 @@ using namespace game;
 namespace menu {
 
 	Menu::Menu(){
-		list = new PlayersList();
-		options = new GlobalOptions();
 		currentMenu = "mainmenu";
 		menus = { "mainmenu", "singleplayer", "options" };
 		images = { };
@@ -25,7 +23,8 @@ namespace menu {
 	}
 
 	void Menu::create() {	
-	
+		list = new PlayersList();
+		options = new GlobalOptions();
 		resetPicking();
 	
 		string s;
@@ -132,9 +131,12 @@ namespace menu {
 		setBoolean("mouse-left", false); 
 	}
 
-	Menu::~Menu(){
+	void Menu::reset() {
+		menuIsCreated = false;
 		delete list;
-		delete options;
 	}
 
+	Menu::~Menu(){
+		delete options;
+	}
 }

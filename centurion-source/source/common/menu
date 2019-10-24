@@ -17,7 +17,7 @@ namespace menu {
 	public:
 		Menu();
 		bool menu_is_created() { return menuIsCreated; }
-		void reset() { menuIsCreated = false; }
+		void reset();
 		void create();
 		void render();
 		~Menu();
