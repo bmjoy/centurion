@@ -35,7 +35,6 @@ namespace glb {
 	float getParam(string param) { return params[param]; }
 	void setBoolean(string param, bool value) { booleans[param] = value; }
 	bool getBoolean(string param) { return booleans[param]; }
-	string getTranslation(string code) { return translation_table_current[code]; }
 
 	void initParams() {
 		//Close the game if it wasn't able to find or process errorCodes.json file
@@ -393,6 +392,16 @@ namespace glb {
 		}
 		return names;
 	}
+
+	string getTranslation(string code) {
+		if (translation_table_current.count(code) > 0) {
+			return translation_table_current[code];
+		}
+		else {
+			return code;
+		}
+	}
+
 	vector<file_info> get_all_files_names_within_subfolders(string const &folder_name, string const &file_extension) {
 		HANDLE finder;          // for FindFirstFile
 		WIN32_FIND_DATA file;   // data about current file.
@@ -441,12 +450,15 @@ namespace glb {
 		} while (!dirs.empty());
 		return output;
 	}
+
 	float getYMinimapCoord(float x) {
 		return getParam("window-height") * (x - getParam("ui-bottom-height")) / (getParam("window-height") - getParam("ui-bottom-height") - getParam("ui-top-height"));
 	}
+
 	bool cursorInGameScreen() {
 		return (getParam("mouse-y-leftclick") > getParam("ui-bottom-height")) && (getParam("mouse-y-leftclick") < (glb::getParam("window-height") - getParam("ui-top-height")));
 	}
+
 	void clearAndSwapBuffers(GLFWwindow *window) {
 		glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
 		glClear(GL_COLOR_BUFFER_BIT);
@@ -454,11 +466,13 @@ namespace glb {
 		glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
 		glClear(GL_COLOR_BUFFER_BIT);
 	}
+
 	vec2 getZoomedCoords(float xCoord, float yCoord) {
 		float x = xCoord * getParam("window-width-zoomed") / getParam("window-width") + getParam("camera-x-position");
 		float y = yCoord * getParam("window-height-zoomed") / getParam("window-height") + getParam("camera-y-position");
 		return vec2(x, y);
 	}
+
 	void forceGameClosure(string errorCode, string errorText) {
 		string eC = (getTranslation("WORD_errorCode") == "") ? "Error code" : getTranslation("WORD_errorCode");
 		string text = "  " + eC + ": " + getErrorCode(errorCode) + "\n\n  " + getTranslation(errorText);
@@ -469,6 +483,7 @@ namespace glb {
 		MessageBoxW(NULL, wstr, gameNameLPCWSTR, MB_ICONERROR);
 		setBoolean("window-should-close", true);
 	}
+
 	void showGameWarning(string warningText) {
 		string text = "  " + getTranslation(warningText);
 		const int wideLength = sizeof(text.c_str()) * 128;
