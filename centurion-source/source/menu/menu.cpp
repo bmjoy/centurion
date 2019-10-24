@@ -15,8 +15,9 @@ namespace menu {
 
 	Menu::Menu(){
 		list = new PlayersList();
+		options = new GlobalOptions();
 		currentMenu = "mainmenu";
-		menus = { "mainmenu", "singleplayer" };
+		menus = { "mainmenu", "singleplayer", "options" };
 		images = { };
 		buttons = { };
 		num_players = 2;
@@ -88,6 +89,7 @@ namespace menu {
 				list->create(data[s]["x"], data[s]["y"], &players_color);
 			}
 		}
+		options->create();
 		menuIsCreated = true;
 		obj::applyMenuMatrices();
 	}
@@ -98,29 +100,33 @@ namespace menu {
 		/* picking */
 
 		if (getBoolean("mouse-left")){
-			for (int i = 0; i < images[currentMenu].size(); ++i) {
+			for (int i = 0; i < images[currentMenu].size(); ++i) 
 				images[currentMenu][i].render(true);
-			}
-			for (int i = 0; i < buttons[currentMenu].size(); ++i) {
+			
+			for (int i = 0; i < buttons[currentMenu].size(); ++i) 
 				buttons[currentMenu][i].render(true);
-			}
-			if (currentMenu == "singleplayer") {
+			
+			if (currentMenu == "singleplayer") 
 				list->render(num_players, players_color, true);
-			}
+			
+			if (currentMenu == "options")
+				options->render(true);
+
 			picking();
 		}
 
 		/* rendering */
 
-		for (int i = 0; i < images[currentMenu].size(); ++i) {
+		for (int i = 0; i < images[currentMenu].size(); ++i) 
 			images[currentMenu][i].render(false);
-		}
-		for (int i = 0; i < buttons[currentMenu].size(); ++i) {
+		
+		for (int i = 0; i < buttons[currentMenu].size(); ++i) 
 			buttons[currentMenu][i].render(false);
-		}
-		if (currentMenu == "singleplayer") {
+		
+		if (currentMenu == "singleplayer") 
 			list->render(num_players, players_color, false);
-		}
+		if (currentMenu == "options")
+			options->render(false);
 	
 		setBoolean("mouse-right", false);
 		setBoolean("mouse-left", false); 
@@ -128,6 +134,7 @@ namespace menu {
 
 	Menu::~Menu(){
 		delete list;
+		delete options;
 	}
 
 }

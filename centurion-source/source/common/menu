@@ -10,6 +10,7 @@ using namespace glm;
 
 namespace menu {
 	class PlayersList;
+	class GlobalOptions;
 
 	class Menu
 	{
@@ -29,6 +30,7 @@ namespace menu {
 		map<string, vector<gui::Button>> buttons;
 	
 		PlayersList *list;
+		GlobalOptions *options;
 		void picking(); // this function is here: source/picking/mainmenu_picking.cpp
 
 		/* INFORMATIONS */

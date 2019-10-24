@@ -23,6 +23,7 @@ namespace glb {
 
 	extern vector<vec3> colors;
 	extern vector<string> races;
+	extern map<string, int> availableLanguages;
 
 	extern int CharCodepointPressed;	// for text input
 	extern bool KeyCode[GLFW_KEY_LAST];	// for text input
@@ -43,7 +44,8 @@ namespace glb {
 	void initParams();
 	void saveLog();
 	void read_translation_tables();
-	
+	void changeLanguage(string lan);
+
 	// reading/saving map data 
 	void readIndicesData(unsigned int *indices, string path);
 	void readVerticesData(float *vertices, string path);

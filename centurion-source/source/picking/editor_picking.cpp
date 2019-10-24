@@ -342,7 +342,7 @@ namespace editor {
 
 		text_input.active(clickName == "PropertiesWindow_textclick");
 
-		if (clickName == "PropertiesWindow_abort") { // ABORT
+		if (clickName == "PropertiesWindow_cancel") { // CANCEL
 			PropertiesWindowIsOpen = false;
 			IsWindowOpened = false;
 		}

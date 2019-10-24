@@ -78,6 +78,25 @@ namespace menu {
 		float textWidth;
 		int x, y, deltaY, w, h;
 	};
+
+	//
+	//	GLOBAL OPTIONS 
+	//
+
+	class GlobalOptions {
+	public:
+		GlobalOptions();
+		void create();		
+		void render(bool pick);
+		string previous_language;
+		~GlobalOptions();
+	private:
+		gui::Rectangle back;
+		gui::SimpleText text[10];
+		gui::FormInput languages;
+		float startX, startY;
+		void picking();
+	};
 };
 
 //----------------------------------------------------------------------------------

@@ -21,7 +21,7 @@ namespace editor {
 
 		buttons[0] = gui::Image("propertieswindow_buttonleft");
 		buttons[0].create("top-left", startX, startY, 0, 0, getPickingID());
-		addValueToPickingListUI(getPickingID(), "PropertiesWindow_abort");
+		addValueToPickingListUI(getPickingID(), "PropertiesWindow_cancel");
 		increasePickingID();
 
 		buttons[1] = gui::Image("propertieswindow_buttonright");
@@ -30,7 +30,7 @@ namespace editor {
 		increasePickingID();
 
 		buttons_text[0] = gui::SimpleText("static");
-		buttons_text[0].create_static(getTranslation("EDITOR_propertiesAbort"), "tahoma_13px", startX + 63.f, startY - 365.f, "center", "middle", vec4(255.f), "bold");
+		buttons_text[0].create_static(getTranslation("EDITOR_propertiesCancel"), "tahoma_13px", startX + 63.f, startY - 365.f, "center", "middle", vec4(255.f), "bold");
 		buttons_text[1] = gui::SimpleText("static");
 		buttons_text[1].create_static(getTranslation("EDITOR_propertiesApply"), "tahoma_13px", startX + 492.f, startY - 365.f, "center", "middle", vec4(255.f), "bold");
 

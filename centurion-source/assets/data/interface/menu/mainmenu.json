@@ -22,6 +22,11 @@
 			"x": -150,
 			"y": 550
 		}, {
+            "name": "MAINMENU_buttonOptions",
+			"image_name": "button_1",
+			"x": -150,
+			"y": 500
+		}, {
 			"name": "MAINMENU_buttonQuit",
 			"image_name": "button_1",
 			"x": -150,

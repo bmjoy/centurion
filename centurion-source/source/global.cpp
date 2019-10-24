@@ -5,6 +5,7 @@
 #include <game>
 #include <picking>
 #include <object>
+#include <menu>
 
 /* ----- GLOBAL ----- */
 
@@ -23,6 +24,7 @@ namespace glb {
 
 	vector<vec3> colors;
 	vector<string> races;
+	map<string, int> availableLanguages;
 
 	int CharCodepointPressed = -1; // for text input
 	bool KeyCode[GLFW_KEY_LAST] = { false }; // for text input
@@ -129,6 +131,7 @@ namespace glb {
 					stringstream s(line);
 					while (getline(s, value, '\t')) {
 						if (value == language) currentlang = nLanguages;
+						if (nLanguages != 0) availableLanguages[value] = nLanguages - 1;
 						nLanguages++;
 					}
 				}
@@ -148,6 +151,13 @@ namespace glb {
 				row++;
 			}
 		}
+	}
+
+	void changeLanguage(string lan) {
+		language = lan;
+		read_translation_tables();
+		menu::MENU()->reset();
+		cout << "DEBUG : Language changed to " + lan << endl;
 	}
 
 	void readIndicesData(unsigned int *indices, string path) {

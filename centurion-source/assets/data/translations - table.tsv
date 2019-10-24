@@ -1,12 +1,22 @@
 string_name	english	italian	spanish	french	arabic
 MAINMENU_buttonSinglePlayer	Singleplayer	Giocatore singolo	Un jugador	Un joueur	ﻻﻋﺐ ﻣﻔﺮﺩ
 MAINMENU_buttonEditor	Editor	Editor	Editor	Éditeur	ﻣﺤﺮر اﻟﺨﺮاﺋﻄ
+MAINMENU_buttonOptions	Options	Opzioni	Opciones		
 MAINMENU_buttonQuit	Exit	Esci dal gioco	Salir	Sortir du jeu	ﺧﺮوج
 SINGLEPLAYER_buttonStart	Start!	Avvia la partita!	Empezar!	Commencer le jeu!	اﺑﺪٲ اﻟﻠﻌﺒﺔ
 SINGLEPLAYER_buttonExit	Back to menu	Menù principale	Menú principal	Menu principal	اﻟﻘﺎﺋﻤﺔ اﻟﺮﺋﻴﺴﻴﺔ
+OPTIONS_buttonSave	Save	Salva	Guardar		
+OPTIONS_buttonCancel	Cancel	Annulla	Anular		
+OPTIONS_Title	Options	Opzioni	Opctiones		
+OPTIONS_LanguageText	Language	Lingua	Idioma		
+LANG_english	English	Inglese			
+LANG_italian	Italian	Italiano			
+LANG_spanish	Spanish	Spagnolo			
+LANG_french	French	Francese			
+LANG_arabic	Arabic	Arabico			
 GAME_pauseMenuButtonQuit	Quit	Esci dalla partita	Salir	Sortir du jeu	اﻟﺨﺮﻮج ﻣﻦ اﻟﻠﻌﺒﺔ
 GAME_pauseMenuButtonClose	Close	Chiudi il menù	Cerrar	Fermer le menu	أﻏﻠﻖ اﻟﻘﺎﺋﻤﺔ اﻟﺮﺋﻴﺴﻴﺔ
-EDITOR_File	File	File	Fichero	Fichier	ﻣﻠﻒ
+EDITOR_File	File	File	Archivo	Fichier	ﻣﻠﻒ
 EDITOR_File_New	New	Nuovo	Nuevo	Nouveau	ﺟﺪﻳﺪ
 EDITOR_File_Open	Open	Apri	Abrir	Ouvrir	ﻓﺘﺢ
 EDITOR_File_Save	Save	Salva	Guardar	Enregistrer	ﺣﻔﻆ
@@ -14,37 +24,37 @@ EDITOR_File_Exit	Exit	Esci	Salir	Sortir	ﺧﺮوج
 EDITOR_Edit	Edit	Modifica	Editar	Éditer	ﺗﻌﺪﻳﻞ
 EDITOR_Edit_UpdateNormals	Update Normals	Ricalcola Normali	Actualizar Normales	Recalculer les normales	
 EDITOR_Tools	Tools	Strumenti	Herramientas	Outils	اﻷدوات
-EDITOR_Tools_AddObject	Toggle "Add Object" window	Attiva/Disattiva la finestra "Aggiungi oggetto"	Alternar ventana "Agregar objeto"	Activer/Désactiver la fenêtre "Ajouter un objet"	
-EDITOR_Tools_TerrainBrush	Toggle terrain brushes	Attiva/Disattiva i pennelli dei terreni	cepillos del terreno de palanca	Activer/Désactiver les brosses de terrain	
+EDITOR_Tools_AddObject	Toggle "Add Object" window	Attiva/Disattiva la finestra "Aggiungi oggetto"	Activar / Desactivar la ventana "Agregar objeto"	Activer/Désactiver la fenêtre "Ajouter un objet"	
+EDITOR_Tools_TerrainBrush	Toggle terrain brushes	Attiva/Disattiva i pennelli dei terreni	Activar / Desactivar pinceles de terreno	Activer/Désactiver les brosses de terrain	
 EDITOR_addObjectButtonAdd	Add	Aggiungi	Añadir	Ajouter	
 EDITOR_newMapButtonClose	Close	Chiudi	Cerrar	Fermer	أﻏﻟﻖ
 EDITOR_newMapButtonCreate	Create	Crea	Crear	Creér	إﻧﺸﺎء
 EDITOR_openMapButtonClose	Close	Chiudi	Cerrar	Fermer	أﻏﻟﻖ
 EDITOR_openMapButtonOpen	Open	Apri	Abierto	Ouvrir	ﻓﺘﺢ
 EDITOR_newScenario	Create new scenario	Crea nuovo scenario	Crear nuevo escenario	Crée a nouveau scénario	إﻧﺸﺎء اﻟﺴﻴﻨﺎرﻳﻮ ﺟﺪﻳﺪ
-EDITOR_newScenarioName	Choose a name for the scenario\n(max 30 characters).	Scegli un nome per lo scenario (max 30 caratteri).	Elegir un nombre para el escenario \ n (máximo 30 caracteres).	Choisir un nom pour le scénario (30 caractères maximum).	اﺧﺘﻴﺎر اﺳﻢ ﻟﻠﺴﻴﻨﺎرﻳﻮ )ﻣﺎﻛﺲ 03 اﺣﺮڧ(
+EDITOR_newScenarioName	Choose a name for the scenario (max 30 characters).	Scegli un nome per lo scenario (max 30 caratteri).	Elegir un nombre para el escenario (máximo 30 caracteres).	Choisir un nom pour le scénario (30 caractères maximum).	اﺧﺘﻴﺎر اﺳﻢ ﻟﻠﺴﻴﻨﺎرﻳﻮ )ﻣﺎﻛﺲ 03 اﺣﺮڧ(
 EDITOR_properties	Object properties	Proprietà dell'oggetto	Propiedades del objeto	Propriétés de l'objet	
 EDITOR_propertiesName	Object name:	Nome dell'oggetto:	Nombre del objeto:	Nom de l'objet	
 EDITOR_propertiesApply	Apply	Applica	Aplicar	Appliquer	
-EDITOR_propertiesAbort	Abort	Annulla	Abortar	Annuler	
+EDITOR_propertiesCancel	Cancel	Annulla	Cancelar	Annuler	
 EDITOR_defaultMapName	Untitled	Senza titolo	Intitulado	Sans titre	ﺑﺪون ﻋﻨﻮان
 EDITOR_buildings	Buildings	Strutture	Edificios	Édifices	
 EDITOR_units	Units	Unità	Unidades	Unités	
-EDITOR_decorations	Decorations	Decorazioni	decoraciones	Décorations	
+EDITOR_decorations	Decorations	Decorazioni	Decoraciones	Décorations	
 EDITORTREE_CLASS_ebarracks	Barracks	Caserma	Cuartel	Caserne	
 EDITORTREE_CLASS_eblacksmith	Blacksmith	Fucina	Herrero	Forge	
 EDITORTREE_CLASS_eosiristemple	Temple of Osiris	Tempio di Osiris	Templo de Osiris	Temple de Osiris	
 EDITORTREE_CLASS_etavern	Tavern	Taverna	Taberna	Auberge	
-EDITORTREE_CLASS_etemple	Temple	Tempio	templo	Temple	
-EDITORTREE_CLASS_etownhall	Townhall	Foro	Ayuntamiento	Mairie	
+EDITORTREE_CLASS_etemple	Temple	Tempio	Templo	Temple	
+EDITORTREE_CLASS_etownhall	Townhall	Foro	Foro	Mairie	
 EDITORTREE_CLASS_rarena	Arena	Arena	Arena	Arène	
 EDITORTREE_CLASS_rbarracks	Barracks	Caserma	Cuartel	Caserne	
 EDITORTREE_CLASS_rblacksmith	Blacksmith	Fucina	Herrero	Forge	
 EDITORTREE_CLASS_rtavern	Tavern	Taverna	Taberna	Auberge	
-EDITORTREE_CLASS_rtemple	Temple	Tempio	templo	Temple	
+EDITORTREE_CLASS_rtemple	Temple	Tempio	Templo	Temple	
 EDITORTREE_CLASS_rtownhall	Townhall	Foro	Ayuntamiento	Mairie	
-EDITORBRUSH_grass1	Grass 1	Erba 1	hierba 1	Herbe 1	
-EDITORBRUSH_road1	Road 1	Strada 1	carretera 1	Route 1	
+EDITORBRUSH_grass1	Grass 1	Erba 1	Hierba 1	Herbe 1	
+EDITORBRUSH_road1	Road 1	Strada 1	Carretera 1	Route 1	
 WORD_gameStarted	Game is being started...	Avvio della partita in corso...	El juego se está iniciando...	Le jeu commence...	...ﺑﺪء اﻟﻠﻌﺒﺔ
 WORD_player_1	Player 1	Giocatore 1	Jugador 1	Joueur 1	ﻻﻋﺐ ۱
 WORD_player_2	Player 2	Giocatore 2	Jugador 2	Joueur 2	ﻻﻋﺐ ٢

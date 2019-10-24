@@ -17,15 +17,35 @@ namespace menu {
 		cout << "DEBUG: Click id: " << clickId << " --> " + clickName + "\n";
 
 		/*------------------------------------------------------------------------------*/
+		if (clickName == "SINGLEPLAYER_buttonExit") {
+			currentMenu = "mainmenu";
+		}
+		/*------------------------------------------------------------------------------*/
+		if (clickName == "MAINMENU_buttonSinglePlayer") {
+			currentMenu = "singleplayer";
+		}
+		/*------------------------------------------------------------------------------*/
+		if (clickName == "MAINMENU_buttonEditor") {
+			ENGINE()->setEnvironment("editor");
+		}
+		/*------------------------------------------------------------------------------*/
+		if (clickName == "MAINMENU_buttonOptions") {
+			currentMenu = "options";
+			options->previous_language = language;
+		}
+		/*------------------------------------------------------------------------------*/
+		if (clickName == "MAINMENU_buttonQuit") {
+			saveLog();
+			setBoolean("window-should-close", true);
+		}
+		/*------------------------------------------------------------------------------*/
 		if (currentMenu == "singleplayer") {
-			if (clickName.substr(0, 4) != "CivForm") {
+			if (clickName.substr(0, 4) != "CivForm")
 				list->close();
-			}
 			list->picking(&num_players, &players_color, clickId);
 		}
 		/*------------------------------------------------------------------------------*/
 		if (clickName == "SINGLEPLAYER_buttonStart") {
-
 			setBoolean("mouse-left", false);
 			ENGINE()->setEnvironment("game");
 			/* save game informations */
@@ -37,21 +57,13 @@ namespace menu {
 			}
 		}
 		/*------------------------------------------------------------------------------*/
-		if (clickName == "MAINMENU_buttonEditor") {
-			ENGINE()->setEnvironment("editor");
-		}
-		/*------------------------------------------------------------------------------*/
-		if (clickName == "MAINMENU_buttonQuit") {
-			saveLog();
-			setBoolean("window-should-close", true);
-		}
-		/*------------------------------------------------------------------------------*/
-		if (clickName == "SINGLEPLAYER_buttonExit") {
+		if (clickName == "OPTIONS_buttonSave") {
 			currentMenu = "mainmenu";
 		}
 		/*------------------------------------------------------------------------------*/
-		if (clickName == "MAINMENU_buttonSinglePlayer") {
-			currentMenu = "singleplayer";
+		if (clickName == "OPTIONS_buttonCancel") {
+			if (options->previous_language != language) changeLanguage(options->previous_language);
+			currentMenu = "mainmenu";
 		}
 	}
 };
