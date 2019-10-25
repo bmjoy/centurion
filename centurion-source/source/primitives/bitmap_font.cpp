@@ -1,7 +1,6 @@
 #include <primitives>
 #include <stb_image.h>
 #include <global>
-#include <json.hpp>
 #include <codecvt>
 #include <locale>
 
@@ -72,55 +71,57 @@ void BitmapFont::create() {
 
 	vector<file_info> fonts = get_all_files_names_within_subfolders("assets\\fonts", "png");
 	string fontName;
-	map<string, json> jsonData;
 
 	for (int i = 0; i < fonts.size(); i++){
 		fontName = fonts[i].name;
+		fontIdMap[fontName] = i;
+		
+		// LOAD IMAGE
 		path = "assets/fonts/" + fontName + ".png";
-
-		// load image
 		textureIdList.push_back(0);
 		textureInfoList.push_back(ivec3(0, 0, 0));
 		unsigned char *data = stbi_load(path.c_str(), &textureInfoList[i].x, &textureInfoList[i].y, &textureInfoList[i].z, 0);
 		if (!data) { cout << "Failed to load texture" << endl; }
 
-		path = "assets/fonts/" + fontName + ".json";
-
-		ifstream json_path(path);
-		jsonData[fontName] = json::parse(json_path);
-
-		glUniform1f(glGetUniformLocation(shaderId, "max_x"), 16.f);
-		glUniform1f(glGetUniformLocation(shaderId, "max_y"), 16.f);
-
 		glUniform1i(glGetUniformLocation(shaderId, "tex"), 0); // texture
 		glGenTextures(1, &textureIdList[i]);
 		glBindTexture(GL_TEXTURE_2D, textureIdList[i]);
-		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-		// create texture and generate mipmaps
 		glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, textureInfoList[i].x, textureInfoList[i].y, 0, GL_RGBA, GL_UNSIGNED_BYTE, data);
 		glGenerateMipmap(GL_TEXTURE_2D);
 		glBindTexture(GL_TEXTURE_2D, 0);
-
 		stbi_image_free(data);
 		textureIdMap[fontName] = textureIdList[i];
-
-		/* save json data in struct */
-		fontIdMap[fontName] = i;
-
-		int ncharacters = (int)jsonData[fontName]["characters"].size();
-		for (int _char = 0; _char < ncharacters; _char++){
-			txt::Character CharData = txt::Character();
-			int charID = jsonData[fontName]["characters"][_char]["id"].get<int>();
-			CharData.line_height = jsonData[fontName]["common"]["line-height"].get<int>()+2;
-			CharData.x = jsonData[fontName]["characters"][_char]["x"].get<int>();
-			CharData.y = jsonData[fontName]["characters"][_char]["y"].get<int>();
-			CharData.width = jsonData[fontName]["characters"][_char]["width"].get<int>();
-			CharData.height = jsonData[fontName]["characters"][_char]["height"].get<int>();
-			CharData.xoffset = jsonData[fontName]["characters"][_char]["xoffset"].get<int>();
-			CharData.yoffset = jsonData[fontName]["characters"][_char]["yoffset"].get<int>();
-			CharData.xadvance = jsonData[fontName]["characters"][_char]["xadvance"].get<int>();
-			fontData[i][charID] = CharData;
+		
+		// LOAD DATA
+		path = "assets/fonts/" + fontName + ".fnt";
+		ifstream fin(path);
+		if (!fin.good()) {
+			cout << "DEBUG: Failed to load \"" << fontName << "\" data.\n";
+		}
+		else {
+			string line, value;
+			while (getline(fin, line)) {
+				if (line != "") {
+					txt::Character CharData = txt::Character();
+					string values[8], element;
+					stringstream s1(line);
+					int k = 0;
+					while (getline(s1, element, ',')) {
+						stringstream s2(element);
+						string pair[2];
+						int i = 0;
+						while (getline(s2, pair[i], '=')) i++;
+						values[k] = pair[1];
+						k++;
+					}
+					int charID = stoi(values[0]);
+					CharData.x = stoi(values[1]); CharData.y = stoi(values[2]);
+					CharData.width = stoi(values[3]); CharData.height = stoi(values[4]);
+					CharData.xoffset = stoi(values[5]); CharData.yoffset = stoi(values[6]);
+					CharData.xadvance = stoi(values[7]);
+					fontData[i][charID] = CharData;
+				}
+			}	
 		}
 	}
 }
