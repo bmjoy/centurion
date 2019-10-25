@@ -85,8 +85,8 @@ namespace editor {
 		}
 	}
 	void insertingObject(string type, string classname) {
-		float x = getParam("mouse-x-position") * getParam("window-width-zoomed") / getParam("window-width") + getParam("camera-x-position");
-		float y = getParam("mouse-y-position") * getParam("window-height-zoomed") / getParam("window-height") + getParam("camera-y-position");
+		float x = round(getParam("mouse-x-position") * getParam("window-width-zoomed") / getParam("window-width") + getParam("camera-x-position"));
+		float y = round(getParam("mouse-y-position") * getParam("window-height-zoomed") / getParam("window-height") + getParam("camera-y-position"));
 		if (type == "buildings") {
 			buildingTemp.set_position(vec3(x, y, 0.f));
 			buildingTemp.render(false, 0, !buildingTemp.is_placeable());
@@ -95,10 +95,14 @@ namespace editor {
 	void addObject(string type) {
 		if (type == "buildings") {
 			if (buildingTemp.is_placeable()){
-				buildingTemp.set_id(getPickingID());
+				int ID = getPickingID(); increasePickingID();
+				buildingTemp.set_id(ID);
 				buildingTemp.create();
-				game::buildings[getPickingID()] = buildingTemp;
-				increasePickingID();
+				game::buildings[ID] = buildingTemp;
+				if (game::buildings[ID].is_central_building()) {
+					game::buildings[ID].set_settlement_name("SETTL_" + game::buildings[ID].get_name());
+					game::central_buildings[ID] = &game::buildings[ID];
+				}
 				setBoolean("mouse-left", false);
 				addingObject = false;
 			}

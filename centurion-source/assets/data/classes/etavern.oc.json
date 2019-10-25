@@ -2,6 +2,7 @@
     "type": "building",
     "race": "egypt",
     "class_name": "etavern",
+    "is_central_building": 0,
     "ent_path": "assets/buildings/egypt/tavern/etavern.oe.json",
     "pass_path" : "assets/buildings/egypt/tavern/etavern.pass",
     "clickable_in_minimap": 0

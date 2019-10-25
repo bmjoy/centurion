@@ -39,6 +39,7 @@ namespace editor {
 		float titlesPos = 0.f;
 
         for (int i = 0; i < titles.size(); i++) {
+
             string s = titlesList[i];
             /* title */
             titles[s].pickingID = getPickingID();
@@ -62,6 +63,12 @@ namespace editor {
             titles[s].titleText = gui::SimpleText("static");
             titles[s].titleText.create_static(getTranslation("EDITOR_" + titles[s].title), "tahoma_13px", titles[s].titlePosition.x + 0.5f * titles[s].titleWidth, titles[s].titlePosition.y + 0.5f * titles[s].titleHeight, "center", "middle", vec4(255.f), "normal");
             
+			/* cleaning */
+			titles[s].optionsText.clear();
+			titles[s].optionsHotKeysText.clear();
+			titles[s].optionsBack.clear();
+
+
             /* options */
 			int maxOptionWordSize = 0;
 			for (int j = 0; j < titles[s].options.size(); j++) {

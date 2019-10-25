@@ -2,6 +2,8 @@
 #include <stb_image.h>
 #include <player>
 #include <pathfinding>
+#include <game>
+#include <math>
 
 using namespace std;
 using namespace glm;
@@ -9,6 +11,8 @@ using namespace glm;
 namespace building {
 	Building::Building(){
 		type = "building";
+		blockSettlName = false;
+		buildingListSize = 0;
 	}
 
 	void Building::prepare() {
@@ -25,13 +29,32 @@ namespace building {
 		unsigned char *texture = stbi_load(texturePath.c_str(), &w, &h, &nrChannels, 0);
 		stbi_image_free(texture);
 
+		isCentralBuilding = (bool)data["is_central_building"].get<int>();
 		clickableInMinimap = (bool)data["clickable_in_minimap"].get<int>();
 		//selectionSound = (sound)data["selectionSound"].get<string>(); TODO
 		textureID = obj::BSprite()->getTextureId(className);
+		blockSettlName = true;
 	}
 
 	bool Building::is_placeable() {
-		return astar::checkAvailability(building_grid, position);
+		bool placeable = astar::checkAvailability(building_grid, position);
+		if (!isCentralBuilding) placeable = (placeable && is_near_to_central_building());
+		return placeable;
+	}
+
+	bool Building::is_near_to_central_building() {
+		bool ok = false;
+		for (map<int, Building*>::iterator b = game::central_buildings.begin(); b != game::central_buildings.end(); b++) {
+			int ID = b->first;
+			float dist = math::euclidean_distance(b->second->get_position().x, b->second->get_position().y, position.x, position.y);
+			if (dist < 1500.f) {
+				set_settlement_building(game::central_buildings[ID]);
+				set_settlement_name(game::central_buildings[ID]->get_settlement_name());
+				ok = true;
+				break;
+			}
+		}
+		return ok;
 	}
 
 	void Building::create(string Name) {
@@ -49,14 +72,32 @@ namespace building {
 		unsigned char *texture = stbi_load(texturePath.c_str(), &w, &h, &nrChannels, 0);
 		stbi_image_free(texture);
 
+		isCentralBuilding = (bool)data["is_central_building"].get<int>();
 		clickableInMinimap = (bool)data["clickable_in_minimap"].get<int>();
 		//selectionSound = (sound)data["selectionSound"].get<string>(); TODO
 		textureID = obj::BSprite()->getTextureId(className);
 
 		(Name == "") ? name = className + "_" + to_string(picking_id) : name = Name;
+		blockSettlName = false;
 	}
 
 	void Building::render(bool picking, int clickID, bool not_placeable) {
+		if (!isCentralBuilding && !blockSettlName)	settl_name = central_building->get_settlement_name();
+
+		if (game::buildings.size() != buildingListSize && isCentralBuilding) {
+			subs_buildings.clear();
+			cout << "DEBUG: Subsidiaries buildings to " + name + " have been updated. Their names are: \n";
+			for (map<int, Building>::iterator bld = game::buildings.begin(); bld != game::buildings.end(); bld++) {
+				int ID = bld->first;
+				if (!bld->second.is_central_building()) {
+					if (bld->second.get_settlement_name() == settl_name) {
+						subs_buildings[ID] = &game::buildings[ID];
+						cout << "   " << game::buildings[ID].get_name() << "\n";
+					}
+				}
+			}
+			buildingListSize = game::buildings.size();
+		}
 		selected = (picking_id == clickID);
 		obj::BSprite()->render(textureID, clickableInMinimap, position.x, position.y, (float)w, (float)h, picking, picking_id, selected, player->getPlayerColor(), not_placeable);
 	}

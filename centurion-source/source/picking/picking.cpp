@@ -16,7 +16,7 @@ namespace glb {
 	void resetDoubleClickTime() { dCD.lastTime = glfwGetTime(); }
 	void resetPicking() {
 		pickingID = 1;
-		pickingListUI = { };
+		pickingListUI.clear();
 		pickingListUI[0] = "background";
 	}
 	int get_id(string LeftRight) {

@@ -34,20 +34,28 @@ namespace editor {
 		buttons_text[1] = gui::SimpleText("static");
 		buttons_text[1].create_static(getTranslation("EDITOR_propertiesApply"), "tahoma_13px", startX + 492.f, startY - 365.f, "center", "middle", vec4(255.f), "bold");
 
-		textinput_back = gui::Image("propertieswindow_textinput");
-		textinput_back.create("top-left", startX, startY, 0, 0, getPickingID());
-		addValueToPickingListUI(getPickingID(), "PropertiesWindow_textclick");
+		textinput_back[0] = gui::Image("propertieswindow_textinput_1");
+		textinput_back[0].create("top-left", startX, startY, 0, 0, getPickingID());
+		addValueToPickingListUI(getPickingID(), "PropertiesWindow_name");
+		increasePickingID();
+
+		textinput_back[1] = gui::Image("propertieswindow_textinput_2");
+		textinput_back[1].create("top-left", startX, startY, 0, 0, getPickingID());
+		addValueToPickingListUI(getPickingID(), "PropertiesWindow_settl_name");
 		increasePickingID();
 
 		text[0] = gui::SimpleText("static");
 		text[0].create_static(getTranslation("EDITOR_properties"), "tahoma_15px", startX + 15.f, startY - 25.f, "left", "normal", vec4(255), "bold");
 		text[1] = gui::SimpleText("static");
 		text[1].create_static(getTranslation("EDITOR_propertiesName"), "tahoma_15px", startX + 15.f, startY - 86.f, "left", "normal", vec4(255), "normal");
+		text[2] = gui::SimpleText("static");
+		text[2].create_static(getTranslation("EDITOR_propertiesSettlement"), "tahoma_15px", startX + 15.f, startY - 130.f, "left", "normal", vec4(255), "normal");	
 
 		currentMapName = getTranslation("EDITOR_defaultMapName");
-		text_input.create("", startX + 246.f, startY - 85.f, 30);
+		text_input[0].create("", startX + 246.f, startY - 85.f, 30);
+		text_input[1].create("", startX + 246.f, startY - 129.f, 30);
 		
-		text_input.active();
+		text_input[0].active();
 		PropertiesWindowIsOpen = false;	
 	}
 
@@ -57,7 +65,9 @@ namespace editor {
 				if (game::buildings[rightClickID].isSelected()){
 					type = "building";
 					building_pointer = &game::buildings[rightClickID];
-					text_input.create(building_pointer->get_name(), startX + 246.f, startY - 85.f, 30);
+					text_input[0].create(building_pointer->get_name(), startX + 246.f, startY - 85.f, 30);
+					text_input[1].create(building_pointer->get_settlement_name(), startX + 246.f, startY - 129.f, 30);
+					
 					PropertiesWindowIsOpen = true;
 					IsWindowOpened = true;
 					AddObjectWindowIsOpen = false;
@@ -69,18 +79,17 @@ namespace editor {
 			if (pick && getBoolean("mouse-left")) {
 				buttons[0].render(true);
 				buttons[1].render(true);
-				textinput_back.render(true);
+				textinput_back[0].render(true);
+				textinput_back[1].render(true);
 				picking();
 			}
 			if (!pick) {
 				back_image.render(false);
-				buttons[0].render(false);
-				buttons[1].render(false);
-				buttons_text[0].render_static();
-				buttons_text[1].render_static();				
-				text[0].render_static();
-				text[1].render_static();
-				text_input.render();
+				for (int i = 0; i < 2; i++) buttons[i].render(false);
+				for (int i = 0; i < 2; i++) buttons_text[i].render_static();
+				for (int i = 0; i < 3; i++) text[i].render_static();
+				text_input[0].render();
+				text_input[1].render();
 			}
 		}	
 	}

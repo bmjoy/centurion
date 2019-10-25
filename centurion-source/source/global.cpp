@@ -262,15 +262,25 @@ namespace glb {
 		textureFile.close();
 
 		// save objects
-		ofstream objectsFile(path + "/objects");
+		ofstream objectsFile(path + "/objects.tsv");
 		if (objectsFile.is_open()) {
+			objectsFile << "type\tclass\tname\tsettlement\tplayerID\tx\ty\txoffset\tyoffset" << "\n";
 			for (map<int, Building>::iterator bld = game::buildings.begin(); bld != game::buildings.end(); bld++) {
-				objectsFile << bld->second.get_type() << ",";
-				objectsFile << bld->second.get_class() << ",";
-				objectsFile << bld->second.get_name() << ",";
-				objectsFile << bld->second.get_playerID() << ",";
-				objectsFile << bld->second.get_position().x << ",";
-				objectsFile << bld->second.get_position().y;
+				objectsFile << bld->second.get_type() << "\t";
+				objectsFile << bld->second.get_class() << "\t";
+				objectsFile << bld->second.get_name() << "\t";
+				objectsFile << bld->second.get_settlement_name() << "\t";
+				objectsFile << bld->second.get_playerID() << "\t";
+				objectsFile << bld->second.get_position().x << "\t";
+				objectsFile << bld->second.get_position().y << "\t";
+				if (bld->second.is_central_building()) {
+					objectsFile << 0 << "\t";
+					objectsFile << 0;
+				}
+				else {
+					objectsFile << bld->second.get_position().x - bld->second.get_settlement_building()->get_position().x << "\t";
+					objectsFile << bld->second.get_position().y - bld->second.get_settlement_building()->get_position().y;
+				}
 				objectsFile << "\n";
 			}
 			/*for (map<int, Unit>::iterator u = units.begin(); u != units.end(); u++) {
@@ -311,31 +321,55 @@ namespace glb {
 		// read objects
 		{
 			fstream fin;
-			fin.open("scenarios/" + name + "/objects");
-			string line, value;			
+			fin.open("scenarios/" + name + "/objects.tsv");
+			string line, value;
+			int row = 0;
 			while (getline(fin, line)){
-				string objectsInfo[6];
-				stringstream s(line);
-				int i = 0;
-				while (getline(s, value, ',')) {
-					objectsInfo[i] = value;
-					i++;
+				if (row > 0){
+					string objectsInfo[9];
+					stringstream s(line);
+					int i = 0;
+					while (getline(s, value, '\t')) {
+						objectsInfo[i] = value;
+						i++;
+					}
+					string type = objectsInfo[0];
+					string className = objectsInfo[1];
+					string name = objectsInfo[2];
+					string settl_name = objectsInfo[3];
+					int playerID = stoi(objectsInfo[4]);
+					float xPos = stof(objectsInfo[5]);
+					float yPos = stof(objectsInfo[6]);
+					float xOffset = stof(objectsInfo[7]);
+					float yOffset = stof(objectsInfo[8]);
+					if (type == "building") {
+						building::Building b = building::Building();
+						b.set_class(className);
+						b.set_player(playerID);
+						b.set_position(vec3(xPos, yPos, 0.f));
+						b.set_id(getPickingID());
+						b.set_settlement_name(settl_name);
+						b.create(name);
+						game::buildings[getPickingID()] = b;
+						if (game::buildings[getPickingID()].is_central_building()) {
+							game::central_buildings[getPickingID()] = &game::buildings[getPickingID()];
+						}
+						increasePickingID();
+					}
 				}
-				string type = objectsInfo[0];
-				string className = objectsInfo[1];
-				string name = objectsInfo[2];
-				int playerID = stoi(objectsInfo[3]);
-				float xPos = stof(objectsInfo[4]);
-				float yPos = stof(objectsInfo[5]);
-				if (type == "building") {
-					building::Building b = building::Building();
-					b.set_class(className);
-					b.set_player(playerID);
-					b.set_position(vec3(xPos, yPos, 0.f));
-					b.set_id(getPickingID());
-					b.create(name);
-					game::buildings[getPickingID()] = b;
-					increasePickingID();
+				row++;
+			}
+			/* set central building for every dependent building */
+			for (map<int, Building>::iterator bld = game::buildings.begin(); bld != game::buildings.end(); bld++) {
+				int ID = bld->first;
+				if (!bld->second.is_central_building()) {
+					for (map<int, Building*>::iterator settl = game::central_buildings.begin(); settl != game::central_buildings.end(); settl++) {
+						int settl_ID = settl->first;
+						if (settl->second->get_settlement_name() == bld->second.get_settlement_name()) {
+							game::buildings[ID].set_settlement_building(game::central_buildings[settl_ID]);
+							break;
+						}
+					}
 				}
 			}
 		}

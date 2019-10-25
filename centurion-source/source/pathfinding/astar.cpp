@@ -93,7 +93,7 @@ namespace astar {
 		pNode1->calculateFValue(locFinish);
 		q[qi].push(*pNode1);
 
-		vector<ivec2> finalPath = { };
+		vector<ivec2> finalPath;
 
 		finalPath.push_back(ivec2(locFinish.col * cellGridSize, locFinish.row * cellGridSize));
 		finalPath.push_back(ivec2(locFinish.col * cellGridSize, locFinish.row * cellGridSize));
@@ -220,7 +220,7 @@ namespace astar {
 		}
 	
 		// no path found
-		vector<ivec2> emptyPath = { };
+		vector<ivec2> emptyPath;
 		return emptyPath;
 	}
 

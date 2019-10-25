@@ -32,6 +32,7 @@ namespace game {
 	int selectedUnits = 0;
 
 	map<int, Building> buildings = { };
+	map<int, Building*> central_buildings = { };
 	map<int, Unit> units = { };
 
 	array<Player, 8> playersList;

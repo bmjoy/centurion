@@ -36,6 +36,7 @@ namespace debug {
 		int n;
 		// background
 		gui::Rectangle back;
+		string currentLan;
 	};
 
 	static DebugUI mydebugui;
@@ -333,12 +334,12 @@ namespace editor {
 		void render(bool pick);
 		~PropertiesWindow();
 	private:
-		gui::TextInput text_input;
+		gui::TextInput text_input[2];
 		gui::Image back_image;
 		gui::Image buttons[2];
-		gui::Image textinput_back;
+		gui::Image textinput_back[2];
 		gui::SimpleText buttons_text[2];
-		gui::SimpleText text[2];
+		gui::SimpleText text[3];
 		float startX, startY;
 		void picking();
 		building::Building *building_pointer;

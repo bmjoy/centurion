@@ -2,6 +2,7 @@
     "type": "building",
     "race": "egypt",
     "class_name": "etemple",
+    "is_central_building": 0,
     "ent_path": "assets/buildings/egypt/temple/etemple.oe.json",
     "pass_path" : "assets/buildings/egypt/temple/etemple.pass",
     "clickable_in_minimap": 0

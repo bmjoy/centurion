@@ -46,8 +46,8 @@ namespace editor {
 	}
 
 	void OpenMapWindow::update() {
-		map_list.back_options = { };
-		map_list.text_options = { };
+		map_list.back_options.clear();
+		map_list.text_options.clear();
 		availableScenarios = get_all_folders_names_within_folder("scenarios");
 		for (int i = 0; i < availableScenarios.size(); i++) {
 			

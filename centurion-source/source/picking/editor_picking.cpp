@@ -224,8 +224,8 @@ namespace editor {
 		if (clickName == "OpenMapWindow_open" || (selectedID == pos && hasDoubleClicked())) { // OPEN
 			if (selectedID != -1) {
 				cout << "DEBUG: You've chosen the following scenario to open: " + availableScenarios[selectedID] << endl;
-				game::buildings = { };
-				game::units = { };
+				game::buildings.clear();
+				game::units.clear();
 				
 				openScenario(availableScenarios[selectedID]);
 				currentMapName = availableScenarios[selectedID];
@@ -260,8 +260,8 @@ namespace editor {
 			cout << "DEBUG: You've set the following map name: " + text_input.get_text() << endl;
 			currentMapName = text_input.get_text();
 			
-			game::buildings = { };
-			game::units = { };
+			game::buildings.clear();
+			game::units.clear();
 
 			mapgen::reset_map();
 			obj::MapTerrain()->updateHeightsBuffer();
@@ -342,17 +342,24 @@ namespace editor {
 		leftClickID_UI = get_id();
 		string clickName = getPickedObjectName(leftClickID_UI);
 
-		text_input.active(clickName == "PropertiesWindow_textclick");
+		text_input[0].active(clickName == "PropertiesWindow_name");
+		if (building_pointer->is_central_building())
+			text_input[1].active(clickName == "PropertiesWindow_settl_name");
 
 		if (clickName == "PropertiesWindow_cancel") { // CANCEL
 			PropertiesWindowIsOpen = false;
 			IsWindowOpened = false;
+			setBoolean("mouse-left", false);
 		}
 		if (clickName == "PropertiesWindow_apply") { // APPLY
-			if (type == "building")
-				building_pointer->set_name(text_input.get_text());
+			if (type == "building"){
+				building_pointer->set_name(text_input[0].get_text());
+				if (building_pointer->is_central_building())
+					building_pointer->set_settlement_name(text_input[1].get_text());
+			}
 			PropertiesWindowIsOpen = false;
 			IsWindowOpened = false;
+			setBoolean("mouse-left", false);
 		}
 	}
 

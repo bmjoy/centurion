@@ -59,7 +59,7 @@ namespace editor {
 		/* normal rendering */
 		obj::applyGameMatrices(&proj, &view);
 
-		if (!IsWindowOpened && !addingObject) game::renderObjectsPicking();
+		if (!IsWindowOpened && !addingObject && !TerrainBrushIsActive) game::renderObjectsPicking();
 
 		surface->render(false);
 		game::renderObjects();

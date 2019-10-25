@@ -58,6 +58,12 @@ namespace building {
 		void create(string Name = "");
 		void render(bool picking, int clickID, bool not_placeable = false);
 		bool is_placeable();
+		bool is_central_building() { return isCentralBuilding; }
+		void set_settlement_name(string s) { settl_name = s; blockSettlName = true; }
+		string get_settlement_name() { return settl_name; }
+		void set_settlement_building(Building *b) { central_building = b; }
+		Building *get_settlement_building() { return central_building; }
+		bool is_near_to_central_building();
 		int UnitsInBuilding();
 		vector<unit::Unit> UnitsInHolder();
 		~Building();
@@ -65,9 +71,15 @@ namespace building {
 	private:
 		vector<vector<int>> building_grid;
 		vector<unit::Unit> unitsInside;
+		map<int, Building*> subs_buildings; // not central buildings connected to central one
 		int w, h, nrChannels;
 		GLuint textureID;
 		bool clickableInMinimap;
+		bool isCentralBuilding;
+		string settl_name;
+		Building *central_building;
+		bool blockSettlName;
+		size_t buildingListSize;
 		//sound selectionSound; TODO
 	};
 };

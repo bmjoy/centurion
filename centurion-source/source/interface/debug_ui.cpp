@@ -46,10 +46,16 @@ namespace debug {
 		back = gui::Rectangle();
 		back.create("border-filled", 10.f, getParam("ui-bottom-height") + 10.f, 250.f, 200.f, "bottom-left", 0);
 	
-	
+		currentLan = language;
 	}
 
 	void DebugUI::render(int fps, int mpfs, int selUnits) {
+
+		if (currentLan != language) {
+			debugText[1].create_static("Currentlang:  " + language, "couriernew_15px", startX, startY + 157, "left", "normal", vec4(0, 255, 0, 255));
+			currentLan = language;
+		}
+
 		back.render(vec4(0.f, 0.f, 0.f, 0.5f));
 
 		debugText[0].render_static();
