@@ -3,7 +3,7 @@
     "race": "egypt",
     "class_name": "eblacksmith",
     "ent_path": "assets/buildings/egypt/blacksmith/eblacksmith.oe.json",
-    "pass_path" : "assets/buildings/egypt/blacksmith/eblacksmith_pass.json",
+    "pass_path" : "assets/buildings/egypt/blacksmith/eblacksmith.pass",
     "clickable_in_minimap": 0
     
 }

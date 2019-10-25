@@ -3,7 +3,7 @@
     "race": "egypt",
     "class_name": "etemple",
     "ent_path": "assets/buildings/egypt/temple/etemple.oe.json",
-    "pass_path" : "assets/buildings/egypt/temple/etemple_pass.json",
+    "pass_path" : "assets/buildings/egypt/temple/etemple.pass",
     "clickable_in_minimap": 0
     
 }

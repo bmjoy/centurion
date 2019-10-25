@@ -3,7 +3,7 @@
     "race": "rome",
     "class_name": "rbarracks",
     "ent_path": "assets/buildings/rome/barracks/rbarracks.oe.json",
-    "pass_path" : "assets/buildings/rome/barracks/rbarracks_pass.json",
+    "pass_path" : "assets/buildings/rome/barracks/rbarracks.pass",
     "clickable_in_minimap": 0
     
 }

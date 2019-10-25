@@ -3,6 +3,6 @@
     "race": "egypt",
     "class_name": "etownhall",
     "ent_path": "assets/buildings/egypt/townhall/etownhall.oe.json",
-    "pass_path" : "assets/buildings/egypt/townhall/etownhall_pass.json",
+    "pass_path" : "assets/buildings/egypt/townhall/etownhall.pass",
     "clickable_in_minimap": 1
 }

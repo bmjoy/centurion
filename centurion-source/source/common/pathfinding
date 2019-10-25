@@ -40,7 +40,9 @@ namespace astar {
 	int *ClosedNodes();
 	int *OpenNodes();
 	int *DirMap();
-	void updatePassMatrix(vector<vector<int>> mat, vec2 position);
+	vector<vector<int>> readPassMatrix(string &path, string &classname);
+	void updatePassMatrix(vector<vector<int>> &building_grid, vec3 &position);
+	bool checkAvailability(vector<vector<int>> &building_grid, vec3 &position);
 	int getGridInfoFromPoint(float x, float y);
 	static int JDIM = 1500;
 	static int IDIM = 1000;

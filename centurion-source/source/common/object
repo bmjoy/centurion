@@ -56,7 +56,8 @@ namespace building {
 		Building();
 		void prepare();
 		void create(string Name = "");
-		void render(bool picking, int clickID);
+		void render(bool picking, int clickID, bool not_placeable = false);
+		bool is_placeable();
 		int UnitsInBuilding();
 		vector<unit::Unit> UnitsInHolder();
 		~Building();

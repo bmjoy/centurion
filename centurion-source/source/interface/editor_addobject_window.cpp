@@ -16,7 +16,8 @@ namespace editor {
 		back_size.x = 790; back_size.y = 260;
 
 		back_image = gui::Image("addobjectwindow_back");
-		back_image.create("center", getParam("window-width")/2.f, back_size.y / 2.f, 0, 0, 0);
+		back_image.create("center", getParam("window-width")/2.f, back_size.y / 2.f, 0, 0, getPickingID());
+		increasePickingID();
 
 		// startX and startY are TOP-LEFT coordinates (as in Paint)
 		startX = getParam("window-width") / 2.f - back_image.getImageSize().x / 2.f;
@@ -118,6 +119,7 @@ namespace editor {
 		if (AddObjectWindowIsOpen) {
 
 			if (pick && getBoolean("mouse-left") && !addingObject) {
+				back_image.render(true);
 				buttons[0].render(true);
 				buttons[1].render(true);
 				arrows[0].render(true);
@@ -131,7 +133,6 @@ namespace editor {
 				insertingObject(formSelectedTexts[0], formSelectedTexts[2]);
 
 				if (getBoolean("mouse-left")) {
-					addingObject = false;
 					addObject(formSelectedTexts[0]);
 				}
 			}

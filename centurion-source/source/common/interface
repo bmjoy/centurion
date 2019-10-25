@@ -195,6 +195,7 @@ namespace editor {
 	extern bool TerrainBrushWindowIsOpen;
 	extern bool TerrainBrushIsActive;
 	extern bool menuIsOpened;
+	extern bool addingObject;
 
 	static const int NumberOfObjects = 100;
 	extern string EditorObjectStringListForm0[NumberOfObjects];
@@ -319,7 +320,6 @@ namespace editor {
 		ivec2 back_size;
 		void picking();
 		void update();
-		bool addingObject;
 	};
 
 	//

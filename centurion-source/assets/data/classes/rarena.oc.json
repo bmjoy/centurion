@@ -3,7 +3,7 @@
     "race": "rome",
     "class_name": "rarena",
     "ent_path": "assets/buildings/rome/arena/rarena.oe.json",
-    "pass_path" : "assets/buildings/rome/arena/rarena_pass.json",
+    "pass_path" : "assets/buildings/rome/arena/rarena.pass",
     "clickable_in_minimap": 0
     
 }

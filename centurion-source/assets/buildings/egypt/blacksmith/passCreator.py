@@ -16,19 +16,13 @@ def passCreate():
             for i in range(round(width/20)):
                 d += [int(data[j*20, i*20]/255)]
             out_data += [d]
-        f = open(objName+"_pass.json", "w")
-        f.write('{\n\t"grid": [\n')
+        f = open(objName+".pass", "w")
         for j in range(len(out_data)):
-            f.write("[")
             for i in range(len(out_data[j])):
                 f.write(str(out_data[j][i]))
                 if (i < len(out_data[j]) - 1):
                     f.write(",")
-            f.write("]")
-            if (j < len(out_data)-1):
-                f.write(",")
             f.write("\n")
-        f.write("\t]\n}")
         f.close()
     
     except Exception as e: 

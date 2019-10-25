@@ -12,7 +12,10 @@ namespace building {
 	}
 
 	void Building::prepare() {
-		
+		/* file pass */
+		string pass_path = data["pass_path"].get<string>();
+		building_grid = astar::readPassMatrix(pass_path, className);
+
 		ifstream path_ent(data["ent_path"].get<string>());
 		if (!path_ent.good()) {
 			//showGameWarning("Error code 0x00000002\n\n  Unable to find (or communicate with) the audio device.\n  No sound will be played as long as the error persists.");
@@ -26,11 +29,16 @@ namespace building {
 		//selectionSound = (sound)data["selectionSound"].get<string>(); TODO
 		textureID = obj::BSprite()->getTextureId(className);
 	}
+
+	bool Building::is_placeable() {
+		return astar::checkAvailability(building_grid, position);
+	}
+
 	void Building::create(string Name) {
-		ifstream path_scan(data["pass_path"].get<string>());
-		json grid_data = json::parse(path_scan);
-		building_grid = grid_data["grid"].get<vector<vector<int>>>();
-		astar::updatePassMatrix(building_grid, vec2((int)position.x / astar::cellGridSize - building_grid[0].size() / 2, (int)position.y / astar::cellGridSize - building_grid.size() / 2));
+		/* file pass */
+		string pass_path = data["pass_path"].get<string>();
+		if (building_grid.size() == 0) building_grid = astar::readPassMatrix(pass_path, className);
+		astar::updatePassMatrix(building_grid, position);
 
 		ifstream path_ent(data["ent_path"].get<string>());
 		if (!path_ent.good()) {
@@ -48,9 +56,9 @@ namespace building {
 		(Name == "") ? name = className + "_" + to_string(picking_id) : name = Name;
 	}
 
-	void Building::render(bool picking, int clickID) {
+	void Building::render(bool picking, int clickID, bool not_placeable) {
 		selected = (picking_id == clickID);
-		obj::BSprite()->render(textureID, clickableInMinimap, position.x, position.y, (float)w, (float)h, picking, picking_id, selected, player->getPlayerColor());
+		obj::BSprite()->render(textureID, clickableInMinimap, position.x, position.y, (float)w, (float)h, picking, picking_id, selected, player->getPlayerColor(), not_placeable);
 	}
 
 	int Building::UnitsInBuilding(){

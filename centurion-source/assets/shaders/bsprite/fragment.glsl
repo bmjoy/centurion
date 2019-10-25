@@ -9,6 +9,7 @@ uniform int picking;
 uniform int selection;
 uniform int minimap;
 uniform int pass;
+uniform int not_placeable;
 uniform vec3 player_color;
 uniform vec4 picking_color;
 
@@ -38,6 +39,11 @@ void main()
             else {
                 FragColor = texture(texture1, FragTex);
             }
+            
+            if (not_placeable == 1) {
+                FragColor = vec4(texture(texture1, FragTex).r, 0.f, 0.f, texture(texture1, FragTex).a);
+            }
+            
         }
         
         /* Minimap Rendering */ 

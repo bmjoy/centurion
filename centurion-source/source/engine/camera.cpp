@@ -31,6 +31,7 @@ void Camera::update(){
 }
 
 void Camera::mouseControl(float threshold) {
+
 	abs_x = getParam("mouse-x-position") + position.x;
 	abs_y = getParam("mouse-y-position") + position.y;
 
@@ -118,7 +119,6 @@ void Camera::go_to_pos(GLfloat x, GLfloat y) {
 	else if (x > mapWidth - getParam("window-width-zoomed")) { x = mapWidth - getParam("window-width-zoomed"); }
 	if (y < 0.0) { y = 0; }
 	else if (y > mapHeight - getParam("window-height-zoomed")) { y = mapHeight - getParam("window-height-zoomed"); }
-
 	position.x = x;
 	position.y = y;
 }

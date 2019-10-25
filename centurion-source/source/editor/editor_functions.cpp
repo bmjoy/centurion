@@ -31,6 +31,7 @@ namespace editor {
 	bool PropertiesWindowResetText = false;
 	bool TerrainBrushWindowIsOpen = false;
 	bool TerrainBrushIsActive = false;
+	bool addingObject = false;
 
 	string EditorObjectStringListForm0[NumberOfObjects] = { "" };
 	string EditorObjectStringListForm1[NumberOfObjects] = { "" };
@@ -88,19 +89,19 @@ namespace editor {
 		float y = getParam("mouse-y-position") * getParam("window-height-zoomed") / getParam("window-height") + getParam("camera-y-position");
 		if (type == "buildings") {
 			buildingTemp.set_position(vec3(x, y, 0.f));
-			buildingTemp.render(false, 0);
+			buildingTemp.render(false, 0, !buildingTemp.is_placeable());
 		}
 	}
 	void addObject(string type) {
 		if (type == "buildings") {
-			float x = getParam("mouse-x-position") * getParam("window-width-zoomed") / getParam("window-width") + getParam("camera-x-position");
-			float y = getParam("mouse-y-position") * getParam("window-height-zoomed") / getParam("window-height") + getParam("camera-y-position");
-			buildingTemp.set_position(vec3(x, y, 0.f));
-			buildingTemp.set_id(getPickingID());
-			buildingTemp.create();
-			game::buildings[getPickingID()] = buildingTemp;
-			increasePickingID();
-			setBoolean("mouse-left", false);
+			if (buildingTemp.is_placeable()){
+				buildingTemp.set_id(getPickingID());
+				buildingTemp.create();
+				game::buildings[getPickingID()] = buildingTemp;
+				increasePickingID();
+				setBoolean("mouse-left", false);
+				addingObject = false;
+			}
 		}
 	}
 	void changeTerrain(int terrainType) {

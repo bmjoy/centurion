@@ -3,7 +3,7 @@
     "race": "rome",
     "class_name": "rtemple",
     "ent_path": "assets/buildings/rome/temple/rtemple.oe.json",
-    "pass_path" : "assets/buildings/rome/temple/rtemple_pass.json",
+    "pass_path" : "assets/buildings/rome/temple/rtemple.pass",
     "clickable_in_minimap": 0
     
 }

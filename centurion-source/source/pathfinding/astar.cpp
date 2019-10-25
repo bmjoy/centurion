@@ -1,5 +1,8 @@
 #include <pathfinding>
 
+using namespace std;
+using namespace glm;
+
 namespace astar {
 
 	int *GridMatrix() { return gridMatrix; }
@@ -7,24 +10,65 @@ namespace astar {
 	int *ClosedNodes() { return closedNodes; }
 	int *OpenNodes() { return openNodes; }
 	int *DirMap() { return dirMap; }
-	void updatePassMatrix(std::vector<std::vector<int>> mat, glm::vec2 position) {
-		for (int i = 0; i < mat.size(); i++) {
-			for (int j = 0; j < mat[0].size(); j++) {
-				int k = ((int)mat.size() - i + (int)position.y) * gridWidth + j + (int)position.x;
+	vector<vector<int>> readPassMatrix(string &path, string &classname) {
+		vector<vector<int>> mat;
+		ifstream fin(path);
+		if (!fin.good()) {
+			cout << "DEBUG: Problem occurred reading " + classname + " PASS file.\n";
+		}
+		else {
+			string line, value;
+			while (getline(fin, line)) {
+				if (line.length() > 0){
+					vector<int> line_values;
+					stringstream s(line);
+					while (getline(s, value, ',')) line_values.push_back(stoi(value));
+					mat.push_back(line_values);
+				}
+			}
+		}
+		return mat;
+	}
+	bool checkAvailability(vector<vector<int>> &building_grid, vec3 &position) {
+		bool b = true;
+		vec2 pos = vec2((int)position.x / astar::cellGridSize - building_grid[0].size() / 2, (int)position.y / astar::cellGridSize - building_grid.size() / 2);
+		for (int i = 0; i < building_grid.size(); i++) {
+			for (int j = 0; j < building_grid[0].size(); j++) {
+				int k = ((int)building_grid.size() - i + (int)pos.y) * gridWidth + j + (int)pos.x;
+				if (k >= 0 && k < gridWidth * gridHeight){
+					if (GridMatrix()[k] == 1 && building_grid[i][j] == 1){
+						b = false;
+						break;
+					}
+				}
+				else {
+					b = false;
+					break;
+				}
+			}
+		}
+		return b;
+	}
+	void updatePassMatrix(vector<vector<int>> &building_grid, vec3 &position) {
+		vec2 pos = vec2((int)position.x / astar::cellGridSize - building_grid[0].size() / 2, (int)position.y / astar::cellGridSize - building_grid.size() / 2);
+		for (int i = 0; i < building_grid.size(); i++) {
+			for (int j = 0; j < building_grid[0].size(); j++) {
+				int k = ((int)building_grid.size() - i + (int)pos.y) * gridWidth + j + (int)pos.x;
 				if (GridMatrix()[k] == 0) {
-					GridMatrix()[k] = mat[i][j];
+					GridMatrix()[k] = building_grid[i][j];
 				}
 			}
 		}
 	}
+
 	int getGridInfoFromPoint(float x, float y) {
 		return GridMatrix()[(int)y / cellGridSize * gridWidth + (int)x / cellGridSize];
 	}
 
-	std::vector<glm::ivec2> pathFind(const Location &locStart, const Location &locFinish){
+	vector<ivec2> pathFind(const Location &locStart, const Location &locFinish){
 
 		// list of open (not-yet-checked-out) nodes
-		static std::priority_queue<Node> q[2];
+		static priority_queue<Node> q[2];
 
 		// q index
 		static int qi;
@@ -49,10 +93,10 @@ namespace astar {
 		pNode1->calculateFValue(locFinish);
 		q[qi].push(*pNode1);
 
-		std::vector<glm::ivec2> finalPath = { };
+		vector<ivec2> finalPath = { };
 
-		finalPath.push_back(glm::ivec2(locFinish.col * cellGridSize, locFinish.row * cellGridSize));
-		finalPath.push_back(glm::ivec2(locFinish.col * cellGridSize, locFinish.row * cellGridSize));
+		finalPath.push_back(ivec2(locFinish.col * cellGridSize, locFinish.row * cellGridSize));
+		finalPath.push_back(ivec2(locFinish.col * cellGridSize, locFinish.row * cellGridSize));
 
 		// A* search
 		while (!q[qi].empty()) {
@@ -94,7 +138,7 @@ namespace astar {
 					}	
 					if (addPoint){
 						if (pCount == 2) {
-							finalPath.push_back(glm::ivec2(col * cellGridSize, row * cellGridSize));
+							finalPath.push_back(ivec2(col * cellGridSize, row * cellGridSize));
 							pCount = 0;
 						}
 						pCount++;
@@ -102,10 +146,10 @@ namespace astar {
 				}
 
 				// push start location
-				finalPath.push_back(glm::ivec2(locStart.col* cellGridSize, locStart.row * cellGridSize));
+				finalPath.push_back(ivec2(locStart.col* cellGridSize, locStart.row * cellGridSize));
 
 				// reverse vector
-				std::reverse(finalPath.begin(), finalPath.end());
+				reverse(finalPath.begin(), finalPath.end());
 
 				// garbage collection
 				delete pNode1;
@@ -176,7 +220,7 @@ namespace astar {
 		}
 	
 		// no path found
-		std::vector<glm::ivec2> emptyPath = { };
+		vector<ivec2> emptyPath = { };
 		return emptyPath;
 	}
 

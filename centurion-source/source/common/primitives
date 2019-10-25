@@ -127,7 +127,7 @@ public:
 	void addPath(string Path) { entPathList.push_back(Path); }
 	GLuint getTextureId(string className);
 	void create();
-	void render(GLuint texID, bool clickable, float x, float y, float w, float h, bool picking, int pickingId, bool selected, vec3 *playerColor);
+	void render(GLuint texID, bool clickable, float x, float y, float w, float h, bool picking, int pickingId, bool selected, vec3 *playerColor, bool not_placeable = false);
 	~BuildingSprite();
 
 private:

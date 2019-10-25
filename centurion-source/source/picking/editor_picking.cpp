@@ -314,19 +314,21 @@ namespace editor {
 			IsWindowOpened = false;
 		}
 
-		if (clickName == "AddObjWindow_leftarrow") { // CLOSE
+		if (clickName == "AddObjWindow_leftarrow") { // LEFT ARROW
 			objectForms[2].select_previous();
 			update();
 		}
 
-		if (clickName == "AddObjWindow_rightarrow") { // CLOSE
+		if (clickName == "AddObjWindow_rightarrow") { // RIGHT ARROW
 			objectForms[2].select_next();
 			update();
 		}
 
-		if (clickName == "AddObjWindow_add") { // CLOSE
+		if (clickName == "AddObjWindow_add") { // ADD
 			addingObject = true;
 			setBoolean("mouse-left", false);
+			setParam("mouse-x-leftclick", 0.f);
+			setParam("mouse-y-leftclick", 0.f);
 		}
 	}
 

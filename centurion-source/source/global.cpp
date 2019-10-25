@@ -53,6 +53,7 @@ namespace glb {
 		read_settings();				
 		read_translation_tables();
 
+		setParam("window-ratio", getParam("window-width") / getParam("window-height"));
 		setParam("window-width-zoomed", getParam("window-width") + (currentZoomCamera - 1) * zoomCameraFactor);
 		setParam("window-height-zoomed", getParam("window-height") + (currentZoomCamera - 1) * zoomCameraFactor / getParam("window-ratio"));
 		setBoolean("window-should-close", false);

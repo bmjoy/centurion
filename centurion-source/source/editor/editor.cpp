@@ -27,6 +27,8 @@ namespace editor {
 		game::GAME()->selRectangle.create("border", 0, 0, 0, 0, "top-left", 0);
 		setBoolean("mouse-left-pressed", false);
 
+		CAMERA()->go_to_pos(1.f, 1.f);
+
 		editorIsCreated = true;
 	}
 	void Editor::run() {
@@ -57,7 +59,7 @@ namespace editor {
 		/* normal rendering */
 		obj::applyGameMatrices(&proj, &view);
 
-		if (!IsWindowOpened) game::renderObjectsPicking();
+		if (!IsWindowOpened && !addingObject) game::renderObjectsPicking();
 
 		surface->render(false);
 		game::renderObjects();

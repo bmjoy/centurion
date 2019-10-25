@@ -129,13 +129,15 @@ namespace game {
 			projection = glb::minimapProjection;	
 		}
 
-		// apply game matrices:
 		ui->render(true);
+
+		// apply game matrices:
 		obj::applyGameMatrices(&projection, &view);
 
 		/* Tracing and Picking */
-		if(!gameMenuStatus) renderObjectsPicking();
 		if (!gameMinimapStatus) tracing(surface);
+		if(!gameMenuStatus) renderObjectsPicking();
+		
 
 		/* Rendering */
 		surface->render(false);
