@@ -33,7 +33,7 @@ namespace editor {
 			}
 		}
 
-		if (!IsWindowOpened) {
+		if (!IsWindowOpened && !addingObject) {
 			//---------------------
 			//    FILE
 			//---------------------
@@ -223,7 +223,7 @@ namespace editor {
 
 		if (clickName == "OpenMapWindow_open" || (selectedID == pos && hasDoubleClicked())) { // OPEN
 			if (selectedID != -1) {
-				cout << "DEBUG: You've chosen the following scenario to open: " + availableScenarios[selectedID] << endl;
+				cout << "[DEBUG] You've chosen the following scenario to open: " + availableScenarios[selectedID] << endl;
 				game::buildings.clear();
 				game::units.clear();
 				
@@ -257,7 +257,7 @@ namespace editor {
 		text_input.active(clickName == "NewMapWindow_textclick");
 
 		if (clickName == "NewMapWindow_create") { // CREATE
-			cout << "DEBUG: You've set the following map name: " + text_input.get_text() << endl;
+			cout << "[DEBUG] You've set the following map name: " + text_input.get_text() << endl;
 			currentMapName = text_input.get_text();
 			
 			game::buildings.clear();

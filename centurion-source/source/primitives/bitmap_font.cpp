@@ -96,7 +96,7 @@ void BitmapFont::create() {
 		path = "assets/fonts/" + fontName + ".fnt";
 		ifstream fin(path);
 		if (!fin.good()) {
-			cout << "DEBUG: Failed to load \"" << fontName << "\" data.\n";
+			cout << "[DEBUG] Failed to load \"" << fontName << "\" data.\n";
 		}
 		else {
 			string line, value;

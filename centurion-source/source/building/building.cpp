@@ -86,7 +86,7 @@ namespace building {
 
 		if (game::buildings.size() != buildingListSize && isCentralBuilding) {
 			subs_buildings.clear();
-			cout << "DEBUG: Subsidiaries buildings to " + name + " have been updated. Their names are: \n";
+			cout << "[DEBUG] Subsidiaries buildings to " + name + " have been updated. Their names are: \n";
 			for (map<int, Building>::iterator bld = game::buildings.begin(); bld != game::buildings.end(); bld++) {
 				int ID = bld->first;
 				if (!bld->second.is_central_building()) {

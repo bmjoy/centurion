@@ -42,7 +42,7 @@ void Mouse::mouse_control(int lastX, int lastY) {
 	}
 	else {
 		currentState = "left";
-		printf("DEBUG: You have left-clicked on (X=%d, Y=%d)\n", (int)getParam("mouse-x-leftclick"), (int)getParam("mouse-y-leftclick"));
+		printf("[DEBUG] You have left-clicked on (X=%d, Y=%d)\n", (int)getParam("mouse-x-leftclick"), (int)getParam("mouse-y-leftclick"));
 	}
 
 	if (!getBoolean("mouse-right")) {
@@ -52,7 +52,7 @@ void Mouse::mouse_control(int lastX, int lastY) {
 	}
 	else {
 		currentState = "right";
-		printf("DEBUG: You have right-clicked on (X=%d, Y=%d)\n", (int)getParam("mouse-x-rightclick"), (int)getParam("mouse-y-rightclick"));
+		printf("[DEBUG] You have right-clicked on (X=%d, Y=%d)\n", (int)getParam("mouse-x-rightclick"), (int)getParam("mouse-y-rightclick"));
 	}
 
 	if (getBoolean("mouse-release")) {

@@ -18,8 +18,8 @@ void Surface::reset() {
 void Surface::createNoise() {
 	mapgen::generateRandomMap();
 	obj::MapTerrain()->updateHeightsBuffer();
-	cout << "DEBUG: Terrain has been generated!\n";
-	cout << "DEBUG: Min(z) = " << mapgen::minZ << "; Max(z) = " << mapgen::maxZ << endl;
+	cout << "[DEBUG] Terrain has been generated!\n";
+	cout << "[DEBUG] Min(z) = " << mapgen::minZ << "; Max(z) = " << mapgen::maxZ << endl;
 }
 
 void Surface::updateGrid() {

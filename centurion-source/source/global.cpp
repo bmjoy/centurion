@@ -111,7 +111,7 @@ namespace glb {
 				if (values[0] == "debug") setBoolean("debug", (bool)stoi(values[1]));
 			}
 		}
-		cout << "DEBUG: Current language: " << language << "\n";
+		cout << "[DEBUG] Current language: " << language << "\n";
 	}
 
 	void save_settings() {
@@ -289,7 +289,7 @@ namespace glb {
 		}
 		objectsFile.close();
 
-		cout << "DEBUG: The map is saved with the following name: " + name << endl;
+		cout << "[DEBUG] The map is saved with the following name: " + name << endl;
 	}
 	void openScenario(string name) {
 		// read heights
@@ -381,7 +381,7 @@ namespace glb {
 		string content;
 		ifstream fileStream(fileLocation, ios::in);
 		if (!fileStream.is_open()) {
-			printf("DEBUG: Failed to read %s! File doesn't exist.", fileLocation);
+			printf("[DEBUG] Failed to read %s! File doesn't exist.", fileLocation);
 			return "";
 		}
 		string line = "";

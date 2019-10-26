@@ -43,22 +43,22 @@ namespace game {
 		//Open or close minimap
 		if (KeyCode[GLFW_KEY_SPACE] || getBoolean("mouse-middle")) {
 			gameMinimapStatus = !gameMinimapStatus;
-			gameMinimapStatus ? std::cout << "DEBUG: Minimap camera ON!\n" : std::cout << "DEBUG: Minimap camera OFF!\n";
+			gameMinimapStatus ? std::cout << "[DEBUG] Minimap camera ON!\n" : std::cout << "[DEBUG] Minimap camera OFF!\n";
 		}
 		//Open in-game menu
 		if (KeyCode[GLFW_KEY_ESCAPE]) {
 			gameMenuStatus = !gameMenuStatus;
-			gameMinimapStatus ? std::cout << "DEBUG: Pause Menu ON!\n" : std::cout << "DEBUG: Pause Menu OFF!\n";
+			gameMinimapStatus ? std::cout << "[DEBUG] Pause Menu ON!\n" : std::cout << "[DEBUG] Pause Menu OFF!\n";
 		}
 		// Wireframe
 		if (KeyCode[GLFW_KEY_Z]) {
 			setBoolean("wireframe", !getBoolean("wireframe"));
-			getBoolean("wireframe") ? std::cout << "DEBUG: Wireframe ON!\n" : std::cout << "DEBUG: Wireframe OFF! \n";
+			getBoolean("wireframe") ? std::cout << "[DEBUG] Wireframe ON!\n" : std::cout << "[DEBUG] Wireframe OFF! \n";
 		}
 		// Grid
 		if (KeyCode[GLFW_KEY_G]) {
 			gameGridStatus = !gameGridStatus;
-			gameGridStatus ? std::cout << "DEBUG: Grid ON!\n" : std::cout << "DEBUG: Grid OFF!\n";
+			gameGridStatus ? std::cout << "[DEBUG] Grid ON!\n" : std::cout << "[DEBUG] Grid OFF!\n";
 		}
 	}
 
@@ -134,7 +134,7 @@ namespace game {
 	void renderSelRectangle() {
 		if (getBoolean("mouse-left-pressed")) {
 			if (!selRectangleIsActive){
-				cout << "DEBUG: Selection rectangle enabled.\n";
+				cout << "[DEBUG] Selection rectangle enabled.\n";
 				(*SelRectCoords()).startX = getParam("mouse-x-leftclick") * getParam("window-width-zoomed") / getParam("window-width") + cameraLastX;
 				(*SelRectCoords()).startY = getParam("mouse-y-leftclick") * getParam("window-height-zoomed") / getParam("window-height") + cameraLastY;
 			}
@@ -172,7 +172,7 @@ namespace game {
 			selRectangleIsActive = true;
 		}
 		else {
-			if (selRectangleIsActive) cout << "DEBUG: Selection rectangle disabled.\n";
+			if (selRectangleIsActive) cout << "[DEBUG] Selection rectangle disabled.\n";
 			cameraLastX = getParam("camera-x-position");
 			cameraLastY = getParam("camera-y-position");
 			(*SelRectCoords()).startX = -0.1f;

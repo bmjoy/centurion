@@ -14,7 +14,7 @@ namespace gui {
 	}
 
 	void SimpleText::create_static(string text, string font, float x, float y, string halign, string valign, vec4 color, string fontWeight) {
-		if (type == "dynamic") cout << "DEBUG: Dynamic text created with static option\n";
+		if (type == "dynamic") cout << "[DEBUG] Dynamic text created with static option\n";
 		if (x < 0) x += getParam("window-width");
 		if (y < 0) y += getParam("window-height");
 
@@ -34,12 +34,12 @@ namespace gui {
 	}
 
 	void SimpleText::render_static() {
-		if (type == "dynamic") cout << "DEBUG: Dynamic text rendered with static option\n";
+		if (type == "dynamic") cout << "[DEBUG] Dynamic text rendered with static option\n";
 		obj::Text()->set_align(hAlign, vAlign);		
 		obj::Text()->render_static(data);
 	}
 	void SimpleText::render_dynamic(string text, string Font, float x, float y, vec4 color, string halign, string valign, string fontWeight) {
-		if (type == "static") cout << "DEBUG: Static text rendered with dynamic option\n";
+		if (type == "static") cout << "[DEBUG] Static text rendered with dynamic option\n";
 		obj::Text()->set_align(halign, valign);
 		if (fontWeight == "normal") {
 			obj::Text()->render_dynamic(Font, x, y, text, color, shadow, false);

@@ -134,7 +134,7 @@ namespace editor {
             for (int i = 0; i < titles.size(); i++) {
                 string s = titlesList[i];
                 if (isHover(titles[s].titlePosition, titles[s].titleWidth, titles[s].titleHeight)) {
-					if (!IsWindowOpened) { titles[s].titleBack.render(titles[s].hoverColor); }
+					if (!IsWindowOpened && !addingObject) { titles[s].titleBack.render(titles[s].hoverColor); }
                     if (menuIsOpened) {
                         titles[s].isOpened = true;
                         for (int j = 0; j < titles.size(); j++) {

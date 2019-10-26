@@ -1,6 +1,0 @@
-type	class	name	settlement	playerID	x	y	xoffset	yoffset
-building	rtownhall	rtownhall_24	SETTL_rtownhall_24	0	1258	943	0	0
-building	rblacksmith	rblacksmith_25	SETTL_rtownhall_24	0	2063	1203	805	260
-building	rtavern	rtavern_26	SETTL_rtownhall_24	0	961	1880	-297	937
-building	rtemple	rtemple_27	SETTL_rtownhall_24	0	2229	587	971	-356
-building	rbarracks	rbarracks_28	SETTL_rtownhall_24	0	2170	1898	912	955

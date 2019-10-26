@@ -5,12 +5,12 @@ MAINMENU_buttonOptions	Options	Opzioni	Opciones	Options
 MAINMENU_buttonQuit	Exit	Esci dal gioco	Salir	Sortir du jeu	ﺧﺮوج
 SINGLEPLAYER_buttonStart	Start!	Avvia la partita!	Empezar!	Commencer le jeu!	اﺑﺪٲ اﻟﻠﻌﺒﺔ
 SINGLEPLAYER_buttonExit	Back to menu	Menù principale	Menú principal	Menu principal	اﻟﻘﺎﺋﻤﺔ اﻟﺮﺋﻴﺴﻴﺔ
-OPTIONS_buttonApply	Apply	Applica	Aplicar	Appliquer	
-OPTIONS_buttonSave	Save	Salva	Guardar	Sauver	
-OPTIONS_buttonCancel	Cancel	Annulla	Anular	Annuler	
-OPTIONS_Title	Options	Opzioni	Opciones	Options	
-OPTIONS_LanguageText	Language	Lingua	Idioma	Langue	
-LANG_english	English	Inglese	Inglés	Anglais	
+OPTIONS_buttonApply	Apply	Applica	Aplicar	Appliquer	ﺗﻄﺒﻴﻖ
+OPTIONS_buttonSave	Save and close	Salva e chiudi	Guardar	Sauver et fermer	ﺣﻔﻆ
+OPTIONS_buttonCancel	Cancel	Annulla	Anular	Annuler	إﻟﻐﺎء
+OPTIONS_Title	Options	Opzioni	Opciones	Options	اﻋﺪادات
+OPTIONS_LanguageText	Language	Lingua	Idioma	Langue	اﻟﻠﻐﺔ
+LANG_english	English	Inglese	Inglés	Anglais	اﻧﺠﻠﻴﺰي
 LANG_italian	Italian	Italiano	Italiano	Italien	
 LANG_spanish	Spanish	Spagnolo	Español	Espagnol	
 LANG_french	French	Francese	Francés	Français	
@@ -56,6 +56,9 @@ EDITORTREE_CLASS_rtemple	Temple	Tempio	Templo	Temple
 EDITORTREE_CLASS_rtownhall	Townhall	Foro	Ayuntamiento	Mairie	
 EDITORBRUSH_grass1	Grass 1	Erba 1	Hierba 1	Herbe 1	
 EDITORBRUSH_road1	Road 1	Strada 1	Carretera 1	Route 1	
+EDITOR_noSettlementsAround	Unable to place the building at the selected point, as there are no nearby settlements.	Impossibile posizionare la struttura nel punto selezionato, poiché non vi sono insediamenti nelle vicinanze.	--	La structure ne peut pas être positionnée au point sélectionné, car il n'y a pas de installations à proximité.	--
+EDITOR_impassablePoint	Unable to place the building at the selected point, as it is a steep or inaccessible place, like the sea.	Impossibile posizionare la struttura nel punto selezionato, in quanto si tratta di un luogo scosceso o inaccessibile, come il mare.	--	La structure ne peut pas être positionnée au point sélectionné, comme c'est un endroit raide ou inaccessible, comme la mer.	--
+EDITOR_canAddStructure	Press the LEFT mouse button to position the structure in the desired point. Press the RIGHT mouse button to abort this operation.	Clicca con il tasto SINISTRO del mouse per posizionare la struttura nel punto desiderato. Premi il tastro DESTRO per annullare l'operazione.	--	Appuyez sur le bouton GAUCHE de la souris pour positionner la structure au point souhaité. Appuyez sur le bouton DROITE de la souris pour abandonner cette opération.	--
 WORD_gameStarted	Game is being started...	Avvio della partita in corso...	El juego se está iniciando...	Le jeu commence...	...ﺑﺪء اﻟﻠﻌﺒﺔ
 WORD_player_1	Player 1	Giocatore 1	Jugador 1	Joueur 1	ﻻﻋﺐ ۱
 WORD_player_2	Player 2	Giocatore 2	Jugador 2	Joueur 2	ﻻﻋﺐ ٢
@@ -69,7 +72,6 @@ WORD_playersNumber	Number of players	Numero di giocatori	Número de jugadores	No
 WORD_errorCode	Error code	Codice errore	Código de error	Code d'erreur	رﻣﺰ ﺧﺎﻃﺊ
 RACE_rome	Rome	Roma	Roma	Rome	روﻣﺎ
 RACE_egypt	Egypt	Egitto	Egipto	Egypte	ﻣﺼﺮ
-ERROR_settings	Unable to find or process SETTINGS file.\nForced application shutdown has started.	Impossibile trovare o leggere il file SETTINGS.\nArresto forzato dell'applicazione in corso...	No se puede encontrar o procesar el fichero SETTINGS.\nLa aplicación va a ser cerrada automáticamente.	Impossible de trouver ou de traiter le fichier SETTINGS.\nL’arrêt forcé de l’application a commencé.	.ﻏﻴﺮ ﻗﺎدر ﻋﻟﻰ اﻟﻌﺜﻮر أو ﻗﺮاءة اﻟﻤﻠﻒ. SETTINGS.\n .اﻹﻏﻼق ٳﻟﺰاﻣﻲ ﻟﻠﺘﻄﺒﻴﻖ
 ERROR_data	Unable to find or process DATA file.\nForced application shutdown has started.	Impossibile trovare o leggere il file DATA.\nArresto forzato dell'applicazione in corso...	No se puede encontrar o procesar el fichero DATA.\nLa aplicación va a ser cerrada automáticamente.	Impossible de trouver ou de traiter le fichier DATA.\nL’arrêt forcé de l’application a commencé.	.ﻏﻴﺮ ﻗﺎدر ﻋﻟﻰ اﻟﻌﺜﻮر أو ﻗﺮاءة اﻟﻤﻠﻒ. DATA.\n .اﻹﻏﻼق ٳﻟﺰاﻣﻲ ﻟﻠﺘﻄﺒﻴﻖ
 ERROR_settlements	Unable to find or process SETTLEMENTS file.\nForced application shutdown has started.	Impossibile trovare o leggere il file SETTLEMENTS.\nArresto forzato dell'applicazione in corso...	No se puede encontrar o procesar el fichero SETTLEMENTS.\nLa aplicación va a ser cerrada automáticamente.	Impossible de trouver ou de traiter le fichier SETTLEMENTS.\nL’arrêt forcé de l’application a commencé.	.ﻏﻴﺮ ﻗﺎدر ﻋﻟﻰ اﻟﻌﺜﻮر أو ﻗﺮاءة اﻟﻤﻠﻒ. SETTLEMENTS file.\n .اﻹﻏﻼق ٳﻟﺰاﻣﻲ ﻟﻠﺘﻄﺒﻴﻖ
 ERROR_menuData	Unable to find or process MENU DATA file.\nForced application shutdown has started.	Impossibile trovare o leggere il file MENU DATA.\nArresto forzato dell'applicazione in corso...	No se puede encontrar o procesar el fichero MENU DATA.\nLa aplicación va a ser cerrada automáticamente.	Impossible de trouver ou de traiter le fichier MENU DATA.\nL’arrêt forcé de l’application a commencé.	.ﻏﻴﺮ ﻗﺎدر ﻋﻟﻰ اﻟﻌﺜﻮر أو ﻗﺮاءة اﻟﻤﻠﻒ. MENU DATA file.\n .اﻹﻏﻼق ٳﻟﺰاﻣﻲ ﻟﻠﺘﻄﺒﻴﻖ

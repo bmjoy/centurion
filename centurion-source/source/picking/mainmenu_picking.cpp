@@ -14,7 +14,7 @@ namespace menu {
 	void Menu::picking() {
 		int clickId = get_id();
 		string clickName = getPickedObjectName(clickId);
-		cout << "DEBUG: Click id: " << clickId << " --> " + clickName + "\n";
+		cout << "[DEBUG] Click id: " << clickId << " --> " + clickName + "\n";
 
 		/*------------------------------------------------------------------------------*/
 		if (clickName == "SINGLEPLAYER_buttonExit") {

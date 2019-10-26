@@ -197,6 +197,7 @@ namespace editor {
 	extern bool TerrainBrushIsActive;
 	extern bool menuIsOpened;
 	extern bool addingObject;
+	extern gui::SimpleText textInfo;
 
 	static const int NumberOfObjects = 100;
 	extern string EditorObjectStringListForm0[NumberOfObjects];
