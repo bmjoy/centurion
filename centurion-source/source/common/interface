@@ -182,6 +182,7 @@ namespace editor {
 	// all the definitions are in source/editor/editor_functions.cpp
 
 	extern bool IsWindowOpened;
+	extern bool QuestionWindowIsOpen;
 	extern bool NewMapWindowIsOpen;
 	extern bool NewMapResetText;
 	extern bool PropertiesWindowIsOpen;
@@ -198,6 +199,9 @@ namespace editor {
 	extern bool menuIsOpened;
 	extern bool addingObject;
 	extern gui::SimpleText textInfo;
+	extern string question;
+	extern int answer;
+	extern void waitForAnswer();
 
 	static const int NumberOfObjects = 100;
 	extern string EditorObjectStringListForm0[NumberOfObjects];
@@ -299,6 +303,26 @@ namespace editor {
 	};
 
 	//
+	//	EDITOR QUESTION WINDOW
+	//
+
+	class QuestionWindow {
+	public:
+		QuestionWindow();
+		void create();
+		void render(bool pick);
+		~QuestionWindow();
+	private:
+		gui::TextInput text_input;
+		gui::Image back_image;
+		gui::Image buttons[2];
+		gui::SimpleText buttons_text[2];
+		gui::SimpleText questionText;
+		float startX, startY;
+		void picking();
+	};
+
+	//
 	//	EDITOR ADD OBJECT WINDOW
 	//
 
@@ -384,6 +408,7 @@ namespace editor {
 		AddObjectWindow add_object_window;
 		PropertiesWindow properties_window;
 		TerrainBrushWindow terrainbrush_window;
+		QuestionWindow question_window;
 		gui::Rectangle minimapRectangle;
 	};
 

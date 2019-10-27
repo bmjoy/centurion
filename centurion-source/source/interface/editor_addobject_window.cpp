@@ -69,6 +69,7 @@ namespace editor {
 		AddObjectWindowUpdateForm2 = true;
 		addingObject = false;
 	}
+
 	void AddObjectWindow::update() {
 		formSelectedTexts[0] = objectForms[0].selectedText.substr(7); // buildings/units/decoration
 

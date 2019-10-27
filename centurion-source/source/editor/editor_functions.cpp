@@ -7,6 +7,7 @@
 #include <game>
 #include <engine>
 #include <surface>
+#include <mutex>
 
 using namespace building;
 using namespace unit;
@@ -31,8 +32,11 @@ namespace editor {
 	bool PropertiesWindowResetText = false;
 	bool TerrainBrushWindowIsOpen = false;
 	bool TerrainBrushIsActive = false;
+	bool QuestionWindowIsOpen = false;
 	bool addingObject = false;
 	gui::SimpleText textInfo = gui::SimpleText("dynamic");
+	string question;
+	int answer;
 
 	string EditorObjectStringListForm0[NumberOfObjects] = { "" };
 	string EditorObjectStringListForm1[NumberOfObjects] = { "" };
@@ -63,6 +67,9 @@ namespace editor {
 
 				//Another bug: you can open minimap when menu is opened causing overlapping.
 			}*/
+		}
+		if (KeyCode[GLFW_KEY_DELETE]) {
+			//Cancellare l'insediamento
 		}
 		if (KeyCode[GLFW_KEY_SPACE] || getBoolean("mouse-middle")) {
 			game::gameMinimapStatus = !game::gameMinimapStatus;
@@ -141,5 +148,13 @@ namespace editor {
 			mapgen::MapTextures()[j] = type;
 			obj::MapTerrain()->updateTextureBuffer();
 		}
+	}
+
+	void waitForAnswer() {
+		std::condition_variable cv;
+		std::mutex mtx;
+
+		std::unique_lock<std::mutex> lk(mtx);
+		cv.wait(lk, answer != -1);
 	}
 }

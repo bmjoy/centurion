@@ -70,6 +70,8 @@ WORD_player_7	Player 7	Giocatore 7	Jugador 7	Joueur 7	ﻻﻋﺐ ٧
 WORD_player_8	Player 8	Giocatore 8	Jugador 8	Joueur 8	ﻻﻋﺐ ٨
 WORD_playersNumber	Number of players	Numero di giocatori	Número de jugadores	Nombre de joueurs	ﻋﺪد اﻟﻼﻋﺒﻴﻦ
 WORD_errorCode	Error code	Codice errore	Código de error	Code d'erreur	رﻣﺰ ﺧﺎﻃﺊ
+WORD_yes	Yes	Sì	Sí	Oui	
+WORD_no	No	No	No	Non	
 RACE_rome	Rome	Roma	Roma	Rome	روﻣﺎ
 RACE_egypt	Egypt	Egitto	Egipto	Egypte	ﻣﺼﺮ
 ERROR_data	Unable to find or process DATA file.\nForced application shutdown has started.	Impossibile trovare o leggere il file DATA.\nArresto forzato dell'applicazione in corso...	No se puede encontrar o procesar el fichero DATA.\nLa aplicación va a ser cerrada automáticamente.	Impossible de trouver ou de traiter le fichier DATA.\nL’arrêt forcé de l’application a commencé.	.ﻏﻴﺮ ﻗﺎدر ﻋﻟﻰ اﻟﻌﺜﻮر أو ﻗﺮاءة اﻟﻤﻠﻒ. DATA.\n .اﻹﻏﻼق ٳﻟﺰاﻣﻲ ﻟﻠﺘﻄﺒﻴﻖ

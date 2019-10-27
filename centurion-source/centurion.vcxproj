@@ -150,6 +150,7 @@
     <ClCompile Include="source\interface\editor_newmap_window.cpp" />
     <ClCompile Include="source\interface\editor_openmap_window.cpp" />
     <ClCompile Include="source\interface\editor_properties_window.cpp" />
+    <ClCompile Include="source\interface\editor_question_window.cpp" />
     <ClCompile Include="source\interface\editor_terrainbrush_window.cpp" />
     <ClCompile Include="source\interface\editor_ui.cpp" />
     <ClCompile Include="source\interface\menu_globaloptions.cpp" />

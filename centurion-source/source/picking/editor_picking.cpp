@@ -268,11 +268,44 @@ namespace editor {
 			obj::MapTerrain()->updateTextureBuffer();
 			NewMapWindowIsOpen = false;
 			IsWindowOpened = false;
-			//This section should be replaced with a question asking for overwriting
-			struct stat info;
-			string sPath = "scenarios/" + currentMapName;
-			if (stat(sPath.c_str(), &info) == 0) MessageBox(NULL, "Selected name already exists.\nMap will be overwritten.", "Centurion", MB_ICONINFORMATION);
-			saveCurrentScenario(currentMapName);
+
+			//Does the map folder already exist?
+			if (!folderExists("scenarios/" + currentMapName)){
+				saveCurrentScenario(currentMapName);
+			}
+			else{
+				question = "EDITOR_canAddStructure";
+				QuestionWindowIsOpen = true;
+				waitForAnswer();
+				if (answer == 1)
+					saveCurrentScenario(currentMapName);
+				answer = -1;
+			}
+		}
+	}
+
+	/*--------------------------*/
+	/*     QUESTION WINDOW      */
+	/*--------------------------*/
+
+	void QuestionWindow::picking() {
+		GLint mouseX = (GLint)getParam("mouse-x-position");
+		GLint mouseY = (GLint)getParam("mouse-y-position");
+		leftClickID_UI = get_id();
+		string clickName = getPickedObjectName(leftClickID_UI);
+
+		// Yes
+		if (clickName == "NewMapWindow_close") { 
+			answer = 1;
+			QuestionWindowIsOpen = false;
+			IsWindowOpened = false;
+		}
+
+		// No
+		if (clickName == "NewMapWindow_create") { 
+			answer = 0;
+			QuestionWindowIsOpen = false;
+			IsWindowOpened = false;
 		}
 	}
 

@@ -19,6 +19,7 @@ namespace editor {
 		add_object_window.create();
 		properties_window.create();
 		terrainbrush_window.create();
+		question_window.create();
 
 		minimapRectangle = gui::Rectangle();
 		minimapRectangle.create("border", 0, 0, 0, 0, "bottom-left", 0);
@@ -30,6 +31,7 @@ namespace editor {
 		add_object_window.render(picking);
 		properties_window.render(picking);
 		terrainbrush_window.render(picking);
+		question_window.render(picking);
 
 		editor_menu.render(picking); // always the last
 

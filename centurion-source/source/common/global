@@ -60,7 +60,6 @@ namespace glb {
 	void saveCurrentScenario(string name);
 	void openScenario(string name);
 
-
 	// other functions 
 	float getYMinimapCoord(float x);
 	bool cursorInGameScreen();
@@ -68,6 +67,7 @@ namespace glb {
 	vec2 getZoomedCoords(float xCoord, float yCoord);
 	void forceGameClosure(string errorCode, string errorText);
 	void showGameWarning(string reason);
+	bool folderExists(string folderPath);
 };
 
 //------------------------------------------------------------------------------

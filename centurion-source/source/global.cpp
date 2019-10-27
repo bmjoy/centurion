@@ -526,6 +526,13 @@ namespace glb {
 		MultiByteToWideChar(CP_UTF8, 0, text.c_str(), wideLength, wstr, wideLength);
 		MessageBoxW(NULL, wstr, gameNameLPCWSTR, MB_ICONINFORMATION);
 	}
+
+	bool folderExists(string folderPath) {
+		struct stat info;
+		if (stat(folderPath.c_str(), &info) == 0) 
+			return true;
+		return false;
+	}
 };
 
 /* ----- OBJECTS ----- */
