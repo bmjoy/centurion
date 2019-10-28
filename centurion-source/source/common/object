@@ -24,6 +24,7 @@ public:
 	void set_player(int player_id);
 	int get_playerID() { return playerID; }
 	void set_id(int pickingId);
+	int get_id() { return picking_id; }
 	bool isSelected() { return selected; }
 	int get_xPos() { return (int)position.x; }
 	int get_yPos() { return (int)position.y; }
@@ -58,16 +59,21 @@ namespace building {
 		void create(string Name = "");
 		void render(bool picking, int clickID, bool not_placeable = false);
 		bool is_placeable();
+		void update_pass();
+		void clear_pass();
+		void set_status(bool b) { isCreated = b; }
 		bool is_central_building() { return isCentralBuilding; }
-		void set_settlement_name(string s) { settl_name = s; blockSettlName = true; }
+		void set_settlement_name(string s) { settl_name = s; }
 		string get_settlement_name() { return settl_name; }
 		void set_settlement_building(Building *b) { central_building = b; }
 		Building *get_settlement_building() { return central_building; }
 		bool is_near_to_central_building();
 		int UnitsInBuilding();
 		vector<unit::Unit> UnitsInHolder();
-		map<int, Building*> buildingsInSettlement();
-		int buildingsInSettlementCount();
+		vector<int> buildingsInSettlementIds();
+		int buildingsInSettlementCount() { return (int)subs_buildings.size(); }
+		void setWaitingToBeErased(bool b) { waitingToBeErased = b; }
+		bool getWaitingToBeErased() { return waitingToBeErased; }
 		~Building();
 
 	private:
@@ -80,7 +86,8 @@ namespace building {
 		bool isCentralBuilding;
 		string settl_name;
 		Building *central_building;
-		bool blockSettlName;
+		bool waitingToBeErased;
+		bool isCreated;
 		size_t buildingListSize;
 		//sound selectionSound; TODO
 	};

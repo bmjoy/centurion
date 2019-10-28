@@ -61,6 +61,16 @@ namespace astar {
 		}
 	}
 
+	void clearPassMatrix(vector<vector<int>> &building_grid, vec3 &position) {
+		vec2 pos = vec2((int)position.x / astar::cellGridSize - building_grid[0].size() / 2, (int)position.y / astar::cellGridSize - building_grid.size() / 2);
+		for (int i = 0; i < building_grid.size(); i++) {
+			for (int j = 0; j < building_grid[0].size(); j++) {
+				int k = ((int)building_grid.size() - i + (int)pos.y) * gridWidth + j + (int)pos.x;
+				GridMatrix()[k] = 0;
+			}
+		}
+	}
+
 	int getGridInfoFromPoint(float x, float y) {
 		return GridMatrix()[(int)y / cellGridSize * gridWidth + (int)x / cellGridSize];
 	}

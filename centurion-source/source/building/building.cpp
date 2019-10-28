@@ -11,7 +11,8 @@ using namespace glm;
 namespace building {
 	Building::Building(){
 		type = "building";
-		blockSettlName = false;
+		isCreated = false;
+		waitingToBeErased = false;
 		buildingListSize = 0;
 	}
 
@@ -33,7 +34,7 @@ namespace building {
 		clickableInMinimap = (bool)data["clickable_in_minimap"].get<int>();
 		//selectionSound = (sound)data["selectionSound"].get<string>(); TODO
 		textureID = obj::BSprite()->getTextureId(className);
-		blockSettlName = true;
+		isCreated = false;
 	}
 
 	bool Building::is_placeable() {
@@ -61,7 +62,7 @@ namespace building {
 		/* file pass */
 		string pass_path = data["pass_path"].get<string>();
 		if (building_grid.size() == 0) building_grid = astar::readPassMatrix(pass_path, className);
-		astar::updatePassMatrix(building_grid, position);
+		update_pass();
 
 		ifstream path_ent(data["ent_path"].get<string>());
 		if (!path_ent.good()) {
@@ -78,12 +79,24 @@ namespace building {
 		textureID = obj::BSprite()->getTextureId(className);
 
 		(Name == "") ? name = className + "_" + to_string(picking_id) : name = Name;
-		blockSettlName = false;
+		isCreated = true;
+	}
+
+	void Building::update_pass() {
+		astar::updatePassMatrix(building_grid, position);
+	}
+	void Building::clear_pass() {
+		astar::clearPassMatrix(building_grid, position);
 	}
 
 	void Building::render(bool picking, int clickID, bool not_placeable) {
-		if (!isCentralBuilding && !blockSettlName)	settl_name = central_building->get_settlement_name();
 
+		// keep updated not central buildings "settlement name"
+		if (!isCentralBuilding && isCreated) 
+			if (settl_name != central_building->get_settlement_name())
+			    settl_name = central_building->get_settlement_name();
+
+		// keep updated central buildings "subsidiaries buildings list"
 		if (game::buildings.size() != buildingListSize && isCentralBuilding) {
 			subs_buildings.clear();
 			cout << "[DEBUG] Subsidiaries buildings to " + name + " have been updated. Their names are: \n";
@@ -98,7 +111,11 @@ namespace building {
 			}
 			buildingListSize = game::buildings.size();
 		}
+
+		// has the building been selected?
 		selected = (picking_id == clickID);
+
+		// rendering
 		obj::BSprite()->render(textureID, clickableInMinimap, position.x, position.y, (float)w, (float)h, picking, picking_id, selected, player->getPlayerColor(), not_placeable);
 	}
 
@@ -120,12 +137,12 @@ namespace building {
 		}
 	}
 
-	map<int, Building*> Building::buildingsInSettlement() {
-		return subs_buildings;
-	}
-
-	int Building::buildingsInSettlementCount() {
-		return (int)subs_buildings.size();
+	vector<int> Building::buildingsInSettlementIds(){
+		vector<int> ids;
+		for (map<int, Building*>::iterator sub = subs_buildings.begin(); sub != subs_buildings.end(); sub++) {
+			ids.push_back(sub->first);
+		}
+		return ids;
 	}
 
 	Building::~Building(){}

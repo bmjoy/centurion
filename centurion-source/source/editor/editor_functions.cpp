@@ -70,15 +70,19 @@ namespace editor {
 			if (game::buildings.count(leftClickID) > 0) {
 				if (game::buildings[leftClickID].isSelected()) {
 					if(game::buildings[leftClickID].is_central_building()){
-						if (game::buildings[leftClickID].buildingsInSettlementCount() > 0)
+						if (game::buildings[leftClickID].buildingsInSettlementCount() > 0){
+							game::buildings[leftClickID].setWaitingToBeErased(true);
 							Q_WINDOW()->setQuestion("QUESTION_deleteAll");
+						}
 						else {
 							cout << "[DEBUG]: Settlement " << game::buildings[leftClickID].get_name() << " deleted!\n";
+							game::buildings[leftClickID].clear_pass();
 							game::buildings.erase(leftClickID);
 						}
 					}
 					else{
 						cout << "[DEBUG]: Building " << game::buildings[leftClickID].get_name() << " deleted!\n";
+						game::buildings[leftClickID].clear_pass();
 						game::buildings.erase(leftClickID);
 					}
 				}
@@ -110,6 +114,7 @@ namespace editor {
 		float y = round(getParam("mouse-y-position") * getParam("window-height-zoomed") / getParam("window-height") + getParam("camera-y-position"));
 		if (type == "buildings") {
 			buildingTemp.set_position(vec3(x, y, 0.f));
+			buildingTemp.set_status(false);
 			buildingTemp.render(false, 0, !buildingTemp.is_placeable());
 			
 			//Player will be able to see info about placing status

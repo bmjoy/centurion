@@ -109,7 +109,7 @@ namespace editor {
 		selectedObject = formSelectedTexts[0] + "_" + formSelectedTexts[1] + "_" + formSelectedTexts[2];
 		object_thumbnail = gui::Image(selectedObject);
 		object_thumbnail.create("center", getParam("window-width") / 2.f, back_size.y / 2.f, 0, 0, 0);
-		
+
 		prepareObject(formSelectedTexts[0], formSelectedTexts[2]);
 	}
 

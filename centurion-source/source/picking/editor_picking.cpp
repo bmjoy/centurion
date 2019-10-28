@@ -297,22 +297,42 @@ namespace editor {
 				mapgen::reset_map();
 				obj::MapTerrain()->updateHeightsBuffer();
 				obj::MapTerrain()->updateTextureBuffer();
-				clearEditorVariables();
 				saveCurrentScenario(currentMapName);
 				cout << "[DEBUG] Map " + currentMapName + " has been overwritten successfully!" << endl;
 			}
 			if (question == "QUESTION_deleteAll") {
-				for (map<int, Building*>::iterator sub = game::buildings[leftClickID].buildingsInSettlement().begin(); sub != game::buildings[leftClickID].buildingsInSettlement().end(); sub++) {
-					game::buildings.erase(sub->first);
+				vector<int> idsToErase;
+				for (map<int, Building*>::iterator bld = game::central_buildings.begin(); bld != game::central_buildings.end(); bld++) {
+					int settl_id = bld->first;
+					Building* settl = bld->second;
+					string settl_name = bld->second->get_name();
+					if (settl->getWaitingToBeErased()) {
+						idsToErase.push_back(settl_id);
+						for(int i = 0; i < settl->buildingsInSettlementIds().size(); i++){
+							idsToErase.push_back(settl->buildingsInSettlementIds()[i]);
+						}
+					}
 				}
-				game::buildings.erase(leftClickID);
-				cout << "[DEBUG]: Settlement " << game::buildings[leftClickID].get_name() << " completly erased!\n";
+				if (idsToErase.size() > 0){
+					for (int i = 0; i < idsToErase.size(); i++) {
+						game::buildings[idsToErase[i]].clear_pass();
+						game::buildings.erase(idsToErase[i]);
+					}
+					game::central_buildings.erase(idsToErase[0]);
+					cout << "[DEBUG]: Settlement " << idsToErase[0] << " completly erased!\n";
+				}
 			}
+			clearEditorVariables();
 		}
 
 		// No
 		if (clickName == "QuestionWindow_No") {
-			clearEditorVariables();
+			if (question == "QUESTION_deleteAll") {
+				for (map<int, Building*>::iterator bld = game::central_buildings.begin(); bld != game::central_buildings.end(); bld++) {
+					game::buildings[bld->first].setWaitingToBeErased(false);
+				}
+			}
+			QuestionWindowIsOpen = false;
 		}
 	}
 
