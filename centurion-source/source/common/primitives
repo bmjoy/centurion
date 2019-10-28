@@ -66,6 +66,10 @@ namespace txt {
 
 	bool isArabic(int codepoint);
 
+	
+
+	
+
 	struct CharData {
 		int charWidth[256];
 		float fontHeight;
@@ -79,6 +83,7 @@ namespace txt {
 
 	struct StaticData {
 		vector<float> X;
+		vector<float> Y;
 		vector<Character> charList;
 		vector<int> charsWidth;
 		GLint textureID;
@@ -100,7 +105,7 @@ public:
 	void set_align(string hAlign = "left", string vAlign = "normal");
 	void create();
 	void render_dynamic(string &font, float xPos, float yPos, string &text, vec4 &color, bool shadow, bool bold = false);
-	txt::StaticData create_static(string &font, string &text, float x, bool bold = false);
+	txt::StaticData create_static(string &font, string &text, float x, float y, bool bold = false, int line_number = 0);
 	void render_static(txt::StaticData &data);
 	int getShaderId() { return shaderId; }
 	~BitmapFont();

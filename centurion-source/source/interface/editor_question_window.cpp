@@ -34,8 +34,9 @@ namespace editor {
 		buttons_text[0].create_static(getTranslation("WORD_yes"), "tahoma_13px", startX + 58.f, startY - 171.f, "center", "middle", vec4(255.f), "bold");
 		buttons_text[1] = gui::SimpleText("static");
 		buttons_text[1].create_static(getTranslation("WORD_no"), "tahoma_13px", startX + 314.f, startY - 171.f, "center", "middle", vec4(255.f), "bold");
-		questionText = gui::SimpleText("static");
-		questionText.create_static(getTranslation(""), "tahoma_15px", startX + 15.f, startY - 85.f, "left", "normal", vec4(255));
+		
+		questionText = gui::TextBox();
+		questionText.create(getTranslation(""), "tahoma_15px", startX + 15.f, startY - 85.f, back_image.getImageSize().x - 30.f, back_image.getImageSize().y, "left", "normal", vec4(255), "normal");
 	}
 
 	void QuestionWindow::render(bool pick) {
@@ -52,7 +53,7 @@ namespace editor {
 				buttons[1].render(false);
 				buttons_text[0].render_static();
 				buttons_text[1].render_static();
-				questionText.render_static();
+				questionText.render();
 			}
 		}
 	}
@@ -62,7 +63,7 @@ namespace editor {
 		QuestionWindowIsOpen = true;
 		IsWindowOpened = true;
 		question = Question;
-		questionText.create_static(getTranslation(Question), "tahoma_15px", startX + 15.f, startY - 85.f, "left", "normal", vec4(255));
+		questionText.create(getTranslation(Question), "tahoma_15px", startX + 15.f, startY - 85.f, back_image.getImageSize().x - 30.f, back_image.getImageSize().y, "left", "normal", vec4(255), "normal");
 	}
 
 	QuestionWindow::~QuestionWindow() {}

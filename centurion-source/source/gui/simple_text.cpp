@@ -27,7 +27,7 @@ namespace gui {
 			fontName = fontName + "_bold";
 			isBold = true;
 		}
-		data = obj::Text()->create_static(fontName, text, x, isBold);
+		data = obj::Text()->create_static(fontName, text, x, y, isBold);
 		data.y = y;
 		data.color = color;
 		data.shadow = shadow;

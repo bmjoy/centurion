@@ -315,7 +315,7 @@ namespace editor {
 		gui::Image back_image;
 		gui::Image buttons[2];
 		gui::SimpleText buttons_text[2];
-		gui::SimpleText questionText;
+		gui::TextBox questionText;
 		float startX, startY;
 		string question;
 		void picking();

@@ -103,7 +103,7 @@ void BitmapFont::create() {
 			while (getline(fin, line)) {
 				if (line != "") {
 					txt::Character CharData = txt::Character();
-					string values[8], element;
+					string values[10], element;
 					stringstream s1(line);
 					int k = 0;
 					while (getline(s1, element, ',')) {
@@ -119,6 +119,7 @@ void BitmapFont::create() {
 					CharData.width = stoi(values[3]); CharData.height = stoi(values[4]);
 					CharData.xoffset = stoi(values[5]); CharData.yoffset = stoi(values[6]);
 					CharData.xadvance = stoi(values[7]);
+					CharData.line_height = stoi(values[8]);
 					fontData[i][charID] = CharData;
 				}
 			}	
@@ -200,7 +201,7 @@ void BitmapFont::render_dynamic(string &font, float xPos, float yPos, string &te
 
 /* Static text */
 
-txt::StaticData BitmapFont::create_static(string &font, string &text, float x, bool bold) {
+txt::StaticData BitmapFont::create_static(string &font, string &text, float x, float y, bool bold, int line_number) {
 	txt::StaticData static_data = txt::StaticData();
 	wstring_convert<codecvt_utf8_utf16<wchar_t>> converter;
 	wstring wtext = converter.from_bytes(text);
@@ -224,10 +225,13 @@ txt::StaticData BitmapFont::create_static(string &font, string &text, float x, b
 	
 	int totw = 0;
 	for (int i = 0; i < wtext.size(); i++) {
-		static_data.X.push_back(x + totw);
+		
 		GLint codepoint;
 		if (language == "arabic" && txt::isArabic((GLint)wtext[0])) codepoint = GLint(wtext[wtext.size() - i - 1]);
 		else codepoint = GLint(wtext[i]);
+		
+		static_data.X.push_back(x + totw);
+		static_data.Y.push_back(y - line_number * fontData[fontID][codepoint].line_height);
 		static_data.charList.push_back(fontData[fontID][codepoint]);
 		static_data.charsWidth.push_back(fontData[fontID][codepoint].xadvance + letterspacing);
 		totw += (fontData[fontID][codepoint].xadvance + letterspacing);
@@ -244,7 +248,7 @@ void BitmapFont::render_static(txt::StaticData &data) {
 
 	glUseProgram(shaderId);
 	glUniform4f(glGetUniformLocation(shaderId, "color"), data.color.x / 255.f, data.color.y / 255.f, data.color.z / 255.f, data.color.w / 255.f);
-	glUniform1f(glGetUniformLocation(shaderId, "y"), data.y);
+	if (data.y > 0) glUniform1f(glGetUniformLocation(shaderId, "y"), data.y); // one line text
 	glUniform1i(glGetUniformLocation(shaderId, "hAlign"), hAlignMap[h_align]);
 	glUniform1i(glGetUniformLocation(shaderId, "vAlign"), vAlignMap[v_align]);
 	glUniform1i(glGetUniformLocation(shaderId, "fontHeight"), data.fontHeight);
@@ -258,6 +262,7 @@ void BitmapFont::render_static(txt::StaticData &data) {
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, IBO);
 	for (int i = 0; i < data.textSize; i++) {
 		glUniform1f(glGetUniformLocation(shaderId, "x"), data.X[i]);
+		if (data.y == 0) glUniform1f(glGetUniformLocation(shaderId, "y"), data.Y[i]); // text box
 		glUniform1i(glGetUniformLocation(shaderId, "char_xpos"), data.charList[i].x);
 		glUniform1i(glGetUniformLocation(shaderId, "char_ypos"), data.charList[i].y);
 		glUniform1i(glGetUniformLocation(shaderId, "char_width"), data.charList[i].width);
