@@ -51,4 +51,5 @@ namespace editor {
 	void insertingObject(string type, string classname);
 	void addObject(string type);
 	void changeTerrain(int terrainType);
+	void clearEditorVariables();
 };

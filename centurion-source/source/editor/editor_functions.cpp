@@ -7,7 +7,6 @@
 #include <game>
 #include <engine>
 #include <surface>
-#include <mutex>
 
 using namespace building;
 using namespace unit;
@@ -35,8 +34,6 @@ namespace editor {
 	bool QuestionWindowIsOpen = false;
 	bool addingObject = false;
 	gui::SimpleText textInfo = gui::SimpleText("dynamic");
-	string question;
-	int answer;
 
 	string EditorObjectStringListForm0[NumberOfObjects] = { "" };
 	string EditorObjectStringListForm1[NumberOfObjects] = { "" };
@@ -46,6 +43,7 @@ namespace editor {
 	Building buildingTemp;
 
 	Editor *EDITOR() { return &myeditor; }
+	QuestionWindow *Q_WINDOW() { return &myquestionwindow; }
 
 	void Editor::handleKeyboardControls() {
 		//CTRL Hotkeys
@@ -69,7 +67,22 @@ namespace editor {
 			}*/
 		}
 		if (KeyCode[GLFW_KEY_DELETE]) {
-			//Cancellare l'insediamento
+			if (game::buildings.count(leftClickID) > 0) {
+				if (game::buildings[leftClickID].isSelected()) {
+					if(game::buildings[leftClickID].is_central_building()){
+						if (game::buildings[leftClickID].buildingsInSettlementCount() > 0)
+							Q_WINDOW()->setQuestion("QUESTION_deleteAll");
+						else {
+							cout << "[DEBUG]: Settlement " << game::buildings[leftClickID].get_name() << " deleted!\n";
+							game::buildings.erase(leftClickID);
+						}
+					}
+					else{
+						cout << "[DEBUG]: Building " << game::buildings[leftClickID].get_name() << " deleted!\n";
+						game::buildings.erase(leftClickID);
+					}
+				}
+			}
 		}
 		if (KeyCode[GLFW_KEY_SPACE] || getBoolean("mouse-middle")) {
 			game::gameMinimapStatus = !game::gameMinimapStatus;
@@ -150,11 +163,21 @@ namespace editor {
 		}
 	}
 
-	void waitForAnswer() {
-		std::condition_variable cv;
-		std::mutex mtx;
-
-		std::unique_lock<std::mutex> lk(mtx);
-		cv.wait(lk, answer != -1);
+	void clearEditorVariables() {
+		IsWindowOpened = false;
+		QuestionWindowIsOpen = false;
+		NewMapWindowIsOpen = false;
+		NewMapResetText = false;
+		PropertiesWindowIsOpen = false;
+		PropertiesWindowResetText = false;
+		OpenMapWindowIsOpen = false;
+		OpenMapWindowUpdate = false;
+		AddObjectWindowIsOpen = false;
+		AddObjectWindowUpdateForm1and2 = false;
+		AddObjectWindowUpdateForm2 = false;
+		TerrainBrushWindowIsOpen = false;
+		TerrainBrushIsActive = false;
+		menuIsOpened = false;
+		addingObject = false;
 	}
 }

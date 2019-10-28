@@ -120,5 +120,13 @@ namespace building {
 		}
 	}
 
+	map<int, Building*> Building::buildingsInSettlement() {
+		return subs_buildings;
+	}
+
+	int Building::buildingsInSettlementCount() {
+		return (int)subs_buildings.size();
+	}
+
 	Building::~Building(){}
 }

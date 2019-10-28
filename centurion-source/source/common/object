@@ -66,6 +66,8 @@ namespace building {
 		bool is_near_to_central_building();
 		int UnitsInBuilding();
 		vector<unit::Unit> UnitsInHolder();
+		map<int, Building*> buildingsInSettlement();
+		int buildingsInSettlementCount();
 		~Building();
 
 	private:

@@ -9,9 +9,11 @@ using namespace glb;
 using namespace engine;
 
 namespace editor {
+
 	Editor::Editor(){
 		editorIsCreated = false;	
 	}
+
 	void Editor::create() {
 		resetPicking();
 		surface = new Surface();
@@ -31,6 +33,7 @@ namespace editor {
 
 		editorIsCreated = true;
 	}
+
 	void Editor::run() {
 		/* Keyboard control */
 		if (!IsWindowOpened) { // TODO: merge all these in a function in Editor->Editor_functions.cpp
@@ -77,6 +80,7 @@ namespace editor {
 
 		if (IsWindowOpened) {
 			KeyCode[GLFW_KEY_BACKSPACE] = false;
+			KeyCode[GLFW_KEY_DELETE] = false;
 			KeyCode[GLFW_KEY_UP] = false;
 			KeyCode[GLFW_KEY_DOWN] = false;
 			KeyCode[GLFW_KEY_LEFT] = false;

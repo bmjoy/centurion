@@ -9,13 +9,12 @@ using namespace engine;
 
 
 namespace editor {
-
 	QuestionWindow::QuestionWindow() {}
-	
+
 	void QuestionWindow::create() {
-		answer = -1;
 		back_image = gui::Image("yesornotwindow_back");
-		back_image.create("center", getParam("window-width") / 2.f, getParam("window-height") / 2.f, 0, 0, 0);
+		back_image.create("center", getParam("window-width") / 2.f, getParam("window-height") / 2.f, 0, 0, getPickingID());
+		increasePickingID();
 
 		// startX and startY are TOP-LEFT coordinates (as in Paint)
 		startX = getParam("window-width") / 2.f - back_image.getImageSize().x / 2.f;
@@ -35,12 +34,14 @@ namespace editor {
 		buttons_text[0].create_static(getTranslation("WORD_yes"), "tahoma_13px", startX + 58.f, startY - 171.f, "center", "middle", vec4(255.f), "bold");
 		buttons_text[1] = gui::SimpleText("static");
 		buttons_text[1].create_static(getTranslation("WORD_no"), "tahoma_13px", startX + 314.f, startY - 171.f, "center", "middle", vec4(255.f), "bold");
-		questionText = gui::SimpleText("dynamic");
+		questionText = gui::SimpleText("static");
+		questionText.create_static(getTranslation(""), "tahoma_15px", startX + 15.f, startY - 85.f, "left", "normal", vec4(255));
 	}
 
 	void QuestionWindow::render(bool pick) {
 		if (QuestionWindowIsOpen) {
 			if (pick && getBoolean("mouse-left")) {
+				back_image.render(true);
 				buttons[0].render(true);
 				buttons[1].render(true);
 				picking();
@@ -51,9 +52,17 @@ namespace editor {
 				buttons[1].render(false);
 				buttons_text[0].render_static();
 				buttons_text[1].render_static();
-				questionText.render_dynamic(getTranslation(question), "tahoma_15px", startX + 15.f, startY - 85.f, vec4(255), "left", "normal");
+				questionText.render_static();
 			}
 		}
+	}
+
+	void QuestionWindow::setQuestion(string Question) {
+		setBoolean("mouse-left", false);
+		QuestionWindowIsOpen = true;
+		IsWindowOpened = true;
+		question = Question;
+		questionText.create_static(getTranslation(Question), "tahoma_15px", startX + 15.f, startY - 85.f, "left", "normal", vec4(255));
 	}
 
 	QuestionWindow::~QuestionWindow() {}

@@ -199,9 +199,6 @@ namespace editor {
 	extern bool menuIsOpened;
 	extern bool addingObject;
 	extern gui::SimpleText textInfo;
-	extern string question;
-	extern int answer;
-	extern void waitForAnswer();
 
 	static const int NumberOfObjects = 100;
 	extern string EditorObjectStringListForm0[NumberOfObjects];
@@ -311,6 +308,7 @@ namespace editor {
 		QuestionWindow();
 		void create();
 		void render(bool pick);
+		void setQuestion(string Question);
 		~QuestionWindow();
 	private:
 		gui::TextInput text_input;
@@ -319,8 +317,12 @@ namespace editor {
 		gui::SimpleText buttons_text[2];
 		gui::SimpleText questionText;
 		float startX, startY;
+		string question;
 		void picking();
 	};
+
+	static QuestionWindow myquestionwindow;
+	QuestionWindow *Q_WINDOW();
 
 	//
 	//	EDITOR ADD OBJECT WINDOW
@@ -408,7 +410,6 @@ namespace editor {
 		AddObjectWindow add_object_window;
 		PropertiesWindow properties_window;
 		TerrainBrushWindow terrainbrush_window;
-		QuestionWindow question_window;
 		gui::Rectangle minimapRectangle;
 	};
 

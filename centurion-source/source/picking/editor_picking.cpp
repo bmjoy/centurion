@@ -259,28 +259,22 @@ namespace editor {
 		if (clickName == "NewMapWindow_create") { // CREATE
 			cout << "[DEBUG] You've set the following map name: " + text_input.get_text() << endl;
 			currentMapName = text_input.get_text();
-			
-			game::buildings.clear();
-			game::units.clear();
 
-			mapgen::reset_map();
-			obj::MapTerrain()->updateHeightsBuffer();
-			obj::MapTerrain()->updateTextureBuffer();
 			NewMapWindowIsOpen = false;
-			IsWindowOpened = false;
 
 			//Does the map folder already exist?
-			if (!folderExists("scenarios/" + currentMapName)){
+			if (!folderExists("scenarios/" + currentMapName)) {
+				game::buildings.clear();
+				game::units.clear();
+
+				mapgen::reset_map();
+				obj::MapTerrain()->updateHeightsBuffer();
+				obj::MapTerrain()->updateTextureBuffer();
+				clearEditorVariables();
 				saveCurrentScenario(currentMapName);
 			}
-			else{
-				question = "EDITOR_canAddStructure";
-				QuestionWindowIsOpen = true;
-				waitForAnswer();
-				if (answer == 1)
-					saveCurrentScenario(currentMapName);
-				answer = -1;
-			}
+			else
+				Q_WINDOW()->setQuestion("QUESTION_overwriteMap");
 		}
 	}
 
@@ -295,17 +289,30 @@ namespace editor {
 		string clickName = getPickedObjectName(leftClickID_UI);
 
 		// Yes
-		if (clickName == "NewMapWindow_close") { 
-			answer = 1;
-			QuestionWindowIsOpen = false;
-			IsWindowOpened = false;
+		if (clickName == "QuestionWindow_Yes") { 
+			if (question == "QUESTION_overwriteMap") {
+				game::buildings.clear();
+				game::units.clear();
+
+				mapgen::reset_map();
+				obj::MapTerrain()->updateHeightsBuffer();
+				obj::MapTerrain()->updateTextureBuffer();
+				clearEditorVariables();
+				saveCurrentScenario(currentMapName);
+				cout << "[DEBUG] Map " + currentMapName + " has been overwritten successfully!" << endl;
+			}
+			if (question == "QUESTION_deleteAll") {
+				for (map<int, Building*>::iterator sub = game::buildings[leftClickID].buildingsInSettlement().begin(); sub != game::buildings[leftClickID].buildingsInSettlement().end(); sub++) {
+					game::buildings.erase(sub->first);
+				}
+				game::buildings.erase(leftClickID);
+				cout << "[DEBUG]: Settlement " << game::buildings[leftClickID].get_name() << " completly erased!\n";
+			}
 		}
 
 		// No
-		if (clickName == "NewMapWindow_create") { 
-			answer = 0;
-			QuestionWindowIsOpen = false;
-			IsWindowOpened = false;
+		if (clickName == "QuestionWindow_No") {
+			clearEditorVariables();
 		}
 	}
 
