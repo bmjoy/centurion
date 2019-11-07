@@ -1,1 +1,13 @@
 type	class	name	settlement	playerID	x	y	xoffset	yoffset
+building	rtownhall	rtownhall_1	Settlement_player_	0	5167	14979	0	0
+building	rarena	rarena_2	Settlement_player_	0	6144.32	15403.6	977.32	424.6
+building	rblacksmith	rblacksmith_3	Settlement_player_	0	5054.32	15758.6	-112.68	779.6
+building	rtemple	rtemple_4	Settlement_player_	0	6004.32	14433.6	837.32	-545.4
+building	rtavern	rtavern_5	Settlement_player_	0	4094.32	15218.6	-1072.68	239.6
+building	rbarracks	rbarracks_6	Settlement_player_	0	4344.32	14188.6	-822.68	-790.4
+building	rtownhall	rtownhall_7	ettlement_player_	0	16522	16843	0	0
+building	rarena	rarena_8	ettlement_player_	0	17499.3	17267.6	977.32	424.6
+building	rblacksmith	rblacksmith_9	ettlement_player_	0	16409.3	17622.6	-112.68	779.6
+building	rtemple	rtemple_10	ettlement_player_	0	17359.3	16297.6	837.32	-545.4
+building	rtavern	rtavern_11	ettlement_player_	0	15449.3	17082.6	-1072.68	239.6
+building	rbarracks	rbarracks_12	ettlement_player_	0	15699.3	16052.6	-822.68	-790.4

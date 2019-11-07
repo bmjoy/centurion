@@ -75,7 +75,7 @@ namespace editor {
 
 		if (AddObjectWindowUpdateForm1and2) {
 			vector<string> form1Options;
-			for (int i = 1; i < NumberOfObjects; i++) {
+			for (int i = 0; i < NumberOfObjects; i++) {
 				if ((EditorObjectStringListForm0[i] == formSelectedTexts[0])){
 					if (formSelectedTexts[0] == "buildings" || formSelectedTexts[0] == "units")
 						form1Options.push_back("RACE_" + EditorObjectStringListForm2[i]);
@@ -94,7 +94,7 @@ namespace editor {
 
 		if (AddObjectWindowUpdateForm2) {
 			vector<string> form2Options;
-			for (int i = 1; i < NumberOfObjects; i++) {
+			for (int i = 0; i < NumberOfObjects; i++) {
 				if ((EditorObjectStringListForm0[i] == formSelectedTexts[0]) && (EditorObjectStringListForm1[i] == formSelectedTexts[1]))
 					form2Options.push_back("EDITORTREE_CLASS_" + EditorObjectStringListForm2[i]);
 			}

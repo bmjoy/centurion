@@ -19,12 +19,12 @@ namespace game {
 
 	// global game variables  --> see source/game/game_functions.cpp
 
+	extern int playersNumber;
+	extern int maxPlayersNumber;
 	extern bool gameMenuStatus;
 	extern bool gameMinimapStatus;
 	extern bool gameGridStatus;
-	extern int mapWidth, mapHeight;
-	extern int playersNumber;
-	extern int maxPlayersNumber;
+	extern int mapWidth, mapHeight;		
 	extern float cameraMovespeed;
 	extern int currentZoomCamera;
 	extern float zoomCameraFactor;
@@ -58,9 +58,6 @@ namespace game {
 	private:
 		Surface *surface;
 		UIGame *ui;
-		json settl_data;
-		string r;
-		vec2 origin;
 		mat4 view, projection;
 		bool gameIsCreated;
 	};
@@ -90,4 +87,5 @@ namespace game {
 	void renderObjects();
 	void renderSelRectangle();
 	void setMinimapProjection();
+	void generateSettlements(int num_players);
 };

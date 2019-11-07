@@ -32,9 +32,8 @@ namespace game {
 
 	void Game::create() {
 		resetPicking();
-		units.clear();
-		buildings.clear();
-		
+		reset();
+
 		setParam("ui-bottom-height", 60.f);
 		setParam("ui-top-height", 100.f);
 		setMinimapProjection();
@@ -43,58 +42,19 @@ namespace game {
 		selRectangle = gui::Rectangle();
 		selRectangle.create("border", 0, 0, 0, 0, "top-left", 0);
 
-		/*------------------------------------------------------------*/
+		surface = new Surface();
+		surface->reset();
+
 		/* DEFINE SETTLEMENTS POSITIONS */
-		mapgen::define_settlements();
+		mapgen::define_settlements(playersNumber);
 
 		/* CREATE SETTLEMENTS */
-		//Close the game if it wasn't able to find or process settlements.json file
+		generateSettlements(playersNumber);
 
-		/* TEMPORARY */
-
-		/* TO BE REPLACED !! */
-
-		/*
-					ifstream path("assets/data/settlements.json");
-					if (!path.good()) {
-						forceGameClosure("NOT_FOUND", "ERROR_settlements");
-					}
-					settl_data = json::parse(path);
-
-					for (int i = 0; i < playersList.size(); i++) {
-						r = playersList[i].getPlayerRace();
-						origin = playersList[i].getStartPoint();
-						for (int j = 0; j < settl_data[r].size(); j++) {
-							Building b = Building();
-							b.set_class(settl_data[r][j]["class"]);
-							b.set_id(getPickingID());
-							b.set_player(i);
-							b.set_position(vec3(origin.x + (int)settl_data[r][j]["offsetx"], origin.y + (int)settl_data[r][j]["offsety"], 0.0f));
-							b.create("temp");
-							b.set_settlement_name("temp_settl_"+std::to_string(i));
-							buildings[getPickingID()] = b;
-							increasePickingID();
-						}
-					}
-
-					for (map<int, Building>::iterator bld = game::buildings.begin(); bld != game::buildings.end(); bld++) {
-						int ID = bld->first;
-						if (!bld->second.is_central_building()) {
-							for (map<int, Building*>::iterator settl = game::central_buildings.begin(); settl != game::central_buildings.end(); settl++) {
-								int settl_ID = settl->first;
-								if (settl->second->get_settlement_name() == bld->second.get_settlement_name()) {
-									game::buildings[ID].set_settlement_building(game::central_buildings[settl_ID]);
-									break;
-								}
-							}
-						}
-					}
-		*/
-
-		/*------------------------------------------------------------*/
-		
-		surface = new Surface();
+		/* GENERATE NOISE */
 		surface->createNoise();
+
+		/* UPDATE PASS MATRIX */
 		surface->updateGrid();
 
 		/*------------------------------------------------------------*/

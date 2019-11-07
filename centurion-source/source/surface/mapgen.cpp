@@ -290,7 +290,7 @@ namespace mapgen {
 		return zHat;
 	}
 
-	void define_settlements() {
+	void define_settlements(int num_players) {
 
 		srand((unsigned int)time(NULL));
 		std::vector<float> townhallPos;
@@ -301,7 +301,7 @@ namespace mapgen {
 		float a, b;
 		float d;
 		bool c;
-		for (int n = 0; n < playersList.size(); n++) {
+		for (int n = 0; n < num_players; n++) {
 			c = false;
 			while (!c) {
 				a = float(rand() % (max_X - min) + min);
@@ -354,7 +354,7 @@ namespace mapgen {
 			}
 		}
 
-		for (int i = 0; i < playersList.size(); i++) {
+		for (int i = 0; i < num_players; i++) {
 			playersList[i].setStartPoint(glm::vec2(townhallPos[i * 2], townhallPos[i * 2 + 1]));
 		}
 	}

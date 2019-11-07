@@ -167,6 +167,8 @@ namespace editor {
 		
 		int x = int(round(x1 / mapgen::grid_size)) * mapgen::grid_size + mapgen::grid_size * 2;
 		int y = int(round(y1 / mapgen::grid_size)) * mapgen::grid_size + mapgen::grid_size * 2;
+		// + mapgen::grid_size * 2; because the map has "borders"
+
 		int j = mapgen::getVertexPos(x, y);
 	
 		if (mapgen::MapTextures()[j] != type){
@@ -237,7 +239,7 @@ namespace editor {
 					game::buildings[leftClickID].set_placeable(true);
 					game::buildings[leftClickID].update_pass();
 				}
-				leftClickID = 0;
+				//leftClickID = 0;
 				movingObject = false;
 				movingObjectRestore = false;
 			}

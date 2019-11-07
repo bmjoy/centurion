@@ -195,5 +195,114 @@ namespace game {
 		float right = (float)mapWidth;
 		glb::minimapProjection = ortho(left, right, bottom, top, -right, right);
 	}
+
+	void generateSettlements(int num_players) {
+
+		string RandomMapSettlementPath = "scenarios/RandomMapSettlements/";
+
+		vector<int> TemporaryMapTextures;
+
+		// read texture
+		{
+			fstream fin;
+			fin.open(RandomMapSettlementPath + "texture");
+			string line, number;
+			getline(fin, line);
+			stringstream s(line);
+			int i = 0;
+			while (getline(s, number, ',')) {
+				TemporaryMapTextures.push_back(stoi(number));
+				i++;
+			}
+		}
+
+		for (int i = 0; i < num_players; i++) {
+			string r = playersList[i].getPlayerRace().substr(5);
+			vec2 origin = playersList[i].getStartPoint();
+			string SettlementRace = "Settlement_" + r + "_1";
+			fstream fin;
+			fin.open(RandomMapSettlementPath + "objects.tsv");
+			string line, value;
+			int row = 0;
+			while (getline(fin, line)) {
+				if (row > 0) {
+					string objectsInfo[9];
+					stringstream s(line);
+					int v = 0;
+					while (getline(s, value, '\t')) { objectsInfo[v] = value; v++; }
+					string settl_name = objectsInfo[3];
+					if (settl_name == SettlementRace) {
+						string type = objectsInfo[0];
+						string className = objectsInfo[1];
+						string settl_name = objectsInfo[3];
+						float xOffset = stof(objectsInfo[7]);
+						float yOffset = stof(objectsInfo[8]);
+
+						float xEditorPos = stof(objectsInfo[5]);
+						float yEditorPos = stof(objectsInfo[6]);
+
+						if (type == "building") {
+							building::Building b = building::Building();
+							b.set_class(className);
+							b.set_player(i);
+							b.set_position(vec3(origin.x + xOffset, origin.y + yOffset, 0.f));
+							b.set_id(getPickingID());
+							b.set_settlement_name("Settlement_player_"+i);
+							b.create();
+							game::buildings[getPickingID()] = b;
+							
+							if (game::buildings[getPickingID()].is_central_building()) {
+								game::central_buildings[getPickingID()] = &game::buildings[getPickingID()];
+
+								// update terrain around the townhall
+								// N.B: mapgen::grid_size * 2 because the map has "borders"
+								
+								int EditorStartPointX = xEditorPos - townhallRadius;
+								int EditorStartPointY = yEditorPos - townhallRadius;
+								EditorStartPointX = int(round(EditorStartPointX / mapgen::grid_size)) * mapgen::grid_size + mapgen::grid_size * 2;
+								EditorStartPointY = int(round(EditorStartPointY / mapgen::grid_size)) * mapgen::grid_size + mapgen::grid_size * 2;
+								
+								int NewMapStartPointX = origin.x + xOffset - townhallRadius;
+								int NewMapStartPointY = origin.y + yOffset - townhallRadius;
+								NewMapStartPointX = int(round(NewMapStartPointX / mapgen::grid_size)) * mapgen::grid_size + mapgen::grid_size * 2;
+								NewMapStartPointY = int(round(NewMapStartPointY / mapgen::grid_size)) * mapgen::grid_size + mapgen::grid_size * 2;
+
+								for (int iHoriz = 0; iHoriz < townhallRadius * 2; iHoriz += mapgen::grid_size) {
+									for (int iVert = 0; iVert < townhallRadius * 2; iVert += mapgen::grid_size) {
+										int EditorPointX = EditorStartPointX + iHoriz; 
+										int EditorPointY = EditorStartPointY + iVert;
+										int EditorPointLoc = mapgen::getVertexPos(EditorPointX, EditorPointY);
+										int NewMapPointX = NewMapStartPointX + iHoriz;
+										int NewMapPointY = NewMapStartPointY + iVert;
+										int NewMapPointLoc = mapgen::getVertexPos(NewMapPointX, NewMapPointY);
+										mapgen::MapTextures()[NewMapPointLoc] = float(TemporaryMapTextures[EditorPointLoc]);
+									}
+								}
+							}
+							increasePickingID();
+						}
+					}
+				}
+				row++;
+			}
+		}
+
+		// update texture buffer
+		obj::MapTerrain()->updateTextureBuffer();
+
+		// update buildings info
+		for (map<int, Building>::iterator bld = game::buildings.begin(); bld != game::buildings.end(); bld++) {
+			int ID = bld->first;
+			if (!bld->second.is_central_building()) {
+				for (map<int, Building*>::iterator settl = game::central_buildings.begin(); settl != game::central_buildings.end(); settl++) {
+					int settl_ID = settl->first;
+					if (settl->second->get_settlement_name() == bld->second.get_settlement_name()) {
+						game::buildings[ID].set_settlement_building(game::central_buildings[settl_ID]);
+						break;
+					}
+				}
+			}
+		}
+	}
 }
 
