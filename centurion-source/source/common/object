@@ -59,6 +59,7 @@ namespace building {
 		void create(string Name = "");
 		void render(bool picking, int clickID, bool not_placeable = false);
 		bool is_placeable();
+		void set_placeable(bool b) { isPlaceable = b; }
 		void update_pass();
 		void clear_pass();
 		void set_status(bool b) { isCreated = b; }
@@ -89,6 +90,7 @@ namespace building {
 		bool waitingToBeErased;
 		bool isCreated;
 		size_t buildingListSize;
+		bool isPlaceable;
 		//sound selectionSound; TODO
 	};
 };

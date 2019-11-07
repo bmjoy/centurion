@@ -13,6 +13,7 @@ namespace building {
 		type = "building";
 		isCreated = false;
 		waitingToBeErased = false;
+		isPlaceable = true;
 		buildingListSize = 0;
 	}
 
@@ -90,6 +91,8 @@ namespace building {
 	}
 
 	void Building::render(bool picking, int clickID, bool not_placeable) {
+
+		not_placeable = (not_placeable || !isPlaceable);
 
 		// keep updated not central buildings "settlement name"
 		if (!isCentralBuilding && isCreated) 

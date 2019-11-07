@@ -33,6 +33,7 @@ namespace editor {
 	bool TerrainBrushIsActive = false;
 	bool QuestionWindowIsOpen = false;
 	bool addingObject = false;
+	bool movingObject = false;
 	gui::SimpleText textInfo = gui::SimpleText("dynamic");
 
 	string EditorObjectStringListForm0[NumberOfObjects] = { "" };
@@ -96,6 +97,12 @@ namespace editor {
 			setBoolean("wireframe", !getBoolean("wireframe"));
 			getBoolean("wireframe") ? std::cout << "[DEBUG] Wireframe ON!\n" : std::cout << "[DEBUG] Wireframe OFF! \n";
 		}
+		// Grid
+		/*if (KeyCode[GLFW_KEY_G]) {
+			surface->updateGrid();
+			game::gameGridStatus = !game::gameGridStatus;
+			game::gameGridStatus ? std::cout << "[DEBUG] Grid ON!\n" : std::cout << "[DEBUG] Grid OFF!\n";
+		}*/
 	}
 
 	/* tools */
@@ -184,5 +191,56 @@ namespace editor {
 		TerrainBrushIsActive = false;
 		menuIsOpened = false;
 		addingObject = false;
+	}
+
+	void moveObjects() {
+		if (getBoolean("mouse-left-pressed")) {
+			// buildings
+			if (game::buildings.count(leftClickID) > 0) {
+				movingObjectRestore = false;
+				if (!movingObject) {
+					movingObjectXPos = game::buildings[leftClickID].get_position().x;
+					movingObjectYPos = game::buildings[leftClickID].get_position().y;
+					movingObjectStartXMouse = getParam("mouse-x-position") * getParam("window-width-zoomed") / getParam("window-width") + getParam("camera-x-position");
+					movingObjectStartYMouse = getParam("mouse-y-position") * getParam("window-height-zoomed") / getParam("window-height") + getParam("camera-y-position");
+				}
+				float x1 = (getParam("mouse-x-position") * getParam("window-width-zoomed") / getParam("window-width") + getParam("camera-x-position"));
+				float y1 = (getParam("mouse-y-position") * getParam("window-height-zoomed") / getParam("window-height") + getParam("camera-y-position"));
+				float dx = x1 - movingObjectStartXMouse;
+				float dy = y1 - movingObjectStartYMouse;
+				
+				// if building isn't central building (TO DO)
+				if (true){
+					if (!movingObject) game::buildings[leftClickID].clear_pass();
+					game::buildings[leftClickID].set_position(vec3(movingObjectXPos + dx, movingObjectYPos + dy, 0.f));
+					if (!game::buildings[leftClickID].is_placeable()) {
+						game::buildings[leftClickID].set_placeable(false);
+						movingObjectRestore = true;
+					}
+					else {
+						game::buildings[leftClickID].set_placeable(true);
+					}
+				}
+				movingObject = true;
+			}
+		}
+		else {
+			// buildings
+			if (game::buildings.count(leftClickID) > 0) {
+				if (movingObjectRestore) {
+					game::buildings[leftClickID].clear_pass();
+					game::buildings[leftClickID].set_position(vec3(movingObjectXPos, movingObjectYPos, 0.f));
+					game::buildings[leftClickID].set_placeable(true);
+					game::buildings[leftClickID].update_pass();
+				}
+				else {
+					game::buildings[leftClickID].set_placeable(true);
+					game::buildings[leftClickID].update_pass();
+				}
+				leftClickID = 0;
+				movingObject = false;
+				movingObjectRestore = false;
+			}
+		}
 	}
 }

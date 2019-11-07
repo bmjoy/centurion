@@ -46,10 +46,14 @@ namespace editor {
 
 	extern Unit unitTemp;
 	extern Building buildingTemp;
+	extern bool movingObject;
+	static float movingObjectXPos, movingObjectYPos, movingObjectStartXMouse, movingObjectStartYMouse;
+	static bool movingObjectRestore;
 
 	void prepareObject(string type, string classname);
 	void insertingObject(string type, string classname);
 	void addObject(string type);
 	void changeTerrain(int terrainType);
 	void clearEditorVariables();
+	void moveObjects();
 };

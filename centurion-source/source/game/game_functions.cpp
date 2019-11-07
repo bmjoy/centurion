@@ -1,4 +1,5 @@
 #include <game>
+#include <editor>
 #include <engine>
 #include <player>
 #include <surface>
@@ -101,8 +102,8 @@ namespace game {
 				if (u->second.isSelected())	  selectedUnits++;
 			}
 		}
-		/*cout << gameMinimapStatus << " " << editor::IsWindowOpened << " " << editor::menuIsOpened << " " << editor::TerrainBrushIsActive << " " << leftClickID_UI << endl;*/
-		if (!gameMinimapStatus && !editor::IsWindowOpened && !editor::menuIsOpened && !editor::TerrainBrushIsActive && leftClickID_UI == 0)	renderSelRectangle();
+		/*cout << gameMinimapStatus << " " << editor::IsWindowOpened << " " << editor::menuIsOpened << " " << editor::TerrainBrushIsActive << " " << leftClickID_UI << editor::movingObject << endl;*/
+		if (!gameMinimapStatus && !editor::IsWindowOpened && !editor::menuIsOpened && !editor::TerrainBrushIsActive && leftClickID_UI == 0 && !editor::movingObject) renderSelRectangle();
 	}
 
 	void clearBuffers() {
