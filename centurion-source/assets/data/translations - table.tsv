@@ -1,20 +1,20 @@
 string_name	english	italian	spanish	french	arabic
 MAINMENU_buttonSinglePlayer	Singleplayer	Giocatore singolo	Un jugador	Un joueur	ﻻﻋﺐ ﻣﻔﺮﺩ
 MAINMENU_buttonEditor	Editor	Editor	Editor	Éditeur	ﻣﺤﺮر اﻟﺨﺮاﺋﻄ
-MAINMENU_buttonOptions	Options	Opzioni	Opciones	Options	
+MAINMENU_buttonOptions	Options	Opzioni	Opciones	Options	اﻋﺪادات
 MAINMENU_buttonQuit	Exit	Esci dal gioco	Salir	Sortir du jeu	ﺧﺮوج
 SINGLEPLAYER_buttonStart	Start!	Avvia la partita!	Empezar!	Commencer le jeu!	اﺑﺪٲ اﻟﻠﻌﺒﺔ
 SINGLEPLAYER_buttonExit	Back to menu	Menù principale	Menú principal	Menu principal	اﻟﻘﺎﺋﻤﺔ اﻟﺮﺋﻴﺴﻴﺔ
 OPTIONS_buttonApply	Apply	Applica	Aplicar	Appliquer	ﺗﻄﺒﻴﻖ
-OPTIONS_buttonSave	Save and close	Salva e chiudi	Guardar	Sauver et fermer	ﺣﻔﻆ
+OPTIONS_buttonSave	Save and close	Salva e chiudi	Guardar y cerrar	Sauver et fermer	ﺣﻔﻆ
 OPTIONS_buttonCancel	Cancel	Annulla	Anular	Annuler	إﻟﻐﺎء
 OPTIONS_Title	Options	Opzioni	Opciones	Options	اﻋﺪادات
 OPTIONS_LanguageText	Language	Lingua	Idioma	Langue	اﻟﻠﻐﺔ
 LANG_english	English	Inglese	Inglés	Anglais	اﻧﺠﻠﻴﺰي
-LANG_italian	Italian	Italiano	Italiano	Italien	
-LANG_spanish	Spanish	Spagnolo	Español	Espagnol	
-LANG_french	French	Francese	Francés	Français	
-LANG_arabic	Arabic	Arabo	Arábica	Arabe	
+LANG_italian	Italian	Italiano	Italiano	Italien	اﻹﻳﻄﺎﻟﻴﺔ
+LANG_spanish	Spanish	Spagnolo	Español	Espagnol	اﻷﺳﺒﺎﻧﻴﺔ
+LANG_french	French	Francese	Francés	Français	اﻟﻔﺮﻧﺴﻴﺔ
+LANG_arabic	Arabic	Arabo	Arábica	Arabe	اﻟﻌﺮﺑﻴﺔ
 GAME_pauseMenuButtonQuit	Quit	Esci dalla partita	Salir	Sortir du jeu	اﻟﺨﺮﻮج ﻣﻦ اﻟﻠﻌﺒﺔ
 GAME_pauseMenuButtonClose	Close	Chiudi il menù	Cerrar	Fermer le menu	أﻏﻠﻖ اﻟﻘﺎﺋﻤﺔ اﻟﺮﺋﻴﺴﻴﺔ
 EDITOR_File	File	File	Archivo	Fichier	ﻣﻠﻒ
@@ -23,39 +23,39 @@ EDITOR_File_Open	Open	Apri	Abrir	Ouvrir	ﻓﺘﺢ
 EDITOR_File_Save	Save	Salva	Guardar	Enregistrer	ﺣﻔﻆ
 EDITOR_File_Exit	Exit	Esci	Salir	Sortir	ﺧﺮوج
 EDITOR_Edit	Edit	Modifica	Editar	Éditer	ﺗﻌﺪﻳﻞ
-EDITOR_Edit_UpdateNormals	Update Normals	Ricalcola Normali	Actualizar Normales	Recalculer les normales	
+EDITOR_Edit_UpdateNormals	Update Normals	Ricalcola Normali	Actualizar Normales	Recalculer les normales	إﻋﺎدة اﻟﺤﺴﺎب ﻋﺎدي     
 EDITOR_Tools	Tools	Strumenti	Herramientas	Outils	اﻷدوات
-EDITOR_Tools_AddObject	Toggle "Add Object" window	Attiva/Disattiva la finestra "Aggiungi oggetto"	Activar / Desactivar la ventana "Agregar objeto"	Activer/Désactiver la fenêtre "Ajouter un objet"	
-EDITOR_Tools_TerrainBrush	Toggle terrain brushes	Attiva/Disattiva i pennelli dei terreni	Activar / Desactivar pinceles de terreno	Activer/Désactiver les brosses de terrain	
-EDITOR_addObjectButtonAdd	Add	Aggiungi	Añadir	Ajouter	
+EDITOR_Tools_AddObject	Toggle "Add Object" window	Attiva/Disattiva la finestra "Aggiungi oggetto"	Activar / Desactivar la ventana "Agregar objeto"	Activer/Désactiver la fenêtre "Ajouter un objet"	  ﺗﺸﻐﻴﻞ/  إﻟﻐﺎء ﺗﺸﻐﻴﻞ ﻧﺎﻓﺬة  "إﺿﺎﻓﺔ ﻛﺎﺋﻦ"    "
+EDITOR_Tools_TerrainBrush	Toggle terrain brushes	Attiva/Disattiva i pennelli dei terreni	Activar / Desactivar pinceles de terreno	Activer/Désactiver les brosses de terrain	  ﺗﺸﻐﻴﻞ/  إﻟﻐﺎء ﺗﺸﻐﻴﻞ ﻓﺮش اﻷرض
+EDITOR_addObjectButtonAdd	Add	Aggiungi	Añadir	Ajouter	إﺿﺎﻓﺔ
 EDITOR_newMapButtonClose	Close	Chiudi	Cerrar	Fermer	أﻏﻟﻖ
 EDITOR_newMapButtonCreate	Create	Crea	Crear	Creér	إﻧﺸﺎء
 EDITOR_openMapButtonClose	Close	Chiudi	Cerrar	Fermer	أﻏﻟﻖ
 EDITOR_openMapButtonOpen	Open	Apri	Abierto	Ouvrir	ﻓﺘﺢ
 EDITOR_newScenario	Create new scenario	Crea nuovo scenario	Crear nuevo escenario	Crée a nouveau scénario	إﻧﺸﺎء اﻟﺴﻴﻨﺎرﻳﻮ ﺟﺪﻳﺪ
 EDITOR_newScenarioName	Choose a name (max 30 characters).	Scegli un nome (max 30 caratteri).	Elegir un nombre (máximo 30 caracteres).	Choisir un nom (30 caractères maximum).	اﺧﺘﻴﺎر اﺳﻢ ﻟﻠﺴﻴﻨﺎرﻳﻮ )ﻣﺎﻛﺲ 03 اﺣﺮڧ(
-EDITOR_properties	Object properties	Proprietà dell'oggetto	Propiedades del objeto	Propriétés de l'objet	
-EDITOR_propertiesName	Object name:	Nome dell'oggetto:	Nombre del objeto:	Nom de l'objet	
-EDITOR_propertiesApply	Apply	Applica	Aplicar	Appliquer	
-EDITOR_propertiesCancel	Cancel	Annulla	Cancelar	Annuler	
+EDITOR_properties	Object properties	Proprietà dell'oggetto	Propiedades del objeto	Propriétés de l'objet	ﺧﺼﺎﺋﺺ اﻟﻜﺎﺋﻦ 
+EDITOR_propertiesName	Object name:	Nome dell'oggetto:	Nombre del objeto:	Nom de l'objet	اﺳﻢ اﻟﻜﺎﺋﻦ 
+EDITOR_propertiesApply	Apply	Applica	Aplicar	Appliquer	ﺗﻄﺒﻴﻖ
+EDITOR_propertiesCancel	Cancel	Annulla	Cancelar	Annuler	إﻟﻐﺎء
 EDITOR_defaultMapName	Untitled	Senza titolo	Intitulado	Sans titre	ﺑﺪون ﻋﻨﻮان
-EDITOR_buildings	Buildings	Strutture	Edificios	Édifices	
-EDITOR_units	Units	Unità	Unidades	Unités	
-EDITOR_decorations	Decorations	Decorazioni	Decoraciones	Décorations	
-EDITORTREE_CLASS_ebarracks	Barracks	Caserma	Cuartel	Caserne	
-EDITORTREE_CLASS_eblacksmith	Blacksmith	Fucina	Herrero	Forge	
-EDITORTREE_CLASS_eosiristemple	Temple of Osiris	Tempio di Osiris	Templo de Osiris	Temple de Osiris	
-EDITORTREE_CLASS_etavern	Tavern	Taverna	Taberna	Auberge	
-EDITORTREE_CLASS_etemple	Temple	Tempio	Templo	Temple	
-EDITORTREE_CLASS_etownhall	Townhall	Foro	Foro	Mairie	
-EDITORTREE_CLASS_rarena	Arena	Arena	Arena	Arène	
-EDITORTREE_CLASS_rbarracks	Barracks	Caserma	Cuartel	Caserne	
-EDITORTREE_CLASS_rblacksmith	Blacksmith	Fucina	Herrero	Forge	
-EDITORTREE_CLASS_rtavern	Tavern	Taverna	Taberna	Auberge	
-EDITORTREE_CLASS_rtemple	Temple	Tempio	Templo	Temple	
-EDITORTREE_CLASS_rtownhall	Townhall	Foro	Ayuntamiento	Mairie	
-EDITORBRUSH_grass1	Grass 1	Erba 1	Hierba 1	Herbe 1	
-EDITORBRUSH_road1	Road 1	Strada 1	Carretera 1	Route 1	
+EDITOR_buildings	Buildings	Strutture	Edificios	Édifices	اﻟﻤﺮاﻓﻖ
+EDITOR_units	Units	Unità	Unidades	Unités	ﺟﻨﻮد
+EDITOR_decorations	Decorations	Decorazioni	Decoraciones	Décorations	زﻳﻨﺔ
+EDITORTREE_CLASS_ebarracks	Barracks	Caserma	Cuartel	Caserne	اﻟﺜﻜﻨﺎت
+EDITORTREE_CLASS_eblacksmith	Blacksmith	Fucina	Herrero	Forge	دﻛﺎن اﻟﺤﺪاد
+EDITORTREE_CLASS_eosiristemple	Temple of Osiris	Tempio di Osiris	Templo de Osiris	Temple de Osiris	ﻣﻌﺒﺪ  أوزورﻳﺲ  
+EDITORTREE_CLASS_etavern	Tavern	Taverna	Taberna	Auberge	ﺣﺎﻧﺔ
+EDITORTREE_CLASS_etemple	Temple	Tempio	Templo	Temple	ﻣﻌﺒﺪ  
+EDITORTREE_CLASS_etownhall	Townhall	Foro	Foro	Mairie	اﻟﻤﻘﺮ
+EDITORTREE_CLASS_rarena	Arena	Arena	Arena	Arène	ﺣﻠﺒﺔ
+EDITORTREE_CLASS_rbarracks	Barracks	Caserma	Cuartel	Caserne	اﻟﺜﻜﻨﺎت
+EDITORTREE_CLASS_rblacksmith	Blacksmith	Fucina	Herrero	Forge	دﻛﺎن اﻟﺤﺪاد
+EDITORTREE_CLASS_rtavern	Tavern	Taverna	Taberna	Auberge	ﺣﺎﻧﺔ
+EDITORTREE_CLASS_rtemple	Temple	Tempio	Templo	Temple	ﻣﻌﺒﺪ
+EDITORTREE_CLASS_rtownhall	Townhall	Foro	Ayuntamiento	Mairie	اﻟﻤﻘﺮ
+EDITORBRUSH_grass1	Grass 1	Erba 1	Hierba 1	Herbe 1	ﻋﺸﺐ1
+EDITORBRUSH_road1	Road 1	Strada 1	Carretera 1	Route 1	ﻃﺮﻳﻖ1
 EDITOR_noSettlementsAround	Unable to place the building at the selected point, as there are no nearby settlements.	Impossibile posizionare la struttura nel punto selezionato, poiché non vi sono insediamenti nelle vicinanze.	--	La structure ne peut pas être positionnée au point sélectionné, car il n'y a pas de installations à proximité.	--
 EDITOR_impassablePoint	Unable to place the building at the selected point, as it is a steep or inaccessible place, like the sea.	Impossibile posizionare la struttura nel punto selezionato, in quanto si tratta di un luogo scosceso o inaccessibile, come il mare.	--	La structure ne peut pas être positionnée au point sélectionné, comme c'est un endroit raide ou inaccessible, comme la mer.	--
 EDITOR_canAddStructure	Press the LEFT mouse button to position the structure in the desired point. Press the RIGHT mouse button to abort this operation.	Clicca con il tasto SINISTRO del mouse per posizionare la struttura nel punto desiderato. Premi il tastro DESTRO per annullare l'operazione.	--	Appuyez sur le bouton GAUCHE de la souris pour positionner la structure au point souhaité. Appuyez sur le bouton DROITE de la souris pour abandonner cette opération.	--
@@ -72,8 +72,8 @@ WORD_player_7	Player 7	Giocatore 7	Jugador 7	Joueur 7	ﻻﻋﺐ ٧
 WORD_player_8	Player 8	Giocatore 8	Jugador 8	Joueur 8	ﻻﻋﺐ ٨
 WORD_playersNumber	Number of players	Numero di giocatori	Número de jugadores	Nombre de joueurs	ﻋﺪد اﻟﻼﻋﺒﻴﻦ
 WORD_errorCode	Error code	Codice errore	Código de error	Code d'erreur	رﻣﺰ ﺧﺎﻃﺊ
-WORD_yes	Yes	Sì	Sí	Oui	
-WORD_no	No	No	No	Non	
+WORD_yes	Yes	Sì	Sí	Oui	ﻧﻌﻢ 
+WORD_no	No	No	No	Non	ﻻ
 RACE_rome	Rome	Roma	Roma	Rome	روﻣﺎ
 RACE_egypt	Egypt	Egitto	Egipto	Egypte	ﻣﺼﺮ
 ERROR_data	Unable to find or process DATA file.\nForced application shutdown has started.	Impossibile trovare o leggere il file DATA.\nArresto forzato dell'applicazione in corso...	No se puede encontrar o procesar el fichero DATA.\nLa aplicación va a ser cerrada automáticamente.	Impossible de trouver ou de traiter le fichier DATA.\nL’arrêt forcé de l’application a commencé.	.ﻏﻴﺮ ﻗﺎدر ﻋﻟﻰ اﻟﻌﺜﻮر أو ﻗﺮاءة اﻟﻤﻠﻒ. DATA.\n .اﻹﻏﻼق ٳﻟﺰاﻣﻲ ﻟﻠﺘﻄﺒﻴﻖ

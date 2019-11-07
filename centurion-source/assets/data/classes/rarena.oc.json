@@ -2,6 +2,7 @@
     "type": "building",
     "race": "rome",
     "class_name": "rarena",
+    "radius": 1000,
     "is_central_building": 0,
     "ent_path": "assets/buildings/rome/arena/rarena.oe.json",
     "pass_path" : "assets/buildings/rome/arena/rarena.pass",

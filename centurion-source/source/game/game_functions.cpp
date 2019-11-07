@@ -257,13 +257,13 @@ namespace game {
 								// update terrain around the townhall
 								// N.B: mapgen::grid_size * 2 because the map has "borders"
 								
-								int EditorStartPointX = xEditorPos - townhallRadius;
-								int EditorStartPointY = yEditorPos - townhallRadius;
+								int EditorStartPointX = (int)xEditorPos - (int)townhallRadius;
+								int EditorStartPointY = (int)yEditorPos - (int)townhallRadius;
 								EditorStartPointX = int(round(EditorStartPointX / mapgen::grid_size)) * mapgen::grid_size + mapgen::grid_size * 2;
 								EditorStartPointY = int(round(EditorStartPointY / mapgen::grid_size)) * mapgen::grid_size + mapgen::grid_size * 2;
 								
-								int NewMapStartPointX = origin.x + xOffset - townhallRadius;
-								int NewMapStartPointY = origin.y + yOffset - townhallRadius;
+								int NewMapStartPointX = (int)origin.x + (int)xOffset - (int)townhallRadius;
+								int NewMapStartPointY = (int)origin.y + (int)yOffset - (int)townhallRadius;
 								NewMapStartPointX = int(round(NewMapStartPointX / mapgen::grid_size)) * mapgen::grid_size + mapgen::grid_size * 2;
 								NewMapStartPointY = int(round(NewMapStartPointY / mapgen::grid_size)) * mapgen::grid_size + mapgen::grid_size * 2;
 

@@ -1,4 +1,5 @@
 #include <object>
+#include <engine>
 #include <stb_image.h>
 #include <player>
 #include <pathfinding>
@@ -81,6 +82,14 @@ namespace building {
 
 		(Name == "") ? name = className + "_" + to_string(picking_id) : name = Name;
 		isCreated = true;
+
+		// selection circle (editor only)
+		circle[0] = gui::Circle();
+		circle[0].create("border", 0.f, 0.f, data["radius"].get<float>(), data["radius"].get<float>() * 2.25f / 3.f, 8.f, "center");
+
+		// townhall radius (editor only)
+		circle[1] = gui::Circle();
+		circle[1].create("border", 0.f, 0.f, game::townhallRadius*2, game::townhallRadius * 2.f, 10.f, "center");
 	}
 
 	void Building::update_pass() {
@@ -117,6 +126,11 @@ namespace building {
 
 		// has the building been selected?
 		selected = (picking_id == clickID);
+
+		if (engine::ENGINE()->getEnvironment() == "editor" && !game::gameMinimapStatus){
+			if (selected) circle[0].render(vec4(255.f), position.x, position.y); // selection rectangle (editor only)
+			if (selected && isCentralBuilding) circle[1].render(vec4(255.f,255.f, 255.f,255.f), position.x, position.y); // selection rectangle (editor only)
+		}
 
 		// rendering
 		obj::BSprite()->render(textureID, clickableInMinimap, position.x, position.y, (float)w, (float)h, picking, picking_id, selected, player->getPlayerColor(), not_placeable);

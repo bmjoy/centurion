@@ -2,6 +2,7 @@
     "type": "building",
     "race": "rome",
     "class_name": "rtemple",
+    "radius": 1000,
     "is_central_building": 0,
     "ent_path": "assets/buildings/rome/temple/rtemple.oe.json",
     "pass_path" : "assets/buildings/rome/temple/rtemple.pass",

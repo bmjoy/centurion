@@ -91,6 +91,7 @@ namespace building {
 		bool isCreated;
 		size_t buildingListSize;
 		bool isPlaceable;
+		gui::Circle circle[2];
 		//sound selectionSound; TODO
 	};
 };
