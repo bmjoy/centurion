@@ -48,7 +48,7 @@ void BuildingSprite::create() {
 			/* load texture to gpu */
 			glGenTextures(1, &textureIdList[k]);
 			glBindTexture(GL_TEXTURE_2D, textureIdList[k]);
-			//glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
 			// create texture and generate mipmaps
 			glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, textureInfoList[k].x, textureInfoList[k].y, 0, GL_RGBA, GL_UNSIGNED_BYTE, data);
 			glGenerateMipmap(GL_TEXTURE_2D);
@@ -73,11 +73,13 @@ void BuildingSprite::render(GLuint texID, bool clickable, float x, float y, floa
 	glUniform3f(glGetUniformLocation(shaderId, "player_color"), playerColor->x / 255.0f, playerColor->y / 255.0f, playerColor->z / 255.0f);
 	glUniform1i(glGetUniformLocation(shaderId, "selection"), selected);
 	glUniform1i(glGetUniformLocation(shaderId, "isLayerColor"), 0);
+	glUniform1i(glGetUniformLocation(shaderId, "isBorder"), 0);
 	glUniform1i(glGetUniformLocation(shaderId, "picking"), picking); // enable/disable picking
 	glUniform1i(glGetUniformLocation(shaderId, "not_placeable"), not_placeable); // enable/disable picking
 
 	glUniform1f(glGetUniformLocation(shaderId, "x"), x);
 	glUniform1f(glGetUniformLocation(shaderId, "y"), y);
+	glUniform1f(glGetUniformLocation(shaderId, "z"), 10.f);
 	glUniform1f(glGetUniformLocation(shaderId, "w"), w);
 	glUniform1f(glGetUniformLocation(shaderId, "h"), h);
 
@@ -86,6 +88,7 @@ void BuildingSprite::render(GLuint texID, bool clickable, float x, float y, floa
 	glBindVertexArray(VAO);
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, IBO);
 
+	glEnable(GL_DEPTH_TEST);
 
 	/* PICKING = TRUE */
 
@@ -98,6 +101,7 @@ void BuildingSprite::render(GLuint texID, bool clickable, float x, float y, floa
 			glUniform1i(glGetUniformLocation(shaderId, "texture1"), 0);
 			glActiveTexture(GL_TEXTURE0);
 			glBindTexture(GL_TEXTURE_2D, texID); // normal
+
 			glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
 		}
 		if (gameMinimapStatus && clickable) {
@@ -124,11 +128,12 @@ void BuildingSprite::render(GLuint texID, bool clickable, float x, float y, floa
 			glUniform1i(glGetUniformLocation(shaderId, "minimap"), 1);
 			
 			if (clickable) {
-
+				glUniform1i(glGetUniformLocation(shaderId, "isBorder"), 1);
 				glUniform1i(glGetUniformLocation(shaderId, "texture1"), 2);
 				glActiveTexture(GL_TEXTURE2); 
 				glBindTexture(GL_TEXTURE_2D, texID + 2); // border
 				glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
+				glUniform1i(glGetUniformLocation(shaderId, "isBorder"), 0);
 
 				glUniform1i(glGetUniformLocation(shaderId, "isLayerColor"), 1);
 				glUniform1i(glGetUniformLocation(shaderId, "texture1"), 1);
@@ -145,6 +150,8 @@ void BuildingSprite::render(GLuint texID, bool clickable, float x, float y, floa
 			glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
 		}
 	}
+
+	glDisable(GL_DEPTH_TEST);
 
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
 	glBindVertexArray(0);

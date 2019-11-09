@@ -1,7 +1,7 @@
 #version 330 core
 
 in vec2 FragTex;
-out vec4 FragColor;
+vec4 FragColor;
 
 uniform sampler2D texture1;
 uniform int isLayerColor;
@@ -17,47 +17,39 @@ void main()
 {
     /* Pass */
     
-    if (pass == 1){
-        FragColor = texture(texture1, FragTex);
-    }
+    FragColor = texture(texture1, FragTex);
+    if (FragColor.a <= 0.1f) discard; 
     
-    /* Picking */
+    if (pass == 1) gl_FragColor = FragColor;
     
-    if (picking == 1){
-        FragColor = texture(texture1, FragTex).a * picking_color;
-    }
+    /* Picking */    
+    
+    if (picking == 1) gl_FragColor = FragColor.a * picking_color;
     
     else {
         
         /* Camera Rendering */
         
         if (minimap == 0){
-            
-            if (selection == 1) {
-                FragColor = texture(texture1, FragTex) + vec4(0.2f, 0.2f, 0.2f, 0.0f);
-            }
-            else {
-                FragColor = texture(texture1, FragTex);
-            }
-            
-            if (not_placeable == 1) {
-                FragColor = vec4(texture(texture1, FragTex).r, 0.f, 0.f, texture(texture1, FragTex).a);
-            }
+
+            if (selection == 1) gl_FragColor = FragColor + vec4(0.2f, 0.2f, 0.2f, 0.0f);     
+           
+            if (selection == 0) gl_FragColor = FragColor;
+               
+            if (not_placeable == 1) gl_FragColor = vec4(FragColor.r, 0.f, 0.f, FragColor.a);
             
         }
         
         /* Minimap Rendering */ 
         
         else {
-            if (selection == 1 && isLayerColor == 1) {
-                FragColor = texture(texture1, FragTex).a * vec4(1.0f, 1.0f, 1.0f, 1.0f);
-            }
-            if (selection == 0 && isLayerColor == 1){
-                FragColor = texture(texture1, FragTex).a * vec4(player_color, 1.0f);
-            }
-            if (isLayerColor == 0){
-                FragColor = texture(texture1, FragTex);
-            }
+        
+            if (selection == 1 && isLayerColor == 1) gl_FragColor = FragColor.a * vec4(1.0f, 1.0f, 1.0f, 1.0f);
+                
+            if (selection == 0 && isLayerColor == 1) gl_FragColor = FragColor.a * vec4(player_color, 1.0f);
+           
+            if (isLayerColor == 0) gl_FragColor = FragColor;   
+        
         }
         
     }

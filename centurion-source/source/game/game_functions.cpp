@@ -72,6 +72,13 @@ namespace game {
 	}
 
 	void renderObjectsPicking() {
+
+		if (leftClickID_UI != 0) {
+			leftClickID = 0;
+			rightClickID = 0;
+			return;
+		}
+
 		if ((getBoolean("mouse-right") || getBoolean("mouse-left")) && !selRectangleIsActive){
 			for (map<int, Building>::iterator bld = buildings.begin(); bld != buildings.end(); bld++) {
 				bld->second.render(true, 0);

@@ -9,12 +9,22 @@ uniform mat4 view;
 
 uniform float x;
 uniform float y;
+uniform float z;
 uniform float w;
 uniform float h;
+uniform int picking;
+uniform int isLayerColor;
+uniform int isBorder;
 
 void main()
 {
-    gl_Position = projection * view * vec4(pos.x*w + x, pos.y*h + y, pos.z, 1.0);
+    float z_offset = z;
+    if (picking == 1) z_offset = z - 3.f;
+    if (isBorder == 1) z_offset = z - 2.f;
+    if (isLayerColor == 1) z_offset = z - 1.f;
+    
+
+    gl_Position = projection * view * vec4(pos.x*w + x, pos.y*h + y, pos.z + y + z_offset, 1.0);
 	FragTex = vec2(tex.x, tex.y);
 }  
 
