@@ -67,8 +67,6 @@ namespace editor {
 			moveObjects();
 		}
 
-
-
 		surface->render(false);
 		game::renderObjects();
 

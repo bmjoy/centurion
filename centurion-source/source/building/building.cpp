@@ -5,6 +5,7 @@
 #include <pathfinding>
 #include <game>
 #include <math>
+#include <interface>
 
 using namespace std;
 using namespace glm;
@@ -85,11 +86,11 @@ namespace building {
 
 		// selection circle (editor only)
 		circle[0] = gui::Circle();
-		circle[0].create("border", 0.f, 0.f, data["radius"].get<float>(), data["radius"].get<float>() * 2.25f / 3.f, 8.f, "center");
+		circle[0].create("border", 0.f, 0.f, data["radius"].get<float>() * 2.f, data["radius"].get<float>() * 2.f * 2.25f / 3.f, 8.f, "center");
 
 		// townhall radius (editor only)
 		circle[1] = gui::Circle();
-		circle[1].create("border", 0.f, 0.f, game::townhallRadius*2, game::townhallRadius * 2.f, 10.f, "center");
+		circle[1].create("border", 0.f, 0.f, game::townhallRadius / 2.f, game::townhallRadius / 2.5f, 10.f, "center");
 	}
 
 	void Building::update_pass() {
@@ -128,8 +129,8 @@ namespace building {
 		selected = (picking_id == clickID);
 
 		if (engine::ENGINE()->getEnvironment() == "editor" && !game::gameMinimapStatus){
-			if (selected) circle[0].render(vec4(255.f), position.x, position.y); // selection rectangle (editor only)
-			if (selected && isCentralBuilding) circle[1].render(vec4(255.f,255.f, 255.f,255.f), position.x, position.y); // selection rectangle (editor only)
+			if (selected && !isCentralBuilding && !editor::addingObject) circle[0].render(vec4(255.f), position.x, position.y - data["radius"].get<float>() / 15.5f); // selection circle (editor only)
+			if (selected && isCentralBuilding && !editor::addingObject) circle[1].render(vec4(255.f), position.x, position.y - data["radius"].get<float>() / 5.f); // selection circle (editor only)
 		}
 
 		// rendering

@@ -332,7 +332,7 @@ namespace editor {
 					game::buildings[bld->first].setWaitingToBeErased(false);
 				}
 			}
-			QuestionWindowIsOpen = false;
+			clearEditorVariables();
 		}
 	}
 

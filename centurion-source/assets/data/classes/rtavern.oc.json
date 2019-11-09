@@ -2,7 +2,7 @@
     "type": "building",
     "race": "rome",
     "class_name": "rtavern",
-    "radius": 1000,
+    "radius": 500,
     "is_central_building": 0,
     "ent_path": "assets/buildings/rome/tavern/rtavern.oe.json",
     "pass_path" : "assets/buildings/rome/tavern/rtavern.pass",

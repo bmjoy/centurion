@@ -2,7 +2,7 @@
     "type": "building",
     "race": "rome",
     "class_name": "rtownhall",
-    "radius": 1000,
+    "radius": 500,
     "is_central_building": 1,
     "ent_path": "assets/buildings/rome/townhall/rtownhall.oe.json",
     "pass_path" : "assets/buildings/rome/townhall/rtownhall.pass",
