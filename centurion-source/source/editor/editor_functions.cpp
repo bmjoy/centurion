@@ -212,7 +212,24 @@ namespace editor {
 				float dy = y1 - movingObjectStartYMouse;
 				
 				// if building isn't central building (TO DO)
-				if (true){
+				if (!game::buildings[leftClickID].is_central_building()){
+					if (!movingObject) game::buildings[leftClickID].clear_pass();
+					game::buildings[leftClickID].set_position(vec3(movingObjectXPos + dx, movingObjectYPos + dy, 0.f));
+					if (!game::buildings[leftClickID].is_placeable()) {
+						if (!game::buildings[leftClickID].is_near_to_central_building()){
+							textInfo.render_dynamic(getTranslation("EDITOR_noSettlementsAround"), "tahoma_15px", 10, getParam("window-height") - 50, vec4(255.f), "left", "center");
+						}
+						else
+							textInfo.render_dynamic(getTranslation("EDITOR_impassablePoint"), "tahoma_15px", 10, getParam("window-height") - 50, vec4(255.f), "left", "center");
+						game::buildings[leftClickID].set_placeable(false);
+						movingObjectRestore = true;
+					}
+					else {
+						textInfo.render_dynamic(getTranslation("EDITOR_canAddStructure"), "tahoma_15px", 10, getParam("window-height") - 50, vec4(255.f), "left", "center");
+						game::buildings[leftClickID].set_placeable(true);
+					}
+				}
+				else {
 					if (!movingObject) game::buildings[leftClickID].clear_pass();
 					game::buildings[leftClickID].set_position(vec3(movingObjectXPos + dx, movingObjectYPos + dy, 0.f));
 					if (!game::buildings[leftClickID].is_placeable()) {
@@ -222,6 +239,10 @@ namespace editor {
 					else {
 						game::buildings[leftClickID].set_placeable(true);
 					}
+					if (!game::buildings[leftClickID].is_placeable())
+						textInfo.render_dynamic(getTranslation("EDITOR_impassablePoint"), "tahoma_15px", 10, getParam("window-height") - 50, vec4(255.f), "left", "center");
+					else
+						textInfo.render_dynamic(getTranslation("EDITOR_canAddStructure"), "tahoma_15px", 10, getParam("window-height") - 50, vec4(255.f), "left", "center");
 				}
 				movingObject = true;
 			}
@@ -230,8 +251,8 @@ namespace editor {
 			// buildings
 			if (game::buildings.count(leftClickID) > 0) {
 				if (movingObjectRestore) {
-					game::buildings[leftClickID].clear_pass();
 					game::buildings[leftClickID].set_position(vec3(movingObjectXPos, movingObjectYPos, 0.f));
+					game::buildings[leftClickID].clear_pass();
 					game::buildings[leftClickID].set_placeable(true);
 					game::buildings[leftClickID].update_pass();
 				}
