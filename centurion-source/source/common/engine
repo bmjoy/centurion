@@ -113,7 +113,7 @@ namespace engine {
 		void resetKeyCodes();
 		void fps();
 		void fps_sleep();
-		void readDataClasses();
+		void read_data();
 	};
 
 	static Engine myengine; 

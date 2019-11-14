@@ -10,8 +10,6 @@ using namespace engine;
 namespace editor {
 
 	TerrainBrushWindow::TerrainBrushWindow(){
-		terrainMap["EDITORBRUSH_grass1"] = 1;
-		terrainMap["EDITORBRUSH_road1"] = 2;
 	}
 
 	void TerrainBrushWindow::create() {
@@ -25,9 +23,13 @@ namespace editor {
 		circle = gui::Circle();
 		circle.create("border", getParam("mouse-x-position"), getParam("mouse-y-position"), 150.f, 100.f, 5.f, "center");
 
-		vector<string> terrainList;
-		for (map<string, int>::iterator i = terrainMap.begin(); i != terrainMap.end(); i++)
-			terrainList.push_back(i->first);
+		vector<string> terrainList = obj::MapTerrain()->getTerrainList();
+
+		for (int i = 0; i < terrainList.size(); i++) {
+			terrainList[i] = "EDITORBRUSH_" + terrainList[i];
+			terrainMap[terrainList[i]] = i + 1;
+		}
+		
 		form1 = gui::FormInput(true);
 		form1.create(startX + 20.f, startY - 80.f, 150.f, 20.f, terrainList, getPickingID());
 		addValueToPickingListUI(getPickingID(), "TerrainBrush_form1");

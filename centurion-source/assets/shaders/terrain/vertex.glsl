@@ -32,14 +32,13 @@ uniform int tracing;
 /* To Fragment Shader Init */
 
 out vec2 FragTex;
-out vec2 FragTexGrass;
+out vec2 FragTexScaled;
 out vec3 FragNorm;
 out float FragCol;
 
 /* Terrain */
-
-out float grassW, roadW;
-
+uniform int nTerrains;
+out float terrainWeight[20];
 
 /* ----- ----- ----- ----- */
 /*      MAIN FUNCTION      */
@@ -47,7 +46,12 @@ out float grassW, roadW;
 
 void main() 
 {   
-   
+    int terrainID = int(terrain) - 1;
+    for (int i = 0; i < nTerrains; i++){
+        terrainWeight[i] = 0.f;
+    }
+    terrainWeight[terrainID] = 1.f;
+    
     /* RENDERING */
     int offset = 256; 
     vec4 newPos = vec4(pos.x - offset, pos.y + zNoise - offset, pos.y *(-1.f) + zNoise, 1.0);
@@ -56,17 +60,7 @@ void main()
     /* To Fragment Shader */
     
     FragTex = tex;
-	FragTexGrass = vec2(tex.x*scaleTextX, tex.y*scaleTextY);
+	FragTexScaled = vec2(tex.x*scaleTextX, tex.y*scaleTextY);
     FragNorm = norm;
     FragCol = (zNoise - minZ) / (maxZ - minZ) ; // in (0-1)
-    
-    if(terrain == 1.f){ // grass
-        grassW = 1.f;
-        roadW = 0.f;
-    }
-    
-    if(terrain == 2.f){ // road
-        grassW = 0.f;
-        roadW = 1.f;
-    }
 }

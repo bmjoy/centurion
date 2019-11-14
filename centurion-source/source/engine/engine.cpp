@@ -30,7 +30,7 @@ namespace engine {
 		window.init();
 		obj::init();
 	
-		readDataClasses();
+		read_data();
 	
 		obj::compile();
 		obj::create();
@@ -117,7 +117,7 @@ namespace engine {
 		return 0;
 	}
 
-	void Engine::readDataClasses() {
+	void Engine::read_data() {
 
 		vector<string> files = get_all_files_names_within_folder("assets/data/classes");
 		json dataClass;
@@ -150,6 +150,13 @@ namespace engine {
 
 		for (int i = 0; i < imagesInfoList.size(); i++)
 			obj::Img()->addPath(imagesInfoList[i].name, imagesInfoList[i].path);
+
+		/* terrain textures */
+
+		vector<file_info> texturesInfoList = get_all_files_names_within_subfolders("assets\\terrain\\textures", "png");
+
+		for (int i = 0; i < texturesInfoList.size(); i++)
+			obj::MapTerrain()->addPath(texturesInfoList[i].name, texturesInfoList[i].path);
 	}
 
 	void Engine::resetKeyCodes() {
