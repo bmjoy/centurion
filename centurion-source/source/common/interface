@@ -385,9 +385,10 @@ namespace editor {
 		void render(bool pick);
 		~TerrainBrushWindow();
 	private:
+		string selBrush;
 		map<string, int> terrainMap;
 		gui::Rectangle back;
-		gui::FormInput form1;
+		vector<gui::FormInput> forms;
 		gui::Circle circle;
 		float startX, startY;
 		void picking();

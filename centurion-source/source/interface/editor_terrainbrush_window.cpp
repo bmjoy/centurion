@@ -24,16 +24,26 @@ namespace editor {
 		circle.create("border", getParam("mouse-x-position"), getParam("mouse-y-position"), 150.f, 100.f, 5.f, "center");
 
 		vector<string> terrainList = obj::MapTerrain()->getTerrainList();
+		vector<string> terrainTypes;
+		map<string, vector<string>> terTypesMap;
 
 		for (int i = 0; i < terrainList.size(); i++) {
+			string temp = terrainList[i];
+			terrainTypes.push_back(temp.erase(temp.find_first_of('_'),temp.length()));
 			terrainList[i] = "EDITORBRUSH_" + terrainList[i];
+			terTypesMap[terrainTypes[i]].push_back(terrainList[i]);
 			terrainMap[terrainList[i]] = i + 1;
 		}
-		
-		form1 = gui::FormInput(true);
-		form1.create(startX + 20.f, startY - 80.f, 150.f, 20.f, terrainList, getPickingID());
-		addValueToPickingListUI(getPickingID(), "TerrainBrush_form1");
-		increasePickingID();
+		sort(terrainTypes.begin(), terrainTypes.end());
+		terrainTypes.erase(unique(terrainTypes.begin(), terrainTypes.end()), terrainTypes.end());
+
+		for (int i = 0; i < terrainTypes.size(); i++){
+			gui::FormInput form = gui::FormInput(true);
+			form.create(startX + 20.f, startY - 20.f - 30 * i, 150.f, 20.f, terTypesMap[terrainTypes[i]], getPickingID());
+			addValueToPickingListUI(getPickingID(), "TerrainBrush_form_"+i);
+			increasePickingID();
+			forms.push_back(form);
+		}
 
 		TerrainBrushWindowIsOpen = false;
 	}
@@ -45,20 +55,19 @@ namespace editor {
 		if (TerrainBrushWindowIsOpen) {
 			if (pick && getBoolean("mouse-left")) {
 				back.render(vec4(), true);
-				form1.render(true, vec4());
+				for (int i = (int)forms.size()-1; i >= 0; i--) { forms[i].render(true, vec4()); }
 				picking();
 			}
 			if (!pick) {
-
 				if (TerrainBrushIsActive){
 					circle.render(vec4(255), getParam("mouse-x-position"), getParam("mouse-y-position"));
 					if (getBoolean("mouse-left-pressed") && leftClickID_UI == 0 && getParam("mouse-y-position") < getParam("window-height") - 30.f) {
-						changeTerrain(terrainMap[form1.selectedText]);
+						if (terrainMap.count(selBrush) > 0) changeTerrain(terrainMap[selBrush]);
 					}
 				}
 
 				back.render(vec4(60.f, 68.f, 104.f, 255.f), false);
-				form1.render(false, vec4(60.f, 68.f, 104.f, 255.f));
+				for (int i = (int)forms.size() - 1; i >= 0; i--) { forms[i].render(false, vec4(60.f, 68.f, 104.f, 255.f)); }
 			}
 		}
 	}

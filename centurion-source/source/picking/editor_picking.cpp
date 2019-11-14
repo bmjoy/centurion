@@ -434,14 +434,19 @@ namespace editor {
 		string clickName = getPickedObjectName(leftClickID_UI);
 
 		if (leftClickID_UI == 0)
-			form1.close();
+			for (int i = 0; i < forms.size(); i++) {
+				forms[i].close();
+			}
 
-		if (clickName == "TerrainBrush_form1") {
-			int i = form1.get_clicked_option();
-			form1.open_close();
-			if (i > 0) {
-				form1.select_option(i);
-				TerrainBrushIsActive = true;
+		for (int i = 0; i < forms.size(); i++) {
+			if (clickName == "TerrainBrush_form_"+i) {
+				int j = forms[i].get_clicked_option();
+				forms[i].open_close();
+				if (j > 0) {
+					forms[i].select_option(j);
+					TerrainBrushIsActive = true;
+					selBrush = forms[i].selectedText;
+				}
 			}
 		}
 	}
