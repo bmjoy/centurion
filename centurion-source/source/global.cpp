@@ -542,6 +542,7 @@ namespace obj {
     AudioManager *Audio() { return &audioM; }
     BitmapFont *Text(){ return &txt; }
     BuildingSprite *BSprite(){ return &bsprite; }
+    DecorationSprite *DSprite(){ return &dsprite; }
     CursorImage *Cursor() { return &cursor; }
     EmptyCircle *ECircle() { return &eCircle; }
     EmptyRectangle *ERectangle() { return &eRect; }
@@ -555,6 +556,7 @@ namespace obj {
         //*Audio() = AudioManager();
         *Text() = BitmapFont();
         *BSprite() = BuildingSprite();
+        *DSprite() = DecorationSprite();
         *Cursor() = CursorImage();
         *ECircle() = EmptyCircle();
         *ERectangle() = EmptyRectangle();
@@ -567,6 +569,7 @@ namespace obj {
     void compile() {
         Text()->compile();
         BSprite()->compile();
+        DSprite()->compile();
         ECircle()->compile();
         ERectangle()->compile();
         FRectangle()->compile();
@@ -588,6 +591,7 @@ namespace obj {
         ERectangle()->create();
         FRectangle()->create();
         BSprite()->create();	
+        DSprite()->create();	
         Img()->create();
         USprite()->create();
 
@@ -610,6 +614,8 @@ namespace obj {
     void applyGameMatrices(mat4 *proj, mat4 *view) {
         BSprite()->apply_projection_matrix(*proj);
         BSprite()->apply_view_matrix(*view);
+		DSprite()->apply_projection_matrix(*proj);
+        DSprite()->apply_view_matrix(*view);
         USprite()->apply_projection_matrix(*proj);
         USprite()->apply_view_matrix(*view);
         Img()->apply_projection_matrix(*proj);

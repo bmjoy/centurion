@@ -19,9 +19,6 @@
     <Filter Include="Header Files\extern">
       <UniqueIdentifier>{670470c3-1bc9-4848-8246-fb2915e33329}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source Files\building">
-      <UniqueIdentifier>{8777aa53-6553-4d66-918c-4e8e11dd2a11}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Source Files\engine">
       <UniqueIdentifier>{4857b0f1-6f03-449c-9185-d2b343215f0a}</UniqueIdentifier>
     </Filter>
@@ -33,9 +30,6 @@
     </Filter>
     <Filter Include="Source Files\menu">
       <UniqueIdentifier>{6f5e5b9c-c05e-48f8-845b-a9701197e29f}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source Files\unit">
-      <UniqueIdentifier>{984cbdf2-1517-49e7-9e21-ae59c7fa96a2}</UniqueIdentifier>
     </Filter>
     <Filter Include="Shader Files">
       <UniqueIdentifier>{3ce97d02-2958-4a71-bfb1-19102bd5a086}</UniqueIdentifier>
@@ -97,13 +91,13 @@
     <Filter Include="Header Files\audio\vorbis">
       <UniqueIdentifier>{3f286ea6-3dbc-4e58-ab28-17869728873e}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\objects">
+      <UniqueIdentifier>{63da2ac5-d0b7-4718-afde-706f03647424}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
       <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="source\building\building.cpp">
-      <Filter>Source Files\building</Filter>
     </ClCompile>
     <ClCompile Include="source\gui\button.cpp">
       <Filter>Source Files\gui</Filter>
@@ -125,9 +119,6 @@
     </ClCompile>
     <ClCompile Include="source\engine\mouse.cpp">
       <Filter>Source Files\engine</Filter>
-    </ClCompile>
-    <ClCompile Include="source\unit\unit.cpp">
-      <Filter>Source Files\unit</Filter>
     </ClCompile>
     <ClCompile Include="source\engine\window.cpp">
       <Filter>Source Files\engine</Filter>
@@ -240,14 +231,8 @@
     <ClCompile Include="source\primitives\audio_manager.cpp">
       <Filter>Source Files\primitives</Filter>
     </ClCompile>
-    <ClCompile Include="source\object.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="source\game\game_functions.cpp">
       <Filter>Source Files\game</Filter>
-    </ClCompile>
-    <ClCompile Include="source\unit\unit_functions.cpp">
-      <Filter>Source Files\unit</Filter>
     </ClCompile>
     <ClCompile Include="source\surface\mapgen.cpp">
       <Filter>Source Files\surface</Filter>
@@ -305,6 +290,24 @@
     </ClCompile>
     <ClCompile Include="source\gui\text_box.cpp">
       <Filter>Source Files\gui</Filter>
+    </ClCompile>
+    <ClCompile Include="source\primitives\decoration_sprite.cpp">
+      <Filter>Source Files\primitives</Filter>
+    </ClCompile>
+    <ClCompile Include="source\objects\building.cpp">
+      <Filter>Source Files\objects</Filter>
+    </ClCompile>
+    <ClCompile Include="source\objects\unit.cpp">
+      <Filter>Source Files\objects</Filter>
+    </ClCompile>
+    <ClCompile Include="source\objects\unit_functions.cpp">
+      <Filter>Source Files\objects</Filter>
+    </ClCompile>
+    <ClCompile Include="source\objects\object.cpp">
+      <Filter>Source Files\objects</Filter>
+    </ClCompile>
+    <ClCompile Include="source\objects\decoration.cpp">
+      <Filter>Source Files\objects</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

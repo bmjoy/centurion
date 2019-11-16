@@ -39,7 +39,7 @@ namespace mapgen {
 		for (int i = 0; i < nVertices; i++) {
 
 			/* reset textures */
-			MapTextures()[i] = 1.f;
+			MapTextures()[i] = 4.f;
 
 			/* reset noise and normals */
 			MapHeights()[i * 4] = 0.f;

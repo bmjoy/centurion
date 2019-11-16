@@ -205,6 +205,10 @@ namespace editor {
 	extern string EditorObjectStringListForm1[NumberOfObjects];
 	extern string EditorObjectStringListForm2[NumberOfObjects];
 
+	extern vector<string> EditorAddObjectBuildingOptions;
+	extern vector<string> EditorAddObjectUnitOptions;
+	extern vector<string> EditorAddObjectDecorationOptions;
+
 	//---------------------------------------------------
 
 	struct menuData {

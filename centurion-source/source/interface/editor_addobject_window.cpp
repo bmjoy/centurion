@@ -50,13 +50,13 @@ namespace editor {
 
 		objectForms[0] = gui::FormInput(true);
 		pickingIDs[0] = getPickingID();
-		objectForms[0].create(startX + 11.f, startY - 11.f, 150.f, 20.f, { "EDITOR_buildings" }, pickingIDs[0]);
+		objectForms[0].create(startX + 11.f, startY - 11.f, 150.f, 20.f, { "EDITOR_buildings", "EDITOR_decorations" }, pickingIDs[0]);
 		addValueToPickingListUI(pickingIDs[0], "AddObjWindow_form0");
 		increasePickingID();
 
 		objectForms[1] = gui::FormInput(true);
 		pickingIDs[1] = getPickingID();
-		objectForms[1].create(startX + 11.f, startY - 11.f - 30.f, 150.f, 20.f, glb::races, pickingIDs[1]);
+		objectForms[1].create(startX + 11.f, startY - 11.f - 30.f, 150.f, 20.f, EditorAddObjectBuildingOptions, pickingIDs[1]);
 		addValueToPickingListUI(pickingIDs[1], "AddObjWindow_form1");
 		increasePickingID();
 
@@ -77,8 +77,24 @@ namespace editor {
 			vector<string> form1Options;
 			for (int i = 0; i < NumberOfObjects; i++) {
 				if ((EditorObjectStringListForm0[i] == formSelectedTexts[0])){
-					if (formSelectedTexts[0] == "buildings" || formSelectedTexts[0] == "units")
+
+					if (formSelectedTexts[0] == "buildings") {
+						objectForms[1].create(startX + 11.f, startY - 11.f - 30.f, 150.f, 20.f, EditorAddObjectBuildingOptions, pickingIDs[1]);
+						objectForms[1].selectedText = EditorAddObjectBuildingOptions[0];
 						form1Options.push_back("RACE_" + EditorObjectStringListForm2[i]);
+					}
+					
+					if (formSelectedTexts[0] == "units") {
+						objectForms[1].create(startX + 11.f, startY - 11.f - 30.f, 150.f, 20.f, EditorAddObjectUnitOptions, pickingIDs[1]);
+						objectForms[1].selectedText = EditorAddObjectUnitOptions[0];
+						form1Options.push_back("RACE_" + EditorObjectStringListForm2[i]);
+					}
+
+					if (formSelectedTexts[0] == "decorations") {
+						objectForms[1].create(startX + 11.f, startY - 11.f - 30.f, 150.f, 20.f, EditorAddObjectDecorationOptions, pickingIDs[1]);
+						objectForms[1].selectedText = EditorAddObjectDecorationOptions[0];
+						form1Options.push_back("CATE_" + EditorObjectStringListForm2[i]); // category
+					}
 				}
 			}
 			if (form1Options.size() > 0){
@@ -90,7 +106,11 @@ namespace editor {
 			AddObjectWindowUpdateForm2 = true;
 		}
 
+		
+
 		formSelectedTexts[1] = objectForms[1].selectedText.substr(5); // rome,egypt,...
+
+		cout << formSelectedTexts[1] << endl;
 
 		if (AddObjectWindowUpdateForm2) {
 			vector<string> form2Options;

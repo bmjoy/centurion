@@ -12,6 +12,7 @@ using namespace glm;
 using namespace unit;
 using namespace engine;
 using namespace building;
+using namespace decoration;
 
 namespace game {
 
@@ -35,6 +36,7 @@ namespace game {
 	map<int, Building> buildings = { };
 	map<int, Building*> central_buildings = { };
 	map<int, Unit> units = { };
+	map<int, Decoration> decorations = { };
 
 	array<Player, 8> playersList;
 
@@ -103,6 +105,9 @@ namespace game {
 	void renderObjects() {
 		for (map<int, Building>::iterator bld = buildings.begin(); bld != buildings.end(); bld++) {
 			bld->second.render(false, leftClickID);
+		}
+		for (map<int, Decoration>::iterator dec = decorations.begin(); dec != decorations.end(); dec++) {
+			dec->second.render();
 		}
 		if (!gameMinimapStatus) {
 			for (map<int, Unit>::iterator u = units.begin(); u != units.end(); u++) {

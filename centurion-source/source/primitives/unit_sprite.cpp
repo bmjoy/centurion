@@ -38,7 +38,7 @@ void UnitSprite::create() {
 			className = ent_data["class_name"].get<std::string>();
 			state = ent_data["spriteList"][i].get<std::string>();
 			fullName = className + "_" + state;
-			texturePath = ent_data["sprites"][state]["filePath"].get<std::string>();
+			string texturePath = ent_data["sprites"][state]["filePath"].get<std::string>();
 
 			/* texture info */
 			data = stbi_load(texturePath.c_str(), &w, &h, &nrChannels, 0);

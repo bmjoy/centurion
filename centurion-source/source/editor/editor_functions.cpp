@@ -40,6 +40,10 @@ namespace editor {
 	string EditorObjectStringListForm1[NumberOfObjects] = { "" };
 	string EditorObjectStringListForm2[NumberOfObjects] = { "" };
 
+	vector<string> EditorAddObjectBuildingOptions;
+	vector<string> EditorAddObjectUnitOptions;
+	vector<string> EditorAddObjectDecorationOptions;
+
 	Unit unitTemp;
 	Building buildingTemp;
 

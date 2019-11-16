@@ -137,12 +137,30 @@ namespace engine {
 				EditorObjectStringListForm1[i] = dataClass["race"].get<string>();
 				EditorObjectStringListForm2[i] = dataClass["class_name"].get<string>();
 
+				EditorAddObjectBuildingOptions.push_back("RACE_" + dataClass["race"].get<string>());
+
 			}
 
 			if (dataClass["type"] == "unit") {
 				obj::USprite()->addPath(dataClass["ent_path"]);
+
+				//EditorAddObjectUnitOptions.push_back("RACE_" + dataClass["race"].get<string>());
+			}
+
+			if (dataClass["type"] == "decoration") {
+				obj::DSprite()->addPath(dataClass["ent_path"]);
+				/* editor object string list */
+				EditorObjectStringListForm0[i] = "decorations";
+				EditorObjectStringListForm1[i] = dataClass["category"].get<string>();
+				EditorObjectStringListForm2[i] = dataClass["class_name"].get<string>();
+
+				EditorAddObjectDecorationOptions.push_back("CATE_" + dataClass["category"].get<string>());
 			}
 		}
+
+		EditorAddObjectBuildingOptions.erase(unique(EditorAddObjectBuildingOptions.begin(), EditorAddObjectBuildingOptions.end()), EditorAddObjectBuildingOptions.end());
+		//EditorAddObjectUnitOptions.erase(unique(EditorAddObjectUnitOptions.begin(), EditorAddObjectUnitOptions.end()), EditorAddObjectUnitOptions.end());
+		EditorAddObjectDecorationOptions.erase(unique(EditorAddObjectDecorationOptions.begin(), EditorAddObjectDecorationOptions.end()), EditorAddObjectDecorationOptions.end());
 
 		/* images */
 

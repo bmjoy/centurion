@@ -16,6 +16,7 @@ namespace game {
 
 	using namespace unit;
 	using namespace building;
+	using namespace decoration;
 
 	// global game variables  --> see source/game/game_functions.cpp
 
@@ -37,6 +38,7 @@ namespace game {
 	extern map<int, Building> buildings;
 	extern map<int, Building*> central_buildings;
 	extern map<int, Unit> units;
+	extern map<int, Decoration> decorations;
 
 	extern array<Player,8> playersList;
 

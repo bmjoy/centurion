@@ -157,7 +157,11 @@
     <ClCompile Include="source\interface\menu_globaloptions.cpp" />
     <ClCompile Include="source\math.cpp" />
     <ClCompile Include="source\menu\menu_functions.cpp" />
-    <ClCompile Include="source\object.cpp" />
+    <ClCompile Include="source\objects\building.cpp" />
+    <ClCompile Include="source\objects\decoration.cpp" />
+    <ClCompile Include="source\objects\object.cpp" />
+    <ClCompile Include="source\objects\unit.cpp" />
+    <ClCompile Include="source\objects\unit_functions.cpp" />
     <ClCompile Include="source\picking\editor_picking.cpp" />
     <ClCompile Include="source\picking\gameui_picking.cpp" />
     <ClCompile Include="source\picking\mainmenu_picking.cpp" />
@@ -166,6 +170,7 @@
     <ClCompile Include="source\primitives\bitmap_font.cpp" />
     <ClCompile Include="source\primitives\building_sprite.cpp" />
     <ClCompile Include="source\primitives\cursor_image.cpp" />
+    <ClCompile Include="source\primitives\decoration_sprite.cpp" />
     <ClCompile Include="source\primitives\empty_circle.cpp" />
     <ClCompile Include="source\primitives\empty_rectangle.cpp" />
     <ClCompile Include="source\primitives\filled_rectangle.cpp" />
@@ -269,7 +274,6 @@
     <ClCompile Include="source\audio\recorder.cpp" />
     <ClCompile Include="source\audio\sound.cpp" />
     <ClCompile Include="source\audio\sound_buffer.cpp" />
-    <ClCompile Include="source\building\building.cpp" />
     <ClCompile Include="source\editor\editor.cpp" />
     <ClCompile Include="source\engine\camera.cpp" />
     <ClCompile Include="source\engine\engine.cpp" />
@@ -294,8 +298,6 @@
     <ClCompile Include="source\player\player.cpp" />
     <ClCompile Include="source\surface\mapgen.cpp" />
     <ClCompile Include="source\surface\surface.cpp" />
-    <ClCompile Include="source\unit\unit.cpp" />
-    <ClCompile Include="source\unit\unit_functions.cpp" />
     <None Include="assets\shaders\bsprite\vertex.glsl">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>

@@ -92,6 +92,9 @@ namespace obj {
 
 	static CursorImage cursor;
 	CursorImage *Cursor();
+	
+	static DecorationSprite dsprite;
+	DecorationSprite *DSprite();
 
 	static EmptyRectangle eRect;
 	EmptyRectangle *ERectangle();
