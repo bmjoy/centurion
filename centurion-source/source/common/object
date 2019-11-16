@@ -96,27 +96,27 @@ namespace building {
 	};
 };
 
-namespace decoration {
-	class Decoration : public GObject
-	{
-	public:
-		Decoration();
-		void prepare();
-		void create(string Name = "");
-		void render(bool picking, int clickID, bool not_placeable = false);
-		bool is_placeable();
-		void set_placeable(bool b) { isPlaceable = b; }
-		void update_pass();
-		void clear_pass();
-		void set_status(bool b) { isCreated = b; }
-		string get_settlement_name() { return settl_name; }
-		void setWaitingToBeErased(bool b) { waitingToBeErased = b; }
-		bool getWaitingToBeErased() { return waitingToBeErased; }
-		~Decoration();
-
-	private:
-	};
-};
+//namespace decoration {
+//	class Decoration : public GObject
+//	{
+//	public:
+//		Decoration();
+//		void prepare();
+//		void create(string Name = "");
+//		void render(bool picking, int clickID, bool not_placeable = false);
+//		bool is_placeable();
+//		void set_placeable(bool b) { isPlaceable = b; }
+//		void update_pass();
+//		void clear_pass();
+//		void set_status(bool b) { isCreated = b; }
+//		string get_settlement_name() { return settl_name; }
+//		void setWaitingToBeErased(bool b) { waitingToBeErased = b; }
+//		bool getWaitingToBeErased() { return waitingToBeErased; }
+//		~Decoration();
+//
+//	private:
+//	};
+//};
 
 //
 //	UNIT  

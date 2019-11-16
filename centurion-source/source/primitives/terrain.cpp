@@ -82,7 +82,7 @@ void Terrain::render(bool tracing) {
 	
 	glBindVertexArray(VAO);
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, IBO);
-	glEnable(GL_DEPTH_TEST);
+	
 
 	/* TRACING */
 
@@ -96,7 +96,9 @@ void Terrain::render(bool tracing) {
 
 	/* NORMAL RENDERING */
 
+
 	else {
+		glEnable(GL_DEPTH_TEST);
 		// Light
 		GLuint uAmbientIntensity = 0, uAmbientColor = 0, uDiffuseIntensity = 0, uDiffuseDirection = 0;
 		uAmbientIntensity = glGetUniformLocation(shaderId, "directionalLight.ambientIntensity");
@@ -121,9 +123,10 @@ void Terrain::render(bool tracing) {
 
 		/* Draw */
 		glDrawElements(GL_TRIANGLES, mapgen::nIndices, GL_UNSIGNED_INT, 0);
+		glDisable(GL_DEPTH_TEST);
 	}
 		
-	glDisable(GL_DEPTH_TEST);
+	
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
 	glBindVertexArray(0);
 	glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
