@@ -58,12 +58,14 @@ void DecorationSprite::render(DecorationData d) {
 
 	glUniform1f(glGetUniformLocation(shaderId, "x"), d.position.x);
 	glUniform1f(glGetUniformLocation(shaderId, "y"), d.position.y);
+	glUniform1f(glGetUniformLocation(shaderId, "z"), 10.f);
 	glUniform1i(glGetUniformLocation(shaderId, "w"), d.width);
 	glUniform1i(glGetUniformLocation(shaderId, "h"), d.height);
 	glUniform1i(glGetUniformLocation(shaderId, "texture1"), 0); // texture
 
 	/* Draw */
 
+	glEnable(GL_DEPTH_TEST);
 	glBindVertexArray(VAO);
 	glActiveTexture(GL_TEXTURE0);
 	glBindTexture(GL_TEXTURE_2D, d.textureID);
@@ -71,6 +73,7 @@ void DecorationSprite::render(DecorationData d) {
 	glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
 	glBindVertexArray(0);
+	glDisable(GL_DEPTH_TEST);
 }
 
 void DecorationSprite::genBuffers() {

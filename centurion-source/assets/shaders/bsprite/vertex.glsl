@@ -24,7 +24,7 @@ void main()
     if (isLayerColor == 1) z_offset = z - 1.f;
     
 
-    gl_Position = projection * view * vec4(pos.x*w + x, pos.y*h + y, pos.z + y + z_offset, 1.0);
+    gl_Position = projection * view * vec4(pos.x*w + x, pos.y*h + y, pos.z - y + z_offset, 1.0);
 	FragTex = vec2(tex.x, tex.y);
 }  
 

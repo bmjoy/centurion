@@ -237,6 +237,7 @@ namespace editor {
 		EditorMenu();
 		void create();
 		void render(bool pick);
+		void closeMenu();
 		~EditorMenu();
 	private:
 		gui::Rectangle topBar;
@@ -407,6 +408,7 @@ namespace editor {
 		EditorUI();
 		void create();
 		void render(bool picking);
+		void close_menu() { editor_menu.closeMenu(); }
 		~EditorUI();
 	private:
 		EditorMenu editor_menu;

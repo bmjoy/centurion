@@ -94,6 +94,9 @@
     <Filter Include="Source Files\objects">
       <UniqueIdentifier>{63da2ac5-d0b7-4718-afde-706f03647424}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Shader Files\dsprite">
+      <UniqueIdentifier>{d5bb376d-55ab-4930-b78f-201bac1a493b}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -483,6 +486,12 @@
     </None>
     <None Include="source\common\interface">
       <Filter>Header Files\common</Filter>
+    </None>
+    <None Include="assets\shaders\dsprite\vertex.glsl">
+      <Filter>Shader Files\dsprite</Filter>
+    </None>
+    <None Include="assets\shaders\dsprite\fragment.glsl">
+      <Filter>Shader Files\dsprite</Filter>
     </None>
   </ItemGroup>
 </Project>

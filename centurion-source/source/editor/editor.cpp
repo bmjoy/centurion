@@ -36,9 +36,9 @@ namespace editor {
 
 	void Editor::run() {
 		/* Keyboard control */
+		handleKeyboardControls();
 		if (!IsWindowOpened) { // TODO: merge all these in a function in Editor->Editor_functions.cpp
 			CAMERA()->keyboardControl();
-			handleKeyboardControls();
 		}
 
 		/* If minimap is NOT active */
@@ -80,6 +80,7 @@ namespace editor {
 		setBoolean("mouse-right", false);
 		setBoolean("mouse-left", false); 
 		setBoolean("mouse-middle", false);
+		KeyCode[GLFW_KEY_ESCAPE] = false;
 
 		if (IsWindowOpened) {
 			KeyCode[GLFW_KEY_BACKSPACE] = false;

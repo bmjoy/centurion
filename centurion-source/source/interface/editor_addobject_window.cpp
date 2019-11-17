@@ -106,11 +106,7 @@ namespace editor {
 			AddObjectWindowUpdateForm2 = true;
 		}
 
-		
-
 		formSelectedTexts[1] = objectForms[1].selectedText.substr(5); // rome,egypt,...
-
-		cout << formSelectedTexts[1] << endl;
 
 		if (AddObjectWindowUpdateForm2) {
 			vector<string> form2Options;

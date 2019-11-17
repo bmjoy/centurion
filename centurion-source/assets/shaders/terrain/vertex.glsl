@@ -54,7 +54,7 @@ void main()
     
     /* RENDERING */
     int offset = 256; 
-    vec4 newPos = vec4(pos.x - offset, pos.y + zNoise - offset, pos.y *(-1.f) + zNoise, 1.0);
+    vec4 newPos = vec4(pos.x - offset, pos.y + zNoise - offset, pos.y *(-1.f) + zNoise - 1000, 1.0);
     gl_Position = projection * view * newPos;
     
     /* To Fragment Shader */

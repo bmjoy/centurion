@@ -60,7 +60,7 @@ namespace editor {
 	}
 
 	void PropertiesWindow::render(bool pick) {
-		if (!IsWindowOpened && !PropertiesWindowIsOpen){
+		if (!IsWindowOpened && !PropertiesWindowIsOpen && !addingObject){
 			if (getBoolean("mouse-right") && (game::buildings.count(rightClickID) > 0)) {
 				if (game::buildings[rightClickID].isSelected()){
 					type = "building";

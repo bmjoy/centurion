@@ -10,6 +10,7 @@
 
 using namespace building;
 using namespace unit;
+using namespace decoration;
 using namespace glb;
 
 namespace editor {
@@ -46,67 +47,68 @@ namespace editor {
 
 	Unit unitTemp;
 	Building buildingTemp;
+	Decoration decorTemp;
 
 	Editor *EDITOR() { return &myeditor; }
 	QuestionWindow *Q_WINDOW() { return &myquestionwindow; }
 
 	void Editor::handleKeyboardControls() {
 		//CTRL Hotkeys
-		if (KeyCode[GLFW_KEY_LEFT_CONTROL] || KeyCode[GLFW_KEY_RIGHT_CONTROL]) {
-			if (KeyCode[GLFW_KEY_N]) { NewMapWindowIsOpen = true; NewMapResetText = true; IsWindowOpened = true; }
-			if (KeyCode[GLFW_KEY_O]) { OpenMapWindowIsOpen = true; OpenMapWindowUpdate = true; IsWindowOpened = true; }
-			if (KeyCode[GLFW_KEY_S]) { saveCurrentScenario(currentMapName); }
-			if (KeyCode[GLFW_KEY_A]) { AddObjectWindowIsOpen = !AddObjectWindowIsOpen; }
-			if (KeyCode[GLFW_KEY_T]) { TerrainBrushIsActive = !TerrainBrushWindowIsOpen; TerrainBrushWindowIsOpen = !TerrainBrushWindowIsOpen;
+		if (!IsWindowOpened) {
+			if (KeyCode[GLFW_KEY_LEFT_CONTROL] || KeyCode[GLFW_KEY_RIGHT_CONTROL]) {
+				if (KeyCode[GLFW_KEY_N]) { NewMapWindowIsOpen = true; NewMapResetText = true; IsWindowOpened = true; }
+				if (KeyCode[GLFW_KEY_O]) { OpenMapWindowIsOpen = true; OpenMapWindowUpdate = true; IsWindowOpened = true; }
+				if (KeyCode[GLFW_KEY_S]) { saveCurrentScenario(currentMapName); }
+				if (KeyCode[GLFW_KEY_A]) { clearEditorVariables(); AddObjectWindowIsOpen = !AddObjectWindowIsOpen; }
+				if (KeyCode[GLFW_KEY_T]) { clearEditorVariables(); TerrainBrushIsActive = !TerrainBrushWindowIsOpen; TerrainBrushWindowIsOpen = !TerrainBrushWindowIsOpen; }
 			}
-		}
-		if (KeyCode[GLFW_KEY_ESCAPE]) {
-			//if (!menuIsOpened()) {
-			engine::ENGINE()->Reset();
-			//}
-			/*else {
-				//Give access to titles variable in editor_picking and call function "closeMenu"
-				menuIsOpened = false;
-
-				//Another bug: you can open minimap when menu is opened causing overlapping.
-			}*/
-		}
-		if (KeyCode[GLFW_KEY_DELETE]) {
-			if (game::buildings.count(leftClickID) > 0) {
-				if (game::buildings[leftClickID].isSelected()) {
-					if(game::buildings[leftClickID].is_central_building()){
-						if (game::buildings[leftClickID].buildingsInSettlementCount() > 0){
-							game::buildings[leftClickID].setWaitingToBeErased(true);
-							Q_WINDOW()->setQuestion("QUESTION_deleteAll");
+			if (KeyCode[GLFW_KEY_DELETE]) {
+				if (game::buildings.count(leftClickID) > 0) {
+					if (game::buildings[leftClickID].isSelected()) {
+						if (game::buildings[leftClickID].is_central_building()) {
+							if (game::buildings[leftClickID].buildingsInSettlementCount() > 0) {
+								game::buildings[leftClickID].setWaitingToBeErased(true);
+								Q_WINDOW()->setQuestion("QUESTION_deleteAll");
+							}
+							else {
+								cout << "[DEBUG]: Settlement " << game::buildings[leftClickID].get_name() << " deleted!\n";
+								game::buildings[leftClickID].clear_pass();
+								game::buildings.erase(leftClickID);
+							}
 						}
 						else {
-							cout << "[DEBUG]: Settlement " << game::buildings[leftClickID].get_name() << " deleted!\n";
+							cout << "[DEBUG]: Building " << game::buildings[leftClickID].get_name() << " deleted!\n";
 							game::buildings[leftClickID].clear_pass();
 							game::buildings.erase(leftClickID);
 						}
 					}
-					else{
-						cout << "[DEBUG]: Building " << game::buildings[leftClickID].get_name() << " deleted!\n";
-						game::buildings[leftClickID].clear_pass();
-						game::buildings.erase(leftClickID);
-					}
 				}
 			}
+			if (KeyCode[GLFW_KEY_SPACE] || getBoolean("mouse-middle")) {
+				game::gameMinimapStatus = !game::gameMinimapStatus;
+				game::gameMinimapStatus ? std::cout << "[DEBUG] Minimap ON!\n" : std::cout << "[DEBUG] Minimap OFF!\n";
+			}
+			if (KeyCode[GLFW_KEY_Z]) {
+				setBoolean("wireframe", !getBoolean("wireframe"));
+				getBoolean("wireframe") ? std::cout << "[DEBUG] Wireframe ON!\n" : std::cout << "[DEBUG] Wireframe OFF! \n";
+			}
+			// Grid
+			/*if (KeyCode[GLFW_KEY_G]) {
+				surface->updateGrid();
+				game::gameGridStatus = !game::gameGridStatus;
+				game::gameGridStatus ? std::cout << "[DEBUG] Grid ON!\n" : std::cout << "[DEBUG] Grid OFF!\n";
+			}*/
 		}
-		if (KeyCode[GLFW_KEY_SPACE] || getBoolean("mouse-middle")) {
-			game::gameMinimapStatus = !game::gameMinimapStatus;
-			game::gameMinimapStatus ? std::cout << "[DEBUG] Minimap ON!\n" : std::cout << "[DEBUG] Minimap OFF!\n";
+		if (KeyCode[GLFW_KEY_ESCAPE]) {
+			if (areWindowsClosed()) {
+				clearEditorVariables();
+				engine::ENGINE()->Reset();
+			}
+			else {
+				clearEditorVariables();
+				EDITOR_UI()->close_menu();
+			}
 		}
-		if (KeyCode[GLFW_KEY_Z]) {
-			setBoolean("wireframe", !getBoolean("wireframe"));
-			getBoolean("wireframe") ? std::cout << "[DEBUG] Wireframe ON!\n" : std::cout << "[DEBUG] Wireframe OFF! \n";
-		}
-		// Grid
-		/*if (KeyCode[GLFW_KEY_G]) {
-			surface->updateGrid();
-			game::gameGridStatus = !game::gameGridStatus;
-			game::gameGridStatus ? std::cout << "[DEBUG] Grid ON!\n" : std::cout << "[DEBUG] Grid OFF!\n";
-		}*/
 	}
 
 	/* tools */
@@ -117,6 +119,13 @@ namespace editor {
 			buildingTemp.set_player(0);
 			buildingTemp.set_position(vec3(0));
 			buildingTemp.prepare();
+		}
+		if (type == "decorations") {
+			decorTemp.set_class(classname);
+			decorTemp.set_id(0);
+			decorTemp.set_player(0);
+			decorTemp.set_position(vec3(0));
+			decorTemp.create();
 		}
 	}
 
@@ -145,6 +154,10 @@ namespace editor {
 					textInfo.render_dynamic(getTranslation("EDITOR_canAddStructure"), "tahoma_15px", 10, getParam("window-height") - 50, vec4(255.f), "left", "center");
 			}
 		}
+		if (type == "decorations") {
+			decorTemp.set_position(vec3(x, y, 0.f));
+			decorTemp.render();
+		}
 	}
 
 	void addObject(string type) {
@@ -161,6 +174,15 @@ namespace editor {
 				setBoolean("mouse-left", false);
 				addingObject = false;
 			}
+		}
+		if (type == "decorations") {
+			//if (buildingTemp.is_placeable()) {
+				int ID = getPickingID(); increasePickingID();
+				decorTemp.set_id(ID);
+				game::decorations[ID] = decorTemp;
+				setBoolean("mouse-left", false);
+				addingObject = false;
+			//}
 		}
 	}
 
@@ -197,6 +219,12 @@ namespace editor {
 		TerrainBrushIsActive = false;
 		menuIsOpened = false;
 		addingObject = false;
+	}
+
+	bool areWindowsClosed() {
+		if(IsWindowOpened || menuIsOpened)
+			return false;
+		return true;
 	}
 
 	void moveObjects() {

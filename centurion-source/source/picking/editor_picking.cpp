@@ -95,7 +95,6 @@ namespace editor {
 				//    EXIT
 
 				if (pos == 4) { // exit
-					//setBoolean("mouse-left-pressed", false);
 					ENGINE()->Reset();
 					for (int i = 0; i < titles.size(); i++) {
 						std::string s = titlesList[i];
@@ -152,6 +151,7 @@ namespace editor {
 				//    ADD OBJECT
 
 				if (pos == 1) { // Add Object
+					clearEditorVariables();
 					AddObjectWindowIsOpen = !AddObjectWindowIsOpen;
 
 					for (int i = 0; i < titles.size(); i++) {
@@ -165,6 +165,7 @@ namespace editor {
 				//    TERRAIN BRUSH
 
 				if (pos == 2) { // Terrain Brush
+					clearEditorVariables();
 					TerrainBrushIsActive = !TerrainBrushWindowIsOpen;
 					TerrainBrushWindowIsOpen = !TerrainBrushWindowIsOpen;
 
@@ -181,12 +182,12 @@ namespace editor {
 		}
 	}
 
-	//void EditorMenu::closeMenu() {
-	/*	for (int i = 0; i < titles.size(); i++) {
+	void EditorMenu::closeMenu() {
+		for (int i = 0; i < titles.size(); i++) {
 			std::string s = titlesList[i];
 			titles[s].isOpened = false;
-		}*/
-	//}
+		}
+	}
 
     bool EditorMenu::isHover(glm::vec2 pos, int w, int h) {
         if ((getParam("mouse-x-position") > pos.x) && (getParam("mouse-x-position") < pos.x + w) && (getParam("mouse-y-position") > pos.y) && (getParam("mouse-y-position") < pos.y + h)) {

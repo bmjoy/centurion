@@ -15,6 +15,7 @@ namespace editor {
 
 	using namespace unit;
 	using namespace building;
+	using namespace decoration;
 
 	//
 	//	EDITOR CLASS --> source/editor/editor.cpp
@@ -46,6 +47,7 @@ namespace editor {
 
 	extern Unit unitTemp;
 	extern Building buildingTemp;
+	extern Decoration decorTemp;
 	extern bool movingObject;
 	static float movingObjectXPos, movingObjectYPos, movingObjectStartXMouse, movingObjectStartYMouse;
 	static bool movingObjectRestore;
@@ -55,5 +57,6 @@ namespace editor {
 	void addObject(string type);
 	void changeTerrain(int terrainType);
 	void clearEditorVariables();
+	bool areWindowsClosed();
 	void moveObjects();
 };
