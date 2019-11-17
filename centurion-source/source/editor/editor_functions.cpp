@@ -125,7 +125,7 @@ namespace editor {
 			decorTemp.set_id(0);
 			decorTemp.set_player(0);
 			decorTemp.set_position(vec3(0));
-			decorTemp.create();
+			decorTemp.prepare();
 		}
 	}
 
@@ -156,7 +156,7 @@ namespace editor {
 		}
 		if (type == "decorations") {
 			decorTemp.set_position(vec3(x, y, 0.f));
-			decorTemp.render();
+			decorTemp.render(!decorTemp.is_placeable());
 		}
 	}
 
@@ -176,13 +176,14 @@ namespace editor {
 			}
 		}
 		if (type == "decorations") {
-			//if (buildingTemp.is_placeable()) {
+			if (decorTemp.is_placeable()) {
 				int ID = getPickingID(); increasePickingID();
 				decorTemp.set_id(ID);
+				decorTemp.create();
 				game::decorations[ID] = decorTemp;
 				setBoolean("mouse-left", false);
 				addingObject = false;
-			//}
+			}
 		}
 	}
 

@@ -22,6 +22,7 @@ namespace game {
 	void Game::reset() {
 		units.clear();
 		buildings.clear();
+		central_buildings.clear();
 		decorations.clear();
 		blockMinimap = false;
 		gameIsCreated = false;
@@ -72,14 +73,6 @@ namespace game {
 				increasePickingID();
 			}
 		}
-
-		Decoration albero = Decoration();
-		albero.set_class("broadleaf_1");
-		albero.set_id(getPickingID());
-		albero.set_position(vec3(playersList[0].getStartPoint().x, playersList[0].getStartPoint().y - 4000, 0));
-		albero.create();
-		decorations[getPickingID()] = albero;
-		increasePickingID();
 
 		// ****************************************
 

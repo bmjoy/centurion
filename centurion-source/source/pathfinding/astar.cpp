@@ -10,6 +10,7 @@ namespace astar {
 	int *ClosedNodes() { return closedNodes; }
 	int *OpenNodes() { return openNodes; }
 	int *DirMap() { return dirMap; }
+
 	vector<vector<int>> readPassMatrix(string &path, string &classname) {
 		vector<vector<int>> mat;
 		ifstream fin(path);

@@ -22,7 +22,7 @@ namespace building {
 	void Building::prepare() {
 		/* file pass */
 		string pass_path = data["pass_path"].get<string>();
-		building_grid = astar::readPassMatrix(pass_path, className);
+		pass_grid = astar::readPassMatrix(pass_path, className);
 
 		ifstream path_ent(data["ent_path"].get<string>());
 		if (!path_ent.good()) {
@@ -41,7 +41,7 @@ namespace building {
 	}
 
 	bool Building::is_placeable() {
-		bool placeable = astar::checkAvailability(building_grid, position);
+		bool placeable = astar::checkAvailability(pass_grid, position);
 		if (!isCentralBuilding) placeable = (placeable && is_near_to_central_building());
 		return placeable;
 	}
@@ -64,7 +64,7 @@ namespace building {
 	void Building::create(string Name) {
 		/* file pass */
 		string pass_path = data["pass_path"].get<string>();
-		if (building_grid.size() == 0) building_grid = astar::readPassMatrix(pass_path, className);
+		if (pass_grid.size() == 0) pass_grid = astar::readPassMatrix(pass_path, className);
 		update_pass();
 
 		ifstream path_ent(data["ent_path"].get<string>());
@@ -90,15 +90,10 @@ namespace building {
 
 		// townhall radius (editor only)
 		circle[1] = gui::Circle();
-		circle[1].create("border", 0.f, 0.f, game::townhallRadius / 2.f, game::townhallRadius / 2.5f, 10.f, "center");
+		circle[1].create("border", 0.f, 0.f, game::townhallRadius * 2.f, game::townhallRadius * 2.f, 10.f, "center");
 	}
 
-	void Building::update_pass() {
-		astar::updatePassMatrix(building_grid, position);
-	}
-	void Building::clear_pass() {
-		astar::clearPassMatrix(building_grid, position);
-	}
+	
 
 	void Building::render(bool picking, int clickID, bool not_placeable) {
 
@@ -129,8 +124,8 @@ namespace building {
 		selected = (picking_id == clickID);
 
 		if (engine::ENGINE()->getEnvironment() == "editor" && !game::gameMinimapStatus){
-			if (selected && !isCentralBuilding && !editor::addingObject) circle[0].render(vec4(255.f), position.x, position.y - data["radius"].get<float>() / 15.5f); // selection circle (editor only)
-			if (selected && isCentralBuilding && !editor::addingObject) circle[1].render(vec4(255.f), position.x, position.y - data["radius"].get<float>() / 5.f); // selection circle (editor only)
+			if (selected && !editor::addingObject) circle[0].render(vec4(255.f), position.x, position.y - data["radius"].get<float>() / 15.5f); // selection circle (editor only)
+			if (selected && isCentralBuilding && !editor::addingObject) circle[1].render(vec4(0,255,255,255), position.x, position.y); // selection circle (editor only)
 		}
 
 		// rendering

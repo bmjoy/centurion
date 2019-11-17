@@ -1,5 +1,6 @@
 #include <game>
 #include <editor>
+#include <math>
 #include <engine>
 #include <player>
 #include <surface>
@@ -270,28 +271,37 @@ namespace game {
 								// update terrain around the townhall
 								// N.B: mapgen::grid_size * 2 because the map has "borders"
 								
-								int EditorStartPointX = (int)xEditorPos - (int)townhallRadius;
-								int EditorStartPointY = (int)yEditorPos - (int)townhallRadius;
-								EditorStartPointX = int(round(EditorStartPointX / mapgen::grid_size)) * mapgen::grid_size + mapgen::grid_size * 2;
-								EditorStartPointY = int(round(EditorStartPointY / mapgen::grid_size)) * mapgen::grid_size + mapgen::grid_size * 2;
-								
-								int NewMapStartPointX = (int)origin.x + (int)xOffset - (int)townhallRadius;
-								int NewMapStartPointY = (int)origin.y + (int)yOffset - (int)townhallRadius;
-								NewMapStartPointX = int(round(NewMapStartPointX / mapgen::grid_size)) * mapgen::grid_size + mapgen::grid_size * 2;
-								NewMapStartPointY = int(round(NewMapStartPointY / mapgen::grid_size)) * mapgen::grid_size + mapgen::grid_size * 2;
+								int EditorStartPointX = (int)xEditorPos - (int)townhallRadius + mapgen::grid_size * 2;
+								int EditorStartPointY = (int)yEditorPos - (int)townhallRadius + mapgen::grid_size * 2;
+								int NewMapStartPointX = (int)origin.x - (int)townhallRadius + mapgen::grid_size * 2;
+								int NewMapStartPointY = (int)origin.y - (int)townhallRadius + mapgen::grid_size * 2;
 
-								for (int iHoriz = 0; iHoriz < townhallRadius * 2; iHoriz += mapgen::grid_size) {
-									for (int iVert = 0; iVert < townhallRadius * 2; iVert += mapgen::grid_size) {
+								for (int iHoriz = 0; iHoriz <= townhallRadius * 2; iHoriz += mapgen::grid_size) {
+									for (int iVert = 0; iVert <= townhallRadius * 2; iVert += mapgen::grid_size) {
+
 										int EditorPointX = EditorStartPointX + iHoriz; 
 										int EditorPointY = EditorStartPointY + iVert;
-										int EditorPointLoc = mapgen::getVertexPos(EditorPointX, EditorPointY);
 										int NewMapPointX = NewMapStartPointX + iHoriz;
 										int NewMapPointY = NewMapStartPointY + iVert;
+
+										if (math::euclidean_distance(NewMapPointX, NewMapPointY, origin.x + mapgen::grid_size * 2, origin.y + mapgen::grid_size * 2) > townhallRadius) continue;
+
+										int EditorPointLoc = mapgen::getVertexPos(EditorPointX, EditorPointY);
 										int NewMapPointLoc = mapgen::getVertexPos(NewMapPointX, NewMapPointY);
 										mapgen::MapTextures()[NewMapPointLoc] = float(TemporaryMapTextures[EditorPointLoc]);
 									}
 								}
 							}
+							increasePickingID();
+						}
+						if (type == "decoration") {
+							decoration::Decoration d = decoration::Decoration();
+							d.set_class(className);
+							d.set_player(0);
+							d.set_position(vec3(origin.x + xOffset, origin.y + yOffset, 0.f));
+							d.set_id(getPickingID());
+							d.create();
+							game::decorations[getPickingID()] = d;
 							increasePickingID();
 						}
 					}

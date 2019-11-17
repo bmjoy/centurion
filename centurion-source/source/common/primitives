@@ -415,7 +415,7 @@ public:
 	void addPath(string Path) { entPathList.push_back(Path); }
 	GLuint getTextureID(string classname);
 	void create();
-	void render(DecorationData d);
+	void render(DecorationData d, bool not_placeable = false);
 	~DecorationSprite();
 
 private:

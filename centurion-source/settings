@@ -3,5 +3,6 @@
 window-width=1366
 window-height=768
 camera-movespeed=10
+camera-max-zoom=20
 language=italian
 debug=1

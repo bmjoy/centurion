@@ -87,13 +87,16 @@ namespace glb {
 
 	void read_settings() {
 		ifstream fin("settings");
+
+		// default values
+		setParam("window-width", 1366.f);
+		setParam("window-height", 768.f);
+		setParam("camera-movespeed", 10.f);
+		setParam("camera-max-zoom", 20.f);
+		language = "english";
+		setBoolean("debug", false);
+
 		if (!fin.good()) {
-			// default values
-			setParam("window-width", 1366.f);
-			setParam("window-height", 768.f);
-			setParam("camera-movespeed", 10.f);
-			language = "english";
-			setBoolean("debug", false);
 			save_settings();
 		}
 		else {
@@ -107,6 +110,7 @@ namespace glb {
 				if (values[0] == "window-width") setParam(values[0], stof(values[1]));
 				if (values[0] == "window-height") setParam(values[0], stof(values[1]));
 				if (values[0] == "camera-movespeed") setParam(values[0], stof(values[1]));
+				if (values[0] == "camera-max-zoom") setParam(values[0], stof(values[1]));
 				if (values[0] == "language") language = values[1];
 				if (values[0] == "debug") setBoolean("debug", (bool)stoi(values[1]));
 			}
@@ -121,6 +125,7 @@ namespace glb {
 			fout << "window-width=" << getParam("window-width") << "\n";
 			fout << "window-height=" << getParam("window-height") << "\n";
 			fout << "camera-movespeed=" << getParam("camera-movespeed") << "\n";
+			fout << "camera-max-zoom=" << getParam("camera-max-zoom") << "\n";
 			fout << "language=" << language << "\n";
 			fout << "debug=" << getBoolean("debug") << "\n";
 		}
@@ -286,6 +291,23 @@ namespace glb {
 			/*for (map<int, Unit>::iterator u = units.begin(); u != units.end(); u++) {
 				u->second.render(true, 0);
 			}*/
+			for (map<int, Decoration>::iterator dec = game::decorations.begin(); dec != game::decorations.end(); dec++) {
+				objectsFile << dec->second.get_type() << "\t";
+				objectsFile << dec->second.get_class() << "\t";
+				objectsFile << "N/A" << "\t";
+				objectsFile << dec->second.get_settlement_name() << "\t";
+				objectsFile << 0 << "\t";
+				objectsFile << dec->second.get_position().x << "\t";
+				objectsFile << dec->second.get_position().y << "\t";
+				if (dec->second.get_settlement_name() != "N/A") {
+					objectsFile << dec->second.get_position().x - dec->second.get_settlement_building()->get_position().x << "\t";
+					objectsFile << dec->second.get_position().y - dec->second.get_settlement_building()->get_position().y << "\n";
+				}
+				else {
+					objectsFile << 0 << "\t";
+					objectsFile << 0 << "\n";
+				}
+			}
 		}
 		objectsFile.close();
 
@@ -354,6 +376,16 @@ namespace glb {
 						if (game::buildings[getPickingID()].is_central_building()) {
 							game::central_buildings[getPickingID()] = &game::buildings[getPickingID()];
 						}
+						increasePickingID();
+					}
+					if (type == "decoration") {
+						decoration::Decoration d = decoration::Decoration();
+						d.set_class(className);
+						d.set_player(0);
+						d.set_position(vec3(xPos, yPos, 0.f));
+						d.set_id(getPickingID());
+						d.create();
+						game::decorations[getPickingID()] = d;
 						increasePickingID();
 					}
 				}

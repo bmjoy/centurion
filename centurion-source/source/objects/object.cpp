@@ -1,6 +1,7 @@
 #include <object>
 #include <player>
 #include <game>
+#include <pathfinding>
 
 using namespace std;
 using namespace glm;
@@ -26,5 +27,11 @@ void GObject::set_id(int pickingId) {
 	int g = (pickingId & 0x0000FF00) >> 8;
 	int b = (pickingId & 0x00FF0000) >> 16;
 	pickingColor = vec3(r / 255.f, g / 255.f, b / 255.f);
+}
+void GObject::update_pass() {
+	astar::updatePassMatrix(pass_grid, position);
+}
+void GObject::clear_pass() {
+	astar::clearPassMatrix(pass_grid, position);
 }
 GObject::~GObject(){}

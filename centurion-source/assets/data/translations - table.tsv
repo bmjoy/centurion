@@ -43,14 +43,14 @@ EDITOR_buildings	Buildings	Strutture	Edificios	Édifices	اﻟﻤﺮاﻓﻖ
 EDITOR_units	Units	Unità	Unidades	Unités	ﺟﻨﻮد
 EDITOR_decorations	Decorations	Decorazioni	Decoraciones	Décorations	زﻳﻨﺔ
 EDITORTREE_CLASS_ebarracks	Barracks	Caserma	Cuartel	Caserne	اﻟﺜﻜﻨﺎت
-EDITORTREE_CLASS_eblacksmith	Blacksmith	Fucina	Herrero	Forge	دﻛﺎن اﻟﺤﺪاد
+EDITORTREE_CLASS_eblacksmith	Blacksmith	Fucina	Herrería	Forge	دﻛﺎن اﻟﺤﺪاد
 EDITORTREE_CLASS_eosiristemple	Temple of Osiris	Tempio di Osiris	Templo de Osiris	Temple de Osiris	ﻣﻌﺒﺪ  أوزورﻳﺲ  
 EDITORTREE_CLASS_etavern	Tavern	Taverna	Taberna	Auberge	ﺣﺎﻧﺔ
 EDITORTREE_CLASS_etemple	Temple	Tempio	Templo	Temple	ﻣﻌﺒﺪ  
 EDITORTREE_CLASS_etownhall	Townhall	Foro	Foro	Mairie	اﻟﻤﻘﺮ
 EDITORTREE_CLASS_rarena	Arena	Arena	Arena	Arène	ﺣﻠﺒﺔ
 EDITORTREE_CLASS_rbarracks	Barracks	Caserma	Cuartel	Caserne	اﻟﺜﻜﻨﺎت
-EDITORTREE_CLASS_rblacksmith	Blacksmith	Fucina	Herrero	Forge	دﻛﺎن اﻟﺤﺪاد
+EDITORTREE_CLASS_rblacksmith	Blacksmith	Fucina	Herrería	Forge	دﻛﺎن اﻟﺤﺪاد
 EDITORTREE_CLASS_rtavern	Tavern	Taverna	Taberna	Auberge	ﺣﺎﻧﺔ
 EDITORTREE_CLASS_rtemple	Temple	Tempio	Templo	Temple	ﻣﻌﺒﺪ
 EDITORTREE_CLASS_rtownhall	Townhall	Foro	Ayuntamiento	Mairie	اﻟﻤﻘﺮ
@@ -67,6 +67,8 @@ EDITORBRUSH_GROUND_3	Ground 3	Terra 3	--	Terre 3	--
 EDITOR_noSettlementsAround	Unable to place the building at the selected point, as there are no nearby settlements.	Impossibile posizionare la struttura nel punto selezionato, poiché non vi sono insediamenti nelle vicinanze.	--	La structure ne peut pas être positionnée au point sélectionné, car il n'y a pas de installations à proximité.	--
 EDITOR_impassablePoint	Unable to place the building at the selected point, as it is a steep or inaccessible place, like the sea.	Impossibile posizionare la struttura nel punto selezionato, in quanto si tratta di un luogo scosceso o inaccessibile, come il mare.	--	La structure ne peut pas être positionnée au point sélectionné, comme c'est un endroit raide ou inaccessible, comme la mer.	--
 EDITOR_canAddStructure	Press the LEFT mouse button to position the structure in the desired point. Press the RIGHT mouse button to abort this operation.	Clicca con il tasto SINISTRO del mouse per posizionare la struttura nel punto desiderato. Premi il tastro DESTRO per annullare l'operazione.	--	Appuyez sur le bouton GAUCHE de la souris pour positionner la structure au point souhaité. Appuyez sur le bouton DROITE de la souris pour abandonner cette opération.	--
+CATE_trees	Trees	Alberi	Árboles	Arbres	--
+EDITORTREE_CLASS_broadleaf_1	Broadleaf 1	Latifoglie 1	--	À feuilles caduques 1	--
 QUESTION_deleteAll	Deleting this structure the rest of the settlement will also be eliminated. Do you really want to proceed?	Con la cancellazione di questa struttura sarà eliminato anche il resto dell'insediamento. Vuoi procedere con l'operazione?	--	Avec l'élimination de cette structure, le reste de l'installation sera également éliminé. Voulez-vous vraiment continuer?	--
 QUESTION_overwriteMap	Typed name corresponds to an existing map. Do you want to overwrite it?	Il nome digitato corrisponde ad una mappa già esistente. Vuoi sovrascriverla?	--	Le nom saisi correspond à une map existante. Voulez-vous l'écraser?	--
 WORD_gameStarted	Game is being started...	Avvio della partita in corso...	El juego se está iniciando...	Le jeu commence...	...ﺑﺪء اﻟﻠﻌﺒﺔ

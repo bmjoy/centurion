@@ -50,7 +50,7 @@ GLuint DecorationSprite::getTextureID(string classname) {
 	return textureIdMap[classname];
 }
 
-void DecorationSprite::render(DecorationData d) {
+void DecorationSprite::render(DecorationData d, bool not_placeable) {
 
 	glUseProgram(shaderId);
 
@@ -61,6 +61,7 @@ void DecorationSprite::render(DecorationData d) {
 	glUniform1f(glGetUniformLocation(shaderId, "z"), 10.f);
 	glUniform1i(glGetUniformLocation(shaderId, "w"), d.width);
 	glUniform1i(glGetUniformLocation(shaderId, "h"), d.height);
+	glUniform1i(glGetUniformLocation(shaderId, "not_placeable"), (int)not_placeable);
 	glUniform1i(glGetUniformLocation(shaderId, "texture1"), 0); // texture
 
 	/* Draw */

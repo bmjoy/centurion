@@ -70,7 +70,7 @@ void Camera::mouseControl(float threshold) {
 			currentZoomCamera -= (int)getParam("mouse-scroll");
 		}
 
-		else if (getParam("mouse-scroll") < 0 && currentZoomCamera < 8.0f) {
+		else if (getParam("mouse-scroll") < 0 && currentZoomCamera < getParam("camera-max-zoom")) {
 			currentZoomCamera -= (int)getParam("mouse-scroll");
 		}
 		setBoolean("mouse-scroll-bool", false);
