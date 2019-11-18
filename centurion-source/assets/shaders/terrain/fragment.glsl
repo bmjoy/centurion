@@ -22,12 +22,14 @@ in vec2 FragTexScaled;
 in vec3 FragNorm;
 in float FragCol;
 in float terrainWeight[20];
+in float terrainType;
 
 /* Uniform Variables Init */
 
 uniform int nTerrains;
 uniform DirectionalLight directionalLight;
 uniform int wireframe;
+uniform int minimap;
 
 /* Tracing */
 
@@ -49,8 +51,13 @@ void main()
        
     vec4 terrainTexture = vec4(0);
     
-    for (int i = 0; i < nTerrains; i++){
-        terrainTexture += texture(sampleTex[i], FragTexScaled) * (ambientColor + diffuseColor) * terrainWeight[i];
+    if (minimap == 0){
+        for (int i = 0; i < nTerrains; i++){
+            terrainTexture += texture(sampleTex[i], FragTexScaled) * (ambientColor + diffuseColor) * terrainWeight[i];
+        }
+    }
+    else {
+        terrainTexture = texture(sampleTex[int(terrainType)], FragTexScaled) * (ambientColor + diffuseColor);
     }
    
     terrainTexture = vec4(terrainTexture.xyz, 1.f);

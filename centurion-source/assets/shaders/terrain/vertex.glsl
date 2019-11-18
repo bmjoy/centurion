@@ -22,6 +22,7 @@ uniform mat4 projection;
 uniform mat4 view;
 uniform float scaleTextX;
 uniform float scaleTextY ;
+uniform int minimap;
 
 /* Tracing */
 
@@ -39,6 +40,7 @@ out float FragCol;
 /* Terrain */
 uniform int nTerrains;
 out float terrainWeight[20];
+out float terrainType;
 
 /* ----- ----- ----- ----- */
 /*      MAIN FUNCTION      */
@@ -47,10 +49,15 @@ out float terrainWeight[20];
 void main() 
 {   
     int terrainID = int(terrain) - 1;
-    for (int i = 0; i < nTerrains; i++){
-        terrainWeight[i] = 0.f;
+    if (minimap == 0){
+        for (int i = 0; i < nTerrains; i++){
+            terrainWeight[i] = 0.f;
+        }
+        terrainWeight[terrainID] = 1.f;
     }
-    terrainWeight[terrainID] = 1.f;
+    else {
+        terrainType = float(terrainID);
+    }
     
     /* RENDERING */
     int offset = 256; 
