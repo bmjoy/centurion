@@ -59,8 +59,8 @@ namespace editor {
 				if (KeyCode[GLFW_KEY_N]) { NewMapWindowIsOpen = true; NewMapResetText = true; IsWindowOpened = true; }
 				if (KeyCode[GLFW_KEY_O]) { OpenMapWindowIsOpen = true; OpenMapWindowUpdate = true; IsWindowOpened = true; }
 				if (KeyCode[GLFW_KEY_S]) { saveCurrentScenario(currentMapName); }
-				if (KeyCode[GLFW_KEY_A]) { clearEditorVariables(); AddObjectWindowIsOpen = !AddObjectWindowIsOpen; }
-				if (KeyCode[GLFW_KEY_T]) { clearEditorVariables(); TerrainBrushIsActive = !TerrainBrushWindowIsOpen; TerrainBrushWindowIsOpen = !TerrainBrushWindowIsOpen; }
+				if (KeyCode[GLFW_KEY_A]) { TerrainBrushIsActive = false; TerrainBrushWindowIsOpen = false; AddObjectWindowIsOpen = !AddObjectWindowIsOpen; }
+				if (KeyCode[GLFW_KEY_T]) { AddObjectWindowIsOpen = false; TerrainBrushIsActive = !TerrainBrushWindowIsOpen; TerrainBrushWindowIsOpen = !TerrainBrushWindowIsOpen; }
 			}
 			if (KeyCode[GLFW_KEY_DELETE]) {
 				if (game::buildings.count(leftClickID) > 0) {
@@ -243,8 +243,7 @@ namespace editor {
 				float y1 = (getParam("mouse-y-position") * getParam("window-height-zoomed") / getParam("window-height") + getParam("camera-y-position"));
 				float dx = x1 - movingObjectStartXMouse;
 				float dy = y1 - movingObjectStartYMouse;
-				
-				// if building isn't central building (TO DO)
+
 				if (!game::buildings[leftClickID].is_central_building()){
 					if (!movingObject) game::buildings[leftClickID].clear_pass();
 					game::buildings[leftClickID].set_position(vec3(movingObjectXPos + dx, movingObjectYPos + dy, 0.f));
@@ -293,7 +292,6 @@ namespace editor {
 					game::buildings[leftClickID].set_placeable(true);
 					game::buildings[leftClickID].update_pass();
 				}
-				//leftClickID = 0;
 				movingObject = false;
 				movingObjectRestore = false;
 			}

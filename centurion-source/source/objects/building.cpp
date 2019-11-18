@@ -26,7 +26,7 @@ namespace building {
 
 		ifstream path_ent(data["ent_path"].get<string>());
 		if (!path_ent.good()) {
-			//showGameWarning("Error code 0x00000002\n\n  Unable to find (or communicate with) the audio device.\n  No sound will be played as long as the error persists.");
+			cout << "[DEBUG] Unable to find or process " << data["ent_path"].get<string>() << ". The relative building, therefore, won't be loaded into the game.\n";
 		}
 		json ent_data = json::parse(path_ent);
 		string texturePath = ent_data["path"].get<string>() + ent_data["sprites"][0]["name"].get<string>();
@@ -69,7 +69,7 @@ namespace building {
 
 		ifstream path_ent(data["ent_path"].get<string>());
 		if (!path_ent.good()) {
-			//showGameWarning("Error code 0x00000002\n\n  Unable to find (or communicate with) the audio device.\n  No sound will be played as long as the error persists.");
+			cout << "[DEBUG] Unable to find or process " << data["ent_path"].get<string>() << ". The relative building, therefore, won't be loaded into the game.\n";
 		}
 		json ent_data = json::parse(path_ent);
 		string texturePath = ent_data["path"].get<string>() + ent_data["sprites"][0]["name"].get<string>();
