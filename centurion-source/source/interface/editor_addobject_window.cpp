@@ -19,6 +19,7 @@ namespace editor {
 		back_image.create("center", getParam("window-width")/2.f, back_size.y / 2.f, 0, 0, getPickingID());
 		increasePickingID();
 
+
 		// startX and startY are TOP-LEFT coordinates (as in Paint)
 		startX = getParam("window-width") / 2.f - back_image.getImageSize().x / 2.f;
 		startY = back_size.y / 2.f + back_image.getImageSize().y / 2.f;
@@ -81,19 +82,19 @@ namespace editor {
 					if (formSelectedTexts[0] == "buildings") {
 						objectForms[1].create(startX + 11.f, startY - 11.f - 30.f, 150.f, 20.f, EditorAddObjectBuildingOptions, pickingIDs[1]);
 						objectForms[1].selectedText = EditorAddObjectBuildingOptions[0];
-						form1Options.push_back("RACE_" + EditorObjectStringListForm2[i]);
+						form1Options.push_back("EDITORTREE_CATEGORY_" + EditorObjectStringListForm2[i]);
 					}
 					
 					if (formSelectedTexts[0] == "units") {
 						objectForms[1].create(startX + 11.f, startY - 11.f - 30.f, 150.f, 20.f, EditorAddObjectUnitOptions, pickingIDs[1]);
 						objectForms[1].selectedText = EditorAddObjectUnitOptions[0];
-						form1Options.push_back("RACE_" + EditorObjectStringListForm2[i]);
+						form1Options.push_back("EDITORTREE_CATEGORY_" + EditorObjectStringListForm2[i]);
 					}
 
 					if (formSelectedTexts[0] == "decorations") {
 						objectForms[1].create(startX + 11.f, startY - 11.f - 30.f, 150.f, 20.f, EditorAddObjectDecorationOptions, pickingIDs[1]);
 						objectForms[1].selectedText = EditorAddObjectDecorationOptions[0];
-						form1Options.push_back("CATE_" + EditorObjectStringListForm2[i]); // category
+						form1Options.push_back("EDITORTREE_CATEGORY_" + EditorObjectStringListForm2[i]); // category
 					}
 				}
 			}
@@ -106,7 +107,7 @@ namespace editor {
 			AddObjectWindowUpdateForm2 = true;
 		}
 
-		formSelectedTexts[1] = objectForms[1].selectedText.substr(5); // rome,egypt,...
+		formSelectedTexts[1] = objectForms[1].selectedText.substr(20); // rome,egypt,...
 
 		if (AddObjectWindowUpdateForm2) {
 			vector<string> form2Options;

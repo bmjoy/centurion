@@ -134,27 +134,27 @@ namespace engine {
 
 				/* editor object string list */
 				EditorObjectStringListForm0[i] = "buildings";
-				EditorObjectStringListForm1[i] = dataClass["race"].get<string>();
+				EditorObjectStringListForm1[i] = dataClass["editor_category"].get<string>();
 				EditorObjectStringListForm2[i] = dataClass["class_name"].get<string>();
 
-				EditorAddObjectBuildingOptions.push_back("RACE_" + dataClass["race"].get<string>());
+				EditorAddObjectBuildingOptions.push_back("EDITORTREE_CATEGORY_" + dataClass["editor_category"].get<string>());
 
 			}
 
 			if (dataClass["type"] == "unit") {
 				obj::USprite()->addPath(dataClass["ent_path"]);
 
-				//EditorAddObjectUnitOptions.push_back("RACE_" + dataClass["race"].get<string>());
+				//EditorAddObjectUnitOptions.push_back(dataClass["race"].get<string>());
 			}
 
 			if (dataClass["type"] == "decoration") {
 				obj::DSprite()->addPath(dataClass["ent_path"]);
 				/* editor object string list */
 				EditorObjectStringListForm0[i] = "decorations";
-				EditorObjectStringListForm1[i] = dataClass["category"].get<string>();
+				EditorObjectStringListForm1[i] = dataClass["editor_category"].get<string>();
 				EditorObjectStringListForm2[i] = dataClass["class_name"].get<string>();
 
-				EditorAddObjectDecorationOptions.push_back("CATE_" + dataClass["category"].get<string>());
+				EditorAddObjectDecorationOptions.push_back("EDITORTREE_CATEGORY_" + dataClass["editor_category"].get<string>());
 			}
 		}
 

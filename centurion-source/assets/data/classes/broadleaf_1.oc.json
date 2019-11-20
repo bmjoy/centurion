@@ -1,7 +1,7 @@
 {
     "type": "decoration",
-    "category": "trees",
     "class_name": "broadleaf_1",
+	"editor_category": "trees",
     "ent_path": "assets/decorations/trees/broadleaves/broadleaf_1.oe.json",
     "pass_path": "assets/decorations/trees/broadleaves/broadleaf_1.pass"
 }

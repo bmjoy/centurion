@@ -19,6 +19,7 @@ namespace gui {
 	void Image::create(string Origin, float x, float y, float w, float h, int pickingID) {
 		if (x < 0) x += getParam("window-width");
 		if (y < 0) y += getParam("window-height");
+		imgData.pickingID = pickingID;
 		imgData.imageName = imageName;
 		imgData.pickingColor = getPickingColorFromID(pickingID);
 		imgData.origin = originMap[Origin];

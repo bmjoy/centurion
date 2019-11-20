@@ -4,6 +4,7 @@
     "class_name": "ebarracks",
     "radius": 1000,
     "is_central_building": 0,
+	"editor_category": "egyptianstronghold",
     "ent_path": "assets/buildings/egypt/barracks/ebarracks.oe.json",
     "pass_path" : "assets/buildings/egypt/barracks/ebarracks.pass",
     "clickable_in_minimap": 0

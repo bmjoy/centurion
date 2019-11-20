@@ -347,7 +347,7 @@ namespace editor {
 		leftClickID_UI = get_id();
 		string clickName = getPickedObjectName(leftClickID_UI);
 
-		if (leftClickID_UI == 0)
+		if (leftClickID_UI == 0 || leftClickID_UI == back_image.getPickingID())
 			for (int j = 0; j < 3; j++)
 				objectForms[j].close();
 
