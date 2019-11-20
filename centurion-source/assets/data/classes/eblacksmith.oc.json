@@ -4,7 +4,7 @@
     "class_name": "eblacksmith",
     "radius": 1000,
     "is_central_building": 0,
-	"editor_category": "egyptianstronghold",
+	"category": "egyptianstronghold",
     "ent_path": "assets/buildings/egypt/blacksmith/eblacksmith.oe.json",
     "pass_path" : "assets/buildings/egypt/blacksmith/eblacksmith.pass",
     "clickable_in_minimap": 0

@@ -4,7 +4,7 @@
     "class_name": "rtavern",
     "radius": 500,
     "is_central_building": 0,
-	"editor_category": "romanstronghold",
+	"category": "romanstronghold",
     "ent_path": "assets/buildings/rome/tavern/rtavern.oe.json",
     "pass_path" : "assets/buildings/rome/tavern/rtavern.pass",
     "clickable_in_minimap": 0

@@ -42,7 +42,7 @@ namespace building {
 
 	bool Building::is_placeable() {
 		bool placeable = astar::checkAvailability(pass_grid, position);
-		if (!isCentralBuilding) placeable = (placeable && is_near_to_central_building());
+		if (!isCentralBuilding) placeable = placeable && is_near_to_central_building();
 		return placeable;
 	}
 
