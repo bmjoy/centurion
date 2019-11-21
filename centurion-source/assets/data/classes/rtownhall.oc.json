@@ -3,8 +3,8 @@
     "race": "rome",
     "class_name": "rtownhall",
     "radius": 500,
-    "is_central_building": 1,
-	"category": "romanstronghold",
+    "is_independent": 1,
+	  "category": "romanstronghold",
     "ent_path": "assets/buildings/rome/townhall/rtownhall.oe.json",
     "pass_path" : "assets/buildings/rome/townhall/rtownhall.pass",
     "clickable_in_minimap": 1

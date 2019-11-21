@@ -278,7 +278,7 @@ namespace glb {
 				objectsFile << bld->second.get_playerID() << "\t";
 				objectsFile << bld->second.get_position().x << "\t";
 				objectsFile << bld->second.get_position().y << "\t";
-				if (bld->second.is_central_building()) {
+				if (bld->second.is_independent()) {
 					objectsFile << 0 << "\t";
 					objectsFile << 0;
 				}
@@ -373,8 +373,8 @@ namespace glb {
 						b.set_settlement_name(settl_name);
 						b.create(name);
 						game::buildings[getPickingID()] = b;
-						if (game::buildings[getPickingID()].is_central_building()) {
-							game::central_buildings[getPickingID()] = &game::buildings[getPickingID()];
+						if (game::buildings[getPickingID()].is_independent()) {
+							game::independent_buildings[getPickingID()] = &game::buildings[getPickingID()];
 						}
 						increasePickingID();
 					}
@@ -394,11 +394,11 @@ namespace glb {
 			/* set central building for every dependent building */
 			for (map<int, Building>::iterator bld = game::buildings.begin(); bld != game::buildings.end(); bld++) {
 				int ID = bld->first;
-				if (!bld->second.is_central_building()) {
-					for (map<int, Building*>::iterator settl = game::central_buildings.begin(); settl != game::central_buildings.end(); settl++) {
+				if (!bld->second.is_independent()) {
+					for (map<int, Building*>::iterator settl = game::independent_buildings.begin(); settl != game::independent_buildings.end(); settl++) {
 						int settl_ID = settl->first;
 						if (settl->second->get_settlement_name() == bld->second.get_settlement_name()) {
-							game::buildings[ID].set_settlement_building(game::central_buildings[settl_ID]);
+							game::buildings[ID].set_settlement_building(game::independent_buildings[settl_ID]);
 							break;
 						}
 					}

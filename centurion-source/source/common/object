@@ -65,18 +65,19 @@ namespace building {
 		void set_placeable(bool b) { isPlaceable = b; }
 		
 		void set_status(bool b) { isCreated = b; }
-		bool is_central_building() { return isCentralBuilding; }
+		bool is_independent() { return isIndependent; }
 		void set_settlement_name(string s) { settl_name = s; }
 		string get_settlement_name() { return settl_name; }
-		void set_settlement_building(Building *b) { central_building = b; }
-		Building *get_settlement_building() { return central_building; }
-		bool is_near_to_central_building();
+		void set_settlement_building(Building *b) { independent = b; }
+		Building *get_settlement_building() { return independent; }
+		bool is_near_to_independent(string *Category);
 		int UnitsInBuilding();
 		vector<unit::Unit> UnitsInHolder();
 		vector<int> buildingsInSettlementIds();
 		int buildingsInSettlementCount() { return (int)subs_buildings.size(); }
 		void setWaitingToBeErased(bool b) { waitingToBeErased = b; }
 		bool getWaitingToBeErased() { return waitingToBeErased; }
+		string getCategory() { return category; }
 		~Building();
 
 	private:
@@ -85,14 +86,15 @@ namespace building {
 		int w, h, nrChannels;
 		GLuint textureID;
 		bool clickableInMinimap;
-		bool isCentralBuilding;
+		bool isIndependent;
 		string settl_name;
-		Building *central_building;
+		Building *independent;
 		bool waitingToBeErased;
 		bool isCreated;
 		size_t buildingListSize;
 		bool isPlaceable;
 		gui::Circle circle[2];
+		string category;
 		//sound selectionSound; TODO
 	};
 };
@@ -109,15 +111,8 @@ namespace decoration {
 		bool is_placeable();
 		void create();
 		void render(bool not_placeable = false);
-		Building *get_settlement_building() { return central_building; }
+		Building *get_settlement_building() { return independent; }
 		string get_settlement_name() { return settlementName; }
-		//void set_placeable(bool b) { isPlaceable = b; }
-		//void update_pass();
-		//void clear_pass();
-		//void set_status(bool b) { isCreated = b; }
-		//string get_settlement_name() { return settl_name; }
-		//void setWaitingToBeErased(bool b) { waitingToBeErased = b; }
-		//bool getWaitingToBeErased() { return waitingToBeErased; }
 		~Decoration();
 
 	private:
@@ -126,7 +121,7 @@ namespace decoration {
 		float oldX, oldY, oldSettlX, oldSettlY;
 		int settlID;
 		void checkSettlement();
-		Building* central_building;
+		Building* independent;
 	};
 };
 

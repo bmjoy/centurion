@@ -65,7 +65,7 @@ namespace editor {
 			if (KeyCode[GLFW_KEY_DELETE]) {
 				if (game::buildings.count(leftClickID) > 0) {
 					if (game::buildings[leftClickID].isSelected()) {
-						if (game::buildings[leftClickID].is_central_building()) {
+						if (game::buildings[leftClickID].is_independent()) {
 							if (game::buildings[leftClickID].buildingsInSettlementCount() > 0) {
 								game::buildings[leftClickID].setWaitingToBeErased(true);
 								Q_WINDOW()->setQuestion("QUESTION_deleteAll");
@@ -138,8 +138,9 @@ namespace editor {
 			buildingTemp.render(false, 0, !buildingTemp.is_placeable());
 			
 			//Player will be able to see info about placing status
-			if (!buildingTemp.is_central_building()) {
-				if (!buildingTemp.is_near_to_central_building())
+			if (!buildingTemp.is_independent()) {
+				string s = "";
+				if (!buildingTemp.is_near_to_independent(&s))
 					textInfo.render_dynamic(getTranslation("EDITOR_noSettlementsAround"), "tahoma_15px", 10, getParam("window-height") - 50, vec4(255.f), "left", "center");
 				else
 					if (!buildingTemp.is_placeable())
@@ -167,9 +168,9 @@ namespace editor {
 				buildingTemp.set_id(ID);
 				buildingTemp.create();
 				game::buildings[ID] = buildingTemp;
-				if (game::buildings[ID].is_central_building()) {
+				if (game::buildings[ID].is_independent()) {
 					game::buildings[ID].set_settlement_name("SETTL_" + game::buildings[ID].get_name());
-					game::central_buildings[ID] = &game::buildings[ID];
+					game::independent_buildings[ID] = &game::buildings[ID];
 				}
 				setBoolean("mouse-left", false);
 				addingObject = false;
@@ -244,11 +245,12 @@ namespace editor {
 				float dx = x1 - movingObjectStartXMouse;
 				float dy = y1 - movingObjectStartYMouse;
 
-				if (!game::buildings[leftClickID].is_central_building()){
+				if (!game::buildings[leftClickID].is_independent()){
 					if (!movingObject) game::buildings[leftClickID].clear_pass();
 					game::buildings[leftClickID].set_position(vec3(movingObjectXPos + dx, movingObjectYPos + dy, 0.f));
 					if (!game::buildings[leftClickID].is_placeable()) {
-						if (!game::buildings[leftClickID].is_near_to_central_building()){
+						string s = "";
+						if (!game::buildings[leftClickID].is_near_to_independent(&s)) {
 							textInfo.render_dynamic(getTranslation("EDITOR_noSettlementsAround"), "tahoma_15px", 10, getParam("window-height") - 50, vec4(255.f), "left", "center");
 						}
 						else

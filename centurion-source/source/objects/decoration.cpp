@@ -72,7 +72,7 @@ namespace decoration {
 	}
 
 	void Decoration::checkSettlement() {
-		for (map<int, Building*>::iterator bld = game::central_buildings.begin(); bld != game::central_buildings.end(); bld++) {
+		for (map<int, Building*>::iterator bld = game::independent_buildings.begin(); bld != game::independent_buildings.end(); bld++) {
 
 			string settlName = bld->second->get_settlement_name();
 			float settlX = bld->second->get_position().x;
@@ -81,7 +81,7 @@ namespace decoration {
 			if (math::euclidean_distance(position.x, position.y, settlX, settlY) <= game::townhallRadius) {
 				settlementName = settlName;
 				settlID = bld->second->get_id();
-				central_building = bld->second;
+				independent = bld->second;
 				oldSettlX = settlX;
 				oldSettlY = settlY;
 				break;

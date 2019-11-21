@@ -33,7 +33,8 @@ namespace building {
 		unsigned char *texture = stbi_load(texturePath.c_str(), &w, &h, &nrChannels, 0);
 		stbi_image_free(texture);
 
-		isCentralBuilding = (bool)data["is_central_building"].get<int>();
+		isIndependent = (bool)data["is_independent"].get<int>();
+		category = data["category"].get<string>();
 		clickableInMinimap = (bool)data["clickable_in_minimap"].get<int>();
 		//selectionSound = (sound)data["selectionSound"].get<string>(); TODO
 		textureID = obj::BSprite()->getTextureId(className);
@@ -42,18 +43,22 @@ namespace building {
 
 	bool Building::is_placeable() {
 		bool placeable = astar::checkAvailability(pass_grid, position);
-		if (!isCentralBuilding) placeable = placeable && is_near_to_central_building();
+		string indCategory = "";
+		bool nearToIndependent = is_near_to_independent(&indCategory);
+		if (!isIndependent) placeable = placeable && nearToIndependent && indCategory == category;
 		return placeable;
 	}
 
-	bool Building::is_near_to_central_building() {
+	bool Building::is_near_to_independent(string *Category) {
 		bool ok = false;
-		for (map<int, Building*>::iterator b = game::central_buildings.begin(); b != game::central_buildings.end(); b++) {
+		(*Category) = "";
+		for (map<int, Building*>::iterator b = game::independent_buildings.begin(); b != game::independent_buildings.end(); b++) {
 			int ID = b->first;
 			float dist = math::euclidean_distance(b->second->get_position().x, b->second->get_position().y, position.x, position.y);
 			if (dist < 1500.f) {
-				set_settlement_building(game::central_buildings[ID]);
-				set_settlement_name(game::central_buildings[ID]->get_settlement_name());
+				set_settlement_building(game::independent_buildings[ID]);
+				set_settlement_name(game::independent_buildings[ID]->get_settlement_name());
+				(*Category) = game::independent_buildings[ID]->getCategory();
 				ok = true;
 				break;
 			}
@@ -76,7 +81,8 @@ namespace building {
 		unsigned char *texture = stbi_load(texturePath.c_str(), &w, &h, &nrChannels, 0);
 		stbi_image_free(texture);
 
-		isCentralBuilding = (bool)data["is_central_building"].get<int>();
+		isIndependent = (bool)data["is_independent"].get<int>();
+		category = data["category"].get<string>();
 		clickableInMinimap = (bool)data["clickable_in_minimap"].get<int>();
 		//selectionSound = (sound)data["selectionSound"].get<string>(); TODO
 		textureID = obj::BSprite()->getTextureId(className);
@@ -100,17 +106,17 @@ namespace building {
 		not_placeable = (not_placeable || !isPlaceable);
 
 		// keep updated not central buildings "settlement name"
-		if (!isCentralBuilding && isCreated) 
-			if (settl_name != central_building->get_settlement_name())
-			    settl_name = central_building->get_settlement_name();
+		if (!isIndependent && isCreated) 
+			if (settl_name != independent->get_settlement_name())
+			    settl_name = independent->get_settlement_name();
 
 		// keep updated central buildings "subsidiaries buildings list"
-		if (game::buildings.size() != buildingListSize && isCentralBuilding) {
+		if (game::buildings.size() != buildingListSize && isIndependent) {
 			subs_buildings.clear();
 			cout << "[DEBUG] Subsidiaries buildings to " + name + " have been updated. Their names are: \n";
 			for (map<int, Building>::iterator bld = game::buildings.begin(); bld != game::buildings.end(); bld++) {
 				int ID = bld->first;
-				if (!bld->second.is_central_building()) {
+				if (!bld->second.is_independent()) {
 					if (bld->second.get_settlement_name() == settl_name) {
 						subs_buildings[ID] = &game::buildings[ID];
 						cout << "   " << game::buildings[ID].get_name() << "\n";
@@ -125,7 +131,7 @@ namespace building {
 
 		if (engine::ENGINE()->getEnvironment() == "editor" && !game::gameMinimapStatus){
 			if (selected && !editor::addingObject) circle[0].render(vec4(255.f), position.x, position.y - data["radius"].get<float>() / 15.5f); // selection circle (editor only)
-			if (selected && isCentralBuilding && !editor::addingObject) circle[1].render(vec4(0,255,255,255), position.x, position.y); // selection circle (editor only)
+			if (selected && isIndependent && !editor::addingObject) circle[1].render(vec4(0,255,255,255), position.x, position.y); // selection circle (editor only)
 		}
 
 		// rendering

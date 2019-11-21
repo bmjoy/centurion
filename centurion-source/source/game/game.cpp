@@ -22,7 +22,7 @@ namespace game {
 	void Game::reset() {
 		units.clear();
 		buildings.clear();
-		central_buildings.clear();
+		independent_buildings.clear();
 		decorations.clear();
 		blockMinimap = false;
 		gameIsCreated = false;

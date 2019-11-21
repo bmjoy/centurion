@@ -3,8 +3,8 @@
     "race": "rome",
     "class_name": "routpost",
     "radius": 500,
-    "is_central_building": 1,
-	"category": "outposts",
+    "is_independent": 1,
+	  "category": "outposts",
     "ent_path": "assets/buildings/rome/outpost/routpost.oe.json",
     "pass_path" : "assets/buildings/rome/outpost/routpost.pass",
     "clickable_in_minimap": 0

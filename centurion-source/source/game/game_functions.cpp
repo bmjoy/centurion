@@ -35,7 +35,7 @@ namespace game {
 	int selectedUnits = 0;
 
 	map<int, Building> buildings = { };
-	map<int, Building*> central_buildings = { };
+	map<int, Building*> independent_buildings = { };
 	map<int, Unit> units = { };
 	map<int, Decoration> decorations = { };
 
@@ -265,8 +265,8 @@ namespace game {
 							b.create();
 							game::buildings[getPickingID()] = b;
 							
-							if (game::buildings[getPickingID()].is_central_building()) {
-								game::central_buildings[getPickingID()] = &game::buildings[getPickingID()];
+							if (game::buildings[getPickingID()].is_independent()) {
+								game::independent_buildings[getPickingID()] = &game::buildings[getPickingID()];
 
 								// update terrain around the townhall
 								// N.B: mapgen::grid_size * 2 because the map has "borders"
@@ -284,7 +284,7 @@ namespace game {
 										int NewMapPointX = NewMapStartPointX + iHoriz;
 										int NewMapPointY = NewMapStartPointY + iVert;
 
-										if (math::euclidean_distance(NewMapPointX, NewMapPointY, origin.x + mapgen::grid_size * 2, origin.y + mapgen::grid_size * 2) > townhallRadius) continue;
+										if (math::euclidean_distance((float)NewMapPointX, (float)NewMapPointY, origin.x + mapgen::grid_size * 2.f, origin.y + mapgen::grid_size * 2.f) > townhallRadius) continue;
 
 										int EditorPointLoc = mapgen::getVertexPos(EditorPointX, EditorPointY);
 										int NewMapPointLoc = mapgen::getVertexPos(NewMapPointX, NewMapPointY);
@@ -316,11 +316,11 @@ namespace game {
 		// update buildings info
 		for (map<int, Building>::iterator bld = game::buildings.begin(); bld != game::buildings.end(); bld++) {
 			int ID = bld->first;
-			if (!bld->second.is_central_building()) {
-				for (map<int, Building*>::iterator settl = game::central_buildings.begin(); settl != game::central_buildings.end(); settl++) {
+			if (!bld->second.is_independent()) {
+				for (map<int, Building*>::iterator settl = game::independent_buildings.begin(); settl != game::independent_buildings.end(); settl++) {
 					int settl_ID = settl->first;
 					if (settl->second->get_settlement_name() == bld->second.get_settlement_name()) {
-						game::buildings[ID].set_settlement_building(game::central_buildings[settl_ID]);
+						game::buildings[ID].set_settlement_building(game::independent_buildings[settl_ID]);
 						break;
 					}
 				}

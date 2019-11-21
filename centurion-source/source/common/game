@@ -36,7 +36,7 @@ namespace game {
 	extern int selectedUnits;
 
 	extern map<int, Building> buildings;
-	extern map<int, Building*> central_buildings;
+	extern map<int, Building*> independent_buildings;
 	extern map<int, Unit> units;
 	extern map<int, Decoration> decorations;
 

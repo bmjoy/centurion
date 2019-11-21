@@ -303,7 +303,7 @@ namespace editor {
 			}
 			if (question == "QUESTION_deleteAll") {
 				vector<int> idsToErase;
-				for (map<int, Building*>::iterator bld = game::central_buildings.begin(); bld != game::central_buildings.end(); bld++) {
+				for (map<int, Building*>::iterator bld = game::independent_buildings.begin(); bld != game::independent_buildings.end(); bld++) {
 					int settl_id = bld->first;
 					Building* settl = bld->second;
 					string settl_name = bld->second->get_name();
@@ -319,7 +319,7 @@ namespace editor {
 						game::buildings[idsToErase[i]].clear_pass();
 						game::buildings.erase(idsToErase[i]);
 					}
-					game::central_buildings.erase(idsToErase[0]);
+					game::independent_buildings.erase(idsToErase[0]);
 					cout << "[DEBUG]: Settlement " << idsToErase[0] << " completly erased!\n";
 				}
 			}
@@ -329,7 +329,7 @@ namespace editor {
 		// No
 		if (clickName == "QuestionWindow_No") {
 			if (question == "QUESTION_deleteAll") {
-				for (map<int, Building*>::iterator bld = game::central_buildings.begin(); bld != game::central_buildings.end(); bld++) {
+				for (map<int, Building*>::iterator bld = game::independent_buildings.begin(); bld != game::independent_buildings.end(); bld++) {
 					game::buildings[bld->first].setWaitingToBeErased(false);
 				}
 			}
@@ -404,7 +404,7 @@ namespace editor {
 		string clickName = getPickedObjectName(leftClickID_UI);
 
 		text_input[0].active(clickName == "PropertiesWindow_name");
-		if (building_pointer->is_central_building())
+		if (building_pointer->is_independent())
 			text_input[1].active(clickName == "PropertiesWindow_settl_name");
 
 		if (clickName == "PropertiesWindow_cancel") { // CANCEL
@@ -415,7 +415,7 @@ namespace editor {
 		if (clickName == "PropertiesWindow_apply") { // APPLY
 			if (type == "building"){
 				building_pointer->set_name(text_input[0].get_text());
-				if (building_pointer->is_central_building())
+				if (building_pointer->is_independent())
 					building_pointer->set_settlement_name(text_input[1].get_text());
 			}
 			PropertiesWindowIsOpen = false;

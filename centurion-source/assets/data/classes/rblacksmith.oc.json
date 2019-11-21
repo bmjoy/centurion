@@ -3,8 +3,8 @@
     "race": "rome",
     "class_name": "rblacksmith",
     "radius": 450,
-    "is_central_building": 0,
-	"category": "romanstronghold",
+    "is_independent": 0,
+	  "category": "romanstronghold",
     "ent_path": "assets/buildings/rome/blacksmith/rblacksmith.oe.json",
     "pass_path" : "assets/buildings/rome/blacksmith/rblacksmith.pass",
     "clickable_in_minimap": 0
