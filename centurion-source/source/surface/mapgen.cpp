@@ -316,7 +316,7 @@ namespace mapgen {
 					}
 				}
 				if (n == 1) { // 2 PLAYERS
-					d = math::euclidean_distance(a, b, townhallPos[n].x, townhallPos[n].y);
+					d = math::euclidean_distance(a, b, townhallPos[0].x, townhallPos[0].y);
 					if (d > mapHeight * 0.5) {
 						townhallPos[n].x = a;
 						townhallPos[n].y = b;

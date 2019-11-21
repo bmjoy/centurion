@@ -15,7 +15,7 @@ namespace game {
 		}
 		if (clickName == "GAME_pauseMenuButtonQuit") {
 			gameMenuStatus = false;
-			saveCurrentScenario("random_map_singleplayer");
+			//saveCurrentScenario("random_map_singleplayer");
 			ENGINE()->Reset();
 		}
 	}
