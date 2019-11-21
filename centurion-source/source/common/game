@@ -40,6 +40,8 @@ namespace game {
 	extern map<int, Unit> units;
 	extern map<int, Decoration> decorations;
 
+	extern vector<string> outposts;
+
 	extern array<Player,8> playersList;
 
 	//
@@ -90,4 +92,5 @@ namespace game {
 	void renderSelRectangle();
 	void setMinimapProjection();
 	void generateSettlements(int num_players);
+	void generateOutposts(vector<vec2> &outpostslocs);
 };

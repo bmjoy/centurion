@@ -47,11 +47,15 @@ namespace game {
 		surface = new Surface();
 		surface->reset();
 
+		vector<vec2> outpostsLocation;
+
 		/* DEFINE SETTLEMENTS POSITIONS */
-		mapgen::define_settlements(playersNumber);
+		mapgen::define_settlements(playersNumber, 15, &outpostsLocation);
 
 		/* CREATE SETTLEMENTS */
 		generateSettlements(playersNumber);
+		generateOutposts(outpostsLocation);
+
 
 		/* GENERATE NOISE */
 		surface->createNoise();

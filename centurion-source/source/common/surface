@@ -82,5 +82,5 @@ namespace mapgen {
 	float perlinNoise(float x, float y, float xy_scale, float z_scale, float x_seed, float y_seed);
 	void generateRandomMap();
 	float generateNoise(vec2 coords, bool normal = false);
-	void define_settlements(int num_players);
+	void define_settlements(int num_players, int num_outposts, vector<vec2> *outpostslocation);
 }

@@ -139,6 +139,7 @@ namespace engine {
 
 				EditorAddObjectBuildingOptions.push_back("EDITORTREE_CATEGORY_" + dataClass["category"].get<string>());
 
+				if (dataClass["category"].get<string>() == "outposts") outposts.push_back(dataClass["class_name"].get<string>());
 			}
 
 			if (dataClass["type"] == "unit") {

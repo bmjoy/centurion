@@ -39,7 +39,7 @@ namespace mapgen {
 		for (int i = 0; i < nVertices; i++) {
 
 			/* reset textures */
-			MapTextures()[i] = 4.f;
+			MapTextures()[i] = 1.f;
 
 			/* reset noise and normals */
 			MapHeights()[i * 4] = 0.f;
@@ -290,10 +290,11 @@ namespace mapgen {
 		return zHat;
 	}
 
-	void define_settlements(int num_players) {
+	void define_settlements(int num_players, int num_outposts, vector<vec2> *outpostslocation) {
 
 		srand((unsigned int)time(NULL));
-		std::vector<float> townhallPos;
+		vector<vec2> townhallPos(num_players, vec2(0));
+		vector<vec2> outpostsPos(num_outposts, vec2(0));
 		int k = 0;
 		int min = (int)townhallRadius + 100;
 		int max_X = mapWidth - (int)townhallRadius - 100;
@@ -309,30 +310,30 @@ namespace mapgen {
 
 				if (n == 0) { // 1 PLAYER
 					if (math::euclidean_distance(a, b, mapWidth / 2.0f, mapHeight / 2.0f) > mapHeight / 2.0f) {
-						townhallPos.push_back(a);
-						townhallPos.push_back(b);
+						townhallPos[n].x = a;
+						townhallPos[n].y = b;
 						c = true;
 					}
 				}
 				if (n == 1) { // 2 PLAYERS
-					d = math::euclidean_distance(a, b, townhallPos[n - 1], townhallPos[n]);
+					d = math::euclidean_distance(a, b, townhallPos[n].x, townhallPos[n].y);
 					if (d > mapHeight * 0.5) {
-						townhallPos.push_back(a);
-						townhallPos.push_back(b);
+						townhallPos[n].x = a;
+						townhallPos[n].y = b;
 						c = true;
 					}
 				}
 				if (n == 2 || n == 3) { // 3 & 4 PLAYERS
 					bool c2 = true;
 					for (int m = n - 1; m >= 0; m--) {
-						d = math::euclidean_distance(a, b, townhallPos[m * 2], townhallPos[m * 2 + 1]);
+						d = math::euclidean_distance(a, b, townhallPos[m].x, townhallPos[m].y);
 						if (d <= mapHeight * 0.5) {
 							c2 = c2 * false;
 						}
 					}
 					if (c2) {
-						townhallPos.push_back(a);
-						townhallPos.push_back(b);
+						townhallPos[n].x = a;
+						townhallPos[n].y = b;
 						c = true;
 					}
 				}
@@ -340,22 +341,52 @@ namespace mapgen {
 
 					bool c2 = true;
 					for (int m = n - 1; m >= 0; m--) {
-						d = math::euclidean_distance(a, b, townhallPos[m * 2], townhallPos[m * 2 + 1]);
+						d = math::euclidean_distance(a, b, townhallPos[m].x, townhallPos[m].y);
 						if (d <= mapHeight * 0.25) {
 							c2 = c2 * false;
 						}
 					}
 					if (c2) {
-						townhallPos.push_back(a);
-						townhallPos.push_back(b);
+						townhallPos[n].x = a;
+						townhallPos[n].y = b;
 						c = true;
 					}
 				}
 			}
 		}
-
 		for (int i = 0; i < num_players; i++) {
-			playersList[i].setStartPoint(glm::vec2(townhallPos[i * 2], townhallPos[i * 2 + 1]));
+			playersList[i].setStartPoint(townhallPos[i]);
 		}
+
+		for (int n = 0; n < num_outposts; n++) {
+			c = false;
+			while (!c) {
+				a = float(rand() % (max_X - min) + min);
+				b = float(rand() % (max_Y - min) + min);
+
+				bool c2 = true;
+				for (int m = 0; m < townhallPos.size(); m++) {
+					if (math::euclidean_distance(a, b, townhallPos[m].x, townhallPos[m].y) < townhallRadius * 1.75){
+						c2 = c2 * false;
+					}
+				}
+				for (int m = n - 1; m >= 0; m--) {
+					if (math::euclidean_distance(a, b, outpostsPos[m].x, outpostsPos[m].y) <= 3500){
+						c2 = c2 * false;
+					}
+				}
+				if (c2) {
+					outpostsPos[n].x = a;
+					outpostsPos[n].y = b;
+					c = true;
+				}
+			}
+		}
+
+		(*outpostslocation) = outpostsPos;
+	}
+
+	void define_outposts_location() {
+
 	}
 }

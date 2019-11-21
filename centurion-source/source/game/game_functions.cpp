@@ -39,6 +39,8 @@ namespace game {
 	map<int, Unit> units = { };
 	map<int, Decoration> decorations = { };
 
+	vector<string> outposts;
+
 	array<Player, 8> playersList;
 
 	SelRectPoints *SelRectCoords() { return &selRectCoords; }
@@ -325,6 +327,23 @@ namespace game {
 					}
 				}
 			}
+		}
+	}
+	void generateOutposts(vector<vec2> &outpostslocs) {
+
+		string className = "routpost";
+
+		for (int i = 0; i < outpostslocs.size(); i++) {
+			building::Building b = building::Building();
+			b.set_class(className);
+			b.set_player(0);
+			b.set_position(vec3(outpostslocs[i].x, outpostslocs[i].y, 0.f));
+			b.set_id(getPickingID());
+			b.set_settlement_name("Outpost_" + i);
+			b.create();
+			game::buildings[getPickingID()] = b;
+			game::independent_buildings[getPickingID()] = &game::buildings[getPickingID()];
+			increasePickingID();
 		}
 	}
 }
