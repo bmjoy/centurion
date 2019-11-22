@@ -61,6 +61,7 @@ namespace mapgen {
 	void reset_map();
 	float getNoiseEstimate(float x, float y);
 	int getVertexPos(int x, int y);
+	vec2 getVertexCoords(int j);
 	vec3 getVertex(int x, int y, bool isNormal);
 	array<Triangle, 6> getAdjacentTriangles(ivec2 pos);
 	vec3 calculateTriangleNormal(Triangle T);
@@ -76,5 +77,6 @@ namespace mapgen {
 	float perlinNoise(float x, float y, float xy_scale, float z_scale, float x_seed, float y_seed);
 	void generateRandomMap();
 	float generateNoise(vec2 coords, string type);
-	void define_buildings_location(int num_players, int num_outposts, vector<vec2> *outpostslocation);
+	void define_buildings_location(int num_players, int num_outposts, vector<vec2> *outpostslocation, vector<vec2> *townhallslocation);
+	void defineTerrainZones();
 }

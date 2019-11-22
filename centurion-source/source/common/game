@@ -30,6 +30,7 @@ namespace game {
 	extern int currentZoomCamera;
 	extern float zoomCameraFactor;
 	extern float townhallRadius;
+	extern float outpostRadius;
 	extern bool selRectangleIsActive;
 	static const float cameraThreshold = 20.f;
 	extern bool blockMinimap;
@@ -91,6 +92,6 @@ namespace game {
 	void renderObjects();
 	void renderSelRectangle();
 	void setMinimapProjection();
-	void generateSettlements(int num_players);
-	void generateOutposts(vector<vec2> &outpostslocs);
+	void generateSettlements(vector<vec2> &locs);
+	void generateOutposts(vector<vec2> &locs);
 };

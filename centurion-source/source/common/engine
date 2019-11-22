@@ -114,6 +114,7 @@ namespace engine {
 		void fps();
 		void fps_sleep();
 		void read_data();
+		void handleGlobalKeys();
 	};
 
 	static Engine myengine; 

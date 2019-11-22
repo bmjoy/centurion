@@ -48,6 +48,8 @@ namespace engine {
 			window.clear_buffers();
 			fps();
 			mouse->mouse_control(window.get_mouse_x(), window.get_mouse_y());
+			handleGlobalKeys();
+
 
 			// ---- MENU ---- //
 		
@@ -183,6 +185,15 @@ namespace engine {
 		KeyCode[GLFW_KEY_Z] = false;
 		KeyCode[GLFW_KEY_A] = false;
 		KeyCode[GLFW_KEY_T] = false;
+		KeyCode[GLFW_KEY_F10] = false;
+	}
+
+	void Engine::handleGlobalKeys() {
+		// activate or deactivate debug ui
+		if (getBoolean("debug") && KeyCode[GLFW_KEY_F10]) {
+			debug::DEBUG_UI()->setStatus(!debug::DEBUG_UI()->getStatus());
+			debug::DEBUG_UI()->getStatus() ? std::cout << "[DEBUG] Debug UI ON!\n" : std::cout << "[DEBUG] Debug UI OFF!\n";
+		}
 	}
 
 	void Engine::fps() {

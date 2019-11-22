@@ -23,6 +23,7 @@ namespace debug {
 			"selected units: ",
 		};
 		dynamicTextList = { "0" };
+		debuguiIsActive = true;
 	}
 
 	void DebugUI::create() {
@@ -51,29 +52,32 @@ namespace debug {
 
 	void DebugUI::render(int fps, int mpfs, int selUnits) {
 
-		if (currentLan != language) {
-			debugText[1].create_static("Currentlang:  " + language, "couriernew_15px", startX, startY + 157, "left", "normal", vec4(0, 255, 0, 255));
-			currentLan = language;
-		}
+		if (debuguiIsActive && getBoolean("debug")) {
 
-		back.render(vec4(0.f, 0.f, 0.f, 0.5f));
+			if (currentLan != language) {
+				debugText[1].create_static("Currentlang:  " + language, "couriernew_15px", startX, startY + 157, "left", "normal", vec4(0, 255, 0, 255));
+				currentLan = language;
+			}
 
-		debugText[0].render_static();
-		debugText[1].render_static();
+			back.render(vec4(0.f, 0.f, 0.f, 0.5f));
 
-		dynamicTextList[0] = to_string(fps);
-		dynamicTextList[1] = to_string(mpfs);
-		dynamicTextList[2] = to_string((int)getParam("mouse-y-position"));
-		dynamicTextList[3] = to_string((int)getParam("mouse-x-position"));
-		dynamicTextList[4] = to_string((int)getZoomedCoords(getParam("mouse-x-position"), getParam("mouse-y-position")).y);
-		dynamicTextList[5] = to_string((int)getZoomedCoords(getParam("mouse-x-position"), getParam("mouse-y-position")).x);
-		dynamicTextList[6] = to_string(selUnits);
+			debugText[0].render_static();
+			debugText[1].render_static();
 
-		!(ENGINE()->getEnvironment() == "game") ? n = 2 : n = (int)dynamicTextList.size();
+			dynamicTextList[0] = to_string(fps);
+			dynamicTextList[1] = to_string(mpfs);
+			dynamicTextList[2] = to_string((int)getParam("mouse-y-position"));
+			dynamicTextList[3] = to_string((int)getParam("mouse-x-position"));
+			dynamicTextList[4] = to_string((int)getZoomedCoords(getParam("mouse-x-position"), getParam("mouse-y-position")).y);
+			dynamicTextList[5] = to_string((int)getZoomedCoords(getParam("mouse-x-position"), getParam("mouse-y-position")).x);
+			dynamicTextList[6] = to_string(selUnits);
 
-		for (int i = 0; i < n; i++) {
-			staticText[i].render_static();
-			dynamicText.render_dynamic(dynamicTextList[i], "couriernew_15px", startX + 150.f, startY + deltaY * i, vec4(255.f), "left", "normal");
+			!(ENGINE()->getEnvironment() == "game") ? n = 2 : n = (int)dynamicTextList.size();
+
+			for (int i = 0; i < n; i++) {
+				staticText[i].render_static();
+				dynamicText.render_dynamic(dynamicTextList[i], "couriernew_15px", startX + 150.f, startY + deltaY * i, vec4(255.f), "left", "normal");
+			}
 		}
 	}
 

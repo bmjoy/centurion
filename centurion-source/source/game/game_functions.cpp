@@ -30,6 +30,7 @@ namespace game {
 	int currentZoomCamera = 8;
 	float zoomCameraFactor = 100.f;
 	float townhallRadius = 1875.f;
+	float outpostRadius = 700.f;
 	bool selRectangleIsActive = false;
 	bool blockMinimap = false;
 	int selectedUnits = 0;
@@ -46,6 +47,7 @@ namespace game {
 	SelRectPoints *SelRectCoords() { return &selRectCoords; }
 
 	void Game::handleKeyboardControls() {
+		
 		//Open or close minimap
 		if (KeyCode[GLFW_KEY_SPACE] || getBoolean("mouse-middle")) {
 			gameMinimapStatus = !gameMinimapStatus;
@@ -212,11 +214,13 @@ namespace game {
 		glb::minimapProjection = ortho(left, right, bottom, top, -right, right);
 	}
 
-	void generateSettlements(int num_players) {
+	void generateSettlements(vector<vec2> &locs) {
 
 		string RandomMapSettlementPath = "scenarios/RandomMapSettlements/";
 
 		vector<int> TemporaryMapTextures;
+
+		int num_townhalls = (int)locs.size();
 
 		// read texture
 		{
@@ -232,9 +236,10 @@ namespace game {
 			}
 		}
 
-		for (int i = 0; i < num_players; i++) {
+		for (int i = 0; i < num_townhalls; i++) {
 			string r = playersList[i].getPlayerRace().substr(5);
-			vec2 origin = playersList[i].getStartPoint();
+			vec2 origin = locs[i];
+			playersList[i].setStartPoint(origin);
 			string SettlementRace = "Settlement_" + r + "_1";
 			fstream fin;
 			fin.open(RandomMapSettlementPath + "objects.tsv");
@@ -329,15 +334,17 @@ namespace game {
 			}
 		}
 	}
-	void generateOutposts(vector<vec2> &outpostslocs) {
+
+
+	void generateOutposts(vector<vec2> &locs) {
 
 		string className = "routpost";
 
-		for (int i = 0; i < outpostslocs.size(); i++) {
+		for (int i = 0; i < locs.size(); i++) {
 			building::Building b = building::Building();
 			b.set_class(className);
 			b.set_player(0);
-			b.set_position(vec3(outpostslocs[i].x, outpostslocs[i].y, 0.f));
+			b.set_position(vec3(locs[i].x, locs[i].y, 0.f));
 			b.set_id(getPickingID());
 			b.set_settlement_name("Outpost_" + i);
 			b.create();

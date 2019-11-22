@@ -135,6 +135,12 @@ namespace mapgen {
 		return j;
 	}
 
+	vec2 getVertexCoords(int j) {
+		float x = MapVertices()[j * 4];
+		float y = MapVertices()[j * 4 + 1];
+		return vec2(x, y);
+	}
+
 	glm::vec3 getVertex(int x, int y, bool isNormal) {
 		int j = getVertexPos(x, y);
 		float intensity;
@@ -247,9 +253,9 @@ namespace mapgen {
 	}
 
 	void generateRandomMap() {
-		random_device rd;
-		mt19937 gen(rd());
-		uniform_real_distribution<float> distribution(0, 3);
+		//random_device rd;
+		//mt19937 gen(rd());
+		//uniform_real_distribution<float> distribution(0, 3);
 
 		for (int i = 0; i < nVertices; i++) {
 			float xCoord = MapVertices()[i * 4];
@@ -267,10 +273,10 @@ namespace mapgen {
 			maxZ = std::max(zNoise, maxZ);
 
 			// terrain
-			float p = distribution(gen);
-			if (p <= 1.5) MapTextures()[i] = 1.f;
-			if (p > 1.5 && p <= 2.5) MapTextures()[i] = 2.f;
-			if (p > 2.5 && p <= 3) MapTextures()[i] = 4.f;
+			//float p = distribution(gen);
+			//if (p <= 1.5) MapTextures()[i] = 1.f;
+			//if (p > 1.5 && p <= 2.5) MapTextures()[i] = 2.f;
+			//if (p > 2.5 && p <= 3) MapTextures()[i] = 4.f;
 			
 
 			// update texture
@@ -324,23 +330,36 @@ namespace mapgen {
 		return zHat;
 	}
 
-	void define_buildings_location(int num_players, int num_outposts, vector<vec2> *outpostslocation) {
-
+	void define_buildings_location(int num_players, int num_outposts, vector<vec2> *outpostslocation, vector<vec2> *townhallslocation) {
+		default_random_engine generator;
 		srand((unsigned int)time(NULL));
 		vector<vec2> townhallPos(num_players, vec2(0));
 		vector<vec2> outpostsPos(num_outposts, vec2(0));
-		int k = 0;
-		int min = (int)townhallRadius + 100;
-		int max_X = mapWidth - (int)townhallRadius - 100;
-		int max_Y = mapHeight - (int)townhallRadius - 100;
-		float a, b;
-		float d;
-		bool c;
+
+		/* locations grid definition */
+		vector<vec2> locGrid;
+		int min = (int)townhallRadius + grid_size;
+		int max_X = mapWidth - (int)townhallRadius - grid_size;
+		int max_Y = mapHeight - (int)townhallRadius - grid_size;
+		for (int iHoriz = 0; iHoriz < mapWidth - grid_size * 4; iHoriz += grid_size) {
+			for (int iVert = 0; iVert < mapHeight - grid_size * 4; iVert += grid_size) {
+				locGrid.push_back(vec2(iHoriz, iVert));
+			}
+		}
+
+		/* townhalls */
+
 		for (int n = 0; n < num_players; n++) {
-			c = false;
+			bool c = false;
 			while (!c) {
-				a = float(rand() % (max_X - min) + min);
-				b = float(rand() % (max_Y - min) + min);
+				uniform_int_distribution<int> distribution(0, int(locGrid.size()) - 1);
+				int j = distribution(generator);
+
+				float a = locGrid[j].x;
+				float b = locGrid[j].y;
+
+				if ((a >= mapWidth - townhallRadius * 1.1) || (a <= townhallRadius * 1.1) ||
+					(b >= mapHeight - townhallRadius * 1.1) || (b <= townhallRadius * 1.1)) continue;
 
 				if (n == 0) { // 1 PLAYER
 					if (math::euclidean_distance(a, b, mapWidth / 2.0f, mapHeight / 2.0f) > mapHeight / 2.0f) {
@@ -350,7 +369,7 @@ namespace mapgen {
 					}
 				}
 				if (n == 1) { // 2 PLAYERS
-					d = math::euclidean_distance(a, b, townhallPos[0].x, townhallPos[0].y);
+					float d = math::euclidean_distance(a, b, townhallPos[0].x, townhallPos[0].y);
 					if (d > mapHeight * 0.5) {
 						townhallPos[n].x = a;
 						townhallPos[n].y = b;
@@ -360,7 +379,7 @@ namespace mapgen {
 				if (n == 2 || n == 3) { // 3 & 4 PLAYERS
 					bool c2 = true;
 					for (int m = n - 1; m >= 0; m--) {
-						d = math::euclidean_distance(a, b, townhallPos[m].x, townhallPos[m].y);
+						float d = math::euclidean_distance(a, b, townhallPos[m].x, townhallPos[m].y);
 						if (d <= mapHeight * 0.5) {
 							c2 = c2 * false;
 						}
@@ -375,7 +394,7 @@ namespace mapgen {
 
 					bool c2 = true;
 					for (int m = n - 1; m >= 0; m--) {
-						d = math::euclidean_distance(a, b, townhallPos[m].x, townhallPos[m].y);
+						float d = math::euclidean_distance(a, b, townhallPos[m].x, townhallPos[m].y);
 						if (d <= mapHeight * 0.25) {
 							c2 = c2 * false;
 						}
@@ -388,24 +407,40 @@ namespace mapgen {
 				}
 			}
 		}
-		for (int i = 0; i < num_players; i++) {
-			playersList[i].setStartPoint(townhallPos[i]);
+		(*townhallslocation) = townhallPos;
+
+		// update locGrid;
+
+		for (int i = 0; i < locGrid.size(); i++) {
+			for (int j = 0; j < townhallPos.size(); j++) {
+				float d = math::euclidean_distance(locGrid[i].x, locGrid[i].y, townhallPos[j].x, townhallPos[j].y);
+				if (d <= townhallRadius * 1.25)
+					locGrid.erase(locGrid.begin() + i);
+			}
 		}
 
+		/* outposts */
+
 		for (int n = 0; n < num_outposts; n++) {
-			c = false;
+			bool c = false;
 			while (!c) {
-				a = float(rand() % (max_X - min) + min);
-				b = float(rand() % (max_Y - min) + min);
+				uniform_int_distribution<int> distribution(0, int(locGrid.size()) - 1);
+				int j = distribution(generator);
+
+				float a = locGrid[j].x;
+				float b = locGrid[j].y;
+
+				if ((a >= mapWidth - outpostRadius * 1.25) || (a <= outpostRadius * 1.25) ||
+					(b >= mapHeight - outpostRadius * 1.25) || (b <= outpostRadius * 1.25)) continue;
 
 				bool c2 = true;
 				for (int m = 0; m < townhallPos.size(); m++) {
-					if (math::euclidean_distance(a, b, townhallPos[m].x, townhallPos[m].y) < townhallRadius * 1.75){
+					if (math::euclidean_distance(a, b, townhallPos[m].x, townhallPos[m].y) < townhallRadius + 2 * outpostRadius){
 						c2 = c2 * false;
 					}
 				}
 				for (int m = n - 1; m >= 0; m--) {
-					if (math::euclidean_distance(a, b, outpostsPos[m].x, outpostsPos[m].y) <= 3500){
+					if (math::euclidean_distance(a, b, outpostsPos[m].x, outpostsPos[m].y) <= outpostRadius * 4){
 						c2 = c2 * false;
 					}
 				}
@@ -416,11 +451,49 @@ namespace mapgen {
 				}
 			}
 		}
-
 		(*outpostslocation) = outpostsPos;
 	}
 
-	void define_outposts_location() {
+	void defineTerrainZones() {
+		random_device rd;
+		mt19937 gen(rd());
+		uniform_real_distribution<float> distribution(-500.f, 500.f);
+		
 
+		for (int i = 0; i < nVertices; i++) {
+
+			string zoneType = "";
+
+			float d = mapWidth * 2;
+			vec2 p = getVertexCoords(i) - (float)grid_size;
+
+			for (map<int, Building*>::iterator settl = game::independent_buildings.begin(); settl != game::independent_buildings.end(); settl++) {
+				Building* b = settl->second;
+				if (b->get_class().substr(1) != "townhall") continue;
+
+				float rnoise = distribution(gen);
+
+				float dist = math::euclidean_distance(p.x, p.y, b->get_position().x, b->get_position().y) + rnoise;
+				if (dist <= d) {
+					d = dist;
+					if (b->get_class() == "rtownhall") zoneType = "mediterranean";
+					if (b->get_class() == "etownhall") zoneType = "desert";
+					if (dist <= townhallRadius) zoneType = "none";
+				}
+			}
+
+			/* reset textures */
+			if (zoneType == "" || zoneType == "mediterranean") {
+				vector<float> mediterranean_terrains = { 1.f, 1.f, 2.f, 2.f, 4.f };
+				uniform_int_distribution<int> distribution(0, 4);
+				int j = distribution(gen);
+				MapTextures()[i] = mediterranean_terrains[j];
+			}
+			if (zoneType == "desert") {
+				MapTextures()[i] = 10.f;
+			}
+		}
+		// update texture buffer
+		obj::MapTerrain()->updateTextureBuffer();
 	}
 }

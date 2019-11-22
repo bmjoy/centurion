@@ -47,21 +47,21 @@ namespace game {
 		surface = new Surface();
 		surface->reset();
 
-		/* GENERATE NOISE */
+		/* GENERATE HEIGHT NOISE */
 		surface->createNoise();
 
+
+		/* DEFINE BUILDINGS POSITIONS */
 		vector<vec2> outpostsLocation;
 		vector<vec2> townhallsLocation;
-
-
-		/* DEFINE SETTLEMENTS POSITIONS */
-		mapgen::define_buildings_location(playersNumber, 15, &outpostsLocation);
+		mapgen::define_buildings_location(playersNumber, 10, &outpostsLocation, &townhallsLocation);
 
 		/* CREATE SETTLEMENTS */
-		generateSettlements(playersNumber);
+		generateSettlements(townhallsLocation);
 		generateOutposts(outpostsLocation);
 
-
+		/* UPDATE TERRAIN TEXTURES */
+		mapgen::defineTerrainZones();
 		
 
 		/* UPDATE PASS MATRIX */

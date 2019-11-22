@@ -22,6 +22,8 @@ namespace debug {
 	class DebugUI {
 	public:
 		DebugUI();
+		void setStatus(bool b) { debuguiIsActive = b; }
+		bool getStatus() { return debuguiIsActive; }
 		void create();
 		void render(int fps, int mpfs, int selUnits);
 		~DebugUI();
@@ -34,6 +36,7 @@ namespace debug {
 		gui::SimpleText debugText[2];
 		float startX, startY, deltaY;
 		int n;
+		bool debuguiIsActive;
 		// background
 		gui::Rectangle back;
 		string currentLan;
