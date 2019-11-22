@@ -3,6 +3,8 @@
 #include <global>
 #include <game>
 #include <player>
+#include <random>
+#include <ctime>
 
 using namespace game;
 
@@ -106,11 +108,25 @@ namespace mapgen {
 		return z;
 	}
 
-	float generateNoise(glm::vec2 coords, bool normal) {
-		float zscale = ZSCALE;
+	float generateNoise(vec2 coords, string type) {
 
-		normal ? zscale *= 1.5f : zscale *= 1.f;
-		float zNoise = perlinNoise(coords.x, coords.y, XYSCALE, zscale, XSEED, YSEED);
+		float XYSCALE, ZSCALE, XSEED, YSEED;
+
+		if (type == "height") {
+			XYSCALE = 80.0f;
+			ZSCALE = 0.025f / 3.0f;
+			XSEED = 0.0f;
+			YSEED = 0.0f;
+		}
+
+		if (type == "texture") {
+			XYSCALE = 10.0f;
+			ZSCALE = 0.1f;
+			XSEED = 0.0f;
+			YSEED = 0.0f;
+		}
+
+		float zNoise = perlinNoise(coords.x, coords.y, XYSCALE, ZSCALE, XSEED, YSEED);
 		return zNoise;
 	}
 
@@ -231,17 +247,35 @@ namespace mapgen {
 	}
 
 	void generateRandomMap() {
+		random_device rd;
+		mt19937 gen(rd());
+		uniform_real_distribution<float> distribution(0, 3);
+
 		for (int i = 0; i < nVertices; i++) {
 			float xCoord = MapVertices()[i * 4];
 			float yCoord = MapVertices()[i * 4 + 1];
 
-			float zNoise = generateNoise(glm::vec2(xCoord, yCoord), false);
+			float zNoise = generateNoise(glm::vec2(xCoord, yCoord), "height");
 			zNoise = smoothNoise(yCoord, zNoise);
+
+			//float zTex = generateNoise(glm::vec2(xCoord, yCoord), "texture");
+			//zTex = smoothNoise(yCoord, zTex);
 
 			// update znoise
 			MapHeights()[i * 4] = zNoise;
 			minZ = std::min(zNoise, minZ);
 			maxZ = std::max(zNoise, maxZ);
+
+			// terrain
+			float p = distribution(gen);
+			if (p <= 1.5) MapTextures()[i] = 1.f;
+			if (p > 1.5 && p <= 2.5) MapTextures()[i] = 2.f;
+			if (p > 2.5 && p <= 3) MapTextures()[i] = 4.f;
+			
+
+			// update texture
+			//if (zTex > 1000)
+				//MapTextures()[i] = 10.f;
 		}
 		updateAllNormals();
 	}
@@ -290,7 +324,7 @@ namespace mapgen {
 		return zHat;
 	}
 
-	void define_settlements(int num_players, int num_outposts, vector<vec2> *outpostslocation) {
+	void define_buildings_location(int num_players, int num_outposts, vector<vec2> *outpostslocation) {
 
 		srand((unsigned int)time(NULL));
 		vector<vec2> townhallPos(num_players, vec2(0));

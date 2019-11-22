@@ -98,7 +98,7 @@ void Grid::update() {
 
 			/* From 3d grid to 2d */
 			/* for pathfinding calculation */
-			zNoise = mapgen::generateNoise(glm::vec2(x*astar::cellGridSize, y*astar::cellGridSize));
+			zNoise = mapgen::generateNoise(glm::vec2(x*astar::cellGridSize, y*astar::cellGridSize), "height");
 			zNoise = mapgen::smoothNoise((float)y*astar::cellGridSize, zNoise);
 			yNoise = int(y*astar::cellGridSize + zNoise) / astar::cellGridSize;
 			if (yNoise < grid_sizeY && yNoise > 0) {
