@@ -23,7 +23,8 @@ namespace glb {
 	GLFWwindow *MainWindow;
 
 	vector<vec3> colors;
-	vector<string> races;
+	vector<string> racesNames;
+	map<string, Race> RACES;
 	map<string, int> availableLanguages;
 
 	int CharCodepointPressed = -1; // for text input
@@ -74,10 +75,6 @@ namespace glb {
 			forceGameClosure("NOT_FOUND" , "ERROR_data");
 		}
 		json data = json::parse(data_path);
-
-		for (int i = 0; i < data["races"].size(); i++) {
-			glb::races.push_back(data["races"][i].get<string>());
-		}
 
 		for (int i = 0; i < data["player_colors"].size(); i++) {
 			vec3 color = vec3(data["player_colors"][i]["r"], data["player_colors"][i]["g"], data["player_colors"][i]["b"]);
@@ -564,6 +561,12 @@ namespace glb {
 		if (stat(folderPath.c_str(), &info) == 0) 
 			return true;
 		return false;
+	}
+
+	Race::Race(){
+	}
+
+	Race::~Race(){
 	}
 };
 

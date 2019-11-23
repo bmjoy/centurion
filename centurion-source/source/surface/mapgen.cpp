@@ -10,6 +10,9 @@ using namespace game;
 
 namespace mapgen {
 
+	map<string, vector<string>> zonesMap;
+	map<string, terrainTexture> terrainsMap;
+
 	float mouseZNoise = 0.f;
 	float minZ = 0.f;
 	float maxZ = 0.f;

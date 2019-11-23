@@ -13,9 +13,7 @@ Terrain::Terrain(){
 	terrainPathMap = map<string, string>();
 }
 
-
 void Terrain::create() {
-
 	mapgen::init();
 
 	// Read and store indices and vertices position information //
@@ -27,17 +25,28 @@ void Terrain::create() {
 	mapgen::reset_map();
 
 	// Textures
-
 	glUseProgram(shaderId);
 
 	genBuffers();
 
 	int k = 0;
 
-	for (map<string, string>::iterator i = terrainPathMap.begin(); i != terrainPathMap.end(); i++) {
+	ifstream path("assets/terrain/terrains.json");
+	json terrainData = json::parse(path);
 
-		texturesName.push_back(i->first);
+	for (map<string, string>::iterator i = terrainPathMap.begin(); i != terrainPathMap.end(); i++) {
+		string texName = i->first;
 		string texturePath = i->second;
+		texturesName.push_back(texName);
+
+		//Terrain data
+		terrainTexture tData = terrainTexture();
+		tData.id = terrainData[texName]["id"].get<int>();
+		tData.name = texName;
+		tData.zones = terrainData[texName]["zone"].get<vector<string>>();
+		tData.frequencies = terrainData[texName]["frequency"].get<vector<float>>();
+		mapgen::zonesMap[tData.zones[0]].push_back(texName);
+		mapgen::terrainsMap[texName] = tData;
 
 		// load image
 		textureIdList.push_back(0);

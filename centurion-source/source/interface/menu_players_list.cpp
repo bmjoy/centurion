@@ -55,7 +55,7 @@ namespace menu{
 			//Player civilization
 			addValueToPickingListUI(getPickingID(), "CivForm_" + std::to_string(j));
 			gui::FormInput c_fi = gui::FormInput(true);
-			c_fi.create((float)x + 280.f, (float)y - deltaY * j, 150.f, 20.f, glb::races, getPickingID());
+			c_fi.create((float)x + 280.f, (float)y - deltaY * j, 150.f, 20.f, racesNames, getPickingID());
 			civiliz_Form.push_back(c_fi);
 			increasePickingID();
 		}

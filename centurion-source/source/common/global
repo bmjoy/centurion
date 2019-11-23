@@ -22,7 +22,7 @@ namespace glb {
 	extern GLFWwindow *MainWindow;
 
 	extern vector<vec3> colors;
-	extern vector<string> races;
+	extern vector<string> racesNames;
 	extern map<string, int> availableLanguages;
 
 	extern int CharCodepointPressed;	// for text input
@@ -68,6 +68,25 @@ namespace glb {
 	void forceGameClosure(string errorCode, string errorText);
 	void showGameWarning(string reason);
 	bool folderExists(string folderPath);
+
+	// Race class
+	class Race {
+	public:
+		Race();
+		void setRaceProperties(int p1, string p2, string p3, string p4) { p_id = p1; name = p2; zone = p3; t_class = p4; }
+		int getRaceId() { return p_id; };
+		string getRaceName() { return name; }
+		string getEnvironmentalZone() { return zone; }
+		string getFoodTransportClass() { return t_class; }
+		~Race();
+	private:
+		int p_id;
+		string name;
+		string zone;
+		string t_class;
+	};
+
+	extern map<string, Race> RACES;
 };
 
 //------------------------------------------------------------------------------

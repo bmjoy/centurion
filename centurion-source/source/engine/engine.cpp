@@ -25,8 +25,8 @@ namespace engine {
 		environment = "menu";
 		reset = false;
 	}
+
 	int Engine::launch() {
-		
 		window.init();
 		obj::init();
 	
@@ -43,7 +43,6 @@ namespace engine {
 		DEBUG_UI()->create();
 
 		while (!getBoolean("window-should-close")) {
-
 			glfwPollEvents();
 			window.clear_buffers();
 			fps();
@@ -120,16 +119,29 @@ namespace engine {
 	}
 
 	void Engine::read_data() {
+		//Read races data
+		vector<string> r_files = get_all_files_names_within_folder("assets/data/races");
+		for (int i = 0; i < r_files.size(); ++i) {
+			ifstream path("assets/data/races/" + r_files[i]);
+			json dataRaces = json::parse(path);
+
+			Race r = Race();
+			int id = dataRaces["race_id"].get<int>();
+			string name = dataRaces["race_name"].get<string>();
+			string zone = dataRaces["zone"].get<string>();
+			string t_class = dataRaces["food_transport_class"].get<string>();
+			r.setRaceProperties(id, name, zone, t_class);
+			RACES[name]=r;
+			racesNames.push_back("RACE_"+name);
+		}
 
 		vector<string> files = get_all_files_names_within_folder("assets/data/classes");
-		json dataClass;
 	
 		/* buildings and units */
 
 		for (int i = 0; i < files.size(); ++i) {
-		
 			ifstream path("assets/data/classes/" + files[i]);
-			dataClass = json::parse(path);
+			json dataClass = json::parse(path);
 
 			if (dataClass["type"] == "building") {			
 				obj::BSprite()->addPath(dataClass["ent_path"]);

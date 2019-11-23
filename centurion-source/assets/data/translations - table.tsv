@@ -28,9 +28,9 @@ EDITOR_Tools	Tools	Strumenti	Herramientas	Outils	اﻷدوات
 EDITOR_Tools_AddObject	Toggle "Add Object" window	Attiva/Disattiva la finestra "Aggiungi oggetto"	Activar / Desactivar la ventana "Agregar objeto"	Activer/Désactiver la fenêtre "Ajouter un objet"	  ﺗﺸﻐﻴﻞ/  إﻟﻐﺎء ﺗﺸﻐﻴﻞ ﻧﺎﻓﺬة  "إﺿﺎﻓﺔ ﻛﺎﺋﻦ"    "
 EDITOR_Tools_TerrainBrush	Toggle terrain brushes	Attiva/Disattiva i pennelli dei terreni	Activar / Desactivar pinceles de terreno	Activer/Désactiver les brosses de terrain	  ﺗﺸﻐﻴﻞ/  إﻟﻐﺎء ﺗﺸﻐﻴﻞ ﻓﺮش اﻷرض
 EDITOR_addObjectButtonAdd	Add	Aggiungi	Añadir	Ajouter	إﺿﺎﻓﺔ
-EDITOR_newMapButtonClose	Close	Chiudi	Cerca	Fermer	أﻏﻟﻖ
+EDITOR_newMapButtonClose	Close	Chiudi	Cerrar	Fermer	أﻏﻟﻖ
 EDITOR_newMapButtonCreate	Create	Crea	Crear	Creér	إﻧﺸﺎء
-EDITOR_openMapButtonClose	Close	Chiudi	Cerca	Fermer	أﻏﻟﻖ
+EDITOR_openMapButtonClose	Close	Chiudi	Cerrar	Fermer	أﻏﻟﻖ
 EDITOR_openMapButtonOpen	Open	Apri	Abierto	Ouvrir	ﻓﺘﺢ
 EDITOR_newScenario	Create new scenario	Crea nuovo scenario	Crear nuevo escenario	Crée a nouveau scénario	إﻧﺸﺎء اﻟﺴﻴﻨﺎرﻳﻮ ﺟﺪﻳﺪ
 EDITOR_newScenarioName	Choose a name (max 30 characters).	Scegli un nome (max 30 caratteri).	Elegir un nombre (máximo 30 caracteres).	Choisir un nom (30 caractères maximum).	اﺧﺘﻴﺎر اﺳﻢ ﻟﻠﺴﻴﻨﺎرﻳﻮ )ﻣﺎﻛﺲ 03 اﺣﺮڧ(
@@ -42,8 +42,8 @@ EDITOR_defaultMapName	Untitled	Senza titolo	Intitulado	Sans titre	ﺑﺪون ﻋ
 EDITOR_buildings	Buildings	Strutture	Edificios	Édifices	اﻟﻤﺮاﻓﻖ
 EDITOR_units	Units	Unità	Unidades	Unités	ﺟﻨﻮد
 EDITOR_decorations	Decorations	Decorazioni	Decoraciones	Décorations	زﻳﻨﺔ
-EDITORTREE_CATEGORY_egyptianstronghold	Egyptian stronghold	Fortezza egizia	--	--	--
-EDITORTREE_CATEGORY_romanstronghold	Roman stronghold	Fortezza romana	--	--	--
+EDITORTREE_CATEGORY_egyptianstronghold	Egyptian stronghold	Fortezza egizia	Fortaleza egipcia	Forteresse égyptienne	--
+EDITORTREE_CATEGORY_romanstronghold	Roman stronghold	Fortezza romana	Fortaleza romana	Forteresse romane	--
 EDITORTREE_CATEGORY_trees	Trees	Alberi	Árboles	Arbres	--
 EDITORTREE_CLASS_ebarracks	Barracks	Caserma	Cuartel	Caserne	اﻟﺜﻜﻨﺎت
 EDITORTREE_CLASS_eblacksmith	Blacksmith	Fucina	Herrería	Forge	دﻛﺎن اﻟﺤﺪاد
@@ -86,8 +86,8 @@ WORD_playersNumber	Number of players	Numero di giocatori	Número de jugadores	No
 WORD_errorCode	Error code	Codice errore	Código de error	Code d'erreur	رﻣﺰ ﺧﺎﻃﺊ
 WORD_yes	Yes	Sì	Sí	Oui	ﻧﻌﻢ 
 WORD_no	No	No	No	Non	ﻻ
-RACE_rome	Rome	Roma	Roma	Rome	روﻣﺎ
-RACE_egypt	Egypt	Egitto	Egipto	Egypte	ﻣﺼﺮ
+RACE_Rome	Rome	Roma	Roma	Rome	روﻣﺎ
+RACE_Egypt	Egypt	Egitto	Egipto	Egypte	ﻣﺼﺮ
 ERROR_data	Unable to find or process DATA file.\nForced application shutdown has started.	Impossibile trovare o leggere il file DATA.\nArresto forzato dell'applicazione in corso...	No se puede encontrar o procesar el fichero DATA.\nLa aplicación va a ser cerrada automáticamente.	Impossible de trouver ou de traiter le fichier DATA.\nL’arrêt forcé de l’application a commencé.	.ﻏﻴﺮ ﻗﺎدر ﻋﻟﻰ اﻟﻌﺜﻮر أو ﻗﺮاءة اﻟﻤﻠﻒ. DATA.\n .اﻹﻏﻼق ٳﻟﺰاﻣﻲ ﻟﻠﺘﻄﺒﻴﻖ
 ERROR_settlements	Unable to find or process SETTLEMENTS file.\nForced application shutdown has started.	Impossibile trovare o leggere il file SETTLEMENTS.\nArresto forzato dell'applicazione in corso...	No se puede encontrar o procesar el fichero SETTLEMENTS.\nLa aplicación va a ser cerrada automáticamente.	Impossible de trouver ou de traiter le fichier SETTLEMENTS.\nL’arrêt forcé de l’application a commencé.	.ﻏﻴﺮ ﻗﺎدر ﻋﻟﻰ اﻟﻌﺜﻮر أو ﻗﺮاءة اﻟﻤﻠﻒ. SETTLEMENTS file.\n .اﻹﻏﻼق ٳﻟﺰاﻣﻲ ﻟﻠﺘﻄﺒﻴﻖ
 ERROR_menuData	Unable to find or process MENU DATA file.\nForced application shutdown has started.	Impossibile trovare o leggere il file MENU DATA.\nArresto forzato dell'applicazione in corso...	No se puede encontrar o procesar el fichero MENU DATA.\nLa aplicación va a ser cerrada automáticamente.	Impossible de trouver ou de traiter le fichier MENU DATA.\nL’arrêt forcé de l’application a commencé.	.ﻏﻴﺮ ﻗﺎدر ﻋﻟﻰ اﻟﻌﺜﻮر أو ﻗﺮاءة اﻟﻤﻠﻒ. MENU DATA file.\n .اﻹﻏﻼق ٳﻟﺰاﻣﻲ ﻟﻠﺘﻄﺒﻴﻖ

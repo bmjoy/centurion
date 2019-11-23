@@ -13,6 +13,8 @@ using namespace glm;
 	textures[] = textureType
 ------------------------------------------------------*/
 
+struct terrainTexture;
+
 namespace mapgen {
 	extern float mouseZNoise; // for 2d coord calculation
 	extern float minZ;
@@ -28,6 +30,9 @@ namespace mapgen {
 	static float map_heights[nVertices * 4];
 	static unsigned int indices[nIndices];
 	static int vertices_pos[nVertices];
+
+	extern map<string, vector<string>> zonesMap;
+	extern map<string, terrainTexture> terrainsMap;
 }
 
 //

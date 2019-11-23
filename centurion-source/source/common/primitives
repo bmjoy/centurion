@@ -63,12 +63,7 @@ private:
 */
 
 namespace txt {
-
 	bool isArabic(int codepoint);
-
-	
-
-	
 
 	struct CharData {
 		int charWidth[256];
@@ -136,7 +131,6 @@ public:
 	~BuildingSprite();
 
 private:
-
 	vector<string> entPathList;
 	string texturePath;       // texture path
 
@@ -319,6 +313,13 @@ private:
 	TERRAIN --> source/primitives/terrain.cpp
 */
 
+struct terrainTexture {
+	vector<string> zones;
+	vector<float> frequencies;
+	string name;
+	int id;
+};
+
 class Terrain : public Shader
 {
 public:
@@ -398,8 +399,6 @@ private:
 	void genBuffers();
 };
 
-
-
 struct DecorationData {
 	string className;
 	vec2 position;
@@ -407,7 +406,6 @@ struct DecorationData {
 	int height;
 	GLuint textureID;
 };
-
 
 class DecorationSprite : public Shader
 {

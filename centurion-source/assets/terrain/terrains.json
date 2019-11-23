@@ -1,0 +1,61 @@
+{
+  "GRASS_1": {
+    "id": 1,
+    "zone": [ "mediterranean" ],
+    "frequency": [ 2 ]
+  },
+
+  "GRASS_2": {
+    "id": 2,
+    "zone": [ "mediterranean" ],
+    "frequency": [ 1 ]
+  },
+
+  "GRASS_3": {
+    "id": 3,
+    "zone": [ "mediterranean" ],
+    "frequency": [ 1 ]
+  },
+
+  "GROUND_1": {
+    "id": 4,
+    "zone": [ "mediterranean" ],
+    "frequency": [ 1 ]
+  },
+
+  "GROUND_2": {
+    "id": 5,
+    "zone": [ "mediterranean" ],
+    "frequency": [ 1 ]
+  },
+
+  "GROUND_3": {
+    "id": 6,
+    "zone": [ "mediterranean" ],
+    "frequency": [ 1 ]
+  },
+
+  "ROAD_1": {
+    "id": 7,
+    "zone": [ "mediterranean" ],
+    "frequency": [ 0 ]
+  },
+
+  "ROAD_2": {
+    "id": 8,
+    "zone": [ "mediterranean" ],
+    "frequency": [ 0 ]
+  },
+
+  "ROAD_3": {
+    "id": 9,
+    "zone": [ "mediterranean" ],
+    "frequency": [ 0 ]
+  },
+
+  "SAND_1": {
+    "id": 10,
+    "zone": [ "desertic" ],
+    "frequency": [ 1 ]
+  }
+}

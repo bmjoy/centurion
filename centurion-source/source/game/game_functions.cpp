@@ -80,7 +80,6 @@ namespace game {
 	}
 
 	void renderObjectsPicking() {
-
 		if (leftClickID_UI != 0) {
 			leftClickID = 0;
 			rightClickID = 0;
@@ -215,7 +214,6 @@ namespace game {
 	}
 
 	void generateSettlements(vector<vec2> &locs) {
-
 		string RandomMapSettlementPath = "scenarios/RandomMapSettlements/";
 
 		vector<int> TemporaryMapTextures;
