@@ -49,7 +49,7 @@ out float terrainType;
 void main() 
 {   
     int terrainID = int(terrain) - 1;
-    if (true){
+    if (minimap == 0){
         for (int i = 0; i < nTerrains; i++){
             terrainWeight[i] = 0.f;
         }
