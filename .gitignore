@@ -3,6 +3,10 @@
 ##
 ## Get latest from https://github.com/github/gitignore/blob/master/VisualStudio.gitignore
 
+# Exclude:
+centurion-source/screenshots/*
+!centurion-source/screenshots/readme.txt
+
 # User-specific files
 *.suo
 *.user
