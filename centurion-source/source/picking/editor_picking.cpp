@@ -446,7 +446,7 @@ namespace editor {
 				if (j > 0) {
 					forms[i].select_option(j);
 					TerrainBrushIsActive = true;
-					selBrush = forms[i].selectedText;
+					selBrush = forms[i].selectedText.substr(12);
 				}
 			}
 		}

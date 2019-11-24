@@ -1,6 +1,6 @@
 {
     "type": "building",
-    "race": "egypt",
+    "race": "Egypt",
     "class_name": "etownhall",
     "radius": 600,
     "is_independent": 1,

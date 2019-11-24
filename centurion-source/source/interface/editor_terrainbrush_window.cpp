@@ -32,7 +32,7 @@ namespace editor {
 			terrainTypes.push_back(temp.erase(temp.find_first_of('_'),temp.length()));
 			terrainList[i] = "EDITORBRUSH_" + terrainList[i];
 			terTypesMap[terrainTypes[i]].push_back(terrainList[i]);
-			terrainMap[terrainList[i]] = i + 1;
+			//terrainMap[terrainList[i]] = i + 1;
 		}
 		sort(terrainTypes.begin(), terrainTypes.end());
 		terrainTypes.erase(unique(terrainTypes.begin(), terrainTypes.end()), terrainTypes.end());
@@ -45,6 +45,7 @@ namespace editor {
 			forms.push_back(form);
 		}
 
+		selBrush = "N/A";
 		TerrainBrushWindowIsOpen = false;
 	}
 	void TerrainBrushWindow::render(bool pick) {
@@ -61,8 +62,8 @@ namespace editor {
 			if (!pick) {
 				if (TerrainBrushIsActive){
 					circle.render(vec4(255), getParam("mouse-x-position"), getParam("mouse-y-position"));
-					if (getBoolean("mouse-left-pressed") && leftClickID_UI == 0 && getParam("mouse-y-position") < getParam("window-height") - 30.f) {
-						if (terrainMap.count(selBrush) > 0) changeTerrain(terrainMap[selBrush]);
+					if (getBoolean("mouse-left-pressed") && leftClickID_UI == 0 && getParam("mouse-y-position") < getParam("window-height") - 30.f) {						
+						if (mapgen::terrainsMap.count(selBrush) > 0) changeTerrain(mapgen::terrainsMap[selBrush].id);
 					}
 				}
 

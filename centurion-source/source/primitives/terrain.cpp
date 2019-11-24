@@ -45,7 +45,8 @@ void Terrain::create() {
 		tData.name = texName;
 		tData.zones = terrainData[texName]["zone"].get<vector<string>>();
 		tData.frequencies = terrainData[texName]["frequency"].get<vector<float>>();
-		mapgen::zonesMap[tData.zones[0]].push_back(texName);
+		for (int j = 0; j < tData.zones.size(); j++)
+			mapgen::zonesMap[tData.zones[j]].push_back(texName);
 		mapgen::terrainsMap[texName] = tData;
 
 		// load image

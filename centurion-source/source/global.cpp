@@ -92,6 +92,7 @@ namespace glb {
 		setParam("camera-max-zoom", 20.f);
 		language = "english";
 		setBoolean("debug", false);
+		setBoolean("full-screen", false);
 
 		if (!fin.good()) {
 			save_settings();
@@ -110,6 +111,7 @@ namespace glb {
 				if (values[0] == "camera-max-zoom") setParam(values[0], stof(values[1]));
 				if (values[0] == "language") language = values[1];
 				if (values[0] == "debug") setBoolean("debug", (bool)stoi(values[1]));
+				if (values[0] == "full-screen") setBoolean("full-screen", (bool)stoi(values[1]));
 			}
 		}
 		cout << "[DEBUG] Current language: " << language << "\n";
@@ -125,6 +127,7 @@ namespace glb {
 			fout << "camera-max-zoom=" << getParam("camera-max-zoom") << "\n";
 			fout << "language=" << language << "\n";
 			fout << "debug=" << getBoolean("debug") << "\n";
+			fout << "full-screen=" << getBoolean("full-screen") << "\n";
 		}
 		fout.close();
 	}

@@ -394,7 +394,6 @@ namespace editor {
 		~TerrainBrushWindow();
 	private:
 		string selBrush;
-		map<string, int> terrainMap;
 		gui::Rectangle back;
 		vector<gui::FormInput> forms;
 		gui::Circle circle;

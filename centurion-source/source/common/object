@@ -54,6 +54,24 @@ protected:
 //
 
 namespace building {
+
+	struct buildingProperties {
+		// properties from class 
+		string type;
+		string race;
+		string class_name;
+		string category;
+		string ent_path;
+		string pass_path;
+		float radius;
+		bool is_indipendent;
+		bool clickable_in_minimap;
+
+		// properties from sprite
+		float sprite_width, sprite_height;
+		GLuint textureID;
+	};
+
 	class Building : public GObject
 	{
 	public:
@@ -62,10 +80,10 @@ namespace building {
 		void create(string Name = "");
 		void render(bool picking, int clickID, bool not_placeable = false);
 		bool is_placeable();
+		string get_race() { return prop.race; }
 		void set_placeable(bool b) { isPlaceable = b; }
-		
 		void set_status(bool b) { isCreated = b; }
-		bool is_independent() { return isIndependent; }
+		bool is_independent() { return prop.is_indipendent; }
 		void set_settlement_name(string s) { settl_name = s; }
 		string get_settlement_name() { return settl_name; }
 		void set_settlement_building(Building *b) { independent = b; }
@@ -77,16 +95,13 @@ namespace building {
 		int buildingsInSettlementCount() { return (int)subs_buildings.size(); }
 		void setWaitingToBeErased(bool b) { waitingToBeErased = b; }
 		bool getWaitingToBeErased() { return waitingToBeErased; }
-		string getCategory() { return category; }
+		string getCategory() { return prop.category; }
 		~Building();
 
 	private:
 		vector<unit::Unit> unitsInside;
-		map<int, Building*> subs_buildings; // not central buildings connected to central one
-		int w, h, nrChannels;
-		GLuint textureID;
-		bool clickableInMinimap;
-		bool isIndependent;
+		map<int, Building*> subs_buildings; // dependent buildings connected to indipendent one
+		buildingProperties prop;
 		string settl_name;
 		Building *independent;
 		bool waitingToBeErased;
@@ -94,7 +109,7 @@ namespace building {
 		size_t buildingListSize;
 		bool isPlaceable;
 		gui::Circle circle[2];
-		string category;
+		vec2 getSpriteSize(string ent_path);
 		//sound selectionSound; TODO
 	};
 };

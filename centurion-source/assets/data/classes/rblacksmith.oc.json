@@ -1,6 +1,6 @@
 {
     "type": "building",
-    "race": "rome",
+    "race": "Rome",
     "class_name": "rblacksmith",
     "radius": 450,
     "is_independent": 0,

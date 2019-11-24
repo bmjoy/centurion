@@ -465,10 +465,10 @@ namespace mapgen {
 
 		for (int i = 0; i < nVertices; i++) {
 
-			string zoneType = "";
+			string zoneType = "none";
 
 			float d = mapWidth * 2;
-			vec2 p = getVertexCoords(i) - (float)grid_size;
+			vec2 p = getVertexCoords(i) - 2.f * grid_size;
 
 			for (map<int, Building*>::iterator settl = game::independent_buildings.begin(); settl != game::independent_buildings.end(); settl++) {
 				Building* b = settl->second;
@@ -476,24 +476,31 @@ namespace mapgen {
 
 				float rnoise = distribution(gen);
 
-				float dist = math::euclidean_distance(p.x, p.y, b->get_position().x, b->get_position().y) + rnoise;
+				float dist = math::euclidean_distance(p.x, p.y, b->get_position().x, b->get_position().y);
+				dist += rnoise;
 				if (dist <= d) {
 					d = dist;
-					if (b->get_class() == "rtownhall") zoneType = "mediterranean";
-					if (b->get_class() == "etownhall") zoneType = "desert";
-					if (dist <= townhallRadius) zoneType = "none";
+					string race = b->get_race();
+					if (dist - rnoise > townhallRadius - grid_size) zoneType = glb::RACES[race].getEnvironmentalZone();
+					else zoneType = "none";
 				}
 			}
-
-			/* reset textures */
-			if (zoneType == "" || zoneType == "mediterranean") {
-				vector<float> mediterranean_terrains = { 1.f, 1.f, 2.f, 2.f, 4.f };
-				uniform_int_distribution<int> distribution(0, 4);
+			
+			if (zoneType != "none"){
+				vector<string> availableTerrainTypes = zonesMap[zoneType];
+				vector<float> weightedTerrainsId;
+				for (int t = 0; t < availableTerrainTypes.size(); t++) {
+					terrainTexture terr = terrainsMap[availableTerrainTypes[t]];
+					for (int z = 0; z < terr.zones.size(); z++) {
+						if (terr.zones[z] == zoneType) {
+							for (int f = 0; f < terr.frequencies[z]; f++)
+								weightedTerrainsId.push_back(float(terr.id));
+						}
+					}
+				}
+				uniform_int_distribution<int> distribution(0, int(weightedTerrainsId.size()-1));
 				int j = distribution(gen);
-				MapTextures()[i] = mediterranean_terrains[j];
-			}
-			if (zoneType == "desert") {
-				MapTextures()[i] = 10.f;
+				MapTextures()[i] = weightedTerrainsId[j];
 			}
 		}
 		// update texture buffer

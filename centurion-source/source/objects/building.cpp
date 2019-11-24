@@ -20,24 +20,24 @@ namespace building {
 	}
 
 	void Building::prepare() {
+
+		prop.type = data["type"].get<string>();
+		prop.race = data["race"].get<string>();
+		prop.class_name = data["race"].get<string>();
+		prop.is_indipendent = (bool)data["is_independent"].get<int>();
+		prop.category = data["category"].get<string>();		
+		prop.ent_path = data["ent_path"].get<string>();
+		prop.pass_path = data["pass_path"].get<string>();
+		prop.clickable_in_minimap = (bool)data["clickable_in_minimap"].get<int>();
+
 		/* file pass */
-		string pass_path = data["pass_path"].get<string>();
-		pass_grid = astar::readPassMatrix(pass_path, className);
+		pass_grid = astar::readPassMatrix(prop.pass_path, className);
 
-		ifstream path_ent(data["ent_path"].get<string>());
-		if (!path_ent.good()) {
-			cout << "[DEBUG] Unable to find or process " << data["ent_path"].get<string>() << ". The relative building, therefore, won't be loaded into the game.\n";
-		}
-		json ent_data = json::parse(path_ent);
-		string texturePath = ent_data["path"].get<string>() + ent_data["sprites"][0]["name"].get<string>();
-		unsigned char *texture = stbi_load(texturePath.c_str(), &w, &h, &nrChannels, 0);
-		stbi_image_free(texture);
+		vec2 spriteSize = getSpriteSize(prop.ent_path);
+		prop.sprite_width = spriteSize.x; 
+		prop.sprite_height = spriteSize.y;
+		prop.textureID = obj::BSprite()->getTextureId(className);
 
-		isIndependent = (bool)data["is_independent"].get<int>();
-		category = data["category"].get<string>();
-		clickableInMinimap = (bool)data["clickable_in_minimap"].get<int>();
-		//selectionSound = (sound)data["selectionSound"].get<string>(); TODO
-		textureID = obj::BSprite()->getTextureId(className);
 		isCreated = false;
 	}
 
@@ -45,7 +45,7 @@ namespace building {
 		bool placeable = astar::checkAvailability(pass_grid, position);
 		string indCategory = "";
 		bool nearToIndependent = is_near_to_independent(&indCategory);
-		if (!isIndependent) placeable = placeable && nearToIndependent && indCategory == category;
+		if (!prop.is_indipendent) placeable = placeable && nearToIndependent && indCategory == prop.category;
 		return placeable;
 	}
 
@@ -67,28 +67,26 @@ namespace building {
 	}
 
 	void Building::create(string Name) {
+
+		prop.type = data["type"].get<string>();
+		prop.race = data["race"].get<string>();
+		prop.class_name = data["race"].get<string>();
+		prop.is_indipendent = (bool)data["is_independent"].get<int>();
+		prop.category = data["category"].get<string>();
+		prop.ent_path = data["ent_path"].get<string>();
+		prop.pass_path = data["pass_path"].get<string>();
+		prop.clickable_in_minimap = (bool)data["clickable_in_minimap"].get<int>();
+
 		/* file pass */
-		string pass_path = data["pass_path"].get<string>();
-		if (pass_grid.size() == 0) pass_grid = astar::readPassMatrix(pass_path, className);
+		if (pass_grid.size() == 0) pass_grid = astar::readPassMatrix(prop.pass_path, className);
 		update_pass();
 
-		ifstream path_ent(data["ent_path"].get<string>());
-		if (!path_ent.good()) {
-			cout << "[DEBUG] Unable to find or process " << data["ent_path"].get<string>() << ". The relative building, therefore, won't be loaded into the game.\n";
-		}
-		json ent_data = json::parse(path_ent);
-		string texturePath = ent_data["path"].get<string>() + ent_data["sprites"][0]["name"].get<string>();
-		unsigned char *texture = stbi_load(texturePath.c_str(), &w, &h, &nrChannels, 0);
-		stbi_image_free(texture);
-
-		isIndependent = (bool)data["is_independent"].get<int>();
-		category = data["category"].get<string>();
-		clickableInMinimap = (bool)data["clickable_in_minimap"].get<int>();
-		//selectionSound = (sound)data["selectionSound"].get<string>(); TODO
-		textureID = obj::BSprite()->getTextureId(className);
+		vec2 spriteSize = getSpriteSize(prop.ent_path);
+		prop.sprite_width = spriteSize.x;
+		prop.sprite_height = spriteSize.y;
+		prop.textureID = obj::BSprite()->getTextureId(className);
 
 		(Name == "") ? name = className + "_" + to_string(picking_id) : name = Name;
-		isCreated = true;
 
 		// selection circle (editor only)
 		circle[0] = gui::Circle();
@@ -97,6 +95,7 @@ namespace building {
 		// townhall radius (editor only)
 		circle[1] = gui::Circle();
 		circle[1].create("border", 0.f, 0.f, game::townhallRadius * 2.f, game::townhallRadius * 2.f, 10.f, "center");
+		isCreated = true;
 	}
 
 	
@@ -106,12 +105,12 @@ namespace building {
 		not_placeable = (not_placeable || !isPlaceable);
 
 		// keep updated not central buildings "settlement name"
-		if (!isIndependent && isCreated) 
+		if (!prop.is_indipendent && isCreated)
 			if (settl_name != independent->get_settlement_name())
 			    settl_name = independent->get_settlement_name();
 
 		// keep updated central buildings "subsidiaries buildings list"
-		if (game::buildings.size() != buildingListSize && isIndependent) {
+		if (game::buildings.size() != buildingListSize && prop.is_indipendent) {
 			subs_buildings.clear();
 			cout << "[DEBUG] Subsidiaries buildings to " + name + " have been updated. Their names are: \n";
 			for (map<int, Building>::iterator bld = game::buildings.begin(); bld != game::buildings.end(); bld++) {
@@ -131,15 +130,15 @@ namespace building {
 
 		if (engine::ENGINE()->getEnvironment() == "editor" && !game::gameMinimapStatus){
 			if (selected && !editor::addingObject) circle[0].render(vec4(255.f), position.x, position.y - data["radius"].get<float>() / 15.5f); // selection circle (editor only)
-			if (selected && isIndependent && !editor::addingObject) circle[1].render(vec4(0,255,255,255), position.x, position.y); // selection circle (editor only)
+			if (selected && prop.is_indipendent && !editor::addingObject) circle[1].render(vec4(0,255,255,255), position.x, position.y); // selection circle (editor only)
 		}
 
 		// rendering
-		obj::BSprite()->render(textureID, clickableInMinimap, position.x, position.y, (float)w, (float)h, picking, picking_id, selected, player->getPlayerColor(), not_placeable);
+		obj::BSprite()->render(prop.textureID, prop.clickable_in_minimap, position.x, position.y, prop.sprite_width, prop.sprite_height, picking, picking_id, selected, player->getPlayerColor(), not_placeable);
 	}
 
 	int Building::UnitsInBuilding(){
-		if (clickableInMinimap) {
+		if (prop.clickable_in_minimap) {
 			return (int)unitsInside.size();
 		}
 		else {
@@ -148,7 +147,7 @@ namespace building {
 	}
 
 	vector<unit::Unit> Building::UnitsInHolder() {
-		if (clickableInMinimap) {
+		if (prop.clickable_in_minimap) {
 			return unitsInside;
 		}
 		else {
@@ -162,6 +161,20 @@ namespace building {
 			ids.push_back(sub->first);
 		}
 		return ids;
+	}
+
+	vec2 Building::getSpriteSize(string ent_path) {
+		ifstream path_ent(ent_path);
+		if (!path_ent.good()) {
+			cout << "[DEBUG] Unable to find or process " << ent_path << ". The relative building, therefore, won't be loaded into the game.\n";
+		}
+		json ent_data = json::parse(path_ent);
+		string texturePath = ent_data["path"].get<string>() + ent_data["sprites"][0]["name"].get<string>();
+		int w, h, nrChannels;
+		unsigned char *texture = stbi_load(texturePath.c_str(), &w, &h, &nrChannels, 0);
+		stbi_image_free(texture);
+
+		return vec2(w, h);
 	}
 
 	Building::~Building(){}

@@ -1,6 +1,6 @@
 {
     "type": "building",
-    "race": "rome",
+    "race": "Rome",
     "class_name": "rtownhall",
     "radius": 500,
     "is_independent": 1,

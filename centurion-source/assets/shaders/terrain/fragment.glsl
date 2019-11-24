@@ -51,7 +51,7 @@ void main()
        
     vec4 terrainTexture = vec4(0);
     
-    if (minimap == 0){
+    if (true){
         for (int i = 0; i < nTerrains; i++){
             terrainTexture += texture(sampleTex[i], FragTexScaled) * (ambientColor + diffuseColor) * terrainWeight[i];
         }

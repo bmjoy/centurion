@@ -1,6 +1,6 @@
 {
     "type": "building",
-    "race": "egypt",
+    "race": "Egypt",
     "class_name": "eblacksmith",
     "radius": 1000,
     "is_independent": 0,
