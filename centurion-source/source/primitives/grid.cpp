@@ -13,6 +13,7 @@ Grid::Grid()
 }
 
 void Grid::create() {
+	glUseProgram(shaderId);
 
 	unsigned int indices[] = {
 		0, 1, 3,   // first triangle
@@ -67,6 +68,7 @@ void Grid::create() {
 }
 
 void Grid::reset() {
+	glUseProgram(shaderId);
 	int grid_sizeX = mapWidth / astar::cellGridSize;
 	int grid_sizeY = mapHeight / astar::cellGridSize;
 	unsigned char* gridData = new unsigned char[grid_sizeX * grid_sizeY * 4];
@@ -85,6 +87,7 @@ void Grid::reset() {
 }
 
 void Grid::update() {
+	glUseProgram(shaderId);
 	/* This texture comes from the real grid of 0/1 */
 
 	float zNoise;

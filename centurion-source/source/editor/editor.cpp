@@ -29,7 +29,7 @@ namespace editor {
 		game::GAME()->selRectangle.create("border", 0, 0, 0, 0, "top-left", 0);
 		setBoolean("mouse-left-pressed", false);
 
-		CAMERA()->go_to_pos(1.f, 1.f);
+		CAMERA()->go_to_pos(1.f, 1.f);		
 
 		editorIsCreated = true;
 	}
@@ -47,34 +47,49 @@ namespace editor {
 				CAMERA()->mouseControl(game::cameraThreshold);
 			view = CAMERA()->calculateViewMatrix();
 			proj = glb::cameraProjection;
+
+			EDITOR_UI()->render(true);
+
+			// apply game matrices
+			obj::applyGameMatrices(&proj, &view);
+
+			// picking
+			if (!IsWindowOpened && !addingObject && !TerrainBrushIsActive) game::renderObjectsPicking();
+
+			// rendering
+			surface->render(false);
+			if (!IsWindowOpened && !addingObject && !TerrainBrushIsActive) moveObjects();
+			game::renderObjects();
+
+			// apply menu matrices
+			obj::applyMenuMatrices();
+
+			EDITOR_UI()->render(false);
 		}
 
 		/* If minimap is active */
 		else {
 			view = mat4(1.0f);
 			proj = glb::minimapProjection;
+
+			// editor ui picking */
+			EDITOR_UI()->render(true);
+
+			if (game::MINIMAP()->getStatus()) game::MINIMAP()->render();
+		
+			if (!game::MINIMAP()->getStatus()) {
+				obj::applyGameMatrices(&proj, &view);
+				surface->render(false);
+				game::renderObjects();
+				game::MINIMAP()->create();
+				obj::applyMenuMatrices();
+			}
+			
+			EDITOR_UI()->render(false);
+
+			game::goToPosition();
 		}
 
-		// editor ui picking */
-		EDITOR_UI()->render(true);
-
-		//-----------------------------
-		/* normal rendering */
-		obj::applyGameMatrices(&proj, &view);
-
-		if (!IsWindowOpened && !addingObject && !TerrainBrushIsActive) game::renderObjectsPicking();
-
-		surface->render(false);
-
-		if (!IsWindowOpened && !addingObject && !TerrainBrushIsActive) moveObjects();
-
-		game::renderObjects();
-
-		// editor UI normal rendering
-		obj::applyMenuMatrices();
-		EDITOR_UI()->render(false);
-
-		if(game::gameMinimapStatus) game::goToPosition();
 		glb::cameraProjection = glm::ortho(0.0f, getParam("window-width-zoomed"), 0.0f, getParam("window-height-zoomed"), -(float)game::mapWidth, (float)game::mapWidth);
 
 		setBoolean("mouse-right", false);

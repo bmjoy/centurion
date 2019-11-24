@@ -7,6 +7,9 @@
 #include <object>
 #include <menu>
 
+#define STB_IMAGE_WRITE_IMPLEMENTATION
+#include <stb_image_write.h>
+
 /* ----- GLOBAL ----- */
 
 using namespace glb;
@@ -53,7 +56,7 @@ namespace glb {
 
 		read_settings();				
 		read_translation_tables();
-
+		
 		setParam("window-ratio", getParam("window-width") / getParam("window-height"));
 		setParam("window-width-zoomed", getParam("window-width") + (currentZoomCamera - 1) * zoomCameraFactor);
 		setParam("window-height-zoomed", getParam("window-height") + (currentZoomCamera - 1) * zoomCameraFactor / getParam("window-ratio"));
@@ -80,6 +83,8 @@ namespace glb {
 			vec3 color = vec3(data["player_colors"][i]["r"], data["player_colors"][i]["g"], data["player_colors"][i]["b"]);
 			glb::colors.push_back(color);
 		}
+
+		stbi_flip_vertically_on_write(1);
 	}
 
 	void read_settings() {
@@ -406,6 +411,23 @@ namespace glb {
 			}
 		}
 	}
+	void takeScreenshot() {
+		char filename[50];
+		static char basename[30];
+		time_t t = time(NULL);
+		strftime(basename, 30, "%Y%m%d_%H%M%S.png", localtime(&t));
+		strcpy(filename, "screenshots/");
+		strcat(filename, basename);
+
+		int w = (int)getParam("window-width");
+		int h = (int)getParam("window-height");
+		unsigned char* imageData = new unsigned char[int(w * h * 3)];
+		glPixelStorei(GL_PACK_ALIGNMENT, 1);
+		glReadPixels(0, 0, w, h, GL_RGB, GL_UNSIGNED_BYTE, imageData);
+
+		int saved = stbi_write_png(filename, w, h, 3, imageData, 0);
+		free(imageData);
+	}
 	//-----------------------------------------------------------------------------
 	//-----------------------------------------------------------------------------
 	//-----------------------------------------------------------------------------
@@ -589,6 +611,7 @@ namespace obj {
     UnitSprite *USprite() { return &usprite; }
     Terrain *MapTerrain() { return &terrain; }
     Grid *MapGrid() { return &grid; }
+    MinimapRectangle *MMRectangle() { return &mmRect; }
     
     void init() {
         //*Audio() = AudioManager();
@@ -603,6 +626,7 @@ namespace obj {
         *USprite() = UnitSprite();
         *MapTerrain() = Terrain();
         *MapGrid() = Grid();
+		*MMRectangle() = MinimapRectangle();
     }
     void compile() {
         Text()->compile();
@@ -616,6 +640,7 @@ namespace obj {
         USprite()->compile();
         MapTerrain()->compile();
         MapGrid()->compile();
+		MMRectangle()->compile();
     }
     void create() {
         Text()->apply_projection_matrix(glb::menuProjection);
@@ -637,6 +662,7 @@ namespace obj {
 
         MapTerrain()->create();
         MapGrid()->create();
+		MMRectangle()->create();
     }
 
     void applyMenuMatrices() {
@@ -648,6 +674,8 @@ namespace obj {
         ERectangle()->apply_view_matrix();
         FRectangle()->apply_projection_matrix(glb::menuProjection);
         FRectangle()->apply_view_matrix();
+		MMRectangle()->apply_projection_matrix(glb::menuProjection);
+		MMRectangle()->apply_view_matrix();
     }
     void applyGameMatrices(mat4 *proj, mat4 *view) {
         BSprite()->apply_projection_matrix(*proj);

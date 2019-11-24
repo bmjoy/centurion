@@ -61,7 +61,7 @@ void myWindow::character_callback(GLFWwindow* window, unsigned int codepoint) {
 
 void myWindow::handle_keys(GLFWwindow* window, int key, int code, int action, int mode) {
 	myWindow* theWindow = static_cast<myWindow*>(glfwGetWindowUserPointer(window));
-	
+
 	KeyCode[key] = (action == GLFW_PRESS || action == GLFW_REPEAT);
 }
 

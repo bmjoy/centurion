@@ -59,6 +59,7 @@ namespace glb {
 	vector<file_info> get_all_files_names_within_subfolders(string const &folder_name, string const &file_extension = "");
 	void saveCurrentScenario(string name);
 	void openScenario(string name);
+	void takeScreenshot();
 
 	// other functions 
 	float getYMinimapCoord(float x);
@@ -68,6 +69,7 @@ namespace glb {
 	void forceGameClosure(string errorCode, string errorText);
 	void showGameWarning(string reason);
 	bool folderExists(string folderPath);
+	
 
 	// Race class
 	class Race {
@@ -135,6 +137,9 @@ namespace obj {
 
 	static Grid grid;
 	Grid *MapGrid();
+
+	static MinimapRectangle mmRect;
+	MinimapRectangle *MMRectangle();
 
 	void applyMenuMatrices();
 	void applyGameMatrices(mat4 *proj, mat4 *view);

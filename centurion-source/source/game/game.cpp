@@ -30,6 +30,7 @@ namespace game {
 		gameMinimapStatus = false;
 		gameGridStatus = false;
 		blockMinimap = false;
+		MINIMAP()->setStatus(false);
 	}
 
 	void Game::create() {
@@ -112,39 +113,55 @@ namespace game {
 			CAMERA()->mouseControl(cameraThreshold);
 			view = CAMERA()->calculateViewMatrix();
 			projection = glb::cameraProjection;
+
+			ui->render(true);
+
+			// apply game matrices:
+			obj::applyGameMatrices(&projection, &view);
+
+			/* Tracing and Picking */
+			if (!gameMinimapStatus) tracing(surface);
+			if (!gameMenuStatus) renderObjectsPicking();
+
+			/* Rendering */
+			surface->render(false);
+			renderObjects();
+
+			// apply menu matrices:
+			obj::applyMenuMatrices();
+
+			ui->render(false);
 		}
+
 
 		/* If minimap is active */
 		else {
 			view = mat4(1.0f);
-			projection = glb::minimapProjection;	
+			projection = glb::minimapProjection;
+
+			ui->render(true);
+
+			// apply game matrices:
+			obj::applyGameMatrices(&projection, &view);
+			if (!gameMenuStatus) renderObjectsPicking();
+
+			if (game::MINIMAP()->getStatus()) game::MINIMAP()->render();
+
+			/* Rendering */
+			if (!game::MINIMAP()->getStatus()) {
+				surface->render(false);
+				game::MINIMAP()->create();
+			}
+			renderObjects();
+
+			// apply menu matrices:	
+			obj::applyMenuMatrices();
+			ui->render(false);
+
+			if (gameMinimapStatus) goToPosition();
 		}
-
-		ui->render(true);
-
-		// apply game matrices:
-		obj::applyGameMatrices(&projection, &view);
-
-		/* Tracing and Picking */
-		if (!gameMinimapStatus) tracing(surface);
-		if(!gameMenuStatus) renderObjectsPicking();
 		
-
-		/* Rendering */
-		surface->render(false);
-		renderObjects();
-
-		// ---- Game UI ---- //
-
-		// apply menu matrices:
-		obj::applyMenuMatrices();
-		ui->render(false);
-
-		// ----------------- //	
-
-		if(gameMinimapStatus) goToPosition();
 		glb::cameraProjection = ortho(0.0f, getParam("window-width-zoomed"), 0.0f, getParam("window-height-zoomed"), -(float)mapWidth, (float)mapWidth);
-		
 
 		// reset mouse-right and mouse-left to improve fps
 		setBoolean("mouse-right", false);

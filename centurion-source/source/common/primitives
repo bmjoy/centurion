@@ -243,6 +243,21 @@ public:
 };
 
 /*
+	MINIMAP PRERENDER --> source/primitives/minimap_rectangle.cpp
+*/
+
+class MinimapRectangle : public Shader
+{
+public:
+	MinimapRectangle();
+	void create();
+	void update();
+	void render();
+	~MinimapRectangle();
+};
+
+
+/*
 	IMAGE SPRITE --> source/primitives/image_sprite.cpp
 */
 

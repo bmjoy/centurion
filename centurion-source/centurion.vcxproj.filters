@@ -312,6 +312,9 @@
     <ClCompile Include="source\objects\decoration.cpp">
       <Filter>Source Files\objects</Filter>
     </ClCompile>
+    <ClCompile Include="source\primitives\minimap_rectangle.cpp">
+      <Filter>Source Files\primitives</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="source\extern\includes\json.hpp">

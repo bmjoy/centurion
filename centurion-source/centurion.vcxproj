@@ -99,6 +99,7 @@
       <AdditionalIncludeDirectories>$(ProjectDir)source/extern/includes;$(ProjectDir)source/common</AdditionalIncludeDirectories>
       <DisableSpecificWarnings>4250</DisableSpecificWarnings>
       <AdditionalOptions>/utf-8 %(AdditionalOptions)</AdditionalOptions>
+      <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
     <Link>
       <AdditionalLibraryDirectories>$(ProjectDir)source/extern/libraries</AdditionalLibraryDirectories>
@@ -133,6 +134,7 @@
       <AdditionalIncludeDirectories>$(ProjectDir)source/extern/includes;$(ProjectDir)source/common</AdditionalIncludeDirectories>
       <DisableSpecificWarnings>4250</DisableSpecificWarnings>
       <AdditionalOptions>/utf-8 %(AdditionalOptions)</AdditionalOptions>
+      <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
     <Link>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
@@ -177,6 +179,7 @@
     <ClCompile Include="source\primitives\grid.cpp" />
     <ClCompile Include="source\primitives\image_sprite.cpp" />
     <ClCompile Include="source\primitives\light.cpp" />
+    <ClCompile Include="source\primitives\minimap_rectangle.cpp" />
     <ClCompile Include="source\primitives\shader.cpp" />
     <ClCompile Include="source\primitives\terrain.cpp" />
     <ClCompile Include="source\primitives\unit_sprite.cpp" />

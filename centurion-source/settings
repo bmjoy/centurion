@@ -1,9 +1,9 @@
 [Settings]
 
-window-width=1920
-window-height=1080
+window-width=1366
+window-height=768
 camera-movespeed=10
 camera-max-zoom=20
 language=italian
-debug=0
-full-screen=1
+debug=1
+full-screen=0

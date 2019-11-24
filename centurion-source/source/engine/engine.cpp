@@ -105,6 +105,11 @@ namespace engine {
 			// mouse
 			mouse->render();
 			
+			if ((KeyCode[GLFW_KEY_LEFT_SHIFT] || KeyCode[GLFW_KEY_RIGHT_SHIFT])&& KeyCode[GLFW_KEY_S]){
+				cout << "[DEBUG] Screenshot taken." << endl;
+				glb::takeScreenshot();
+			}
+
 			CharCodepointPressed = -1;
 			resetKeyCodes();
 			glfwSwapBuffers(MainWindow);
@@ -196,8 +201,11 @@ namespace engine {
 		KeyCode[GLFW_KEY_SPACE] = false;
 		KeyCode[GLFW_KEY_Z] = false;
 		KeyCode[GLFW_KEY_A] = false;
+		KeyCode[GLFW_KEY_S] = false;
 		KeyCode[GLFW_KEY_T] = false;
 		KeyCode[GLFW_KEY_F10] = false;
+		KeyCode[GLFW_KEY_ENTER] = false;
+		KeyCode[GLFW_KEY_ESCAPE] = false;
 	}
 
 	void Engine::handleGlobalKeys() {

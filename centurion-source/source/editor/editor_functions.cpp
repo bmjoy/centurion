@@ -186,6 +186,7 @@ namespace editor {
 				addingObject = false;
 			}
 		}
+		game::MINIMAP()->setStatus(false);
 	}
 
 	void changeTerrain(int terrainType) {
@@ -202,6 +203,7 @@ namespace editor {
 		if (mapgen::MapTextures()[j] != type){
 			mapgen::MapTextures()[j] = type;
 			obj::MapTerrain()->updateTextureBuffer();
+			game::MINIMAP()->setStatus(false);
 		}
 	}
 
@@ -279,6 +281,7 @@ namespace editor {
 						textInfo.render_dynamic(getTranslation("EDITOR_canAddStructure"), "tahoma_15px", 10, getParam("window-height") - 50, vec4(255.f), "left", "center");
 				}
 				movingObject = true;
+				game::MINIMAP()->setStatus(false);
 			}
 		}
 		else {

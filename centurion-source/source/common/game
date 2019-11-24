@@ -70,6 +70,25 @@ namespace game {
 	static Game mygame;
 	Game *GAME(); // --> definition in game_functions.cpp
 
+	// 
+	// PRERENDERED MINIMAP
+
+	class Minimap {
+	public:
+		Minimap();
+		void create();
+		void render();
+		void setStatus(bool b) { isCreated = b; }
+		bool getStatus() { return isCreated; }
+		~Minimap();
+	private:
+		bool isCreated;
+	};
+
+	static Minimap myminimap;
+	Minimap *MINIMAP();
+
+
 	//
 	// GAME FUNCTIONS --> source/game/game_functions.cpp
 	//
@@ -94,4 +113,5 @@ namespace game {
 	void setMinimapProjection();
 	void generateSettlements(vector<vec2> &locs);
 	void generateOutposts(vector<vec2> &locs);
+
 };

@@ -18,6 +18,7 @@ using namespace decoration;
 namespace game {
 
 	Game *GAME() { return &mygame; }
+	Minimap *MINIMAP() { return &myminimap; }
 
 	bool gameMenuStatus = false;
 	bool gameMinimapStatus = false;
@@ -69,6 +70,20 @@ namespace game {
 			gameGridStatus ? std::cout << "[DEBUG] Grid ON!\n" : std::cout << "[DEBUG] Grid OFF!\n";
 		}
 	}
+
+	// prerendered minimap--------------------
+	Minimap::Minimap() {
+		isCreated = false;
+	}
+	void Minimap::create() {
+		obj::MMRectangle()->update();
+		isCreated = true;
+	}
+	void Minimap::render() {
+		obj::MMRectangle()->render();
+	}
+	Minimap::~Minimap(){}
+	//----------------------------------------
 
 	void tracing(Surface *s) {
 		if (getBoolean("mouse-right")) {
