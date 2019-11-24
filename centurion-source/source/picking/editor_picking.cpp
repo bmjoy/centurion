@@ -386,10 +386,12 @@ namespace editor {
 		}
 
 		if (clickName == "AddObjWindow_add") { // ADD
-			addingObject = true;
-			setBoolean("mouse-left", false);
-			setParam("mouse-x-leftclick", 0.f);
-			setParam("mouse-y-leftclick", 0.f);
+			if (!game::gameMinimapStatus){
+				addingObject = true;
+				setBoolean("mouse-left", false);
+				setParam("mouse-x-leftclick", 0.f);
+				setParam("mouse-y-leftclick", 0.f);
+			}
 		}
 	}
 

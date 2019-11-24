@@ -3,6 +3,7 @@
 #include <engine>
 #include <editor>
 #include <surface>
+#include <game>
 
 using namespace glb;
 using namespace engine;
@@ -60,7 +61,7 @@ namespace editor {
 				picking();
 			}
 			if (!pick) {
-				if (TerrainBrushIsActive){
+				if (!game::gameMinimapStatus && TerrainBrushIsActive){
 					circle.render(vec4(255), getParam("mouse-x-position"), getParam("mouse-y-position"));
 					if (getBoolean("mouse-left-pressed") && leftClickID_UI == 0 && getParam("mouse-y-position") < getParam("window-height") - 30.f) {						
 						if (mapgen::terrainsMap.count(selBrush) > 0) changeTerrain(mapgen::terrainsMap[selBrush].id);

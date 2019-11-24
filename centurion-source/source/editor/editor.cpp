@@ -87,7 +87,7 @@ namespace editor {
 			
 			EDITOR_UI()->render(false);
 
-			game::goToPosition();
+			if (leftClickID_UI == 0) game::goToPosition();
 		}
 
 		glb::cameraProjection = glm::ortho(0.0f, getParam("window-width-zoomed"), 0.0f, getParam("window-height-zoomed"), -(float)game::mapWidth, (float)game::mapWidth);

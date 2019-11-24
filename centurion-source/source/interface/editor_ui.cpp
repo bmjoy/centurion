@@ -26,13 +26,6 @@ namespace editor {
 	}
 
 	void EditorUI::render(bool picking) {
-		open_map_window.render(picking);
-		new_map_window.render(picking);
-		add_object_window.render(picking);
-		properties_window.render(picking);
-		terrainbrush_window.render(picking);
-		Q_WINDOW()->render(picking);
-
 		// minimap rectangle:
 		if (game::gameMinimapStatus) {
 			float x = getParam("camera-x-position") / game::mapWidth * getParam("window-width");
@@ -44,6 +37,13 @@ namespace editor {
 			y = std::min(y, getParam("window-height") - getParam("ui-top-height") - h);
 			minimapRectangle.render(vec4(255.f), false, x, y, w, h);
 		}
+
+		open_map_window.render(picking);
+		new_map_window.render(picking);
+		add_object_window.render(picking);
+		properties_window.render(picking);
+		terrainbrush_window.render(picking);
+		Q_WINDOW()->render(picking);
 
 		editor_menu.render(picking); // always the last
 	}

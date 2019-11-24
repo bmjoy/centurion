@@ -66,6 +66,8 @@ namespace building {
 		float radius;
 		bool is_indipendent;
 		bool clickable_in_minimap;
+		bool is_townhall;
+		bool is_villagehall;
 
 		// properties from sprite
 		float sprite_width, sprite_height;

@@ -57,7 +57,10 @@ namespace editor {
 
 		objectForms[1] = gui::FormInput(true);
 		pickingIDs[1] = getPickingID();
-		objectForms[1].create(startX + 11.f, startY - 11.f - 30.f, 150.f, 20.f, EditorAddObjectBuildingOptions, pickingIDs[1]);
+		vector<string> form1Options = EditorAddObjectBuildingOptions;
+		sort(form1Options.begin(), form1Options.end());
+		form1Options.erase(unique(form1Options.begin(), form1Options.end()), form1Options.end());
+		objectForms[1].create(startX + 11.f, startY - 11.f - 30.f, 150.f, 20.f, form1Options, pickingIDs[1]);
 		addValueToPickingListUI(pickingIDs[1], "AddObjWindow_form1");
 		increasePickingID();
 
@@ -78,24 +81,9 @@ namespace editor {
 			vector<string> form1Options;
 			for (int i = 0; i < NumberOfObjects; i++) {
 				if ((EditorObjectStringListForm0[i] == formSelectedTexts[0])){
-
-					if (formSelectedTexts[0] == "buildings") {
-						objectForms[1].create(startX + 11.f, startY - 11.f - 30.f, 150.f, 20.f, EditorAddObjectBuildingOptions, pickingIDs[1]);
-						objectForms[1].selectedText = EditorAddObjectBuildingOptions[0];
-						form1Options.push_back("EDITORTREE_CATEGORY_" + EditorObjectStringListForm2[i]);
-					}
-					
-					if (formSelectedTexts[0] == "units") {
-						objectForms[1].create(startX + 11.f, startY - 11.f - 30.f, 150.f, 20.f, EditorAddObjectUnitOptions, pickingIDs[1]);
-						objectForms[1].selectedText = EditorAddObjectUnitOptions[0];
-						form1Options.push_back("EDITORTREE_CATEGORY_" + EditorObjectStringListForm2[i]);
-					}
-
-					if (formSelectedTexts[0] == "decorations") {
-						objectForms[1].create(startX + 11.f, startY - 11.f - 30.f, 150.f, 20.f, EditorAddObjectDecorationOptions, pickingIDs[1]);
-						objectForms[1].selectedText = EditorAddObjectDecorationOptions[0];
-						form1Options.push_back("EDITORTREE_CATEGORY_" + EditorObjectStringListForm2[i]); // category
-					}
+					if (formSelectedTexts[0] == "buildings") form1Options = EditorAddObjectBuildingOptions;
+					if (formSelectedTexts[0] == "units") form1Options = EditorAddObjectUnitOptions;
+					if (formSelectedTexts[0] == "decorations") form1Options = EditorAddObjectDecorationOptions;
 				}
 			}
 			if (form1Options.size() > 0){
@@ -103,6 +91,9 @@ namespace editor {
 				form1Options.erase(unique(form1Options.begin(), form1Options.end()), form1Options.end());
 			}
 			else form1Options = { "" };
+
+			objectForms[1].create(startX + 11.f, startY - 11.f - 30.f, 150.f, 20.f, form1Options, pickingIDs[1]);
+			objectForms[1].selectedText = form1Options[0];
 			AddObjectWindowUpdateForm1and2 = false;
 			AddObjectWindowUpdateForm2 = true;
 		}

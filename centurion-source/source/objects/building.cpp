@@ -17,18 +17,22 @@ namespace building {
 		waitingToBeErased = false;
 		isPlaceable = true;
 		buildingListSize = 0;
+		prop.is_townhall = false;
+		prop.is_villagehall = false;
 	}
 
 	void Building::prepare() {
 
 		prop.type = data["type"].get<string>();
 		prop.race = data["race"].get<string>();
-		prop.class_name = data["race"].get<string>();
+		prop.class_name = data["class_name"].get<string>();
 		prop.is_indipendent = (bool)data["is_independent"].get<int>();
 		prop.category = data["category"].get<string>();		
 		prop.ent_path = data["ent_path"].get<string>();
 		prop.pass_path = data["pass_path"].get<string>();
 		prop.clickable_in_minimap = (bool)data["clickable_in_minimap"].get<int>();
+		prop.is_townhall = (prop.class_name.substr(1) == "townhall");
+		prop.is_villagehall = (prop.class_name.substr(1) == "village");
 
 		/* file pass */
 		pass_grid = astar::readPassMatrix(prop.pass_path, className);
@@ -70,12 +74,14 @@ namespace building {
 
 		prop.type = data["type"].get<string>();
 		prop.race = data["race"].get<string>();
-		prop.class_name = data["race"].get<string>();
+		prop.class_name = data["class_name"].get<string>();
 		prop.is_indipendent = (bool)data["is_independent"].get<int>();
 		prop.category = data["category"].get<string>();
 		prop.ent_path = data["ent_path"].get<string>();
 		prop.pass_path = data["pass_path"].get<string>();
 		prop.clickable_in_minimap = (bool)data["clickable_in_minimap"].get<int>();
+		prop.is_townhall = (prop.class_name.substr(1) == "townhall");
+		prop.is_villagehall = (prop.class_name.substr(1) == "village");
 
 		/* file pass */
 		if (pass_grid.size() == 0) pass_grid = astar::readPassMatrix(prop.pass_path, className);
@@ -110,7 +116,7 @@ namespace building {
 			    settl_name = independent->get_settlement_name();
 
 		// keep updated central buildings "subsidiaries buildings list"
-		if (game::buildings.size() != buildingListSize && prop.is_indipendent) {
+		if (game::buildings.size() != buildingListSize && (prop.is_townhall || prop.is_villagehall)) {
 			subs_buildings.clear();
 			cout << "[DEBUG] Subsidiaries buildings to " + name + " have been updated. Their names are: \n";
 			for (map<int, Building>::iterator bld = game::buildings.begin(); bld != game::buildings.end(); bld++) {
@@ -130,7 +136,7 @@ namespace building {
 
 		if (engine::ENGINE()->getEnvironment() == "editor" && !game::gameMinimapStatus){
 			if (selected && !editor::addingObject) circle[0].render(vec4(255.f), position.x, position.y - data["radius"].get<float>() / 15.5f); // selection circle (editor only)
-			if (selected && prop.is_indipendent && !editor::addingObject) circle[1].render(vec4(0,255,255,255), position.x, position.y); // selection circle (editor only)
+			if (selected && (prop.is_townhall || prop.is_villagehall) && !editor::addingObject) circle[1].render(vec4(0,255,255,255), position.x, position.y); // selection circle (editor only)
 		}
 
 		// rendering
