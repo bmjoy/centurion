@@ -21,16 +21,17 @@ namespace game {
 
 	}
 
-	void UIGame::create() {
+	void UIGame::create(string race) {
 
 		gameMenu = GameMenu();
 		gameMenu.create();
 
-		top_bar = gui::Rectangle();
-		top_bar.create("filled", 0.0f, getParam("window-height") - getParam("ui-top-height"), getParam("window-width"), getParam("ui-top-height"), "bottom-left", 0);
+		top_bar = gui::Image("topbar-" + race);
+		top_bar.create("bottom-left", 0, -1.f * getParam("ui-top-height"), getParam("window-width"), getParam("ui-top-height"), 0);
+		
 
-		bottom_bar = gui::Rectangle();
-		bottom_bar.create("filled", 0.0f, 0.0f, getParam("window-width"), getParam("ui-bottom-height"), "bottom-left", 0);
+		bottom_bar = gui::Image("bottombar");
+		bottom_bar.create("bottom-left", 0, 0, getParam("window-width"), getParam("ui-bottom-height"), 0);
 
 		time.lastTime = glfwGetTime();
 		time.text = gui::SimpleText("dynamic", true);
@@ -40,6 +41,7 @@ namespace game {
 	}
 
 	void UIGame::render(bool pick) {
+
 		if (pick && getBoolean("mouse-left")) {
 			if (gameMenuStatus) gameMenu.render(true);
 			picking(); // --> source/picking/gameui_picking.cpp  
@@ -64,9 +66,10 @@ namespace game {
 				minimapRectangle.render(vec4(255.f), false, x, y, w, h);
 			}
 			// Temporary bars:
-			top_bar.render(vec4(255.0f, 0.0f, 0.0f, 1.0f));
-			bottom_bar.render(vec4(255.0f, 0.0f, 0.0f, 1.0f));
+			top_bar.render(false, 0, 0, true);
+			bottom_bar.render(false, 0, 0, true);
 		}
+
 	}
 
 	void UIGame::calculateTime() {

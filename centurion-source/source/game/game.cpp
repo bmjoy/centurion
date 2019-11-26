@@ -37,7 +37,7 @@ namespace game {
 		resetPicking();
 		reset();
 
-		setParam("ui-bottom-height", 60.f);
+		setParam("ui-bottom-height", 70.f);
 		setParam("ui-top-height", 100.f);
 		setMinimapProjection();
 		setBoolean("mouse-left-pressed", false);
@@ -86,7 +86,8 @@ namespace game {
 		// ****************************************
 
 		ui = new UIGame();
-		ui->create();
+
+		ui->create(playersList[0].getPlayerRace().substr(5));
 
 		CAMERA()->go_to_pos(
 			(GLfloat)(playersList[0].getStartPoint().x - getParam("window-width-zoomed") /2.f),

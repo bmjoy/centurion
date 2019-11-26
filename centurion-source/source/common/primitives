@@ -265,6 +265,7 @@ struct ImageData {
 	vec3 pickingColor;
 	string imageName;
 	float x, y, w, h;
+	float texW, texH, ratioX, ratioY;
 	int pickingID;
 	int origin;
 	GLuint textureID;
@@ -277,7 +278,7 @@ public:
 	void addPath(string imageName, string path) { imagesPathMap[imageName] = path; }
 	void create();
 	void getImageData(ImageData *d);
-	void render(ImageData &imageData, bool picking = false);
+	void render(ImageData &imageData, bool picking = false, bool repeat = false);
 	~ImageSprite();
 
 private:

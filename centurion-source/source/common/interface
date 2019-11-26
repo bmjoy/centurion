@@ -139,7 +139,7 @@ namespace game {
 	class UIGame {
 	public:
 		UIGame();
-		void create();
+		void create(string race);
 		void render(bool pick);
 		~UIGame();
 	private:
@@ -151,9 +151,8 @@ namespace game {
 			float x;
 			float y;
 		} time;
-
-		gui::Rectangle top_bar;
-		gui::Rectangle bottom_bar;
+		gui::Image top_bar;
+		gui::Image bottom_bar;
 		gui::Rectangle minimapRectangle;
 		GameMenu gameMenu;
 

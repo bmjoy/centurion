@@ -55,9 +55,11 @@ void ImageSprite::getImageData(ImageData *d) {
 	(*d).textureID = textureIdMap[d->imageName];
 	(*d).w = (float)imageSize[textureIdMap[d->imageName]][0];
 	(*d).h = (float)imageSize[textureIdMap[d->imageName]][1];
+	(*d).texW = (float)imageSize[textureIdMap[d->imageName]][0];
+	(*d).texH = (float)imageSize[textureIdMap[d->imageName]][1];
 }
 
-void ImageSprite::render(ImageData &imageData, bool picking) {
+void ImageSprite::render(ImageData &imageData, bool picking, bool repeat) {
 
 	glUseProgram(shaderId);
 
@@ -66,7 +68,10 @@ void ImageSprite::render(ImageData &imageData, bool picking) {
 	glUniform1f(glGetUniformLocation(shaderId, "y"), imageData.y);
 	glUniform1f(glGetUniformLocation(shaderId, "w"), imageData.w);
 	glUniform1f(glGetUniformLocation(shaderId, "h"), imageData.h);
+	glUniform1f(glGetUniformLocation(shaderId, "ratioX"), imageData.ratioX);
+	glUniform1f(glGetUniformLocation(shaderId, "ratioY"), imageData.ratioY);
 	glUniform1i(glGetUniformLocation(shaderId, "origin"), imageData.origin);
+	glUniform1i(glGetUniformLocation(shaderId, "repeat"), int(repeat));
 	glUniform1i(glGetUniformLocation(shaderId, "picking"), int(picking));  // enable/disable picking
 	glUniform1i(glGetUniformLocation(shaderId, "texture1"), 0); // texture
 

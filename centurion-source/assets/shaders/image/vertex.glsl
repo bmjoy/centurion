@@ -10,7 +10,10 @@ uniform float x;
 uniform float y;
 uniform float w;
 uniform float h;
+uniform float ratioX;
+uniform float ratioY;
 uniform int origin;
+uniform int repeat;
 
 float x1, y1;
 
@@ -32,5 +35,9 @@ void main()
     }
     
     gl_Position = projection * view * vec4(x1, y1, pos.z, 1.0);
+	
 	FragTex = tex;
+	if (repeat == 1){
+		FragTex = vec2(tex.x * ratioX, tex.y * ratioY);
+	}
 }  

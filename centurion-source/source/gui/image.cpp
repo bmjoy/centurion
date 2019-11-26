@@ -28,11 +28,13 @@ namespace gui {
 		obj::Img()->getImageData(&imgData);
 		if (w != 0) imgData.w = w;
 		if (h != 0) imgData.h = h;
+		imgData.ratioX = imgData.w / imgData.texW;
+		imgData.ratioY = imgData.h / imgData.texH;
 	}
-	void Image::render(bool picking, float x, float y) {
+	void Image::render(bool picking, float x, float y, bool repeat) {
 		if (x != 0.f) imgData.x = x;
 		if (y != 0.f) imgData.y = y;
-		obj::Img()->render(imgData, picking);
+		obj::Img()->render(imgData, picking, repeat);
 	}
 
 	Image::~Image()	{}
