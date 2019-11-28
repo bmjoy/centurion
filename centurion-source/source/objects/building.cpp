@@ -71,7 +71,6 @@ namespace building {
 	}
 
 	void Building::create(string Name) {
-
 		prop.type = data["type"].get<string>();
 		prop.race = data["race"].get<string>();
 		prop.class_name = data["class_name"].get<string>();
@@ -93,6 +92,8 @@ namespace building {
 		prop.textureID = obj::BSprite()->getTextureId(className);
 
 		(Name == "") ? name = className + "_" + to_string(picking_id) : name = Name;
+		buildingUI = ObjectUI();
+		buildingUI.create(prop.class_name);
 
 		// selection circle (editor only)
 		circle[0] = gui::Circle();
@@ -107,7 +108,6 @@ namespace building {
 	
 
 	void Building::render(bool picking, int clickID, bool not_placeable) {
-
 		not_placeable = (not_placeable || !isPlaceable);
 
 		// keep updated not central buildings "settlement name"
@@ -118,13 +118,15 @@ namespace building {
 		// keep updated central buildings "subsidiaries buildings list"
 		if (game::buildings.size() != buildingListSize && (prop.is_townhall || prop.is_villagehall)) {
 			subs_buildings.clear();
-			cout << "[DEBUG] Subsidiaries buildings to " + name + " have been updated. Their names are: \n";
+			int k = 0;
 			for (map<int, Building>::iterator bld = game::buildings.begin(); bld != game::buildings.end(); bld++) {
 				int ID = bld->first;
 				if (!bld->second.is_independent()) {
 					if (bld->second.get_settlement_name() == settl_name) {
+						if (k == 0) { cout << "[DEBUG] Subsidiaries buildings to " + name + " have been updated. Their names are: \n"; }
 						subs_buildings[ID] = &game::buildings[ID];
 						cout << "   " << game::buildings[ID].get_name() << "\n";
+						k++;
 					}
 				}
 			}
@@ -139,6 +141,9 @@ namespace building {
 			if (selected && (prop.is_townhall || prop.is_villagehall) && !editor::addingObject) circle[1].render(vec4(0,255,255,255), position.x, position.y); // selection circle (editor only)
 		}
 
+		if (engine::ENGINE()->getEnvironment() == "game" && selected) {
+			buildingUI.render();
+		}
 		// rendering
 		obj::BSprite()->render(prop.textureID, prop.clickable_in_minimap, position.x, position.y, prop.sprite_width, prop.sprite_height, picking, picking_id, selected, player->getPlayerColor(), not_placeable);
 	}

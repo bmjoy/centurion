@@ -1,0 +1,7 @@
+{
+    "type": "decoration",
+    "class_name": "palm_1",
+	"category": "trees",
+    "ent_path": "assets/decorations/trees/palm_trees/palm_1.oe.json",
+    "pass_path": "assets/decorations/trees/palm_trees/palm_1.pass"
+}

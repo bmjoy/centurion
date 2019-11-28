@@ -49,6 +49,16 @@ protected:
 	vector<vector<int>> pass_grid;
 };
 
+class ObjectUI{
+public:
+	ObjectUI();
+	void create(string className);
+	void render();
+	~ObjectUI();
+private:
+	gui::SimpleText objectName;
+};
+
 //
 //	BUILDING --> source/building/building.cpp
 //
@@ -101,6 +111,7 @@ namespace building {
 		~Building();
 
 	private:
+		ObjectUI buildingUI;
 		vector<unit::Unit> unitsInside;
 		map<int, Building*> subs_buildings; // dependent buildings connected to indipendent one
 		buildingProperties prop;

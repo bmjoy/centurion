@@ -104,7 +104,7 @@ namespace editor {
 			vector<string> form2Options;
 			for (int i = 0; i < NumberOfObjects; i++) {
 				if ((EditorObjectStringListForm0[i] == formSelectedTexts[0]) && (EditorObjectStringListForm1[i] == formSelectedTexts[1]))
-					form2Options.push_back("EDITORTREE_CLASS_" + EditorObjectStringListForm2[i]);
+					form2Options.push_back("WORD_" + EditorObjectStringListForm2[i]);
 			}
 			if (form2Options.size() == 0)
 				form2Options = { "" };
@@ -112,7 +112,7 @@ namespace editor {
 			AddObjectWindowUpdateForm2 = false;
 		}
 
-		formSelectedTexts[2] = objectForms[2].selectedText.substr(17); // rtownhall,...
+		formSelectedTexts[2] = objectForms[2].selectedText.substr(5); // rtownhall,...
 
 		selectedObject = formSelectedTexts[0] + "_" + formSelectedTexts[1] + "_" + formSelectedTexts[2];
 		object_thumbnail = gui::Image(selectedObject);

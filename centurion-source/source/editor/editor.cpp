@@ -58,8 +58,8 @@ namespace editor {
 
 			// rendering
 			surface->render(false);
-			if (!IsWindowOpened && !addingObject && !TerrainBrushIsActive) moveObjects();
 			game::renderObjects();
+			if (!IsWindowOpened && !addingObject && !TerrainBrushIsActive) moveObjects();
 
 			// apply menu matrices
 			obj::applyMenuMatrices();

@@ -71,13 +71,13 @@ namespace editor {
 								Q_WINDOW()->setQuestion("QUESTION_deleteAll");
 							}
 							else {
-								cout << "[DEBUG]: Settlement " << game::buildings[leftClickID].get_name() << " deleted!\n";
+								cout << "[DEBUG] Settlement " << game::buildings[leftClickID].get_name() << " deleted!\n";
 								game::buildings[leftClickID].clear_pass();
 								game::buildings.erase(leftClickID);
 							}
 						}
 						else {
-							cout << "[DEBUG]: Building " << game::buildings[leftClickID].get_name() << " deleted!\n";
+							cout << "[DEBUG] Building " << game::buildings[leftClickID].get_name() << " deleted!\n";
 							game::buildings[leftClickID].clear_pass();
 							game::buildings.erase(leftClickID);
 						}
