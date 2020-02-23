@@ -42,21 +42,21 @@ EDITOR_defaultMapName	Untitled	Senza titolo	Intitulado	Sans titre	ﺑﺪون ﻋ
 EDITOR_buildings	Buildings	Strutture	Edificios	Édifices	اﻟﻤﺮاﻓﻖ
 EDITOR_units	Units	Unità	Unidades	Unités	ﺟﻨﻮد
 EDITOR_decorations	Decorations	Decorazioni	Decoraciones	Décorations	زﻳﻨﺔ
-EDITORTREE_CATEGORY_egyptianstronghold	Egyptian stronghold	Fortezza egizia	Fortaleza egipcia	Forteresse égyptienne	--
-EDITORTREE_CATEGORY_romanstronghold	Roman stronghold	Fortezza romana	Fortaleza romana	Forteresse romane	--
-EDITORTREE_CATEGORY_outposts	Outposts	Avamposti	Puesto de Avanzada	Avant-postes	--
-EDITORTREE_CATEGORY_trees	Trees	Alberi	Árboles	Arbres	--
-EDITORBRUSH_GRASS	Grass	Erba	Hierba	Herbe	--
+EDITORTREE_CATEGORY_egyptianstronghold	Egyptian stronghold	Fortezza egizia	Fortaleza egipcia	Forteresse égyptienne	اﻟﻘﻠﻌﺔ اﻟﻤﺼﺮﻳﺔ  
+EDITORTREE_CATEGORY_romanstronghold	Roman stronghold	Fortezza romana	Fortaleza romana	Forteresse romane	اﻟﻘﻠﻌﺔ اﻟﺮوﻣﺎﻧﻴﺔ  
+EDITORTREE_CATEGORY_outposts	Outposts	Avamposti	Puesto de Avanzada	Avant-postes	اﻟﺒﺆر اﻻﺳﺘﻴﻄﺎﻧﻴﺔ 
+EDITORTREE_CATEGORY_trees	Trees	Alberi	Árboles	Arbres	اﻷﺷﺠﺎر
+EDITORBRUSH_GRASS	Grass	Erba	Hierba	Herbe	ﻋﺸﺐ
 EDITORBRUSH_GRASS_1	Grass 1	Erba 1	Hierba 1	Herbe 1	ﻋﺸﺐ 1
 EDITORBRUSH_GRASS_2	Grass 2	Erba 2	Hierba 2	Herbe 2	ﻋﺸﺐ 2
 EDITORBRUSH_GRASS_3	Grass 3	Erba 3	Hierba 3	Herbe 3	ﻋﺸﺐ 3
 EDITORBRUSH_ROAD_1	Road 1	Strada 1	Carretera 1	Route 1	ﻃﺮﻳﻖ 1
 EDITORBRUSH_ROAD_2	Road 2	Strada 2	Carretera 2	Route 2	ﻃﺮﻳﻖ 2
 EDITORBRUSH_ROAD_3	Road 3	Strada 3	Carretera 3	Route 3	ﻃﺮﻳﻖ 3
-EDITORBRUSH_GROUND_1	Ground 1	Terra 1	Terreno 1	Terre 1	--
-EDITORBRUSH_GROUND_2	Ground 2	Terra 2	Terreno 2	Terre 2	--
-EDITORBRUSH_GROUND_3	Ground 3	Terra 3	Terreno 3	Terre 3	--
-EDITORBRUSH_SAND_1	Sand 1	Sabbia 1	Arena 1	Sable 1	--
+EDITORBRUSH_GROUND_1	Ground 1	Terra 1	Terreno 1	Terre 1	اﻷرض1
+EDITORBRUSH_GROUND_2	Ground 2	Terra 2	Terreno 2	Terre 2	اﻷرض2
+EDITORBRUSH_GROUND_3	Ground 3	Terra 3	Terreno 3	Terre 3	اﻷرض3
+EDITORBRUSH_SAND_1	Sand 1	Sabbia 1	Arena 1	Sable 1	اﻟﺮﻣﺎل1
 EDITOR_noSettlementsAround	Unable to place the building at the selected point, as there are no nearby settlements.	Impossibile posizionare la struttura nel punto selezionato, poiché non vi sono insediamenti nelle vicinanze.	--	La structure ne peut pas être positionnée au point sélectionné, car il n'y a pas de installations à proximité.	--
 EDITOR_impassablePoint	Unable to place the building at the selected point, as it is a steep or inaccessible place, like the sea.	Impossibile posizionare la struttura nel punto selezionato, in quanto si tratta di un luogo scosceso o inaccessibile, come il mare.	--	La structure ne peut pas être positionnée au point sélectionné, comme c'est un endroit raide ou inaccessible, comme la mer.	--
 EDITOR_canAddStructure	Press the LEFT mouse button to position the structure in the desired point. Press the RIGHT mouse button to abort this operation.	Clicca con il tasto SINISTRO del mouse per posizionare la struttura nel punto desiderato. Premi il tastro DESTRO per annullare l'operazione.	--	Appuyez sur le bouton GAUCHE de la souris pour positionner la structure au point souhaité. Appuyez sur le bouton DROITE de la souris pour abandonner cette opération.	--
@@ -75,12 +75,12 @@ WORD_rblacksmith	Blacksmith	Fucina	Herrería	Forge	دﻛﺎن اﻟﺤﺪاد
 WORD_rtavern	Tavern	Taverna	Taberna	Auberge	ﺣﺎﻧﺔ
 WORD_rtemple	Temple	Tempio	Templo	Temple	ﻣﻌﺒﺪ
 WORD_rtownhall	Townhall	Foro	Foro	Mairie	اﻟﻤﻘﺮ
-WORD_routpost	Roman outpost	Avamposto romano	Puesto de Avanzada romano	Avant-poste romain	--
-WORD_broadleaf_1	Broadleaf 1	Latifoglie 1	--	À feuilles caduques 1	--
-WORD_broadleaf_2	Broadleaf 2	Latifoglie 2	--	À feuilles caduques 2	--
-WORD_cypress	Cypress	Cipresso	Ciprès	Cyprès	--
-WORD_jasmimmanga	Tropical tree 1	Pianta tropicale 1	Planta tropical 1	Plante tropicale 1	--
-WORD_palm_1	Palm 1	Palma 1	Palmera 1	Palmier 1	--
+WORD_routpost	Roman outpost	Avamposto romano	Puesto de Avanzada romano	Avant-poste romain	اﻟﺒﺆرة اﻻﺳﺘﻴﻄﺎﻧﻴﺔ  اﻟﺮوﻣﺎﻧﻴﺔ  
+WORD_broadleaf_1	Broadleaf 1	Latifoglie 1	--	À feuilles caduques 1	اﻷﺧﺸﺎب اﻟﺼﻠﺒﺔ1
+WORD_broadleaf_2	Broadleaf 2	Latifoglie 2	--	À feuilles caduques 2	اﻷﺧﺸﺎب اﻟﺼﻠﺒﺔ2
+WORD_cypress	Cypress	Cipresso	Ciprès	Cyprès	ﺷﺠﺮ اﻟﺴﺮو
+WORD_jasmimmanga	Tropical tree 1	Pianta tropicale 1	Planta tropical 1	Plante tropicale 1	اﻟﻨﺒﺎﺗﺎت اﻻﺳﺘﻮاﺋﻴﺔ
+WORD_palm_1	Palm 1	Palma 1	Palmera 1	Palmier 1	ﻧﺨﻠﺔ1
 WORD_gameStarted	Game is being started...	Avvio della partita in corso...	El juego se está iniciando...	Le jeu commence...	...ﺑﺪء اﻟﻠﻌﺒﺔ
 WORD_player_1	Player 1	Giocatore 1	Jugador 1	Joueur 1	ﻻﻋﺐ 1
 WORD_player_2	Player 2	Giocatore 2	Jugador 2	Joueur 2	ﻻﻋﺐ 2
