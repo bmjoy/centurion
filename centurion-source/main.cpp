@@ -3,6 +3,7 @@
 #include <global>
 #include <engine>
 
+// main function 
 int main() {
 
 	glb::initParams();
