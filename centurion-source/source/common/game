@@ -3,6 +3,9 @@
 #include <gui>
 #include <json.hpp>
 #include <object>
+#include <unit>
+#include <building>
+#include <decoration>
 #include <player>
 
 using namespace std;

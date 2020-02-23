@@ -97,6 +97,15 @@
     <Filter Include="Shader Files\dsprite">
       <UniqueIdentifier>{d5bb376d-55ab-4930-b78f-201bac1a493b}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\building">
+      <UniqueIdentifier>{87ff652c-a11f-4ae5-bf90-c9ab15535719}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\decoration">
+      <UniqueIdentifier>{ddd1411f-06af-4ba4-aaa1-b20b5d42bfef}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\unit">
+      <UniqueIdentifier>{88304990-1d0f-41a6-acb4-3b8ad50f5fc8}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -297,23 +306,23 @@
     <ClCompile Include="source\primitives\decoration_sprite.cpp">
       <Filter>Source Files\primitives</Filter>
     </ClCompile>
-    <ClCompile Include="source\objects\building.cpp">
-      <Filter>Source Files\objects</Filter>
-    </ClCompile>
-    <ClCompile Include="source\objects\unit.cpp">
-      <Filter>Source Files\objects</Filter>
-    </ClCompile>
-    <ClCompile Include="source\objects\unit_functions.cpp">
-      <Filter>Source Files\objects</Filter>
-    </ClCompile>
-    <ClCompile Include="source\objects\object.cpp">
-      <Filter>Source Files\objects</Filter>
-    </ClCompile>
-    <ClCompile Include="source\objects\decoration.cpp">
-      <Filter>Source Files\objects</Filter>
-    </ClCompile>
     <ClCompile Include="source\primitives\minimap_rectangle.cpp">
       <Filter>Source Files\primitives</Filter>
+    </ClCompile>
+    <ClCompile Include="source\object.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="source\building\building.cpp">
+      <Filter>Source Files\building</Filter>
+    </ClCompile>
+    <ClCompile Include="source\decoration\decoration.cpp">
+      <Filter>Source Files\decoration</Filter>
+    </ClCompile>
+    <ClCompile Include="source\unit\unit.cpp">
+      <Filter>Source Files\unit</Filter>
+    </ClCompile>
+    <ClCompile Include="source\unit\unit_functions.cpp">
+      <Filter>Source Files\unit</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -495,6 +504,15 @@
     </None>
     <None Include="assets\shaders\dsprite\fragment.glsl">
       <Filter>Shader Files\dsprite</Filter>
+    </None>
+    <None Include="source\common\building">
+      <Filter>Header Files\common</Filter>
+    </None>
+    <None Include="source\common\decoration">
+      <Filter>Header Files\common</Filter>
+    </None>
+    <None Include="source\common\unit">
+      <Filter>Header Files\common</Filter>
     </None>
   </ItemGroup>
 </Project>

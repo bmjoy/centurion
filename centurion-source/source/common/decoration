@@ -1,0 +1,43 @@
+#pragma once
+
+#include <gui>
+#include <object>
+#include <json.hpp>
+
+using namespace std;
+using namespace glm;
+
+namespace unit { class Unit; };
+namespace building { class Building; };
+
+class Player;
+
+//
+//	GAME OBJECT --> source/object.cpp
+//
+
+namespace decoration {
+
+	using namespace building;
+
+	class Decoration : public GObject
+	{
+	public:
+		Decoration();
+		void prepare() override;
+		bool is_placeable();
+		void create() override;
+		void render(bool not_placeable = false);
+		Building *get_settlement_building() { return independent; }
+		string get_settlement_name() { return settlementName; }
+		~Decoration();
+
+	private:
+		DecorationData decorData;
+		string settlementName;
+		float oldX, oldY, oldSettlX, oldSettlY;
+		int settlID;
+		void checkSettlement();
+		Building* independent;
+	};
+};

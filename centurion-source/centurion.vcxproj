@@ -22,7 +22,7 @@
     <VCProjectVersion>15.0</VCProjectVersion>
     <ProjectGuid>{29C92E4D-97E2-4049-A35E-F6A42D1C8AB9}</ProjectGuid>
     <RootNamespace>centurion</RootNamespace>
-    <WindowsTargetPlatformVersion>10.0.18362.0</WindowsTargetPlatformVersion>
+    <WindowsTargetPlatformVersion>10.0.17763.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
@@ -145,6 +145,8 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="source\audio\vorbis\ogg_vorbis.cpp" />
+    <ClCompile Include="source\building\building.cpp" />
+    <ClCompile Include="source\decoration\decoration.cpp" />
     <ClCompile Include="source\editor\editor_functions.cpp" />
     <ClCompile Include="source\global.cpp" />
     <ClCompile Include="source\gui\text_box.cpp" />
@@ -159,11 +161,7 @@
     <ClCompile Include="source\interface\menu_globaloptions.cpp" />
     <ClCompile Include="source\math.cpp" />
     <ClCompile Include="source\menu\menu_functions.cpp" />
-    <ClCompile Include="source\objects\building.cpp" />
-    <ClCompile Include="source\objects\decoration.cpp" />
-    <ClCompile Include="source\objects\object.cpp" />
-    <ClCompile Include="source\objects\unit.cpp" />
-    <ClCompile Include="source\objects\unit_functions.cpp" />
+    <ClCompile Include="source\object.cpp" />
     <ClCompile Include="source\picking\editor_picking.cpp" />
     <ClCompile Include="source\picking\gameui_picking.cpp" />
     <ClCompile Include="source\picking\mainmenu_picking.cpp" />
@@ -183,6 +181,8 @@
     <ClCompile Include="source\primitives\shader.cpp" />
     <ClCompile Include="source\primitives\terrain.cpp" />
     <ClCompile Include="source\primitives\unit_sprite.cpp" />
+    <ClCompile Include="source\unit\unit.cpp" />
+    <ClCompile Include="source\unit\unit_functions.cpp" />
     <None Include="assets\shaders\bsprite\fragment.glsl">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
       <FileType>Document</FileType>
@@ -322,6 +322,8 @@
       <DeploymentContent Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</DeploymentContent>
       <DeploymentContent Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</DeploymentContent>
     </ClInclude>
+    <None Include="source\common\building" />
+    <None Include="source\common\decoration" />
     <None Include="source\common\editor" />
     <None Include="source\common\engine" />
     <None Include="source\common\game" />
@@ -333,6 +335,7 @@
     <None Include="source\common\picking" />
     <None Include="source\common\player" />
     <None Include="source\common\surface" />
+    <None Include="source\common\unit" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="source\audio\audio_context.h" />

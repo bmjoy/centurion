@@ -1,6 +1,5 @@
 #include <editor>
 #include <interface>
-#include <object>
 #include <global>
 #include <picking>
 #include <player>

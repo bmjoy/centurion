@@ -35,6 +35,11 @@ public:
 	void set_type(string Type) { type = Type; }
 	void update_pass();
 	void clear_pass();
+
+	virtual void prepare() { }
+	virtual void create() { }
+	virtual void render() { }
+
 	~GObject();
 protected:
 	Player *player;
@@ -49,7 +54,7 @@ protected:
 	vector<vector<int>> pass_grid;
 };
 
-class ObjectUI{
+class ObjectUI {
 public:
 	ObjectUI();
 	void create(string className);
@@ -59,157 +64,3 @@ private:
 	gui::SimpleText objectName;
 };
 
-//
-//	BUILDING --> source/building/building.cpp
-//
-
-namespace building {
-
-	struct buildingProperties {
-		// properties from class 
-		string type;
-		string race;
-		string class_name;
-		string category;
-		string ent_path;
-		string pass_path;
-		float radius;
-		bool is_indipendent;
-		bool clickable_in_minimap;
-		bool is_townhall;
-		bool is_villagehall;
-
-		// properties from sprite
-		float sprite_width, sprite_height;
-		GLuint textureID;
-	};
-
-	class Building : public GObject
-	{
-	public:
-		Building();
-		void prepare();
-		void create(string Name = "");
-		void render(bool picking, int clickID, bool not_placeable = false);
-		bool is_placeable();
-		string get_race() { return prop.race; }
-		void set_placeable(bool b) { isPlaceable = b; }
-		void set_status(bool b) { isCreated = b; }
-		bool is_independent() { return prop.is_indipendent; }
-		void set_settlement_name(string s) { settl_name = s; }
-		string get_settlement_name() { return settl_name; }
-		void set_settlement_building(Building *b) { independent = b; }
-		Building *get_settlement_building() { return independent; }
-		bool is_near_to_independent(string *Category);
-		int UnitsInBuilding();
-		vector<unit::Unit> UnitsInHolder();
-		vector<int> buildingsInSettlementIds();
-		int buildingsInSettlementCount() { return (int)subs_buildings.size(); }
-		void setWaitingToBeErased(bool b) { waitingToBeErased = b; }
-		bool getWaitingToBeErased() { return waitingToBeErased; }
-		string getCategory() { return prop.category; }
-		~Building();
-
-	private:
-		ObjectUI buildingUI;
-		vector<unit::Unit> unitsInside;
-		map<int, Building*> subs_buildings; // dependent buildings connected to indipendent one
-		buildingProperties prop;
-		string settl_name;
-		Building *independent;
-		bool waitingToBeErased;
-		bool isCreated;
-		size_t buildingListSize;
-		bool isPlaceable;
-		gui::Circle circle[2];
-		vec2 getSpriteSize(string ent_path);
-		//sound selectionSound; TODO
-	};
-};
-
-namespace decoration {
-
-	using namespace building;
-
-	class Decoration : public GObject
-	{
-	public:
-		Decoration();
-		void prepare();
-		bool is_placeable();
-		void create();
-		void render(bool not_placeable = false);
-		Building *get_settlement_building() { return independent; }
-		string get_settlement_name() { return settlementName; }
-		~Decoration();
-
-	private:
-		DecorationData decorData;
-		string settlementName;
-		float oldX, oldY, oldSettlX, oldSettlY;
-		int settlID;
-		void checkSettlement();
-		Building* independent;
-	};
-};
-
-//
-//	UNIT  
-//
-
-namespace unit {
-
-	// UNIT CLASS  --> source/unit/unit.cpp
-
-	class Unit : public GObject
-	{
-	public:
-		Unit();
-		void create();
-		void set_position(float x, float y);
-		void render(bool picking, int clickID);
-		~Unit();
-	private:
-		UnitData unitData;
-
-		/* unit properties & data */
-		string currentStateStr;
-		json entityData;
-		float creationTime;
-
-		/* unit position */
-		vec3 position2D, position3D;
-		bool clickSelection, rectangleSelection;
-
-		/* unit circle if selected */
-		gui::Circle selectionCircle;
-
-		/* unit movement & pathfinding */
-		bool is_Moving;
-		int pathCount;
-		float angle, delta, distance, res_distance;
-		vector<ivec2> path;
-		vec2 startPoint, endPoint;
-		void position_update();
-		void walk_behaviour();
-
-		/* debug objects */
-		vector<gui::Rectangle> pathQuadsList;
-		struct HitBox {
-			gui::Rectangle rectangle;
-			array<float, 8> coords;
-		} hitbox;
-		gui::Image circlePos;
-	};
-
-
-	// UNIT FUNCTIONS --> source/unit/functions.cpp
-
-	void updateZ(vec3 &pos2d, vec3 *pos3d);
-	void updateFrame(float *creationTime, int *frame, int max_frames, int duration);
-	bool isInSelectionRect(array<float, 8> &coords);
-	float getAngle(vector<ivec2> &path, int &n);
-	float getDistance(vector<ivec2> &path, int &n);
-	float getResDistance(vector<ivec2> &path, int &n, vec3 &pos2d);
-	vector<ivec2> getPath(vec2 &start, vec2 &end);
-};
