@@ -92,8 +92,8 @@ namespace building {
 		prop.textureID = obj::BSprite()->getTextureId(className);
 
 		(Name == "") ? name = className + "_" + to_string(picking_id) : name = Name;
-		buildingUI = ObjectUI();
-		buildingUI.create(prop.class_name);
+		buildingUI = new game::ObjectUI();
+		buildingUI->create(prop.class_name);
 
 		// selection circle (editor only)
 		circle[0] = gui::Circle();
@@ -142,7 +142,7 @@ namespace building {
 		}
 
 		if (engine::ENGINE()->getEnvironment() == "game" && selected) {
-			buildingUI.render();
+			buildingUI->render();
 		}
 		// rendering
 		obj::BSprite()->render(prop.textureID, prop.clickable_in_minimap, position.x, position.y, prop.sprite_width, prop.sprite_height, picking, picking_id, selected, player->getPlayerColor(), not_placeable);

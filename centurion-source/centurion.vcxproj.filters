@@ -91,9 +91,6 @@
     <Filter Include="Header Files\audio\vorbis">
       <UniqueIdentifier>{3f286ea6-3dbc-4e58-ab28-17869728873e}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source Files\objects">
-      <UniqueIdentifier>{63da2ac5-d0b7-4718-afde-706f03647424}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Shader Files\dsprite">
       <UniqueIdentifier>{d5bb376d-55ab-4930-b78f-201bac1a493b}</UniqueIdentifier>
     </Filter>
@@ -323,6 +320,9 @@
     </ClCompile>
     <ClCompile Include="source\unit\unit_functions.cpp">
       <Filter>Source Files\unit</Filter>
+    </ClCompile>
+    <ClCompile Include="source\interface\object_ui.cpp">
+      <Filter>Source Files\interface</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

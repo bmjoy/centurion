@@ -54,13 +54,5 @@ protected:
 	vector<vector<int>> pass_grid;
 };
 
-class ObjectUI {
-public:
-	ObjectUI();
-	void create(string className);
-	void render();
-	~ObjectUI();
-private:
-	gui::SimpleText objectName;
-};
+
 

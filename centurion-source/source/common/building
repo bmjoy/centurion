@@ -9,6 +9,7 @@ using namespace glm;
 
 namespace unit { class Unit; };
 namespace building { class Building; };
+namespace game { class ObjectUI; };
 
 class Player;
 
@@ -64,7 +65,7 @@ namespace building {
 		~Building();
 
 	private:
-		ObjectUI buildingUI;
+		game::ObjectUI* buildingUI;
 		vector<unit::Unit> unitsInside;
 		map<int, Building*> subs_buildings; // dependent buildings connected to indipendent one
 		buildingProperties prop;
