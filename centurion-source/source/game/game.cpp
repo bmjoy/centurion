@@ -85,9 +85,9 @@ namespace game {
 
 		// ****************************************
 
-		ui = new UIGame();
+		//ui = new UIGame();
 
-		ui->create(playersList[0].getPlayerRace().substr(5));
+		GAME_UI()->create(playersList[0].getPlayerRace().substr(5));
 
 		CAMERA()->go_to_pos(
 			(GLfloat)(playersList[0].getStartPoint().x - getParam("window-width-zoomed") /2.f),
@@ -115,7 +115,7 @@ namespace game {
 			view = CAMERA()->calculateViewMatrix();
 			projection = glb::cameraProjection;
 
-			ui->render(true);
+			GAME_UI()->render(true);
 
 			// apply game matrices:
 			obj::applyGameMatrices(&projection, &view);
@@ -131,7 +131,7 @@ namespace game {
 			// apply menu matrices:
 			obj::applyMenuMatrices();
 
-			ui->render(false);
+			GAME_UI()->render(false);
 		}
 
 
@@ -140,7 +140,7 @@ namespace game {
 			view = mat4(1.0f);
 			projection = glb::minimapProjection;
 
-			ui->render(true);
+			GAME_UI()->render(true);
 
 			// apply game matrices:
 			obj::applyGameMatrices(&projection, &view);
@@ -157,7 +157,7 @@ namespace game {
 
 			// apply menu matrices:	
 			obj::applyMenuMatrices();
-			ui->render(false);
+			GAME_UI()->render(false);
 
 			if (gameMinimapStatus) goToPosition();
 		}
@@ -172,7 +172,6 @@ namespace game {
 
 	void Game::clear() {
 		delete surface;
-		delete ui;
 	}
 
 	Game::~Game() {}

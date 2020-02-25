@@ -11,17 +11,19 @@ using namespace engine;
 
 namespace game {
 
-	UIGame::UIGame()
-	{
+	UIGame* GAME_UI() {
+		return &myuigame;
+	}
+
+	UIGame::UIGame() { }
+
+	void UIGame::create(string race) {
+
 		time.seconds = 0; time.seconds_str = "00";
 		time.minutes = 0; time.minutes_str = "00";
 		time.hours = 0; time.hours_str = "00";
 		time.x = getParam("window-width") - 100.0f;
 		time.y = getParam("window-height") - getParam("ui-top-height") - 30.0f;
-
-	}
-
-	void UIGame::create(string race) {
 
 		gameMenu = GameMenu();
 		gameMenu.create();
@@ -38,6 +40,20 @@ namespace game {
 
 		minimapRectangle = gui::Rectangle();
 		minimapRectangle.create("border", 0, 0, 0, 0, "bottom-left", 0);
+
+		objectUI = ObjectUI();
+		objectUI.create("No item selected");
+
+		set_ui(nullptr);
+	}
+
+	void UIGame::set_ui(ObjectUI* objUI) {
+		if (objUI == nullptr) {
+			objectUIptr = &objectUI;
+		}
+		else {
+			objectUIptr = objUI;
+		}
 	}
 
 	void UIGame::render(bool pick) {
@@ -68,6 +84,8 @@ namespace game {
 			// Temporary bars:
 			top_bar.render(false, 0, 0, true);
 			bottom_bar.render(false, 0, 0, true);
+
+			objectUIptr->render();
 		}
 
 	}

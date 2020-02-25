@@ -122,9 +122,13 @@ namespace game {
 	}
 
 	void renderObjects() {
+		int selectedBuildings = 0;
 		for (map<int, Building>::iterator bld = buildings.begin(); bld != buildings.end(); bld++) {
 			bld->second.render(false, leftClickID);
+			if (bld->second.isSelected()) selectedBuildings++;
 		}
+		if (selectedBuildings == 0) game::GAME_UI()->set_ui(nullptr);
+
 		for (map<int, Decoration>::iterator dec = decorations.begin(); dec != decorations.end(); dec++) {
 			dec->second.render();
 		}

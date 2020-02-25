@@ -107,6 +107,23 @@ namespace menu {
 //----------------------------------------------------------------------------------
 //----------------------------------------------------------------------------------
 
+
+/*
+	---- OBJECT UI (GAME) ----
+*/
+
+namespace game {
+	class ObjectUI {
+	public:
+		ObjectUI();
+		void create(string className);
+		void render();
+		~ObjectUI();
+	private:
+		gui::SimpleText objectName;
+	};
+}
+
 /*
 	---- GAME UI ----
 */
@@ -140,6 +157,7 @@ namespace game {
 	public:
 		UIGame();
 		void create(string race);
+		void set_ui(ObjectUI* obj_ui);
 		void render(bool pick);
 		~UIGame();
 	private:
@@ -156,35 +174,22 @@ namespace game {
 		gui::Rectangle minimapRectangle;
 		GameMenu gameMenu;
 
+		ObjectUI objectUI;
+		ObjectUI* objectUIptr;
+
+
 		void picking(); // this function is here: source/picking/gameui_picking.cpp
 		void calculateTime();
 	};
+
+	static UIGame myuigame;
+	UIGame* GAME_UI();
 };
 
 //----------------------------------------------------------------------------------
 //----------------------------------------------------------------------------------
 //----------------------------------------------------------------------------------
 
-/*
-	---- OBJECT UI (GAME) ----
-*/
-
-namespace game {
-	class ObjectUI {
-	public:
-		ObjectUI();
-		void create(string className);
-		void render();
-		~ObjectUI();
-	private:
-		gui::SimpleText objectName;
-	};
-}
-
-
-//----------------------------------------------------------------------------------
-//----------------------------------------------------------------------------------
-//----------------------------------------------------------------------------------
 
 /*
 	---- EDITOR UI ----

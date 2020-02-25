@@ -65,7 +65,7 @@ namespace game {
 		~Game();
 	private:
 		Surface *surface;
-		UIGame *ui;
+		//UIGame *ui;
 		mat4 view, projection;
 		bool gameIsCreated;
 	};
