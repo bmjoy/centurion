@@ -6,6 +6,7 @@
 #include <picking>
 #include <object>
 #include <menu>
+#include "../lmx/xml-settings.h"
 
 #define STB_IMAGE_WRITE_IMPLEMENTATION
 #include <stb_image_write.h>
@@ -18,6 +19,7 @@ using namespace game;
 
 namespace glb {
 
+	string exe_root = ""; //defined in main.cpp
 	string language = "english"; //Default value
     mat4 menuProjection;
 	mat4 cameraProjection;
@@ -54,7 +56,17 @@ namespace glb {
 		map<string, string> errorsMap = errorCodes.get<map<string, string>>();
 		setErrors(errorsMap);
 
-		read_settings();				
+		lmx::elmx_error xmlReadError;
+		string settingsPath = exe_root + "\\settings.xml";
+		c_settings settings = c_settings(settingsPath.c_str(), &xmlReadError);
+
+		if (xmlReadError != lmx::ELMX_OK)
+			cout << xmlReadError << endl;
+
+		read_settings();
+
+		getParam("Ciao");
+
 		read_translation_tables();
 		
 		setParam("window-ratio", getParam("window-width") / getParam("window-height"));

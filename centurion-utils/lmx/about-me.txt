@@ -1,0 +1,23 @@
+This directory contains the LMX compiler executable and documentation.  The
+directory also contains files associated with the installation such as
+start menu short cuts and uninstall information.
+
+The Windows executables are:
+
+	winlmx.exe - The Windows GUI version of LMX.
+
+	lmx.exe - The Win32 command-line (DOS) version of LMX.
+
+The Linux executables are:
+
+	glinmx - The Linux GUI version of LMX.
+
+	linmx - The Linux command-line version of LMX.
+
+The documentation files are:
+
+	lmx-start.html - The main LMX documentation as a single HTML file.
+
+	lmx-start.chm - The main LMX documentation as a Windows help file.
+
+	lmx-start.pdf - The main LMX documentation as a single PDF file.

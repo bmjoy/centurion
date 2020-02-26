@@ -104,7 +104,31 @@
     <Link>
       <AdditionalLibraryDirectories>$(ProjectDir)source/extern/libraries</AdditionalLibraryDirectories>
       <AdditionalDependencies>opengl32.lib;glew32.lib;glfw3.lib;OpenAL32.lib;libsndfile-1.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalOptions>/ignore:4217 %(AdditionalOptions)</AdditionalOptions>
     </Link>
+    <PostBuildEvent>
+      <Command>
+      </Command>
+    </PostBuildEvent>
+    <PreBuildEvent>
+      <Command>DEL /Q "$(ProjectDir)$(OutDir)*"
+FOR /D %%P IN ("$(ProjectDir)$(OutDir)*.*") DO RMDIR "%%P" /S /Q
+MD "$(ProjectDir)$(OutDir)assets"
+MD "$(ProjectDir)$(OutDir)logs"
+MD "$(ProjectDir)$(OutDir)scenarios"
+MD "$(ProjectDir)$(OutDir)screenshots"
+MD "$(ProjectDir)$(OutDir)scenarios\RandomMapSettlements"
+XCOPY "$(ProjectDir)assets\*" "$(ProjectDir)$(OutDir)assets" /S
+XCOPY "$(ProjectDir)scenarios\RandomMapSettlements\*" "$(ProjectDir)$(OutDir)scenarios\RandomMapSettlements" /S
+XCOPY "$(ProjectDir)glew32.dll" "$(ProjectDir)$(OutDir)"
+XCOPY "$(ProjectDir)libsndfile-1.dll" "$(ProjectDir)$(OutDir)"
+XCOPY "$(ProjectDir)ogg.dll" "$(ProjectDir)$(OutDir)"
+XCOPY "$(ProjectDir)OpenAL32.dll" "$(ProjectDir)$(OutDir)"
+XCOPY "$(ProjectDir)settings.xml" "$(ProjectDir)$(OutDir)"
+XCOPY "$(ProjectDir)vorbis.dll" "$(ProjectDir)$(OutDir)"
+XCOPY "$(ProjectDir)vorbisfile.dll" "$(ProjectDir)$(OutDir)"
+XCOPY "$(ProjectDir)wrap_oal.dll" "$(ProjectDir)$(OutDir)"</Command>
+    </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <ClCompile>
@@ -141,7 +165,31 @@
       <OptimizeReferences>true</OptimizeReferences>
       <AdditionalLibraryDirectories>$(ProjectDir)source/extern/libraries</AdditionalLibraryDirectories>
       <AdditionalDependencies>opengl32.lib;glew32.lib;glfw3.lib;OpenAL32.lib;libsndfile-1.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalOptions>/ignore:4217 %(AdditionalOptions)</AdditionalOptions>
     </Link>
+    <PostBuildEvent>
+      <Command>
+      </Command>
+    </PostBuildEvent>
+    <PreBuildEvent>
+      <Command>DEL /Q "$(ProjectDir)$(OutDir)*"
+FOR /D %%P IN ("$(ProjectDir)$(OutDir)*.*") DO RMDIR "%%P" /S /Q
+MD "$(ProjectDir)$(OutDir)assets"
+MD "$(ProjectDir)$(OutDir)logs"
+MD "$(ProjectDir)$(OutDir)scenarios"
+MD "$(ProjectDir)$(OutDir)screenshots"
+MD "$(ProjectDir)$(OutDir)scenarios\RandomMapSettlements"
+XCOPY "$(ProjectDir)assets\*" "$(ProjectDir)$(OutDir)assets" /S
+XCOPY "$(ProjectDir)scenarios\RandomMapSettlements\*" "$(ProjectDir)$(OutDir)scenarios\RandomMapSettlements" /S
+XCOPY "$(ProjectDir)glew32.dll" "$(ProjectDir)$(OutDir)"
+XCOPY "$(ProjectDir)libsndfile-1.dll" "$(ProjectDir)$(OutDir)"
+XCOPY "$(ProjectDir)ogg.dll" "$(ProjectDir)$(OutDir)"
+XCOPY "$(ProjectDir)OpenAL32.dll" "$(ProjectDir)$(OutDir)"
+XCOPY "$(ProjectDir)settings.xml" "$(ProjectDir)$(OutDir)"
+XCOPY "$(ProjectDir)vorbis.dll" "$(ProjectDir)$(OutDir)"
+XCOPY "$(ProjectDir)vorbisfile.dll" "$(ProjectDir)$(OutDir)"
+XCOPY "$(ProjectDir)wrap_oal.dll" "$(ProjectDir)$(OutDir)"</Command>
+    </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="source\audio\vorbis\ogg_vorbis.cpp" />
@@ -160,6 +208,11 @@
     <ClCompile Include="source\interface\editor_ui.cpp" />
     <ClCompile Include="source\interface\menu_globaloptions.cpp" />
     <ClCompile Include="source\interface\object_ui.cpp" />
+    <ClCompile Include="source\lmx\lmxparse.cpp" />
+    <ClCompile Include="source\lmx\lmxregex.cpp" />
+    <ClCompile Include="source\lmx\lmxtypes.cpp" />
+    <ClCompile Include="source\lmx\lmxunicode.cpp" />
+    <ClCompile Include="source\lmx\xml-settings.cpp" />
     <ClCompile Include="source\math.cpp" />
     <ClCompile Include="source\menu\menu_functions.cpp" />
     <ClCompile Include="source\object.cpp" />
@@ -184,6 +237,13 @@
     <ClCompile Include="source\primitives\unit_sprite.cpp" />
     <ClCompile Include="source\unit\unit.cpp" />
     <ClCompile Include="source\unit\unit_functions.cpp" />
+    <ClInclude Include="source\lmx\lmxinternals.h" />
+    <ClInclude Include="source\lmx\lmxparse.h" />
+    <ClInclude Include="source\lmx\lmxregex.h" />
+    <ClInclude Include="source\lmx\lmxtypes.h" />
+    <ClInclude Include="source\lmx\lmxunicode.h" />
+    <ClInclude Include="source\lmx\lmxuser.h" />
+    <ClInclude Include="source\lmx\xml-settings.h" />
     <None Include="assets\shaders\bsprite\fragment.glsl">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
       <FileType>Document</FileType>

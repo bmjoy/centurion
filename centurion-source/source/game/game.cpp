@@ -37,7 +37,7 @@ namespace game {
 		resetPicking();
 		reset();
 
-		setParam("ui-bottom-height", 70.f);
+		setParam("ui-bottom-height", 100.f);
 		setParam("ui-top-height", 100.f);
 		setMinimapProjection();
 		setBoolean("mouse-left-pressed", false);

@@ -1,0 +1,671 @@
+<html>
+<head>
+<style type="text/css">
+body { font-family: Arial, Helvetica, sans-serif; }
+h1 { color:#0005C8; }
+h2 { color:#0005C8; }
+h3 { color:#0005C8; }
+h4 { color:#0005C8; }
+code { color:#800000; }
+pre.cmd { color:#0000c0; }
+pre.code { color:#600000; }
+pre.proto { color:#800000; }
+pre.anot { color:#0000c0; }
+pre.conf { color:#0000c0; }
+pre.schema { color:#0000ff; }
+pre.xml { color:#0000ff; }
+span.xtag { color:#800000; }
+span.xattr { color:#ff0000; }
+span.ckw { color:#0000ff; }
+span.ccom { color:#008000; }
+p.content-link { margin-top: 2px; margin-bottom: 4px; border: 2px 0; padding: 2px 0; }
+.desc { background-color:#99DAFF; width:100%; padding: 5px; border-width: thin;    border-style: solid; border-color: #99DAFF; }
+.synop { color:#0000ff; background-color:#B7E5FF; padding: 5px; }
+.flist { background-color:#FFF; padding: 5px; }
+.ret { color: #FF9900; text-align: right; }
+.fname { color: #800000; }
+.args { color: #00f; }
+.comment { color: #008000; }
+</style>
+<title>Codalogic Annotated XML Example (AXE&TRADE;) Specification</title>
+</head>
+<body>
+<!-- HEADER CENTER "" -->
+<!-- FOOTER LEFT "" -->
+<!-- FOOTER RIGHT "" -->
+
+<a name="top"></a>
+<!--TITLESTART-->
+<center>
+<font size=+3 color='#0005C8'><b>Codalogic AXE&TRADE;</b></font><font size=+3 color='#0005C8'><b><br>'Annotated XML Example'<br>Specification</b></font><br>
+<font size=-1>Version 0.5<br>Document Revision 4<br>
+Copyright &copy; 2011 Codalogic Ltd.</font>
+</center>
+<!--TITLEEND-->
+				
+<!-- HEADER CENTER "$TITLE" -->
+<!-- FOOTER LEFT "$HEADING" -->
+<!-- FOOTER RIGHT "$PAGE" -->
+
+<p align=right><font face=arial size=-1><a href='#top'>[Top]</a> <a href='#contents'>[Contents]</a></font></p>
+<a name='Introduction'></a>
+<h1>Introduction</h1>
+Annotated XML Example (AXE&TRADE;) is a simple method for specifying the format of XML data.  In its simplest use an example of your XML data can be used to specify the XML format.  The XML example can then be annotated with additional characters to more accurately describe your XML data.
+<p>
+AXE&TRADE;'s main goal is to be easy to use.  Therefore it does not support some of the more advanced features supported by other XML data specification languages such as <a href='http://codalogic.com/lmx/documentation-xsd.php'>W3C XML Schema</a>.  
+
+<a name="contents"></a>
+<!--NoNum--><h1>Contents</h1>
+<ul>
+<p class="content-link"><a href='#QuickOverview'>1&nbsp;-&nbsp;Quick Overview</a></p>
+<p class="content-link"><a href='#IdentifyingAXEFiles'>2&nbsp;-&nbsp;Identifying AXE Files</a></p>
+<p class="content-link"><a href='#StructureofanAXESpecificationFile'>3&nbsp;-&nbsp;Structure of an AXE Specification File</a></p>
+<p class="content-link"><a href='#SpecifyingTypes'>4&nbsp;-&nbsp;Specifying Types</a></p>
+<p class="content-link">&nbsp;&nbsp;&nbsp;<a href='#SpecifyingAttributesfromtheXMLNamespace'>4.1&nbsp;-&nbsp;Specifying Attributes from the XML Namespace</a></p>
+<p class="content-link"><a href='#SpecifyingHowManyTimesanAttributeCanOccur'>5&nbsp;-&nbsp;Specifying How Many Times an Attribute Can Occur</a></p>
+<p class="content-link"><a href='#SpecifyingHowManyTimesanElementCanOccur'>6&nbsp;-&nbsp;Specifying How Many Times an Element Can Occur</a></p>
+<p class="content-link"><a href='#SpecifyingComplexElementBodies'>7&nbsp;-&nbsp;Specifying Complex Element Bodies</a></p>
+<p class="content-link"><a href='#SpecifyingGroupsofElements'>8&nbsp;-&nbsp;Specifying Groups of Elements</a></p>
+<p class="content-link"><a href='#SpecifyingUserDefinedSimpleTypes'>9&nbsp;-&nbsp;Specifying User-Defined Simple Types</a></p>
+<p class="content-link"><a href='#SpecifyingUserDefinedComplexTypes'>10&nbsp;-&nbsp;Specifying User-Defined Complex Types</a></p>
+<p class="content-link"><a href='#HowaUserDefinedComplexTypeAffectsaReferencingElement'>11&nbsp;-&nbsp;How a User-Defined Complex Type Affects a Referencing Element</a></p>
+<p class="content-link"><a href='#MakinganAXEDefinitionwithUserDefinedTypesaValidXMLDocument'>12&nbsp;-&nbsp;Making an AXE Definition with User-Defined Types a Valid XML Document</a></p>
+<p class="content-link"><a href='#SpecifyinganXMLNamespace'>13&nbsp;-&nbsp;Specifying an XML Namespace</a></p>
+<p class="content-link"><a href='#MarkingtheContentofanElementasMixed'>14&nbsp;-&nbsp;Marking the Content of an Element as 'Mixed'</a></p>
+<p class="content-link"><a href='#ExtensibilityandVersioning'>15&nbsp;-&nbsp;Extensibility and Versioning</a></p>
+<p class="content-link"><a href='#ModellingPolymorphism'>16&nbsp;-&nbsp;Modelling Polymorphism</a></p>
+<p class="content-link"><a href='#ModularityofUserDefinedTypes'>17&nbsp;-&nbsp;Modularity of User-Defined Types</a></p>
+</ul>
+
+</skip>
+
+<p align=right><font face=arial size=-1><a href='#top'>[Top]</a> <a href='#contents'>[Contents]</a></font></p>
+<a name='QuickOverview'></a>
+<h1>1&nbsp;-&nbsp;Quick Overview</h1>
+This section briefly introduces the AXE&TRADE; format.  The concepts presented here are discussed further later in the document so it doesn't matter if you don't fully understand the example.
+<p>
+The following is a brief example of an AXE specification:
+<pre class='xml'>
+    &lt;<span class='xtag'>MyElement</span> <span class='xattr'>a1</span>="12" <span class='xattr'>a2</span>="?int">
+        &lt;<span class='xtag'>Element1</span>>This is a string&lt;/<span class='xtag'>Element1</span>>
+        * &lt;<span class='xtag'>Element2</span>>string&lt;/<span class='xtag'>Element2</span>>
+        ? &lt;<span class='xtag'>Element3</span>>AComplexType&lt;/<span class='xtag'>Element3</span>>
+    &lt;/<span class='xtag'>MyElement</span>>
+
+    AComplexType =
+        &lt;<span class='xtag'>_</span> <span class='xattr'>a3</span>="AnInt">MyInt&lt;/<span class='xtag'>_</span>>
+
+    AnInt = int
+
+    MyInt = int( min=0, max=100 )
+</pre>
+As you can see, the format follows that of the actual XML data that it represents, but has some additional characters added to it to describe the format in more detail.
+<p>
+For example, an AXE parser will look at the value of attribute <code>a1</code> ("12") and infer that it is an integer.  If you prefer, you can explicitly state that a type is an integer by putting the name of the type where the value normally appears.  This is shown for attribute <code>a2</code>.
+<p>
+The set of built-in types supported by AXE are described below.  They are the set of types specified by W3C XML Schema Part 2.
+<p><code></code>
+The example shows a <code>?</code> character as the first non-whitespace character of attribute <code>a2</code>'s value.  This indicates that the attribute is optional.  Without the </code>?</code> the attribute is assumed to be mandatory.
+<p>
+Similar to above, the type of the <code>Element1</code> element is inferred to be a string, whereas the type of <code>Element2</code> is explicitly stated to be a string.
+<p>
+The <code>*</code> before <code>Element2</code> indicates that it can occur 0 or more times.  A <code>?</code> in that location would indicate that the element can appear 0 or 1 times, and a <code>+</code> would indicate 1 or more times.
+<p>
+<code>Element3</code>'s type is defined by the user defined <code>AComplexType</code> complex type.  Effectively the name of the element is substituted for the <code>_</code> in the complex type definition in the places where the type is used by an element.
+<p>
+The value of the <code>a3</code> attribute in the <code>AComplexType</code> type uses the user defined type <code>AnInt</code>, which is effectively an alias of the <code>int</code> built-in type.  The body of any element that is associated with the <code>AComplexType</code> type uses the user defined <code>MyInt</code> type.  <code>MyInt</code> is defined to be an <code>int</code> with a minimum value of 0 and a maximum value of 100.
+
+<p align=right><font face=arial size=-1><a href='#top'>[Top]</a> <a href='#contents'>[Contents]</a></font></p>
+<a name='IdentifyingAXEFiles'></a>
+<h1>2&nbsp;-&nbsp;Identifying AXE Files</h1>
+The preferred file extension for an AXE file is <code>.axe</code>.  If you add AXE annotations to an XML file it is recommended that you rename the file to include the <code>.axe</code> extension.
+
+<p align=right><font face=arial size=-1><a href='#top'>[Top]</a> <a href='#contents'>[Contents]</a></font></p>
+<a name='StructureofanAXESpecificationFile'></a>
+<h1>3&nbsp;-&nbsp;Structure of an AXE Specification File</h1>
+An AXE specification file consists of zero or more example elements followed by zero or more User-Defined Type definitions.  The example elements are the set of elements that the document element of an XML instance document is validated against.  A simple AXE specification with one example element and no User-Defined Types is:
+<pre class='xml'>
+    &lt;<span class='xtag'>MyElement</span> <span class='xattr'>a1</span>="12" <span class='xattr'>a2</span>="?int">
+        &lt;<span class='xtag'>Element1</span>>This is a string&lt;/<span class='xtag'>Element1</span>>
+    &lt;/<span class='xtag'>MyElement</span>>
+</pre>
+The above example indicates that a valid XML instance document must have a document element called <code>MyElement</code> with a mandatory attribute called <code>a1</code> of integer type, an optional attribute called <code>a2</code> of integer type and a child element called <code>Element1</code> of string type.
+<p>
+The following is an example containing two example elements, permitting a valid XML instance to match either the <code>MyElement</code> example element or the <code>YourElement</code> example element:
+<pre class='xml'>
+    &lt;<span class='xtag'>MyElement</span> <span class='xattr'>a1</span>="12" <span class='xattr'>a2</span>="?int">
+        &lt;<span class='xtag'>Element1</span>>This is a string&lt;/<span class='xtag'>Element1</span>>
+    &lt;/<span class='xtag'>MyElement</span>>
+
+    &lt;<span class='xtag'>YourElement</span> <span class='xattr'>a</span>="?int">
+        &lt;<span class='xtag'>Child1</span>>15.2&lt;/<span class='xtag'>Child1</span>>
+    &lt;/<span class='xtag'>YourElement</span>>
+</pre>
+User-Defined Types are described below (See <a href='#SpecifyingUserDefinedSimpleTypes'>9&nbsp;-&nbsp;Specifying User-Defined Simple Types</a> and <a href='#SpecifyingUserDefinedComplexTypes'>10&nbsp;-&nbsp;Specifying User-Defined Complex Types</a>).
+<p>
+An AXE specification file may optionally also have an AXE wrapper as described in <a href='#MakinganAXEDefinitionwithUserDefinedTypesaValidXMLDocument'>12&nbsp;-&nbsp;Making an AXE Definition with User-Defined Types a Valid XML Document</a>.
+
+<p align=right><font face=arial size=-1><a href='#top'>[Top]</a> <a href='#contents'>[Contents]</a></font></p>
+<a name='SpecifyingTypes'></a>
+<h1>4&nbsp;-&nbsp;Specifying Types</h1>
+The type associated with an attribute or element can be inferred from an example of the type, or be explicitly stated using a built-in type or a user defined type.
+<p>
+The type of an attribute is specified in the attribute's value field, for example:
+<pre class='xml'>
+    <span class='xattr'>a1</span>="12"
+</pre>
+Or:
+<pre class='xml'>
+    <span class='xattr'>a2</span>="int"
+</pre>
+<p>
+The type of an element is specified in the body of the element, for example:
+<pre class='xml'>
+    &lt;<span class='xtag'>Element1</span>>string&lt;/<span class='xtag'>Element1</span>>
+</pre>
+<p>
+The built-in types are those of W3C XML Schema Part 2.
+<p>
+The common types include:
+<p>
+<ul>
+<code>string</code>, <code>long</code>, <code>unsignedLong</code>, <code>int</code>, <code>unsignedInt</code>, <code>short</code>, <code>unsignedShort</code>, <code>byte</code>, <code>unsignedByte</code>, <code>float</code>, <code>double</code>, <code>boolean</code>
+</ul>
+Date and time types are:
+<ul>
+<code>date</code>, <code>time</code>, <code>dateTime</code>, <code>gYearMonth</code>, <code>gYear</code>, <code>gMonthDay</code>, <code>gDay</code>, <code>gMonth</code>, <code>duration</code>
+</ul>
+Variations on the string type are:
+<ul>
+<code>normalizedString</code>, <code>token</code>, <code>NMTOKENS</code>, <code>Name</code>, <code>NCName</code>, <code>NMTOKEN</code>
+</ul>
+Arbitrary precision numbers are:
+<ul>
+<code>integer</code>, <code>nonPositiveInteger</code>, <code>negativeInteger</code>, <code>nonNegativeInteger</code>, <code>positiveInteger</code>, <code>decimal</code>
+</ul>
+Binary data types are:
+<ul>
+<code>hexBinary</code>, <code>base64Binary</code>
+</ul>
+Other types are:
+<ul>
+<code>anyURI</code>, <code>language</code>, <code>QName</code>, <code>ID</code>, <code>IDREF</code>, <code>IDREFS</code>, <code>ENTITY</code>, <code>ENTITIES</code>, <code>anySimpleType</code>, <code>anyAtomicType</code>, <code>anyType</code>, <code>NOTATION</code>
+</ul>
+<p>
+To specify a built-in type, put the name of the type in the position described above.
+<p>
+The following types can be inferred by example:
+<ul>
+<code>int</code>, <code>long</code>, <code>double</code>, <code>boolean</code>, <code>date</code>, <code>time</code>, <code>dateTime</code>, <code>gYearMonth</code>, <code>gMonthDay</code>, <code>gDay</code>, <code>gMonth</code>, <code>duration</code>
+</ul>
+Any unrecognised value is assumed to be a <code>string</code> type.
+<p>
+Note that an AXE parser may infer an incorrect type when the example of the type is ambiguous.  In this case you should explicitly specify the type using a built-in type or a user-defined type.
+<p>
+The above built-in types are all simple types.  Simple types may have parameters associated with them to further specify the type.  The parameters are placed in brackets after the type name.  The parameters are specified using a comma separated list of either the parameter name on its own, or <code>x=y</code> pairs in which the <code>x</code> value of the pair is the name of the parameter, and the <code>y</code> value of the pair is the parameter's value.  For example:
+<ul>
+int( min=0, max=100 )
+</ul>
+This specifies an integer type with a minimum value of 0 and a maximum value of 100.
+<p>
+When a parameter value contains spaces it should be placed in quotes, as in:
+<ul>
+string( pattern = "\w{3} \d{3}" )
+</ul>
+
+The allowed type parameters mirror the W3C XML Schema Part 2 facets.  The following parameters are allowed:
+<ul>
+<table border='1'>
+<tr><td>min</td><td>An AXE alias of minInclusive</td></tr>
+<tr><td>minInclusive</td><td>The minimum inclusive value</td></tr>
+<tr><td>minExclusive</td><td>The minimum exclusive value</td></tr>
+<tr><td>max</td><td>An AXE alias of maxInclusive</td></tr>
+<tr><td>maxInclusive</td><td>The maximum inclusive value</td></tr>
+<tr><td>maxExclusive</td><td>The maximum inclusive value</td></tr>
+<tr><td>minLength</td><td>The minimum length of a string or binary type</td></tr>
+<tr><td>maxLength</td><td>The maximum length of a string or binary type</td></tr>
+<tr><td>length</td><td>The fixed length of a string or binary type</td></tr>
+<tr><td>enumeration</td><td>An enumeration.  Multiple occurences of this parameter are allowed</td></tr>
+<tr><td>enum</td><td>An AXE alias of enumeration.  Multiple occurences of this parameter are allowed</td></tr>
+<tr><td>pattern</td><td>A pattern.  Multiple occurences of this parameter are allowed</td></tr>
+<tr><td>fractionDigits</td><td>The number of digits to the right of a decimal point in decimal types</td></tr>
+<tr><td>totalDigits</td><td>The maximum number of digits an integer or decimal type can have</td></tr>
+<tr><td>whiteSpace</td><td>Indicates whitespace handling.  Can be preserve ,replace or collapse</td></tr>
+</table>
+</ul>
+In addition to the above W3C XML Schema Part 2 facets, AXE also supports the following parameters:
+<ul>
+<table border='1'>
+<tr><td>anyEnumeration</td><td>Specifies that the set of specified enumerations is open and extensible.  While parsing an XML instance file values that do not correspond to the specified enumerations are not treated as validation errors.</td></tr>
+<tr><td>anyEnum</td><td>An alias of anyEnumeration</td></tr>
+<tr><td>AlternativeEnumeration</td><td>See description below</td></tr>
+<tr><td>AltEnum</td><td>An alias of AlternativeEnumeration</td></tr>
+<tr><td>id</td><td>Indicates that the type is an identifier.  See description below</td></tr>
+<tr><td>idRef</td><td>Indicates that the type is a reference to an identifier.  See description below</td></tr>
+</table>
+</ul>
+The <code>AlternativeEnumeration</code> parameter (and its alias <code>AltEnum</code>) allows additional enumerated values to be associated with a type.  The set of valid values of the type becomes the union of the specified base type (as modified by the other specified parameters), plus the enumerated values specified by any <code>AlternateEnumeration</code> parameters.  For example, to specify that a <code>range</code> type must have an unsigned integer value or the enumerated value <code>unbounded</code>, you could specify:
+<pre class='xml'>
+    range = unsignedInt( altEnum=unbounded )
+</pre>
+<p>
+The <code>id</code> and <code>idRef</code> parameters are used to allow parts of an XML instance document to reference other parts of an XML instance document.  The value part of the <code>id</code> and <code>idRef</code> parameters specify the name of an id set.  For example to specify that the <code>authorId</code> and <code>authorRef</code> types are associated with the <code>author</code> id set you could do:
+<pre class='xml'>
+    authorId = unsignedInt( id=author )
+
+    authorRef = unsignedInt( idRef=author )
+</pre>
+
+Multiple id sets may be specified, with each id set being given a unique name, for example:
+<pre class='xml'>
+    authorId = unsignedInt( id=author )
+
+    authorRef = unsignedInt( idRef=author )
+
+    bookId = unsignedInt( id=book )
+
+    bookRef = unsignedInt( idRef=book )
+</pre>
+During parsing of an XML instance document a parser records an implementation specific reference to the parent of an attribute or element whose type has an <code>id</code> parameter and ensures that the value of the attribute or element is unique within the applicable id set.  
+
+<p>
+An attribute value or element body may contain multiple instances of a simple type, for example:
+<pre class='xml'>
+    &lt;<span class='xtag'>MyElement</span>>10 15 82&lt;/<span class='xtag'>MyElement</span>>
+</pre>
+This is called a simple type array.  The number of instances of the simple type in such an array is specified in square brackets after the type name, for example:
+<ul>
+int[1..10]
+</ul>
+Or:
+<ul>
+int[1..*]( min=0, max=100 )
+</ul>
+The first number in the array specification is the minimum number of times the type should appear and the second number is the maximum number of times the type should appear.  A <code>*</code> in the place of the second number indicates that the upper limit is unbounded.  The array specification min and max values are separated by two dots (<code>..</code>).
+<p>
+Simple type parameters and array specifications can also be applied to user-defined simple types.
+<p>
+The contents of an element's body can be specified to be empty using an empty element, for example:
+<pre class='xml'>
+    &lt;<span class='xtag'>MyElement</span>>&lt;/<span class='xtag'>MyElement</span>>
+</pre>
+Or:
+<pre class='xml'>
+    &lt;<span class='xtag'>MyElement</span>/>
+</pre>
+<p>
+
+<!-- NEED 5cm -->
+<p align=right><font face=arial size=-1><a href='#top'>[Top]</a> <a href='#contents'>[Contents]</a></font></p>
+<a name='SpecifyingAttributesfromtheXMLNamespace'></a>
+<h2>4.1&nbsp;-&nbsp;Specifying Attributes from the XML Namespace</h2>
+An exception to the above is specifying the use of attributes from the XML namespace, such as <code>xml:lang</code> and <code>xml:id</code>.  Such definitions use the name of the attribute to indicate the type, and ignore the attribute value.  Therefore, to indicate the use of the <code>xml:lang</code> attribute, do:
+<pre class='xml'>
+    &lt;<span class='xtag'>MyElement</span> <span class='xattr'>xml:lang</span>="en">
+        ...
+    &lt;/<span class='xtag'>MyElement</span>>
+</pre>
+
+<p align=right><font face=arial size=-1><a href='#top'>[Top]</a> <a href='#contents'>[Contents]</a></font></p>
+<a name='SpecifyingHowManyTimesanAttributeCanOccur'></a>
+<h1>5&nbsp;-&nbsp;Specifying How Many Times an Attribute Can Occur</h1>
+By default an attribute is considered to be mandatory.  If the attribute is optional place a <code>?</code> character as the first non-whitespace character of the attribute's value, for example:
+<pre class='xml'>
+    &lt;<span class='xtag'>MyElement</span> <span class='xattr'>attr</span>="? int">&lt;/<span class='xtag'>MyElement</span>>
+</pre>
+
+<p align=right><font face=arial size=-1><a href='#top'>[Top]</a> <a href='#contents'>[Contents]</a></font></p>
+<a name='SpecifyingHowManyTimesanElementCanOccur'></a>
+<h1>6&nbsp;-&nbsp;Specifying How Many Times an Element Can Occur</h1>
+By default an element is considered to be required once and only once. If the element is optional (0 or 1 times), place a <code>?</code> character in front of the element specification, for example:
+<pre class='xml'>
+    ?&lt;<span class='xtag'>MyElement</span> <span class='xattr'>attr</span>="int">string&lt;/<span class='xtag'>MyElement</span>>
+</pre>
+If an element can appear 0 or more times, place a <code>*</code> character in front of the element specification, for example:
+<pre class='xml'>
+    *&lt;<span class='xtag'>MyElement</span> <span class='xattr'>attr</span>="int">string&lt;/<span class='xtag'>MyElement</span>>
+</pre>
+If an element can appear 1 or more times, place a <code>+</code> character in front of the element specification, for example:
+<pre class='xml'>
+    +&lt;<span class='xtag'>MyElement</span> <span class='xattr'>attr</span>="int">string&lt;/<span class='xtag'>MyElement</span>>
+</pre>
+White space may appear between the annotation character and the start of the element specification, for example:
+<pre class='xml'>
+    + &lt;<span class='xtag'>MyElement</span> <span class='xattr'>attr</span>="int">string&lt;/<span class='xtag'>MyElement</span>>
+</pre>
+A specific range of occurrences can be specified within a pair of braces, for example:
+<pre class='xml'>
+    {5,10}&lt;<span class='xtag'>MyElement</span> <span class='xattr'>attr</span>="int">string&lt;/<span class='xtag'>MyElement</span>>
+</pre>
+The minimum number of times the element can occur is specified by the first number within the braces.  If the maximum number of times the element can appear is the same as the minimum number, then the braces contain no further content.  For example, if the element must appear exactly 5 times, the following can be used:
+<pre class='xml'>
+    {5}&lt;<span class='xtag'>MyElement</span> <span class='xattr'>attr</span>="int">string&lt;/<span class='xtag'>MyElement</span>>
+</pre>
+If the maximum number of times the element can appear is a finite number, then a comma is placed after the first number, and then the maximum number of times the element can appear is specified, for example:
+<pre class='xml'>
+    {5,10} &lt;<span class='xtag'>MyElement</span> <span class='xattr'>attr</span>="int">string&lt;/<span class='xtag'>MyElement</span>>
+</pre>
+If the maximum number of times the element can appear is unbounded then a <code>*</code> instead of a number for the maximum number of times the element can appear, for example:
+<pre class='xml'>
+    {5,*} &lt;<span class='xtag'>MyElement</span> <span class='xattr'>attr</span>="int">string&lt;/<span class='xtag'>MyElement</span>>
+</pre>
+
+<p align=right><font face=arial size=-1><a href='#top'>[Top]</a> <a href='#contents'>[Contents]</a></font></p>
+<a name='SpecifyingComplexElementBodies'></a>
+<h1>7&nbsp;-&nbsp;Specifying Complex Element Bodies</h1>
+If the body of an element contains multiple child elements, then by default it is assumed that the elements occur in the sequence they are specified in in the specification.  For example:
+<pre class='xml'>
+    &lt;<span class='xtag'>MyElement</span> <span class='xattr'>a1</span>="12" ?<span class='xattr'>a2</span>="int">
+        &lt;<span class='xtag'>Element1</span>>This is a string&lt;/<span class='xtag'>Element1</span>>
+        * &lt;<span class='xtag'>Element2</span>>string&lt;/<span class='xtag'>Element2</span>>
+        ? &lt;<span class='xtag'>Element3</span> <span class='xattr'>a1</span>="MyInt">MyInt&lt;/<span class='xtag'>Element3</span>>
+    &lt;/<span class='xtag'>MyElement</span>>
+</pre>
+would mean that <code>MyElement</code> contains 1 instance of  <code>Element1</code>, followed by 0 or more instances of <code>Element2</code>, optionally followed by an instance of <code>Element3</code>.  (This mirrors W3C XML Schema <code>xs:sequence</code>.)
+<p>
+If only one of the child elements should appear, then include the <code>|</code> character between the element specifications.  For example:
+<pre class='xml'>
+    &lt;<span class='xtag'>MyElement</span>>
+        &lt;<span class='xtag'>Element1</span>>This is a string&lt;/<span class='xtag'>Element1</span>>
+        | {1,6} &lt;<span class='xtag'>Element2</span>>date&lt;/<span class='xtag'>Element2</span>>
+        | + &lt;<span class='xtag'>Element3</span>>int&lt;/<span class='xtag'>Element3</span>>
+    &lt;/<span class='xtag'>MyElement</span>>
+</pre>
+means that the body of <code>MyElement</code> can contain either a single occurrence of <code>Element1</code>, or between 1 and 6 occurrences of <code>Element2</code>, or 1 or more occurrences of <code>Element3</code>.  (This mirrors W3C XML Schema <code>xs:choice</code>.)
+<p>
+If multiple child elements can appear, but in any order, then include the <code>^</code> between the child element specifications.  For example:
+<pre class='xml'>
+    &lt;<span class='xtag'>MyElement</span>>
+        &lt;<span class='xtag'>Element1</span>>This is a string&lt;/<span class='xtag'>Element1</span>>
+        ^ {1,6} &lt;<span class='xtag'>Element2</span>>date&lt;/<span class='xtag'>Element2</span>>
+        ^ + &lt;<span class='xtag'>Element3</span>>int&lt;/<span class='xtag'>Element3</span>>
+    &lt;/<span class='xtag'>MyElement</span>>
+</pre>
+(This mirrors W3C XML Schema <code>xs:all</code> or Relax-NG's interleave.)
+
+<p align=right><font face=arial size=-1><a href='#top'>[Top]</a> <a href='#contents'>[Contents]</a></font></p>
+<a name='SpecifyingGroupsofElements'></a>
+<h1>8&nbsp;-&nbsp;Specifying Groups of Elements</h1>
+Child elements can be specified to appear in groups.  This is indicated by placing (round) brackets around the elements forming the group.  For example:
+<pre class='xml'>
+    &lt;<span class='xtag'>MyElement</span> <span class='xattr'>a1</span>="12" ?<span class='xattr'>a2</span>="int">
+        &lt;<span class='xtag'>Element1</span>>This is a string&lt;/<span class='xtag'>Element1</span>>
+        ?(
+            + &lt;<span class='xtag'>Element2</span>>string&lt;/<span class='xtag'>Element2</span>>
+            + &lt;<span class='xtag'>Element3</span> <span class='xattr'>a1</span>="MyInt">MyInt&lt;/<span class='xtag'>Element3</span>>
+         )
+    &lt;/<span class='xtag'>MyElement</span>>
+</pre>
+A group may contain body structure characters (i.e. <code>|</code> characters), for example:
+<pre class='xml'>
+    &lt;<span class='xtag'>MyElement</span> <span class='xattr'>a1</span>="12" ?<span class='xattr'>a2</span>="int">
+        &lt;<span class='xtag'>Element1</span>>This is a string&lt;/<span class='xtag'>Element1</span>>
+        ?(
+            + &lt;<span class='xtag'>Element2</span>>string&lt;/<span class='xtag'>Element2</span>>
+            | + &lt;<span class='xtag'>Element3</span> <span class='xattr'>a1</span>="MyInt">MyInt&lt;/<span class='xtag'>Element3</span>>
+         )
+    &lt;/<span class='xtag'>MyElement</span>>
+</pre>
+The number of times the group is allowed to appear is indicated using the same method to specify the number of times an element can appear.  For example:
+<pre class='xml'>
+    &lt;<span class='xtag'>MyElement</span> <span class='xattr'>a1</span>="12" ?<span class='xattr'>a2</span>="int">
+        &lt;<span class='xtag'>Element1</span>>This is a string&lt;/<span class='xtag'>Element1</span>>
+        +(
+            + &lt;<span class='xtag'>Element2</span>>string&lt;/<span class='xtag'>Element2</span>>
+            | + &lt;<span class='xtag'>Element3</span> <span class='xattr'>a1</span>="MyInt">MyInt&lt;/<span class='xtag'>Element3</span>>
+         )
+    &lt;/<span class='xtag'>MyElement</span>>
+</pre>
+indicates that the group can appear 1 or more times, and:
+<pre class='xml'>
+    &lt;<span class='xtag'>MyElement</span> <span class='xattr'>a1</span>="12" ?<span class='xattr'>a2</span>="int">
+        &lt;<span class='xtag'>Element1</span>>This is a string&lt;/<span class='xtag'>Element1</span>>
+        (
+            + &lt;<span class='xtag'>Element2</span>>string&lt;/<span class='xtag'>Element2</span>>
+            | + &lt;<span class='xtag'>Element3</span> <span class='xattr'>a1</span>="MyInt">MyInt&lt;/<span class='xtag'>Element3</span>>
+         )
+    &lt;/<span class='xtag'>MyElement</span>>
+</pre>
+indicates that the group can appear once and only once.
+
+<p align=right><font face=arial size=-1><a href='#top'>[Top]</a> <a href='#contents'>[Contents]</a></font></p>
+<a name='SpecifyingUserDefinedSimpleTypes'></a>
+<h1>9&nbsp;-&nbsp;Specifying User-Defined Simple Types</h1>
+User-defined types are defined after the example elements, if present.  They follow a <code>Name = Type</code> format.  The <code>Name</code> must be an XML Name without any colons.  The <code>Type</code> of the user-defined simple type follows the format as described in <a href='#SpecifyingTypes'>4&nbsp;-&nbsp;Specifying Types</a>.
+<p>
+For example, given:
+<pre class='xml'>
+    &lt;<span class='xtag'>MyElement</span>>
+        &lt;<span class='xtag'>Element1</span> <span class='xattr'>a2</span>="AnInt" <span class='xattr'>a3</span>="MyInt">MyOtherInt&lt;/<span class='xtag'>Element1</span>>
+    &lt;/<span class='xtag'>MyElement</span>>
+
+    AnInt = int
+
+    MyInt = int( min=0, max=100 )
+
+    MyOtherInt = MyInt( min=0, max=50 )
+</pre>
+<code>AnInt</code> becomes an alternative name for the built-in <code>int</code>, <code>MyInt</code> defines an integer limited to the range 0 to 100, and <code>MyOtherInt</code> further restricts <code>MyInt</code> to the number range 0 to 50.
+<p>
+To use a user-defined type in an XML document, place the <code>Name</code> of the type where a built-in type name would appear (see example above).  See also <a href='#ModularityofUserDefinedTypes'>17&nbsp;-&nbsp;Modularity of User-Defined Types</a> for how User-Defined Types in other AXE modules can be referenced.
+
+<p align=right><font face=arial size=-1><a href='#top'>[Top]</a> <a href='#contents'>[Contents]</a></font></p>
+<a name='SpecifyingUserDefinedComplexTypes'></a>
+<h1>10&nbsp;-&nbsp;Specifying User-Defined Complex Types</h1>
+User-defined complex types provide a useful way to decompose your XML document description into more manageable chunks in much the same way as you would use methods and functions to decompose a program's structure.  Their use is highly recommended.
+<p>
+Specifying a User-Defined Complex Type is similar to defining a User-Defined Simple Type in that it has the form <code>Name = Type</code>, and are defined after the example elements, if present.
+<p>
+In this case the <code>Type</code> looks like an element declaration, except that the name of the element is replaced with a <code>_</code> character; for example:
+<pre class='xml'>
+    MyComplex =
+            &lt;<span class='xtag'>_</span> <span class='xattr'>attr</span>="?int">
+                * &lt;<span class='xtag'>Child1</span> <span class='xattr'>a3</span>="string">time&lt;/<span class='xtag'>Child1</span>>
+                | * &lt;<span class='xtag'>Child2</span>>date&lt;/<span class='xtag'>Child2</span>>
+            &lt;/<span class='xtag'>_</span>>
+</pre><code></code>
+To use the type, place the name of the type in the body of the element to which the type is being assigned in the same way you would for a user-defined simple type, for example:
+<pre class='xml'>
+    &lt;<span class='xtag'>MyElement</span>>MyComplex&lt;/<span class='xtag'>MyElement</span>>
+</pre>
+This effectively gives a definition for <code>MyElement</code> of:
+<pre class='xml'>
+    &lt;<span class='xtag'>MyElement</span> <span class='xattr'>attr</span>="?int">
+        * &lt;<span class='xtag'>Child1</span> <span class='xattr'>a3</span>="string">time&lt;/<span class='xtag'>Child1</span>>
+        | * &lt;<span class='xtag'>Child2</span>>date&lt;/<span class='xtag'>Child2</span>>
+    &lt;/<span class='xtag'>MyElement</span>>
+</pre>
+
+<p align=right><font face=arial size=-1><a href='#top'>[Top]</a> <a href='#contents'>[Contents]</a></font></p>
+<a name='HowaUserDefinedComplexTypeAffectsaReferencingElement'></a>
+<h1>11&nbsp;-&nbsp;How a User-Defined Complex Type Affects a Referencing Element</h1>
+A User-Defined Complex Type can contribute attributes and/or element body content to an element that references the User-Defined Complex Type.  
+<p>
+If a User-Defined Complex Type includes attribute definitions then these attributes become part of the referencing element's definition.
+<p>
+If the content of a User-Defined Complex Type is empty then the User-Defined Complex Type does not affect the content of the referencing element.
+<p>
+If the content of a User-Defined Complex Type is a simple type, then this becomes the simple type content of the referencing element.  An element that references a User-Defined Complex Type whose content is a simple type must not define content locally, and any other User-Defined Complex Types referenced by the referencing element must have empty content.
+<p>
+If the content of a User-Defined Complex Type is one or more child elements then these child elements are conceptually pasted into the referencing elements definition as a group (See <a href='#SpecifyingGroupsofElements'>8&nbsp;-&nbsp;Specifying Groups of Elements</a>) in place of the reference to the User-Defined Complex Type.
+<p>
+For example, if the following AXE definition occurs:
+<pre class='xml'>
+        &lt;<span class='xtag'>MyElement</span> <span class='xattr'>a1</span>="12">
+            &lt;<span class='xtag'>Element1</span>>This is a string&lt;/<span class='xtag'>Element1</span>>
+            * MyType1
+            ? MyType2
+        &lt;/<span class='xtag'>MyElement</span>>
+
+        MyType1 =
+            &lt;<span class='xtag'>_</span> <span class='xattr'>a3</span>="AnInt">
+                &lt;<span class='xtag'>T11</span>>int&lt;/<span class='xtag'>T11</span>>
+                &lt;<span class='xtag'>T12</span>>string&lt;/<span class='xtag'>T12</span>>
+            &lt;/<span class='xtag'>_</span>>
+
+        MyType2 =
+            &lt;<span class='xtag'>_</span> <span class='xattr'>a4</span>="string">
+                &lt;<span class='xtag'>T21</span>>int&lt;/<span class='xtag'>T21</span>>
+                &lt;<span class='xtag'>T22</span>>string&lt;/<span class='xtag'>T22</span>>
+            &lt;/<span class='xtag'>_</span>>
+</pre>
+the effective definition of <code>MyElement</code> is:
+<pre class='xml'>
+        &lt;<span class='xtag'>MyElement</span> <span class='xattr'>a1</span>="12" <span class='xattr'>a3</span>="AnInt" <span class='xattr'>a4</span>="string">
+            &lt;<span class='xtag'>Element1</span>>This is a string&lt;/<span class='xtag'>Element1</span>>
+            * (  
+                &lt;<span class='xtag'>T11</span>>int&lt;/<span class='xtag'>T11</span>>
+                &lt;<span class='xtag'>T12</span>>string&lt;/<span class='xtag'>T12</span>> )
+            ? (
+                &lt;<span class='xtag'>T21</span>>int&lt;/<span class='xtag'>T21</span>>
+                &lt;<span class='xtag'>T22</span>>string&lt;/<span class='xtag'>T22</span>> )
+        &lt;/<span class='xtag'>MyElement</span>>
+</pre>
+The process by which this effective definition is realised is implementation dependent.  For example, in an AXE to W3C XML XSD Schema converter it is recommended that if a User-Defined Complex Type in an element definition is the first specified item of an element's content and it may occur once and only once, then the element is modelled as an XML Schema <code>xs:extension</code> of the User-Defined Complex Type.  If the referenced User-Defined Complex Type is not the first specified item of content, or is not specified to occur only once, then the User-Defined Complex Type definition should be treated as if it attributes defined an XML Schema attribute group, and it's content defined an XML Schema model group.
+
+<p align=right><font face=arial size=-1><a href='#top'>[Top]</a> <a href='#contents'>[Contents]</a></font></p>
+<a name='MakinganAXEDefinitionwithUserDefinedTypesaValidXMLDocument'></a>
+<h1>12&nbsp;-&nbsp;Making an AXE Definition with User-Defined Types a Valid XML Document</h1>
+Because the user defined types appear after the main example XML, without special consideration an AXE document may not be a valid XML document.  To address this, the AXE specification can be optionally wrapped in an <code>axe</code> element, which has a namespace prefix associated with it that is associated with the <code>http://codalogic.com/axe</code> namespace.  For example:
+<pre class='xml'>
+    &lt;<span class='xtag'>axe:axe</span> <span class='xattr'>xmlns:axe</span>="http://codalogic.com/axe">
+
+        &lt;<span class='xtag'>MyElement</span> <span class='xattr'>a1</span>="12" <span class='xattr'>a2</span>="?int">
+            &lt;<span class='xtag'>Element1</span>>This is a string&lt;/<span class='xtag'>Element1</span>>
+            * &lt;<span class='xtag'>Element2</span>>string&lt;/<span class='xtag'>Element2</span>>
+            ? &lt;<span class='xtag'>Element3</span>>AComplexType&lt;/<span class='xtag'>Element3</span>>
+        &lt;/<span class='xtag'>MyElement</span>>
+
+        AComplexType =
+            &lt;<span class='xtag'>_</span> <span class='xattr'>a3</span>="AnInt">MyInt&lt;/<span class='xtag'>_</span>>
+
+        AnInt = int
+
+        MyInt = int( min=0, max=100 )
+
+    &lt;/<span class='xtag'>axe:axe</span>>
+</pre>
+This more readily allows the AXE specification to be edited in an XML editor.  
+
+<p align=right><font face=arial size=-1><a href='#top'>[Top]</a> <a href='#contents'>[Contents]</a></font></p>
+<a name='SpecifyinganXMLNamespace'></a>
+<h1>13&nbsp;-&nbsp;Specifying an XML Namespace</h1>
+An XML document can be associated with an XML namespace by including an XML namespace declaration in the first element.  For example, to associate the default namespace with your document, do:
+<pre class='xml'>
+    &lt;<span class='xtag'>MyElement</span> <span class='xattr'>xmlns</span>="http://mynamespace.com">
+        ...
+    &lt;/<span class='xtag'>MyElement</span>>
+</pre>
+To associate a namespace prefix with your document, do:
+<pre class='xml'>
+    &lt;<span class='xtag'>myns:MyElement</span> <span class='xattr'>xmlns:myns</span>="http://mynamespace.com">
+        ...
+    &lt;/<span class='xtag'>myns:MyElement</span>>
+</pre>
+In the latter case, elements with names including the namespace prefix will be associated with the specified namespace, and elements with names without a prefix will not be associated with a namespace.
+
+<p align=right><font face=arial size=-1><a href='#top'>[Top]</a> <a href='#contents'>[Contents]</a></font></p>
+<a name='MarkingtheContentofanElementasMixed'></a>
+<h1>14&nbsp;-&nbsp;Marking the Content of an Element as 'Mixed'</h1>
+There are two ways to mark the content of an element as 'Mixed'.  Firstly you can add the <code>mixed</code> attribute from the AXE namespace to the element's definition and set its value to <code>true</code>.  For example, assuming the namespace prefix 'axe' is mapped to the AXE namespace then you can do:
+<pre class='xml'>
+    &lt;<span class='xtag'>MyElement</span> <span class='xattr'>axe:mixed</span>="true" ...>
+        ...
+    &lt;/<span class='xtag'>MyElement</span>>
+</pre>
+Alternatively you can include the string <code>##mixed</code> in the body of the element definition, for example:
+<pre class='xml'>
+    &lt;<span class='xtag'>MyElement</span>>
+        ##mixed
+        ...
+    &lt;/<span class='xtag'>MyElement</span>>
+</pre>
+Any user-defined complex type that has child elements that is referenced as an immediate child in an element marked as 'mixed' must also be marked as 'mixed'.  Similarly, if a user-defined complex type is marked as 'mixed' then any element that references it as an immediate child must also be marked as 'mixed'.
+
+<p align=right><font face=arial size=-1><a href='#top'>[Top]</a> <a href='#contents'>[Contents]</a></font></p>
+<a name='ExtensibilityandVersioning'></a>
+<h1>15&nbsp;-&nbsp;Extensibility and Versioning</h1>
+An AXE specification has two mechanisms for specifying extensibility and versioning.
+<p>
+You can mark the whole AXE definition as 'open' by including the <code>open</code> attribute from the AXE namespace in the definition's outer most element and setting its value to <code>true</code>.  For example, assuming the namespace prefix 'axe' is mapped to the AXE namespace then you can do:
+<pre class='xml'>
+    &lt;<span class='xtag'>axe:axe</span> <span class='xattr'>xmlns:axe</span>="http://codalogic.com/axe" <span class='xattr'>axe:open</span>="true">
+        ...
+    &lt;/<span class='xtag'>axe</span>>
+</pre>
+If an AXE specification is marked as 'open' then all unknown attributes are ignored, and unknown child elements that appear before any element's end tag are ignored. 
+<p>
+Alternatively you can specify specific places where unknown elements and attributes are permitted using the <code>any</code> attribute and element in the AXE namespace.  If an elements's definition includes AXE's <code>any</code> attribute then any unknown attribute is ignored.  If an element's content definition includes one or more <code>any</code> elements, then in an XML instance document any unknown element appearing at that position within the element's content is ignored.
+<p>
+The normal rules for specifying the cardinality of elements and attributes apply to these constructs.  Therefore, if the namespace prefix 'axe' is mapped to the AXE namespace, a typical example of using the <code>any</code> attribute and element is:
+<pre class='xml'>
+        &lt;<span class='xtag'>MyElement</span> <span class='xattr'>a1</span>="12" <span class='xattr'>axe:any</span>="?">
+            &lt;<span class='xtag'>Element1</span>>This is a string&lt;/<span class='xtag'>Element1</span>>
+            * &lt;<span class='xtag'>axe:any</span>/>
+        &lt;/<span class='xtag'>MyElement</span>>
+</pre>
+
+<p align=right><font face=arial size=-1><a href='#top'>[Top]</a> <a href='#contents'>[Contents]</a></font></p>
+<a name='ModellingPolymorphism'></a>
+<h1>16&nbsp;-&nbsp;Modelling Polymorphism</h1>
+Some XML documents model the type of polymorphism found in programming languages such as Java.  To model this behaviour the <code>polymorphic</code>, <code>abstract</code>, <code>base</code>, and <code>selector</code> attributes are available in the AXE namespace.  
+<p>
+To indicate that a User-Defined Complex Type is polymorphic, set AXE's <code>polymorphic</code> attribute to <code>true</code>, for example (if the namespace prefix 'axe' is mapped to the AXE namespace):
+<pre class='xml'>
+        MyBase =
+            &lt;<span class='xtag'>_</span> <span class='xattr'>a4</span>="string" <span class='xattr'>axe:polymorphic</span>="true">
+                &lt;<span class='xtag'>E1</span>>int&lt;/<span class='xtag'>E1</span>>
+            &lt;/<span class='xtag'>_</span>>
+</pre>
+If the polymorphic base type can not be used without being extended, then it can be marked as abstract by setting the AXE <code>abstract</code> attribute to <code>true</code>, for example:
+<pre class='xml'>
+        MyBase =
+            &lt;<span class='xtag'>_</span> <span class='xattr'>a4</span>="string" <span class='xattr'>axe:polymorphic</span>="true" <span class='xattr'>axe:abstract</span>="true">
+                &lt;<span class='xtag'>E1</span>>int&lt;/<span class='xtag'>E1</span>>
+            &lt;/<span class='xtag'>_</span>>
+</pre>
+Types that extend a polymorphic base use AXE's <code>base</code>, and <code>selector</code> attributes.  The <code>base</code> attribute specifies the base that the type extends.  The <code>selector</code> specifies an <code>x=y</code> pair where the <code>x</code> value is the name of an attribute, and the <code>y</code> value specifies the value that the attribute must be set to in order for the type to be selected, for example:
+<pre class='xml'>
+        MyExtension1 =
+            &lt;<span class='xtag'>_</span> <span class='xattr'>aExtra</span>="string" <span class='xattr'>axe:base</span>="MyBase" <span class='xattr'>axe:selector</span>="aExtra=Ext1">
+                &lt;<span class='xtag'>E2</span>>string&lt;/<span class='xtag'>E2</span>>
+            &lt;/<span class='xtag'>_</span>>
+</pre>
+This indicates that the <code>aExtra</code> attribute must be set to the value <code>Ext1</code> in order for the parsed type to be treated as <code>MyExtension1</code>.  Thus an example of an element that should be validated against the <code>MyExtension1</code> code type might be:
+<pre class='xml'>
+        &lt;<span class='xtag'>MyElement</span> <span class='xattr'>aExtra</span>="Ext1" <span class='xattr'>a4</span>="This is the start">
+            &lt;<span class='xtag'>E1</span>>18&lt;/<span class='xtag'>E1</span>>
+            &lt;<span class='xtag'>E2</span>>Housing plan&lt;/<span class='xtag'>E2</span>>
+        &lt;/<span class='xtag'>MyElement</span>>
+</pre>
+<p>
+Note that the attribute specified in the <code>selector</code> attribute may be defined in either the base type or the extended type.  The order in which possible candidate selectors are evaluated is undefined and it is the responsibility of the schema designer to ensure that determination of the applicable extension is deterministic independent of the order in which the selectors are evaluated.
+<p>
+For compatibility with W3C XML Schema, if the attribute name portion of the <code>selector</code> attribute value can be interpreted as a QName that corresponds to the <code>type</code> attribute in the <code>http://www.w3.org/2001/XMLSchema-instance</code> namespace, then the value portion of the <code>selector</code> attribute value should be treated as a QName; otherwise it should be treated as a token and any comparisons should be made on a character-by-character basis irrespective of the type of the attribute referenced in the <code>selector</code> attribute.
+<p>
+If during parsing an XML instance document none of the selectors found in the extensions of the base type are matched then an element is parsed assuming its type is that of the base type.
+
+<p align=right><font face=arial size=-1><a href='#top'>[Top]</a> <a href='#contents'>[Contents]</a></font></p>
+<a name='ModularityofUserDefinedTypes'></a>
+<h1>17&nbsp;-&nbsp;Modularity of User-Defined Types</h1>
+To aid modularity and reuse AXE specifications can be split into multiple modules.  A module may be described using multiple files.  A module is identified using the <code>module</code> attribute from the AXE namespace.  Typically the value of the <code>module</code> attribute is a URI or reverse domain name notation.  For example, if the namespace prefix 'axe' is mapped to the AXE namespace, the following specifies that the file is part of the <code>com.codalogic.schemas.libraryTypes</code> module:
+<pre class='xml'>
+    &lt;<span class='xtag'>axe:axe</span> <span class='xattr'>xmlns:axe</span>="http://codalogic.com/axe"
+             <span class='xattr'>axe:module</span>="com.codalogic.schemas.libraryTypes">
+        authorId = unsignedInt( id=author )
+    &lt;/<span class='xtag'>axe:axe</span>>
+</pre>
+When a reference to a User-Defined Type is made, if it has no prefix then the type is searched for in the current file.  If the reference has a prefix then a search is made amongst the known files that are specified to be part of the module that the namespace prefix is associated with.  For example, to reference the above <code>authorId</code> from a separate file you can do:
+<pre class='xml'>
+    &lt;<span class='xtag'>axe:axe</span> <span class='xattr'>xmlns:axe</span>="http://codalogic.com/axe"
+             <span class='xattr'>xmlns:ltypes</span>="com.codalogic.schemas.libraryTypes">
+
+        &lt;<span class='xtag'>MyElement</span>>ltypes:authorId&lt;/<span class='xtag'>MyElement</span>>
+    &lt;/<span class='xtag'>axe:axe</span>>
+</pre>
+Note that specifying that a file is in a particular module does not indicate that all the elements and attributes that it defines are in the namespace of the module.  Specifying the namespace of a module and the namespace that elements and attributes are associated with is orthogonal in AXE.
+
+<center>END</center>
+</body>
+
+</html>

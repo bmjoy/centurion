@@ -1,0 +1,21 @@
+﻿<object type="building" className="etemple">
+  <properties>
+    <race>Egypt</race>
+    <singularName>Egypt temple</singularName>
+    <pluralName>Egypt temples</pluralName>
+    <maxHealth>500</maxHealth>
+    <sight>1000</sight>
+    <selectionRadius>1000</selectionRadius>
+    <selfRepair>true</selfRepair>
+    <helpSection>test</helpSection>
+    <minimapVisible>true</minimapVisible>
+    <isAnimated>false</isAnimated>
+    <isCentralBuilding>false</isCentralBuilding>
+    <isWaterBuilding>false</isWaterBuilding>
+    <duplicable>false</duplicable>
+    <repairRate>10</repairRate>
+  </properties>
+  <sounds>
+    <sound name="select" src="test/test.ogg"/>
+  </sounds>
+</object>

@@ -1,0 +1,33 @@
+This directory is the default target destination for the Win32 library files
+built from the Supporting Software source code contained in the
+supporting-software/src directory.
+
+See supporting-software/src/about-me.txt and
+supporting-software/src/build-libs.bat for details on how to build these
+files.
+
+The file names of the compiled files have the form:
+
+	lmx-<build type>-<compiler>.lib (or .dll)
+
+For example:
+
+	lmx-MT-vs2017.lib
+
+The <build type> part of the name follows the build switches used by the 
+Microsoft Visual C++ compiler.  These are:
+
+	MD - DLL
+	MDd - Debug DLL
+	MT - Multi-threaded
+	MTd - Debug multi-threaded.
+
+The <compiler> part of the name is as follows:
+
+	vs2017 - Microsoft Visual Studio 2017
+
+To select a particular lib for your build, simply add it to your 
+project using the IDE.
+
+The header files for Win32 are the same as for the other builds and
+are located in the supporting-software/include directory.
