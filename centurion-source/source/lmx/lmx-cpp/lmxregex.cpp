@@ -14,8 +14,8 @@
 
 #include <stdlib.h>
 
-#include "lmxregex.h"
-#include "lmxunicode.h"
+#include <lmx/lmxregex.h>
+#include <lmx/lmxunicode.h>
 
 namespace lmx {
 

@@ -6,7 +6,7 @@
 #pragma warning (disable:4100)  // Disable unreferenced formal parameter
 #endif
 
-#include "lmxuser.h"
+#include <lmx/lmxuser.h>
 
 // To help MS intellisense
 #ifndef LMX_GDECL

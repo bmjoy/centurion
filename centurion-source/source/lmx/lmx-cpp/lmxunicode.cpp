@@ -7,7 +7,7 @@
 #pragma warning (disable:4996)  // Disable VC8 'safe' warnings
 #endif
 
-#include "lmxunicode.h"
+#include <lmx/lmxunicode.h>
 
 namespace lmx {
 

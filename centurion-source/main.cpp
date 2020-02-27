@@ -2,7 +2,7 @@
 
 #include <global>
 #include <engine>
-#include "../lmx/lmxparse.h"
+#include <lmx/lmxparse.h>
 
 // main function 
 int main(int numArgs, char *args[]) {

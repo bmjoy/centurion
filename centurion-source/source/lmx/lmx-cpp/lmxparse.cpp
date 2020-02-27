@@ -18,7 +18,7 @@
 #define LMX_PARSE_SOURCE
 #endif
 
-#include "lmxparse.h"
+#include <lmx/lmxparse.h>
 
 //------------------------------------------------------------------------------
 //                       Functions for parsing XML

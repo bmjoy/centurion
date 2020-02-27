@@ -11,7 +11,7 @@
 #endif
 
 #include "xml-settings.h"
-#include "lmxparse.h"
+#include <lmx/lmxparse.h>
 
 #if defined( _MSC_VER ) && _MSC_VER <= 1200
 using namespace lmx;

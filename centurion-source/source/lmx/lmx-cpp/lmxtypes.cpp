@@ -21,7 +21,7 @@
 #define LMX_TYPES_SOURCE
 #endif
 
-#include "lmxuser.h"    // lmxuser.h will include lmxtypes.h at the right place
+#include <lmx/lmxuser.h>    // lmxuser.h will include lmxtypes.h at the right place
 
 namespace lmx {
 
