@@ -1,0 +1,63 @@
+
+<HTML>
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<TITLE>CreateInstance</TITLE>
+<LINK REL=STYLESHEET HREF="schema.css" TYPE="text/css">
+</HEAD>
+<BODY topmargin=0 rightmargin=0 leftmargin=0 style="background-image:  url(titletile.jpg); background-repeat:repeat-x; background-position: 0 0;" >
+<DIV CLASS="PageHeading">static CXXXXPtr CreateInstance();<BR> </DIV>
+<IMG src="GradLeft.jpg" width=7 height=378 alt="" border="0" style="position:absolute; left:10; top:18;z-Index:2"> 
+<IMG src="GradTop.jpg" width=352 height=7 alt="" border="0" align="top" style="position:absolute; left:10; top:18; z-index:1"> 
+
+<TABLE CLASS="InfoTable" cellpadding=0 cellspacing=0> 
+	<TR height=20> 
+		<TD width=20>&nbsp;</TD>
+		<TD valign=top align=left width=9 bgcolor="#cccc66"><IMG SRC="tablecorner.jpg" align=top></TD>
+		<TD CLASS="TableLightLabel" WIDTH=206>Property</TD>
+		<TD CLASS="TableLightLabel" >Description</TD>
+		<TD width=20>&nbsp;</TD>
+	</TR> 
+	<TR height=20 VALIGN="TOP"> 
+		<TD width=20>&nbsp;</TD>
+		<TD CLASS="TableLightDesc">&nbsp;</TD>
+		<TD CLASS="TableLightDesc">Method Name</TD>
+		<TD CLASS="TableLightDesc">CreateInstance</TD>
+		<TD width=20>&nbsp;</TD>
+	</TR> 
+	<TR height=20 VALIGN="TOP"> 
+		<TD width=20>&nbsp;</TD>
+		<TD CLASS="TableLightDesc">&nbsp;</TD>
+		<TD CLASS="TableLightDesc">Returns</TD>
+		<TD CLASS="TableLightDesc">A newly created instance of the object.</TD>
+		<TD width=20>&nbsp;</TD>
+	</TR> 
+	<TR height=20 VALIGN="TOP"> 
+		<TD width=20>&nbsp;</TD>
+		<TD CLASS="TableLightDesc">&nbsp;</TD>
+		<TD CLASS="TableLightDesc">Description</TD>
+		<TD CLASS="TableLightDesc">Creates a new object.</TD>
+		<TD width=20>&nbsp;</TD>
+	</TR> 
+	<TR height=20 VALIGN="TOP"> 
+		<TD width=20>&nbsp;</TD>
+		<TD CLASS="TableLightDesc">&nbsp;</TD>
+		<TD CLASS="TableLightDesc">Remarks</TD>
+		<TD CLASS="TableLightDesc">
+			This is the recomended way to create new objects<BR>
+			<BR>
+			The object returned is wrapped inside a smart pointer. <BR>
+			This takes care of all the reference counting issues.<BR>
+			<BR>
+			The returned object is initilized. All the mandatory attributes and elements will 
+			have been created, optional attributes and elements are never created, and collections 
+			are always created empty. If a collection is required to have 1 or more items in it 
+			then validation may fail when calling ToXml (until you add the appropriate number 
+			of items to the collection).
+		</TD>
+		<TD width=20>&nbsp;</TD>
+	</TR>
+</TABLE>
+
+</BODY>
+</HTML>

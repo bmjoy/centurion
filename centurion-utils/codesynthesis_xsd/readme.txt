@@ -1,0 +1,1 @@
+xsd cxx-tree --generate-serialization nome.xsd

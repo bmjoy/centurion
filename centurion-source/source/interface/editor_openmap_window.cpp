@@ -14,15 +14,15 @@ namespace editor {
 	
 	void OpenMapWindow::create() {
 		back_image = gui::Image("openmapwindow_back");
-		back_image.create("center", getParam("window-width") / 2.f, getParam("window-height") / 2.f, 0, 0, 0);
+		back_image.create("center", settings.GetWindowWidth() / 2.f, settings.GetWindowHeight() / 2.f, 0, 0, 0);
 		availableScenarios = get_all_folders_names_within_folder("scenarios");
 		map_list.padding_left = 15.f;
 		map_list.padding_top = 15.f;
 		map_list.option_height = 25.f;
 
 		// startX and startY are TOP-LEFT coordinates (as in Paint)
-		startX = getParam("window-width") / 2.f - back_image.getImageSize().x / 2.f;
-		startY = getParam("window-height") / 2.f + back_image.getImageSize().y / 2.f;
+		startX = settings.GetWindowWidth() / 2.f - back_image.getImageSize().x / 2.f;
+		startY = settings.GetWindowHeight() / 2.f + back_image.getImageSize().y / 2.f;
 
 		map_list.pickingID = getPickingID();
 		increasePickingID();

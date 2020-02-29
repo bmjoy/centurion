@@ -29,7 +29,7 @@ namespace game {
 	extern bool gameMinimapStatus;
 	extern bool gameGridStatus;
 	extern int mapWidth, mapHeight;		
-	extern float cameraMovespeed;
+	//extern float cameraMovespeed;
 	extern int currentZoomCamera;
 	extern float zoomCameraFactor;
 	extern float townhallRadius;

@@ -14,8 +14,8 @@ namespace menu {
 
 	void GlobalOptions::create() {
 
-		startX = getParam("window-width") / 2.f - 300.f;
-		startY = getParam("window-height") / 2.f + 200.f;
+		startX = settings.GetWindowWidth() / 2.f - 300.f;
+		startY = settings.GetWindowHeight() / 2.f + 200.f;
 
 		back.create("border-filled", startX, startY, 600.f, 400.f, "top-left", 0);
 
@@ -24,7 +24,7 @@ namespace menu {
 			form_options.push_back("LANG_" + i->first);
 		languages = gui::FormInput(true);
 		languages.create(startX + 150.f, startY - 77.f, 150.f, 20.f, form_options, getPickingID());
-		languages.selectedText = "LANG_"+language;
+		languages.selectedText = "LANG_"+ settings.GetLanguage();
 		addValueToPickingListUI(getPickingID(), "GlobalOptions_formLanguages");
 		increasePickingID();
 

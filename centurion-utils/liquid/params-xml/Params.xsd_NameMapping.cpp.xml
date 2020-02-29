@@ -1,0 +1,190 @@
+<?xml version="1.0"?>
+<MappingSchema Language="CPP" CollectionMapping="Original" NamespacePrefix="">
+  <Class Name="camera" LongName="camera" MappedClassColName="CCameraCol" MappedClassName="CCamera">
+    <Description>
+    </Description>
+    <Remarks>
+    </Remarks>
+    <Attribute Name="xPosition" DefaultValue="" MappedIsValidMember="m_IsValidXPosition" MappedSetValidName="SetValidXPosition" MappedIsValidName="IsValidXPosition" MappedIsNilMember="m_IsNilXPosition" MappedSetNilName="SetNilXPosition" MappedIsNilName="IsNilXPosition" MappedMemberName="m_XPosition" MappedDisplayName="xPosition" MappedSetterName="SetXPosition" MappedGetterName="GetXPosition" FormatOverride="">
+      <Description>
+      </Description>
+      <Remarks>
+      </Remarks>
+    </Attribute>
+    <Attribute Name="yPosition" DefaultValue="" MappedIsValidMember="m_IsValidYPosition" MappedSetValidName="SetValidYPosition" MappedIsValidName="IsValidYPosition" MappedIsNilMember="m_IsNilYPosition" MappedSetNilName="SetNilYPosition" MappedIsNilName="IsNilYPosition" MappedMemberName="m_YPosition" MappedDisplayName="yPosition" MappedSetterName="SetYPosition" MappedGetterName="GetYPosition" FormatOverride="">
+      <Description>
+      </Description>
+      <Remarks>
+      </Remarks>
+    </Attribute>
+  </Class>
+  <Class Name="mouse" LongName="mouse" MappedClassColName="CMouseCol" MappedClassName="CMouse">
+    <Description>
+    </Description>
+    <Remarks>
+    </Remarks>
+    <Attribute Name="scrollValue" DefaultValue="" MappedIsValidMember="m_IsValidScrollValue" MappedSetValidName="SetValidScrollValue" MappedIsValidName="IsValidScrollValue" MappedIsNilMember="m_IsNilScrollValue" MappedSetNilName="SetNilScrollValue" MappedIsNilName="IsNilScrollValue" MappedMemberName="m_ScrollValue" MappedDisplayName="scrollValue" MappedSetterName="SetScrollValue" MappedGetterName="GetScrollValue" FormatOverride="">
+      <Description>
+      </Description>
+      <Remarks>
+      </Remarks>
+    </Attribute>
+    <Attribute Name="xLeftClick" DefaultValue="" MappedIsValidMember="m_IsValidXLeftClick" MappedSetValidName="SetValidXLeftClick" MappedIsValidName="IsValidXLeftClick" MappedIsNilMember="m_IsNilXLeftClick" MappedSetNilName="SetNilXLeftClick" MappedIsNilName="IsNilXLeftClick" MappedMemberName="m_XLeftClick" MappedDisplayName="xLeftClick" MappedSetterName="SetXLeftClick" MappedGetterName="GetXLeftClick" FormatOverride="">
+      <Description>
+      </Description>
+      <Remarks>
+      </Remarks>
+    </Attribute>
+    <Attribute Name="xPosition" DefaultValue="" MappedIsValidMember="m_IsValidXPosition" MappedSetValidName="SetValidXPosition" MappedIsValidName="IsValidXPosition" MappedIsNilMember="m_IsNilXPosition" MappedSetNilName="SetNilXPosition" MappedIsNilName="IsNilXPosition" MappedMemberName="m_XPosition" MappedDisplayName="xPosition" MappedSetterName="SetXPosition" MappedGetterName="GetXPosition" FormatOverride="">
+      <Description>
+      </Description>
+      <Remarks>
+      </Remarks>
+    </Attribute>
+    <Attribute Name="xRightClick" DefaultValue="" MappedIsValidMember="m_IsValidXRightClick" MappedSetValidName="SetValidXRightClick" MappedIsValidName="IsValidXRightClick" MappedIsNilMember="m_IsNilXRightClick" MappedSetNilName="SetNilXRightClick" MappedIsNilName="IsNilXRightClick" MappedMemberName="m_XRightClick" MappedDisplayName="xRightClick" MappedSetterName="SetXRightClick" MappedGetterName="GetXRightClick" FormatOverride="">
+      <Description>
+      </Description>
+      <Remarks>
+      </Remarks>
+    </Attribute>
+    <Attribute Name="y2dPosition" DefaultValue="" MappedIsValidMember="m_IsValidY2dPosition" MappedSetValidName="SetValidY2dPosition" MappedIsValidName="IsValidY2dPosition" MappedIsNilMember="m_IsNilY2dPosition" MappedSetNilName="SetNilY2dPosition" MappedIsNilName="IsNilY2dPosition" MappedMemberName="m_Y2dPosition" MappedDisplayName="y2dPosition" MappedSetterName="SetY2dPosition" MappedGetterName="GetY2dPosition" FormatOverride="">
+      <Description>
+      </Description>
+      <Remarks>
+      </Remarks>
+    </Attribute>
+    <Attribute Name="y2dRightClick" DefaultValue="" MappedIsValidMember="m_IsValidY2dRightClick" MappedSetValidName="SetValidY2dRightClick" MappedIsValidName="IsValidY2dRightClick" MappedIsNilMember="m_IsNilY2dRightClick" MappedSetNilName="SetNilY2dRightClick" MappedIsNilName="IsNilY2dRightClick" MappedMemberName="m_Y2dRightClick" MappedDisplayName="y2dRightClick" MappedSetterName="SetY2dRightClick" MappedGetterName="GetY2dRightClick" FormatOverride="">
+      <Description>
+      </Description>
+      <Remarks>
+      </Remarks>
+    </Attribute>
+    <Attribute Name="yLeftClick" DefaultValue="" MappedIsValidMember="m_IsValidYLeftClick" MappedSetValidName="SetValidYLeftClick" MappedIsValidName="IsValidYLeftClick" MappedIsNilMember="m_IsNilYLeftClick" MappedSetNilName="SetNilYLeftClick" MappedIsNilName="IsNilYLeftClick" MappedMemberName="m_YLeftClick" MappedDisplayName="yLeftClick" MappedSetterName="SetYLeftClick" MappedGetterName="GetYLeftClick" FormatOverride="">
+      <Description>
+      </Description>
+      <Remarks>
+      </Remarks>
+    </Attribute>
+    <Attribute Name="yPosition" DefaultValue="" MappedIsValidMember="m_IsValidYPosition" MappedSetValidName="SetValidYPosition" MappedIsValidName="IsValidYPosition" MappedIsNilMember="m_IsNilYPosition" MappedSetNilName="SetNilYPosition" MappedIsNilName="IsNilYPosition" MappedMemberName="m_YPosition" MappedDisplayName="yPosition" MappedSetterName="SetYPosition" MappedGetterName="GetYPosition" FormatOverride="">
+      <Description>
+      </Description>
+      <Remarks>
+      </Remarks>
+    </Attribute>
+    <Attribute Name="yRightClick" DefaultValue="" MappedIsValidMember="m_IsValidYRightClick" MappedSetValidName="SetValidYRightClick" MappedIsValidName="IsValidYRightClick" MappedIsNilMember="m_IsNilYRightClick" MappedSetNilName="SetNilYRightClick" MappedIsNilName="IsNilYRightClick" MappedMemberName="m_YRightClick" MappedDisplayName="yRightClick" MappedSetterName="SetYRightClick" MappedGetterName="GetYRightClick" FormatOverride="">
+      <Description>
+      </Description>
+      <Remarks>
+      </Remarks>
+    </Attribute>
+    <Attribute Name="leftClick" DefaultValue="" MappedIsValidMember="m_IsValidLeftClick" MappedSetValidName="SetValidLeftClick" MappedIsValidName="IsValidLeftClick" MappedIsNilMember="m_IsNilLeftClick" MappedSetNilName="SetNilLeftClick" MappedIsNilName="IsNilLeftClick" MappedMemberName="m_LeftClick" MappedDisplayName="leftClick" MappedSetterName="SetLeftClick" MappedGetterName="GetLeftClick" FormatOverride="">
+      <Description>
+      </Description>
+      <Remarks>
+      </Remarks>
+    </Attribute>
+    <Attribute Name="leftHold" DefaultValue="" MappedIsValidMember="m_IsValidLeftHold" MappedSetValidName="SetValidLeftHold" MappedIsValidName="IsValidLeftHold" MappedIsNilMember="m_IsNilLeftHold" MappedSetNilName="SetNilLeftHold" MappedIsNilName="IsNilLeftHold" MappedMemberName="m_LeftHold" MappedDisplayName="leftHold" MappedSetterName="SetLeftHold" MappedGetterName="GetLeftHold" FormatOverride="">
+      <Description>
+      </Description>
+      <Remarks>
+      </Remarks>
+    </Attribute>
+    <Attribute Name="release" DefaultValue="" MappedIsValidMember="m_IsValidRelease" MappedSetValidName="SetValidRelease" MappedIsValidName="IsValidRelease" MappedIsNilMember="m_IsNilRelease" MappedSetNilName="SetNilRelease" MappedIsNilName="IsNilRelease" MappedMemberName="m_Release" MappedDisplayName="release" MappedSetterName="SetRelease" MappedGetterName="GetRelease" FormatOverride="">
+      <Description>
+      </Description>
+      <Remarks>
+      </Remarks>
+    </Attribute>
+    <Attribute Name="rightClick" DefaultValue="" MappedIsValidMember="m_IsValidRightClick" MappedSetValidName="SetValidRightClick" MappedIsValidName="IsValidRightClick" MappedIsNilMember="m_IsNilRightClick" MappedSetNilName="SetNilRightClick" MappedIsNilName="IsNilRightClick" MappedMemberName="m_RightClick" MappedDisplayName="rightClick" MappedSetterName="SetRightClick" MappedGetterName="GetRightClick" FormatOverride="">
+      <Description>
+      </Description>
+      <Remarks>
+      </Remarks>
+    </Attribute>
+    <Attribute Name="scrollBool" DefaultValue="" MappedIsValidMember="m_IsValidScrollBool" MappedSetValidName="SetValidScrollBool" MappedIsValidName="IsValidScrollBool" MappedIsNilMember="m_IsNilScrollBool" MappedSetNilName="SetNilScrollBool" MappedIsNilName="IsNilScrollBool" MappedMemberName="m_ScrollBool" MappedDisplayName="scrollBool" MappedSetterName="SetScrollBool" MappedGetterName="GetScrollBool" FormatOverride="">
+      <Description>
+      </Description>
+      <Remarks>
+      </Remarks>
+    </Attribute>
+  </Class>
+  <Class Name="params" LongName="params" MappedClassColName="CParamsCol" MappedClassName="CParams">
+    <Description>
+    </Description>
+    <Remarks>
+    </Remarks>
+    <Attribute Name="camera" DefaultValue="" MappedIsValidMember="m_IsValidCamera" MappedSetValidName="SetValidCamera" MappedIsValidName="IsValidCamera" MappedIsNilMember="m_IsNilCamera" MappedSetNilName="SetNilCamera" MappedIsNilName="IsNilCamera" MappedMemberName="m_Camera" MappedDisplayName="camera" MappedSetterName="SetCamera" MappedGetterName="GetCamera">
+      <Description>
+      </Description>
+      <Remarks>
+      </Remarks>
+    </Attribute>
+    <Attribute Name="mouse" DefaultValue="" MappedIsValidMember="m_IsValidMouse" MappedSetValidName="SetValidMouse" MappedIsValidName="IsValidMouse" MappedIsNilMember="m_IsNilMouse" MappedSetNilName="SetNilMouse" MappedIsNilName="IsNilMouse" MappedMemberName="m_Mouse" MappedDisplayName="mouse" MappedSetterName="SetMouse" MappedGetterName="GetMouse">
+      <Description>
+      </Description>
+      <Remarks>
+      </Remarks>
+    </Attribute>
+    <Attribute Name="window" DefaultValue="" MappedIsValidMember="m_IsValidWindow" MappedSetValidName="SetValidWindow" MappedIsValidName="IsValidWindow" MappedIsNilMember="m_IsNilWindow" MappedSetNilName="SetNilWindow" MappedIsNilName="IsNilWindow" MappedMemberName="m_Window" MappedDisplayName="window" MappedSetterName="SetWindow" MappedGetterName="GetWindow">
+      <Description>
+      </Description>
+      <Remarks>
+      </Remarks>
+    </Attribute>
+    <Attribute Name="ui" DefaultValue="" MappedIsValidMember="m_IsValidUi" MappedSetValidName="SetValidUi" MappedIsValidName="IsValidUi" MappedIsNilMember="m_IsNilUi" MappedSetNilName="SetNilUi" MappedIsNilName="IsNilUi" MappedMemberName="m_Ui" MappedDisplayName="ui" MappedSetterName="SetUi" MappedGetterName="GetUi">
+      <Description>
+      </Description>
+      <Remarks>
+      </Remarks>
+    </Attribute>
+  </Class>
+  <Class Name="ui" LongName="ui" MappedClassColName="CUiCol" MappedClassName="CUi">
+    <Description>
+    </Description>
+    <Remarks>
+    </Remarks>
+    <Attribute Name="bottomBarHeight" DefaultValue="" MappedIsValidMember="m_IsValidBottomBarHeight" MappedSetValidName="SetValidBottomBarHeight" MappedIsValidName="IsValidBottomBarHeight" MappedIsNilMember="m_IsNilBottomBarHeight" MappedSetNilName="SetNilBottomBarHeight" MappedIsNilName="IsNilBottomBarHeight" MappedMemberName="m_BottomBarHeight" MappedDisplayName="bottomBarHeight" MappedSetterName="SetBottomBarHeight" MappedGetterName="GetBottomBarHeight" FormatOverride="">
+      <Description>
+      </Description>
+      <Remarks>
+      </Remarks>
+    </Attribute>
+    <Attribute Name="topBarHeight" DefaultValue="" MappedIsValidMember="m_IsValidTopBarHeight" MappedSetValidName="SetValidTopBarHeight" MappedIsValidName="IsValidTopBarHeight" MappedIsNilMember="m_IsNilTopBarHeight" MappedSetNilName="SetNilTopBarHeight" MappedIsNilName="IsNilTopBarHeight" MappedMemberName="m_TopBarHeight" MappedDisplayName="topBarHeight" MappedSetterName="SetTopBarHeight" MappedGetterName="GetTopBarHeight" FormatOverride="">
+      <Description>
+      </Description>
+      <Remarks>
+      </Remarks>
+    </Attribute>
+  </Class>
+  <Class Name="window" LongName="window" MappedClassColName="CWindowCol" MappedClassName="CWindow">
+    <Description>
+    </Description>
+    <Remarks>
+    </Remarks>
+    <Attribute Name="heightZoomed" DefaultValue="" MappedIsValidMember="m_IsValidHeightZoomed" MappedSetValidName="SetValidHeightZoomed" MappedIsValidName="IsValidHeightZoomed" MappedIsNilMember="m_IsNilHeightZoomed" MappedSetNilName="SetNilHeightZoomed" MappedIsNilName="IsNilHeightZoomed" MappedMemberName="m_HeightZoomed" MappedDisplayName="heightZoomed" MappedSetterName="SetHeightZoomed" MappedGetterName="GetHeightZoomed" FormatOverride="">
+      <Description>
+      </Description>
+      <Remarks>
+      </Remarks>
+    </Attribute>
+    <Attribute Name="ratio" DefaultValue="" MappedIsValidMember="m_IsValidRatio" MappedSetValidName="SetValidRatio" MappedIsValidName="IsValidRatio" MappedIsNilMember="m_IsNilRatio" MappedSetNilName="SetNilRatio" MappedIsNilName="IsNilRatio" MappedMemberName="m_Ratio" MappedDisplayName="ratio" MappedSetterName="SetRatio" MappedGetterName="GetRatio" FormatOverride="">
+      <Description>
+      </Description>
+      <Remarks>
+      </Remarks>
+    </Attribute>
+    <Attribute Name="widthZoomed" DefaultValue="" MappedIsValidMember="m_IsValidWidthZoomed" MappedSetValidName="SetValidWidthZoomed" MappedIsValidName="IsValidWidthZoomed" MappedIsNilMember="m_IsNilWidthZoomed" MappedSetNilName="SetNilWidthZoomed" MappedIsNilName="IsNilWidthZoomed" MappedMemberName="m_WidthZoomed" MappedDisplayName="widthZoomed" MappedSetterName="SetWidthZoomed" MappedGetterName="GetWidthZoomed" FormatOverride="">
+      <Description>
+      </Description>
+      <Remarks>
+      </Remarks>
+    </Attribute>
+    <Attribute Name="shouldClose" DefaultValue="" MappedIsValidMember="m_IsValidShouldClose" MappedSetValidName="SetValidShouldClose" MappedIsValidName="IsValidShouldClose" MappedIsNilMember="m_IsNilShouldClose" MappedSetNilName="SetNilShouldClose" MappedIsNilName="IsNilShouldClose" MappedMemberName="m_ShouldClose" MappedDisplayName="shouldClose" MappedSetterName="SetShouldClose" MappedGetterName="GetShouldClose" FormatOverride="">
+      <Description>
+      </Description>
+      <Remarks>
+      </Remarks>
+    </Attribute>
+  </Class>
+  <Namespace SchemaNamespace="" SchemaAlias="" ClassNamespace="ParamsLib" />
+</MappingSchema>

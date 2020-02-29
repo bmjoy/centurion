@@ -22,8 +22,8 @@ namespace game {
 		}
 		json data = json::parse(path);
 
-		x = getParam("window-width") / 2.f;
-		y = getParam("window-height") / 2.f;
+		x = settings.GetWindowWidth() / 2.f;
+		y = settings.GetWindowHeight() / 2.f;
 
 		s = "buttons";
 		for (int i = 0; i < data[s].size(); ++i) {

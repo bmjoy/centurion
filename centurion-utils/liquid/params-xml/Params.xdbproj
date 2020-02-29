@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<lxdb8:LXDBWizardProject xmlns:xs="http://www.w3.org/2001/XMLSchema-instance" xmlns:lxdb8="http://www.liquid-technologies.com/LTWizProjectLib8" ProjectVersion="18.0.2.9849" UseRelativePaths="true">
+	<lxdb8:Schema FullPathName="..\..\..\centurion-source\Params.xsd" SelectedSchemaType="XSD" XDRAllowAdditionalAttributes="false" XDRIgnoreSimpleElements="false" WSDLGenerateClientInterface="false" WSDLAutoFilterElements="false" SelectedLanguage="CPP">
+		<lxdb8:CPP CollectionMapping="Original" OutputPath="..\..\..\centurion-source\Params.xsd.Output\SourceCodeCPP" DocumentationOutputPath="..\..\..\centurion-source\Params.xsd.Output\DocumentationCPP" SampleAppOutputPath="..\..\..\centurion-source\Params.xsd.Output\SampleAppCPP" MappingFilePath="..\..\..\centurion-source\Params.xsd_NameMapping.cpp.xml" DefaultClassNamespace="ParamsLib">
+			<lxdb8:PermProperty>
+				<lxdb8:Name>ProjectGUID</lxdb8:Name>
+				<lxdb8:Value>{F709F8B1-28B0-4E7E-A4E4-C2B54915340D}</lxdb8:Value>
+			</lxdb8:PermProperty>
+			<lxdb8:PermProperty>
+				<lxdb8:Name>SourceFilesGUID</lxdb8:Name>
+				<lxdb8:Value>{FF6C5464-2033-46CB-A3F6-4ECB77B9FDF5}</lxdb8:Value>
+			</lxdb8:PermProperty>
+			<lxdb8:PermProperty>
+				<lxdb8:Name>HeaderFilesGUID</lxdb8:Name>
+				<lxdb8:Value>{81513DA8-5099-4331-8666-D25B1EF7BB38}</lxdb8:Value>
+			</lxdb8:PermProperty>
+			<lxdb8:PermProperty>
+				<lxdb8:Name>SampleAppGUID</lxdb8:Name>
+				<lxdb8:Value>{F8DF9732-6BB9-4EDB-B22F-B86016AEB7AE}</lxdb8:Value>
+			</lxdb8:PermProperty>
+			<lxdb8:PermProperty>
+				<lxdb8:Name>SampleSourceFilesGUID</lxdb8:Name>
+				<lxdb8:Value>{EE809EFB-75EF-4C89-8F39-10C3F8AFF1DE}</lxdb8:Value>
+			</lxdb8:PermProperty>
+			<lxdb8:PermProperty>
+				<lxdb8:Name>SampleHeaderFilesGUID</lxdb8:Name>
+				<lxdb8:Value>{1759A306-EFF5-43FA-8557-5283E0FF64B1}</lxdb8:Value>
+			</lxdb8:PermProperty>
+			<lxdb8:PermProperty>
+				<lxdb8:Name>SampleResourceFilesGUID</lxdb8:Name>
+				<lxdb8:Value>{3F02501C-F385-4DF7-8681-A0CD5C9A54E7}</lxdb8:Value>
+			</lxdb8:PermProperty>
+		</lxdb8:CPP>
+		<lxdb8:CSharp CollectionMapping="Original" OutputPath="..\..\..\centurion-source\Params.xsd.Output\SourceCodeCS" DocumentationOutputPath="..\..\..\centurion-source\Params.xsd.Output\DocumentationCS" SampleAppOutputPath="..\..\..\centurion-source\Params.xsd.Output\SampleAppCS" MappingFilePath="..\..\..\centurion-source\Params.xsd_NameMapping.cs.xml" DefaultClassNamespace="ParamsLib" BaseNamespace="">
+			<lxdb8:DotNetPlatformOptions UseLiquidRuntimeNuget="true">
+				<lxdb8:DotNetDevEnv>VS2019</lxdb8:DotNetDevEnv>
+				<lxdb8:DotNetPlatform>DotNet472</lxdb8:DotNetPlatform>
+			</lxdb8:DotNetPlatformOptions>
+		</lxdb8:CSharp>
+		<lxdb8:Java CollectionMapping="Original" OutputPath="..\..\..\centurion-source\Params.xsd.Output\SourceCodeJava" DocumentationOutputPath="..\..\..\centurion-source\Params.xsd.Output\DocumentationJava" SampleAppOutputPath="..\..\..\centurion-source\Params.xsd.Output\SampleAppJava" MappingFilePath="..\..\..\centurion-source\Params.xsd_NameMapping.java.xml" DefaultPackageName="ParamsLib" BasePackage="">
+			<lxdb8:JavaPlatformOptions>
+				<lxdb8:JDK>JDK5</lxdb8:JDK>
+			</lxdb8:JavaPlatformOptions>
+		</lxdb8:Java>
+		<lxdb8:VBNet CollectionMapping="Original" OutputPath="..\..\..\centurion-source\Params.xsd.Output\SourceCodeVBNet" DocumentationOutputPath="..\..\..\centurion-source\Params.xsd.Output\DocumentationVBNet" SampleAppOutputPath="..\..\..\centurion-source\Params.xsd.Output\SampleAppVBNet" MappingFilePath="..\..\..\centurion-source\Params.xsd_NameMapping.vbnet.xml" DefaultClassNamespace="ParamsLib" BaseNamespace="">
+			<lxdb8:DotNetPlatformOptions UseLiquidRuntimeNuget="true">
+				<lxdb8:DotNetDevEnv>VS2019</lxdb8:DotNetDevEnv>
+				<lxdb8:DotNetPlatform>DotNet472</lxdb8:DotNetPlatform>
+			</lxdb8:DotNetPlatformOptions>
+		</lxdb8:VBNet>
+		<lxdb8:VB6 CollectionMapping="Original" OutputPath="..\..\..\centurion-source\Params.xsd.Output\SourceCodeVB" DocumentationOutputPath="..\..\..\centurion-source\Params.xsd.Output\DocumentationVB" SampleAppOutputPath="..\..\..\centurion-source\Params.xsd.Output\SampleAppVB" MappingFilePath="..\..\..\centurion-source\Params.xsd_NameMapping.vb6.xml" ComponentName="ParamsLib" Description="" MajorVersion="1" MinorVersion="0" Revision="0" ProductName=""/>
+	</lxdb8:Schema>
+	<lxdb8:Output CreateDocumentation="true" CreateSampleApplication="true" OutputDateInHeaderBlock="false" OutputSchemaPathInHeaderBlock="true" OutputVersionInHeaderBlock="true" OutputProjectFiles="true" OutputFastInfosetTables="false" OutputPropertyEvents="false" OutputElmRefAsInterface="true" OutputPrimitiveClassesAsTextProperty="false" OutputXmlSchemaProviderAttribute="false" OutputNullableSimpleTypes="true" IgnoreOptionalElementDefaults="false">
+		<lxdb8:SelectedWsdlPort Port="" Service=""/>
+		<lxdb8:ProjectReferenceInclude/>
+		<lxdb8:ProjectCompileInclude/>
+		<lxdb8:ProjectNoneInclude/>
+		<lxdb8:ProjectStrongNameKeyFile/>
+	</lxdb8:Output>
+	<lxdb8:PostBuild BuildHelp="false" OpenHelp="false" OpenProject="false"/>
+</lxdb8:LXDBWizardProject>

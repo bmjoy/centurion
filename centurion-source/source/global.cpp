@@ -6,7 +6,8 @@
 #include <picking>
 #include <object>
 #include <menu>
-#include "../lmx/xml-settings.h"
+#include <Windows.h>
+
 
 #define STB_IMAGE_WRITE_IMPLEMENTATION
 #include <stb_image_write.h>
@@ -19,9 +20,11 @@ using namespace game;
 
 namespace glb {
 
+	Settings settings;
+
 	string exe_root = ""; //defined in main.cpp
-	string language = "english"; //Default value
-    mat4 menuProjection;
+	//string language = "english"; //Default value
+	mat4 menuProjection;
 	mat4 cameraProjection;
 	mat4 minimapProjection;
 
@@ -43,115 +46,75 @@ namespace glb {
 	bool getBoolean(string param) { return booleans[param]; }
 
 	void initParams() {
-		//Close the game if it wasn't able to find or process errorCodes.json file
-		ifstream errorCodes_path("assets/data/errorCodes.json");
-		if (!errorCodes_path.good()) {
-			map<string, string> tempMap;
-			tempMap["NOT_FOUND"] = "0x00000001";
-			translation_table_current["noFile"] = "Unable to find or process ERROR CODES file.\n  Forced application shutdown has started.";
-			setErrors(tempMap);
-			forceGameClosure("NOT_FOUND" , "noFile");
-		}
-		json errorCodes = json::parse(errorCodes_path);
-		map<string, string> errorsMap = errorCodes.get<map<string, string>>();
-		setErrors(errorsMap);
 
-		lmx::elmx_error xmlReadError;
-		string settingsPath = exe_root + "\\settings.xml";
-		c_settings settings = c_settings(settingsPath.c_str(), &xmlReadError);
+		try {
+			//Close the game if it wasn't able to find or process errorCodes.json file
 
-		if (xmlReadError != lmx::ELMX_OK)
-			cout << xmlReadError << endl;
-
-		read_settings();
-
-		getParam("Ciao");
-
-		read_translation_tables();
-		
-		setParam("window-ratio", getParam("window-width") / getParam("window-height"));
-		setParam("window-width-zoomed", getParam("window-width") + (currentZoomCamera - 1) * zoomCameraFactor);
-		setParam("window-height-zoomed", getParam("window-height") + (currentZoomCamera - 1) * zoomCameraFactor / getParam("window-ratio"));
-		setBoolean("window-should-close", false);
-		setBoolean("wireframe", false);
-		setBoolean("mouse-left", false);
-		setBoolean("mouse-left-pressed", false);
-		setBoolean("mouse-right", false);
-		setBoolean("mouse-release", false);
-		setBoolean("mouse-scroll-bool", false);
-		setParam("mouse-scroll", 0.f);
-
-		menuProjection = glm::ortho(0.0f, getParam("window-width"), 0.0f, getParam("window-height"), -100.0f, 100.0f);
-		cameraProjection = glm::ortho(0.0f, getParam("window-width-zoomed"), 0.0f, getParam("window-height-zoomed"), -(float)mapWidth, (float)mapWidth);
-
-		ifstream data_path("assets/data/data.json");
-		//Close the game if it wasn't able to find or process data.json file
-		if (!data_path.good()) {
-			forceGameClosure("NOT_FOUND" , "ERROR_data");
-		}
-		json data = json::parse(data_path);
-
-		for (int i = 0; i < data["player_colors"].size(); i++) {
-			vec3 color = vec3(data["player_colors"][i]["r"], data["player_colors"][i]["g"], data["player_colors"][i]["b"]);
-			glb::colors.push_back(color);
-		}
-
-		stbi_flip_vertically_on_write(1);
-	}
-
-	void read_settings() {
-		ifstream fin("settings");
-
-		// default values
-		setParam("window-width", 1366.f);
-		setParam("window-height", 768.f);
-		setParam("camera-movespeed", 10.f);
-		setParam("camera-max-zoom", 20.f);
-		language = "english";
-		setBoolean("debug", false);
-		setBoolean("full-screen", false);
-
-		if (!fin.good()) {
-			save_settings();
-		}
-		else {
-			string line, value;
-			while (getline(fin, line)) {
-				if (line[0] == '[') continue;
-				string values[2];
-				stringstream s(line);
-				int i = 0;
-				while (getline(s, values[i], '=')) i++;
-				if (values[0] == "window-width") setParam(values[0], stof(values[1]));
-				if (values[0] == "window-height") setParam(values[0], stof(values[1]));
-				if (values[0] == "camera-movespeed") setParam(values[0], stof(values[1]));
-				if (values[0] == "camera-max-zoom") setParam(values[0], stof(values[1]));
-				if (values[0] == "language") language = values[1];
-				if (values[0] == "debug") setBoolean("debug", (bool)stoi(values[1]));
-				if (values[0] == "full-screen") setBoolean("full-screen", (bool)stoi(values[1]));
+			ifstream errorCodes_path("assets/data/errorCodes.json");
+			if (!errorCodes_path.good()) {
+				map<string, string> tempMap;
+				tempMap["NOT_FOUND"] = "0x00000001";
+				translation_table_current["noFile"] = "Unable to find or process ERROR CODES file.\n  Forced application shutdown has started.";
+				setErrors(tempMap);
+				forceGameClosure("NOT_FOUND", "noFile");
 			}
-		}
-		cout << "[DEBUG] Current language: " << language << "\n";
-	}
+			json errorCodes = json::parse(errorCodes_path);
+			map<string, string> errorsMap = errorCodes.get<map<string, string>>();
+			setErrors(errorsMap);
 
-	void save_settings() {
-		ofstream fout("settings");
-		if (fout.is_open()) {
-			fout << "[Settings]\n\n";
-			fout << "window-width=" << getParam("window-width") << "\n";
-			fout << "window-height=" << getParam("window-height") << "\n";
-			fout << "camera-movespeed=" << getParam("camera-movespeed") << "\n";
-			fout << "camera-max-zoom=" << getParam("camera-max-zoom") << "\n";
-			fout << "language=" << language << "\n";
-			fout << "debug=" << getBoolean("debug") << "\n";
-			fout << "full-screen=" << getBoolean("full-screen") << "\n";
+			// Read Settings.xml
+
+			bool settingsOk = settings.ReadSettings();
+
+			if (settingsOk == false) {
+				settings.SetDefaultSettings();
+				settingsOk = settings.ReadSettings();
+				if (settingsOk == false) {
+					// throw exception;
+				}
+			}
+			
+
+			//read_settings();
+			read_translation_tables();
+
+			setParam("window-ratio", settings.GetWindowWidth() / settings.GetWindowHeight());
+			setParam("window-width-zoomed", settings.GetWindowWidth() + (currentZoomCamera - 1) * zoomCameraFactor);
+			setParam("window-height-zoomed", settings.GetWindowHeight() + (currentZoomCamera - 1) * zoomCameraFactor / getParam("window-ratio"));
+			setBoolean("window-should-close", false);
+			setBoolean("wireframe", false);
+			setBoolean("mouse-left", false);
+			setBoolean("mouse-left-pressed", false);
+			setBoolean("mouse-right", false);
+			setBoolean("mouse-release", false);
+			setBoolean("mouse-scroll-bool", false);
+			setParam("mouse-scroll", 0.f);
+
+			menuProjection = glm::ortho(0.0f, settings.GetWindowWidth(), 0.0f, settings.GetWindowHeight(), -100.0f, 100.0f);
+			cameraProjection = glm::ortho(0.0f, getParam("window-width-zoomed"), 0.0f, getParam("window-height-zoomed"), -(float)mapWidth, (float)mapWidth);
+
+			ifstream data_path("assets/data/data.json");
+			//Close the game if it wasn't able to find or process data.json file
+			if (!data_path.good()) {
+				forceGameClosure("NOT_FOUND", "ERROR_data");
+			}
+			json data = json::parse(data_path);
+
+			for (int i = 0; i < data["player_colors"].size(); i++) {
+				vec3 color = vec3(data["player_colors"][i]["r"], data["player_colors"][i]["g"], data["player_colors"][i]["b"]);
+				glb::colors.push_back(color);
+			}
+
+			stbi_flip_vertically_on_write(1);
 		}
-		fout.close();
+		catch (...) {
+			std::cout << "An error occurred" << std::endl;
+		}
 	}
 
 	void saveLog() {
-		ofstream logFile("logs/global.log");		
-		if (logFile.is_open()){
+		ofstream logFile("logs/global.log");
+		if (logFile.is_open()) {
 			logFile << "PARAMETERS\n";
 			for (map<string, float>::iterator x = params.begin(); x != params.end(); x++) {
 				logFile << "\t" << x->first << " = " << x->second << "\n";
@@ -183,7 +146,7 @@ namespace glb {
 				if (row == 0) { // first row
 					stringstream s(line);
 					while (getline(s, value, '\t')) {
-						if (value == language) currentlang = nLanguages;
+						if (value == settings.GetLanguage()) currentlang = nLanguages;
 						if (nLanguages != 0) availableLanguages[value] = nLanguages - 1;
 						nLanguages++;
 					}
@@ -207,7 +170,7 @@ namespace glb {
 	}
 
 	void changeLanguage(string lan) {
-		language = lan;
+		settings.SetLanguage(lan);
 		read_translation_tables();
 		menu::MENU()->update();
 		cout << "DEBUG : Language changed to " + lan << endl;
@@ -258,7 +221,7 @@ namespace glb {
 		_mkdir(path.c_str());
 
 		// save heights 
-		ofstream heightsFile(path+"/heights");
+		ofstream heightsFile(path + "/heights");
 		if (heightsFile.is_open()) {
 			for (int i = 0; i < mapgen::nVertices * 4; i += 4)
 				if (i == 0) {
@@ -273,7 +236,7 @@ namespace glb {
 		// save texture type
 		ofstream textureFile(path + "/texture");
 		if (textureFile.is_open()) {
-			for (int i = 0; i < mapgen::nVertices; i ++)
+			for (int i = 0; i < mapgen::nVertices; i++)
 				if (i == 0) {
 					textureFile << mapgen::MapTextures()[i];
 				}
@@ -363,8 +326,8 @@ namespace glb {
 			fin.open("scenarios/" + name + "/objects.tsv");
 			string line, value;
 			int row = 0;
-			while (getline(fin, line)){
-				if (row > 0){
+			while (getline(fin, line)) {
+				if (row > 0) {
 					string objectsInfo[9];
 					stringstream s(line);
 					int i = 0;
@@ -431,8 +394,8 @@ namespace glb {
 		strcpy(filename, "screenshots/");
 		strcat(filename, basename);
 
-		int w = (int)getParam("window-width");
-		int h = (int)getParam("window-height");
+		int w = (int)settings.GetWindowWidth();
+		int h = (int)settings.GetWindowHeight();
 		unsigned char* imageData = new unsigned char[int(w * h * 3)];
 		glPixelStorei(GL_PACK_ALIGNMENT, 1);
 		glReadPixels(0, 0, w, h, GL_RGB, GL_UNSIGNED_BYTE, imageData);
@@ -473,7 +436,7 @@ namespace glb {
 		}
 		return names;
 	}
-	vector<string> get_all_folders_names_within_folder(string folder){
+	vector<string> get_all_folders_names_within_folder(string folder) {
 		vector<string> names;
 		WIN32_FIND_DATA findfiledata;
 		HANDLE hFind = INVALID_HANDLE_VALUE;
@@ -553,11 +516,11 @@ namespace glb {
 	}
 
 	float getYMinimapCoord(float x) {
-		return getParam("window-height") * (x - getParam("ui-bottom-height")) / (getParam("window-height") - getParam("ui-bottom-height") - getParam("ui-top-height"));
+		return settings.GetWindowHeight() * (x - getParam("ui-bottom-height")) / (settings.GetWindowHeight() - getParam("ui-bottom-height") - getParam("ui-top-height"));
 	}
 
 	bool cursorInGameScreen() {
-		return (getParam("mouse-y-leftclick") > getParam("ui-bottom-height")) && (getParam("mouse-y-leftclick") < (glb::getParam("window-height") - getParam("ui-top-height")));
+		return (getParam("mouse-y-leftclick") > getParam("ui-bottom-height")) && (getParam("mouse-y-leftclick") < (glb::settings.GetWindowHeight() - getParam("ui-top-height")));
 	}
 
 	void clearAndSwapBuffers(GLFWwindow *window) {
@@ -569,16 +532,16 @@ namespace glb {
 	}
 
 	vec2 getZoomedCoords(float xCoord, float yCoord) {
-		float x = xCoord * getParam("window-width-zoomed") / getParam("window-width") + getParam("camera-x-position");
-		float y = yCoord * getParam("window-height-zoomed") / getParam("window-height") + getParam("camera-y-position");
+		float x = xCoord * getParam("window-width-zoomed") / settings.GetWindowWidth() + getParam("camera-x-position");
+		float y = yCoord * getParam("window-height-zoomed") / settings.GetWindowHeight() + getParam("camera-y-position");
 		return vec2(x, y);
 	}
 
 	void forceGameClosure(string errorCode, string errorText) {
 		string eC = (getTranslation("WORD_errorCode") == "") ? "Error code" : getTranslation("WORD_errorCode");
 		string text = "  " + eC + ": " + getErrorCode(errorCode) + "\n\n  " + getTranslation(errorText);
-		if (language == "arabic") text = "  " + getErrorCode(errorCode)+ ": " + eC + "\n\n  " + getTranslation(errorText);
-		const int wideLength = sizeof(text.c_str())*128;
+		if (settings.GetLanguage() == "arabic") text = "  " + getErrorCode(errorCode) + ": " + eC + "\n\n  " + getTranslation(errorText);
+		const int wideLength = sizeof(text.c_str()) * 128;
 		WCHAR wstr[wideLength];
 		MultiByteToWideChar(CP_UTF8, 0, text.c_str(), wideLength, wstr, wideLength);
 		MessageBoxW(NULL, wstr, gameNameLPCWSTR, MB_ICONERROR);
@@ -595,15 +558,15 @@ namespace glb {
 
 	bool folderExists(string folderPath) {
 		struct stat info;
-		if (stat(folderPath.c_str(), &info) == 0) 
+		if (stat(folderPath.c_str(), &info) == 0)
 			return true;
 		return false;
 	}
 
-	Race::Race(){
+	Race::Race() {
 	}
 
-	Race::~Race(){
+	Race::~Race() {
 	}
 };
 
@@ -611,102 +574,102 @@ namespace glb {
 
 namespace obj {
 
-    AudioManager *Audio() { return &audioM; }
-    BitmapFont *Text(){ return &txt; }
-    BuildingSprite *BSprite(){ return &bsprite; }
-    DecorationSprite *DSprite(){ return &dsprite; }
-    CursorImage *Cursor() { return &cursor; }
-    EmptyCircle *ECircle() { return &eCircle; }
-    EmptyRectangle *ERectangle() { return &eRect; }
-    FilledRectangle *FRectangle() { return &fRect; }
-    ImageSprite *Img() { return &img; }
-    UnitSprite *USprite() { return &usprite; }
-    Terrain *MapTerrain() { return &terrain; }
-    Grid *MapGrid() { return &grid; }
-    MinimapRectangle *MMRectangle() { return &mmRect; }
-    
-    void init() {
-        //*Audio() = AudioManager();
-        *Text() = BitmapFont();
-        *BSprite() = BuildingSprite();
-        *DSprite() = DecorationSprite();
-        *Cursor() = CursorImage();
-        *ECircle() = EmptyCircle();
-        *ERectangle() = EmptyRectangle();
-        *FRectangle() = FilledRectangle();
-        *Img() = ImageSprite();
-        *USprite() = UnitSprite();
-        *MapTerrain() = Terrain();
-        *MapGrid() = Grid();
+	AudioManager *Audio() { return &audioM; }
+	BitmapFont *Text() { return &txt; }
+	BuildingSprite *BSprite() { return &bsprite; }
+	DecorationSprite *DSprite() { return &dsprite; }
+	CursorImage *Cursor() { return &cursor; }
+	EmptyCircle *ECircle() { return &eCircle; }
+	EmptyRectangle *ERectangle() { return &eRect; }
+	FilledRectangle *FRectangle() { return &fRect; }
+	ImageSprite *Img() { return &img; }
+	UnitSprite *USprite() { return &usprite; }
+	Terrain *MapTerrain() { return &terrain; }
+	Grid *MapGrid() { return &grid; }
+	MinimapRectangle *MMRectangle() { return &mmRect; }
+
+	void init() {
+		//*Audio() = AudioManager();
+		*Text() = BitmapFont();
+		*BSprite() = BuildingSprite();
+		*DSprite() = DecorationSprite();
+		*Cursor() = CursorImage();
+		*ECircle() = EmptyCircle();
+		*ERectangle() = EmptyRectangle();
+		*FRectangle() = FilledRectangle();
+		*Img() = ImageSprite();
+		*USprite() = UnitSprite();
+		*MapTerrain() = Terrain();
+		*MapGrid() = Grid();
 		*MMRectangle() = MinimapRectangle();
-    }
-    void compile() {
-        Text()->compile();
-        BSprite()->compile();
-        DSprite()->compile();
-        ECircle()->compile();
-        ERectangle()->compile();
-        FRectangle()->compile();
-        Cursor()->compile();
-        Img()->compile();
-        USprite()->compile();
-        MapTerrain()->compile();
-        MapGrid()->compile();
+	}
+	void compile() {
+		Text()->compile();
+		BSprite()->compile();
+		DSprite()->compile();
+		ECircle()->compile();
+		ERectangle()->compile();
+		FRectangle()->compile();
+		Cursor()->compile();
+		Img()->compile();
+		USprite()->compile();
+		MapTerrain()->compile();
+		MapGrid()->compile();
 		MMRectangle()->compile();
-    }
-    void create() {
-        Text()->apply_projection_matrix(glb::menuProjection);
-        Cursor()->apply_projection_matrix(glb::menuProjection);
+	}
+	void create() {
+		Text()->apply_projection_matrix(glb::menuProjection);
+		Cursor()->apply_projection_matrix(glb::menuProjection);
 
-        //----
+		//----
 
-        Text()->create();
-        Cursor()->create();
-        ECircle()->create();
-        ERectangle()->create();
-        FRectangle()->create();
-        BSprite()->create();	
-        DSprite()->create();	
-        Img()->create();
-        USprite()->create();
+		Text()->create();
+		Cursor()->create();
+		ECircle()->create();
+		ERectangle()->create();
+		FRectangle()->create();
+		BSprite()->create();
+		DSprite()->create();
+		Img()->create();
+		USprite()->create();
 
-        //----
+		//----
 
-        MapTerrain()->create();
-        MapGrid()->create();
+		MapTerrain()->create();
+		MapGrid()->create();
 		MMRectangle()->create();
-    }
+	}
 
-    void applyMenuMatrices() {
-        Img()->apply_projection_matrix(glb::menuProjection);
-        Img()->apply_view_matrix();
-        ECircle()->apply_projection_matrix(glb::menuProjection);
-        ECircle()->apply_view_matrix();
-        ERectangle()->apply_projection_matrix(glb::menuProjection);
-        ERectangle()->apply_view_matrix();
-        FRectangle()->apply_projection_matrix(glb::menuProjection);
-        FRectangle()->apply_view_matrix();
+	void applyMenuMatrices() {
+		Img()->apply_projection_matrix(glb::menuProjection);
+		Img()->apply_view_matrix();
+		ECircle()->apply_projection_matrix(glb::menuProjection);
+		ECircle()->apply_view_matrix();
+		ERectangle()->apply_projection_matrix(glb::menuProjection);
+		ERectangle()->apply_view_matrix();
+		FRectangle()->apply_projection_matrix(glb::menuProjection);
+		FRectangle()->apply_view_matrix();
 		MMRectangle()->apply_projection_matrix(glb::menuProjection);
 		MMRectangle()->apply_view_matrix();
-    }
-    void applyGameMatrices(mat4 *proj, mat4 *view) {
-        BSprite()->apply_projection_matrix(*proj);
-        BSprite()->apply_view_matrix(*view);
+	}
+	void applyGameMatrices(mat4 *proj, mat4 *view) {
+		BSprite()->apply_projection_matrix(*proj);
+		BSprite()->apply_view_matrix(*view);
 		DSprite()->apply_projection_matrix(*proj);
-        DSprite()->apply_view_matrix(*view);
-        USprite()->apply_projection_matrix(*proj);
-        USprite()->apply_view_matrix(*view);
-        Img()->apply_projection_matrix(*proj);
-        Img()->apply_view_matrix(*view);
-        ECircle()->apply_projection_matrix(*proj);
-        ECircle()->apply_view_matrix(*view);
-        ERectangle()->apply_projection_matrix(*proj);
-        ERectangle()->apply_view_matrix(*view);
-        FRectangle()->apply_projection_matrix(*proj);
-        FRectangle()->apply_view_matrix(*view);
-        MapTerrain()->apply_projection_matrix(*proj);
-        MapTerrain()->apply_view_matrix(*view);
-        MapGrid()->apply_projection_matrix(*proj);
-        MapGrid()->apply_view_matrix(*view);
-    }
+		DSprite()->apply_view_matrix(*view);
+		USprite()->apply_projection_matrix(*proj);
+		USprite()->apply_view_matrix(*view);
+		Img()->apply_projection_matrix(*proj);
+		Img()->apply_view_matrix(*view);
+		ECircle()->apply_projection_matrix(*proj);
+		ECircle()->apply_view_matrix(*view);
+		ERectangle()->apply_projection_matrix(*proj);
+		ERectangle()->apply_view_matrix(*view);
+		FRectangle()->apply_projection_matrix(*proj);
+		FRectangle()->apply_view_matrix(*view);
+		MapTerrain()->apply_projection_matrix(*proj);
+		MapTerrain()->apply_view_matrix(*view);
+		MapGrid()->apply_projection_matrix(*proj);
+		MapGrid()->apply_view_matrix(*view);
+	}
 };

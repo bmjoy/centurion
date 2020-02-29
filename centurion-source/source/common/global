@@ -3,6 +3,7 @@
 #include <headers>
 #include <primitives>
 
+
 using namespace std;
 using namespace glm;
 
@@ -15,8 +16,10 @@ using namespace glm;
 
 namespace glb {
 
+	extern Settings settings;
+
 	extern string exe_root;
-	extern string language;
+	//extern string language;
 	extern mat4 menuProjection;
 	extern mat4 cameraProjection;
 	extern mat4 minimapProjection;
@@ -32,12 +35,10 @@ namespace glb {
 
 	static const string gameNameSTR = "Centurion";
 	static const LPCWSTR gameNameLPCWSTR = L"Centurion";
-    static map<string, float> params; // global parameters
+	static map<string, float> params; // global parameters
 	static map<string, bool> booleans; // global booleans
 	static map<string, string> errors; // error codes
 	static map<string, string> translation_table_current;
-	void read_settings();
-	void save_settings();
 	void setParam(string param, float value);
 	float getParam(string param);
 	void setBoolean(string param, bool value);
@@ -57,7 +58,7 @@ namespace glb {
 	string ReadFile(const char* fileLocation);
 	vector<string> get_all_files_names_within_folder(string folder);
 	vector<string> get_all_folders_names_within_folder(string folder);
-	struct file_info {string name, path;};
+	struct file_info { string name, path; };
 	vector<file_info> get_all_files_names_within_subfolders(string const &folder_name, string const &file_extension = "");
 	void saveCurrentScenario(string name);
 	void openScenario(string name);
@@ -71,7 +72,7 @@ namespace glb {
 	void forceGameClosure(string errorCode, string errorText);
 	void showGameWarning(string reason);
 	bool folderExists(string folderPath);
-	
+
 
 	// Race class
 	class Race {
@@ -115,7 +116,7 @@ namespace obj {
 
 	static CursorImage cursor;
 	CursorImage *Cursor();
-	
+
 	static DecorationSprite dsprite;
 	DecorationSprite *DSprite();
 

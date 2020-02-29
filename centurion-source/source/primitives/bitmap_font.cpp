@@ -147,7 +147,7 @@ void BitmapFont::render_dynamic(string &font, float xPos, float yPos, string &te
 
 	int letterspacing = 0;
 
-	if (language == "arabic" && txt::isArabic((GLint)wtext[0])) {
+	if (settings.GetLanguage() == "arabic" && txt::isArabic((GLint)wtext[0])) {
 		if (!bold) {
 			fontID = fontIdMap["arabic_16px"];
 			textureID = textureIdMap["arabic_16px"];
@@ -178,7 +178,7 @@ void BitmapFont::render_dynamic(string &font, float xPos, float yPos, string &te
 	offset_x = 0;
 	for (int i = 0; i < wtext.size(); i++) {
 		GLint codepoint;
-		if (language == "arabic" && txt::isArabic((GLint)wtext[0])) codepoint = GLint(wtext[wtext.size() - i - 1]);
+		if (settings.GetLanguage() == "arabic" && txt::isArabic((GLint)wtext[0])) codepoint = GLint(wtext[wtext.size() - i - 1]);
 		else codepoint = GLint(wtext[i]);
 		glUniform1f(glGetUniformLocation(shaderId, "x"), xPos + offset_x);
 		glUniform1i(glGetUniformLocation(shaderId, "char_xpos"), fontData[fontID][codepoint].x);
@@ -209,7 +209,7 @@ txt::StaticData BitmapFont::create_static(string &font, string &text, float x, f
 	int fontID, letterspacing = 0;
 	fontID = fontIdMap[font];
 	static_data.textureID = textureIdMap[font];
-	if (language == "arabic" && txt::isArabic((GLint)wtext[0])) {
+	if (settings.GetLanguage() == "arabic" && txt::isArabic((GLint)wtext[0])) {
 		if (!bold) {
 			fontID = fontIdMap["arabic_16px"];
 			static_data.textureID = textureIdMap["arabic_16px"];
@@ -227,7 +227,7 @@ txt::StaticData BitmapFont::create_static(string &font, string &text, float x, f
 	for (int i = 0; i < wtext.size(); i++) {
 		
 		GLint codepoint;
-		if (language == "arabic" && txt::isArabic((GLint)wtext[0])) codepoint = GLint(wtext[wtext.size() - i - 1]);
+		if (settings.GetLanguage() == "arabic" && txt::isArabic((GLint)wtext[0])) codepoint = GLint(wtext[wtext.size() - i - 1]);
 		else codepoint = GLint(wtext[i]);
 		
 		static_data.X.push_back(x + totw);

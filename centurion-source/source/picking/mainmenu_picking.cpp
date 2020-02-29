@@ -31,7 +31,7 @@ namespace menu {
 		/*------------------------------------------------------------------------------*/
 		if (clickName == "MAINMENU_buttonOptions") {
 			currentMenu = "options";
-			options->currentLan = language;
+			options->currentLan = settings.GetLanguage();
 		}
 		/*------------------------------------------------------------------------------*/
 		if (clickName == "MAINMENU_buttonQuit") {
@@ -58,16 +58,16 @@ namespace menu {
 		}
 		/*------------------------------------------------------------------------------*/
 		if (clickName == "OPTIONS_buttonApply") {
-			if (language != options->currentLan)
+			if (settings.GetLanguage() != options->currentLan)
 				changeLanguage(options->currentLan);
-			save_settings();
+			settings.SaveXml();
 		}
 		/*------------------------------------------------------------------------------*/
 		if (clickName == "OPTIONS_buttonSave") {
-			if (language != options->currentLan)
+			if (settings.GetLanguage() != options->currentLan)
 				changeLanguage(options->currentLan);
 			currentMenu = "mainmenu";
-			save_settings();
+			settings.SaveXml();
 		}
 		/*------------------------------------------------------------------------------*/
 		if (clickName == "OPTIONS_buttonCancel") {

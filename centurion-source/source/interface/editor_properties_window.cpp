@@ -13,11 +13,11 @@ namespace editor {
 	
 	void PropertiesWindow::create() {
 		back_image = gui::Image("propertieswindow_back");
-		back_image.create("center", getParam("window-width")/2.f, getParam("window-height")/2.f, 0, 0, 0);
+		back_image.create("center", settings.GetWindowWidth()/2.f, settings.GetWindowHeight()/2.f, 0, 0, 0);
 
 		// startX and startY are TOP-LEFT coordinates (as in Paint)
-		startX = getParam("window-width") / 2.f - back_image.getImageSize().x / 2.f;
-		startY = getParam("window-height") / 2.f + back_image.getImageSize().y / 2.f;
+		startX = settings.GetWindowWidth() / 2.f - back_image.getImageSize().x / 2.f;
+		startY = settings.GetWindowHeight() / 2.f + back_image.getImageSize().y / 2.f;
 
 		buttons[0] = gui::Image("propertieswindow_buttonleft");
 		buttons[0].create("top-left", startX, startY, 0, 0, getPickingID());

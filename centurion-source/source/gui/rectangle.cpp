@@ -19,8 +19,8 @@ namespace gui {
 	}
 	void Rectangle::create(string Type, float x, float y, float w, float h, string origin, int pickingID) {
 
-		if (x < 0) x += getParam("window-width");
-		if (y < 0) y += getParam("window-height");
+		if (x < 0) x += settings.GetWindowWidth();
+		if (y < 0) y += settings.GetWindowHeight();
 
 		data.type = Type;
 		data.x = x;

@@ -93,7 +93,7 @@ namespace unit {
 
 		/* debug pathfinding and coordinates */
 
-		if (glb::getBoolean("debug") && !picking) {
+		if (glb::settings.DebugIsActive() && !picking) {
 
 			// **** Rectangle Path **** //	
 			for (int i = 0; i < pathQuadsList.size(); i++) {

@@ -103,14 +103,11 @@
     <Filter Include="Source Files\unit">
       <UniqueIdentifier>{88304990-1d0f-41a6-acb4-3b8ad50f5fc8}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Header Files\lmx">
-      <UniqueIdentifier>{7f7a3515-ae94-48b2-ac21-ad4f755194ba}</UniqueIdentifier>
+    <Filter Include="Header Files\classes">
+      <UniqueIdentifier>{69eec375-ef93-4607-9b3f-a440839a91b8}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source Files\lmx">
-      <UniqueIdentifier>{14b554f1-43b5-4aa8-9e3c-efbbd5b250a7}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source Files\lmx\lmx-cpp">
-      <UniqueIdentifier>{5408b92e-13d0-4657-94c3-65bc3062cc11}</UniqueIdentifier>
+    <Filter Include="Source Files\classes">
+      <UniqueIdentifier>{10e4802a-a190-46d5-93e6-0d48b95d7ebf}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -333,20 +330,11 @@
     <ClCompile Include="source\interface\object_ui.cpp">
       <Filter>Source Files\interface</Filter>
     </ClCompile>
-    <ClCompile Include="source\lmx\xml-settings.cpp">
-      <Filter>Source Files\lmx</Filter>
+    <ClCompile Include="source\classes\settings.cpp">
+      <Filter>Source Files\classes</Filter>
     </ClCompile>
-    <ClCompile Include="source\lmx\lmx-cpp\lmxparse.cpp">
-      <Filter>Source Files\lmx\lmx-cpp</Filter>
-    </ClCompile>
-    <ClCompile Include="source\lmx\lmx-cpp\lmxregex.cpp">
-      <Filter>Source Files\lmx\lmx-cpp</Filter>
-    </ClCompile>
-    <ClCompile Include="source\lmx\lmx-cpp\lmxtypes.cpp">
-      <Filter>Source Files\lmx\lmx-cpp</Filter>
-    </ClCompile>
-    <ClCompile Include="source\lmx\lmx-cpp\lmxunicode.cpp">
-      <Filter>Source Files\lmx\lmx-cpp</Filter>
+    <ClCompile Include="source\classes\Settings-xml.cxx">
+      <Filter>Source Files\classes</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -434,8 +422,11 @@
     <ClInclude Include="source\audio\vorbis\os_types.h">
       <Filter>Header Files\audio\vorbis</Filter>
     </ClInclude>
-    <ClInclude Include="source\lmx\xml-settings.h">
-      <Filter>Header Files\lmx</Filter>
+    <ClInclude Include="source\classes\settings.h">
+      <Filter>Header Files\classes</Filter>
+    </ClInclude>
+    <ClInclude Include="source\classes\Settings-xml.hxx">
+      <Filter>Header Files\classes</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

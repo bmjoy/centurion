@@ -1,0 +1,101 @@
+<HTML>
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<TITLE>bool shouldClose - CWindow</TITLE>
+<LINK REL=STYLESHEET HREF="../../std/schema.css" TYPE="text/css">
+</HEAD>
+<BODY topmargin=0 rightmargin=0 leftmargin=0 style="background-image: url(../titletile.jpg); background-repeat:repeat-x; background-position: 0 0;" >
+<DIV CLASS="PageHeading">
+	bool GetShouldClose() const;<BR>
+	void SetShouldClose(bool val);
+</DIV>
+<IMG src="../../std/GradLeft.jpg" width=7 height=378 alt="" border="0" style="position:absolute; left:10; top:18;z-Index:2">
+<IMG src="../../std/GradTop.jpg" width=352 height=7 alt="" border="0" align="top" style="position:absolute; left:10; top:18; z-index:1">
+
+<TABLE CLASS="InfoTable" cellpadding=0 cellspacing=0>
+	<TR height=20>
+		<TD width=20>&nbsp;</TD>
+		<TD valign=top align=left width=9 bgcolor="#cccc66"><IMG SRC="../../std/tablecorner.jpg" align=top></TD>
+		<TD CLASS="TableLightLabel" WIDTH=206>Property</TD>
+		<TD CLASS="TableLightLabel" >Description</TD>
+		<TD width=20>&nbsp;</TD>
+	</TR>
+	<TR height=20 VALIGN="TOP">
+		<TD width=20>&nbsp;</TD>
+		<TD CLASS="TableLightDesc">&nbsp;</TD>
+		<TD CLASS="TableLightDesc">Property Name</TD>
+		<TD CLASS="TableLightDesc">shouldClose</TD>
+		<TD width=20>&nbsp;</TD>
+	</TR>
+	<TR height=20 VALIGN="TOP">
+		<TD width=20>&nbsp;</TD>
+		<TD CLASS="TableLightDesc">&nbsp;</TD>
+		<TD CLASS="TableLightDesc">Property Type</TD>
+		<TD CLASS="TableLightDesc">bool</TD>
+		<TD width=20>&nbsp;</TD>
+	</TR>
+	<TR height=20 VALIGN="TOP">
+		<TD width=20>&nbsp;</TD>
+		<TD CLASS="TableLightDesc">&nbsp;</TD>
+		<TD CLASS="TableLightDesc">Parent Class</TD>
+		<TD CLASS="TableLightDesc"><A HREF="Cls_Window.htm">ParamsLib::CWindow</A></TD>
+		<TD width=20>&nbsp;</TD>
+	</TR>
+	<TR height=20 VALIGN="TOP">
+		<TD width=20>&nbsp;</TD>
+		<TD CLASS="TableLightDesc">&nbsp;</TD>
+		<TD CLASS="TableLightDesc">XML Type</TD>
+		<TD CLASS="TableLightDesc">Element</TD>
+		<TD width=20>&nbsp;</TD>
+	</TR>
+	<TR height=20 VALIGN="TOP">
+		<TD width=20>&nbsp;</TD>
+		<TD CLASS="TableLightDesc">&nbsp;</TD>
+		<TD CLASS="TableLightDesc">Accessors</TD>
+		<TD CLASS="TableLightDesc">Read/Write</TD>
+		<TD width=20>&nbsp;</TD>
+	</TR>
+	<TR height=20 VALIGN="TOP">
+		<TD width=20>&nbsp;</TD>
+		<TD CLASS="TableLightDesc">&nbsp;</TD>
+		<TD CLASS="TableLightDesc">Description</TD>
+		<TD CLASS="TableLightDesc">			A mandatory bool
+</TD>
+		<TD width=20>&nbsp;</TD>
+	</TR>
+	<TR height=20 VALIGN="TOP">
+		<TD width=20>&nbsp;</TD>
+		<TD CLASS="TableLightDesc">&nbsp;</TD>
+		<TD CLASS="TableLightDesc">Remarks</TD>
+		<TD CLASS="TableLightDesc">			It is mandatory and therefore must be populated within the XML.<BR>
+			It is defaulted to [false].
+<BR><BR></TD>
+		<TD width=20>&nbsp;</TD>
+	</TR>
+	<TR height=20 VALIGN="TOP">
+		<TD width=20>&nbsp;</TD>
+		<TD CLASS="TableLightDesc">&nbsp;</TD>
+		<TD CLASS="TableLightDesc">Example</TD>
+		<TD CLASS="TableLightDesc"><PRE>
+<A HREF="Cls_Window.htm">ParamsLib::CWindow</A>Ptr spParent = ...;
+
+// Because the property is mandatory, it will already be populated
+
+// So it can be read  as follows (Note: Collections are held by value so v is a copy
+// of what is in the class i.e. changing v will not effect the property).
+bool v = spParent-&gt;GetShouldClose();
+
+// And set as follows 
+spParent-&gt;SetShouldClose(false);
+
+</PRE>
+</TD>
+		<TD width=20>&nbsp;</TD>
+	</TR>
+</TABLE>
+
+</BODY>
+</HTML>
+
+
+

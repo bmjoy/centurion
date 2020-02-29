@@ -1,0 +1,321 @@
+###############################################################################################
+# Copyright (c) 2001-2020 Liquid Technologies Limited. All rights reserved.
+# See www.liquid-technologies.com for product details.
+#
+# Please see products End User License Agreement for distribution permissions.
+#
+# WARNING: THIS FILE IS GENERATED
+# Changes made outside of ##HAND_CODED_BLOCK_START blocks will be overwritten
+#
+# Generation  :  by Liquid XML Data Binder 18.0.2.9849
+# Using Schema: C:\Users\utente\source\repos\centurion\centurion-source\Params.xsd
+###############################################################################################
+
+# ParamsLib Makefile
+LT_VERSION=18
+
+# use g++ compiler
+CPP=g++
+LNK=g++ -shared
+
+# compiler options for release build
+RELEASE_CPP=-D_UNIX_ -D_LINUX_ -shared -c -m64 -fPIC -O2
+
+# compiler options for debug build
+DEBUG_CPP=-D_UNIX_ -D_DEBUG -D_LINUX_ -shared -ggdb -c -m64 -fPIC
+
+# compiler options for release build
+RELEASE_UNICODE_CPP=-D_UNIX_ -D_LINUX_ -DUNICODE -D_UNICODE -shared -c -m64 -fPIC -O2
+
+# compiler options for debug build
+DEBUG_UNICODE_CPP=-D_UNIX_ -D_DEBUG -D_LINUX_ -DUNICODE -D_UNICODE -shared -ggdb -m64 -c -fPIC
+
+# compiler include dirs
+CPP_INCLUDES=-I. -I../Bin/Redist$(LT_VERSION)/cpp/include
+
+# libraries to include
+RELEASE_LIBS=-lLtXml$(LT_VERSION)
+DEBUG_LIBS=-lLtXml$(LT_VERSION)
+RELEASE_UNICODE_LIBS=-lLtXml$(LT_VERSION)U
+DEBUG_UNICODE_LIBS=-lLtXml$(LT_VERSION)U
+
+# target name 
+RELEASE_TARGET=libParamsLib.so
+DEBUG_TARGET=libParamsLibD.so
+RELEASE_UNICODE_TARGET=libParamsLibU.so
+DEBUG_UNICODE_TARGET=libParamsLibDU.so
+
+# path to output binaries
+RELEASE_TARGET_PATH=release
+DEBUG_TARGET_PATH=debug
+RELEASE_UNICODE_TARGET_PATH=releaseUnicode
+DEBUG_UNICODE_TARGET_PATH=debugUnicode
+
+# external libs path
+RELEASE_LIB_PATH=-L../Bin/Redist$(LT_VERSION)/cpp/linux/bin
+DEBUG_LIB_PATH=-L../Bin/Redist$(LT_VERSION)/cpp/linux/bin
+RELEASE_UNICODE_LIB_PATH=-L../Bin/Redist$(LT_VERSION)/cpp/linux/bin
+DEBUG_UNICODE_LIB_PATH=-L../Bin/Redist$(LT_VERSION)/cpp/linux/bin
+
+# path to object files
+RELEASE_OBJ_PATH=release
+DEBUG_OBJ_PATH=debug
+RELEASE_UNICODE_OBJ_PATH=releaseUnicode
+DEBUG_UNICODE_OBJ_PATH=debugUnicode
+
+# c++ files
+CPPS=./StdAfx.cpp \
+             ./ParamsLib/Camera.cpp \
+             ./ParamsLib/Mouse.cpp \
+             ./ParamsLib/Params.cpp \
+             ./ParamsLib/Ui.cpp \
+             ./ParamsLib/Window.cpp \
+             ./Enumerations.cpp \
+             ./ClassFactory.cpp \
+             ./XmlCollectionCommonBase.cpp \
+             ./XmlCommonBase.cpp
+
+
+############################################################################
+
+# Main Target, build release & debug
+all: release debug releaseUnicode debugUnicode
+
+# build the release version
+release: release_paths $(RELEASE_TARGET_PATH)/$(RELEASE_TARGET)
+
+# build the debug version
+debug: debug_paths $(DEBUG_TARGET_PATH)/$(DEBUG_TARGET)
+
+# build the release version
+releaseUnicode: release_unicode_paths $(RELEASE_UNICODE_TARGET_PATH)/$(RELEASE_UNICODE_TARGET)
+
+# build the debug version
+debugUnicode: debug_unicode_paths $(DEBUG_UNICODE_TARGET_PATH)/$(DEBUG_UNICODE_TARGET)
+
+############################################################################
+#
+# SHARED OBJECT RELEASE BUILD
+#
+############################################################################
+
+# release object files
+RELEASE_OBJS=$(RELEASE_OBJ_PATH)/StdAfx.o \
+             $(RELEASE_OBJ_PATH)/Camera.o \
+             $(RELEASE_OBJ_PATH)/Mouse.o \
+             $(RELEASE_OBJ_PATH)/Params.o \
+             $(RELEASE_OBJ_PATH)/Ui.o \
+             $(RELEASE_OBJ_PATH)/Window.o \
+             $(RELEASE_OBJ_PATH)/Enumerations.o \
+             $(RELEASE_OBJ_PATH)/ClassFactory.o \
+             $(RELEASE_OBJ_PATH)/XmlCollectionCommonBase.o \
+             $(RELEASE_OBJ_PATH)/XmlCommonBase.o
+
+# build the release shared library
+$(RELEASE_TARGET_PATH)/$(RELEASE_TARGET): $(RELEASE_OBJS) 
+	$(LNK) -shared -o$(RELEASE_TARGET_PATH)/$(RELEASE_TARGET) $(RELEASE_OBJS) $(RELEASE_LIB_PATH) $(RELEASE_LIBS)
+
+# compile release c++ files
+$(RELEASE_OBJ_PATH)/StdAfx.o: StdAfx.cpp
+	$(CPP) $(RELEASE_CPP) $(CPP_INCLUDES) StdAfx.cpp -o $(RELEASE_OBJ_PATH)/StdAfx.o
+$(RELEASE_OBJ_PATH)/Camera.o: ./ParamsLib/Camera.cpp
+	$(CPP) $(RELEASE_CPP) $(CPP_INCLUDES) ./ParamsLib/Camera.cpp -o $(RELEASE_OBJ_PATH)/Camera.o
+$(RELEASE_OBJ_PATH)/Mouse.o: ./ParamsLib/Mouse.cpp
+	$(CPP) $(RELEASE_CPP) $(CPP_INCLUDES) ./ParamsLib/Mouse.cpp -o $(RELEASE_OBJ_PATH)/Mouse.o
+$(RELEASE_OBJ_PATH)/Params.o: ./ParamsLib/Params.cpp
+	$(CPP) $(RELEASE_CPP) $(CPP_INCLUDES) ./ParamsLib/Params.cpp -o $(RELEASE_OBJ_PATH)/Params.o
+$(RELEASE_OBJ_PATH)/Ui.o: ./ParamsLib/Ui.cpp
+	$(CPP) $(RELEASE_CPP) $(CPP_INCLUDES) ./ParamsLib/Ui.cpp -o $(RELEASE_OBJ_PATH)/Ui.o
+$(RELEASE_OBJ_PATH)/Window.o: ./ParamsLib/Window.cpp
+	$(CPP) $(RELEASE_CPP) $(CPP_INCLUDES) ./ParamsLib/Window.cpp -o $(RELEASE_OBJ_PATH)/Window.o
+$(RELEASE_OBJ_PATH)/Enumerations.o: Enumerations.cpp
+	$(CPP) $(RELEASE_CPP) $(CPP_INCLUDES) Enumerations.cpp -o $(RELEASE_OBJ_PATH)/Enumerations.o
+$(RELEASE_OBJ_PATH)/ClassFactory.o: ClassFactory.cpp
+	$(CPP) $(RELEASE_CPP) $(CPP_INCLUDES) ClassFactory.cpp -o $(RELEASE_OBJ_PATH)/ClassFactory.o
+$(RELEASE_OBJ_PATH)/XmlCollectionCommonBase.o: XmlCollectionCommonBase.cpp
+	$(CPP) $(RELEASE_CPP) $(CPP_INCLUDES) XmlCollectionCommonBase.cpp -o $(RELEASE_OBJ_PATH)/XmlCollectionCommonBase.o
+$(RELEASE_OBJ_PATH)/XmlCommonBase.o: XmlCommonBase.cpp
+	$(CPP) $(RELEASE_CPP) $(CPP_INCLUDES) XmlCommonBase.cpp -o $(RELEASE_OBJ_PATH)/XmlCommonBase.o
+
+
+############################################################################
+#
+# SHARED OBJECT DEBUG BUILD
+#
+############################################################################
+
+# debug object files
+DEBUG_OBJS=$(DEBUG_OBJ_PATH)/StdAfx.o \
+             $(DEBUG_OBJ_PATH)/Camera.o \
+             $(DEBUG_OBJ_PATH)/Mouse.o \
+             $(DEBUG_OBJ_PATH)/Params.o \
+             $(DEBUG_OBJ_PATH)/Ui.o \
+             $(DEBUG_OBJ_PATH)/Window.o \
+             $(DEBUG_OBJ_PATH)/Enumerations.o \
+             $(DEBUG_OBJ_PATH)/ClassFactory.o \
+             $(DEBUG_OBJ_PATH)/XmlCollectionCommonBase.o \
+             $(DEBUG_OBJ_PATH)/XmlCommonBase.o
+
+# build the debug shared library
+$(DEBUG_TARGET_PATH)/$(DEBUG_TARGET): $(DEBUG_OBJS) 
+	$(LNK) -shared -o$(DEBUG_TARGET_PATH)/$(DEBUG_TARGET) $(DEBUG_OBJS) $(DEBUG_LIB_PATH) $(DEBUG_LIBS)
+
+# compile debug c++ files
+$(DEBUG_OBJ_PATH)/StdAfx.o: StdAfx.cpp
+	$(CPP) $(DEBUG_CPP) $(CPP_INCLUDES) StdAfx.cpp -o $(DEBUG_OBJ_PATH)/StdAfx.o
+$(DEBUG_OBJ_PATH)/Camera.o: ./ParamsLib/Camera.cpp
+	$(CPP) $(DEBUG_CPP) $(CPP_INCLUDES) ./ParamsLib/Camera.cpp -o $(DEBUG_OBJ_PATH)/Camera.o
+$(DEBUG_OBJ_PATH)/Mouse.o: ./ParamsLib/Mouse.cpp
+	$(CPP) $(DEBUG_CPP) $(CPP_INCLUDES) ./ParamsLib/Mouse.cpp -o $(DEBUG_OBJ_PATH)/Mouse.o
+$(DEBUG_OBJ_PATH)/Params.o: ./ParamsLib/Params.cpp
+	$(CPP) $(DEBUG_CPP) $(CPP_INCLUDES) ./ParamsLib/Params.cpp -o $(DEBUG_OBJ_PATH)/Params.o
+$(DEBUG_OBJ_PATH)/Ui.o: ./ParamsLib/Ui.cpp
+	$(CPP) $(DEBUG_CPP) $(CPP_INCLUDES) ./ParamsLib/Ui.cpp -o $(DEBUG_OBJ_PATH)/Ui.o
+$(DEBUG_OBJ_PATH)/Window.o: ./ParamsLib/Window.cpp
+	$(CPP) $(DEBUG_CPP) $(CPP_INCLUDES) ./ParamsLib/Window.cpp -o $(DEBUG_OBJ_PATH)/Window.o
+$(DEBUG_OBJ_PATH)/Enumerations.o: Enumerations.cpp
+	$(CPP) $(DEBUG_CPP) $(CPP_INCLUDES) Enumerations.cpp -o $(DEBUG_OBJ_PATH)/Enumerations.o
+$(DEBUG_OBJ_PATH)/ClassFactory.o: ClassFactory.cpp
+	$(CPP) $(DEBUG_CPP) $(CPP_INCLUDES) ClassFactory.cpp -o $(DEBUG_OBJ_PATH)/ClassFactory.o
+$(DEBUG_OBJ_PATH)/XmlCollectionCommonBase.o: XmlCollectionCommonBase.cpp
+	$(CPP) $(DEBUG_CPP) $(CPP_INCLUDES) XmlCollectionCommonBase.cpp -o $(DEBUG_OBJ_PATH)/XmlCollectionCommonBase.o
+$(DEBUG_OBJ_PATH)/XmlCommonBase.o: XmlCommonBase.cpp
+	$(CPP) $(DEBUG_CPP) $(CPP_INCLUDES) XmlCommonBase.cpp -o $(DEBUG_OBJ_PATH)/XmlCommonBase.o
+
+
+############################################################################
+#
+# SHARED OBJECT RELEASE BUILD
+#
+############################################################################
+
+# release object files
+RELEASE_UNICODE_OBJS=$(RELEASE_UNICODE_OBJ_PATH)/StdAfx.o \
+             $(RELEASE_UNICODE_OBJ_PATH)/Camera.o \
+             $(RELEASE_UNICODE_OBJ_PATH)/Mouse.o \
+             $(RELEASE_UNICODE_OBJ_PATH)/Params.o \
+             $(RELEASE_UNICODE_OBJ_PATH)/Ui.o \
+             $(RELEASE_UNICODE_OBJ_PATH)/Window.o \
+             $(RELEASE_UNICODE_OBJ_PATH)/Enumerations.o \
+             $(RELEASE_UNICODE_OBJ_PATH)/ClassFactory.o \
+             $(RELEASE_UNICODE_OBJ_PATH)/XmlCollectionCommonBase.o \
+             $(RELEASE_UNICODE_OBJ_PATH)/XmlCommonBase.o
+
+# build the release shared library
+$(RELEASE_UNICODE_TARGET_PATH)/$(RELEASE_UNICODE_TARGET): $(RELEASE_UNICODE_OBJS) 
+	$(LNK) -shared -o$(RELEASE_UNICODE_TARGET_PATH)/$(RELEASE_UNICODE_TARGET) $(RELEASE_UNICODE_OBJS) $(RELEASE_UNICODE_LIB_PATH) $(RELEASE_UNICODE_LIBS)
+
+# compile release c++ files
+$(RELEASE_UNICODE_OBJ_PATH)/StdAfx.o: StdAfx.cpp
+	$(CPP) $(RELEASE_UNICODE_CPP) $(CPP_INCLUDES) StdAfx.cpp -o $(RELEASE_UNICODE_OBJ_PATH)/StdAfx.o
+$(RELEASE_UNICODE_OBJ_PATH)/Camera.o: ./ParamsLib/Camera.cpp
+	$(CPP) $(RELEASE_UNICODE_CPP) $(CPP_INCLUDES) ./ParamsLib/Camera.cpp -o $(RELEASE_UNICODE_OBJ_PATH)/Camera.o
+$(RELEASE_UNICODE_OBJ_PATH)/Mouse.o: ./ParamsLib/Mouse.cpp
+	$(CPP) $(RELEASE_UNICODE_CPP) $(CPP_INCLUDES) ./ParamsLib/Mouse.cpp -o $(RELEASE_UNICODE_OBJ_PATH)/Mouse.o
+$(RELEASE_UNICODE_OBJ_PATH)/Params.o: ./ParamsLib/Params.cpp
+	$(CPP) $(RELEASE_UNICODE_CPP) $(CPP_INCLUDES) ./ParamsLib/Params.cpp -o $(RELEASE_UNICODE_OBJ_PATH)/Params.o
+$(RELEASE_UNICODE_OBJ_PATH)/Ui.o: ./ParamsLib/Ui.cpp
+	$(CPP) $(RELEASE_UNICODE_CPP) $(CPP_INCLUDES) ./ParamsLib/Ui.cpp -o $(RELEASE_UNICODE_OBJ_PATH)/Ui.o
+$(RELEASE_UNICODE_OBJ_PATH)/Window.o: ./ParamsLib/Window.cpp
+	$(CPP) $(RELEASE_UNICODE_CPP) $(CPP_INCLUDES) ./ParamsLib/Window.cpp -o $(RELEASE_UNICODE_OBJ_PATH)/Window.o
+$(RELEASE_UNICODE_OBJ_PATH)/Enumerations.o: Enumerations.cpp
+	$(CPP) $(RELEASE_UNICODE_CPP) $(CPP_INCLUDES) Enumerations.cpp -o $(RELEASE_UNICODE_OBJ_PATH)/Enumerations.o
+$(RELEASE_UNICODE_OBJ_PATH)/ClassFactory.o: ClassFactory.cpp
+	$(CPP) $(RELEASE_UNICODE_CPP) $(CPP_INCLUDES) ClassFactory.cpp -o $(RELEASE_UNICODE_OBJ_PATH)/ClassFactory.o
+$(RELEASE_UNICODE_OBJ_PATH)/XmlCollectionCommonBase.o: XmlCollectionCommonBase.cpp
+	$(CPP) $(RELEASE_UNICODE_CPP) $(CPP_INCLUDES) XmlCollectionCommonBase.cpp -o $(RELEASE_UNICODE_OBJ_PATH)/XmlCollectionCommonBase.o
+$(RELEASE_UNICODE_OBJ_PATH)/XmlCommonBase.o: XmlCommonBase.cpp
+	$(CPP) $(RELEASE_UNICODE_CPP) $(CPP_INCLUDES) XmlCommonBase.cpp -o $(RELEASE_UNICODE_OBJ_PATH)/XmlCommonBase.o
+
+
+############################################################################
+#
+# SHARED OBJECT DEBUG BUILD
+#
+############################################################################
+
+# debug object files
+DEBUG_UNICODE_OBJS=$(DEBUG_UNICODE_OBJ_PATH)/StdAfx.o \
+             $(DEBUG_UNICODE_OBJ_PATH)/Camera.o \
+             $(DEBUG_UNICODE_OBJ_PATH)/Mouse.o \
+             $(DEBUG_UNICODE_OBJ_PATH)/Params.o \
+             $(DEBUG_UNICODE_OBJ_PATH)/Ui.o \
+             $(DEBUG_UNICODE_OBJ_PATH)/Window.o \
+             $(DEBUG_UNICODE_OBJ_PATH)/Enumerations.o \
+             $(DEBUG_UNICODE_OBJ_PATH)/ClassFactory.o \
+             $(DEBUG_UNICODE_OBJ_PATH)/XmlCollectionCommonBase.o \
+             $(DEBUG_UNICODE_OBJ_PATH)/XmlCommonBase.o
+
+# build the debug shared library
+$(DEBUG_UNICODE_TARGET_PATH)/$(DEBUG_UNICODE_TARGET): $(DEBUG_UNICODE_OBJS) 
+	$(LNK) -shared -o$(DEBUG_UNICODE_TARGET_PATH)/$(DEBUG_UNICODE_TARGET) $(DEBUG_UNICODE_OBJS) $(DEBUG_UNICODE_LIB_PATH) $(DEBUG_UNICODE_LIBS)
+
+# compile debug c++ files
+$(DEBUG_UNICODE_OBJ_PATH)/StdAfx.o: StdAfx.cpp
+	$(CPP) $(DEBUG_UNICODE_CPP) $(CPP_INCLUDES) StdAfx.cpp -o $(DEBUG_UNICODE_OBJ_PATH)/StdAfx.o
+$(DEBUG_UNICODE_OBJ_PATH)/Camera.o: ./ParamsLib/Camera.cpp
+	$(CPP) $(DEBUG_UNICODE_CPP) $(CPP_INCLUDES) ./ParamsLib/Camera.cpp -o $(DEBUG_UNICODE_OBJ_PATH)/Camera.o
+$(DEBUG_UNICODE_OBJ_PATH)/Mouse.o: ./ParamsLib/Mouse.cpp
+	$(CPP) $(DEBUG_UNICODE_CPP) $(CPP_INCLUDES) ./ParamsLib/Mouse.cpp -o $(DEBUG_UNICODE_OBJ_PATH)/Mouse.o
+$(DEBUG_UNICODE_OBJ_PATH)/Params.o: ./ParamsLib/Params.cpp
+	$(CPP) $(DEBUG_UNICODE_CPP) $(CPP_INCLUDES) ./ParamsLib/Params.cpp -o $(DEBUG_UNICODE_OBJ_PATH)/Params.o
+$(DEBUG_UNICODE_OBJ_PATH)/Ui.o: ./ParamsLib/Ui.cpp
+	$(CPP) $(DEBUG_UNICODE_CPP) $(CPP_INCLUDES) ./ParamsLib/Ui.cpp -o $(DEBUG_UNICODE_OBJ_PATH)/Ui.o
+$(DEBUG_UNICODE_OBJ_PATH)/Window.o: ./ParamsLib/Window.cpp
+	$(CPP) $(DEBUG_UNICODE_CPP) $(CPP_INCLUDES) ./ParamsLib/Window.cpp -o $(DEBUG_UNICODE_OBJ_PATH)/Window.o
+$(DEBUG_UNICODE_OBJ_PATH)/Enumerations.o: Enumerations.cpp
+	$(CPP) $(DEBUG_UNICODE_CPP) $(CPP_INCLUDES) Enumerations.cpp -o $(DEBUG_UNICODE_OBJ_PATH)/Enumerations.o
+$(DEBUG_UNICODE_OBJ_PATH)/ClassFactory.o: ClassFactory.cpp
+	$(CPP) $(DEBUG_UNICODE_CPP) $(CPP_INCLUDES) ClassFactory.cpp -o $(DEBUG_UNICODE_OBJ_PATH)/ClassFactory.o
+$(DEBUG_UNICODE_OBJ_PATH)/XmlCollectionCommonBase.o: XmlCollectionCommonBase.cpp
+	$(CPP) $(DEBUG_UNICODE_CPP) $(CPP_INCLUDES) XmlCollectionCommonBase.cpp -o $(DEBUG_UNICODE_OBJ_PATH)/XmlCollectionCommonBase.o
+$(DEBUG_UNICODE_OBJ_PATH)/XmlCommonBase.o: XmlCommonBase.cpp
+	$(CPP) $(DEBUG_UNICODE_CPP) $(CPP_INCLUDES) XmlCommonBase.cpp -o $(DEBUG_UNICODE_OBJ_PATH)/XmlCommonBase.o
+
+
+############################################################################
+
+# create release directories
+release_paths:
+	mkdir -p $(RELEASE_TARGET_PATH)
+	mkdir -p $(RELEASE_OBJ_PATH)
+
+# create debug directories
+debug_paths:
+	mkdir -p $(DEBUG_TARGET_PATH)
+	mkdir -p $(DEBUG_OBJ_PATH)
+
+# create release directories
+release_unicode_paths:
+	mkdir -p $(RELEASE_UNICODE_TARGET_PATH)
+	mkdir -p $(RELEASE_UNICODE_OBJ_PATH)
+
+# create debug directories
+debug_unicode_paths:
+	mkdir -p $(DEBUG_UNICODE_TARGET_PATH)
+	mkdir -p $(DEBUG_UNICODE_OBJ_PATH)
+
+# delete all files
+clean: release_clean debug_clean release_unicode_clean debug_unicode_clean
+
+# delete release files
+release_clean:
+	rm -f $(RELEASE_TARGET_PATH)/$(RELEASE_TARGET)
+	rm -f $(RELEASE_OBJ_PATH)/*.o
+
+# delete debug files
+debug_clean:
+	rm -f $(DEBUG_TARGET_PATH)/$(DEBUG_TARGET)
+	rm -f $(DEBUG_OBJ_PATH)/*.o
+
+# delete release files
+release_unicode_clean:
+	rm -f $(RELEASE_UNICODE_TARGET_PATH)/$(RELEASE_UNICODE_TARGET)
+	rm -f $(RELEASE_UNICODE_OBJ_PATH)/*.o
+
+# delete debug files
+debug_unicode_clean:
+	rm -f $(DEBUG_UNICODE_TARGET_PATH)/$(DEBUG_UNICODE_TARGET)
+	rm -f $(DEBUG_UNICODE_OBJ_PATH)/*.o
+
+

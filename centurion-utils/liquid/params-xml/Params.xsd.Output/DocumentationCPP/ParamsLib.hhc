@@ -1,0 +1,785 @@
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML//EN">
+<HTML>
+<HEAD>
+<meta name="GENERATOR" content="Microsoft&reg; HTML Help Workshop 4.1">
+<!-- Sitemap 1.0 -->
+</HEAD><BODY>
+<OBJECT type="text/site properties">
+	<param name="ImageType" value="Folder">
+</OBJECT>
+<UL>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="Introduction">
+		<param name="Local" value="std/default.htm">
+		</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="Schema">
+		<param name="Local" value="ParamsLib.htm">
+		</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="ParamsLib">
+		<param name="Local" value="classList.htm">
+		</OBJECT>
+	<UL>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="Classes">
+			<param name="Local" value="classList.htm#Classes">
+			</OBJECT>
+		<UL>
+			<LI> <OBJECT type="text/sitemap">
+				<param name="Name" value="CClassFactory">
+				<param name="Local" value="Classfactory.htm">
+				</OBJECT>
+			<UL>
+				<LI> <OBJECT type="text/sitemap">
+					<param name="Name" value="ParamsLib_Classes">
+					<param name="Local" value="ClassFactory_Enums.htm">
+					</OBJECT>
+				<LI> <OBJECT type="text/sitemap">
+					<param name="Name" value="CreateClass">
+					<param name="Local" value="std/LtXmlLib_CClassfactory_CreateClass.htm">
+					</OBJECT>
+				<LI> <OBJECT type="text/sitemap">
+					<param name="Name" value="CreateClassCollection">
+					<param name="Local" value="std/LtXmlLib_CClassfactory_CreateClassCollection.htm">
+					</OBJECT>
+				<LI> <OBJECT type="text/sitemap">
+					<param name="Name" value="CreateEnumCollection">
+					<param name="Local" value="std/LtXmlLib_CClassfactory_CreateEnumCollection.htm">
+					</OBJECT>
+				<LI> <OBJECT type="text/sitemap">
+					<param name="Name" value="FromXml">
+					<param name="Local" value="std/LtXmlLib_CClassfactory_FromXml.htm">
+					</OBJECT>
+				<LI> <OBJECT type="text/sitemap">
+					<param name="Name" value="FromXmlFile">
+					<param name="Local" value="std/LtXmlLib_CClassfactory_FromXml.htm">
+					</OBJECT>
+				<LI> <OBJECT type="text/sitemap">
+					<param name="Name" value="FromXmlStream">
+					<param name="Local" value="std/LtXmlLib_CClassfactory_FromXml.htm">
+					</OBJECT>
+				<LI> <OBJECT type="text/sitemap">
+					<param name="Name" value="FromXmlElement">
+					<param name="Local" value="std/LtXmlLib_CClassfactory_FromXml.htm">
+					</OBJECT>
+			</UL>
+<!--Written at 29/02/2020 18:25:45-->
+			<LI> <OBJECT type="text/sitemap">
+				<param name="Name" value="CCamera">
+				<param name="Local" value="ParamsLib\Cls_Camera.htm">
+				</OBJECT>
+			<UL>
+				<LI> <OBJECT type="text/sitemap">
+					<param name="Name" value="AddRef">
+					<param name="Local" value="ms-its:XmlDataBinder.chm::/LtXmlLib_CXmlObjectBase_AddRef.html">
+					<param name="ImageNumber" value="11">
+					</OBJECT>
+				<LI> <OBJECT type="text/sitemap">
+					<param name="Name" value="CreateInstance">
+					<param name="Local" value="std/LtXmlLib_CreateInstance.htm">
+					</OBJECT>
+				<LI> <OBJECT type="text/sitemap">
+					<param name="Name" value="FromXml">
+					<param name="Local" value="ms-its:XmlDataBinder.chm::/LtXmlLib_CXmlObjectBase_FromXml.html">
+					<param name="ImageNumber" value="11">
+					</OBJECT>
+				<LI> <OBJECT type="text/sitemap">
+					<param name="Name" value="FromXmlElement">
+					<param name="Local" value="ms-its:XmlDataBinder.chm::/LtXmlLib_CXmlObjectBase_FromXmlElement.html">
+					<param name="ImageNumber" value="11">
+					</OBJECT>
+				<LI> <OBJECT type="text/sitemap">
+					<param name="Name" value="FromXmlFile">
+					<param name="Local" value="ms-its:XmlDataBinder.chm::/LtXmlLib_CXmlObjectBase_FromXmlFile.html">
+					<param name="ImageNumber" value="11">
+					</OBJECT>
+				<LI> <OBJECT type="text/sitemap">
+					<param name="Name" value="FromXmlStream">
+					<param name="Local" value="ms-its:XmlDataBinder.chm::/LtXmlLib_CXmlObjectBase_FromXmlStream.html">
+					<param name="ImageNumber" value="11">
+					</OBJECT>
+				<LI> <OBJECT type="text/sitemap">
+					<param name="Name" value="FromJson">
+					<param name="Local" value="ms-its:XmlDataBinder.chm::/LtXmlLib_CXmlObjectBase_FromJson.html">
+					<param name="ImageNumber" value="11">
+					</OBJECT>
+				<LI> <OBJECT type="text/sitemap">
+					<param name="Name" value="FromJsonFile">
+					<param name="Local" value="ms-its:XmlDataBinder.chm::/LtXmlLib_CXmlObjectBase_FromJsonFile.html">
+					<param name="ImageNumber" value="11">
+					</OBJECT>
+				<LI> <OBJECT type="text/sitemap">
+					<param name="Name" value="FromJsonStream">
+					<param name="Local" value="ms-its:XmlDataBinder.chm::/LtXmlLib_CXmlObjectBase_FromJsonStream.html">
+					<param name="ImageNumber" value="11">
+					</OBJECT>
+				<LI> <OBJECT type="text/sitemap">
+					<param name="Name" value="GetBase">
+					<param name="Local" value="ms-its:XmlDataBinder.chm::/LtXmlLib_CXmlObjectBase_GetBase.html">
+					<param name="ImageNumber" value="11">
+					</OBJECT>
+				<LI> <OBJECT type="text/sitemap">
+					<param name="Name" value="GetNamespace">
+					<param name="Local" value="std/Namespace.htm">
+					</OBJECT>
+				<LI> <OBJECT type="text/sitemap">
+					<param name="Name" value="GetTargetNamespace">
+					<param name="Local" value="std/LtXmlLib_CXmlObjectBase_GetTargetNamespace.htm">
+					<param name="ImageNumber" value="11">
+					</OBJECT>
+				<LI> <OBJECT type="text/sitemap">
+					<param name="Name" value="Release">
+					<param name="Local" value="ms-its:XmlDataBinder.chm::/LtXmlLib_CXmlObjectBase_Release.html">
+					<param name="ImageNumber" value="11">
+					</OBJECT>
+				<LI> <OBJECT type="text/sitemap">
+					<param name="Name" value="ToXml">
+					<param name="Local" value="ms-its:XmlDataBinder.chm::/LtXmlLib_CXmlObjectBase_ToXml.html">
+					<param name="ImageNumber" value="11">
+					</OBJECT>
+				<LI> <OBJECT type="text/sitemap">
+					<param name="Name" value="ToXmlFile">
+					<param name="Local" value="ms-its:XmlDataBinder.chm::/LtXmlLib_CXmlObjectBase_ToXmlFile.html">
+					<param name="ImageNumber" value="11">
+					</OBJECT>
+				<LI> <OBJECT type="text/sitemap">
+					<param name="Name" value="ToXmlStream">
+					<param name="Local" value="ms-its:XmlDataBinder.chm::/LtXmlLib_CXmlObjectBase_ToXmlStream.html">
+					<param name="ImageNumber" value="11">
+					</OBJECT>
+				<LI> <OBJECT type="text/sitemap">
+					<param name="Name" value="ToJson">
+					<param name="Local" value="ms-its:XmlDataBinder.chm::/LtXmlLib_CXmlObjectBase_ToJson.html">
+					<param name="ImageNumber" value="11">
+					</OBJECT>
+				<LI> <OBJECT type="text/sitemap">
+					<param name="Name" value="ToJsonFile">
+					<param name="Local" value="ms-its:XmlDataBinder.chm::/LtXmlLib_CXmlObjectBase_ToJsonFile.html">
+					<param name="ImageNumber" value="11">
+					</OBJECT>
+				<LI> <OBJECT type="text/sitemap">
+					<param name="Name" value="ToJsonStream">
+					<param name="Local" value="ms-its:XmlDataBinder.chm::/LtXmlLib_CXmlObjectBase_ToJsonStream.html">
+					<param name="ImageNumber" value="11">
+					</OBJECT>
+				<LI> <OBJECT type="text/sitemap">
+					<param name="Name" value="GetXPosition">
+					<param name="Local" value="ParamsLib\Attr_Camera_xPosition.htm">
+					</OBJECT>
+				<LI> <OBJECT type="text/sitemap">
+					<param name="Name" value="SetXPosition">
+					<param name="Local" value="ParamsLib\Attr_Camera_xPosition.htm">
+					</OBJECT>
+				<LI> <OBJECT type="text/sitemap">
+					<param name="Name" value="GetYPosition">
+					<param name="Local" value="ParamsLib\Attr_Camera_yPosition.htm">
+					</OBJECT>
+				<LI> <OBJECT type="text/sitemap">
+					<param name="Name" value="SetYPosition">
+					<param name="Local" value="ParamsLib\Attr_Camera_yPosition.htm">
+					</OBJECT>
+			</UL>
+<!--Written at 29/02/2020 18:25:45-->
+			<LI> <OBJECT type="text/sitemap">
+				<param name="Name" value="CMouse">
+				<param name="Local" value="ParamsLib\Cls_Mouse.htm">
+				</OBJECT>
+			<UL>
+				<LI> <OBJECT type="text/sitemap">
+					<param name="Name" value="AddRef">
+					<param name="Local" value="ms-its:XmlDataBinder.chm::/LtXmlLib_CXmlObjectBase_AddRef.html">
+					<param name="ImageNumber" value="11">
+					</OBJECT>
+				<LI> <OBJECT type="text/sitemap">
+					<param name="Name" value="CreateInstance">
+					<param name="Local" value="std/LtXmlLib_CreateInstance.htm">
+					</OBJECT>
+				<LI> <OBJECT type="text/sitemap">
+					<param name="Name" value="FromXml">
+					<param name="Local" value="ms-its:XmlDataBinder.chm::/LtXmlLib_CXmlObjectBase_FromXml.html">
+					<param name="ImageNumber" value="11">
+					</OBJECT>
+				<LI> <OBJECT type="text/sitemap">
+					<param name="Name" value="FromXmlElement">
+					<param name="Local" value="ms-its:XmlDataBinder.chm::/LtXmlLib_CXmlObjectBase_FromXmlElement.html">
+					<param name="ImageNumber" value="11">
+					</OBJECT>
+				<LI> <OBJECT type="text/sitemap">
+					<param name="Name" value="FromXmlFile">
+					<param name="Local" value="ms-its:XmlDataBinder.chm::/LtXmlLib_CXmlObjectBase_FromXmlFile.html">
+					<param name="ImageNumber" value="11">
+					</OBJECT>
+				<LI> <OBJECT type="text/sitemap">
+					<param name="Name" value="FromXmlStream">
+					<param name="Local" value="ms-its:XmlDataBinder.chm::/LtXmlLib_CXmlObjectBase_FromXmlStream.html">
+					<param name="ImageNumber" value="11">
+					</OBJECT>
+				<LI> <OBJECT type="text/sitemap">
+					<param name="Name" value="FromJson">
+					<param name="Local" value="ms-its:XmlDataBinder.chm::/LtXmlLib_CXmlObjectBase_FromJson.html">
+					<param name="ImageNumber" value="11">
+					</OBJECT>
+				<LI> <OBJECT type="text/sitemap">
+					<param name="Name" value="FromJsonFile">
+					<param name="Local" value="ms-its:XmlDataBinder.chm::/LtXmlLib_CXmlObjectBase_FromJsonFile.html">
+					<param name="ImageNumber" value="11">
+					</OBJECT>
+				<LI> <OBJECT type="text/sitemap">
+					<param name="Name" value="FromJsonStream">
+					<param name="Local" value="ms-its:XmlDataBinder.chm::/LtXmlLib_CXmlObjectBase_FromJsonStream.html">
+					<param name="ImageNumber" value="11">
+					</OBJECT>
+				<LI> <OBJECT type="text/sitemap">
+					<param name="Name" value="GetBase">
+					<param name="Local" value="ms-its:XmlDataBinder.chm::/LtXmlLib_CXmlObjectBase_GetBase.html">
+					<param name="ImageNumber" value="11">
+					</OBJECT>
+				<LI> <OBJECT type="text/sitemap">
+					<param name="Name" value="GetNamespace">
+					<param name="Local" value="std/Namespace.htm">
+					</OBJECT>
+				<LI> <OBJECT type="text/sitemap">
+					<param name="Name" value="GetTargetNamespace">
+					<param name="Local" value="std/LtXmlLib_CXmlObjectBase_GetTargetNamespace.htm">
+					<param name="ImageNumber" value="11">
+					</OBJECT>
+				<LI> <OBJECT type="text/sitemap">
+					<param name="Name" value="Release">
+					<param name="Local" value="ms-its:XmlDataBinder.chm::/LtXmlLib_CXmlObjectBase_Release.html">
+					<param name="ImageNumber" value="11">
+					</OBJECT>
+				<LI> <OBJECT type="text/sitemap">
+					<param name="Name" value="ToXml">
+					<param name="Local" value="ms-its:XmlDataBinder.chm::/LtXmlLib_CXmlObjectBase_ToXml.html">
+					<param name="ImageNumber" value="11">
+					</OBJECT>
+				<LI> <OBJECT type="text/sitemap">
+					<param name="Name" value="ToXmlFile">
+					<param name="Local" value="ms-its:XmlDataBinder.chm::/LtXmlLib_CXmlObjectBase_ToXmlFile.html">
+					<param name="ImageNumber" value="11">
+					</OBJECT>
+				<LI> <OBJECT type="text/sitemap">
+					<param name="Name" value="ToXmlStream">
+					<param name="Local" value="ms-its:XmlDataBinder.chm::/LtXmlLib_CXmlObjectBase_ToXmlStream.html">
+					<param name="ImageNumber" value="11">
+					</OBJECT>
+				<LI> <OBJECT type="text/sitemap">
+					<param name="Name" value="ToJson">
+					<param name="Local" value="ms-its:XmlDataBinder.chm::/LtXmlLib_CXmlObjectBase_ToJson.html">
+					<param name="ImageNumber" value="11">
+					</OBJECT>
+				<LI> <OBJECT type="text/sitemap">
+					<param name="Name" value="ToJsonFile">
+					<param name="Local" value="ms-its:XmlDataBinder.chm::/LtXmlLib_CXmlObjectBase_ToJsonFile.html">
+					<param name="ImageNumber" value="11">
+					</OBJECT>
+				<LI> <OBJECT type="text/sitemap">
+					<param name="Name" value="ToJsonStream">
+					<param name="Local" value="ms-its:XmlDataBinder.chm::/LtXmlLib_CXmlObjectBase_ToJsonStream.html">
+					<param name="ImageNumber" value="11">
+					</OBJECT>
+				<LI> <OBJECT type="text/sitemap">
+					<param name="Name" value="GetScrollValue">
+					<param name="Local" value="ParamsLib\Attr_Mouse_scrollValue.htm">
+					</OBJECT>
+				<LI> <OBJECT type="text/sitemap">
+					<param name="Name" value="SetScrollValue">
+					<param name="Local" value="ParamsLib\Attr_Mouse_scrollValue.htm">
+					</OBJECT>
+				<LI> <OBJECT type="text/sitemap">
+					<param name="Name" value="GetXLeftClick">
+					<param name="Local" value="ParamsLib\Attr_Mouse_xLeftClick.htm">
+					</OBJECT>
+				<LI> <OBJECT type="text/sitemap">
+					<param name="Name" value="SetXLeftClick">
+					<param name="Local" value="ParamsLib\Attr_Mouse_xLeftClick.htm">
+					</OBJECT>
+				<LI> <OBJECT type="text/sitemap">
+					<param name="Name" value="GetXPosition">
+					<param name="Local" value="ParamsLib\Attr_Mouse_xPosition.htm">
+					</OBJECT>
+				<LI> <OBJECT type="text/sitemap">
+					<param name="Name" value="SetXPosition">
+					<param name="Local" value="ParamsLib\Attr_Mouse_xPosition.htm">
+					</OBJECT>
+				<LI> <OBJECT type="text/sitemap">
+					<param name="Name" value="GetXRightClick">
+					<param name="Local" value="ParamsLib\Attr_Mouse_xRightClick.htm">
+					</OBJECT>
+				<LI> <OBJECT type="text/sitemap">
+					<param name="Name" value="SetXRightClick">
+					<param name="Local" value="ParamsLib\Attr_Mouse_xRightClick.htm">
+					</OBJECT>
+				<LI> <OBJECT type="text/sitemap">
+					<param name="Name" value="GetY2dPosition">
+					<param name="Local" value="ParamsLib\Attr_Mouse_y2dPosition.htm">
+					</OBJECT>
+				<LI> <OBJECT type="text/sitemap">
+					<param name="Name" value="SetY2dPosition">
+					<param name="Local" value="ParamsLib\Attr_Mouse_y2dPosition.htm">
+					</OBJECT>
+				<LI> <OBJECT type="text/sitemap">
+					<param name="Name" value="GetY2dRightClick">
+					<param name="Local" value="ParamsLib\Attr_Mouse_y2dRightClick.htm">
+					</OBJECT>
+				<LI> <OBJECT type="text/sitemap">
+					<param name="Name" value="SetY2dRightClick">
+					<param name="Local" value="ParamsLib\Attr_Mouse_y2dRightClick.htm">
+					</OBJECT>
+				<LI> <OBJECT type="text/sitemap">
+					<param name="Name" value="GetYLeftClick">
+					<param name="Local" value="ParamsLib\Attr_Mouse_yLeftClick.htm">
+					</OBJECT>
+				<LI> <OBJECT type="text/sitemap">
+					<param name="Name" value="SetYLeftClick">
+					<param name="Local" value="ParamsLib\Attr_Mouse_yLeftClick.htm">
+					</OBJECT>
+				<LI> <OBJECT type="text/sitemap">
+					<param name="Name" value="GetYPosition">
+					<param name="Local" value="ParamsLib\Attr_Mouse_yPosition.htm">
+					</OBJECT>
+				<LI> <OBJECT type="text/sitemap">
+					<param name="Name" value="SetYPosition">
+					<param name="Local" value="ParamsLib\Attr_Mouse_yPosition.htm">
+					</OBJECT>
+				<LI> <OBJECT type="text/sitemap">
+					<param name="Name" value="GetYRightClick">
+					<param name="Local" value="ParamsLib\Attr_Mouse_yRightClick.htm">
+					</OBJECT>
+				<LI> <OBJECT type="text/sitemap">
+					<param name="Name" value="SetYRightClick">
+					<param name="Local" value="ParamsLib\Attr_Mouse_yRightClick.htm">
+					</OBJECT>
+				<LI> <OBJECT type="text/sitemap">
+					<param name="Name" value="GetLeftClick">
+					<param name="Local" value="ParamsLib\Attr_Mouse_leftClick.htm">
+					</OBJECT>
+				<LI> <OBJECT type="text/sitemap">
+					<param name="Name" value="SetLeftClick">
+					<param name="Local" value="ParamsLib\Attr_Mouse_leftClick.htm">
+					</OBJECT>
+				<LI> <OBJECT type="text/sitemap">
+					<param name="Name" value="GetLeftHold">
+					<param name="Local" value="ParamsLib\Attr_Mouse_leftHold.htm">
+					</OBJECT>
+				<LI> <OBJECT type="text/sitemap">
+					<param name="Name" value="SetLeftHold">
+					<param name="Local" value="ParamsLib\Attr_Mouse_leftHold.htm">
+					</OBJECT>
+				<LI> <OBJECT type="text/sitemap">
+					<param name="Name" value="GetRelease">
+					<param name="Local" value="ParamsLib\Attr_Mouse_release.htm">
+					</OBJECT>
+				<LI> <OBJECT type="text/sitemap">
+					<param name="Name" value="SetRelease">
+					<param name="Local" value="ParamsLib\Attr_Mouse_release.htm">
+					</OBJECT>
+				<LI> <OBJECT type="text/sitemap">
+					<param name="Name" value="GetRightClick">
+					<param name="Local" value="ParamsLib\Attr_Mouse_rightClick.htm">
+					</OBJECT>
+				<LI> <OBJECT type="text/sitemap">
+					<param name="Name" value="SetRightClick">
+					<param name="Local" value="ParamsLib\Attr_Mouse_rightClick.htm">
+					</OBJECT>
+				<LI> <OBJECT type="text/sitemap">
+					<param name="Name" value="GetScrollBool">
+					<param name="Local" value="ParamsLib\Attr_Mouse_scrollBool.htm">
+					</OBJECT>
+				<LI> <OBJECT type="text/sitemap">
+					<param name="Name" value="SetScrollBool">
+					<param name="Local" value="ParamsLib\Attr_Mouse_scrollBool.htm">
+					</OBJECT>
+			</UL>
+<!--Written at 29/02/2020 18:25:45-->
+			<LI> <OBJECT type="text/sitemap">
+				<param name="Name" value="CParams">
+				<param name="Local" value="ParamsLib\Cls_Params.htm">
+				</OBJECT>
+			<UL>
+				<LI> <OBJECT type="text/sitemap">
+					<param name="Name" value="AddRef">
+					<param name="Local" value="ms-its:XmlDataBinder.chm::/LtXmlLib_CXmlObjectBase_AddRef.html">
+					<param name="ImageNumber" value="11">
+					</OBJECT>
+				<LI> <OBJECT type="text/sitemap">
+					<param name="Name" value="CreateInstance">
+					<param name="Local" value="std/LtXmlLib_CreateInstance.htm">
+					</OBJECT>
+				<LI> <OBJECT type="text/sitemap">
+					<param name="Name" value="FromXml">
+					<param name="Local" value="ms-its:XmlDataBinder.chm::/LtXmlLib_CXmlObjectBase_FromXml.html">
+					<param name="ImageNumber" value="11">
+					</OBJECT>
+				<LI> <OBJECT type="text/sitemap">
+					<param name="Name" value="FromXmlElement">
+					<param name="Local" value="ms-its:XmlDataBinder.chm::/LtXmlLib_CXmlObjectBase_FromXmlElement.html">
+					<param name="ImageNumber" value="11">
+					</OBJECT>
+				<LI> <OBJECT type="text/sitemap">
+					<param name="Name" value="FromXmlFile">
+					<param name="Local" value="ms-its:XmlDataBinder.chm::/LtXmlLib_CXmlObjectBase_FromXmlFile.html">
+					<param name="ImageNumber" value="11">
+					</OBJECT>
+				<LI> <OBJECT type="text/sitemap">
+					<param name="Name" value="FromXmlStream">
+					<param name="Local" value="ms-its:XmlDataBinder.chm::/LtXmlLib_CXmlObjectBase_FromXmlStream.html">
+					<param name="ImageNumber" value="11">
+					</OBJECT>
+				<LI> <OBJECT type="text/sitemap">
+					<param name="Name" value="FromJson">
+					<param name="Local" value="ms-its:XmlDataBinder.chm::/LtXmlLib_CXmlObjectBase_FromJson.html">
+					<param name="ImageNumber" value="11">
+					</OBJECT>
+				<LI> <OBJECT type="text/sitemap">
+					<param name="Name" value="FromJsonFile">
+					<param name="Local" value="ms-its:XmlDataBinder.chm::/LtXmlLib_CXmlObjectBase_FromJsonFile.html">
+					<param name="ImageNumber" value="11">
+					</OBJECT>
+				<LI> <OBJECT type="text/sitemap">
+					<param name="Name" value="FromJsonStream">
+					<param name="Local" value="ms-its:XmlDataBinder.chm::/LtXmlLib_CXmlObjectBase_FromJsonStream.html">
+					<param name="ImageNumber" value="11">
+					</OBJECT>
+				<LI> <OBJECT type="text/sitemap">
+					<param name="Name" value="GetBase">
+					<param name="Local" value="ms-its:XmlDataBinder.chm::/LtXmlLib_CXmlObjectBase_GetBase.html">
+					<param name="ImageNumber" value="11">
+					</OBJECT>
+				<LI> <OBJECT type="text/sitemap">
+					<param name="Name" value="GetNamespace">
+					<param name="Local" value="std/Namespace.htm">
+					</OBJECT>
+				<LI> <OBJECT type="text/sitemap">
+					<param name="Name" value="GetTargetNamespace">
+					<param name="Local" value="std/LtXmlLib_CXmlObjectBase_GetTargetNamespace.htm">
+					<param name="ImageNumber" value="11">
+					</OBJECT>
+				<LI> <OBJECT type="text/sitemap">
+					<param name="Name" value="Release">
+					<param name="Local" value="ms-its:XmlDataBinder.chm::/LtXmlLib_CXmlObjectBase_Release.html">
+					<param name="ImageNumber" value="11">
+					</OBJECT>
+				<LI> <OBJECT type="text/sitemap">
+					<param name="Name" value="ToXml">
+					<param name="Local" value="ms-its:XmlDataBinder.chm::/LtXmlLib_CXmlObjectBase_ToXml.html">
+					<param name="ImageNumber" value="11">
+					</OBJECT>
+				<LI> <OBJECT type="text/sitemap">
+					<param name="Name" value="ToXmlFile">
+					<param name="Local" value="ms-its:XmlDataBinder.chm::/LtXmlLib_CXmlObjectBase_ToXmlFile.html">
+					<param name="ImageNumber" value="11">
+					</OBJECT>
+				<LI> <OBJECT type="text/sitemap">
+					<param name="Name" value="ToXmlStream">
+					<param name="Local" value="ms-its:XmlDataBinder.chm::/LtXmlLib_CXmlObjectBase_ToXmlStream.html">
+					<param name="ImageNumber" value="11">
+					</OBJECT>
+				<LI> <OBJECT type="text/sitemap">
+					<param name="Name" value="ToJson">
+					<param name="Local" value="ms-its:XmlDataBinder.chm::/LtXmlLib_CXmlObjectBase_ToJson.html">
+					<param name="ImageNumber" value="11">
+					</OBJECT>
+				<LI> <OBJECT type="text/sitemap">
+					<param name="Name" value="ToJsonFile">
+					<param name="Local" value="ms-its:XmlDataBinder.chm::/LtXmlLib_CXmlObjectBase_ToJsonFile.html">
+					<param name="ImageNumber" value="11">
+					</OBJECT>
+				<LI> <OBJECT type="text/sitemap">
+					<param name="Name" value="ToJsonStream">
+					<param name="Local" value="ms-its:XmlDataBinder.chm::/LtXmlLib_CXmlObjectBase_ToJsonStream.html">
+					<param name="ImageNumber" value="11">
+					</OBJECT>
+				<LI> <OBJECT type="text/sitemap">
+					<param name="Name" value="GetCamera">
+					<param name="Local" value="ParamsLib\Attr_Params_camera.htm">
+					</OBJECT>
+				<LI> <OBJECT type="text/sitemap">
+					<param name="Name" value="SetCamera">
+					<param name="Local" value="ParamsLib\Attr_Params_camera.htm">
+					</OBJECT>
+				<LI> <OBJECT type="text/sitemap">
+					<param name="Name" value="GetMouse">
+					<param name="Local" value="ParamsLib\Attr_Params_mouse.htm">
+					</OBJECT>
+				<LI> <OBJECT type="text/sitemap">
+					<param name="Name" value="SetMouse">
+					<param name="Local" value="ParamsLib\Attr_Params_mouse.htm">
+					</OBJECT>
+				<LI> <OBJECT type="text/sitemap">
+					<param name="Name" value="GetWindow">
+					<param name="Local" value="ParamsLib\Attr_Params_window.htm">
+					</OBJECT>
+				<LI> <OBJECT type="text/sitemap">
+					<param name="Name" value="SetWindow">
+					<param name="Local" value="ParamsLib\Attr_Params_window.htm">
+					</OBJECT>
+				<LI> <OBJECT type="text/sitemap">
+					<param name="Name" value="GetUi">
+					<param name="Local" value="ParamsLib\Attr_Params_ui.htm">
+					</OBJECT>
+				<LI> <OBJECT type="text/sitemap">
+					<param name="Name" value="SetUi">
+					<param name="Local" value="ParamsLib\Attr_Params_ui.htm">
+					</OBJECT>
+			</UL>
+<!--Written at 29/02/2020 18:25:45-->
+			<LI> <OBJECT type="text/sitemap">
+				<param name="Name" value="CUi">
+				<param name="Local" value="ParamsLib\Cls_Ui.htm">
+				</OBJECT>
+			<UL>
+				<LI> <OBJECT type="text/sitemap">
+					<param name="Name" value="AddRef">
+					<param name="Local" value="ms-its:XmlDataBinder.chm::/LtXmlLib_CXmlObjectBase_AddRef.html">
+					<param name="ImageNumber" value="11">
+					</OBJECT>
+				<LI> <OBJECT type="text/sitemap">
+					<param name="Name" value="CreateInstance">
+					<param name="Local" value="std/LtXmlLib_CreateInstance.htm">
+					</OBJECT>
+				<LI> <OBJECT type="text/sitemap">
+					<param name="Name" value="FromXml">
+					<param name="Local" value="ms-its:XmlDataBinder.chm::/LtXmlLib_CXmlObjectBase_FromXml.html">
+					<param name="ImageNumber" value="11">
+					</OBJECT>
+				<LI> <OBJECT type="text/sitemap">
+					<param name="Name" value="FromXmlElement">
+					<param name="Local" value="ms-its:XmlDataBinder.chm::/LtXmlLib_CXmlObjectBase_FromXmlElement.html">
+					<param name="ImageNumber" value="11">
+					</OBJECT>
+				<LI> <OBJECT type="text/sitemap">
+					<param name="Name" value="FromXmlFile">
+					<param name="Local" value="ms-its:XmlDataBinder.chm::/LtXmlLib_CXmlObjectBase_FromXmlFile.html">
+					<param name="ImageNumber" value="11">
+					</OBJECT>
+				<LI> <OBJECT type="text/sitemap">
+					<param name="Name" value="FromXmlStream">
+					<param name="Local" value="ms-its:XmlDataBinder.chm::/LtXmlLib_CXmlObjectBase_FromXmlStream.html">
+					<param name="ImageNumber" value="11">
+					</OBJECT>
+				<LI> <OBJECT type="text/sitemap">
+					<param name="Name" value="FromJson">
+					<param name="Local" value="ms-its:XmlDataBinder.chm::/LtXmlLib_CXmlObjectBase_FromJson.html">
+					<param name="ImageNumber" value="11">
+					</OBJECT>
+				<LI> <OBJECT type="text/sitemap">
+					<param name="Name" value="FromJsonFile">
+					<param name="Local" value="ms-its:XmlDataBinder.chm::/LtXmlLib_CXmlObjectBase_FromJsonFile.html">
+					<param name="ImageNumber" value="11">
+					</OBJECT>
+				<LI> <OBJECT type="text/sitemap">
+					<param name="Name" value="FromJsonStream">
+					<param name="Local" value="ms-its:XmlDataBinder.chm::/LtXmlLib_CXmlObjectBase_FromJsonStream.html">
+					<param name="ImageNumber" value="11">
+					</OBJECT>
+				<LI> <OBJECT type="text/sitemap">
+					<param name="Name" value="GetBase">
+					<param name="Local" value="ms-its:XmlDataBinder.chm::/LtXmlLib_CXmlObjectBase_GetBase.html">
+					<param name="ImageNumber" value="11">
+					</OBJECT>
+				<LI> <OBJECT type="text/sitemap">
+					<param name="Name" value="GetNamespace">
+					<param name="Local" value="std/Namespace.htm">
+					</OBJECT>
+				<LI> <OBJECT type="text/sitemap">
+					<param name="Name" value="GetTargetNamespace">
+					<param name="Local" value="std/LtXmlLib_CXmlObjectBase_GetTargetNamespace.htm">
+					<param name="ImageNumber" value="11">
+					</OBJECT>
+				<LI> <OBJECT type="text/sitemap">
+					<param name="Name" value="Release">
+					<param name="Local" value="ms-its:XmlDataBinder.chm::/LtXmlLib_CXmlObjectBase_Release.html">
+					<param name="ImageNumber" value="11">
+					</OBJECT>
+				<LI> <OBJECT type="text/sitemap">
+					<param name="Name" value="ToXml">
+					<param name="Local" value="ms-its:XmlDataBinder.chm::/LtXmlLib_CXmlObjectBase_ToXml.html">
+					<param name="ImageNumber" value="11">
+					</OBJECT>
+				<LI> <OBJECT type="text/sitemap">
+					<param name="Name" value="ToXmlFile">
+					<param name="Local" value="ms-its:XmlDataBinder.chm::/LtXmlLib_CXmlObjectBase_ToXmlFile.html">
+					<param name="ImageNumber" value="11">
+					</OBJECT>
+				<LI> <OBJECT type="text/sitemap">
+					<param name="Name" value="ToXmlStream">
+					<param name="Local" value="ms-its:XmlDataBinder.chm::/LtXmlLib_CXmlObjectBase_ToXmlStream.html">
+					<param name="ImageNumber" value="11">
+					</OBJECT>
+				<LI> <OBJECT type="text/sitemap">
+					<param name="Name" value="ToJson">
+					<param name="Local" value="ms-its:XmlDataBinder.chm::/LtXmlLib_CXmlObjectBase_ToJson.html">
+					<param name="ImageNumber" value="11">
+					</OBJECT>
+				<LI> <OBJECT type="text/sitemap">
+					<param name="Name" value="ToJsonFile">
+					<param name="Local" value="ms-its:XmlDataBinder.chm::/LtXmlLib_CXmlObjectBase_ToJsonFile.html">
+					<param name="ImageNumber" value="11">
+					</OBJECT>
+				<LI> <OBJECT type="text/sitemap">
+					<param name="Name" value="ToJsonStream">
+					<param name="Local" value="ms-its:XmlDataBinder.chm::/LtXmlLib_CXmlObjectBase_ToJsonStream.html">
+					<param name="ImageNumber" value="11">
+					</OBJECT>
+				<LI> <OBJECT type="text/sitemap">
+					<param name="Name" value="GetBottomBarHeight">
+					<param name="Local" value="ParamsLib\Attr_Ui_bottomBarHeight.htm">
+					</OBJECT>
+				<LI> <OBJECT type="text/sitemap">
+					<param name="Name" value="SetBottomBarHeight">
+					<param name="Local" value="ParamsLib\Attr_Ui_bottomBarHeight.htm">
+					</OBJECT>
+				<LI> <OBJECT type="text/sitemap">
+					<param name="Name" value="GetTopBarHeight">
+					<param name="Local" value="ParamsLib\Attr_Ui_topBarHeight.htm">
+					</OBJECT>
+				<LI> <OBJECT type="text/sitemap">
+					<param name="Name" value="SetTopBarHeight">
+					<param name="Local" value="ParamsLib\Attr_Ui_topBarHeight.htm">
+					</OBJECT>
+			</UL>
+<!--Written at 29/02/2020 18:25:45-->
+			<LI> <OBJECT type="text/sitemap">
+				<param name="Name" value="CWindow">
+				<param name="Local" value="ParamsLib\Cls_Window.htm">
+				</OBJECT>
+			<UL>
+				<LI> <OBJECT type="text/sitemap">
+					<param name="Name" value="AddRef">
+					<param name="Local" value="ms-its:XmlDataBinder.chm::/LtXmlLib_CXmlObjectBase_AddRef.html">
+					<param name="ImageNumber" value="11">
+					</OBJECT>
+				<LI> <OBJECT type="text/sitemap">
+					<param name="Name" value="CreateInstance">
+					<param name="Local" value="std/LtXmlLib_CreateInstance.htm">
+					</OBJECT>
+				<LI> <OBJECT type="text/sitemap">
+					<param name="Name" value="FromXml">
+					<param name="Local" value="ms-its:XmlDataBinder.chm::/LtXmlLib_CXmlObjectBase_FromXml.html">
+					<param name="ImageNumber" value="11">
+					</OBJECT>
+				<LI> <OBJECT type="text/sitemap">
+					<param name="Name" value="FromXmlElement">
+					<param name="Local" value="ms-its:XmlDataBinder.chm::/LtXmlLib_CXmlObjectBase_FromXmlElement.html">
+					<param name="ImageNumber" value="11">
+					</OBJECT>
+				<LI> <OBJECT type="text/sitemap">
+					<param name="Name" value="FromXmlFile">
+					<param name="Local" value="ms-its:XmlDataBinder.chm::/LtXmlLib_CXmlObjectBase_FromXmlFile.html">
+					<param name="ImageNumber" value="11">
+					</OBJECT>
+				<LI> <OBJECT type="text/sitemap">
+					<param name="Name" value="FromXmlStream">
+					<param name="Local" value="ms-its:XmlDataBinder.chm::/LtXmlLib_CXmlObjectBase_FromXmlStream.html">
+					<param name="ImageNumber" value="11">
+					</OBJECT>
+				<LI> <OBJECT type="text/sitemap">
+					<param name="Name" value="FromJson">
+					<param name="Local" value="ms-its:XmlDataBinder.chm::/LtXmlLib_CXmlObjectBase_FromJson.html">
+					<param name="ImageNumber" value="11">
+					</OBJECT>
+				<LI> <OBJECT type="text/sitemap">
+					<param name="Name" value="FromJsonFile">
+					<param name="Local" value="ms-its:XmlDataBinder.chm::/LtXmlLib_CXmlObjectBase_FromJsonFile.html">
+					<param name="ImageNumber" value="11">
+					</OBJECT>
+				<LI> <OBJECT type="text/sitemap">
+					<param name="Name" value="FromJsonStream">
+					<param name="Local" value="ms-its:XmlDataBinder.chm::/LtXmlLib_CXmlObjectBase_FromJsonStream.html">
+					<param name="ImageNumber" value="11">
+					</OBJECT>
+				<LI> <OBJECT type="text/sitemap">
+					<param name="Name" value="GetBase">
+					<param name="Local" value="ms-its:XmlDataBinder.chm::/LtXmlLib_CXmlObjectBase_GetBase.html">
+					<param name="ImageNumber" value="11">
+					</OBJECT>
+				<LI> <OBJECT type="text/sitemap">
+					<param name="Name" value="GetNamespace">
+					<param name="Local" value="std/Namespace.htm">
+					</OBJECT>
+				<LI> <OBJECT type="text/sitemap">
+					<param name="Name" value="GetTargetNamespace">
+					<param name="Local" value="std/LtXmlLib_CXmlObjectBase_GetTargetNamespace.htm">
+					<param name="ImageNumber" value="11">
+					</OBJECT>
+				<LI> <OBJECT type="text/sitemap">
+					<param name="Name" value="Release">
+					<param name="Local" value="ms-its:XmlDataBinder.chm::/LtXmlLib_CXmlObjectBase_Release.html">
+					<param name="ImageNumber" value="11">
+					</OBJECT>
+				<LI> <OBJECT type="text/sitemap">
+					<param name="Name" value="ToXml">
+					<param name="Local" value="ms-its:XmlDataBinder.chm::/LtXmlLib_CXmlObjectBase_ToXml.html">
+					<param name="ImageNumber" value="11">
+					</OBJECT>
+				<LI> <OBJECT type="text/sitemap">
+					<param name="Name" value="ToXmlFile">
+					<param name="Local" value="ms-its:XmlDataBinder.chm::/LtXmlLib_CXmlObjectBase_ToXmlFile.html">
+					<param name="ImageNumber" value="11">
+					</OBJECT>
+				<LI> <OBJECT type="text/sitemap">
+					<param name="Name" value="ToXmlStream">
+					<param name="Local" value="ms-its:XmlDataBinder.chm::/LtXmlLib_CXmlObjectBase_ToXmlStream.html">
+					<param name="ImageNumber" value="11">
+					</OBJECT>
+				<LI> <OBJECT type="text/sitemap">
+					<param name="Name" value="ToJson">
+					<param name="Local" value="ms-its:XmlDataBinder.chm::/LtXmlLib_CXmlObjectBase_ToJson.html">
+					<param name="ImageNumber" value="11">
+					</OBJECT>
+				<LI> <OBJECT type="text/sitemap">
+					<param name="Name" value="ToJsonFile">
+					<param name="Local" value="ms-its:XmlDataBinder.chm::/LtXmlLib_CXmlObjectBase_ToJsonFile.html">
+					<param name="ImageNumber" value="11">
+					</OBJECT>
+				<LI> <OBJECT type="text/sitemap">
+					<param name="Name" value="ToJsonStream">
+					<param name="Local" value="ms-its:XmlDataBinder.chm::/LtXmlLib_CXmlObjectBase_ToJsonStream.html">
+					<param name="ImageNumber" value="11">
+					</OBJECT>
+				<LI> <OBJECT type="text/sitemap">
+					<param name="Name" value="GetHeightZoomed">
+					<param name="Local" value="ParamsLib\Attr_Window_heightZoomed.htm">
+					</OBJECT>
+				<LI> <OBJECT type="text/sitemap">
+					<param name="Name" value="SetHeightZoomed">
+					<param name="Local" value="ParamsLib\Attr_Window_heightZoomed.htm">
+					</OBJECT>
+				<LI> <OBJECT type="text/sitemap">
+					<param name="Name" value="GetRatio">
+					<param name="Local" value="ParamsLib\Attr_Window_ratio.htm">
+					</OBJECT>
+				<LI> <OBJECT type="text/sitemap">
+					<param name="Name" value="SetRatio">
+					<param name="Local" value="ParamsLib\Attr_Window_ratio.htm">
+					</OBJECT>
+				<LI> <OBJECT type="text/sitemap">
+					<param name="Name" value="GetWidthZoomed">
+					<param name="Local" value="ParamsLib\Attr_Window_widthZoomed.htm">
+					</OBJECT>
+				<LI> <OBJECT type="text/sitemap">
+					<param name="Name" value="SetWidthZoomed">
+					<param name="Local" value="ParamsLib\Attr_Window_widthZoomed.htm">
+					</OBJECT>
+				<LI> <OBJECT type="text/sitemap">
+					<param name="Name" value="GetShouldClose">
+					<param name="Local" value="ParamsLib\Attr_Window_shouldClose.htm">
+					</OBJECT>
+				<LI> <OBJECT type="text/sitemap">
+					<param name="Name" value="SetShouldClose">
+					<param name="Local" value="ParamsLib\Attr_Window_shouldClose.htm">
+					</OBJECT>
+			</UL>
+		</UL>
+
+	
+	</UL>
+</UL>
+<OBJECT type="text/sitemap">
+	<param name="Merge" value="XmlDataBinder.chm::/XmlDataBinder.hhc">
+	</OBJECT>
+</BODY>
+</HTML>
+

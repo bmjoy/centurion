@@ -19,7 +19,7 @@ namespace editor {
 		GLint mouseX = (GLint)getParam("mouse-x-position");
 		GLint mouseY = (GLint)getParam("mouse-y-position");
 		leftClickID_UI = get_id();
-		int pos = (int)((mouseY - getParam("window-height"))*(-1)) / titles["File"].titleHeight;
+		int pos = (int)((mouseY - settings.GetWindowHeight())*(-1)) / titles["File"].titleHeight;
 
 		//---------------------
 		//   RESET 

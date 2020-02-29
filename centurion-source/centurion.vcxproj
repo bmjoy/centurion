@@ -87,7 +87,7 @@
     </ClCompile>
     <Link>
       <AdditionalLibraryDirectories>$(ProjectDir)src\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>opengl32.lib;glew32.lib;glfw3.lib;freetype.lib;assimp.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>xerces-c_3D.lib;opengl32.lib;glew32.lib;glfw3.lib;freetype.lib;assimp.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -96,14 +96,14 @@
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(ProjectDir)source/extern/includes;$(ProjectDir)source/common</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir)source\extern\includes;$(ProjectDir)source\common;$(ProjectDir)source\classes</AdditionalIncludeDirectories>
       <DisableSpecificWarnings>4250</DisableSpecificWarnings>
       <AdditionalOptions>/utf-8 %(AdditionalOptions)</AdditionalOptions>
       <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
     <Link>
       <AdditionalLibraryDirectories>$(ProjectDir)source/extern/libraries</AdditionalLibraryDirectories>
-      <AdditionalDependencies>opengl32.lib;glew32.lib;glfw3.lib;OpenAL32.lib;libsndfile-1.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>xerces-c_3D.lib;opengl32.lib;glew32.lib;glfw3.lib;OpenAL32.lib;libsndfile-1.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <AdditionalOptions>/ignore:4217 %(AdditionalOptions)</AdditionalOptions>
     </Link>
     <PostBuildEvent>
@@ -127,7 +127,9 @@ XCOPY "$(ProjectDir)OpenAL32.dll" "$(ProjectDir)$(OutDir)"
 XCOPY "$(ProjectDir)settings.xml" "$(ProjectDir)$(OutDir)"
 XCOPY "$(ProjectDir)vorbis.dll" "$(ProjectDir)$(OutDir)"
 XCOPY "$(ProjectDir)vorbisfile.dll" "$(ProjectDir)$(OutDir)"
-XCOPY "$(ProjectDir)wrap_oal.dll" "$(ProjectDir)$(OutDir)"</Command>
+XCOPY "$(ProjectDir)wrap_oal.dll" "$(ProjectDir)$(OutDir)"
+XCOPY "$(ProjectDir)msvcr120.dll" "$(ProjectDir)$(OutDir)"
+XCOPY "$(ProjectDir)msvcr120d.dll" "$(ProjectDir)$(OutDir)"</Command>
     </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -144,7 +146,7 @@ XCOPY "$(ProjectDir)wrap_oal.dll" "$(ProjectDir)$(OutDir)"</Command>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <AdditionalLibraryDirectories>$(ProjectDir)src\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>opengl32.lib;glew32.lib;glfw3.lib;freetype.lib;assimp.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>xerces-c_3D.lib;opengl32.lib;glew32.lib;glfw3.lib;freetype.lib;assimp.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -155,7 +157,7 @@ XCOPY "$(ProjectDir)wrap_oal.dll" "$(ProjectDir)$(OutDir)"</Command>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(ProjectDir)source/extern/includes;$(ProjectDir)source/common</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir)source\extern\includes;$(ProjectDir)source\common;$(ProjectDir)source\classes</AdditionalIncludeDirectories>
       <DisableSpecificWarnings>4250</DisableSpecificWarnings>
       <AdditionalOptions>/utf-8 %(AdditionalOptions)</AdditionalOptions>
       <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
@@ -164,7 +166,7 @@ XCOPY "$(ProjectDir)wrap_oal.dll" "$(ProjectDir)$(OutDir)"</Command>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <AdditionalLibraryDirectories>$(ProjectDir)source/extern/libraries</AdditionalLibraryDirectories>
-      <AdditionalDependencies>opengl32.lib;glew32.lib;glfw3.lib;OpenAL32.lib;libsndfile-1.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>xerces-c_3D.lib;opengl32.lib;glew32.lib;glfw3.lib;OpenAL32.lib;libsndfile-1.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <AdditionalOptions>/ignore:4217 %(AdditionalOptions)</AdditionalOptions>
     </Link>
     <PostBuildEvent>
@@ -188,12 +190,16 @@ XCOPY "$(ProjectDir)OpenAL32.dll" "$(ProjectDir)$(OutDir)"
 XCOPY "$(ProjectDir)settings.xml" "$(ProjectDir)$(OutDir)"
 XCOPY "$(ProjectDir)vorbis.dll" "$(ProjectDir)$(OutDir)"
 XCOPY "$(ProjectDir)vorbisfile.dll" "$(ProjectDir)$(OutDir)"
-XCOPY "$(ProjectDir)wrap_oal.dll" "$(ProjectDir)$(OutDir)"</Command>
+XCOPY "$(ProjectDir)wrap_oal.dll" "$(ProjectDir)$(OutDir)"
+XCOPY "$(ProjectDir)msvcr120.dll" "$(ProjectDir)$(OutDir)"
+XCOPY "$(ProjectDir)msvcr120d.dll" "$(ProjectDir)$(OutDir)"</Command>
     </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="source\audio\vorbis\ogg_vorbis.cpp" />
     <ClCompile Include="source\building\building.cpp" />
+    <ClCompile Include="source\classes\Settings-xml.cxx" />
+    <ClCompile Include="source\classes\settings.cpp" />
     <ClCompile Include="source\decoration\decoration.cpp" />
     <ClCompile Include="source\editor\editor_functions.cpp" />
     <ClCompile Include="source\global.cpp" />
@@ -208,11 +214,6 @@ XCOPY "$(ProjectDir)wrap_oal.dll" "$(ProjectDir)$(OutDir)"</Command>
     <ClCompile Include="source\interface\editor_ui.cpp" />
     <ClCompile Include="source\interface\menu_globaloptions.cpp" />
     <ClCompile Include="source\interface\object_ui.cpp" />
-    <ClCompile Include="source\lmx\lmx-cpp\lmxparse.cpp" />
-    <ClCompile Include="source\lmx\lmx-cpp\lmxregex.cpp" />
-    <ClCompile Include="source\lmx\lmx-cpp\lmxtypes.cpp" />
-    <ClCompile Include="source\lmx\lmx-cpp\lmxunicode.cpp" />
-    <ClCompile Include="source\lmx\xml-settings.cpp" />
     <ClCompile Include="source\math.cpp" />
     <ClCompile Include="source\menu\menu_functions.cpp" />
     <ClCompile Include="source\object.cpp" />
@@ -237,7 +238,6 @@ XCOPY "$(ProjectDir)wrap_oal.dll" "$(ProjectDir)$(OutDir)"</Command>
     <ClCompile Include="source\primitives\unit_sprite.cpp" />
     <ClCompile Include="source\unit\unit.cpp" />
     <ClCompile Include="source\unit\unit_functions.cpp" />
-    <ClInclude Include="source\lmx\xml-settings.h" />
     <None Include="assets\shaders\bsprite\fragment.glsl">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
       <FileType>Document</FileType>
@@ -372,6 +372,8 @@ XCOPY "$(ProjectDir)wrap_oal.dll" "$(ProjectDir)$(OutDir)"</Command>
     <ClInclude Include="source\audio\vorbis\ogg.h" />
     <ClInclude Include="source\audio\vorbis\os_types.h" />
     <ClInclude Include="source\audio\vorbis\vorbis_file.h" />
+    <ClInclude Include="source\classes\Settings-xml.hxx" />
+    <ClInclude Include="source\classes\settings.h" />
     <ClInclude Include="source\common\headers">
       <FileType>Document</FileType>
       <DeploymentContent Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</DeploymentContent>

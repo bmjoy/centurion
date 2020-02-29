@@ -35,32 +35,32 @@ void Camera::mouseControl(float threshold) {
 	abs_x = getParam("mouse-x-position") + position.x;
 	abs_y = getParam("mouse-y-position") + position.y;
 
-	threshold_x = mapWidth - 2 * cameraMovespeed + (getParam("window-width-zoomed") - getParam("window-width"));
-	threshold_y = mapHeight - 2 * cameraMovespeed + (getParam("window-height-zoomed") - getParam("window-height"));
+	threshold_x = mapWidth - 2 * settings.GetCameraMovespeed() + (getParam("window-width-zoomed") - settings.GetWindowWidth());
+	threshold_y = mapHeight - 2 * settings.GetCameraMovespeed() + (getParam("window-height-zoomed") - settings.GetWindowHeight());
 
 	float threshold_top = threshold;
 	if (ENGINE()->getEnvironment() == "editor") threshold_top += 30.f;
 
 	//Left margin
 	if (getParam("mouse-x-position") <= threshold && (abs_x > threshold) && getParam("mouse-x-position") > 0) {
-		position -= right * cameraMovespeed;
+		position -= right * settings.GetCameraMovespeed();
 	}
 	//Right margin
-	if (getParam("mouse-x-position") >= (getParam("window-width") - threshold) && (abs_x < threshold_x) && getParam("mouse-x-position") < getParam("window-width")) {
+	if (getParam("mouse-x-position") >= (settings.GetWindowWidth() - threshold) && (abs_x < threshold_x) && getParam("mouse-x-position") < settings.GetWindowWidth()) {
 		if (position.x < mapWidth - getParam("window-width-zoomed")) {
-			position += right * cameraMovespeed;
+			position += right * settings.GetCameraMovespeed();
 		}
 	}
 	//Top margin
-	if (getParam("mouse-y-position") >= (getParam("window-height") - threshold_top) && abs_y < (threshold_y + getParam("ui-top-height")* getParam("window-height-zoomed") / getParam("window-height-zoomed")) && getParam("mouse-y-position") < getParam("window-height")) {
-		if (position.y < (mapHeight - getParam("window-height-zoomed") + getParam("ui-top-height")* getParam("window-height-zoomed") / getParam("window-height"))) {
-			position += up * cameraMovespeed;
+	if (getParam("mouse-y-position") >= (settings.GetWindowHeight() - threshold_top) && abs_y < (threshold_y + getParam("ui-top-height")* getParam("window-height-zoomed") / getParam("window-height-zoomed")) && getParam("mouse-y-position") < settings.GetWindowHeight()) {
+		if (position.y < (mapHeight - getParam("window-height-zoomed") + getParam("ui-top-height")* getParam("window-height-zoomed") / settings.GetWindowHeight())) {
+			position += up * settings.GetCameraMovespeed();
 		}
 	}
 	//Bottom margin
-	if (getParam("mouse-y-position") <= threshold && abs_y > (threshold - getParam("ui-bottom-height")* getParam("window-height-zoomed") / getParam("window-height")) && getParam("mouse-y-position") > 0) {
-		if (position.y > (0 - getParam("ui-bottom-height")* getParam("window-height-zoomed") / getParam("window-height"))) {
-			position -= up * cameraMovespeed;
+	if (getParam("mouse-y-position") <= threshold && abs_y > (threshold - getParam("ui-bottom-height")* getParam("window-height-zoomed") / settings.GetWindowHeight()) && getParam("mouse-y-position") > 0) {
+		if (position.y > (0 - getParam("ui-bottom-height")* getParam("window-height-zoomed") / settings.GetWindowHeight())) {
+			position -= up * settings.GetCameraMovespeed();
 		}
 	}
 
@@ -70,24 +70,24 @@ void Camera::mouseControl(float threshold) {
 			currentZoomCamera -= (int)getParam("mouse-scroll");
 		}
 
-		else if (getParam("mouse-scroll") < 0 && currentZoomCamera < getParam("camera-max-zoom")) {
+		else if (getParam("mouse-scroll") < 0 && currentZoomCamera < settings.GetCameraMaxZoom()) {
 			currentZoomCamera -= (int)getParam("mouse-scroll");
 		}
 		setBoolean("mouse-scroll-bool", false);
 	}
 
-	if (position.x > mapWidth - getParam("window-width-zoomed") - cameraMovespeed) {
-		position.x = mapWidth - getParam("window-width-zoomed") - cameraMovespeed;
+	if (position.x > mapWidth - getParam("window-width-zoomed") - settings.GetCameraMovespeed()) {
+		position.x = mapWidth - getParam("window-width-zoomed") - settings.GetCameraMovespeed();
 	}
-	if (position.y < -getParam("ui-bottom-height") * getParam("window-height-zoomed") / getParam("window-height")) {
-		position.y = -getParam("ui-bottom-height") * getParam("window-height-zoomed") / getParam("window-height");
+	if (position.y < -getParam("ui-bottom-height") * getParam("window-height-zoomed") / settings.GetWindowHeight()) {
+		position.y = -getParam("ui-bottom-height") * getParam("window-height-zoomed") / settings.GetWindowHeight();
 	}
-	if (position.y > mapHeight - getParam("window-height-zoomed") + getParam("ui-top-height") * getParam("window-height-zoomed") / getParam("window-height")) {
-		position.y = mapHeight - getParam("window-height-zoomed") + getParam("ui-top-height") * getParam("window-height-zoomed") / getParam("window-height");
+	if (position.y > mapHeight - getParam("window-height-zoomed") + getParam("ui-top-height") * getParam("window-height-zoomed") / settings.GetWindowHeight()) {
+		position.y = mapHeight - getParam("window-height-zoomed") + getParam("ui-top-height") * getParam("window-height-zoomed") / settings.GetWindowHeight();
 	}
 	/* ------------------------------------------- */	
-	setParam("window-width-zoomed", getParam("window-width") + (currentZoomCamera - 1) * zoomCameraFactor);
-	setParam("window-height-zoomed", getParam("window-height") + (currentZoomCamera - 1) *  zoomCameraFactor / getParam("window-ratio"));
+	setParam("window-width-zoomed", settings.GetWindowWidth() + (currentZoomCamera - 1) * zoomCameraFactor);
+	setParam("window-height-zoomed", settings.GetWindowHeight() + (currentZoomCamera - 1) *  zoomCameraFactor / getParam("window-ratio"));
 	setParam("camera-x-position", position.x);
 	setParam("camera-y-position", position.y);
 }
@@ -95,19 +95,19 @@ void Camera::mouseControl(float threshold) {
 void Camera::keyboardControl() {
 	//Left margin
 	if (KeyCode[GLFW_KEY_LEFT] && position.x > 0) {
-		position -= right * cameraMovespeed;
+		position -= right * settings.GetCameraMovespeed();
 	}
 	//Right margin 
 	if (KeyCode[GLFW_KEY_RIGHT] && position.x < mapWidth - getParam("window-width-zoomed")) {
-		position += right * cameraMovespeed;
+		position += right * settings.GetCameraMovespeed();
 	}
 	//Top margin 
-	if (KeyCode[GLFW_KEY_UP] && (position.y < (mapHeight - getParam("window-height-zoomed") + getParam("ui-top-height")* getParam("window-height-zoomed") / getParam("window-height")))) {
-		position += up * cameraMovespeed;
+	if (KeyCode[GLFW_KEY_UP] && (position.y < (mapHeight - getParam("window-height-zoomed") + getParam("ui-top-height")* getParam("window-height-zoomed") / settings.GetWindowHeight()))) {
+		position += up * settings.GetCameraMovespeed();
 	}
 	//Bottom margin 
-	if (KeyCode[GLFW_KEY_DOWN] && (position.y > (0 - getParam("ui-bottom-height")* getParam("window-height-zoomed") / getParam("window-height")))) {
-		position -= up * cameraMovespeed;
+	if (KeyCode[GLFW_KEY_DOWN] && (position.y > (0 - getParam("ui-bottom-height")* getParam("window-height-zoomed") / settings.GetWindowHeight()))) {
+		position -= up * settings.GetCameraMovespeed();
 	}
 
 	setParam("camera-x-position", position.x);

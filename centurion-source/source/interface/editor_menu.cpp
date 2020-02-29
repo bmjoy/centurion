@@ -22,7 +22,7 @@ namespace editor {
 		minPickingID = getPickingID();
 
         topBar = gui::Rectangle();
-        topBar.create("filled", 0.0f, (float)-barHeight, getParam("window-width"), (float)barHeight, "bottom-left", 0);
+        topBar.create("filled", 0.0f, (float)-barHeight, settings.GetWindowWidth(), (float)barHeight, "bottom-left", 0);
 
         titles["File"].title = "File";
         titles["File"].options = { "New", "Open", "Save", "Exit" };
@@ -55,7 +55,7 @@ namespace editor {
 
             titles[s].titleWidth = std::max(int(temptext.get_width()) + 20, 60);
             titles[s].titleHeight = barHeight;
-            titles[s].titlePosition = ivec2(titlesPos, getParam("window-height") - titles[s].titleHeight);
+            titles[s].titlePosition = ivec2(titlesPos, settings.GetWindowHeight() - titles[s].titleHeight);
             titles[s].titleBack = gui::Rectangle();
             
             titles[s].titleBack = gui::Rectangle();
@@ -91,7 +91,7 @@ namespace editor {
             titles[s].optionsOffsetX = 20;
 
             for (int j = 0; j < titles[s].options.size(); j++) {
-                titles[s].optionsPosition.push_back(ivec2(titlesPos, getParam("window-height") - titles[s].optionsHeight * (j + 2)));
+                titles[s].optionsPosition.push_back(ivec2(titlesPos, settings.GetWindowHeight() - titles[s].optionsHeight * (j + 2)));
 
                 gui::SimpleText tempText = gui::SimpleText("static");
                 tempText.create_static(getTranslation("EDITOR_" + titles[s].title + "_" + titles[s].options[j]), "tahoma_13px", titles[s].optionsPosition[j].x + titles[s].optionsOffsetX*1.f, titles[s].optionsPosition[j].y + 0.5f * titles[s].optionsHeight, "left", "middle", vec4(255.f), "normal");

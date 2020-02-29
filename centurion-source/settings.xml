@@ -1,9 +1,10 @@
-﻿<settings>
+<?xml version="1.0" encoding="UTF-8" standalone="no" ?>
+<c_settings xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="Settings.xsd">
   <windowWidth>1366</windowWidth>
   <windowHeight>768</windowHeight>
   <cameraMovespeed>10</cameraMovespeed>
   <cameraMaxZoom>20</cameraMaxZoom>
-  <language>italian</language>
-  <debug>true</debug>
+  <language>english</language>
+  <debug>false</debug>
   <fullScreen>false</fullScreen>
-</settings>
+</c_settings>

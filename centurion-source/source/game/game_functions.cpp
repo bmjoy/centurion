@@ -25,7 +25,7 @@ namespace game {
 	bool gameGridStatus = false;
 	int mapWidth = 30000;
 	int mapHeight = 20000;
-	float cameraMovespeed = 10.f;
+	//float cameraMovespeed = 10.f;
 	int playersNumber = 1;
 	int maxPlayersNumber = 10;
 	int currentZoomCamera = 8;
@@ -149,8 +149,8 @@ namespace game {
 
 	void goToPosition() {
 		if (getBoolean("mouse-left") && cursorInGameScreen()) {
-			cameraToX = getParam("mouse-x-leftclick") / getParam("window-width")*(float)mapWidth - getParam("window-width-zoomed") / 2.f;
-			cameraToY = getYMinimapCoord(getParam("mouse-y-leftclick")) / getParam("window-height")*(float)mapHeight - getParam("window-height-zoomed") / 2.f;
+			cameraToX = getParam("mouse-x-leftclick") / settings.GetWindowWidth()*(float)mapWidth - getParam("window-width-zoomed") / 2.f;
+			cameraToY = getYMinimapCoord(getParam("mouse-y-leftclick")) / settings.GetWindowHeight()*(float)mapHeight - getParam("window-height-zoomed") / 2.f;
 			// if you are clicking on a townhall you have to double click 
 			// to move the camera there and quit minimap
 			if (leftClickID > 0 && hasDoubleClicked()) {
@@ -172,16 +172,16 @@ namespace game {
 		if (getBoolean("mouse-left-pressed")) {
 			if (!selRectangleIsActive){
 				cout << "[DEBUG] Selection rectangle enabled.\n";
-				(*SelRectCoords()).startX = getParam("mouse-x-leftclick") * getParam("window-width-zoomed") / getParam("window-width") + cameraLastX;
-				(*SelRectCoords()).startY = getParam("mouse-y-leftclick") * getParam("window-height-zoomed") / getParam("window-height") + cameraLastY;
+				(*SelRectCoords()).startX = getParam("mouse-x-leftclick") * getParam("window-width-zoomed") / settings.GetWindowWidth() + cameraLastX;
+				(*SelRectCoords()).startY = getParam("mouse-y-leftclick") * getParam("window-height-zoomed") / settings.GetWindowHeight() + cameraLastY;
 			}
-			(*SelRectCoords()).lastX = getParam("mouse-x-position") * getParam("window-width-zoomed") / getParam("window-width") + getParam("camera-x-position");
-			(*SelRectCoords()).lastY = getParam("mouse-y-position") * getParam("window-height-zoomed") / getParam("window-height") + getParam("camera-y-position");
+			(*SelRectCoords()).lastX = getParam("mouse-x-position") * getParam("window-width-zoomed") / settings.GetWindowWidth() + getParam("camera-x-position");
+			(*SelRectCoords()).lastY = getParam("mouse-y-position") * getParam("window-height-zoomed") / settings.GetWindowHeight() + getParam("camera-y-position");
 			if (getParam("mouse-y-position") < getParam("ui-bottom-height")) {
-				(*SelRectCoords()).lastY = getParam("ui-bottom-height")*getParam("window-height-zoomed") / getParam("window-height") + 1.0f + getParam("camera-y-position");
+				(*SelRectCoords()).lastY = getParam("ui-bottom-height")*getParam("window-height-zoomed") / settings.GetWindowHeight() + 1.0f + getParam("camera-y-position");
 			}
-			if (getParam("mouse-y-position") > getParam("window-height") - getParam("ui-top-height")) {
-				(*SelRectCoords()).lastY = getParam("window-height-zoomed") - getParam("ui-top-height")*getParam("window-height-zoomed") / getParam("window-height") - 1.0f + getParam("camera-y-position");
+			if (getParam("mouse-y-position") > settings.GetWindowHeight() - getParam("ui-top-height")) {
+				(*SelRectCoords()).lastY = getParam("window-height-zoomed") - getParam("ui-top-height")*getParam("window-height-zoomed") / settings.GetWindowHeight() - 1.0f + getParam("camera-y-position");
 			}
 
 			float w = ((*SelRectCoords()).lastX - (*SelRectCoords()).startX);
@@ -225,8 +225,8 @@ namespace game {
 	}
 
 	void setMinimapProjection() {
-		float bottom = (-1.f)*(mapHeight * getParam("ui-bottom-height") / (getParam("window-height") - getParam("ui-bottom-height") - getParam("ui-top-height")));
-		float top = mapHeight + mapHeight * getParam("ui-top-height") / (getParam("window-height") - getParam("ui-bottom-height") - getParam("ui-top-height"));
+		float bottom = (-1.f)*(mapHeight * getParam("ui-bottom-height") / (settings.GetWindowHeight() - getParam("ui-bottom-height") - getParam("ui-top-height")));
+		float top = mapHeight + mapHeight * getParam("ui-top-height") / (settings.GetWindowHeight() - getParam("ui-bottom-height") - getParam("ui-top-height"));
 		float left = 0.f;
 		float right = (float)mapWidth;
 		glb::minimapProjection = ortho(left, right, bottom, top, -right, right);
