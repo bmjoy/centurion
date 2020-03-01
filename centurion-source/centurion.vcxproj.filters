@@ -19,9 +19,6 @@
     <Filter Include="Header Files\extern">
       <UniqueIdentifier>{670470c3-1bc9-4848-8246-fb2915e33329}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source Files\engine">
-      <UniqueIdentifier>{4857b0f1-6f03-449c-9185-d2b343215f0a}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Source Files\game">
       <UniqueIdentifier>{f41b8cb8-4254-44e2-ba57-e1fefa5b4a59}</UniqueIdentifier>
     </Filter>
@@ -109,6 +106,12 @@
     <Filter Include="Source Files\classes">
       <UniqueIdentifier>{10e4802a-a190-46d5-93e6-0d48b95d7ebf}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\classes\engine">
+      <UniqueIdentifier>{08058b61-c5ec-4f30-91fe-002a98aeb85c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\classes\engine">
+      <UniqueIdentifier>{5718fb39-22a6-403d-97b2-c44b80655835}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -116,12 +119,6 @@
     </ClCompile>
     <ClCompile Include="source\gui\button.cpp">
       <Filter>Source Files\gui</Filter>
-    </ClCompile>
-    <ClCompile Include="source\engine\camera.cpp">
-      <Filter>Source Files\engine</Filter>
-    </ClCompile>
-    <ClCompile Include="source\engine\engine.cpp">
-      <Filter>Source Files\engine</Filter>
     </ClCompile>
     <ClCompile Include="source\gui\form_input.cpp">
       <Filter>Source Files\gui</Filter>
@@ -131,12 +128,6 @@
     </ClCompile>
     <ClCompile Include="source\menu\menu.cpp">
       <Filter>Source Files\menu</Filter>
-    </ClCompile>
-    <ClCompile Include="source\engine\mouse.cpp">
-      <Filter>Source Files\engine</Filter>
-    </ClCompile>
-    <ClCompile Include="source\engine\window.cpp">
-      <Filter>Source Files\engine</Filter>
     </ClCompile>
     <ClCompile Include="source\pathfinding\node.cpp">
       <Filter>Source Files\pathfinding</Filter>
@@ -336,6 +327,18 @@
     <ClCompile Include="source\classes\Settings-xml.cxx">
       <Filter>Source Files\classes</Filter>
     </ClCompile>
+    <ClCompile Include="source\classes\engine\engine.cpp">
+      <Filter>Source Files\classes\engine</Filter>
+    </ClCompile>
+    <ClCompile Include="source\classes\engine\window.cpp">
+      <Filter>Source Files\classes\engine</Filter>
+    </ClCompile>
+    <ClCompile Include="source\classes\engine\camera.cpp">
+      <Filter>Source Files\classes\engine</Filter>
+    </ClCompile>
+    <ClCompile Include="source\classes\engine\mouse.cpp">
+      <Filter>Source Files\classes\engine</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="source\extern\includes\json.hpp">
@@ -428,6 +431,18 @@
     <ClInclude Include="source\classes\Settings-xml.hxx">
       <Filter>Header Files\classes</Filter>
     </ClInclude>
+    <ClInclude Include="source\classes\engine\engine.h">
+      <Filter>Header Files\classes\engine</Filter>
+    </ClInclude>
+    <ClInclude Include="source\classes\engine\window.h">
+      <Filter>Header Files\classes\engine</Filter>
+    </ClInclude>
+    <ClInclude Include="source\classes\engine\camera.h">
+      <Filter>Header Files\classes\engine</Filter>
+    </ClInclude>
+    <ClInclude Include="source\classes\engine\mouse.h">
+      <Filter>Header Files\classes\engine</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="assets\shaders\bsprite\fragment.glsl">
@@ -485,9 +500,6 @@
       <Filter>Shader Files\usprite</Filter>
     </None>
     <None Include="source\common\gui">
-      <Filter>Header Files\common</Filter>
-    </None>
-    <None Include="source\common\engine">
       <Filter>Header Files\common</Filter>
     </None>
     <None Include="source\common\game">

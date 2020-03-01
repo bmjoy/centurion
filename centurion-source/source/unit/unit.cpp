@@ -4,6 +4,7 @@
 #include <stb_image.h>
 #include <player>
 #include <pathfinding>
+#include <engine/mouse.h>
 
 using namespace math;
 using namespace glb;
@@ -151,12 +152,12 @@ namespace unit {
 	}
 
 	void Unit::walk_behaviour() {
-		if (getBoolean("mouse-right") && selected) {
+		if (engine::Mouse::RightClick && selected) {
 
 			is_Moving = true;
 
 			startPoint = glm::vec2((int)position2D.x / astar::cellGridSize * astar::cellGridSize, (int)position2D.y / astar::cellGridSize * astar::cellGridSize);
-			endPoint = getZoomedCoords(getParam("mouse-x-rightclick"), getParam("mouse-y-2D-rightclick"));
+			endPoint = getZoomedCoords(engine::Mouse::GetXRightClick(), engine::Mouse::GetY2DRightClick());
 
 			// pathfinding
 			path = unit::getPath(startPoint, endPoint);

@@ -1,24 +1,24 @@
 #include <interface>
 #include <picking>
-#include <engine>
 #include <surface>
 #include <editor>
+#include <engine/window.h>
+#include <engine/mouse.h>
 
 using namespace glb;
 using namespace engine;
-
 
 namespace editor {
 	QuestionWindow::QuestionWindow() {}
 
 	void QuestionWindow::create() {
 		back_image = gui::Image("yesornotwindow_back");
-		back_image.create("center", Settings::WindowWidth() / 2.f, Settings::WindowHeight() / 2.f, 0, 0, getPickingID());
+		back_image.create("center", myWindow::Width / 2.f, myWindow::Height / 2.f, 0, 0, getPickingID());
 		increasePickingID();
 
 		// startX and startY are TOP-LEFT coordinates (as in Paint)
-		startX = Settings::WindowWidth() / 2.f - back_image.getImageSize().x / 2.f;
-		startY = Settings::WindowHeight() / 2.f + back_image.getImageSize().y / 2.f;
+		startX = myWindow::Width / 2.f - back_image.getImageSize().x / 2.f;
+		startY = myWindow::Height / 2.f + back_image.getImageSize().y / 2.f;
 
 		buttons[0] = gui::Image("newmapwindow_buttonleft");
 		buttons[0].create("top-left", startX, startY, 0, 0, getPickingID());
@@ -41,7 +41,7 @@ namespace editor {
 
 	void QuestionWindow::render(bool pick) {
 		if (QuestionWindowIsOpen) {
-			if (pick && getBoolean("mouse-left")) {
+			if (pick && engine::Mouse::LeftClick) {
 				back_image.render(true);
 				buttons[0].render(true);
 				buttons[1].render(true);
@@ -59,7 +59,7 @@ namespace editor {
 	}
 
 	void QuestionWindow::setQuestion(string Question) {
-		setBoolean("mouse-left", false);
+		Mouse::LeftClick = false;
 		QuestionWindowIsOpen = true;
 		IsWindowOpened = true;
 		question = Question;

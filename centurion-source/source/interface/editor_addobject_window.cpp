@@ -1,12 +1,11 @@
 #include <interface>
 #include <picking>
-#include <engine>
 #include <surface>
 #include <editor>
+#include <engine/window.h>
+#include <engine/mouse.h>
 
 using namespace glb;
-using namespace engine;
-
 
 namespace editor {
 
@@ -16,12 +15,12 @@ namespace editor {
 		back_size.x = 790; back_size.y = 260;
 
 		back_image = gui::Image("addobjectwindow_back");
-		back_image.create("center", Settings::WindowWidth()/2.f, back_size.y / 2.f, 0, 0, getPickingID());
+		back_image.create("center", engine::myWindow::Width/2.f, back_size.y / 2.f, 0, 0, getPickingID());
 		increasePickingID();
 
 
 		// startX and startY are TOP-LEFT coordinates (as in Paint)
-		startX = Settings::WindowWidth() / 2.f - back_image.getImageSize().x / 2.f;
+		startX = engine::myWindow::Width / 2.f - back_image.getImageSize().x / 2.f;
 		startY = back_size.y / 2.f + back_image.getImageSize().y / 2.f;
 
 		buttons[0] = gui::Image("addobjectwindow_button1");
@@ -116,7 +115,7 @@ namespace editor {
 
 		selectedObject = formSelectedTexts[0] + "_" + formSelectedTexts[1] + "_" + formSelectedTexts[2];
 		object_thumbnail = gui::Image(selectedObject);
-		object_thumbnail.create("center", Settings::WindowWidth() / 2.f, back_size.y / 2.f, 0, 0, 0);
+		object_thumbnail.create("center", engine::myWindow::Width / 2.f, back_size.y / 2.f, 0, 0, 0);
 
 		prepareObject(formSelectedTexts[0], formSelectedTexts[2]);
 	}
@@ -127,7 +126,7 @@ namespace editor {
 
 		if (AddObjectWindowIsOpen) {
 
-			if (pick && getBoolean("mouse-left") && !addingObject) {
+			if (pick && engine::Mouse::LeftClick && !addingObject) {
 				back_image.render(true);
 				buttons[0].render(true);
 				buttons[1].render(true);
@@ -141,7 +140,7 @@ namespace editor {
 			if (addingObject) {
 				insertingObject(formSelectedTexts[0], formSelectedTexts[2]);
 
-				if (getBoolean("mouse-left")) {
+				if (engine::Mouse::LeftClick) {
 					addObject(formSelectedTexts[0]);
 				}
 			}
@@ -160,7 +159,7 @@ namespace editor {
 			}
 		}	
 
-		if (getBoolean("mouse-right")) addingObject = false;
+		if (engine::Mouse::RightClick) addingObject = false;
 	}
 
 	AddObjectWindow::~AddObjectWindow() {}

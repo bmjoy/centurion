@@ -1,8 +1,9 @@
 #include <interface>
 #include <picking>
-#include <engine>
 #include <surface>
 #include <game>
+#include <engine/window.h>
+#include <engine/mouse.h>
 
 using namespace glb;
 using namespace engine;
@@ -13,11 +14,11 @@ namespace editor {
 	
 	void PropertiesWindow::create() {
 		back_image = gui::Image("propertieswindow_back");
-		back_image.create("center", Settings::WindowWidth()/2.f, Settings::WindowHeight()/2.f, 0, 0, 0);
+		back_image.create("center", myWindow::Width/2.f, myWindow::Height/2.f, 0, 0, 0);
 
 		// startX and startY are TOP-LEFT coordinates (as in Paint)
-		startX = Settings::WindowWidth() / 2.f - back_image.getImageSize().x / 2.f;
-		startY = Settings::WindowHeight() / 2.f + back_image.getImageSize().y / 2.f;
+		startX = myWindow::Width / 2.f - back_image.getImageSize().x / 2.f;
+		startY = myWindow::Height / 2.f + back_image.getImageSize().y / 2.f;
 
 		buttons[0] = gui::Image("propertieswindow_buttonleft");
 		buttons[0].create("top-left", startX, startY, 0, 0, getPickingID());
@@ -61,7 +62,7 @@ namespace editor {
 
 	void PropertiesWindow::render(bool pick) {
 		if (!IsWindowOpened && !PropertiesWindowIsOpen && !addingObject){
-			if (getBoolean("mouse-right") && (game::buildings.count(rightClickID) > 0)) {
+			if (engine::Mouse::RightClick && (game::buildings.count(rightClickID) > 0)) {
 				if (game::buildings[rightClickID].isSelected()){
 					type = "building";
 					building_pointer = &game::buildings[rightClickID];
@@ -76,7 +77,7 @@ namespace editor {
 		}
 
 		if (PropertiesWindowIsOpen) {
-			if (pick && getBoolean("mouse-left")) {
+			if (pick && engine::Mouse::LeftClick) {
 				buttons[0].render(true);
 				buttons[1].render(true);
 				textinput_back[0].render(true);

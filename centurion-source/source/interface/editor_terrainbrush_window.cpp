@@ -1,9 +1,10 @@
 #include <interface>
 #include <picking>
-#include <engine>
 #include <editor>
 #include <surface>
 #include <game>
+#include <engine/mouse.h>
+#include <engine/window.h>
 
 using namespace glb;
 using namespace engine;
@@ -15,14 +16,14 @@ namespace editor {
 
 	void TerrainBrushWindow::create() {
 
-		startX = 0.f; startY = Settings::WindowHeight()/2.f + 150.f / 2.f;
+		startX = 0.f; startY = myWindow::Height/2.f + 150.f / 2.f;
 
 		back = gui::Rectangle();
 		back.create("filled", startX, startY, 190.f, 150.f, "top-left", getPickingID());
 		increasePickingID();
 
 		circle = gui::Circle();
-		circle.create("border", getParam("mouse-x-position"), getParam("mouse-y-position"), 150.f, 100.f, 5.f, "center");
+		circle.create("border", engine::Mouse::GetXPosition(), engine::Mouse::GetYPosition(), 150.f, 100.f, 5.f, "center");
 
 		vector<string> terrainList = obj::MapTerrain()->getTerrainList();
 		vector<string> terrainTypes;
@@ -51,19 +52,19 @@ namespace editor {
 	}
 	void TerrainBrushWindow::render(bool pick) {
 
-		if (getBoolean("mouse-right")) TerrainBrushIsActive = false;
-		if (getBoolean("mouse-left") && getParam("mouse-y-position") >= Settings::WindowHeight() - 30.f) TerrainBrushIsActive = false;
+		if (engine::Mouse::RightClick) TerrainBrushIsActive = false;
+		if (engine::Mouse::LeftClick && engine::Mouse::GetYPosition() >= myWindow::Height - 30.f) TerrainBrushIsActive = false;
 
 		if (TerrainBrushWindowIsOpen) {
-			if (pick && getBoolean("mouse-left")) {
+			if (pick && engine::Mouse::LeftClick) {
 				back.render(vec4(), true);
 				for (int i = (int)forms.size()-1; i >= 0; i--) { forms[i].render(true, vec4()); }
 				picking();
 			}
 			if (!pick) {
 				if (!game::gameMinimapStatus && TerrainBrushIsActive){
-					circle.render(vec4(255), getParam("mouse-x-position"), getParam("mouse-y-position"));
-					if (getBoolean("mouse-left-pressed") && leftClickID_UI == 0 && getParam("mouse-y-position") < Settings::WindowHeight() - 30.f) {						
+					circle.render(vec4(255), engine::Mouse::GetXPosition(), engine::Mouse::GetYPosition());
+					if (Mouse::LeftHold && leftClickID_UI == 0 && engine::Mouse::GetYPosition() < myWindow::Height - 30.f) {
 						if (mapgen::terrainsMap.count(selBrush) > 0) changeTerrain(mapgen::terrainsMap[selBrush].id);
 					}
 				}

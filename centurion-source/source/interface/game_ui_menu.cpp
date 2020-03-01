@@ -1,6 +1,6 @@
 #include <interface>
 #include <json.hpp>
-
+#include <engine/window.h>
 #include <picking>
 
 using namespace glb;
@@ -22,8 +22,8 @@ namespace game {
 		}
 		json data = json::parse(path);
 
-		x = Settings::WindowWidth() / 2.f;
-		y = Settings::WindowHeight() / 2.f;
+		x = engine::myWindow::Width / 2.f;
+		y = engine::myWindow::Height / 2.f;
 
 		s = "buttons";
 		for (int i = 0; i < data[s].size(); ++i) {

@@ -1,9 +1,11 @@
 #include <editor>
 #include <surface>
-#include <engine>
 #include <game>
 #include <picking>
 #include <interface>
+#include <engine/camera.h>
+#include <engine/mouse.h>
+#include <engine/window.h>
 
 using namespace glb;
 using namespace engine;
@@ -19,17 +21,17 @@ namespace editor {
 		surface = new Surface();
 
 		game::GAME()->reset();
-		setParam("ui-bottom-height", 0.f);
-		setParam("ui-top-height", 30.f);
+		myWindow::BottomBarHeight = 0.f;
+		myWindow::TopBarHeight = 30.f;
 		game::setMinimapProjection();
 
 		surface->reset();
 		EDITOR_UI()->create();
 		game::GAME()->selRectangle = gui::Rectangle();
 		game::GAME()->selRectangle.create("border", 0, 0, 0, 0, "top-left", 0);
-		setBoolean("mouse-left-pressed", false);
+		Mouse::LeftHold = false;
 
-		CAMERA()->go_to_pos(1.f, 1.f);		
+		Camera::go_to_pos(1.f, 1.f);		
 
 		editorIsCreated = true;
 	}
@@ -38,14 +40,14 @@ namespace editor {
 		/* Keyboard control */
 		handleKeyboardControls();
 		if (!IsWindowOpened) { // TODO: merge all these in a function in Editor->Editor_functions.cpp
-			CAMERA()->keyboardControl();
+			Camera::keyboardControl();
 		}
 
 		/* If minimap is NOT active */
 		if (!game::gameMinimapStatus) {
-			if (!IsWindowOpened && getParam("mouse-y-position") < Settings::WindowHeight() - 30.f && !menuIsOpened) 
-				CAMERA()->mouseControl(game::cameraThreshold);
-			view = CAMERA()->calculateViewMatrix();
+			if (!IsWindowOpened && Mouse::GetYPosition() < myWindow::Height - 30.f && !menuIsOpened) 
+				Camera::mouseControl(game::cameraThreshold);
+			view = Camera::calculateViewMatrix();
 			proj = glb::cameraProjection;
 
 			EDITOR_UI()->render(true);
@@ -90,11 +92,11 @@ namespace editor {
 			if (leftClickID_UI == 0) game::goToPosition();
 		}
 
-		glb::cameraProjection = glm::ortho(0.0f, getParam("window-width-zoomed"), 0.0f, getParam("window-height-zoomed"), -(float)game::mapWidth, (float)game::mapWidth);
+		glb::cameraProjection = glm::ortho(0.0f, myWindow::WidthZoomed, 0.0f, myWindow::HeightZoomed, -(float)game::mapWidth, (float)game::mapWidth);
 
-		setBoolean("mouse-right", false);
-		setBoolean("mouse-left", false); 
-		setBoolean("mouse-middle", false);
+		Mouse::RightClick = false;
+		Mouse::LeftClick = false;
+		Mouse::MiddleClick = false;
 		KeyCode[GLFW_KEY_ESCAPE] = false;
 
 		if (IsWindowOpened) {

@@ -1,5 +1,5 @@
 #include <decoration>
-#include <engine>
+#include <engine/engine.h>
 #include <stb_image.h>
 #include <player>
 #include <pathfinding>
@@ -99,7 +99,7 @@ namespace decoration {
 
 	void Decoration::render(bool not_placeable) {
 		
-		if (engine::ENGINE()->getEnvironment() == "editor"){
+		if (engine::Engine::getEnvironment() == "editor"){
 			if (game::buildings.count(settlID) > 0){
 				if (oldX != position.x || oldY != position.y || oldSettlX != game::buildings[settlID].get_position().x || oldSettlY != game::buildings[settlID].get_position().y) {
 					checkSettlement();

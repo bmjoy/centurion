@@ -7,6 +7,10 @@
 #include <object>
 #include <menu>
 #include <Windows.h>
+#include <engine/camera.h>
+#include <engine/mouse.h>
+#include <engine/window.h>
+#include <interface>
 
 
 #define STB_IMAGE_WRITE_IMPLEMENTATION
@@ -17,18 +21,14 @@
 using namespace glb;
 using namespace std;
 using namespace game;
+using namespace engine;
 
 namespace glb {
 
-	//Settings settings;
-
 	string exe_root = ""; //defined in main.cpp
-	//string language = "english"; //Default value
 	mat4 menuProjection;
 	mat4 cameraProjection;
 	mat4 minimapProjection;
-
-	GLFWwindow *MainWindow;
 
 	vector<vec3> colors;
 	vector<string> racesNames;
@@ -40,10 +40,6 @@ namespace glb {
 
 	void setErrors(map<string, string> errorsMap) { errors = errorsMap; }
 	string getErrorCode(string error) { return errors[error]; }
-	void setParam(string param, float value) { params[param] = value; }
-	float getParam(string param) { return params[param]; }
-	void setBoolean(string param, bool value) { booleans[param] = value; }
-	bool getBoolean(string param) { return booleans[param]; }
 
 	void initParams() {
 
@@ -79,20 +75,13 @@ namespace glb {
 			//read_settings();
 			read_translation_tables();
 
-			setParam("window-ratio", Settings::WindowWidth() / Settings::WindowHeight());
-			setParam("window-width-zoomed", Settings::WindowWidth() + (currentZoomCamera - 1) * zoomCameraFactor);
-			setParam("window-height-zoomed", Settings::WindowHeight() + (currentZoomCamera - 1) * zoomCameraFactor / getParam("window-ratio"));
-			setBoolean("window-should-close", false);
-			setBoolean("wireframe", false);
-			setBoolean("mouse-left", false);
-			setBoolean("mouse-left-pressed", false);
-			setBoolean("mouse-right", false);
-			setBoolean("mouse-release", false);
-			setBoolean("mouse-scroll-bool", false);
-			setParam("mouse-scroll", 0.f);
-
-			menuProjection = glm::ortho(0.0f, Settings::WindowWidth(), 0.0f, Settings::WindowHeight(), -100.0f, 100.0f);
-			cameraProjection = glm::ortho(0.0f, getParam("window-width-zoomed"), 0.0f, getParam("window-height-zoomed"), -(float)mapWidth, (float)mapWidth);
+			myWindow::Ratio = myWindow::Width / myWindow::Height;
+			myWindow::WidthZoomed = myWindow::Width + (currentZoomCamera - 1) * zoomCameraFactor;
+			myWindow::HeightZoomed = myWindow::Height + (currentZoomCamera - 1) * zoomCameraFactor / myWindow::Ratio;
+			
+		
+			menuProjection = glm::ortho(0.0f, myWindow::Width, 0.0f, myWindow::Height, -100.0f, 100.0f);
+			cameraProjection = glm::ortho(0.0f, myWindow::WidthZoomed, 0.0f, myWindow::HeightZoomed, -(float)mapWidth, (float)mapWidth);
 
 			ifstream data_path("assets/data/data.json");
 			//Close the game if it wasn't able to find or process data.json file
@@ -113,24 +102,6 @@ namespace glb {
 		}
 	}
 
-	void saveLog() {
-		ofstream logFile("logs/global.log");
-		if (logFile.is_open()) {
-			logFile << "PARAMETERS\n";
-			for (map<string, float>::iterator x = params.begin(); x != params.end(); x++) {
-				logFile << "\t" << x->first << " = " << x->second << "\n";
-			}
-			logFile << "\nBOOLEANS\n";
-			for (map<string, bool>::iterator x = booleans.begin(); x != booleans.end(); x++) {
-				logFile << "\t" << x->first << " = " << x->second << "\n";
-			}
-			logFile << "\nERROR CODE\n";
-			for (map<string, string>::iterator x = errors.begin(); x != errors.end(); x++) {
-				logFile << "\t" << x->first << " = " << x->second << "\n";
-			}
-		}
-		logFile.close();
-	}
 
 	void read_translation_tables() {
 		ifstream fin("assets/data/translations - table.tsv");
@@ -168,6 +139,43 @@ namespace glb {
 				row++;
 			}
 		}
+	}
+
+	void saveLog() {
+		ofstream logFile("logs/Params.xml");
+		if (logFile.is_open()) {
+			logFile << "<?xml version=\"1.0\" encoding=\"utf-8\"?>\n<params>\n" <<
+				"\t<camera>\n" <<
+				"\t\t<xPosition>" << Camera::GetXPosition() << "</xPosition>\n" <<
+				"\t\t<yPosition>" << Camera::GetYPosition() << "</yPosition>\n" <<
+				"\t</camera>\n" <<
+				"\t<mouse>\n" <<
+				"\t\t<scrollValue>" << Mouse::ScrollValue << "</scrollValue>\n" <<
+				"\t\t<xLeftClick>" << Mouse::GetXLeftClick() << "</xLeftClick>\n" <<
+				"\t\t<xPosition>" << Mouse::GetXPosition() << "</xPosition>\n" <<
+				"\t\t<xRightClick>" << Mouse::GetXRightClick() << "</xRightClick>\n" <<
+				"\t\t<y2dPosition>" << Mouse::GetY2DPosition() << "</y2dPosition>\n" <<
+				"\t\t<y2dRightClick>" << Mouse::GetY2DRightClick() << "</y2dRightClick>\n" <<
+				"\t\t<yLeftClick>" << Mouse::GetYLeftClick() << "</yLeftClick>\n" <<
+				"\t\t<yPosition>" << Mouse::GetYPosition() << "</yPosition>\n" <<
+				"\t\t<yRightClick>" << Mouse::GetYRightClick() << "</yRightClick>\n" <<
+				"\t\t<leftClick>" << Mouse::LeftClick << "</leftClick>\n" <<
+				"\t\t<leftHold>" << Mouse::LeftHold << "</leftHold>\n" <<
+				"\t\t<release>" << Mouse::Release << "</release>\n" <<
+				"\t\t<rightClick>" << Mouse::RightClick << "</rightClick>\n" <<
+				"\t\t<scrollBool>" << Mouse::ScrollBool << "</scrollBool>\n" <<
+				"\t</mouse>\n" <<
+				"\t<window>\n" <<
+				"\t\t<heightZoomed>" << myWindow::HeightZoomed << "</heightZoomed>\n" <<
+				"\t\t<ratio>" << myWindow::Ratio << "</ratio>\n" <<
+				"\t\t<widthZoomed>" << myWindow::WidthZoomed << "</widthZoomed>\n" <<
+				"\t\t<shouldClose>" << myWindow::ShouldClose << "</shouldClose>\n" <<
+				"\t\t<bottomBarHeight>" << myWindow::BottomBarHeight << "</bottomBarHeight>\n" <<
+				"\t\t<topBarHeight>" << myWindow::TopBarHeight << "</topBarHeight>\n" <<
+				"\t</window>\n" <<
+				"</params>";
+		}
+		logFile.close();
 	}
 
 	void changeLanguage(string lan) {
@@ -395,8 +403,8 @@ namespace glb {
 		strcpy(filename, "screenshots/");
 		strcat(filename, basename);
 
-		int w = (int)Settings::WindowWidth();
-		int h = (int)Settings::WindowHeight();
+		int w = (int)myWindow::Width;
+		int h = (int)myWindow::Height;
 		unsigned char* imageData = new unsigned char[int(w * h * 3)];
 		glPixelStorei(GL_PACK_ALIGNMENT, 1);
 		glReadPixels(0, 0, w, h, GL_RGB, GL_UNSIGNED_BYTE, imageData);
@@ -517,11 +525,11 @@ namespace glb {
 	}
 
 	float getYMinimapCoord(float x) {
-		return Settings::WindowHeight() * (x - getParam("ui-bottom-height")) / (Settings::WindowHeight() - getParam("ui-bottom-height") - getParam("ui-top-height"));
+		return myWindow::Height * (x - myWindow::BottomBarHeight) / (myWindow::Height - myWindow::BottomBarHeight - myWindow::TopBarHeight);
 	}
 
 	bool cursorInGameScreen() {
-		return (getParam("mouse-y-leftclick") > getParam("ui-bottom-height")) && (getParam("mouse-y-leftclick") < (glb::Settings::WindowHeight() - getParam("ui-top-height")));
+		return (Mouse::GetYLeftClick() > myWindow::BottomBarHeight) && (Mouse::GetYLeftClick() < (myWindow::Height - myWindow::TopBarHeight));
 	}
 
 	void clearAndSwapBuffers(GLFWwindow *window) {
@@ -533,8 +541,8 @@ namespace glb {
 	}
 
 	vec2 getZoomedCoords(float xCoord, float yCoord) {
-		float x = xCoord * getParam("window-width-zoomed") / Settings::WindowWidth() + getParam("camera-x-position");
-		float y = yCoord * getParam("window-height-zoomed") / Settings::WindowHeight() + getParam("camera-y-position");
+		float x = xCoord * myWindow::WidthZoomed / myWindow::Width + Camera::GetXPosition();
+		float y = yCoord * myWindow::HeightZoomed / myWindow::Height + Camera::GetYPosition();
 		return vec2(x, y);
 	}
 
@@ -546,7 +554,7 @@ namespace glb {
 		WCHAR wstr[wideLength];
 		MultiByteToWideChar(CP_UTF8, 0, text.c_str(), wideLength, wstr, wideLength);
 		MessageBoxW(NULL, wstr, gameNameLPCWSTR, MB_ICONERROR);
-		setBoolean("window-should-close", true);
+		myWindow::ShouldClose = true;
 	}
 
 	void showGameWarning(string warningText) {

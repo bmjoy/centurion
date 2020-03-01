@@ -1,10 +1,11 @@
 #include <surface>
 #include <global>
-#include <engine>
 #include <game>
 
 using namespace glb;
 using namespace game;
+
+bool Surface::Wireframe = false;
 
 Surface::Surface(){}
 
@@ -18,7 +19,6 @@ void Surface::reset() {
 void Surface::createNoise() {
 	mapgen::generateRandomMap();
 	obj::MapTerrain()->updateHeightsBuffer();
-
 
 	cout << "[DEBUG] Terrain has been generated!\n";
 	cout << "[DEBUG] Min(z) = " << mapgen::minZ << "; Max(z) = " << mapgen::maxZ << endl;

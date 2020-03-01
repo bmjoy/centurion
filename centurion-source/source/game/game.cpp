@@ -1,6 +1,8 @@
 #include <game>
 #include <interface>
-#include <engine>
+#include <engine/camera.h>
+#include <engine/window.h>
+#include <engine/mouse.h>
 #include <surface>
 #include <player>
 #include <picking>
@@ -36,11 +38,10 @@ namespace game {
 	void Game::create() {
 		resetPicking();
 		reset();
-
-		setParam("ui-bottom-height", 100.f);
-		setParam("ui-top-height", 100.f);
+		myWindow::BottomBarHeight = 100.f;
+		myWindow::TopBarHeight = 100.f;
 		setMinimapProjection();
-		setBoolean("mouse-left-pressed", false);
+		Mouse::LeftHold = false;
 
 		selRectangle = gui::Rectangle();
 		selRectangle.create("border", 0, 0, 0, 0, "top-left", 0);
@@ -89,9 +90,9 @@ namespace game {
 
 		GAME_UI()->create(playersList[0].getPlayerRace().substr(5));
 
-		CAMERA()->go_to_pos(
-			(GLfloat)(playersList[0].getStartPoint().x - getParam("window-width-zoomed") /2.f),
-			(GLfloat)(playersList[0].getStartPoint().y - getParam("window-height-zoomed") / 2.f)
+		Camera::go_to_pos(
+			(GLfloat)(playersList[0].getStartPoint().x - engine::myWindow::WidthZoomed /2.f),
+			(GLfloat)(playersList[0].getStartPoint().y - myWindow::HeightZoomed / 2.f)
 		);
 
 		//---------------------------------------
@@ -104,15 +105,15 @@ namespace game {
 	void Game::run() {
 		selectedUnits = 0;
 		leftClickID_UI = 0;
-		CAMERA()->keyboardControl();
+		Camera::keyboardControl();
 
 		/* Keyboard controls handling*/
 		if (!gameMenuStatus) handleKeyboardControls();
 
 		/* If minimap is NOT active */
 		if (!gameMinimapStatus) {
-			CAMERA()->mouseControl(cameraThreshold);
-			view = CAMERA()->calculateViewMatrix();
+			Camera::mouseControl(cameraThreshold);
+			view = Camera::calculateViewMatrix();
 			projection = glb::cameraProjection;
 
 			GAME_UI()->render(true);
@@ -162,12 +163,12 @@ namespace game {
 			if (gameMinimapStatus) goToPosition();
 		}
 		
-		glb::cameraProjection = ortho(0.0f, getParam("window-width-zoomed"), 0.0f, getParam("window-height-zoomed"), -(float)mapWidth, (float)mapWidth);
+		glb::cameraProjection = ortho(0.0f, engine::myWindow::WidthZoomed, 0.0f, myWindow::HeightZoomed, -(float)mapWidth, (float)mapWidth);
 
 		// reset mouse-right and mouse-left to improve fps
-		setBoolean("mouse-right", false);
-		setBoolean("mouse-left", false);
-		setBoolean("mouse-middle", false);
+		Mouse::RightClick = false;
+		Mouse::LeftClick = false;
+		Mouse::MiddleClick = false;
 	}
 
 	void Game::clear() {

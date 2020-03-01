@@ -3,6 +3,7 @@
 #include <surface>
 #include <pathfinding>
 #include <global>
+#include <engine/window.h>
 
 using namespace game;
 using namespace glb;
@@ -20,8 +21,8 @@ void MinimapRectangle::create() {
 		1, 2, 3    // second triangle
 	};
 
-	float w = Settings::WindowWidth();
-	float h = Settings::WindowHeight();
+	float w = engine::myWindow::Width;
+	float h = engine::myWindow::Height;
 
 	float vertices[] = {
 		// X,Y,Z			// uv coords		
@@ -70,8 +71,8 @@ void MinimapRectangle::update() {
 	glUseProgram(shaderId);
 	/* This texture comes from the real grid of 0/1 */
 
-	int w = (int)Settings::WindowWidth();
-	int h = (int)Settings::WindowHeight();
+	int w = (int)engine::myWindow::Width;
+	int h = (int)engine::myWindow::Height;
 
 	unsigned char* imageData = new unsigned char[int(w * h * 4)];
 	glReadPixels(0, 0, w, h, GL_RGBA, GL_UNSIGNED_BYTE, imageData);

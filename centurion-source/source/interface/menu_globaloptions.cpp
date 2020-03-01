@@ -1,10 +1,10 @@
 #include <interface>
-#include <engine>
 #include <game>
 #include <picking>
 #include <menu>
+#include <engine/mouse.h>
+#include <engine/window.h>
 
-using namespace engine;
 using namespace glb;
 using namespace glm;
 
@@ -14,8 +14,8 @@ namespace menu {
 
 	void GlobalOptions::create() {
 
-		startX = Settings::WindowWidth() / 2.f - 300.f;
-		startY = Settings::WindowHeight() / 2.f + 200.f;
+		startX = engine::myWindow::Width / 2.f - 300.f;
+		startY = engine::myWindow::Height / 2.f + 200.f;
 
 		back.create("border-filled", startX, startY, 600.f, 400.f, "top-left", 0);
 
@@ -37,7 +37,7 @@ namespace menu {
 	}
 
 	void GlobalOptions::render(bool pick) {
-		if (pick && getBoolean("mouse-left")) {
+		if (pick && engine::Mouse::LeftClick) {
 			languages.render(true, vec4());
 			picking();
 		}
@@ -50,8 +50,8 @@ namespace menu {
 	}
 
 	void GlobalOptions::picking() {
-		GLint mouseX = (GLint)getParam("mouse-x-position");
-		GLint mouseY = (GLint)getParam("mouse-y-position");
+		GLint mouseX = (GLint)engine::Mouse::GetXPosition();
+		GLint mouseY = (GLint)engine::Mouse::GetYPosition();
 		leftClickID_UI = get_id();
 		string clickName = getPickedObjectName(leftClickID_UI);
 

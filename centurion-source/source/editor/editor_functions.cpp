@@ -4,11 +4,15 @@
 #include <picking>
 #include <player>
 #include <game>
-#include <engine>
+#include <engine/engine.h>
+#include <engine/mouse.h>
+#include <engine/camera.h>
+#include <engine/window.h>
 #include <surface>
 #include <settings.h>
 
 using namespace building;
+using namespace engine;
 using namespace unit;
 using namespace decoration;
 using namespace glb;
@@ -84,13 +88,13 @@ namespace editor {
 					}
 				}
 			}
-			if (KeyCode[GLFW_KEY_SPACE] || getBoolean("mouse-middle")) {
+			if (KeyCode[GLFW_KEY_SPACE] || Mouse::MiddleClick) {
 				game::gameMinimapStatus = !game::gameMinimapStatus;
 				game::gameMinimapStatus ? std::cout << "[DEBUG] Minimap ON!\n" : std::cout << "[DEBUG] Minimap OFF!\n";
 			}
 			if (KeyCode[GLFW_KEY_Z]) {
-				setBoolean("wireframe", !getBoolean("wireframe"));
-				getBoolean("wireframe") ? std::cout << "[DEBUG] Wireframe ON!\n" : std::cout << "[DEBUG] Wireframe OFF! \n";
+				Surface::Wireframe = !Surface::Wireframe;
+				Surface::Wireframe ? std::cout << "[DEBUG] Wireframe ON!\n" : std::cout << "[DEBUG] Wireframe OFF! \n";
 			}
 			// Grid
 			/*if (KeyCode[GLFW_KEY_G]) {
@@ -102,7 +106,7 @@ namespace editor {
 		if (KeyCode[GLFW_KEY_ESCAPE]) {
 			if (areWindowsClosed()) {
 				clearEditorVariables();
-				engine::ENGINE()->Reset();
+				engine::Engine::Reset();
 			}
 			else {
 				clearEditorVariables();
@@ -130,8 +134,8 @@ namespace editor {
 	}
 
 	void insertingObject(string type, string classname) {
-		float x = round(getParam("mouse-x-position") * getParam("window-width-zoomed") / Settings::WindowWidth() + getParam("camera-x-position"));
-		float y = round(getParam("mouse-y-position") * getParam("window-height-zoomed") / Settings::WindowHeight() + getParam("camera-y-position"));
+		float x = round(engine::Mouse::GetXPosition() * engine::myWindow::WidthZoomed / myWindow::Width + engine::Camera::GetXPosition());
+		float y = round(engine::Mouse::GetYPosition() * engine::myWindow::HeightZoomed / myWindow::Height + engine::Camera::GetYPosition());
 		if (type == "buildings") {
 			buildingTemp.set_position(vec3(x, y, 0.f));
 			buildingTemp.set_status(false);
@@ -141,18 +145,18 @@ namespace editor {
 			if (!buildingTemp.is_independent()) {
 				string s = "";
 				if (!buildingTemp.is_near_to_independent(&s))
-					textInfo.render_dynamic(getTranslation("EDITOR_noSettlementsAround"), "tahoma_15px", 10, Settings::WindowHeight() - 50, vec4(255.f), "left", "center");
+					textInfo.render_dynamic(getTranslation("EDITOR_noSettlementsAround"), "tahoma_15px", 10, myWindow::Height - 50, vec4(255.f), "left", "center");
 				else
 					if (!buildingTemp.is_placeable())
-						textInfo.render_dynamic(getTranslation("EDITOR_impassablePoint"), "tahoma_15px", 10, Settings::WindowHeight() - 50, vec4(255.f), "left", "center");
+						textInfo.render_dynamic(getTranslation("EDITOR_impassablePoint"), "tahoma_15px", 10, myWindow::Height - 50, vec4(255.f), "left", "center");
 					else
-						textInfo.render_dynamic(getTranslation("EDITOR_canAddStructure"), "tahoma_15px", 10, Settings::WindowHeight() - 50, vec4(255.f), "left", "center");
+						textInfo.render_dynamic(getTranslation("EDITOR_canAddStructure"), "tahoma_15px", 10, myWindow::Height - 50, vec4(255.f), "left", "center");
 			}
 			else {
 				if (!buildingTemp.is_placeable())
-					textInfo.render_dynamic(getTranslation("EDITOR_impassablePoint"), "tahoma_15px", 10, Settings::WindowHeight() - 50, vec4(255.f), "left", "center");
+					textInfo.render_dynamic(getTranslation("EDITOR_impassablePoint"), "tahoma_15px", 10, myWindow::Height - 50, vec4(255.f), "left", "center");
 				else
-					textInfo.render_dynamic(getTranslation("EDITOR_canAddStructure"), "tahoma_15px", 10, Settings::WindowHeight() - 50, vec4(255.f), "left", "center");
+					textInfo.render_dynamic(getTranslation("EDITOR_canAddStructure"), "tahoma_15px", 10, myWindow::Height - 50, vec4(255.f), "left", "center");
 			}
 		}
 		if (type == "decorations") {
@@ -172,7 +176,7 @@ namespace editor {
 					game::buildings[ID].set_settlement_name("SETTL_" + game::buildings[ID].get_name());
 					game::independent_buildings[ID] = &game::buildings[ID];
 				}
-				setBoolean("mouse-left", false);
+				Mouse::LeftClick = false;
 				addingObject = false;
 			}
 		}
@@ -182,7 +186,7 @@ namespace editor {
 				decorTemp.set_id(ID);
 				decorTemp.create();
 				game::decorations[ID] = decorTemp;
-				setBoolean("mouse-left", false);
+				Mouse::LeftClick = false;
 				addingObject = false;
 			}
 		}
@@ -190,8 +194,8 @@ namespace editor {
 	}
 
 	void changeTerrain(int terrainType) {
-		float x1 = (getParam("mouse-x-position") * getParam("window-width-zoomed") / Settings::WindowWidth() + getParam("camera-x-position"));
-		float y1 = (getParam("mouse-y-position") * getParam("window-height-zoomed") / Settings::WindowHeight() + getParam("camera-y-position"));
+		float x1 = (engine::Mouse::GetXPosition() * engine::myWindow::WidthZoomed / myWindow::Width + engine::Camera::GetXPosition());
+		float y1 = (engine::Mouse::GetYPosition() * engine::myWindow::HeightZoomed / myWindow::Height + engine::Camera::GetYPosition());
 		float type = float(terrainType);
 		
 		int x = int(round(x1 / mapgen::grid_size)) * mapgen::grid_size + mapgen::grid_size * 2;
@@ -232,18 +236,18 @@ namespace editor {
 	}
 
 	void moveObjects() {
-		if (getBoolean("mouse-left-pressed")) {
+		if (Mouse::LeftHold) {
 			// buildings
 			if (game::buildings.count(leftClickID) > 0) {
 				movingObjectRestore = false;
 				if (!movingObject) {
 					movingObjectXPos = game::buildings[leftClickID].get_position().x;
 					movingObjectYPos = game::buildings[leftClickID].get_position().y;
-					movingObjectStartXMouse = getParam("mouse-x-position") * getParam("window-width-zoomed") / Settings::WindowWidth() + getParam("camera-x-position");
-					movingObjectStartYMouse = getParam("mouse-y-position") * getParam("window-height-zoomed") / Settings::WindowHeight() + getParam("camera-y-position");
+					movingObjectStartXMouse = engine::Mouse::GetXPosition() * engine::myWindow::WidthZoomed / myWindow::Width + engine::Camera::GetXPosition();
+					movingObjectStartYMouse = engine::Mouse::GetYPosition() * engine::myWindow::HeightZoomed / myWindow::Height + engine::Camera::GetYPosition();
 				}
-				float x1 = (getParam("mouse-x-position") * getParam("window-width-zoomed") / Settings::WindowWidth() + getParam("camera-x-position"));
-				float y1 = (getParam("mouse-y-position") * getParam("window-height-zoomed") / Settings::WindowHeight() + getParam("camera-y-position"));
+				float x1 = (engine::Mouse::GetXPosition() * engine::myWindow::WidthZoomed / myWindow::Width + engine::Camera::GetXPosition());
+				float y1 = (engine::Mouse::GetYPosition() * engine::myWindow::HeightZoomed / myWindow::Height + engine::Camera::GetYPosition());
 				float dx = x1 - movingObjectStartXMouse;
 				float dy = y1 - movingObjectStartYMouse;
 
@@ -253,15 +257,15 @@ namespace editor {
 					if (!game::buildings[leftClickID].is_placeable()) {
 						string s = "";
 						if (!game::buildings[leftClickID].is_near_to_independent(&s)) {
-							textInfo.render_dynamic(getTranslation("EDITOR_noSettlementsAround"), "tahoma_15px", 10, Settings::WindowHeight() - 50, vec4(255.f), "left", "center");
+							textInfo.render_dynamic(getTranslation("EDITOR_noSettlementsAround"), "tahoma_15px", 10, myWindow::Height - 50, vec4(255.f), "left", "center");
 						}
 						else
-							textInfo.render_dynamic(getTranslation("EDITOR_impassablePoint"), "tahoma_15px", 10, Settings::WindowHeight() - 50, vec4(255.f), "left", "center");
+							textInfo.render_dynamic(getTranslation("EDITOR_impassablePoint"), "tahoma_15px", 10, myWindow::Height - 50, vec4(255.f), "left", "center");
 						game::buildings[leftClickID].set_placeable(false);
 						movingObjectRestore = true;
 					}
 					else {
-						textInfo.render_dynamic(getTranslation("EDITOR_canAddStructure"), "tahoma_15px", 10, Settings::WindowHeight() - 50, vec4(255.f), "left", "center");
+						textInfo.render_dynamic(getTranslation("EDITOR_canAddStructure"), "tahoma_15px", 10, myWindow::Height - 50, vec4(255.f), "left", "center");
 						game::buildings[leftClickID].set_placeable(true);
 					}
 				}
@@ -276,9 +280,9 @@ namespace editor {
 						game::buildings[leftClickID].set_placeable(true);
 					}
 					if (!game::buildings[leftClickID].is_placeable())
-						textInfo.render_dynamic(getTranslation("EDITOR_impassablePoint"), "tahoma_15px", 10, Settings::WindowHeight() - 50, vec4(255.f), "left", "center");
+						textInfo.render_dynamic(getTranslation("EDITOR_impassablePoint"), "tahoma_15px", 10, myWindow::Height - 50, vec4(255.f), "left", "center");
 					else
-						textInfo.render_dynamic(getTranslation("EDITOR_canAddStructure"), "tahoma_15px", 10, Settings::WindowHeight() - 50, vec4(255.f), "left", "center");
+						textInfo.render_dynamic(getTranslation("EDITOR_canAddStructure"), "tahoma_15px", 10, myWindow::Height - 50, vec4(255.f), "left", "center");
 				}
 				movingObject = true;
 				game::MINIMAP()->setStatus(false);

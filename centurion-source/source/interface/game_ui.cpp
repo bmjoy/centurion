@@ -1,7 +1,8 @@
 #include <interface>
-
+#include <engine/camera.h>
+#include <engine/window.h>
+#include <engine/mouse.h>
 #include <picking>
-#include <engine>
 #include <game>
 
 using namespace std;
@@ -22,18 +23,18 @@ namespace game {
 		time.seconds = 0; time.seconds_str = "00";
 		time.minutes = 0; time.minutes_str = "00";
 		time.hours = 0; time.hours_str = "00";
-		time.x = Settings::WindowWidth() - 100.0f;
-		time.y = Settings::WindowHeight() - getParam("ui-top-height") - 30.0f;
+		time.x = myWindow::Width - 100.0f;
+		time.y = myWindow::Height - myWindow::TopBarHeight - 30.0f;
 
 		gameMenu = GameMenu();
 		gameMenu.create();
 
 		top_bar = gui::Image("topbar-" + race);
-		top_bar.create("bottom-left", 0, -1.f * getParam("ui-top-height"), Settings::WindowWidth(), getParam("ui-top-height"), 0);
+		top_bar.create("bottom-left", 0, -1.f * myWindow::TopBarHeight, myWindow::Width, myWindow::TopBarHeight, 0);
 		
 
 		bottom_bar = gui::Image("bottombar");
-		bottom_bar.create("bottom-left", 0, 0, Settings::WindowWidth(), getParam("ui-bottom-height"), 0);
+		bottom_bar.create("bottom-left", 0, 0, myWindow::Width, myWindow::BottomBarHeight, 0);
 
 		time.lastTime = glfwGetTime();
 		time.text = gui::SimpleText("dynamic", true);
@@ -58,7 +59,7 @@ namespace game {
 
 	void UIGame::render(bool pick) {
 
-		if (pick && getBoolean("mouse-left")) {
+		if (pick && engine::Mouse::LeftClick) {
 			if (gameMenuStatus) gameMenu.render(true);
 			picking(); // --> source/picking/gameui_picking.cpp  
 		}
@@ -72,13 +73,13 @@ namespace game {
 
 			// minimap rectangle:
 			if (gameMinimapStatus) {
-				float x = getParam("camera-x-position") / mapWidth * Settings::WindowWidth();
-				float y = getParam("camera-y-position") / mapHeight * (Settings::WindowHeight() - getParam("ui-bottom-height") - getParam("ui-top-height")) + getParam("ui-bottom-height");
-				float w = getParam("window-width-zoomed") * Settings::WindowWidth() / mapWidth;
-				float h = getParam("window-height-zoomed") * (Settings::WindowHeight() - getParam("ui-bottom-height") - getParam("ui-top-height")) / mapHeight;
+				float x = engine::Camera::GetXPosition() / mapWidth * myWindow::Width;
+				float y = engine::Camera::GetYPosition() / mapHeight * (myWindow::Height - myWindow::BottomBarHeight - myWindow::TopBarHeight) + myWindow::BottomBarHeight;
+				float w = engine::myWindow::WidthZoomed * myWindow::Width / mapWidth;
+				float h = engine::myWindow::HeightZoomed * (myWindow::Height - myWindow::BottomBarHeight - myWindow::TopBarHeight) / mapHeight;
 				x = std::max(x, 1.f);
-				y = std::max(y, getParam("ui-bottom-height") + 1.f);
-				y = std::min(y, Settings::WindowHeight() - getParam("ui-top-height") - h);
+				y = std::max(y, myWindow::BottomBarHeight + 1.f);
+				y = std::min(y, myWindow::Height - myWindow::TopBarHeight - h);
 				minimapRectangle.render(vec4(255.f), false, x, y, w, h);
 			}
 			// Temporary bars:

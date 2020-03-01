@@ -42,6 +42,7 @@ namespace mapgen {
 class Surface
 {
 public:
+	static bool Wireframe;
 	Surface();
 	void reset();
 	void createNoise();

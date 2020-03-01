@@ -1,4 +1,5 @@
 #include "settings.h"
+#include <engine/window.h>
 #include <iostream>
 #include <fstream>
 
@@ -10,20 +11,17 @@ namespace glb {
 	float Settings::windowWidth;
 	float Settings::windowHeight;
 	string Settings::SettingsPath;
-	Settings Settings::mysettings;
 	auto_ptr<c_settings> Settings::SettingsXML;
 	//--- end definition
 
-	Settings::Settings() {
+	Settings::Settings() { }
+
+	void Settings::Init() {
 		SettingsPath = "Settings.xml";
 		cameraMaxZoom = 20;
 		cameraMovespeed = 10;
 		windowWidth = 1366;
 		windowHeight = 768;
-	}
-
-	void Settings::Init() {
-		mysettings = Settings();
 	}
 
 	bool Settings::ReadSettings() {
@@ -59,6 +57,20 @@ namespace glb {
 		map[""].schema = "Settings.xsd";
 		ofstream ofs(SettingsPath.c_str());
 		c_settings_(ofs, settingsXMLtemp, map);
+	}
+
+	void Settings::SetWindowWidth(float x) { 
+		windowWidth = x;
+		engine::myWindow::Width = x;
+		engine::myWindow::Ratio = engine::myWindow::Width / engine::myWindow::Height;
+		SettingsXML->windowWidth(int(x)); 
+	}
+	
+	void Settings::SetWindowHeight(float y) { 
+		windowHeight = y; 
+		engine::myWindow::Height = y;
+		engine::myWindow::Ratio = engine::myWindow::Width / engine::myWindow::Height;
+		SettingsXML->windowHeight(int(y)); 
 	}
 
 	void Settings::SaveXml()

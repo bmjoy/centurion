@@ -2,14 +2,15 @@
 #include <global>
 #include <player>
 #include <picking>
-#include <engine>
 #include <game>
 #include <interface>
+#include <engine/window.h>
+#include <engine/mouse.h>
 
 using namespace glb;
 using namespace std;
-using namespace engine;
 using namespace game;
+using namespace engine;
 
 namespace menu {
 
@@ -52,7 +53,7 @@ namespace menu {
 				/* use data */
 				img = gui::Image(imageName);	
 				if (size == "auto") img.create(align, (float)x, (float)y, 0.0f, 0.0f, getPickingID() * clickable);
-				if (size == "max") img.create(align, (float)x, (float)y, Settings::WindowWidth(), Settings::WindowHeight(), pickingID * clickable);
+				if (size == "max") img.create(align, (float)x, (float)y, myWindow::Width, myWindow::Height, pickingID * clickable);
 				images[menus[a]].push_back(img);
 
 				// update picking 
@@ -122,7 +123,7 @@ namespace menu {
 				/* use data */
 				img = gui::Image(imageName);
 				if (size == "auto") img.create(align, (float)x, (float)y, 0.0f, 0.0f, getPickingID() * clickable);
-				if (size == "max") img.create(align, (float)x, (float)y, Settings::WindowWidth(), Settings::WindowHeight(), pickingID * clickable);
+				if (size == "max") img.create(align, (float)x, (float)y, myWindow::Width, myWindow::Height, pickingID * clickable);
 				images[menus[a]].push_back(img);
 
 				// update picking 
@@ -165,7 +166,7 @@ namespace menu {
 
 		/* picking */
 
-		if (getBoolean("mouse-left")){
+		if (engine::Mouse::LeftClick){
 			for (int i = 0; i < images[currentMenu].size(); ++i) 
 				images[currentMenu][i].render(true);
 			
@@ -194,8 +195,9 @@ namespace menu {
 		if (currentMenu == "options")
 			options->render(false);
 	
-		setBoolean("mouse-right", false);
-		setBoolean("mouse-left", false); 
+		Mouse::RightClick = false;
+		Mouse::LeftClick = false;
+		Mouse::RightClick = false;
 	}
 
 	void Menu::reset() {

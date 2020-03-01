@@ -1,7 +1,9 @@
 #include <interface>
 #include <picking>
-#include <engine>
 #include <surface>
+#include <global>
+#include <engine/window.h>
+#include <engine/mouse.h>
 
 using namespace glb;
 using namespace engine;
@@ -14,15 +16,15 @@ namespace editor {
 	
 	void OpenMapWindow::create() {
 		back_image = gui::Image("openmapwindow_back");
-		back_image.create("center", Settings::WindowWidth() / 2.f, Settings::WindowHeight() / 2.f, 0, 0, 0);
+		back_image.create("center", myWindow::Width / 2.f, myWindow::Height / 2.f, 0, 0, 0);
 		availableScenarios = get_all_folders_names_within_folder("scenarios");
 		map_list.padding_left = 15.f;
 		map_list.padding_top = 15.f;
 		map_list.option_height = 25.f;
 
 		// startX and startY are TOP-LEFT coordinates (as in Paint)
-		startX = Settings::WindowWidth() / 2.f - back_image.getImageSize().x / 2.f;
-		startY = Settings::WindowHeight() / 2.f + back_image.getImageSize().y / 2.f;
+		startX = myWindow::Width / 2.f - back_image.getImageSize().x / 2.f;
+		startY = myWindow::Height / 2.f + back_image.getImageSize().y / 2.f;
 
 		map_list.pickingID = getPickingID();
 		increasePickingID();
@@ -74,7 +76,7 @@ namespace editor {
 		if (OpenMapWindowUpdate) update();
 
 		if (OpenMapWindowIsOpen) {
-			if (pick && getBoolean("mouse-left")) {
+			if (pick && engine::Mouse::LeftClick) {
 				for (int i = 0; i < availableScenarios.size(); i++) {
 					map_list.back_options[i].render(vec4(), true);
 				}

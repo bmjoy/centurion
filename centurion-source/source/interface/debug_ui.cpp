@@ -1,11 +1,14 @@
 #include <interface>
-#include <engine>
+#include <engine/engine.h>
+#include <engine/mouse.h>
+#include <engine/window.h>
 #include <game>
 
 using namespace std;
 using namespace glm;
 using namespace glb;
 using namespace engine;
+using namespace game;
 
 namespace debug {
 
@@ -28,7 +31,7 @@ namespace debug {
 
 	void DebugUI::create() {
 		startX = 14.f;
-		startY = getParam("ui-bottom-height") + 12.f;
+		startY = myWindow::BottomBarHeight + 12.f;
 		deltaY = 15.f;
 
 		dynamicText = gui::SimpleText("dynamic");
@@ -45,7 +48,7 @@ namespace debug {
 		}
 
 		back = gui::Rectangle();
-		back.create("border-filled", 10.f, getParam("ui-bottom-height") + 10.f, 250.f, 200.f, "bottom-left", 0);
+		back.create("border-filled", 10.f, myWindow::BottomBarHeight + 10.f, 250.f, 200.f, "bottom-left", 0);
 	
 		currentLan = Settings::Language();
 	}
@@ -66,13 +69,13 @@ namespace debug {
 
 			dynamicTextList[0] = to_string(fps);
 			dynamicTextList[1] = to_string(mpfs);
-			dynamicTextList[2] = to_string((int)getParam("mouse-y-position"));
-			dynamicTextList[3] = to_string((int)getParam("mouse-x-position"));
-			dynamicTextList[4] = to_string((int)getZoomedCoords(getParam("mouse-x-position"), getParam("mouse-y-position")).y);
-			dynamicTextList[5] = to_string((int)getZoomedCoords(getParam("mouse-x-position"), getParam("mouse-y-position")).x);
+			dynamicTextList[2] = to_string((int)Mouse::GetYPosition());
+			dynamicTextList[3] = to_string((int)Mouse::GetXPosition());
+			dynamicTextList[4] = to_string((int)getZoomedCoords(Mouse::GetXPosition(), Mouse::GetYPosition()).y);
+			dynamicTextList[5] = to_string((int)getZoomedCoords(Mouse::GetXPosition(), Mouse::GetYPosition()).x);
 			dynamicTextList[6] = to_string(selUnits);
 
-			!(ENGINE()->getEnvironment() == "game") ? n = 2 : n = (int)dynamicTextList.size();
+			!(Engine::getEnvironment() == "game") ? n = 2 : n = (int)dynamicTextList.size();
 
 			for (int i = 0; i < n; i++) {
 				staticText[i].render_static();

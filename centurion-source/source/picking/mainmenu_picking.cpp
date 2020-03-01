@@ -1,6 +1,8 @@
 #include <menu>
 #include <picking>
-#include <engine>
+#include <engine/engine.h>
+#include <engine/window.h>
+#include <engine/mouse.h>
 #include <game>
 #include <global>
 #include <player>
@@ -26,7 +28,7 @@ namespace menu {
 		}
 		/*------------------------------------------------------------------------------*/
 		if (clickName == "MAINMENU_buttonEditor") {
-			ENGINE()->setEnvironment("editor");
+			Engine::setEnvironment("editor");
 		}
 		/*------------------------------------------------------------------------------*/
 		if (clickName == "MAINMENU_buttonOptions") {
@@ -36,7 +38,7 @@ namespace menu {
 		/*------------------------------------------------------------------------------*/
 		if (clickName == "MAINMENU_buttonQuit") {
 			saveLog();
-			setBoolean("window-should-close", true);
+			engine::myWindow::ShouldClose = true;
 		}
 		/*------------------------------------------------------------------------------*/
 		if (currentMenu == "singleplayer") {
@@ -46,8 +48,8 @@ namespace menu {
 		}
 		/*------------------------------------------------------------------------------*/
 		if (clickName == "SINGLEPLAYER_buttonStart") {
-			setBoolean("mouse-left", false);
-			ENGINE()->setEnvironment("game");
+			Mouse::LeftClick = false;
+			Engine::setEnvironment("game");
 			/* save game informations */
 			game::playersNumber = num_players;
 			for (int i = 0; i < num_players; i++) {

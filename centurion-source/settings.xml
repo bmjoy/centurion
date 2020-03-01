@@ -5,6 +5,6 @@
   <cameraMovespeed>10</cameraMovespeed>
   <cameraMaxZoom>20</cameraMaxZoom>
   <language>english</language>
-  <debug>false</debug>
+  <debug>true</debug>
   <fullScreen>false</fullScreen>
 </c_settings>

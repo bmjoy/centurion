@@ -1,7 +1,9 @@
 #include <game>
 #include <editor>
 #include <math>
-#include <engine>
+#include <engine/camera.h>
+#include <engine/window.h>
+#include <engine/mouse.h>
 #include <player>
 #include <surface>
 #include <picking>
@@ -50,7 +52,7 @@ namespace game {
 	void Game::handleKeyboardControls() {
 		
 		//Open or close minimap
-		if (KeyCode[GLFW_KEY_SPACE] || getBoolean("mouse-middle")) {
+		if (KeyCode[GLFW_KEY_SPACE] || Mouse::MiddleClick) {
 			gameMinimapStatus = !gameMinimapStatus;
 			gameMinimapStatus ? std::cout << "[DEBUG] Minimap camera ON!\n" : std::cout << "[DEBUG] Minimap camera OFF!\n";
 		}
@@ -61,8 +63,8 @@ namespace game {
 		}
 		// Wireframe
 		if (KeyCode[GLFW_KEY_Z]) {
-			setBoolean("wireframe", !getBoolean("wireframe"));
-			getBoolean("wireframe") ? std::cout << "[DEBUG] Wireframe ON!\n" : std::cout << "[DEBUG] Wireframe OFF! \n";
+			Surface::Wireframe = !Surface::Wireframe;
+			Surface::Wireframe ? std::cout << "[DEBUG] Wireframe ON!\n" : std::cout << "[DEBUG] Wireframe OFF! \n";
 		}
 		// Grid
 		if (KeyCode[GLFW_KEY_G]) {
@@ -86,10 +88,10 @@ namespace game {
 	//----------------------------------------
 
 	void tracing(Surface *s) {
-		if (getBoolean("mouse-right")) {
+		if (Mouse::RightClick) {
 			unsigned char tracingCol[4];
 			(*s).render(true);
-			glReadPixels((GLint)getParam("mouse-x-rightclick"), (GLint)getParam("mouse-y-rightclick"), 1, 1, GL_RGBA, GL_UNSIGNED_BYTE, &tracingCol);
+			glReadPixels((GLint)Mouse::GetXRightClick(), (GLint)Mouse::GetYRightClick(), 1, 1, GL_RGBA, GL_UNSIGNED_BYTE, &tracingCol);
 			mapgen::mouseZNoise = (mapgen::maxZ - mapgen::minZ) * ((float)tracingCol[0] / 255.0f) + mapgen::minZ;
 		}
 	}
@@ -101,7 +103,7 @@ namespace game {
 			return;
 		}
 
-		if ((getBoolean("mouse-right") || getBoolean("mouse-left")) && !selRectangleIsActive){
+		if ((Mouse::RightClick || Mouse::LeftClick) && !selRectangleIsActive){
 			for (map<int, Building>::iterator bld = buildings.begin(); bld != buildings.end(); bld++) {
 				bld->second.render(true, 0);
 			}
@@ -109,8 +111,8 @@ namespace game {
 				u->second.render(true, 0);
 			}	
 
-			if (getBoolean("mouse-left")) leftClickID = get_id("left");
-			if (getBoolean("mouse-right")) rightClickID = get_id("right");
+			if (Mouse::LeftClick) leftClickID = get_id("left");
+			if (Mouse::RightClick) rightClickID = get_id("right");
 
 			if (gameMinimapStatus) {					
 				blockMinimap = false;
@@ -148,40 +150,40 @@ namespace game {
 	}
 
 	void goToPosition() {
-		if (getBoolean("mouse-left") && cursorInGameScreen()) {
-			cameraToX = getParam("mouse-x-leftclick") / Settings::WindowWidth()*(float)mapWidth - getParam("window-width-zoomed") / 2.f;
-			cameraToY = getYMinimapCoord(getParam("mouse-y-leftclick")) / Settings::WindowHeight()*(float)mapHeight - getParam("window-height-zoomed") / 2.f;
+		if (Mouse::LeftClick && cursorInGameScreen()) {
+			cameraToX = Mouse::GetXLeftClick() / myWindow::Width*(float)mapWidth - myWindow::WidthZoomed / 2.f;
+			cameraToY = getYMinimapCoord(Mouse::GetYLeftClick()) / myWindow::Height*(float)mapHeight - myWindow::HeightZoomed / 2.f;
 			// if you are clicking on a townhall you have to double click 
 			// to move the camera there and quit minimap
 			if (leftClickID > 0 && hasDoubleClicked()) {
-				cameraToX = buildings[leftClickID].get_xPos() - getParam("window-width-zoomed") / 2.f;
-				cameraToY = buildings[leftClickID].get_yPos() - getParam("window-height-zoomed") / 2.f;
+				cameraToX = buildings[leftClickID].get_xPos() - myWindow::WidthZoomed / 2.f;
+				cameraToY = buildings[leftClickID].get_yPos() - myWindow::HeightZoomed / 2.f;
 				blockMinimap = false;
 			}
 			//------------------------------------------------
 			if (!blockMinimap) {
-				CAMERA()->go_to_pos(cameraToX, cameraToY);
+				Camera::go_to_pos(cameraToX, cameraToY);
 				gameMinimapStatus = false;
-				setBoolean("mouse-left", false);
-				setBoolean("mouse-left-pressed", false);
+				Mouse::LeftClick = false;
+				Mouse::LeftHold = false;
 			}
 		}
 	}
 
 	void renderSelRectangle() {
-		if (getBoolean("mouse-left-pressed")) {
+		if (Mouse::LeftHold) {
 			if (!selRectangleIsActive){
 				cout << "[DEBUG] Selection rectangle enabled.\n";
-				(*SelRectCoords()).startX = getParam("mouse-x-leftclick") * getParam("window-width-zoomed") / Settings::WindowWidth() + cameraLastX;
-				(*SelRectCoords()).startY = getParam("mouse-y-leftclick") * getParam("window-height-zoomed") / Settings::WindowHeight() + cameraLastY;
+				(*SelRectCoords()).startX = Mouse::GetXLeftClick() * myWindow::WidthZoomed / myWindow::Width + cameraLastX;
+				(*SelRectCoords()).startY = Mouse::GetYLeftClick() * myWindow::HeightZoomed / myWindow::Height + cameraLastY;
 			}
-			(*SelRectCoords()).lastX = getParam("mouse-x-position") * getParam("window-width-zoomed") / Settings::WindowWidth() + getParam("camera-x-position");
-			(*SelRectCoords()).lastY = getParam("mouse-y-position") * getParam("window-height-zoomed") / Settings::WindowHeight() + getParam("camera-y-position");
-			if (getParam("mouse-y-position") < getParam("ui-bottom-height")) {
-				(*SelRectCoords()).lastY = getParam("ui-bottom-height")*getParam("window-height-zoomed") / Settings::WindowHeight() + 1.0f + getParam("camera-y-position");
+			(*SelRectCoords()).lastX = Mouse::GetXPosition() * myWindow::WidthZoomed / myWindow::Width + Camera::GetXPosition();
+			(*SelRectCoords()).lastY = Mouse::GetYPosition() * myWindow::HeightZoomed / myWindow::Height + Camera::GetYPosition();
+			if (Mouse::GetYPosition() < myWindow::BottomBarHeight) {
+				(*SelRectCoords()).lastY = myWindow::BottomBarHeight*myWindow::HeightZoomed / myWindow::Height + 1.0f + Camera::GetYPosition();
 			}
-			if (getParam("mouse-y-position") > Settings::WindowHeight() - getParam("ui-top-height")) {
-				(*SelRectCoords()).lastY = getParam("window-height-zoomed") - getParam("ui-top-height")*getParam("window-height-zoomed") / Settings::WindowHeight() - 1.0f + getParam("camera-y-position");
+			if (Mouse::GetYPosition() > myWindow::Height - myWindow::TopBarHeight) {
+				(*SelRectCoords()).lastY = myWindow::HeightZoomed - myWindow::TopBarHeight*myWindow::HeightZoomed / myWindow::Height - 1.0f + Camera::GetYPosition();
 			}
 
 			float w = ((*SelRectCoords()).lastX - (*SelRectCoords()).startX);
@@ -210,8 +212,8 @@ namespace game {
 		}
 		else {
 			if (selRectangleIsActive) cout << "[DEBUG] Selection rectangle disabled.\n";
-			cameraLastX = getParam("camera-x-position");
-			cameraLastY = getParam("camera-y-position");
+			cameraLastX = Camera::GetXPosition();
+			cameraLastY = Camera::GetYPosition();
 			(*SelRectCoords()).startX = -0.1f;
 			(*SelRectCoords()).startY = -0.1f;
 			(*SelRectCoords()).lastX = -0.1f;
@@ -225,8 +227,8 @@ namespace game {
 	}
 
 	void setMinimapProjection() {
-		float bottom = (-1.f)*(mapHeight * getParam("ui-bottom-height") / (Settings::WindowHeight() - getParam("ui-bottom-height") - getParam("ui-top-height")));
-		float top = mapHeight + mapHeight * getParam("ui-top-height") / (Settings::WindowHeight() - getParam("ui-bottom-height") - getParam("ui-top-height"));
+		float bottom = (-1.f)*(mapHeight * myWindow::BottomBarHeight / (myWindow::Height - myWindow::BottomBarHeight - myWindow::TopBarHeight));
+		float top = mapHeight + mapHeight * myWindow::TopBarHeight / (myWindow::Height - myWindow::BottomBarHeight - myWindow::TopBarHeight);
 		float left = 0.f;
 		float right = (float)mapWidth;
 		glb::minimapProjection = ortho(left, right, bottom, top, -right, right);

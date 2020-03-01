@@ -24,7 +24,7 @@ namespace glb {
 	extern mat4 cameraProjection;
 	extern mat4 minimapProjection;
 
-	extern GLFWwindow *MainWindow;
+	//extern GLFWwindow *MainWindow;
 
 	extern vector<vec3> colors;
 	extern vector<string> racesNames;
@@ -35,19 +35,15 @@ namespace glb {
 
 	static const string gameNameSTR = "Centurion";
 	static const LPCWSTR gameNameLPCWSTR = L"Centurion";
-	static map<string, float> params; // global parameters
-	static map<string, bool> booleans; // global booleans
 	static map<string, string> errors; // error codes
 	static map<string, string> translation_table_current;
-	void setParam(string param, float value);
-	float getParam(string param);
-	void setBoolean(string param, bool value);
-	bool getBoolean(string param);
+
 	void setErrors(map<string, string> errorsMap);
 	string getErrorCode(string error);
 	string getTranslation(string code);
 	void initParams();
 	void saveLog();
+
 	void read_translation_tables();
 	void changeLanguage(string lan);
 

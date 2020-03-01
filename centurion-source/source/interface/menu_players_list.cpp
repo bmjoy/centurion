@@ -1,9 +1,7 @@
 #include <interface>
-#include <engine>
 #include <game>
 #include <picking>
 
-using namespace engine;
 using namespace glb;
 using namespace game;
 

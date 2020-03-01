@@ -1,9 +1,11 @@
 #include <interface>
 #include <picking>
-#include <engine>
 #include <game>
+#include <engine/camera.h>
+#include <engine/window.h>
 
 using namespace glb;
+using namespace game;
 using namespace engine;
 
 namespace editor {
@@ -28,13 +30,13 @@ namespace editor {
 	void EditorUI::render(bool picking) {
 		// minimap rectangle:
 		if (game::gameMinimapStatus) {
-			float x = getParam("camera-x-position") / game::mapWidth * Settings::WindowWidth();
-			float y = getParam("camera-y-position") / game::mapHeight * (Settings::WindowHeight() - getParam("ui-bottom-height") - getParam("ui-top-height")) + getParam("ui-bottom-height");
-			float w = getParam("window-width-zoomed") * Settings::WindowWidth() / game::mapWidth;
-			float h = getParam("window-height-zoomed") * (Settings::WindowHeight() - getParam("ui-bottom-height") - getParam("ui-top-height")) / game::mapHeight;
+			float x = Camera::GetXPosition() / game::mapWidth * myWindow::Width;
+			float y = Camera::GetYPosition() / game::mapHeight * (myWindow::Height - myWindow::BottomBarHeight - myWindow::TopBarHeight) + myWindow::BottomBarHeight;
+			float w = myWindow::WidthZoomed * myWindow::Width / game::mapWidth;
+			float h = myWindow::HeightZoomed * (myWindow::Height - myWindow::BottomBarHeight - myWindow::TopBarHeight) / game::mapHeight;
 			x = std::max(x, 1.f);
-			y = std::max(y, getParam("ui-bottom-height") + 1.f);
-			y = std::min(y, Settings::WindowHeight() - getParam("ui-top-height") - h);
+			y = std::max(y, myWindow::BottomBarHeight + 1.f);
+			y = std::min(y, myWindow::Height - myWindow::TopBarHeight - h);
 			minimapRectangle.render(vec4(255.f), false, x, y, w, h);
 		}
 

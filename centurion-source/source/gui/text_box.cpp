@@ -1,4 +1,6 @@
 #include <gui>
+#include <global>
+#include <engine/window.h>
 
 namespace gui {
 
@@ -14,8 +16,8 @@ namespace gui {
 		lines.clear();
 		lines_data.clear();
 
-		if (x < 0) x += Settings::WindowWidth();
-		if (y < 0) y += Settings::WindowHeight();		
+		if (x < 0) x += engine::myWindow::Width;
+		if (y < 0) y += engine::myWindow::Height;
 		
 		hAlign = halign; vAlign = valign;
 

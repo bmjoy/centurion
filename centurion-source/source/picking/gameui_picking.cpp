@@ -1,6 +1,6 @@
 #include <interface>
 #include <picking>
-#include <engine>
+#include <engine/engine.h>
 #include <game>
 
 using namespace glb;
@@ -16,7 +16,7 @@ namespace game {
 		if (clickName == "GAME_pauseMenuButtonQuit") {
 			gameMenuStatus = false;
 			//saveCurrentScenario("random_map_singleplayer");
-			ENGINE()->Reset();
+			Engine::Reset();
 		}
 	}
 };

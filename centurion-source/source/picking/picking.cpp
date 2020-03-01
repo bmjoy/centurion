@@ -1,5 +1,6 @@
 #include <picking>
 #include <global>
+#include <engine/mouse.h>
 
 using namespace std;
 using namespace glm;
@@ -23,9 +24,9 @@ namespace glb {
 		unsigned char data[4];
 		//Edit the following line because you can get id with both left and right click
 		if (LeftRight == "left")
-			glReadPixels((GLint)getParam("mouse-x-leftclick"), (GLint)getParam("mouse-y-leftclick"), 1, 1, GL_RGBA, GL_UNSIGNED_BYTE, &data);
+			glReadPixels((GLint)engine::Mouse::GetXLeftClick(), (GLint)engine::Mouse::GetYLeftClick(), 1, 1, GL_RGBA, GL_UNSIGNED_BYTE, &data);
 		if (LeftRight == "right")
-			glReadPixels((GLint)getParam("mouse-x-rightclick"), (GLint)getParam("mouse-y-rightclick"), 1, 1, GL_RGBA, GL_UNSIGNED_BYTE, &data);
+			glReadPixels((GLint)engine::Mouse::GetXRightClick(), (GLint)engine::Mouse::GetYRightClick(), 1, 1, GL_RGBA, GL_UNSIGNED_BYTE, &data);
 		int pickedID =
 			data[0] +
 			data[1] * 256 +

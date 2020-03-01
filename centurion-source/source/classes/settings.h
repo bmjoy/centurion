@@ -22,14 +22,11 @@ namespace glb {
 		static bool FullScreen() { return SettingsXML->fullScreen(); }
 		static void Language(string lang) { SettingsXML->language(lang); }
 		static string Language() { return SettingsXML->language(); }
-		static void WindowWidth(float x) { windowWidth = x;  SettingsXML->windowWidth(int(x)); }
-		static float WindowWidth() { return windowWidth; }
-		static void WindowHeight(float y) { windowHeight = y;  SettingsXML->windowHeight(int(y)); }
-		static float WindowHeight() { return windowHeight; }
+		static void SetWindowWidth(float x);  // get --> engine::myWindow::Width
+		static void SetWindowHeight(float y); // get --> engine::myWindow::Height
 	private:
 		Settings();
 		~Settings();
-		static Settings mysettings;
 		static string SettingsPath;
 		static auto_ptr<c_settings> SettingsXML;
 

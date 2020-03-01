@@ -1,6 +1,7 @@
 #include <gui>
 #include <codecvt>
 #include <locale>
+#include <global>
 
 namespace gui {
 

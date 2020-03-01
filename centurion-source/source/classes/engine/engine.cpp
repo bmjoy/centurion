@@ -1,4 +1,8 @@
-#include <engine>
+#include "engine.h"
+#include "window.h"
+#include "camera.h"
+#include "mouse.h"
+
 #include <editor>
 #include <game>
 #include <player>
@@ -14,12 +18,18 @@ using namespace editor;
 using namespace debug;
 
 namespace engine {
-	Engine *ENGINE() { return &myengine; }
-	Camera *CAMERA() { return &mycamera; }
+	// define static variables
+	gui::SimpleText Engine::text;
+	string Engine::environment;
+	double Engine::currentTime, Engine::lastTime, Engine::finalTime;
+	int Engine::nbFrames, Engine::Fps, Engine::Mpfs;
+	bool Engine::reset;
+	// ---------- end definitions
 
-	Engine::Engine(){
-		window = myWindow();
-		nbFrames = 0; 
+	Engine::Engine() { }
+
+	void Engine::Init() {
+		nbFrames = 0;
 		Fps = 0;
 		Mpfs = 0;
 		environment = "menu";
@@ -27,33 +37,33 @@ namespace engine {
 	}
 
 	int Engine::launch() {
-		window.init();
+		myWindow window = myWindow::GetInstance();
 		obj::init();
-	
+
 		read_data();
-	
+
 		obj::compile();
 		obj::create();
 
 		lastTime = glfwGetTime();
 
-		*CAMERA() = Camera(vec3(0.0f, 0.0f, 0.0f), vec3(0.0f, 1.0f, 0.0f), -90.0f, 0.0f);
-		mouse = new Mouse();
+		Camera::Init(vec3(0.0f, 0.0f, 0.0f), vec3(0.0f, 1.0f, 0.0f), -90.0f, 0.0f);
+		Mouse::create();
 
 		DEBUG_UI()->create();
 
-		while (!getBoolean("window-should-close")) {
+		while (myWindow::ShouldClose == false) {
 			glfwPollEvents();
 			window.clear_buffers();
 			fps();
-			mouse->mouse_control(window.get_mouse_x(), window.get_mouse_y());
+			Mouse::mouse_control(window.get_mouse_x(), window.get_mouse_y());
 			handleGlobalKeys();
 
 
 			// ---- MENU ---- //
-		
-			if (environment == "menu"){
-				if (!MENU()->menu_is_created()){
+
+			if (environment == "menu") {
+				if (!MENU()->menu_is_created()) {
 					obj::Audio()->MusicPlay("assets/music/menu.ogg");
 					MENU()->create();
 					cout << "[DEBUG] Main menu was created!\n";
@@ -67,15 +77,15 @@ namespace engine {
 				if (!GAME()->game_is_created()) {
 					obj::Audio()->MusicStop();
 
-					clearAndSwapBuffers(MainWindow);
+					clearAndSwapBuffers(window.GetGlfwWindow());
 					{
 						text = gui::SimpleText("dynamic");
-						text.render_dynamic(getTranslation("WORD_gameStarted"), "tahoma_15px", Settings::WindowWidth() / 2.f, Settings::WindowHeight() / 2.f, vec4(255.f), "center", "middle");
+						text.render_dynamic(getTranslation("WORD_gameStarted"), "tahoma_15px", myWindow::Width / 2.f, myWindow::Height / 2.f, vec4(255.f), "center", "middle");
 					}
-					glfwSwapBuffers(MainWindow);
+					glfwSwapBuffers(window.GetGlfwWindow());
 
 					GAME()->create();
-				}						
+				}
 				GAME()->run();
 			}
 
@@ -92,7 +102,7 @@ namespace engine {
 			// -------------- //
 
 			if (reset) {
-				reset = false;				
+				reset = false;
 				if (environment == "editor") EDITOR()->reset();
 				if (environment == "game") { GAME()->reset(); GAME()->clear(); }
 				MENU()->reset();
@@ -103,23 +113,23 @@ namespace engine {
 			if (Settings::DebugIsActive())	DEBUG_UI()->render(Fps, Mpfs, selectedUnits);
 
 			// mouse
-			mouse->render();
-			
-			if ((KeyCode[GLFW_KEY_LEFT_SHIFT] || KeyCode[GLFW_KEY_RIGHT_SHIFT])&& KeyCode[GLFW_KEY_S]){
+			Mouse::render();
+
+			if ((KeyCode[GLFW_KEY_LEFT_SHIFT] || KeyCode[GLFW_KEY_RIGHT_SHIFT]) && KeyCode[GLFW_KEY_S]) {
 				cout << "[DEBUG] Screenshot taken." << endl;
 				glb::takeScreenshot();
 			}
 
 			CharCodepointPressed = -1;
 			resetKeyCodes();
-			glfwSwapBuffers(MainWindow);
+			glfwSwapBuffers(window.GetGlfwWindow());
 
 			fps_sleep();
 		}
 
 		if (MENU()->menu_is_created()) MENU()->reset();
 
-		glfwTerminate(); 
+		glfwTerminate();
 		return 0;
 	}
 
@@ -136,19 +146,19 @@ namespace engine {
 			string zone = dataRaces["zone"].get<string>();
 			string t_class = dataRaces["food_transport_class"].get<string>();
 			r.setRaceProperties(id, name, zone, t_class);
-			RACES[name]=r;
-			racesNames.push_back("RACE_"+name);
+			RACES[name] = r;
+			racesNames.push_back("RACE_" + name);
 		}
 
 		vector<string> files = get_all_files_names_within_folder("assets/data/classes");
-	
+
 		/* buildings and units */
 
 		for (int i = 0; i < files.size(); ++i) {
 			ifstream path("assets/data/classes/" + files[i]);
 			json dataClass = json::parse(path);
 
-			if (dataClass["type"] == "building") {			
+			if (dataClass["type"] == "building") {
 				obj::BSprite()->addPath(dataClass["ent_path"]);
 
 				/* editor object string list */
@@ -234,7 +244,5 @@ namespace engine {
 		}
 	}
 
-	Engine::~Engine(){		
-		delete mouse;
-	}
+	Engine::~Engine() { }
 }

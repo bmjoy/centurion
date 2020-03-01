@@ -1,5 +1,7 @@
 #include <gui>
 #include <picking>
+#include <global>
+#include <engine/window.h>
 
 namespace gui {
 
@@ -17,8 +19,8 @@ namespace gui {
 		originMap["top-left"] = 2;
 	}
 	void Image::create(string Origin, float x, float y, float w, float h, int pickingID) {
-		if (x < 0) x += Settings::WindowWidth();
-		if (y < 0) y += Settings::WindowHeight();
+		if (x < 0) x += engine::myWindow::Width;
+		if (y < 0) y += engine::myWindow::Height;
 		imgData.pickingID = pickingID;
 		imgData.imageName = imageName;
 		imgData.pickingColor = getPickingColorFromID(pickingID);

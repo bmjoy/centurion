@@ -1,4 +1,6 @@
 #include <gui>
+#include <global>
+#include <engine/mouse.h>
 
 namespace gui {
 
@@ -106,7 +108,7 @@ namespace gui {
 	}
 
 	int FormInput::get_clicked_option() {
-		int i = int((getParam("mouse-y-leftclick") - y) / height)*(-1);
+		int i = int((engine::Mouse::GetYLeftClick() - y) / height)*(-1);
 		return i;
 	}
 	void FormInput::select_next() {
