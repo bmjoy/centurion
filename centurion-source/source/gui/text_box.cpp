@@ -14,8 +14,8 @@ namespace gui {
 		lines.clear();
 		lines_data.clear();
 
-		if (x < 0) x += settings.GetWindowWidth();
-		if (y < 0) y += settings.GetWindowHeight();		
+		if (x < 0) x += Settings::WindowWidth();
+		if (y < 0) y += Settings::WindowHeight();		
 		
 		hAlign = halign; vAlign = valign;
 

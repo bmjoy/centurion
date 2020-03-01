@@ -20,8 +20,8 @@ void MinimapRectangle::create() {
 		1, 2, 3    // second triangle
 	};
 
-	float w = settings.GetWindowWidth();
-	float h = settings.GetWindowHeight();
+	float w = Settings::WindowWidth();
+	float h = Settings::WindowHeight();
 
 	float vertices[] = {
 		// X,Y,Z			// uv coords		
@@ -70,8 +70,8 @@ void MinimapRectangle::update() {
 	glUseProgram(shaderId);
 	/* This texture comes from the real grid of 0/1 */
 
-	int w = (int)settings.GetWindowWidth();
-	int h = (int)settings.GetWindowHeight();
+	int w = (int)Settings::WindowWidth();
+	int h = (int)Settings::WindowHeight();
 
 	unsigned char* imageData = new unsigned char[int(w * h * 4)];
 	glReadPixels(0, 0, w, h, GL_RGBA, GL_UNSIGNED_BYTE, imageData);

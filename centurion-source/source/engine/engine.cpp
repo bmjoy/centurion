@@ -70,7 +70,7 @@ namespace engine {
 					clearAndSwapBuffers(MainWindow);
 					{
 						text = gui::SimpleText("dynamic");
-						text.render_dynamic(getTranslation("WORD_gameStarted"), "tahoma_15px", settings.GetWindowWidth() / 2.f, settings.GetWindowHeight() / 2.f, vec4(255.f), "center", "middle");
+						text.render_dynamic(getTranslation("WORD_gameStarted"), "tahoma_15px", Settings::WindowWidth() / 2.f, Settings::WindowHeight() / 2.f, vec4(255.f), "center", "middle");
 					}
 					glfwSwapBuffers(MainWindow);
 
@@ -100,7 +100,7 @@ namespace engine {
 			}
 
 			// debug ui
-			if (settings.DebugIsActive())	DEBUG_UI()->render(Fps, Mpfs, selectedUnits);
+			if (Settings::DebugIsActive())	DEBUG_UI()->render(Fps, Mpfs, selectedUnits);
 
 			// mouse
 			mouse->render();
@@ -210,7 +210,7 @@ namespace engine {
 
 	void Engine::handleGlobalKeys() {
 		// activate or deactivate debug ui
-		if (settings.DebugIsActive() && KeyCode[GLFW_KEY_F10]) {
+		if (Settings::DebugIsActive() && KeyCode[GLFW_KEY_F10]) {
 			debug::DEBUG_UI()->setStatus(!debug::DEBUG_UI()->getStatus());
 			debug::DEBUG_UI()->getStatus() ? std::cout << "[DEBUG] Debug UI ON!\n" : std::cout << "[DEBUG] Debug UI OFF!\n";
 		}

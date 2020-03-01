@@ -52,7 +52,7 @@ namespace menu {
 				/* use data */
 				img = gui::Image(imageName);	
 				if (size == "auto") img.create(align, (float)x, (float)y, 0.0f, 0.0f, getPickingID() * clickable);
-				if (size == "max") img.create(align, (float)x, (float)y, settings.GetWindowWidth(), settings.GetWindowHeight(), pickingID * clickable);
+				if (size == "max") img.create(align, (float)x, (float)y, Settings::WindowWidth(), Settings::WindowHeight(), pickingID * clickable);
 				images[menus[a]].push_back(img);
 
 				// update picking 
@@ -122,7 +122,7 @@ namespace menu {
 				/* use data */
 				img = gui::Image(imageName);
 				if (size == "auto") img.create(align, (float)x, (float)y, 0.0f, 0.0f, getPickingID() * clickable);
-				if (size == "max") img.create(align, (float)x, (float)y, settings.GetWindowWidth(), settings.GetWindowHeight(), pickingID * clickable);
+				if (size == "max") img.create(align, (float)x, (float)y, Settings::WindowWidth(), Settings::WindowHeight(), pickingID * clickable);
 				images[menus[a]].push_back(img);
 
 				// update picking 

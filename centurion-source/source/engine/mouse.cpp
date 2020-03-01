@@ -32,7 +32,7 @@ void Mouse::mouse_control(int lastX, int lastY) {
 	
 	yzoomed = getZoomedCoords(getParam("mouse-x-position"), getParam("mouse-y-position")).y;
 	znoise = mapgen::smoothNoise(yzoomed, mapgen::mouseZNoise);
-	znoise /= getParam("window-height-zoomed") / settings.GetWindowHeight();
+	znoise /= getParam("window-height-zoomed") / Settings::WindowHeight();
 
 	setParam("mouse-y-2D-position", getParam("mouse-y-position") - znoise);
 	

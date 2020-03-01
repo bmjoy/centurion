@@ -43,7 +43,7 @@ namespace editor {
 
 		/* If minimap is NOT active */
 		if (!game::gameMinimapStatus) {
-			if (!IsWindowOpened && getParam("mouse-y-position") < settings.GetWindowHeight() - 30.f && !menuIsOpened) 
+			if (!IsWindowOpened && getParam("mouse-y-position") < Settings::WindowHeight() - 30.f && !menuIsOpened) 
 				CAMERA()->mouseControl(game::cameraThreshold);
 			view = CAMERA()->calculateViewMatrix();
 			proj = glb::cameraProjection;

@@ -15,8 +15,8 @@ namespace gui {
 
 	void SimpleText::create_static(string text, string font, float x, float y, string halign, string valign, vec4 color, string fontWeight) {
 		if (type == "dynamic") cout << "[DEBUG] Dynamic text created with static option\n";
-		if (x < 0) x += settings.GetWindowWidth();
-		if (y < 0) y += settings.GetWindowHeight();
+		if (x < 0) x += Settings::WindowWidth();
+		if (y < 0) y += Settings::WindowHeight();
 
 		hAlign = halign;
 		vAlign = valign;

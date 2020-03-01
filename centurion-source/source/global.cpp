@@ -20,7 +20,7 @@ using namespace game;
 
 namespace glb {
 
-	Settings settings;
+	//Settings settings;
 
 	string exe_root = ""; //defined in main.cpp
 	//string language = "english"; //Default value
@@ -64,23 +64,24 @@ namespace glb {
 
 			// Read Settings.xml
 
-			bool settingsOk = settings.ReadSettings();
-
+			Settings::Init();
+			bool settingsOk = Settings::ReadSettings();
 			if (settingsOk == false) {
-				settings.SetDefaultSettings();
-				settingsOk = settings.ReadSettings();
+				Settings::SetDefaultSettings();
+				settingsOk = Settings::ReadSettings();
 				if (settingsOk == false) {
-					// throw exception;
+					string m = "[DEBUG] An error occurred reading Settings.xml.";
+					std::cout << m;
+					throw new std::exception(m.c_str());
 				}
 			}
-			
 
 			//read_settings();
 			read_translation_tables();
 
-			setParam("window-ratio", settings.GetWindowWidth() / settings.GetWindowHeight());
-			setParam("window-width-zoomed", settings.GetWindowWidth() + (currentZoomCamera - 1) * zoomCameraFactor);
-			setParam("window-height-zoomed", settings.GetWindowHeight() + (currentZoomCamera - 1) * zoomCameraFactor / getParam("window-ratio"));
+			setParam("window-ratio", Settings::WindowWidth() / Settings::WindowHeight());
+			setParam("window-width-zoomed", Settings::WindowWidth() + (currentZoomCamera - 1) * zoomCameraFactor);
+			setParam("window-height-zoomed", Settings::WindowHeight() + (currentZoomCamera - 1) * zoomCameraFactor / getParam("window-ratio"));
 			setBoolean("window-should-close", false);
 			setBoolean("wireframe", false);
 			setBoolean("mouse-left", false);
@@ -90,7 +91,7 @@ namespace glb {
 			setBoolean("mouse-scroll-bool", false);
 			setParam("mouse-scroll", 0.f);
 
-			menuProjection = glm::ortho(0.0f, settings.GetWindowWidth(), 0.0f, settings.GetWindowHeight(), -100.0f, 100.0f);
+			menuProjection = glm::ortho(0.0f, Settings::WindowWidth(), 0.0f, Settings::WindowHeight(), -100.0f, 100.0f);
 			cameraProjection = glm::ortho(0.0f, getParam("window-width-zoomed"), 0.0f, getParam("window-height-zoomed"), -(float)mapWidth, (float)mapWidth);
 
 			ifstream data_path("assets/data/data.json");
@@ -146,7 +147,7 @@ namespace glb {
 				if (row == 0) { // first row
 					stringstream s(line);
 					while (getline(s, value, '\t')) {
-						if (value == settings.GetLanguage()) currentlang = nLanguages;
+						if (value == Settings::Language()) currentlang = nLanguages;
 						if (nLanguages != 0) availableLanguages[value] = nLanguages - 1;
 						nLanguages++;
 					}
@@ -170,7 +171,7 @@ namespace glb {
 	}
 
 	void changeLanguage(string lan) {
-		settings.SetLanguage(lan);
+		Settings::Language(lan);
 		read_translation_tables();
 		menu::MENU()->update();
 		cout << "DEBUG : Language changed to " + lan << endl;
@@ -394,8 +395,8 @@ namespace glb {
 		strcpy(filename, "screenshots/");
 		strcat(filename, basename);
 
-		int w = (int)settings.GetWindowWidth();
-		int h = (int)settings.GetWindowHeight();
+		int w = (int)Settings::WindowWidth();
+		int h = (int)Settings::WindowHeight();
 		unsigned char* imageData = new unsigned char[int(w * h * 3)];
 		glPixelStorei(GL_PACK_ALIGNMENT, 1);
 		glReadPixels(0, 0, w, h, GL_RGB, GL_UNSIGNED_BYTE, imageData);
@@ -516,11 +517,11 @@ namespace glb {
 	}
 
 	float getYMinimapCoord(float x) {
-		return settings.GetWindowHeight() * (x - getParam("ui-bottom-height")) / (settings.GetWindowHeight() - getParam("ui-bottom-height") - getParam("ui-top-height"));
+		return Settings::WindowHeight() * (x - getParam("ui-bottom-height")) / (Settings::WindowHeight() - getParam("ui-bottom-height") - getParam("ui-top-height"));
 	}
 
 	bool cursorInGameScreen() {
-		return (getParam("mouse-y-leftclick") > getParam("ui-bottom-height")) && (getParam("mouse-y-leftclick") < (glb::settings.GetWindowHeight() - getParam("ui-top-height")));
+		return (getParam("mouse-y-leftclick") > getParam("ui-bottom-height")) && (getParam("mouse-y-leftclick") < (glb::Settings::WindowHeight() - getParam("ui-top-height")));
 	}
 
 	void clearAndSwapBuffers(GLFWwindow *window) {
@@ -532,15 +533,15 @@ namespace glb {
 	}
 
 	vec2 getZoomedCoords(float xCoord, float yCoord) {
-		float x = xCoord * getParam("window-width-zoomed") / settings.GetWindowWidth() + getParam("camera-x-position");
-		float y = yCoord * getParam("window-height-zoomed") / settings.GetWindowHeight() + getParam("camera-y-position");
+		float x = xCoord * getParam("window-width-zoomed") / Settings::WindowWidth() + getParam("camera-x-position");
+		float y = yCoord * getParam("window-height-zoomed") / Settings::WindowHeight() + getParam("camera-y-position");
 		return vec2(x, y);
 	}
 
 	void forceGameClosure(string errorCode, string errorText) {
 		string eC = (getTranslation("WORD_errorCode") == "") ? "Error code" : getTranslation("WORD_errorCode");
 		string text = "  " + eC + ": " + getErrorCode(errorCode) + "\n\n  " + getTranslation(errorText);
-		if (settings.GetLanguage() == "arabic") text = "  " + getErrorCode(errorCode) + ": " + eC + "\n\n  " + getTranslation(errorText);
+		if (Settings::Language() == "arabic") text = "  " + getErrorCode(errorCode) + ": " + eC + "\n\n  " + getTranslation(errorText);
 		const int wideLength = sizeof(text.c_str()) * 128;
 		WCHAR wstr[wideLength];
 		MultiByteToWideChar(CP_UTF8, 0, text.c_str(), wideLength, wstr, wideLength);

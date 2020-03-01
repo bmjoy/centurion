@@ -1,4 +1,5 @@
-#pragma once
+#ifndef SETTINGS_H
+#define SETTINGS_H
 
 #include <settings-xml.hxx>
 
@@ -8,32 +9,33 @@ namespace glb {
 	class Settings
 	{
 	public:
-		Settings();
-		bool ReadSettings();
-		void SetDefaultSettings();
-		void SaveXml();
-		void SetCameraMaxZoom(float zoom) { cameraMaxZoom = zoom;  SettingsXML->cameraMaxZoom((int)zoom); }
-		float GetCameraMaxZoom() { return cameraMaxZoom; }
-		void SetCameraMovespeed(float speed) { cameraMovespeed = speed;  SettingsXML->cameraMovespeed((int)speed); }
-		float GetCameraMovespeed() { return cameraMovespeed; }
-		bool DebugIsActive() { return SettingsXML->debug(); }
-		void SetFullScreen(bool full) { SettingsXML->fullScreen(full); }
-		bool GetFullScreen() { return SettingsXML->fullScreen(); }
-		void SetLanguage(string lang) { SettingsXML->language(lang); }
-		string GetLanguage() { return SettingsXML->language(); }
-		void SetWindowWidth(float x) { windowWidth = x;  SettingsXML->windowWidth(int(x)); }
-		float GetWindowWidth() { return windowWidth; }
-		void SetWindowHeight(float y) { windowHeight = y;  SettingsXML->windowHeight(int(y)); }
-		float GetWindowHeight() { return windowHeight; }
-		~Settings();
+		static void Init();
+		static bool ReadSettings();
+		static void SetDefaultSettings();
+		static void SaveXml();
+		static void CameraMaxZoom(float zoom) { cameraMaxZoom = zoom;  SettingsXML->cameraMaxZoom((int)zoom); }
+		static float CameraMaxZoom() { return cameraMaxZoom; }
+		static void CameraMovespeed(float speed) { cameraMovespeed = speed;  SettingsXML->cameraMovespeed((int)speed); }
+		static float CameraMovespeed() { return cameraMovespeed; }
+		static bool DebugIsActive() { return SettingsXML->debug(); }
+		static void FullScreen(bool full) { SettingsXML->fullScreen(full); }
+		static bool FullScreen() { return SettingsXML->fullScreen(); }
+		static void Language(string lang) { SettingsXML->language(lang); }
+		static string Language() { return SettingsXML->language(); }
+		static void WindowWidth(float x) { windowWidth = x;  SettingsXML->windowWidth(int(x)); }
+		static float WindowWidth() { return windowWidth; }
+		static void WindowHeight(float y) { windowHeight = y;  SettingsXML->windowHeight(int(y)); }
+		static float WindowHeight() { return windowHeight; }
 	private:
-		string SettingsPath;
-		std::auto_ptr<c_settings> SettingsXML;
-		
+		Settings();
+		~Settings();
+		static Settings mysettings;
+		static string SettingsPath;
+		static auto_ptr<c_settings> SettingsXML;
 
 		// just floats that are used a lot (increase speed avoiding conversions)
-		float cameraMaxZoom, cameraMovespeed, windowWidth, windowHeight;
+		static float cameraMaxZoom, cameraMovespeed, windowWidth, windowHeight;
 	};
 };
 
-
+#endif

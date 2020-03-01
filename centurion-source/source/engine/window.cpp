@@ -13,8 +13,8 @@ void myWindow::init() {
 	glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
 	glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
 	glfwWindowHint(GLFW_RESIZABLE, GL_FALSE);
-	if (!settings.GetFullScreen()) MainWindow = glfwCreateWindow((int)settings.GetWindowWidth(), (int)settings.GetWindowHeight(), gameNameSTR.c_str(), nullptr, nullptr); // Windowed
-	else MainWindow = glfwCreateWindow((int)settings.GetWindowWidth(), (int)settings.GetWindowHeight(), gameNameSTR.c_str(), glfwGetPrimaryMonitor(), nullptr); // full screen
+	if (!Settings::FullScreen()) MainWindow = glfwCreateWindow((int)Settings::WindowWidth(), (int)Settings::WindowHeight(), gameNameSTR.c_str(), nullptr, nullptr); // Windowed
+	else MainWindow = glfwCreateWindow((int)Settings::WindowWidth(), (int)Settings::WindowHeight(), gameNameSTR.c_str(), glfwGetPrimaryMonitor(), nullptr); // full screen
 	glfwMakeContextCurrent(MainWindow);
 
 	create_callbacks(); // handle key + mouse input
@@ -68,7 +68,7 @@ void myWindow::handle_keys(GLFWwindow* window, int key, int code, int action, in
 void myWindow::handle_mouse(GLFWwindow* window, double xPos, double yPos){
 	myWindow* theWindow = static_cast<myWindow*>(glfwGetWindowUserPointer(window));
 	theWindow->lastX = (GLfloat)xPos;
-	double y = fabs(yPos - settings.GetWindowHeight());
+	double y = fabs(yPos - Settings::WindowHeight());
 	theWindow->lastY = (GLfloat)y;
 }
 

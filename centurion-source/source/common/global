@@ -16,7 +16,7 @@ using namespace glm;
 
 namespace glb {
 
-	extern Settings settings;
+	//extern Settings settings;
 
 	extern string exe_root;
 	//extern string language;

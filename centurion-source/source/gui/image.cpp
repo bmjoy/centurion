@@ -17,8 +17,8 @@ namespace gui {
 		originMap["top-left"] = 2;
 	}
 	void Image::create(string Origin, float x, float y, float w, float h, int pickingID) {
-		if (x < 0) x += settings.GetWindowWidth();
-		if (y < 0) y += settings.GetWindowHeight();
+		if (x < 0) x += Settings::WindowWidth();
+		if (y < 0) y += Settings::WindowHeight();
 		imgData.pickingID = pickingID;
 		imgData.imageName = imageName;
 		imgData.pickingColor = getPickingColorFromID(pickingID);

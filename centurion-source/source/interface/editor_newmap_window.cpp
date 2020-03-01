@@ -12,11 +12,11 @@ namespace editor {
 	
 	void NewMapWindow::create() {
 		back_image = gui::Image("newmapwindow_back");
-		back_image.create("center", settings.GetWindowWidth()/2.f, settings.GetWindowHeight()/2.f, 0, 0, 0);
+		back_image.create("center", Settings::WindowWidth()/2.f, Settings::WindowHeight()/2.f, 0, 0, 0);
 
 		// startX and startY are TOP-LEFT coordinates (as in Paint)
-		startX = settings.GetWindowWidth() / 2.f - back_image.getImageSize().x / 2.f;
-		startY = settings.GetWindowHeight() / 2.f + back_image.getImageSize().y / 2.f;
+		startX = Settings::WindowWidth() / 2.f - back_image.getImageSize().x / 2.f;
+		startY = Settings::WindowHeight() / 2.f + back_image.getImageSize().y / 2.f;
 
 		buttons[0] = gui::Image("newmapwindow_buttonleft");
 		buttons[0].create("top-left", startX, startY, 0, 0, getPickingID());

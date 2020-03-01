@@ -22,18 +22,18 @@ namespace game {
 		time.seconds = 0; time.seconds_str = "00";
 		time.minutes = 0; time.minutes_str = "00";
 		time.hours = 0; time.hours_str = "00";
-		time.x = settings.GetWindowWidth() - 100.0f;
-		time.y = settings.GetWindowHeight() - getParam("ui-top-height") - 30.0f;
+		time.x = Settings::WindowWidth() - 100.0f;
+		time.y = Settings::WindowHeight() - getParam("ui-top-height") - 30.0f;
 
 		gameMenu = GameMenu();
 		gameMenu.create();
 
 		top_bar = gui::Image("topbar-" + race);
-		top_bar.create("bottom-left", 0, -1.f * getParam("ui-top-height"), settings.GetWindowWidth(), getParam("ui-top-height"), 0);
+		top_bar.create("bottom-left", 0, -1.f * getParam("ui-top-height"), Settings::WindowWidth(), getParam("ui-top-height"), 0);
 		
 
 		bottom_bar = gui::Image("bottombar");
-		bottom_bar.create("bottom-left", 0, 0, settings.GetWindowWidth(), getParam("ui-bottom-height"), 0);
+		bottom_bar.create("bottom-left", 0, 0, Settings::WindowWidth(), getParam("ui-bottom-height"), 0);
 
 		time.lastTime = glfwGetTime();
 		time.text = gui::SimpleText("dynamic", true);
@@ -72,13 +72,13 @@ namespace game {
 
 			// minimap rectangle:
 			if (gameMinimapStatus) {
-				float x = getParam("camera-x-position") / mapWidth * settings.GetWindowWidth();
-				float y = getParam("camera-y-position") / mapHeight * (settings.GetWindowHeight() - getParam("ui-bottom-height") - getParam("ui-top-height")) + getParam("ui-bottom-height");
-				float w = getParam("window-width-zoomed") * settings.GetWindowWidth() / mapWidth;
-				float h = getParam("window-height-zoomed") * (settings.GetWindowHeight() - getParam("ui-bottom-height") - getParam("ui-top-height")) / mapHeight;
+				float x = getParam("camera-x-position") / mapWidth * Settings::WindowWidth();
+				float y = getParam("camera-y-position") / mapHeight * (Settings::WindowHeight() - getParam("ui-bottom-height") - getParam("ui-top-height")) + getParam("ui-bottom-height");
+				float w = getParam("window-width-zoomed") * Settings::WindowWidth() / mapWidth;
+				float h = getParam("window-height-zoomed") * (Settings::WindowHeight() - getParam("ui-bottom-height") - getParam("ui-top-height")) / mapHeight;
 				x = std::max(x, 1.f);
 				y = std::max(y, getParam("ui-bottom-height") + 1.f);
-				y = std::min(y, settings.GetWindowHeight() - getParam("ui-top-height") - h);
+				y = std::min(y, Settings::WindowHeight() - getParam("ui-top-height") - h);
 				minimapRectangle.render(vec4(255.f), false, x, y, w, h);
 			}
 			// Temporary bars:

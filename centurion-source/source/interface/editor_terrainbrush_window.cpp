@@ -15,7 +15,7 @@ namespace editor {
 
 	void TerrainBrushWindow::create() {
 
-		startX = 0.f; startY = settings.GetWindowHeight()/2.f + 150.f / 2.f;
+		startX = 0.f; startY = Settings::WindowHeight()/2.f + 150.f / 2.f;
 
 		back = gui::Rectangle();
 		back.create("filled", startX, startY, 190.f, 150.f, "top-left", getPickingID());
@@ -52,7 +52,7 @@ namespace editor {
 	void TerrainBrushWindow::render(bool pick) {
 
 		if (getBoolean("mouse-right")) TerrainBrushIsActive = false;
-		if (getBoolean("mouse-left") && getParam("mouse-y-position") >= settings.GetWindowHeight() - 30.f) TerrainBrushIsActive = false;
+		if (getBoolean("mouse-left") && getParam("mouse-y-position") >= Settings::WindowHeight() - 30.f) TerrainBrushIsActive = false;
 
 		if (TerrainBrushWindowIsOpen) {
 			if (pick && getBoolean("mouse-left")) {
@@ -63,7 +63,7 @@ namespace editor {
 			if (!pick) {
 				if (!game::gameMinimapStatus && TerrainBrushIsActive){
 					circle.render(vec4(255), getParam("mouse-x-position"), getParam("mouse-y-position"));
-					if (getBoolean("mouse-left-pressed") && leftClickID_UI == 0 && getParam("mouse-y-position") < settings.GetWindowHeight() - 30.f) {						
+					if (getBoolean("mouse-left-pressed") && leftClickID_UI == 0 && getParam("mouse-y-position") < Settings::WindowHeight() - 30.f) {						
 						if (mapgen::terrainsMap.count(selBrush) > 0) changeTerrain(mapgen::terrainsMap[selBrush].id);
 					}
 				}
