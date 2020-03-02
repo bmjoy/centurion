@@ -9,29 +9,30 @@ namespace glb {
 	class Settings
 	{
 	public:
+		// settings
+		static string Language;
+		static bool DebugIsActive;
+		static bool FullScreen;
+
+		// methods
 		static void Init();
-		static bool ReadSettings();
-		static void SetDefaultSettings();
+		static void ReadSettings();
 		static void SaveXml();
-		static void CameraMaxZoom(float zoom) { cameraMaxZoom = zoom;  SettingsXML->cameraMaxZoom((int)zoom); }
-		static float CameraMaxZoom() { return cameraMaxZoom; }
-		static void CameraMovespeed(float speed) { cameraMovespeed = speed;  SettingsXML->cameraMovespeed((int)speed); }
-		static float CameraMovespeed() { return cameraMovespeed; }
-		static bool DebugIsActive() { return SettingsXML->debug(); }
-		static void FullScreen(bool full) { SettingsXML->fullScreen(full); }
-		static bool FullScreen() { return SettingsXML->fullScreen(); }
-		static void Language(string lang) { SettingsXML->language(lang); }
-		static string Language() { return SettingsXML->language(); }
-		static void SetWindowWidth(float x);  // get --> engine::myWindow::Width
-		static void SetWindowHeight(float y); // get --> engine::myWindow::Height
+		static void SetCameraMovespeed(float speed);
+		static void SetCameraMaxZoom(float zoom);
+		static void SetWindowSize(float width, float height);
 	private:
 		Settings();
 		~Settings();
+		static void ParseInt(string name, string value, int* var);
+		static void ParseFloat(string name, string value, float* var);
+		static void ParseString(string name, string value, string* var);
+		static void ParseBool(string name, string value, bool* var);
 		static string SettingsPath;
-		static auto_ptr<c_settings> SettingsXML;
-
-		// just floats that are used a lot (increase speed avoiding conversions)
-		static float cameraMaxZoom, cameraMovespeed, windowWidth, windowHeight;
+		static float windowWidth;
+		static float windowHeight;
+		static float cameraMaxZoom;
+		static float cameraMovespeed;
 	};
 };
 

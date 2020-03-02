@@ -110,7 +110,7 @@ namespace engine {
 			}
 
 			// debug ui
-			if (Settings::DebugIsActive())	DEBUG_UI()->render(Fps, Mpfs, selectedUnits);
+			if (Settings::DebugIsActive)	DEBUG_UI()->render(Fps, Mpfs, selectedUnits);
 
 			// mouse
 			Mouse::render();
@@ -220,7 +220,7 @@ namespace engine {
 
 	void Engine::handleGlobalKeys() {
 		// activate or deactivate debug ui
-		if (Settings::DebugIsActive() && KeyCode[GLFW_KEY_F10]) {
+		if (Settings::DebugIsActive && KeyCode[GLFW_KEY_F10]) {
 			debug::DEBUG_UI()->setStatus(!debug::DEBUG_UI()->getStatus());
 			debug::DEBUG_UI()->getStatus() ? std::cout << "[DEBUG] Debug UI ON!\n" : std::cout << "[DEBUG] Debug UI OFF!\n";
 		}

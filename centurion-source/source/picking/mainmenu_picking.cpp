@@ -3,6 +3,7 @@
 #include <engine/engine.h>
 #include <engine/window.h>
 #include <engine/mouse.h>
+#include <settings.h>
 #include <game>
 #include <global>
 #include <player>
@@ -33,11 +34,12 @@ namespace menu {
 		/*------------------------------------------------------------------------------*/
 		if (clickName == "MAINMENU_buttonOptions") {
 			currentMenu = "options";
-			options->currentLan = Settings::Language();
+			options->currentLan = Settings::Language;
 		}
 		/*------------------------------------------------------------------------------*/
 		if (clickName == "MAINMENU_buttonQuit") {
 			saveLog();
+			Settings::SaveXml();
 			engine::myWindow::ShouldClose = true;
 		}
 		/*------------------------------------------------------------------------------*/
@@ -60,13 +62,13 @@ namespace menu {
 		}
 		/*------------------------------------------------------------------------------*/
 		if (clickName == "OPTIONS_buttonApply") {
-			if (Settings::Language() != options->currentLan)
+			if (Settings::Language != options->currentLan)
 				changeLanguage(options->currentLan);
 			Settings::SaveXml();
 		}
 		/*------------------------------------------------------------------------------*/
 		if (clickName == "OPTIONS_buttonSave") {
-			if (Settings::Language() != options->currentLan)
+			if (Settings::Language != options->currentLan)
 				changeLanguage(options->currentLan);
 			currentMenu = "mainmenu";
 			Settings::SaveXml();

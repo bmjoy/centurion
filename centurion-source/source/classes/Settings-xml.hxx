@@ -31,8 +31,8 @@
 // in the accompanying FLOSSE file.
 //
 
-#ifndef SETTINGS_HXX
-#define SETTINGS_HXX
+#ifndef SETTINGS2_HXX
+#define SETTINGS2_HXX
 
 #ifndef XSD_USE_CHAR
 #define XSD_USE_CHAR
@@ -249,6 +249,7 @@ namespace xml_schema
 // Forward declarations.
 //
 class c_settings;
+class setting;
 
 #include <memory>    // ::std::auto_ptr
 #include <limits>    // std::numeric_limits
@@ -266,116 +267,26 @@ class c_settings;
 class c_settings : public ::xml_schema::type
 {
 public:
-	// windowWidth
+	// setting
 	//
-	typedef ::xml_schema::integer windowWidth_type;
-	typedef ::xsd::cxx::tree::traits< windowWidth_type, char > windowWidth_traits;
+	typedef ::setting setting_type;
+	typedef ::xsd::cxx::tree::sequence< setting_type > setting_sequence;
+	typedef setting_sequence::iterator setting_iterator;
+	typedef setting_sequence::const_iterator setting_const_iterator;
+	typedef ::xsd::cxx::tree::traits< setting_type, char > setting_traits;
 
-	const windowWidth_type&
-		windowWidth() const;
+	const setting_sequence&
+		setting() const;
 
-	windowWidth_type&
-		windowWidth();
-
-	void
-		windowWidth(const windowWidth_type& x);
-
-	// windowHeight
-	//
-	typedef ::xml_schema::integer windowHeight_type;
-	typedef ::xsd::cxx::tree::traits< windowHeight_type, char > windowHeight_traits;
-
-	const windowHeight_type&
-		windowHeight() const;
-
-	windowHeight_type&
-		windowHeight();
+	setting_sequence&
+		setting();
 
 	void
-		windowHeight(const windowHeight_type& x);
-
-	// cameraMovespeed
-	//
-	typedef ::xml_schema::integer cameraMovespeed_type;
-	typedef ::xsd::cxx::tree::traits< cameraMovespeed_type, char > cameraMovespeed_traits;
-
-	const cameraMovespeed_type&
-		cameraMovespeed() const;
-
-	cameraMovespeed_type&
-		cameraMovespeed();
-
-	void
-		cameraMovespeed(const cameraMovespeed_type& x);
-
-	// cameraMaxZoom
-	//
-	typedef ::xml_schema::integer cameraMaxZoom_type;
-	typedef ::xsd::cxx::tree::traits< cameraMaxZoom_type, char > cameraMaxZoom_traits;
-
-	const cameraMaxZoom_type&
-		cameraMaxZoom() const;
-
-	cameraMaxZoom_type&
-		cameraMaxZoom();
-
-	void
-		cameraMaxZoom(const cameraMaxZoom_type& x);
-
-	// language
-	//
-	typedef ::xml_schema::string language_type;
-	typedef ::xsd::cxx::tree::traits< language_type, char > language_traits;
-
-	const language_type&
-		language() const;
-
-	language_type&
-		language();
-
-	void
-		language(const language_type& x);
-
-	void
-		language(::std::auto_ptr< language_type > p);
-
-	// debug
-	//
-	typedef ::xml_schema::boolean debug_type;
-	typedef ::xsd::cxx::tree::traits< debug_type, char > debug_traits;
-
-	const debug_type&
-		debug() const;
-
-	debug_type&
-		debug();
-
-	void
-		debug(const debug_type& x);
-
-	// fullScreen
-	//
-	typedef ::xml_schema::boolean fullScreen_type;
-	typedef ::xsd::cxx::tree::traits< fullScreen_type, char > fullScreen_traits;
-
-	const fullScreen_type&
-		fullScreen() const;
-
-	fullScreen_type&
-		fullScreen();
-
-	void
-		fullScreen(const fullScreen_type& x);
+		setting(const setting_sequence& s);
 
 	// Constructors.
 	//
-	c_settings(const windowWidth_type&,
-		const windowHeight_type&,
-		const cameraMovespeed_type&,
-		const cameraMaxZoom_type&,
-		const language_type&,
-		const debug_type&,
-		const fullScreen_type&);
+	c_settings();
 
 	c_settings(const ::xercesc::DOMElement& e,
 		::xml_schema::flags f = 0,
@@ -403,13 +314,79 @@ protected:
 			::xml_schema::flags);
 
 protected:
-	::xsd::cxx::tree::one< windowWidth_type > windowWidth_;
-	::xsd::cxx::tree::one< windowHeight_type > windowHeight_;
-	::xsd::cxx::tree::one< cameraMovespeed_type > cameraMovespeed_;
-	::xsd::cxx::tree::one< cameraMaxZoom_type > cameraMaxZoom_;
-	::xsd::cxx::tree::one< language_type > language_;
-	::xsd::cxx::tree::one< debug_type > debug_;
-	::xsd::cxx::tree::one< fullScreen_type > fullScreen_;
+	setting_sequence setting_;
+};
+
+class setting : public ::xml_schema::type
+{
+public:
+	// name
+	//
+	typedef ::xml_schema::string name_type;
+	typedef ::xsd::cxx::tree::traits< name_type, char > name_traits;
+
+	const name_type&
+		name() const;
+
+	name_type&
+		name();
+
+	void
+		name(const name_type& x);
+
+	void
+		name(::std::auto_ptr< name_type > p);
+
+	// value
+	//
+	typedef ::xml_schema::string value_type;
+	typedef ::xsd::cxx::tree::traits< value_type, char > value_traits;
+
+	const value_type&
+		value() const;
+
+	value_type&
+		value();
+
+	void
+		value(const value_type& x);
+
+	void
+		value(::std::auto_ptr< value_type > p);
+
+	// Constructors.
+	//
+	setting(const name_type&,
+		const value_type&);
+
+	setting(const ::xercesc::DOMElement& e,
+		::xml_schema::flags f = 0,
+		::xml_schema::container* c = 0);
+
+	setting(const setting& x,
+		::xml_schema::flags f = 0,
+		::xml_schema::container* c = 0);
+
+	virtual setting*
+		_clone(::xml_schema::flags f = 0,
+			::xml_schema::container* c = 0) const;
+
+	setting&
+		operator= (const setting& x);
+
+	virtual
+		~setting();
+
+	// Implementation.
+	//
+protected:
+	void
+		parse(::xsd::cxx::xml::dom::parser< char >&,
+			::xml_schema::flags);
+
+protected:
+	::xsd::cxx::tree::one< name_type > name_;
+	::xsd::cxx::tree::one< value_type > value_;
 };
 
 #include <iosfwd>
@@ -590,6 +567,9 @@ c_settings_(const ::c_settings& x,
 void
 operator<< (::xercesc::DOMElement&, const c_settings&);
 
+void
+operator<< (::xercesc::DOMElement&, const setting&);
+
 #include <xsd/cxx/post.hxx>
 
 // Begin epilogue.
@@ -597,4 +577,4 @@ operator<< (::xercesc::DOMElement&, const c_settings&);
 //
 // End epilogue.
 
-#endif // SETTINGS_HXX
+#endif // SETTINGS2_HXX

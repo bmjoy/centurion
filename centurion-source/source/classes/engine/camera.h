@@ -10,6 +10,8 @@ namespace engine {
 
 	class Camera {
 	public:
+		static float MaxZoom;
+		static float MovementSpeed;
 		static float GetXPosition() { return position.x; }
 		static float GetYPosition() { return position.y; }
 		static void Init(vec3 startPosition, vec3 startUp, GLfloat startYaw, GLfloat startPitch);

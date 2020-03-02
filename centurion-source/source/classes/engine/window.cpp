@@ -37,7 +37,7 @@ namespace engine {
 		glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
 		glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
 		glfwWindowHint(GLFW_RESIZABLE, GL_FALSE);
-		if (!Settings::FullScreen()) glfwWindow = glfwCreateWindow((int)myWindow::Width, (int)myWindow::Height, gameNameSTR.c_str(), nullptr, nullptr); // Windowed
+		if (!Settings::FullScreen) glfwWindow = glfwCreateWindow((int)myWindow::Width, (int)myWindow::Height, gameNameSTR.c_str(), nullptr, nullptr); // Windowed
 		else glfwWindow = glfwCreateWindow((int)myWindow::Width, (int)myWindow::Height, gameNameSTR.c_str(), glfwGetPrimaryMonitor(), nullptr); // full screen
 		glfwMakeContextCurrent(glfwWindow);
 

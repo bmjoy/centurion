@@ -39,7 +39,7 @@ namespace debug {
 		debugText[0] = gui::SimpleText("static");
 		debugText[0].create_static("Centurion - DEBUG MODE", "couriernew_15px", startX, startY + 177, "left", "normal", vec4(255,255,0,255));
 		debugText[1] = gui::SimpleText("static");
-		debugText[1].create_static("Currentlang:  " + glb::Settings::Language(), "couriernew_15px", startX, startY + 157, "left", "normal", vec4(0, 255, 0, 255));
+		debugText[1].create_static("Currentlang:  " + glb::Settings::Language, "couriernew_15px", startX, startY + 157, "left", "normal", vec4(0, 255, 0, 255));
 
 		for (int i = 0; i < staticTextList.size(); i++) {
 			gui::SimpleText tempText = gui::SimpleText("static");
@@ -50,16 +50,16 @@ namespace debug {
 		back = gui::Rectangle();
 		back.create("border-filled", 10.f, myWindow::BottomBarHeight + 10.f, 250.f, 200.f, "bottom-left", 0);
 	
-		currentLan = Settings::Language();
+		currentLan = Settings::Language;
 	}
 
 	void DebugUI::render(int fps, int mpfs, int selUnits) {
 
-		if (debuguiIsActive && Settings::DebugIsActive()) {
+		if (debuguiIsActive && Settings::DebugIsActive) {
 
-			if (currentLan != glb::Settings::Language()) {
-				debugText[1].create_static("Currentlang:  " + glb::Settings::Language(), "couriernew_15px", startX, startY + 157, "left", "normal", vec4(0, 255, 0, 255));
-				currentLan = glb::Settings::Language();
+			if (currentLan != glb::Settings::Language) {
+				debugText[1].create_static("Currentlang:  " + glb::Settings::Language, "couriernew_15px", startX, startY + 157, "left", "normal", vec4(0, 255, 0, 255));
+				currentLan = glb::Settings::Language;
 			}
 
 			back.render(vec4(0.f, 0.f, 0.f, 0.5f));

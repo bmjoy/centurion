@@ -43,136 +43,74 @@
 // c_settings
 // 
 
-const c_settings::windowWidth_type& c_settings::
-windowWidth() const
+const c_settings::setting_sequence& c_settings::
+setting() const
 {
-	return this->windowWidth_.get();
+	return this->setting_;
 }
 
-c_settings::windowWidth_type& c_settings::
-windowWidth()
+c_settings::setting_sequence& c_settings::
+setting()
 {
-	return this->windowWidth_.get();
-}
-
-void c_settings::
-windowWidth(const windowWidth_type& x)
-{
-	this->windowWidth_.set(x);
-}
-
-const c_settings::windowHeight_type& c_settings::
-windowHeight() const
-{
-	return this->windowHeight_.get();
-}
-
-c_settings::windowHeight_type& c_settings::
-windowHeight()
-{
-	return this->windowHeight_.get();
+	return this->setting_;
 }
 
 void c_settings::
-windowHeight(const windowHeight_type& x)
+setting(const setting_sequence& s)
 {
-	this->windowHeight_.set(x);
+	this->setting_ = s;
 }
 
-const c_settings::cameraMovespeed_type& c_settings::
-cameraMovespeed() const
+
+// setting
+// 
+
+const setting::name_type& setting::
+name() const
 {
-	return this->cameraMovespeed_.get();
+	return this->name_.get();
 }
 
-c_settings::cameraMovespeed_type& c_settings::
-cameraMovespeed()
+setting::name_type& setting::
+name()
 {
-	return this->cameraMovespeed_.get();
+	return this->name_.get();
 }
 
-void c_settings::
-cameraMovespeed(const cameraMovespeed_type& x)
+void setting::
+name(const name_type& x)
 {
-	this->cameraMovespeed_.set(x);
+	this->name_.set(x);
 }
 
-const c_settings::cameraMaxZoom_type& c_settings::
-cameraMaxZoom() const
+void setting::
+name(::std::auto_ptr< name_type > x)
 {
-	return this->cameraMaxZoom_.get();
+	this->name_.set(x);
 }
 
-c_settings::cameraMaxZoom_type& c_settings::
-cameraMaxZoom()
+const setting::value_type& setting::
+value() const
 {
-	return this->cameraMaxZoom_.get();
+	return this->value_.get();
 }
 
-void c_settings::
-cameraMaxZoom(const cameraMaxZoom_type& x)
+setting::value_type& setting::
+value()
 {
-	this->cameraMaxZoom_.set(x);
+	return this->value_.get();
 }
 
-const c_settings::language_type& c_settings::
-language() const
+void setting::
+value(const value_type& x)
 {
-	return this->language_.get();
+	this->value_.set(x);
 }
 
-c_settings::language_type& c_settings::
-language()
+void setting::
+value(::std::auto_ptr< value_type > x)
 {
-	return this->language_.get();
-}
-
-void c_settings::
-language(const language_type& x)
-{
-	this->language_.set(x);
-}
-
-void c_settings::
-language(::std::auto_ptr< language_type > x)
-{
-	this->language_.set(x);
-}
-
-const c_settings::debug_type& c_settings::
-debug() const
-{
-	return this->debug_.get();
-}
-
-c_settings::debug_type& c_settings::
-debug()
-{
-	return this->debug_.get();
-}
-
-void c_settings::
-debug(const debug_type& x)
-{
-	this->debug_.set(x);
-}
-
-const c_settings::fullScreen_type& c_settings::
-fullScreen() const
-{
-	return this->fullScreen_.get();
-}
-
-c_settings::fullScreen_type& c_settings::
-fullScreen()
-{
-	return this->fullScreen_.get();
-}
-
-void c_settings::
-fullScreen(const fullScreen_type& x)
-{
-	this->fullScreen_.set(x);
+	this->value_.set(x);
 }
 
 
@@ -182,21 +120,9 @@ fullScreen(const fullScreen_type& x)
 //
 
 c_settings::
-c_settings(const windowWidth_type& windowWidth,
-	const windowHeight_type& windowHeight,
-	const cameraMovespeed_type& cameraMovespeed,
-	const cameraMaxZoom_type& cameraMaxZoom,
-	const language_type& language,
-	const debug_type& debug,
-	const fullScreen_type& fullScreen)
+c_settings()
 	: ::xml_schema::type(),
-	windowWidth_(windowWidth, this),
-	windowHeight_(windowHeight, this),
-	cameraMovespeed_(cameraMovespeed, this),
-	cameraMaxZoom_(cameraMaxZoom, this),
-	language_(language, this),
-	debug_(debug, this),
-	fullScreen_(fullScreen, this)
+	setting_(this)
 {
 }
 
@@ -205,13 +131,7 @@ c_settings(const c_settings& x,
 	::xml_schema::flags f,
 	::xml_schema::container* c)
 	: ::xml_schema::type(x, f, c),
-	windowWidth_(x.windowWidth_, f, this),
-	windowHeight_(x.windowHeight_, f, this),
-	cameraMovespeed_(x.cameraMovespeed_, f, this),
-	cameraMaxZoom_(x.cameraMaxZoom_, f, this),
-	language_(x.language_, f, this),
-	debug_(x.debug_, f, this),
-	fullScreen_(x.fullScreen_, f, this)
+	setting_(x.setting_, f, this)
 {
 }
 
@@ -220,13 +140,7 @@ c_settings(const ::xercesc::DOMElement& e,
 	::xml_schema::flags f,
 	::xml_schema::container* c)
 	: ::xml_schema::type(e, f | ::xml_schema::flags::base, c),
-	windowWidth_(this),
-	windowHeight_(this),
-	cameraMovespeed_(this),
-	cameraMaxZoom_(this),
-	language_(this),
-	debug_(this),
-	fullScreen_(this)
+	setting_(this)
 {
 	if ((f & ::xml_schema::flags::base) == 0)
 	{
@@ -245,136 +159,18 @@ parse(::xsd::cxx::xml::dom::parser< char >& p,
 		const ::xsd::cxx::xml::qualified_name< char > n(
 			::xsd::cxx::xml::dom::name< char >(i));
 
-		// windowWidth
+		// setting
 		//
-		if (n.name() == "windowWidth" && n.namespace_().empty())
+		if (n.name() == "setting" && n.namespace_().empty())
 		{
-			if (!windowWidth_.present())
-			{
-				this->windowWidth_.set(windowWidth_traits::create(i, f, this));
-				continue;
-			}
-		}
+			::std::auto_ptr< setting_type > r(
+				setting_traits::create(i, f, this));
 
-		// windowHeight
-		//
-		if (n.name() == "windowHeight" && n.namespace_().empty())
-		{
-			if (!windowHeight_.present())
-			{
-				this->windowHeight_.set(windowHeight_traits::create(i, f, this));
-				continue;
-			}
-		}
-
-		// cameraMovespeed
-		//
-		if (n.name() == "cameraMovespeed" && n.namespace_().empty())
-		{
-			if (!cameraMovespeed_.present())
-			{
-				this->cameraMovespeed_.set(cameraMovespeed_traits::create(i, f, this));
-				continue;
-			}
-		}
-
-		// cameraMaxZoom
-		//
-		if (n.name() == "cameraMaxZoom" && n.namespace_().empty())
-		{
-			if (!cameraMaxZoom_.present())
-			{
-				this->cameraMaxZoom_.set(cameraMaxZoom_traits::create(i, f, this));
-				continue;
-			}
-		}
-
-		// language
-		//
-		if (n.name() == "language" && n.namespace_().empty())
-		{
-			::std::auto_ptr< language_type > r(
-				language_traits::create(i, f, this));
-
-			if (!language_.present())
-			{
-				this->language_.set(r);
-				continue;
-			}
-		}
-
-		// debug
-		//
-		if (n.name() == "debug" && n.namespace_().empty())
-		{
-			if (!debug_.present())
-			{
-				this->debug_.set(debug_traits::create(i, f, this));
-				continue;
-			}
-		}
-
-		// fullScreen
-		//
-		if (n.name() == "fullScreen" && n.namespace_().empty())
-		{
-			if (!fullScreen_.present())
-			{
-				this->fullScreen_.set(fullScreen_traits::create(i, f, this));
-				continue;
-			}
+			this->setting_.push_back(r);
+			continue;
 		}
 
 		break;
-	}
-
-	if (!windowWidth_.present())
-	{
-		throw ::xsd::cxx::tree::expected_element< char >(
-			"windowWidth",
-			"");
-	}
-
-	if (!windowHeight_.present())
-	{
-		throw ::xsd::cxx::tree::expected_element< char >(
-			"windowHeight",
-			"");
-	}
-
-	if (!cameraMovespeed_.present())
-	{
-		throw ::xsd::cxx::tree::expected_element< char >(
-			"cameraMovespeed",
-			"");
-	}
-
-	if (!cameraMaxZoom_.present())
-	{
-		throw ::xsd::cxx::tree::expected_element< char >(
-			"cameraMaxZoom",
-			"");
-	}
-
-	if (!language_.present())
-	{
-		throw ::xsd::cxx::tree::expected_element< char >(
-			"language",
-			"");
-	}
-
-	if (!debug_.present())
-	{
-		throw ::xsd::cxx::tree::expected_element< char >(
-			"debug",
-			"");
-	}
-
-	if (!fullScreen_.present())
-	{
-		throw ::xsd::cxx::tree::expected_element< char >(
-			"fullScreen",
-			"");
 	}
 }
 
@@ -391,13 +187,7 @@ operator= (const c_settings& x)
 	if (this != &x)
 	{
 		static_cast<::xml_schema::type&> (*this) = x;
-		this->windowWidth_ = x.windowWidth_;
-		this->windowHeight_ = x.windowHeight_;
-		this->cameraMovespeed_ = x.cameraMovespeed_;
-		this->cameraMaxZoom_ = x.cameraMaxZoom_;
-		this->language_ = x.language_;
-		this->debug_ = x.debug_;
-		this->fullScreen_ = x.fullScreen_;
+		this->setting_ = x.setting_;
 	}
 
 	return *this;
@@ -405,6 +195,106 @@ operator= (const c_settings& x)
 
 c_settings::
 ~c_settings()
+{
+}
+
+// setting
+//
+
+setting::
+setting(const name_type& name,
+	const value_type& value)
+	: ::xml_schema::type(),
+	name_(name, this),
+	value_(value, this)
+{
+}
+
+setting::
+setting(const setting& x,
+	::xml_schema::flags f,
+	::xml_schema::container* c)
+	: ::xml_schema::type(x, f, c),
+	name_(x.name_, f, this),
+	value_(x.value_, f, this)
+{
+}
+
+setting::
+setting(const ::xercesc::DOMElement& e,
+	::xml_schema::flags f,
+	::xml_schema::container* c)
+	: ::xml_schema::type(e, f | ::xml_schema::flags::base, c),
+	name_(this),
+	value_(this)
+{
+	if ((f & ::xml_schema::flags::base) == 0)
+	{
+		::xsd::cxx::xml::dom::parser< char > p(e, false, false, true);
+		this->parse(p, f);
+	}
+}
+
+void setting::
+parse(::xsd::cxx::xml::dom::parser< char >& p,
+	::xml_schema::flags f)
+{
+	while (p.more_attributes())
+	{
+		const ::xercesc::DOMAttr& i(p.next_attribute());
+		const ::xsd::cxx::xml::qualified_name< char > n(
+			::xsd::cxx::xml::dom::name< char >(i));
+
+		if (n.name() == "name" && n.namespace_().empty())
+		{
+			this->name_.set(name_traits::create(i, f, this));
+			continue;
+		}
+
+		if (n.name() == "value" && n.namespace_().empty())
+		{
+			this->value_.set(value_traits::create(i, f, this));
+			continue;
+		}
+	}
+
+	if (!name_.present())
+	{
+		throw ::xsd::cxx::tree::expected_attribute< char >(
+			"name",
+			"");
+	}
+
+	if (!value_.present())
+	{
+		throw ::xsd::cxx::tree::expected_attribute< char >(
+			"value",
+			"");
+	}
+}
+
+setting* setting::
+_clone(::xml_schema::flags f,
+	::xml_schema::container* c) const
+{
+	return new class setting(*this, f, c);
+}
+
+setting& setting::
+operator= (const setting& x)
+{
+	if (this != &x)
+	{
+		static_cast<::xml_schema::type&> (*this) = x;
+		this->name_ = x.name_;
+		this->value_ = x.value_;
+	}
+
+	return *this;
+}
+
+setting::
+~setting()
 {
 }
 
@@ -835,81 +725,46 @@ operator<< (::xercesc::DOMElement& e, const c_settings& i)
 {
 	e << static_cast<const ::xml_schema::type&> (i);
 
-	// windowWidth
+	// setting
 	//
+	for (c_settings::setting_const_iterator
+		b(i.setting().begin()), n(i.setting().end());
+		b != n; ++b)
 	{
 		::xercesc::DOMElement& s(
 			::xsd::cxx::xml::dom::create_element(
-				"windowWidth",
+				"setting",
 				e));
 
-		s << i.windowWidth();
+		s << *b;
+	}
+}
+
+void
+operator<< (::xercesc::DOMElement& e, const setting& i)
+{
+	e << static_cast<const ::xml_schema::type&> (i);
+
+	// name
+	//
+	{
+		::xercesc::DOMAttr& a(
+			::xsd::cxx::xml::dom::create_attribute(
+				"name",
+				e));
+
+		a << i.name();
 	}
 
-	// windowHeight
+	// value
 	//
 	{
-		::xercesc::DOMElement& s(
-			::xsd::cxx::xml::dom::create_element(
-				"windowHeight",
+		::xercesc::DOMAttr& a(
+			::xsd::cxx::xml::dom::create_attribute(
+				"value",
 				e));
 
-		s << i.windowHeight();
-	}
-
-	// cameraMovespeed
-	//
-	{
-		::xercesc::DOMElement& s(
-			::xsd::cxx::xml::dom::create_element(
-				"cameraMovespeed",
-				e));
-
-		s << i.cameraMovespeed();
-	}
-
-	// cameraMaxZoom
-	//
-	{
-		::xercesc::DOMElement& s(
-			::xsd::cxx::xml::dom::create_element(
-				"cameraMaxZoom",
-				e));
-
-		s << i.cameraMaxZoom();
-	}
-
-	// language
-	//
-	{
-		::xercesc::DOMElement& s(
-			::xsd::cxx::xml::dom::create_element(
-				"language",
-				e));
-
-		s << i.language();
-	}
-
-	// debug
-	//
-	{
-		::xercesc::DOMElement& s(
-			::xsd::cxx::xml::dom::create_element(
-				"debug",
-				e));
-
-		s << i.debug();
-	}
-
-	// fullScreen
-	//
-	{
-		::xercesc::DOMElement& s(
-			::xsd::cxx::xml::dom::create_element(
-				"fullScreen",
-				e));
-
-		s << i.fullScreen();
+		a << i.value();
 	}
 }
 

@@ -61,16 +61,7 @@ namespace glb {
 			// Read Settings.xml
 
 			Settings::Init();
-			bool settingsOk = Settings::ReadSettings();
-			if (settingsOk == false) {
-				Settings::SetDefaultSettings();
-				settingsOk = Settings::ReadSettings();
-				if (settingsOk == false) {
-					string m = "[DEBUG] An error occurred reading Settings.xml.";
-					std::cout << m;
-					throw new std::exception(m.c_str());
-				}
-			}
+			Settings::ReadSettings();
 
 			//read_settings();
 			read_translation_tables();
@@ -78,7 +69,6 @@ namespace glb {
 			myWindow::Ratio = myWindow::Width / myWindow::Height;
 			myWindow::WidthZoomed = myWindow::Width + (currentZoomCamera - 1) * zoomCameraFactor;
 			myWindow::HeightZoomed = myWindow::Height + (currentZoomCamera - 1) * zoomCameraFactor / myWindow::Ratio;
-			
 		
 			menuProjection = glm::ortho(0.0f, myWindow::Width, 0.0f, myWindow::Height, -100.0f, 100.0f);
 			cameraProjection = glm::ortho(0.0f, myWindow::WidthZoomed, 0.0f, myWindow::HeightZoomed, -(float)mapWidth, (float)mapWidth);
@@ -118,7 +108,7 @@ namespace glb {
 				if (row == 0) { // first row
 					stringstream s(line);
 					while (getline(s, value, '\t')) {
-						if (value == Settings::Language()) currentlang = nLanguages;
+						if (value == Settings::Language) currentlang = nLanguages;
 						if (nLanguages != 0) availableLanguages[value] = nLanguages - 1;
 						nLanguages++;
 					}
@@ -179,7 +169,7 @@ namespace glb {
 	}
 
 	void changeLanguage(string lan) {
-		Settings::Language(lan);
+		Settings::Language = lan;
 		read_translation_tables();
 		menu::MENU()->update();
 		cout << "DEBUG : Language changed to " + lan << endl;
@@ -549,7 +539,7 @@ namespace glb {
 	void forceGameClosure(string errorCode, string errorText) {
 		string eC = (getTranslation("WORD_errorCode") == "") ? "Error code" : getTranslation("WORD_errorCode");
 		string text = "  " + eC + ": " + getErrorCode(errorCode) + "\n\n  " + getTranslation(errorText);
-		if (Settings::Language() == "arabic") text = "  " + getErrorCode(errorCode) + ": " + eC + "\n\n  " + getTranslation(errorText);
+		if (Settings::Language == "arabic") text = "  " + getErrorCode(errorCode) + ": " + eC + "\n\n  " + getTranslation(errorText);
 		const int wideLength = sizeof(text.c_str()) * 128;
 		WCHAR wstr[wideLength];
 		MultiByteToWideChar(CP_UTF8, 0, text.c_str(), wideLength, wstr, wideLength);
