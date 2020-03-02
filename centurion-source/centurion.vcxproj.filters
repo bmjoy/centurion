@@ -339,6 +339,9 @@
     <ClCompile Include="source\classes\engine\mouse.cpp">
       <Filter>Source Files\classes\engine</Filter>
     </ClCompile>
+    <ClCompile Include="source\classes\translationTable-xml.cxx">
+      <Filter>Source Files\classes</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="source\extern\includes\json.hpp">
@@ -442,6 +445,9 @@
     </ClInclude>
     <ClInclude Include="source\classes\engine\mouse.h">
       <Filter>Header Files\classes\engine</Filter>
+    </ClInclude>
+    <ClInclude Include="source\classes\translationTable-xml.hxx">
+      <Filter>Header Files\classes</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

@@ -59,7 +59,6 @@ namespace engine {
 			Mouse::mouse_control(window.get_mouse_x(), window.get_mouse_y());
 			handleGlobalKeys();
 
-
 			// ---- MENU ---- //
 
 			if (environment == "menu") {

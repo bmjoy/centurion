@@ -1,0 +1,104 @@
+﻿<?xml version="1.0" encoding="UTF-8" standalone="no" ?>
+<translationTable language="arabic" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="TranslationTable.xsd">
+	<entry stringName='MAINMENU_buttonSinglePlayer' result='ﻻﻋﺐ ﻣﻔﺮﺩ'/>
+	<entry stringName='MAINMENU_buttonEditor' result='ﻣﺤﺮر اﻟﺨﺮاﺋﻄ'/>
+	<entry stringName='MAINMENU_buttonOptions' result='اﻋﺪادات'/>
+	<entry stringName='MAINMENU_buttonQuit' result='ﺧﺮوج'/>
+	<entry stringName='SINGLEPLAYER_buttonStart' result='اﺑﺪٲ اﻟﻠﻌﺒﺔ'/>
+	<entry stringName='SINGLEPLAYER_buttonExit' result='اﻟﻘﺎﺋﻤﺔ اﻟﺮﺋﻴﺴﻴﺔ'/>
+	<entry stringName='OPTIONS_buttonApply' result='ﺗﻄﺒﻴﻖ'/>
+	<entry stringName='OPTIONS_buttonSave' result='ﺣﻔﻆ'/>
+	<entry stringName='OPTIONS_buttonCancel' result='إﻟﻐﺎء'/>
+	<entry stringName='OPTIONS_Title' result='اﻋﺪادات'/>
+	<entry stringName='OPTIONS_LanguageText' result='اﻟﻠﻐﺔ'/>
+	<entry stringName='LANG_english' result='اﻧﺠﻠﻴﺰي'/>
+	<entry stringName='LANG_italian' result='اﻹﻳﻄﺎﻟﻴﺔ'/>
+	<entry stringName='LANG_spanish' result='اﻷﺳﺒﺎﻧﻴﺔ'/>
+	<entry stringName='LANG_french' result='اﻟﻔﺮﻧﺴﻴﺔ'/>
+	<entry stringName='LANG_arabic' result='اﻟﻌﺮﺑﻴﺔ'/>
+	<entry stringName='GAME_pauseMenuButtonQuit' result='اﻟﺨﺮﻮج ﻣﻦ اﻟﻠﻌﺒﺔ'/>
+	<entry stringName='GAME_pauseMenuButtonClose' result='أﻏﻠﻖ اﻟﻘﺎﺋﻤﺔ اﻟﺮﺋﻴﺴﻴﺔ'/>
+	<entry stringName='EDITOR_File' result='ﻣﻠﻒ'/>
+	<entry stringName='EDITOR_File_New' result='ﺟﺪﻳﺪ'/>
+	<entry stringName='EDITOR_File_Open' result='ﻓﺘﺢ'/>
+	<entry stringName='EDITOR_File_Save' result='ﺣﻔﻆ'/>
+	<entry stringName='EDITOR_File_Exit' result='ﺧﺮوج'/>
+	<entry stringName='EDITOR_Edit' result='ﺗﻌﺪﻳﻞ'/>
+	<entry stringName='EDITOR_Edit_UpdateNormals' result='إﻋﺎدة اﻟﺤﺴﺎب ﻋﺎدي'/>
+	<entry stringName='EDITOR_Tools' result='اﻷدوات'/>
+	<entry stringName='EDITOR_Tools_AddObject' result=' ﺗﺸﻐﻴﻞ/  إﻟﻐﺎء ﺗﺸﻐﻴﻞ ﻧﺎﻓﺬة  "إﺿﺎﻓﺔ ﻛﺎﺋﻦ"'/>
+	<entry stringName='EDITOR_Tools_TerrainBrush' result='  ﺗﺸﻐﻴﻞ/  إﻟﻐﺎء ﺗﺸﻐﻴﻞ ﻓﺮش اﻷرض'/>
+	<entry stringName='EDITOR_addObjectButtonAdd' result='إﺿﺎﻓﺔ'/>
+	<entry stringName='EDITOR_newMapButtonClose' result='أﻏﻟﻖ'/>
+	<entry stringName='EDITOR_newMapButtonCreate' result='إﻧﺸﺎء'/>
+	<entry stringName='EDITOR_openMapButtonClose' result='أﻏﻟﻖ'/>
+	<entry stringName='EDITOR_openMapButtonOpen' result='ﻓﺘﺢ'/>
+	<entry stringName='EDITOR_newScenario' result='إﻧﺸﺎء اﻟﺴﻴﻨﺎرﻳﻮ ﺟﺪﻳﺪ'/>
+	<entry stringName='EDITOR_newScenarioName' result='اﺧﺘﻴﺎر اﺳﻢ ﻟﻠﺴﻴﻨﺎرﻳﻮ )ﻣﺎﻛﺲ 03 اﺣﺮڧ('/>
+	<entry stringName='EDITOR_properties' result='ﺧﺼﺎﺋﺺ اﻟﻜﺎﺋﻦ '/>
+	<entry stringName='EDITOR_propertiesName' result='اﺳﻢ اﻟﻜﺎﺋﻦ '/>
+	<entry stringName='EDITOR_propertiesApply' result='ﺗﻄﺒﻴﻖ'/>
+	<entry stringName='EDITOR_propertiesCancel' result='إﻟﻐﺎء'/>
+	<entry stringName='EDITOR_defaultMapName' result='ﺑﺪون ﻋﻨﻮان'/>
+	<entry stringName='EDITOR_buildings' result='اﻟﻤﺮاﻓﻖ'/>
+	<entry stringName='EDITOR_units' result='ﺟﻨﻮد'/>
+	<entry stringName='EDITOR_decorations' result='زﻳﻨﺔ'/>
+	<entry stringName='EDITORTREE_CATEGORY_egyptianstronghold' result='اﻟﻘﻠﻌﺔ اﻟﻤﺼﺮﻳﺔ  '/>
+	<entry stringName='EDITORTREE_CATEGORY_romanstronghold' result='اﻟﻘﻠﻌﺔ اﻟﺮوﻣﺎﻧﻴﺔ  '/>
+	<entry stringName='EDITORTREE_CATEGORY_outposts' result='اﻟﺒﺆر اﻻﺳﺘﻴﻄﺎﻧﻴﺔ '/>
+	<entry stringName='EDITORTREE_CATEGORY_trees' result='اﻷﺷﺠﺎر'/>
+	<entry stringName='EDITORBRUSH_GRASS' result='ﻋﺸﺐ'/>
+	<entry stringName='EDITORBRUSH_GRASS_1' result='ﻋﺸﺐ 1'/>
+	<entry stringName='EDITORBRUSH_GRASS_2' result='ﻋﺸﺐ 2'/>
+	<entry stringName='EDITORBRUSH_GRASS_3' result='ﻋﺸﺐ 3'/>
+	<entry stringName='EDITORBRUSH_ROAD_1' result='ﻃﺮﻳﻖ 1'/>
+	<entry stringName='EDITORBRUSH_ROAD_2' result='ﻃﺮﻳﻖ 2'/>
+	<entry stringName='EDITORBRUSH_ROAD_3' result='ﻃﺮﻳﻖ 3'/>
+	<entry stringName='EDITORBRUSH_GROUND_1' result='اﻷرض1'/>
+	<entry stringName='EDITORBRUSH_GROUND_2' result='اﻷرض2'/>
+	<entry stringName='EDITORBRUSH_GROUND_3' result='اﻷرض3'/>
+	<entry stringName='EDITORBRUSH_SAND_1' result='اﻟﺮﻣﺎل1'/>
+	<entry stringName='EDITOR_noSettlementsAround' result='--'/>
+	<entry stringName='EDITOR_impassablePoint' result='--'/>
+	<entry stringName='EDITOR_canAddStructure' result='--'/>
+	<entry stringName='QUESTION_deleteAll' result='--'/>
+	<entry stringName='QUESTION_overwriteMap' result='--'/>
+	<entry stringName='EDITORTREE_CATEGORY_trees' result='--'/>
+	<entry stringName='WORD_ebarracks' result='اﻟﺜﻜﻨﺎت'/>
+	<entry stringName='WORD_eblacksmith' result='دﻛﺎن اﻟﺤﺪاد'/>
+	<entry stringName='WORD_eosiristemple' result='ﻣﻌﺒﺪ  أوزورﻳﺲ'/>
+	<entry stringName='WORD_etavern' result='ﺣﺎﻧﺔ'/>
+	<entry stringName='WORD_etemple' result='ﻣﻌﺒﺪ  '/>
+	<entry stringName='WORD_etownhall' result='اﻟﻤﻘﺮ'/>
+	<entry stringName='WORD_rarena' result='ﺣﻠﺒﺔ'/>
+	<entry stringName='WORD_rbarracks' result='اﻟﺜﻜﻨﺎت'/>
+	<entry stringName='WORD_rblacksmith' result='دﻛﺎن اﻟﺤﺪاد'/>
+	<entry stringName='WORD_rtavern' result='ﺣﺎﻧﺔ'/>
+	<entry stringName='WORD_rtemple' result='ﻣﻌﺒﺪ'/>
+	<entry stringName='WORD_rtownhall' result='اﻟﻤﻘﺮ'/>
+	<entry stringName='WORD_routpost' result='اﻟﺒﺆرة اﻻﺳﺘﻴﻄﺎﻧﻴﺔ  اﻟﺮوﻣﺎﻧﻴﺔ  '/>
+	<entry stringName='WORD_broadleaf_1' result='اﻷﺧﺸﺎب اﻟﺼﻠﺒﺔ1'/>
+	<entry stringName='WORD_broadleaf_2' result='اﻷﺧﺸﺎب اﻟﺼﻠﺒﺔ2'/>
+	<entry stringName='WORD_cypress' result='ﺷﺠﺮ اﻟﺴﺮو'/>
+	<entry stringName='WORD_jasmimmanga' result='اﻟﻨﺒﺎﺗﺎت اﻻﺳﺘﻮاﺋﻴﺔ'/>
+	<entry stringName='WORD_palm_1' result='ﻧﺨﻠﺔ1'/>
+	<entry stringName='WORD_gameStarted' result='...ﺑﺪء اﻟﻠﻌﺒﺔ'/>
+	<entry stringName='WORD_player_1' result='ﻻﻋﺐ 1'/>
+	<entry stringName='WORD_player_2' result='ﻻﻋﺐ 2'/>
+	<entry stringName='WORD_player_3' result='ﻻﻋﺐ 3'/>
+	<entry stringName='WORD_player_4' result='ﻻﻋﺐ 4'/>
+	<entry stringName='WORD_player_5' result='ﻻﻋﺐ 5'/>
+	<entry stringName='WORD_player_6' result='ﻻﻋﺐ 6'/>
+	<entry stringName='WORD_player_7' result='ﻻﻋﺐ 7'/>
+	<entry stringName='WORD_player_8' result='ﻻﻋﺐ 8'/>
+	<entry stringName='WORD_playersNumber' result='ﻋﺪد اﻟﻼﻋﺒﻴﻦ'/>
+	<entry stringName='WORD_errorCode' result='رﻣﺰ ﺧﺎﻃﺊ'/>
+	<entry stringName='WORD_yes' result='ﻧﻌﻢ '/>
+	<entry stringName='WORD_no' result='ﻻ'/>
+	<entry stringName='RACE_Rome' result='روﻣﺎ'/>
+	<entry stringName='RACE_Egypt' result='ﻣﺼﺮ'/>
+	<entry stringName='ERROR_data' result='.ﻏﻴﺮ ﻗﺎدر ﻋﻟﻰ اﻟﻌﺜﻮر أو ﻗﺮاءة اﻟﻤﻠﻒ. DATA.\n .اﻹﻏﻼق ٳﻟﺰاﻣﻲ ﻟﻠﺘﻄﺒﻴﻖ'/>
+	<entry stringName='ERROR_settlements' result='.ﻏﻴﺮ ﻗﺎدر ﻋﻟﻰ اﻟﻌﺜﻮر أو ﻗﺮاءة اﻟﻤﻠﻒ. SETTLEMENTS file.\n .اﻹﻏﻼق ٳﻟﺰاﻣﻲ ﻟﻠﺘﻄﺒﻴﻖ'/>
+	<entry stringName='ERROR_menuData' result='.ﻏﻴﺮ ﻗﺎدر ﻋﻟﻰ اﻟﻌﺜﻮر أو ﻗﺮاءة اﻟﻤﻠﻒ. MENU DATA file.\n .اﻹﻏﻼق ٳﻟﺰاﻣﻲ ﻟﻠﺘﻄﺒﻴﻖ'/>
+	<entry stringName='WARNING_audioDevice' result='audio.\n ﻏﻴﺮ ﻗﺎدر ﻋﻟﻰ اﻟﻌﺜﻮر أو (اﻟﺗﻮاﺻﻞ) ٳﻟﻰ اﻟﺠﻬﺎز اﻟﺼﻮﺗﻲ. ﻹﻏﻼق ٳﻟﺰاﻣﻲ ﻟﻠﺘﻄﺒﻴﻖ'/>
+</translationTable>

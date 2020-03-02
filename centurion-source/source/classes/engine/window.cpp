@@ -37,21 +37,18 @@ namespace engine {
 		glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
 		glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
 		glfwWindowHint(GLFW_RESIZABLE, GL_FALSE);
-		if (!Settings::FullScreen) glfwWindow = glfwCreateWindow((int)myWindow::Width, (int)myWindow::Height, gameNameSTR.c_str(), nullptr, nullptr); // Windowed
-		else glfwWindow = glfwCreateWindow((int)myWindow::Width, (int)myWindow::Height, gameNameSTR.c_str(), glfwGetPrimaryMonitor(), nullptr); // full screen
+		if (!Settings::FullScreen) glfwWindow = glfwCreateWindow((int)Width, (int)Height, gameNameSTR.c_str(), nullptr, nullptr); // Windowed
+		else glfwWindow = glfwCreateWindow((int)Width, (int)Height, gameNameSTR.c_str(), glfwGetPrimaryMonitor(), nullptr); // full screen
 		glfwMakeContextCurrent(glfwWindow);
-
 		create_callbacks(); // handle key + mouse input
 
 		// Initialize GLEW to setup the OpenGL Function pointers
 		glewExperimental = GL_TRUE;
 		glewInit();
-
 		glfwGetFramebufferSize(glfwWindow, &bufferWidth, &bufferHeight);
 
 		// Define the viewport dimensions
 		glViewport(0, 0, bufferWidth, bufferHeight);
-
 		glfwSetWindowUserPointer(glfwWindow, this); // this function is for taking inputs
 
 		// Set OpenGL options
@@ -79,26 +76,20 @@ namespace engine {
 	}
 
 	void myWindow::character_callback(GLFWwindow* window, unsigned int codepoint) {
-		//myWindow* theWindow = static_cast<myWindow*>(glfwGetWindowUserPointer(window));
 		CharCodepointPressed = (int)codepoint;
 	}
 
 	void myWindow::handle_keys(GLFWwindow* window, int key, int code, int action, int mode) {
-		//myWindow* theWindow = static_cast<myWindow*>(glfwGetWindowUserPointer(window));
-
 		KeyCode[key] = (action == GLFW_PRESS || action == GLFW_REPEAT);
 	}
 
 	void myWindow::handle_mouse(GLFWwindow* window, double xPos, double yPos) {
-		//myWindow* theWindow = static_cast<myWindow*>(glfwGetWindowUserPointer(window));
 		lastX = (GLfloat)xPos;
-		double y = fabs(yPos - myWindow::Height);
+		double y = fabs(yPos - Height);
 		lastY = (GLfloat)y;
 	}
 
 	void myWindow::mouse_button_callback(GLFWwindow* window, int button, int action, int mods) {
-		//myWindow* theWindow = static_cast<myWindow*>(glfwGetWindowUserPointer(window));
-
 		if (button == GLFW_MOUSE_BUTTON_LEFT) {
 			if (action == GLFW_PRESS) {
 				Mouse::LeftClick = true;
@@ -131,13 +122,11 @@ namespace engine {
 		}
 	}
 
-	void myWindow::scroll_callback(GLFWwindow* window, double xoffset, double yoffset)
-	{
+	void myWindow::scroll_callback(GLFWwindow* window, double xoffset, double yoffset){
 		Mouse::ScrollValue = float(yoffset);
 		Mouse::ScrollBool = true;
 	}
 
-	myWindow::~myWindow()
-	{
+	myWindow::~myWindow(){
 	}
 }

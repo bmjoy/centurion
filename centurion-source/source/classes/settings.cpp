@@ -47,7 +47,7 @@ namespace glb {
 					if (name == "fullScreen") ParseBool(name, value, &FullScreen);
 				}
 				catch (...) {
-					std::cout << "An error occurred parsing the XML file. I'm using default values.";
+					std::cout << "An error occurred parsing the XML file. Using default values.";
 					SaveXml();
 				}
 			}

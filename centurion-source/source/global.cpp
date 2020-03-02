@@ -10,6 +10,7 @@
 #include <engine/camera.h>
 #include <engine/mouse.h>
 #include <engine/window.h>
+#include <translationTable-xml.hxx>
 #include <interface>
 
 
@@ -42,7 +43,6 @@ namespace glb {
 	string getErrorCode(string error) { return errors[error]; }
 
 	void initParams() {
-
 		try {
 			//Close the game if it wasn't able to find or process errorCodes.json file
 
@@ -92,42 +92,29 @@ namespace glb {
 		}
 	}
 
-
 	void read_translation_tables() {
-		ifstream fin("assets/data/translations - table.tsv");
-		if (!fin.good()) {
-			translation_table_current["temp"] = "Unable to find or process TRANSLATIONS file.\n  Forced application shutdown has started.";
-			forceGameClosure("NOT_FOUND", translation_table_current["temp"]);
-		}
-		else {
-			string line, value;
-			int currentlang = 0;
-			int nLanguages = 0;
-			int row = 0;
-			while (getline(fin, line)) {
-				if (row == 0) { // first row
-					stringstream s(line);
-					while (getline(s, value, '\t')) {
-						if (value == Settings::Language) currentlang = nLanguages;
-						if (nLanguages != 0) availableLanguages[value] = nLanguages - 1;
+		try{
+			if (availableLanguages.empty()) {
+				int nLanguages = 0;
+				vector<string> filesName = get_all_files_names_within_folder("assets/data");
+				for (int i = 0; i < filesName.size(); i++) {
+					if (filesName[i].substr(0, filesName[i].find('_')) == "translationTable") {
+						string lan = filesName[i].substr(filesName[i].find('_'));
+						availableLanguages[lan.substr(1,lan.find('.') -1)] = nLanguages;
 						nLanguages++;
 					}
 				}
-				if (row > 0) {
-					vector<string> values(nLanguages, "");
-					stringstream s(line);
-					int i = 0;
-					while (getline(s, value, '\t')) {
-						values[i] = value;
-						i++;
-					}
-					string key = values[0];
-					string eng = values[1];
-					string current = values[currentlang];
-					(current != "") ? translation_table_current[key] = current : translation_table_current[key] = eng;
-				}
-				row++;
 			}
+
+			string path = "assets/data/translationTable_" + Settings::Language + ".xml";
+			auto_ptr<translationTable> tTable = translationTable_(path);
+			translationTable::entry_iterator it;
+			for (it = tTable->entry().begin(); it != tTable->entry().end(); it++) {
+				translation_table_current[it->stringName()] = it->result();
+			}
+		}
+		catch (...) {
+			std::cout << "An error occurred" << std::endl;
 		}
 	}
 
