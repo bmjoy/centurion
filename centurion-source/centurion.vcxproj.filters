@@ -342,6 +342,9 @@
     <ClCompile Include="source\classes\translationTable-xml.cxx">
       <Filter>Source Files\classes</Filter>
     </ClCompile>
+    <ClCompile Include="source\classes\fontCharacters-xml.cxx">
+      <Filter>Source Files\classes</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="source\extern\includes\json.hpp">
@@ -447,6 +450,9 @@
       <Filter>Header Files\classes\engine</Filter>
     </ClInclude>
     <ClInclude Include="source\classes\translationTable-xml.hxx">
+      <Filter>Header Files\classes</Filter>
+    </ClInclude>
+    <ClInclude Include="source\classes\fontCharacters-xml.hxx">
       <Filter>Header Files\classes</Filter>
     </ClInclude>
   </ItemGroup>

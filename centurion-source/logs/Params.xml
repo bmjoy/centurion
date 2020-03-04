@@ -6,14 +6,14 @@
 	</camera>
 	<mouse>
 		<scrollValue>0</scrollValue>
-		<xLeftClick>1195</xLeftClick>
-		<xPosition>1195</xPosition>
-		<xRightClick>1195</xRightClick>
-		<y2dPosition>86</y2dPosition>
-		<y2dRightClick>86</y2dRightClick>
-		<yLeftClick>86</yLeftClick>
-		<yPosition>86</yPosition>
-		<yRightClick>86</yRightClick>
+		<xLeftClick>1189</xLeftClick>
+		<xPosition>1189</xPosition>
+		<xRightClick>1189</xRightClick>
+		<y2dPosition>69</y2dPosition>
+		<y2dRightClick>69</y2dRightClick>
+		<yLeftClick>69</yLeftClick>
+		<yPosition>69</yPosition>
+		<yRightClick>69</yRightClick>
 		<leftClick>1</leftClick>
 		<leftHold>1</leftHold>
 		<release>0</release>

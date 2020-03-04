@@ -3,6 +3,7 @@
 #include <global>
 #include <codecvt>
 #include <locale>
+#include <fontCharacters-xml.hxx>
 
 using namespace glb;
 
@@ -92,38 +93,34 @@ void BitmapFont::create() {
 		stbi_image_free(data);
 		textureIdMap[fontName] = textureIdList[i];
 		
-		// LOAD DATA
-		path = "assets/fonts/" + fontName + ".fnt";
-		ifstream fin(path);
-		if (!fin.good()) {
-			cout << "[DEBUG] Failed to load \"" << fontName << "\" data.\n";
+		// LOAD DATA FROM XML
+		path = "assets/fonts/" + fontName + ".xml";
+		try {
+			auto_ptr<chars> charsXML = chars_(path);
+
+			chars::char_iterator it;
+			for (it = charsXML->char_().begin(); it != charsXML->char_().end(); it++) {
+				txt::Character CharData = txt::Character();
+				int charID = int(it->id());
+				CharData.x = int(it->x());
+				CharData.y = int(it->y());
+				CharData.width = int(it->width());
+				CharData.height = int(it->height());
+				CharData.xoffset = int(it->xoffset());
+				CharData.yoffset = int(it->yoffset());
+				CharData.xadvance = int(it->xadvance());
+				CharData.line_height = int(it->lineheight());
+				fontData[i][charID] = CharData;
+			}
 		}
-		else {
-			string line, value;
-			while (getline(fin, line)) {
-				if (line != "") {
-					txt::Character CharData = txt::Character();
-					string values[10], element;
-					stringstream s1(line);
-					int k = 0;
-					while (getline(s1, element, ',')) {
-						stringstream s2(element);
-						string pair[2];
-						int i = 0;
-						while (getline(s2, pair[i], '=')) i++;
-						values[k] = pair[1];
-						k++;
-					}
-					int charID = stoi(values[0]);
-					CharData.x = stoi(values[1]); CharData.y = stoi(values[2]);
-					CharData.width = stoi(values[3]); CharData.height = stoi(values[4]);
-					CharData.xoffset = stoi(values[5]); CharData.yoffset = stoi(values[6]);
-					CharData.xadvance = stoi(values[7]);
-					CharData.line_height = stoi(values[8]);
-					fontData[i][charID] = CharData;
-				}
-			}	
+		catch(const xml_schema::exception & e) {
+			std::cout << e << std::endl;
 		}
+		catch (...) {
+			std::cout << "An error occurred reading font XML files." << std::endl;
+			forceGameClosure("NOT_FOUND", "noFile");
+		}
+		
 	}
 }
 

@@ -1,4 +1,4 @@
-﻿<chars name="arabic">
+﻿<chars name="arabic_16px" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="characters.xsd">
 	<char id="32" x="6" y="294" width="5" height="20" xoffset="0" yoffset="0" xadvance="10" lineheight="19" />
 	<char id="33" x="314" y="273" width="6" height="20" xoffset="0" yoffset="0" xadvance="5" lineheight="19" />
 	<char id="34" x="230" y="273" width="6" height="20" xoffset="0" yoffset="0" xadvance="5" lineheight="19" />
@@ -706,5 +706,5 @@
 	<char id="65273" x="66" y="189" width="10" height="20" xoffset="0" yoffset="0" xadvance="9" lineheight="19" />
 	<char id="65274" x="336" y="84" width="12" height="20" xoffset="0" yoffset="0" xadvance="11" lineheight="19" />
 	<char id="65275" x="88" y="189" width="10" height="20" xoffset="0" yoffset="0" xadvance="9" lineheight="19" />
-	<char id="65276" x="52" y="105" width="12" height="20" xoffset="0" yoffset="0" xadvance="11" lineheight="19 />
+	<char id="65276" x="52" y="105" width="12" height="20" xoffset="0" yoffset="0" xadvance="11" lineheight="19" />
 </chars>
