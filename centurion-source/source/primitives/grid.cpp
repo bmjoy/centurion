@@ -1,10 +1,10 @@
 #include <primitives>
-#include <game>
+#include <game/strategy.h>
 #include <surface>
 #include <pathfinding>
 #include <global>
 
-using namespace game;
+
 
 Grid::Grid()
 {

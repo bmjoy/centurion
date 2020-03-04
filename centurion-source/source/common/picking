@@ -1,5 +1,8 @@
 #pragma once
 
+#define PICKING_ID_MIN 1
+#define PICKING_ID_MAX 16777215
+
 #include <headers>
 
 using namespace std;
@@ -7,21 +10,27 @@ using namespace glm;
 
 namespace glb {
 	
-	extern int leftClickID;
-	extern int leftClickID_UI;
-	extern int rightClickID;
-
-	static int pickingID = 1;
-	void increasePickingID();
-	int getPickingID();
-
-	static map<int, string> pickingListUI;
-	void addValueToPickingListUI(int pick, string value);
-	string getPickedObjectName(int pick);
-	void resetPicking();
 	int get_id(string LeftRight = "left");
 	vec3 getPickingColorFromID(int pickingID);
-	
+
+	/* ui objects */
+	static int pickingID_UI = PICKING_ID_MAX;
+	extern int leftClickID_UI;
+	static map<int, string> pickingListUI;
+	void increasePickingID_UI();
+	int getPickingID_UI();
+	void addValueToPickingListUI(int pick, string value);
+	string getPickedObjectName(int pick);
+	void resetPicking_UI();
+
+	/* game objects */
+	static int pickingID = PICKING_ID_MIN;
+	extern int leftClickID;
+	extern int rightClickID;
+	void increasePickingID();
+	int getPickingID();
+	void resetPicking();
+
 	//Double clicking section
 	struct doubleClickData {
 		double lastTime = 0;

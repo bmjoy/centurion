@@ -2,13 +2,14 @@
 #include <engine/engine.h>
 #include <engine/mouse.h>
 #include <engine/window.h>
-#include <game>
+#include <game/strategy.h>
+#include <picking>
 
 using namespace std;
 using namespace glm;
 using namespace glb;
 using namespace engine;
-using namespace game;
+
 
 namespace debug {
 
@@ -24,6 +25,8 @@ namespace debug {
 			"y-map: ",
 			"x-map: ",
 			"selected units: ",
+			"picking obj: ",
+			"picking ui: ",
 		};
 		dynamicTextList = { "0" };
 		debuguiIsActive = true;
@@ -74,9 +77,11 @@ namespace debug {
 			dynamicTextList[4] = to_string((int)getZoomedCoords(Mouse::GetXPosition(), Mouse::GetYPosition()).y);
 			dynamicTextList[5] = to_string((int)getZoomedCoords(Mouse::GetXPosition(), Mouse::GetYPosition()).x);
 			dynamicTextList[6] = to_string(selUnits);
+			dynamicTextList[7] = to_string(getPickingID());
+			dynamicTextList[8] = to_string(getPickingID_UI());
 
-			!(Engine::getEnvironment() == "game") ? n = 2 : n = (int)dynamicTextList.size();
-
+			//!(Engine::getEnvironment() == "game") ? n = 2 : n = (int)dynamicTextList.size();
+			n = (int)dynamicTextList.size();
 			for (int i = 0; i < n; i++) {
 				staticText[i].render_static();
 				dynamicText.render_dynamic(dynamicTextList[i], "couriernew_15px", startX + 150.f, startY + deltaY * i, vec4(255.f), "left", "normal");

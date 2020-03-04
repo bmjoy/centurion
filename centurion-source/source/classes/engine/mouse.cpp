@@ -3,10 +3,10 @@
 #include "mouse.h"
 #include "engine.h"
 #include "window.h"
-#include <game>
+#include <game/strategy.h>
 
 using namespace glb;
-using namespace game;
+
 
 namespace engine {
 

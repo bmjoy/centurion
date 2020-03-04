@@ -3,7 +3,7 @@
 #include <stb_image.h>
 #include <player>
 #include <pathfinding>
-#include <game>
+#include <game/strategy.h>
 #include <math>
 #include <interface>
 
@@ -72,13 +72,13 @@ namespace decoration {
 	}
 
 	void Decoration::checkSettlement() {
-		for (map<int, Building*>::iterator bld = game::independent_buildings.begin(); bld != game::independent_buildings.end(); bld++) {
+		for (map<int, Building*>::iterator bld = independent_buildings.begin(); bld != independent_buildings.end(); bld++) {
 
 			string settlName = bld->second->get_settlement_name();
 			float settlX = bld->second->get_position().x;
 			float settlY = bld->second->get_position().y;
 
-			if (math::euclidean_distance(position.x, position.y, settlX, settlY) <= game::townhallRadius) {
+			if (math::euclidean_distance(position.x, position.y, settlX, settlY) <= townhallRadius) {
 				settlementName = settlName;
 				settlID = bld->second->get_id();
 				independent = bld->second;
@@ -100,8 +100,8 @@ namespace decoration {
 	void Decoration::render(bool not_placeable) {
 		
 		if (engine::Engine::getEnvironment() == "editor"){
-			if (game::buildings.count(settlID) > 0){
-				if (oldX != position.x || oldY != position.y || oldSettlX != game::buildings[settlID].get_position().x || oldSettlY != game::buildings[settlID].get_position().y) {
+			if (buildings.count(settlID) > 0){
+				if (oldX != position.x || oldY != position.y || oldSettlX != buildings[settlID].get_position().x || oldSettlY != buildings[settlID].get_position().y) {
 					checkSettlement();
 				}
 			}

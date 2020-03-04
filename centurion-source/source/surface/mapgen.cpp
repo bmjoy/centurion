@@ -1,12 +1,12 @@
 #include <surface>
 #include <math>
 #include <global>
-#include <game>
+#include <game/strategy.h>
 #include <player>
 #include <random>
 #include <ctime>
 
-using namespace game;
+
 
 namespace mapgen {
 
@@ -470,7 +470,7 @@ namespace mapgen {
 			float d = mapWidth * 2;
 			vec2 p = getVertexCoords(i) - 2.f * grid_size;
 
-			for (map<int, Building*>::iterator settl = game::independent_buildings.begin(); settl != game::independent_buildings.end(); settl++) {
+			for (map<int, Building*>::iterator settl = independent_buildings.begin(); settl != independent_buildings.end(); settl++) {
 				Building* b = settl->second;
 				if (b->get_class().substr(1) != "townhall") continue;
 

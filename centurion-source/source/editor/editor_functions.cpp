@@ -1,9 +1,9 @@
-#include <editor>
+#include <game/editor.h>
 #include <interface>
 #include <global>
 #include <picking>
 #include <player>
-#include <game>
+#include <game/strategy.h>
 #include <engine/engine.h>
 #include <engine/mouse.h>
 #include <engine/camera.h>
@@ -16,6 +16,8 @@ using namespace engine;
 using namespace unit;
 using namespace decoration;
 using namespace glb;
+
+Editor *EDITOR() { return &myeditor; }
 
 namespace editor {
 
@@ -53,67 +55,10 @@ namespace editor {
 	Building buildingTemp;
 	Decoration decorTemp;
 
-	Editor *EDITOR() { return &myeditor; }
+	
 	QuestionWindow *Q_WINDOW() { return &myquestionwindow; }
 
-	void Editor::handleKeyboardControls() {
-		//CTRL Hotkeys
-		if (!IsWindowOpened) {
-			if (KeyCode[GLFW_KEY_LEFT_CONTROL] || KeyCode[GLFW_KEY_RIGHT_CONTROL]) {
-				if (KeyCode[GLFW_KEY_N]) { NewMapWindowIsOpen = true; NewMapResetText = true; IsWindowOpened = true; }
-				if (KeyCode[GLFW_KEY_O]) { OpenMapWindowIsOpen = true; OpenMapWindowUpdate = true; IsWindowOpened = true; }
-				if (KeyCode[GLFW_KEY_S]) { saveCurrentScenario(currentMapName); }
-				if (KeyCode[GLFW_KEY_A]) { TerrainBrushIsActive = false; TerrainBrushWindowIsOpen = false; AddObjectWindowIsOpen = !AddObjectWindowIsOpen; }
-				if (KeyCode[GLFW_KEY_T]) { AddObjectWindowIsOpen = false; TerrainBrushIsActive = !TerrainBrushWindowIsOpen; TerrainBrushWindowIsOpen = !TerrainBrushWindowIsOpen; }
-			}
-			if (KeyCode[GLFW_KEY_DELETE]) {
-				if (game::buildings.count(leftClickID) > 0) {
-					if (game::buildings[leftClickID].isSelected()) {
-						if (game::buildings[leftClickID].is_independent()) {
-							if (game::buildings[leftClickID].buildingsInSettlementCount() > 0) {
-								game::buildings[leftClickID].setWaitingToBeErased(true);
-								Q_WINDOW()->setQuestion("QUESTION_deleteAll");
-							}
-							else {
-								cout << "[DEBUG] Settlement " << game::buildings[leftClickID].get_name() << " deleted!\n";
-								game::buildings[leftClickID].clear_pass();
-								game::buildings.erase(leftClickID);
-							}
-						}
-						else {
-							cout << "[DEBUG] Building " << game::buildings[leftClickID].get_name() << " deleted!\n";
-							game::buildings[leftClickID].clear_pass();
-							game::buildings.erase(leftClickID);
-						}
-					}
-				}
-			}
-			if (KeyCode[GLFW_KEY_SPACE] || Mouse::MiddleClick) {
-				game::gameMinimapStatus = !game::gameMinimapStatus;
-				game::gameMinimapStatus ? std::cout << "[DEBUG] Minimap ON!\n" : std::cout << "[DEBUG] Minimap OFF!\n";
-			}
-			if (KeyCode[GLFW_KEY_Z]) {
-				Surface::Wireframe = !Surface::Wireframe;
-				Surface::Wireframe ? std::cout << "[DEBUG] Wireframe ON!\n" : std::cout << "[DEBUG] Wireframe OFF! \n";
-			}
-			// Grid
-			/*if (KeyCode[GLFW_KEY_G]) {
-				surface->updateGrid();
-				game::gameGridStatus = !game::gameGridStatus;
-				game::gameGridStatus ? std::cout << "[DEBUG] Grid ON!\n" : std::cout << "[DEBUG] Grid OFF!\n";
-			}*/
-		}
-		if (KeyCode[GLFW_KEY_ESCAPE]) {
-			if (areWindowsClosed()) {
-				clearEditorVariables();
-				engine::Engine::Reset();
-			}
-			else {
-				clearEditorVariables();
-				EDITOR_UI()->close_menu();
-			}
-		}
-	}
+	
 
 	/* tools */
 	void prepareObject(string type, string classname) {
@@ -171,10 +116,10 @@ namespace editor {
 				int ID = getPickingID(); increasePickingID();
 				buildingTemp.set_id(ID);
 				buildingTemp.create();
-				game::buildings[ID] = buildingTemp;
-				if (game::buildings[ID].is_independent()) {
-					game::buildings[ID].set_settlement_name("SETTL_" + game::buildings[ID].get_name());
-					game::independent_buildings[ID] = &game::buildings[ID];
+				buildings[ID] = buildingTemp;
+				if (buildings[ID].is_independent()) {
+					buildings[ID].set_settlement_name("SETTL_" + buildings[ID].get_name());
+					independent_buildings[ID] = &buildings[ID];
 				}
 				Mouse::LeftClick = false;
 				addingObject = false;
@@ -185,12 +130,12 @@ namespace editor {
 				int ID = getPickingID(); increasePickingID();
 				decorTemp.set_id(ID);
 				decorTemp.create();
-				game::decorations[ID] = decorTemp;
+				decorations[ID] = decorTemp;
 				Mouse::LeftClick = false;
 				addingObject = false;
 			}
 		}
-		game::MINIMAP()->setStatus(false);
+		MINIMAP()->setStatus(false);
 	}
 
 	void changeTerrain(int terrainType) {
@@ -207,7 +152,7 @@ namespace editor {
 		if (mapgen::MapTextures()[j] != type){
 			mapgen::MapTextures()[j] = type;
 			obj::MapTerrain()->updateTextureBuffer();
-			game::MINIMAP()->setStatus(false);
+			MINIMAP()->setStatus(false);
 		}
 	}
 
@@ -238,11 +183,11 @@ namespace editor {
 	void moveObjects() {
 		if (Mouse::LeftHold) {
 			// buildings
-			if (game::buildings.count(leftClickID) > 0) {
+			if (buildings.count(leftClickID) > 0) {
 				movingObjectRestore = false;
 				if (!movingObject) {
-					movingObjectXPos = game::buildings[leftClickID].get_position().x;
-					movingObjectYPos = game::buildings[leftClickID].get_position().y;
+					movingObjectXPos = buildings[leftClickID].get_position().x;
+					movingObjectYPos = buildings[leftClickID].get_position().y;
 					movingObjectStartXMouse = engine::Mouse::GetXPosition() * engine::myWindow::WidthZoomed / myWindow::Width + engine::Camera::GetXPosition();
 					movingObjectStartYMouse = engine::Mouse::GetYPosition() * engine::myWindow::HeightZoomed / myWindow::Height + engine::Camera::GetYPosition();
 				}
@@ -251,55 +196,55 @@ namespace editor {
 				float dx = x1 - movingObjectStartXMouse;
 				float dy = y1 - movingObjectStartYMouse;
 
-				if (!game::buildings[leftClickID].is_independent()){
-					if (!movingObject) game::buildings[leftClickID].clear_pass();
-					game::buildings[leftClickID].set_position(vec3(movingObjectXPos + dx, movingObjectYPos + dy, 0.f));
-					if (!game::buildings[leftClickID].is_placeable()) {
+				if (!buildings[leftClickID].is_independent()){
+					if (!movingObject) buildings[leftClickID].clear_pass();
+					buildings[leftClickID].set_position(vec3(movingObjectXPos + dx, movingObjectYPos + dy, 0.f));
+					if (!buildings[leftClickID].is_placeable()) {
 						string s = "";
-						if (!game::buildings[leftClickID].is_near_to_independent(&s)) {
+						if (!buildings[leftClickID].is_near_to_independent(&s)) {
 							textInfo.render_dynamic(getTranslation("EDITOR_noSettlementsAround"), "tahoma_15px", 10, myWindow::Height - 50, vec4(255.f), "left", "center");
 						}
 						else
 							textInfo.render_dynamic(getTranslation("EDITOR_impassablePoint"), "tahoma_15px", 10, myWindow::Height - 50, vec4(255.f), "left", "center");
-						game::buildings[leftClickID].set_placeable(false);
+						buildings[leftClickID].set_placeable(false);
 						movingObjectRestore = true;
 					}
 					else {
 						textInfo.render_dynamic(getTranslation("EDITOR_canAddStructure"), "tahoma_15px", 10, myWindow::Height - 50, vec4(255.f), "left", "center");
-						game::buildings[leftClickID].set_placeable(true);
+						buildings[leftClickID].set_placeable(true);
 					}
 				}
 				else {
-					if (!movingObject) game::buildings[leftClickID].clear_pass();
-					game::buildings[leftClickID].set_position(vec3(movingObjectXPos + dx, movingObjectYPos + dy, 0.f));
-					if (!game::buildings[leftClickID].is_placeable()) {
-						game::buildings[leftClickID].set_placeable(false);
+					if (!movingObject) buildings[leftClickID].clear_pass();
+					buildings[leftClickID].set_position(vec3(movingObjectXPos + dx, movingObjectYPos + dy, 0.f));
+					if (!buildings[leftClickID].is_placeable()) {
+						buildings[leftClickID].set_placeable(false);
 						movingObjectRestore = true;
 					}
 					else {
-						game::buildings[leftClickID].set_placeable(true);
+						buildings[leftClickID].set_placeable(true);
 					}
-					if (!game::buildings[leftClickID].is_placeable())
+					if (!buildings[leftClickID].is_placeable())
 						textInfo.render_dynamic(getTranslation("EDITOR_impassablePoint"), "tahoma_15px", 10, myWindow::Height - 50, vec4(255.f), "left", "center");
 					else
 						textInfo.render_dynamic(getTranslation("EDITOR_canAddStructure"), "tahoma_15px", 10, myWindow::Height - 50, vec4(255.f), "left", "center");
 				}
 				movingObject = true;
-				game::MINIMAP()->setStatus(false);
+				MINIMAP()->setStatus(false);
 			}
 		}
 		else {
 			// buildings
-			if (game::buildings.count(leftClickID) > 0) {
+			if (buildings.count(leftClickID) > 0) {
 				if (movingObjectRestore) {
-					game::buildings[leftClickID].set_position(vec3(movingObjectXPos, movingObjectYPos, 0.f));
-					game::buildings[leftClickID].clear_pass();
-					game::buildings[leftClickID].set_placeable(true);
-					game::buildings[leftClickID].update_pass();
+					buildings[leftClickID].set_position(vec3(movingObjectXPos, movingObjectYPos, 0.f));
+					buildings[leftClickID].clear_pass();
+					buildings[leftClickID].set_placeable(true);
+					buildings[leftClickID].update_pass();
 				}
 				else {
-					game::buildings[leftClickID].set_placeable(true);
-					game::buildings[leftClickID].update_pass();
+					buildings[leftClickID].set_placeable(true);
+					buildings[leftClickID].update_pass();
 				}
 				movingObject = false;
 				movingObjectRestore = false;

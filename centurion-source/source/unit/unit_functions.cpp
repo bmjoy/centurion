@@ -1,9 +1,9 @@
 #include <unit>
 #include <surface>
-#include <game>
+#include <game/strategy.h>
 #include <pathfinding>
 
-using namespace game;
+
 using namespace std;
 using namespace glm;
 

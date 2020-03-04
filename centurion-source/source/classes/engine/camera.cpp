@@ -2,12 +2,11 @@
 #include "engine.h"
 #include "mouse.h"
 #include "window.h"
-#include <game>
+#include <game/strategy.h>
 #include <interface>
 
 using namespace glb;
-using namespace game;
-using namespace editor;
+
 
 namespace engine {
 

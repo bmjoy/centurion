@@ -1,11 +1,12 @@
 #include <primitives>
 #include <stb_image.h>
-#include <game>
+#include <game/strategy.h>
 #include <surface>
 #include <global>
+#include "game/game.h"
 
 using namespace glb;
-using namespace game;
+
 
 Terrain::Terrain(){
 	vPath = "assets/shaders/terrain/vertex.glsl";
@@ -75,8 +76,8 @@ void Terrain::render(bool tracing) {
 	glUseProgram(shaderId);
 
 	// Wireframe
-	glUniform1i(glGetUniformLocation(shaderId, "wireframe"), int(Surface::Wireframe));
-	if (Surface::Wireframe && !tracing) {
+	glUniform1i(glGetUniformLocation(shaderId, "wireframe"), int(Game::Surface::Wireframe));
+	if (Game::Surface::Wireframe && !tracing) {
 		glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
 	}
 	else {
@@ -87,7 +88,7 @@ void Terrain::render(bool tracing) {
 	glUniform1i(glGetUniformLocation(shaderId, "tracing"), int(tracing));
 
 	// Minimap
-	glUniform1i(glGetUniformLocation(shaderId, "minimap"), int(game::gameMinimapStatus));
+	glUniform1i(glGetUniformLocation(shaderId, "minimap"), int(gameMinimapStatus));
 	
 	//-------------------------------------//
 	/*               DRAWING               */

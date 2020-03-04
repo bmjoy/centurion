@@ -4,14 +4,14 @@
 #include <engine/window.h>
 #include <engine/mouse.h>
 #include <settings.h>
-#include <game>
+#include <game/strategy.h>
 #include <global>
 #include <player>
 #include <interface>
 
 using namespace glb;
 using namespace engine;
-using namespace game;
+
 
 namespace menu {
 	void Menu::picking() {
@@ -53,7 +53,7 @@ namespace menu {
 			Mouse::LeftClick = false;
 			Engine::setEnvironment("game");
 			/* save game informations */
-			game::playersNumber = num_players;
+			playersNumber = num_players;
 			for (int i = 0; i < num_players; i++) {
 				Player p = Player();
 				p.create(players_color[i], 0, list->get_race(i), glb::colors[players_color[i]]);

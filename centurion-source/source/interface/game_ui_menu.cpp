@@ -39,8 +39,8 @@ namespace game {
 			buttons.push_back(btn);
 
 			/* update picking */
-			addValueToPickingListUI(getPickingID(), data[s][i]["name"].get<std::string>());
-			increasePickingID();
+			addValueToPickingListUI(getPickingID_UI(), data[s][i]["name"].get<std::string>());
+			increasePickingID_UI();
 		}
 
 		background = gui::Rectangle();

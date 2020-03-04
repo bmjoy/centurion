@@ -1,11 +1,11 @@
 #include <primitives>
-#include <game>
+#include <game/strategy.h>
 #include <surface>
 #include <pathfinding>
 #include <global>
 #include <engine/window.h>
 
-using namespace game;
+
 using namespace glb;
 
 MinimapRectangle::MinimapRectangle()

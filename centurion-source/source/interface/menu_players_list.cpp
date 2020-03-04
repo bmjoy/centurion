@@ -1,9 +1,9 @@
 #include <interface>
-#include <game>
+#include <game/strategy.h>
 #include <picking>
 
 using namespace glb;
-using namespace game;
+
 
 namespace menu{
 
@@ -20,15 +20,15 @@ namespace menu{
 		dynamicText = gui::SimpleText("dynamic", true);
 
 		arrowDown = gui::Image("arrowDown");
-		arrowDown.create("center", (float)x + 240, (float)y + 50, 0, 0, getPickingID());
+		arrowDown.create("center", (float)x + 240, (float)y + 50, 0, 0, getPickingID_UI());
 
-		addValueToPickingListUI(getPickingID(), "arrowDown");
-		increasePickingID();
+		addValueToPickingListUI(getPickingID_UI(), "arrowDown");
+		increasePickingID_UI();
 	
 		arrowUp = gui::Image("arrowUp");
-		arrowUp.create("center", (float)x + 280, (float)y + 50, 0, 0, getPickingID());
-		addValueToPickingListUI(getPickingID(), "arrowUp");
-		increasePickingID();
+		arrowUp.create("center", (float)x + 280, (float)y + 50, 0, 0, getPickingID_UI());
+		addValueToPickingListUI(getPickingID_UI(), "arrowUp");
+		increasePickingID_UI();
 	
 		background = gui::Rectangle();
 		background.create("border-filled", (float)x - 30, (float)y + 80, (float)w, (float)h, "top-left", 0);
@@ -37,13 +37,13 @@ namespace menu{
 		for (int j = 0; j < maxPlayersNumber; j++) {
 
 			//Player color rectangle
-			addValueToPickingListUI(getPickingID(), "ColForm_" + std::to_string(j));
+			addValueToPickingListUI(getPickingID_UI(), "ColForm_" + std::to_string(j));
 			gui::FormInput col_fi = gui::FormInput(false);
-			col_fi.create((float)x, (float)y - deltaY * j, 20.f, 20.f, { "" }, getPickingID());
+			col_fi.create((float)x, (float)y - deltaY * j, 20.f, 20.f, { "" }, getPickingID_UI());
 			if (j < 2) { (*players_color).push_back(j); }
 			else { (*players_color).push_back(-1); }
 			colors_Form.push_back(col_fi);
-			increasePickingID();
+			increasePickingID_UI();
 
 			//Player name
 			gui::FormInput p_fi = gui::FormInput(false);
@@ -51,11 +51,11 @@ namespace menu{
 			players_Form.push_back(p_fi);
 
 			//Player civilization
-			addValueToPickingListUI(getPickingID(), "CivForm_" + std::to_string(j));
+			addValueToPickingListUI(getPickingID_UI(), "CivForm_" + std::to_string(j));
 			gui::FormInput c_fi = gui::FormInput(true);
-			c_fi.create((float)x + 280.f, (float)y - deltaY * j, 150.f, 20.f, racesNames, getPickingID());
+			c_fi.create((float)x + 280.f, (float)y - deltaY * j, 150.f, 20.f, racesNames, getPickingID_UI());
 			civiliz_Form.push_back(c_fi);
-			increasePickingID();
+			increasePickingID_UI();
 		}
 	}
 

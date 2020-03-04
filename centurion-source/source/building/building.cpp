@@ -3,7 +3,7 @@
 #include <stb_image.h>
 #include <player>
 #include <pathfinding>
-#include <game>
+#include <game/strategy.h>
 #include <math>
 #include <interface>
 
@@ -56,13 +56,13 @@ namespace building {
 	bool Building::is_near_to_independent(string *Category) {
 		bool ok = false;
 		(*Category) = "";
-		for (map<int, Building*>::iterator b = game::independent_buildings.begin(); b != game::independent_buildings.end(); b++) {
+		for (map<int, Building*>::iterator b = independent_buildings.begin(); b != independent_buildings.end(); b++) {
 			int ID = b->first;
 			float dist = math::euclidean_distance(b->second->get_position().x, b->second->get_position().y, position.x, position.y);
 			if (dist < 1500.f) {
-				set_settlement_building(game::independent_buildings[ID]);
-				set_settlement_name(game::independent_buildings[ID]->get_settlement_name());
-				(*Category) = game::independent_buildings[ID]->getCategory();
+				set_settlement_building(independent_buildings[ID]);
+				set_settlement_name(independent_buildings[ID]->get_settlement_name());
+				(*Category) = independent_buildings[ID]->getCategory();
 				ok = true;
 				break;
 			}
@@ -101,7 +101,7 @@ namespace building {
 
 		// townhall radius (editor only)
 		circle[1] = gui::Circle();
-		circle[1].create("border", 0.f, 0.f, game::townhallRadius * 2.f, game::townhallRadius * 2.f, 10.f, "center");
+		circle[1].create("border", 0.f, 0.f, townhallRadius * 2.f, townhallRadius * 2.f, 10.f, "center");
 		isCreated = true;
 	}
 
@@ -116,27 +116,27 @@ namespace building {
 			    settl_name = independent->get_settlement_name();
 
 		// keep updated central buildings "subsidiaries buildings list"
-		if (game::buildings.size() != buildingListSize && (prop.is_townhall || prop.is_villagehall)) {
+		if (buildings.size() != buildingListSize && (prop.is_townhall || prop.is_villagehall)) {
 			subs_buildings.clear();
 			int k = 0;
-			for (map<int, Building>::iterator bld = game::buildings.begin(); bld != game::buildings.end(); bld++) {
+			for (map<int, Building>::iterator bld = buildings.begin(); bld != buildings.end(); bld++) {
 				int ID = bld->first;
 				if (!bld->second.is_independent()) {
 					if (bld->second.get_settlement_name() == settl_name) {
 						if (k == 0) { cout << "[DEBUG] Subsidiaries buildings to " + name + " have been updated. Their names are: \n"; }
-						subs_buildings[ID] = &game::buildings[ID];
-						cout << "   " << game::buildings[ID].get_name() << "\n";
+						subs_buildings[ID] = &buildings[ID];
+						cout << "   " << buildings[ID].get_name() << "\n";
 						k++;
 					}
 				}
 			}
-			buildingListSize = game::buildings.size();
+			buildingListSize = buildings.size();
 		}
 
 		// has the building been selected?
 		selected = (picking_id == clickID);
 
-		if (engine::Engine::getEnvironment() == "editor" && !game::gameMinimapStatus){
+		if (engine::Engine::getEnvironment() == "editor" && !gameMinimapStatus){
 			if (selected && !editor::addingObject) circle[0].render(vec4(255.f), position.x, position.y - data["radius"].get<float>() / 15.5f); // selection circle (editor only)
 			if (selected && (prop.is_townhall || prop.is_villagehall) && !editor::addingObject) circle[1].render(vec4(0,255,255,255), position.x, position.y); // selection circle (editor only)
 		}

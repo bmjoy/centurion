@@ -2,7 +2,7 @@
 #include <surface>
 #include <math>
 #include <json.hpp>
-#include <game>
+#include <game/strategy.h>
 #include <picking>
 #include <object>
 #include <menu>
@@ -21,7 +21,7 @@
 
 using namespace glb;
 using namespace std;
-using namespace game;
+
 using namespace engine;
 
 namespace glb {
@@ -236,7 +236,7 @@ namespace glb {
 		ofstream objectsFile(path + "/objects.tsv");
 		if (objectsFile.is_open()) {
 			objectsFile << "type\tclass\tname\tsettlement\tplayerID\tx\ty\txoffset\tyoffset" << "\n";
-			for (map<int, Building>::iterator bld = game::buildings.begin(); bld != game::buildings.end(); bld++) {
+			for (map<int, Building>::iterator bld = buildings.begin(); bld != buildings.end(); bld++) {
 				objectsFile << bld->second.get_type() << "\t";
 				objectsFile << bld->second.get_class() << "\t";
 				objectsFile << bld->second.get_name() << "\t";
@@ -257,7 +257,7 @@ namespace glb {
 			/*for (map<int, Unit>::iterator u = units.begin(); u != units.end(); u++) {
 				u->second.render(true, 0);
 			}*/
-			for (map<int, Decoration>::iterator dec = game::decorations.begin(); dec != game::decorations.end(); dec++) {
+			for (map<int, Decoration>::iterator dec = decorations.begin(); dec != decorations.end(); dec++) {
 				objectsFile << dec->second.get_type() << "\t";
 				objectsFile << dec->second.get_class() << "\t";
 				objectsFile << "N/A" << "\t";
@@ -338,9 +338,9 @@ namespace glb {
 						b.set_id(getPickingID());
 						b.set_settlement_name(settl_name);
 						b.create(name);
-						game::buildings[getPickingID()] = b;
-						if (game::buildings[getPickingID()].is_independent()) {
-							game::independent_buildings[getPickingID()] = &game::buildings[getPickingID()];
+						buildings[getPickingID()] = b;
+						if (buildings[getPickingID()].is_independent()) {
+							independent_buildings[getPickingID()] = &buildings[getPickingID()];
 						}
 						increasePickingID();
 					}
@@ -351,20 +351,20 @@ namespace glb {
 						d.set_position(vec3(xPos, yPos, 0.f));
 						d.set_id(getPickingID());
 						d.create();
-						game::decorations[getPickingID()] = d;
+						decorations[getPickingID()] = d;
 						increasePickingID();
 					}
 				}
 				row++;
 			}
 			/* set central building for every dependent building */
-			for (map<int, Building>::iterator bld = game::buildings.begin(); bld != game::buildings.end(); bld++) {
+			for (map<int, Building>::iterator bld = buildings.begin(); bld != buildings.end(); bld++) {
 				int ID = bld->first;
 				if (!bld->second.is_independent()) {
-					for (map<int, Building*>::iterator settl = game::independent_buildings.begin(); settl != game::independent_buildings.end(); settl++) {
+					for (map<int, Building*>::iterator settl = independent_buildings.begin(); settl != independent_buildings.end(); settl++) {
 						int settl_ID = settl->first;
 						if (settl->second->get_settlement_name() == bld->second.get_settlement_name()) {
-							game::buildings[ID].set_settlement_building(game::independent_buildings[settl_ID]);
+							buildings[ID].set_settlement_building(independent_buildings[settl_ID]);
 							break;
 						}
 					}

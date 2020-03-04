@@ -1,7 +1,7 @@
 #include <interface>
 #include <picking>
 #include <surface>
-#include <editor>
+#include <game/editor.h>
 #include <engine/window.h>
 #include <engine/mouse.h>
 
@@ -13,22 +13,22 @@ namespace editor {
 
 	void QuestionWindow::create() {
 		back_image = gui::Image("yesornotwindow_back");
-		back_image.create("center", myWindow::Width / 2.f, myWindow::Height / 2.f, 0, 0, getPickingID());
-		increasePickingID();
+		back_image.create("center", myWindow::Width / 2.f, myWindow::Height / 2.f, 0, 0, getPickingID_UI());
+		increasePickingID_UI();
 
 		// startX and startY are TOP-LEFT coordinates (as in Paint)
 		startX = myWindow::Width / 2.f - back_image.getImageSize().x / 2.f;
 		startY = myWindow::Height / 2.f + back_image.getImageSize().y / 2.f;
 
 		buttons[0] = gui::Image("newmapwindow_buttonleft");
-		buttons[0].create("top-left", startX, startY, 0, 0, getPickingID());
-		addValueToPickingListUI(getPickingID(), "QuestionWindow_Yes");
-		increasePickingID();
+		buttons[0].create("top-left", startX, startY, 0, 0, getPickingID_UI());
+		addValueToPickingListUI(getPickingID_UI(), "QuestionWindow_Yes");
+		increasePickingID_UI();
 
 		buttons[1] = gui::Image("newmapwindow_buttonright");
-		buttons[1].create("top-left", startX, startY, 0, 0, getPickingID());
-		addValueToPickingListUI(getPickingID(), "QuestionWindow_No");
-		increasePickingID();
+		buttons[1].create("top-left", startX, startY, 0, 0, getPickingID_UI());
+		addValueToPickingListUI(getPickingID_UI(), "QuestionWindow_No");
+		increasePickingID_UI();
 
 		buttons_text[0] = gui::SimpleText("static");
 		buttons_text[0].create_static(getTranslation("WORD_yes"), "tahoma_13px", startX + 58.f, startY - 171.f, "center", "middle", vec4(255.f), "bold");

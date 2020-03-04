@@ -1,5 +1,5 @@
 #include <interface>
-#include <game>
+#include <game/strategy.h>
 #include <picking>
 #include <menu>
 #include <engine/mouse.h>
@@ -23,10 +23,10 @@ namespace menu {
 		for (map<string,int>::iterator i = availableLanguages.begin(); i != availableLanguages.end(); i++)
 			form_options.push_back("LANG_" + i->first);
 		languages = gui::FormInput(true);
-		languages.create(startX + 150.f, startY - 77.f, 150.f, 20.f, form_options, getPickingID());
+		languages.create(startX + 150.f, startY - 77.f, 150.f, 20.f, form_options, getPickingID_UI());
 		languages.selectedText = "LANG_"+ Settings::Language;
-		addValueToPickingListUI(getPickingID(), "GlobalOptions_formLanguages");
-		increasePickingID();
+		addValueToPickingListUI(getPickingID_UI(), "GlobalOptions_formLanguages");
+		increasePickingID_UI();
 
 		text[0] = gui::SimpleText("static");
 		text[0].create_static(getTranslation("OPTIONS_Title"), "tahoma_15px", startX + 20.f, startY - 40.f, "left", "normal", vec4(255), "bold");

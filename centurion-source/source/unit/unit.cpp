@@ -1,6 +1,6 @@
 #include <unit>
 #include <math>
-#include <game>
+#include <game/strategy.h>
 #include <stb_image.h>
 #include <player>
 #include <pathfinding>
@@ -8,7 +8,7 @@
 
 using namespace math;
 using namespace glb;
-using namespace game;
+
 
 namespace unit {
 	Unit::Unit() {

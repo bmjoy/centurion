@@ -6,47 +6,46 @@
 #include <unit>
 #include <building>
 #include <decoration>
+#include "game.h"
 
 using namespace std;
 using namespace glm;
 
-class Surface;
 class UIGame;
 class Player;
 
-namespace editor {
+//
+//	EDITOR CLASS --> source/editor/editor.cpp
+//
 
+class Editor : public Game
+{
+public:
+	Editor();
+	bool editor_is_created() { return editorIsCreated; }
+	void reset() { editorIsCreated = false; }
+	void create();
+	void run();
+	void handleKeyboardControls();
+	~Editor();
+private:
+	//Surface *surface;
+	glm::mat4 proj, view;
+	int pickingID;
+	bool editorIsCreated;
+};
+
+static Editor myeditor;
+Editor *EDITOR();
+
+// 
+//	EDITOR FUNCTIONS
+//
+
+namespace editor {
 	using namespace unit;
 	using namespace building;
 	using namespace decoration;
-
-	//
-	//	EDITOR CLASS --> source/editor/editor.cpp
-	//
-
-	class Editor
-	{
-	public:
-		Editor();
-		bool editor_is_created() { return editorIsCreated; }
-		void reset() { editorIsCreated = false; }
-		void create();
-		void run();
-		void handleKeyboardControls();
-		~Editor();
-	private:
-		Surface *surface;
-		glm::mat4 proj, view;
-		int pickingID;
-		bool editorIsCreated;
-	};
-
-	static Editor myeditor;
-	Editor *EDITOR();
-
-	// 
-	//	EDITOR FUNCTIONS
-	//
 
 	extern Unit unitTemp;
 	extern Building buildingTemp;
@@ -63,3 +62,6 @@ namespace editor {
 	bool areWindowsClosed();
 	void moveObjects();
 };
+
+
+

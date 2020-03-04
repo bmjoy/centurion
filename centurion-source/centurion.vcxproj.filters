@@ -112,6 +112,12 @@
     <Filter Include="Source Files\classes\engine">
       <UniqueIdentifier>{5718fb39-22a6-403d-97b2-c44b80655835}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\classes\game">
+      <UniqueIdentifier>{a9e919bf-51a6-4e28-953f-820dc87c10ce}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\classes\game">
+      <UniqueIdentifier>{e62e959c-2da3-4c6d-a46e-ed920f9c438b}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -122,9 +128,6 @@
     </ClCompile>
     <ClCompile Include="source\gui\form_input.cpp">
       <Filter>Source Files\gui</Filter>
-    </ClCompile>
-    <ClCompile Include="source\game\game.cpp">
-      <Filter>Source Files\game</Filter>
     </ClCompile>
     <ClCompile Include="source\menu\menu.cpp">
       <Filter>Source Files\menu</Filter>
@@ -158,9 +161,6 @@
     </ClCompile>
     <ClCompile Include="source\surface\surface.cpp">
       <Filter>Source Files\surface</Filter>
-    </ClCompile>
-    <ClCompile Include="source\editor\editor.cpp">
-      <Filter>Source Files\editor</Filter>
     </ClCompile>
     <ClCompile Include="source\interface\editor_menu.cpp">
       <Filter>Source Files\interface</Filter>
@@ -345,6 +345,18 @@
     <ClCompile Include="source\classes\fontCharacters-xml.cxx">
       <Filter>Source Files\classes</Filter>
     </ClCompile>
+    <ClCompile Include="source\classes\game\strategy.cpp">
+      <Filter>Source Files\classes\game</Filter>
+    </ClCompile>
+    <ClCompile Include="source\classes\game\game.cpp">
+      <Filter>Source Files\classes\game</Filter>
+    </ClCompile>
+    <ClCompile Include="source\classes\game\editor.cpp">
+      <Filter>Source Files\classes\game</Filter>
+    </ClCompile>
+    <ClCompile Include="source\classes\game\match.cpp">
+      <Filter>Source Files\classes\game</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="source\extern\includes\json.hpp">
@@ -455,6 +467,18 @@
     <ClInclude Include="source\classes\fontCharacters-xml.hxx">
       <Filter>Header Files\classes</Filter>
     </ClInclude>
+    <ClInclude Include="source\classes\game\strategy.h">
+      <Filter>Header Files\classes\game</Filter>
+    </ClInclude>
+    <ClInclude Include="source\classes\game\game.h">
+      <Filter>Header Files\classes\game</Filter>
+    </ClInclude>
+    <ClInclude Include="source\classes\game\editor.h">
+      <Filter>Header Files\classes\game</Filter>
+    </ClInclude>
+    <ClInclude Include="source\classes\game\match.h">
+      <Filter>Header Files\classes\game</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="assets\shaders\bsprite\fragment.glsl">
@@ -514,9 +538,6 @@
     <None Include="source\common\gui">
       <Filter>Header Files\common</Filter>
     </None>
-    <None Include="source\common\game">
-      <Filter>Header Files\common</Filter>
-    </None>
     <None Include="source\common\object">
       <Filter>Header Files\common</Filter>
     </None>
@@ -524,9 +545,6 @@
       <Filter>Header Files\common</Filter>
     </None>
     <None Include="source\common\player">
-      <Filter>Header Files\common</Filter>
-    </None>
-    <None Include="source\common\editor">
       <Filter>Header Files\common</Filter>
     </None>
     <None Include="source\common\pathfinding">

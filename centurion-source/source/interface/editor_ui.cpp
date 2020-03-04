@@ -1,11 +1,11 @@
 #include <interface>
 #include <picking>
-#include <game>
+#include <game/strategy.h>
 #include <engine/camera.h>
 #include <engine/window.h>
 
 using namespace glb;
-using namespace game;
+
 using namespace engine;
 
 namespace editor {
@@ -29,11 +29,11 @@ namespace editor {
 
 	void EditorUI::render(bool picking) {
 		// minimap rectangle:
-		if (game::gameMinimapStatus) {
-			float x = Camera::GetXPosition() / game::mapWidth * myWindow::Width;
-			float y = Camera::GetYPosition() / game::mapHeight * (myWindow::Height - myWindow::BottomBarHeight - myWindow::TopBarHeight) + myWindow::BottomBarHeight;
-			float w = myWindow::WidthZoomed * myWindow::Width / game::mapWidth;
-			float h = myWindow::HeightZoomed * (myWindow::Height - myWindow::BottomBarHeight - myWindow::TopBarHeight) / game::mapHeight;
+		if (gameMinimapStatus) {
+			float x = Camera::GetXPosition() / mapWidth * myWindow::Width;
+			float y = Camera::GetYPosition() / mapHeight * (myWindow::Height - myWindow::BottomBarHeight - myWindow::TopBarHeight) + myWindow::BottomBarHeight;
+			float w = myWindow::WidthZoomed * myWindow::Width / mapWidth;
+			float h = myWindow::HeightZoomed * (myWindow::Height - myWindow::BottomBarHeight - myWindow::TopBarHeight) / mapHeight;
 			x = std::max(x, 1.f);
 			y = std::max(y, myWindow::BottomBarHeight + 1.f);
 			y = std::min(y, myWindow::Height - myWindow::TopBarHeight - h);

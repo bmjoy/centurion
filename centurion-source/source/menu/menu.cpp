@@ -2,14 +2,14 @@
 #include <global>
 #include <player>
 #include <picking>
-#include <game>
+#include <game/strategy.h>
 #include <interface>
 #include <engine/window.h>
 #include <engine/mouse.h>
 
 using namespace glb;
 using namespace std;
-using namespace game;
+
 using namespace engine;
 
 namespace menu {
@@ -27,6 +27,7 @@ namespace menu {
 	void Menu::create() {	
 		list = new PlayersList();
 		resetPicking();
+		resetPicking_UI();
 	
 		string s;
 		for (int a = 0; a < menus.size(); ++a) {
@@ -52,14 +53,14 @@ namespace menu {
 
 				/* use data */
 				img = gui::Image(imageName);	
-				if (size == "auto") img.create(align, (float)x, (float)y, 0.0f, 0.0f, getPickingID() * clickable);
+				if (size == "auto") img.create(align, (float)x, (float)y, 0.0f, 0.0f, getPickingID_UI() * clickable);
 				if (size == "max") img.create(align, (float)x, (float)y, myWindow::Width, myWindow::Height, pickingID * clickable);
 				images[menus[a]].push_back(img);
 
 				// update picking 
 				if (clickable) {
-					addValueToPickingListUI(getPickingID(), name);
-					increasePickingID();
+					addValueToPickingListUI(getPickingID_UI(), name);
+					increasePickingID_UI();
 				}
 			}
 
@@ -75,12 +76,12 @@ namespace menu {
 
 				/* use data */
 				btn = gui::Button();
-				btn.create(imageName, buttonText, x, y, getPickingID(), glm::vec4(0.f, 0.f, 0.f, 255.f));
+				btn.create(imageName, buttonText, x, y, getPickingID_UI(), glm::vec4(0.f, 0.f, 0.f, 255.f));
 				buttons[menus[a]].push_back(btn);
 
 				// update picking 
-				addValueToPickingListUI(getPickingID(), name);
-				increasePickingID();
+				addValueToPickingListUI(getPickingID_UI(), name);
+				increasePickingID_UI();
 			}
 
 			s = "playersList";
@@ -97,6 +98,7 @@ namespace menu {
 	void Menu::update() {
 		list = new PlayersList();
 		resetPicking();
+		resetPicking_UI();
 
 		string s;
 		for (int a = 0; a < menus.size(); ++a) {
@@ -122,14 +124,14 @@ namespace menu {
 
 				/* use data */
 				img = gui::Image(imageName);
-				if (size == "auto") img.create(align, (float)x, (float)y, 0.0f, 0.0f, getPickingID() * clickable);
+				if (size == "auto") img.create(align, (float)x, (float)y, 0.0f, 0.0f, getPickingID_UI() * clickable);
 				if (size == "max") img.create(align, (float)x, (float)y, myWindow::Width, myWindow::Height, pickingID * clickable);
 				images[menus[a]].push_back(img);
 
 				// update picking 
 				if (clickable) {
-					addValueToPickingListUI(getPickingID(), name);
-					increasePickingID();
+					addValueToPickingListUI(getPickingID_UI(), name);
+					increasePickingID_UI();
 				}
 			}
 
@@ -145,12 +147,12 @@ namespace menu {
 
 				/* use data */
 				btn = gui::Button();
-				btn.create(imageName, buttonText, x, y, getPickingID(), glm::vec4(0.f, 0.f, 0.f, 255.f));
+				btn.create(imageName, buttonText, x, y, getPickingID_UI(), glm::vec4(0.f, 0.f, 0.f, 255.f));
 				buttons[menus[a]].push_back(btn);
 
 				// update picking 
-				addValueToPickingListUI(getPickingID(), name);
-				increasePickingID();
+				addValueToPickingListUI(getPickingID_UI(), name);
+				increasePickingID_UI();
 			}
 
 			s = "playersList";

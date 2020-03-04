@@ -3,8 +3,8 @@
 #include "camera.h"
 #include "mouse.h"
 
-#include <editor>
-#include <game>
+#include <game/editor.h>
+#include <game/strategy.h>
 #include <player>
 #include <menu>
 #include <interface>
@@ -13,8 +13,7 @@ using namespace std;
 using namespace glm;
 using namespace glb;
 using namespace menu;
-using namespace game;
-using namespace editor;
+
 using namespace debug;
 
 namespace engine {
@@ -103,7 +102,7 @@ namespace engine {
 			if (reset) {
 				reset = false;
 				if (environment == "editor") EDITOR()->reset();
-				if (environment == "game") { GAME()->reset(); GAME()->clear(); }
+				if (environment == "game") { GAME()->reset(); }
 				MENU()->reset();
 				environment = "menu";
 			}
@@ -161,11 +160,11 @@ namespace engine {
 				obj::BSprite()->addPath(dataClass["ent_path"]);
 
 				/* editor object string list */
-				EditorObjectStringListForm0[i] = "buildings";
-				EditorObjectStringListForm1[i] = dataClass["category"].get<string>();
-				EditorObjectStringListForm2[i] = dataClass["class_name"].get<string>();
+				editor::EditorObjectStringListForm0[i] = "buildings";
+				editor::EditorObjectStringListForm1[i] = dataClass["category"].get<string>();
+				editor::EditorObjectStringListForm2[i] = dataClass["class_name"].get<string>();
 
-				EditorAddObjectBuildingOptions.push_back("EDITORTREE_CATEGORY_" + dataClass["category"].get<string>());
+				editor::EditorAddObjectBuildingOptions.push_back("EDITORTREE_CATEGORY_" + dataClass["category"].get<string>());
 
 				if (dataClass["category"].get<string>() == "outposts") outposts.push_back(dataClass["class_name"].get<string>());
 			}
@@ -179,17 +178,17 @@ namespace engine {
 			if (dataClass["type"] == "decoration") {
 				obj::DSprite()->addPath(dataClass["ent_path"]);
 				/* editor object string list */
-				EditorObjectStringListForm0[i] = "decorations";
-				EditorObjectStringListForm1[i] = dataClass["category"].get<string>();
-				EditorObjectStringListForm2[i] = dataClass["class_name"].get<string>();
+				editor::EditorObjectStringListForm0[i] = "decorations";
+				editor::EditorObjectStringListForm1[i] = dataClass["category"].get<string>();
+				editor::EditorObjectStringListForm2[i] = dataClass["class_name"].get<string>();
 
-				EditorAddObjectDecorationOptions.push_back("EDITORTREE_CATEGORY_" + dataClass["category"].get<string>());
+				editor::EditorAddObjectDecorationOptions.push_back("EDITORTREE_CATEGORY_" + dataClass["category"].get<string>());
 			}
 		}
 
-		EditorAddObjectBuildingOptions.erase(unique(EditorAddObjectBuildingOptions.begin(), EditorAddObjectBuildingOptions.end()), EditorAddObjectBuildingOptions.end());
+		editor::EditorAddObjectBuildingOptions.erase(unique(editor::EditorAddObjectBuildingOptions.begin(), editor::EditorAddObjectBuildingOptions.end()), editor::EditorAddObjectBuildingOptions.end());
 		//EditorAddObjectUnitOptions.erase(unique(EditorAddObjectUnitOptions.begin(), EditorAddObjectUnitOptions.end()), EditorAddObjectUnitOptions.end());
-		EditorAddObjectDecorationOptions.erase(unique(EditorAddObjectDecorationOptions.begin(), EditorAddObjectDecorationOptions.end()), EditorAddObjectDecorationOptions.end());
+		editor::EditorAddObjectDecorationOptions.erase(unique(editor::EditorAddObjectDecorationOptions.begin(), editor::EditorAddObjectDecorationOptions.end()), editor::EditorAddObjectDecorationOptions.end());
 
 		/* images */
 

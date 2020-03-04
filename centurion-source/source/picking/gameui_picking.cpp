@@ -1,7 +1,7 @@
 #include <interface>
 #include <picking>
 #include <engine/engine.h>
-#include <game>
+#include <game/strategy.h>
 
 using namespace glb;
 using namespace engine;

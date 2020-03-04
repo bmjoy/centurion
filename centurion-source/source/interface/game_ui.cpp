@@ -3,7 +3,7 @@
 #include <engine/window.h>
 #include <engine/mouse.h>
 #include <picking>
-#include <game>
+#include <game/strategy.h>
 
 using namespace std;
 using namespace glm;

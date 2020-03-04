@@ -39,17 +39,17 @@ namespace mapgen {
 //	SURFACE CLASS --> source/surface/surface.cpp
 //
 
-class Surface
-{
-public:
-	static bool Wireframe;
-	Surface();
-	void reset();
-	void createNoise();
-	void updateGrid();
-	void render(bool tracing);
-	~Surface();
-};
+//class Surface
+//{
+//public:
+//	static bool Wireframe;
+//	Surface();
+//	void reset();
+//	void createNoise();
+//	void updateGrid();
+//	void render(bool tracing);
+//	~Surface();
+//};
 
 //
 //	MAP GENERATION FUNCTIONS --> source/surface/mapgen.cpp

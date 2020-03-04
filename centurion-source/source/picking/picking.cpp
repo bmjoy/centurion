@@ -11,12 +11,18 @@ namespace glb {
 	int rightClickID = 0;
 
 	void increasePickingID() { pickingID++; }
+	void increasePickingID_UI() { pickingID_UI--; }
 	int getPickingID() { return pickingID; }
+	int getPickingID_UI() { return pickingID_UI; }
+
 	void addValueToPickingListUI(int pick, string value) { pickingListUI[pick] = value; }
 	string getPickedObjectName(int pick) { return pickingListUI[pick]; }
 	void resetDoubleClickTime() { dCD.lastTime = glfwGetTime(); }
 	void resetPicking() {
-		pickingID = 1;
+		pickingID = PICKING_ID_MIN;
+	}
+	void resetPicking_UI() {
+		pickingID_UI = PICKING_ID_MAX;
 		pickingListUI.clear();
 		pickingListUI[0] = "background";
 	}

@@ -2,9 +2,9 @@
 #include <stb_image.h>
 #include <json.hpp>
 #include <global>
-#include <game>
+#include <game/strategy.h>
 
-using namespace game;
+
 
 BuildingSprite::BuildingSprite(){
 	vPath = "assets/shaders/bsprite/vertex.glsl";

@@ -4,8 +4,8 @@
 #include <engine/mouse.h>
 #include <engine/window.h>
 #include <surface>
-#include <editor>
-#include <game>
+#include <game/editor.h>
+#include <game/strategy.h>
 #include <object>
 
 using namespace glb;
@@ -227,8 +227,8 @@ namespace editor {
 		if (clickName == "OpenMapWindow_open" || (selectedID == pos && hasDoubleClicked())) { // OPEN
 			if (selectedID != -1) {
 				cout << "[DEBUG] You've chosen the following scenario to open: " + availableScenarios[selectedID] << endl;
-				game::buildings.clear();
-				game::units.clear();
+				buildings.clear();
+				units.clear();
 				
 				openScenario(availableScenarios[selectedID]);
 				currentMapName = availableScenarios[selectedID];
@@ -267,8 +267,8 @@ namespace editor {
 
 			//Does the map folder already exist?
 			if (!folderExists("scenarios/" + currentMapName)) {
-				game::buildings.clear();
-				game::units.clear();
+				buildings.clear();
+				units.clear();
 
 				mapgen::reset_map();
 				obj::MapTerrain()->updateHeightsBuffer();
@@ -294,8 +294,8 @@ namespace editor {
 		// Yes
 		if (clickName == "QuestionWindow_Yes") { 
 			if (question == "QUESTION_overwriteMap") {
-				game::buildings.clear();
-				game::units.clear();
+				buildings.clear();
+				units.clear();
 
 				mapgen::reset_map();
 				obj::MapTerrain()->updateHeightsBuffer();
@@ -305,7 +305,7 @@ namespace editor {
 			}
 			if (question == "QUESTION_deleteAll") {
 				vector<int> idsToErase;
-				for (map<int, Building*>::iterator bld = game::independent_buildings.begin(); bld != game::independent_buildings.end(); bld++) {
+				for (map<int, Building*>::iterator bld = independent_buildings.begin(); bld != independent_buildings.end(); bld++) {
 					int settl_id = bld->first;
 					Building* settl = bld->second;
 					string settl_name = bld->second->get_name();
@@ -318,10 +318,10 @@ namespace editor {
 				}
 				if (idsToErase.size() > 0){
 					for (int i = 0; i < idsToErase.size(); i++) {
-						game::buildings[idsToErase[i]].clear_pass();
-						game::buildings.erase(idsToErase[i]);
+						buildings[idsToErase[i]].clear_pass();
+						buildings.erase(idsToErase[i]);
 					}
-					game::independent_buildings.erase(idsToErase[0]);
+					independent_buildings.erase(idsToErase[0]);
 					cout << "[DEBUG]: Settlement " << idsToErase[0] << " completly erased!\n";
 				}
 			}
@@ -331,8 +331,8 @@ namespace editor {
 		// No
 		if (clickName == "QuestionWindow_No") {
 			if (question == "QUESTION_deleteAll") {
-				for (map<int, Building*>::iterator bld = game::independent_buildings.begin(); bld != game::independent_buildings.end(); bld++) {
-					game::buildings[bld->first].setWaitingToBeErased(false);
+				for (map<int, Building*>::iterator bld = independent_buildings.begin(); bld != independent_buildings.end(); bld++) {
+					buildings[bld->first].setWaitingToBeErased(false);
 				}
 			}
 			clearEditorVariables();
@@ -388,7 +388,7 @@ namespace editor {
 		}
 
 		if (clickName == "AddObjWindow_add") { // ADD
-			if (!game::gameMinimapStatus){
+			if (!gameMinimapStatus){
 				addingObject = true;
 				Mouse::LeftClick = false;
 			}

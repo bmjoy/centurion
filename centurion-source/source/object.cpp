@@ -1,11 +1,11 @@
 #include <object>
 #include <player>
-#include <game>
+#include <game/strategy.h>
 #include <pathfinding>
 
 using namespace std;
 using namespace glm;
-using namespace game;
+
 
 GObject::GObject(){
 	selected = false;

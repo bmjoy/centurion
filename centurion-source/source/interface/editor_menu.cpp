@@ -20,7 +20,7 @@ namespace editor {
     }
 
     void EditorMenu::create() {
-		minPickingID = getPickingID();
+		minPickingID = getPickingID_UI();
 
         topBar = gui::Rectangle();
         topBar.create("filled", 0.0f, (float)-barHeight, engine::myWindow::Width, (float)barHeight, "bottom-left", 0);
@@ -43,7 +43,7 @@ namespace editor {
 
             string s = titlesList[i];
             /* title */
-            titles[s].pickingID = getPickingID();
+            titles[s].pickingID = getPickingID_UI();
             titles[s].pickingColor = vec4(getPickingColorFromID(titles[s].pickingID), 255.f);
             pickingList[titles[s].title] = titles[s].pickingID;
 
@@ -107,9 +107,9 @@ namespace editor {
             }
             titles[s].isOpened = false;
 			titlesPos += titles[s].titleWidth; 
-			increasePickingID();
+			increasePickingID_UI();
         }
-		maxPickingID = getPickingID();
+		maxPickingID = getPickingID_UI();
     }
 
     void EditorMenu::render(bool pick) {

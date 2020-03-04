@@ -1,9 +1,9 @@
-#include <game>
+#include <game/strategy.h>
 #include "window.h"
 #include "mouse.h"
 
 using namespace glb;
-using namespace game;
+
 
 namespace engine {
 
