@@ -29,7 +29,7 @@ namespace editor {
 
 	void EditorUI::render(bool picking) {
 		// minimap rectangle:
-		if (gameMinimapStatus) {
+		if (Game::Minimap::IsActive()) {
 			float x = Camera::GetXPosition() / mapWidth * myWindow::Width;
 			float y = Camera::GetYPosition() / mapHeight * (myWindow::Height - myWindow::BottomBarHeight - myWindow::TopBarHeight) + myWindow::BottomBarHeight;
 			float w = myWindow::WidthZoomed * myWindow::Width / mapWidth;

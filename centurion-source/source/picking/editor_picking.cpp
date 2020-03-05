@@ -388,7 +388,7 @@ namespace editor {
 		}
 
 		if (clickName == "AddObjWindow_add") { // ADD
-			if (!gameMinimapStatus){
+			if (Game::Minimap::IsActive() == false){
 				addingObject = true;
 				Mouse::LeftClick = false;
 			}

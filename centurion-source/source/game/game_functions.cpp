@@ -19,19 +19,15 @@ using namespace decoration;
 
 
 bool gameMenuStatus = false;
-bool gameMinimapStatus = false;
 bool gameGridStatus = false;
 int mapWidth = 30000;
 int mapHeight = 20000;
-//float cameraMovespeed = 10.f;
 int playersNumber = 1;
 int maxPlayersNumber = 10;
 int currentZoomCamera = 8;
 float zoomCameraFactor = 100.f;
 float townhallRadius = 1875.f;
 float outpostRadius = 700.f;
-bool selRectangleIsActive = false;
-bool blockMinimap = false;
 int selectedUnits = 0;
 
 map<int, Building> buildings = { };
@@ -47,13 +43,14 @@ void Strategy::handleKeyboardControls() {
 		
 	//Open or close minimap
 	if (KeyCode[GLFW_KEY_SPACE] || Mouse::MiddleClick) {
-		gameMinimapStatus = !gameMinimapStatus;
-		gameMinimapStatus ? std::cout << "[DEBUG] Minimap camera ON!\n" : std::cout << "[DEBUG] Minimap camera OFF!\n";
+		if (Minimap::IsActive()) Minimap::Disable();
+		else Minimap::Enable();
+		Minimap::IsActive() ? std::cout << "[DEBUG] Minimap camera ON!\n" : std::cout << "[DEBUG] Minimap camera OFF!\n";
 	}
 	//Open in-game menu
 	if (KeyCode[GLFW_KEY_ESCAPE]) {
 		gameMenuStatus = !gameMenuStatus;
-		gameMinimapStatus ? std::cout << "[DEBUG] Pause Menu ON!\n" : std::cout << "[DEBUG] Pause Menu OFF!\n";
+		gameMenuStatus ? std::cout << "[DEBUG] Pause Menu ON!\n" : std::cout << "[DEBUG] Pause Menu OFF!\n";
 	}
 	// Wireframe
 	if (KeyCode[GLFW_KEY_Z]) {
@@ -100,12 +97,12 @@ void goToPosition() {
 		if (leftClickID > 0 && hasDoubleClicked()) {
 			cameraToX = buildings[leftClickID].get_xPos() - myWindow::WidthZoomed / 2.f;
 			cameraToY = buildings[leftClickID].get_yPos() - myWindow::HeightZoomed / 2.f;
-			blockMinimap = false;
+			Game::Minimap::Unblock();
 		}
 		//------------------------------------------------
-		if (!blockMinimap) {
+		if (Game::Minimap::IsBlocked() == false) {
 			Camera::go_to_pos(cameraToX, cameraToY);
-			gameMinimapStatus = false;
+			Game::Minimap::Disable();
 			Mouse::LeftClick = false;
 			Mouse::LeftHold = false;
 		}

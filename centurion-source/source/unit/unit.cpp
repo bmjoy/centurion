@@ -73,7 +73,7 @@ namespace unit {
 	void Unit::render(bool picking, int clickID) {
 	
 		clickSelection = (picking_id == clickID);
-		if (selRectangleIsActive) rectangleSelection = Game::SelectionRectangle::IsInRectangle(hitbox.coords);
+		if (Game::SelectionRectangle::IsActive()) rectangleSelection = Game::SelectionRectangle::IsInRectangle(hitbox.coords);
 		selected = (clickSelection + rectangleSelection > 0);
 	
 		hitbox.coords = get_rectangle_coords(position3D.x - unitData.hitBox[0] / 2.f, position3D.y + unitData.hitBox[1] / 2.f + unitData.yOffset, (float)unitData.hitBox[0], (float)unitData.hitBox[1]);
@@ -85,7 +85,7 @@ namespace unit {
 			walk_behaviour();		
 		}
 	
-		if (!gameMinimapStatus){
+		if (Game::Minimap::IsActive() == false){
 			if (selected) {
 				selectionCircle.render(glm::vec4(255.f, 255.f, 255.f, 0.8f), position3D.x, position3D.y);
 			}
@@ -103,7 +103,7 @@ namespace unit {
 			}
 			// ************************ //
 
-			if (!gameMinimapStatus) {
+			if (Game::Minimap::IsActive() == false) {
 				circlePos.render(false, position2D.x, position2D.y);
 				hitbox.rectangle.render(
 					selected ? glm::vec4(255.0f, 0.0f, 255.0f, 1.0f) : glm::vec4(255.0f, 242.0f, 0.0f, 1.0f),

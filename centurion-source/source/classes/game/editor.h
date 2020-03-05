@@ -24,8 +24,8 @@ public:
 	Editor();
 	bool editor_is_created() { return editorIsCreated; }
 	void reset() { editorIsCreated = false; }
-	void create();
-	void run();
+	void Create();
+	void Run();
 	void handleKeyboardControls();
 	~Editor();
 private:

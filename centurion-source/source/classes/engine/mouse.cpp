@@ -42,7 +42,7 @@ namespace engine {
 	void Mouse::render() {
 		obj::Cursor()->render(position.x, position.y, currentState);
 		if (Engine::getEnvironment() == "game") {
-			if (!gameMinimapStatus) {
+			if (Game::Minimap::IsActive() == false) {
 				img.render(false, position.x, y2DPosition);
 			}
 		}

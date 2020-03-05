@@ -136,7 +136,7 @@ namespace building {
 		// has the building been selected?
 		selected = (picking_id == clickID);
 
-		if (engine::Engine::getEnvironment() == "editor" && !gameMinimapStatus){
+		if (engine::Engine::getEnvironment() == "editor" && !Game::Minimap::IsActive()){
 			if (selected && !editor::addingObject) circle[0].render(vec4(255.f), position.x, position.y - data["radius"].get<float>() / 15.5f); // selection circle (editor only)
 			if (selected && (prop.is_townhall || prop.is_villagehall) && !editor::addingObject) circle[1].render(vec4(0,255,255,255), position.x, position.y); // selection circle (editor only)
 		}

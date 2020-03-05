@@ -15,7 +15,7 @@ Editor::Editor(){
 	editorIsCreated = false;	
 }
 
-void Editor::create() {
+void Editor::Create() {
 	resetPicking();
 	resetPicking_UI();
 	//surface = new Surface();
@@ -40,7 +40,7 @@ void Editor::create() {
 	Minimap::Update();
 }
 
-void Editor::run() {
+void Editor::Run() {
 	/* Keyboard control */
 	handleKeyboardControls();
 	if (!editor::IsWindowOpened) { // TODO: merge all these in a function in Editor->Editor_functions.cpp
@@ -48,7 +48,7 @@ void Editor::run() {
 	}
 
 	/* If minimap is NOT active */
-	if (!gameMinimapStatus) {
+	if (Minimap::IsActive() == false) {
 		if (!editor::IsWindowOpened && Mouse::GetYPosition() < myWindow::Height - 30.f && !editor::menuIsOpened)
 			Camera::mouseControl(cameraThreshold);
 		view = Camera::calculateViewMatrix();
@@ -81,9 +81,9 @@ void Editor::run() {
 		// editor ui picking */
 		editor::EDITOR_UI()->render(true);
 
-		if (Minimap::IsCreated) Minimap::Render();
+		if (Minimap::IsCreated()) Minimap::Render();
 		
-		if (!Minimap::IsCreated) {
+		if (!Minimap::IsCreated()) {
 			obj::applyGameMatrices(&proj, &view);
 			Surface::Render(false);
 			RenderObjects();
@@ -152,8 +152,9 @@ void Editor::handleKeyboardControls() {
 			}
 		}
 		if (KeyCode[GLFW_KEY_SPACE] || Mouse::MiddleClick) {
-			gameMinimapStatus = !gameMinimapStatus;
-			gameMinimapStatus ? std::cout << "[DEBUG] Minimap ON!\n" : std::cout << "[DEBUG] Minimap OFF!\n";
+			if (Minimap::IsActive()) Minimap::Disable();
+			else Minimap::Enable();
+			Minimap::IsActive() ? std::cout << "[DEBUG] Minimap ON!\n" : std::cout << "[DEBUG] Minimap OFF!\n";
 		}
 		if (KeyCode[GLFW_KEY_Z]) {
 			Surface::Wireframe = !Surface::Wireframe;

@@ -23,17 +23,13 @@ using namespace decoration;
 extern int playersNumber;
 extern int maxPlayersNumber;
 extern bool gameMenuStatus;
-extern bool gameMinimapStatus;
 extern bool gameGridStatus;
 extern int mapWidth, mapHeight;
-//extern float cameraMovespeed;
 extern int currentZoomCamera;
 extern float zoomCameraFactor;
 extern float townhallRadius;
 extern float outpostRadius;
-extern bool selRectangleIsActive;
 static const float cameraThreshold = 20.f;
-extern bool blockMinimap;
 extern int selectedUnits;
 
 extern map<int, Building> buildings;
@@ -53,9 +49,9 @@ class Strategy : public Match {
 public:
 	static Strategy GetInstance();
 	bool game_is_created() { return gameIsCreated; }
+	void handleKeyboardControls();
 	void reset();
 	void Create() override;
-	void handleKeyboardControls();
 	void Run() override;
 	
 	~Strategy();

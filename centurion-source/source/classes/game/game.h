@@ -26,16 +26,19 @@ public:
 			float minX, maxX, minY, maxY;
 		};
 		static SelRectPoints Coordinates;
+		static float cameraLastX, cameraLastY;
 
 		static bool IsInRectangle(std::array<float, 8> &coords);
 		static void Create();
 		static void Render();
-		static float cameraLastX, cameraLastY;
-
+		static bool IsActive() { return isActive; }
+		static void Enable() { isActive = true; }
+		static void Disable() { isActive = false; }
 
 	private:
 		SelectionRectangle();
 		static gui::Rectangle selRectangle;
+		static bool isActive;
 	};
 
 
@@ -43,18 +46,25 @@ public:
 	public:
 		static void Create();
 		static void Render();
-		static void Update() { IsCreated = false; }
-		static bool IsCreated;
+		static void Update() { isCreated = false; }
+		static bool IsCreated() { return isCreated; }
+		static void Enable() { isActive = true; }
+		static void Disable() { isActive = false; }
+		static bool IsActive() { return isActive; }
+		static bool IsBlocked() { return isBlocked; }
+		static void Block() { isBlocked = true; }
+		static void Unblock() { isBlocked = false; }
 		~Minimap();
 	private:
 		Minimap();
+		static bool isActive;
+		static bool isCreated;
+		static bool isBlocked;
 	};
 
 
 
 	Game();
-	virtual void Create() {};
-	virtual void Run() {};
 	~Game();
 
 protected:

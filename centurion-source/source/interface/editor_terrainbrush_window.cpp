@@ -62,7 +62,7 @@ namespace editor {
 				picking();
 			}
 			if (!pick) {
-				if (!gameMinimapStatus && TerrainBrushIsActive){
+				if (Game::Minimap::IsActive() == false && TerrainBrushIsActive){
 					circle.render(vec4(255), engine::Mouse::GetXPosition(), engine::Mouse::GetYPosition());
 					if (Mouse::LeftHold && leftClickID_UI == 0 && engine::Mouse::GetYPosition() < myWindow::Height - 30.f) {
 						if (mapgen::terrainsMap.count(selBrush) > 0) changeTerrain(mapgen::terrainsMap[selBrush].id);

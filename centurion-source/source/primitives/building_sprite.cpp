@@ -97,14 +97,14 @@ void BuildingSprite::render(GLuint texID, bool clickable, float x, float y, floa
 		g = (pickingId & 0x0000FF00) >> 8;
 		b = (pickingId & 0x00FF0000) >> 16;
 		glUniform4f(glGetUniformLocation(shaderId, "picking_color"), r / 255.0f, g / 255.0f, b / 255.0f, 1.0f);
-		if (!gameMinimapStatus) {
+		if (Game::Minimap::IsActive() == false) {
 			glUniform1i(glGetUniformLocation(shaderId, "texture1"), 0);
 			glActiveTexture(GL_TEXTURE0);
 			glBindTexture(GL_TEXTURE_2D, texID); // normal
 
 			glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
 		}
-		if (gameMinimapStatus && clickable) {
+		if (Game::Minimap::IsActive() && clickable) {
 			glUniform1i(glGetUniformLocation(shaderId, "texture1"), 0);
 			glActiveTexture(GL_TEXTURE0);
 			glBindTexture(GL_TEXTURE_2D, texID + 2); // border
@@ -115,7 +115,7 @@ void BuildingSprite::render(GLuint texID, bool clickable, float x, float y, floa
 	/* PICKING = FALSE (NORMAL RENDER)*/
 
 	else {
-		if (!gameMinimapStatus){
+		if (Game::Minimap::IsActive() == false){
 			glUniform1i(glGetUniformLocation(shaderId, "minimap"), 0);
 			glUniform1i(glGetUniformLocation(shaderId, "texture1"), 0);
 			glActiveTexture(GL_TEXTURE0);

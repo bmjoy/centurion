@@ -63,6 +63,7 @@ Game::Surface::~Surface() {}
 Game::SelectionRectangle::SelRectPoints Game::SelectionRectangle::Coordinates;
 float Game::SelectionRectangle::cameraLastX = 0.f;
 float Game::SelectionRectangle::cameraLastY = 0.f;
+bool Game::SelectionRectangle::isActive = false;
 gui::Rectangle Game::SelectionRectangle::selRectangle;
 
 Game::SelectionRectangle::SelectionRectangle() {}
@@ -100,7 +101,7 @@ bool Game::SelectionRectangle::IsInRectangle(array<float, 8> &coords) {
 void Game::SelectionRectangle::Render(){
 	if (Mouse::LeftHold) {
 		
-		if (!selRectangleIsActive) {
+		if (SelectionRectangle::IsActive() == false) {
 			cout << "[DEBUG] Selection rectangle enabled.\n";
 			Coordinates.startX = Mouse::GetXLeftClick() * myWindow::WidthZoomed / myWindow::Width + cameraLastX;
 			Coordinates.startY = Mouse::GetYLeftClick() * myWindow::HeightZoomed / myWindow::Height + cameraLastY;
@@ -136,10 +137,10 @@ void Game::SelectionRectangle::Render(){
 			Coordinates.minY = -0.1f;
 			Coordinates.maxY = -0.1f;
 		}
-		selRectangleIsActive = true;
+		SelectionRectangle::Enable();
 	}
 	else {
-		if (selRectangleIsActive) cout << "[DEBUG] Selection rectangle disabled.\n";
+		if (SelectionRectangle::IsActive()) cout << "[DEBUG] Selection rectangle disabled.\n";
 		cameraLastX = Camera::GetXPosition();
 		cameraLastY = Camera::GetYPosition();
 		Coordinates.startX = -0.1f;
@@ -150,7 +151,7 @@ void Game::SelectionRectangle::Render(){
 		Coordinates.maxX = -0.1f;
 		Coordinates.minY = -0.1f;
 		Coordinates.maxY = -0.1f;
-		selRectangleIsActive = false;
+		SelectionRectangle::Disable();
 	}
 }
 
@@ -158,13 +159,15 @@ void Game::SelectionRectangle::Render(){
 
 #pragma region Minimap prerendered
 
-bool Game::Minimap::IsCreated = false;
+bool Game::Minimap::isCreated = false;
+bool Game::Minimap::isActive = false;
+bool Game::Minimap::isBlocked = false;
 
 Game::Minimap::Minimap() {}
 
 void Game::Minimap::Create() {
 	obj::MMRectangle()->update();
-	IsCreated = true;
+	isCreated = true;
 }
 
 void Game::Minimap::Render() {
@@ -188,7 +191,7 @@ void Game::RenderObjectsPicking() {
 		return;
 	}
 
-	if ((Mouse::RightClick || Mouse::LeftClick) && !selRectangleIsActive) {
+	if ((Mouse::RightClick || Mouse::LeftClick) && !SelectionRectangle::IsActive()) {
 		for (map<int, Building>::iterator bld = buildings.begin(); bld != buildings.end(); bld++) {
 			bld->second.render(true, 0);
 		}
@@ -199,10 +202,10 @@ void Game::RenderObjectsPicking() {
 		if (Mouse::LeftClick) leftClickID = get_id("left");
 		if (Mouse::RightClick) rightClickID = get_id("right");
 
-		if (gameMinimapStatus) {
-			blockMinimap = false;
+		if (Minimap::IsActive()) {
+			Minimap::Unblock();
 			if (leftClickID > 0) {
-				blockMinimap = true;
+				Minimap::Block();
 			}
 		}
 	}
@@ -219,12 +222,12 @@ void Game::RenderObjects() {
 	for (map<int, Decoration>::iterator dec = decorations.begin(); dec != decorations.end(); dec++) {
 		dec->second.render();
 	}
-	if (!gameMinimapStatus) {
+	if (Minimap::IsActive() == false) {
 		for (map<int, Unit>::iterator u = units.begin(); u != units.end(); u++) {
 			u->second.render(false, leftClickID);
 			if (u->second.isSelected())	  selectedUnits++;
 		}
 	}
 	/*cout << gameMinimapStatus << " " << editor::IsWindowOpened << " " << editor::menuIsOpened << " " << editor::TerrainBrushIsActive << " " << leftClickID_UI << editor::movingObject << endl;*/
-	if (!gameMinimapStatus && !editor::IsWindowOpened && !editor::menuIsOpened && !editor::TerrainBrushIsActive && leftClickID_UI == 0 && !editor::movingObject) SelectionRectangle::Render();
+	if (!Minimap::IsActive() && !editor::IsWindowOpened && !editor::menuIsOpened && !editor::TerrainBrushIsActive && leftClickID_UI == 0 && !editor::movingObject) SelectionRectangle::Render();
 }

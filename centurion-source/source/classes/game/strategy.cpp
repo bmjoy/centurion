@@ -26,7 +26,6 @@ Strategy* Strategy::strategy;
 
 Strategy::Strategy() {
 	gameIsCreated = false;
-	blockMinimap = false;
 }
 
 Strategy Strategy::GetInstance() {
@@ -41,12 +40,11 @@ void Strategy::reset() {
 	buildings.clear();
 	independent_buildings.clear();
 	decorations.clear();
-	blockMinimap = false;
 	gameIsCreated = false;
 	gameMenuStatus = false;
-	gameMinimapStatus = false;
 	gameGridStatus = false;
-	blockMinimap = false;
+	Minimap::Unblock();
+	Minimap::Disable();
 	Minimap::Update();
 }
 
@@ -125,7 +123,7 @@ void Strategy::Run() {
 	if (!gameMenuStatus) handleKeyboardControls();
 
 	/* If minimap is NOT active */
-	if (!gameMinimapStatus) {
+	if (Minimap::IsActive() == false) {
 		Camera::mouseControl(cameraThreshold);
 		view = Camera::calculateViewMatrix();
 		projection = glb::cameraProjection;
@@ -136,7 +134,7 @@ void Strategy::Run() {
 		obj::applyGameMatrices(&projection, &view);
 
 		/* Tracing and Picking */
-		if (!gameMinimapStatus) tracing();
+		tracing();
 		if (!gameMenuStatus) RenderObjectsPicking();
 
 		/* Rendering */
@@ -162,10 +160,10 @@ void Strategy::Run() {
 		obj::applyGameMatrices(&projection, &view);
 		if (!gameMenuStatus) RenderObjectsPicking();
 
-		if (Minimap::IsCreated) Minimap::Render();
+		if (Minimap::IsCreated()) Minimap::Render();
 
 		/* Rendering */
-		if (!Minimap::IsCreated) {
+		if (!Minimap::IsCreated()) {
 			Surface::Render(false);
 			Minimap::Create();
 		}
@@ -175,7 +173,7 @@ void Strategy::Run() {
 		obj::applyMenuMatrices();
 		game::GAME_UI()->render(false);
 
-		if (gameMinimapStatus) goToPosition();
+		if (Minimap::IsActive()) goToPosition();
 	}
 
 	glb::cameraProjection = ortho(0.0f, engine::myWindow::WidthZoomed, 0.0f, myWindow::HeightZoomed, -(float)mapWidth, (float)mapWidth);

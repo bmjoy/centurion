@@ -88,7 +88,7 @@ void Terrain::render(bool tracing) {
 	glUniform1i(glGetUniformLocation(shaderId, "tracing"), int(tracing));
 
 	// Minimap
-	glUniform1i(glGetUniformLocation(shaderId, "minimap"), int(gameMinimapStatus));
+	glUniform1i(glGetUniformLocation(shaderId, "minimap"), int(Game::Minimap::IsActive()));
 	
 	//-------------------------------------//
 	/*               DRAWING               */

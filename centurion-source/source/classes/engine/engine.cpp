@@ -94,9 +94,9 @@ namespace engine {
 			if (environment == "editor") {
 				if (!EDITOR()->editor_is_created()) {
 					obj::Audio()->MusicStop();
-					EDITOR()->create();
+					EDITOR()->Create();
 				}
-				EDITOR()->run();
+				EDITOR()->Run();
 			}
 
 			// -------------- //

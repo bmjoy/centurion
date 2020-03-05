@@ -72,7 +72,7 @@ namespace game {
 			time.text.render_dynamic(txt, "tahoma_15px", time.x, time.y, vec4(255.f, 255.f, 255.f, 255.f), "left", "normal");
 
 			// minimap rectangle:
-			if (gameMinimapStatus) {
+			if (Game::Minimap::IsActive()) {
 				float x = engine::Camera::GetXPosition() / mapWidth * myWindow::Width;
 				float y = engine::Camera::GetYPosition() / mapHeight * (myWindow::Height - myWindow::BottomBarHeight - myWindow::TopBarHeight) + myWindow::BottomBarHeight;
 				float w = engine::myWindow::WidthZoomed * myWindow::Width / mapWidth;
