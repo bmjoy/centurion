@@ -20,20 +20,24 @@ void Editor::create() {
 	resetPicking_UI();
 	//surface = new Surface();
 
-	GAME()->reset();
+	Strategy STRATEGY = Strategy::GetInstance();
+
+	STRATEGY.reset();
 	myWindow::BottomBarHeight = 0.f;
 	myWindow::TopBarHeight = 30.f;
 	setMinimapProjection();
 
 	Surface::Reset();
 	editor::EDITOR_UI()->create();
-	GAME()->selRectangle = gui::Rectangle();
-	GAME()->selRectangle.create("border", 0, 0, 0, 0, "top-left", 0);
+	
+	SelectionRectangle::Create();
+
 	Mouse::LeftHold = false;
 
 	Camera::go_to_pos(1.f, 1.f);		
 
 	editorIsCreated = true;
+	Minimap::Update();
 }
 
 void Editor::run() {
@@ -60,7 +64,7 @@ void Editor::run() {
 
 		// rendering
 		Surface::Render(false);
-		renderObjects();
+		RenderObjects();
 		if (!editor::IsWindowOpened && !editor::addingObject && !editor::TerrainBrushIsActive) editor::moveObjects();
 
 		// apply menu matrices
@@ -77,13 +81,13 @@ void Editor::run() {
 		// editor ui picking */
 		editor::EDITOR_UI()->render(true);
 
-		if (MINIMAP()->getStatus()) MINIMAP()->render();
+		if (Minimap::IsCreated) Minimap::Render();
 		
-		if (!MINIMAP()->getStatus()) {
+		if (!Minimap::IsCreated) {
 			obj::applyGameMatrices(&proj, &view);
 			Surface::Render(false);
-			renderObjects();
-			MINIMAP()->create();
+			RenderObjects();
+			Minimap::Create();
 			obj::applyMenuMatrices();
 		}
 			

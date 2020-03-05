@@ -1,6 +1,7 @@
 #include <unit>
 #include <surface>
 #include <game/strategy.h>
+#include <game/game.h>
 #include <pathfinding>
 
 
@@ -20,29 +21,6 @@ namespace unit {
 			if (*frame == max_frames - 1) *frame = 0;
 			(*creationTime) += duration / 100.f;
 		}
-	}
-
-	bool isInSelectionRect(array<float, 8> &coords){
-		return(
-			// are the 4 points in selection rectangle ?
-			(coords[0] > SelRectCoords()->minX && coords[0] < SelRectCoords()->maxX &&
-				coords[1] > SelRectCoords()->minY && coords[1] < SelRectCoords()->maxY) ||
-			(coords[2] > SelRectCoords()->minX && coords[2] < SelRectCoords()->maxX &&
-				coords[3] > SelRectCoords()->minY && coords[3] < SelRectCoords()->maxY) ||
-			(coords[4] > SelRectCoords()->minX && coords[4] < SelRectCoords()->maxX &&
-				coords[5] > SelRectCoords()->minY && coords[5] < SelRectCoords()->maxY) ||
-			(coords[6] > SelRectCoords()->minX && coords[6] < SelRectCoords()->maxX &&
-				coords[7] > SelRectCoords()->minY && coords[7] < SelRectCoords()->maxY) ||
-			// does the sel. rectangle and hitbox rectangle intersect themselves?
-			(coords[0] > SelRectCoords()->minX && coords[0] < SelRectCoords()->maxX &&
-				coords[3] < SelRectCoords()->minY && coords[1] > SelRectCoords()->maxY) ||
-			(coords[4] > SelRectCoords()->minX && coords[4] < SelRectCoords()->maxX &&
-				coords[3] < SelRectCoords()->minY && coords[1] > SelRectCoords()->maxY) ||
-			(coords[1] > SelRectCoords()->minY && coords[1] < SelRectCoords()->maxY &&
-				coords[0] < SelRectCoords()->minX && coords[4] > SelRectCoords()->maxX) ||
-			(coords[3] > SelRectCoords()->minY && coords[3] < SelRectCoords()->maxY &&
-				coords[0] < SelRectCoords()->minX && coords[4] > SelRectCoords()->maxX)
-			);
 	}
 
 	float getAngle(vector<ivec2> &path, int &n) {

@@ -18,10 +18,6 @@ using namespace building;
 using namespace decoration;
 
 
-
-Strategy *GAME() { return &mygame; }
-Minimap *MINIMAP() { return &myminimap; }
-
 bool gameMenuStatus = false;
 bool gameMinimapStatus = false;
 bool gameGridStatus = false;
@@ -46,8 +42,6 @@ map<int, Decoration> decorations = { };
 vector<string> outposts;
 
 array<Player, 8> playersList;
-
-SelRectPoints *SelRectCoords() { return &selRectCoords; }
 
 void Strategy::handleKeyboardControls() {
 		
@@ -74,17 +68,7 @@ void Strategy::handleKeyboardControls() {
 }
 
 // prerendered minimap--------------------
-Minimap::Minimap() {
-	isCreated = false;
-}
-void Minimap::create() {
-	obj::MMRectangle()->update();
-	isCreated = true;
-}
-void Minimap::render() {
-	obj::MMRectangle()->render();
-}
-Minimap::~Minimap(){}
+
 //----------------------------------------
 
 void tracing() {
@@ -100,26 +84,7 @@ void tracing() {
 		
 }*/
 
-void renderObjects() {
-	int selectedBuildings = 0;
-	for (map<int, Building>::iterator bld = buildings.begin(); bld != buildings.end(); bld++) {
-		bld->second.render(false, leftClickID);
-		if (bld->second.isSelected()) selectedBuildings++;
-	}
-	if (selectedBuildings == 0) game::GAME_UI()->set_ui(nullptr);
 
-	for (map<int, Decoration>::iterator dec = decorations.begin(); dec != decorations.end(); dec++) {
-		dec->second.render();
-	}
-	if (!gameMinimapStatus) {
-		for (map<int, Unit>::iterator u = units.begin(); u != units.end(); u++) {
-			u->second.render(false, leftClickID);
-			if (u->second.isSelected())	  selectedUnits++;
-		}
-	}
-	/*cout << gameMinimapStatus << " " << editor::IsWindowOpened << " " << editor::menuIsOpened << " " << editor::TerrainBrushIsActive << " " << leftClickID_UI << editor::movingObject << endl;*/
-	if (!gameMinimapStatus && !editor::IsWindowOpened && !editor::menuIsOpened && !editor::TerrainBrushIsActive && leftClickID_UI == 0 && !editor::movingObject) renderSelRectangle();
-}
 
 void clearBuffers() {
 	glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
@@ -147,61 +112,7 @@ void goToPosition() {
 	}
 }
 
-void renderSelRectangle() {
-	if (Mouse::LeftHold) {
-		if (!selRectangleIsActive){
-			cout << "[DEBUG] Selection rectangle enabled.\n";
-			(*SelRectCoords()).startX = Mouse::GetXLeftClick() * myWindow::WidthZoomed / myWindow::Width + cameraLastX;
-			(*SelRectCoords()).startY = Mouse::GetYLeftClick() * myWindow::HeightZoomed / myWindow::Height + cameraLastY;
-		}
-		(*SelRectCoords()).lastX = Mouse::GetXPosition() * myWindow::WidthZoomed / myWindow::Width + Camera::GetXPosition();
-		(*SelRectCoords()).lastY = Mouse::GetYPosition() * myWindow::HeightZoomed / myWindow::Height + Camera::GetYPosition();
-		if (Mouse::GetYPosition() < myWindow::BottomBarHeight) {
-			(*SelRectCoords()).lastY = myWindow::BottomBarHeight*myWindow::HeightZoomed / myWindow::Height + 1.0f + Camera::GetYPosition();
-		}
-		if (Mouse::GetYPosition() > myWindow::Height - myWindow::TopBarHeight) {
-			(*SelRectCoords()).lastY = myWindow::HeightZoomed - myWindow::TopBarHeight*myWindow::HeightZoomed / myWindow::Height - 1.0f + Camera::GetYPosition();
-		}
 
-		float w = ((*SelRectCoords()).lastX - (*SelRectCoords()).startX);
-		float h = ((*SelRectCoords()).lastY - (*SelRectCoords()).startY);
-
-		int origin = 0;
-		if (w > 0 && h > 0) origin = 0; // bottom-left
-		if (w > 0 && h < 0) origin = 1; // top-left
-		if (w < 0 && h > 0) origin = 4; // bottom-right
-		if (w < 0 && h < 0) origin = 3; // top-right
-
-		if (abs(w) > 1 && abs(h) > 1){
-			GAME()->selRectangle.render(vec4(255.f), 0, (*SelRectCoords()).startX, (*SelRectCoords()).startY, abs(w), abs(h), origin);
-			(*SelRectCoords()).minX = std::min((*SelRectCoords()).startX, (*SelRectCoords()).lastX);
-			(*SelRectCoords()).maxX = std::max((*SelRectCoords()).startX, (*SelRectCoords()).lastX);
-			(*SelRectCoords()).minY = std::min((*SelRectCoords()).startY, (*SelRectCoords()).lastY);
-			(*SelRectCoords()).maxY = std::max((*SelRectCoords()).startY, (*SelRectCoords()).lastY);
-		}
-		else {
-			(*SelRectCoords()).minX = -0.1f;
-			(*SelRectCoords()).maxX = -0.1f;
-			(*SelRectCoords()).minY = -0.1f;
-			(*SelRectCoords()).maxY = -0.1f;
-		}	
-		selRectangleIsActive = true;
-	}
-	else {
-		if (selRectangleIsActive) cout << "[DEBUG] Selection rectangle disabled.\n";
-		cameraLastX = Camera::GetXPosition();
-		cameraLastY = Camera::GetYPosition();
-		(*SelRectCoords()).startX = -0.1f;
-		(*SelRectCoords()).startY = -0.1f;
-		(*SelRectCoords()).lastX = -0.1f;
-		(*SelRectCoords()).lastY = -0.1f;
-		(*SelRectCoords()).minX = -0.1f;
-		(*SelRectCoords()).maxX = -0.1f;
-		(*SelRectCoords()).minY = -0.1f;
-		(*SelRectCoords()).maxY = -0.1f;
-		selRectangleIsActive = false;
-	}
-}
 
 void setMinimapProjection() {
 	float bottom = (-1.f)*(mapHeight * myWindow::BottomBarHeight / (myWindow::Height - myWindow::BottomBarHeight - myWindow::TopBarHeight));

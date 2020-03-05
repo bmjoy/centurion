@@ -7,6 +7,7 @@
 #include <player>
 #include <picking>
 
+#pragma region Namespaces
 
 using namespace glb;
 using namespace std;
@@ -15,9 +16,24 @@ using namespace engine;
 using namespace unit;
 using namespace building;
 
+#pragma endregion
+
+#pragma region Static variables
+
+Strategy* Strategy::strategy;
+
+#pragma endregion
+
 Strategy::Strategy() {
-	blockMinimap = false;
 	gameIsCreated = false;
+	blockMinimap = false;
+}
+
+Strategy Strategy::GetInstance() {
+	if (strategy == nullptr) {
+		strategy = new Strategy();
+	}
+	return *strategy;
 }
 
 void Strategy::reset() {
@@ -31,10 +47,10 @@ void Strategy::reset() {
 	gameMinimapStatus = false;
 	gameGridStatus = false;
 	blockMinimap = false;
-	MINIMAP()->setStatus(false);
+	Minimap::Update();
 }
 
-void Strategy::create() {
+void Strategy::Create() {
 	resetPicking();
 	resetPicking_UI();
 	reset();
@@ -43,8 +59,7 @@ void Strategy::create() {
 	setMinimapProjection();
 	Mouse::LeftHold = false;
 
-	selRectangle = gui::Rectangle();
-	selRectangle.create("border", 0, 0, 0, 0, "top-left", 0);
+	SelectionRectangle::Create();
 
 	Surface::Reset();
 
@@ -101,7 +116,7 @@ void Strategy::create() {
 	resetDoubleClickTime();
 }
 
-void Strategy::run() {
+void Strategy::Run() {
 	selectedUnits = 0;
 	leftClickID_UI = 0;
 	Camera::keyboardControl();
@@ -126,7 +141,7 @@ void Strategy::run() {
 
 		/* Rendering */
 		Surface::Render(false);
-		renderObjects();
+		RenderObjects();
 
 		// apply menu matrices:
 		obj::applyMenuMatrices();
@@ -147,14 +162,14 @@ void Strategy::run() {
 		obj::applyGameMatrices(&projection, &view);
 		if (!gameMenuStatus) RenderObjectsPicking();
 
-		if (MINIMAP()->getStatus()) MINIMAP()->render();
+		if (Minimap::IsCreated) Minimap::Render();
 
 		/* Rendering */
-		if (!MINIMAP()->getStatus()) {
+		if (!Minimap::IsCreated) {
 			Surface::Render(false);
-			MINIMAP()->create();
+			Minimap::Create();
 		}
-		renderObjects();
+		RenderObjects();
 
 		// apply menu matrices:	
 		obj::applyMenuMatrices();

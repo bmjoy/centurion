@@ -6,7 +6,9 @@
 	
 class Match : public Game 
 {
-
+public:
+	Match();
+	~Match();
 };
 
 

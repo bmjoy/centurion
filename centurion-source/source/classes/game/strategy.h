@@ -51,64 +51,37 @@ extern array<Player, 8> playersList;
 
 class Strategy : public Match {
 public:
-	Strategy();
+	static Strategy GetInstance();
 	bool game_is_created() { return gameIsCreated; }
 	void reset();
-	void create();
+	void Create() override;
 	void handleKeyboardControls();
-	void run();
-	gui::Rectangle selRectangle;
+	void Run() override;
+	
 	~Strategy();
 private:
-	//Surface *surface;
-	//UIGame *ui;
+	Strategy();
+	static Strategy* strategy;
 	mat4 view, projection;
 	bool gameIsCreated;
 };
-
-static Strategy mygame;
-Strategy *GAME(); // --> definition in game_functions.cpp
-
-// 
-// PRERENDERED MINIMAP
-
-class Minimap {
-public:
-	Minimap();
-	void create();
-	void render();
-	void setStatus(bool b) { isCreated = b; }
-	bool getStatus() { return isCreated; }
-	~Minimap();
-private:
-	bool isCreated;
-};
-
-static Minimap myminimap;
-Minimap *MINIMAP();
-
 
 //
 // GAME FUNCTIONS --> source/game/game_functions.cpp
 //
 
-struct SelRectPoints {
-	float startX, startY, lastX, lastY;
-	float minX, maxX, minY, maxY;
-};
 
-static SelRectPoints selRectCoords;
-SelRectPoints *SelRectCoords();
-static float cameraToX = 0.f, cameraToY = 0.f;
-static float cameraLastX = 0.f;
-static float cameraLastY = 0.f;
+static float cameraToX = 0, cameraToY = 0;
+//static SelRectPoints selRectCoords;
+//SelRectPoints *SelRectCoords();
+
 
 //void renderObjectsPicking();
 void tracing();
 void clearBuffers();
 void goToPosition();
-void renderObjects();
-void renderSelRectangle();
+//void renderObjects();
+//void renderSelRectangle();
 void setMinimapProjection();
 void generateSettlements(vector<vec2> &locs);
 void generateOutposts(vector<vec2> &locs);

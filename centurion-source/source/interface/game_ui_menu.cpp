@@ -33,7 +33,7 @@ namespace game {
 				getTranslation(data[s][i]["name"].get<std::string>()), 
 				(int)x + data[s][i]["x"].get<int>(),
 				(int)y + data[s][i]["y"].get<int>(),
-				getPickingID(), 
+				getPickingID_UI(), 
 				glm::vec4(0.f, 0.f, 0.f, 255.f)
 			);
 			buttons.push_back(btn);

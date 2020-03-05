@@ -66,7 +66,6 @@ namespace unit {
 
 	void updateZ(vec3 &pos2d, vec3 *pos3d);
 	void updateFrame(float *creationTime, int *frame, int max_frames, int duration);
-	bool isInSelectionRect(array<float, 8> &coords);
 	float getAngle(vector<ivec2> &path, int &n);
 	float getDistance(vector<ivec2> &path, int &n);
 	float getResDistance(vector<ivec2> &path, int &n, vec3 &pos2d);
