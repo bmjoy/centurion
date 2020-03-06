@@ -11,32 +11,32 @@
 using namespace glb;
 using namespace engine;
 
-Editor::Editor(){
-	editorIsCreated = false;	
-}
+#pragma region Static variables
+
+#pragma endregion
+
+
+Editor::Editor() {}
 
 void Editor::Create() {
 	resetPicking();
 	resetPicking_UI();
-	//surface = new Surface();
 
-	Strategy STRATEGY = Strategy::GetInstance();
-
-	STRATEGY.reset();
+	Strategy::reset();
 	myWindow::BottomBarHeight = 0.f;
 	myWindow::TopBarHeight = 30.f;
 	setMinimapProjection();
 
 	Surface::Reset();
 	editor::EDITOR_UI()->create();
-	
+
 	SelectionRectangle::Create();
 
 	Mouse::LeftHold = false;
 
-	Camera::go_to_pos(1.f, 1.f);		
+	Camera::GoToPoint(1.f, 1.f);
 
-	editorIsCreated = true;
+	isCreated = true;
 	Minimap::Update();
 }
 
@@ -51,13 +51,13 @@ void Editor::Run() {
 	if (Minimap::IsActive() == false) {
 		if (!editor::IsWindowOpened && Mouse::GetYPosition() < myWindow::Height - 30.f && !editor::menuIsOpened)
 			Camera::mouseControl(cameraThreshold);
-		view = Camera::calculateViewMatrix();
-		proj = glb::cameraProjection;
+		viewMatrix = Camera::calculateViewMatrix();
+		projectionMatrix = glb::cameraProjection;
 
 		editor::EDITOR_UI()->render(true);
 
 		// apply game matrices
-		obj::applyGameMatrices(&proj, &view);
+		obj::applyGameMatrices(&projectionMatrix, &viewMatrix);
 
 		// picking
 		if (!editor::IsWindowOpened && !editor::addingObject && !editor::TerrainBrushIsActive) RenderObjectsPicking();
@@ -75,25 +75,25 @@ void Editor::Run() {
 
 	/* If minimap is active */
 	else {
-		view = mat4(1.0f);
-		proj = glb::minimapProjection;
+		viewMatrix = mat4(1.0f);
+		projectionMatrix = glb::minimapProjection;
 
 		// editor ui picking */
 		editor::EDITOR_UI()->render(true);
 
 		if (Minimap::IsCreated()) Minimap::Render();
-		
+
 		if (!Minimap::IsCreated()) {
-			obj::applyGameMatrices(&proj, &view);
+			obj::applyGameMatrices(&projectionMatrix, &viewMatrix);
 			Surface::Render(false);
 			RenderObjects();
 			Minimap::Create();
 			obj::applyMenuMatrices();
 		}
-			
+
 		editor::EDITOR_UI()->render(false);
 
-		if (leftClickID_UI == 0) goToPosition();
+		if (leftClickID_UI == 0) GoToPointFromMinimap();
 	}
 
 	glb::cameraProjection = glm::ortho(0.0f, myWindow::WidthZoomed, 0.0f, myWindow::HeightZoomed, -(float)mapWidth, (float)mapWidth);
@@ -179,4 +179,4 @@ void Editor::handleKeyboardControls() {
 	}
 }
 
-Editor::~Editor(){ }
+Editor::~Editor() { }

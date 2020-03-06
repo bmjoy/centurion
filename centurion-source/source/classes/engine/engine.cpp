@@ -49,8 +49,6 @@ namespace engine {
 		Camera::Init(vec3(0.0f, 0.0f, 0.0f), vec3(0.0f, 1.0f, 0.0f), -90.0f, 0.0f);
 		Mouse::create();
 
-		Strategy STRATEGY = Strategy::GetInstance();
-
 		DEBUG_UI()->create();
 
 		while (myWindow::ShouldClose == false) {
@@ -74,7 +72,7 @@ namespace engine {
 			// ---- GAME ---- //
 
 			if (environment == "game") {
-				if (!STRATEGY.game_is_created()) {
+				if (!Strategy::IsCreated()) {
 					obj::Audio()->MusicStop();
 
 					clearAndSwapBuffers(window.GetGlfwWindow());
@@ -84,27 +82,27 @@ namespace engine {
 					}
 					glfwSwapBuffers(window.GetGlfwWindow());
 
-					STRATEGY.Create();
+					Strategy::Create();
 				}
-				STRATEGY.Run();
+				Strategy::Run();
 			}
 
 			// ---- EDITOR ---- //
 
 			if (environment == "editor") {
-				if (!EDITOR()->editor_is_created()) {
+				if (!Editor::IsCreated()) {
 					obj::Audio()->MusicStop();
-					EDITOR()->Create();
+					Editor::Create();
 				}
-				EDITOR()->Run();
+				Editor::Run();
 			}
 
 			// -------------- //
 
 			if (reset) {
 				reset = false;
-				if (environment == "editor") EDITOR()->reset();
-				if (environment == "game") { STRATEGY.reset(); }
+				if (environment == "editor") Editor::reset();
+				if (environment == "game") Strategy::reset();
 				MENU()->reset();
 				environment = "menu";
 			}

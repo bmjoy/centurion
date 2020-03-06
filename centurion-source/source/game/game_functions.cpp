@@ -64,53 +64,6 @@ void Strategy::handleKeyboardControls() {
 	}
 }
 
-// prerendered minimap--------------------
-
-//----------------------------------------
-
-void tracing() {
-	if (Mouse::RightClick) {
-		unsigned char tracingCol[4];
-		Game::Surface::Render(true);
-		glReadPixels((GLint)Mouse::GetXRightClick(), (GLint)Mouse::GetYRightClick(), 1, 1, GL_RGBA, GL_UNSIGNED_BYTE, &tracingCol);
-		mapgen::mouseZNoise = (mapgen::maxZ - mapgen::minZ) * ((float)tracingCol[0] / 255.0f) + mapgen::minZ;
-	}
-}
-
-/*void renderObjectsPicking() {
-		
-}*/
-
-
-
-void clearBuffers() {
-	glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
-	glClear(GL_COLOR_BUFFER_BIT);
-}
-
-void goToPosition() {
-	if (Mouse::LeftClick && cursorInGameScreen()) {
-		cameraToX = Mouse::GetXLeftClick() / myWindow::Width*(float)mapWidth - myWindow::WidthZoomed / 2.f;
-		cameraToY = getYMinimapCoord(Mouse::GetYLeftClick()) / myWindow::Height*(float)mapHeight - myWindow::HeightZoomed / 2.f;
-		// if you are clicking on a townhall you have to double click 
-		// to move the camera there and quit minimap
-		if (leftClickID > 0 && hasDoubleClicked()) {
-			cameraToX = buildings[leftClickID].get_xPos() - myWindow::WidthZoomed / 2.f;
-			cameraToY = buildings[leftClickID].get_yPos() - myWindow::HeightZoomed / 2.f;
-			Game::Minimap::Unblock();
-		}
-		//------------------------------------------------
-		if (Game::Minimap::IsBlocked() == false) {
-			Camera::go_to_pos(cameraToX, cameraToY);
-			Game::Minimap::Disable();
-			Mouse::LeftClick = false;
-			Mouse::LeftHold = false;
-		}
-	}
-}
-
-
-
 void setMinimapProjection() {
 	float bottom = (-1.f)*(mapHeight * myWindow::BottomBarHeight / (myWindow::Height - myWindow::BottomBarHeight - myWindow::TopBarHeight));
 	float top = mapHeight + mapHeight * myWindow::TopBarHeight / (myWindow::Height - myWindow::BottomBarHeight - myWindow::TopBarHeight);

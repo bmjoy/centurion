@@ -8,11 +8,10 @@ class Match : public Game
 {
 public:
 	Match();
-
-	virtual void Create() {};
-	virtual void Run() {};
-
 	~Match();
+
+protected:
+	static void Tracing();
 };
 
 

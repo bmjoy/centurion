@@ -41,7 +41,7 @@ public:
 		static bool isActive;
 	};
 
-
+	// prerendered minimap "image"
 	class Minimap {
 	public:
 		static void Create();
@@ -65,10 +65,16 @@ public:
 
 
 	Game();
+	static bool IsCreated() { return isCreated; }
 	~Game();
 
 protected:
+	static void GoToPointFromMinimap();
 	static void RenderObjectsPicking();
 	static void RenderObjects();
-};
+	static glm::mat4 projectionMatrix, viewMatrix;
+	static bool isCreated;
 
+private:
+	static float cameraToX, cameraToY;
+};

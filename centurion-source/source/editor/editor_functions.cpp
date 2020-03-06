@@ -17,8 +17,6 @@ using namespace unit;
 using namespace decoration;
 using namespace glb;
 
-Editor *EDITOR() { return &myeditor; }
-
 namespace editor {
 
 	/* extern variables definitions */

@@ -1,19 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <params>
 	<camera>
-		<xPosition>24272.1</xPosition>
-		<yPosition>7394.7</yPosition>
+		<xPosition>13674.5</xPosition>
+		<yPosition>9152.31</yPosition>
 	</camera>
 	<mouse>
 		<scrollValue>-1</scrollValue>
-		<xLeftClick>1225</xLeftClick>
-		<xPosition>1225</xPosition>
-		<xRightClick>1225</xRightClick>
-		<y2dPosition>83</y2dPosition>
-		<y2dRightClick>83</y2dRightClick>
-		<yLeftClick>83</yLeftClick>
-		<yPosition>83</yPosition>
-		<yRightClick>83</yRightClick>
+		<xLeftClick>1217</xLeftClick>
+		<xPosition>1217</xPosition>
+		<xRightClick>1217</xRightClick>
+		<y2dPosition>74</y2dPosition>
+		<y2dRightClick>74</y2dRightClick>
+		<yLeftClick>74</yLeftClick>
+		<yPosition>74</yPosition>
+		<yRightClick>74</yRightClick>
 		<leftClick>1</leftClick>
 		<leftHold>1</leftHold>
 		<release>0</release>

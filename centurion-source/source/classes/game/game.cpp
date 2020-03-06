@@ -18,6 +18,12 @@ using namespace engine;
 
 #pragma region Static variables
 
+glm::mat4 Game::projectionMatrix;
+glm::mat4 Game::viewMatrix;
+bool Game::isCreated = false;
+float Game::cameraToX;
+float Game::cameraToY;
+
 #pragma endregion
 
 #pragma region Surface
@@ -230,4 +236,25 @@ void Game::RenderObjects() {
 	}
 	/*cout << gameMinimapStatus << " " << editor::IsWindowOpened << " " << editor::menuIsOpened << " " << editor::TerrainBrushIsActive << " " << leftClickID_UI << editor::movingObject << endl;*/
 	if (!Minimap::IsActive() && !editor::IsWindowOpened && !editor::menuIsOpened && !editor::TerrainBrushIsActive && leftClickID_UI == 0 && !editor::movingObject) SelectionRectangle::Render();
+}
+
+void Game::GoToPointFromMinimap() {
+	if (Mouse::LeftClick && cursorInGameScreen()) {
+		cameraToX = Mouse::GetXLeftClick() / myWindow::Width*(float)mapWidth - myWindow::WidthZoomed / 2.f;
+		cameraToY = getYMinimapCoord(Mouse::GetYLeftClick()) / myWindow::Height*(float)mapHeight - myWindow::HeightZoomed / 2.f;
+		// if you are clicking on a townhall you have to double click 
+		// to move the camera there and quit minimap
+		if (leftClickID > 0 && hasDoubleClicked()) {
+			cameraToX = buildings[leftClickID].get_xPos() - myWindow::WidthZoomed / 2.f;
+			cameraToY = buildings[leftClickID].get_yPos() - myWindow::HeightZoomed / 2.f;
+			Game::Minimap::Unblock();
+		}
+		//------------------------------------------------
+		if (Game::Minimap::IsBlocked() == false) {
+			Camera::GoToPoint(cameraToX, cameraToY);
+			Game::Minimap::Disable();
+			Mouse::LeftClick = false;
+			Mouse::LeftHold = false;
+		}
+	}
 }

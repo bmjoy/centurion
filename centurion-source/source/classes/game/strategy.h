@@ -47,37 +47,20 @@ extern array<Player, 8> playersList;
 
 class Strategy : public Match {
 public:
-	static Strategy GetInstance();
-	bool game_is_created() { return gameIsCreated; }
-	void handleKeyboardControls();
-	void reset();
-	void Create() override;
-	void Run() override;
+	static void handleKeyboardControls();
+	static void reset();
+	static void Create();
+	static void Run();
 	
 	~Strategy();
 private:
 	Strategy();
-	static Strategy* strategy;
-	mat4 view, projection;
-	bool gameIsCreated;
 };
 
 //
 // GAME FUNCTIONS --> source/game/game_functions.cpp
 //
 
-
-static float cameraToX = 0, cameraToY = 0;
-//static SelRectPoints selRectCoords;
-//SelRectPoints *SelRectCoords();
-
-
-//void renderObjectsPicking();
-void tracing();
-void clearBuffers();
-void goToPosition();
-//void renderObjects();
-//void renderSelRectangle();
 void setMinimapProjection();
 void generateSettlements(vector<vec2> &locs);
 void generateOutposts(vector<vec2> &locs);

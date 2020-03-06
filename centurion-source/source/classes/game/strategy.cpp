@@ -20,27 +20,16 @@ using namespace building;
 
 #pragma region Static variables
 
-Strategy* Strategy::strategy;
-
 #pragma endregion
 
-Strategy::Strategy() {
-	gameIsCreated = false;
-}
-
-Strategy Strategy::GetInstance() {
-	if (strategy == nullptr) {
-		strategy = new Strategy();
-	}
-	return *strategy;
-}
+Strategy::Strategy() { }
 
 void Strategy::reset() {
 	units.clear();
 	buildings.clear();
 	independent_buildings.clear();
 	decorations.clear();
-	gameIsCreated = false;
+	isCreated = false;
 	gameMenuStatus = false;
 	gameGridStatus = false;
 	Minimap::Unblock();
@@ -102,13 +91,13 @@ void Strategy::Create() {
 
 	game::GAME_UI()->create(playersList[0].getPlayerRace().substr(5));
 
-	Camera::go_to_pos(
-		(GLfloat)(playersList[0].getStartPoint().x - engine::myWindow::WidthZoomed / 2.f),
+	Camera::GoToPoint(
+		(GLfloat)(playersList[0].getStartPoint().x - myWindow::WidthZoomed / 2.f),
 		(GLfloat)(playersList[0].getStartPoint().y - myWindow::HeightZoomed / 2.f)
 	);
 
 	//---------------------------------------
-	gameIsCreated = true;
+	isCreated = true;
 	leftClickID = 0;
 	leftClickID_UI = 0;
 	resetDoubleClickTime();
@@ -125,16 +114,16 @@ void Strategy::Run() {
 	/* If minimap is NOT active */
 	if (Minimap::IsActive() == false) {
 		Camera::mouseControl(cameraThreshold);
-		view = Camera::calculateViewMatrix();
-		projection = glb::cameraProjection;
+		viewMatrix = Camera::calculateViewMatrix();
+		projectionMatrix = glb::cameraProjection;
 
 		game::GAME_UI()->render(true);
 
 		// apply game matrices:
-		obj::applyGameMatrices(&projection, &view);
+		obj::applyGameMatrices(&projectionMatrix, &viewMatrix);
 
 		/* Tracing and Picking */
-		tracing();
+		Tracing();
 		if (!gameMenuStatus) RenderObjectsPicking();
 
 		/* Rendering */
@@ -151,13 +140,13 @@ void Strategy::Run() {
 
 	/* If minimap is active */
 	else {
-		view = mat4(1.0f);
-		projection = glb::minimapProjection;
+		viewMatrix = mat4(1.0f);
+		projectionMatrix = glb::minimapProjection;
 
 		game::GAME_UI()->render(true);
 
 		// apply game matrices:
-		obj::applyGameMatrices(&projection, &view);
+		obj::applyGameMatrices(&projectionMatrix, &viewMatrix);
 		if (!gameMenuStatus) RenderObjectsPicking();
 
 		if (Minimap::IsCreated()) Minimap::Render();
@@ -173,7 +162,7 @@ void Strategy::Run() {
 		obj::applyMenuMatrices();
 		game::GAME_UI()->render(false);
 
-		if (Minimap::IsActive()) goToPosition();
+		if (Minimap::IsActive()) GoToPointFromMinimap();
 	}
 
 	glb::cameraProjection = ortho(0.0f, engine::myWindow::WidthZoomed, 0.0f, myWindow::HeightZoomed, -(float)mapWidth, (float)mapWidth);
@@ -183,7 +172,5 @@ void Strategy::Run() {
 	Mouse::LeftClick = false;
 	Mouse::MiddleClick = false;
 }
-
-//void Strategy::clear() {}
 
 Strategy::~Strategy() {}

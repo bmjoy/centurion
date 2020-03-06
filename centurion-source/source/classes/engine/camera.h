@@ -17,7 +17,7 @@ namespace engine {
 		static void Init(vec3 startPosition, vec3 startUp, GLfloat startYaw, GLfloat startPitch);
 		static void mouseControl(float threshold);
 		static void keyboardControl();
-		static void go_to_pos(GLfloat x, GLfloat y);
+		static void GoToPoint(GLfloat x, GLfloat y);
 		static mat4 calculateViewMatrix();
 	private:
 		Camera();

@@ -119,7 +119,7 @@ namespace engine {
 		}
 	}
 
-	void Camera::go_to_pos(GLfloat x, GLfloat y) {
+	void Camera::GoToPoint(GLfloat x, GLfloat y) {
 		if (x < 0.0) { x = 0; }
 		else if (x > mapWidth - myWindow::WidthZoomed) { x = mapWidth - myWindow::WidthZoomed; }
 		if (y < 0.0) { y = 0; }
