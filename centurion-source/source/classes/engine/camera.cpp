@@ -15,6 +15,8 @@ namespace engine {
 	float Camera::MovementSpeed = 10.f;
 	vec3 Camera::position, Camera::front, Camera::up, Camera::right, Camera::worldUp;
 	GLfloat Camera::yaw, Camera::pitch, Camera::threshold_x, Camera::threshold_y, Camera::abs_x, Camera::abs_y;
+	float Camera::zoomCameraFactor = 100.f;
+	int Camera::currentZoom = 8;
 	// ---------- end definitions
 
 	Camera::Camera() {}
@@ -40,64 +42,64 @@ namespace engine {
 		up = glm::normalize(glm::cross(right, front));
 	}
 
-	void Camera::mouseControl(float threshold) {
+	void Camera::mouseControl() {
 
 		abs_x = Mouse::GetXPosition() + position.x;
 		abs_y = Mouse::GetYPosition() + position.y;
 
-		threshold_x = mapWidth - 2 * MovementSpeed + (myWindow::WidthZoomed - myWindow::Width);
-		threshold_y = mapHeight - 2 * MovementSpeed + (myWindow::HeightZoomed - myWindow::Height);
+		threshold_x = MEDIUM_MAP_WIDTH - 2 * MovementSpeed + (myWindow::WidthZoomed - myWindow::Width);
+		threshold_y = MEDIUM_MAP_HEIGHT - 2 * MovementSpeed + (myWindow::HeightZoomed - myWindow::Height);
 
-		float threshold_top = threshold;
+		float threshold_top = CAMERA_THRESHOLD;
 		if (Engine::getEnvironment() == "editor") threshold_top += 30.f;
 
 		//Left margin
-		if (Mouse::GetXPosition() <= threshold && (abs_x > threshold) && Mouse::GetXPosition() > 0) {
+		if (Mouse::GetXPosition() <= CAMERA_THRESHOLD && (abs_x > CAMERA_THRESHOLD) && Mouse::GetXPosition() > 0) {
 			position -= right * MovementSpeed;
 		}
 		//Right margin
-		if (Mouse::GetXPosition() >= (myWindow::Width - threshold) && (abs_x < threshold_x) && Mouse::GetXPosition() < myWindow::Width) {
-			if (position.x < mapWidth - myWindow::WidthZoomed) {
+		if (Mouse::GetXPosition() >= (myWindow::Width - CAMERA_THRESHOLD) && (abs_x < threshold_x) && Mouse::GetXPosition() < myWindow::Width) {
+			if (position.x < MEDIUM_MAP_WIDTH - myWindow::WidthZoomed) {
 				position += right * MovementSpeed;
 			}
 		}
 		//Top margin
 		if (Mouse::GetYPosition() >= (myWindow::Height - threshold_top) && abs_y < (threshold_y + myWindow::TopBarHeight* myWindow::HeightZoomed / myWindow::HeightZoomed) && Mouse::GetYPosition() < myWindow::Height) {
-			if (position.y < (mapHeight - myWindow::HeightZoomed + myWindow::TopBarHeight* myWindow::HeightZoomed / myWindow::Height)) {
+			if (position.y < (MEDIUM_MAP_HEIGHT - myWindow::HeightZoomed + myWindow::TopBarHeight* myWindow::HeightZoomed / myWindow::Height)) {
 				position += up * MovementSpeed;
 			}
 		}
 		//Bottom margin
-		if (Mouse::GetYPosition() <= threshold && abs_y > (threshold - myWindow::BottomBarHeight* myWindow::HeightZoomed / myWindow::Height) && Mouse::GetYPosition() > 0) {
+		if (Mouse::GetYPosition() <= CAMERA_THRESHOLD && abs_y > (CAMERA_THRESHOLD - myWindow::BottomBarHeight* myWindow::HeightZoomed / myWindow::Height) && Mouse::GetYPosition() > 0) {
 			if (position.y > (0 - myWindow::BottomBarHeight* myWindow::HeightZoomed / myWindow::Height)) {
 				position -= up * MovementSpeed;
 			}
 		}
 
 		/* MOUSE SCROLLING --> CAMERA ZOOM */
-		if (!gameMenuStatus && (KeyCode[GLFW_KEY_LEFT_CONTROL] || KeyCode[GLFW_KEY_RIGHT_CONTROL]) && Mouse::ScrollBool) {
-			if (Mouse::ScrollValue > 0 && currentZoomCamera > 1.0f) {
-				currentZoomCamera -= (int)Mouse::ScrollValue;
+		if (!game::GameMenu::IsActive() && (KeyCode[GLFW_KEY_LEFT_CONTROL] || KeyCode[GLFW_KEY_RIGHT_CONTROL]) && Mouse::ScrollBool) {
+			if (Mouse::ScrollValue > 0 && currentZoom > 1.0f) {
+				currentZoom -= (int)Mouse::ScrollValue;
 			}
 
-			else if (Mouse::ScrollValue < 0 && currentZoomCamera < MaxZoom) {
-				currentZoomCamera -= (int)Mouse::ScrollValue;
+			else if (Mouse::ScrollValue < 0 && currentZoom < MaxZoom) {
+				currentZoom -= (int)Mouse::ScrollValue;
 			}
 			Mouse::ScrollBool = false;
 		}
 
-		if (position.x > mapWidth - myWindow::WidthZoomed - MovementSpeed) {
-			position.x = mapWidth - myWindow::WidthZoomed - MovementSpeed;
+		if (position.x > MEDIUM_MAP_WIDTH - myWindow::WidthZoomed - MovementSpeed) {
+			position.x = MEDIUM_MAP_WIDTH - myWindow::WidthZoomed - MovementSpeed;
 		}
 		if (position.y < -myWindow::BottomBarHeight * myWindow::HeightZoomed / myWindow::Height) {
 			position.y = -myWindow::BottomBarHeight * myWindow::HeightZoomed / myWindow::Height;
 		}
-		if (position.y > mapHeight - myWindow::HeightZoomed + myWindow::TopBarHeight * myWindow::HeightZoomed / myWindow::Height) {
-			position.y = mapHeight - myWindow::HeightZoomed + myWindow::TopBarHeight * myWindow::HeightZoomed / myWindow::Height;
+		if (position.y > MEDIUM_MAP_HEIGHT - myWindow::HeightZoomed + myWindow::TopBarHeight * myWindow::HeightZoomed / myWindow::Height) {
+			position.y = MEDIUM_MAP_HEIGHT - myWindow::HeightZoomed + myWindow::TopBarHeight * myWindow::HeightZoomed / myWindow::Height;
 		}
 		/* ------------------------------------------- */
-		myWindow::WidthZoomed = myWindow::Width + (currentZoomCamera - 1) * zoomCameraFactor;
-		myWindow::HeightZoomed = myWindow::Height + (currentZoomCamera - 1) *  zoomCameraFactor / myWindow::Ratio;
+		myWindow::WidthZoomed = myWindow::Width + (currentZoom - 1) * zoomCameraFactor;
+		myWindow::HeightZoomed = myWindow::Height + (currentZoom - 1) *  zoomCameraFactor / myWindow::Ratio;
 	}
 
 	void Camera::keyboardControl() {
@@ -106,11 +108,11 @@ namespace engine {
 			position -= right * MovementSpeed;
 		}
 		//Right margin 
-		if (KeyCode[GLFW_KEY_RIGHT] && position.x < mapWidth - myWindow::WidthZoomed) {
+		if (KeyCode[GLFW_KEY_RIGHT] && position.x < MEDIUM_MAP_WIDTH - myWindow::WidthZoomed) {
 			position += right * MovementSpeed;
 		}
 		//Top margin 
-		if (KeyCode[GLFW_KEY_UP] && (position.y < (mapHeight - myWindow::HeightZoomed + myWindow::TopBarHeight* myWindow::HeightZoomed / myWindow::Height))) {
+		if (KeyCode[GLFW_KEY_UP] && (position.y < (MEDIUM_MAP_HEIGHT - myWindow::HeightZoomed + myWindow::TopBarHeight* myWindow::HeightZoomed / myWindow::Height))) {
 			position += up * MovementSpeed;
 		}
 		//Bottom margin 
@@ -121,9 +123,9 @@ namespace engine {
 
 	void Camera::GoToPoint(GLfloat x, GLfloat y) {
 		if (x < 0.0) { x = 0; }
-		else if (x > mapWidth - myWindow::WidthZoomed) { x = mapWidth - myWindow::WidthZoomed; }
+		else if (x > MEDIUM_MAP_WIDTH - myWindow::WidthZoomed) { x = MEDIUM_MAP_WIDTH - myWindow::WidthZoomed; }
 		if (y < 0.0) { y = 0; }
-		else if (y > mapHeight - myWindow::HeightZoomed) { y = mapHeight - myWindow::HeightZoomed; }
+		else if (y > MEDIUM_MAP_HEIGHT - myWindow::HeightZoomed) { y = MEDIUM_MAP_HEIGHT - myWindow::HeightZoomed; }
 		position.x = x;
 		position.y = y;
 	}

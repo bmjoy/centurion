@@ -11,10 +11,10 @@
 #include <surface>
 #include <settings.h>
 
-using namespace building;
+
 using namespace engine;
-using namespace unit;
-using namespace decoration;
+
+
 using namespace glb;
 
 namespace editor {
@@ -109,7 +109,7 @@ namespace editor {
 	}
 
 	void addObject(string type) {
-		if (type == "buildings") {
+		/*if (type == "buildings") {
 			if (buildingTemp.is_placeable()){
 				int ID = getPickingID(); increasePickingID();
 				buildingTemp.set_id(ID);
@@ -133,7 +133,7 @@ namespace editor {
 				addingObject = false;
 			}
 		}
-		Game::Minimap::Update();
+		Game::Minimap::Update();*/
 	}
 
 	void changeTerrain(int terrainType) {
@@ -181,7 +181,7 @@ namespace editor {
 	void moveObjects() {
 		if (Mouse::LeftHold) {
 			// buildings
-			if (buildings.count(leftClickID) > 0) {
+			/*if (buildings.count(leftClickID) > 0) {
 				movingObjectRestore = false;
 				if (!movingObject) {
 					movingObjectXPos = buildings[leftClickID].get_position().x;
@@ -229,11 +229,11 @@ namespace editor {
 				}
 				movingObject = true;
 				Game::Minimap::Update();
-			}
+			}*/
 		}
 		else {
 			// buildings
-			if (buildings.count(leftClickID) > 0) {
+			/*if (buildings.count(leftClickID) > 0) {
 				if (movingObjectRestore) {
 					buildings[leftClickID].set_position(vec3(movingObjectXPos, movingObjectYPos, 0.f));
 					buildings[leftClickID].clear_pass();
@@ -246,7 +246,7 @@ namespace editor {
 				}
 				movingObject = false;
 				movingObjectRestore = false;
-			}
+			}*/
 		}
 	}
 }

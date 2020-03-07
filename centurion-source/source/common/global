@@ -61,6 +61,7 @@ namespace glb {
 	void takeScreenshot();
 
 	// other functions 
+	void setMinimapProjection();
 	float getYMinimapCoord(float x);
 	bool cursorInGameScreen();
 	void clearAndSwapBuffers(GLFWwindow *window);

@@ -3,6 +3,7 @@
 #include <global>
 #include "strategy.h"
 #include <picking>
+#include <math>
 #include <engine/mouse.h>
 #include <engine/window.h>
 #include <engine/camera.h>
@@ -23,16 +24,20 @@ glm::mat4 Game::viewMatrix;
 bool Game::isCreated = false;
 float Game::cameraToX;
 float Game::cameraToY;
+int Game::numberOfPlayers = 1;
+GObject* Game::GameObjects[MAX_NUMBER_OF_OBJECTS] = { nullptr };
 
 #pragma endregion
 
 #pragma region Surface
 
 bool Game::Surface::Wireframe = false;
+bool Game::Surface::isGridEnabled;
 
 Game::Surface::Surface() {}
 
 void Game::Surface::Reset() {
+	isGridEnabled = false;
 	mapgen::reset_map();
 	obj::MapGrid()->reset();
 	obj::MapTerrain()->updateHeightsBuffer();
@@ -55,7 +60,7 @@ void Game::Surface::Render(bool tracing) {
 
 	obj::MapTerrain()->render(tracing);
 
-	if (gameGridStatus && !tracing) {
+	if (isGridEnabled && !tracing) {
 		obj::MapGrid()->render();
 	}
 }
@@ -104,9 +109,9 @@ bool Game::SelectionRectangle::IsInRectangle(array<float, 8> &coords) {
 		);
 }
 
-void Game::SelectionRectangle::Render(){
+void Game::SelectionRectangle::Render() {
 	if (Mouse::LeftHold) {
-		
+
 		if (SelectionRectangle::IsActive() == false) {
 			cout << "[DEBUG] Selection rectangle enabled.\n";
 			Coordinates.startX = Mouse::GetXLeftClick() * myWindow::WidthZoomed / myWindow::Width + cameraLastX;
@@ -186,9 +191,25 @@ Game::Minimap::~Minimap() {}
 
 
 
-Game::Game(){}
-Game::~Game(){}
+Game::Game() {}
+Game::~Game() {}
 
+void Game::RemoveGameObject(int i){
+	if (i >= 1 && i < MAX_NUMBER_OF_OBJECTS) {
+		if (GameObjects[i] != nullptr) {
+			delete GameObjects[i];
+		}
+	}
+}
+
+void Game::ResetGameObjects(){
+	for (int i = 0; i < MAX_NUMBER_OF_OBJECTS; i++) {
+		if (GameObjects[i] != nullptr) {
+			delete GameObjects[i];
+		}
+		GameObjects[i] = nullptr;
+	}
+}
 
 void Game::RenderObjectsPicking() {
 	if (leftClickID_UI != 0) {
@@ -198,12 +219,20 @@ void Game::RenderObjectsPicking() {
 	}
 
 	if ((Mouse::RightClick || Mouse::LeftClick) && !SelectionRectangle::IsActive()) {
-		for (map<int, Building>::iterator bld = buildings.begin(); bld != buildings.end(); bld++) {
+
+		for (int i = 1; i < MAX_NUMBER_OF_OBJECTS; i++) {
+			if (GameObjects[i] != nullptr) {
+				GameObjects[i]->render(true);
+			}
+		}
+
+
+		/*for (map<int, Building>::iterator bld = buildings.begin(); bld != buildings.end(); bld++) {
 			bld->second.render(true, 0);
 		}
 		for (map<int, Unit>::iterator u = units.begin(); u != units.end(); u++) {
 			u->second.render(true, 0);
-		}
+		}*/
 
 		if (Mouse::LeftClick) leftClickID = get_id("left");
 		if (Mouse::RightClick) rightClickID = get_id("right");
@@ -218,8 +247,15 @@ void Game::RenderObjectsPicking() {
 }
 
 void Game::RenderObjects() {
-	int selectedBuildings = 0;
-	for (map<int, Building>::iterator bld = buildings.begin(); bld != buildings.end(); bld++) {
+	//int selectedBuildings = 0;
+
+	for (int i = 1; i < MAX_NUMBER_OF_OBJECTS; i++) {
+		if (GameObjects[i] != nullptr) {
+			GameObjects[i]->render(false, leftClickID);
+		}
+	}
+
+	/*for (map<int, Building>::iterator bld = buildings.begin(); bld != buildings.end(); bld++) {
 		bld->second.render(false, leftClickID);
 		if (bld->second.isSelected()) selectedBuildings++;
 	}
@@ -231,22 +267,26 @@ void Game::RenderObjects() {
 	if (Minimap::IsActive() == false) {
 		for (map<int, Unit>::iterator u = units.begin(); u != units.end(); u++) {
 			u->second.render(false, leftClickID);
-			if (u->second.isSelected())	  selectedUnits++;
+			if (u->second.isSelected())	Unit::IncreaseCounter();
 		}
-	}
+	}*/
 	/*cout << gameMinimapStatus << " " << editor::IsWindowOpened << " " << editor::menuIsOpened << " " << editor::TerrainBrushIsActive << " " << leftClickID_UI << editor::movingObject << endl;*/
 	if (!Minimap::IsActive() && !editor::IsWindowOpened && !editor::menuIsOpened && !editor::TerrainBrushIsActive && leftClickID_UI == 0 && !editor::movingObject) SelectionRectangle::Render();
 }
 
 void Game::GoToPointFromMinimap() {
 	if (Mouse::LeftClick && cursorInGameScreen()) {
-		cameraToX = Mouse::GetXLeftClick() / myWindow::Width*(float)mapWidth - myWindow::WidthZoomed / 2.f;
-		cameraToY = getYMinimapCoord(Mouse::GetYLeftClick()) / myWindow::Height*(float)mapHeight - myWindow::HeightZoomed / 2.f;
+		cameraToX = Mouse::GetXLeftClick() / myWindow::Width*(float)MEDIUM_MAP_WIDTH - myWindow::WidthZoomed / 2.f;
+		cameraToY = getYMinimapCoord(Mouse::GetYLeftClick()) / myWindow::Height*(float)MEDIUM_MAP_HEIGHT - myWindow::HeightZoomed / 2.f;
 		// if you are clicking on a townhall you have to double click 
 		// to move the camera there and quit minimap
 		if (leftClickID > 0 && hasDoubleClicked()) {
-			cameraToX = buildings[leftClickID].get_xPos() - myWindow::WidthZoomed / 2.f;
-			cameraToY = buildings[leftClickID].get_yPos() - myWindow::HeightZoomed / 2.f;
+
+			/*cameraToX = buildings[leftClickID].get_xPos() - myWindow::WidthZoomed / 2.f;
+			cameraToY = buildings[leftClickID].get_yPos() - myWindow::HeightZoomed / 2.f;*/
+
+			cameraToX = GameObjects[leftClickID]->AsBuilding()->get_xPos() - myWindow::WidthZoomed / 2.f;
+			cameraToY = GameObjects[leftClickID]->AsBuilding()->get_yPos() - myWindow::HeightZoomed / 2.f;
 			Game::Minimap::Unblock();
 		}
 		//------------------------------------------------
@@ -258,3 +298,151 @@ void Game::GoToPointFromMinimap() {
 		}
 	}
 }
+
+#pragma region Map Generation Methods
+
+void Game::GenerateSettlements(vector<vec2> &locs) {
+	string RandomMapSettlementPath = "scenarios/RandomMapSettlements/";
+
+	vector<int> TemporaryMapTextures;
+
+	int num_townhalls = (int)locs.size();
+
+	// read texture
+	{
+		fstream fin;
+		fin.open(RandomMapSettlementPath + "texture");
+		string line, number;
+		getline(fin, line);
+		stringstream s(line);
+		int i = 0;
+		while (getline(s, number, ',')) {
+			TemporaryMapTextures.push_back(stoi(number));
+			i++;
+		}
+	}
+
+	for (int i = 0; i < num_townhalls; i++) {
+		string r = playersList[i].getPlayerRace().substr(5);
+		vec2 origin = locs[i];
+		playersList[i].setStartPoint(origin);
+		string SettlementRace = "Settlement_" + r + "_1";
+		fstream fin;
+		fin.open(RandomMapSettlementPath + "objects.tsv");
+		string line, value;
+		int row = 0;
+		while (getline(fin, line)) {
+			if (row > 0) {
+				string objectsInfo[9];
+				stringstream s(line);
+				int v = 0;
+				while (getline(s, value, '\t')) { objectsInfo[v] = value; v++; }
+				string settl_name = objectsInfo[3];
+				if (settl_name == SettlementRace) {
+					string type = objectsInfo[0];
+					string className = objectsInfo[1];
+					string settl_name = objectsInfo[3];
+					float xOffset = stof(objectsInfo[7]);
+					float yOffset = stof(objectsInfo[8]);
+
+					float xEditorPos = stof(objectsInfo[5]);
+					float yEditorPos = stof(objectsInfo[6]);
+
+					if (type == "building") {
+						Building* b = new Building();
+						b->set_class(className);
+						b->set_type(type);
+						b->set_player(i);
+						b->set_position(vec3(origin.x + xOffset, origin.y + yOffset, 0.f));
+						b->set_id(getPickingID());
+						b->set_settlement_name("Settlement_player_" + i);
+						b->create();
+						GameObjects[getPickingID()] = b;
+						//buildings[getPickingID()] = b;
+
+						if (b->is_independent()) {
+							//independent_buildings[getPickingID()] = &buildings[getPickingID()];
+
+							// update terrain around the townhall
+							// N.B: mapgen::grid_size * 2 because the map has "borders"
+
+							int EditorStartPointX = (int)xEditorPos - TOWNHALL_RADIUS + mapgen::grid_size * 2;
+							int EditorStartPointY = (int)yEditorPos - TOWNHALL_RADIUS + mapgen::grid_size * 2;
+							int NewMapStartPointX = (int)origin.x - TOWNHALL_RADIUS + mapgen::grid_size * 2;
+							int NewMapStartPointY = (int)origin.y - TOWNHALL_RADIUS + mapgen::grid_size * 2;
+
+							for (int iHoriz = 0; iHoriz <= TOWNHALL_RADIUS * 2; iHoriz += mapgen::grid_size) {
+								for (int iVert = 0; iVert <= TOWNHALL_RADIUS * 2; iVert += mapgen::grid_size) {
+
+									int EditorPointX = EditorStartPointX + iHoriz;
+									int EditorPointY = EditorStartPointY + iVert;
+									int NewMapPointX = NewMapStartPointX + iHoriz;
+									int NewMapPointY = NewMapStartPointY + iVert;
+
+									if (math::euclidean_distance((float)NewMapPointX, (float)NewMapPointY, origin.x + mapgen::grid_size * 2.f, origin.y + mapgen::grid_size * 2.f) > TOWNHALL_RADIUS) continue;
+
+									int EditorPointLoc = mapgen::getVertexPos(EditorPointX, EditorPointY);
+									int NewMapPointLoc = mapgen::getVertexPos(NewMapPointX, NewMapPointY);
+									mapgen::MapTextures()[NewMapPointLoc] = float(TemporaryMapTextures[EditorPointLoc]);
+								}
+							}
+						}
+						increasePickingID();
+					}
+					if (type == "decoration") {
+						Decoration* d = new Decoration();
+						d->set_class(className);
+						d->set_player(0);
+						d->set_position(vec3(origin.x + xOffset, origin.y + yOffset, 0.f));
+						d->set_id(getPickingID());
+						d->create();
+						GameObjects[getPickingID()] = d;
+						//decorations[getPickingID()] = d;
+						increasePickingID();
+					}
+				}
+			}
+			row++;
+		}
+	}
+
+	// update texture buffer
+	obj::MapTerrain()->updateTextureBuffer();
+
+	// update buildings info
+	/*for (map<int, Building>::iterator bld = buildings.begin(); bld != buildings.end(); bld++) {
+		int ID = bld->first;
+		if (!bld->second.is_independent()) {
+			for (map<int, Building*>::iterator settl = independent_buildings.begin(); settl != independent_buildings.end(); settl++) {
+				int settl_ID = settl->first;
+				if (settl->second->get_settlement_name() == bld->second.get_settlement_name()) {
+					buildings[ID].set_settlement_building(independent_buildings[settl_ID]);
+					break;
+				}
+			}
+		}
+	}*/
+}
+
+
+void Game::GenerateOutposts(vector<vec2> &locs) {
+
+	string className = "routpost";
+
+	for (int i = 0; i < locs.size(); i++) {
+		Building* b = new Building();
+		b->set_class(className);
+		b->set_type("building");
+		b->set_player(0);
+		b->set_position(vec3(locs[i].x, locs[i].y, 0.f));
+		b->set_id(getPickingID());
+		b->set_settlement_name("Outpost_" + i);
+		b->create();
+		GameObjects[getPickingID()] = b;
+		//buildings[getPickingID()] = b;
+		//independent_buildings[getPickingID()] = &buildings[getPickingID()];
+		increasePickingID();
+	}
+}
+
+#pragma endregion

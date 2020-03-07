@@ -60,12 +60,12 @@ namespace game {
 	void UIGame::render(bool pick) {
 
 		if (pick && engine::Mouse::LeftClick) {
-			if (gameMenuStatus) gameMenu.render(true);
+			if (GameMenu::IsActive()) gameMenu.render(true);
 			picking(); // --> source/picking/gameui_picking.cpp  
 		}
 
 		if (!pick) {
-			if (gameMenuStatus) { gameMenu.render(false); }
+			if (GameMenu::IsActive()) { gameMenu.render(false); }
 
 			calculateTime();
 			string txt = time.hours_str + ":" + time.minutes_str + ":" + time.seconds_str;
@@ -73,10 +73,10 @@ namespace game {
 
 			// minimap rectangle:
 			if (Game::Minimap::IsActive()) {
-				float x = engine::Camera::GetXPosition() / mapWidth * myWindow::Width;
-				float y = engine::Camera::GetYPosition() / mapHeight * (myWindow::Height - myWindow::BottomBarHeight - myWindow::TopBarHeight) + myWindow::BottomBarHeight;
-				float w = engine::myWindow::WidthZoomed * myWindow::Width / mapWidth;
-				float h = engine::myWindow::HeightZoomed * (myWindow::Height - myWindow::BottomBarHeight - myWindow::TopBarHeight) / mapHeight;
+				float x = engine::Camera::GetXPosition() / MEDIUM_MAP_WIDTH * myWindow::Width;
+				float y = engine::Camera::GetYPosition() / MEDIUM_MAP_HEIGHT * (myWindow::Height - myWindow::BottomBarHeight - myWindow::TopBarHeight) + myWindow::BottomBarHeight;
+				float w = engine::myWindow::WidthZoomed * myWindow::Width / MEDIUM_MAP_WIDTH;
+				float h = engine::myWindow::HeightZoomed * (myWindow::Height - myWindow::BottomBarHeight - myWindow::TopBarHeight) / MEDIUM_MAP_HEIGHT;
 				x = std::max(x, 1.f);
 				y = std::max(y, myWindow::BottomBarHeight + 1.f);
 				y = std::min(y, myWindow::Height - myWindow::TopBarHeight - h);

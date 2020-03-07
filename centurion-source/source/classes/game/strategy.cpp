@@ -6,6 +6,7 @@
 #include <surface>
 #include <player>
 #include <picking>
+#include <object/unit.h>
 
 #pragma region Namespaces
 
@@ -13,8 +14,8 @@ using namespace glb;
 using namespace std;
 using namespace glm;
 using namespace engine;
-using namespace unit;
-using namespace building;
+
+
 
 #pragma endregion
 
@@ -25,13 +26,16 @@ using namespace building;
 Strategy::Strategy() { }
 
 void Strategy::reset() {
-	units.clear();
-	buildings.clear();
-	independent_buildings.clear();
-	decorations.clear();
+	//units.clear();
+	//buildings.clear();
+	//independent_buildings.clear();
+	//decorations.clear();
+	
+	ResetGameObjects();
+
 	isCreated = false;
-	gameMenuStatus = false;
-	gameGridStatus = false;
+	game::GameMenu::Disable();
+	Surface::DisableGrid();
 	Minimap::Unblock();
 	Minimap::Disable();
 	Minimap::Update();
@@ -57,11 +61,11 @@ void Strategy::Create() {
 	/* DEFINE BUILDINGS POSITIONS */
 	vector<vec2> outpostsLocation;
 	vector<vec2> townhallsLocation;
-	mapgen::define_buildings_location(playersNumber, 10, &outpostsLocation, &townhallsLocation);
+	mapgen::define_buildings_location(numberOfPlayers, 10, &outpostsLocation, &townhallsLocation);
 
 	/* CREATE SETTLEMENTS */
-	generateSettlements(townhallsLocation);
-	generateOutposts(outpostsLocation);
+	Game::GenerateSettlements(townhallsLocation);
+	Game::GenerateOutposts(outpostsLocation);
 
 	/* UPDATE TERRAIN TEXTURES */
 	mapgen::defineTerrainZones();
@@ -74,13 +78,14 @@ void Strategy::Create() {
 	// *********** ROBA PROVVISORIA ***********
 	for (int i = 0; i < 5; i++) {
 		for (int j = 0; j < 5; j++) {
-			Unit u = Unit();
-			u.set_class("hmyrmidon");
-			u.set_id(getPickingID());
-			u.set_player(0);
-			u.set_position(playersList[0].getStartPoint().x + i * 50, playersList[0].getStartPoint().y - 1000 - j * 50);
-			u.create();
-			units[getPickingID()] = u;
+			Unit* u = new Unit();
+			u->set_class("hmyrmidon");
+			u->set_id(getPickingID());
+			u->set_player(0);
+			u->set_position(playersList[0].getStartPoint().x + i * 50, playersList[0].getStartPoint().y - 1000 - j * 50);
+			u->create();
+			GameObjects[getPickingID()] = u;
+			//units[getPickingID()] = u;
 			increasePickingID();
 		}
 	}
@@ -104,16 +109,17 @@ void Strategy::Create() {
 }
 
 void Strategy::Run() {
-	selectedUnits = 0;
+	Unit::ResetCounter();
 	leftClickID_UI = 0;
 	Camera::keyboardControl();
 
 	/* Keyboard controls handling*/
-	if (!gameMenuStatus) handleKeyboardControls();
+	if (!game::GameMenu::IsActive()) handleKeyboardControls();
 
 	/* If minimap is NOT active */
 	if (Minimap::IsActive() == false) {
-		Camera::mouseControl(cameraThreshold);
+
+		Camera::mouseControl();
 		viewMatrix = Camera::calculateViewMatrix();
 		projectionMatrix = glb::cameraProjection;
 
@@ -124,7 +130,7 @@ void Strategy::Run() {
 
 		/* Tracing and Picking */
 		Tracing();
-		if (!gameMenuStatus) RenderObjectsPicking();
+		if (!game::GameMenu::IsActive()) RenderObjectsPicking();
 
 		/* Rendering */
 		Surface::Render(false);
@@ -147,7 +153,7 @@ void Strategy::Run() {
 
 		// apply game matrices:
 		obj::applyGameMatrices(&projectionMatrix, &viewMatrix);
-		if (!gameMenuStatus) RenderObjectsPicking();
+		if (!game::GameMenu::IsActive()) RenderObjectsPicking();
 
 		if (Minimap::IsCreated()) Minimap::Render();
 
@@ -165,12 +171,39 @@ void Strategy::Run() {
 		if (Minimap::IsActive()) GoToPointFromMinimap();
 	}
 
-	glb::cameraProjection = ortho(0.0f, engine::myWindow::WidthZoomed, 0.0f, myWindow::HeightZoomed, -(float)mapWidth, (float)mapWidth);
+	glb::cameraProjection = ortho(0.0f, engine::myWindow::WidthZoomed, 0.0f, myWindow::HeightZoomed, -(float)MEDIUM_MAP_WIDTH, (float)MEDIUM_MAP_WIDTH);
 
 	// reset mouse-right and mouse-left to improve fps
 	Mouse::RightClick = false;
 	Mouse::LeftClick = false;
 	Mouse::MiddleClick = false;
+}
+
+void Strategy::handleKeyboardControls() {
+
+	//Open or close minimap
+	if (KeyCode[GLFW_KEY_SPACE] || Mouse::MiddleClick) {
+		if (Minimap::IsActive()) Minimap::Disable();
+		else Minimap::Enable();
+		Minimap::IsActive() ? std::cout << "[DEBUG] Minimap camera ON!\n" : std::cout << "[DEBUG] Minimap camera OFF!\n";
+	}
+	//Open in-game menu
+	if (KeyCode[GLFW_KEY_ESCAPE]) {
+		if (game::GameMenu::IsActive()) game::GameMenu::Disable();
+		else game::GameMenu::Enable();
+		game::GameMenu::IsActive() ? std::cout << "[DEBUG] Pause Menu ON!\n" : std::cout << "[DEBUG] Pause Menu OFF!\n";
+	}
+	// Wireframe
+	if (KeyCode[GLFW_KEY_Z]) {
+		Surface::Wireframe = !Surface::Wireframe;
+		Surface::Wireframe ? std::cout << "[DEBUG] Wireframe ON!\n" : std::cout << "[DEBUG] Wireframe OFF! \n";
+	}
+	// Grid
+	if (KeyCode[GLFW_KEY_G]) {
+		if (Surface::IsGridEnabled()) Surface::DisableGrid();
+		else Surface::EnableGrid();
+		Surface::IsGridEnabled() ? std::cout << "[DEBUG] Grid ON!\n" : std::cout << "[DEBUG] Grid OFF!\n";
+	}
 }
 
 Strategy::~Strategy() {}

@@ -14,8 +14,8 @@ using namespace glm;
 	For example FPS, selected units, mouse position, etc.
 */
 
-namespace building { class Building; }
-namespace unit { class Unit; }
+class Building;
+class Unit;
 
 namespace debug {
 
@@ -137,6 +137,9 @@ namespace game {
 	class GameMenu {
 	public:
 		GameMenu();
+		static bool IsActive() { return isActive; }
+		static void Enable() { isActive = true; }
+		static void Disable() { isActive = false; }
 		void create();
 		void render(bool picking);
 		~GameMenu();
@@ -146,7 +149,7 @@ namespace game {
 		vector<gui::Button> buttons;
 		string s;
 		float w, h, x, y;
-		bool gameMenuActive;
+		static bool isActive;
 	};
 
 	//
@@ -401,8 +404,8 @@ namespace editor {
 		gui::SimpleText text[3];
 		float startX, startY;
 		void picking();
-		building::Building *building_pointer;
-		unit::Unit *unit_pointer;
+		Building *building_pointer;
+		Unit *unit_pointer;
 		string type;
 	};
 

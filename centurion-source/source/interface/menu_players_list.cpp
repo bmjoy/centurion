@@ -34,7 +34,7 @@ namespace menu{
 		background.create("border-filled", (float)x - 30, (float)y + 80, (float)w, (float)h, "top-left", 0);
 
 
-		for (int j = 0; j < maxPlayersNumber; j++) {
+		for (int j = 0; j < MAX_NUMBER_OF_PLAYERS; j++) {
 
 			//Player color rectangle
 			addValueToPickingListUI(getPickingID_UI(), "ColForm_" + std::to_string(j));
@@ -87,7 +87,7 @@ namespace menu{
 	}
 
 	void PlayersList::close() {
-		for (int k = 0; k < maxPlayersNumber; k++) {
+		for (int k = 0; k < MAX_NUMBER_OF_PLAYERS; k++) {
 			civiliz_Form[k].close();
 		}
 	}

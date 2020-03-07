@@ -6,8 +6,9 @@
 using namespace std;
 using namespace glm;
 
-namespace unit { class Unit; };
-namespace building { class Building; };
+class Unit;
+class Building;
+class Decoration;
 
 class Player;
 
@@ -36,9 +37,13 @@ public:
 	void update_pass();
 	void clear_pass();
 
+	Building* AsBuilding() { return (Building*)this; }
+	Unit* AsUnit() { return (Unit*)this; }
+	Decoration* AsDecoration() { return (Decoration*)this; }
+
 	virtual void prepare() { }
 	virtual void create() { }
-	virtual void render() { }
+	virtual void render(bool picking, int clickID = 0, bool not_placeable = false) {};
 
 	~GObject();
 protected:

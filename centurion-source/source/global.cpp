@@ -4,7 +4,7 @@
 #include <json.hpp>
 #include <game/strategy.h>
 #include <picking>
-#include <object>
+#include <object/object.h>
 #include <menu>
 #include <Windows.h>
 #include <engine/camera.h>
@@ -12,7 +12,6 @@
 #include <engine/window.h>
 #include <translationTable-xml.hxx>
 #include <interface>
-
 
 #define STB_IMAGE_WRITE_IMPLEMENTATION
 #include <stb_image_write.h>
@@ -67,11 +66,11 @@ namespace glb {
 			read_translation_tables();
 
 			myWindow::Ratio = myWindow::Width / myWindow::Height;
-			myWindow::WidthZoomed = myWindow::Width + (currentZoomCamera - 1) * zoomCameraFactor;
-			myWindow::HeightZoomed = myWindow::Height + (currentZoomCamera - 1) * zoomCameraFactor / myWindow::Ratio;
+			myWindow::WidthZoomed = myWindow::Width + (Camera::GetCurrentZoom() - 1) * Camera::GetZoomFactor();
+			myWindow::HeightZoomed = myWindow::Height + (Camera::GetCurrentZoom() - 1) * Camera::GetZoomFactor() / myWindow::Ratio;
 		
 			menuProjection = glm::ortho(0.0f, myWindow::Width, 0.0f, myWindow::Height, -100.0f, 100.0f);
-			cameraProjection = glm::ortho(0.0f, myWindow::WidthZoomed, 0.0f, myWindow::HeightZoomed, -(float)mapWidth, (float)mapWidth);
+			cameraProjection = glm::ortho(0.0f, myWindow::WidthZoomed, 0.0f, myWindow::HeightZoomed, -(float)MEDIUM_MAP_WIDTH, (float)MEDIUM_MAP_WIDTH);
 
 			ifstream data_path("assets/data/data.json");
 			//Close the game if it wasn't able to find or process data.json file
@@ -163,6 +162,14 @@ namespace glb {
 		cout << "DEBUG : Settings file updated!" << endl;
 	}
 
+	void setMinimapProjection() {
+		float bottom = (-1.f) * (MEDIUM_MAP_HEIGHT * myWindow::BottomBarHeight / (myWindow::Height - myWindow::BottomBarHeight - myWindow::TopBarHeight));
+		float top = MEDIUM_MAP_HEIGHT + MEDIUM_MAP_HEIGHT * myWindow::TopBarHeight / (myWindow::Height - myWindow::BottomBarHeight - myWindow::TopBarHeight);
+		float left = 0.f;
+		float right = (float)MEDIUM_MAP_WIDTH;
+		glb::minimapProjection = ortho(left, right, bottom, top, -right, right);
+	}
+
 	void readIndicesData(unsigned int *indices, string path) {
 		fstream fin;
 		fin.open(path);
@@ -202,175 +209,178 @@ namespace glb {
 		}
 	}
 	void saveCurrentScenario(string name) {
-		// create a folder which will contain all scenario files
-		string path = "scenarios/" + name;
-		_mkdir(path.c_str());
+	//	
+	//	
+	//	// create a folder which will contain all scenario files
+	//	string path = "scenarios/" + name;
+	//	_mkdir(path.c_str());
 
-		// save heights 
-		ofstream heightsFile(path + "/heights");
-		if (heightsFile.is_open()) {
-			for (int i = 0; i < mapgen::nVertices * 4; i += 4)
-				if (i == 0) {
-					heightsFile << mapgen::MapHeights()[i] << "," << mapgen::MapHeights()[i + 1] << "," << mapgen::MapHeights()[i + 2] << "," << mapgen::MapHeights()[i + 3];
-				}
-				else {
-					heightsFile << "," << mapgen::MapHeights()[i] << "," << mapgen::MapHeights()[i + 1] << "," << mapgen::MapHeights()[i + 2] << "," << mapgen::MapHeights()[i + 3];
-				}
-		}
-		heightsFile.close();
+	//	// save heights 
+	//	ofstream heightsFile(path + "/heights");
+	//	if (heightsFile.is_open()) {
+	//		for (int i = 0; i < mapgen::nVertices * 4; i += 4)
+	//			if (i == 0) {
+	//				heightsFile << mapgen::MapHeights()[i] << "," << mapgen::MapHeights()[i + 1] << "," << mapgen::MapHeights()[i + 2] << "," << mapgen::MapHeights()[i + 3];
+	//			}
+	//			else {
+	//				heightsFile << "," << mapgen::MapHeights()[i] << "," << mapgen::MapHeights()[i + 1] << "," << mapgen::MapHeights()[i + 2] << "," << mapgen::MapHeights()[i + 3];
+	//			}
+	//	}
+	//	heightsFile.close();
 
-		// save texture type
-		ofstream textureFile(path + "/texture");
-		if (textureFile.is_open()) {
-			for (int i = 0; i < mapgen::nVertices; i++)
-				if (i == 0) {
-					textureFile << mapgen::MapTextures()[i];
-				}
-				else {
-					textureFile << "," << mapgen::MapTextures()[i];
-				}
-		}
-		textureFile.close();
+	//	// save texture type
+	//	ofstream textureFile(path + "/texture");
+	//	if (textureFile.is_open()) {
+	//		for (int i = 0; i < mapgen::nVertices; i++)
+	//			if (i == 0) {
+	//				textureFile << mapgen::MapTextures()[i];
+	//			}
+	//			else {
+	//				textureFile << "," << mapgen::MapTextures()[i];
+	//			}
+	//	}
+	//	textureFile.close();
 
-		// save objects
-		ofstream objectsFile(path + "/objects.tsv");
-		if (objectsFile.is_open()) {
-			objectsFile << "type\tclass\tname\tsettlement\tplayerID\tx\ty\txoffset\tyoffset" << "\n";
-			for (map<int, Building>::iterator bld = buildings.begin(); bld != buildings.end(); bld++) {
-				objectsFile << bld->second.get_type() << "\t";
-				objectsFile << bld->second.get_class() << "\t";
-				objectsFile << bld->second.get_name() << "\t";
-				objectsFile << bld->second.get_settlement_name() << "\t";
-				objectsFile << bld->second.get_playerID() << "\t";
-				objectsFile << bld->second.get_position().x << "\t";
-				objectsFile << bld->second.get_position().y << "\t";
-				if (bld->second.is_independent()) {
-					objectsFile << 0 << "\t";
-					objectsFile << 0;
-				}
-				else {
-					objectsFile << bld->second.get_position().x - bld->second.get_settlement_building()->get_position().x << "\t";
-					objectsFile << bld->second.get_position().y - bld->second.get_settlement_building()->get_position().y;
-				}
-				objectsFile << "\n";
-			}
-			/*for (map<int, Unit>::iterator u = units.begin(); u != units.end(); u++) {
-				u->second.render(true, 0);
-			}*/
-			for (map<int, Decoration>::iterator dec = decorations.begin(); dec != decorations.end(); dec++) {
-				objectsFile << dec->second.get_type() << "\t";
-				objectsFile << dec->second.get_class() << "\t";
-				objectsFile << "N/A" << "\t";
-				objectsFile << dec->second.get_settlement_name() << "\t";
-				objectsFile << 0 << "\t";
-				objectsFile << dec->second.get_position().x << "\t";
-				objectsFile << dec->second.get_position().y << "\t";
-				if (dec->second.get_settlement_name() != "N/A") {
-					objectsFile << dec->second.get_position().x - dec->second.get_settlement_building()->get_position().x << "\t";
-					objectsFile << dec->second.get_position().y - dec->second.get_settlement_building()->get_position().y << "\n";
-				}
-				else {
-					objectsFile << 0 << "\t";
-					objectsFile << 0 << "\n";
-				}
-			}
-		}
-		objectsFile.close();
+	//	// save objects
+	//	ofstream objectsFile(path + "/objects.tsv");
+	//	if (objectsFile.is_open()) {
+	//		objectsFile << "type\tclass\tname\tsettlement\tplayerID\tx\ty\txoffset\tyoffset" << "\n";
+	//		for (map<int, Building>::iterator bld = buildings.begin(); bld != buildings.end(); bld++) {
+	//			objectsFile << bld->second.get_type() << "\t";
+	//			objectsFile << bld->second.get_class() << "\t";
+	//			objectsFile << bld->second.get_name() << "\t";
+	//			objectsFile << bld->second.get_settlement_name() << "\t";
+	//			objectsFile << bld->second.get_playerID() << "\t";
+	//			objectsFile << bld->second.get_position().x << "\t";
+	//			objectsFile << bld->second.get_position().y << "\t";
+	//			if (bld->second.is_independent()) {
+	//				objectsFile << 0 << "\t";
+	//				objectsFile << 0;
+	//			}
+	//			else {
+	//				objectsFile << bld->second.get_position().x - bld->second.get_settlement_building()->get_position().x << "\t";
+	//				objectsFile << bld->second.get_position().y - bld->second.get_settlement_building()->get_position().y;
+	//			}
+	//			objectsFile << "\n";
+	//		}
+	//		/*for (map<int, Unit>::iterator u = units.begin(); u != units.end(); u++) {
+	//			u->second.render(true, 0);
+	//		}*/
+	//		for (map<int, Decoration>::iterator dec = decorations.begin(); dec != decorations.end(); dec++) {
+	//			objectsFile << dec->second.get_type() << "\t";
+	//			objectsFile << dec->second.get_class() << "\t";
+	//			objectsFile << "N/A" << "\t";
+	//			objectsFile << dec->second.get_settlement_name() << "\t";
+	//			objectsFile << 0 << "\t";
+	//			objectsFile << dec->second.get_position().x << "\t";
+	//			objectsFile << dec->second.get_position().y << "\t";
+	//			if (dec->second.get_settlement_name() != "N/A") {
+	//				objectsFile << dec->second.get_position().x - dec->second.get_settlement_building()->get_position().x << "\t";
+	//				objectsFile << dec->second.get_position().y - dec->second.get_settlement_building()->get_position().y << "\n";
+	//			}
+	//			else {
+	//				objectsFile << 0 << "\t";
+	//				objectsFile << 0 << "\n";
+	//			}
+	//		}
+	//	}
+	//	objectsFile.close();
 
-		cout << "[DEBUG] The map is saved with the following name: " + name << endl;
+	//	cout << "[DEBUG] The map is saved with the following name: " + name << endl;
+	//
 	}
 	void openScenario(string name) {
-		// read heights
-		{
-			fstream fin;
-			fin.open("scenarios/" + name + "/heights");
-			string line, number;
-			getline(fin, line);
-			stringstream s(line);
-			int i = 0;
-			while (getline(s, number, ',')) {
-				mapgen::MapHeights()[i] = stof(number);
-				i++;
-			}
-		}
-		// read texture
-		{
-			fstream fin;
-			fin.open("scenarios/" + name + "/texture");
-			string line, number;
-			getline(fin, line);
-			stringstream s(line);
-			int i = 0;
-			while (getline(s, number, ',')) {
-				mapgen::MapTextures()[i] = stof(number);
-				i++;
-			}
-		}
-		// read objects
-		{
-			fstream fin;
-			fin.open("scenarios/" + name + "/objects.tsv");
-			string line, value;
-			int row = 0;
-			while (getline(fin, line)) {
-				if (row > 0) {
-					string objectsInfo[9];
-					stringstream s(line);
-					int i = 0;
-					while (getline(s, value, '\t')) {
-						objectsInfo[i] = value;
-						i++;
-					}
-					string type = objectsInfo[0];
-					string className = objectsInfo[1];
-					string name = objectsInfo[2];
-					string settl_name = objectsInfo[3];
-					int playerID = stoi(objectsInfo[4]);
-					float xPos = stof(objectsInfo[5]);
-					float yPos = stof(objectsInfo[6]);
-					float xOffset = stof(objectsInfo[7]);
-					float yOffset = stof(objectsInfo[8]);
-					if (type == "building") {
-						building::Building b = building::Building();
-						b.set_class(className);
-						b.set_player(playerID);
-						b.set_position(vec3(xPos, yPos, 0.f));
-						b.set_id(getPickingID());
-						b.set_settlement_name(settl_name);
-						b.create(name);
-						buildings[getPickingID()] = b;
-						if (buildings[getPickingID()].is_independent()) {
-							independent_buildings[getPickingID()] = &buildings[getPickingID()];
-						}
-						increasePickingID();
-					}
-					if (type == "decoration") {
-						decoration::Decoration d = decoration::Decoration();
-						d.set_class(className);
-						d.set_player(0);
-						d.set_position(vec3(xPos, yPos, 0.f));
-						d.set_id(getPickingID());
-						d.create();
-						decorations[getPickingID()] = d;
-						increasePickingID();
-					}
-				}
-				row++;
-			}
-			/* set central building for every dependent building */
-			for (map<int, Building>::iterator bld = buildings.begin(); bld != buildings.end(); bld++) {
-				int ID = bld->first;
-				if (!bld->second.is_independent()) {
-					for (map<int, Building*>::iterator settl = independent_buildings.begin(); settl != independent_buildings.end(); settl++) {
-						int settl_ID = settl->first;
-						if (settl->second->get_settlement_name() == bld->second.get_settlement_name()) {
-							buildings[ID].set_settlement_building(independent_buildings[settl_ID]);
-							break;
-						}
-					}
-				}
-			}
-		}
+		//// read heights
+		//{
+		//	fstream fin;
+		//	fin.open("scenarios/" + name + "/heights");
+		//	string line, number;
+		//	getline(fin, line);
+		//	stringstream s(line);
+		//	int i = 0;
+		//	while (getline(s, number, ',')) {
+		//		mapgen::MapHeights()[i] = stof(number);
+		//		i++;
+		//	}
+		//}
+		//// read texture
+		//{
+		//	fstream fin;
+		//	fin.open("scenarios/" + name + "/texture");
+		//	string line, number;
+		//	getline(fin, line);
+		//	stringstream s(line);
+		//	int i = 0;
+		//	while (getline(s, number, ',')) {
+		//		mapgen::MapTextures()[i] = stof(number);
+		//		i++;
+		//	}
+		//}
+		//// read objects
+		//{
+		//	fstream fin;
+		//	fin.open("scenarios/" + name + "/objects.tsv");
+		//	string line, value;
+		//	int row = 0;
+		//	while (getline(fin, line)) {
+		//		if (row > 0) {
+		//			string objectsInfo[9];
+		//			stringstream s(line);
+		//			int i = 0;
+		//			while (getline(s, value, '\t')) {
+		//				objectsInfo[i] = value;
+		//				i++;
+		//			}
+		//			string type = objectsInfo[0];
+		//			string className = objectsInfo[1];
+		//			string name = objectsInfo[2];
+		//			string settl_name = objectsInfo[3];
+		//			int playerID = stoi(objectsInfo[4]);
+		//			float xPos = stof(objectsInfo[5]);
+		//			float yPos = stof(objectsInfo[6]);
+		//			float xOffset = stof(objectsInfo[7]);
+		//			float yOffset = stof(objectsInfo[8]);
+		//			if (type == "building") {
+		//				Building b = Building();
+		//				b.set_class(className);
+		//				b.set_player(playerID);
+		//				b.set_position(vec3(xPos, yPos, 0.f));
+		//				b.set_id(getPickingID());
+		//				b.set_settlement_name(settl_name);
+		//				b.create(name);
+		//				buildings[getPickingID()] = b;
+		//				if (buildings[getPickingID()].is_independent()) {
+		//					independent_buildings[getPickingID()] = &buildings[getPickingID()];
+		//				}
+		//				increasePickingID();
+		//			}
+		//			if (type == "decoration") {
+		//				Decoration d = Decoration();
+		//				d.set_class(className);
+		//				d.set_player(0);
+		//				d.set_position(vec3(xPos, yPos, 0.f));
+		//				d.set_id(getPickingID());
+		//				d.create();
+		//				decorations[getPickingID()] = d;
+		//				increasePickingID();
+		//			}
+		//		}
+		//		row++;
+		//	}
+		//	/* set central building for every dependent building */
+		//	for (map<int, Building>::iterator bld = buildings.begin(); bld != buildings.end(); bld++) {
+		//		int ID = bld->first;
+		//		if (!bld->second.is_independent()) {
+		//			for (map<int, Building*>::iterator settl = independent_buildings.begin(); settl != independent_buildings.end(); settl++) {
+		//				int settl_ID = settl->first;
+		//				if (settl->second->get_settlement_name() == bld->second.get_settlement_name()) {
+		//					buildings[ID].set_settlement_building(independent_buildings[settl_ID]);
+		//					break;
+		//				}
+		//			}
+		//		}
+		//	}
+		//}
 	}
 	void takeScreenshot() {
 		char filename[50];

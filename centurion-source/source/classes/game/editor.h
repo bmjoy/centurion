@@ -2,10 +2,10 @@
 
 #include <gui>
 #include <json.hpp>
-#include <object>
-#include <unit>
-#include <building>
-#include <decoration>
+#include <object/object.h>
+#include <object/unit.h>
+#include <object/building.h>
+#include <object/decoration.h>
 #include "game.h"
 
 using namespace std;
@@ -35,9 +35,9 @@ private:
 //
 
 namespace editor {
-	using namespace unit;
-	using namespace building;
-	using namespace decoration;
+	
+	
+	
 
 	extern Unit unitTemp;
 	extern Building buildingTemp;

@@ -6,7 +6,7 @@
 #include <surface>
 #include <game/editor.h>
 #include <game/strategy.h>
-#include <object>
+#include <object/object.h>
 
 using namespace glb;
 using namespace engine;
@@ -225,7 +225,7 @@ namespace editor {
 		}
 
 		if (clickName == "OpenMapWindow_open" || (selectedID == pos && hasDoubleClicked())) { // OPEN
-			if (selectedID != -1) {
+			/*if (selectedID != -1) {
 				cout << "[DEBUG] You've chosen the following scenario to open: " + availableScenarios[selectedID] << endl;
 				buildings.clear();
 				units.clear();
@@ -236,7 +236,7 @@ namespace editor {
 				obj::MapTerrain()->updateTextureBuffer();
 				OpenMapWindowIsOpen = false;
 				IsWindowOpened = false;
-			}
+			}*/
 		}
 	}
 
@@ -260,24 +260,24 @@ namespace editor {
 		text_input.active(clickName == "NewMapWindow_textclick");
 
 		if (clickName == "NewMapWindow_create") { // CREATE
-			cout << "[DEBUG] You've set the following map name: " + text_input.get_text() << endl;
-			currentMapName = text_input.get_text();
+			//cout << "[DEBUG] You've set the following map name: " + text_input.get_text() << endl;
+			//currentMapName = text_input.get_text();
 
-			NewMapWindowIsOpen = false;
+			//NewMapWindowIsOpen = false;
 
-			//Does the map folder already exist?
-			if (!folderExists("scenarios/" + currentMapName)) {
-				buildings.clear();
-				units.clear();
+			////Does the map folder already exist?
+			//if (!folderExists("scenarios/" + currentMapName)) {
+			//	buildings.clear();
+			//	units.clear();
 
-				mapgen::reset_map();
-				obj::MapTerrain()->updateHeightsBuffer();
-				obj::MapTerrain()->updateTextureBuffer();
-				clearEditorVariables();
-				saveCurrentScenario(currentMapName);
-			}
-			else
-				Q_WINDOW()->setQuestion("QUESTION_overwriteMap");
+			//	mapgen::reset_map();
+			//	obj::MapTerrain()->updateHeightsBuffer();
+			//	obj::MapTerrain()->updateTextureBuffer();
+			//	clearEditorVariables();
+			//	saveCurrentScenario(currentMapName);
+			//}
+			//else
+			//	Q_WINDOW()->setQuestion("QUESTION_overwriteMap");
 		}
 	}
 
@@ -294,14 +294,14 @@ namespace editor {
 		// Yes
 		if (clickName == "QuestionWindow_Yes") { 
 			if (question == "QUESTION_overwriteMap") {
-				buildings.clear();
+				/*buildings.clear();
 				units.clear();
 
 				mapgen::reset_map();
 				obj::MapTerrain()->updateHeightsBuffer();
 				obj::MapTerrain()->updateTextureBuffer();
 				saveCurrentScenario(currentMapName);
-				cout << "[DEBUG] Map " + currentMapName + " has been overwritten successfully!" << endl;
+				cout << "[DEBUG] Map " + currentMapName + " has been overwritten successfully!" << endl;*/
 			}
 			if (question == "QUESTION_deleteAll") {
 				vector<int> idsToErase;
@@ -317,12 +317,12 @@ namespace editor {
 					}
 				}
 				if (idsToErase.size() > 0){
-					for (int i = 0; i < idsToErase.size(); i++) {
+					/*for (int i = 0; i < idsToErase.size(); i++) {
 						buildings[idsToErase[i]].clear_pass();
 						buildings.erase(idsToErase[i]);
 					}
 					independent_buildings.erase(idsToErase[0]);
-					cout << "[DEBUG]: Settlement " << idsToErase[0] << " completly erased!\n";
+					cout << "[DEBUG]: Settlement " << idsToErase[0] << " completly erased!\n";*/
 				}
 			}
 			clearEditorVariables();
@@ -331,9 +331,9 @@ namespace editor {
 		// No
 		if (clickName == "QuestionWindow_No") {
 			if (question == "QUESTION_deleteAll") {
-				for (map<int, Building*>::iterator bld = independent_buildings.begin(); bld != independent_buildings.end(); bld++) {
+				/*for (map<int, Building*>::iterator bld = independent_buildings.begin(); bld != independent_buildings.end(); bld++) {
 					buildings[bld->first].setWaitingToBeErased(false);
-				}
+				}*/
 			}
 			clearEditorVariables();
 		}

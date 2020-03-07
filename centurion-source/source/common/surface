@@ -23,8 +23,8 @@ namespace mapgen {
 	static const int grid_size = 128;
 	static const int nIndices = 228480;
 	static const int nVertices = 38479;
-	static const int mapWidth = 30464;  // 29952 + 128*4
-	static const int mapHeight = 20480; // 19968 + 128*4
+	static const int mapMeshWidth = 30464;  // 29952 + 128*4
+	static const int mapMeshHeight = 20480; // 19968 + 128*4
 	static float map_vertices[nVertices * 4];
 	static float map_textures[nVertices];
 	static float map_heights[nVertices * 4];

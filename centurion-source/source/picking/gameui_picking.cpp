@@ -11,11 +11,10 @@ namespace game {
 		leftClickID_UI = get_id();
 		string clickName = getPickedObjectName(leftClickID_UI);
 		if (clickName == "GAME_pauseMenuButtonClose") {
-			gameMenuStatus = false;
+			GameMenu::Disable();
 		}
 		if (clickName == "GAME_pauseMenuButtonQuit") {
-			gameMenuStatus = false;
-			//saveCurrentScenario("random_map_singleplayer");
+			GameMenu::Disable();
 			Engine::Reset();
 		}
 	}

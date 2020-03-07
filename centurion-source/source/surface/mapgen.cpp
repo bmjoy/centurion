@@ -84,13 +84,13 @@ namespace mapgen {
 
 	float smoothNoise(float y, float z, float alpha, float beta) {
 		float zSmoothed;
-		zSmoothed = z * beta * tanh(y * alpha) * tanh((mapHeight - y)*alpha);
+		zSmoothed = z * beta * tanh(y * alpha) * tanh((mapMeshHeight - y)*alpha);
 		return zSmoothed;
 	}
 
 	float perlinNoise(float x, float y, float xy_scale, float z_scale, float x_seed, float y_seed) {
-		z_scale *= mapWidth;
-		xy_scale /= mapWidth;
+		z_scale *= mapMeshWidth;
+		xy_scale /= mapMeshWidth;
 
 		x += x_seed;
 		y += y_seed;
@@ -134,7 +134,7 @@ namespace mapgen {
 	}
 
 	int getVertexPos(int x, int y) {
-		int j = VerticesPos()[(y / grid_size * mapWidth / grid_size + x / grid_size)];
+		int j = VerticesPos()[(y / grid_size * mapMeshWidth / grid_size + x / grid_size)];
 		return j;
 	}
 
@@ -206,7 +206,7 @@ namespace mapgen {
 			glm::ivec2 pos = glm::ivec2(vertices[i].x, vertices[i].y);
 			int j = getVertexPos(pos.x, pos.y);
 
-			if (pos.x > grid_size && pos.x < mapWidth - grid_size && pos.y > grid_size && pos.y < mapHeight - grid_size) {
+			if (pos.x > grid_size && pos.x < mapMeshWidth - grid_size && pos.y > grid_size && pos.y < mapMeshHeight - grid_size) {
 
 				std::array<Triangle, 6> adjacentTriangles = getAdjacentTriangles(pos);
 				glm::vec3 sum(0.f);
@@ -233,7 +233,7 @@ namespace mapgen {
 			float xCoord = MapVertices()[i * 4];
 			float yCoord = MapVertices()[i * 4 + 1];
 			glm::ivec2 pos = glm::ivec2(int(xCoord), int(yCoord));
-			if (pos.x > grid_size && pos.x < mapWidth - grid_size && pos.y > grid_size && pos.y < mapHeight - grid_size) {
+			if (pos.x > grid_size && pos.x < mapMeshWidth - grid_size && pos.y > grid_size && pos.y < mapMeshHeight - grid_size) {
 				std::array<Triangle, 6> adjacentTriangles = getAdjacentTriangles(pos);
 				glm::vec3 sum(0.f);
 
@@ -341,11 +341,11 @@ namespace mapgen {
 
 		/* locations grid definition */
 		vector<vec2> locGrid;
-		int min = (int)townhallRadius + grid_size;
-		int max_X = mapWidth - (int)townhallRadius - grid_size;
-		int max_Y = mapHeight - (int)townhallRadius - grid_size;
-		for (int iHoriz = 0; iHoriz < mapWidth - grid_size * 4; iHoriz += grid_size) {
-			for (int iVert = 0; iVert < mapHeight - grid_size * 4; iVert += grid_size) {
+		int min = TOWNHALL_RADIUS + grid_size;
+		int max_X = mapMeshWidth - TOWNHALL_RADIUS - grid_size;
+		int max_Y = mapMeshHeight - TOWNHALL_RADIUS - grid_size;
+		for (int iHoriz = 0; iHoriz < mapMeshWidth - grid_size * 4; iHoriz += grid_size) {
+			for (int iVert = 0; iVert < mapMeshHeight - grid_size * 4; iVert += grid_size) {
 				locGrid.push_back(vec2(iHoriz, iVert));
 			}
 		}
@@ -361,11 +361,11 @@ namespace mapgen {
 				float a = locGrid[j].x;
 				float b = locGrid[j].y;
 
-				if ((a >= mapWidth - townhallRadius * 1.1) || (a <= townhallRadius * 1.1) ||
-					(b >= mapHeight - townhallRadius * 1.1) || (b <= townhallRadius * 1.1)) continue;
+				if ((a >= mapMeshWidth - TOWNHALL_RADIUS * 1.1) || (a <= TOWNHALL_RADIUS * 1.1) ||
+					(b >= mapMeshHeight - TOWNHALL_RADIUS * 1.1) || (b <= TOWNHALL_RADIUS * 1.1)) continue;
 
 				if (n == 0) { // 1 PLAYER
-					if (math::euclidean_distance(a, b, mapWidth / 2.0f, mapHeight / 2.0f) > mapHeight / 2.0f) {
+					if (math::euclidean_distance(a, b, mapMeshWidth / 2.0f, mapMeshHeight / 2.0f) > mapMeshHeight / 2.0f) {
 						townhallPos[n].x = a;
 						townhallPos[n].y = b;
 						c = true;
@@ -373,7 +373,7 @@ namespace mapgen {
 				}
 				if (n == 1) { // 2 PLAYERS
 					float d = math::euclidean_distance(a, b, townhallPos[0].x, townhallPos[0].y);
-					if (d > mapHeight * 0.5) {
+					if (d > mapMeshHeight * 0.5) {
 						townhallPos[n].x = a;
 						townhallPos[n].y = b;
 						c = true;
@@ -383,7 +383,7 @@ namespace mapgen {
 					bool c2 = true;
 					for (int m = n - 1; m >= 0; m--) {
 						float d = math::euclidean_distance(a, b, townhallPos[m].x, townhallPos[m].y);
-						if (d <= mapHeight * 0.5) {
+						if (d <= mapMeshHeight * 0.5) {
 							c2 = c2 * false;
 						}
 					}
@@ -398,7 +398,7 @@ namespace mapgen {
 					bool c2 = true;
 					for (int m = n - 1; m >= 0; m--) {
 						float d = math::euclidean_distance(a, b, townhallPos[m].x, townhallPos[m].y);
-						if (d <= mapHeight * 0.25) {
+						if (d <= mapMeshHeight * 0.25) {
 							c2 = c2 * false;
 						}
 					}
@@ -417,7 +417,7 @@ namespace mapgen {
 		for (int i = 0; i < locGrid.size(); i++) {
 			for (int j = 0; j < townhallPos.size(); j++) {
 				float d = math::euclidean_distance(locGrid[i].x, locGrid[i].y, townhallPos[j].x, townhallPos[j].y);
-				if (d <= townhallRadius * 1.25)
+				if (d <= TOWNHALL_RADIUS * 1.25f)
 					locGrid.erase(locGrid.begin() + i);
 			}
 		}
@@ -433,17 +433,17 @@ namespace mapgen {
 				float a = locGrid[j].x;
 				float b = locGrid[j].y;
 
-				if ((a >= mapWidth - outpostRadius * 1.25) || (a <= outpostRadius * 1.25) ||
-					(b >= mapHeight - outpostRadius * 1.25) || (b <= outpostRadius * 1.25)) continue;
+				if ((a >= mapMeshWidth - OUTPOST_RADIUS * 1.25f) || (a <= OUTPOST_RADIUS * 1.25f) ||
+					(b >= mapMeshHeight - OUTPOST_RADIUS * 1.25f) || (b <= OUTPOST_RADIUS * 1.25f)) continue;
 
 				bool c2 = true;
 				for (int m = 0; m < townhallPos.size(); m++) {
-					if (math::euclidean_distance(a, b, townhallPos[m].x, townhallPos[m].y) < townhallRadius + 2 * outpostRadius){
+					if (math::euclidean_distance(a, b, townhallPos[m].x, townhallPos[m].y) < TOWNHALL_RADIUS + 2 * OUTPOST_RADIUS){
 						c2 = c2 * false;
 					}
 				}
 				for (int m = n - 1; m >= 0; m--) {
-					if (math::euclidean_distance(a, b, outpostsPos[m].x, outpostsPos[m].y) <= outpostRadius * 4){
+					if (math::euclidean_distance(a, b, outpostsPos[m].x, outpostsPos[m].y) <= OUTPOST_RADIUS * 4){
 						c2 = c2 * false;
 					}
 				}
@@ -467,7 +467,7 @@ namespace mapgen {
 
 			string zoneType = "none";
 
-			float d = mapWidth * 2;
+			float d = mapMeshWidth * 2;
 			vec2 p = getVertexCoords(i) - 2.f * grid_size;
 
 			for (map<int, Building*>::iterator settl = independent_buildings.begin(); settl != independent_buildings.end(); settl++) {
@@ -481,7 +481,7 @@ namespace mapgen {
 				if (dist <= d) {
 					d = dist;
 					string race = b->get_race();
-					if (dist - rnoise > townhallRadius - grid_size) zoneType = glb::RACES[race].getEnvironmentalZone();
+					if (dist - rnoise > TOWNHALL_RADIUS - grid_size) zoneType = glb::RACES[race].getEnvironmentalZone();
 					else zoneType = "none";
 				}
 			}
@@ -506,4 +506,4 @@ namespace mapgen {
 		// update texture buffer
 		obj::MapTerrain()->updateTextureBuffer();
 	}
-}
+};

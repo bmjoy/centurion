@@ -91,15 +91,6 @@
     <Filter Include="Shader Files\dsprite">
       <UniqueIdentifier>{d5bb376d-55ab-4930-b78f-201bac1a493b}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source Files\building">
-      <UniqueIdentifier>{87ff652c-a11f-4ae5-bf90-c9ab15535719}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source Files\decoration">
-      <UniqueIdentifier>{ddd1411f-06af-4ba4-aaa1-b20b5d42bfef}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source Files\unit">
-      <UniqueIdentifier>{88304990-1d0f-41a6-acb4-3b8ad50f5fc8}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Header Files\classes">
       <UniqueIdentifier>{69eec375-ef93-4607-9b3f-a440839a91b8}</UniqueIdentifier>
     </Filter>
@@ -117,6 +108,12 @@
     </Filter>
     <Filter Include="Source Files\classes\game">
       <UniqueIdentifier>{e62e959c-2da3-4c6d-a46e-ed920f9c438b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\classes\object">
+      <UniqueIdentifier>{11ed68f9-c16f-4596-b215-ee4b4d36739e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\classes\object">
+      <UniqueIdentifier>{351fdacb-0f47-4ff8-85c3-02f5d91e47be}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -303,21 +300,6 @@
     <ClCompile Include="source\primitives\minimap_rectangle.cpp">
       <Filter>Source Files\primitives</Filter>
     </ClCompile>
-    <ClCompile Include="source\object.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="source\building\building.cpp">
-      <Filter>Source Files\building</Filter>
-    </ClCompile>
-    <ClCompile Include="source\decoration\decoration.cpp">
-      <Filter>Source Files\decoration</Filter>
-    </ClCompile>
-    <ClCompile Include="source\unit\unit.cpp">
-      <Filter>Source Files\unit</Filter>
-    </ClCompile>
-    <ClCompile Include="source\unit\unit_functions.cpp">
-      <Filter>Source Files\unit</Filter>
-    </ClCompile>
     <ClCompile Include="source\interface\object_ui.cpp">
       <Filter>Source Files\interface</Filter>
     </ClCompile>
@@ -356,6 +338,18 @@
     </ClCompile>
     <ClCompile Include="source\classes\game\match.cpp">
       <Filter>Source Files\classes\game</Filter>
+    </ClCompile>
+    <ClCompile Include="source\classes\object\object.cpp">
+      <Filter>Source Files\classes\object</Filter>
+    </ClCompile>
+    <ClCompile Include="source\classes\object\building.cpp">
+      <Filter>Source Files\classes\object</Filter>
+    </ClCompile>
+    <ClCompile Include="source\classes\object\decoration.cpp">
+      <Filter>Source Files\classes\object</Filter>
+    </ClCompile>
+    <ClCompile Include="source\classes\object\unit.cpp">
+      <Filter>Source Files\classes\object</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -479,6 +473,18 @@
     <ClInclude Include="source\classes\game\match.h">
       <Filter>Header Files\classes\game</Filter>
     </ClInclude>
+    <ClInclude Include="source\classes\object\object.h">
+      <Filter>Header Files\classes\object</Filter>
+    </ClInclude>
+    <ClInclude Include="source\classes\object\unit.h">
+      <Filter>Header Files\classes\object</Filter>
+    </ClInclude>
+    <ClInclude Include="source\classes\object\building.h">
+      <Filter>Header Files\classes\object</Filter>
+    </ClInclude>
+    <ClInclude Include="source\classes\object\decoration.h">
+      <Filter>Header Files\classes\object</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="assets\shaders\bsprite\fragment.glsl">
@@ -538,9 +544,6 @@
     <None Include="source\common\gui">
       <Filter>Header Files\common</Filter>
     </None>
-    <None Include="source\common\object">
-      <Filter>Header Files\common</Filter>
-    </None>
     <None Include="source\common\surface">
       <Filter>Header Files\common</Filter>
     </None>
@@ -564,15 +567,6 @@
     </None>
     <None Include="assets\shaders\dsprite\fragment.glsl">
       <Filter>Shader Files\dsprite</Filter>
-    </None>
-    <None Include="source\common\building">
-      <Filter>Header Files\common</Filter>
-    </None>
-    <None Include="source\common\decoration">
-      <Filter>Header Files\common</Filter>
-    </None>
-    <None Include="source\common\unit">
-      <Filter>Header Files\common</Filter>
     </None>
   </ItemGroup>
 </Project>

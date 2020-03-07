@@ -8,6 +8,7 @@
 #include <player>
 #include <menu>
 #include <interface>
+#include <object/unit.h>
 
 using namespace std;
 using namespace glm;
@@ -108,7 +109,7 @@ namespace engine {
 			}
 
 			// debug ui
-			if (Settings::DebugIsActive)	DEBUG_UI()->render(Fps, Mpfs, selectedUnits);
+			if (Settings::DebugIsActive)	DEBUG_UI()->render(Fps, Mpfs, Unit::GetCounter());
 
 			// mouse
 			Mouse::render();
@@ -126,6 +127,8 @@ namespace engine {
 		}
 
 		if (MENU()->menu_is_created()) MENU()->reset();
+		
+		Game::ResetGameObjects();
 
 		glfwTerminate();
 		return 0;

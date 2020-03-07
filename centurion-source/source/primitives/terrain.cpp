@@ -122,8 +122,8 @@ void Terrain::render(bool tracing) {
 		light.use_light((GLfloat)uAmbientIntensity, (GLfloat)uAmbientColor, (GLfloat)uDiffuseIntensity, (GLfloat)uDiffuseDirection);
 
 		// Texture
-		float scaleTexX = (float)mapWidth / width;    // to fix the texture scale
-		float scaleTexY = (float)mapHeight / height;
+		float scaleTexX = (float)MEDIUM_MAP_WIDTH / width;    // to fix the texture scale
+		float scaleTexY = (float)MEDIUM_MAP_HEIGHT / height;
 		glUniform1f(glGetUniformLocation(shaderId, "scaleTextX"), scaleTexX);
 		glUniform1f(glGetUniformLocation(shaderId, "scaleTextY"), scaleTexY);
 		glUniform1i(glGetUniformLocation(shaderId, "nTerrains"), int(texturesName.size()));

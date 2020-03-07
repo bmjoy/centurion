@@ -62,7 +62,7 @@ namespace editor {
 
 	void PropertiesWindow::render(bool pick) {
 		if (!IsWindowOpened && !PropertiesWindowIsOpen && !addingObject){
-			if (engine::Mouse::RightClick && (buildings.count(rightClickID) > 0)) {
+			/*if (engine::Mouse::RightClick && (buildings.count(rightClickID) > 0)) {
 				if (buildings[rightClickID].isSelected()){
 					type = "building";
 					building_pointer = &buildings[rightClickID];
@@ -73,7 +73,7 @@ namespace editor {
 					IsWindowOpened = true;
 					AddObjectWindowIsOpen = false;
 				}
- 			}
+ 			}*/
 		}
 
 		if (PropertiesWindowIsOpen) {

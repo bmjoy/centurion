@@ -7,10 +7,12 @@ using namespace glb;
 
 namespace game {
 
+	bool GameMenu::isActive;
+
 	GameMenu::GameMenu(){
 		w = 300.f;
 		h = 400.f;
-		gameMenuActive = false;
+		isActive = false;
 	}
 
 	void GameMenu::create() {

@@ -53,7 +53,7 @@ namespace menu {
 			Mouse::LeftClick = false;
 			Engine::setEnvironment("game");
 			/* save game informations */
-			playersNumber = num_players;
+			Game::SetNumberOfPlayers(num_players);
 			for (int i = 0; i < num_players; i++) {
 				Player p = Player();
 				p.create(players_color[i], 0, list->get_race(i), glb::colors[players_color[i]]);

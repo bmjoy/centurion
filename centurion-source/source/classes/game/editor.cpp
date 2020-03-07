@@ -50,7 +50,7 @@ void Editor::Run() {
 	/* If minimap is NOT active */
 	if (Minimap::IsActive() == false) {
 		if (!editor::IsWindowOpened && Mouse::GetYPosition() < myWindow::Height - 30.f && !editor::menuIsOpened)
-			Camera::mouseControl(cameraThreshold);
+			Camera::mouseControl();
 		viewMatrix = Camera::calculateViewMatrix();
 		projectionMatrix = glb::cameraProjection;
 
@@ -96,7 +96,7 @@ void Editor::Run() {
 		if (leftClickID_UI == 0) GoToPointFromMinimap();
 	}
 
-	glb::cameraProjection = glm::ortho(0.0f, myWindow::WidthZoomed, 0.0f, myWindow::HeightZoomed, -(float)mapWidth, (float)mapWidth);
+	glb::cameraProjection = glm::ortho(0.0f, myWindow::WidthZoomed, 0.0f, myWindow::HeightZoomed, -(float)MEDIUM_MAP_WIDTH, (float)MEDIUM_MAP_WIDTH);
 
 	Mouse::RightClick = false;
 	Mouse::LeftClick = false;
@@ -130,7 +130,7 @@ void Editor::handleKeyboardControls() {
 			if (KeyCode[GLFW_KEY_T]) { AddObjectWindowIsOpen = false; TerrainBrushIsActive = !TerrainBrushWindowIsOpen; TerrainBrushWindowIsOpen = !TerrainBrushWindowIsOpen; }
 		}
 		if (KeyCode[GLFW_KEY_DELETE]) {
-			if (buildings.count(leftClickID) > 0) {
+			/*if (buildings.count(leftClickID) > 0) {
 				if (buildings[leftClickID].isSelected()) {
 					if (buildings[leftClickID].is_independent()) {
 						if (buildings[leftClickID].buildingsInSettlementCount() > 0) {
@@ -149,7 +149,7 @@ void Editor::handleKeyboardControls() {
 						buildings.erase(leftClickID);
 					}
 				}
-			}
+			}*/
 		}
 		if (KeyCode[GLFW_KEY_SPACE] || Mouse::MiddleClick) {
 			if (Minimap::IsActive()) Minimap::Disable();
@@ -161,11 +161,11 @@ void Editor::handleKeyboardControls() {
 			Surface::Wireframe ? std::cout << "[DEBUG] Wireframe ON!\n" : std::cout << "[DEBUG] Wireframe OFF! \n";
 		}
 		// Grid
-		/*if (KeyCode[GLFW_KEY_G]) {
-			surface->updateGrid();
-			gameGridStatus = !gameGridStatus;
-			gameGridStatus ? std::cout << "[DEBUG] Grid ON!\n" : std::cout << "[DEBUG] Grid OFF!\n";
-		}*/
+		if (KeyCode[GLFW_KEY_G]) {
+			if (Surface::IsGridEnabled()) Surface::DisableGrid();
+			else Surface::EnableGrid();
+			Surface::IsGridEnabled() ? std::cout << "[DEBUG] Grid ON!\n" : std::cout << "[DEBUG] Grid OFF!\n";
+		}
 	}
 	if (KeyCode[GLFW_KEY_ESCAPE]) {
 		if (areWindowsClosed()) {

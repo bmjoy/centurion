@@ -30,10 +30,10 @@ namespace editor {
 	void EditorUI::render(bool picking) {
 		// minimap rectangle:
 		if (Game::Minimap::IsActive()) {
-			float x = Camera::GetXPosition() / mapWidth * myWindow::Width;
-			float y = Camera::GetYPosition() / mapHeight * (myWindow::Height - myWindow::BottomBarHeight - myWindow::TopBarHeight) + myWindow::BottomBarHeight;
-			float w = myWindow::WidthZoomed * myWindow::Width / mapWidth;
-			float h = myWindow::HeightZoomed * (myWindow::Height - myWindow::BottomBarHeight - myWindow::TopBarHeight) / mapHeight;
+			float x = Camera::GetXPosition() / MEDIUM_MAP_WIDTH * myWindow::Width;
+			float y = Camera::GetYPosition() / MEDIUM_MAP_HEIGHT * (myWindow::Height - myWindow::BottomBarHeight - myWindow::TopBarHeight) + myWindow::BottomBarHeight;
+			float w = myWindow::WidthZoomed * myWindow::Width / MEDIUM_MAP_WIDTH;
+			float h = myWindow::HeightZoomed * (myWindow::Height - myWindow::BottomBarHeight - myWindow::TopBarHeight) / MEDIUM_MAP_HEIGHT;
 			x = std::max(x, 1.f);
 			y = std::max(y, myWindow::BottomBarHeight + 1.f);
 			y = std::min(y, myWindow::Height - myWindow::TopBarHeight - h);

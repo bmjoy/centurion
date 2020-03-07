@@ -200,7 +200,6 @@ XCOPY "$(ProjectDir)xerces-c_3_1D_vc120.dll" "$(ProjectDir)$(OutDir)"</Command>
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="source\audio\vorbis\ogg_vorbis.cpp" />
-    <ClCompile Include="source\building\building.cpp" />
     <ClCompile Include="source\classes\engine\camera.cpp" />
     <ClCompile Include="source\classes\engine\engine.cpp" />
     <ClCompile Include="source\classes\engine\mouse.cpp" />
@@ -210,10 +209,13 @@ XCOPY "$(ProjectDir)xerces-c_3_1D_vc120.dll" "$(ProjectDir)$(OutDir)"</Command>
     <ClCompile Include="source\classes\game\game.cpp" />
     <ClCompile Include="source\classes\game\match.cpp" />
     <ClCompile Include="source\classes\game\strategy.cpp" />
+    <ClCompile Include="source\classes\object\building.cpp" />
+    <ClCompile Include="source\classes\object\decoration.cpp" />
+    <ClCompile Include="source\classes\object\object.cpp" />
+    <ClCompile Include="source\classes\object\unit.cpp" />
     <ClCompile Include="source\classes\Settings-xml.cxx" />
     <ClCompile Include="source\classes\settings.cpp" />
     <ClCompile Include="source\classes\translationTable-xml.cxx" />
-    <ClCompile Include="source\decoration\decoration.cpp" />
     <ClCompile Include="source\editor\editor_functions.cpp" />
     <ClCompile Include="source\global.cpp" />
     <ClCompile Include="source\gui\text_box.cpp" />
@@ -229,7 +231,6 @@ XCOPY "$(ProjectDir)xerces-c_3_1D_vc120.dll" "$(ProjectDir)$(OutDir)"</Command>
     <ClCompile Include="source\interface\object_ui.cpp" />
     <ClCompile Include="source\math.cpp" />
     <ClCompile Include="source\menu\menu_functions.cpp" />
-    <ClCompile Include="source\object.cpp" />
     <ClCompile Include="source\picking\editor_picking.cpp" />
     <ClCompile Include="source\picking\gameui_picking.cpp" />
     <ClCompile Include="source\picking\mainmenu_picking.cpp" />
@@ -249,8 +250,6 @@ XCOPY "$(ProjectDir)xerces-c_3_1D_vc120.dll" "$(ProjectDir)$(OutDir)"</Command>
     <ClCompile Include="source\primitives\shader.cpp" />
     <ClCompile Include="source\primitives\terrain.cpp" />
     <ClCompile Include="source\primitives\unit_sprite.cpp" />
-    <ClCompile Include="source\unit\unit.cpp" />
-    <ClCompile Include="source\unit\unit_functions.cpp" />
     <None Include="assets\shaders\bsprite\fragment.glsl">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
       <FileType>Document</FileType>
@@ -388,6 +387,10 @@ XCOPY "$(ProjectDir)xerces-c_3_1D_vc120.dll" "$(ProjectDir)$(OutDir)"</Command>
     <ClInclude Include="source\classes\game\game.h" />
     <ClInclude Include="source\classes\game\match.h" />
     <ClInclude Include="source\classes\game\strategy.h" />
+    <ClInclude Include="source\classes\object\building.h" />
+    <ClInclude Include="source\classes\object\decoration.h" />
+    <ClInclude Include="source\classes\object\object.h" />
+    <ClInclude Include="source\classes\object\unit.h" />
     <ClInclude Include="source\classes\Settings-xml.hxx" />
     <ClInclude Include="source\classes\settings.h" />
     <ClInclude Include="source\classes\translationTable-xml.hxx" />
@@ -396,17 +399,13 @@ XCOPY "$(ProjectDir)xerces-c_3_1D_vc120.dll" "$(ProjectDir)$(OutDir)"</Command>
       <DeploymentContent Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</DeploymentContent>
       <DeploymentContent Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</DeploymentContent>
     </ClInclude>
-    <None Include="source\common\building" />
-    <None Include="source\common\decoration" />
     <None Include="source\common\gui" />
     <None Include="source\common\interface" />
     <None Include="source\common\menu" />
-    <None Include="source\common\object" />
     <None Include="source\common\pathfinding" />
     <None Include="source\common\picking" />
     <None Include="source\common\player" />
     <None Include="source\common\surface" />
-    <None Include="source\common\unit" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="source\audio\audio_context.h" />

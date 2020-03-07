@@ -23,9 +23,9 @@ void Grid::create() {
 	float vertices[] = {
 		// X,Y,Z												// uv coords		
 		0.f, 0.f, 0.f,											0.f, 1.f,  // in basso a sx
-		(float)mapWidth, 0.f, 0.f,						1.f, 1.f,  // in basso a dx
-		(float)mapWidth, (float)mapHeight, 0.f,	1.f, 0.f,  // in alto a dx
-		0.f, (float)mapHeight, 0.f,						0.f, 0.f   // in alto a sx
+		(float)MEDIUM_MAP_WIDTH, 0.f, 0.f,						1.f, 1.f,  // in basso a dx
+		(float)MEDIUM_MAP_WIDTH, (float)MEDIUM_MAP_HEIGHT, 0.f,	1.f, 0.f,  // in alto a dx
+		0.f, (float)MEDIUM_MAP_HEIGHT, 0.f,						0.f, 0.f   // in alto a sx
 	};
 
 	glGenVertexArrays(1, &VAO);
@@ -53,8 +53,8 @@ void Grid::create() {
 
 	float zNoise = 0.0f;
 	int yNoise = 0;
-	int grid_sizeX = mapWidth / astar::cellGridSize;
-	int grid_sizeY = mapHeight / astar::cellGridSize;
+	int grid_sizeX = MEDIUM_MAP_WIDTH / astar::cellGridSize;
+	int grid_sizeY = MEDIUM_MAP_HEIGHT / astar::cellGridSize;
 	unsigned char* gridData = new unsigned char[grid_sizeX * grid_sizeY * 4];
 
 	gridData = { 0 };
@@ -69,8 +69,8 @@ void Grid::create() {
 
 void Grid::reset() {
 	glUseProgram(shaderId);
-	int grid_sizeX = mapWidth / astar::cellGridSize;
-	int grid_sizeY = mapHeight / astar::cellGridSize;
+	int grid_sizeX = MEDIUM_MAP_WIDTH / astar::cellGridSize;
+	int grid_sizeY = MEDIUM_MAP_HEIGHT / astar::cellGridSize;
 	unsigned char* gridData = new unsigned char[grid_sizeX * grid_sizeY * 4];
 	for (int y = 0; y < grid_sizeY; ++y) {
 		for (int x = 0; x < grid_sizeX; ++x) {
@@ -92,8 +92,8 @@ void Grid::update() {
 
 	float zNoise;
 	int yNoise;
-	int grid_sizeX = mapWidth / astar::cellGridSize;
-	int grid_sizeY = mapHeight / astar::cellGridSize;
+	int grid_sizeX = MEDIUM_MAP_WIDTH / astar::cellGridSize;
+	int grid_sizeY = MEDIUM_MAP_HEIGHT / astar::cellGridSize;
 	unsigned char* gridData = new unsigned char[grid_sizeX * grid_sizeY * 4];
 
 	for (int y = 0; y < grid_sizeY; ++y) {
