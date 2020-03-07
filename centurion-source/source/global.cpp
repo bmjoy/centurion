@@ -41,6 +41,15 @@ namespace glb {
 	void setErrors(map<string, string> errorsMap) { errors = errorsMap; }
 	string getErrorCode(string error) { return errors[error]; }
 
+	string currentDateTime(const char* format) {
+		time_t     now = time(0);
+		struct tm  tstruct;
+		char       buf[80];
+		tstruct = *localtime(&now);
+		strftime(buf, sizeof(buf), format, &tstruct);
+		return buf;
+	}
+	
 	void initParams() {
 		try {
 			//Close the game if it wasn't able to find or process errorCodes.json file
@@ -115,43 +124,6 @@ namespace glb {
 		catch (...) {
 			std::cout << "An error occurred" << std::endl;
 		}
-	}
-
-	void saveLog() {
-		ofstream logFile("logs/Params.xml");
-		if (logFile.is_open()) {
-			logFile << "<?xml version=\"1.0\" encoding=\"utf-8\"?>\n<params>\n" <<
-				"\t<camera>\n" <<
-				"\t\t<xPosition>" << Camera::GetXPosition() << "</xPosition>\n" <<
-				"\t\t<yPosition>" << Camera::GetYPosition() << "</yPosition>\n" <<
-				"\t</camera>\n" <<
-				"\t<mouse>\n" <<
-				"\t\t<scrollValue>" << Mouse::ScrollValue << "</scrollValue>\n" <<
-				"\t\t<xLeftClick>" << Mouse::GetXLeftClick() << "</xLeftClick>\n" <<
-				"\t\t<xPosition>" << Mouse::GetXPosition() << "</xPosition>\n" <<
-				"\t\t<xRightClick>" << Mouse::GetXRightClick() << "</xRightClick>\n" <<
-				"\t\t<y2dPosition>" << Mouse::GetY2DPosition() << "</y2dPosition>\n" <<
-				"\t\t<y2dRightClick>" << Mouse::GetY2DRightClick() << "</y2dRightClick>\n" <<
-				"\t\t<yLeftClick>" << Mouse::GetYLeftClick() << "</yLeftClick>\n" <<
-				"\t\t<yPosition>" << Mouse::GetYPosition() << "</yPosition>\n" <<
-				"\t\t<yRightClick>" << Mouse::GetYRightClick() << "</yRightClick>\n" <<
-				"\t\t<leftClick>" << Mouse::LeftClick << "</leftClick>\n" <<
-				"\t\t<leftHold>" << Mouse::LeftHold << "</leftHold>\n" <<
-				"\t\t<release>" << Mouse::Release << "</release>\n" <<
-				"\t\t<rightClick>" << Mouse::RightClick << "</rightClick>\n" <<
-				"\t\t<scrollBool>" << Mouse::ScrollBool << "</scrollBool>\n" <<
-				"\t</mouse>\n" <<
-				"\t<window>\n" <<
-				"\t\t<heightZoomed>" << myWindow::HeightZoomed << "</heightZoomed>\n" <<
-				"\t\t<ratio>" << myWindow::Ratio << "</ratio>\n" <<
-				"\t\t<widthZoomed>" << myWindow::WidthZoomed << "</widthZoomed>\n" <<
-				"\t\t<shouldClose>" << myWindow::ShouldClose << "</shouldClose>\n" <<
-				"\t\t<bottomBarHeight>" << myWindow::BottomBarHeight << "</bottomBarHeight>\n" <<
-				"\t\t<topBarHeight>" << myWindow::TopBarHeight << "</topBarHeight>\n" <<
-				"\t</window>\n" <<
-				"</params>";
-		}
-		logFile.close();
 	}
 
 	void changeLanguage(string lan) {

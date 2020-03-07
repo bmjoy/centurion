@@ -38,7 +38,6 @@ namespace menu {
 		}
 		/*------------------------------------------------------------------------------*/
 		if (clickName == "MAINMENU_buttonQuit") {
-			saveLog();
 			Settings::SaveXml();
 			engine::myWindow::ShouldClose = true;
 		}

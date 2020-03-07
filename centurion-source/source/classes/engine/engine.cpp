@@ -65,7 +65,7 @@ namespace engine {
 				if (!MENU()->menu_is_created()) {
 					obj::Audio()->MusicPlay("assets/music/menu.ogg");
 					MENU()->create();
-					cout << "[DEBUG] Main menu was created!\n";
+					Logger::Info("Main menu was created!");
 				}
 				MENU()->render();
 			}
@@ -127,7 +127,7 @@ namespace engine {
 		}
 
 		if (MENU()->menu_is_created()) MENU()->reset();
-		
+		Logger::SaveParamsXML();
 		Game::ResetGameObjects();
 
 		glfwTerminate();

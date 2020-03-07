@@ -1,5 +1,6 @@
 #pragma once
 
+#include <logger.h>
 #include <settings.h>
 #include <Windows.h>
 #include <iostream>

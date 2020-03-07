@@ -41,8 +41,8 @@ namespace glb {
 	void setErrors(map<string, string> errorsMap);
 	string getErrorCode(string error);
 	string getTranslation(string code);
+	string currentDateTime(const char* format);
 	void initParams();
-	void saveLog();
 
 	void read_translation_tables();
 	void changeLanguage(string lan);

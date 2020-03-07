@@ -22,7 +22,7 @@
     <VCProjectVersion>15.0</VCProjectVersion>
     <ProjectGuid>{29C92E4D-97E2-4049-A35E-F6A42D1C8AB9}</ProjectGuid>
     <RootNamespace>centurion</RootNamespace>
-    <WindowsTargetPlatformVersion>10.0.17763.0</WindowsTargetPlatformVersion>
+    <WindowsTargetPlatformVersion>10.0.18362.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
@@ -209,6 +209,7 @@ XCOPY "$(ProjectDir)xerces-c_3_1D_vc120.dll" "$(ProjectDir)$(OutDir)"</Command>
     <ClCompile Include="source\classes\game\game.cpp" />
     <ClCompile Include="source\classes\game\match.cpp" />
     <ClCompile Include="source\classes\game\strategy.cpp" />
+    <ClCompile Include="source\classes\logger.cpp" />
     <ClCompile Include="source\classes\object\building.cpp" />
     <ClCompile Include="source\classes\object\decoration.cpp" />
     <ClCompile Include="source\classes\object\object.cpp" />
@@ -387,6 +388,7 @@ XCOPY "$(ProjectDir)xerces-c_3_1D_vc120.dll" "$(ProjectDir)$(OutDir)"</Command>
     <ClInclude Include="source\classes\game\game.h" />
     <ClInclude Include="source\classes\game\match.h" />
     <ClInclude Include="source\classes\game\strategy.h" />
+    <ClInclude Include="source\classes\logger.h" />
     <ClInclude Include="source\classes\object\building.h" />
     <ClInclude Include="source\classes\object\decoration.h" />
     <ClInclude Include="source\classes\object\object.h" />
