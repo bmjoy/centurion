@@ -17,17 +17,6 @@ using namespace engine;
 
 #pragma endregion
 
-#pragma region Static variables
-
-glm::mat4 Game::projectionMatrix;
-glm::mat4 Game::viewMatrix;
-bool Game::isCreated = false;
-float Game::cameraToX;
-float Game::cameraToY;
-int Game::numberOfPlayers = 1;
-GObject* Game::GameObjects[MAX_NUMBER_OF_OBJECTS] = { nullptr };
-
-#pragma endregion
 
 #pragma region Surface
 
@@ -192,7 +181,17 @@ Game::Minimap::~Minimap() {}
 
 #pragma endregion
 
+#pragma region Static variables
 
+glm::mat4 Game::projectionMatrix;
+glm::mat4 Game::viewMatrix;
+bool Game::isCreated = false;
+float Game::cameraToX;
+float Game::cameraToY;
+int Game::numberOfPlayers = 1;
+GObject* Game::GameObjects[MAX_NUMBER_OF_OBJECTS] = { nullptr };
+
+#pragma endregion
 
 Game::Game() {}
 Game::~Game() {}
@@ -202,6 +201,7 @@ void Game::RemoveGameObject(int i){
 		if (GameObjects[i] != nullptr) {
 			delete GameObjects[i];
 		}
+		GameObjects[i] = nullptr;
 	}
 }
 
@@ -213,6 +213,63 @@ void Game::ResetGameObjects(){
 		GameObjects[i] = nullptr;
 	}
 }
+
+int Game::GetNumberOfGameObjects() {
+	int n = 0;
+	for (int i = 0; i < MAX_NUMBER_OF_OBJECTS; i++) {
+		if (GameObjects[i] != nullptr) {
+			n++;
+		}
+	}
+	return n;
+}
+
+int Game::GetNumberOfBuildings() {
+	int n = 0;
+	for (int i = 0; i < MAX_NUMBER_OF_OBJECTS; i++) {
+		if (GameObjects[i] != nullptr && GameObjects[i]->IsBuilding()) {
+			n++;
+		}
+	}
+	return n;
+}
+
+int Game::GetNumberOfUnits() {
+	int n = 0;
+	for (int i = 0; i < MAX_NUMBER_OF_OBJECTS; i++) {
+		if (GameObjects[i] != nullptr && GameObjects[i]->IsUnit()) {
+			n++;
+		}
+	}
+	return n;
+}
+
+int Game::GetNumberOfDecorations() {
+	int n = 0;
+	for (int i = 0; i < MAX_NUMBER_OF_OBJECTS; i++) {
+		if (GameObjects[i] != nullptr && GameObjects[i]->IsDecoration()) {
+			n++;
+		}
+	}
+	return n;
+}
+
+bool Game::IsGameObjectNotNull(int i) {
+	return (GameObjects[i] != nullptr);
+}
+
+vector<Building*> Game::GetListOfIndipendentBuildings() {
+	vector<Building*> indipBuildings = vector<Building*>();
+	for (int i = 0; i < MAX_NUMBER_OF_OBJECTS; i++) {
+		if (GameObjects[i] != nullptr && GameObjects[i]->IsBuilding()) {
+			if (GameObjects[i]->AsBuilding()->is_independent()) {
+				indipBuildings.push_back(GameObjects[i]->AsBuilding());
+			}
+		}
+	}
+	return indipBuildings;
+}
+
 
 void Game::RenderObjectsPicking() {
 	if (leftClickID_UI != 0) {
@@ -257,6 +314,8 @@ void Game::RenderObjects() {
 			GameObjects[i]->render(false, leftClickID);
 		}
 	}
+
+	
 
 	/*for (map<int, Building>::iterator bld = buildings.begin(); bld != buildings.end(); bld++) {
 		bld->second.render(false, leftClickID);

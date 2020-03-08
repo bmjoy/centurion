@@ -40,6 +40,9 @@ public:
 	Building* AsBuilding() { return (Building*)this; }
 	Unit* AsUnit() { return (Unit*)this; }
 	Decoration* AsDecoration() { return (Decoration*)this; }
+	bool IsBuilding() { return (type == "building"); }
+	bool IsUnit() { return (type == "unit"); }
+	bool IsDecoration() { return (type == "decoration"); }
 
 	virtual void prepare() { }
 	virtual void create() { }

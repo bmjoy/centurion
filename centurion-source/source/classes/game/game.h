@@ -11,6 +11,7 @@
 #include <gui>
 
 class GObject;
+class Building;
 
 class Game {
 
@@ -80,10 +81,21 @@ public:
 	static void ResetGameObjects() { GameObjects.clear(); }
 	static std::vector<GObject> GameObjects;*/
 
+	#pragma region GameObjects List and Methods
+
 	static GObject* GameObjects[MAX_NUMBER_OF_OBJECTS];
 	static void RemoveGameObject(int i);
 	static void AddGameObject(int i, GObject* o) { GameObjects[i] = o; }
 	static void ResetGameObjects();
+	static GObject* GetGameObjectPtrById(int id) { return GameObjects[id]; }
+	static int GetNumberOfGameObjects();
+	static int GetNumberOfBuildings();
+	static int GetNumberOfUnits();
+	static int GetNumberOfDecorations();
+	static bool IsGameObjectNotNull(int i);
+	static vector<Building*> GetListOfIndipendentBuildings();
+
+	#pragma endregion
 
 	static bool IsCreated() { return isCreated; }
 	static void SetNumberOfPlayers(int n) { numberOfPlayers = n; }

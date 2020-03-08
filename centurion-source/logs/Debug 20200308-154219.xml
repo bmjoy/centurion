@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Log>
+	<LogMessages>
+		<LogMessage>
+			<Date>2020/03/08 - 15:42:33</Date>
+			<Type>Info</Type>
+			<CppNamespace></CppNamespace>
+			<CppClass></CppClass>
+			<Method></Method>
+			<Text>Music file detected. Starting the playing function.</Text>
+		</LogMessage>
+		<LogMessage>
+			<Date>2020/03/08 - 15:42:33</Date>
+			<Type>Info</Type>
+			<CppNamespace></CppNamespace>
+			<CppClass></CppClass>
+			<Method></Method>
+			<Text>Main menu was created!</Text>
+		</LogMessage>
+	</LogMessages>
+</Log>
