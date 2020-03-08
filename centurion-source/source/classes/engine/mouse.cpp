@@ -63,7 +63,10 @@ namespace engine {
 		}
 		else {
 			currentState = "left";
-			printf("[DEBUG] You have left-clicked on (X=%d, Y=%d)\n", (int)xLeftClick, (int)yLeftClick);
+
+			stringstream ss;
+			ss << "You have left-clicked on (X=" << (int)xLeftClick << ", Y=" << (int)yLeftClick << ")";
+			Logger::Info(ss.str());
 		}
 
 		if (!RightClick) {
@@ -73,7 +76,9 @@ namespace engine {
 		}
 		else {
 			currentState = "right";
-			printf("[DEBUG] You have right-clicked on (X=%d, Y=%d)\n", (int)xRightClick, (int)yRightClick);
+
+			stringstream ss;
+			ss << "You have right-clicked on (X=" << (int)xRightClick << ", Y=" << (int)yRightClick << ")";
 		}
 
 		if (Mouse::Release) {

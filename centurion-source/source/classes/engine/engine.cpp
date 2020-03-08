@@ -115,7 +115,7 @@ namespace engine {
 			Mouse::render();
 
 			if ((KeyCode[GLFW_KEY_LEFT_SHIFT] || KeyCode[GLFW_KEY_RIGHT_SHIFT]) && KeyCode[GLFW_KEY_S]) {
-				cout << "[DEBUG] Screenshot taken." << endl;
+				Logger::Info("Screenshot taken!");
 				glb::takeScreenshot();
 			}
 
@@ -223,7 +223,7 @@ namespace engine {
 		// activate or deactivate debug ui
 		if (Settings::DebugIsActive && KeyCode[GLFW_KEY_F10]) {
 			debug::DEBUG_UI()->setStatus(!debug::DEBUG_UI()->getStatus());
-			debug::DEBUG_UI()->getStatus() ? std::cout << "[DEBUG] Debug UI ON!\n" : std::cout << "[DEBUG] Debug UI OFF!\n";
+			debug::DEBUG_UI()->getStatus() ? Logger::Info("Debug UI ON!") : Logger::Info("Debug UI OFF!");
 		}
 	}
 

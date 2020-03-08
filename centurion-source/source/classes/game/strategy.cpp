@@ -185,24 +185,24 @@ void Strategy::handleKeyboardControls() {
 	if (KeyCode[GLFW_KEY_SPACE] || Mouse::MiddleClick) {
 		if (Minimap::IsActive()) Minimap::Disable();
 		else Minimap::Enable();
-		Minimap::IsActive() ? std::cout << "[DEBUG] Minimap camera ON!\n" : std::cout << "[DEBUG] Minimap camera OFF!\n";
+		Minimap::IsActive() ? Logger::Info("Minimap camera ON!") : Logger::Info("Minimap camera OFF!");
 	}
 	//Open in-game menu
 	if (KeyCode[GLFW_KEY_ESCAPE]) {
 		if (game::GameMenu::IsActive()) game::GameMenu::Disable();
 		else game::GameMenu::Enable();
-		game::GameMenu::IsActive() ? std::cout << "[DEBUG] Pause Menu ON!\n" : std::cout << "[DEBUG] Pause Menu OFF!\n";
+		game::GameMenu::IsActive() ? Logger::Info("Pause Menu ON!") : Logger::Info("Pause Menu OFF!");
 	}
 	// Wireframe
 	if (KeyCode[GLFW_KEY_Z]) {
 		Surface::Wireframe = !Surface::Wireframe;
-		Surface::Wireframe ? std::cout << "[DEBUG] Wireframe ON!\n" : std::cout << "[DEBUG] Wireframe OFF! \n";
+		Surface::Wireframe ? Logger::Info("Wireframe ON!") : Logger::Info("Wireframe OFF!");
 	}
 	// Grid
 	if (KeyCode[GLFW_KEY_G]) {
 		if (Surface::IsGridEnabled()) Surface::DisableGrid();
 		else Surface::EnableGrid();
-		Surface::IsGridEnabled() ? std::cout << "[DEBUG] Grid ON!\n" : std::cout << "[DEBUG] Grid OFF!\n";
+		Surface::IsGridEnabled() ? Logger::Info("Grid ON!") : Logger::Info("Grid OFF!");
 	}
 }
 

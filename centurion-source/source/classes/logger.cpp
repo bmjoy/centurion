@@ -14,12 +14,44 @@ vector<Logger::LogMessage> Logger::Messages;
 string Logger::fileDebugName = "logs/Debug " + currentDateTime("%Y%m%d-%H%M%S") + ".xml";
 string Logger::fileParamsName = "logs/Params " + currentDateTime("%Y%m%d-%H%M%S") + ".xml";
 
+#pragma region Logger
+
 Logger::Logger() { }
 
-void Logger::Info(LogMessage msg) { }
+void Logger::Info(LogMessage msg) {
+	AddMessage(msg);
+	PrintLogMessage(msg);
+	SaveDebugXML();
+}
 
 void Logger::Info(string msg) {
 	LogMessage message = LogMessage(msg);
+	AddMessage(message);
+	PrintLogMessage(message);
+	SaveDebugXML();
+}
+
+void Logger::Warn(LogMessage msg) {
+	AddMessage(msg);
+	PrintLogMessage(msg);
+	SaveDebugXML();
+}
+
+void Logger::Warn(string msg) {
+	LogMessage message = LogMessage(msg, "Warning");
+	AddMessage(message);
+	PrintLogMessage(message);
+	SaveDebugXML();
+}
+
+void Logger::Error(LogMessage msg) {
+	AddMessage(msg);
+	PrintLogMessage(msg);
+	SaveDebugXML();
+}
+
+void Logger::Error(string msg) {
+	LogMessage message = LogMessage(msg, "Error");
 	AddMessage(message);
 	PrintLogMessage(message);
 	SaveDebugXML();
@@ -29,17 +61,20 @@ void Logger::SaveDebugXML() {
 	ofstream logFile(fileDebugName);
 	if (logFile.is_open()) {
 		logFile << "<?xml version=\"1.0\" encoding=\"utf-8\"?>" << endl <<
-			"<logger>" << endl <<
-			"\t<logMessages>" << endl;
+			"<Log>" << endl <<
+			"\t<LogMessages>" << endl;
 		for (int i = 0; i < Messages.size(); i++) {
-			logFile << "\t\t<logMessage>" << endl <<
-				"\t\t\t<date>" << Messages[i].date << "</date>" << endl <<
-				"\t\t\t<type>" << Messages[i].type << "</type>" << endl <<
-				"\t\t\t<text>" << Messages[i].text << "</text>" << endl <<
-				"\t\t</logMessage>" << endl;
+			logFile << "\t\t<LogMessage>" << endl <<
+				"\t\t\t<Date>" << Messages[i].date << "</Date>" << endl <<
+				"\t\t\t<Type>" << Messages[i].type << "</Type>" << endl <<
+				"\t\t\t<CppNamespace>" << Messages[i].cpp_namespace << "</CppNamespace>" << endl <<
+				"\t\t\t<CppClass>" << Messages[i].cpp_class << "</CppClass>" << endl <<
+				"\t\t\t<Method>" << Messages[i].method << "</Method>" << endl <<
+				"\t\t\t<Text>" << Messages[i].text << "</Text>" << endl <<
+				"\t\t</LogMessage>" << endl;
 		}
-		logFile << "\t</logMessages>" << endl;
-		logFile << "</logger>" << endl;
+		logFile << "\t</LogMessages>" << endl;
+		logFile << "</Log>" << endl;
 	}
 	logFile.close();
 }
@@ -47,12 +82,12 @@ void Logger::SaveDebugXML() {
 void Logger::SaveParamsXML() {
 	ofstream logFile(fileParamsName);
 	if (logFile.is_open()) {
-		logFile << "<?xml version=\"1.0\" encoding=\"utf-8\"?>\n<logger>\n\t<params>\n" <<
-			"\t\t<camera>\n" <<
+		logFile << "<?xml version=\"1.0\" encoding=\"utf-8\"?>\n<Log>\n\t<Params>\n" <<
+			"\t\t<Camera>\n" <<
 			"\t\t\t<xPosition>" << Camera::GetXPosition() << "</xPosition>\n" <<
 			"\t\t\t<yPosition>" << Camera::GetYPosition() << "</yPosition>\n" <<
-			"\t\t</camera>\n" <<
-			"\t\t<mouse>\n" <<
+			"\t\t</Camera>\n" <<
+			"\t\t<Mouse>\n" <<
 			"\t\t\t<scrollValue>" << Mouse::ScrollValue << "</scrollValue>\n" <<
 			"\t\t\t<xLeftClick>" << Mouse::GetXLeftClick() << "</xLeftClick>\n" <<
 			"\t\t\t<xPosition>" << Mouse::GetXPosition() << "</xPosition>\n" <<
@@ -67,16 +102,16 @@ void Logger::SaveParamsXML() {
 			"\t\t\t<release>" << Mouse::Release << "</release>\n" <<
 			"\t\t\t<rightClick>" << Mouse::RightClick << "</rightClick>\n" <<
 			"\t\t\t<scrollBool>" << Mouse::ScrollBool << "</scrollBool>\n" <<
-			"\t\t</mouse>\n" <<
-			"\t\t<window>\n" <<
+			"\t\t</Mouse>\n" <<
+			"\t\t<Window>\n" <<
 			"\t\t\t<heightZoomed>" << myWindow::HeightZoomed << "</heightZoomed>\n" <<
 			"\t\t\t<ratio>" << myWindow::Ratio << "</ratio>\n" <<
 			"\t\t\t<widthZoomed>" << myWindow::WidthZoomed << "</widthZoomed>\n" <<
 			"\t\t\t<shouldClose>" << myWindow::ShouldClose << "</shouldClose>\n" <<
 			"\t\t\t<bottomBarHeight>" << myWindow::BottomBarHeight << "</bottomBarHeight>\n" <<
 			"\t\t\t<topBarHeight>" << myWindow::TopBarHeight << "</topBarHeight>\n" <<
-			"\t\t</window>\n\t</params>\n" <<
-			"</logger>";
+			"\t\t</Window>\n\t</Params>\n" <<
+			"</Log>";
 	}
 	logFile.close();
 }
@@ -89,13 +124,18 @@ void Logger::PrintLogMessage(LogMessage msg) {
 
 Logger::~Logger() { }
 
+#pragma endregion
+
 #pragma region LogMessage
 Logger::LogMessage::LogMessage() { }
 
-Logger::LogMessage::LogMessage(string txt, string typ) {
+Logger::LogMessage::LogMessage(string txt, string typ, string nms, string clss, string mtd) {
 	date = currentDateTime("%Y/%m/%d - %X");
 	type = typ;
 	text = txt;
+	cpp_namespace = nms;
+	cpp_class = clss;
+	method = mtd;
 }
 
 Logger::LogMessage::~LogMessage() { }

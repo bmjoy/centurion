@@ -48,8 +48,11 @@ void Game::Surface::CreateNoise() {
 	mapgen::generateRandomMap();
 	obj::MapTerrain()->updateHeightsBuffer();
 
-	cout << "[DEBUG] Terrain has been generated!\n";
-	cout << "[DEBUG] Min(z) = " << mapgen::minZ << "; Max(z) = " << mapgen::maxZ << endl;
+	stringstream ss;
+	ss << "Min(z) = " << mapgen::minZ << "; Max(z) = " << mapgen::maxZ;
+
+	Logger::Info("Terrain has been generated!");
+	Logger::Info(ss.str());
 }
 
 void Game::Surface::UpdateGrid() {
@@ -113,7 +116,7 @@ void Game::SelectionRectangle::Render() {
 	if (Mouse::LeftHold) {
 
 		if (SelectionRectangle::IsActive() == false) {
-			cout << "[DEBUG] Selection rectangle enabled.\n";
+			Logger::Info("Selection rectangle enabled.");
 			Coordinates.startX = Mouse::GetXLeftClick() * myWindow::WidthZoomed / myWindow::Width + cameraLastX;
 			Coordinates.startY = Mouse::GetYLeftClick() * myWindow::HeightZoomed / myWindow::Height + cameraLastY;
 		}
@@ -151,7 +154,7 @@ void Game::SelectionRectangle::Render() {
 		SelectionRectangle::Enable();
 	}
 	else {
-		if (SelectionRectangle::IsActive()) cout << "[DEBUG] Selection rectangle disabled.\n";
+		if (SelectionRectangle::IsActive()) Logger::Info("Selection rectangle disabled.");
 		cameraLastX = Camera::GetXPosition();
 		cameraLastY = Camera::GetYPosition();
 		Coordinates.startX = -0.1f;

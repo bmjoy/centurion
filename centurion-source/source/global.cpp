@@ -378,7 +378,10 @@ namespace glb {
 		string content;
 		ifstream fileStream(fileLocation, ios::in);
 		if (!fileStream.is_open()) {
-			printf("[DEBUG] Failed to read %s! File doesn't exist.", fileLocation);
+			stringstream ss;
+
+			ss << "Failed to read " << fileLocation << "! File doesn't exist.";
+			Logger::Warn(ss.str());
 			return "";
 		}
 		string line = "";

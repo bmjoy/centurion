@@ -15,7 +15,10 @@ namespace astar {
 		vector<vector<int>> mat;
 		ifstream fin(path);
 		if (!fin.good()) {
-			cout << "[DEBUG] Problem occurred reading " + classname + " PASS file.\n";
+			stringstream ss;
+
+			ss << "A problem occurred while reading " + classname + " PASS file.";
+			Logger::Warn(ss.str());
 		}
 		else {
 			string line, value;

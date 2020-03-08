@@ -178,7 +178,10 @@ vector<int> Building::buildingsInSettlementIds() {
 vec2 Building::getSpriteSize(string ent_path) {
 	ifstream path_ent(ent_path);
 	if (!path_ent.good()) {
-		cout << "[DEBUG] Unable to find or process " << ent_path << ". The relative building, therefore, won't be loaded into the game.\n";
+		stringstream ss;
+
+		ss << "Unable to find or process " << ent_path << ". The relative building, therefore, won't be loaded into the game.";
+		Logger::Warn(ss.str());
 	}
 	json ent_data = json::parse(path_ent);
 	string texturePath = ent_data["path"].get<string>() + ent_data["sprites"][0]["name"].get<string>();

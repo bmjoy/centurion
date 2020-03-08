@@ -83,7 +83,7 @@ void AudioPlayer::Rewind(){
 
 void AudioPlayer::Stop(){
 	alSourceStop(m_source[0]);
-	std::cout << "[DEBUG] Music stopped!\n";
+	Logger::Info("Music stopped!");
 }
 
 void AudioPlayer::Pause(){

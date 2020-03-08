@@ -154,17 +154,17 @@ void Editor::handleKeyboardControls() {
 		if (KeyCode[GLFW_KEY_SPACE] || Mouse::MiddleClick) {
 			if (Minimap::IsActive()) Minimap::Disable();
 			else Minimap::Enable();
-			Minimap::IsActive() ? std::cout << "[DEBUG] Minimap ON!\n" : std::cout << "[DEBUG] Minimap OFF!\n";
+			Minimap::IsActive() ? Logger::Info("Minimap ON!") : Logger::Info("Minimap OFF!");
 		}
 		if (KeyCode[GLFW_KEY_Z]) {
 			Surface::Wireframe = !Surface::Wireframe;
-			Surface::Wireframe ? std::cout << "[DEBUG] Wireframe ON!\n" : std::cout << "[DEBUG] Wireframe OFF! \n";
+			Surface::Wireframe ? Logger::Info("Wireframe ON!") : Logger::Info("Wireframe OFF!");
 		}
 		// Grid
 		if (KeyCode[GLFW_KEY_G]) {
 			if (Surface::IsGridEnabled()) Surface::DisableGrid();
 			else Surface::EnableGrid();
-			Surface::IsGridEnabled() ? std::cout << "[DEBUG] Grid ON!\n" : std::cout << "[DEBUG] Grid OFF!\n";
+			Surface::IsGridEnabled() ? Logger::Info("Grid ON!") : Logger::Info("Grid OFF!");
 		}
 	}
 	if (KeyCode[GLFW_KEY_ESCAPE]) {
