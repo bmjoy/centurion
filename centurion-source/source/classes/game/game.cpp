@@ -196,7 +196,7 @@ GObject* Game::GameObjects[MAX_NUMBER_OF_OBJECTS] = { nullptr };
 Game::Game() {}
 Game::~Game() {}
 
-void Game::RemoveGameObject(int i){
+void Game::RemoveGameObject(int i) {
 	if (i >= 1 && i < MAX_NUMBER_OF_OBJECTS) {
 		if (GameObjects[i] != nullptr) {
 			delete GameObjects[i];
@@ -205,7 +205,7 @@ void Game::RemoveGameObject(int i){
 	}
 }
 
-void Game::ResetGameObjects(){
+void Game::ResetGameObjects() {
 	for (int i = 0; i < MAX_NUMBER_OF_OBJECTS; i++) {
 		if (GameObjects[i] != nullptr) {
 			delete GameObjects[i];
@@ -270,6 +270,33 @@ vector<Building*> Game::GetListOfIndipendentBuildings() {
 	return indipBuildings;
 }
 
+vector<Building*> Game::GetListOfBuildings() {
+	vector<Building*> indipBuildings = vector<Building*>();
+	for (int i = 0; i < MAX_NUMBER_OF_OBJECTS; i++) {
+		if (GameObjects[i] != nullptr && GameObjects[i]->IsBuilding()) {
+			indipBuildings.push_back(GameObjects[i]->AsBuilding());
+		}
+	}
+	return indipBuildings;
+}
+vector<Unit*> Game::GetListOfUnits() {
+	vector<Unit*> output = vector<Unit*>();
+	for (int i = 0; i < MAX_NUMBER_OF_OBJECTS; i++) {
+		if (GameObjects[i] != nullptr && GameObjects[i]->IsUnit()) {
+			output.push_back(GameObjects[i]->AsUnit());
+		}
+	}
+	return output;
+}
+vector<Decoration*> Game::GetListOfDecorations() {
+	vector<Decoration*> output = vector<Decoration*>();
+	for (int i = 0; i < MAX_NUMBER_OF_OBJECTS; i++) {
+		if (GameObjects[i] != nullptr && GameObjects[i]->IsBuilding()) {
+			output.push_back(GameObjects[i]->AsDecoration());
+		}
+	}
+	return output;
+}
 
 void Game::RenderObjectsPicking() {
 	if (leftClickID_UI != 0) {
@@ -285,14 +312,6 @@ void Game::RenderObjectsPicking() {
 				GameObjects[i]->render(true);
 			}
 		}
-
-
-		/*for (map<int, Building>::iterator bld = buildings.begin(); bld != buildings.end(); bld++) {
-			bld->second.render(true, 0);
-		}
-		for (map<int, Unit>::iterator u = units.begin(); u != units.end(); u++) {
-			u->second.render(true, 0);
-		}*/
 
 		if (Mouse::LeftClick) leftClickID = get_id("left");
 		if (Mouse::RightClick) rightClickID = get_id("right");
@@ -314,25 +333,7 @@ void Game::RenderObjects() {
 			GameObjects[i]->render(false, leftClickID);
 		}
 	}
-
-	
-
-	/*for (map<int, Building>::iterator bld = buildings.begin(); bld != buildings.end(); bld++) {
-		bld->second.render(false, leftClickID);
-		if (bld->second.isSelected()) selectedBuildings++;
-	}
-	if (selectedBuildings == 0) game::GAME_UI()->set_ui(nullptr);
-
-	for (map<int, Decoration>::iterator dec = decorations.begin(); dec != decorations.end(); dec++) {
-		dec->second.render();
-	}
-	if (Minimap::IsActive() == false) {
-		for (map<int, Unit>::iterator u = units.begin(); u != units.end(); u++) {
-			u->second.render(false, leftClickID);
-			if (u->second.isSelected())	Unit::IncreaseCounter();
-		}
-	}*/
-	/*cout << gameMinimapStatus << " " << editor::IsWindowOpened << " " << editor::menuIsOpened << " " << editor::TerrainBrushIsActive << " " << leftClickID_UI << editor::movingObject << endl;*/
+		/*cout << gameMinimapStatus << " " << editor::IsWindowOpened << " " << editor::menuIsOpened << " " << editor::TerrainBrushIsActive << " " << leftClickID_UI << editor::movingObject << endl;*/
 	if (!Minimap::IsActive() && !editor::IsWindowOpened && !editor::menuIsOpened && !editor::TerrainBrushIsActive && leftClickID_UI == 0 && !editor::movingObject) SelectionRectangle::Render();
 }
 
@@ -343,10 +344,6 @@ void Game::GoToPointFromMinimap() {
 		// if you are clicking on a townhall you have to double click 
 		// to move the camera there and quit minimap
 		if (leftClickID > 0 && hasDoubleClicked()) {
-
-			/*cameraToX = buildings[leftClickID].get_xPos() - myWindow::WidthZoomed / 2.f;
-			cameraToY = buildings[leftClickID].get_yPos() - myWindow::HeightZoomed / 2.f;*/
-
 			cameraToX = GameObjects[leftClickID]->AsBuilding()->get_xPos() - myWindow::WidthZoomed / 2.f;
 			cameraToY = GameObjects[leftClickID]->AsBuilding()->get_yPos() - myWindow::HeightZoomed / 2.f;
 			Game::Minimap::Unblock();
@@ -420,11 +417,8 @@ void Game::GenerateSettlements(vector<vec2> &locs) {
 						b->set_settlement_name("Settlement_player_" + i);
 						b->create();
 						GameObjects[getPickingID()] = b;
-						//buildings[getPickingID()] = b;
 
 						if (b->is_independent()) {
-							//independent_buildings[getPickingID()] = &buildings[getPickingID()];
-
 							// update terrain around the townhall
 							// N.B: mapgen::grid_size * 2 because the map has "borders"
 
@@ -459,7 +453,6 @@ void Game::GenerateSettlements(vector<vec2> &locs) {
 						d->set_id(getPickingID());
 						d->create();
 						GameObjects[getPickingID()] = d;
-						//decorations[getPickingID()] = d;
 						increasePickingID();
 					}
 				}
@@ -472,20 +465,26 @@ void Game::GenerateSettlements(vector<vec2> &locs) {
 	obj::MapTerrain()->updateTextureBuffer();
 
 	// update buildings info
-	/*for (map<int, Building>::iterator bld = buildings.begin(); bld != buildings.end(); bld++) {
-		int ID = bld->first;
-		if (!bld->second.is_independent()) {
-			for (map<int, Building*>::iterator settl = independent_buildings.begin(); settl != independent_buildings.end(); settl++) {
-				int settl_ID = settl->first;
-				if (settl->second->get_settlement_name() == bld->second.get_settlement_name()) {
-					buildings[ID].set_settlement_building(independent_buildings[settl_ID]);
+	UpdateSettlementBuildings();
+}
+
+void Game::UpdateSettlementBuildings() {
+	vector<Building*> listOfBuildings = Game::GetListOfBuildings();
+	vector<Building*> listOfIndipBuildings = Game::GetListOfIndipendentBuildings();
+
+	for (int i = 0; i < listOfBuildings.size(); i++) {
+		Building* bld = listOfBuildings[i];
+		if (!bld->is_independent()) {
+			for (int j = 0; j < listOfIndipBuildings.size(); j++) {
+				Building* settl = listOfIndipBuildings[j];
+				if (settl->get_settlement_name() == bld->get_settlement_name()) {
+					bld->set_settlement_building(settl);
 					break;
 				}
 			}
 		}
-	}*/
+	}
 }
-
 
 void Game::GenerateOutposts(vector<vec2> &locs) {
 
@@ -501,8 +500,6 @@ void Game::GenerateOutposts(vector<vec2> &locs) {
 		b->set_settlement_name("Outpost_" + i);
 		b->create();
 		GameObjects[getPickingID()] = b;
-		//buildings[getPickingID()] = b;
-		//independent_buildings[getPickingID()] = &buildings[getPickingID()];
 		increasePickingID();
 	}
 }

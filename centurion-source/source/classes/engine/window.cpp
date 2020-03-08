@@ -31,6 +31,12 @@ namespace engine {
 		return (*window);
 	}
 
+	void myWindow::DeleteInstance() {
+		if (window != nullptr) {
+			delete window;
+		}
+	}
+
 	void myWindow::init() {
 		glfwInit();
 		glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);

@@ -49,9 +49,9 @@ namespace editor {
 	vector<string> EditorAddObjectUnitOptions;
 	vector<string> EditorAddObjectDecorationOptions;
 
-	Unit unitTemp;
-	Building buildingTemp;
-	Decoration decorTemp;
+	//Unit unitTemp;
+	Building* buildingTemp;
+	Decoration* decorTemp;
 
 	
 	QuestionWindow *Q_WINDOW() { return &myquestionwindow; }
@@ -61,18 +61,20 @@ namespace editor {
 	/* tools */
 	void prepareObject(string type, string classname) {
 		if (type == "buildings") {
-			buildingTemp.set_class(classname);
-			buildingTemp.set_id(0);
-			buildingTemp.set_player(0);
-			buildingTemp.set_position(vec3(0));
-			buildingTemp.prepare();
+			buildingTemp = new Building();
+			buildingTemp->set_class(classname);
+			buildingTemp->set_id(0);
+			buildingTemp->set_player(0);
+			buildingTemp->set_position(vec3(0));
+			buildingTemp->prepare();
 		}
 		if (type == "decorations") {
-			decorTemp.set_class(classname);
-			decorTemp.set_id(0);
-			decorTemp.set_player(0);
-			decorTemp.set_position(vec3(0));
-			decorTemp.prepare();
+			decorTemp = new Decoration();
+			decorTemp->set_class(classname);
+			decorTemp->set_id(0);
+			decorTemp->set_player(0);
+			decorTemp->set_position(vec3(0));
+			decorTemp->prepare();
 		}
 	}
 
@@ -80,60 +82,60 @@ namespace editor {
 		float x = round(engine::Mouse::GetXPosition() * engine::myWindow::WidthZoomed / myWindow::Width + engine::Camera::GetXPosition());
 		float y = round(engine::Mouse::GetYPosition() * engine::myWindow::HeightZoomed / myWindow::Height + engine::Camera::GetYPosition());
 		if (type == "buildings") {
-			buildingTemp.set_position(vec3(x, y, 0.f));
-			buildingTemp.set_status(false);
-			buildingTemp.render(false, 0, !buildingTemp.is_placeable());
+			buildingTemp->set_position(vec3(x, y, 0.f));
+			buildingTemp->set_status(false);
+			buildingTemp->render(false, 0, !buildingTemp->is_placeable());
 			
 			//Player will be able to see info about placing status
-			if (!buildingTemp.is_independent()) {
+			if (!buildingTemp->is_independent()) {
 				string s = "";
-				if (!buildingTemp.is_near_to_independent(&s))
+				if (!buildingTemp->is_near_to_independent(&s))
 					textInfo.render_dynamic(getTranslation("EDITOR_noSettlementsAround"), "tahoma_15px", 10, myWindow::Height - 50, vec4(255.f), "left", "center");
 				else
-					if (!buildingTemp.is_placeable())
+					if (!buildingTemp->is_placeable())
 						textInfo.render_dynamic(getTranslation("EDITOR_impassablePoint"), "tahoma_15px", 10, myWindow::Height - 50, vec4(255.f), "left", "center");
 					else
 						textInfo.render_dynamic(getTranslation("EDITOR_canAddStructure"), "tahoma_15px", 10, myWindow::Height - 50, vec4(255.f), "left", "center");
 			}
 			else {
-				if (!buildingTemp.is_placeable())
+				if (!buildingTemp->is_placeable())
 					textInfo.render_dynamic(getTranslation("EDITOR_impassablePoint"), "tahoma_15px", 10, myWindow::Height - 50, vec4(255.f), "left", "center");
 				else
 					textInfo.render_dynamic(getTranslation("EDITOR_canAddStructure"), "tahoma_15px", 10, myWindow::Height - 50, vec4(255.f), "left", "center");
 			}
 		}
 		if (type == "decorations") {
-			decorTemp.set_position(vec3(x, y, 0.f));
-			decorTemp.render(!decorTemp.is_placeable());
+			decorTemp->set_position(vec3(x, y, 0.f));
+			decorTemp->render(!decorTemp->is_placeable());
 		}
 	}
 
 	void addObject(string type) {
-		/*if (type == "buildings") {
-			if (buildingTemp.is_placeable()){
+		if (type == "buildings") {
+			if (buildingTemp->is_placeable()){
 				int ID = getPickingID(); increasePickingID();
-				buildingTemp.set_id(ID);
-				buildingTemp.create();
-				buildings[ID] = buildingTemp;
-				if (buildings[ID].is_independent()) {
-					buildings[ID].set_settlement_name("SETTL_" + buildings[ID].get_name());
-					independent_buildings[ID] = &buildings[ID];
+				buildingTemp->set_id(ID);
+				buildingTemp->create();
+				
+				if (buildingTemp->is_independent()) {
+					buildingTemp->set_settlement_name("SETTL_" + buildingTemp->get_name());
 				}
+				Game::AddGameObject(ID, buildingTemp);
 				Mouse::LeftClick = false;
 				addingObject = false;
 			}
 		}
 		if (type == "decorations") {
-			if (decorTemp.is_placeable()) {
+			if (decorTemp->is_placeable()) {
 				int ID = getPickingID(); increasePickingID();
-				decorTemp.set_id(ID);
-				decorTemp.create();
-				decorations[ID] = decorTemp;
+				decorTemp->set_id(ID);
+				decorTemp->create();
+				Game::AddGameObject(ID, decorTemp);
 				Mouse::LeftClick = false;
 				addingObject = false;
 			}
 		}
-		Game::Minimap::Update();*/
+		Game::Minimap::Update();
 	}
 
 	void changeTerrain(int terrainType) {
@@ -181,11 +183,12 @@ namespace editor {
 	void moveObjects() {
 		if (Mouse::LeftHold) {
 			// buildings
-			/*if (buildings.count(leftClickID) > 0) {
+			if (Game::IsGameObjectNotNull(leftClickID)) {
+				Building* bld = Game::GetGameObjectPtrById(leftClickID)->AsBuilding();
 				movingObjectRestore = false;
 				if (!movingObject) {
-					movingObjectXPos = buildings[leftClickID].get_position().x;
-					movingObjectYPos = buildings[leftClickID].get_position().y;
+					movingObjectXPos = bld->get_position().x;
+					movingObjectYPos = bld->get_position().y;
 					movingObjectStartXMouse = engine::Mouse::GetXPosition() * engine::myWindow::WidthZoomed / myWindow::Width + engine::Camera::GetXPosition();
 					movingObjectStartYMouse = engine::Mouse::GetYPosition() * engine::myWindow::HeightZoomed / myWindow::Height + engine::Camera::GetYPosition();
 				}
@@ -194,59 +197,60 @@ namespace editor {
 				float dx = x1 - movingObjectStartXMouse;
 				float dy = y1 - movingObjectStartYMouse;
 
-				if (!buildings[leftClickID].is_independent()){
-					if (!movingObject) buildings[leftClickID].clear_pass();
-					buildings[leftClickID].set_position(vec3(movingObjectXPos + dx, movingObjectYPos + dy, 0.f));
-					if (!buildings[leftClickID].is_placeable()) {
+				if (!bld->is_independent()){
+					if (!movingObject) bld->clear_pass();
+					bld->set_position(vec3(movingObjectXPos + dx, movingObjectYPos + dy, 0.f));
+					if (!bld->is_placeable()) {
 						string s = "";
-						if (!buildings[leftClickID].is_near_to_independent(&s)) {
+						if (!bld->is_near_to_independent(&s)) {
 							textInfo.render_dynamic(getTranslation("EDITOR_noSettlementsAround"), "tahoma_15px", 10, myWindow::Height - 50, vec4(255.f), "left", "center");
 						}
 						else
 							textInfo.render_dynamic(getTranslation("EDITOR_impassablePoint"), "tahoma_15px", 10, myWindow::Height - 50, vec4(255.f), "left", "center");
-						buildings[leftClickID].set_placeable(false);
+						bld->set_placeable(false);
 						movingObjectRestore = true;
 					}
 					else {
 						textInfo.render_dynamic(getTranslation("EDITOR_canAddStructure"), "tahoma_15px", 10, myWindow::Height - 50, vec4(255.f), "left", "center");
-						buildings[leftClickID].set_placeable(true);
+						bld->set_placeable(true);
 					}
 				}
 				else {
-					if (!movingObject) buildings[leftClickID].clear_pass();
-					buildings[leftClickID].set_position(vec3(movingObjectXPos + dx, movingObjectYPos + dy, 0.f));
-					if (!buildings[leftClickID].is_placeable()) {
-						buildings[leftClickID].set_placeable(false);
+					if (!movingObject) bld->clear_pass();
+					bld->set_position(vec3(movingObjectXPos + dx, movingObjectYPos + dy, 0.f));
+					if (!bld->is_placeable()) {
+						bld->set_placeable(false);
 						movingObjectRestore = true;
 					}
 					else {
-						buildings[leftClickID].set_placeable(true);
+						bld->set_placeable(true);
 					}
-					if (!buildings[leftClickID].is_placeable())
+					if (!bld->is_placeable())
 						textInfo.render_dynamic(getTranslation("EDITOR_impassablePoint"), "tahoma_15px", 10, myWindow::Height - 50, vec4(255.f), "left", "center");
 					else
 						textInfo.render_dynamic(getTranslation("EDITOR_canAddStructure"), "tahoma_15px", 10, myWindow::Height - 50, vec4(255.f), "left", "center");
 				}
 				movingObject = true;
 				Game::Minimap::Update();
-			}*/
+			}
 		}
 		else {
 			// buildings
-			/*if (buildings.count(leftClickID) > 0) {
+			if (Game::IsGameObjectNotNull(leftClickID)) {
+				Building* bld = Game::GetGameObjectPtrById(leftClickID)->AsBuilding();
 				if (movingObjectRestore) {
-					buildings[leftClickID].set_position(vec3(movingObjectXPos, movingObjectYPos, 0.f));
-					buildings[leftClickID].clear_pass();
-					buildings[leftClickID].set_placeable(true);
-					buildings[leftClickID].update_pass();
+					bld->set_position(vec3(movingObjectXPos, movingObjectYPos, 0.f));
+					bld->clear_pass();
+					bld->set_placeable(true);
+					bld->update_pass();
 				}
 				else {
-					buildings[leftClickID].set_placeable(true);
-					buildings[leftClickID].update_pass();
+					bld->set_placeable(true);
+					bld->update_pass();
 				}
 				movingObject = false;
 				movingObjectRestore = false;
-			}*/
+			}
 		}
 	}
 }

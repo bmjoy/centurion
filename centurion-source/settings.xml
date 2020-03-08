@@ -4,7 +4,7 @@
   <setting name="windowHeight" value="768"/>
   <setting name="cameraMovespeed" value="10"/>
   <setting name="cameraMaxZoom" value="20"/>
-  <setting name="language" value="english"/>
+  <setting name="language" value="spanish"/>
   <setting name="debug" value="true"/>
   <setting name="fullScreen" value="false"/>
 </c_settings>

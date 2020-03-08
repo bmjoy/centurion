@@ -26,11 +26,7 @@ using namespace engine;
 Strategy::Strategy() { }
 
 void Strategy::reset() {
-	//units.clear();
-	//buildings.clear();
-	//independent_buildings.clear();
-	//decorations.clear();
-	
+
 	ResetGameObjects();
 
 	isCreated = false;

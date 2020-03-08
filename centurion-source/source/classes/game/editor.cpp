@@ -130,27 +130,29 @@ void Editor::handleKeyboardControls() {
 			if (KeyCode[GLFW_KEY_T]) { AddObjectWindowIsOpen = false; TerrainBrushIsActive = !TerrainBrushWindowIsOpen; TerrainBrushWindowIsOpen = !TerrainBrushWindowIsOpen; }
 		}
 		if (KeyCode[GLFW_KEY_DELETE]) {
-			/*if (buildings.count(leftClickID) > 0) {
-				if (buildings[leftClickID].isSelected()) {
-					if (buildings[leftClickID].is_independent()) {
-						if (buildings[leftClickID].buildingsInSettlementCount() > 0) {
-							buildings[leftClickID].setWaitingToBeErased(true);
+			if (Game::IsGameObjectNotNull(leftClickID)) {
+				Building* b = Game::GetGameObjectPtrById(leftClickID)->AsBuilding();
+				if (b->isSelected()) {
+					if (b->is_independent()) {
+						if (b->buildingsInSettlementCount() > 0) {
+							b->setWaitingToBeErased(true);
 							Q_WINDOW()->setQuestion("QUESTION_deleteAll");
 						}
 						else {
-							cout << "[DEBUG] Settlement " << buildings[leftClickID].get_name() << " deleted!\n";
-							buildings[leftClickID].clear_pass();
-							buildings.erase(leftClickID);
+							cout << "[DEBUG] Settlement " << b->get_name() << " deleted!\n";
+							b->clear_pass();
+							Game::RemoveGameObject(leftClickID);
 						}
 					}
 					else {
-						cout << "[DEBUG] Building " << buildings[leftClickID].get_name() << " deleted!\n";
-						buildings[leftClickID].clear_pass();
-						buildings.erase(leftClickID);
+						cout << "[DEBUG] Building " << b->get_name() << " deleted!\n";
+						b->clear_pass();
+						Game::RemoveGameObject(leftClickID);
 					}
 				}
-			}*/
+			}
 		}
+		
 		if (KeyCode[GLFW_KEY_SPACE] || Mouse::MiddleClick) {
 			if (Minimap::IsActive()) Minimap::Disable();
 			else Minimap::Enable();

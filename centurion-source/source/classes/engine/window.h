@@ -20,6 +20,8 @@ namespace engine {
 		static float TopBarHeight;
 
 		static myWindow GetInstance();
+		static void DeleteInstance();
+
 		GLFWwindow* GetGlfwWindow() { return glfwWindow; }
 		void clear_buffers();
 		void create_callbacks();

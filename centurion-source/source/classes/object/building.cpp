@@ -55,13 +55,14 @@ bool Building::is_placeable() {
 bool Building::is_near_to_independent(string *Category) {
 	bool ok = false;
 	(*Category) = "";
-	for (map<int, Building*>::iterator b = independent_buildings.begin(); b != independent_buildings.end(); b++) {
-		int ID = b->first;
-		float dist = math::euclidean_distance(b->second->get_position().x, b->second->get_position().y, position.x, position.y);
+	vector<Building*> listOfIndipBuildings = Game::GetListOfIndipendentBuildings();
+	for (int i = 0; i < listOfIndipBuildings.size(); i++) {
+		Building* bld = listOfIndipBuildings[i];
+		float dist = math::euclidean_distance(bld->get_position().x, bld->get_position().y, position.x, position.y);
 		if (dist < 1500.f) {
-			set_settlement_building(independent_buildings[ID]);
-			set_settlement_name(independent_buildings[ID]->get_settlement_name());
-			(*Category) = independent_buildings[ID]->getCategory();
+			set_settlement_building(bld);
+			set_settlement_name(bld->get_settlement_name());
+			(*Category) = bld->getCategory();
 			ok = true;
 			break;
 		}
@@ -110,28 +111,29 @@ void Building::render(bool picking, int clickID, bool not_placeable) {
 	not_placeable = (not_placeable || !isPlaceable);
 
 	// keep updated not central buildings "settlement name"
-	/*if (!prop.is_indipendent && isCreated)
+	if (!prop.is_indipendent && isCreated)
 		if (settl_name != independent->get_settlement_name())
-			settl_name = independent->get_settlement_name();*/
+			settl_name = independent->get_settlement_name();
 
 	// keep updated central buildings "subsidiaries buildings list"
-	
-	/*if (buildings.size() != buildingListSize && (prop.is_townhall || prop.is_villagehall)) {
+	if (Game::GetNumberOfBuildings() != buildingListSize && (prop.is_townhall || prop.is_villagehall)) {
 		subs_buildings.clear();
 		int k = 0;
-		for (map<int, Building>::iterator bld = buildings.begin(); bld != buildings.end(); bld++) {
-			int ID = bld->first;
-			if (!bld->second.is_independent()) {
-				if (bld->second.get_settlement_name() == settl_name) {
+
+		vector<Building*> listOfBuildings = Game::GetListOfBuildings();
+		for (int i = 0; i < listOfBuildings.size(); i++) {
+			Building* bld = listOfBuildings[i];
+			if (bld->is_independent() == false) {
+				if (bld->get_settlement_name() == settl_name) {
 					if (k == 0) { cout << "[DEBUG] Subsidiaries buildings to " + name + " have been updated. Their names are: \n"; }
-					subs_buildings[ID] = &buildings[ID];
-					cout << "   " << buildings[ID].get_name() << "\n";
+					subs_buildings[bld->get_id()] = bld;
+					cout << "   " << bld->get_name() << "\n";
 					k++;
 				}
 			}
 		}
-		buildingListSize = buildings.size();
-	}*/
+		buildingListSize = Game::GetNumberOfBuildings();
+	}
 
 	// has the building been selected?
 	selected = (picking_id == clickID);

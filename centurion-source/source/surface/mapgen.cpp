@@ -470,8 +470,9 @@ namespace mapgen {
 			float d = mapMeshWidth * 2;
 			vec2 p = getVertexCoords(i) - 2.f * grid_size;
 
-			for (map<int, Building*>::iterator settl = independent_buildings.begin(); settl != independent_buildings.end(); settl++) {
-				Building* b = settl->second;
+			vector<Building*> listOfIndipBuildings = Game::GetListOfIndipendentBuildings();
+			for (int i = 0; i < listOfIndipBuildings.size(); i++) {
+				Building* b = listOfIndipBuildings[i];
 				if (b->get_class().substr(1) != "townhall") continue;
 
 				float rnoise = distribution(gen);

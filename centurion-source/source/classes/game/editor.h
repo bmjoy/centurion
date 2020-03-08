@@ -3,9 +3,6 @@
 #include <gui>
 #include <json.hpp>
 #include <object/object.h>
-#include <object/unit.h>
-#include <object/building.h>
-#include <object/decoration.h>
 #include "game.h"
 
 using namespace std;
@@ -13,6 +10,9 @@ using namespace glm;
 
 class UIGame;
 class Player;
+class Building;
+class Unit;
+class Decoration;
 
 //
 //	EDITOR CLASS --> source/editor/editor.cpp
@@ -36,12 +36,9 @@ private:
 
 namespace editor {
 	
-	
-	
-
-	extern Unit unitTemp;
-	extern Building buildingTemp;
-	extern Decoration decorTemp;
+	//extern Unit unitTemp;
+	extern Building* buildingTemp;
+	extern Decoration* decorTemp;
 	extern bool movingObject;
 	static float movingObjectXPos, movingObjectYPos, movingObjectStartXMouse, movingObjectStartYMouse;
 	static bool movingObjectRestore;

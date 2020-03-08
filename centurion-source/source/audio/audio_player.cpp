@@ -1,4 +1,5 @@
 #include "audio_player.h"
+#include <logger.h>
 
 AudioPlayer::AudioPlayer(){
 	pBuffer = NULL;

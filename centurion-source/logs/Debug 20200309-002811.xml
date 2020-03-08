@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Log>
+	<LogMessages>
+		<LogMessage>
+			<Date>2020/03/09 - 00:28:25</Date>
+			<Type>Info</Type>
+			<CppNamespace></CppNamespace>
+			<CppClass></CppClass>
+			<Method></Method>
+			<Text>Music file detected. Starting the playing function.</Text>
+		</LogMessage>
+		<LogMessage>
+			<Date>2020/03/09 - 00:28:25</Date>
+			<Type>Info</Type>
+			<CppNamespace></CppNamespace>
+			<CppClass></CppClass>
+			<Method></Method>
+			<Text>Main menu was created!</Text>
+		</LogMessage>
+		<LogMessage>
+			<Date>2020/03/09 - 00:28:26</Date>
+			<Type>Info</Type>
+			<CppNamespace></CppNamespace>
+			<CppClass></CppClass>
+			<Method></Method>
+			<Text>You have left-clicked on (X=1191, Y=556)</Text>
+		</LogMessage>
+		<LogMessage>
+			<Date>2020/03/09 - 00:28:26</Date>
+			<Type>Info</Type>
+			<CppNamespace></CppNamespace>
+			<CppClass></CppClass>
+			<Method></Method>
+			<Text>Click id: 16777214 --> MAINMENU_buttonEditor</Text>
+		</LogMessage>
+		<LogMessage>
+			<Date>2020/03/09 - 00:28:26</Date>
+			<Type>Info</Type>
+			<CppNamespace></CppNamespace>
+			<CppClass></CppClass>
+			<Method></Method>
+			<Text>Music stopped!</Text>
+		</LogMessage>
+		<LogMessage>
+			<Date>2020/03/09 - 00:28:26</Date>
+			<Type>Info</Type>
+			<CppNamespace></CppNamespace>
+			<CppClass></CppClass>
+			<Method></Method>
+			<Text>Music variable is working properly.</Text>
+		</LogMessage>
+		<LogMessage>
+			<Date>2020/03/09 - 00:28:26</Date>
+			<Type>Info</Type>
+			<CppNamespace></CppNamespace>
+			<CppClass></CppClass>
+			<Method></Method>
+			<Text>Music is not playing.</Text>
+		</LogMessage>
+		<LogMessage>
+			<Date>2020/03/09 - 00:28:27</Date>
+			<Type>Info</Type>
+			<CppNamespace></CppNamespace>
+			<CppClass></CppClass>
+			<Method></Method>
+			<Text>You have left-clicked on (X=515, Y=303)</Text>
+		</LogMessage>
+		<LogMessage>
+			<Date>2020/03/09 - 00:28:30</Date>
+			<Type>Info</Type>
+			<CppNamespace></CppNamespace>
+			<CppClass></CppClass>
+			<Method></Method>
+			<Text>You have left-clicked on (X=500, Y=149)</Text>
+		</LogMessage>
+		<LogMessage>
+			<Date>2020/03/09 - 00:28:30</Date>
+			<Type>Info</Type>
+			<CppNamespace></CppNamespace>
+			<CppClass></CppClass>
+			<Method></Method>
+			<Text>You have left-clicked on (X=982, Y=220)</Text>
+		</LogMessage>
+		<LogMessage>
+			<Date>2020/03/09 - 00:28:31</Date>
+			<Type>Info</Type>
+			<CppNamespace></CppNamespace>
+			<CppClass></CppClass>
+			<Method></Method>
+			<Text>You have left-clicked on (X=1023, Y=488)</Text>
+		</LogMessage>
+		<LogMessage>
+			<Date>2020/03/09 - 00:28:32</Date>
+			<Type>Info</Type>
+			<CppNamespace></CppNamespace>
+			<CppClass></CppClass>
+			<Method></Method>
+			<Text>You have left-clicked on (X=868, Y=143)</Text>
+		</LogMessage>
+		<LogMessage>
+			<Date>2020/03/09 - 00:28:32</Date>
+			<Type>Info</Type>
+			<CppNamespace></CppNamespace>
+			<CppClass></CppClass>
+			<Method></Method>
+			<Text>You have left-clicked on (X=1005, Y=221)</Text>
+		</LogMessage>
+		<LogMessage>
+			<Date>2020/03/09 - 00:28:33</Date>
+			<Type>Info</Type>
+			<CppNamespace></CppNamespace>
+			<CppClass></CppClass>
+			<Method></Method>
+			<Text>You have left-clicked on (X=561, Y=491)</Text>
+		</LogMessage>
+		<LogMessage>
+			<Date>2020/03/09 - 00:28:34</Date>
+			<Type>Info</Type>
+			<CppNamespace></CppNamespace>
+			<CppClass></CppClass>
+			<Method></Method>
+			<Text>You have left-clicked on (X=873, Y=482)</Text>
+		</LogMessage>
+		<LogMessage>
+			<Date>2020/03/09 - 00:28:34</Date>
+			<Type>Info</Type>
+			<CppNamespace></CppNamespace>
+			<CppClass></CppClass>
+			<Method></Method>
+			<Text>Selection rectangle enabled.</Text>
+		</LogMessage>
+		<LogMessage>
+			<Date>2020/03/09 - 00:28:34</Date>
+			<Type>Info</Type>
+			<CppNamespace></CppNamespace>
+			<CppClass></CppClass>
+			<Method></Method>
+			<Text>Selection rectangle disabled.</Text>
+		</LogMessage>
+		<LogMessage>
+			<Date>2020/03/09 - 00:28:38</Date>
+			<Type>Info</Type>
+			<CppNamespace></CppNamespace>
+			<CppClass></CppClass>
+			<Method></Method>
+			<Text>You have left-clicked on (X=568, Y=315)</Text>
+		</LogMessage>
+	</LogMessages>
+</Log>

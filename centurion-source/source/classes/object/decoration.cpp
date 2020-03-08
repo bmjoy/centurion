@@ -69,16 +69,17 @@ void Decoration::create() {
 }
 
 void Decoration::checkSettlement() {
-	for (map<int, Building*>::iterator bld = independent_buildings.begin(); bld != independent_buildings.end(); bld++) {
-
-		string settlName = bld->second->get_settlement_name();
-		float settlX = bld->second->get_position().x;
-		float settlY = bld->second->get_position().y;
+	vector<Building*> listOfIndipBuildings = Game::GetListOfIndipendentBuildings();
+	for (int i = 0; i < listOfIndipBuildings.size(); i++) {
+		Building* bld = listOfIndipBuildings[i];
+		string settlName = bld->get_settlement_name();
+		float settlX = bld->get_position().x;
+		float settlY = bld->get_position().y;
 
 		if (math::euclidean_distance(position.x, position.y, settlX, settlY) <= TOWNHALL_RADIUS) {
 			settlementName = settlName;
-			settlID = bld->second->get_id();
-			independent = bld->second;
+			settlID = bld->get_id();
+			independent = bld;
 			oldSettlX = settlX;
 			oldSettlY = settlY;
 			break;
@@ -98,13 +99,13 @@ void Decoration::render(bool picking, int clickID, bool not_placeable)  {
 
 	if (picking) return;
 
-	/*if (engine::Engine::getEnvironment() == "editor") {
-		if (buildings.count(settlID) > 0) {
-			if (oldX != position.x || oldY != position.y || oldSettlX != buildings[settlID].get_position().x || oldSettlY != buildings[settlID].get_position().y) {
+	if (engine::Engine::getEnvironment() == "editor") {
+		if (Game::IsGameObjectNotNull(settlID)) {
+			if (oldX != position.x || oldY != position.y || oldSettlX != Game::GetGameObjectPtrById(settlID)->get_position().x || oldSettlY != Game::GetGameObjectPtrById(settlID)->get_position().y) {
 				checkSettlement();
 			}
 		}
-	}*/
+	}
 
 	decorData.position = vec2(position.x, position.y);
 	obj::DSprite()->render(decorData, not_placeable);

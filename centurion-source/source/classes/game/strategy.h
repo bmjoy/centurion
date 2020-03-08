@@ -16,11 +16,6 @@ using namespace std;
 
 // global game variables  --> see source/game/game_functions.cpp
 
-//extern map<int, Building> buildings;
-extern map<int, Building*> independent_buildings;
-//extern map<int, Unit> units;
-//extern map<int, Decoration> decorations;
-
 extern vector<string> outposts;
 extern array<Player, 8> playersList;
 

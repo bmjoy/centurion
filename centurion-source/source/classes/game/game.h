@@ -12,6 +12,8 @@
 
 class GObject;
 class Building;
+class Decoration;
+class Unit;
 
 class Game {
 
@@ -94,6 +96,10 @@ public:
 	static int GetNumberOfDecorations();
 	static bool IsGameObjectNotNull(int i);
 	static vector<Building*> GetListOfIndipendentBuildings();
+	static vector<Building*> GetListOfBuildings();
+	static vector<Unit*> GetListOfUnits();
+	static vector<Decoration*> GetListOfDecorations();
+	static void UpdateSettlementBuildings();
 
 	#pragma endregion
 

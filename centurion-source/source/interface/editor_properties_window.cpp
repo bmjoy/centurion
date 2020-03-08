@@ -62,18 +62,19 @@ namespace editor {
 
 	void PropertiesWindow::render(bool pick) {
 		if (!IsWindowOpened && !PropertiesWindowIsOpen && !addingObject){
-			/*if (engine::Mouse::RightClick && (buildings.count(rightClickID) > 0)) {
-				if (buildings[rightClickID].isSelected()){
+			if (engine::Mouse::RightClick && Game::IsGameObjectNotNull(rightClickID)) {
+				Building* bld = Game::GetGameObjectPtrById(rightClickID)->AsBuilding();
+				if (bld->isSelected()){
 					type = "building";
-					building_pointer = &buildings[rightClickID];
-					text_input[0].create(building_pointer->get_name(), startX + 246.f, startY - 85.f, 30);
-					text_input[1].create(building_pointer->get_settlement_name(), startX + 246.f, startY - 129.f, 30);
+					building_pointer = bld;
+					text_input[0].create(bld->get_name(), startX + 246.f, startY - 85.f, 30);
+					text_input[1].create(bld->get_settlement_name(), startX + 246.f, startY - 129.f, 30);
 					
 					PropertiesWindowIsOpen = true;
 					IsWindowOpened = true;
 					AddObjectWindowIsOpen = false;
 				}
- 			}*/
+ 			}
 		}
 
 		if (PropertiesWindowIsOpen) {

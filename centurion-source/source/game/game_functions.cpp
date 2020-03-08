@@ -15,11 +15,5 @@ using namespace glm;
 
 using namespace engine;
 
-
-
-map<int, Building> buildings = { };
-map<int, Building*> independent_buildings = { };
-map<int, Unit> units = { };
-map<int, Decoration> decorations = { };
 vector<string> outposts;
 array<Player, 8> playersList;

@@ -129,6 +129,7 @@ namespace engine {
 		if (MENU()->menu_is_created()) MENU()->reset();
 		Logger::SaveParamsXML();
 		Game::ResetGameObjects();
+		myWindow::DeleteInstance();
 
 		glfwTerminate();
 		return 0;
