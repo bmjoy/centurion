@@ -199,6 +199,7 @@ Game::~Game() {}
 void Game::RemoveGameObject(int i) {
 	if (i >= 1 && i < MAX_NUMBER_OF_OBJECTS) {
 		if (GameObjects[i] != nullptr) {
+			addUnsedPickingID(GameObjects[i]->get_id());
 			delete GameObjects[i];
 		}
 		GameObjects[i] = nullptr;

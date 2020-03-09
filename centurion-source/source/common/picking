@@ -28,8 +28,10 @@ namespace glb {
 	extern int leftClickID;
 	extern int rightClickID;
 	void increasePickingID();
-	int getPickingID();
+	unsigned int getPickingID();
+	unsigned int getLastPickingID();
 	void resetPicking();
+	void addUnsedPickingID(const unsigned int par_pickingID);
 
 
 	//Double clicking section

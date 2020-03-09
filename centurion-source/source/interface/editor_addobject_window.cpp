@@ -142,6 +142,7 @@ namespace editor {
 
 				if (engine::Mouse::LeftClick) {
 					addObject(formSelectedTexts[0]);
+					prepareObject(formSelectedTexts[0], formSelectedTexts[2]);
 				}
 			}
 

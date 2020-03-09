@@ -52,6 +52,10 @@ namespace engine {
 
 		DEBUG_UI()->create();
 
+		std::ostringstream ss;
+		ss << glGetString(GL_VERSION);
+		Logger::Info("Running OpenGL Version " + ss.str());
+
 		while (myWindow::ShouldClose == false) {
 			glfwPollEvents();
 			window.clear_buffers();

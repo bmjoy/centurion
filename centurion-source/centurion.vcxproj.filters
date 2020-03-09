@@ -249,9 +249,6 @@
     <ClCompile Include="source\menu\menu_functions.cpp">
       <Filter>Source Files\menu</Filter>
     </ClCompile>
-    <ClCompile Include="source\picking\picking.cpp">
-      <Filter>Source Files\picking</Filter>
-    </ClCompile>
     <ClCompile Include="source\picking\mainmenu_picking.cpp">
       <Filter>Source Files\picking</Filter>
     </ClCompile>
@@ -352,6 +349,9 @@
       <Filter>Source Files\classes\object</Filter>
     </ClCompile>
     <ClCompile Include="source\classes\logger.cpp">
+      <Filter>Source Files\classes</Filter>
+    </ClCompile>
+    <ClCompile Include="source\classes\picking.cpp">
       <Filter>Source Files\classes</Filter>
     </ClCompile>
   </ItemGroup>
@@ -489,6 +489,9 @@
       <Filter>Header Files\classes\object</Filter>
     </ClInclude>
     <ClInclude Include="source\classes\logger.h">
+      <Filter>Header Files\classes</Filter>
+    </ClInclude>
+    <ClInclude Include="source\classes\picking.h">
       <Filter>Header Files\classes</Filter>
     </ClInclude>
   </ItemGroup>

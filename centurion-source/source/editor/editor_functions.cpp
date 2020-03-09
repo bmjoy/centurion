@@ -113,21 +113,31 @@ namespace editor {
 	void addObject(string type) {
 		if (type == "buildings") {
 			if (buildingTemp->is_placeable()){
-				int ID = getPickingID(); increasePickingID();
+				unsigned int ID = getPickingID(); 
+				if(ID == getLastPickingID())
+				{
+					increasePickingID();
+				}
+
 				buildingTemp->set_id(ID);
 				buildingTemp->create();
-				
 				if (buildingTemp->is_independent()) {
 					buildingTemp->set_settlement_name("SETTL_" + buildingTemp->get_name());
 				}
 				Game::AddGameObject(ID, buildingTemp);
+	
 				Mouse::LeftClick = false;
 				addingObject = false;
 			}
 		}
 		if (type == "decorations") {
 			if (decorTemp->is_placeable()) {
-				int ID = getPickingID(); increasePickingID();
+				int ID = getPickingID(); 
+				if (ID == getLastPickingID())
+				{
+					increasePickingID();
+				}
+				increasePickingID();
 				decorTemp->set_id(ID);
 				decorTemp->create();
 				Game::AddGameObject(ID, decorTemp);

@@ -214,6 +214,7 @@ XCOPY "$(ProjectDir)xerces-c_3_1D_vc120.dll" "$(ProjectDir)$(OutDir)"</Command>
     <ClCompile Include="source\classes\object\decoration.cpp" />
     <ClCompile Include="source\classes\object\object.cpp" />
     <ClCompile Include="source\classes\object\unit.cpp" />
+    <ClCompile Include="source\classes\picking.cpp" />
     <ClCompile Include="source\classes\Settings-xml.cxx" />
     <ClCompile Include="source\classes\settings.cpp" />
     <ClCompile Include="source\classes\translationTable-xml.cxx" />
@@ -235,7 +236,6 @@ XCOPY "$(ProjectDir)xerces-c_3_1D_vc120.dll" "$(ProjectDir)$(OutDir)"</Command>
     <ClCompile Include="source\picking\editor_picking.cpp" />
     <ClCompile Include="source\picking\gameui_picking.cpp" />
     <ClCompile Include="source\picking\mainmenu_picking.cpp" />
-    <ClCompile Include="source\picking\picking.cpp" />
     <ClCompile Include="source\primitives\audio_manager.cpp" />
     <ClCompile Include="source\primitives\bitmap_font.cpp" />
     <ClCompile Include="source\primitives\building_sprite.cpp" />
@@ -393,6 +393,7 @@ XCOPY "$(ProjectDir)xerces-c_3_1D_vc120.dll" "$(ProjectDir)$(OutDir)"</Command>
     <ClInclude Include="source\classes\object\decoration.h" />
     <ClInclude Include="source\classes\object\object.h" />
     <ClInclude Include="source\classes\object\unit.h" />
+    <ClInclude Include="source\classes\picking.h" />
     <ClInclude Include="source\classes\Settings-xml.hxx" />
     <ClInclude Include="source\classes\settings.h" />
     <ClInclude Include="source\classes\translationTable-xml.hxx" />
