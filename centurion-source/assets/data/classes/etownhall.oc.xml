@@ -1,0 +1,17 @@
+<c_object parent="Building" type="building" class_name="ETownhall">
+  <properties>
+    <property name="race" value="Egypt"/>
+    <property name="radius" value="600"/>
+    <property name="isCentralBuilding" value="1"/>
+    <property name="category" value="egyptianstronghold"/>
+    <property name="ent_path" value="assets/buildings/egypt/townhall/etownhall.oe.json"/>
+    <property name="pass_path" value="assets/buildings/egypt/townhall/etownhall.pass"/>
+    <property name="clickable_in_minimap" value="1"/>
+  </properties>
+  <methods>
+    <method name="feedAllies" script="buildingFeedAllies.Lua"/>
+  </methods>
+  <sounds>
+    <sound name="select" path="sounds/eTownhallSelect.ogg"/>
+  </sounds>
+</c_object>

@@ -1,0 +1,17 @@
+<c_object parent="Building" type="building" class_name="ROutpost">
+  <properties>
+    <property name="race" value="Rome"/>
+    <property name="radius" value="500"/>
+    <property name="isCentralBuilding" value="1"/>
+    <property name="category" value="outposts"/>
+    <property name="ent_path" value="assets/buildings/rome/outpost/routpost.oe.json"/>
+    <property name="pass_path" value="assets/buildings/rome/outpost/routpost.pass"/>
+    <property name="clickable_in_minimap" value="1"/>
+  </properties>
+  <methods>
+    <method name="feedAllies" script="buildingFeedAllies.Lua"/>
+  </methods>
+  <sounds>
+    <sound name="select" path="sounds/outpostSelect.ogg"/>
+  </sounds>
+</c_object>

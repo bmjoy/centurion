@@ -1,0 +1,15 @@
+<c_object parent="Ranged" type="unit" class_name="HMyrmidon">
+  <properties>
+    <property name="minAttack" value="10"/>
+    <property name="maxAttack" value="30"/>
+    <property name="maxhealth" value="200"/>
+    <property name="speed" value="50"/>
+    <property name="ent_path" value="assets/units/hmyrmidon/hmyrmidon.oe.json"/>
+  </properties>
+  <methods>
+    <method name="" script=""/>
+  </methods>
+  <sounds>
+    <sound name="" path=""/>
+  </sounds>
+</c_object>
