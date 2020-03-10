@@ -1,7 +1,7 @@
 #include <game/editor.h>
 #include <surface>
 #include <game/strategy.h>
-#include <picking>
+#include <picking.h>
 #include <interface>
 #include <engine/camera.h>
 #include <engine/mouse.h>
@@ -22,6 +22,7 @@ void Editor::Create() {
 	resetPicking();
 	resetPicking_UI();
 
+	pickerObject.getPickingID();
 	Strategy::reset();
 	myWindow::BottomBarHeight = 0.f;
 	myWindow::TopBarHeight = 30.f;

@@ -14,6 +14,7 @@ class GObject;
 class Building;
 class Decoration;
 class Unit;
+//class PickingObject;
 
 class Game {
 
@@ -117,6 +118,7 @@ protected:
 	static glm::mat4 projectionMatrix, viewMatrix;
 	static bool isCreated;
 	static int numberOfPlayers;
+	//static PickingObject *pickingObject;
 
 private:
 	static float cameraToX, cameraToY;

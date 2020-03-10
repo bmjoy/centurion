@@ -324,8 +324,7 @@ namespace glb {
 						b->set_settlement_name(settl_name);
 						b->set_type("building");
 						b->create(name);
-						Game::AddGameObject(getPickingID(), b);
-						increasePickingID();
+						Game::AddGameObject(b->get_id(), b);
 					}
 					if (type == "decoration") {
 						Decoration* d = new Decoration();
@@ -335,8 +334,7 @@ namespace glb {
 						d->set_id(getPickingID());
 						d->create();
 						d->set_type("decoration");
-						Game::AddGameObject(getPickingID(), d);
-						increasePickingID();
+						Game::AddGameObject(d->get_id(), d);
 					}
 				}
 				row++;

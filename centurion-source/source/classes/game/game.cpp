@@ -417,7 +417,7 @@ void Game::GenerateSettlements(vector<vec2> &locs) {
 						b->set_id(getPickingID());
 						b->set_settlement_name("Settlement_player_" + i);
 						b->create();
-						GameObjects[getPickingID()] = b;
+						GameObjects[b->get_id()] = b;
 
 						if (b->is_independent()) {
 							// update terrain around the townhall
@@ -444,7 +444,6 @@ void Game::GenerateSettlements(vector<vec2> &locs) {
 								}
 							}
 						}
-						increasePickingID();
 					}
 					if (type == "decoration") {
 						Decoration* d = new Decoration();
@@ -453,8 +452,7 @@ void Game::GenerateSettlements(vector<vec2> &locs) {
 						d->set_position(vec3(origin.x + xOffset, origin.y + yOffset, 0.f));
 						d->set_id(getPickingID());
 						d->create();
-						GameObjects[getPickingID()] = d;
-						increasePickingID();
+						GameObjects[d->get_id()] = d;
 					}
 				}
 			}
@@ -500,8 +498,7 @@ void Game::GenerateOutposts(vector<vec2> &locs) {
 		b->set_id(getPickingID());
 		b->set_settlement_name("Outpost_" + i);
 		b->create();
-		GameObjects[getPickingID()] = b;
-		increasePickingID();
+		GameObjects[b->get_id()] = b;
 	}
 }
 

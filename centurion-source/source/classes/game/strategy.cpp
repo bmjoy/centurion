@@ -81,8 +81,7 @@ void Strategy::Create() {
 			u->set_position(playersList[0].getStartPoint().x + i * 50, playersList[0].getStartPoint().y - 1000 - j * 50);
 			u->create();
 			GameObjects[getPickingID()] = u;
-			//units[getPickingID()] = u;
-			increasePickingID();
+			//units[u->get_id()] = u;
 		}
 	}
 

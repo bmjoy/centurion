@@ -10,37 +10,37 @@ using namespace glm;
 
 namespace glb {
 	
-	int get_id(string LeftRight = "left");
-	vec3 getPickingColorFromID(int pickingID);
+	//int get_id(string LeftRight = "left");
+	//vec3 getPickingColorFromID(int pickingID);
 
 	/* ui objects */
-	static int pickingID_UI = PICKING_ID_MAX;
-	extern int leftClickID_UI;
-	static map<int, string> pickingListUI;
-	void increasePickingID_UI();
-	int getPickingID_UI();
-	void addValueToPickingListUI(int pick, string value);
-	string getPickedObjectName(int pick);
-	void resetPicking_UI();
+	//static int pickingID_UI = PICKING_ID_MAX;
+	//extern int leftClickID_UI;
+	//static map<int, string> pickingListUI;
+	//void increasePickingID_UI();
+	//int getPickingID_UI();
+	//void addValueToPickingListUI(int pick, string value);
+	//string getPickedObjectName(int pick);
+	//void resetPicking_UI();
 
 	/* game objects */
-	static int pickingID = PICKING_ID_MIN;
-	extern int leftClickID;
-	extern int rightClickID;
-	void increasePickingID();
-	unsigned int getPickingID();
-	unsigned int getLastPickingID();
-	void resetPicking();
-	void addUnsedPickingID(const unsigned int par_pickingID);
+	//static int pickingID = PICKING_ID_MIN;
+	//extern int leftClickID;
+	//extern int rightClickID;
+	//void increasePickingID();
+	//unsigned int getPickingID();
+	//unsigned int getLastPickingID();
+	//void resetPicking();
+	//void addUnsedPickingID(const unsigned int par_pickingID);
 
 
 	//Double clicking section
-	struct doubleClickData {
-		double lastTime = 0;
-		int clickCount = 0;
-		int clickIdList[2] = { 0, 0 };
-	};
-	static doubleClickData dCD;
-	void resetDoubleClickTime();
-	bool hasDoubleClicked();
+	//struct doubleClickData {
+	//	double lastTime = 0;
+	//	int clickCount = 0;
+	//	int clickIdList[2] = { 0, 0 };
+	//};
+	//static doubleClickData dCD;
+	//void resetDoubleClickTime();
+	//bool hasDoubleClicked();
 };

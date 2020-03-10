@@ -110,18 +110,17 @@ namespace editor {
 		}
 	}
 
-	void addObject(string type) {
-		if (type == "buildings") {
-			if (buildingTemp->is_placeable()){
+	void addObject(string type) 
+	{
+		if (type == "buildings") 
+		{
+			if (buildingTemp->is_placeable())
+			{
 				unsigned int ID = getPickingID(); 
-				if(ID == getLastPickingID())
-				{
-					increasePickingID();
-				}
-
 				buildingTemp->set_id(ID);
 				buildingTemp->create();
-				if (buildingTemp->is_independent()) {
+				if (buildingTemp->is_independent()) 
+				{
 					buildingTemp->set_settlement_name("SETTL_" + buildingTemp->get_name());
 				}
 				Game::AddGameObject(ID, buildingTemp);
@@ -130,14 +129,11 @@ namespace editor {
 				addingObject = false;
 			}
 		}
-		if (type == "decorations") {
-			if (decorTemp->is_placeable()) {
-				int ID = getPickingID(); 
-				if (ID == getLastPickingID())
-				{
-					increasePickingID();
-				}
-				increasePickingID();
+		if (type == "decorations") 
+		{
+			if (decorTemp->is_placeable()) 
+			{
+				unsigned int ID = getPickingID(); 
 				decorTemp->set_id(ID);
 				decorTemp->create();
 				Game::AddGameObject(ID, decorTemp);
