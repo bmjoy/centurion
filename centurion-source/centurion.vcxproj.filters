@@ -354,6 +354,9 @@
     <ClCompile Include="source\classes\picking.cpp">
       <Filter>Source Files\classes</Filter>
     </ClCompile>
+    <ClCompile Include="source\classes\object\object-xml.cxx">
+      <Filter>Source Files\classes\object</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="source\extern\includes\json.hpp">
@@ -493,6 +496,9 @@
     </ClInclude>
     <ClInclude Include="source\classes\picking.h">
       <Filter>Header Files\classes</Filter>
+    </ClInclude>
+    <ClInclude Include="source\classes\object\object-xml.hxx">
+      <Filter>Header Files\classes\object</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
