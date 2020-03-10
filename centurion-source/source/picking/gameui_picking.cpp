@@ -1,5 +1,5 @@
 #include <interface>
-#include <picking>
+#include <picking.h>
 #include <engine/engine.h>
 #include <game/strategy.h>
 
@@ -8,8 +8,8 @@ using namespace engine;
 
 namespace game {
 	void UIGame::picking() {
-		leftClickID_UI = get_id();
-		string clickName = getPickedObjectName(leftClickID_UI);
+		Picking::leftClickID_UI = Picking::GetIdFromClick();
+		string clickName = PickingUI::getPickedObjectName(Picking::leftClickID_UI);
 		if (clickName == "GAME_pauseMenuButtonClose") {
 			GameMenu::Disable();
 		}

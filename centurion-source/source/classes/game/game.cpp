@@ -2,7 +2,7 @@
 #include <surface>
 #include <global>
 #include "strategy.h"
-#include <picking>
+#include <picking.h>
 #include <math>
 #include <engine/mouse.h>
 #include <engine/window.h>
@@ -199,7 +199,7 @@ Game::~Game() {}
 void Game::RemoveGameObject(int i) {
 	if (i >= 1 && i < MAX_NUMBER_OF_OBJECTS) {
 		if (GameObjects[i] != nullptr) {
-			addUnsedPickingID(GameObjects[i]->get_id());
+			PickingObject::addUnsedPickingID(GameObjects[i]->get_id());
 			delete GameObjects[i];
 		}
 		GameObjects[i] = nullptr;
@@ -300,9 +300,9 @@ vector<Decoration*> Game::GetListOfDecorations() {
 }
 
 void Game::RenderObjectsPicking() {
-	if (leftClickID_UI != 0) {
-		leftClickID = 0;
-		rightClickID = 0;
+	if (Picking::leftClickID_UI != 0) {
+		Picking::leftClickID = 0;
+		Picking::rightClickID = 0;
 		return;
 	}
 
@@ -314,12 +314,12 @@ void Game::RenderObjectsPicking() {
 			}
 		}
 
-		if (Mouse::LeftClick) leftClickID = get_id("left");
-		if (Mouse::RightClick) rightClickID = get_id("right");
+		if (Mouse::LeftClick) Picking::leftClickID = Picking::GetIdFromClick(PICKING_LEFT);
+		if (Mouse::RightClick) Picking::rightClickID = Picking::GetIdFromClick(PICKING_RIGHT);
 
 		if (Minimap::IsActive()) {
 			Minimap::Unblock();
-			if (leftClickID > 0) {
+			if (Picking::leftClickID > 0) {
 				Minimap::Block();
 			}
 		}
@@ -331,11 +331,11 @@ void Game::RenderObjects() {
 
 	for (int i = 1; i < MAX_NUMBER_OF_OBJECTS; i++) {
 		if (GameObjects[i] != nullptr) {
-			GameObjects[i]->render(false, leftClickID);
+			GameObjects[i]->render(false, Picking::leftClickID);
 		}
 	}
 		/*cout << gameMinimapStatus << " " << editor::IsWindowOpened << " " << editor::menuIsOpened << " " << editor::TerrainBrushIsActive << " " << leftClickID_UI << editor::movingObject << endl;*/
-	if (!Minimap::IsActive() && !editor::IsWindowOpened && !editor::menuIsOpened && !editor::TerrainBrushIsActive && leftClickID_UI == 0 && !editor::movingObject) SelectionRectangle::Render();
+	if (!Minimap::IsActive() && !editor::IsWindowOpened && !editor::menuIsOpened && !editor::TerrainBrushIsActive && Picking::leftClickID_UI == 0 && !editor::movingObject) SelectionRectangle::Render();
 }
 
 void Game::GoToPointFromMinimap() {
@@ -344,9 +344,9 @@ void Game::GoToPointFromMinimap() {
 		cameraToY = getYMinimapCoord(Mouse::GetYLeftClick()) / myWindow::Height*(float)MEDIUM_MAP_HEIGHT - myWindow::HeightZoomed / 2.f;
 		// if you are clicking on a townhall you have to double click 
 		// to move the camera there and quit minimap
-		if (leftClickID > 0 && hasDoubleClicked()) {
-			cameraToX = GameObjects[leftClickID]->AsBuilding()->get_xPos() - myWindow::WidthZoomed / 2.f;
-			cameraToY = GameObjects[leftClickID]->AsBuilding()->get_yPos() - myWindow::HeightZoomed / 2.f;
+		if (Picking::leftClickID > 0 && Picking::hasDoubleClicked()) {
+			cameraToX = GameObjects[Picking::leftClickID]->AsBuilding()->get_xPos() - myWindow::WidthZoomed / 2.f;
+			cameraToY = GameObjects[Picking::leftClickID]->AsBuilding()->get_yPos() - myWindow::HeightZoomed / 2.f;
 			Game::Minimap::Unblock();
 		}
 		//------------------------------------------------
@@ -414,7 +414,7 @@ void Game::GenerateSettlements(vector<vec2> &locs) {
 						b->set_type(type);
 						b->set_player(i);
 						b->set_position(vec3(origin.x + xOffset, origin.y + yOffset, 0.f));
-						b->set_id(getPickingID());
+						b->set_id(PickingObject::GetPickingId());
 						b->set_settlement_name("Settlement_player_" + i);
 						b->create();
 						GameObjects[b->get_id()] = b;
@@ -450,7 +450,7 @@ void Game::GenerateSettlements(vector<vec2> &locs) {
 						d->set_class(className);
 						d->set_player(0);
 						d->set_position(vec3(origin.x + xOffset, origin.y + yOffset, 0.f));
-						d->set_id(getPickingID());
+						d->set_id(PickingObject::GetPickingId());
 						d->create();
 						GameObjects[d->get_id()] = d;
 					}
@@ -495,7 +495,7 @@ void Game::GenerateOutposts(vector<vec2> &locs) {
 		b->set_type("building");
 		b->set_player(0);
 		b->set_position(vec3(locs[i].x, locs[i].y, 0.f));
-		b->set_id(getPickingID());
+		b->set_id(PickingObject::GetPickingId());
 		b->set_settlement_name("Outpost_" + i);
 		b->create();
 		GameObjects[b->get_id()] = b;

@@ -2,19 +2,23 @@
 #include <global>
 #include <engine/mouse.h>
 
+
+#pragma region Picking Class
+
+/* static variables */
 unsigned int Picking::leftClickID = 0;
 unsigned int Picking::leftClickID_UI = 0;
 unsigned int Picking::rightClickID = 0;
+Picking::DoubleClickData Picking::doubleClickData;
 
 
-/* PICKING */
 unsigned int Picking::GetIdFromClick(const unsigned short int LeftRight)
 {
 	unsigned char data[4];
 	//Edit the following line because you can get id with both left and right click
-	if (LeftRight == Picking::PICKING_LEFT)
+	if (LeftRight == PICKING_LEFT)
 		glReadPixels((GLint)engine::Mouse::GetXLeftClick(), (GLint)engine::Mouse::GetYLeftClick(), 1, 1, GL_RGBA, GL_UNSIGNED_BYTE, &data);
-	if (LeftRight == Picking::PICKING_RIGHT)
+	if (LeftRight == PICKING_RIGHT)
 		glReadPixels((GLint)engine::Mouse::GetXRightClick(), (GLint)engine::Mouse::GetYRightClick(), 1, 1, GL_RGBA, GL_UNSIGNED_BYTE, &data);
 	unsigned int pickedID =
 		         data[0] +
@@ -33,112 +37,128 @@ vec3 Picking::getPickingColorFromID(const unsigned int par_pickingID)
 
 void Picking::resetDoubleClickTime(void)
 {
-	dCD.lastTime = glfwGetTime();
+	doubleClickData.lastTime = glfwGetTime();
 }
 
 bool Picking::hasDoubleClicked(void)
 {
 	bool output = false;
 
-	if (glfwGetTime() - dCD.lastTime > 1.0f)
+	if (glfwGetTime() - doubleClickData.lastTime > 1.0f)
 	{
-		dCD.clickCount = 0;
+		doubleClickData.clickCount = 0;
 	}
-	if (dCD.clickCount == 0)
+	if (doubleClickData.clickCount == 0)
 	{
-		dCD.clickCount++;
-		dCD.clickIdList[0] = leftClickID;
-		dCD.lastTime = glfwGetTime();
+		doubleClickData.clickCount++;
+		doubleClickData.clickIdList[0] = leftClickID;
+		doubleClickData.lastTime = glfwGetTime();
 		output = false;
 	}
-	else if (dCD.clickCount == 1)
+	else if (doubleClickData.clickCount == 1)
 	{
-		if (glfwGetTime() - dCD.lastTime < 1.0f)
+		if (glfwGetTime() - doubleClickData.lastTime < 1.0f)
 		{
-			dCD.clickIdList[1] = leftClickID;
-			if (dCD.clickIdList[1] == dCD.clickIdList[0])
+			doubleClickData.clickIdList[1] = leftClickID;
+			if (doubleClickData.clickIdList[1] == doubleClickData.clickIdList[0])
 			{
 				output = true;
 			}
 			else
 			{
-				dCD.clickIdList[0] = leftClickID;
+				doubleClickData.clickIdList[0] = leftClickID;
 			}
 		}
 	}
 	return output;
 }
 
-/* PICKING_UI */
+Picking::~Picking(){}
+
+#pragma endregion
+
+#pragma region PickingUi Class
+
+/* static variables */
+unsigned int PickingUI::pickingID_UI = PICKING_ID_MAX;
+map<unsigned int, string> PickingUI::pickingList_UI;
+
 unsigned int PickingUI::getPickingID(void)
 {
-	unsigned int pickingID = this->pickingID_UI;
-	this->pickingID_UI -= 1;
-
+	unsigned int pickingID = pickingID_UI;
+	pickingID_UI--;
 	return pickingID;
+}
+
+unsigned int PickingUI::getLastID(void)
+{
+	return pickingID_UI;
 }
 
 void PickingUI::resetPicking(void)
 {
-	this->pickingID_UI = PICKING_ID_MAX;
-	this->pickingList_UI.clear();
-	this->pickingList_UI[0] = "background";
+	pickingID_UI = PICKING_ID_MAX;
+	pickingList_UI.clear();
+	pickingList_UI[0] = "background";
 }
 
-void PickingUI::addValueToPickingList(const string par_value)
+void PickingUI::addValueToPickingList(unsigned int picking_id, const string par_value)
 {
-	this->pickingList_UI[PickingUI::getPickingID()] = par_value;
+	pickingList_UI[picking_id] = par_value;
 }
 
 string PickingUI::getPickedObjectName(const unsigned int par_pickingID_UI)
 {
-	return this->pickingList_UI[par_pickingID_UI];
+	return pickingList_UI[par_pickingID_UI];
 }
 
-/* PICKING_OBJECT */
+PickingUI::~PickingUI() {}
 
-PickingObject *PickingObject::instance;
-PickingObject *PickingObject::GetInstance()
-{
-	if (instance == nullptr)
-	{
-		instance = new PickingObject();
-	}
-	return instance;
-}
-//PickingObject pickerObject = PickingObject::GetInstance();
+#pragma endregion
 
-unsigned int PickingObject::getPickingID(void)
+#pragma region PickingObject Class
+
+/* static variables */
+unsigned int PickingObject::pickingID_Object = PICKING_ID_MIN;
+vector<unsigned int> PickingObject::unsedPickingID;
+
+unsigned int PickingObject::GetPickingId(void)
 {
-	unsigned int pickingID = this->pickingID_Object;
+	unsigned int pickingID = pickingID_Object;
 	
 	if (unsedPickingID.empty() == false)
 	{
-		pickingID = this->unsedPickingID[this->unsedPickingID.size() - 1];
-		this->unsedPickingID.pop_back();
+		pickingID = unsedPickingID[unsedPickingID.size() - 1];
+		unsedPickingID.pop_back();
 	}
 	else
 	{
-		this->pickingID_Object += 1;
+		pickingID_Object += 1;
 	}
 	return pickingID;
 }
 
 void PickingObject::addUnsedPickingID(const unsigned int par_pickingID)
 {
-	this->unsedPickingID.push_back(par_pickingID);
+	unsedPickingID.push_back(par_pickingID);
 }
 
 unsigned int PickingObject::getLastPickingID(void)
 {
-	return this->pickingID_Object;
+	return pickingID_Object;
 }
 
 void PickingObject::resetPicking(void)
 {
-	this->pickingID_Object = PICKING_ID_MIN;
-	this->unsedPickingID.clear();
+	pickingID_Object = PICKING_ID_MIN;
+	unsedPickingID.clear();
 }
+
+PickingObject::~PickingObject(){}
+
+#pragma endregion
+
+#pragma region Obsolete
 
 /*
 using namespace std;
@@ -260,3 +280,5 @@ namespace glb {
 	}
 };
 */
+#pragma endregion
+

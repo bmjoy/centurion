@@ -1,5 +1,5 @@
 #include <interface>
-#include <picking>
+#include <picking.h>
 #include <surface>
 #include <game/strategy.h>
 #include <engine/window.h>
@@ -21,14 +21,13 @@ namespace editor {
 		startY = myWindow::Height / 2.f + back_image.getImageSize().y / 2.f;
 
 		buttons[0] = gui::Image("propertieswindow_buttonleft");
-		buttons[0].create("top-left", startX, startY, 0, 0, getPickingID_UI());
-		addValueToPickingListUI(getPickingID_UI(), "PropertiesWindow_cancel");
-		increasePickingID_UI();
+		buttons[0].create("top-left", startX, startY, 0, 0, PickingUI::getPickingID());
+		PickingUI::addValueToPickingList(PickingUI::getLastID() + 1, "PropertiesWindow_cancel");
 
 		buttons[1] = gui::Image("propertieswindow_buttonright");
-		buttons[1].create("top-left", startX, startY, 0, 0, getPickingID_UI());
-		addValueToPickingListUI(getPickingID_UI(), "PropertiesWindow_apply");
-		increasePickingID_UI();
+		buttons[1].create("top-left", startX, startY, 0, 0, PickingUI::getPickingID());
+		PickingUI::addValueToPickingList(PickingUI::getLastID() + 1, "PropertiesWindow_apply");
+		
 
 		buttons_text[0] = gui::SimpleText("static");
 		buttons_text[0].create_static(getTranslation("EDITOR_propertiesCancel"), "tahoma_13px", startX + 63.f, startY - 365.f, "center", "middle", vec4(255.f), "bold");
@@ -36,14 +35,14 @@ namespace editor {
 		buttons_text[1].create_static(getTranslation("EDITOR_propertiesApply"), "tahoma_13px", startX + 492.f, startY - 365.f, "center", "middle", vec4(255.f), "bold");
 
 		textinput_back[0] = gui::Image("propertieswindow_textinput_1");
-		textinput_back[0].create("top-left", startX, startY, 0, 0, getPickingID_UI());
-		addValueToPickingListUI(getPickingID_UI(), "PropertiesWindow_name");
-		increasePickingID_UI();
+		textinput_back[0].create("top-left", startX, startY, 0, 0, PickingUI::getPickingID());
+		PickingUI::addValueToPickingList(PickingUI::getLastID() + 1, "PropertiesWindow_name");
+		
 
 		textinput_back[1] = gui::Image("propertieswindow_textinput_2");
-		textinput_back[1].create("top-left", startX, startY, 0, 0, getPickingID_UI());
-		addValueToPickingListUI(getPickingID_UI(), "PropertiesWindow_settl_name");
-		increasePickingID_UI();
+		textinput_back[1].create("top-left", startX, startY, 0, 0, PickingUI::getPickingID());
+		PickingUI::addValueToPickingList(PickingUI::getLastID() + 1, "PropertiesWindow_settl_name");
+		
 
 		text[0] = gui::SimpleText("static");
 		text[0].create_static(getTranslation("EDITOR_properties"), "tahoma_15px", startX + 15.f, startY - 25.f, "left", "normal", vec4(255), "bold");
@@ -62,8 +61,8 @@ namespace editor {
 
 	void PropertiesWindow::render(bool pick) {
 		if (!IsWindowOpened && !PropertiesWindowIsOpen && !addingObject){
-			if (engine::Mouse::RightClick && Game::IsGameObjectNotNull(rightClickID)) {
-				Building* bld = Game::GetGameObjectPtrById(rightClickID)->AsBuilding();
+			if (engine::Mouse::RightClick && Game::IsGameObjectNotNull(Picking::rightClickID)) {
+				Building* bld = Game::GetGameObjectPtrById(Picking::rightClickID)->AsBuilding();
 				if (bld->isSelected()){
 					type = "building";
 					building_pointer = bld;

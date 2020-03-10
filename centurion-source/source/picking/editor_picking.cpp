@@ -1,5 +1,5 @@
 #include <interface>
-#include <picking>
+#include <picking.h>
 #include <engine/engine.h>
 #include <engine/mouse.h>
 #include <engine/window.h>
@@ -20,14 +20,14 @@ namespace editor {
 	void EditorMenu::picking() {
 		GLint mouseX = (GLint)engine::Mouse::GetXPosition();
 		GLint mouseY = (GLint)engine::Mouse::GetYPosition();
-		leftClickID_UI = get_id();
+		Picking::leftClickID_UI = Picking::GetIdFromClick();
 		int pos = (int)((mouseY - myWindow::Height)*(-1)) / titles["File"].titleHeight;
 
 		//---------------------
 		//   RESET 
 		//---------------------
 
-		if (leftClickID_UI < minPickingID || leftClickID_UI > maxPickingID) {
+		if (Picking::leftClickID_UI < minPickingID || Picking::leftClickID_UI > maxPickingID) {
 			for (int i = 0; i < titles.size(); i++) {
 				std::string s = titlesList[i];
 				titles[s].isOpened = false;
@@ -40,7 +40,7 @@ namespace editor {
 			//    FILE
 			//---------------------
 
-			if (pickingList["File"] == leftClickID_UI) {
+			if (pickingList["File"] == Picking::leftClickID_UI) {
 				if (pos == 0) {
 					titles["File"].isOpened = !titles["File"].isOpened;
 					menuIsOpened = !menuIsOpened;
@@ -110,7 +110,7 @@ namespace editor {
 			//    EDIT
 			//---------------------
 
-			if (pickingList["Edit"] == leftClickID_UI) {
+			if (pickingList["Edit"] == Picking::leftClickID_UI) {
 				if (pos == 0){
 					titles["Edit"].isOpened = !titles["Edit"].isOpened;
 					menuIsOpened = !menuIsOpened;
@@ -139,7 +139,7 @@ namespace editor {
 			//    TOOLS
 			//---------------------
 
-			if (pickingList["Tools"] == leftClickID_UI) {
+			if (pickingList["Tools"] == Picking::leftClickID_UI) {
 				if (pos == 0) {
 					titles["Tools"].isOpened = !titles["Tools"].isOpened;
 					menuIsOpened = !menuIsOpened;
@@ -207,13 +207,13 @@ namespace editor {
 	void OpenMapWindow::picking() {
 		GLint mouseX = (GLint)engine::Mouse::GetXPosition();
 		GLint mouseY = (GLint)engine::Mouse::GetYPosition();
-		leftClickID_UI = get_id();
-		string clickName = getPickedObjectName(leftClickID_UI);
+		Picking::leftClickID_UI = Picking::GetIdFromClick();
+		string clickName = PickingUI::getPickedObjectName(Picking::leftClickID_UI);
 		int pos = (int)((mouseY - startY + map_list.padding_top)*(-1)) / (int)map_list.option_height;
 
-		if (leftClickID_UI == 0) selectedID = -1;
+		if (Picking::leftClickID_UI == 0) selectedID = -1;
 
-		if (leftClickID_UI == map_list.pickingID) {
+		if (Picking::leftClickID_UI == map_list.pickingID) {
 			if (pos >= 0) {
 				selectedID = pos;
 			}
@@ -224,7 +224,7 @@ namespace editor {
 			IsWindowOpened = false;
 		}
 
-		if (clickName == "OpenMapWindow_open" || (selectedID == pos && hasDoubleClicked())) { // OPEN
+		if (clickName == "OpenMapWindow_open" || (selectedID == pos && Picking::hasDoubleClicked())) { // OPEN
 			if (selectedID != -1) {
 				cout << "[DEBUG] You've chosen the following scenario to open: " + availableScenarios[selectedID] << endl;
 				Game::ResetGameObjects();
@@ -247,8 +247,8 @@ namespace editor {
 	void NewMapWindow::picking() {
 		GLint mouseX = (GLint)engine::Mouse::GetXPosition();
 		GLint mouseY = (GLint)engine::Mouse::GetYPosition();
-		leftClickID_UI = get_id();
-		string clickName = getPickedObjectName(leftClickID_UI);
+		Picking::leftClickID_UI = Picking::GetIdFromClick();
+		string clickName = PickingUI::getPickedObjectName(Picking::leftClickID_UI);
 
 		if (clickName == "NewMapWindow_close") { // CLOSE
 			currentMapName = text_input.get_text();
@@ -287,8 +287,8 @@ namespace editor {
 	void QuestionWindow::picking() {
 		GLint mouseX = (GLint)engine::Mouse::GetXPosition();
 		GLint mouseY = (GLint)engine::Mouse::GetYPosition();
-		leftClickID_UI = get_id();
-		string clickName = getPickedObjectName(leftClickID_UI);
+		Picking::leftClickID_UI = Picking::GetIdFromClick();
+		string clickName = PickingUI::getPickedObjectName(Picking::leftClickID_UI);
 
 		// Yes
 		if (clickName == "QuestionWindow_Yes") { 
@@ -347,10 +347,10 @@ namespace editor {
 	void AddObjectWindow::picking() {
 		GLint mouseX = (GLint)engine::Mouse::GetXPosition();
 		GLint mouseY = (GLint)engine::Mouse::GetYPosition();
-		leftClickID_UI = get_id();
-		string clickName = getPickedObjectName(leftClickID_UI);
+		Picking::leftClickID_UI = Picking::GetIdFromClick();
+		string clickName = PickingUI::getPickedObjectName(Picking::leftClickID_UI);
 
-		if (leftClickID_UI == 0 || leftClickID_UI == back_image.getPickingID())
+		if (Picking::leftClickID_UI == 0 || Picking::leftClickID_UI == back_image.getPickingID())
 			for (int j = 0; j < 3; j++)
 				objectForms[j].close();
 
@@ -403,8 +403,8 @@ namespace editor {
 	void PropertiesWindow::picking() {
 		GLint mouseX = (GLint)engine::Mouse::GetXPosition();
 		GLint mouseY = (GLint)engine::Mouse::GetYPosition();
-		leftClickID_UI = get_id();
-		string clickName = getPickedObjectName(leftClickID_UI);
+		Picking::leftClickID_UI = Picking::GetIdFromClick();
+		string clickName = PickingUI::getPickedObjectName(Picking::leftClickID_UI);
 
 		text_input[0].active(clickName == "PropertiesWindow_name");
 		if (building_pointer->is_independent())
@@ -434,10 +434,10 @@ namespace editor {
 	void TerrainBrushWindow::picking() {
 		GLint mouseX = (GLint)engine::Mouse::GetXPosition();
 		GLint mouseY = (GLint)engine::Mouse::GetYPosition();
-		leftClickID_UI = get_id();
-		string clickName = getPickedObjectName(leftClickID_UI);
+		Picking::leftClickID_UI = Picking::GetIdFromClick();
+		string clickName = PickingUI::getPickedObjectName(Picking::leftClickID_UI);
 
-		if (leftClickID_UI == 0)
+		if (Picking::leftClickID_UI == 0)
 			for (int i = 0; i < forms.size(); i++) {
 				forms[i].close();
 			}

@@ -1,5 +1,5 @@
 #include <interface>
-#include <picking>
+#include <picking.h>
 #include <game/editor.h>
 #include <surface>
 #include <game/strategy.h>
@@ -19,8 +19,7 @@ namespace editor {
 		startX = 0.f; startY = myWindow::Height/2.f + 150.f / 2.f;
 
 		back = gui::Rectangle();
-		back.create("filled", startX, startY, 190.f, 150.f, "top-left", getPickingID_UI());
-		increasePickingID_UI();
+		back.create("filled", startX, startY, 190.f, 150.f, "top-left", PickingUI::getPickingID());
 
 		circle = gui::Circle();
 		circle.create("border", engine::Mouse::GetXPosition(), engine::Mouse::GetYPosition(), 150.f, 100.f, 5.f, "center");
@@ -41,9 +40,8 @@ namespace editor {
 
 		for (int i = 0; i < terrainTypes.size(); i++){
 			gui::FormInput form = gui::FormInput(true);
-			form.create(startX + 20.f, startY - 20.f - 30 * i, 150.f, 20.f, terTypesMap[terrainTypes[i]], getPickingID_UI());
-			addValueToPickingListUI(getPickingID_UI(), "TerrainBrush_form_"+i);
-			increasePickingID_UI();
+			form.create(startX + 20.f, startY - 20.f - 30 * i, 150.f, 20.f, terTypesMap[terrainTypes[i]], PickingUI::getPickingID());
+			PickingUI::addValueToPickingList(PickingUI::getLastID() + 1, "TerrainBrush_form_"+i);
 			forms.push_back(form);
 		}
 
@@ -64,7 +62,7 @@ namespace editor {
 			if (!pick) {
 				if (Game::Minimap::IsActive() == false && TerrainBrushIsActive){
 					circle.render(vec4(255), engine::Mouse::GetXPosition(), engine::Mouse::GetYPosition());
-					if (Mouse::LeftHold && leftClickID_UI == 0 && engine::Mouse::GetYPosition() < myWindow::Height - 30.f) {
+					if (Mouse::LeftHold && Picking::leftClickID_UI == 0 && engine::Mouse::GetYPosition() < myWindow::Height - 30.f) {
 						if (mapgen::terrainsMap.count(selBrush) > 0) changeTerrain(mapgen::terrainsMap[selBrush].id);
 					}
 				}

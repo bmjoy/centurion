@@ -2,7 +2,6 @@
 #include <engine/camera.h>
 #include <engine/window.h>
 #include <engine/mouse.h>
-#include <picking>
 #include <game/strategy.h>
 
 using namespace std;

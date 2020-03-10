@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Log>
+	<LogMessages>
+		<LogMessage>
+			<Date>2020/03/10 - 23:59:53</Date>
+			<Type>Info</Type>
+			<CppNamespace></CppNamespace>
+			<CppClass></CppClass>
+			<Method></Method>
+			<Text>Running OpenGL Version 3.3.0 NVIDIA 432.00</Text>
+		</LogMessage>
+		<LogMessage>
+			<Date>2020/03/10 - 23:59:54</Date>
+			<Type>Info</Type>
+			<CppNamespace></CppNamespace>
+			<CppClass></CppClass>
+			<Method></Method>
+			<Text>Music file detected. Starting the playing function.</Text>
+		</LogMessage>
+		<LogMessage>
+			<Date>2020/03/10 - 23:59:55</Date>
+			<Type>Info</Type>
+			<CppNamespace></CppNamespace>
+			<CppClass></CppClass>
+			<Method></Method>
+			<Text>Main menu was created!</Text>
+		</LogMessage>
+		<LogMessage>
+			<Date>2020/03/10 - 23:59:59</Date>
+			<Type>Info</Type>
+			<CppNamespace></CppNamespace>
+			<CppClass></CppClass>
+			<Method></Method>
+			<Text>You have left-clicked on (X=1229, Y=501)</Text>
+		</LogMessage>
+		<LogMessage>
+			<Date>2020/03/10 - 23:59:59</Date>
+			<Type>Info</Type>
+			<CppNamespace></CppNamespace>
+			<CppClass></CppClass>
+			<Method></Method>
+			<Text>Click id: 16777212 --> MAINMENU_buttonEditor</Text>
+		</LogMessage>
+		<LogMessage>
+			<Date>2020/03/11 - 00:00:00</Date>
+			<Type>Info</Type>
+			<CppNamespace></CppNamespace>
+			<CppClass></CppClass>
+			<Method></Method>
+			<Text>Music stopped!</Text>
+		</LogMessage>
+		<LogMessage>
+			<Date>2020/03/11 - 00:00:00</Date>
+			<Type>Info</Type>
+			<CppNamespace></CppNamespace>
+			<CppClass></CppClass>
+			<Method></Method>
+			<Text>Music variable is working properly.</Text>
+		</LogMessage>
+		<LogMessage>
+			<Date>2020/03/11 - 00:00:00</Date>
+			<Type>Info</Type>
+			<CppNamespace></CppNamespace>
+			<CppClass></CppClass>
+			<Method></Method>
+			<Text>Music is not playing.</Text>
+		</LogMessage>
+	</LogMessages>
+</Log>

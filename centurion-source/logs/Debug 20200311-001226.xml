@@ -1,0 +1,333 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Log>
+	<LogMessages>
+		<LogMessage>
+			<Date>2020/03/11 - 00:12:38</Date>
+			<Type>Info</Type>
+			<CppNamespace></CppNamespace>
+			<CppClass></CppClass>
+			<Method></Method>
+			<Text>Running OpenGL Version 3.3.0 NVIDIA 432.00</Text>
+		</LogMessage>
+		<LogMessage>
+			<Date>2020/03/11 - 00:12:40</Date>
+			<Type>Info</Type>
+			<CppNamespace></CppNamespace>
+			<CppClass></CppClass>
+			<Method></Method>
+			<Text>Music file detected. Starting the playing function.</Text>
+		</LogMessage>
+		<LogMessage>
+			<Date>2020/03/11 - 00:12:40</Date>
+			<Type>Info</Type>
+			<CppNamespace></CppNamespace>
+			<CppClass></CppClass>
+			<Method></Method>
+			<Text>Main menu was created!</Text>
+		</LogMessage>
+		<LogMessage>
+			<Date>2020/03/11 - 00:12:46</Date>
+			<Type>Info</Type>
+			<CppNamespace></CppNamespace>
+			<CppClass></CppClass>
+			<Method></Method>
+			<Text>You have left-clicked on (X=1212, Y=598)</Text>
+		</LogMessage>
+		<LogMessage>
+			<Date>2020/03/11 - 00:12:46</Date>
+			<Type>Info</Type>
+			<CppNamespace></CppNamespace>
+			<CppClass></CppClass>
+			<Method></Method>
+			<Text>Click id: 16777214 --> MAINMENU_buttonSinglePlayer</Text>
+		</LogMessage>
+		<LogMessage>
+			<Date>2020/03/11 - 00:12:47</Date>
+			<Type>Info</Type>
+			<CppNamespace></CppNamespace>
+			<CppClass></CppClass>
+			<Method></Method>
+			<Text>You have left-clicked on (X=373, Y=589)</Text>
+		</LogMessage>
+		<LogMessage>
+			<Date>2020/03/11 - 00:12:47</Date>
+			<Type>Info</Type>
+			<CppNamespace></CppNamespace>
+			<CppClass></CppClass>
+			<Method></Method>
+			<Text>Click id: 16777204 --> CivForm_0</Text>
+		</LogMessage>
+		<LogMessage>
+			<Date>2020/03/11 - 00:12:48</Date>
+			<Type>Info</Type>
+			<CppNamespace></CppNamespace>
+			<CppClass></CppClass>
+			<Method></Method>
+			<Text>You have left-clicked on (X=354, Y=551)</Text>
+		</LogMessage>
+		<LogMessage>
+			<Date>2020/03/11 - 00:12:48</Date>
+			<Type>Info</Type>
+			<CppNamespace></CppNamespace>
+			<CppClass></CppClass>
+			<Method></Method>
+			<Text>Click id: 16777204 --> CivForm_0</Text>
+		</LogMessage>
+		<LogMessage>
+			<Date>2020/03/11 - 00:12:48</Date>
+			<Type>Info</Type>
+			<CppNamespace></CppNamespace>
+			<CppClass></CppClass>
+			<Method></Method>
+			<Text>You have left-clicked on (X=354, Y=563)</Text>
+		</LogMessage>
+		<LogMessage>
+			<Date>2020/03/11 - 00:12:48</Date>
+			<Type>Info</Type>
+			<CppNamespace></CppNamespace>
+			<CppClass></CppClass>
+			<Method></Method>
+			<Text>Click id: 16777202 --> CivForm_1</Text>
+		</LogMessage>
+		<LogMessage>
+			<Date>2020/03/11 - 00:12:49</Date>
+			<Type>Info</Type>
+			<CppNamespace></CppNamespace>
+			<CppClass></CppClass>
+			<Method></Method>
+			<Text>You have left-clicked on (X=349, Y=520)</Text>
+		</LogMessage>
+		<LogMessage>
+			<Date>2020/03/11 - 00:12:49</Date>
+			<Type>Info</Type>
+			<CppNamespace></CppNamespace>
+			<CppClass></CppClass>
+			<Method></Method>
+			<Text>Click id: 16777202 --> CivForm_1</Text>
+		</LogMessage>
+		<LogMessage>
+			<Date>2020/03/11 - 00:12:49</Date>
+			<Type>Info</Type>
+			<CppNamespace></CppNamespace>
+			<CppClass></CppClass>
+			<Method></Method>
+			<Text>You have left-clicked on (X=319, Y=651)</Text>
+		</LogMessage>
+		<LogMessage>
+			<Date>2020/03/11 - 00:12:49</Date>
+			<Type>Info</Type>
+			<CppNamespace></CppNamespace>
+			<CppClass></CppClass>
+			<Method></Method>
+			<Text>Click id: 16777180 --> arrowUp</Text>
+		</LogMessage>
+		<LogMessage>
+			<Date>2020/03/11 - 00:12:50</Date>
+			<Type>Info</Type>
+			<CppNamespace></CppNamespace>
+			<CppClass></CppClass>
+			<Method></Method>
+			<Text>You have left-clicked on (X=319, Y=651)</Text>
+		</LogMessage>
+		<LogMessage>
+			<Date>2020/03/11 - 00:12:50</Date>
+			<Type>Info</Type>
+			<CppNamespace></CppNamespace>
+			<CppClass></CppClass>
+			<Method></Method>
+			<Text>Click id: 16777180 --> arrowUp</Text>
+		</LogMessage>
+		<LogMessage>
+			<Date>2020/03/11 - 00:12:50</Date>
+			<Type>Info</Type>
+			<CppNamespace></CppNamespace>
+			<CppClass></CppClass>
+			<Method></Method>
+			<Text>You have left-clicked on (X=284, Y=652)</Text>
+		</LogMessage>
+		<LogMessage>
+			<Date>2020/03/11 - 00:12:50</Date>
+			<Type>Info</Type>
+			<CppNamespace></CppNamespace>
+			<CppClass></CppClass>
+			<Method></Method>
+			<Text>Click id: 16777181 --> arrowDown</Text>
+		</LogMessage>
+		<LogMessage>
+			<Date>2020/03/11 - 00:12:51</Date>
+			<Type>Info</Type>
+			<CppNamespace></CppNamespace>
+			<CppClass></CppClass>
+			<Method></Method>
+			<Text>You have left-clicked on (X=284, Y=652)</Text>
+		</LogMessage>
+		<LogMessage>
+			<Date>2020/03/11 - 00:12:51</Date>
+			<Type>Info</Type>
+			<CppNamespace></CppNamespace>
+			<CppClass></CppClass>
+			<Method></Method>
+			<Text>Click id: 16777181 --> arrowDown</Text>
+		</LogMessage>
+		<LogMessage>
+			<Date>2020/03/11 - 00:12:51</Date>
+			<Type>Info</Type>
+			<CppNamespace></CppNamespace>
+			<CppClass></CppClass>
+			<Method></Method>
+			<Text>You have left-clicked on (X=43, Y=585)</Text>
+		</LogMessage>
+		<LogMessage>
+			<Date>2020/03/11 - 00:12:51</Date>
+			<Type>Info</Type>
+			<CppNamespace></CppNamespace>
+			<CppClass></CppClass>
+			<Method></Method>
+			<Text>Click id: 16777205 --> ColForm_0</Text>
+		</LogMessage>
+		<LogMessage>
+			<Date>2020/03/11 - 00:12:51</Date>
+			<Type>Info</Type>
+			<CppNamespace></CppNamespace>
+			<CppClass></CppClass>
+			<Method></Method>
+			<Text>You have left-clicked on (X=43, Y=585)</Text>
+		</LogMessage>
+		<LogMessage>
+			<Date>2020/03/11 - 00:12:51</Date>
+			<Type>Info</Type>
+			<CppNamespace></CppNamespace>
+			<CppClass></CppClass>
+			<Method></Method>
+			<Text>Click id: 16777205 --> ColForm_0</Text>
+		</LogMessage>
+		<LogMessage>
+			<Date>2020/03/11 - 00:12:52</Date>
+			<Type>Info</Type>
+			<CppNamespace></CppNamespace>
+			<CppClass></CppClass>
+			<Method></Method>
+			<Text>You have left-clicked on (X=43, Y=562)</Text>
+		</LogMessage>
+		<LogMessage>
+			<Date>2020/03/11 - 00:12:52</Date>
+			<Type>Info</Type>
+			<CppNamespace></CppNamespace>
+			<CppClass></CppClass>
+			<Method></Method>
+			<Text>Click id: 16777203 --> ColForm_1</Text>
+		</LogMessage>
+		<LogMessage>
+			<Date>2020/03/11 - 00:12:52</Date>
+			<Type>Info</Type>
+			<CppNamespace></CppNamespace>
+			<CppClass></CppClass>
+			<Method></Method>
+			<Text>You have left-clicked on (X=43, Y=562)</Text>
+		</LogMessage>
+		<LogMessage>
+			<Date>2020/03/11 - 00:12:52</Date>
+			<Type>Info</Type>
+			<CppNamespace></CppNamespace>
+			<CppClass></CppClass>
+			<Method></Method>
+			<Text>Click id: 16777203 --> ColForm_1</Text>
+		</LogMessage>
+		<LogMessage>
+			<Date>2020/03/11 - 00:12:53</Date>
+			<Type>Info</Type>
+			<CppNamespace></CppNamespace>
+			<CppClass></CppClass>
+			<Method></Method>
+			<Text>You have left-clicked on (X=395, Y=555)</Text>
+		</LogMessage>
+		<LogMessage>
+			<Date>2020/03/11 - 00:12:53</Date>
+			<Type>Info</Type>
+			<CppNamespace></CppNamespace>
+			<CppClass></CppClass>
+			<Method></Method>
+			<Text>Click id: 16777202 --> CivForm_1</Text>
+		</LogMessage>
+		<LogMessage>
+			<Date>2020/03/11 - 00:12:53</Date>
+			<Type>Info</Type>
+			<CppNamespace></CppNamespace>
+			<CppClass></CppClass>
+			<Method></Method>
+			<Text>You have left-clicked on (X=358, Y=529)</Text>
+		</LogMessage>
+		<LogMessage>
+			<Date>2020/03/11 - 00:12:53</Date>
+			<Type>Info</Type>
+			<CppNamespace></CppNamespace>
+			<CppClass></CppClass>
+			<Method></Method>
+			<Text>Click id: 16777202 --> CivForm_1</Text>
+		</LogMessage>
+		<LogMessage>
+			<Date>2020/03/11 - 00:12:54</Date>
+			<Type>Info</Type>
+			<CppNamespace></CppNamespace>
+			<CppClass></CppClass>
+			<Method></Method>
+			<Text>You have left-clicked on (X=355, Y=553)</Text>
+		</LogMessage>
+		<LogMessage>
+			<Date>2020/03/11 - 00:12:54</Date>
+			<Type>Info</Type>
+			<CppNamespace></CppNamespace>
+			<CppClass></CppClass>
+			<Method></Method>
+			<Text>Click id: 16777202 --> CivForm_1</Text>
+		</LogMessage>
+		<LogMessage>
+			<Date>2020/03/11 - 00:12:54</Date>
+			<Type>Info</Type>
+			<CppNamespace></CppNamespace>
+			<CppClass></CppClass>
+			<Method></Method>
+			<Text>You have left-clicked on (X=351, Y=540)</Text>
+		</LogMessage>
+		<LogMessage>
+			<Date>2020/03/11 - 00:12:54</Date>
+			<Type>Info</Type>
+			<CppNamespace></CppNamespace>
+			<CppClass></CppClass>
+			<Method></Method>
+			<Text>Click id: 16777202 --> CivForm_1</Text>
+		</LogMessage>
+		<LogMessage>
+			<Date>2020/03/11 - 00:12:56</Date>
+			<Type>Info</Type>
+			<CppNamespace></CppNamespace>
+			<CppClass></CppClass>
+			<Method></Method>
+			<Text>You have left-clicked on (X=1208, Y=75)</Text>
+		</LogMessage>
+		<LogMessage>
+			<Date>2020/03/11 - 00:12:56</Date>
+			<Type>Info</Type>
+			<CppNamespace></CppNamespace>
+			<CppClass></CppClass>
+			<Method></Method>
+			<Text>Click id: 16777208 --> SINGLEPLAYER_buttonExit</Text>
+		</LogMessage>
+		<LogMessage>
+			<Date>2020/03/11 - 00:12:56</Date>
+			<Type>Info</Type>
+			<CppNamespace></CppNamespace>
+			<CppClass></CppClass>
+			<Method></Method>
+			<Text>You have left-clicked on (X=1195, Y=84)</Text>
+		</LogMessage>
+		<LogMessage>
+			<Date>2020/03/11 - 00:12:56</Date>
+			<Type>Info</Type>
+			<CppNamespace></CppNamespace>
+			<CppClass></CppClass>
+			<Method></Method>
+			<Text>Click id: 16777211 --> MAINMENU_buttonQuit</Text>
+		</LogMessage>
+	</LogMessages>
+</Log>

@@ -276,7 +276,7 @@ namespace editor {
 		array<string, 3> titlesList;
 		map<string, int>pickingList;
 		int barHeight;
-		int minPickingID, maxPickingID;	
+		unsigned int minPickingID, maxPickingID;	
 
 		void picking(); // this function is here: source/picking/editormenu_picking.cpp
 		bool isHover(vec2 pos, int w, int h); // idem

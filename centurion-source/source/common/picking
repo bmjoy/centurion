@@ -1,14 +1,14 @@
-#pragma once
-
-#define PICKING_ID_MIN 1
-#define PICKING_ID_MAX 16777215
-
-#include <headers>
-
-using namespace std;
-using namespace glm;
-
-namespace glb {
+//#pragma once
+//
+//#define PICKING_ID_MIN 1
+//#define PICKING_ID_MAX 16777215
+//
+//#include <headers>
+//
+//using namespace std;
+//using namespace glm;
+//
+//namespace glb {
 	
 	//int get_id(string LeftRight = "left");
 	//vec3 getPickingColorFromID(int pickingID);
@@ -43,4 +43,5 @@ namespace glb {
 	//static doubleClickData dCD;
 	//void resetDoubleClickTime();
 	//bool hasDoubleClicked();
-};
+
+//};

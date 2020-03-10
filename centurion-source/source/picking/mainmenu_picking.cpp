@@ -1,5 +1,5 @@
 #include <menu>
-#include <picking>
+#include <picking.h>
 #include <engine/engine.h>
 #include <engine/window.h>
 #include <engine/mouse.h>
@@ -15,8 +15,8 @@ using namespace engine;
 
 namespace menu {
 	void Menu::picking() {
-		int clickId = get_id();
-		string clickName = getPickedObjectName(clickId);
+		int clickId = Picking::GetIdFromClick();
+		string clickName = PickingUI::getPickedObjectName(clickId);
 		stringstream ss;
 
 		ss << "Click id: " << clickId << " --> " + clickName;

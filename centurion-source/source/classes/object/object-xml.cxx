@@ -38,7 +38,7 @@
 
 #include <xsd/cxx/pre.hxx>
 
-#include "object.hxx"
+#include "object-xml.hxx"
 
 // c_object
 // 

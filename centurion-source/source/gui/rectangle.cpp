@@ -1,5 +1,5 @@
 #include <gui>
-#include <picking>
+#include <picking.h>
 #include <global>
 #include <engine/window.h>
 
@@ -30,7 +30,7 @@ namespace gui {
 		data.w = w;
 		data.h = h;
 		data.origin = originMap[origin];
-		data.pickingColor = vec4(getPickingColorFromID(pickingID), 1.f);
+		data.pickingColor = vec4(Picking::getPickingColorFromID(pickingID), 1.f);
 	}
 	void Rectangle::render(vec4 Color, bool picking, float x, float y, float w, float h, int origin) {
 

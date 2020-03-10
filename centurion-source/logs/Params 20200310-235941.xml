@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Log>
+	<Params>
+		<Camera>
+			<xPosition>1</xPosition>
+			<yPosition>1</yPosition>
+		</Camera>
+		<Mouse>
+			<scrollValue>0</scrollValue>
+			<xLeftClick>1363</xLeftClick>
+			<xPosition>1363</xPosition>
+			<xRightClick>1363</xRightClick>
+			<y2dPosition>765</y2dPosition>
+			<y2dRightClick>765</y2dRightClick>
+			<yLeftClick>765</yLeftClick>
+			<yPosition>765</yPosition>
+			<yRightClick>765</yRightClick>
+			<leftClick>0</leftClick>
+			<leftHold>0</leftHold>
+			<release>1</release>
+			<rightClick>0</rightClick>
+			<scrollBool>0</scrollBool>
+		</Mouse>
+		<Window>
+			<heightZoomed>1161.56</heightZoomed>
+			<ratio>1.77865</ratio>
+			<widthZoomed>2066</widthZoomed>
+			<shouldClose>1</shouldClose>
+			<bottomBarHeight>0</bottomBarHeight>
+			<topBarHeight>30</topBarHeight>
+		</Window>
+	</Params>
+</Log>

@@ -1,5 +1,5 @@
 #include <interface>
-#include <picking>
+#include <picking.h>
 #include <surface>
 #include <global>
 #include <engine/window.h>
@@ -21,14 +21,14 @@ namespace editor {
 		startY = myWindow::Height / 2.f + back_image.getImageSize().y / 2.f;
 
 		buttons[0] = gui::Image("newmapwindow_buttonleft");
-		buttons[0].create("top-left", startX, startY, 0, 0, getPickingID_UI());
-		addValueToPickingListUI(getPickingID_UI(), "NewMapWindow_close");
-		increasePickingID_UI();
+		buttons[0].create("top-left", startX, startY, 0, 0, PickingUI::getPickingID());
+		PickingUI::addValueToPickingList(PickingUI::getLastID() + 1, "NewMapWindow_close");
+
 
 		buttons[1] = gui::Image("newmapwindow_buttonright");
-		buttons[1].create("top-left", startX, startY, 0, 0, getPickingID_UI());
-		addValueToPickingListUI(getPickingID_UI(), "NewMapWindow_create");
-		increasePickingID_UI();
+		buttons[1].create("top-left", startX, startY, 0, 0, PickingUI::getPickingID());
+		PickingUI::addValueToPickingList(PickingUI::getLastID() + 1, "NewMapWindow_create");
+
 
 		buttons_text[0] = gui::SimpleText("static");
 		buttons_text[0].create_static(getTranslation("EDITOR_newMapButtonClose"), "tahoma_13px", startX + 58.f, startY - 171.f, "center", "middle", vec4(255.f), "bold");
@@ -36,9 +36,9 @@ namespace editor {
 		buttons_text[1].create_static(getTranslation("EDITOR_newMapButtonCreate"), "tahoma_13px", startX + 314.f, startY - 171.f, "center", "middle", vec4(255.f), "bold");
 
 		textinput_back = gui::Image("newmapwindow_textinput");
-		textinput_back.create("top-left", startX, startY, 0, 0, getPickingID_UI());
-		addValueToPickingListUI(getPickingID_UI(), "NewMapWindow_textclick");
-		increasePickingID_UI();
+		textinput_back.create("top-left", startX, startY, 0, 0, PickingUI::getPickingID());
+		PickingUI::addValueToPickingList(PickingUI::getLastID() + 1, "NewMapWindow_textclick");
+
 
 		text[0] = gui::SimpleText("static");
 		text[0].create_static(getTranslation("EDITOR_newScenario"), "tahoma_15px", startX + 15.f, startY - 25.f, "left", "normal", vec4(255), "bold");

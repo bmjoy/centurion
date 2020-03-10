@@ -1,6 +1,6 @@
 #include <interface>
 #include <game/strategy.h>
-#include <picking>
+#include <picking.h>
 #include <menu>
 #include <engine/mouse.h>
 #include <engine/window.h>
@@ -23,10 +23,9 @@ namespace menu {
 		for (map<string,int>::iterator i = availableLanguages.begin(); i != availableLanguages.end(); i++)
 			form_options.push_back("LANG_" + i->first);
 		languages = gui::FormInput(true);
-		languages.create(startX + 150.f, startY - 77.f, 150.f, 20.f, form_options, getPickingID_UI());
+		languages.create(startX + 150.f, startY - 77.f, 150.f, 20.f, form_options, PickingUI::getPickingID());
 		languages.selectedText = "LANG_"+ Settings::Language;
-		addValueToPickingListUI(getPickingID_UI(), "GlobalOptions_formLanguages");
-		increasePickingID_UI();
+		PickingUI::addValueToPickingList(PickingUI::getLastID() + 1, "GlobalOptions_formLanguages");
 
 		text[0] = gui::SimpleText("static");
 		text[0].create_static(getTranslation("OPTIONS_Title"), "tahoma_15px", startX + 20.f, startY - 40.f, "left", "normal", vec4(255), "bold");
@@ -52,10 +51,10 @@ namespace menu {
 	void GlobalOptions::picking() {
 		GLint mouseX = (GLint)engine::Mouse::GetXPosition();
 		GLint mouseY = (GLint)engine::Mouse::GetYPosition();
-		leftClickID_UI = get_id();
-		string clickName = getPickedObjectName(leftClickID_UI);
+		Picking::leftClickID_UI = Picking::GetIdFromClick();
+		string clickName = PickingUI::getPickedObjectName(Picking::leftClickID_UI);
 
-		if (leftClickID_UI == 0)
+		if (Picking::leftClickID_UI == 0)
 			languages.close();
 
 		if (clickName == "GlobalOptions_formLanguages") {

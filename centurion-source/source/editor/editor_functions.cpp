@@ -1,7 +1,7 @@
 #include <game/editor.h>
 #include <interface>
 #include <global>
-#include <picking>
+#include <picking.h>
 #include <player>
 #include <game/strategy.h>
 #include <engine/engine.h>
@@ -116,7 +116,7 @@ namespace editor {
 		{
 			if (buildingTemp->is_placeable())
 			{
-				unsigned int ID = getPickingID(); 
+				unsigned int ID = PickingObject::GetPickingId();
 				buildingTemp->set_id(ID);
 				buildingTemp->create();
 				if (buildingTemp->is_independent()) 
@@ -133,7 +133,7 @@ namespace editor {
 		{
 			if (decorTemp->is_placeable()) 
 			{
-				unsigned int ID = getPickingID(); 
+				unsigned int ID = PickingObject::GetPickingId();
 				decorTemp->set_id(ID);
 				decorTemp->create();
 				Game::AddGameObject(ID, decorTemp);
@@ -189,8 +189,8 @@ namespace editor {
 	void moveObjects() {
 		if (Mouse::LeftHold) {
 			// buildings
-			if (Game::IsGameObjectNotNull(leftClickID)) {
-				Building* bld = Game::GetGameObjectPtrById(leftClickID)->AsBuilding();
+			if (Game::IsGameObjectNotNull(Picking::leftClickID)) {
+				Building* bld = Game::GetGameObjectPtrById(Picking::leftClickID)->AsBuilding();
 				movingObjectRestore = false;
 				if (!movingObject) {
 					movingObjectXPos = bld->get_position().x;
@@ -242,8 +242,8 @@ namespace editor {
 		}
 		else {
 			// buildings
-			if (Game::IsGameObjectNotNull(leftClickID)) {
-				Building* bld = Game::GetGameObjectPtrById(leftClickID)->AsBuilding();
+			if (Game::IsGameObjectNotNull(Picking::leftClickID)) {
+				Building* bld = Game::GetGameObjectPtrById(Picking::leftClickID)->AsBuilding();
 				if (movingObjectRestore) {
 					bld->set_position(vec3(movingObjectXPos, movingObjectYPos, 0.f));
 					bld->clear_pass();

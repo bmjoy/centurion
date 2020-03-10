@@ -1,7 +1,7 @@
 #include <interface>
 #include <json.hpp>
 #include <engine/window.h>
-#include <picking>
+#include <picking.h>
 
 using namespace glb;
 
@@ -35,14 +35,13 @@ namespace game {
 				getTranslation(data[s][i]["name"].get<std::string>()), 
 				(int)x + data[s][i]["x"].get<int>(),
 				(int)y + data[s][i]["y"].get<int>(),
-				getPickingID_UI(), 
+				PickingUI::getPickingID(),
 				glm::vec4(0.f, 0.f, 0.f, 255.f)
 			);
 			buttons.push_back(btn);
 
 			/* update picking */
-			addValueToPickingListUI(getPickingID_UI(), data[s][i]["name"].get<std::string>());
-			increasePickingID_UI();
+			PickingUI::addValueToPickingList(PickingUI::getLastID() + 1, data[s][i]["name"].get<std::string>());
 		}
 
 		background = gui::Rectangle();

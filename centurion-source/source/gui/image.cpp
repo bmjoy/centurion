@@ -1,5 +1,5 @@
 #include <gui>
-#include <picking>
+#include <picking.h>
 #include <global>
 #include <engine/window.h>
 
@@ -23,7 +23,7 @@ namespace gui {
 		if (y < 0) y += engine::myWindow::Height;
 		imgData.pickingID = pickingID;
 		imgData.imageName = imageName;
-		imgData.pickingColor = getPickingColorFromID(pickingID);
+		imgData.pickingColor = PickingUI::getPickingColorFromID(pickingID);
 		imgData.origin = originMap[Origin];
 		imgData.x = x;
 		imgData.y = y;

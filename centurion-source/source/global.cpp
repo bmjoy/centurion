@@ -3,7 +3,7 @@
 #include <math>
 #include <json.hpp>
 #include <game/strategy.h>
-#include <picking>
+#include <picking.h>
 #include <object/object.h>
 #include <menu>
 #include <Windows.h>
@@ -320,7 +320,7 @@ namespace glb {
 						b->set_class(className);
 						b->set_player(playerID);
 						b->set_position(vec3(xPos, yPos, 0.f));
-						b->set_id(getPickingID());
+						b->set_id(PickingObject::GetPickingId());
 						b->set_settlement_name(settl_name);
 						b->set_type("building");
 						b->create(name);
@@ -331,7 +331,7 @@ namespace glb {
 						d->set_class(className);
 						d->set_player(0);
 						d->set_position(vec3(xPos, yPos, 0.f));
-						d->set_id(getPickingID());
+						d->set_id(PickingObject::GetPickingId());
 						d->create();
 						d->set_type("decoration");
 						Game::AddGameObject(d->get_id(), d);

@@ -6,7 +6,7 @@
 #include <engine/mouse.h>
 #include <player>
 #include <surface>
-#include <picking>
+#include <picking.h>
 #include <interface>
 
 using namespace glb;

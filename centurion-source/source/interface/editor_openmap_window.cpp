@@ -1,5 +1,5 @@
 #include <interface>
-#include <picking>
+#include <picking.h>
 #include <surface>
 #include <global>
 #include <engine/window.h>
@@ -26,18 +26,18 @@ namespace editor {
 		startX = myWindow::Width / 2.f - back_image.getImageSize().x / 2.f;
 		startY = myWindow::Height / 2.f + back_image.getImageSize().y / 2.f;
 
-		map_list.pickingID = getPickingID_UI();
-		increasePickingID_UI();
+		map_list.pickingID = PickingUI::getPickingID();
+
 
 		buttons[0] = gui::Image("openmapwindow_buttonleft");
-		buttons[0].create("top-left", startX, startY, 0, 0, getPickingID_UI());
-		addValueToPickingListUI(getPickingID_UI(), "OpenMapWindow_close");
-		increasePickingID_UI();
+		buttons[0].create("top-left", startX, startY, 0, 0, PickingUI::getPickingID());
+		PickingUI::addValueToPickingList(PickingUI::getLastID() + 1, "OpenMapWindow_close");
+
 
 		buttons[1] = gui::Image("openmapwindow_buttonright");
-		buttons[1].create("top-left", startX, startY, 0, 0, getPickingID_UI());
-		addValueToPickingListUI(getPickingID_UI(), "OpenMapWindow_open");
-		increasePickingID_UI();
+		buttons[1].create("top-left", startX, startY, 0, 0, PickingUI::getPickingID());
+		PickingUI::addValueToPickingList(PickingUI::getLastID() + 1, "OpenMapWindow_open");
+
 
 		buttons_text[0] = gui::SimpleText("static");
 		buttons_text[0].create_static(getTranslation("EDITOR_openMapButtonClose"), "tahoma_13px", startX + 58.f, startY - 468.f, "center", "middle", vec4(255.f), "bold");

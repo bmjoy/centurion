@@ -5,7 +5,7 @@
 #include <engine/mouse.h>
 #include <surface>
 #include <player>
-#include <picking>
+#include <picking.h>
 #include <object/unit.h>
 
 #pragma region Namespaces
@@ -38,8 +38,10 @@ void Strategy::reset() {
 }
 
 void Strategy::Create() {
-	resetPicking();
-	resetPicking_UI();
+
+	PickingObject::resetPicking();
+	PickingUI::resetPicking();
+
 	reset();
 	myWindow::BottomBarHeight = 100.f;
 	myWindow::TopBarHeight = 100.f;
@@ -76,11 +78,11 @@ void Strategy::Create() {
 		for (int j = 0; j < 5; j++) {
 			Unit* u = new Unit();
 			u->set_class("hmyrmidon");
-			u->set_id(getPickingID());
+			u->set_id(PickingObject::GetPickingId());
 			u->set_player(0);
 			u->set_position(playersList[0].getStartPoint().x + i * 50, playersList[0].getStartPoint().y - 1000 - j * 50);
 			u->create();
-			GameObjects[getPickingID()] = u;
+			GameObjects[u->get_id()] = u;
 			//units[u->get_id()] = u;
 		}
 	}
@@ -98,14 +100,14 @@ void Strategy::Create() {
 
 	//---------------------------------------
 	isCreated = true;
-	leftClickID = 0;
-	leftClickID_UI = 0;
-	resetDoubleClickTime();
+	Picking::leftClickID = 0;
+	Picking::leftClickID_UI = 0;
+	Picking::resetDoubleClickTime();
 }
 
 void Strategy::Run() {
 	Unit::ResetCounter();
-	leftClickID_UI = 0;
+	Picking::leftClickID_UI = 0;
 	Camera::keyboardControl();
 
 	/* Keyboard controls handling*/

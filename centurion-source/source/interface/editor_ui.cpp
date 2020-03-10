@@ -1,5 +1,4 @@
 #include <interface>
-#include <picking>
 #include <game/strategy.h>
 #include <engine/camera.h>
 #include <engine/window.h>

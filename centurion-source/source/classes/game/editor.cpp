@@ -19,10 +19,9 @@ using namespace engine;
 Editor::Editor() {}
 
 void Editor::Create() {
-	resetPicking();
-	resetPicking_UI();
+	PickingUI::resetPicking();
+	PickingObject::resetPicking();
 
-	pickerObject.getPickingID();
 	Strategy::reset();
 	myWindow::BottomBarHeight = 0.f;
 	myWindow::TopBarHeight = 30.f;
@@ -94,7 +93,7 @@ void Editor::Run() {
 
 		editor::EDITOR_UI()->render(false);
 
-		if (leftClickID_UI == 0) GoToPointFromMinimap();
+		if (Picking::leftClickID_UI == 0) GoToPointFromMinimap();
 	}
 
 	glb::cameraProjection = glm::ortho(0.0f, myWindow::WidthZoomed, 0.0f, myWindow::HeightZoomed, -(float)MEDIUM_MAP_WIDTH, (float)MEDIUM_MAP_WIDTH);
@@ -131,8 +130,8 @@ void Editor::handleKeyboardControls() {
 			if (KeyCode[GLFW_KEY_T]) { AddObjectWindowIsOpen = false; TerrainBrushIsActive = !TerrainBrushWindowIsOpen; TerrainBrushWindowIsOpen = !TerrainBrushWindowIsOpen; }
 		}
 		if (KeyCode[GLFW_KEY_DELETE]) {
-			if (Game::IsGameObjectNotNull(leftClickID)) {
-				Building* b = Game::GetGameObjectPtrById(leftClickID)->AsBuilding();
+			if (Game::IsGameObjectNotNull(Picking::leftClickID)) {
+				Building* b = Game::GetGameObjectPtrById(Picking::leftClickID)->AsBuilding();
 				if (b->isSelected()) {
 					if (b->is_independent()) {
 						if (b->buildingsInSettlementCount() > 0) {
@@ -142,13 +141,13 @@ void Editor::handleKeyboardControls() {
 						else {
 							cout << "[DEBUG] Settlement " << b->get_name() << " deleted!\n";
 							b->clear_pass();
-							Game::RemoveGameObject(leftClickID);
+							Game::RemoveGameObject(Picking::leftClickID);
 						}
 					}
 					else {
 						cout << "[DEBUG] Building " << b->get_name() << " deleted!\n";
 						b->clear_pass();
-						Game::RemoveGameObject(leftClickID);
+						Game::RemoveGameObject(Picking::leftClickID);
 					}
 				}
 			}
