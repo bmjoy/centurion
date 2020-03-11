@@ -3,6 +3,14 @@
 #include "camera.h"
 #include "mouse.h"
 
+#include <object/object-data.h>
+
+#ifndef __MSXML_LIBRARY_DEFINED__
+#define __MSXML_LIBRARY_DEFINED__
+#endif
+#include <Windows.h>
+
+
 #include <game/editor.h>
 #include <game/strategy.h>
 #include <player>
@@ -40,6 +48,7 @@ namespace engine {
 		myWindow window = myWindow::GetInstance();
 		obj::init();
 
+		ObjectData::ReadDataClassesFromXml();
 		read_data();
 
 		obj::compile();

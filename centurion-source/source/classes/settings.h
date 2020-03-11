@@ -1,7 +1,7 @@
 #ifndef SETTINGS_H
 #define SETTINGS_H
 
-#include <settings-xml.hxx>
+#include <string>
 
 using namespace std;
 

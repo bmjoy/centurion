@@ -34,7 +34,6 @@ namespace glb {
 	extern bool KeyCode[GLFW_KEY_LAST];	// for text input
 
 	static const string gameNameSTR = "Centurion";
-	static const LPCWSTR gameNameLPCWSTR = L"Centurion";
 	static map<string, string> errors; // error codes
 	static map<string, string> translation_table_current;
 
@@ -52,7 +51,7 @@ namespace glb {
 	void readVerticesData(float *vertices, string path);
 	void readVerticesPosData(int *verticesPos, string path);
 	string ReadFile(const char* fileLocation);
-	vector<string> get_all_files_names_within_folder(string folder);
+	vector<string> get_all_files_names_within_folder(string folder, string type = "*");
 	vector<string> get_all_folders_names_within_folder(string folder);
 	struct file_info { string name, path; };
 	vector<file_info> get_all_files_names_within_subfolders(string const &folder_name, string const &file_extension = "");

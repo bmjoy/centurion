@@ -3,6 +3,7 @@
 #include <engine/camera.h>
 #include <iostream>
 #include <fstream>
+#include <settings-xml.hxx>
 
 namespace glb {
 

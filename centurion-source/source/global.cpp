@@ -6,11 +6,19 @@
 #include <picking.h>
 #include <object/object.h>
 #include <menu>
+
+
+
+#ifndef __MSXML_LIBRARY_DEFINED__
+#define __MSXML_LIBRARY_DEFINED__
+#endif
 #include <Windows.h>
+
+#include <translationTable-xml.hxx>
+
 #include <engine/camera.h>
 #include <engine/mouse.h>
 #include <engine/window.h>
-#include <translationTable-xml.hxx>
 #include <interface>
 
 #define STB_IMAGE_WRITE_IMPLEMENTATION
@@ -49,7 +57,7 @@ namespace glb {
 		strftime(buf, sizeof(buf), format, &tstruct);
 		return buf;
 	}
-	
+
 	void initParams() {
 		try {
 			//Close the game if it wasn't able to find or process errorCodes.json file
@@ -77,7 +85,7 @@ namespace glb {
 			myWindow::Ratio = myWindow::Width / myWindow::Height;
 			myWindow::WidthZoomed = myWindow::Width + (Camera::GetCurrentZoom() - 1) * Camera::GetZoomFactor();
 			myWindow::HeightZoomed = myWindow::Height + (Camera::GetCurrentZoom() - 1) * Camera::GetZoomFactor() / myWindow::Ratio;
-		
+
 			menuProjection = glm::ortho(0.0f, myWindow::Width, 0.0f, myWindow::Height, -100.0f, 100.0f);
 			cameraProjection = glm::ortho(0.0f, myWindow::WidthZoomed, 0.0f, myWindow::HeightZoomed, -(float)MEDIUM_MAP_WIDTH, (float)MEDIUM_MAP_WIDTH);
 
@@ -101,14 +109,14 @@ namespace glb {
 	}
 
 	void read_translation_tables() {
-		try{
+		try {
 			if (availableLanguages.empty()) {
 				int nLanguages = 0;
 				vector<string> filesName = get_all_files_names_within_folder("assets/data");
 				for (int i = 0; i < filesName.size(); i++) {
 					if (filesName[i].substr(0, filesName[i].find('_')) == "translationTable") {
 						string lan = filesName[i].substr(filesName[i].find('_'));
-						availableLanguages[lan.substr(1,lan.find('.') -1)] = nLanguages;
+						availableLanguages[lan.substr(1, lan.find('.') - 1)] = nLanguages;
 						nLanguages++;
 					}
 				}
@@ -181,8 +189,8 @@ namespace glb {
 		}
 	}
 	void saveCurrentScenario(string name) {
-		
-		
+
+
 		// create a folder which will contain all scenario files
 		string path = "scenarios/" + name;
 		_mkdir(path.c_str());
@@ -238,7 +246,7 @@ namespace glb {
 				}
 				objectsFile << "\n";
 			}
-			
+
 			vector<Decoration*> listOfDecorations = Game::GetListOfDecorations();
 
 			for (int i = 0; i < listOfDecorations.size(); i++) {
@@ -262,7 +270,7 @@ namespace glb {
 		objectsFile.close();
 
 		cout << "[DEBUG] The map is saved with the following name: " + name << endl;
-	
+
 	}
 	void openScenario(string name) {
 		// read heights
@@ -339,7 +347,7 @@ namespace glb {
 				}
 				row++;
 			}
-			
+
 			Game::UpdateSettlementBuildings(); // set central building for every dependent building
 		}
 	}
@@ -381,20 +389,36 @@ namespace glb {
 		fileStream.close();
 		return content;
 	}
-	vector<string> get_all_files_names_within_folder(string folder) {
-		vector<string> names;
-		string search_path = folder + "/*.*";
-		WIN32_FIND_DATA fd;
-		HANDLE hFind = ::FindFirstFile(search_path.c_str(), &fd);
-		if (hFind != INVALID_HANDLE_VALUE) {
-			do {
-				if (!(fd.dwFileAttributes & FILE_ATTRIBUTE_DIRECTORY)) {
-					names.push_back(fd.cFileName);
-				}
-			} while (::FindNextFile(hFind, &fd));
-			::FindClose(hFind);
+	vector<string> get_all_files_names_within_folder(string folder, string type) {
+		try {
+			vector<string> names;
+			string search_path = folder + "/*.*";
+			WIN32_FIND_DATA fd;
+			HANDLE hFind = ::FindFirstFile(search_path.c_str(), &fd);
+			if (hFind != INVALID_HANDLE_VALUE) {
+				do {
+					if (!(fd.dwFileAttributes & FILE_ATTRIBUTE_DIRECTORY)) {
+						if (type == "*") {
+							names.push_back(fd.cFileName);
+						}
+						else {
+							string fullname = (string)fd.cFileName;
+							string fileExt = fullname.substr(fullname.find_last_of(".") + 1);
+							transform(fileExt.begin(), fileExt.end(), fileExt.begin(), ::tolower);
+							transform(type.begin(), type.end(), type.begin(), ::tolower);
+							if (fileExt == type) {
+								names.push_back(fd.cFileName);
+							}
+						}
+					}
+				} while (::FindNextFile(hFind, &fd));
+				::FindClose(hFind);
+			}
+			return names;
 		}
-		return names;
+		catch (...) {
+			throw;
+		}
 	}
 	vector<string> get_all_folders_names_within_folder(string folder) {
 		vector<string> names;
@@ -504,7 +528,7 @@ namespace glb {
 		const int wideLength = sizeof(text.c_str()) * 128;
 		WCHAR wstr[wideLength];
 		MultiByteToWideChar(CP_UTF8, 0, text.c_str(), wideLength, wstr, wideLength);
-		MessageBoxW(NULL, wstr, gameNameLPCWSTR, MB_ICONERROR);
+		MessageBoxW(NULL, wstr, L"Centurion", MB_ICONERROR);
 		myWindow::ShouldClose = true;
 	}
 
@@ -513,7 +537,7 @@ namespace glb {
 		const int wideLength = sizeof(text.c_str()) * 128;
 		WCHAR wstr[wideLength];
 		MultiByteToWideChar(CP_UTF8, 0, text.c_str(), wideLength, wstr, wideLength);
-		MessageBoxW(NULL, wstr, gameNameLPCWSTR, MB_ICONINFORMATION);
+		MessageBoxW(NULL, wstr, L"Centurion", MB_ICONINFORMATION);
 	}
 
 	bool folderExists(string folderPath) {

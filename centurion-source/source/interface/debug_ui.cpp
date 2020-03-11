@@ -78,7 +78,7 @@ namespace debug {
 			dynamicTextList[5] = to_string((int)getZoomedCoords(Mouse::GetXPosition(), Mouse::GetYPosition()).x);
 			dynamicTextList[6] = to_string(selUnits);
 			dynamicTextList[7] = to_string(PickingObject::getLastPickingID());
-			dynamicTextList[8] = to_string(PickingUI::getPickingID());
+			dynamicTextList[8] = to_string(PickingUI::getLastID());
 
 			//!(Engine::getEnvironment() == "game") ? n = 2 : n = (int)dynamicTextList.size();
 			n = (int)dynamicTextList.size();

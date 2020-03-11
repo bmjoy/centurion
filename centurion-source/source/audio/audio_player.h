@@ -3,7 +3,7 @@
 
 #include <cstdlib>
 #include <iostream>
-#include <windows.h>
+//#include <windows.h>
 #include <OpenAL/al.h>
 #include <OpenAL/alc.h>
 #include "audio_device.h"

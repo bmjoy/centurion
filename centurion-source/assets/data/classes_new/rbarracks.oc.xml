@@ -1,5 +1,5 @@
-<c_object parent="Building" type="building" class_name="RBarracks">
-  <properties>
+<c_object parent="Building" type="building" class_name="RBarracks" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="Object.xsd">
+ <properties>
     <property name="race" value="Rome"/>
     <property name="radius" value="600"/>
     <property name="isCentralBuilding" value="0"/>

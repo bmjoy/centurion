@@ -212,6 +212,7 @@ XCOPY "$(ProjectDir)xerces-c_3_1D_vc120.dll" "$(ProjectDir)$(OutDir)"</Command>
     <ClCompile Include="source\classes\logger.cpp" />
     <ClCompile Include="source\classes\object\building.cpp" />
     <ClCompile Include="source\classes\object\decoration.cpp" />
+    <ClCompile Include="source\classes\object\object-data.cpp" />
     <ClCompile Include="source\classes\object\object-xml.cxx" />
     <ClCompile Include="source\classes\object\object.cpp" />
     <ClCompile Include="source\classes\object\unit.cpp" />
@@ -392,6 +393,7 @@ XCOPY "$(ProjectDir)xerces-c_3_1D_vc120.dll" "$(ProjectDir)$(OutDir)"</Command>
     <ClInclude Include="source\classes\logger.h" />
     <ClInclude Include="source\classes\object\building.h" />
     <ClInclude Include="source\classes\object\decoration.h" />
+    <ClInclude Include="source\classes\object\object-data.h" />
     <ClInclude Include="source\classes\object\object-xml.hxx" />
     <ClInclude Include="source\classes\object\object.h" />
     <ClInclude Include="source\classes\object\unit.h" />

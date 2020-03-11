@@ -43,6 +43,8 @@
 // c_object
 // 
 
+XERCES_CPP_NAMESPACE_QUALIFIER DOMDocument * fDoc;
+
 const c_object::properties_type& c_object::
 properties () const
 {
@@ -1226,8 +1228,7 @@ c_object_ (const ::std::string& u,
   return ::std::auto_ptr< ::c_object > (
     ::c_object_ (
       d, f | ::xml_schema::flags::own_dom, p));
-}
-
+}
 ::std::auto_ptr< ::c_object >
 c_object_ (const ::std::string& u,
            ::xercesc::DOMErrorHandler& h,
