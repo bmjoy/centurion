@@ -1,3 +1,4 @@
+#include <windows.h>
 #include <logger.h>
 #include <fstream>
 #include <settings.h>
@@ -11,8 +12,8 @@ using namespace glb;
 using namespace engine;
 
 vector<Logger::LogMessage> Logger::Messages;
-string Logger::fileDebugName = "logs/Debug " + currentDateTime("%Y%m%d-%H%M%S") + ".xml";
-string Logger::fileParamsName = "logs/Params " + currentDateTime("%Y%m%d-%H%M%S") + ".xml";
+string Logger::fileDebugName = "logs/debug/Debug " + currentDateTime("%Y%m%d-%H%M%S") + ".xml";
+string Logger::fileParamsName = "logs/params/Params " + currentDateTime("%Y%m%d-%H%M%S") + ".xml";
 
 #pragma region Logger
 
@@ -58,6 +59,23 @@ void Logger::Error(string msg) {
 }
 
 void Logger::SaveDebugXML() {
+	vector<string> debugFiles = get_all_files_names_within_folder("logs/debug");
+	char szBuffer[200] = "";
+	char *pszFileName = NULL;
+
+	GetFullPathName((LPCSTR)debugFiles[0].c_str(), sizeof(szBuffer), szBuffer, &pszFileName);
+	//Removing exceeding file number
+	if (debugFiles.size() >= 10) {
+		string path = szBuffer;
+		path.replace(path.begin(), path.end(), '\\', '/');
+
+		if (remove(path.c_str()) != 0)
+			perror("File deletion failed");
+		else
+			cout << "File deleted successfully";
+	}
+
+	//Saving all debug informations
 	ofstream logFile(fileDebugName);
 	if (logFile.is_open()) {
 		logFile << "<?xml version=\"1.0\" encoding=\"utf-8\"?>" << endl <<
@@ -80,6 +98,23 @@ void Logger::SaveDebugXML() {
 }
 
 void Logger::SaveParamsXML() {
+	vector<string> paramFiles = get_all_files_names_within_folder("logs/params");
+	char szBuffer[200] = "";
+	char *pszFileName = NULL;
+
+	GetFullPathName((LPCSTR)paramFiles[0].c_str(), sizeof(szBuffer), szBuffer, &pszFileName);
+	//Removing exceeding file number
+	if (paramFiles.size() >= 10) {
+		string path = szBuffer;
+		path.replace(path.begin(), path.end(), '\\', '/');
+
+		if (remove(path.c_str()) != 0)
+			perror("File deletion failed");
+		else
+			cout << "File deleted successfully";
+	}
+
+	//Saving all parameters
 	ofstream logFile(fileParamsName);
 	if (logFile.is_open()) {
 		logFile << "<?xml version=\"1.0\" encoding=\"utf-8\"?>\n<Log>\n\t<Params>\n" <<
