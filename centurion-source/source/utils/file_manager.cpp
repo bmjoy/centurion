@@ -1,4 +1,4 @@
-#include "utils.h"
+#include "file_manager.h"
 
 #include <logger.h>
 #include <fstream>
@@ -12,7 +12,7 @@
 #endif
 #include <Windows.h>
 
-string Utils::ReadFile(const char* fileLocation) {
+string FileManager::ReadFile(const char* fileLocation) {
 	try {
 		string content;
 		ifstream fileStream(fileLocation, ios::in);
@@ -36,7 +36,7 @@ string Utils::ReadFile(const char* fileLocation) {
 	}
 }
 
-vector<string> Utils::GetAllFilesNamesWithinFolder(string folder, string type) {
+vector<string> FileManager::GetAllFilesNamesWithinFolder(string folder, string type) {
 	try {
 		vector<string> names;
 		string search_path = folder + "/*.*";
@@ -68,7 +68,7 @@ vector<string> Utils::GetAllFilesNamesWithinFolder(string folder, string type) {
 	}
 }
 
-vector<string> Utils::GetAllFoldersNamesWithinFolder(string folder) {
+vector<string> FileManager::GetAllFoldersNamesWithinFolder(string folder) {
 	try {
 		vector<string> names;
 		WIN32_FIND_DATA findfiledata;
@@ -94,7 +94,7 @@ vector<string> Utils::GetAllFoldersNamesWithinFolder(string folder) {
 	}
 }
 
-vector<Utils::file_info> Utils::GetAllFilesNamesWithinSubfolders(string const &folder_name, string const &file_extension) {
+vector<FileManager::file_info> FileManager::GetAllFilesNamesWithinSubfolders(string const &folder_name, string const &file_extension) {
 	try {
 		HANDLE finder;          // for FindFirstFile
 		WIN32_FIND_DATA file;   // data about current file.
@@ -148,7 +148,7 @@ vector<Utils::file_info> Utils::GetAllFilesNamesWithinSubfolders(string const &f
 	}
 }
 
-string Utils::CurrentDateTime(const char * format) {
+string FileManager::CurrentDateTime(const char * format) {
 	try {
 		time_t     now = time(0);
 		struct tm  tstruct;
@@ -162,7 +162,7 @@ string Utils::CurrentDateTime(const char * format) {
 	}
 }
 
-bool Utils::CheckIfFolderExists(string folderPath) {
+bool FileManager::CheckIfFolderExists(string folderPath) {
 	try {
 		struct stat info;
 		if (stat(folderPath.c_str(), &info) == 0)
@@ -176,7 +176,7 @@ bool Utils::CheckIfFolderExists(string folderPath) {
 	}
 }
 
-void Utils::RemoveFile(string filePath)
+void FileManager::RemoveFile(string filePath)
 {
 	try
 	{

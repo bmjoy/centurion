@@ -1,7 +1,7 @@
 #include "object-data.h"
 #include <global>
 
-#include <utils.h>
+#include <file_manager.h>
 #include "object-xml.hxx"
 
 #pragma region Static variables
@@ -27,7 +27,7 @@ ObjectData::ObjectXMLClassData::~ObjectXMLClassData(){}
 
 void ObjectData::ReadDataClassesFromXml()
 {
-	vector<string> files = Utils::GetAllFilesNamesWithinFolder(dataClassesPath, "xml");
+	vector<string> files = FileManager::GetAllFilesNamesWithinFolder(dataClassesPath, "xml");
 
 	for (int i = 0; i < files.size(); ++i) {
 

@@ -4,7 +4,7 @@
 #include <player>
 #include <pathfinding>
 #include <game/strategy.h>
-#include <math>
+#include <maths.h>
 #include <interface>
 
 #include <primitives.h>

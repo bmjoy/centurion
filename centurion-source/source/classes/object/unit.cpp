@@ -1,5 +1,5 @@
 #include "unit.h"
-#include <math>
+#include <maths.h>
 #include <game/strategy.h>
 #include <game/game.h>
 #include <stb_image.h>

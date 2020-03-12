@@ -3,7 +3,7 @@
 #include <global>
 #include "strategy.h"
 #include <picking.h>
-#include <math>
+#include <maths.h>
 #include <engine.h>
 #include <interface>
 #include "editor.h"

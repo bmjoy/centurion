@@ -1,4 +1,4 @@
-#include <math>
+#include <maths.h>
 
 using namespace std;
 using namespace glm;

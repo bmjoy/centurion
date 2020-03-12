@@ -3,7 +3,7 @@
 #include <surface>
 #include <global>
 #include <engine.h>
-#include <utils.h>
+#include <file_manager.h>
 #include <translationsTable.h>
 
 using namespace glb;
@@ -18,7 +18,7 @@ namespace editor {
 	void OpenMapWindow::create() {
 		back_image = gui::Image("openmapwindow_back");
 		back_image.create("center", Engine::myWindow::Width / 2.f, Engine::myWindow::Height / 2.f, 0, 0, 0);
-		availableScenarios = Utils::GetAllFoldersNamesWithinFolder("scenarios");
+		availableScenarios = FileManager::GetAllFoldersNamesWithinFolder("scenarios");
 		map_list.padding_left = 15.f;
 		map_list.padding_top = 15.f;
 		map_list.option_height = 25.f;
@@ -51,7 +51,7 @@ namespace editor {
 	void OpenMapWindow::update() {
 		map_list.back_options.clear();
 		map_list.text_options.clear();
-		availableScenarios = Utils::GetAllFoldersNamesWithinFolder("scenarios");
+		availableScenarios = FileManager::GetAllFoldersNamesWithinFolder("scenarios");
 		for (int i = 0; i < availableScenarios.size(); i++) {
 			
 			/* options texts */

@@ -10,7 +10,7 @@
 #include <terrain.h>
 
 #include <global>
-#include <utils.h>
+#include <file_manager.h>
 
 using namespace glb;
 
@@ -270,7 +270,7 @@ namespace editor {
 			NewMapWindowIsOpen = false;
 
 			//Does the map folder already exist?
-			if (Utils::CheckIfFolderExists("scenarios/" + currentMapName)) {
+			if (FileManager::CheckIfFolderExists("scenarios/" + currentMapName)) {
 				Game::ResetGameObjects();
 
 				mapgen::reset_map();

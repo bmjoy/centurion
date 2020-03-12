@@ -6,7 +6,7 @@
 #include <locale>
 #include <fontCharacters-xml.hxx>
 
-#include <utils.h>
+#include <file_manager.h>
 
 using namespace glb;
 
@@ -73,7 +73,7 @@ void BitmapFont::create() {
 
 	/* Texture */
 
-	vector<Utils::file_info> fonts = Utils::GetAllFilesNamesWithinSubfolders("assets\\fonts", "png");
+	vector<FileManager::file_info> fonts = FileManager::GetAllFilesNamesWithinSubfolders("assets\\fonts", "png");
 	string fontName;
 
 	for (int i = 0; i < fonts.size(); i++){

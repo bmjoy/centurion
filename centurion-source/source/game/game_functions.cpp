@@ -1,6 +1,6 @@
 #include <game/strategy.h>
 #include <game/editor.h>
-#include <math>
+#include <maths.h>
 #include <engine.h>
 #include <player>
 #include <surface>

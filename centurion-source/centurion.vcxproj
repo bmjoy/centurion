@@ -22,7 +22,7 @@
     <VCProjectVersion>15.0</VCProjectVersion>
     <ProjectGuid>{29C92E4D-97E2-4049-A35E-F6A42D1C8AB9}</ProjectGuid>
     <RootNamespace>centurion</RootNamespace>
-    <WindowsTargetPlatformVersion>10.0.17763.0</WindowsTargetPlatformVersion>
+    <WindowsTargetPlatformVersion>10.0.18362.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
@@ -208,7 +208,6 @@ XCOPY "$(ProjectDir)xerces-c_3_1D_vc120.dll" "$(ProjectDir)$(OutDir)"</Command>
     <ClCompile Include="source\classes\game\game.cpp" />
     <ClCompile Include="source\classes\game\match.cpp" />
     <ClCompile Include="source\classes\game\strategy.cpp" />
-    <ClCompile Include="source\classes\logger.cpp" />
     <ClCompile Include="source\classes\object\building.cpp" />
     <ClCompile Include="source\classes\object\decoration.cpp" />
     <ClCompile Include="source\classes\object\object-data.cpp" />
@@ -233,7 +232,6 @@ XCOPY "$(ProjectDir)xerces-c_3_1D_vc120.dll" "$(ProjectDir)$(OutDir)"</Command>
     <ClCompile Include="source\interface\editor_ui.cpp" />
     <ClCompile Include="source\interface\menu_globaloptions.cpp" />
     <ClCompile Include="source\interface\object_ui.cpp" />
-    <ClCompile Include="source\math.cpp" />
     <ClCompile Include="source\menu\menu_functions.cpp" />
     <ClCompile Include="source\picking\editor_picking.cpp" />
     <ClCompile Include="source\picking\gameui_picking.cpp" />
@@ -254,7 +252,9 @@ XCOPY "$(ProjectDir)xerces-c_3_1D_vc120.dll" "$(ProjectDir)$(OutDir)"</Command>
     <ClCompile Include="source\primitives\shader.cpp" />
     <ClCompile Include="source\primitives\terrain.cpp" />
     <ClCompile Include="source\primitives\unit_sprite.cpp" />
-    <ClCompile Include="source\utils\utils.cpp" />
+    <ClCompile Include="source\utils\logger.cpp" />
+    <ClCompile Include="source\utils\maths.cpp" />
+    <ClCompile Include="source\utils\file_manager.cpp" />
     <ClInclude Include="source\classes\engine.h" />
     <ClInclude Include="source\classes\ErrorCodes-xml.hxx" />
     <ClInclude Include="source\classes\errorCodes.h" />
@@ -277,7 +277,9 @@ XCOPY "$(ProjectDir)xerces-c_3_1D_vc120.dll" "$(ProjectDir)$(OutDir)"</Command>
     <ClInclude Include="source\primitives\shader.h" />
     <ClInclude Include="source\primitives\terrain.h" />
     <ClInclude Include="source\primitives\unit_sprite.h" />
-    <ClInclude Include="source\utils\utils.h" />
+    <ClInclude Include="source\utils\logger.h" />
+    <ClInclude Include="source\utils\maths.h" />
+    <ClInclude Include="source\utils\file_manager.h" />
     <None Include="assets\shaders\bsprite\fragment.glsl">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
       <FileType>Document</FileType>
@@ -410,7 +412,6 @@ XCOPY "$(ProjectDir)xerces-c_3_1D_vc120.dll" "$(ProjectDir)$(OutDir)"</Command>
     <ClInclude Include="source\classes\game\game.h" />
     <ClInclude Include="source\classes\game\match.h" />
     <ClInclude Include="source\classes\game\strategy.h" />
-    <ClInclude Include="source\classes\logger.h" />
     <ClInclude Include="source\classes\object\building.h" />
     <ClInclude Include="source\classes\object\decoration.h" />
     <ClInclude Include="source\classes\object\object-data.h" />
@@ -453,7 +454,6 @@ XCOPY "$(ProjectDir)xerces-c_3_1D_vc120.dll" "$(ProjectDir)$(OutDir)"</Command>
     <ClInclude Include="source\audio\sound.h" />
     <ClInclude Include="source\audio\sound_buffer.h" />
     <ClInclude Include="source\common\global" />
-    <ClInclude Include="source\common\math" />
     <ClInclude Include="source\extern\includes\json.hpp" />
     <ClInclude Include="source\extern\includes\stb_image.h" />
   </ItemGroup>

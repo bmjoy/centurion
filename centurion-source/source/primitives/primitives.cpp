@@ -14,7 +14,7 @@
 #include "grid.h"
 #include "minimap_rectangle.h"
 
-#include <math>
+#include <maths.h>
 #include <global>
 
 AudioManager *Audio() { return &audioM; }

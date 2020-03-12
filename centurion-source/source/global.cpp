@@ -1,6 +1,6 @@
 #include <global>
 #include <surface>
-#include <math>
+#include <maths.h>
 #include <json.hpp>
 #include <game/strategy.h>
 #include <picking.h>
@@ -8,7 +8,7 @@
 #include <menu>
 
 #include <errorCodes.h>
-#include <utils.h>
+#include <file_manager.h>
 
 #include <engine.h>
 #include <interface>

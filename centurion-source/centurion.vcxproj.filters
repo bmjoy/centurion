@@ -189,9 +189,6 @@
     <ClCompile Include="source\gui\circle.cpp">
       <Filter>Source Files\gui</Filter>
     </ClCompile>
-    <ClCompile Include="source\math.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="source\global.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -333,9 +330,6 @@
     <ClCompile Include="source\classes\object\unit.cpp">
       <Filter>Source Files\classes\object</Filter>
     </ClCompile>
-    <ClCompile Include="source\classes\logger.cpp">
-      <Filter>Source Files\classes</Filter>
-    </ClCompile>
     <ClCompile Include="source\classes\picking.cpp">
       <Filter>Source Files\classes</Filter>
     </ClCompile>
@@ -344,9 +338,6 @@
     </ClCompile>
     <ClCompile Include="source\classes\object\object-data.cpp">
       <Filter>Source Files\classes\object</Filter>
-    </ClCompile>
-    <ClCompile Include="source\utils\utils.cpp">
-      <Filter>Source Files\utils</Filter>
     </ClCompile>
     <ClCompile Include="source\classes\translationsTable.cpp">
       <Filter>Source Files\classes</Filter>
@@ -365,6 +356,15 @@
     </ClCompile>
     <ClCompile Include="source\classes\engine.cpp">
       <Filter>Source Files\classes</Filter>
+    </ClCompile>
+    <ClCompile Include="source\utils\logger.cpp">
+      <Filter>Source Files\utils</Filter>
+    </ClCompile>
+    <ClCompile Include="source\utils\maths.cpp">
+      <Filter>Source Files\utils</Filter>
+    </ClCompile>
+    <ClCompile Include="source\utils\file_manager.cpp">
+      <Filter>Source Files\utils</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -431,9 +431,6 @@
     <ClInclude Include="source\common\headers">
       <Filter>Header Files\common</Filter>
     </ClInclude>
-    <ClInclude Include="source\common\math">
-      <Filter>Header Files\common</Filter>
-    </ClInclude>
     <ClInclude Include="source\common\global">
       <Filter>Header Files\common</Filter>
     </ClInclude>
@@ -482,9 +479,6 @@
     <ClInclude Include="source\classes\object\decoration.h">
       <Filter>Header Files\classes\object</Filter>
     </ClInclude>
-    <ClInclude Include="source\classes\logger.h">
-      <Filter>Header Files\classes</Filter>
-    </ClInclude>
     <ClInclude Include="source\classes\picking.h">
       <Filter>Header Files\classes</Filter>
     </ClInclude>
@@ -493,9 +487,6 @@
     </ClInclude>
     <ClInclude Include="source\classes\object\object-data.h">
       <Filter>Header Files\classes\object</Filter>
-    </ClInclude>
-    <ClInclude Include="source\utils\utils.h">
-      <Filter>Header Files\utils</Filter>
     </ClInclude>
     <ClInclude Include="source\classes\translationsTable.h">
       <Filter>Header Files\classes</Filter>
@@ -565,6 +556,15 @@
     </ClInclude>
     <ClInclude Include="source\classes\engine.h">
       <Filter>Header Files\classes</Filter>
+    </ClInclude>
+    <ClInclude Include="source\utils\logger.h">
+      <Filter>Header Files\utils</Filter>
+    </ClInclude>
+    <ClInclude Include="source\utils\maths.h">
+      <Filter>Header Files\utils</Filter>
+    </ClInclude>
+    <ClInclude Include="source\utils\file_manager.h">
+      <Filter>Header Files\utils</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

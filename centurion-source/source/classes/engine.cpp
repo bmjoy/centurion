@@ -1,5 +1,5 @@
 #include "engine.h"
-#include <utils.h>
+#include <file_manager.h>
 
 #include <global>
 #include <translationsTable.h>
@@ -583,7 +583,7 @@ int Engine::launch() {
 
 void Engine::read_data() {
 	//Read races data
-	vector<string> r_files = Utils::GetAllFilesNamesWithinFolder("assets/data/races");
+	vector<string> r_files = FileManager::GetAllFilesNamesWithinFolder("assets/data/races");
 	for (int i = 0; i < r_files.size(); ++i) {
 		ifstream path("assets/data/races/" + r_files[i]);
 		json dataRaces = json::parse(path);
@@ -597,7 +597,7 @@ void Engine::read_data() {
 		Game::AddRace(name, r);
 	}
 
-	vector<string> files = Utils::GetAllFilesNamesWithinFolder("assets/data/classes");
+	vector<string> files = FileManager::GetAllFilesNamesWithinFolder("assets/data/classes");
 
 	/* buildings and units */
 
@@ -641,14 +641,14 @@ void Engine::read_data() {
 
 	/* images */
 
-	vector<Utils::file_info> imagesInfoList = Utils::GetAllFilesNamesWithinSubfolders("assets\\ui", "png");
+	vector<FileManager::file_info> imagesInfoList = FileManager::GetAllFilesNamesWithinSubfolders("assets\\ui", "png");
 
 	for (int i = 0; i < imagesInfoList.size(); i++)
 		Img()->addPath(imagesInfoList[i].name, imagesInfoList[i].path);
 
 	/* terrain textures */
 
-	vector<Utils::file_info> texturesInfoList = Utils::GetAllFilesNamesWithinSubfolders("assets\\terrain\\textures", "png");
+	vector<FileManager::file_info> texturesInfoList = FileManager::GetAllFilesNamesWithinSubfolders("assets\\terrain\\textures", "png");
 
 	for (int i = 0; i < texturesInfoList.size(); i++)
 		MapTerrain()->addPath(texturesInfoList[i].name, texturesInfoList[i].path);

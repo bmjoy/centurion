@@ -6,7 +6,7 @@
 
 using namespace std;
 
-class Utils {
+class FileManager {
 public:
 
 	struct file_info {

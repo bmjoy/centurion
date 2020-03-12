@@ -3,13 +3,11 @@
 #include <settings.h>
 #include <iostream>
 #include <engine.h>
-#include <utils.h>
-
-
+#include <file_manager.h>
 
 vector<Logger::LogMessage> Logger::Messages;
-string Logger::fileDebugName = "logs/debug/Debug " + Utils::CurrentDateTime("%Y%m%d-%H%M%S") + ".xml";
-string Logger::fileParamsName = "logs/params/Params " + Utils::CurrentDateTime("%Y%m%d-%H%M%S") + ".xml";
+string Logger::fileDebugName = "logs/debug/Debug " + FileManager::CurrentDateTime("%Y%m%d-%H%M%S") + ".xml";
+string Logger::fileParamsName = "logs/params/Params " + FileManager::CurrentDateTime("%Y%m%d-%H%M%S") + ".xml";
 
 #pragma region Logger
 
@@ -58,13 +56,13 @@ void Logger::CleanLogs(void)
 {
 	try
 	{
-		vector<string> debugFiles = Utils::GetAllFilesNamesWithinFolder("logs/debug/");
+		vector<string> debugFiles = FileManager::GetAllFilesNamesWithinFolder("logs/debug/");
 		if (debugFiles.size() >= 10) {
-			Utils::RemoveFile("logs/debug/" + debugFiles[0]);
+			FileManager::RemoveFile("logs/debug/" + debugFiles[0]);
 		}
-		vector<string> paramsFiles = Utils::GetAllFilesNamesWithinFolder("logs/params/");
+		vector<string> paramsFiles = FileManager::GetAllFilesNamesWithinFolder("logs/params/");
 		if (paramsFiles.size() >= 10) {
-			Utils::RemoveFile("logs/params/" + paramsFiles[0]);
+			FileManager::RemoveFile("logs/params/" + paramsFiles[0]);
 		}
 	}
 	catch (...)
@@ -99,7 +97,6 @@ void Logger::SaveDebugXML() {
 }
 
 void Logger::SaveParamsXML() {
-
 	//Saving all parameters
 	ofstream logFile(fileParamsName);
 	if (logFile.is_open()) {
@@ -151,7 +148,7 @@ Logger::~Logger() { }
 Logger::LogMessage::LogMessage() { }
 
 Logger::LogMessage::LogMessage(string txt, string typ, string nms, string clss, string mtd) {
-	date = Utils::CurrentDateTime("%Y/%m/%d - %X");
+	date = FileManager::CurrentDateTime("%Y/%m/%d - %X");
 	type = typ;
 	text = txt;
 	cpp_namespace = nms;
@@ -161,23 +158,3 @@ Logger::LogMessage::LogMessage(string txt, string typ, string nms, string clss, 
 
 Logger::LogMessage::~LogMessage() { }
 #pragma endregion
-
-
-//void forceGameClosure(string errorCode, string errorText) {
-//	string eC = (TranslationsTable::GetTranslation("WORD_errorCode") == "") ? "Error code" : TranslationsTable::GetTranslation("WORD_errorCode");
-//	string text = "  " + eC + ": " + ErrorCodes::GetErrorCode(errorCode) + "\n\n  " + TranslationsTable::GetTranslation(errorText);
-//	if (language == "arabic") text = "  " + ErrorCodes::GetErrorCode(errorCode) + ": " + eC + "\n\n  " + TranslationsTable::GetTranslation(errorText);
-//	const int wideLength = sizeof(text.c_str()) * 128;
-//	WCHAR wstr[wideLength];
-//	MultiByteToWideChar(CP_UTF8, 0, text.c_str(), wideLength, wstr, wideLength);
-//	MessageBoxW(NULL, wstr, gameNameLPCWSTR, MB_ICONERROR);
-//	setBoolean("window-should-close", true);
-//}
-//
-//void showGameWarning(string warningText) {
-//	string text = "  " + TranslationsTable::GetTranslation(warningText);
-//	const int wideLength = sizeof(text.c_str()) * 128;
-//	WCHAR wstr[wideLength];
-//	MultiByteToWideChar(CP_UTF8, 0, text.c_str(), wideLength, wstr, wideLength);
-//	MessageBoxW(NULL, wstr, gameNameLPCWSTR, MB_ICONINFORMATION);
-//}

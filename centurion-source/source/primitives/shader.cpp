@@ -2,7 +2,7 @@
 
 #include <sstream>
 
-#include <utils.h>
+#include <file_manager.h>
 #include <logger.h>
 
 Shader::Shader() {
@@ -12,8 +12,8 @@ Shader::Shader() {
 
 void Shader::compile() {
 	// Compile and setup the shader
-	std::string vertexString = Utils::ReadFile(vPath);
-	std::string fragmentString = Utils::ReadFile(fPath);
+	std::string vertexString = FileManager::ReadFile(vPath);
+	std::string fragmentString = FileManager::ReadFile(fPath);
 	vShaderCode = vertexString.c_str();
 	fShaderCode = fragmentString.c_str();
 

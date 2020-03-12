@@ -2,7 +2,7 @@
 #include "translationsTable-xml.hxx"
 
 #include <logger.h>
-#include <utils.h>
+#include <file_manager.h>
 
 #pragma region Static variables
 
@@ -51,7 +51,7 @@ void TranslationsTable::ReadTranslationsTableXml(string lang)
 	{
 		if (languagesMap.empty()) {
 			int nLanguages = 0;
-			vector<string> filesName = Utils::GetAllFilesNamesWithinFolder("assets/data");
+			vector<string> filesName = FileManager::GetAllFilesNamesWithinFolder("assets/data");
 			for (int i = 0; i < filesName.size(); i++) {
 				if (filesName[i].substr(0, filesName[i].find('_')) == "translationTable") {
 					string lan = filesName[i].substr(filesName[i].find('_'));
