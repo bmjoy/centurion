@@ -1,6 +1,8 @@
-#include <primitives>
+#include "unit_sprite.h"
+
 #include <stb_image.h>
 #include <json.hpp>
+#include <fstream>
 
 UnitSprite::UnitSprite(){
 	vPath = "assets/shaders/usprite/vertex.glsl";

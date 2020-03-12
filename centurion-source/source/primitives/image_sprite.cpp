@@ -1,4 +1,5 @@
-#include <primitives>
+#include "image_sprite.h"
+
 #define STB_IMAGE_IMPLEMENTATION  
 #include <stb_image.h>  // manip. texture
 

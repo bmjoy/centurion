@@ -2,11 +2,12 @@
 #include <picking.h>
 #include <surface>
 #include <global>
-#include <engine/window.h>
-#include <engine/mouse.h>
+#include <engine.h>
+#include <utils.h>
+#include <translationsTable.h>
 
 using namespace glb;
-using namespace engine;
+
 
 namespace editor {
 
@@ -16,15 +17,15 @@ namespace editor {
 	
 	void OpenMapWindow::create() {
 		back_image = gui::Image("openmapwindow_back");
-		back_image.create("center", myWindow::Width / 2.f, myWindow::Height / 2.f, 0, 0, 0);
-		availableScenarios = get_all_folders_names_within_folder("scenarios");
+		back_image.create("center", Engine::myWindow::Width / 2.f, Engine::myWindow::Height / 2.f, 0, 0, 0);
+		availableScenarios = Utils::GetAllFoldersNamesWithinFolder("scenarios");
 		map_list.padding_left = 15.f;
 		map_list.padding_top = 15.f;
 		map_list.option_height = 25.f;
 
 		// startX and startY are TOP-LEFT coordinates (as in Paint)
-		startX = myWindow::Width / 2.f - back_image.getImageSize().x / 2.f;
-		startY = myWindow::Height / 2.f + back_image.getImageSize().y / 2.f;
+		startX = Engine::myWindow::Width / 2.f - back_image.getImageSize().x / 2.f;
+		startY = Engine::myWindow::Height / 2.f + back_image.getImageSize().y / 2.f;
 
 		map_list.pickingID = PickingUI::getPickingID();
 
@@ -40,9 +41,9 @@ namespace editor {
 
 
 		buttons_text[0] = gui::SimpleText("static");
-		buttons_text[0].create_static(getTranslation("EDITOR_openMapButtonClose"), "tahoma_13px", startX + 58.f, startY - 468.f, "center", "middle", vec4(255.f), "bold");
+		buttons_text[0].create_static(TranslationsTable::GetTranslation("EDITOR_openMapButtonClose"), "tahoma_13px", startX + 58.f, startY - 468.f, "center", "middle", vec4(255.f), "bold");
 		buttons_text[1] = gui::SimpleText("static");
-		buttons_text[1].create_static(getTranslation("EDITOR_openMapButtonOpen"), "tahoma_13px", startX + 314.f, startY - 468.f, "center", "middle", vec4(255.f), "bold");
+		buttons_text[1].create_static(TranslationsTable::GetTranslation("EDITOR_openMapButtonOpen"), "tahoma_13px", startX + 314.f, startY - 468.f, "center", "middle", vec4(255.f), "bold");
 
 		selectedID = -1;
 	}
@@ -50,7 +51,7 @@ namespace editor {
 	void OpenMapWindow::update() {
 		map_list.back_options.clear();
 		map_list.text_options.clear();
-		availableScenarios = get_all_folders_names_within_folder("scenarios");
+		availableScenarios = Utils::GetAllFoldersNamesWithinFolder("scenarios");
 		for (int i = 0; i < availableScenarios.size(); i++) {
 			
 			/* options texts */
@@ -76,7 +77,7 @@ namespace editor {
 		if (OpenMapWindowUpdate) update();
 
 		if (OpenMapWindowIsOpen) {
-			if (pick && engine::Mouse::LeftClick) {
+			if (pick && Engine::Mouse::LeftClick) {
 				for (int i = 0; i < availableScenarios.size(); i++) {
 					map_list.back_options[i].render(vec4(), true);
 				}
@@ -85,12 +86,12 @@ namespace editor {
 				picking();
 			}
 			if (!pick) {
-				if (KeyCode[GLFW_KEY_UP]) {
+				if (Engine::Keyboard::IsKeyPressed(GLFW_KEY_UP)) {
 					if (selectedID > 0) {
 						selectedID--;
 					}
 				}
-				if (KeyCode[GLFW_KEY_DOWN]) {
+				if (Engine::Keyboard::IsKeyPressed(GLFW_KEY_DOWN)) {
 					if (selectedID < availableScenarios.size() - 1) {
 						selectedID++;
 					}

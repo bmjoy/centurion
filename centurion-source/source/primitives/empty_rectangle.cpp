@@ -1,4 +1,4 @@
-#include <primitives>
+#include "empty_rectangle.h"
 
 EmptyRectangle::EmptyRectangle() {
 	vPath = "assets/shaders/empty_rectangle/vertex.glsl";

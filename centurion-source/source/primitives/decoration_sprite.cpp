@@ -1,6 +1,8 @@
-#include <primitives>
+#include "decoration_sprite.h"
 #include <stb_image.h>
 #include <json.hpp>
+#include <fstream>
+
 
 DecorationSprite::DecorationSprite(){
 	vPath = "assets/shaders/dsprite/vertex.glsl";

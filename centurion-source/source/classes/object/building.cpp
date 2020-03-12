@@ -1,11 +1,14 @@
 #include <object/building.h>
-#include <engine/engine.h>
+#include <engine.h>
 #include <stb_image.h>
 #include <player>
 #include <pathfinding>
 #include <game/strategy.h>
 #include <math>
 #include <interface>
+
+#include <primitives.h>
+#include <building_sprite.h>
 
 using namespace std;
 using namespace glm;
@@ -39,7 +42,7 @@ void Building::prepare() {
 	vec2 spriteSize = getSpriteSize(prop.ent_path);
 	prop.sprite_width = spriteSize.x;
 	prop.sprite_height = spriteSize.y;
-	prop.textureID = obj::BSprite()->getTextureId(className);
+	prop.textureID = BSprite()->getTextureId(className);
 
 	isCreated = false;
 }
@@ -89,7 +92,7 @@ void Building::create(string Name) {
 	vec2 spriteSize = getSpriteSize(prop.ent_path);
 	prop.sprite_width = spriteSize.x;
 	prop.sprite_height = spriteSize.y;
-	prop.textureID = obj::BSprite()->getTextureId(className);
+	prop.textureID = BSprite()->getTextureId(className);
 
 	(Name == "") ? name = className + "_" + to_string(picking_id) : name = Name;
 	buildingUI = new game::ObjectUI();
@@ -138,17 +141,17 @@ void Building::render(bool picking, int clickID, bool not_placeable) {
 	// has the building been selected?
 	selected = (picking_id == clickID);
 
-	if (engine::Engine::getEnvironment() == "editor" && !Game::Minimap::IsActive()) {
+	if (Engine::getEnvironment() == "editor" && !Game::Minimap::IsActive()) {
 		if (selected && !editor::addingObject) circle[0].render(vec4(255.f), position.x, position.y - data["radius"].get<float>() / 15.5f); // selection circle (editor only)
 		if (selected && (prop.is_townhall || prop.is_villagehall) && !editor::addingObject) circle[1].render(vec4(0, 255, 255, 255), position.x, position.y); // selection circle (editor only)
 	}
 
-	if (engine::Engine::getEnvironment() == "game" && selected) {
+	if (Engine::getEnvironment() == "game" && selected) {
 		game::GAME_UI()->set_ui(buildingUI);
 	}
 
 	// rendering
-	obj::BSprite()->render(prop.textureID, prop.clickable_in_minimap, position.x, position.y, prop.sprite_width, prop.sprite_height, picking, picking_id, selected, player->getPlayerColor(), not_placeable);
+	BSprite()->render(prop.textureID, prop.clickable_in_minimap, position.x, position.y, prop.sprite_width, prop.sprite_height, picking, picking_id, selected, player->getPlayerColor(), not_placeable);
 }
 
 int Building::UnitsInBuilding() {

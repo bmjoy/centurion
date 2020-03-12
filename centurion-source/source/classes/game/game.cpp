@@ -4,21 +4,26 @@
 #include "strategy.h"
 #include <picking.h>
 #include <math>
-#include <engine/mouse.h>
-#include <engine/window.h>
-#include <engine/camera.h>
+#include <engine.h>
 #include <interface>
 #include "editor.h"
+
+#include <primitives.h>
+#include <terrain.h>
+#include <grid.h>
+#include <empty_rectangle.h>
+#include <filled_rectangle.h>
+#include <minimap_rectangle.h>
 
 #pragma region Namespaces
 
 using namespace glb;
-using namespace engine;
+
 
 #pragma endregion
 
 
-#pragma region Surface
+#pragma region Surface class
 
 bool Game::Surface::Wireframe = false;
 bool Game::Surface::isGridEnabled;
@@ -28,14 +33,14 @@ Game::Surface::Surface() {}
 void Game::Surface::Reset() {
 	isGridEnabled = false;
 	mapgen::reset_map();
-	obj::MapGrid()->reset();
-	obj::MapTerrain()->updateHeightsBuffer();
-	obj::MapTerrain()->updateTextureBuffer();
+	MapGrid()->reset();
+	MapTerrain()->updateHeightsBuffer();
+	MapTerrain()->updateTextureBuffer();
 }
 
 void Game::Surface::CreateNoise() {
 	mapgen::generateRandomMap();
-	obj::MapTerrain()->updateHeightsBuffer();
+	MapTerrain()->updateHeightsBuffer();
 
 	stringstream ss;
 	ss << "Min(z) = " << mapgen::minZ << "; Max(z) = " << mapgen::maxZ;
@@ -45,15 +50,15 @@ void Game::Surface::CreateNoise() {
 }
 
 void Game::Surface::UpdateGrid() {
-	obj::MapGrid()->update();
+	MapGrid()->update();
 }
 
 void Game::Surface::Render(bool tracing) {
 
-	obj::MapTerrain()->render(tracing);
+	MapTerrain()->render(tracing);
 
 	if (isGridEnabled && !tracing) {
-		obj::MapGrid()->render();
+		MapGrid()->render();
 	}
 }
 
@@ -61,7 +66,7 @@ Game::Surface::~Surface() {}
 
 #pragma endregion
 
-#pragma region Selection rectangle
+#pragma region Selection rectangle class
 
 Game::SelectionRectangle::SelRectPoints Game::SelectionRectangle::Coordinates;
 float Game::SelectionRectangle::cameraLastX = 0.f;
@@ -102,20 +107,20 @@ bool Game::SelectionRectangle::IsInRectangle(array<float, 8> &coords) {
 }
 
 void Game::SelectionRectangle::Render() {
-	if (Mouse::LeftHold) {
+	if (Engine::Mouse::LeftHold) {
 
 		if (SelectionRectangle::IsActive() == false) {
 			Logger::Info("Selection rectangle enabled.");
-			Coordinates.startX = Mouse::GetXLeftClick() * myWindow::WidthZoomed / myWindow::Width + cameraLastX;
-			Coordinates.startY = Mouse::GetYLeftClick() * myWindow::HeightZoomed / myWindow::Height + cameraLastY;
+			Coordinates.startX = Engine::Mouse::GetXLeftClick() * Engine::myWindow::WidthZoomed / Engine::myWindow::Width + cameraLastX;
+			Coordinates.startY = Engine::Mouse::GetYLeftClick() * Engine::myWindow::HeightZoomed / Engine::myWindow::Height + cameraLastY;
 		}
-		Coordinates.lastX = Mouse::GetXPosition() * myWindow::WidthZoomed / myWindow::Width + Camera::GetXPosition();
-		Coordinates.lastY = Mouse::GetYPosition() * myWindow::HeightZoomed / myWindow::Height + Camera::GetYPosition();
-		if (Mouse::GetYPosition() < myWindow::BottomBarHeight) {
-			Coordinates.lastY = myWindow::BottomBarHeight*myWindow::HeightZoomed / myWindow::Height + 1.0f + Camera::GetYPosition();
+		Coordinates.lastX = Engine::Mouse::GetXPosition() * Engine::myWindow::WidthZoomed / Engine::myWindow::Width + Engine::Camera::GetXPosition();
+		Coordinates.lastY = Engine::Mouse::GetYPosition() * Engine::myWindow::HeightZoomed / Engine::myWindow::Height + Engine::Camera::GetYPosition();
+		if (Engine::Mouse::GetYPosition() < Engine::myWindow::BottomBarHeight) {
+			Coordinates.lastY = Engine::myWindow::BottomBarHeight*Engine::myWindow::HeightZoomed / Engine::myWindow::Height + 1.0f + Engine::Camera::GetYPosition();
 		}
-		if (Mouse::GetYPosition() > myWindow::Height - myWindow::TopBarHeight) {
-			Coordinates.lastY = myWindow::HeightZoomed - myWindow::TopBarHeight*myWindow::HeightZoomed / myWindow::Height - 1.0f + Camera::GetYPosition();
+		if (Engine::Mouse::GetYPosition() > Engine::myWindow::Height - Engine::myWindow::TopBarHeight) {
+			Coordinates.lastY = Engine::myWindow::HeightZoomed - Engine::myWindow::TopBarHeight*Engine::myWindow::HeightZoomed / Engine::myWindow::Height - 1.0f + Engine::Camera::GetYPosition();
 		}
 
 		float w = (Coordinates.lastX - Coordinates.startX);
@@ -144,8 +149,8 @@ void Game::SelectionRectangle::Render() {
 	}
 	else {
 		if (SelectionRectangle::IsActive()) Logger::Info("Selection rectangle disabled.");
-		cameraLastX = Camera::GetXPosition();
-		cameraLastY = Camera::GetYPosition();
+		cameraLastX = Engine::Camera::GetXPosition();
+		cameraLastY = Engine::Camera::GetYPosition();
 		Coordinates.startX = -0.1f;
 		Coordinates.startY = -0.1f;
 		Coordinates.lastX = -0.1f;
@@ -160,7 +165,7 @@ void Game::SelectionRectangle::Render() {
 
 #pragma endregion
 
-#pragma region Minimap prerendered
+#pragma region Minimap prerendered class
 
 bool Game::Minimap::isCreated = false;
 bool Game::Minimap::isActive = false;
@@ -169,17 +174,25 @@ bool Game::Minimap::isBlocked = false;
 Game::Minimap::Minimap() {}
 
 void Game::Minimap::Create() {
-	obj::MMRectangle()->update();
+	MMRectangle()->update();
 	isCreated = true;
 }
 
 void Game::Minimap::Render() {
-	obj::MMRectangle()->render();
+	MMRectangle()->render();
 }
 
 Game::Minimap::~Minimap() {}
 
 #pragma endregion
+
+#pragma region Race class
+
+Game::Race::Race() { };
+Game::Race::~Race() { };
+
+#pragma endregion
+
 
 #pragma region Static variables
 
@@ -190,6 +203,9 @@ float Game::cameraToX;
 float Game::cameraToY;
 int Game::numberOfPlayers = 1;
 GObject* Game::GameObjects[MAX_NUMBER_OF_OBJECTS] = { nullptr };
+vector<string> Game::racesName;
+map<string, Game::Race> Game::races;
+vector<vec3> Game::listOfColors;
 
 #pragma endregion
 
@@ -306,7 +322,7 @@ void Game::RenderObjectsPicking() {
 		return;
 	}
 
-	if ((Mouse::RightClick || Mouse::LeftClick) && !SelectionRectangle::IsActive()) {
+	if ((Engine::Mouse::RightClick || Engine::Mouse::LeftClick) && !SelectionRectangle::IsActive()) {
 
 		for (int i = 1; i < MAX_NUMBER_OF_OBJECTS; i++) {
 			if (GameObjects[i] != nullptr) {
@@ -314,8 +330,8 @@ void Game::RenderObjectsPicking() {
 			}
 		}
 
-		if (Mouse::LeftClick) Picking::leftClickID = Picking::GetIdFromClick(PICKING_LEFT);
-		if (Mouse::RightClick) Picking::rightClickID = Picking::GetIdFromClick(PICKING_RIGHT);
+		if (Engine::Mouse::LeftClick) Picking::leftClickID = Picking::GetIdFromClick(PICKING_LEFT);
+		if (Engine::Mouse::RightClick) Picking::rightClickID = Picking::GetIdFromClick(PICKING_RIGHT);
 
 		if (Minimap::IsActive()) {
 			Minimap::Unblock();
@@ -339,23 +355,54 @@ void Game::RenderObjects() {
 }
 
 void Game::GoToPointFromMinimap() {
-	if (Mouse::LeftClick && cursorInGameScreen()) {
-		cameraToX = Mouse::GetXLeftClick() / myWindow::Width*(float)MEDIUM_MAP_WIDTH - myWindow::WidthZoomed / 2.f;
-		cameraToY = getYMinimapCoord(Mouse::GetYLeftClick()) / myWindow::Height*(float)MEDIUM_MAP_HEIGHT - myWindow::HeightZoomed / 2.f;
+	if (Engine::Mouse::LeftClick && cursorInGameScreen()) {
+		cameraToX = Engine::Mouse::GetXLeftClick() / Engine::myWindow::Width*(float)MEDIUM_MAP_WIDTH - Engine::myWindow::WidthZoomed / 2.f;
+		cameraToY = getYMinimapCoord(Engine::Mouse::GetYLeftClick()) / Engine::myWindow::Height*(float)MEDIUM_MAP_HEIGHT - Engine::myWindow::HeightZoomed / 2.f;
 		// if you are clicking on a townhall you have to double click 
 		// to move the camera there and quit minimap
 		if (Picking::leftClickID > 0 && Picking::hasDoubleClicked()) {
-			cameraToX = GameObjects[Picking::leftClickID]->AsBuilding()->get_xPos() - myWindow::WidthZoomed / 2.f;
-			cameraToY = GameObjects[Picking::leftClickID]->AsBuilding()->get_yPos() - myWindow::HeightZoomed / 2.f;
+			cameraToX = GameObjects[Picking::leftClickID]->AsBuilding()->get_xPos() - Engine::myWindow::WidthZoomed / 2.f;
+			cameraToY = GameObjects[Picking::leftClickID]->AsBuilding()->get_yPos() - Engine::myWindow::HeightZoomed / 2.f;
 			Game::Minimap::Unblock();
 		}
 		//------------------------------------------------
 		if (Game::Minimap::IsBlocked() == false) {
-			Camera::GoToPoint(cameraToX, cameraToY);
+			Engine::Camera::GoToPoint(cameraToX, cameraToY);
 			Game::Minimap::Disable();
-			Mouse::LeftClick = false;
-			Mouse::LeftHold = false;
+			Engine::Mouse::LeftClick = false;
+			Engine::Mouse::LeftHold = false;
 		}
+	}
+}
+
+void Game::AddRace(string race_name, Race r)
+{
+	races[race_name] = r;
+	racesName.push_back("RACE_" + race_name);
+}
+
+Game::Race *Game::GetRace(string race_name)
+{
+	if (races.count(race_name) > 0) {
+		return &races[race_name];
+	}
+	return nullptr;
+}
+
+void Game::GenerateOutposts(vector<vec2> &locs) {
+
+	string className = "routpost";
+
+	for (int i = 0; i < locs.size(); i++) {
+		Building* b = new Building();
+		b->set_class(className);
+		b->set_type("building");
+		b->set_player(0);
+		b->set_position(vec3(locs[i].x, locs[i].y, 0.f));
+		b->set_id(PickingObject::GetPickingId());
+		b->set_settlement_name("Outpost_" + i);
+		b->create();
+		GameObjects[b->get_id()] = b;
 	}
 }
 
@@ -461,7 +508,7 @@ void Game::GenerateSettlements(vector<vec2> &locs) {
 	}
 
 	// update texture buffer
-	obj::MapTerrain()->updateTextureBuffer();
+	MapTerrain()->updateTextureBuffer();
 
 	// update buildings info
 	UpdateSettlementBuildings();
@@ -482,23 +529,6 @@ void Game::UpdateSettlementBuildings() {
 				}
 			}
 		}
-	}
-}
-
-void Game::GenerateOutposts(vector<vec2> &locs) {
-
-	string className = "routpost";
-
-	for (int i = 0; i < locs.size(); i++) {
-		Building* b = new Building();
-		b->set_class(className);
-		b->set_type("building");
-		b->set_player(0);
-		b->set_position(vec3(locs[i].x, locs[i].y, 0.f));
-		b->set_id(PickingObject::GetPickingId());
-		b->set_settlement_name("Outpost_" + i);
-		b->create();
-		GameObjects[b->get_id()] = b;
 	}
 }
 

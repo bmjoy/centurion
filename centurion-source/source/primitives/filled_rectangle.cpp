@@ -1,4 +1,4 @@
-#include <primitives>
+#include "filled_rectangle.h"
 
 FilledRectangle::FilledRectangle(){
 	vPath = "assets/shaders/filled_rectangle/vertex.glsl";

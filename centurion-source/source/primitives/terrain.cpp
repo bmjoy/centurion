@@ -1,4 +1,5 @@
-#include <primitives>
+#include "terrain.h"
+
 #include <stb_image.h>
 #include <game/strategy.h>
 #include <surface>

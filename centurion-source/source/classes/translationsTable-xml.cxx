@@ -38,7 +38,7 @@
 
 #include <xsd/cxx/pre.hxx>
 
-#include "translationTable-xml.hxx"
+#include "translationsTable-xml.hxx"
 
 // translationTable
 // 

@@ -97,12 +97,6 @@
     <Filter Include="Source Files\classes">
       <UniqueIdentifier>{10e4802a-a190-46d5-93e6-0d48b95d7ebf}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Header Files\classes\engine">
-      <UniqueIdentifier>{08058b61-c5ec-4f30-91fe-002a98aeb85c}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source Files\classes\engine">
-      <UniqueIdentifier>{5718fb39-22a6-403d-97b2-c44b80655835}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Header Files\classes\game">
       <UniqueIdentifier>{a9e919bf-51a6-4e28-953f-820dc87c10ce}</UniqueIdentifier>
     </Filter>
@@ -114,6 +108,15 @@
     </Filter>
     <Filter Include="Source Files\classes\object">
       <UniqueIdentifier>{351fdacb-0f47-4ff8-85c3-02f5d91e47be}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\utils">
+      <UniqueIdentifier>{6f8ededa-6012-4857-8e38-642ea6a629ab}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\utils">
+      <UniqueIdentifier>{ed95aebc-0b19-4289-a4e3-948ac379884d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\primitives">
+      <UniqueIdentifier>{21c5b0f0-af5d-4410-9e26-5f766460cf8e}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -155,9 +158,6 @@
     </ClCompile>
     <ClCompile Include="source\gui\image.cpp">
       <Filter>Source Files\gui</Filter>
-    </ClCompile>
-    <ClCompile Include="source\surface\surface.cpp">
-      <Filter>Source Files\surface</Filter>
     </ClCompile>
     <ClCompile Include="source\interface\editor_menu.cpp">
       <Filter>Source Files\interface</Filter>
@@ -306,21 +306,6 @@
     <ClCompile Include="source\classes\Settings-xml.cxx">
       <Filter>Source Files\classes</Filter>
     </ClCompile>
-    <ClCompile Include="source\classes\engine\engine.cpp">
-      <Filter>Source Files\classes\engine</Filter>
-    </ClCompile>
-    <ClCompile Include="source\classes\engine\window.cpp">
-      <Filter>Source Files\classes\engine</Filter>
-    </ClCompile>
-    <ClCompile Include="source\classes\engine\camera.cpp">
-      <Filter>Source Files\classes\engine</Filter>
-    </ClCompile>
-    <ClCompile Include="source\classes\engine\mouse.cpp">
-      <Filter>Source Files\classes\engine</Filter>
-    </ClCompile>
-    <ClCompile Include="source\classes\translationTable-xml.cxx">
-      <Filter>Source Files\classes</Filter>
-    </ClCompile>
     <ClCompile Include="source\classes\fontCharacters-xml.cxx">
       <Filter>Source Files\classes</Filter>
     </ClCompile>
@@ -359,6 +344,27 @@
     </ClCompile>
     <ClCompile Include="source\classes\object\object-data.cpp">
       <Filter>Source Files\classes\object</Filter>
+    </ClCompile>
+    <ClCompile Include="source\utils\utils.cpp">
+      <Filter>Source Files\utils</Filter>
+    </ClCompile>
+    <ClCompile Include="source\classes\translationsTable.cpp">
+      <Filter>Source Files\classes</Filter>
+    </ClCompile>
+    <ClCompile Include="source\classes\translationsTable-xml.cxx">
+      <Filter>Source Files\classes</Filter>
+    </ClCompile>
+    <ClCompile Include="source\classes\ErrorCodes-xml.cxx">
+      <Filter>Source Files\classes</Filter>
+    </ClCompile>
+    <ClCompile Include="source\classes\errorCodes.cpp">
+      <Filter>Source Files\classes</Filter>
+    </ClCompile>
+    <ClCompile Include="source\primitives\primitives.cpp">
+      <Filter>Source Files\primitives</Filter>
+    </ClCompile>
+    <ClCompile Include="source\classes\engine.cpp">
+      <Filter>Source Files\classes</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -431,9 +437,6 @@
     <ClInclude Include="source\common\global">
       <Filter>Header Files\common</Filter>
     </ClInclude>
-    <ClInclude Include="source\common\primitives">
-      <Filter>Header Files\common</Filter>
-    </ClInclude>
     <ClInclude Include="source\audio\vorbis\vorbis_file.h">
       <Filter>Header Files\audio\vorbis</Filter>
     </ClInclude>
@@ -450,21 +453,6 @@
       <Filter>Header Files\classes</Filter>
     </ClInclude>
     <ClInclude Include="source\classes\Settings-xml.hxx">
-      <Filter>Header Files\classes</Filter>
-    </ClInclude>
-    <ClInclude Include="source\classes\engine\engine.h">
-      <Filter>Header Files\classes\engine</Filter>
-    </ClInclude>
-    <ClInclude Include="source\classes\engine\window.h">
-      <Filter>Header Files\classes\engine</Filter>
-    </ClInclude>
-    <ClInclude Include="source\classes\engine\camera.h">
-      <Filter>Header Files\classes\engine</Filter>
-    </ClInclude>
-    <ClInclude Include="source\classes\engine\mouse.h">
-      <Filter>Header Files\classes\engine</Filter>
-    </ClInclude>
-    <ClInclude Include="source\classes\translationTable-xml.hxx">
       <Filter>Header Files\classes</Filter>
     </ClInclude>
     <ClInclude Include="source\classes\fontCharacters-xml.hxx">
@@ -505,6 +493,78 @@
     </ClInclude>
     <ClInclude Include="source\classes\object\object-data.h">
       <Filter>Header Files\classes\object</Filter>
+    </ClInclude>
+    <ClInclude Include="source\utils\utils.h">
+      <Filter>Header Files\utils</Filter>
+    </ClInclude>
+    <ClInclude Include="source\classes\translationsTable.h">
+      <Filter>Header Files\classes</Filter>
+    </ClInclude>
+    <ClInclude Include="source\classes\translationsTable-xml.hxx">
+      <Filter>Header Files\classes</Filter>
+    </ClInclude>
+    <ClInclude Include="source\classes\ErrorCodes-xml.hxx">
+      <Filter>Header Files\classes</Filter>
+    </ClInclude>
+    <ClInclude Include="source\classes\errorCodes.h">
+      <Filter>Header Files\classes</Filter>
+    </ClInclude>
+    <ClInclude Include="source\primitives\header_primitives.h">
+      <Filter>Header Files\primitives</Filter>
+    </ClInclude>
+    <ClInclude Include="source\primitives\primitives.h">
+      <Filter>Header Files\primitives</Filter>
+    </ClInclude>
+    <ClInclude Include="source\primitives\unit_sprite.h">
+      <Filter>Header Files\primitives</Filter>
+    </ClInclude>
+    <ClInclude Include="source\primitives\audio_manager.h">
+      <Filter>Header Files\primitives</Filter>
+    </ClInclude>
+    <ClInclude Include="source\primitives\bitmap_font.h">
+      <Filter>Header Files\primitives</Filter>
+    </ClInclude>
+    <ClInclude Include="source\primitives\building_sprite.h">
+      <Filter>Header Files\primitives</Filter>
+    </ClInclude>
+    <ClInclude Include="source\primitives\cursor_image.h">
+      <Filter>Header Files\primitives</Filter>
+    </ClInclude>
+    <ClInclude Include="source\primitives\decoration_sprite.h">
+      <Filter>Header Files\primitives</Filter>
+    </ClInclude>
+    <ClInclude Include="source\primitives\empty_circle.h">
+      <Filter>Header Files\primitives</Filter>
+    </ClInclude>
+    <ClInclude Include="source\primitives\empty_rectangle.h">
+      <Filter>Header Files\primitives</Filter>
+    </ClInclude>
+    <ClInclude Include="source\primitives\filled_rectangle.h">
+      <Filter>Header Files\primitives</Filter>
+    </ClInclude>
+    <ClInclude Include="source\primitives\grid.h">
+      <Filter>Header Files\primitives</Filter>
+    </ClInclude>
+    <ClInclude Include="source\primitives\image_sprite.h">
+      <Filter>Header Files\primitives</Filter>
+    </ClInclude>
+    <ClInclude Include="source\primitives\light.h">
+      <Filter>Header Files\primitives</Filter>
+    </ClInclude>
+    <ClInclude Include="source\primitives\minimap_rectangle.h">
+      <Filter>Header Files\primitives</Filter>
+    </ClInclude>
+    <ClInclude Include="source\primitives\shader.h">
+      <Filter>Header Files\primitives</Filter>
+    </ClInclude>
+    <ClInclude Include="source\primitives\terrain.h">
+      <Filter>Header Files\primitives</Filter>
+    </ClInclude>
+    <ClInclude Include="source\primitives\primitives_structs.h">
+      <Filter>Header Files\primitives</Filter>
+    </ClInclude>
+    <ClInclude Include="source\classes\engine.h">
+      <Filter>Header Files\classes</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -572,9 +632,6 @@
       <Filter>Header Files\common</Filter>
     </None>
     <None Include="source\common\pathfinding">
-      <Filter>Header Files\common</Filter>
-    </None>
-    <None Include="source\common\picking">
       <Filter>Header Files\common</Filter>
     </None>
     <None Include="source\common\menu">

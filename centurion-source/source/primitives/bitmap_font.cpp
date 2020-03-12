@@ -1,9 +1,12 @@
-#include <primitives>
+#include "bitmap_font.h"
+
+#include <settings.h>
 #include <stb_image.h>
-#include <global>
 #include <codecvt>
 #include <locale>
 #include <fontCharacters-xml.hxx>
+
+#include <utils.h>
 
 using namespace glb;
 
@@ -70,7 +73,7 @@ void BitmapFont::create() {
 
 	/* Texture */
 
-	vector<file_info> fonts = get_all_files_names_within_subfolders("assets\\fonts", "png");
+	vector<Utils::file_info> fonts = Utils::GetAllFilesNamesWithinSubfolders("assets\\fonts", "png");
 	string fontName;
 
 	for (int i = 0; i < fonts.size(); i++){
@@ -118,7 +121,7 @@ void BitmapFont::create() {
 		}
 		catch (...) {
 			std::cout << "An error occurred reading font XML files." << std::endl;
-			forceGameClosure("NOT_FOUND", "noFile");
+			//forceGameClosure("NOT_FOUND", "noFile");
 		}
 		
 	}

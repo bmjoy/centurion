@@ -1,6 +1,9 @@
 #include <gui>
 #include <global>
-#include <engine/window.h>
+#include <engine.h>
+
+#include <logger.h>
+#include "bitmap_font.h"
 
 namespace gui {
 
@@ -17,8 +20,8 @@ namespace gui {
 
 	void SimpleText::create_static(string text, string font, float x, float y, string halign, string valign, vec4 color, string fontWeight) {
 		if (type == "dynamic") Logger::Info("Dynamic text created with static option");
-		if (x < 0) x += engine::myWindow::Width;
-		if (y < 0) y += engine::myWindow::Height;
+		if (x < 0) x += Engine::myWindow::Width;
+		if (y < 0) y += Engine::myWindow::Height;
 
 		hAlign = halign;
 		vAlign = valign;
@@ -29,7 +32,7 @@ namespace gui {
 			fontName = fontName + "_bold";
 			isBold = true;
 		}
-		data = obj::Text()->create_static(fontName, text, x, y, isBold);
+		data = Text()->create_static(fontName, text, x, y, isBold);
 		data.y = y;
 		data.color = color;
 		data.shadow = shadow;
@@ -37,17 +40,17 @@ namespace gui {
 
 	void SimpleText::render_static() {
 		if (type == "dynamic") Logger::Info("Dynamic text rendered with static option");
-		obj::Text()->set_align(hAlign, vAlign);		
-		obj::Text()->render_static(data);
+		Text()->set_align(hAlign, vAlign);		
+		Text()->render_static(data);
 	}
 	void SimpleText::render_dynamic(string text, string Font, float x, float y, vec4 color, string halign, string valign, string fontWeight) {
 		if (type == "static") Logger::Info("Static text rendered with dynamic option");
-		obj::Text()->set_align(halign, valign);
+		Text()->set_align(halign, valign);
 		if (fontWeight == "normal") {
-			obj::Text()->render_dynamic(Font, x, y, text, color, shadow, false);
+			Text()->render_dynamic(Font, x, y, text, color, shadow, false);
 		}
 		else {
-			obj::Text()->render_dynamic(Font, x, y, text, color, shadow, true);
+			Text()->render_dynamic(Font, x, y, text, color, shadow, true);
 		}
 	}
 

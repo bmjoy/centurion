@@ -2,8 +2,8 @@
 #include <game/strategy.h>
 #include <picking.h>
 #include <menu>
-#include <engine/mouse.h>
-#include <engine/window.h>
+#include <engine.h>
+#include <translationsTable.h>
 
 using namespace glb;
 using namespace glm;
@@ -14,29 +14,31 @@ namespace menu {
 
 	void GlobalOptions::create() {
 
-		startX = engine::myWindow::Width / 2.f - 300.f;
-		startY = engine::myWindow::Height / 2.f + 200.f;
+		startX = Engine::myWindow::Width / 2.f - 300.f;
+		startY = Engine::myWindow::Height / 2.f + 200.f;
 
 		back.create("border-filled", startX, startY, 600.f, 400.f, "top-left", 0);
 
 		vector<string> form_options;
-		for (map<string,int>::iterator i = availableLanguages.begin(); i != availableLanguages.end(); i++)
+		map<string, int> langMap = TranslationsTable::GetLanguagesMap();
+		for (map<string, int>::iterator i = langMap.begin(); i != langMap.end(); i++) {
 			form_options.push_back("LANG_" + i->first);
+		}
 		languages = gui::FormInput(true);
 		languages.create(startX + 150.f, startY - 77.f, 150.f, 20.f, form_options, PickingUI::getPickingID());
 		languages.selectedText = "LANG_"+ Settings::Language;
 		PickingUI::addValueToPickingList(PickingUI::getLastID() + 1, "GlobalOptions_formLanguages");
 
 		text[0] = gui::SimpleText("static");
-		text[0].create_static(getTranslation("OPTIONS_Title"), "tahoma_15px", startX + 20.f, startY - 40.f, "left", "normal", vec4(255), "bold");
+		text[0].create_static(TranslationsTable::GetTranslation("OPTIONS_Title"), "tahoma_15px", startX + 20.f, startY - 40.f, "left", "normal", vec4(255), "bold");
 
 		text[1] = gui::SimpleText("static");
-		text[1].create_static(getTranslation("OPTIONS_LanguageText"), "tahoma_15px", startX + 20.f, startY - 93.f, "left", "normal", vec4(255), "normal");
+		text[1].create_static(TranslationsTable::GetTranslation("OPTIONS_LanguageText"), "tahoma_15px", startX + 20.f, startY - 93.f, "left", "normal", vec4(255), "normal");
 
 	}
 
 	void GlobalOptions::render(bool pick) {
-		if (pick && engine::Mouse::LeftClick) {
+		if (pick && Engine::Mouse::LeftClick) {
 			languages.render(true, vec4());
 			picking();
 		}
@@ -49,8 +51,8 @@ namespace menu {
 	}
 
 	void GlobalOptions::picking() {
-		GLint mouseX = (GLint)engine::Mouse::GetXPosition();
-		GLint mouseY = (GLint)engine::Mouse::GetYPosition();
+		GLint mouseX = (GLint)Engine::Mouse::GetXPosition();
+		GLint mouseY = (GLint)Engine::Mouse::GetYPosition();
 		Picking::leftClickID_UI = Picking::GetIdFromClick();
 		string clickName = PickingUI::getPickedObjectName(Picking::leftClickID_UI);
 

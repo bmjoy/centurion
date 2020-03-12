@@ -1,10 +1,10 @@
 #include <interface>
 #include <picking.h>
-#include <engine/engine.h>
+#include <engine.h>
 #include <game/strategy.h>
 
 using namespace glb;
-using namespace engine;
+
 
 namespace game {
 	void UIGame::picking() {

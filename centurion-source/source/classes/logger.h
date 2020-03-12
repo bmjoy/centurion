@@ -23,6 +23,7 @@ public:
 	static void Warn(string msg);
 	static void Error(LogMessage msg);
 	static void Error(string msg);
+	static void CleanLogs(void);
 	static void SaveDebugXML();
 	static void SaveParamsXML();
 	static void AddMessage(LogMessage msg) { Messages.push_back(msg); }

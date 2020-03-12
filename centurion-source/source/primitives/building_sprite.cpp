@@ -1,7 +1,7 @@
-#include <primitives>
+#include "building_sprite.h"
 #include <stb_image.h>
 #include <json.hpp>
-#include <global>
+
 #include <game/strategy.h>
 
 

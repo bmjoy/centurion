@@ -1,6 +1,8 @@
 #include <gui>
 #include <global>
-#include <engine/mouse.h>
+#include <engine.h>
+
+#include <translationsTable.h>
 
 namespace gui {
 
@@ -46,7 +48,7 @@ namespace gui {
 
 				/* options text saved in memory */
 				gui::SimpleText tempText = gui::SimpleText("static");
-				tempText.create_static(getTranslation(form_options[j]), "tahoma_15px", x + 2.f, y1 - height / 1.5f - 5.f, "left", "normal", vec4(255.f));
+				tempText.create_static(TranslationsTable::GetTranslation(form_options[j]), "tahoma_15px", x + 2.f, y1 - height / 1.5f - 5.f, "left", "normal", vec4(255.f));
 				optionsText.push_back(tempText);
 			}
 		}
@@ -54,7 +56,7 @@ namespace gui {
 			if (hasText) {
 				text = gui::SimpleText("static");
 	
-				text.create_static(getTranslation(form_options[selectedTextID]), "tahoma_15px", mainTextPos.x, mainTextPos.y, "left", "normal", vec4(255.f));
+				text.create_static(TranslationsTable::GetTranslation(form_options[selectedTextID]), "tahoma_15px", mainTextPos.x, mainTextPos.y, "left", "normal", vec4(255.f));
 			}
 		}
 		selectedText = form_options[selectedTextID];
@@ -75,7 +77,7 @@ namespace gui {
 
 			if (boolOptions) {
 				// selected text
-				text.render_dynamic(getTranslation(selectedText), "tahoma_15px", mainTextPos.x, mainTextPos.y, vec4(255.f), "left", "normal");
+				text.render_dynamic(TranslationsTable::GetTranslation(selectedText), "tahoma_15px", mainTextPos.x, mainTextPos.y, vec4(255.f), "left", "normal");
 				if (isOpened) {
 
 					// background and border
@@ -108,7 +110,7 @@ namespace gui {
 	}
 
 	int FormInput::get_clicked_option() {
-		int i = int((engine::Mouse::GetYLeftClick() - y) / height)*(-1);
+		int i = int((Engine::Mouse::GetYLeftClick() - y) / height)*(-1);
 		return i;
 	}
 	void FormInput::select_next() {

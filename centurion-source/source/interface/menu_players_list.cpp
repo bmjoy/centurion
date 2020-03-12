@@ -1,6 +1,10 @@
 #include <interface>
+#include <game/game.h>
 #include <game/strategy.h>
 #include <picking.h>
+
+#include <global>
+#include <translationsTable.h>
 
 using namespace glb;
 
@@ -49,7 +53,7 @@ namespace menu{
 
 			//Player civilization
 			gui::FormInput c_fi = gui::FormInput(true);
-			c_fi.create((float)x + 280.f, (float)y - deltaY * j, 150.f, 20.f, racesNames, PickingUI::getPickingID());
+			c_fi.create((float)x + 280.f, (float)y - deltaY * j, 150.f, 20.f, Game::GetListOfRacesNames(), PickingUI::getPickingID());
 			PickingUI::addValueToPickingList(PickingUI::getLastID() + 1, "CivForm_" + std::to_string(j));
 			civiliz_Form.push_back(c_fi);
 		}
@@ -69,9 +73,9 @@ namespace menu{
 			background.render(glm::vec4(0.f, 0.f, 0.f, 0.5f));
 			arrowDown.render(false);
 			arrowUp.render(false);
-			dynamicText.render_dynamic(getTranslation("WORD_playersNumber") + ": " + std::to_string(numPlayers), "tahoma_15px", x * 1.f + 5.f, y + 40.f, glm::vec4(255.f, 255.f, 255.f, 255.f), "left", "normal");
+			dynamicText.render_dynamic(TranslationsTable::GetTranslation("WORD_playersNumber") + ": " + std::to_string(numPlayers), "tahoma_15px", x * 1.f + 5.f, y + 40.f, glm::vec4(255.f, 255.f, 255.f, 255.f), "left", "normal");
 			for (int j = numPlayers - 1; j >= 0; j--) {
-				colors_Form[j].render(false, glm::vec4(glb::colors[players_color[j]], 1.0f));
+				colors_Form[j].render(false, glm::vec4(Game::GetColor(players_color[j]), 1.0f));
 				players_Form[j].render(false, glm::vec4(0.f, 0.f, 0.f, 1.f));
 				civiliz_Form[j].render(false, glm::vec4(0.f, 0.f, 0.f, 1.f));
 			}
@@ -133,7 +137,7 @@ namespace menu{
 			}
 			if (clickedName == "ColForm_" + std::to_string(j)) {
 				(*players_color)[j] ++;
-				if ((*players_color)[j] == glb::colors.size()) { (*players_color)[j] = 0; }
+				if ((*players_color)[j] == Game::GetNumberOfColors()) { (*players_color)[j] = 0; }
 				bool c = false;
 				while (!c) {
 					int s = 0;

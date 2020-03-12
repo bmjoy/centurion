@@ -1,13 +1,15 @@
 #include <gui>
 #include <codecvt>
 #include <locale>
-#include <global>
+//#include <global>
+#include <engine.h>
+
+#include <GLFW/glfw3.h>
 
 namespace gui {
 
 	using namespace std;
 	using namespace glm;
-	using namespace glb;
 
 	TextInput::TextInput() {}
 	
@@ -26,17 +28,17 @@ namespace gui {
 	void TextInput::render() {
 		if (is_active) {
 
-			if (CharCodepointPressed != -1 && current_text.size() <= max_chars){
+			if (Engine::Keyboard::GetCharCodepointPressed() != -1 && current_text.size() <= max_chars) {
 				wstring_convert<codecvt_utf8_utf16<wchar_t>> converter;
 				wstring wchar = L" ";
-				wchar[0] = CharCodepointPressed;
+				wchar[0] = Engine::Keyboard::GetCharCodepointPressed();
 				string c = converter.to_bytes(wchar);
 				current_text += c;
 				cursorPosition++;
 				static_text.create_static(current_text, "tahoma_15px", xPos, yPos, "left", "normal", vec4(255.f));
 			}
 
-			if (KeyCode[GLFW_KEY_BACKSPACE] && current_text.size() > 0) {
+			if (Engine::Keyboard::IsKeyPressed(GLFW_KEY_BACKSPACE) && current_text.size() > 0) {
 				current_text.erase(current_text.end() - 1);
 				cursorPosition--;
 				static_text.create_static(current_text, "tahoma_15px", xPos, yPos, "left", "normal", vec4(255.f));

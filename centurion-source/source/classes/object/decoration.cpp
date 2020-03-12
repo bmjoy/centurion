@@ -1,11 +1,14 @@
 #include <object/decoration.h>
-#include <engine/engine.h>
+#include <engine.h>
 #include <stb_image.h>
 #include <player>
 #include <pathfinding>
 #include <game/strategy.h>
 #include <math>
 #include <interface>
+
+#include <primitives.h>
+#include <decoration_sprite.h>
 
 using namespace std;
 using namespace glm;
@@ -36,7 +39,7 @@ void Decoration::prepare() {
 	decorData.width = w;
 	decorData.height = h;
 	decorData.className = className;
-	decorData.textureID = obj::DSprite()->getTextureID(className);
+	decorData.textureID = DSprite()->getTextureID(className);
 }
 
 void Decoration::create() {
@@ -60,7 +63,7 @@ void Decoration::create() {
 	decorData.width = w;
 	decorData.height = h;
 	decorData.className = className;
-	decorData.textureID = obj::DSprite()->getTextureID(className);
+	decorData.textureID = DSprite()->getTextureID(className);
 
 	settlementName = "N/A";
 	checkSettlement();
@@ -99,7 +102,7 @@ void Decoration::render(bool picking, int clickID, bool not_placeable)  {
 
 	if (picking) return;
 
-	if (engine::Engine::getEnvironment() == "editor") {
+	if (Engine::getEnvironment() == "editor") {
 		if (Game::IsGameObjectNotNull(settlID)) {
 			if (oldX != position.x || oldY != position.y || oldSettlX != Game::GetGameObjectPtrById(settlID)->get_position().x || oldSettlY != Game::GetGameObjectPtrById(settlID)->get_position().y) {
 				checkSettlement();
@@ -108,7 +111,7 @@ void Decoration::render(bool picking, int clickID, bool not_placeable)  {
 	}
 
 	decorData.position = vec2(position.x, position.y);
-	obj::DSprite()->render(decorData, not_placeable);
+	DSprite()->render(decorData, not_placeable);
 }
 
 Decoration::~Decoration() {}

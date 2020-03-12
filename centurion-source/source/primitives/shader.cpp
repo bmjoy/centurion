@@ -1,5 +1,9 @@
-#include <primitives>
-#include <global>
+#include "shader.h"
+
+#include <sstream>
+
+#include <utils.h>
+#include <logger.h>
 
 Shader::Shader() {
 	VAO = 0; VBO = 0; IBO = 0;
@@ -8,8 +12,8 @@ Shader::Shader() {
 
 void Shader::compile() {
 	// Compile and setup the shader
-	std::string vertexString = glb::ReadFile(vPath);
-	std::string fragmentString = glb::ReadFile(fPath);
+	std::string vertexString = Utils::ReadFile(vPath);
+	std::string fragmentString = Utils::ReadFile(fPath);
 	vShaderCode = vertexString.c_str();
 	fShaderCode = fragmentString.c_str();
 

@@ -1,21 +1,18 @@
 #include <game/strategy.h>
 #include <interface>
-#include <engine/camera.h>
-#include <engine/window.h>
-#include <engine/mouse.h>
+#include <engine.h>
 #include <surface>
 #include <player>
 #include <picking.h>
 #include <object/unit.h>
+
+#include <global>
 
 #pragma region Namespaces
 
 using namespace glb;
 using namespace std;
 using namespace glm;
-using namespace engine;
-
-
 
 #pragma endregion
 
@@ -43,10 +40,10 @@ void Strategy::Create() {
 	PickingUI::resetPicking();
 
 	reset();
-	myWindow::BottomBarHeight = 100.f;
-	myWindow::TopBarHeight = 100.f;
+	Engine::myWindow::BottomBarHeight = 100.f;
+	Engine::myWindow::TopBarHeight = 100.f;
 	setMinimapProjection();
-	Mouse::LeftHold = false;
+	Engine::Mouse::LeftHold = false;
 
 	SelectionRectangle::Create();
 
@@ -93,9 +90,9 @@ void Strategy::Create() {
 
 	game::GAME_UI()->create(playersList[0].getPlayerRace().substr(5));
 
-	Camera::GoToPoint(
-		(GLfloat)(playersList[0].getStartPoint().x - myWindow::WidthZoomed / 2.f),
-		(GLfloat)(playersList[0].getStartPoint().y - myWindow::HeightZoomed / 2.f)
+	Engine::Camera::GoToPoint(
+		(GLfloat)(playersList[0].getStartPoint().x - Engine::myWindow::WidthZoomed / 2.f),
+		(GLfloat)(playersList[0].getStartPoint().y - Engine::myWindow::HeightZoomed / 2.f)
 	);
 
 	//---------------------------------------
@@ -108,7 +105,7 @@ void Strategy::Create() {
 void Strategy::Run() {
 	Unit::ResetCounter();
 	Picking::leftClickID_UI = 0;
-	Camera::keyboardControl();
+	Engine::Camera::keyboardControl();
 
 	/* Keyboard controls handling*/
 	if (!game::GameMenu::IsActive()) handleKeyboardControls();
@@ -116,14 +113,14 @@ void Strategy::Run() {
 	/* If minimap is NOT active */
 	if (Minimap::IsActive() == false) {
 
-		Camera::mouseControl();
-		viewMatrix = Camera::calculateViewMatrix();
+		Engine::Camera::mouseControl();
+		viewMatrix = Engine::Camera::calculateViewMatrix();
 		projectionMatrix = glb::cameraProjection;
 
 		game::GAME_UI()->render(true);
 
 		// apply game matrices:
-		obj::applyGameMatrices(&projectionMatrix, &viewMatrix);
+		applyGameMatrices(&projectionMatrix, &viewMatrix);
 
 		/* Tracing and Picking */
 		Tracing();
@@ -134,7 +131,7 @@ void Strategy::Run() {
 		RenderObjects();
 
 		// apply menu matrices:
-		obj::applyMenuMatrices();
+		applyMenuMatrices();
 
 		game::GAME_UI()->render(false);
 
@@ -149,7 +146,7 @@ void Strategy::Run() {
 		game::GAME_UI()->render(true);
 
 		// apply game matrices:
-		obj::applyGameMatrices(&projectionMatrix, &viewMatrix);
+		applyGameMatrices(&projectionMatrix, &viewMatrix);
 		if (!game::GameMenu::IsActive()) RenderObjectsPicking();
 
 		if (Minimap::IsCreated()) Minimap::Render();
@@ -162,41 +159,41 @@ void Strategy::Run() {
 		RenderObjects();
 
 		// apply menu matrices:	
-		obj::applyMenuMatrices();
+		applyMenuMatrices();
 		game::GAME_UI()->render(false);
 
 		if (Minimap::IsActive()) GoToPointFromMinimap();
 	}
 
-	glb::cameraProjection = ortho(0.0f, engine::myWindow::WidthZoomed, 0.0f, myWindow::HeightZoomed, -(float)MEDIUM_MAP_WIDTH, (float)MEDIUM_MAP_WIDTH);
+	glb::cameraProjection = ortho(0.0f, Engine::myWindow::WidthZoomed, 0.0f, Engine::myWindow::HeightZoomed, -(float)MEDIUM_MAP_WIDTH, (float)MEDIUM_MAP_WIDTH);
 
 	// reset mouse-right and mouse-left to improve fps
-	Mouse::RightClick = false;
-	Mouse::LeftClick = false;
-	Mouse::MiddleClick = false;
+	Engine::Mouse::RightClick = false;
+	Engine::Mouse::LeftClick = false;
+	Engine::Mouse::MiddleClick = false;
 }
 
 void Strategy::handleKeyboardControls() {
 
 	//Open or close minimap
-	if (KeyCode[GLFW_KEY_SPACE] || Mouse::MiddleClick) {
+	if (Engine::Keyboard::IsKeyPressed(GLFW_KEY_SPACE) || Engine::Mouse::MiddleClick) {
 		if (Minimap::IsActive()) Minimap::Disable();
 		else Minimap::Enable();
 		Minimap::IsActive() ? Logger::Info("Minimap camera ON!") : Logger::Info("Minimap camera OFF!");
 	}
 	//Open in-game menu
-	if (KeyCode[GLFW_KEY_ESCAPE]) {
+	if (Engine::Keyboard::IsKeyPressed(GLFW_KEY_ESCAPE)) {
 		if (game::GameMenu::IsActive()) game::GameMenu::Disable();
 		else game::GameMenu::Enable();
 		game::GameMenu::IsActive() ? Logger::Info("Pause Menu ON!") : Logger::Info("Pause Menu OFF!");
 	}
 	// Wireframe
-	if (KeyCode[GLFW_KEY_Z]) {
+	if (Engine::Keyboard::IsKeyPressed(GLFW_KEY_Z)) {
 		Surface::Wireframe = !Surface::Wireframe;
 		Surface::Wireframe ? Logger::Info("Wireframe ON!") : Logger::Info("Wireframe OFF!");
 	}
 	// Grid
-	if (KeyCode[GLFW_KEY_G]) {
+	if (Engine::Keyboard::IsKeyPressed(GLFW_KEY_G)) {
 		if (Surface::IsGridEnabled()) Surface::DisableGrid();
 		else Surface::EnableGrid();
 		Surface::IsGridEnabled() ? Logger::Info("Grid ON!") : Logger::Info("Grid OFF!");

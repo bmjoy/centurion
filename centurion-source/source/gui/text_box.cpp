@@ -1,6 +1,9 @@
 #include <gui>
 #include <global>
-#include <engine/window.h>
+#include <engine.h>
+
+#include "bitmap_font.h"
+
 
 namespace gui {
 
@@ -16,8 +19,8 @@ namespace gui {
 		lines.clear();
 		lines_data.clear();
 
-		if (x < 0) x += engine::myWindow::Width;
-		if (y < 0) y += engine::myWindow::Height;
+		if (x < 0) x += Engine::myWindow::Width;
+		if (y < 0) y += Engine::myWindow::Height;
 		
 		hAlign = halign; vAlign = valign;
 
@@ -60,7 +63,7 @@ namespace gui {
 						cout << TEXT << " [IF]" << endl;
 					}
 					else {
-						lines_data.push_back(obj::Text()->create_static(fontName, TEXT, x, y, isBold, line_number));
+						lines_data.push_back(Text()->create_static(fontName, TEXT, x, y, isBold, line_number));
 						line_width = tempWidth;
 						TEXT.clear();
 						TEXT = TEXT + word;
@@ -70,7 +73,7 @@ namespace gui {
 					k = j + 1;
 				}
 				if (j == line.size() - 1) {
-					lines_data.push_back(obj::Text()->create_static(fontName, TEXT, x, y, isBold, line_number));
+					lines_data.push_back(Text()->create_static(fontName, TEXT, x, y, isBold, line_number));
 					line_number++;
 					cout << "      " << TEXT << " [LAST]" << endl;
 				}
@@ -84,9 +87,9 @@ namespace gui {
 	}
 
 	void TextBox::render() {
-		obj::Text()->set_align(hAlign, vAlign);	
+		Text()->set_align(hAlign, vAlign);	
 		for(int i = 0; i < lines_data.size(); i++)
-			obj::Text()->render_static(lines_data[i]);
+			Text()->render_static(lines_data[i]);
 	}
 
 	TextBox::~TextBox(){}

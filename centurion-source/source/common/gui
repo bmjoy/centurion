@@ -1,10 +1,9 @@
-#pragma once
-#include <primitives>
+#ifndef GUI_H
+#define GUI_H
+
+#include <primitives.h>
 
 namespace gui {
-
-	using namespace std;
-	using namespace glm;
 
 	/*
 		IMAGE --> source/gui/image.cpp
@@ -161,3 +160,5 @@ namespace gui {
 		int max_chars;
 	};
 }
+
+#endif

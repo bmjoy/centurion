@@ -22,7 +22,7 @@
     <VCProjectVersion>15.0</VCProjectVersion>
     <ProjectGuid>{29C92E4D-97E2-4049-A35E-F6A42D1C8AB9}</ProjectGuid>
     <RootNamespace>centurion</RootNamespace>
-    <WindowsTargetPlatformVersion>10.0.18362.0</WindowsTargetPlatformVersion>
+    <WindowsTargetPlatformVersion>10.0.17763.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
@@ -96,7 +96,7 @@
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(ProjectDir)source\extern\includes;$(ProjectDir)source\common;$(ProjectDir)source\classes</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir)source\extern\includes;$(ProjectDir)source\common;$(ProjectDir)source\classes;$(ProjectDir)source\utils;$(ProjectDir)source\primitives</AdditionalIncludeDirectories>
       <DisableSpecificWarnings>4250</DisableSpecificWarnings>
       <AdditionalOptions>/utf-8 %(AdditionalOptions)</AdditionalOptions>
       <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
@@ -159,7 +159,7 @@ XCOPY "$(ProjectDir)xerces-c_3_1D_vc120.dll" "$(ProjectDir)$(OutDir)"</Command>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(ProjectDir)source\extern\includes;$(ProjectDir)source\common;$(ProjectDir)source\classes</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir)source\extern\includes;$(ProjectDir)source\common;$(ProjectDir)source\classes;$(ProjectDir)source\utils;$(ProjectDir)source\primitives</AdditionalIncludeDirectories>
       <DisableSpecificWarnings>4250</DisableSpecificWarnings>
       <AdditionalOptions>/utf-8 %(AdditionalOptions)</AdditionalOptions>
       <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
@@ -200,10 +200,9 @@ XCOPY "$(ProjectDir)xerces-c_3_1D_vc120.dll" "$(ProjectDir)$(OutDir)"</Command>
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="source\audio\vorbis\ogg_vorbis.cpp" />
-    <ClCompile Include="source\classes\engine\camera.cpp" />
-    <ClCompile Include="source\classes\engine\engine.cpp" />
-    <ClCompile Include="source\classes\engine\mouse.cpp" />
-    <ClCompile Include="source\classes\engine\window.cpp" />
+    <ClCompile Include="source\classes\engine.cpp" />
+    <ClCompile Include="source\classes\ErrorCodes-xml.cxx" />
+    <ClCompile Include="source\classes\errorCodes.cpp" />
     <ClCompile Include="source\classes\fontCharacters-xml.cxx" />
     <ClCompile Include="source\classes\game\editor.cpp" />
     <ClCompile Include="source\classes\game\game.cpp" />
@@ -219,7 +218,8 @@ XCOPY "$(ProjectDir)xerces-c_3_1D_vc120.dll" "$(ProjectDir)$(OutDir)"</Command>
     <ClCompile Include="source\classes\picking.cpp" />
     <ClCompile Include="source\classes\Settings-xml.cxx" />
     <ClCompile Include="source\classes\settings.cpp" />
-    <ClCompile Include="source\classes\translationTable-xml.cxx" />
+    <ClCompile Include="source\classes\translationsTable-xml.cxx" />
+    <ClCompile Include="source\classes\translationsTable.cpp" />
     <ClCompile Include="source\editor\editor_functions.cpp" />
     <ClCompile Include="source\global.cpp" />
     <ClCompile Include="source\gui\text_box.cpp" />
@@ -250,9 +250,34 @@ XCOPY "$(ProjectDir)xerces-c_3_1D_vc120.dll" "$(ProjectDir)$(OutDir)"</Command>
     <ClCompile Include="source\primitives\image_sprite.cpp" />
     <ClCompile Include="source\primitives\light.cpp" />
     <ClCompile Include="source\primitives\minimap_rectangle.cpp" />
+    <ClCompile Include="source\primitives\primitives.cpp" />
     <ClCompile Include="source\primitives\shader.cpp" />
     <ClCompile Include="source\primitives\terrain.cpp" />
     <ClCompile Include="source\primitives\unit_sprite.cpp" />
+    <ClCompile Include="source\utils\utils.cpp" />
+    <ClInclude Include="source\classes\engine.h" />
+    <ClInclude Include="source\classes\ErrorCodes-xml.hxx" />
+    <ClInclude Include="source\classes\errorCodes.h" />
+    <ClInclude Include="source\classes\translationsTable.h" />
+    <ClInclude Include="source\primitives\audio_manager.h" />
+    <ClInclude Include="source\primitives\bitmap_font.h" />
+    <ClInclude Include="source\primitives\building_sprite.h" />
+    <ClInclude Include="source\primitives\cursor_image.h" />
+    <ClInclude Include="source\primitives\decoration_sprite.h" />
+    <ClInclude Include="source\primitives\empty_circle.h" />
+    <ClInclude Include="source\primitives\empty_rectangle.h" />
+    <ClInclude Include="source\primitives\filled_rectangle.h" />
+    <ClInclude Include="source\primitives\grid.h" />
+    <ClInclude Include="source\primitives\header_primitives.h" />
+    <ClInclude Include="source\primitives\image_sprite.h" />
+    <ClInclude Include="source\primitives\light.h" />
+    <ClInclude Include="source\primitives\minimap_rectangle.h" />
+    <ClInclude Include="source\primitives\primitives.h" />
+    <ClInclude Include="source\primitives\primitives_structs.h" />
+    <ClInclude Include="source\primitives\shader.h" />
+    <ClInclude Include="source\primitives\terrain.h" />
+    <ClInclude Include="source\primitives\unit_sprite.h" />
+    <ClInclude Include="source\utils\utils.h" />
     <None Include="assets\shaders\bsprite\fragment.glsl">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
       <FileType>Document</FileType>
@@ -372,7 +397,6 @@ XCOPY "$(ProjectDir)xerces-c_3_1D_vc120.dll" "$(ProjectDir)$(OutDir)"</Command>
     <ClCompile Include="source\pathfinding\node.cpp" />
     <ClCompile Include="source\player\player.cpp" />
     <ClCompile Include="source\surface\mapgen.cpp" />
-    <ClCompile Include="source\surface\surface.cpp" />
     <None Include="assets\shaders\bsprite\vertex.glsl">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
@@ -381,10 +405,6 @@ XCOPY "$(ProjectDir)xerces-c_3_1D_vc120.dll" "$(ProjectDir)$(OutDir)"</Command>
     <ClInclude Include="source\audio\vorbis\ogg.h" />
     <ClInclude Include="source\audio\vorbis\os_types.h" />
     <ClInclude Include="source\audio\vorbis\vorbis_file.h" />
-    <ClInclude Include="source\classes\engine\camera.h" />
-    <ClInclude Include="source\classes\engine\engine.h" />
-    <ClInclude Include="source\classes\engine\mouse.h" />
-    <ClInclude Include="source\classes\engine\window.h" />
     <ClInclude Include="source\classes\fontCharacters-xml.hxx" />
     <ClInclude Include="source\classes\game\editor.h" />
     <ClInclude Include="source\classes\game\game.h" />
@@ -400,7 +420,7 @@ XCOPY "$(ProjectDir)xerces-c_3_1D_vc120.dll" "$(ProjectDir)$(OutDir)"</Command>
     <ClInclude Include="source\classes\picking.h" />
     <ClInclude Include="source\classes\Settings-xml.hxx" />
     <ClInclude Include="source\classes\settings.h" />
-    <ClInclude Include="source\classes\translationTable-xml.hxx" />
+    <ClInclude Include="source\classes\translationsTable-xml.hxx" />
     <ClInclude Include="source\common\headers">
       <FileType>Document</FileType>
       <DeploymentContent Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</DeploymentContent>
@@ -410,7 +430,6 @@ XCOPY "$(ProjectDir)xerces-c_3_1D_vc120.dll" "$(ProjectDir)$(OutDir)"</Command>
     <None Include="source\common\interface" />
     <None Include="source\common\menu" />
     <None Include="source\common\pathfinding" />
-    <None Include="source\common\picking" />
     <None Include="source\common\player" />
     <None Include="source\common\surface" />
   </ItemGroup>
@@ -435,7 +454,6 @@ XCOPY "$(ProjectDir)xerces-c_3_1D_vc120.dll" "$(ProjectDir)$(OutDir)"</Command>
     <ClInclude Include="source\audio\sound_buffer.h" />
     <ClInclude Include="source\common\global" />
     <ClInclude Include="source\common\math" />
-    <ClInclude Include="source\common\primitives" />
     <ClInclude Include="source\extern\includes\json.hpp" />
     <ClInclude Include="source\extern\includes\stb_image.h" />
   </ItemGroup>

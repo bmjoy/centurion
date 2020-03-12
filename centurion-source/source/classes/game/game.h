@@ -1,13 +1,12 @@
 #pragma once
 
 #define MAX_NUMBER_OF_OBJECTS 100
-#define MAX_NUMBER_OF_PLAYERS 10
+#define MAX_NUMBER_OF_PLAYERS 8
 #define TOWNHALL_RADIUS 1875
 #define OUTPOST_RADIUS 700
 #define MEDIUM_MAP_WIDTH 30000
 #define MEDIUM_MAP_HEIGHT 20000
 
-#include <headers>
 #include <gui>
 
 class GObject;
@@ -35,7 +34,7 @@ public:
 		static bool isGridEnabled;
 	};
 
-	
+
 	class SelectionRectangle {
 	public:
 		struct SelRectPoints {
@@ -79,14 +78,25 @@ public:
 		static bool isBlocked;
 	};
 
-	/*static void RemoveGameObject(int i) { GameObjects.erase(GameObjects.begin() + i); }
-	static void AddGameObject(GObject o) { GameObjects.push_back(o); }
-	static void ResetGameObjects() { GameObjects.clear(); }
-	static std::vector<GObject> GameObjects;*/
+	class Race {
+	public:
+		Race();
+		void setRaceProperties(int p1, string p2, string p3, string p4) { p_id = p1; name = p2; zone = p3; t_class = p4; }
+		int getRaceId() { return p_id; };
+		string getRaceName() { return name; }
+		string getEnvironmentalZone() { return zone; }
+		string getFoodTransportClass() { return t_class; }
+		~Race();
+	private:
+		int p_id;
+		string name;
+		string zone;
+		string t_class;
+	};
 
-	#pragma region GameObjects List and Methods
+#pragma region GameObjects List and Methods
 
-	static GObject* GameObjects[MAX_NUMBER_OF_OBJECTS];
+	static GObject* GameObjects[MAX_NUMBER_OF_OBJECTS]; // protected?
 	static void RemoveGameObject(int i);
 	static void AddGameObject(int i, GObject* o) { GameObjects[i] = o; }
 	static void ResetGameObjects();
@@ -102,7 +112,26 @@ public:
 	static vector<Decoration*> GetListOfDecorations();
 	static void UpdateSettlementBuildings();
 
-	#pragma endregion
+#pragma endregion
+
+#pragma region Race methods
+
+	static void AddRace(string race_name, Race r);
+	static vector<string> GetListOfRacesNames() { return racesName; }
+	static Race* GetRace(string race_name);
+
+#pragma endregion
+
+#pragma region Colors methods
+
+	static void AddColor(vec3 col) { listOfColors.push_back(col); }
+	static vector<vec3> GetListOfColors() { return listOfColors; }
+	static vec3 GetColor(int i) { return listOfColors[i]; }
+	static int GetNumberOfColors() { return (int)listOfColors.size(); }
+
+#pragma endregion
+
+
 
 	static bool IsCreated() { return isCreated; }
 	static void SetNumberOfPlayers(int n) { numberOfPlayers = n; }
@@ -110,15 +139,19 @@ public:
 
 protected:
 	Game();
+	static glm::mat4 projectionMatrix, viewMatrix;
+	static bool isCreated;
+	static int numberOfPlayers;
+	static vector<string> racesName;
+	static map<string, Race> races;
+	static vector<vec3> listOfColors;
+
+
 	static void GenerateSettlements(vector<vec2> &locs);
 	static void GenerateOutposts(vector<vec2> &locs);
 	static void GoToPointFromMinimap();
 	static void RenderObjectsPicking();
 	static void RenderObjects();
-	static glm::mat4 projectionMatrix, viewMatrix;
-	static bool isCreated;
-	static int numberOfPlayers;
-	//static PickingObject *pickingObject;
 
 private:
 	static float cameraToX, cameraToY;

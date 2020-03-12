@@ -1,15 +1,19 @@
 #include <interface>
 #include <picking.h>
-#include <engine/engine.h>
-#include <engine/mouse.h>
-#include <engine/window.h>
+#include <engine.h>
 #include <surface>
 #include <game/editor.h>
 #include <game/strategy.h>
 #include <object/object.h>
 
+#include <primitives.h>
+#include <terrain.h>
+
+#include <global>
+#include <utils.h>
+
 using namespace glb;
-using namespace engine;
+
 
 namespace editor {
 
@@ -18,10 +22,10 @@ namespace editor {
 	/*----------------*/
 
 	void EditorMenu::picking() {
-		GLint mouseX = (GLint)engine::Mouse::GetXPosition();
-		GLint mouseY = (GLint)engine::Mouse::GetYPosition();
+		GLint mouseX = (GLint)Engine::Mouse::GetXPosition();
+		GLint mouseY = (GLint)Engine::Mouse::GetYPosition();
 		Picking::leftClickID_UI = Picking::GetIdFromClick();
-		int pos = (int)((mouseY - myWindow::Height)*(-1)) / titles["File"].titleHeight;
+		int pos = (int)((mouseY - Engine::myWindow::Height)*(-1)) / titles["File"].titleHeight;
 
 		//---------------------
 		//   RESET 
@@ -125,7 +129,7 @@ namespace editor {
 
 				if (pos == 1) { // Update normals
 					mapgen::updateAllNormals();
-					obj::MapTerrain()->updateHeightsBuffer();
+					MapTerrain()->updateHeightsBuffer();
 
 					for (int i = 0; i < titles.size(); i++) {
 						std::string s = titlesList[i];
@@ -192,7 +196,7 @@ namespace editor {
 	}
 
     bool EditorMenu::isHover(glm::vec2 pos, int w, int h) {
-        if ((engine::Mouse::GetXPosition() > pos.x) && (engine::Mouse::GetXPosition() < pos.x + w) && (engine::Mouse::GetYPosition() > pos.y) && (engine::Mouse::GetYPosition() < pos.y + h)) {
+        if ((Engine::Mouse::GetXPosition() > pos.x) && (Engine::Mouse::GetXPosition() < pos.x + w) && (Engine::Mouse::GetYPosition() > pos.y) && (Engine::Mouse::GetYPosition() < pos.y + h)) {
             return true;
         }
         else {
@@ -205,8 +209,8 @@ namespace editor {
 	/*---------------------------*/
 
 	void OpenMapWindow::picking() {
-		GLint mouseX = (GLint)engine::Mouse::GetXPosition();
-		GLint mouseY = (GLint)engine::Mouse::GetYPosition();
+		GLint mouseX = (GLint)Engine::Mouse::GetXPosition();
+		GLint mouseY = (GLint)Engine::Mouse::GetYPosition();
 		Picking::leftClickID_UI = Picking::GetIdFromClick();
 		string clickName = PickingUI::getPickedObjectName(Picking::leftClickID_UI);
 		int pos = (int)((mouseY - startY + map_list.padding_top)*(-1)) / (int)map_list.option_height;
@@ -232,8 +236,8 @@ namespace editor {
 				
 				openScenario(availableScenarios[selectedID]);
 				currentMapName = availableScenarios[selectedID];
-				obj::MapTerrain()->updateHeightsBuffer();
-				obj::MapTerrain()->updateTextureBuffer();
+				MapTerrain()->updateHeightsBuffer();
+				MapTerrain()->updateTextureBuffer();
 				OpenMapWindowIsOpen = false;
 				IsWindowOpened = false;
 			}
@@ -245,8 +249,8 @@ namespace editor {
 	/*--------------------------*/
 
 	void NewMapWindow::picking() {
-		GLint mouseX = (GLint)engine::Mouse::GetXPosition();
-		GLint mouseY = (GLint)engine::Mouse::GetYPosition();
+		GLint mouseX = (GLint)Engine::Mouse::GetXPosition();
+		GLint mouseY = (GLint)Engine::Mouse::GetYPosition();
 		Picking::leftClickID_UI = Picking::GetIdFromClick();
 		string clickName = PickingUI::getPickedObjectName(Picking::leftClickID_UI);
 
@@ -266,12 +270,12 @@ namespace editor {
 			NewMapWindowIsOpen = false;
 
 			//Does the map folder already exist?
-			if (!folderExists("scenarios/" + currentMapName)) {
+			if (Utils::CheckIfFolderExists("scenarios/" + currentMapName)) {
 				Game::ResetGameObjects();
 
 				mapgen::reset_map();
-				obj::MapTerrain()->updateHeightsBuffer();
-				obj::MapTerrain()->updateTextureBuffer();
+				MapTerrain()->updateHeightsBuffer();
+				MapTerrain()->updateTextureBuffer();
 				clearEditorVariables();
 				saveCurrentScenario(currentMapName);
 			}
@@ -285,8 +289,8 @@ namespace editor {
 	/*--------------------------*/
 
 	void QuestionWindow::picking() {
-		GLint mouseX = (GLint)engine::Mouse::GetXPosition();
-		GLint mouseY = (GLint)engine::Mouse::GetYPosition();
+		GLint mouseX = (GLint)Engine::Mouse::GetXPosition();
+		GLint mouseY = (GLint)Engine::Mouse::GetYPosition();
 		Picking::leftClickID_UI = Picking::GetIdFromClick();
 		string clickName = PickingUI::getPickedObjectName(Picking::leftClickID_UI);
 
@@ -296,8 +300,8 @@ namespace editor {
 				Game::ResetGameObjects();
 
 				mapgen::reset_map();
-				obj::MapTerrain()->updateHeightsBuffer();
-				obj::MapTerrain()->updateTextureBuffer();
+				MapTerrain()->updateHeightsBuffer();
+				MapTerrain()->updateTextureBuffer();
 				saveCurrentScenario(currentMapName);
 				cout << "[DEBUG] Map " + currentMapName + " has been overwritten successfully!" << endl;
 			}
@@ -345,8 +349,8 @@ namespace editor {
 	/*--------------------------*/
 
 	void AddObjectWindow::picking() {
-		GLint mouseX = (GLint)engine::Mouse::GetXPosition();
-		GLint mouseY = (GLint)engine::Mouse::GetYPosition();
+		GLint mouseX = (GLint)Engine::Mouse::GetXPosition();
+		GLint mouseY = (GLint)Engine::Mouse::GetYPosition();
 		Picking::leftClickID_UI = Picking::GetIdFromClick();
 		string clickName = PickingUI::getPickedObjectName(Picking::leftClickID_UI);
 
@@ -391,7 +395,7 @@ namespace editor {
 		if (clickName == "AddObjWindow_add") { // ADD
 			if (Game::Minimap::IsActive() == false){
 				addingObject = true;
-				Mouse::LeftClick = false;
+				Engine::Mouse::LeftClick = false;
 			}
 		}
 	}
@@ -401,8 +405,8 @@ namespace editor {
 	/*-----------------------------*/
 
 	void PropertiesWindow::picking() {
-		GLint mouseX = (GLint)engine::Mouse::GetXPosition();
-		GLint mouseY = (GLint)engine::Mouse::GetYPosition();
+		GLint mouseX = (GLint)Engine::Mouse::GetXPosition();
+		GLint mouseY = (GLint)Engine::Mouse::GetYPosition();
 		Picking::leftClickID_UI = Picking::GetIdFromClick();
 		string clickName = PickingUI::getPickedObjectName(Picking::leftClickID_UI);
 
@@ -413,7 +417,7 @@ namespace editor {
 		if (clickName == "PropertiesWindow_cancel") { // CANCEL
 			PropertiesWindowIsOpen = false;
 			IsWindowOpened = false;
-			Mouse::LeftClick = false;
+			Engine::Mouse::LeftClick = false;
 		}
 		if (clickName == "PropertiesWindow_apply") { // APPLY
 			if (type == "building"){
@@ -423,7 +427,7 @@ namespace editor {
 			}
 			PropertiesWindowIsOpen = false;
 			IsWindowOpened = false;
-			Mouse::LeftClick = false;
+			Engine::Mouse::LeftClick = false;
 		}
 	}
 
@@ -432,8 +436,8 @@ namespace editor {
 	/*--------------------------------*/
 
 	void TerrainBrushWindow::picking() {
-		GLint mouseX = (GLint)engine::Mouse::GetXPosition();
-		GLint mouseY = (GLint)engine::Mouse::GetYPosition();
+		GLint mouseX = (GLint)Engine::Mouse::GetXPosition();
+		GLint mouseY = (GLint)Engine::Mouse::GetYPosition();
 		Picking::leftClickID_UI = Picking::GetIdFromClick();
 		string clickName = PickingUI::getPickedObjectName(Picking::leftClickID_UI);
 

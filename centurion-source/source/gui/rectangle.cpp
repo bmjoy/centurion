@@ -1,7 +1,10 @@
 #include <gui>
 #include <picking.h>
 #include <global>
-#include <engine/window.h>
+#include <engine.h>
+
+#include "empty_rectangle.h"
+#include "filled_rectangle.h"
 
 namespace gui {
 
@@ -21,8 +24,8 @@ namespace gui {
 	}
 	void Rectangle::create(string Type, float x, float y, float w, float h, string origin, int pickingID) {
 
-		if (x < 0) x += engine::myWindow::Width;
-		if (y < 0) y += engine::myWindow::Height;
+		if (x < 0) x += Engine::myWindow::Width;
+		if (y < 0) y += Engine::myWindow::Height;
 
 		data.type = Type;
 		data.x = x;
@@ -42,17 +45,17 @@ namespace gui {
 
 		if (data.type == "filled") {
 			data.backColor = Color;
-			obj::FRectangle()->render(data, picking);
+			FRectangle()->render(data, picking);
 		}
 		if (data.type == "border") {
 			data.borderColor = Color;
-			obj::ERectangle()->render(data);
+			ERectangle()->render(data);
 		}
 		if (data.type == "border-filled") {
 			data.backColor = Color;
 			data.borderColor = vec4(255.f);
-			obj::FRectangle()->render(data, picking);
-			obj::ERectangle()->render(data);
+			FRectangle()->render(data, picking);
+			ERectangle()->render(data);
 		}
 	}
 

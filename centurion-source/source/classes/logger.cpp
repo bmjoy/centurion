@@ -1,19 +1,15 @@
-#include <windows.h>
 #include <logger.h>
 #include <fstream>
 #include <settings.h>
 #include <iostream>
-#include <global>
-#include <engine/camera.h>
-#include <engine/mouse.h>
-#include <engine/window.h>
+#include <engine.h>
+#include <utils.h>
 
-using namespace glb;
-using namespace engine;
+
 
 vector<Logger::LogMessage> Logger::Messages;
-string Logger::fileDebugName = "logs/debug/Debug " + currentDateTime("%Y%m%d-%H%M%S") + ".xml";
-string Logger::fileParamsName = "logs/params/Params " + currentDateTime("%Y%m%d-%H%M%S") + ".xml";
+string Logger::fileDebugName = "logs/debug/Debug " + Utils::CurrentDateTime("%Y%m%d-%H%M%S") + ".xml";
+string Logger::fileParamsName = "logs/params/Params " + Utils::CurrentDateTime("%Y%m%d-%H%M%S") + ".xml";
 
 #pragma region Logger
 
@@ -58,23 +54,28 @@ void Logger::Error(string msg) {
 	SaveDebugXML();
 }
 
-void Logger::SaveDebugXML() {
-	vector<string> debugFiles = get_all_files_names_within_folder("logs/debug");
-	char szBuffer[200] = "";
-	char *pszFileName = NULL;
-
-	GetFullPathName((LPCSTR)debugFiles[0].c_str(), sizeof(szBuffer), szBuffer, &pszFileName);
-	//Removing exceeding file number
-	if (debugFiles.size() >= 10) {
-		string path = szBuffer;
-		path.replace(path.begin(), path.end(), '\\', '/');
-
-		if (remove(path.c_str()) != 0)
-			perror("File deletion failed");
-		else
-			cout << "File deleted successfully";
+void Logger::CleanLogs(void)
+{
+	try
+	{
+		vector<string> debugFiles = Utils::GetAllFilesNamesWithinFolder("logs/debug/");
+		if (debugFiles.size() >= 10) {
+			Utils::RemoveFile("logs/debug/" + debugFiles[0]);
+		}
+		vector<string> paramsFiles = Utils::GetAllFilesNamesWithinFolder("logs/params/");
+		if (paramsFiles.size() >= 10) {
+			Utils::RemoveFile("logs/params/" + paramsFiles[0]);
+		}
 	}
+	catch (...)
+	{
+		Logger::LogMessage msg = Logger::LogMessage("An error occurred cleaning the log files", "", "Logger", "CleanLogs");
+		Logger::Error(msg);
+		throw;
+	}	
+}
 
+void Logger::SaveDebugXML() {
 	//Saving all debug informations
 	ofstream logFile(fileDebugName);
 	if (logFile.is_open()) {
@@ -98,53 +99,38 @@ void Logger::SaveDebugXML() {
 }
 
 void Logger::SaveParamsXML() {
-	vector<string> paramFiles = get_all_files_names_within_folder("logs/params");
-	char szBuffer[200] = "";
-	char *pszFileName = NULL;
-
-	GetFullPathName((LPCSTR)paramFiles[0].c_str(), sizeof(szBuffer), szBuffer, &pszFileName);
-	//Removing exceeding file number
-	if (paramFiles.size() >= 10) {
-		string path = szBuffer;
-		path.replace(path.begin(), path.end(), '\\', '/');
-
-		if (remove(path.c_str()) != 0)
-			perror("File deletion failed");
-		else
-			cout << "File deleted successfully";
-	}
 
 	//Saving all parameters
 	ofstream logFile(fileParamsName);
 	if (logFile.is_open()) {
 		logFile << "<?xml version=\"1.0\" encoding=\"utf-8\"?>\n<Log>\n\t<Params>\n" <<
 			"\t\t<Camera>\n" <<
-			"\t\t\t<xPosition>" << Camera::GetXPosition() << "</xPosition>\n" <<
-			"\t\t\t<yPosition>" << Camera::GetYPosition() << "</yPosition>\n" <<
+			"\t\t\t<xPosition>" << Engine::Camera::GetXPosition() << "</xPosition>\n" <<
+			"\t\t\t<yPosition>" << Engine::Camera::GetYPosition() << "</yPosition>\n" <<
 			"\t\t</Camera>\n" <<
 			"\t\t<Mouse>\n" <<
-			"\t\t\t<scrollValue>" << Mouse::ScrollValue << "</scrollValue>\n" <<
-			"\t\t\t<xLeftClick>" << Mouse::GetXLeftClick() << "</xLeftClick>\n" <<
-			"\t\t\t<xPosition>" << Mouse::GetXPosition() << "</xPosition>\n" <<
-			"\t\t\t<xRightClick>" << Mouse::GetXRightClick() << "</xRightClick>\n" <<
-			"\t\t\t<y2dPosition>" << Mouse::GetY2DPosition() << "</y2dPosition>\n" <<
-			"\t\t\t<y2dRightClick>" << Mouse::GetY2DRightClick() << "</y2dRightClick>\n" <<
-			"\t\t\t<yLeftClick>" << Mouse::GetYLeftClick() << "</yLeftClick>\n" <<
-			"\t\t\t<yPosition>" << Mouse::GetYPosition() << "</yPosition>\n" <<
-			"\t\t\t<yRightClick>" << Mouse::GetYRightClick() << "</yRightClick>\n" <<
-			"\t\t\t<leftClick>" << Mouse::LeftClick << "</leftClick>\n" <<
-			"\t\t\t<leftHold>" << Mouse::LeftHold << "</leftHold>\n" <<
-			"\t\t\t<release>" << Mouse::Release << "</release>\n" <<
-			"\t\t\t<rightClick>" << Mouse::RightClick << "</rightClick>\n" <<
-			"\t\t\t<scrollBool>" << Mouse::ScrollBool << "</scrollBool>\n" <<
+			"\t\t\t<scrollValue>" << Engine::Mouse::ScrollValue << "</scrollValue>\n" <<
+			"\t\t\t<xLeftClick>" << Engine::Mouse::GetXLeftClick() << "</xLeftClick>\n" <<
+			"\t\t\t<xPosition>" << Engine::Mouse::GetXPosition() << "</xPosition>\n" <<
+			"\t\t\t<xRightClick>" << Engine::Mouse::GetXRightClick() << "</xRightClick>\n" <<
+			"\t\t\t<y2dPosition>" << Engine::Mouse::GetY2DPosition() << "</y2dPosition>\n" <<
+			"\t\t\t<y2dRightClick>" << Engine::Mouse::GetY2DRightClick() << "</y2dRightClick>\n" <<
+			"\t\t\t<yLeftClick>" << Engine::Mouse::GetYLeftClick() << "</yLeftClick>\n" <<
+			"\t\t\t<yPosition>" << Engine::Mouse::GetYPosition() << "</yPosition>\n" <<
+			"\t\t\t<yRightClick>" << Engine::Mouse::GetYRightClick() << "</yRightClick>\n" <<
+			"\t\t\t<leftClick>" << Engine::Mouse::LeftClick << "</leftClick>\n" <<
+			"\t\t\t<leftHold>" << Engine::Mouse::LeftHold << "</leftHold>\n" <<
+			"\t\t\t<release>" << Engine::Mouse::Release << "</release>\n" <<
+			"\t\t\t<rightClick>" << Engine::Mouse::RightClick << "</rightClick>\n" <<
+			"\t\t\t<scrollBool>" << Engine::Mouse::ScrollBool << "</scrollBool>\n" <<
 			"\t\t</Mouse>\n" <<
 			"\t\t<Window>\n" <<
-			"\t\t\t<heightZoomed>" << myWindow::HeightZoomed << "</heightZoomed>\n" <<
-			"\t\t\t<ratio>" << myWindow::Ratio << "</ratio>\n" <<
-			"\t\t\t<widthZoomed>" << myWindow::WidthZoomed << "</widthZoomed>\n" <<
-			"\t\t\t<shouldClose>" << myWindow::ShouldClose << "</shouldClose>\n" <<
-			"\t\t\t<bottomBarHeight>" << myWindow::BottomBarHeight << "</bottomBarHeight>\n" <<
-			"\t\t\t<topBarHeight>" << myWindow::TopBarHeight << "</topBarHeight>\n" <<
+			"\t\t\t<heightZoomed>" << Engine::myWindow::HeightZoomed << "</heightZoomed>\n" <<
+			"\t\t\t<ratio>" << Engine::myWindow::Ratio << "</ratio>\n" <<
+			"\t\t\t<widthZoomed>" << Engine::myWindow::WidthZoomed << "</widthZoomed>\n" <<
+			"\t\t\t<shouldClose>" << Engine::myWindow::ShouldClose << "</shouldClose>\n" <<
+			"\t\t\t<bottomBarHeight>" << Engine::myWindow::BottomBarHeight << "</bottomBarHeight>\n" <<
+			"\t\t\t<topBarHeight>" << Engine::myWindow::TopBarHeight << "</topBarHeight>\n" <<
 			"\t\t</Window>\n\t</Params>\n" <<
 			"</Log>";
 	}
@@ -165,7 +151,7 @@ Logger::~Logger() { }
 Logger::LogMessage::LogMessage() { }
 
 Logger::LogMessage::LogMessage(string txt, string typ, string nms, string clss, string mtd) {
-	date = currentDateTime("%Y/%m/%d - %X");
+	date = Utils::CurrentDateTime("%Y/%m/%d - %X");
 	type = typ;
 	text = txt;
 	cpp_namespace = nms;
@@ -175,3 +161,23 @@ Logger::LogMessage::LogMessage(string txt, string typ, string nms, string clss, 
 
 Logger::LogMessage::~LogMessage() { }
 #pragma endregion
+
+
+//void forceGameClosure(string errorCode, string errorText) {
+//	string eC = (TranslationsTable::GetTranslation("WORD_errorCode") == "") ? "Error code" : TranslationsTable::GetTranslation("WORD_errorCode");
+//	string text = "  " + eC + ": " + ErrorCodes::GetErrorCode(errorCode) + "\n\n  " + TranslationsTable::GetTranslation(errorText);
+//	if (language == "arabic") text = "  " + ErrorCodes::GetErrorCode(errorCode) + ": " + eC + "\n\n  " + TranslationsTable::GetTranslation(errorText);
+//	const int wideLength = sizeof(text.c_str()) * 128;
+//	WCHAR wstr[wideLength];
+//	MultiByteToWideChar(CP_UTF8, 0, text.c_str(), wideLength, wstr, wideLength);
+//	MessageBoxW(NULL, wstr, gameNameLPCWSTR, MB_ICONERROR);
+//	setBoolean("window-should-close", true);
+//}
+//
+//void showGameWarning(string warningText) {
+//	string text = "  " + TranslationsTable::GetTranslation(warningText);
+//	const int wideLength = sizeof(text.c_str()) * 128;
+//	WCHAR wstr[wideLength];
+//	MultiByteToWideChar(CP_UTF8, 0, text.c_str(), wideLength, wstr, wideLength);
+//	MessageBoxW(NULL, wstr, gameNameLPCWSTR, MB_ICONINFORMATION);
+//}

@@ -2,8 +2,8 @@
 #include <picking.h>
 #include <surface>
 #include <game/editor.h>
-#include <engine/window.h>
-#include <engine/mouse.h>
+#include <engine.h>
+#include <translationsTable.h>
 
 using namespace glb;
 
@@ -15,12 +15,12 @@ namespace editor {
 		back_size.x = 790; back_size.y = 260;
 
 		back_image = gui::Image("addobjectwindow_back");
-		back_image.create("center", engine::myWindow::Width/2.f, back_size.y / 2.f, 0, 0, PickingUI::getPickingID());
+		back_image.create("center", Engine::myWindow::Width/2.f, back_size.y / 2.f, 0, 0, PickingUI::getPickingID());
 
 
 
 		// startX and startY are TOP-LEFT coordinates (as in Paint)
-		startX = engine::myWindow::Width / 2.f - back_image.getImageSize().x / 2.f;
+		startX = Engine::myWindow::Width / 2.f - back_image.getImageSize().x / 2.f;
 		startY = back_size.y / 2.f + back_image.getImageSize().y / 2.f;
 
 		buttons[0] = gui::Image("addobjectwindow_button1");
@@ -34,9 +34,9 @@ namespace editor {
 
 
 		buttons_text[0] = gui::SimpleText("static");
-		buttons_text[0].create_static(getTranslation("EDITOR_addObjectButtonAdd"), "tahoma_13px", startX + 725.f, startY - 28.f, "center", "middle", vec4(255.f), "bold");
+		buttons_text[0].create_static(TranslationsTable::GetTranslation("EDITOR_addObjectButtonAdd"), "tahoma_13px", startX + 725.f, startY - 28.f, "center", "middle", vec4(255.f), "bold");
 		buttons_text[1] = gui::SimpleText("static");
-		buttons_text[1].create_static(getTranslation("EDITOR_newMapButtonClose"), "tahoma_13px", startX + 725.f, startY - 233.f, "center", "middle", vec4(255.f), "bold");
+		buttons_text[1].create_static(TranslationsTable::GetTranslation("EDITOR_newMapButtonClose"), "tahoma_13px", startX + 725.f, startY - 233.f, "center", "middle", vec4(255.f), "bold");
 
 		arrows[0] = gui::Image("addobjectwindow_arrowleft");
 		arrows[0].create("top-left", startX, startY, 0, 0, PickingUI::getPickingID());
@@ -115,7 +115,7 @@ namespace editor {
 
 		selectedObject = formSelectedTexts[0] + "_" + formSelectedTexts[1] + "_" + formSelectedTexts[2];
 		object_thumbnail = gui::Image(selectedObject);
-		object_thumbnail.create("center", engine::myWindow::Width / 2.f, back_size.y / 2.f, 0, 0, 0);
+		object_thumbnail.create("center", Engine::myWindow::Width / 2.f, back_size.y / 2.f, 0, 0, 0);
 
 		prepareObject(formSelectedTexts[0], formSelectedTexts[2]);
 	}
@@ -126,7 +126,7 @@ namespace editor {
 
 		if (AddObjectWindowIsOpen) {
 
-			if (pick && engine::Mouse::LeftClick && !addingObject) {
+			if (pick && Engine::Mouse::LeftClick && !addingObject) {
 				back_image.render(true);
 				buttons[0].render(true);
 				buttons[1].render(true);
@@ -140,7 +140,7 @@ namespace editor {
 			if (addingObject) {
 				insertingObject(formSelectedTexts[0], formSelectedTexts[2]);
 
-				if (engine::Mouse::LeftClick) {
+				if (Engine::Mouse::LeftClick) {
 					addObject(formSelectedTexts[0]);
 					prepareObject(formSelectedTexts[0], formSelectedTexts[2]);
 				}
@@ -160,7 +160,7 @@ namespace editor {
 			}
 		}	
 
-		if (engine::Mouse::RightClick) addingObject = false;
+		if (Engine::Mouse::RightClick) addingObject = false;
 	}
 
 	AddObjectWindow::~AddObjectWindow() {}

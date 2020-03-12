@@ -1,4 +1,4 @@
-#include <primitives>
+#include "empty_circle.h"
 
 EmptyCircle::EmptyCircle(){
 	vPath = "assets/shaders/empty_circle/vertex.glsl";

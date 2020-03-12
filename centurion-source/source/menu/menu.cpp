@@ -4,13 +4,15 @@
 #include <picking.h>
 #include <game/strategy.h>
 #include <interface>
-#include <engine/window.h>
-#include <engine/mouse.h>
+#include <engine.h>
+#include <translationsTable.h>
+
+#include <primitives.h>
 
 using namespace glb;
 using namespace std;
 
-using namespace engine;
+
 
 namespace menu {
 
@@ -54,7 +56,7 @@ namespace menu {
 				/* use data */
 				img = gui::Image(imageName);	
 				if (size == "auto") img.create(align, (float)x, (float)y, 0.0f, 0.0f, PickingUI::getPickingID() * clickable);
-				if (size == "max") img.create(align, (float)x, (float)y, myWindow::Width, myWindow::Height, PickingUI::getPickingID() * clickable);
+				if (size == "max") img.create(align, (float)x, (float)y, Engine::myWindow::Width, Engine::myWindow::Height, PickingUI::getPickingID() * clickable);
 				images[menus[a]].push_back(img);
 
 				// update picking 
@@ -69,7 +71,7 @@ namespace menu {
 				/* read data from json */
 				string imageName = data[s][i]["image_name"].get<string>();
 				string name = data[s][i]["name"].get<string>();
-				string buttonText = getTranslation(name);
+				string buttonText = TranslationsTable::GetTranslation(name);
 				int x = data[s][i]["x"].get<int>();
 				int y = data[s][i]["y"].get<int>();
 
@@ -90,7 +92,7 @@ namespace menu {
 		}
 		options->create();
 		menuIsCreated = true;
-		obj::applyMenuMatrices();
+		applyMenuMatrices();
 	}
 
 	void Menu::update() {
@@ -123,7 +125,7 @@ namespace menu {
 				/* use data */
 				img = gui::Image(imageName);
 				if (size == "auto") img.create(align, (float)x, (float)y, 0.0f, 0.0f, PickingUI::getPickingID() * clickable);
-				if (size == "max") img.create(align, (float)x, (float)y, myWindow::Width, myWindow::Height, PickingUI::getPickingID() * clickable);
+				if (size == "max") img.create(align, (float)x, (float)y, Engine::myWindow::Width, Engine::myWindow::Height, PickingUI::getPickingID() * clickable);
 				images[menus[a]].push_back(img);
 
 				// update picking 
@@ -138,7 +140,7 @@ namespace menu {
 				/* read data from json */
 				string imageName = data[s][i]["image_name"].get<string>();
 				string name = data[s][i]["name"].get<string>();
-				string buttonText = getTranslation(name);
+				string buttonText = TranslationsTable::GetTranslation(name);
 				int x = data[s][i]["x"].get<int>();
 				int y = data[s][i]["y"].get<int>();
 
@@ -164,7 +166,7 @@ namespace menu {
 
 		/* picking */
 
-		if (engine::Mouse::LeftClick){
+		if (Engine::Mouse::LeftClick){
 			for (int i = 0; i < images[currentMenu].size(); ++i) 
 				images[currentMenu][i].render(true);
 			
@@ -193,9 +195,9 @@ namespace menu {
 		if (currentMenu == "options")
 			options->render(false);
 	
-		Mouse::RightClick = false;
-		Mouse::LeftClick = false;
-		Mouse::RightClick = false;
+		Engine::Mouse::RightClick = false;
+		Engine::Mouse::LeftClick = false;
+		Engine::Mouse::RightClick = false;
 	}
 
 	void Menu::reset() {

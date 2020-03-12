@@ -5,9 +5,13 @@
 #include <stb_image.h>
 #include <player>
 #include <pathfinding>
-#include <engine/mouse.h>
+#include <engine.h>
 #include <surface>
 
+#include <global>
+
+#include <primitives.h>
+#include <unit_sprite.h>
 
 using namespace math;
 using namespace glb;
@@ -58,7 +62,7 @@ void Unit::create() {
 	unitData.playerColor = *(player->getPlayerColor());
 	unitData.pickingColor = pickingColor;
 	unitData.className = className;
-	obj::USprite()->getTextureInfo(&unitData);
+	USprite()->getTextureInfo(&unitData);
 
 	selectionCircle = gui::Circle();
 	selectionCircle.create("border", 0.f, 0.f, 35.f, 23.f, 8.f, "center");
@@ -93,7 +97,7 @@ void Unit::render(bool picking, int clickID, bool not_placeable) {
 		if (selected) {
 			selectionCircle.render(glm::vec4(255.f, 255.f, 255.f, 0.8f), position3D.x, position3D.y);
 		}
-		obj::USprite()->render(unitData, position3D, picking);
+		USprite()->render(unitData, position3D, picking);
 
 	}
 
@@ -157,12 +161,12 @@ void Unit::position_update() {
 }
 
 void Unit::walk_behaviour() {
-	if (engine::Mouse::RightClick && selected) {
+	if (Engine::Mouse::RightClick && selected) {
 
 		is_Moving = true;
 
 		startPoint = glm::vec2((int)position2D.x / astar::cellGridSize * astar::cellGridSize, (int)position2D.y / astar::cellGridSize * astar::cellGridSize);
-		endPoint = getZoomedCoords(engine::Mouse::GetXRightClick(), engine::Mouse::GetY2DRightClick());
+		endPoint = getZoomedCoords(Engine::Mouse::GetXRightClick(), Engine::Mouse::GetY2DRightClick());
 
 		// pathfinding
 		path = getPath(startPoint, endPoint);

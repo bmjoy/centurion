@@ -1,4 +1,5 @@
-#include <primitives>
+#include "cursor_image.h"
+
 #include <stb_image.h>
 
 CursorImage::CursorImage(){

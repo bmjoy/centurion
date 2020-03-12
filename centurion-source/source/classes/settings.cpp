@@ -1,6 +1,8 @@
 #include "settings.h"
-#include <engine/window.h>
-#include <engine/camera.h>
+
+#include <logger.h>
+#include <engine.h>
+#include <translationsTable.h>
 #include <iostream>
 #include <fstream>
 #include <settings-xml.hxx>
@@ -52,70 +54,94 @@ namespace glb {
 					SaveXml();
 				}
 			}
+			TranslationsTable::ReadTranslationsTableXml(Language);
 		}
 		catch (const xml_schema::exception & e) {
 			std::cout << e << std::endl;
 			SaveXml();
 		}
 
-		engine::myWindow::Width = windowWidth;
-		engine::myWindow::Height = windowHeight;
-		engine::Camera::MaxZoom = cameraMaxZoom;
-		engine::Camera::MovementSpeed = cameraMovespeed;
-		engine::myWindow::Ratio = windowWidth / windowHeight;
+		Engine::myWindow::Width = windowWidth;
+		Engine::myWindow::Height = windowHeight;
+		Engine::Camera::MaxZoom = cameraMaxZoom;
+		Engine::Camera::MovementSpeed = cameraMovespeed;
+		Engine::myWindow::Ratio = windowWidth / windowHeight;
 	}
 
 	void Settings::SetCameraMovespeed(float speed) {
 		cameraMovespeed = speed; 
-		engine::Camera::MovementSpeed = speed;
+		Engine::Camera::MovementSpeed = speed;
 	}
 
 	void Settings::SetCameraMaxZoom(float zoom) {
 		cameraMaxZoom = zoom;
-		engine::Camera::MaxZoom = zoom;
+		Engine::Camera::MaxZoom = zoom;
 	}
 
 	void Settings::SetWindowSize(float width, float height) {
 		windowWidth = width;
 		windowHeight = height;
-		engine::myWindow::Width = width;
-		engine::myWindow::Height = height;
-		engine::myWindow::Ratio = width / height;
+		Engine::myWindow::Width = width;
+		Engine::myWindow::Height = height;
+		Engine::myWindow::Ratio = width / height;
+	}
+
+	void Settings::ChangeLanguage(string lang)
+	{
+		try {
+			Language = lang;
+			TranslationsTable::ReadTranslationsTableXml(lang);
+			SaveXml();
+		}
+		catch (...) {
+			Logger::LogMessage msg = Logger::LogMessage("An error occurred changing the language to \"" + lang + "\"", "Error", "", "Settings", "ChangeLanguage");
+			Logger::Error(msg);
+			throw;
+		}
 	}
 
 	void Settings::SaveXml()
 	{
-		c_settings settXML = c_settings();
-		vector<pair<string, string>> settings_;
+		try
+		{
+			c_settings settXML = c_settings();
+			vector<pair<string, string>> settings_;
 
-		// Define strings for the XML
-		ostringstream windowWidthStr, windowHeightStr, cameraMovespeedStr, cameraMaxZoomStr;
-		windowWidthStr << (int)windowWidth;
-		windowHeightStr << (int)windowHeight;
-		cameraMovespeedStr << (int)cameraMovespeed;
-		cameraMaxZoomStr << (int)cameraMaxZoom;
-		string debugStr = "false";
-		if (DebugIsActive) debugStr = "true";
-		string fullScreenStr = "false";
-		if (FullScreen) fullScreenStr = "true";
+			// Define strings for the XML
+			ostringstream windowWidthStr, windowHeightStr, cameraMovespeedStr, cameraMaxZoomStr;
+			windowWidthStr << (int)windowWidth;
+			windowHeightStr << (int)windowHeight;
+			cameraMovespeedStr << (int)cameraMovespeed;
+			cameraMaxZoomStr << (int)cameraMaxZoom;
+			string debugStr = "false";
+			if (DebugIsActive) debugStr = "true";
+			string fullScreenStr = "false";
+			if (FullScreen) fullScreenStr = "true";
 
-		settings_.push_back({ "windowWidth", windowWidthStr.str() });
-		settings_.push_back({ "windowHeight", windowHeightStr.str() });
-		settings_.push_back({ "cameraMovespeed", cameraMovespeedStr.str() });
-		settings_.push_back({ "cameraMaxZoom", cameraMaxZoomStr.str() });
-		settings_.push_back({ "language", Language });
-		settings_.push_back({ "debug", debugStr });
-		settings_.push_back({ "fullScreen", fullScreenStr });
+			settings_.push_back({ "windowWidth", windowWidthStr.str() });
+			settings_.push_back({ "windowHeight", windowHeightStr.str() });
+			settings_.push_back({ "cameraMovespeed", cameraMovespeedStr.str() });
+			settings_.push_back({ "cameraMaxZoom", cameraMaxZoomStr.str() });
+			settings_.push_back({ "language", Language });
+			settings_.push_back({ "debug", debugStr });
+			settings_.push_back({ "fullScreen", fullScreenStr });
 
-		for (int i = 0; i < settings_.size(); i++) {
-			setting xml_setting = setting(settings_[i].first, settings_[i].second);
-			settXML.setting().push_back(xml_setting);
+			for (int i = 0; i < settings_.size(); i++) {
+				setting xml_setting = setting(settings_[i].first, settings_[i].second);
+				settXML.setting().push_back(xml_setting);
+			}
+
+			xml_schema::namespace_infomap map;
+			map[""].schema = "Settings.xsd";
+			ofstream ofs(SettingsPath.c_str());
+			c_settings_(ofs, settXML, map);
 		}
-
-		xml_schema::namespace_infomap map;
-		map[""].schema = "Settings.xsd";
-		ofstream ofs(SettingsPath.c_str());
-		c_settings_(ofs, settXML, map);
+		catch (...)
+		{
+			Logger::LogMessage msg = Logger::LogMessage("An error occurred saving \"Settings.XML\"", "Error", "", "Settings", "ChangeLanguage");
+			Logger::Error(msg);
+			throw;
+		}
 	}
 
 	void Settings::ParseInt(string name, string value, int* var) {

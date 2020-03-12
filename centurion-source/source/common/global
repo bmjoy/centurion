@@ -1,148 +1,31 @@
 ﻿#pragma once
 
-#include <headers>
-#include <primitives>
-
+#include <string>
+#include <glm/gtc/matrix_transform.hpp>
 
 using namespace std;
 using namespace glm;
 
-// cpp file --> source/global.cpp
-
-//
-//	NAMESPACE GLOBAL
-//	FOR GLOBAL VARIABLES, PARAMETERS AND FUNCTIONS
-//
-
 namespace glb {
-
-	//extern Settings settings;
-
 	extern string exe_root;
-	//extern string language;
 	extern mat4 menuProjection;
 	extern mat4 cameraProjection;
 	extern mat4 minimapProjection;
 
-	//extern GLFWwindow *MainWindow;
-
-	extern vector<vec3> colors;
-	extern vector<string> racesNames;
-	extern map<string, int> availableLanguages;
-
-	extern int CharCodepointPressed;	// for text input
-	extern bool KeyCode[GLFW_KEY_LAST];	// for text input
-
-	static const string gameNameSTR = "Centurion";
-	static map<string, string> errors; // error codes
-	static map<string, string> translation_table_current;
-
-	void setErrors(map<string, string> errorsMap);
-	string getErrorCode(string error);
-	string getTranslation(string code);
-	string currentDateTime(const char* format);
 	void initParams();
-
-	void read_translation_tables();
-	void changeLanguage(string lan);
 
 	// reading/saving map data 
 	void readIndicesData(unsigned int *indices, string path);
 	void readVerticesData(float *vertices, string path);
 	void readVerticesPosData(int *verticesPos, string path);
-	string ReadFile(const char* fileLocation);
-	vector<string> get_all_files_names_within_folder(string folder, string type = "*");
-	vector<string> get_all_folders_names_within_folder(string folder);
-	struct file_info { string name, path; };
-	vector<file_info> get_all_files_names_within_subfolders(string const &folder_name, string const &file_extension = "");
+	
 	void saveCurrentScenario(string name);
 	void openScenario(string name);
-	void takeScreenshot();
 
 	// other functions 
 	void setMinimapProjection();
 	float getYMinimapCoord(float x);
 	bool cursorInGameScreen();
-	void clearAndSwapBuffers(GLFWwindow *window);
 	vec2 getZoomedCoords(float xCoord, float yCoord);
-	void forceGameClosure(string errorCode, string errorText);
-	void showGameWarning(string reason);
-	bool folderExists(string folderPath);
 
-
-	// Race class
-	class Race {
-	public:
-		Race();
-		void setRaceProperties(int p1, string p2, string p3, string p4) { p_id = p1; name = p2; zone = p3; t_class = p4; }
-		int getRaceId() { return p_id; };
-		string getRaceName() { return name; }
-		string getEnvironmentalZone() { return zone; }
-		string getFoodTransportClass() { return t_class; }
-		~Race();
-	private:
-		int p_id;
-		string name;
-		string zone;
-		string t_class;
-	};
-
-	extern map<string, Race> RACES;
-};
-
-//------------------------------------------------------------------------------
-//------------------------------------------------------------------------------
-//------------------------------------------------------------------------------
-
-//
-//	NAMESPACE OBJECTS
-//	FOR OBJECTS THAT COMMUNICATE WITH AUDIO/GRAPHIC DRIVERS
-//
-
-namespace obj {
-
-	static AudioManager audioM;
-	AudioManager *Audio();
-
-	static BitmapFont txt;
-	BitmapFont *Text();
-
-	static BuildingSprite bsprite;
-	BuildingSprite *BSprite();
-
-	static CursorImage cursor;
-	CursorImage *Cursor();
-
-	static DecorationSprite dsprite;
-	DecorationSprite *DSprite();
-
-	static EmptyRectangle eRect;
-	EmptyRectangle *ERectangle();
-
-	static EmptyCircle eCircle;
-	EmptyCircle *ECircle();
-
-	static FilledRectangle fRect;
-	FilledRectangle *FRectangle();
-
-	static ImageSprite img;
-	ImageSprite *Img();
-
-	static UnitSprite usprite;
-	UnitSprite *USprite();
-
-	static Terrain terrain;
-	Terrain *MapTerrain();
-
-	static Grid grid;
-	Grid *MapGrid();
-
-	static MinimapRectangle mmRect;
-	MinimapRectangle *MMRectangle();
-
-	void applyMenuMatrices();
-	void applyGameMatrices(mat4 *proj, mat4 *view);
-	void init();
-	void compile();
-	void create();
 };

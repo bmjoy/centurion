@@ -1,17 +1,16 @@
 //#pragma comment(linker, "/SUBSYSTEM:windows /ENTRY:mainCRTStartup")
 
 #include <global>
-#include <engine/engine.h>
-#include <engine/window.h>
+#include <engine.h>
 
-using namespace engine;
+// main function
 
-// main function 
 int main(int numArgs, char *args[]) {
 
 	glb::initParams();
 	Engine::Init();
-	if (myWindow::ShouldClose == false) {
+	
+	if (Engine::myWindow::ShouldClose == false) {
 		try {
 			return Engine::launch();
 		}
@@ -19,7 +18,9 @@ int main(int numArgs, char *args[]) {
 
 		}
 	}
+	
 	else {
 		return 0;
 	}
+
 }

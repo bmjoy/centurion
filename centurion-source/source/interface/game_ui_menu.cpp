@@ -1,7 +1,8 @@
 #include <interface>
 #include <json.hpp>
-#include <engine/window.h>
+#include <engine.h>
 #include <picking.h>
+#include <translationsTable.h>
 
 using namespace glb;
 
@@ -20,19 +21,19 @@ namespace game {
 		//Close the game if it wasn't able to find or process menu.json file
 		std::ifstream path("assets/data/interface/game/menu.json");
 		if (!path.good()) {
-			forceGameClosure("NOT_FOUND" , "ERROR_menuData");
+			//forceGameClosure("NOT_FOUND" , "ERROR_menuData");
 		}
 		json data = json::parse(path);
 
-		x = engine::myWindow::Width / 2.f;
-		y = engine::myWindow::Height / 2.f;
+		x = Engine::myWindow::Width / 2.f;
+		y = Engine::myWindow::Height / 2.f;
 
 		s = "buttons";
 		for (int i = 0; i < data[s].size(); ++i) {
 			btn = gui::Button();
 			btn.create(
 				data[s][i]["image_name"].get<std::string>(), 
-				getTranslation(data[s][i]["name"].get<std::string>()), 
+				TranslationsTable::GetTranslation(data[s][i]["name"].get<std::string>()), 
 				(int)x + data[s][i]["x"].get<int>(),
 				(int)y + data[s][i]["y"].get<int>(),
 				PickingUI::getPickingID(),

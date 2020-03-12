@@ -1,12 +1,14 @@
 #include <surface>
 #include <math>
 #include <global>
+#include <game/game.h>
 #include <game/strategy.h>
 #include <player>
 #include <random>
 #include <ctime>
 
-
+#include <primitives.h>
+#include <terrain.h>
 
 namespace mapgen {
 
@@ -482,7 +484,7 @@ namespace mapgen {
 				if (dist <= d) {
 					d = dist;
 					string race = b->get_race();
-					if (dist - rnoise > TOWNHALL_RADIUS - grid_size) zoneType = glb::RACES[race].getEnvironmentalZone();
+					if (dist - rnoise > TOWNHALL_RADIUS - grid_size) zoneType = Game::GetRace(race)->getEnvironmentalZone();
 					else zoneType = "none";
 				}
 			}
@@ -505,6 +507,6 @@ namespace mapgen {
 			}
 		}
 		// update texture buffer
-		obj::MapTerrain()->updateTextureBuffer();
+		MapTerrain()->updateTextureBuffer();
 	}
 };

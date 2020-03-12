@@ -1,8 +1,6 @@
 #include <menu>
 #include <picking.h>
-#include <engine/engine.h>
-#include <engine/window.h>
-#include <engine/mouse.h>
+#include <engine.h>
 #include <settings.h>
 #include <game/strategy.h>
 #include <global>
@@ -10,7 +8,7 @@
 #include <interface>
 
 using namespace glb;
-using namespace engine;
+
 
 
 namespace menu {
@@ -42,7 +40,7 @@ namespace menu {
 		/*------------------------------------------------------------------------------*/
 		if (clickName == "MAINMENU_buttonQuit") {
 			Settings::SaveXml();
-			engine::myWindow::ShouldClose = true;
+			Engine::myWindow::ShouldClose = true;
 		}
 		/*------------------------------------------------------------------------------*/
 		if (currentMenu == "singleplayer") {
@@ -52,28 +50,30 @@ namespace menu {
 		}
 		/*------------------------------------------------------------------------------*/
 		if (clickName == "SINGLEPLAYER_buttonStart") {
-			Mouse::LeftClick = false;
+			Engine::Mouse::LeftClick = false;
 			Engine::setEnvironment("game");
 			/* save game informations */
 			Game::SetNumberOfPlayers(num_players);
 			for (int i = 0; i < num_players; i++) {
 				Player p = Player();
-				p.create(players_color[i], 0, list->get_race(i), glb::colors[players_color[i]]);
+				p.create(players_color[i], 0, list->get_race(i), Game::GetColor(players_color[i]));
 				playersList[i] = p;
 			}
 		}
 		/*------------------------------------------------------------------------------*/
 		if (clickName == "OPTIONS_buttonApply") {
 			if (Settings::Language != options->currentLan)
-				changeLanguage(options->currentLan);
-			Settings::SaveXml();
+			{
+				Settings::ChangeLanguage(options->currentLan);
+			}
 		}
 		/*------------------------------------------------------------------------------*/
 		if (clickName == "OPTIONS_buttonSave") {
-			if (Settings::Language != options->currentLan)
-				changeLanguage(options->currentLan);
+			if (Settings::Language != options->currentLan) 
+			{
+				Settings::ChangeLanguage(options->currentLan);
+			}
 			currentMenu = "mainmenu";
-			Settings::SaveXml();
 		}
 		/*------------------------------------------------------------------------------*/
 		if (clickName == "OPTIONS_buttonCancel") {

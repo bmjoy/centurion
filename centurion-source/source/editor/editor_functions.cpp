@@ -4,16 +4,13 @@
 #include <picking.h>
 #include <player>
 #include <game/strategy.h>
-#include <engine/engine.h>
-#include <engine/mouse.h>
-#include <engine/camera.h>
-#include <engine/window.h>
+#include <engine.h>
 #include <surface>
 #include <settings.h>
+#include <translationsTable.h>
 
-
-using namespace engine;
-
+#include <primitives.h>
+#include <terrain.h>
 
 using namespace glb;
 
@@ -79,8 +76,8 @@ namespace editor {
 	}
 
 	void insertingObject(string type, string classname) {
-		float x = round(engine::Mouse::GetXPosition() * engine::myWindow::WidthZoomed / myWindow::Width + engine::Camera::GetXPosition());
-		float y = round(engine::Mouse::GetYPosition() * engine::myWindow::HeightZoomed / myWindow::Height + engine::Camera::GetYPosition());
+		float x = round(Engine::Mouse::GetXPosition() * Engine::myWindow::WidthZoomed / Engine::myWindow::Width + Engine::Camera::GetXPosition());
+		float y = round(Engine::Mouse::GetYPosition() * Engine::myWindow::HeightZoomed / Engine::myWindow::Height + Engine::Camera::GetYPosition());
 		if (type == "buildings") {
 			buildingTemp->set_position(vec3(x, y, 0.f));
 			buildingTemp->set_status(false);
@@ -90,18 +87,18 @@ namespace editor {
 			if (!buildingTemp->is_independent()) {
 				string s = "";
 				if (!buildingTemp->is_near_to_independent(&s))
-					textInfo.render_dynamic(getTranslation("EDITOR_noSettlementsAround"), "tahoma_15px", 10, myWindow::Height - 50, vec4(255.f), "left", "center");
+					textInfo.render_dynamic(TranslationsTable::GetTranslation("EDITOR_noSettlementsAround"), "tahoma_15px", 10, Engine::myWindow::Height - 50, vec4(255.f), "left", "center");
 				else
 					if (!buildingTemp->is_placeable())
-						textInfo.render_dynamic(getTranslation("EDITOR_impassablePoint"), "tahoma_15px", 10, myWindow::Height - 50, vec4(255.f), "left", "center");
+						textInfo.render_dynamic(TranslationsTable::GetTranslation("EDITOR_impassablePoint"), "tahoma_15px", 10, Engine::myWindow::Height - 50, vec4(255.f), "left", "center");
 					else
-						textInfo.render_dynamic(getTranslation("EDITOR_canAddStructure"), "tahoma_15px", 10, myWindow::Height - 50, vec4(255.f), "left", "center");
+						textInfo.render_dynamic(TranslationsTable::GetTranslation("EDITOR_canAddStructure"), "tahoma_15px", 10, Engine::myWindow::Height - 50, vec4(255.f), "left", "center");
 			}
 			else {
 				if (!buildingTemp->is_placeable())
-					textInfo.render_dynamic(getTranslation("EDITOR_impassablePoint"), "tahoma_15px", 10, myWindow::Height - 50, vec4(255.f), "left", "center");
+					textInfo.render_dynamic(TranslationsTable::GetTranslation("EDITOR_impassablePoint"), "tahoma_15px", 10, Engine::myWindow::Height - 50, vec4(255.f), "left", "center");
 				else
-					textInfo.render_dynamic(getTranslation("EDITOR_canAddStructure"), "tahoma_15px", 10, myWindow::Height - 50, vec4(255.f), "left", "center");
+					textInfo.render_dynamic(TranslationsTable::GetTranslation("EDITOR_canAddStructure"), "tahoma_15px", 10, Engine::myWindow::Height - 50, vec4(255.f), "left", "center");
 			}
 		}
 		if (type == "decorations") {
@@ -125,7 +122,7 @@ namespace editor {
 				}
 				Game::AddGameObject(ID, buildingTemp);
 	
-				Mouse::LeftClick = false;
+				Engine::Mouse::LeftClick = false;
 				addingObject = false;
 			}
 		}
@@ -137,7 +134,7 @@ namespace editor {
 				decorTemp->set_id(ID);
 				decorTemp->create();
 				Game::AddGameObject(ID, decorTemp);
-				Mouse::LeftClick = false;
+				Engine::Mouse::LeftClick = false;
 				addingObject = false;
 			}
 		}
@@ -145,8 +142,8 @@ namespace editor {
 	}
 
 	void changeTerrain(int terrainType) {
-		float x1 = (engine::Mouse::GetXPosition() * engine::myWindow::WidthZoomed / myWindow::Width + engine::Camera::GetXPosition());
-		float y1 = (engine::Mouse::GetYPosition() * engine::myWindow::HeightZoomed / myWindow::Height + engine::Camera::GetYPosition());
+		float x1 = (Engine::Mouse::GetXPosition() * Engine::myWindow::WidthZoomed / Engine::myWindow::Width + Engine::Camera::GetXPosition());
+		float y1 = (Engine::Mouse::GetYPosition() * Engine::myWindow::HeightZoomed / Engine::myWindow::Height + Engine::Camera::GetYPosition());
 		float type = float(terrainType);
 		
 		int x = int(round(x1 / mapgen::grid_size)) * mapgen::grid_size + mapgen::grid_size * 2;
@@ -157,7 +154,7 @@ namespace editor {
 	
 		if (mapgen::MapTextures()[j] != type){
 			mapgen::MapTextures()[j] = type;
-			obj::MapTerrain()->updateTextureBuffer();
+			MapTerrain()->updateTextureBuffer();
 			Game::Minimap::Update();
 		}
 	}
@@ -187,7 +184,7 @@ namespace editor {
 	}
 
 	void moveObjects() {
-		if (Mouse::LeftHold) {
+		if (Engine::Mouse::LeftHold) {
 			// buildings
 			if (Game::IsGameObjectNotNull(Picking::leftClickID)) {
 				Building* bld = Game::GetGameObjectPtrById(Picking::leftClickID)->AsBuilding();
@@ -195,11 +192,11 @@ namespace editor {
 				if (!movingObject) {
 					movingObjectXPos = bld->get_position().x;
 					movingObjectYPos = bld->get_position().y;
-					movingObjectStartXMouse = engine::Mouse::GetXPosition() * engine::myWindow::WidthZoomed / myWindow::Width + engine::Camera::GetXPosition();
-					movingObjectStartYMouse = engine::Mouse::GetYPosition() * engine::myWindow::HeightZoomed / myWindow::Height + engine::Camera::GetYPosition();
+					movingObjectStartXMouse = Engine::Mouse::GetXPosition() * Engine::myWindow::WidthZoomed / Engine::myWindow::Width + Engine::Camera::GetXPosition();
+					movingObjectStartYMouse = Engine::Mouse::GetYPosition() * Engine::myWindow::HeightZoomed / Engine::myWindow::Height + Engine::Camera::GetYPosition();
 				}
-				float x1 = (engine::Mouse::GetXPosition() * engine::myWindow::WidthZoomed / myWindow::Width + engine::Camera::GetXPosition());
-				float y1 = (engine::Mouse::GetYPosition() * engine::myWindow::HeightZoomed / myWindow::Height + engine::Camera::GetYPosition());
+				float x1 = (Engine::Mouse::GetXPosition() * Engine::myWindow::WidthZoomed / Engine::myWindow::Width + Engine::Camera::GetXPosition());
+				float y1 = (Engine::Mouse::GetYPosition() * Engine::myWindow::HeightZoomed / Engine::myWindow::Height + Engine::Camera::GetYPosition());
 				float dx = x1 - movingObjectStartXMouse;
 				float dy = y1 - movingObjectStartYMouse;
 
@@ -209,15 +206,15 @@ namespace editor {
 					if (!bld->is_placeable()) {
 						string s = "";
 						if (!bld->is_near_to_independent(&s)) {
-							textInfo.render_dynamic(getTranslation("EDITOR_noSettlementsAround"), "tahoma_15px", 10, myWindow::Height - 50, vec4(255.f), "left", "center");
+							textInfo.render_dynamic(TranslationsTable::GetTranslation("EDITOR_noSettlementsAround"), "tahoma_15px", 10, Engine::myWindow::Height - 50, vec4(255.f), "left", "center");
 						}
 						else
-							textInfo.render_dynamic(getTranslation("EDITOR_impassablePoint"), "tahoma_15px", 10, myWindow::Height - 50, vec4(255.f), "left", "center");
+							textInfo.render_dynamic(TranslationsTable::GetTranslation("EDITOR_impassablePoint"), "tahoma_15px", 10, Engine::myWindow::Height - 50, vec4(255.f), "left", "center");
 						bld->set_placeable(false);
 						movingObjectRestore = true;
 					}
 					else {
-						textInfo.render_dynamic(getTranslation("EDITOR_canAddStructure"), "tahoma_15px", 10, myWindow::Height - 50, vec4(255.f), "left", "center");
+						textInfo.render_dynamic(TranslationsTable::GetTranslation("EDITOR_canAddStructure"), "tahoma_15px", 10, Engine::myWindow::Height - 50, vec4(255.f), "left", "center");
 						bld->set_placeable(true);
 					}
 				}
@@ -232,9 +229,9 @@ namespace editor {
 						bld->set_placeable(true);
 					}
 					if (!bld->is_placeable())
-						textInfo.render_dynamic(getTranslation("EDITOR_impassablePoint"), "tahoma_15px", 10, myWindow::Height - 50, vec4(255.f), "left", "center");
+						textInfo.render_dynamic(TranslationsTable::GetTranslation("EDITOR_impassablePoint"), "tahoma_15px", 10, Engine::myWindow::Height - 50, vec4(255.f), "left", "center");
 					else
-						textInfo.render_dynamic(getTranslation("EDITOR_canAddStructure"), "tahoma_15px", 10, myWindow::Height - 50, vec4(255.f), "left", "center");
+						textInfo.render_dynamic(TranslationsTable::GetTranslation("EDITOR_canAddStructure"), "tahoma_15px", 10, Engine::myWindow::Height - 50, vec4(255.f), "left", "center");
 				}
 				movingObject = true;
 				Game::Minimap::Update();

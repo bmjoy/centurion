@@ -1,6 +1,6 @@
-#include <global>
+#include "audio_manager.h"
 
-using namespace glb;
+#include "logger.h"
 
 AudioManager::AudioManager(){}
 
@@ -18,7 +18,7 @@ void AudioManager::MusicPlay(std::string name, bool looping) {
 		}
 	}
 	else {
-		showGameWarning("WARNING_audioDevice");
+		//showGameWarning("WARNING_audioDevice");
 	}
 }
 

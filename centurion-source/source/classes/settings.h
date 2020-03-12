@@ -21,6 +21,9 @@ namespace glb {
 		static void SetCameraMovespeed(float speed);
 		static void SetCameraMaxZoom(float zoom);
 		static void SetWindowSize(float width, float height);
+		static void ChangeLanguage(string lang);
+		const static string GetGameNameStr(void) { return "Centurion"; }
+		const static char* GetGameName(void) { return "Centurion"; }
 	private:
 		Settings();
 		~Settings();

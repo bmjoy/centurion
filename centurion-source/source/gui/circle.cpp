@@ -1,6 +1,8 @@
 #include <gui>
 #include <global>
-#include <engine/window.h>
+#include <engine.h>
+
+#include <empty_circle.h>
 
 namespace gui {
 
@@ -19,8 +21,8 @@ namespace gui {
 	}
 
 	void Circle::create(string Type, float x, float y, float w, float h, float borderWidth, string origin) {
-		if (x < 0) x += engine::myWindow::Width;
-		if (y < 0) y += engine::myWindow::Height;
+		if (x < 0) x += Engine::myWindow::Width;
+		if (y < 0) y += Engine::myWindow::Height;
 		data.type = Type;
 		data.x = x;
 		data.y = y;
@@ -37,7 +39,7 @@ namespace gui {
 		if (origin != -1) data.origin = origin;
 		if (data.type == "border") {
 			data.borderColor = Color;
-			obj::ECircle()->render(data);
+			ECircle()->render(data);
 		}
 	}
 

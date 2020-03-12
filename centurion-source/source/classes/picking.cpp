@@ -1,6 +1,6 @@
 #include <picking.h>
 #include <global>
-#include <engine/mouse.h>
+#include <engine.h>
 
 
 #pragma region Picking Class
@@ -17,9 +17,9 @@ unsigned int Picking::GetIdFromClick(const unsigned short int LeftRight)
 	unsigned char data[4];
 	//Edit the following line because you can get id with both left and right click
 	if (LeftRight == PICKING_LEFT)
-		glReadPixels((GLint)engine::Mouse::GetXLeftClick(), (GLint)engine::Mouse::GetYLeftClick(), 1, 1, GL_RGBA, GL_UNSIGNED_BYTE, &data);
+		glReadPixels((GLint)Engine::Mouse::GetXLeftClick(), (GLint)Engine::Mouse::GetYLeftClick(), 1, 1, GL_RGBA, GL_UNSIGNED_BYTE, &data);
 	if (LeftRight == PICKING_RIGHT)
-		glReadPixels((GLint)engine::Mouse::GetXRightClick(), (GLint)engine::Mouse::GetYRightClick(), 1, 1, GL_RGBA, GL_UNSIGNED_BYTE, &data);
+		glReadPixels((GLint)Engine::Mouse::GetXRightClick(), (GLint)Engine::Mouse::GetYRightClick(), 1, 1, GL_RGBA, GL_UNSIGNED_BYTE, &data);
 	unsigned int pickedID =
 		         data[0] +
 		         data[1] * 256 +
@@ -230,9 +230,9 @@ namespace glb {
 		unsigned char data[4];
 		//Edit the following line because you can get id with both left and right click
 		if (LeftRight == "left")
-			glReadPixels((GLint)engine::Mouse::GetXLeftClick(), (GLint)engine::Mouse::GetYLeftClick(), 1, 1, GL_RGBA, GL_UNSIGNED_BYTE, &data);
+			glReadPixels((GLint)Engine::Mouse::GetXLeftClick(), (GLint)Engine::Mouse::GetYLeftClick(), 1, 1, GL_RGBA, GL_UNSIGNED_BYTE, &data);
 		if (LeftRight == "right")
-			glReadPixels((GLint)engine::Mouse::GetXRightClick(), (GLint)engine::Mouse::GetYRightClick(), 1, 1, GL_RGBA, GL_UNSIGNED_BYTE, &data);
+			glReadPixels((GLint)Engine::Mouse::GetXRightClick(), (GLint)Engine::Mouse::GetYRightClick(), 1, 1, GL_RGBA, GL_UNSIGNED_BYTE, &data);
 		int pickedID =
 			data[0] +
 			data[1] * 256 +

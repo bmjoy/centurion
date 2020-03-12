@@ -1,8 +1,8 @@
-#include <primitives>
+#include "grid.h"
+
 #include <game/strategy.h>
 #include <surface>
 #include <pathfinding>
-#include <global>
 
 
 

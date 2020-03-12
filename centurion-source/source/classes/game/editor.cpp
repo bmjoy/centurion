@@ -3,13 +3,12 @@
 #include <game/strategy.h>
 #include <picking.h>
 #include <interface>
-#include <engine/camera.h>
-#include <engine/mouse.h>
-#include <engine/window.h>
-#include <engine/engine.h>
+#include <engine.h>
+
+#include <global>
 
 using namespace glb;
-using namespace engine;
+
 
 #pragma region Static variables
 
@@ -23,8 +22,8 @@ void Editor::Create() {
 	PickingObject::resetPicking();
 
 	Strategy::reset();
-	myWindow::BottomBarHeight = 0.f;
-	myWindow::TopBarHeight = 30.f;
+	Engine::myWindow::BottomBarHeight = 0.f;
+	Engine::myWindow::TopBarHeight = 30.f;
 	setMinimapProjection();
 
 	Surface::Reset();
@@ -32,9 +31,9 @@ void Editor::Create() {
 
 	SelectionRectangle::Create();
 
-	Mouse::LeftHold = false;
+	Engine::Mouse::LeftHold = false;
 
-	Camera::GoToPoint(1.f, 1.f);
+	Engine::Camera::GoToPoint(1.f, 1.f);
 
 	isCreated = true;
 	Minimap::Update();
@@ -44,20 +43,20 @@ void Editor::Run() {
 	/* Keyboard control */
 	handleKeyboardControls();
 	if (!editor::IsWindowOpened) { // TODO: merge all these in a function in Editor->Editor_functions.cpp
-		Camera::keyboardControl();
+		Engine::Camera::keyboardControl();
 	}
 
 	/* If minimap is NOT active */
 	if (Minimap::IsActive() == false) {
-		if (!editor::IsWindowOpened && Mouse::GetYPosition() < myWindow::Height - 30.f && !editor::menuIsOpened)
-			Camera::mouseControl();
-		viewMatrix = Camera::calculateViewMatrix();
+		if (!editor::IsWindowOpened && Engine::Mouse::GetYPosition() < Engine::myWindow::Height - 30.f && !editor::menuIsOpened)
+			Engine::Camera::mouseControl();
+		viewMatrix = Engine::Camera::calculateViewMatrix();
 		projectionMatrix = glb::cameraProjection;
 
 		editor::EDITOR_UI()->render(true);
 
 		// apply game matrices
-		obj::applyGameMatrices(&projectionMatrix, &viewMatrix);
+		applyGameMatrices(&projectionMatrix, &viewMatrix);
 
 		// picking
 		if (!editor::IsWindowOpened && !editor::addingObject && !editor::TerrainBrushIsActive) RenderObjectsPicking();
@@ -68,7 +67,7 @@ void Editor::Run() {
 		if (!editor::IsWindowOpened && !editor::addingObject && !editor::TerrainBrushIsActive) editor::moveObjects();
 
 		// apply menu matrices
-		obj::applyMenuMatrices();
+		applyMenuMatrices();
 
 		editor::EDITOR_UI()->render(false);
 	}
@@ -84,11 +83,11 @@ void Editor::Run() {
 		if (Minimap::IsCreated()) Minimap::Render();
 
 		if (!Minimap::IsCreated()) {
-			obj::applyGameMatrices(&projectionMatrix, &viewMatrix);
+			applyGameMatrices(&projectionMatrix, &viewMatrix);
 			Surface::Render(false);
 			RenderObjects();
 			Minimap::Create();
-			obj::applyMenuMatrices();
+			applyMenuMatrices();
 		}
 
 		editor::EDITOR_UI()->render(false);
@@ -96,20 +95,20 @@ void Editor::Run() {
 		if (Picking::leftClickID_UI == 0) GoToPointFromMinimap();
 	}
 
-	glb::cameraProjection = glm::ortho(0.0f, myWindow::WidthZoomed, 0.0f, myWindow::HeightZoomed, -(float)MEDIUM_MAP_WIDTH, (float)MEDIUM_MAP_WIDTH);
+	glb::cameraProjection = glm::ortho(0.0f, Engine::myWindow::WidthZoomed, 0.0f, Engine::myWindow::HeightZoomed, -(float)MEDIUM_MAP_WIDTH, (float)MEDIUM_MAP_WIDTH);
 
-	Mouse::RightClick = false;
-	Mouse::LeftClick = false;
-	Mouse::MiddleClick = false;
-	KeyCode[GLFW_KEY_ESCAPE] = false;
+	Engine::Mouse::RightClick = false;
+	Engine::Mouse::LeftClick = false;
+	Engine::Mouse::MiddleClick = false;
+	Engine::Keyboard::SetKeyStatus(GLFW_KEY_ESCAPE, false);
 
 	if (editor::IsWindowOpened) {
-		KeyCode[GLFW_KEY_BACKSPACE] = false;
-		KeyCode[GLFW_KEY_DELETE] = false;
-		KeyCode[GLFW_KEY_UP] = false;
-		KeyCode[GLFW_KEY_DOWN] = false;
-		KeyCode[GLFW_KEY_LEFT] = false;
-		KeyCode[GLFW_KEY_RIGHT] = false;
+		Engine::Keyboard::SetKeyStatus(GLFW_KEY_BACKSPACE, false);
+		Engine::Keyboard::SetKeyStatus(GLFW_KEY_DELETE, false);
+		Engine::Keyboard::SetKeyStatus(GLFW_KEY_UP, false);
+		Engine::Keyboard::SetKeyStatus(GLFW_KEY_DOWN, false);
+		Engine::Keyboard::SetKeyStatus(GLFW_KEY_LEFT, false);
+		Engine::Keyboard::SetKeyStatus(GLFW_KEY_RIGHT, false);
 	}
 }
 
@@ -122,14 +121,14 @@ void Editor::handleKeyboardControls() {
 
 	//CTRL Hotkeys
 	if (!IsWindowOpened) {
-		if (KeyCode[GLFW_KEY_LEFT_CONTROL] || KeyCode[GLFW_KEY_RIGHT_CONTROL]) {
-			if (KeyCode[GLFW_KEY_N]) { NewMapWindowIsOpen = true; NewMapResetText = true; IsWindowOpened = true; }
-			if (KeyCode[GLFW_KEY_O]) { OpenMapWindowIsOpen = true; OpenMapWindowUpdate = true; IsWindowOpened = true; }
-			if (KeyCode[GLFW_KEY_S]) { saveCurrentScenario(currentMapName); }
-			if (KeyCode[GLFW_KEY_A]) { TerrainBrushIsActive = false; TerrainBrushWindowIsOpen = false; AddObjectWindowIsOpen = !AddObjectWindowIsOpen; }
-			if (KeyCode[GLFW_KEY_T]) { AddObjectWindowIsOpen = false; TerrainBrushIsActive = !TerrainBrushWindowIsOpen; TerrainBrushWindowIsOpen = !TerrainBrushWindowIsOpen; }
+		if (Engine::Keyboard::IsKeyPressed(GLFW_KEY_LEFT_CONTROL) || Engine::Keyboard::IsKeyPressed(GLFW_KEY_RIGHT_CONTROL)) {
+			if (Engine::Keyboard::IsKeyPressed(GLFW_KEY_N)) { NewMapWindowIsOpen = true; NewMapResetText = true; IsWindowOpened = true; }
+			if (Engine::Keyboard::IsKeyPressed(GLFW_KEY_O)) { OpenMapWindowIsOpen = true; OpenMapWindowUpdate = true; IsWindowOpened = true; }
+			if (Engine::Keyboard::IsKeyPressed(GLFW_KEY_S)) { saveCurrentScenario(currentMapName); }
+			if (Engine::Keyboard::IsKeyPressed(GLFW_KEY_A)) { TerrainBrushIsActive = false; TerrainBrushWindowIsOpen = false; AddObjectWindowIsOpen = !AddObjectWindowIsOpen; }
+			if (Engine::Keyboard::IsKeyPressed(GLFW_KEY_T)) { AddObjectWindowIsOpen = false; TerrainBrushIsActive = !TerrainBrushWindowIsOpen; TerrainBrushWindowIsOpen = !TerrainBrushWindowIsOpen; }
 		}
-		if (KeyCode[GLFW_KEY_DELETE]) {
+		if (Engine::Keyboard::IsKeyPressed(GLFW_KEY_DELETE)){
 			if (Game::IsGameObjectNotNull(Picking::leftClickID)) {
 				Building* b = Game::GetGameObjectPtrById(Picking::leftClickID)->AsBuilding();
 				if (b->isSelected()) {
@@ -153,26 +152,26 @@ void Editor::handleKeyboardControls() {
 			}
 		}
 		
-		if (KeyCode[GLFW_KEY_SPACE] || Mouse::MiddleClick) {
+		if (Engine::Keyboard::IsKeyPressed(GLFW_KEY_SPACE) || Engine::Mouse::MiddleClick) {
 			if (Minimap::IsActive()) Minimap::Disable();
 			else Minimap::Enable();
 			Minimap::IsActive() ? Logger::Info("Minimap ON!") : Logger::Info("Minimap OFF!");
 		}
-		if (KeyCode[GLFW_KEY_Z]) {
+		if (Engine::Keyboard::IsKeyPressed(GLFW_KEY_Z)) {
 			Surface::Wireframe = !Surface::Wireframe;
 			Surface::Wireframe ? Logger::Info("Wireframe ON!") : Logger::Info("Wireframe OFF!");
 		}
 		// Grid
-		if (KeyCode[GLFW_KEY_G]) {
+		if (Engine::Keyboard::IsKeyPressed(GLFW_KEY_G)) {
 			if (Surface::IsGridEnabled()) Surface::DisableGrid();
 			else Surface::EnableGrid();
 			Surface::IsGridEnabled() ? Logger::Info("Grid ON!") : Logger::Info("Grid OFF!");
 		}
 	}
-	if (KeyCode[GLFW_KEY_ESCAPE]) {
+	if (Engine::Keyboard::IsKeyPressed(GLFW_KEY_ESCAPE)) {
 		if (areWindowsClosed()) {
 			clearEditorVariables();
-			engine::Engine::Reset();
+			Engine::Reset();
 		}
 		else {
 			clearEditorVariables();

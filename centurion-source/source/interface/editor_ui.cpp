@@ -1,11 +1,10 @@
 #include <interface>
 #include <game/strategy.h>
-#include <engine/camera.h>
-#include <engine/window.h>
+#include <engine.h>
 
 using namespace glb;
 
-using namespace engine;
+
 
 namespace editor {
 
@@ -29,13 +28,13 @@ namespace editor {
 	void EditorUI::render(bool picking) {
 		// minimap rectangle:
 		if (Game::Minimap::IsActive()) {
-			float x = Camera::GetXPosition() / MEDIUM_MAP_WIDTH * myWindow::Width;
-			float y = Camera::GetYPosition() / MEDIUM_MAP_HEIGHT * (myWindow::Height - myWindow::BottomBarHeight - myWindow::TopBarHeight) + myWindow::BottomBarHeight;
-			float w = myWindow::WidthZoomed * myWindow::Width / MEDIUM_MAP_WIDTH;
-			float h = myWindow::HeightZoomed * (myWindow::Height - myWindow::BottomBarHeight - myWindow::TopBarHeight) / MEDIUM_MAP_HEIGHT;
+			float x = Engine::Camera::GetXPosition() / MEDIUM_MAP_WIDTH * Engine::myWindow::Width;
+			float y = Engine::Camera::GetYPosition() / MEDIUM_MAP_HEIGHT * (Engine::myWindow::Height - Engine::myWindow::BottomBarHeight - Engine::myWindow::TopBarHeight) + Engine::myWindow::BottomBarHeight;
+			float w = Engine::myWindow::WidthZoomed * Engine::myWindow::Width / MEDIUM_MAP_WIDTH;
+			float h = Engine::myWindow::HeightZoomed * (Engine::myWindow::Height - Engine::myWindow::BottomBarHeight - Engine::myWindow::TopBarHeight) / MEDIUM_MAP_HEIGHT;
 			x = std::max(x, 1.f);
-			y = std::max(y, myWindow::BottomBarHeight + 1.f);
-			y = std::min(y, myWindow::Height - myWindow::TopBarHeight - h);
+			y = std::max(y, Engine::myWindow::BottomBarHeight + 1.f);
+			y = std::min(y, Engine::myWindow::Height - Engine::myWindow::TopBarHeight - h);
 			minimapRectangle.render(vec4(255.f), false, x, y, w, h);
 		}
 
