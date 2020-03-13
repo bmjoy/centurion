@@ -13,15 +13,18 @@
 using namespace std;
 using namespace glm;
 
-Decoration::Decoration() {
-	type = "decoration";
+Decoration::Decoration() 
+{
+	//type = "decoration";
+	this->SetType("decoration");
 	settlementName = "N/A";
 	settlID = 0;
 }
 
 void Decoration::prepare() {
 	string pass_path = data["pass_path"].get<string>();
-	pass_grid = astar::readPassMatrix(pass_path, className);
+	string str_className = this->GetClassName();
+	pass_grid = astar::readPassMatrix(pass_path, str_className);
 
 	int w, h, nrChannels;
 
@@ -38,14 +41,15 @@ void Decoration::prepare() {
 
 	decorData.width = w;
 	decorData.height = h;
-	decorData.className = className;
-	decorData.textureID = DSprite()->getTextureID(className);
+	decorData.className = this->GetClassName();
+	decorData.textureID = DSprite()->getTextureID(this->GetClassName());
 }
 
 void Decoration::create() {
 
 	string pass_path = data["pass_path"].get<string>();
-	if (pass_grid.size() == 0) pass_grid = astar::readPassMatrix(pass_path, className);
+	string str_className = this->GetClassName();
+	if (pass_grid.size() == 0) pass_grid = astar::readPassMatrix(pass_path, str_className);
 	update_pass();
 
 	int w, h, nrChannels;
@@ -62,8 +66,8 @@ void Decoration::create() {
 
 	decorData.width = w;
 	decorData.height = h;
-	decorData.className = className;
-	decorData.textureID = DSprite()->getTextureID(className);
+	decorData.className = this->GetClassName();
+	decorData.textureID = DSprite()->getTextureID(this->GetClassName());
 
 	settlementName = "N/A";
 	checkSettlement();
@@ -81,7 +85,7 @@ void Decoration::checkSettlement() {
 
 		if (math::euclidean_distance(position.x, position.y, settlX, settlY) <= TOWNHALL_RADIUS) {
 			settlementName = settlName;
-			settlID = bld->get_id();
+			settlID = bld->GetPickingID();
 			independent = bld;
 			oldSettlX = settlX;
 			oldSettlY = settlY;

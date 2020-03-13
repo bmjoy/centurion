@@ -35,13 +35,13 @@ string TranslationsTable::GetTranslation(string string_name)
 		else {
 			Logger::LogMessage msg = Logger::LogMessage("Translation of the word \"" + string_name + "\" is missing", "Warn", "TranslationsTable", "GetTranslation");
 			Logger::Warn(msg);
-			throw;
+			return string_name;
 		}
 	}
 	catch (...) {
 		Logger::LogMessage msg = Logger::LogMessage("An error occurred getting the translation of \"" + string_name + "\"", "Error", "", "TranslationsTable", "GetTranslation");
 		Logger::Error(msg);
-		throw;
+		return string_name;
 	}
 }
 

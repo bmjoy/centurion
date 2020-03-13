@@ -55,8 +55,8 @@ namespace menu {
 
 				/* use data */
 				img = gui::Image(imageName);	
-				if (size == "auto") img.create(align, (float)x, (float)y, 0.0f, 0.0f, PickingUI::getPickingID() * clickable);
-				if (size == "max") img.create(align, (float)x, (float)y, Engine::myWindow::Width, Engine::myWindow::Height, PickingUI::getPickingID() * clickable);
+				if (size == "auto") img.create(align, (float)x, (float)y, 0.0f, 0.0f, PickingUI::obtainPickingID() * clickable);
+				if (size == "max") img.create(align, (float)x, (float)y, Engine::myWindow::Width, Engine::myWindow::Height, PickingUI::obtainPickingID() * clickable);
 				images[menus[a]].push_back(img);
 
 				// update picking 
@@ -77,7 +77,7 @@ namespace menu {
 
 				/* use data */
 				btn = gui::Button();
-				btn.create(imageName, buttonText, x, y, PickingUI::getPickingID(), glm::vec4(0.f, 0.f, 0.f, 255.f));
+				btn.create(imageName, buttonText, x, y, PickingUI::obtainPickingID(), glm::vec4(0.f, 0.f, 0.f, 255.f));
 				buttons[menus[a]].push_back(btn);
 
 				// update picking 
@@ -124,8 +124,8 @@ namespace menu {
 
 				/* use data */
 				img = gui::Image(imageName);
-				if (size == "auto") img.create(align, (float)x, (float)y, 0.0f, 0.0f, PickingUI::getPickingID() * clickable);
-				if (size == "max") img.create(align, (float)x, (float)y, Engine::myWindow::Width, Engine::myWindow::Height, PickingUI::getPickingID() * clickable);
+				if (size == "auto") img.create(align, (float)x, (float)y, 0.0f, 0.0f, PickingUI::obtainPickingID() * clickable);
+				if (size == "max") img.create(align, (float)x, (float)y, Engine::myWindow::Width, Engine::myWindow::Height, PickingUI::obtainPickingID() * clickable);
 				images[menus[a]].push_back(img);
 
 				// update picking 
@@ -146,7 +146,7 @@ namespace menu {
 
 				/* use data */
 				btn = gui::Button();
-				btn.create(imageName, buttonText, x, y, PickingUI::getPickingID(), glm::vec4(0.f, 0.f, 0.f, 255.f));
+				btn.create(imageName, buttonText, x, y, PickingUI::obtainPickingID(), glm::vec4(0.f, 0.f, 0.f, 255.f));
 				buttons[menus[a]].push_back(btn);
 
 				// update picking 

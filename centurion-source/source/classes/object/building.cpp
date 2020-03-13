@@ -13,8 +13,10 @@
 using namespace std;
 using namespace glm;
 
-Building::Building() {
-	type = "building";
+Building::Building() 
+{
+	//type = "building";
+	this->SetType("building");
 	isCreated = false;
 	waitingToBeErased = false;
 	isPlaceable = true;
@@ -37,12 +39,13 @@ void Building::prepare() {
 	prop.is_villagehall = (prop.class_name.substr(1) == "village");
 
 	/* file pass */
-	pass_grid = astar::readPassMatrix(prop.pass_path, className);
+	string str_className = GetClassName();
+	pass_grid = astar::readPassMatrix(prop.pass_path, str_className);
 
 	vec2 spriteSize = getSpriteSize(prop.ent_path);
 	prop.sprite_width = spriteSize.x;
 	prop.sprite_height = spriteSize.y;
-	prop.textureID = BSprite()->getTextureId(className);
+	prop.textureID = BSprite()->getTextureId(this->GetClassName());
 
 	isCreated = false;
 }
@@ -86,15 +89,18 @@ void Building::create(string Name) {
 	prop.is_villagehall = (prop.class_name.substr(1) == "village");
 
 	/* file pass */
-	if (pass_grid.size() == 0) pass_grid = astar::readPassMatrix(prop.pass_path, className);
+	string str_className = this->GetClassName();
+	if (pass_grid.size() == 0) pass_grid = astar::readPassMatrix(prop.pass_path, str_className);
 	update_pass();
 
 	vec2 spriteSize = getSpriteSize(prop.ent_path);
 	prop.sprite_width = spriteSize.x;
 	prop.sprite_height = spriteSize.y;
-	prop.textureID = BSprite()->getTextureId(className);
+	prop.textureID = BSprite()->getTextureId(this->GetClassName());
+	string name;
+	(Name == "") ? name = this->GetClassName() + "_" + to_string(this->GetPickingID()) : name = Name;
+	this->SetName(name);
 
-	(Name == "") ? name = className + "_" + to_string(picking_id) : name = Name;
 	buildingUI = new game::ObjectUI();
 	buildingUI->create(prop.class_name);
 
@@ -128,9 +134,9 @@ void Building::render(bool picking, int clickID, bool not_placeable) {
 			Building* bld = listOfBuildings[i];
 			if (bld->is_independent() == false) {
 				if (bld->get_settlement_name() == settl_name) {
-					if (k == 0) { cout << "[DEBUG] Subsidiaries buildings to " + name + " have been updated. Their names are: \n"; }
-					subs_buildings[bld->get_id()] = bld;
-					cout << "   " << bld->get_name() << "\n";
+					if (k == 0) { cout << "[DEBUG] Subsidiaries buildings to " + this->GetName() + " have been updated. Their names are: \n"; }
+					subs_buildings[bld->GetPickingID()] = bld;
+					cout << "   " << bld->GetName() << "\n";
 					k++;
 				}
 			}
@@ -139,19 +145,20 @@ void Building::render(bool picking, int clickID, bool not_placeable) {
 	}
 
 	// has the building been selected?
-	selected = (picking_id == clickID);
+	bool bSelected = (this->GetPickingID() == clickID);
+	this->Select(bSelected);
 
 	if (Engine::getEnvironment() == "editor" && !Game::Minimap::IsActive()) {
-		if (selected && !editor::addingObject) circle[0].render(vec4(255.f), position.x, position.y - data["radius"].get<float>() / 15.5f); // selection circle (editor only)
-		if (selected && (prop.is_townhall || prop.is_villagehall) && !editor::addingObject) circle[1].render(vec4(0, 255, 255, 255), position.x, position.y); // selection circle (editor only)
+		if (this->IsSelected() && !editor::addingObject) circle[0].render(vec4(255.f), position.x, position.y - data["radius"].get<float>() / 15.5f); // selection circle (editor only)
+		if (this->IsSelected() && (prop.is_townhall || prop.is_villagehall) && !editor::addingObject) circle[1].render(vec4(0, 255, 255, 255), position.x, position.y); // selection circle (editor only)
 	}
 
-	if (Engine::getEnvironment() == "game" && selected) {
+	if (Engine::getEnvironment() == "game" && this->IsSelected()) {
 		game::GAME_UI()->set_ui(buildingUI);
 	}
 
 	// rendering
-	BSprite()->render(prop.textureID, prop.clickable_in_minimap, position.x, position.y, prop.sprite_width, prop.sprite_height, picking, picking_id, selected, player->getPlayerColor(), not_placeable);
+	BSprite()->render(prop.textureID, prop.clickable_in_minimap, position.x, position.y, prop.sprite_width, prop.sprite_height, picking, this->GetPickingID(), this->IsSelected(), player->getPlayerColor(), not_placeable);
 }
 
 int Building::UnitsInBuilding() {

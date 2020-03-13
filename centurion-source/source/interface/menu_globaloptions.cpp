@@ -25,7 +25,7 @@ namespace menu {
 			form_options.push_back("LANG_" + i->first);
 		}
 		languages = gui::FormInput(true);
-		languages.create(startX + 150.f, startY - 77.f, 150.f, 20.f, form_options, PickingUI::getPickingID());
+		languages.create(startX + 150.f, startY - 77.f, 150.f, 20.f, form_options, PickingUI::obtainPickingID());
 		languages.selectedText = "LANG_"+ Settings::Language;
 		PickingUI::addValueToPickingList(PickingUI::getLastID() + 1, "GlobalOptions_formLanguages");
 

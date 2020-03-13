@@ -13,18 +13,18 @@ namespace editor {
 
 	void QuestionWindow::create() {
 		back_image = gui::Image("yesornotwindow_back");
-		back_image.create("center", Engine::myWindow::Width / 2.f, Engine::myWindow::Height / 2.f, 0, 0, PickingUI::getPickingID());
+		back_image.create("center", Engine::myWindow::Width / 2.f, Engine::myWindow::Height / 2.f, 0, 0, PickingUI::obtainPickingID());
 
 		// startX and startY are TOP-LEFT coordinates (as in Paint)
 		startX = Engine::myWindow::Width / 2.f - back_image.getImageSize().x / 2.f;
 		startY = Engine::myWindow::Height / 2.f + back_image.getImageSize().y / 2.f;
 
 		buttons[0] = gui::Image("newmapwindow_buttonleft");
-		buttons[0].create("top-left", startX, startY, 0, 0, PickingUI::getPickingID());
+		buttons[0].create("top-left", startX, startY, 0, 0, PickingUI::obtainPickingID());
 		PickingUI::addValueToPickingList(PickingUI::getLastID() + 1, "QuestionWindow_Yes");
 
 		buttons[1] = gui::Image("newmapwindow_buttonright");
-		buttons[1].create("top-left", startX, startY, 0, 0, PickingUI::getPickingID());
+		buttons[1].create("top-left", startX, startY, 0, 0, PickingUI::obtainPickingID());
 		PickingUI::addValueToPickingList(PickingUI::getLastID() + 1, "QuestionWindow_No");
 
 		buttons_text[0] = gui::SimpleText("static");

@@ -311,9 +311,9 @@ namespace editor {
 				
 				for (int i = 0; i < indipBuildings.size(); i++) {
 					Building* settl = indipBuildings[i]->AsBuilding();
-					string settl_name = settl->get_name();
+					string settl_name = settl->GetName();
 					if (settl->getWaitingToBeErased()) {
-						idsToErase.push_back(settl->get_id());
+						idsToErase.push_back(settl->GetPickingID());
 						for (int j = 0; j < settl->buildingsInSettlementIds().size(); j++) {
 							idsToErase.push_back(settl->buildingsInSettlementIds()[j]);
 						}
@@ -354,7 +354,7 @@ namespace editor {
 		Picking::leftClickID_UI = Picking::GetIdFromClick();
 		string clickName = PickingUI::getPickedObjectName(Picking::leftClickID_UI);
 
-		if (Picking::leftClickID_UI == 0 || Picking::leftClickID_UI == back_image.getPickingID())
+		if (Picking::leftClickID_UI == 0 || Picking::leftClickID_UI == back_image.obtainPickingID())
 			for (int j = 0; j < 3; j++)
 				objectForms[j].close();
 
@@ -421,7 +421,7 @@ namespace editor {
 		}
 		if (clickName == "PropertiesWindow_apply") { // APPLY
 			if (type == "building"){
-				building_pointer->set_name(text_input[0].get_text());
+				building_pointer->SetName(text_input[0].get_text());
 				if (building_pointer->is_independent())
 					building_pointer->set_settlement_name(text_input[1].get_text());
 			}

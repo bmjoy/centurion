@@ -24,12 +24,12 @@ namespace menu{
 		dynamicText = gui::SimpleText("dynamic", true);
 
 		arrowDown = gui::Image("arrowDown");
-		arrowDown.create("center", (float)x + 240, (float)y + 50, 0, 0, PickingUI::getPickingID());
+		arrowDown.create("center", (float)x + 240, (float)y + 50, 0, 0, PickingUI::obtainPickingID());
 
 		PickingUI::addValueToPickingList(PickingUI::getLastID() + 1, "arrowDown");
 	
 		arrowUp = gui::Image("arrowUp");
-		arrowUp.create("center", (float)x + 280, (float)y + 50, 0, 0, PickingUI::getPickingID());
+		arrowUp.create("center", (float)x + 280, (float)y + 50, 0, 0, PickingUI::obtainPickingID());
 		PickingUI::addValueToPickingList(PickingUI::getLastID() + 1, "arrowUp");
 	
 		background = gui::Rectangle();
@@ -40,7 +40,7 @@ namespace menu{
 
 			//Player color rectangle
 			gui::FormInput col_fi = gui::FormInput(false);
-			col_fi.create((float)x, (float)y - deltaY * j, 20.f, 20.f, { "" }, PickingUI::getPickingID());
+			col_fi.create((float)x, (float)y - deltaY * j, 20.f, 20.f, { "" }, PickingUI::obtainPickingID());
 			PickingUI::addValueToPickingList(PickingUI::getLastID() + 1, "ColForm_" + std::to_string(j));
 			if (j < 2) { (*players_color).push_back(j); }
 			else { (*players_color).push_back(-1); }
@@ -53,7 +53,7 @@ namespace menu{
 
 			//Player civilization
 			gui::FormInput c_fi = gui::FormInput(true);
-			c_fi.create((float)x + 280.f, (float)y - deltaY * j, 150.f, 20.f, Game::GetListOfRacesNames(), PickingUI::getPickingID());
+			c_fi.create((float)x + 280.f, (float)y - deltaY * j, 150.f, 20.f, Game::GetListOfRacesNames(), PickingUI::obtainPickingID());
 			PickingUI::addValueToPickingList(PickingUI::getLastID() + 1, "CivForm_" + std::to_string(j));
 			civiliz_Form.push_back(c_fi);
 		}

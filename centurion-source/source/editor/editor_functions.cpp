@@ -59,17 +59,17 @@ namespace editor {
 	void prepareObject(string type, string classname) {
 		if (type == "buildings") {
 			buildingTemp = new Building();
-			buildingTemp->set_class(classname);
-			buildingTemp->set_id(0);
-			buildingTemp->set_player(0);
+			buildingTemp->SetClassName(classname);
+			buildingTemp->SetPickingID(0);
+			buildingTemp->SetPlayer(0);
 			buildingTemp->set_position(vec3(0));
 			buildingTemp->prepare();
 		}
 		if (type == "decorations") {
 			decorTemp = new Decoration();
-			decorTemp->set_class(classname);
-			decorTemp->set_id(0);
-			decorTemp->set_player(0);
+			decorTemp->SetClassName(classname);
+			decorTemp->SetPickingID(0);
+			decorTemp->SetPlayer(0);
 			decorTemp->set_position(vec3(0));
 			decorTemp->prepare();
 		}
@@ -114,11 +114,11 @@ namespace editor {
 			if (buildingTemp->is_placeable())
 			{
 				unsigned int ID = PickingObject::GetPickingId();
-				buildingTemp->set_id(ID);
+				buildingTemp->SetPickingID(ID);
 				buildingTemp->create();
 				if (buildingTemp->is_independent()) 
 				{
-					buildingTemp->set_settlement_name("SETTL_" + buildingTemp->get_name());
+					buildingTemp->set_settlement_name("SETTL_" + buildingTemp->GetName());
 				}
 				Game::AddGameObject(ID, buildingTemp);
 	
@@ -131,7 +131,7 @@ namespace editor {
 			if (decorTemp->is_placeable()) 
 			{
 				unsigned int ID = PickingObject::GetPickingId();
-				decorTemp->set_id(ID);
+				decorTemp->SetPickingID(ID);
 				decorTemp->create();
 				Game::AddGameObject(ID, decorTemp);
 				Engine::Mouse::LeftClick = false;

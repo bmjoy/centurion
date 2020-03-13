@@ -150,11 +150,11 @@ namespace glb {
 			vector<Building*> listOfBuildings = Game::GetListOfBuildings();
 
 			for (int i = 0; i < listOfBuildings.size(); i++) {
-				objectsFile << listOfBuildings[i]->get_type() << "\t";
-				objectsFile << listOfBuildings[i]->get_class() << "\t";
-				objectsFile << listOfBuildings[i]->get_name() << "\t";
+				objectsFile << listOfBuildings[i]->GetType() << "\t";
+				objectsFile << listOfBuildings[i]->GetClassName() << "\t";
+				objectsFile << listOfBuildings[i]->GetName() << "\t";
 				objectsFile << listOfBuildings[i]->get_settlement_name() << "\t";
-				objectsFile << listOfBuildings[i]->get_playerID() << "\t";
+				objectsFile << listOfBuildings[i]->GetPlayer() << "\t";
 				objectsFile << listOfBuildings[i]->get_position().x << "\t";
 				objectsFile << listOfBuildings[i]->get_position().y << "\t";
 				if (listOfBuildings[i]->is_independent()) {
@@ -170,15 +170,17 @@ namespace glb {
 
 			vector<Decoration*> listOfDecorations = Game::GetListOfDecorations();
 
-			for (int i = 0; i < listOfDecorations.size(); i++) {
-				objectsFile << listOfDecorations[i]->get_type() << "\t";
-				objectsFile << listOfDecorations[i]->get_class() << "\t";
+			for (int i = 0; i < listOfDecorations.size(); i++) 
+			{
+				objectsFile << listOfDecorations[i]->GetType() << "\t";
+				objectsFile << listOfDecorations[i]->GetClassName() << "\t";
 				objectsFile << "N/A" << "\t";
 				objectsFile << listOfDecorations[i]->get_settlement_name() << "\t";
 				objectsFile << 0 << "\t";
 				objectsFile << listOfDecorations[i]->get_position().x << "\t";
 				objectsFile << listOfDecorations[i]->get_position().y << "\t";
-				if (listOfDecorations[i]->get_settlement_name() != "N/A") {
+				if (listOfDecorations[i]->get_settlement_name() != "N/A") 
+				{
 					objectsFile << listOfDecorations[i]->get_position().x - listOfDecorations[i]->get_settlement_building()->get_position().x << "\t";
 					objectsFile << listOfDecorations[i]->get_position().y - listOfDecorations[i]->get_settlement_building()->get_position().y << "\n";
 				}
@@ -194,7 +196,8 @@ namespace glb {
 
 	}
 
-	void openScenario(string name) {
+	void openScenario(string name) 
+	{
 		// read heights
 		{
 			fstream fin;
@@ -247,24 +250,24 @@ namespace glb {
 					float yOffset = stof(objectsInfo[8]);
 					if (type == "building") {
 						Building* b = new Building();
-						b->set_class(className);
-						b->set_player(playerID);
+						b->SetClassName(className);
+						b->SetPlayer(playerID);
 						b->set_position(vec3(xPos, yPos, 0.f));
-						b->set_id(PickingObject::GetPickingId());
+						b->SetPickingID(PickingObject::GetPickingId());
 						b->set_settlement_name(settl_name);
-						b->set_type("building");
+						b->SetType("building");
 						b->create(name);
-						Game::AddGameObject(b->get_id(), b);
+						Game::AddGameObject(b->GetPickingID(), b);
 					}
 					if (type == "decoration") {
 						Decoration* d = new Decoration();
-						d->set_class(className);
-						d->set_player(0);
+						d->SetClassName(className);
+						d->SetPlayer(0);
 						d->set_position(vec3(xPos, yPos, 0.f));
-						d->set_id(PickingObject::GetPickingId());
+						d->SetPickingID(PickingObject::GetPickingId());
 						d->create();
-						d->set_type("decoration");
-						Game::AddGameObject(d->get_id(), d);
+						d->SetType("decoration");
+						Game::AddGameObject(d->GetPickingID(), d);
 					}
 				}
 				row++;

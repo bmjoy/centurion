@@ -39,7 +39,7 @@ private:
 class PickingUI : public Picking
 {
 public:
-	static unsigned int getPickingID(void);
+	static unsigned int obtainPickingID(void);
 	static unsigned int getLastID(void);
 	static void resetPicking(void);
 	static void addValueToPickingList(unsigned int picking_id, const string par_value);

@@ -61,7 +61,7 @@ void Unit::create() {
 	unitData.yOffset = entityData["yOffset"].get<int>();
 	unitData.playerColor = *(player->getPlayerColor());
 	unitData.pickingColor = pickingColor;
-	unitData.className = className;
+	unitData.className = this->GetClassName();
 	USprite()->getTextureInfo(&unitData);
 
 	selectionCircle = gui::Circle();
@@ -78,23 +78,27 @@ void Unit::create() {
 	creationTime = (float)glfwGetTime();
 }
 
-void Unit::render(bool picking, int clickID, bool not_placeable) {
-
-	clickSelection = (picking_id == clickID);
+void Unit::render(bool picking, int clickID, bool not_placeable) 
+{
+	clickSelection = (this->GetPickingID() == clickID);
 	if (Game::SelectionRectangle::IsActive()) rectangleSelection = Game::SelectionRectangle::IsInRectangle(hitbox.coords);
-	selected = (clickSelection + rectangleSelection > 0);
+	bool select = (clickSelection + rectangleSelection > 0);
+	this->Select(select);
 
 	hitbox.coords = get_rectangle_coords(position3D.x - unitData.hitBox[0] / 2.f, position3D.y + unitData.hitBox[1] / 2.f + unitData.yOffset, (float)unitData.hitBox[0], (float)unitData.hitBox[1]);
 
-	if (!picking) {
+	if (!picking) 
+	{
 		updateFrame(&creationTime, &unitData.currentFrame, unitData.Frames[unitData.currentState], unitData.Durations[unitData.currentState]);
 		updateZ(position2D, &position3D);
 		position_update();
 		walk_behaviour();
 	}
 
-	if (Game::Minimap::IsActive() == false) {
-		if (selected) {
+	if (Game::Minimap::IsActive() == false) 
+	{
+		if (this->IsSelected() == true) 
+		{
 			selectionCircle.render(glm::vec4(255.f, 255.f, 255.f, 0.8f), position3D.x, position3D.y);
 		}
 		USprite()->render(unitData, position3D, picking);
@@ -114,7 +118,7 @@ void Unit::render(bool picking, int clickID, bool not_placeable) {
 		if (Game::Minimap::IsActive() == false) {
 			circlePos.render(false, position2D.x, position2D.y);
 			hitbox.rectangle.render(
-				selected ? glm::vec4(255.0f, 0.0f, 255.0f, 1.0f) : glm::vec4(255.0f, 242.0f, 0.0f, 1.0f),
+				this->IsSelected() ? glm::vec4(255.0f, 0.0f, 255.0f, 1.0f) : glm::vec4(255.0f, 242.0f, 0.0f, 1.0f),
 				0,
 				position3D.x,
 				position3D.y + unitData.yOffset,
@@ -161,7 +165,7 @@ void Unit::position_update() {
 }
 
 void Unit::walk_behaviour() {
-	if (Engine::Mouse::RightClick && selected) {
+	if (Engine::Mouse::RightClick && this->IsSelected()) {
 
 		is_Moving = true;
 

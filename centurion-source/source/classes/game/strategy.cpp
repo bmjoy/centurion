@@ -74,13 +74,13 @@ void Strategy::Create() {
 	for (int i = 0; i < 5; i++) {
 		for (int j = 0; j < 5; j++) {
 			Unit* u = new Unit();
-			u->set_class("hmyrmidon");
-			u->set_id(PickingObject::GetPickingId());
-			u->set_player(0);
+			u->SetClassName("hmyrmidon");
+			u->SetPickingID(PickingObject::GetPickingId());
+			u->SetPlayer(0);
 			u->set_position(playersList[0].getStartPoint().x + i * 50, playersList[0].getStartPoint().y - 1000 - j * 50);
 			u->create();
-			GameObjects[u->get_id()] = u;
-			//units[u->get_id()] = u;
+			GameObjects[u->GetPickingID()] = u;
+			//units[u->GetPickingID()] = u;
 		}
 	}
 

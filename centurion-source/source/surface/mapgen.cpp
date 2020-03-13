@@ -475,7 +475,7 @@ namespace mapgen {
 			vector<Building*> listOfIndipBuildings = Game::GetListOfIndipendentBuildings();
 			for (int i = 0; i < listOfIndipBuildings.size(); i++) {
 				Building* b = listOfIndipBuildings[i];
-				if (b->get_class().substr(1) != "townhall") continue;
+				if (b->GetClassName().substr(1) != "townhall") continue;
 
 				float rnoise = distribution(gen);
 

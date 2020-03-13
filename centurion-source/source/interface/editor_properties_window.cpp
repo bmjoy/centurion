@@ -21,11 +21,11 @@ namespace editor {
 		startY = Engine::myWindow::Height / 2.f + back_image.getImageSize().y / 2.f;
 
 		buttons[0] = gui::Image("propertieswindow_buttonleft");
-		buttons[0].create("top-left", startX, startY, 0, 0, PickingUI::getPickingID());
+		buttons[0].create("top-left", startX, startY, 0, 0, PickingUI::obtainPickingID());
 		PickingUI::addValueToPickingList(PickingUI::getLastID() + 1, "PropertiesWindow_cancel");
 
 		buttons[1] = gui::Image("propertieswindow_buttonright");
-		buttons[1].create("top-left", startX, startY, 0, 0, PickingUI::getPickingID());
+		buttons[1].create("top-left", startX, startY, 0, 0, PickingUI::obtainPickingID());
 		PickingUI::addValueToPickingList(PickingUI::getLastID() + 1, "PropertiesWindow_apply");
 		
 
@@ -35,12 +35,12 @@ namespace editor {
 		buttons_text[1].create_static(TranslationsTable::GetTranslation("EDITOR_propertiesApply"), "tahoma_13px", startX + 492.f, startY - 365.f, "center", "middle", vec4(255.f), "bold");
 
 		textinput_back[0] = gui::Image("propertieswindow_textinput_1");
-		textinput_back[0].create("top-left", startX, startY, 0, 0, PickingUI::getPickingID());
+		textinput_back[0].create("top-left", startX, startY, 0, 0, PickingUI::obtainPickingID());
 		PickingUI::addValueToPickingList(PickingUI::getLastID() + 1, "PropertiesWindow_name");
 		
 
 		textinput_back[1] = gui::Image("propertieswindow_textinput_2");
-		textinput_back[1].create("top-left", startX, startY, 0, 0, PickingUI::getPickingID());
+		textinput_back[1].create("top-left", startX, startY, 0, 0, PickingUI::obtainPickingID());
 		PickingUI::addValueToPickingList(PickingUI::getLastID() + 1, "PropertiesWindow_settl_name");
 		
 
@@ -66,7 +66,7 @@ namespace editor {
 				if (bld->isSelected()){
 					type = "building";
 					building_pointer = bld;
-					text_input[0].create(bld->get_name(), startX + 246.f, startY - 85.f, 30);
+					text_input[0].create(bld->GetName(), startX + 246.f, startY - 85.f, 30);
 					text_input[1].create(bld->get_settlement_name(), startX + 246.f, startY - 129.f, 30);
 					
 					PropertiesWindowIsOpen = true;

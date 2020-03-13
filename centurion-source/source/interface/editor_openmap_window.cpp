@@ -27,16 +27,16 @@ namespace editor {
 		startX = Engine::myWindow::Width / 2.f - back_image.getImageSize().x / 2.f;
 		startY = Engine::myWindow::Height / 2.f + back_image.getImageSize().y / 2.f;
 
-		map_list.pickingID = PickingUI::getPickingID();
+		map_list.pickingID = PickingUI::obtainPickingID();
 
 
 		buttons[0] = gui::Image("openmapwindow_buttonleft");
-		buttons[0].create("top-left", startX, startY, 0, 0, PickingUI::getPickingID());
+		buttons[0].create("top-left", startX, startY, 0, 0, PickingUI::obtainPickingID());
 		PickingUI::addValueToPickingList(PickingUI::getLastID() + 1, "OpenMapWindow_close");
 
 
 		buttons[1] = gui::Image("openmapwindow_buttonright");
-		buttons[1].create("top-left", startX, startY, 0, 0, PickingUI::getPickingID());
+		buttons[1].create("top-left", startX, startY, 0, 0, PickingUI::obtainPickingID());
 		PickingUI::addValueToPickingList(PickingUI::getLastID() + 1, "OpenMapWindow_open");
 
 

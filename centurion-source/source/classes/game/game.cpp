@@ -215,7 +215,7 @@ Game::~Game() {}
 void Game::RemoveGameObject(int i) {
 	if (i >= 1 && i < MAX_NUMBER_OF_OBJECTS) {
 		if (GameObjects[i] != nullptr) {
-			PickingObject::addUnsedPickingID(GameObjects[i]->get_id());
+			PickingObject::addUnsedPickingID(GameObjects[i]->GetPickingID());
 			delete GameObjects[i];
 		}
 		GameObjects[i] = nullptr;
@@ -395,14 +395,14 @@ void Game::GenerateOutposts(vector<vec2> &locs) {
 
 	for (int i = 0; i < locs.size(); i++) {
 		Building* b = new Building();
-		b->set_class(className);
-		b->set_type("building");
-		b->set_player(0);
+		b->SetClassName(className);
+		b->SetType("building");
+		b->SetPlayer(0);
 		b->set_position(vec3(locs[i].x, locs[i].y, 0.f));
-		b->set_id(PickingObject::GetPickingId());
+		b->SetPickingID(PickingObject::GetPickingId());
 		b->set_settlement_name("Outpost_" + i);
 		b->create();
-		GameObjects[b->get_id()] = b;
+		GameObjects[b->GetPickingID()] = b;
 	}
 }
 
@@ -457,14 +457,14 @@ void Game::GenerateSettlements(vector<vec2> &locs) {
 
 					if (type == "building") {
 						Building* b = new Building();
-						b->set_class(className);
-						b->set_type(type);
-						b->set_player(i);
+						b->SetClassName(className);
+						b->SetType(type);
+						b->SetPlayer(i);
 						b->set_position(vec3(origin.x + xOffset, origin.y + yOffset, 0.f));
-						b->set_id(PickingObject::GetPickingId());
+						b->SetPickingID(PickingObject::GetPickingId());
 						b->set_settlement_name("Settlement_player_" + i);
 						b->create();
-						GameObjects[b->get_id()] = b;
+						GameObjects[b->GetPickingID()] = b;
 
 						if (b->is_independent()) {
 							// update terrain around the townhall
@@ -494,12 +494,12 @@ void Game::GenerateSettlements(vector<vec2> &locs) {
 					}
 					if (type == "decoration") {
 						Decoration* d = new Decoration();
-						d->set_class(className);
-						d->set_player(0);
+						d->SetClassName(className);
+						d->SetPlayer(0);
 						d->set_position(vec3(origin.x + xOffset, origin.y + yOffset, 0.f));
-						d->set_id(PickingObject::GetPickingId());
+						d->SetPickingID(PickingObject::GetPickingId());
 						d->create();
-						GameObjects[d->get_id()] = d;
+						GameObjects[d->GetPickingID()] = d;
 					}
 				}
 			}

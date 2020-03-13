@@ -83,7 +83,7 @@ Picking::~Picking(){}
 unsigned int PickingUI::pickingID_UI = PICKING_ID_MAX;
 map<unsigned int, string> PickingUI::pickingList_UI;
 
-unsigned int PickingUI::getPickingID(void)
+unsigned int PickingUI::obtainPickingID(void)
 {
 	unsigned int pickingID = pickingID_UI;
 	pickingID_UI--;
@@ -179,7 +179,7 @@ namespace glb {
 	{
 		pickingID_UI--;
 	}
-	unsigned int getPickingID()
+	unsigned int obtainPickingID()
 	{
 		unsigned int var_pickingID = pickingID;
 		if (unsedPickingID.empty() == false)
@@ -193,7 +193,7 @@ namespace glb {
 	{
 		unsedPickingID.push_back(par_pickingID);
 	}
-	int getPickingID_UI() 
+	int obtainPickingID_UI() 
 	{ 
 		return pickingID_UI; 
 	}
@@ -225,7 +225,7 @@ namespace glb {
 		pickingListUI.clear();
 		pickingListUI[0] = "background";
 	}
-	int get_id(string LeftRight)
+	int GetPickingID(string LeftRight)
 	{
 		unsigned char data[4];
 		//Edit the following line because you can get id with both left and right click

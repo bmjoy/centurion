@@ -138,13 +138,13 @@ void Editor::handleKeyboardControls() {
 							Q_WINDOW()->setQuestion("QUESTION_deleteAll");
 						}
 						else {
-							cout << "[DEBUG] Settlement " << b->get_name() << " deleted!\n";
+							cout << "[DEBUG] Settlement " << b->GetName() << " deleted!\n";
 							b->clear_pass();
 							Game::RemoveGameObject(Picking::leftClickID);
 						}
 					}
 					else {
-						cout << "[DEBUG] Building " << b->get_name() << " deleted!\n";
+						cout << "[DEBUG] Building " << b->GetName() << " deleted!\n";
 						b->clear_pass();
 						Game::RemoveGameObject(Picking::leftClickID);
 					}
