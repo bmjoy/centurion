@@ -8,7 +8,6 @@
 #include <interface>
 #include "editor.h"
 
-#include <primitives.h>
 #include <terrain.h>
 #include <grid.h>
 #include <empty_rectangle.h>
@@ -18,7 +17,6 @@
 #pragma region Namespaces
 
 using namespace glb;
-
 
 #pragma endregion
 
@@ -355,9 +353,9 @@ void Game::RenderObjects() {
 }
 
 void Game::GoToPointFromMinimap() {
-	if (Engine::Mouse::LeftClick && cursorInGameScreen()) {
+	if (Engine::Mouse::LeftClick && Engine::Mouse::IsCursorInGameScreen()) {
 		cameraToX = Engine::Mouse::GetXLeftClick() / Engine::myWindow::Width*(float)MEDIUM_MAP_WIDTH - Engine::myWindow::WidthZoomed / 2.f;
-		cameraToY = getYMinimapCoord(Engine::Mouse::GetYLeftClick()) / Engine::myWindow::Height*(float)MEDIUM_MAP_HEIGHT - Engine::myWindow::HeightZoomed / 2.f;
+		cameraToY = Engine::Camera::GetYMinimapCoordinate(Engine::Mouse::GetYLeftClick()) / Engine::myWindow::Height*(float)MEDIUM_MAP_HEIGHT - Engine::myWindow::HeightZoomed / 2.f;
 		// if you are clicking on a townhall you have to double click 
 		// to move the camera there and quit minimap
 		if (Picking::leftClickID > 0 && Picking::hasDoubleClicked()) {

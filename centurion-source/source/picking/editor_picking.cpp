@@ -6,7 +6,6 @@
 #include <game/strategy.h>
 #include <object/object.h>
 
-#include <primitives.h>
 #include <terrain.h>
 
 #include <global>

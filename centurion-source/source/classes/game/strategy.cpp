@@ -42,7 +42,9 @@ void Strategy::Create() {
 	reset();
 	Engine::myWindow::BottomBarHeight = 100.f;
 	Engine::myWindow::TopBarHeight = 100.f;
-	setMinimapProjection();
+
+	setMinimapProjectionMatrix();
+
 	Engine::Mouse::LeftHold = false;
 
 	SelectionRectangle::Create();
@@ -115,7 +117,7 @@ void Strategy::Run() {
 
 		Engine::Camera::mouseControl();
 		viewMatrix = Engine::Camera::calculateViewMatrix();
-		projectionMatrix = glb::cameraProjection;
+		projectionMatrix = getCameraProjectionMatrix();
 
 		game::GAME_UI()->render(true);
 
@@ -141,7 +143,7 @@ void Strategy::Run() {
 	/* If minimap is active */
 	else {
 		viewMatrix = mat4(1.0f);
-		projectionMatrix = glb::minimapProjection;
+		projectionMatrix = getMinimapProjectionMatrix();
 
 		game::GAME_UI()->render(true);
 
@@ -165,7 +167,7 @@ void Strategy::Run() {
 		if (Minimap::IsActive()) GoToPointFromMinimap();
 	}
 
-	glb::cameraProjection = ortho(0.0f, Engine::myWindow::WidthZoomed, 0.0f, Engine::myWindow::HeightZoomed, -(float)MEDIUM_MAP_WIDTH, (float)MEDIUM_MAP_WIDTH);
+	setCameraProjectionMatrix(ortho(0.0f, Engine::myWindow::WidthZoomed, 0.0f, Engine::myWindow::HeightZoomed, -(float)MEDIUM_MAP_WIDTH, (float)MEDIUM_MAP_WIDTH));
 
 	// reset mouse-right and mouse-left to improve fps
 	Engine::Mouse::RightClick = false;

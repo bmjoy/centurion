@@ -5,7 +5,6 @@
 #include <game/strategy.h>
 #include <engine.h>
 
-#include <primitives.h>
 #include <terrain.h>
 
 using namespace glb;

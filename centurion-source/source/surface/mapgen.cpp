@@ -7,7 +7,6 @@
 #include <random>
 #include <ctime>
 
-#include <primitives.h>
 #include <terrain.h>
 
 namespace mapgen {

@@ -10,7 +10,6 @@
 
 #include <global>
 
-#include <primitives.h>
 #include <unit_sprite.h>
 
 using namespace math;
@@ -170,7 +169,7 @@ void Unit::walk_behaviour() {
 		is_Moving = true;
 
 		startPoint = glm::vec2((int)position2D.x / astar::cellGridSize * astar::cellGridSize, (int)position2D.y / astar::cellGridSize * astar::cellGridSize);
-		endPoint = getZoomedCoords(Engine::Mouse::GetXRightClick(), Engine::Mouse::GetY2DRightClick());
+		endPoint = Engine::Camera::GetZoomedCoords(Engine::Mouse::GetXRightClick(), Engine::Mouse::GetY2DRightClick());
 
 		// pathfinding
 		path = getPath(startPoint, endPoint);

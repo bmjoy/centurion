@@ -26,7 +26,6 @@
 #include <settings.h>
 
 // for mouse cursor
-#include <primitives.h>
 #include <cursor_image.h>
 
 // audio
@@ -73,6 +72,11 @@ bool Engine::Mouse::MiddleClick = false;
 
 Engine::Mouse::Mouse() { }
 
+bool Engine::Mouse::IsCursorInGameScreen()
+{
+	return (GetYLeftClick() > myWindow::BottomBarHeight) && (GetYLeftClick() < (myWindow::Height - myWindow::TopBarHeight));
+}
+
 void Engine::Mouse::create() {
 	img = gui::Image("circle_pos");
 	img.create("center", 0.f, 0.f, 0, 0, 0);
@@ -89,7 +93,7 @@ void Engine::Mouse::mouse_control(int lastX, int lastY) {
 	position.x = (GLfloat)lastX;
 	position.y = (GLfloat)lastY;
 
-	yzoomed = getZoomedCoords(position.x, Mouse::GetYPosition()).y;
+	yzoomed = Camera::GetZoomedCoords(position.x, Mouse::GetYPosition()).y;
 	znoise = mapgen::smoothNoise(yzoomed, mapgen::mouseZNoise);
 	znoise /= myWindow::HeightZoomed / myWindow::Height;
 
@@ -315,6 +319,13 @@ int Engine::Camera::currentZoom = 8;
 
 Engine::Camera::Camera() {}
 
+vec2 Engine::Camera::GetZoomedCoords(float xCoord, float yCoord)
+{
+	float x = xCoord * myWindow::WidthZoomed / myWindow::Width + Camera::GetXPosition();
+	float y = yCoord * myWindow::HeightZoomed / myWindow::Height + Camera::GetYPosition();
+	return vec2(x, y);
+}
+
 void Engine::Camera::Init(glm::vec3 startPosition, glm::vec3 startUp, GLfloat startYaw, GLfloat startPitch) {
 	position = startPosition;
 
@@ -427,6 +438,11 @@ void Engine::Camera::GoToPoint(GLfloat x, GLfloat y) {
 glm::mat4 Engine::Camera::calculateViewMatrix()
 {
 	return glm::lookAt(position, position + front, up);
+}
+
+float Engine::Camera::GetYMinimapCoordinate(float y)
+{
+	return myWindow::Height * (y - myWindow::BottomBarHeight) / (myWindow::Height - myWindow::BottomBarHeight - myWindow::TopBarHeight);
 }
 
 Engine::Camera::~Camera()

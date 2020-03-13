@@ -6,8 +6,7 @@
 
 using namespace std;
 
-class FileManager {
-public:
+namespace FileManager {
 
 	struct file_info {
 		string name;
@@ -15,24 +14,24 @@ public:
 	};
 
 	//
-	static string ReadFile(const char* fileLocation);
+	string ReadFile(const char* fileLocation);
 
 	// 
-	static vector<string> GetAllFilesNamesWithinFolder(string folder, string type = "*");
+	vector<string> GetAllFilesNamesWithinFolder(string folder, string type = "*");
 
 	// 
-	static vector<string> GetAllFoldersNamesWithinFolder(string folder);
+	vector<string> GetAllFoldersNamesWithinFolder(string folder);
 
 	// 
-	static vector<file_info> GetAllFilesNamesWithinSubfolders(string const &folder_name, string const &file_extension = "");
+	vector<file_info> GetAllFilesNamesWithinSubfolders(string const &folder_name, string const &file_extension = "");
 
 	//
-	static string CurrentDateTime(const char* format);
+	string CurrentDateTime(const char* format);
 
 	// 
-	static bool CheckIfFolderExists(string folderPath);
+	bool CheckIfFolderExists(string folderPath);
 
-	static void RemoveFile(string filePath);
+	void RemoveFile(string filePath);
 
 };
 

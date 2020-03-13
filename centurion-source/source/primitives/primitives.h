@@ -19,24 +19,36 @@ class Terrain;
 class Grid;
 class MinimapRectangle;
 
-AudioManager *Audio();
-BitmapFont *Text();
-BuildingSprite *BSprite();
-CursorImage *Cursor();
-DecorationSprite *DSprite();
-EmptyRectangle *ERectangle();
-EmptyCircle *ECircle();
-FilledRectangle *FRectangle();
-ImageSprite *Img();
-UnitSprite *USprite();
-Terrain *MapTerrain();
-Grid *MapGrid();
-MinimapRectangle *MMRectangle();
+namespace primitives {
+	AudioManager *Audio();
+	BitmapFont *Text();
+	BuildingSprite *BSprite();
+	CursorImage *Cursor();
+	DecorationSprite *DSprite();
+	EmptyRectangle *ERectangle();
+	EmptyCircle *ECircle();
+	FilledRectangle *FRectangle();
+	ImageSprite *Img();
+	UnitSprite *USprite();
+	Terrain *MapTerrain();
+	Grid *MapGrid();
+	MinimapRectangle *MMRectangle();
 
-void applyMenuMatrices();
-void applyGameMatrices(mat4 *proj, mat4 *view);
-void init();
-void compile();
-void create();
+	static mat4 MENU_PROJECTION_MATRIX = mat4(0);
+	static mat4 CAMERA_PROJECTION_MATRIX = mat4(0);
+	static mat4 MINIMAP_PROJECTION_MATRIX = mat4(0);
+
+	void setMenuProjectionMatrix(mat4 mat);
+	void setCameraProjectionMatrix(mat4 mat);
+	void setMinimapProjectionMatrix();
+	mat4 getCameraProjectionMatrix(void);
+	mat4 getMinimapProjectionMatrix(void);
+
+	void applyMenuMatrices();
+	void applyGameMatrices(mat4 *proj, mat4 *view);
+	void init();
+	void compile();
+	void create();
+};
 
 #endif

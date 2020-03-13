@@ -9,7 +9,6 @@
 #include <settings.h>
 #include <translationsTable.h>
 
-#include <primitives.h>
 #include <terrain.h>
 
 using namespace glb;

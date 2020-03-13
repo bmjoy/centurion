@@ -7,7 +7,6 @@
 #include <maths.h>
 #include <interface>
 
-#include <primitives.h>
 #include <building_sprite.h>
 
 using namespace std;

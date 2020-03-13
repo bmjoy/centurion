@@ -74,8 +74,8 @@ namespace debug {
 			dynamicTextList[1] = to_string(mpfs);
 			dynamicTextList[2] = to_string((int)Engine::Mouse::GetYPosition());
 			dynamicTextList[3] = to_string((int)Engine::Mouse::GetXPosition());
-			dynamicTextList[4] = to_string((int)getZoomedCoords(Engine::Mouse::GetXPosition(), Engine::Mouse::GetYPosition()).y);
-			dynamicTextList[5] = to_string((int)getZoomedCoords(Engine::Mouse::GetXPosition(), Engine::Mouse::GetYPosition()).x);
+			dynamicTextList[4] = to_string((int)Engine::Camera::GetZoomedCoords(Engine::Mouse::GetXPosition(), Engine::Mouse::GetYPosition()).y);
+			dynamicTextList[5] = to_string((int)Engine::Camera::GetZoomedCoords(Engine::Mouse::GetXPosition(), Engine::Mouse::GetYPosition()).x);
 			dynamicTextList[6] = to_string(selUnits);
 			dynamicTextList[7] = to_string(PickingObject::getLastPickingID());
 			dynamicTextList[8] = to_string(PickingUI::getLastID());

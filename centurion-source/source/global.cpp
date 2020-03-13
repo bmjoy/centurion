@@ -21,8 +21,6 @@ using namespace std;
 
 
 namespace glb {
-
-	string exe_root = ""; //defined in main.cpp
 	mat4 menuProjection;
 	mat4 cameraProjection;
 	mat4 minimapProjection;
@@ -40,8 +38,9 @@ namespace glb {
 			Engine::myWindow::WidthZoomed = Engine::myWindow::Width + (Engine::Camera::GetCurrentZoom() - 1) * Engine::Camera::GetZoomFactor();
 			Engine::myWindow::HeightZoomed = Engine::myWindow::Height + (Engine::Camera::GetCurrentZoom() - 1) * Engine::Camera::GetZoomFactor() / Engine::myWindow::Ratio;
 
-			menuProjection = glm::ortho(0.0f, Engine::myWindow::Width, 0.0f, Engine::myWindow::Height, -100.0f, 100.0f);
-			cameraProjection = glm::ortho(0.0f, Engine::myWindow::WidthZoomed, 0.0f, Engine::myWindow::HeightZoomed, -(float)MEDIUM_MAP_WIDTH, (float)MEDIUM_MAP_WIDTH);
+			setMenuProjectionMatrix(glm::ortho(0.0f, Engine::myWindow::Width, 0.0f, Engine::myWindow::Height, -100.0f, 100.0f));
+			setCameraProjectionMatrix(glm::ortho(0.0f, Engine::myWindow::WidthZoomed, 0.0f, Engine::myWindow::HeightZoomed, -(float)MEDIUM_MAP_WIDTH, (float)MEDIUM_MAP_WIDTH));
+
 
 			ifstream data_path("assets/data/data.json");
 			//Close the game if it wasn't able to find or process data.json file
@@ -60,14 +59,6 @@ namespace glb {
 		catch (...) {
 			std::cout << "An error occurred" << std::endl;
 		}
-	}
-
-	void setMinimapProjection() {
-		float bottom = (-1.f) * (MEDIUM_MAP_HEIGHT * Engine::myWindow::BottomBarHeight / (Engine::myWindow::Height - Engine::myWindow::BottomBarHeight - Engine::myWindow::TopBarHeight));
-		float top = MEDIUM_MAP_HEIGHT + MEDIUM_MAP_HEIGHT * Engine::myWindow::TopBarHeight / (Engine::myWindow::Height - Engine::myWindow::BottomBarHeight - Engine::myWindow::TopBarHeight);
-		float left = 0.f;
-		float right = (float)MEDIUM_MAP_WIDTH;
-		glb::minimapProjection = ortho(left, right, bottom, top, -right, right);
 	}
 
 	void readIndicesData(unsigned int *indices, string path) {
@@ -275,23 +266,5 @@ namespace glb {
 
 			Game::UpdateSettlementBuildings(); // set central building for every dependent building
 		}
-	}
-	
-	float getYMinimapCoord(float x) {
-		return Engine::myWindow::Height * (x - Engine::myWindow::BottomBarHeight) / (Engine::myWindow::Height - Engine::myWindow::BottomBarHeight - Engine::myWindow::TopBarHeight);
-	}
-
-	bool cursorInGameScreen() {
-		return (Engine::Mouse::GetYLeftClick() > Engine::myWindow::BottomBarHeight) && (Engine::Mouse::GetYLeftClick() < (Engine::myWindow::Height - Engine::myWindow::TopBarHeight));
-	}
-
-	void clearAndSwapBuffers(GLFWwindow *window) {
-		
-	}
-
-	vec2 getZoomedCoords(float xCoord, float yCoord) {
-		float x = xCoord * Engine::myWindow::WidthZoomed / Engine::myWindow::Width + Engine::Camera::GetXPosition();
-		float y = yCoord * Engine::myWindow::HeightZoomed / Engine::myWindow::Height + Engine::Camera::GetYPosition();
-		return vec2(x, y);
 	}
 };

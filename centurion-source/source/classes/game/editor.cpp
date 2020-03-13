@@ -24,7 +24,8 @@ void Editor::Create() {
 	Strategy::reset();
 	Engine::myWindow::BottomBarHeight = 0.f;
 	Engine::myWindow::TopBarHeight = 30.f;
-	setMinimapProjection();
+
+	setMinimapProjectionMatrix();
 
 	Surface::Reset();
 	editor::EDITOR_UI()->create();
@@ -51,7 +52,7 @@ void Editor::Run() {
 		if (!editor::IsWindowOpened && Engine::Mouse::GetYPosition() < Engine::myWindow::Height - 30.f && !editor::menuIsOpened)
 			Engine::Camera::mouseControl();
 		viewMatrix = Engine::Camera::calculateViewMatrix();
-		projectionMatrix = glb::cameraProjection;
+		projectionMatrix = getCameraProjectionMatrix();
 
 		editor::EDITOR_UI()->render(true);
 
@@ -75,7 +76,7 @@ void Editor::Run() {
 	/* If minimap is active */
 	else {
 		viewMatrix = mat4(1.0f);
-		projectionMatrix = glb::minimapProjection;
+		projectionMatrix = getMinimapProjectionMatrix();
 
 		// editor ui picking */
 		editor::EDITOR_UI()->render(true);
@@ -95,7 +96,7 @@ void Editor::Run() {
 		if (Picking::leftClickID_UI == 0) GoToPointFromMinimap();
 	}
 
-	glb::cameraProjection = glm::ortho(0.0f, Engine::myWindow::WidthZoomed, 0.0f, Engine::myWindow::HeightZoomed, -(float)MEDIUM_MAP_WIDTH, (float)MEDIUM_MAP_WIDTH);
+	setCameraProjectionMatrix(glm::ortho(0.0f, Engine::myWindow::WidthZoomed, 0.0f, Engine::myWindow::HeightZoomed, -(float)MEDIUM_MAP_WIDTH, (float)MEDIUM_MAP_WIDTH));
 
 	Engine::Mouse::RightClick = false;
 	Engine::Mouse::LeftClick = false;

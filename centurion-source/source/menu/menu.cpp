@@ -7,8 +7,6 @@
 #include <engine.h>
 #include <translationsTable.h>
 
-#include <primitives.h>
-
 using namespace glb;
 using namespace std;
 

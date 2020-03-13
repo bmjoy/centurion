@@ -24,6 +24,8 @@ public:
 		static void SetZoomFactor(float f) { zoomCameraFactor = f; }
 		static float GetXPosition() { return position.x; }
 		static float GetYPosition() { return position.y; }
+		static vec2 GetZoomedCoords(float xCoord, float yCoord);
+		static float GetYMinimapCoordinate(float y);
 		static void Init(vec3 startPosition, vec3 startUp, GLfloat startYaw, GLfloat startPitch);
 		static void mouseControl();
 		static void keyboardControl();
@@ -56,6 +58,7 @@ public:
 		static myWindow GetInstance(void);
 		static void DeleteInstance(void);
 		static void TakeScreenshot(void);
+		
 
 		GLFWwindow* GetGlfwWindow() { return glfwWindow; }
 		void ClearBuffers();
@@ -97,6 +100,7 @@ public:
 		static float GetXRightClick() { return xRightClick; }
 		static float GetYRightClick() { return yRightClick; }
 		static float GetY2DRightClick() { return y2DRightClick; }
+		static bool IsCursorInGameScreen();
 		static bool LeftClick;
 		static bool RightClick;
 		static bool LeftHold;

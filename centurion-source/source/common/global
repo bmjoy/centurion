@@ -1,17 +1,10 @@
 ﻿#pragma once
 
 #include <string>
-#include <glm/gtc/matrix_transform.hpp>
 
 using namespace std;
-using namespace glm;
 
 namespace glb {
-	extern string exe_root;
-	extern mat4 menuProjection;
-	extern mat4 cameraProjection;
-	extern mat4 minimapProjection;
-
 	void initParams();
 
 	// reading/saving map data 
@@ -21,11 +14,4 @@ namespace glb {
 	
 	void saveCurrentScenario(string name);
 	void openScenario(string name);
-
-	// other functions 
-	void setMinimapProjection();
-	float getYMinimapCoord(float x);
-	bool cursorInGameScreen();
-	vec2 getZoomedCoords(float xCoord, float yCoord);
-
 };
