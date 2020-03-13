@@ -51,7 +51,8 @@ void Building::prepare() {
 }
 
 bool Building::is_placeable() {
-	bool placeable = astar::checkAvailability(pass_grid, position);
+	vec3 var_position = this->GetPosition();
+	bool placeable = astar::checkAvailability(pass_grid, var_position);
 	string indCategory = "";
 	bool nearToIndependent = is_near_to_independent(&indCategory);
 	if (!prop.is_indipendent) placeable = placeable && nearToIndependent && indCategory == prop.category;
@@ -64,7 +65,7 @@ bool Building::is_near_to_independent(string *Category) {
 	vector<Building*> listOfIndipBuildings = Game::GetListOfIndipendentBuildings();
 	for (int i = 0; i < listOfIndipBuildings.size(); i++) {
 		Building* bld = listOfIndipBuildings[i];
-		float dist = math::euclidean_distance(bld->get_position().x, bld->get_position().y, position.x, position.y);
+		float dist = math::euclidean_distance(bld->GetPosition().x, bld->GetPosition().y, this->GetPosition().x, this->GetPosition().y);
 		if (dist < 1500.f) {
 			set_settlement_building(bld);
 			set_settlement_name(bld->get_settlement_name());
@@ -149,8 +150,8 @@ void Building::render(bool picking, int clickID, bool not_placeable) {
 	this->Select(bSelected);
 
 	if (Engine::getEnvironment() == "editor" && !Game::Minimap::IsActive()) {
-		if (this->IsSelected() && !editor::addingObject) circle[0].render(vec4(255.f), position.x, position.y - data["radius"].get<float>() / 15.5f); // selection circle (editor only)
-		if (this->IsSelected() && (prop.is_townhall || prop.is_villagehall) && !editor::addingObject) circle[1].render(vec4(0, 255, 255, 255), position.x, position.y); // selection circle (editor only)
+		if (this->IsSelected() && !editor::addingObject) circle[0].render(vec4(255.f), this->GetPosition().x, this->GetPosition().y - data["radius"].get<float>() / 15.5f); // selection circle (editor only)
+		if (this->IsSelected() && (prop.is_townhall || prop.is_villagehall) && !editor::addingObject) circle[1].render(vec4(0, 255, 255, 255), this->GetPosition().x, this->GetPosition().y); // selection circle (editor only)
 	}
 
 	if (Engine::getEnvironment() == "game" && this->IsSelected()) {
@@ -158,7 +159,7 @@ void Building::render(bool picking, int clickID, bool not_placeable) {
 	}
 
 	// rendering
-	BSprite()->render(prop.textureID, prop.clickable_in_minimap, position.x, position.y, prop.sprite_width, prop.sprite_height, picking, this->GetPickingID(), this->IsSelected(), player->getPlayerColor(), not_placeable);
+	BSprite()->render(prop.textureID, prop.clickable_in_minimap, this->GetPosition().x, this->GetPosition().y, prop.sprite_width, prop.sprite_height, picking, this->GetPickingID(), this->IsSelected(), player->getPlayerColor(), not_placeable);
 }
 
 int Building::UnitsInBuilding() {

@@ -46,6 +46,16 @@ void GObject::SetPickingID(const unsigned int par_pickingID)
 	pickingColor = vec3(r / 255.f, g / 255.f, b / 255.f);
 }
 
+unsigned short int GObject::GetRadius(void)
+{
+	return this->radius;
+}
+
+void GObject::SetRadius(const unsigned short int par_radius)
+{
+	this->radius = par_radius;
+}
+
 string GObject::GetClassName(void)
 {
 	return this->className;
@@ -77,52 +87,99 @@ void GObject::SetName(const string par_name)
 {
 	this->name = par_name;
 }
-//---
 
-void GObject::set_position(vec3 pos)
+unsigned short int GObject::GetRace(void)
 {
-	position = pos;
+	return this->race;
 }
 
-void GObject::update_pass() {
-	astar::updatePassMatrix(pass_grid, position);
+void GObject::SetRace(const unsigned short int par_race)
+{
+	this->race = par_race;
 }
-void GObject::clear_pass() {
-	astar::clearPassMatrix(pass_grid, position);
-}
-GObject::~GObject() {}
 
-/*
-GObject::GObject()
+unsigned short int GObject::GetSight(void)
 {
-	selected = false;
+	return this->sight;
 }
-void GObject::set_position(vec3 pos) 
-{
-	position = pos;
-}
-void GObject::set_class(string class_name) 
-{
-	ifstream path("assets/data/classes/" + class_name + ".oc.json");
-	data = json::parse(path);
-	className = class_name;
-}
-void GObject::SetPlayer(int player_id) {
-	player = &playersList[player_id];
-}
-void GObject::SetPickingID(int pickingId) {
-	picking_id = pickingId;
-	int r = (pickingId & 0x000000FF) >> 0;
-	int g = (pickingId & 0x0000FF00) >> 8;
-	int b = (pickingId & 0x00FF0000) >> 16;
-	pickingColor = vec3(r / 255.f, g / 255.f, b / 255.f);
-}
-void GObject::update_pass() {
-	astar::updatePassMatrix(pass_grid, position);
-}
-void GObject::clear_pass() {
-	astar::clearPassMatrix(pass_grid, position);
-}
-GObject::~GObject(){}
-*/
 
+void GObject::SetSight(const unsigned short int par_sight)
+{
+	this-> sight = par_sight;
+}
+
+bool GObject::CanBePositionedIntoWater(void)
+{
+	return this->isWaterObject;
+}
+
+void GObject::AllowPositioningIntoWater(void)
+{
+	this->isWaterObject = true;
+}
+void GObject::DenyPositioningIntoWater(void)
+{
+	this->isWaterObject = false;
+}
+
+bool GObject::IsBuilding(void)
+{
+	return (this->type == "building");
+}
+
+bool GObject::IsUnit(void)
+{
+	return this->type == "unit";
+}
+
+bool GObject::IsDecoration(void)
+{
+	return (this->type == "decoration");
+}
+
+Building* GObject::AsBuilding()
+{ 
+	return (Building*)this; 
+}
+Unit* GObject::AsUnit()
+{ 
+	return (Unit*)this; 
+}
+Decoration* GObject::AsDecoration()
+{ 
+	return (Decoration*)this;
+}
+
+void GObject::update_pass(void) 
+{
+	astar::updatePassMatrix(this->pass_grid, this->position);
+}
+
+void GObject::clear_pass(void) 
+{
+	astar::clearPassMatrix(this->pass_grid, this->position);
+}
+
+void GObject::SetPosition(const vec3 pos)
+{
+	this->position = pos;
+}
+
+vec3 GObject::GetPosition(void)
+{
+	return this->position;
+}
+
+int GObject::get_xPos(void)
+{ 
+	return (int)position.x; 
+}
+int GObject::get_yPos(void)
+{ 
+	return (int)position.y; 
+}
+
+GObject::~GObject(void) 
+{
+	//TODO
+}

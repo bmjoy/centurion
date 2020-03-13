@@ -63,7 +63,7 @@ namespace editor {
 		if (!IsWindowOpened && !PropertiesWindowIsOpen && !addingObject){
 			if (Engine::Mouse::RightClick && Game::IsGameObjectNotNull(Picking::rightClickID)) {
 				Building* bld = Game::GetGameObjectPtrById(Picking::rightClickID)->AsBuilding();
-				if (bld->isSelected()){
+				if (bld->IsSelected()){
 					type = "building";
 					building_pointer = bld;
 					text_input[0].create(bld->GetName(), startX + 246.f, startY - 85.f, 30);

@@ -131,7 +131,7 @@ void Editor::handleKeyboardControls() {
 		if (Engine::Keyboard::IsKeyPressed(GLFW_KEY_DELETE)){
 			if (Game::IsGameObjectNotNull(Picking::leftClickID)) {
 				Building* b = Game::GetGameObjectPtrById(Picking::leftClickID)->AsBuilding();
-				if (b->isSelected()) {
+				if (b->IsSelected()) {
 					if (b->is_independent()) {
 						if (b->buildingsInSettlementCount() > 0) {
 							b->setWaitingToBeErased(true);

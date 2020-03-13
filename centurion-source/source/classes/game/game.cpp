@@ -398,7 +398,7 @@ void Game::GenerateOutposts(vector<vec2> &locs) {
 		b->SetClassName(className);
 		b->SetType("building");
 		b->SetPlayer(0);
-		b->set_position(vec3(locs[i].x, locs[i].y, 0.f));
+		b->SetPosition(vec3(locs[i].x, locs[i].y, 0.f));
 		b->SetPickingID(PickingObject::GetPickingId());
 		b->set_settlement_name("Outpost_" + i);
 		b->create();
@@ -460,7 +460,7 @@ void Game::GenerateSettlements(vector<vec2> &locs) {
 						b->SetClassName(className);
 						b->SetType(type);
 						b->SetPlayer(i);
-						b->set_position(vec3(origin.x + xOffset, origin.y + yOffset, 0.f));
+						b->SetPosition(vec3(origin.x + xOffset, origin.y + yOffset, 0.f));
 						b->SetPickingID(PickingObject::GetPickingId());
 						b->set_settlement_name("Settlement_player_" + i);
 						b->create();
@@ -496,7 +496,7 @@ void Game::GenerateSettlements(vector<vec2> &locs) {
 						Decoration* d = new Decoration();
 						d->SetClassName(className);
 						d->SetPlayer(0);
-						d->set_position(vec3(origin.x + xOffset, origin.y + yOffset, 0.f));
+						d->SetPosition(vec3(origin.x + xOffset, origin.y + yOffset, 0.f));
 						d->SetPickingID(PickingObject::GetPickingId());
 						d->create();
 						GameObjects[d->GetPickingID()] = d;

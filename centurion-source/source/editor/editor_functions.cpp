@@ -62,7 +62,7 @@ namespace editor {
 			buildingTemp->SetClassName(classname);
 			buildingTemp->SetPickingID(0);
 			buildingTemp->SetPlayer(0);
-			buildingTemp->set_position(vec3(0));
+			buildingTemp->SetPosition(vec3(0));
 			buildingTemp->prepare();
 		}
 		if (type == "decorations") {
@@ -70,7 +70,7 @@ namespace editor {
 			decorTemp->SetClassName(classname);
 			decorTemp->SetPickingID(0);
 			decorTemp->SetPlayer(0);
-			decorTemp->set_position(vec3(0));
+			decorTemp->SetPosition(vec3(0));
 			decorTemp->prepare();
 		}
 	}
@@ -79,7 +79,7 @@ namespace editor {
 		float x = round(Engine::Mouse::GetXPosition() * Engine::myWindow::WidthZoomed / Engine::myWindow::Width + Engine::Camera::GetXPosition());
 		float y = round(Engine::Mouse::GetYPosition() * Engine::myWindow::HeightZoomed / Engine::myWindow::Height + Engine::Camera::GetYPosition());
 		if (type == "buildings") {
-			buildingTemp->set_position(vec3(x, y, 0.f));
+			buildingTemp->SetPosition(vec3(x, y, 0.f));
 			buildingTemp->set_status(false);
 			buildingTemp->render(false, 0, !buildingTemp->is_placeable());
 			
@@ -102,7 +102,7 @@ namespace editor {
 			}
 		}
 		if (type == "decorations") {
-			decorTemp->set_position(vec3(x, y, 0.f));
+			decorTemp->SetPosition(vec3(x, y, 0.f));
 			decorTemp->render(!decorTemp->is_placeable());
 		}
 	}
@@ -190,8 +190,8 @@ namespace editor {
 				Building* bld = Game::GetGameObjectPtrById(Picking::leftClickID)->AsBuilding();
 				movingObjectRestore = false;
 				if (!movingObject) {
-					movingObjectXPos = bld->get_position().x;
-					movingObjectYPos = bld->get_position().y;
+					movingObjectXPos = bld->GetPosition().x;
+					movingObjectYPos = bld->GetPosition().y;
 					movingObjectStartXMouse = Engine::Mouse::GetXPosition() * Engine::myWindow::WidthZoomed / Engine::myWindow::Width + Engine::Camera::GetXPosition();
 					movingObjectStartYMouse = Engine::Mouse::GetYPosition() * Engine::myWindow::HeightZoomed / Engine::myWindow::Height + Engine::Camera::GetYPosition();
 				}
@@ -202,7 +202,7 @@ namespace editor {
 
 				if (!bld->is_independent()){
 					if (!movingObject) bld->clear_pass();
-					bld->set_position(vec3(movingObjectXPos + dx, movingObjectYPos + dy, 0.f));
+					bld->SetPosition(vec3(movingObjectXPos + dx, movingObjectYPos + dy, 0.f));
 					if (!bld->is_placeable()) {
 						string s = "";
 						if (!bld->is_near_to_independent(&s)) {
@@ -220,7 +220,7 @@ namespace editor {
 				}
 				else {
 					if (!movingObject) bld->clear_pass();
-					bld->set_position(vec3(movingObjectXPos + dx, movingObjectYPos + dy, 0.f));
+					bld->SetPosition(vec3(movingObjectXPos + dx, movingObjectYPos + dy, 0.f));
 					if (!bld->is_placeable()) {
 						bld->set_placeable(false);
 						movingObjectRestore = true;
@@ -242,7 +242,7 @@ namespace editor {
 			if (Game::IsGameObjectNotNull(Picking::leftClickID)) {
 				Building* bld = Game::GetGameObjectPtrById(Picking::leftClickID)->AsBuilding();
 				if (movingObjectRestore) {
-					bld->set_position(vec3(movingObjectXPos, movingObjectYPos, 0.f));
+					bld->SetPosition(vec3(movingObjectXPos, movingObjectYPos, 0.f));
 					bld->clear_pass();
 					bld->set_placeable(true);
 					bld->update_pass();

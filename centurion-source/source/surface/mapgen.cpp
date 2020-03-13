@@ -479,7 +479,7 @@ namespace mapgen {
 
 				float rnoise = distribution(gen);
 
-				float dist = math::euclidean_distance(p.x, p.y, b->get_position().x, b->get_position().y);
+				float dist = math::euclidean_distance(p.x, p.y, b->GetPosition().x, b->GetPosition().y);
 				dist += rnoise;
 				if (dist <= d) {
 					d = dist;

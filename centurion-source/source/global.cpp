@@ -155,15 +155,15 @@ namespace glb {
 				objectsFile << listOfBuildings[i]->GetName() << "\t";
 				objectsFile << listOfBuildings[i]->get_settlement_name() << "\t";
 				objectsFile << listOfBuildings[i]->GetPlayer() << "\t";
-				objectsFile << listOfBuildings[i]->get_position().x << "\t";
-				objectsFile << listOfBuildings[i]->get_position().y << "\t";
+				objectsFile << listOfBuildings[i]->GetPosition().x << "\t";
+				objectsFile << listOfBuildings[i]->GetPosition().y << "\t";
 				if (listOfBuildings[i]->is_independent()) {
 					objectsFile << 0 << "\t";
 					objectsFile << 0;
 				}
 				else {
-					objectsFile << listOfBuildings[i]->get_position().x - listOfBuildings[i]->get_settlement_building()->get_position().x << "\t";
-					objectsFile << listOfBuildings[i]->get_position().y - listOfBuildings[i]->get_settlement_building()->get_position().y;
+					objectsFile << listOfBuildings[i]->GetPosition().x - listOfBuildings[i]->get_settlement_building()->GetPosition().x << "\t";
+					objectsFile << listOfBuildings[i]->GetPosition().y - listOfBuildings[i]->get_settlement_building()->GetPosition().y;
 				}
 				objectsFile << "\n";
 			}
@@ -177,12 +177,12 @@ namespace glb {
 				objectsFile << "N/A" << "\t";
 				objectsFile << listOfDecorations[i]->get_settlement_name() << "\t";
 				objectsFile << 0 << "\t";
-				objectsFile << listOfDecorations[i]->get_position().x << "\t";
-				objectsFile << listOfDecorations[i]->get_position().y << "\t";
+				objectsFile << listOfDecorations[i]->GetPosition().x << "\t";
+				objectsFile << listOfDecorations[i]->GetPosition().y << "\t";
 				if (listOfDecorations[i]->get_settlement_name() != "N/A") 
 				{
-					objectsFile << listOfDecorations[i]->get_position().x - listOfDecorations[i]->get_settlement_building()->get_position().x << "\t";
-					objectsFile << listOfDecorations[i]->get_position().y - listOfDecorations[i]->get_settlement_building()->get_position().y << "\n";
+					objectsFile << listOfDecorations[i]->GetPosition().x - listOfDecorations[i]->get_settlement_building()->GetPosition().x << "\t";
+					objectsFile << listOfDecorations[i]->GetPosition().y - listOfDecorations[i]->get_settlement_building()->GetPosition().y << "\n";
 				}
 				else {
 					objectsFile << 0 << "\t";
@@ -252,7 +252,7 @@ namespace glb {
 						Building* b = new Building();
 						b->SetClassName(className);
 						b->SetPlayer(playerID);
-						b->set_position(vec3(xPos, yPos, 0.f));
+						b->SetPosition(vec3(xPos, yPos, 0.f));
 						b->SetPickingID(PickingObject::GetPickingId());
 						b->set_settlement_name(settl_name);
 						b->SetType("building");
@@ -263,7 +263,7 @@ namespace glb {
 						Decoration* d = new Decoration();
 						d->SetClassName(className);
 						d->SetPlayer(0);
-						d->set_position(vec3(xPos, yPos, 0.f));
+						d->SetPosition(vec3(xPos, yPos, 0.f));
 						d->SetPickingID(PickingObject::GetPickingId());
 						d->create();
 						d->SetType("decoration");

@@ -71,8 +71,8 @@ void Decoration::create() {
 
 	settlementName = "N/A";
 	checkSettlement();
-	oldX = position.x;
-	oldY = position.y;
+	oldX = this->GetPosition().x;
+	oldY = this->GetPosition().y;
 }
 
 void Decoration::checkSettlement() {
@@ -80,10 +80,10 @@ void Decoration::checkSettlement() {
 	for (int i = 0; i < listOfIndipBuildings.size(); i++) {
 		Building* bld = listOfIndipBuildings[i];
 		string settlName = bld->get_settlement_name();
-		float settlX = bld->get_position().x;
-		float settlY = bld->get_position().y;
+		float settlX = bld->GetPosition().x;
+		float settlY = bld->GetPosition().y;
 
-		if (math::euclidean_distance(position.x, position.y, settlX, settlY) <= TOWNHALL_RADIUS) {
+		if (math::euclidean_distance(this->GetPosition().x, this->GetPosition().y, settlX, settlY) <= TOWNHALL_RADIUS) {
 			settlementName = settlName;
 			settlID = bld->GetPickingID();
 			independent = bld;
@@ -98,8 +98,10 @@ void Decoration::checkSettlement() {
 	}
 }
 
-bool Decoration::is_placeable() {
-	return astar::checkAvailability(pass_grid, position);
+bool Decoration::is_placeable()
+{
+	vec3 var_position = this->GetPosition();
+	return astar::checkAvailability(pass_grid, var_position);
 }
 
 void Decoration::render(bool picking, int clickID, bool not_placeable)  {
@@ -108,13 +110,13 @@ void Decoration::render(bool picking, int clickID, bool not_placeable)  {
 
 	if (Engine::getEnvironment() == "editor") {
 		if (Game::IsGameObjectNotNull(settlID)) {
-			if (oldX != position.x || oldY != position.y || oldSettlX != Game::GetGameObjectPtrById(settlID)->get_position().x || oldSettlY != Game::GetGameObjectPtrById(settlID)->get_position().y) {
+			if (oldX != this->GetPosition().x || oldY != this->GetPosition().y || oldSettlX != Game::GetGameObjectPtrById(settlID)->GetPosition().x || oldSettlY != Game::GetGameObjectPtrById(settlID)->GetPosition().y) {
 				checkSettlement();
 			}
 		}
 	}
 
-	decorData.position = vec2(position.x, position.y);
+	decorData.position = vec2(this->GetPosition().x, this->GetPosition().y);
 	DSprite()->render(decorData, not_placeable);
 }
 
