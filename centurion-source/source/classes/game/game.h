@@ -31,7 +31,7 @@ public:
 		~Surface();
 	private:
 		Surface();
-		static bool isGridEnabled;
+		static bool isGridEnabled; 
 	};
 
 

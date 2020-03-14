@@ -1,4 +1,4 @@
-﻿<chars name="couriernew_15px" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="characters.xsd">
+﻿<chars name="couriernew_15px" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../xml-schemas/characters.xsd">
     <char id="32" x="385" y="247" width="10" height="18" xoffset="0" yoffset="0" xadvance="9" lineheight="17" />
     <char id="33" x="55" y="266" width="10" height="18" xoffset="0" yoffset="0" xadvance="9" lineheight="17" />
     <char id="34" x="374" y="266" width="10" height="18" xoffset="0" yoffset="0" xadvance="9" lineheight="17" />

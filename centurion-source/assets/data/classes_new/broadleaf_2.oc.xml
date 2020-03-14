@@ -1,4 +1,4 @@
-<c_object parent="Object" type="decoration" class_name="Broadleaf_2" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="Object.xsd">
+<c_object parent="Object" type="decoration" class_name="Broadleaf_2" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../xml-schemas/Object.xsd">
  <properties>
     <property name="category" value="trees"/>
     <property name="ent_path" value="assets/decorations/trees/broadleaves/broadleaf_2.oe.json"/>

@@ -65,6 +65,7 @@ namespace menu {
 			if (Settings::Language != options->currentLan)
 			{
 				Settings::ChangeLanguage(options->currentLan);
+				MENU()->update();
 			}
 		}
 		/*------------------------------------------------------------------------------*/
@@ -72,6 +73,7 @@ namespace menu {
 			if (Settings::Language != options->currentLan) 
 			{
 				Settings::ChangeLanguage(options->currentLan);
+				MENU()->update();
 			}
 			currentMenu = "mainmenu";
 		}

@@ -24,7 +24,7 @@ namespace glb {
 
 	void Settings::Init() {
 		Language = "english";
-		SettingsPath = "Settings.xml";
+		SettingsPath = "settings.xml";
 		cameraMaxZoom = 20.f;
 		cameraMovespeed = 10.f;
 		windowWidth = 1366.f;
@@ -132,7 +132,7 @@ namespace glb {
 			}
 
 			xml_schema::namespace_infomap map;
-			map[""].schema = "Settings.xsd";
+			map[""].schema = "./assets/xml-schemas/settings.xsd";
 			ofstream ofs(SettingsPath.c_str());
 			c_settings_(ofs, settXML, map);
 		}
