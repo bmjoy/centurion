@@ -115,6 +115,7 @@ public:
 	static int GetNumberOfDecorations();
 	static bool IsGameObjectNotNull(int i);
 	static vector<Building*> GetListOfIndipendentBuildings();
+	static vector<Building*> GetListOfStandAloneBuildings();
 	static vector<Building*> GetListOfBuildings();
 	static vector<Unit*> GetListOfUnits();
 	static vector<Decoration*> GetListOfDecorations();

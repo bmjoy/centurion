@@ -1155,6 +1155,36 @@ class_ (::std::auto_ptr< class_type > x)
   this->class__.set (x);
 }
 
+const c_building1::name_optional& c_building1::
+name () const
+{
+  return this->name_;
+}
+
+c_building1::name_optional& c_building1::
+name ()
+{
+  return this->name_;
+}
+
+void c_building1::
+name (const name_type& x)
+{
+  this->name_.set (x);
+}
+
+void c_building1::
+name (const name_optional& x)
+{
+  this->name_ = x;
+}
+
+void c_building1::
+name (::std::auto_ptr< name_type > x)
+{
+  this->name_.set (x);
+}
+
 const c_building1::id_type& c_building1::
 id () const
 {
@@ -2532,6 +2562,7 @@ c_building1 (const class_type& class_,
              const yOffset_type& yOffset)
 : ::xml_schema::type (),
   class__ (class_, this),
+  name_ (this),
   id_ (id, this),
   healthperc_ (this),
   xOffset_ (xOffset, this),
@@ -2546,6 +2577,7 @@ c_building1 (const c_building1& x,
              ::xml_schema::container* c)
 : ::xml_schema::type (x, f, c),
   class__ (x.class__, f, this),
+  name_ (x.name_, f, this),
   id_ (x.id_, f, this),
   healthperc_ (x.healthperc_, f, this),
   xOffset_ (x.xOffset_, f, this),
@@ -2560,6 +2592,7 @@ c_building1 (const ::xercesc::DOMElement& e,
              ::xml_schema::container* c)
 : ::xml_schema::type (e, f | ::xml_schema::flags::base, c),
   class__ (this),
+  name_ (this),
   id_ (this),
   healthperc_ (this),
   xOffset_ (this),
@@ -2586,6 +2619,12 @@ parse (::xsd::cxx::xml::dom::parser< char >& p,
     if (n.name () == "class" && n.namespace_ ().empty ())
     {
       this->class__.set (class_traits::create (i, f, this));
+      continue;
+    }
+
+    if (n.name () == "name" && n.namespace_ ().empty ())
+    {
+      this->name_.set (name_traits::create (i, f, this));
       continue;
     }
 
@@ -2663,6 +2702,7 @@ operator= (const c_building1& x)
   {
     static_cast< ::xml_schema::type& > (*this) = x;
     this->class__ = x.class__;
+    this->name_ = x.name_;
     this->id_ = x.id_;
     this->healthperc_ = x.healthperc_;
     this->xOffset_ = x.xOffset_;
@@ -3725,6 +3765,18 @@ operator<< (::xercesc::DOMElement& e, const c_building1& i)
         e));
 
     a << i.class_ ();
+  }
+
+  // name
+  //
+  if (i.name ())
+  {
+    ::xercesc::DOMAttr& a (
+      ::xsd::cxx::xml::dom::create_attribute (
+        "name",
+        e));
+
+    a << *i.name ();
   }
 
   // id

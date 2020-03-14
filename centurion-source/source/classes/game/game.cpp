@@ -43,7 +43,7 @@ void Game::Map::SaveScenario(string scenarioName)
 		if (FileManager::CheckIfFolderExists(scenarioPath) == false) {
 			FileManager::CreateFolder(scenarioPath);
 		}
-		
+
 		SaveHeights(scenarioPath + "/heights");
 		SaveTexture(scenarioPath + "/texture");
 		SaveMapObjectsToXml(scenarioPath + "/mapObjects.xml");
@@ -69,30 +69,81 @@ void Game::Map::SaveMapObjectsToXml(string xmlPath)
 	{
 		c_buildings _buildings = c_buildings();
 
-		for (int i = 0; i < MAX_NUMBER_OF_OBJECTS; i++) {
+		/* settlements */
 
-			if (IsGameObjectNotNull(i) == false) continue;
+		vector<Building*> indip_bs = GetListOfIndipendentBuildings();
 
-			if (GameObjects[i]->IsBuilding()) {
+		for (int i = 0; i < indip_bs.size(); i++) {
 
-				Building* gobj = GameObjects[i]->AsBuilding();
+			Building* gobj = indip_bs[i];
 
-				c_building b = c_building((c_building::class_type) gobj->GetClassName(),
-					(c_building::id_type)gobj->GetPickingID(),
-					(c_building::player_type)1,
-					(c_building::x_type)gobj->GetPosition().x,
-					(c_building::y_type)gobj->GetPosition().y,
-					(c_building::gold_type)100,
-					(c_building::food_type)100
+			c_settlement _settl = c_settlement((c_settlement::name_type)gobj->GetName(),
+				(c_settlement::player_type)1,
+				(c_settlement::x_type)gobj->GetPosition().x,
+				(c_settlement::y_type)gobj->GetPosition().y
+			);
+
+			c_building1 b = c_building1((c_building1::class_type) gobj->GetClassName(),
+				(c_building1::id_type)gobj->GetPickingID(),
+				(c_building1::xOffset_type)0,
+				(c_building1::yOffset_type)0
+			);
+			b.healthperc(100);
+			b.name(gobj->GetName());
+			_settl.c_building().push_back(b);
+
+			vector<int> dip_bs = gobj->buildingsInSettlementIds();
+
+
+			for (int i = 0; i < dip_bs.size(); i++) {
+				int id = dip_bs[i];
+				Building* gobj2 = GameObjects[id]->AsBuilding();
+
+				c_building1 b2 = c_building1((c_building1::class_type) gobj2->GetClassName(),
+					(c_building1::id_type)gobj2->GetPickingID(),
+					c_building1::xOffset_type(gobj2->GetPosition().x - gobj->GetPosition().x),
+					c_building1::yOffset_type(gobj2->GetPosition().y - gobj->GetPosition().y)
 				);
-
-				b.healthperc(100);
-				b.name(gobj->GetName());
-				//b.icon = "";
-
-				_buildings.c_building().push_back(b);
+				b2.healthperc(100);
+				_settl.c_building().push_back(b2);
 			}
+
+			_buildings.c_settlement().push_back(_settl);
 		}
+
+
+
+
+		//vector<Building*> indip_bs = GetListOfIndipendentBuildings();
+
+		//for (int i = 0; i < indip_bs.size(); i++) {
+
+		//	c_settlement _settl = c_settlement((c_settlement::name_type)gobj->GetClassName(),
+
+		//		);
+
+		//	if (indip_bs[i]->IsBuilding()) {
+
+		//		Building* gobj = indip_bs[i];
+
+		//		c_building b = c_building((c_building::class_type) gobj->GetClassName(),
+		//			(c_building::id_type)gobj->GetPickingID(),
+		//			(c_building::player_type)1,
+		//			(c_building::x_type)gobj->GetPosition().x,
+		//			(c_building::y_type)gobj->GetPosition().y,
+		//			(c_building::gold_type)100,
+		//			(c_building::food_type)100
+		//		);
+
+		//		b.healthperc(100);
+		//		b.name(gobj->GetName());
+		//		//b.icon = "";
+
+		//		_buildings.c_building().push_back(b);
+		//	}
+		//}
+
+
 
 		c_decorations _decorations = c_decorations();
 
@@ -403,6 +454,19 @@ vector<Building*> Game::GetListOfIndipendentBuildings() {
 	return indipBuildings;
 }
 
+vector<Building*> Game::GetListOfStandAloneBuildings()
+{
+	vector<Building*> saBuildings = vector<Building*>();
+	for (int i = 0; i < MAX_NUMBER_OF_OBJECTS; i++) {
+		if (GameObjects[i] != nullptr && GameObjects[i]->IsBuilding()) {
+			if (GameObjects[i]->AsBuilding()->get_settlement_building() == nullptr && GameObjects[i]->AsBuilding()->is_independent() == false) {
+				saBuildings.push_back(GameObjects[i]->AsBuilding());
+			}
+		}
+	}
+	return saBuildings;
+}
+
 vector<Building*> Game::GetListOfBuildings() {
 	vector<Building*> indipBuildings = vector<Building*>();
 	for (int i = 0; i < MAX_NUMBER_OF_OBJECTS; i++) {
@@ -466,7 +530,7 @@ void Game::RenderObjects() {
 			GameObjects[i]->render(false, Picking::leftClickID);
 		}
 	}
-		/*cout << gameMinimapStatus << " " << editor::IsWindowOpened << " " << editor::menuIsOpened << " " << editor::TerrainBrushIsActive << " " << leftClickID_UI << editor::movingObject << endl;*/
+	/*cout << gameMinimapStatus << " " << editor::IsWindowOpened << " " << editor::menuIsOpened << " " << editor::TerrainBrushIsActive << " " << leftClickID_UI << editor::movingObject << endl;*/
 	if (!Minimap::IsActive() && !editor::IsWindowOpened && !editor::menuIsOpened && !editor::TerrainBrushIsActive && Picking::leftClickID_UI == 0 && !editor::movingObject) SelectionRectangle::Render();
 }
 

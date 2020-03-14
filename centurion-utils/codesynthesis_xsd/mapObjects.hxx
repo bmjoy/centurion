@@ -1444,6 +1444,27 @@ class c_building1: public ::xml_schema::type
   void
   class_ (::std::auto_ptr< class_type > p);
 
+  // name
+  //
+  typedef ::xml_schema::string name_type;
+  typedef ::xsd::cxx::tree::optional< name_type > name_optional;
+  typedef ::xsd::cxx::tree::traits< name_type, char > name_traits;
+
+  const name_optional&
+  name () const;
+
+  name_optional&
+  name ();
+
+  void
+  name (const name_type& x);
+
+  void
+  name (const name_optional& x);
+
+  void
+  name (::std::auto_ptr< name_type > p);
+
   // id
   //
   typedef ::xml_schema::integer id_type;
@@ -1559,6 +1580,7 @@ class c_building1: public ::xml_schema::type
 
   protected:
   ::xsd::cxx::tree::one< class_type > class__;
+  name_optional name_;
   ::xsd::cxx::tree::one< id_type > id_;
   healthperc_optional healthperc_;
   ::xsd::cxx::tree::one< xOffset_type > xOffset_;
