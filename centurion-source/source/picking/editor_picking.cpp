@@ -11,7 +11,6 @@
 #include <global>
 #include <file_manager.h>
 
-#include <game/mapObjects.h>
 
 using namespace glb;
 
@@ -90,8 +89,9 @@ namespace editor {
 				//    SAVE
 
 				if (pos == 3) { // save
+					Game::Map::SaveScenario(currentMapName);
 					//saveCurrentScenario(currentMapName);
-					MapObjects::SaveMapObjectsToXml("scenarios/mapObjTry/mapObjects.xml");
+					//MapObjects::SaveMapObjectsToXml("scenarios/mapObjTry/mapObjects.xml");
 
 					for (int i = 0; i < titles.size(); i++) {
 						std::string s = titlesList[i];

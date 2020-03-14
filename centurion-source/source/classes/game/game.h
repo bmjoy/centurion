@@ -18,8 +18,12 @@ class Unit;
 class Game {
 
 public:
-	class Surface {
+	class Map {
 	public:
+
+		static void LoadScenario(string scenarioName);
+		static void SaveScenario(string scenarioName);
+
 		static bool IsGridEnabled() { return isGridEnabled; }
 		static void EnableGrid() { isGridEnabled = true; }
 		static void DisableGrid() { isGridEnabled = false; }
@@ -28,9 +32,13 @@ public:
 		static void CreateNoise();
 		static void UpdateGrid();
 		static void Render(bool tracing);
-		~Surface();
+		~Map();
 	private:
-		Surface();
+		Map();
+		static void ReadMapObjectsFromXml(string xmlPath);
+		static void SaveMapObjectsToXml(string xmlPath);
+		static void SaveHeights(string path);
+		static void SaveTexture(string path);
 		static bool isGridEnabled; 
 	};
 

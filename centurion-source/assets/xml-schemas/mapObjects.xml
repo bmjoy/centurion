@@ -1,13 +1,24 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no" ?>
-<c_mapObjects xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="mapObjects.xsd">
-	<object class="class_placeholder" id="1" healthperc="100" player="1" x="100" y="200" name="ciao" icon="ciao"/>
-    <object class="class_placeholder" id="2" healthperc="100" player="2" x="100" y="200" name="ciao" icon="ciao" />
-	<settlement class="RTownhall" id="3" player="1" x="100" y="200" name="ciao" gold="100" food="100" population="100" maxpopulation="200" healthperc="100" icon="ciao">
-        <object class="class_placeholder" id="4" healthperc="100" player="1" x="100" y="200" icon="ciao" />
-        <object class="class_placeholder" id="5" healthperc="100" player="1" x="100" y="200" icon="ciao" />
-    </settlement>
-    <settlement class="RTownhall" id="6" player="1" x="100" y="200" name="ciao" gold="100" food="100" population="100" maxpopulation="200" healthperc="100" icon="ciao">
-        <object class="class_placeholder" id="7" healthperc="100" player="1" x="100" y="200" icon="ciao" />
-        <object class="class_placeholder" id="8" healthperc="100" player="1" x="100" y="200" icon="ciao" />
-    </settlement>
+<c_mapObjects
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="mapObjects.xsd">
+    <c_buildings>
+        <c_building class="class_placeholder" id="1" healthperc="100" player="1" x="100" y="200" name="ciao" icon="ciao" gold="200" food="100"/>
+        <c_building class="class_placeholder" id="2" healthperc="100" player="2" x="100" y="200" name="ciao" icon="ciao" gold="200" food="100" />
+        <c_settlement name="ciao" player="1" x="100" y="200" gold="100" food="100" population="100" maxpopulation="200">
+            <c_building class="class_placeholder" id="4" healthperc="100" xOffset="100" yOffset="200" icon="ciao" />
+            <c_building class="class_placeholder" id="5" healthperc="100" xOffset="100" yOffset="200" icon="ciao" />
+        </c_settlement>
+        <c_settlement name="ciao" player="1" x="100" y="200" gold="100" food="100" population="100" maxpopulation="200">
+            <c_building class="class_placeholder" id="4" healthperc="100" xOffset="100" yOffset="200" icon="ciao" />
+            <c_building class="class_placeholder" id="5" healthperc="100" xOffset="100" yOffset="200" icon="ciao" />
+        </c_settlement>
+    </c_buildings>
+    <c_decorations>
+        <c_decoration class="class_placeholder" id="1" x="100" y="200" xOffset="100" yOffset="200" settlementName="ciao" />
+        <c_decoration class="class_placeholder" id="1" x="100" y="200" xOffset="100" yOffset="200" settlementName="ciao" />
+    </c_decorations>
+    <c_units>
+        <c_unit class="class_placeholder" name="ciao" id="1" x="100" y="200" direction="1" level="10" invisible="1" messenger_status="1" feeds="0" party="0" ai_ctrl="0" healthperc="50" stamina="10" inventary="oggetto1" />
+		<c_unit class="class_placeholder" name="ciao" id="1" x="100" y="200" direction="1" level="10" invisible="1" messenger_status="1" feeds="0" party="0" ai_ctrl="0" healthperc="50" stamina="10" inventary="oggetto1" />
+    </c_units>
 </c_mapObjects>

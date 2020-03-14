@@ -43,703 +43,1221 @@
 // c_mapObjects
 // 
 
-const c_mapObjects::object_sequence& c_mapObjects::
-object() const
+const c_mapObjects::c_buildings_type& c_mapObjects::
+c_buildings() const
 {
-	return this->object_;
+	return this->c_buildings_.get();
 }
 
-c_mapObjects::object_sequence& c_mapObjects::
-object()
+c_mapObjects::c_buildings_type& c_mapObjects::
+c_buildings()
 {
-	return this->object_;
-}
-
-void c_mapObjects::
-object(const object_sequence& s)
-{
-	this->object_ = s;
-}
-
-const c_mapObjects::settlement_sequence& c_mapObjects::
-settlement() const
-{
-	return this->settlement_;
-}
-
-c_mapObjects::settlement_sequence& c_mapObjects::
-settlement()
-{
-	return this->settlement_;
+	return this->c_buildings_.get();
 }
 
 void c_mapObjects::
-settlement(const settlement_sequence& s)
+c_buildings(const c_buildings_type& x)
 {
-	this->settlement_ = s;
+	this->c_buildings_.set(x);
+}
+
+void c_mapObjects::
+c_buildings(::std::auto_ptr< c_buildings_type > x)
+{
+	this->c_buildings_.set(x);
+}
+
+const c_mapObjects::c_decorations_type& c_mapObjects::
+c_decorations() const
+{
+	return this->c_decorations_.get();
+}
+
+c_mapObjects::c_decorations_type& c_mapObjects::
+c_decorations()
+{
+	return this->c_decorations_.get();
+}
+
+void c_mapObjects::
+c_decorations(const c_decorations_type& x)
+{
+	this->c_decorations_.set(x);
+}
+
+void c_mapObjects::
+c_decorations(::std::auto_ptr< c_decorations_type > x)
+{
+	this->c_decorations_.set(x);
+}
+
+const c_mapObjects::c_units_type& c_mapObjects::
+c_units() const
+{
+	return this->c_units_.get();
+}
+
+c_mapObjects::c_units_type& c_mapObjects::
+c_units()
+{
+	return this->c_units_.get();
+}
+
+void c_mapObjects::
+c_units(const c_units_type& x)
+{
+	this->c_units_.set(x);
+}
+
+void c_mapObjects::
+c_units(::std::auto_ptr< c_units_type > x)
+{
+	this->c_units_.set(x);
 }
 
 
-// object
+// c_buildings
 // 
 
-const object::class_type& object::
+const c_buildings::c_building_sequence& c_buildings::
+c_building() const
+{
+	return this->c_building_;
+}
+
+c_buildings::c_building_sequence& c_buildings::
+c_building()
+{
+	return this->c_building_;
+}
+
+void c_buildings::
+c_building(const c_building_sequence& s)
+{
+	this->c_building_ = s;
+}
+
+const c_buildings::c_settlement_sequence& c_buildings::
+c_settlement() const
+{
+	return this->c_settlement_;
+}
+
+c_buildings::c_settlement_sequence& c_buildings::
+c_settlement()
+{
+	return this->c_settlement_;
+}
+
+void c_buildings::
+c_settlement(const c_settlement_sequence& s)
+{
+	this->c_settlement_ = s;
+}
+
+
+// c_decorations
+// 
+
+const c_decorations::c_decoration_sequence& c_decorations::
+c_decoration() const
+{
+	return this->c_decoration_;
+}
+
+c_decorations::c_decoration_sequence& c_decorations::
+c_decoration()
+{
+	return this->c_decoration_;
+}
+
+void c_decorations::
+c_decoration(const c_decoration_sequence& s)
+{
+	this->c_decoration_ = s;
+}
+
+
+// c_units
+// 
+
+const c_units::c_unit_sequence& c_units::
+c_unit() const
+{
+	return this->c_unit_;
+}
+
+c_units::c_unit_sequence& c_units::
+c_unit()
+{
+	return this->c_unit_;
+}
+
+void c_units::
+c_unit(const c_unit_sequence& s)
+{
+	this->c_unit_ = s;
+}
+
+
+// c_building
+// 
+
+const c_building::class_type& c_building::
 class_() const
 {
 	return this->class__.get();
 }
 
-object::class_type& object::
+c_building::class_type& c_building::
 class_()
 {
 	return this->class__.get();
 }
 
-void object::
+void c_building::
 class_(const class_type& x)
 {
 	this->class__.set(x);
 }
 
-void object::
+void c_building::
 class_(::std::auto_ptr< class_type > x)
 {
 	this->class__.set(x);
 }
 
-const object::id_type& object::
+const c_building::id_type& c_building::
 id() const
 {
 	return this->id_.get();
 }
 
-object::id_type& object::
+c_building::id_type& c_building::
 id()
 {
 	return this->id_.get();
 }
 
-void object::
+void c_building::
 id(const id_type& x)
 {
 	this->id_.set(x);
 }
 
-const object::healthperc_optional& object::
+const c_building::healthperc_optional& c_building::
 healthperc() const
 {
 	return this->healthperc_;
 }
 
-object::healthperc_optional& object::
+c_building::healthperc_optional& c_building::
 healthperc()
 {
 	return this->healthperc_;
 }
 
-void object::
+void c_building::
 healthperc(const healthperc_type& x)
 {
 	this->healthperc_.set(x);
 }
 
-void object::
+void c_building::
 healthperc(const healthperc_optional& x)
 {
 	this->healthperc_ = x;
 }
 
-const object::player_type& object::
+const c_building::player_type& c_building::
 player() const
 {
 	return this->player_.get();
 }
 
-object::player_type& object::
+c_building::player_type& c_building::
 player()
 {
 	return this->player_.get();
 }
 
-void object::
+void c_building::
 player(const player_type& x)
 {
 	this->player_.set(x);
 }
 
-const object::x_type& object::
+const c_building::x_type& c_building::
 x() const
 {
 	return this->x_.get();
 }
 
-object::x_type& object::
+c_building::x_type& c_building::
 x()
 {
 	return this->x_.get();
 }
 
-void object::
+void c_building::
 x(const x_type& x)
 {
 	this->x_.set(x);
 }
 
-const object::y_type& object::
+const c_building::y_type& c_building::
 y() const
 {
 	return this->y_.get();
 }
 
-object::y_type& object::
+c_building::y_type& c_building::
 y()
 {
 	return this->y_.get();
 }
 
-void object::
+void c_building::
 y(const y_type& x)
 {
 	this->y_.set(x);
 }
 
-const object::name_optional& object::
+const c_building::name_optional& c_building::
 name() const
 {
 	return this->name_;
 }
 
-object::name_optional& object::
+c_building::name_optional& c_building::
 name()
 {
 	return this->name_;
 }
 
-void object::
+void c_building::
 name(const name_type& x)
 {
 	this->name_.set(x);
 }
 
-void object::
+void c_building::
 name(const name_optional& x)
 {
 	this->name_ = x;
 }
 
-void object::
+void c_building::
 name(::std::auto_ptr< name_type > x)
 {
 	this->name_.set(x);
 }
 
-const object::icon_optional& object::
+const c_building::icon_optional& c_building::
 icon() const
 {
 	return this->icon_;
 }
 
-object::icon_optional& object::
+c_building::icon_optional& c_building::
 icon()
 {
 	return this->icon_;
 }
 
-void object::
+void c_building::
 icon(const icon_type& x)
 {
 	this->icon_.set(x);
 }
 
-void object::
+void c_building::
 icon(const icon_optional& x)
 {
 	this->icon_ = x;
 }
 
-void object::
+void c_building::
 icon(::std::auto_ptr< icon_type > x)
 {
 	this->icon_.set(x);
 }
 
-
-// settlement
-// 
-
-const settlement::object_sequence& settlement::
-object() const
-{
-	return this->object_;
-}
-
-settlement::object_sequence& settlement::
-object()
-{
-	return this->object_;
-}
-
-void settlement::
-object(const object_sequence& s)
-{
-	this->object_ = s;
-}
-
-const settlement::class_type& settlement::
-class_() const
-{
-	return this->class__.get();
-}
-
-settlement::class_type& settlement::
-class_()
-{
-	return this->class__.get();
-}
-
-void settlement::
-class_(const class_type& x)
-{
-	this->class__.set(x);
-}
-
-void settlement::
-class_(::std::auto_ptr< class_type > x)
-{
-	this->class__.set(x);
-}
-
-const settlement::id_type& settlement::
-id() const
-{
-	return this->id_.get();
-}
-
-settlement::id_type& settlement::
-id()
-{
-	return this->id_.get();
-}
-
-void settlement::
-id(const id_type& x)
-{
-	this->id_.set(x);
-}
-
-const settlement::player_type& settlement::
-player() const
-{
-	return this->player_.get();
-}
-
-settlement::player_type& settlement::
-player()
-{
-	return this->player_.get();
-}
-
-void settlement::
-player(const player_type& x)
-{
-	this->player_.set(x);
-}
-
-const settlement::x_type& settlement::
-x() const
-{
-	return this->x_.get();
-}
-
-settlement::x_type& settlement::
-x()
-{
-	return this->x_.get();
-}
-
-void settlement::
-x(const x_type& x)
-{
-	this->x_.set(x);
-}
-
-const settlement::y_type& settlement::
-y() const
-{
-	return this->y_.get();
-}
-
-settlement::y_type& settlement::
-y()
-{
-	return this->y_.get();
-}
-
-void settlement::
-y(const y_type& x)
-{
-	this->y_.set(x);
-}
-
-const settlement::name_optional& settlement::
-name() const
-{
-	return this->name_;
-}
-
-settlement::name_optional& settlement::
-name()
-{
-	return this->name_;
-}
-
-void settlement::
-name(const name_type& x)
-{
-	this->name_.set(x);
-}
-
-void settlement::
-name(const name_optional& x)
-{
-	this->name_ = x;
-}
-
-void settlement::
-name(::std::auto_ptr< name_type > x)
-{
-	this->name_.set(x);
-}
-
-const settlement::gold_type& settlement::
+const c_building::gold_type& c_building::
 gold() const
 {
 	return this->gold_.get();
 }
 
-settlement::gold_type& settlement::
+c_building::gold_type& c_building::
 gold()
 {
 	return this->gold_.get();
 }
 
-void settlement::
+void c_building::
 gold(const gold_type& x)
 {
 	this->gold_.set(x);
 }
 
-settlement::gold_type settlement::
-gold_default_value()
-{
-	return gold_type(0LL);
-}
-
-const settlement::food_type& settlement::
+const c_building::food_type& c_building::
 food() const
 {
 	return this->food_.get();
 }
 
-settlement::food_type& settlement::
+c_building::food_type& c_building::
 food()
 {
 	return this->food_.get();
 }
 
-void settlement::
+void c_building::
 food(const food_type& x)
 {
 	this->food_.set(x);
 }
 
-settlement::food_type settlement::
-food_default_value()
-{
-	return food_type(0LL);
-}
 
-const settlement::population_optional& settlement::
-population() const
-{
-	return this->population_;
-}
-
-settlement::population_optional& settlement::
-population()
-{
-	return this->population_;
-}
-
-void settlement::
-population(const population_type& x)
-{
-	this->population_.set(x);
-}
-
-void settlement::
-population(const population_optional& x)
-{
-	this->population_ = x;
-}
-
-const settlement::maxpopulation_optional& settlement::
-maxpopulation() const
-{
-	return this->maxpopulation_;
-}
-
-settlement::maxpopulation_optional& settlement::
-maxpopulation()
-{
-	return this->maxpopulation_;
-}
-
-void settlement::
-maxpopulation(const maxpopulation_type& x)
-{
-	this->maxpopulation_.set(x);
-}
-
-void settlement::
-maxpopulation(const maxpopulation_optional& x)
-{
-	this->maxpopulation_ = x;
-}
-
-const settlement::healthperc_type& settlement::
-healthperc() const
-{
-	return this->healthperc_.get();
-}
-
-settlement::healthperc_type& settlement::
-healthperc()
-{
-	return this->healthperc_.get();
-}
-
-void settlement::
-healthperc(const healthperc_type& x)
-{
-	this->healthperc_.set(x);
-}
-
-settlement::healthperc_type settlement::
-healthperc_default_value()
-{
-	return healthperc_type(100LL);
-}
-
-const settlement::icon_optional& settlement::
-icon() const
-{
-	return this->icon_;
-}
-
-settlement::icon_optional& settlement::
-icon()
-{
-	return this->icon_;
-}
-
-void settlement::
-icon(const icon_type& x)
-{
-	this->icon_.set(x);
-}
-
-void settlement::
-icon(const icon_optional& x)
-{
-	this->icon_ = x;
-}
-
-void settlement::
-icon(::std::auto_ptr< icon_type > x)
-{
-	this->icon_.set(x);
-}
-
-
-// object1
+// c_settlement
 // 
 
-const object1::class_type& object1::
-class_() const
+const c_settlement::c_building_sequence& c_settlement::
+c_building() const
 {
-	return this->class__.get();
+	return this->c_building_;
 }
 
-object1::class_type& object1::
-class_()
+c_settlement::c_building_sequence& c_settlement::
+c_building()
 {
-	return this->class__.get();
+	return this->c_building_;
 }
 
-void object1::
-class_(const class_type& x)
+void c_settlement::
+c_building(const c_building_sequence& s)
 {
-	this->class__.set(x);
+	this->c_building_ = s;
 }
 
-void object1::
-class_(::std::auto_ptr< class_type > x)
-{
-	this->class__.set(x);
-}
-
-const object1::id_type& object1::
-id() const
-{
-	return this->id_.get();
-}
-
-object1::id_type& object1::
-id()
-{
-	return this->id_.get();
-}
-
-void object1::
-id(const id_type& x)
-{
-	this->id_.set(x);
-}
-
-const object1::healthperc_type& object1::
-healthperc() const
-{
-	return this->healthperc_.get();
-}
-
-object1::healthperc_type& object1::
-healthperc()
-{
-	return this->healthperc_.get();
-}
-
-void object1::
-healthperc(const healthperc_type& x)
-{
-	this->healthperc_.set(x);
-}
-
-object1::healthperc_type object1::
-healthperc_default_value()
-{
-	return healthperc_type(100LL);
-}
-
-const object1::player_type& object1::
-player() const
-{
-	return this->player_.get();
-}
-
-object1::player_type& object1::
-player()
-{
-	return this->player_.get();
-}
-
-void object1::
-player(const player_type& x)
-{
-	this->player_.set(x);
-}
-
-const object1::x_type& object1::
-x() const
-{
-	return this->x_.get();
-}
-
-object1::x_type& object1::
-x()
-{
-	return this->x_.get();
-}
-
-void object1::
-x(const x_type& x)
-{
-	this->x_.set(x);
-}
-
-const object1::y_type& object1::
-y() const
-{
-	return this->y_.get();
-}
-
-object1::y_type& object1::
-y()
-{
-	return this->y_.get();
-}
-
-void object1::
-y(const y_type& x)
-{
-	this->y_.set(x);
-}
-
-const object1::name_optional& object1::
+const c_settlement::name_type& c_settlement::
 name() const
 {
-	return this->name_;
+	return this->name_.get();
 }
 
-object1::name_optional& object1::
+c_settlement::name_type& c_settlement::
 name()
 {
-	return this->name_;
+	return this->name_.get();
 }
 
-void object1::
+void c_settlement::
 name(const name_type& x)
 {
 	this->name_.set(x);
 }
 
-void object1::
-name(const name_optional& x)
-{
-	this->name_ = x;
-}
-
-void object1::
+void c_settlement::
 name(::std::auto_ptr< name_type > x)
 {
 	this->name_.set(x);
 }
 
-const object1::icon_optional& object1::
+const c_settlement::player_type& c_settlement::
+player() const
+{
+	return this->player_.get();
+}
+
+c_settlement::player_type& c_settlement::
+player()
+{
+	return this->player_.get();
+}
+
+void c_settlement::
+player(const player_type& x)
+{
+	this->player_.set(x);
+}
+
+const c_settlement::x_type& c_settlement::
+x() const
+{
+	return this->x_.get();
+}
+
+c_settlement::x_type& c_settlement::
+x()
+{
+	return this->x_.get();
+}
+
+void c_settlement::
+x(const x_type& x)
+{
+	this->x_.set(x);
+}
+
+const c_settlement::y_type& c_settlement::
+y() const
+{
+	return this->y_.get();
+}
+
+c_settlement::y_type& c_settlement::
+y()
+{
+	return this->y_.get();
+}
+
+void c_settlement::
+y(const y_type& x)
+{
+	this->y_.set(x);
+}
+
+const c_settlement::gold_optional& c_settlement::
+gold() const
+{
+	return this->gold_;
+}
+
+c_settlement::gold_optional& c_settlement::
+gold()
+{
+	return this->gold_;
+}
+
+void c_settlement::
+gold(const gold_type& x)
+{
+	this->gold_.set(x);
+}
+
+void c_settlement::
+gold(const gold_optional& x)
+{
+	this->gold_ = x;
+}
+
+const c_settlement::food_optional& c_settlement::
+food() const
+{
+	return this->food_;
+}
+
+c_settlement::food_optional& c_settlement::
+food()
+{
+	return this->food_;
+}
+
+void c_settlement::
+food(const food_type& x)
+{
+	this->food_.set(x);
+}
+
+void c_settlement::
+food(const food_optional& x)
+{
+	this->food_ = x;
+}
+
+const c_settlement::population_optional& c_settlement::
+population() const
+{
+	return this->population_;
+}
+
+c_settlement::population_optional& c_settlement::
+population()
+{
+	return this->population_;
+}
+
+void c_settlement::
+population(const population_type& x)
+{
+	this->population_.set(x);
+}
+
+void c_settlement::
+population(const population_optional& x)
+{
+	this->population_ = x;
+}
+
+const c_settlement::maxpopulation_optional& c_settlement::
+maxpopulation() const
+{
+	return this->maxpopulation_;
+}
+
+c_settlement::maxpopulation_optional& c_settlement::
+maxpopulation()
+{
+	return this->maxpopulation_;
+}
+
+void c_settlement::
+maxpopulation(const maxpopulation_type& x)
+{
+	this->maxpopulation_.set(x);
+}
+
+void c_settlement::
+maxpopulation(const maxpopulation_optional& x)
+{
+	this->maxpopulation_ = x;
+}
+
+
+// c_decoration
+// 
+
+const c_decoration::class_type& c_decoration::
+class_() const
+{
+	return this->class__.get();
+}
+
+c_decoration::class_type& c_decoration::
+class_()
+{
+	return this->class__.get();
+}
+
+void c_decoration::
+class_(const class_type& x)
+{
+	this->class__.set(x);
+}
+
+void c_decoration::
+class_(::std::auto_ptr< class_type > x)
+{
+	this->class__.set(x);
+}
+
+const c_decoration::id_type& c_decoration::
+id() const
+{
+	return this->id_.get();
+}
+
+c_decoration::id_type& c_decoration::
+id()
+{
+	return this->id_.get();
+}
+
+void c_decoration::
+id(const id_type& x)
+{
+	this->id_.set(x);
+}
+
+const c_decoration::x_type& c_decoration::
+x() const
+{
+	return this->x_.get();
+}
+
+c_decoration::x_type& c_decoration::
+x()
+{
+	return this->x_.get();
+}
+
+void c_decoration::
+x(const x_type& x)
+{
+	this->x_.set(x);
+}
+
+const c_decoration::y_type& c_decoration::
+y() const
+{
+	return this->y_.get();
+}
+
+c_decoration::y_type& c_decoration::
+y()
+{
+	return this->y_.get();
+}
+
+void c_decoration::
+y(const y_type& x)
+{
+	this->y_.set(x);
+}
+
+const c_decoration::xOffset_optional& c_decoration::
+xOffset() const
+{
+	return this->xOffset_;
+}
+
+c_decoration::xOffset_optional& c_decoration::
+xOffset()
+{
+	return this->xOffset_;
+}
+
+void c_decoration::
+xOffset(const xOffset_type& x)
+{
+	this->xOffset_.set(x);
+}
+
+void c_decoration::
+xOffset(const xOffset_optional& x)
+{
+	this->xOffset_ = x;
+}
+
+const c_decoration::yOffset_optional& c_decoration::
+yOffset() const
+{
+	return this->yOffset_;
+}
+
+c_decoration::yOffset_optional& c_decoration::
+yOffset()
+{
+	return this->yOffset_;
+}
+
+void c_decoration::
+yOffset(const yOffset_type& x)
+{
+	this->yOffset_.set(x);
+}
+
+void c_decoration::
+yOffset(const yOffset_optional& x)
+{
+	this->yOffset_ = x;
+}
+
+const c_decoration::settlementName_optional& c_decoration::
+settlementName() const
+{
+	return this->settlementName_;
+}
+
+c_decoration::settlementName_optional& c_decoration::
+settlementName()
+{
+	return this->settlementName_;
+}
+
+void c_decoration::
+settlementName(const settlementName_type& x)
+{
+	this->settlementName_.set(x);
+}
+
+void c_decoration::
+settlementName(const settlementName_optional& x)
+{
+	this->settlementName_ = x;
+}
+
+void c_decoration::
+settlementName(::std::auto_ptr< settlementName_type > x)
+{
+	this->settlementName_.set(x);
+}
+
+
+// c_unit
+// 
+
+const c_unit::class_type& c_unit::
+class_() const
+{
+	return this->class__.get();
+}
+
+c_unit::class_type& c_unit::
+class_()
+{
+	return this->class__.get();
+}
+
+void c_unit::
+class_(const class_type& x)
+{
+	this->class__.set(x);
+}
+
+void c_unit::
+class_(::std::auto_ptr< class_type > x)
+{
+	this->class__.set(x);
+}
+
+const c_unit::name_optional& c_unit::
+name() const
+{
+	return this->name_;
+}
+
+c_unit::name_optional& c_unit::
+name()
+{
+	return this->name_;
+}
+
+void c_unit::
+name(const name_type& x)
+{
+	this->name_.set(x);
+}
+
+void c_unit::
+name(const name_optional& x)
+{
+	this->name_ = x;
+}
+
+void c_unit::
+name(::std::auto_ptr< name_type > x)
+{
+	this->name_.set(x);
+}
+
+const c_unit::id_type& c_unit::
+id() const
+{
+	return this->id_.get();
+}
+
+c_unit::id_type& c_unit::
+id()
+{
+	return this->id_.get();
+}
+
+void c_unit::
+id(const id_type& x)
+{
+	this->id_.set(x);
+}
+
+const c_unit::x_type& c_unit::
+x() const
+{
+	return this->x_.get();
+}
+
+c_unit::x_type& c_unit::
+x()
+{
+	return this->x_.get();
+}
+
+void c_unit::
+x(const x_type& x)
+{
+	this->x_.set(x);
+}
+
+const c_unit::y_type& c_unit::
+y() const
+{
+	return this->y_.get();
+}
+
+c_unit::y_type& c_unit::
+y()
+{
+	return this->y_.get();
+}
+
+void c_unit::
+y(const y_type& x)
+{
+	this->y_.set(x);
+}
+
+const c_unit::direction_optional& c_unit::
+direction() const
+{
+	return this->direction_;
+}
+
+c_unit::direction_optional& c_unit::
+direction()
+{
+	return this->direction_;
+}
+
+void c_unit::
+direction(const direction_type& x)
+{
+	this->direction_.set(x);
+}
+
+void c_unit::
+direction(const direction_optional& x)
+{
+	this->direction_ = x;
+}
+
+const c_unit::level_type& c_unit::
+level() const
+{
+	return this->level_.get();
+}
+
+c_unit::level_type& c_unit::
+level()
+{
+	return this->level_.get();
+}
+
+void c_unit::
+level(const level_type& x)
+{
+	this->level_.set(x);
+}
+
+const c_unit::invisible_optional& c_unit::
+invisible() const
+{
+	return this->invisible_;
+}
+
+c_unit::invisible_optional& c_unit::
+invisible()
+{
+	return this->invisible_;
+}
+
+void c_unit::
+invisible(const invisible_type& x)
+{
+	this->invisible_.set(x);
+}
+
+void c_unit::
+invisible(const invisible_optional& x)
+{
+	this->invisible_ = x;
+}
+
+const c_unit::messenger_status_optional& c_unit::
+messenger_status() const
+{
+	return this->messenger_status_;
+}
+
+c_unit::messenger_status_optional& c_unit::
+messenger_status()
+{
+	return this->messenger_status_;
+}
+
+void c_unit::
+messenger_status(const messenger_status_type& x)
+{
+	this->messenger_status_.set(x);
+}
+
+void c_unit::
+messenger_status(const messenger_status_optional& x)
+{
+	this->messenger_status_ = x;
+}
+
+const c_unit::feeds_optional& c_unit::
+feeds() const
+{
+	return this->feeds_;
+}
+
+c_unit::feeds_optional& c_unit::
+feeds()
+{
+	return this->feeds_;
+}
+
+void c_unit::
+feeds(const feeds_type& x)
+{
+	this->feeds_.set(x);
+}
+
+void c_unit::
+feeds(const feeds_optional& x)
+{
+	this->feeds_ = x;
+}
+
+const c_unit::party_optional& c_unit::
+party() const
+{
+	return this->party_;
+}
+
+c_unit::party_optional& c_unit::
+party()
+{
+	return this->party_;
+}
+
+void c_unit::
+party(const party_type& x)
+{
+	this->party_.set(x);
+}
+
+void c_unit::
+party(const party_optional& x)
+{
+	this->party_ = x;
+}
+
+const c_unit::ai_ctrl_optional& c_unit::
+ai_ctrl() const
+{
+	return this->ai_ctrl_;
+}
+
+c_unit::ai_ctrl_optional& c_unit::
+ai_ctrl()
+{
+	return this->ai_ctrl_;
+}
+
+void c_unit::
+ai_ctrl(const ai_ctrl_type& x)
+{
+	this->ai_ctrl_.set(x);
+}
+
+void c_unit::
+ai_ctrl(const ai_ctrl_optional& x)
+{
+	this->ai_ctrl_ = x;
+}
+
+const c_unit::healthperc_optional& c_unit::
+healthperc() const
+{
+	return this->healthperc_;
+}
+
+c_unit::healthperc_optional& c_unit::
+healthperc()
+{
+	return this->healthperc_;
+}
+
+void c_unit::
+healthperc(const healthperc_type& x)
+{
+	this->healthperc_.set(x);
+}
+
+void c_unit::
+healthperc(const healthperc_optional& x)
+{
+	this->healthperc_ = x;
+}
+
+const c_unit::stamina_optional& c_unit::
+stamina() const
+{
+	return this->stamina_;
+}
+
+c_unit::stamina_optional& c_unit::
+stamina()
+{
+	return this->stamina_;
+}
+
+void c_unit::
+stamina(const stamina_type& x)
+{
+	this->stamina_.set(x);
+}
+
+void c_unit::
+stamina(const stamina_optional& x)
+{
+	this->stamina_ = x;
+}
+
+const c_unit::inventary_optional& c_unit::
+inventary() const
+{
+	return this->inventary_;
+}
+
+c_unit::inventary_optional& c_unit::
+inventary()
+{
+	return this->inventary_;
+}
+
+void c_unit::
+inventary(const inventary_type& x)
+{
+	this->inventary_.set(x);
+}
+
+void c_unit::
+inventary(const inventary_optional& x)
+{
+	this->inventary_ = x;
+}
+
+void c_unit::
+inventary(::std::auto_ptr< inventary_type > x)
+{
+	this->inventary_.set(x);
+}
+
+
+// c_building1
+// 
+
+const c_building1::class_type& c_building1::
+class_() const
+{
+	return this->class__.get();
+}
+
+c_building1::class_type& c_building1::
+class_()
+{
+	return this->class__.get();
+}
+
+void c_building1::
+class_(const class_type& x)
+{
+	this->class__.set(x);
+}
+
+void c_building1::
+class_(::std::auto_ptr< class_type > x)
+{
+	this->class__.set(x);
+}
+
+const c_building1::id_type& c_building1::
+id() const
+{
+	return this->id_.get();
+}
+
+c_building1::id_type& c_building1::
+id()
+{
+	return this->id_.get();
+}
+
+void c_building1::
+id(const id_type& x)
+{
+	this->id_.set(x);
+}
+
+const c_building1::healthperc_optional& c_building1::
+healthperc() const
+{
+	return this->healthperc_;
+}
+
+c_building1::healthperc_optional& c_building1::
+healthperc()
+{
+	return this->healthperc_;
+}
+
+void c_building1::
+healthperc(const healthperc_type& x)
+{
+	this->healthperc_.set(x);
+}
+
+void c_building1::
+healthperc(const healthperc_optional& x)
+{
+	this->healthperc_ = x;
+}
+
+const c_building1::xOffset_type& c_building1::
+xOffset() const
+{
+	return this->xOffset_.get();
+}
+
+c_building1::xOffset_type& c_building1::
+xOffset()
+{
+	return this->xOffset_.get();
+}
+
+void c_building1::
+xOffset(const xOffset_type& x)
+{
+	this->xOffset_.set(x);
+}
+
+const c_building1::yOffset_type& c_building1::
+yOffset() const
+{
+	return this->yOffset_.get();
+}
+
+c_building1::yOffset_type& c_building1::
+yOffset()
+{
+	return this->yOffset_.get();
+}
+
+void c_building1::
+yOffset(const yOffset_type& x)
+{
+	this->yOffset_.set(x);
+}
+
+const c_building1::icon_optional& c_building1::
 icon() const
 {
 	return this->icon_;
 }
 
-object1::icon_optional& object1::
+c_building1::icon_optional& c_building1::
 icon()
 {
 	return this->icon_;
 }
 
-void object1::
+void c_building1::
 icon(const icon_type& x)
 {
 	this->icon_.set(x);
 }
 
-void object1::
+void c_building1::
 icon(const icon_optional& x)
 {
 	this->icon_ = x;
 }
 
-void object1::
+void c_building1::
 icon(::std::auto_ptr< icon_type > x)
 {
 	this->icon_.set(x);
@@ -752,10 +1270,24 @@ icon(::std::auto_ptr< icon_type > x)
 //
 
 c_mapObjects::
-c_mapObjects()
+c_mapObjects(const c_buildings_type& c_buildings,
+	const c_decorations_type& c_decorations,
+	const c_units_type& c_units)
 	: ::xml_schema::type(),
-	object_(this),
-	settlement_(this)
+	c_buildings_(c_buildings, this),
+	c_decorations_(c_decorations, this),
+	c_units_(c_units, this)
+{
+}
+
+c_mapObjects::
+c_mapObjects(::std::auto_ptr< c_buildings_type > c_buildings,
+	::std::auto_ptr< c_decorations_type > c_decorations,
+	::std::auto_ptr< c_units_type > c_units)
+	: ::xml_schema::type(),
+	c_buildings_(c_buildings, this),
+	c_decorations_(c_decorations, this),
+	c_units_(c_units, this)
 {
 }
 
@@ -764,8 +1296,9 @@ c_mapObjects(const c_mapObjects& x,
 	::xml_schema::flags f,
 	::xml_schema::container* c)
 	: ::xml_schema::type(x, f, c),
-	object_(x.object_, f, this),
-	settlement_(x.settlement_, f, this)
+	c_buildings_(x.c_buildings_, f, this),
+	c_decorations_(x.c_decorations_, f, this),
+	c_units_(x.c_units_, f, this)
 {
 }
 
@@ -774,8 +1307,9 @@ c_mapObjects(const ::xercesc::DOMElement& e,
 	::xml_schema::flags f,
 	::xml_schema::container* c)
 	: ::xml_schema::type(e, f | ::xml_schema::flags::base, c),
-	object_(this),
-	settlement_(this)
+	c_buildings_(this),
+	c_decorations_(this),
+	c_units_(this)
 {
 	if ((f & ::xml_schema::flags::base) == 0)
 	{
@@ -794,29 +1328,70 @@ parse(::xsd::cxx::xml::dom::parser< char >& p,
 		const ::xsd::cxx::xml::qualified_name< char > n(
 			::xsd::cxx::xml::dom::name< char >(i));
 
-		// object
+		// c_buildings
 		//
-		if (n.name() == "object" && n.namespace_().empty())
+		if (n.name() == "c_buildings" && n.namespace_().empty())
 		{
-			::std::auto_ptr< object_type > r(
-				object_traits::create(i, f, this));
+			::std::auto_ptr< c_buildings_type > r(
+				c_buildings_traits::create(i, f, this));
 
-			this->object_.push_back(r);
-			continue;
+			if (!c_buildings_.present())
+			{
+				this->c_buildings_.set(r);
+				continue;
+			}
 		}
 
-		// settlement
+		// c_decorations
 		//
-		if (n.name() == "settlement" && n.namespace_().empty())
+		if (n.name() == "c_decorations" && n.namespace_().empty())
 		{
-			::std::auto_ptr< settlement_type > r(
-				settlement_traits::create(i, f, this));
+			::std::auto_ptr< c_decorations_type > r(
+				c_decorations_traits::create(i, f, this));
 
-			this->settlement_.push_back(r);
-			continue;
+			if (!c_decorations_.present())
+			{
+				this->c_decorations_.set(r);
+				continue;
+			}
+		}
+
+		// c_units
+		//
+		if (n.name() == "c_units" && n.namespace_().empty())
+		{
+			::std::auto_ptr< c_units_type > r(
+				c_units_traits::create(i, f, this));
+
+			if (!c_units_.present())
+			{
+				this->c_units_.set(r);
+				continue;
+			}
 		}
 
 		break;
+	}
+
+	if (!c_buildings_.present())
+	{
+		throw ::xsd::cxx::tree::expected_element< char >(
+			"c_buildings",
+			"");
+	}
+
+	if (!c_decorations_.present())
+	{
+		throw ::xsd::cxx::tree::expected_element< char >(
+			"c_decorations",
+			"");
+	}
+
+	if (!c_units_.present())
+	{
+		throw ::xsd::cxx::tree::expected_element< char >(
+			"c_units",
+			"");
 	}
 }
 
@@ -833,8 +1408,9 @@ operator= (const c_mapObjects& x)
 	if (this != &x)
 	{
 		static_cast<::xml_schema::type&> (*this) = x;
-		this->object_ = x.object_;
-		this->settlement_ = x.settlement_;
+		this->c_buildings_ = x.c_buildings_;
+		this->c_decorations_ = x.c_decorations_;
+		this->c_units_ = x.c_units_;
 	}
 
 	return *this;
@@ -845,15 +1421,278 @@ c_mapObjects::
 {
 }
 
-// object
+// c_buildings
 //
 
-object::
-object(const class_type& class_,
+c_buildings::
+c_buildings()
+	: ::xml_schema::type(),
+	c_building_(this),
+	c_settlement_(this)
+{
+}
+
+c_buildings::
+c_buildings(const c_buildings& x,
+	::xml_schema::flags f,
+	::xml_schema::container* c)
+	: ::xml_schema::type(x, f, c),
+	c_building_(x.c_building_, f, this),
+	c_settlement_(x.c_settlement_, f, this)
+{
+}
+
+c_buildings::
+c_buildings(const ::xercesc::DOMElement& e,
+	::xml_schema::flags f,
+	::xml_schema::container* c)
+	: ::xml_schema::type(e, f | ::xml_schema::flags::base, c),
+	c_building_(this),
+	c_settlement_(this)
+{
+	if ((f & ::xml_schema::flags::base) == 0)
+	{
+		::xsd::cxx::xml::dom::parser< char > p(e, true, false, false);
+		this->parse(p, f);
+	}
+}
+
+void c_buildings::
+parse(::xsd::cxx::xml::dom::parser< char >& p,
+	::xml_schema::flags f)
+{
+	for (; p.more_content(); p.next_content(false))
+	{
+		const ::xercesc::DOMElement& i(p.cur_element());
+		const ::xsd::cxx::xml::qualified_name< char > n(
+			::xsd::cxx::xml::dom::name< char >(i));
+
+		// c_building
+		//
+		if (n.name() == "c_building" && n.namespace_().empty())
+		{
+			::std::auto_ptr< c_building_type > r(
+				c_building_traits::create(i, f, this));
+
+			this->c_building_.push_back(r);
+			continue;
+		}
+
+		// c_settlement
+		//
+		if (n.name() == "c_settlement" && n.namespace_().empty())
+		{
+			::std::auto_ptr< c_settlement_type > r(
+				c_settlement_traits::create(i, f, this));
+
+			this->c_settlement_.push_back(r);
+			continue;
+		}
+
+		break;
+	}
+}
+
+c_buildings* c_buildings::
+_clone(::xml_schema::flags f,
+	::xml_schema::container* c) const
+{
+	return new class c_buildings(*this, f, c);
+}
+
+c_buildings& c_buildings::
+operator= (const c_buildings& x)
+{
+	if (this != &x)
+	{
+		static_cast<::xml_schema::type&> (*this) = x;
+		this->c_building_ = x.c_building_;
+		this->c_settlement_ = x.c_settlement_;
+	}
+
+	return *this;
+}
+
+c_buildings::
+~c_buildings()
+{
+}
+
+// c_decorations
+//
+
+c_decorations::
+c_decorations()
+	: ::xml_schema::type(),
+	c_decoration_(this)
+{
+}
+
+c_decorations::
+c_decorations(const c_decorations& x,
+	::xml_schema::flags f,
+	::xml_schema::container* c)
+	: ::xml_schema::type(x, f, c),
+	c_decoration_(x.c_decoration_, f, this)
+{
+}
+
+c_decorations::
+c_decorations(const ::xercesc::DOMElement& e,
+	::xml_schema::flags f,
+	::xml_schema::container* c)
+	: ::xml_schema::type(e, f | ::xml_schema::flags::base, c),
+	c_decoration_(this)
+{
+	if ((f & ::xml_schema::flags::base) == 0)
+	{
+		::xsd::cxx::xml::dom::parser< char > p(e, true, false, false);
+		this->parse(p, f);
+	}
+}
+
+void c_decorations::
+parse(::xsd::cxx::xml::dom::parser< char >& p,
+	::xml_schema::flags f)
+{
+	for (; p.more_content(); p.next_content(false))
+	{
+		const ::xercesc::DOMElement& i(p.cur_element());
+		const ::xsd::cxx::xml::qualified_name< char > n(
+			::xsd::cxx::xml::dom::name< char >(i));
+
+		// c_decoration
+		//
+		if (n.name() == "c_decoration" && n.namespace_().empty())
+		{
+			::std::auto_ptr< c_decoration_type > r(
+				c_decoration_traits::create(i, f, this));
+
+			this->c_decoration_.push_back(r);
+			continue;
+		}
+
+		break;
+	}
+}
+
+c_decorations* c_decorations::
+_clone(::xml_schema::flags f,
+	::xml_schema::container* c) const
+{
+	return new class c_decorations(*this, f, c);
+}
+
+c_decorations& c_decorations::
+operator= (const c_decorations& x)
+{
+	if (this != &x)
+	{
+		static_cast<::xml_schema::type&> (*this) = x;
+		this->c_decoration_ = x.c_decoration_;
+	}
+
+	return *this;
+}
+
+c_decorations::
+~c_decorations()
+{
+}
+
+// c_units
+//
+
+c_units::
+c_units()
+	: ::xml_schema::type(),
+	c_unit_(this)
+{
+}
+
+c_units::
+c_units(const c_units& x,
+	::xml_schema::flags f,
+	::xml_schema::container* c)
+	: ::xml_schema::type(x, f, c),
+	c_unit_(x.c_unit_, f, this)
+{
+}
+
+c_units::
+c_units(const ::xercesc::DOMElement& e,
+	::xml_schema::flags f,
+	::xml_schema::container* c)
+	: ::xml_schema::type(e, f | ::xml_schema::flags::base, c),
+	c_unit_(this)
+{
+	if ((f & ::xml_schema::flags::base) == 0)
+	{
+		::xsd::cxx::xml::dom::parser< char > p(e, true, false, false);
+		this->parse(p, f);
+	}
+}
+
+void c_units::
+parse(::xsd::cxx::xml::dom::parser< char >& p,
+	::xml_schema::flags f)
+{
+	for (; p.more_content(); p.next_content(false))
+	{
+		const ::xercesc::DOMElement& i(p.cur_element());
+		const ::xsd::cxx::xml::qualified_name< char > n(
+			::xsd::cxx::xml::dom::name< char >(i));
+
+		// c_unit
+		//
+		if (n.name() == "c_unit" && n.namespace_().empty())
+		{
+			::std::auto_ptr< c_unit_type > r(
+				c_unit_traits::create(i, f, this));
+
+			this->c_unit_.push_back(r);
+			continue;
+		}
+
+		break;
+	}
+}
+
+c_units* c_units::
+_clone(::xml_schema::flags f,
+	::xml_schema::container* c) const
+{
+	return new class c_units(*this, f, c);
+}
+
+c_units& c_units::
+operator= (const c_units& x)
+{
+	if (this != &x)
+	{
+		static_cast<::xml_schema::type&> (*this) = x;
+		this->c_unit_ = x.c_unit_;
+	}
+
+	return *this;
+}
+
+c_units::
+~c_units()
+{
+}
+
+// c_building
+//
+
+c_building::
+c_building(const class_type& class_,
 	const id_type& id,
 	const player_type& player,
 	const x_type& x,
-	const y_type& y)
+	const y_type& y,
+	const gold_type& gold,
+	const food_type& food)
 	: ::xml_schema::type(),
 	class__(class_, this),
 	id_(id, this),
@@ -862,12 +1701,14 @@ object(const class_type& class_,
 	x_(x, this),
 	y_(y, this),
 	name_(this),
-	icon_(this)
+	icon_(this),
+	gold_(gold, this),
+	food_(food, this)
 {
 }
 
-object::
-object(const object& x,
+c_building::
+c_building(const c_building& x,
 	::xml_schema::flags f,
 	::xml_schema::container* c)
 	: ::xml_schema::type(x, f, c),
@@ -878,12 +1719,14 @@ object(const object& x,
 	x_(x.x_, f, this),
 	y_(x.y_, f, this),
 	name_(x.name_, f, this),
-	icon_(x.icon_, f, this)
+	icon_(x.icon_, f, this),
+	gold_(x.gold_, f, this),
+	food_(x.food_, f, this)
 {
 }
 
-object::
-object(const ::xercesc::DOMElement& e,
+c_building::
+c_building(const ::xercesc::DOMElement& e,
 	::xml_schema::flags f,
 	::xml_schema::container* c)
 	: ::xml_schema::type(e, f | ::xml_schema::flags::base, c),
@@ -894,7 +1737,9 @@ object(const ::xercesc::DOMElement& e,
 	x_(this),
 	y_(this),
 	name_(this),
-	icon_(this)
+	icon_(this),
+	gold_(this),
+	food_(this)
 {
 	if ((f & ::xml_schema::flags::base) == 0)
 	{
@@ -903,7 +1748,7 @@ object(const ::xercesc::DOMElement& e,
 	}
 }
 
-void object::
+void c_building::
 parse(::xsd::cxx::xml::dom::parser< char >& p,
 	::xml_schema::flags f)
 {
@@ -958,213 +1803,6 @@ parse(::xsd::cxx::xml::dom::parser< char >& p,
 		if (n.name() == "icon" && n.namespace_().empty())
 		{
 			this->icon_.set(icon_traits::create(i, f, this));
-			continue;
-		}
-	}
-
-	if (!class__.present())
-	{
-		throw ::xsd::cxx::tree::expected_attribute< char >(
-			"class",
-			"");
-	}
-
-	if (!id_.present())
-	{
-		throw ::xsd::cxx::tree::expected_attribute< char >(
-			"id",
-			"");
-	}
-
-	if (!player_.present())
-	{
-		throw ::xsd::cxx::tree::expected_attribute< char >(
-			"player",
-			"");
-	}
-
-	if (!x_.present())
-	{
-		throw ::xsd::cxx::tree::expected_attribute< char >(
-			"x",
-			"");
-	}
-
-	if (!y_.present())
-	{
-		throw ::xsd::cxx::tree::expected_attribute< char >(
-			"y",
-			"");
-	}
-}
-
-object* object::
-_clone(::xml_schema::flags f,
-	::xml_schema::container* c) const
-{
-	return new class object(*this, f, c);
-}
-
-object& object::
-operator= (const object& x)
-{
-	if (this != &x)
-	{
-		static_cast<::xml_schema::type&> (*this) = x;
-		this->class__ = x.class__;
-		this->id_ = x.id_;
-		this->healthperc_ = x.healthperc_;
-		this->player_ = x.player_;
-		this->x_ = x.x_;
-		this->y_ = x.y_;
-		this->name_ = x.name_;
-		this->icon_ = x.icon_;
-	}
-
-	return *this;
-}
-
-object::
-~object()
-{
-}
-
-// settlement
-//
-
-settlement::
-settlement(const class_type& class_,
-	const id_type& id,
-	const player_type& player,
-	const x_type& x,
-	const y_type& y)
-	: ::xml_schema::type(),
-	object_(this),
-	class__(class_, this),
-	id_(id, this),
-	player_(player, this),
-	x_(x, this),
-	y_(y, this),
-	name_(this),
-	gold_(gold_default_value(), this),
-	food_(food_default_value(), this),
-	population_(this),
-	maxpopulation_(this),
-	healthperc_(healthperc_default_value(), this),
-	icon_(this)
-{
-}
-
-settlement::
-settlement(const settlement& x,
-	::xml_schema::flags f,
-	::xml_schema::container* c)
-	: ::xml_schema::type(x, f, c),
-	object_(x.object_, f, this),
-	class__(x.class__, f, this),
-	id_(x.id_, f, this),
-	player_(x.player_, f, this),
-	x_(x.x_, f, this),
-	y_(x.y_, f, this),
-	name_(x.name_, f, this),
-	gold_(x.gold_, f, this),
-	food_(x.food_, f, this),
-	population_(x.population_, f, this),
-	maxpopulation_(x.maxpopulation_, f, this),
-	healthperc_(x.healthperc_, f, this),
-	icon_(x.icon_, f, this)
-{
-}
-
-settlement::
-settlement(const ::xercesc::DOMElement& e,
-	::xml_schema::flags f,
-	::xml_schema::container* c)
-	: ::xml_schema::type(e, f | ::xml_schema::flags::base, c),
-	object_(this),
-	class__(this),
-	id_(this),
-	player_(this),
-	x_(this),
-	y_(this),
-	name_(this),
-	gold_(this),
-	food_(this),
-	population_(this),
-	maxpopulation_(this),
-	healthperc_(this),
-	icon_(this)
-{
-	if ((f & ::xml_schema::flags::base) == 0)
-	{
-		::xsd::cxx::xml::dom::parser< char > p(e, true, false, true);
-		this->parse(p, f);
-	}
-}
-
-void settlement::
-parse(::xsd::cxx::xml::dom::parser< char >& p,
-	::xml_schema::flags f)
-{
-	for (; p.more_content(); p.next_content(false))
-	{
-		const ::xercesc::DOMElement& i(p.cur_element());
-		const ::xsd::cxx::xml::qualified_name< char > n(
-			::xsd::cxx::xml::dom::name< char >(i));
-
-		// object
-		//
-		if (n.name() == "object" && n.namespace_().empty())
-		{
-			::std::auto_ptr< object_type > r(
-				object_traits::create(i, f, this));
-
-			this->object_.push_back(r);
-			continue;
-		}
-
-		break;
-	}
-
-	while (p.more_attributes())
-	{
-		const ::xercesc::DOMAttr& i(p.next_attribute());
-		const ::xsd::cxx::xml::qualified_name< char > n(
-			::xsd::cxx::xml::dom::name< char >(i));
-
-		if (n.name() == "class" && n.namespace_().empty())
-		{
-			this->class__.set(class_traits::create(i, f, this));
-			continue;
-		}
-
-		if (n.name() == "id" && n.namespace_().empty())
-		{
-			this->id_.set(id_traits::create(i, f, this));
-			continue;
-		}
-
-		if (n.name() == "player" && n.namespace_().empty())
-		{
-			this->player_.set(player_traits::create(i, f, this));
-			continue;
-		}
-
-		if (n.name() == "x" && n.namespace_().empty())
-		{
-			this->x_.set(x_traits::create(i, f, this));
-			continue;
-		}
-
-		if (n.name() == "y" && n.namespace_().empty())
-		{
-			this->y_.set(y_traits::create(i, f, this));
-			continue;
-		}
-
-		if (n.name() == "name" && n.namespace_().empty())
-		{
-			this->name_.set(name_traits::create(i, f, this));
 			continue;
 		}
 
@@ -1177,30 +1815,6 @@ parse(::xsd::cxx::xml::dom::parser< char >& p,
 		if (n.name() == "food" && n.namespace_().empty())
 		{
 			this->food_.set(food_traits::create(i, f, this));
-			continue;
-		}
-
-		if (n.name() == "population" && n.namespace_().empty())
-		{
-			this->population_.set(population_traits::create(i, f, this));
-			continue;
-		}
-
-		if (n.name() == "maxpopulation" && n.namespace_().empty())
-		{
-			this->maxpopulation_.set(maxpopulation_traits::create(i, f, this));
-			continue;
-		}
-
-		if (n.name() == "healthperc" && n.namespace_().empty())
-		{
-			this->healthperc_.set(healthperc_traits::create(i, f, this));
-			continue;
-		}
-
-		if (n.name() == "icon" && n.namespace_().empty())
-		{
-			this->icon_.set(icon_traits::create(i, f, this));
 			continue;
 		}
 	}
@@ -1242,105 +1856,714 @@ parse(::xsd::cxx::xml::dom::parser< char >& p,
 
 	if (!gold_.present())
 	{
-		this->gold_.set(gold_default_value());
+		throw ::xsd::cxx::tree::expected_attribute< char >(
+			"gold",
+			"");
 	}
 
 	if (!food_.present())
 	{
-		this->food_.set(food_default_value());
-	}
-
-	if (!healthperc_.present())
-	{
-		this->healthperc_.set(healthperc_default_value());
+		throw ::xsd::cxx::tree::expected_attribute< char >(
+			"food",
+			"");
 	}
 }
 
-settlement* settlement::
+c_building* c_building::
 _clone(::xml_schema::flags f,
 	::xml_schema::container* c) const
 {
-	return new class settlement(*this, f, c);
+	return new class c_building(*this, f, c);
 }
 
-settlement& settlement::
-operator= (const settlement& x)
+c_building& c_building::
+operator= (const c_building& x)
 {
 	if (this != &x)
 	{
 		static_cast<::xml_schema::type&> (*this) = x;
-		this->object_ = x.object_;
 		this->class__ = x.class__;
 		this->id_ = x.id_;
+		this->healthperc_ = x.healthperc_;
 		this->player_ = x.player_;
 		this->x_ = x.x_;
 		this->y_ = x.y_;
 		this->name_ = x.name_;
+		this->icon_ = x.icon_;
 		this->gold_ = x.gold_;
 		this->food_ = x.food_;
-		this->population_ = x.population_;
-		this->maxpopulation_ = x.maxpopulation_;
-		this->healthperc_ = x.healthperc_;
-		this->icon_ = x.icon_;
 	}
 
 	return *this;
 }
 
-settlement::
-~settlement()
+c_building::
+~c_building()
 {
 }
 
-// object1
+// c_settlement
 //
 
-object1::
-object1(const class_type& class_,
-	const id_type& id,
+c_settlement::
+c_settlement(const name_type& name,
 	const player_type& player,
+	const x_type& x,
+	const y_type& y)
+	: ::xml_schema::type(),
+	c_building_(this),
+	name_(name, this),
+	player_(player, this),
+	x_(x, this),
+	y_(y, this),
+	gold_(this),
+	food_(this),
+	population_(this),
+	maxpopulation_(this)
+{
+}
+
+c_settlement::
+c_settlement(const c_settlement& x,
+	::xml_schema::flags f,
+	::xml_schema::container* c)
+	: ::xml_schema::type(x, f, c),
+	c_building_(x.c_building_, f, this),
+	name_(x.name_, f, this),
+	player_(x.player_, f, this),
+	x_(x.x_, f, this),
+	y_(x.y_, f, this),
+	gold_(x.gold_, f, this),
+	food_(x.food_, f, this),
+	population_(x.population_, f, this),
+	maxpopulation_(x.maxpopulation_, f, this)
+{
+}
+
+c_settlement::
+c_settlement(const ::xercesc::DOMElement& e,
+	::xml_schema::flags f,
+	::xml_schema::container* c)
+	: ::xml_schema::type(e, f | ::xml_schema::flags::base, c),
+	c_building_(this),
+	name_(this),
+	player_(this),
+	x_(this),
+	y_(this),
+	gold_(this),
+	food_(this),
+	population_(this),
+	maxpopulation_(this)
+{
+	if ((f & ::xml_schema::flags::base) == 0)
+	{
+		::xsd::cxx::xml::dom::parser< char > p(e, true, false, true);
+		this->parse(p, f);
+	}
+}
+
+void c_settlement::
+parse(::xsd::cxx::xml::dom::parser< char >& p,
+	::xml_schema::flags f)
+{
+	for (; p.more_content(); p.next_content(false))
+	{
+		const ::xercesc::DOMElement& i(p.cur_element());
+		const ::xsd::cxx::xml::qualified_name< char > n(
+			::xsd::cxx::xml::dom::name< char >(i));
+
+		// c_building
+		//
+		if (n.name() == "c_building" && n.namespace_().empty())
+		{
+			::std::auto_ptr< c_building_type > r(
+				c_building_traits::create(i, f, this));
+
+			this->c_building_.push_back(r);
+			continue;
+		}
+
+		break;
+	}
+
+	while (p.more_attributes())
+	{
+		const ::xercesc::DOMAttr& i(p.next_attribute());
+		const ::xsd::cxx::xml::qualified_name< char > n(
+			::xsd::cxx::xml::dom::name< char >(i));
+
+		if (n.name() == "name" && n.namespace_().empty())
+		{
+			this->name_.set(name_traits::create(i, f, this));
+			continue;
+		}
+
+		if (n.name() == "player" && n.namespace_().empty())
+		{
+			this->player_.set(player_traits::create(i, f, this));
+			continue;
+		}
+
+		if (n.name() == "x" && n.namespace_().empty())
+		{
+			this->x_.set(x_traits::create(i, f, this));
+			continue;
+		}
+
+		if (n.name() == "y" && n.namespace_().empty())
+		{
+			this->y_.set(y_traits::create(i, f, this));
+			continue;
+		}
+
+		if (n.name() == "gold" && n.namespace_().empty())
+		{
+			this->gold_.set(gold_traits::create(i, f, this));
+			continue;
+		}
+
+		if (n.name() == "food" && n.namespace_().empty())
+		{
+			this->food_.set(food_traits::create(i, f, this));
+			continue;
+		}
+
+		if (n.name() == "population" && n.namespace_().empty())
+		{
+			this->population_.set(population_traits::create(i, f, this));
+			continue;
+		}
+
+		if (n.name() == "maxpopulation" && n.namespace_().empty())
+		{
+			this->maxpopulation_.set(maxpopulation_traits::create(i, f, this));
+			continue;
+		}
+	}
+
+	if (!name_.present())
+	{
+		throw ::xsd::cxx::tree::expected_attribute< char >(
+			"name",
+			"");
+	}
+
+	if (!player_.present())
+	{
+		throw ::xsd::cxx::tree::expected_attribute< char >(
+			"player",
+			"");
+	}
+
+	if (!x_.present())
+	{
+		throw ::xsd::cxx::tree::expected_attribute< char >(
+			"x",
+			"");
+	}
+
+	if (!y_.present())
+	{
+		throw ::xsd::cxx::tree::expected_attribute< char >(
+			"y",
+			"");
+	}
+}
+
+c_settlement* c_settlement::
+_clone(::xml_schema::flags f,
+	::xml_schema::container* c) const
+{
+	return new class c_settlement(*this, f, c);
+}
+
+c_settlement& c_settlement::
+operator= (const c_settlement& x)
+{
+	if (this != &x)
+	{
+		static_cast<::xml_schema::type&> (*this) = x;
+		this->c_building_ = x.c_building_;
+		this->name_ = x.name_;
+		this->player_ = x.player_;
+		this->x_ = x.x_;
+		this->y_ = x.y_;
+		this->gold_ = x.gold_;
+		this->food_ = x.food_;
+		this->population_ = x.population_;
+		this->maxpopulation_ = x.maxpopulation_;
+	}
+
+	return *this;
+}
+
+c_settlement::
+~c_settlement()
+{
+}
+
+// c_decoration
+//
+
+c_decoration::
+c_decoration(const class_type& class_,
+	const id_type& id,
 	const x_type& x,
 	const y_type& y)
 	: ::xml_schema::type(),
 	class__(class_, this),
 	id_(id, this),
-	healthperc_(healthperc_default_value(), this),
-	player_(player, this),
 	x_(x, this),
 	y_(y, this),
+	xOffset_(this),
+	yOffset_(this),
+	settlementName_(this)
+{
+}
+
+c_decoration::
+c_decoration(const c_decoration& x,
+	::xml_schema::flags f,
+	::xml_schema::container* c)
+	: ::xml_schema::type(x, f, c),
+	class__(x.class__, f, this),
+	id_(x.id_, f, this),
+	x_(x.x_, f, this),
+	y_(x.y_, f, this),
+	xOffset_(x.xOffset_, f, this),
+	yOffset_(x.yOffset_, f, this),
+	settlementName_(x.settlementName_, f, this)
+{
+}
+
+c_decoration::
+c_decoration(const ::xercesc::DOMElement& e,
+	::xml_schema::flags f,
+	::xml_schema::container* c)
+	: ::xml_schema::type(e, f | ::xml_schema::flags::base, c),
+	class__(this),
+	id_(this),
+	x_(this),
+	y_(this),
+	xOffset_(this),
+	yOffset_(this),
+	settlementName_(this)
+{
+	if ((f & ::xml_schema::flags::base) == 0)
+	{
+		::xsd::cxx::xml::dom::parser< char > p(e, false, false, true);
+		this->parse(p, f);
+	}
+}
+
+void c_decoration::
+parse(::xsd::cxx::xml::dom::parser< char >& p,
+	::xml_schema::flags f)
+{
+	while (p.more_attributes())
+	{
+		const ::xercesc::DOMAttr& i(p.next_attribute());
+		const ::xsd::cxx::xml::qualified_name< char > n(
+			::xsd::cxx::xml::dom::name< char >(i));
+
+		if (n.name() == "class" && n.namespace_().empty())
+		{
+			this->class__.set(class_traits::create(i, f, this));
+			continue;
+		}
+
+		if (n.name() == "id" && n.namespace_().empty())
+		{
+			this->id_.set(id_traits::create(i, f, this));
+			continue;
+		}
+
+		if (n.name() == "x" && n.namespace_().empty())
+		{
+			this->x_.set(x_traits::create(i, f, this));
+			continue;
+		}
+
+		if (n.name() == "y" && n.namespace_().empty())
+		{
+			this->y_.set(y_traits::create(i, f, this));
+			continue;
+		}
+
+		if (n.name() == "xOffset" && n.namespace_().empty())
+		{
+			this->xOffset_.set(xOffset_traits::create(i, f, this));
+			continue;
+		}
+
+		if (n.name() == "yOffset" && n.namespace_().empty())
+		{
+			this->yOffset_.set(yOffset_traits::create(i, f, this));
+			continue;
+		}
+
+		if (n.name() == "settlementName" && n.namespace_().empty())
+		{
+			this->settlementName_.set(settlementName_traits::create(i, f, this));
+			continue;
+		}
+	}
+
+	if (!class__.present())
+	{
+		throw ::xsd::cxx::tree::expected_attribute< char >(
+			"class",
+			"");
+	}
+
+	if (!id_.present())
+	{
+		throw ::xsd::cxx::tree::expected_attribute< char >(
+			"id",
+			"");
+	}
+
+	if (!x_.present())
+	{
+		throw ::xsd::cxx::tree::expected_attribute< char >(
+			"x",
+			"");
+	}
+
+	if (!y_.present())
+	{
+		throw ::xsd::cxx::tree::expected_attribute< char >(
+			"y",
+			"");
+	}
+}
+
+c_decoration* c_decoration::
+_clone(::xml_schema::flags f,
+	::xml_schema::container* c) const
+{
+	return new class c_decoration(*this, f, c);
+}
+
+c_decoration& c_decoration::
+operator= (const c_decoration& x)
+{
+	if (this != &x)
+	{
+		static_cast<::xml_schema::type&> (*this) = x;
+		this->class__ = x.class__;
+		this->id_ = x.id_;
+		this->x_ = x.x_;
+		this->y_ = x.y_;
+		this->xOffset_ = x.xOffset_;
+		this->yOffset_ = x.yOffset_;
+		this->settlementName_ = x.settlementName_;
+	}
+
+	return *this;
+}
+
+c_decoration::
+~c_decoration()
+{
+}
+
+// c_unit
+//
+
+c_unit::
+c_unit(const class_type& class_,
+	const id_type& id,
+	const x_type& x,
+	const y_type& y,
+	const level_type& level)
+	: ::xml_schema::type(),
+	class__(class_, this),
 	name_(this),
+	id_(id, this),
+	x_(x, this),
+	y_(y, this),
+	direction_(this),
+	level_(level, this),
+	invisible_(this),
+	messenger_status_(this),
+	feeds_(this),
+	party_(this),
+	ai_ctrl_(this),
+	healthperc_(this),
+	stamina_(this),
+	inventary_(this)
+{
+}
+
+c_unit::
+c_unit(const c_unit& x,
+	::xml_schema::flags f,
+	::xml_schema::container* c)
+	: ::xml_schema::type(x, f, c),
+	class__(x.class__, f, this),
+	name_(x.name_, f, this),
+	id_(x.id_, f, this),
+	x_(x.x_, f, this),
+	y_(x.y_, f, this),
+	direction_(x.direction_, f, this),
+	level_(x.level_, f, this),
+	invisible_(x.invisible_, f, this),
+	messenger_status_(x.messenger_status_, f, this),
+	feeds_(x.feeds_, f, this),
+	party_(x.party_, f, this),
+	ai_ctrl_(x.ai_ctrl_, f, this),
+	healthperc_(x.healthperc_, f, this),
+	stamina_(x.stamina_, f, this),
+	inventary_(x.inventary_, f, this)
+{
+}
+
+c_unit::
+c_unit(const ::xercesc::DOMElement& e,
+	::xml_schema::flags f,
+	::xml_schema::container* c)
+	: ::xml_schema::type(e, f | ::xml_schema::flags::base, c),
+	class__(this),
+	name_(this),
+	id_(this),
+	x_(this),
+	y_(this),
+	direction_(this),
+	level_(this),
+	invisible_(this),
+	messenger_status_(this),
+	feeds_(this),
+	party_(this),
+	ai_ctrl_(this),
+	healthperc_(this),
+	stamina_(this),
+	inventary_(this)
+{
+	if ((f & ::xml_schema::flags::base) == 0)
+	{
+		::xsd::cxx::xml::dom::parser< char > p(e, false, false, true);
+		this->parse(p, f);
+	}
+}
+
+void c_unit::
+parse(::xsd::cxx::xml::dom::parser< char >& p,
+	::xml_schema::flags f)
+{
+	while (p.more_attributes())
+	{
+		const ::xercesc::DOMAttr& i(p.next_attribute());
+		const ::xsd::cxx::xml::qualified_name< char > n(
+			::xsd::cxx::xml::dom::name< char >(i));
+
+		if (n.name() == "class" && n.namespace_().empty())
+		{
+			this->class__.set(class_traits::create(i, f, this));
+			continue;
+		}
+
+		if (n.name() == "name" && n.namespace_().empty())
+		{
+			this->name_.set(name_traits::create(i, f, this));
+			continue;
+		}
+
+		if (n.name() == "id" && n.namespace_().empty())
+		{
+			this->id_.set(id_traits::create(i, f, this));
+			continue;
+		}
+
+		if (n.name() == "x" && n.namespace_().empty())
+		{
+			this->x_.set(x_traits::create(i, f, this));
+			continue;
+		}
+
+		if (n.name() == "y" && n.namespace_().empty())
+		{
+			this->y_.set(y_traits::create(i, f, this));
+			continue;
+		}
+
+		if (n.name() == "direction" && n.namespace_().empty())
+		{
+			this->direction_.set(direction_traits::create(i, f, this));
+			continue;
+		}
+
+		if (n.name() == "level" && n.namespace_().empty())
+		{
+			this->level_.set(level_traits::create(i, f, this));
+			continue;
+		}
+
+		if (n.name() == "invisible" && n.namespace_().empty())
+		{
+			this->invisible_.set(invisible_traits::create(i, f, this));
+			continue;
+		}
+
+		if (n.name() == "messenger_status" && n.namespace_().empty())
+		{
+			this->messenger_status_.set(messenger_status_traits::create(i, f, this));
+			continue;
+		}
+
+		if (n.name() == "feeds" && n.namespace_().empty())
+		{
+			this->feeds_.set(feeds_traits::create(i, f, this));
+			continue;
+		}
+
+		if (n.name() == "party" && n.namespace_().empty())
+		{
+			this->party_.set(party_traits::create(i, f, this));
+			continue;
+		}
+
+		if (n.name() == "ai_ctrl" && n.namespace_().empty())
+		{
+			this->ai_ctrl_.set(ai_ctrl_traits::create(i, f, this));
+			continue;
+		}
+
+		if (n.name() == "healthperc" && n.namespace_().empty())
+		{
+			this->healthperc_.set(healthperc_traits::create(i, f, this));
+			continue;
+		}
+
+		if (n.name() == "stamina" && n.namespace_().empty())
+		{
+			this->stamina_.set(stamina_traits::create(i, f, this));
+			continue;
+		}
+
+		if (n.name() == "inventary" && n.namespace_().empty())
+		{
+			this->inventary_.set(inventary_traits::create(i, f, this));
+			continue;
+		}
+	}
+
+	if (!class__.present())
+	{
+		throw ::xsd::cxx::tree::expected_attribute< char >(
+			"class",
+			"");
+	}
+
+	if (!id_.present())
+	{
+		throw ::xsd::cxx::tree::expected_attribute< char >(
+			"id",
+			"");
+	}
+
+	if (!x_.present())
+	{
+		throw ::xsd::cxx::tree::expected_attribute< char >(
+			"x",
+			"");
+	}
+
+	if (!y_.present())
+	{
+		throw ::xsd::cxx::tree::expected_attribute< char >(
+			"y",
+			"");
+	}
+
+	if (!level_.present())
+	{
+		throw ::xsd::cxx::tree::expected_attribute< char >(
+			"level",
+			"");
+	}
+}
+
+c_unit* c_unit::
+_clone(::xml_schema::flags f,
+	::xml_schema::container* c) const
+{
+	return new class c_unit(*this, f, c);
+}
+
+c_unit& c_unit::
+operator= (const c_unit& x)
+{
+	if (this != &x)
+	{
+		static_cast<::xml_schema::type&> (*this) = x;
+		this->class__ = x.class__;
+		this->name_ = x.name_;
+		this->id_ = x.id_;
+		this->x_ = x.x_;
+		this->y_ = x.y_;
+		this->direction_ = x.direction_;
+		this->level_ = x.level_;
+		this->invisible_ = x.invisible_;
+		this->messenger_status_ = x.messenger_status_;
+		this->feeds_ = x.feeds_;
+		this->party_ = x.party_;
+		this->ai_ctrl_ = x.ai_ctrl_;
+		this->healthperc_ = x.healthperc_;
+		this->stamina_ = x.stamina_;
+		this->inventary_ = x.inventary_;
+	}
+
+	return *this;
+}
+
+c_unit::
+~c_unit()
+{
+}
+
+// c_building1
+//
+
+c_building1::
+c_building1(const class_type& class_,
+	const id_type& id,
+	const xOffset_type& xOffset,
+	const yOffset_type& yOffset)
+	: ::xml_schema::type(),
+	class__(class_, this),
+	id_(id, this),
+	healthperc_(this),
+	xOffset_(xOffset, this),
+	yOffset_(yOffset, this),
 	icon_(this)
 {
 }
 
-object1::
-object1(const object1& x,
+c_building1::
+c_building1(const c_building1& x,
 	::xml_schema::flags f,
 	::xml_schema::container* c)
 	: ::xml_schema::type(x, f, c),
 	class__(x.class__, f, this),
 	id_(x.id_, f, this),
 	healthperc_(x.healthperc_, f, this),
-	player_(x.player_, f, this),
-	x_(x.x_, f, this),
-	y_(x.y_, f, this),
-	name_(x.name_, f, this),
+	xOffset_(x.xOffset_, f, this),
+	yOffset_(x.yOffset_, f, this),
 	icon_(x.icon_, f, this)
 {
 }
 
-object1::
-object1(const ::xercesc::DOMElement& e,
+c_building1::
+c_building1(const ::xercesc::DOMElement& e,
 	::xml_schema::flags f,
 	::xml_schema::container* c)
 	: ::xml_schema::type(e, f | ::xml_schema::flags::base, c),
 	class__(this),
 	id_(this),
 	healthperc_(this),
-	player_(this),
-	x_(this),
-	y_(this),
-	name_(this),
+	xOffset_(this),
+	yOffset_(this),
 	icon_(this)
 {
 	if ((f & ::xml_schema::flags::base) == 0)
@@ -1350,7 +2573,7 @@ object1(const ::xercesc::DOMElement& e,
 	}
 }
 
-void object1::
+void c_building1::
 parse(::xsd::cxx::xml::dom::parser< char >& p,
 	::xml_schema::flags f)
 {
@@ -1378,27 +2601,15 @@ parse(::xsd::cxx::xml::dom::parser< char >& p,
 			continue;
 		}
 
-		if (n.name() == "player" && n.namespace_().empty())
+		if (n.name() == "xOffset" && n.namespace_().empty())
 		{
-			this->player_.set(player_traits::create(i, f, this));
+			this->xOffset_.set(xOffset_traits::create(i, f, this));
 			continue;
 		}
 
-		if (n.name() == "x" && n.namespace_().empty())
+		if (n.name() == "yOffset" && n.namespace_().empty())
 		{
-			this->x_.set(x_traits::create(i, f, this));
-			continue;
-		}
-
-		if (n.name() == "y" && n.namespace_().empty())
-		{
-			this->y_.set(y_traits::create(i, f, this));
-			continue;
-		}
-
-		if (n.name() == "name" && n.namespace_().empty())
-		{
-			this->name_.set(name_traits::create(i, f, this));
+			this->yOffset_.set(yOffset_traits::create(i, f, this));
 			continue;
 		}
 
@@ -1423,42 +2634,30 @@ parse(::xsd::cxx::xml::dom::parser< char >& p,
 			"");
 	}
 
-	if (!healthperc_.present())
-	{
-		this->healthperc_.set(healthperc_default_value());
-	}
-
-	if (!player_.present())
+	if (!xOffset_.present())
 	{
 		throw ::xsd::cxx::tree::expected_attribute< char >(
-			"player",
+			"xOffset",
 			"");
 	}
 
-	if (!x_.present())
+	if (!yOffset_.present())
 	{
 		throw ::xsd::cxx::tree::expected_attribute< char >(
-			"x",
-			"");
-	}
-
-	if (!y_.present())
-	{
-		throw ::xsd::cxx::tree::expected_attribute< char >(
-			"y",
+			"yOffset",
 			"");
 	}
 }
 
-object1* object1::
+c_building1* c_building1::
 _clone(::xml_schema::flags f,
 	::xml_schema::container* c) const
 {
-	return new class object1(*this, f, c);
+	return new class c_building1(*this, f, c);
 }
 
-object1& object1::
-operator= (const object1& x)
+c_building1& c_building1::
+operator= (const c_building1& x)
 {
 	if (this != &x)
 	{
@@ -1466,18 +2665,16 @@ operator= (const object1& x)
 		this->class__ = x.class__;
 		this->id_ = x.id_;
 		this->healthperc_ = x.healthperc_;
-		this->player_ = x.player_;
-		this->x_ = x.x_;
-		this->y_ = x.y_;
-		this->name_ = x.name_;
+		this->xOffset_ = x.xOffset_;
+		this->yOffset_ = x.yOffset_;
 		this->icon_ = x.icon_;
 	}
 
 	return *this;
 }
 
-object1::
-~object1()
+c_building1::
+~c_building1()
 {
 }
 
@@ -1908,29 +3105,68 @@ operator<< (::xercesc::DOMElement& e, const c_mapObjects& i)
 {
 	e << static_cast<const ::xml_schema::type&> (i);
 
-	// object
+	// c_buildings
 	//
-	for (c_mapObjects::object_const_iterator
-		b(i.object().begin()), n(i.object().end());
+	{
+		::xercesc::DOMElement& s(
+			::xsd::cxx::xml::dom::create_element(
+				"c_buildings",
+				e));
+
+		s << i.c_buildings();
+	}
+
+	// c_decorations
+	//
+	{
+		::xercesc::DOMElement& s(
+			::xsd::cxx::xml::dom::create_element(
+				"c_decorations",
+				e));
+
+		s << i.c_decorations();
+	}
+
+	// c_units
+	//
+	{
+		::xercesc::DOMElement& s(
+			::xsd::cxx::xml::dom::create_element(
+				"c_units",
+				e));
+
+		s << i.c_units();
+	}
+}
+
+void
+operator<< (::xercesc::DOMElement& e, const c_buildings& i)
+{
+	e << static_cast<const ::xml_schema::type&> (i);
+
+	// c_building
+	//
+	for (c_buildings::c_building_const_iterator
+		b(i.c_building().begin()), n(i.c_building().end());
 		b != n; ++b)
 	{
 		::xercesc::DOMElement& s(
 			::xsd::cxx::xml::dom::create_element(
-				"object",
+				"c_building",
 				e));
 
 		s << *b;
 	}
 
-	// settlement
+	// c_settlement
 	//
-	for (c_mapObjects::settlement_const_iterator
-		b(i.settlement().begin()), n(i.settlement().end());
+	for (c_buildings::c_settlement_const_iterator
+		b(i.c_settlement().begin()), n(i.c_settlement().end());
 		b != n; ++b)
 	{
 		::xercesc::DOMElement& s(
 			::xsd::cxx::xml::dom::create_element(
-				"settlement",
+				"c_settlement",
 				e));
 
 		s << *b;
@@ -1938,7 +3174,47 @@ operator<< (::xercesc::DOMElement& e, const c_mapObjects& i)
 }
 
 void
-operator<< (::xercesc::DOMElement& e, const object& i)
+operator<< (::xercesc::DOMElement& e, const c_decorations& i)
+{
+	e << static_cast<const ::xml_schema::type&> (i);
+
+	// c_decoration
+	//
+	for (c_decorations::c_decoration_const_iterator
+		b(i.c_decoration().begin()), n(i.c_decoration().end());
+		b != n; ++b)
+	{
+		::xercesc::DOMElement& s(
+			::xsd::cxx::xml::dom::create_element(
+				"c_decoration",
+				e));
+
+		s << *b;
+	}
+}
+
+void
+operator<< (::xercesc::DOMElement& e, const c_units& i)
+{
+	e << static_cast<const ::xml_schema::type&> (i);
+
+	// c_unit
+	//
+	for (c_units::c_unit_const_iterator
+		b(i.c_unit().begin()), n(i.c_unit().end());
+		b != n; ++b)
+	{
+		::xercesc::DOMElement& s(
+			::xsd::cxx::xml::dom::create_element(
+				"c_unit",
+				e));
+
+		s << *b;
+	}
+}
+
+void
+operator<< (::xercesc::DOMElement& e, const c_building& i)
 {
 	e << static_cast<const ::xml_schema::type&> (i);
 
@@ -2032,47 +3308,58 @@ operator<< (::xercesc::DOMElement& e, const object& i)
 
 		a << *i.icon();
 	}
+
+	// gold
+	//
+	{
+		::xercesc::DOMAttr& a(
+			::xsd::cxx::xml::dom::create_attribute(
+				"gold",
+				e));
+
+		a << i.gold();
+	}
+
+	// food
+	//
+	{
+		::xercesc::DOMAttr& a(
+			::xsd::cxx::xml::dom::create_attribute(
+				"food",
+				e));
+
+		a << i.food();
+	}
 }
 
 void
-operator<< (::xercesc::DOMElement& e, const settlement& i)
+operator<< (::xercesc::DOMElement& e, const c_settlement& i)
 {
 	e << static_cast<const ::xml_schema::type&> (i);
 
-	// object
+	// c_building
 	//
-	for (settlement::object_const_iterator
-		b(i.object().begin()), n(i.object().end());
+	for (c_settlement::c_building_const_iterator
+		b(i.c_building().begin()), n(i.c_building().end());
 		b != n; ++b)
 	{
 		::xercesc::DOMElement& s(
 			::xsd::cxx::xml::dom::create_element(
-				"object",
+				"c_building",
 				e));
 
 		s << *b;
 	}
 
-	// class
+	// name
 	//
 	{
 		::xercesc::DOMAttr& a(
 			::xsd::cxx::xml::dom::create_attribute(
-				"class",
+				"name",
 				e));
 
-		a << i.class_();
-	}
-
-	// id
-	//
-	{
-		::xercesc::DOMAttr& a(
-			::xsd::cxx::xml::dom::create_attribute(
-				"id",
-				e));
-
-		a << i.id();
+		a << i.name();
 	}
 
 	// player
@@ -2108,38 +3395,28 @@ operator<< (::xercesc::DOMElement& e, const settlement& i)
 		a << i.y();
 	}
 
-	// name
-	//
-	if (i.name())
-	{
-		::xercesc::DOMAttr& a(
-			::xsd::cxx::xml::dom::create_attribute(
-				"name",
-				e));
-
-		a << *i.name();
-	}
-
 	// gold
 	//
+	if (i.gold())
 	{
 		::xercesc::DOMAttr& a(
 			::xsd::cxx::xml::dom::create_attribute(
 				"gold",
 				e));
 
-		a << i.gold();
+		a << *i.gold();
 	}
 
 	// food
 	//
+	if (i.food())
 	{
 		::xercesc::DOMAttr& a(
 			::xsd::cxx::xml::dom::create_attribute(
 				"food",
 				e));
 
-		a << i.food();
+		a << *i.food();
 	}
 
 	// population
@@ -2165,33 +3442,277 @@ operator<< (::xercesc::DOMElement& e, const settlement& i)
 
 		a << *i.maxpopulation();
 	}
+}
+
+void
+operator<< (::xercesc::DOMElement& e, const c_decoration& i)
+{
+	e << static_cast<const ::xml_schema::type&> (i);
+
+	// class
+	//
+	{
+		::xercesc::DOMAttr& a(
+			::xsd::cxx::xml::dom::create_attribute(
+				"class",
+				e));
+
+		a << i.class_();
+	}
+
+	// id
+	//
+	{
+		::xercesc::DOMAttr& a(
+			::xsd::cxx::xml::dom::create_attribute(
+				"id",
+				e));
+
+		a << i.id();
+	}
+
+	// x
+	//
+	{
+		::xercesc::DOMAttr& a(
+			::xsd::cxx::xml::dom::create_attribute(
+				"x",
+				e));
+
+		a << i.x();
+	}
+
+	// y
+	//
+	{
+		::xercesc::DOMAttr& a(
+			::xsd::cxx::xml::dom::create_attribute(
+				"y",
+				e));
+
+		a << i.y();
+	}
+
+	// xOffset
+	//
+	if (i.xOffset())
+	{
+		::xercesc::DOMAttr& a(
+			::xsd::cxx::xml::dom::create_attribute(
+				"xOffset",
+				e));
+
+		a << *i.xOffset();
+	}
+
+	// yOffset
+	//
+	if (i.yOffset())
+	{
+		::xercesc::DOMAttr& a(
+			::xsd::cxx::xml::dom::create_attribute(
+				"yOffset",
+				e));
+
+		a << *i.yOffset();
+	}
+
+	// settlementName
+	//
+	if (i.settlementName())
+	{
+		::xercesc::DOMAttr& a(
+			::xsd::cxx::xml::dom::create_attribute(
+				"settlementName",
+				e));
+
+		a << *i.settlementName();
+	}
+}
+
+void
+operator<< (::xercesc::DOMElement& e, const c_unit& i)
+{
+	e << static_cast<const ::xml_schema::type&> (i);
+
+	// class
+	//
+	{
+		::xercesc::DOMAttr& a(
+			::xsd::cxx::xml::dom::create_attribute(
+				"class",
+				e));
+
+		a << i.class_();
+	}
+
+	// name
+	//
+	if (i.name())
+	{
+		::xercesc::DOMAttr& a(
+			::xsd::cxx::xml::dom::create_attribute(
+				"name",
+				e));
+
+		a << *i.name();
+	}
+
+	// id
+	//
+	{
+		::xercesc::DOMAttr& a(
+			::xsd::cxx::xml::dom::create_attribute(
+				"id",
+				e));
+
+		a << i.id();
+	}
+
+	// x
+	//
+	{
+		::xercesc::DOMAttr& a(
+			::xsd::cxx::xml::dom::create_attribute(
+				"x",
+				e));
+
+		a << i.x();
+	}
+
+	// y
+	//
+	{
+		::xercesc::DOMAttr& a(
+			::xsd::cxx::xml::dom::create_attribute(
+				"y",
+				e));
+
+		a << i.y();
+	}
+
+	// direction
+	//
+	if (i.direction())
+	{
+		::xercesc::DOMAttr& a(
+			::xsd::cxx::xml::dom::create_attribute(
+				"direction",
+				e));
+
+		a << *i.direction();
+	}
+
+	// level
+	//
+	{
+		::xercesc::DOMAttr& a(
+			::xsd::cxx::xml::dom::create_attribute(
+				"level",
+				e));
+
+		a << i.level();
+	}
+
+	// invisible
+	//
+	if (i.invisible())
+	{
+		::xercesc::DOMAttr& a(
+			::xsd::cxx::xml::dom::create_attribute(
+				"invisible",
+				e));
+
+		a << *i.invisible();
+	}
+
+	// messenger_status
+	//
+	if (i.messenger_status())
+	{
+		::xercesc::DOMAttr& a(
+			::xsd::cxx::xml::dom::create_attribute(
+				"messenger_status",
+				e));
+
+		a << *i.messenger_status();
+	}
+
+	// feeds
+	//
+	if (i.feeds())
+	{
+		::xercesc::DOMAttr& a(
+			::xsd::cxx::xml::dom::create_attribute(
+				"feeds",
+				e));
+
+		a << *i.feeds();
+	}
+
+	// party
+	//
+	if (i.party())
+	{
+		::xercesc::DOMAttr& a(
+			::xsd::cxx::xml::dom::create_attribute(
+				"party",
+				e));
+
+		a << *i.party();
+	}
+
+	// ai_ctrl
+	//
+	if (i.ai_ctrl())
+	{
+		::xercesc::DOMAttr& a(
+			::xsd::cxx::xml::dom::create_attribute(
+				"ai_ctrl",
+				e));
+
+		a << *i.ai_ctrl();
+	}
 
 	// healthperc
 	//
+	if (i.healthperc())
 	{
 		::xercesc::DOMAttr& a(
 			::xsd::cxx::xml::dom::create_attribute(
 				"healthperc",
 				e));
 
-		a << i.healthperc();
+		a << *i.healthperc();
 	}
 
-	// icon
+	// stamina
 	//
-	if (i.icon())
+	if (i.stamina())
 	{
 		::xercesc::DOMAttr& a(
 			::xsd::cxx::xml::dom::create_attribute(
-				"icon",
+				"stamina",
 				e));
 
-		a << *i.icon();
+		a << *i.stamina();
+	}
+
+	// inventary
+	//
+	if (i.inventary())
+	{
+		::xercesc::DOMAttr& a(
+			::xsd::cxx::xml::dom::create_attribute(
+				"inventary",
+				e));
+
+		a << *i.inventary();
 	}
 }
 
 void
-operator<< (::xercesc::DOMElement& e, const object1& i)
+operator<< (::xercesc::DOMElement& e, const c_building1& i)
 {
 	e << static_cast<const ::xml_schema::type&> (i);
 
@@ -2219,58 +3740,36 @@ operator<< (::xercesc::DOMElement& e, const object1& i)
 
 	// healthperc
 	//
+	if (i.healthperc())
 	{
 		::xercesc::DOMAttr& a(
 			::xsd::cxx::xml::dom::create_attribute(
 				"healthperc",
 				e));
 
-		a << i.healthperc();
+		a << *i.healthperc();
 	}
 
-	// player
+	// xOffset
 	//
 	{
 		::xercesc::DOMAttr& a(
 			::xsd::cxx::xml::dom::create_attribute(
-				"player",
+				"xOffset",
 				e));
 
-		a << i.player();
+		a << i.xOffset();
 	}
 
-	// x
+	// yOffset
 	//
 	{
 		::xercesc::DOMAttr& a(
 			::xsd::cxx::xml::dom::create_attribute(
-				"x",
+				"yOffset",
 				e));
 
-		a << i.x();
-	}
-
-	// y
-	//
-	{
-		::xercesc::DOMAttr& a(
-			::xsd::cxx::xml::dom::create_attribute(
-				"y",
-				e));
-
-		a << i.y();
-	}
-
-	// name
-	//
-	if (i.name())
-	{
-		::xercesc::DOMAttr& a(
-			::xsd::cxx::xml::dom::create_attribute(
-				"name",
-				e));
-
-		a << *i.name();
+		a << i.yOffset();
 	}
 
 	// icon

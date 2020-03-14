@@ -28,7 +28,7 @@ void Strategy::reset() {
 
 	isCreated = false;
 	game::GameMenu::Disable();
-	Surface::DisableGrid();
+	Map::DisableGrid();
 	Minimap::Unblock();
 	Minimap::Disable();
 	Minimap::Update();
@@ -49,10 +49,10 @@ void Strategy::Create() {
 
 	SelectionRectangle::Create();
 
-	Surface::Reset();
+	Map::Reset();
 
 	/* GENERATE HEIGHT NOISE */
-	Surface::CreateNoise();
+	Map::CreateNoise();
 
 
 	/* DEFINE BUILDINGS POSITIONS */
@@ -69,7 +69,7 @@ void Strategy::Create() {
 
 
 	/* UPDATE PASS MATRIX */
-	Surface::UpdateGrid();
+	Map::UpdateGrid();
 
 	/*------------------------------------------------------------*/
 	// *********** ROBA PROVVISORIA ***********
@@ -129,7 +129,7 @@ void Strategy::Run() {
 		if (!game::GameMenu::IsActive()) RenderObjectsPicking();
 
 		/* Rendering */
-		Surface::Render(false);
+		Map::Render(false);
 		RenderObjects();
 
 		// apply menu matrices:
@@ -155,7 +155,7 @@ void Strategy::Run() {
 
 		/* Rendering */
 		if (!Minimap::IsCreated()) {
-			Surface::Render(false);
+			Map::Render(false);
 			Minimap::Create();
 		}
 		RenderObjects();
@@ -191,14 +191,14 @@ void Strategy::handleKeyboardControls() {
 	}
 	// Wireframe
 	if (Engine::Keyboard::IsKeyPressed(GLFW_KEY_Z)) {
-		Surface::Wireframe = !Surface::Wireframe;
-		Surface::Wireframe ? Logger::Info("Wireframe ON!") : Logger::Info("Wireframe OFF!");
+		Map::Wireframe = !Map::Wireframe;
+		Map::Wireframe ? Logger::Info("Wireframe ON!") : Logger::Info("Wireframe OFF!");
 	}
 	// Grid
 	if (Engine::Keyboard::IsKeyPressed(GLFW_KEY_G)) {
-		if (Surface::IsGridEnabled()) Surface::DisableGrid();
-		else Surface::EnableGrid();
-		Surface::IsGridEnabled() ? Logger::Info("Grid ON!") : Logger::Info("Grid OFF!");
+		if (Map::IsGridEnabled()) Map::DisableGrid();
+		else Map::EnableGrid();
+		Map::IsGridEnabled() ? Logger::Info("Grid ON!") : Logger::Info("Grid OFF!");
 	}
 }
 

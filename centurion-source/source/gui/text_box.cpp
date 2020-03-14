@@ -60,7 +60,7 @@ namespace gui {
 					if (line_width + tempWidth <= width) {
 						TEXT = TEXT + word;
 						line_width += tempWidth;
-						cout << TEXT << " [IF]" << endl;
+						//cout << TEXT << " [IF]" << endl;
 					}
 					else {
 						lines_data.push_back(Text()->create_static(fontName, TEXT, x, y, isBold, line_number));
@@ -68,14 +68,14 @@ namespace gui {
 						TEXT.clear();
 						TEXT = TEXT + word;
 						line_number++;
-						cout << "   " << TEXT << " [ELSE]" << endl;
+						//cout << "   " << TEXT << " [ELSE]" << endl;
 					}
 					k = j + 1;
 				}
 				if (j == line.size() - 1) {
 					lines_data.push_back(Text()->create_static(fontName, TEXT, x, y, isBold, line_number));
 					line_number++;
-					cout << "      " << TEXT << " [LAST]" << endl;
+					//cout << "      " << TEXT << " [LAST]" << endl;
 				}
 			}	
 		}

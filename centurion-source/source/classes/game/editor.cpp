@@ -27,7 +27,7 @@ void Editor::Create() {
 
 	setMinimapProjectionMatrix();
 
-	Surface::Reset();
+	Map::Reset();
 	editor::EDITOR_UI()->create();
 
 	SelectionRectangle::Create();
@@ -63,7 +63,7 @@ void Editor::Run() {
 		if (!editor::IsWindowOpened && !editor::addingObject && !editor::TerrainBrushIsActive) RenderObjectsPicking();
 
 		// rendering
-		Surface::Render(false);
+		Map::Render(false);
 		RenderObjects();
 		if (!editor::IsWindowOpened && !editor::addingObject && !editor::TerrainBrushIsActive) editor::moveObjects();
 
@@ -85,7 +85,7 @@ void Editor::Run() {
 
 		if (!Minimap::IsCreated()) {
 			applyGameMatrices(&projectionMatrix, &viewMatrix);
-			Surface::Render(false);
+			Map::Render(false);
 			RenderObjects();
 			Minimap::Create();
 			applyMenuMatrices();
@@ -159,14 +159,14 @@ void Editor::handleKeyboardControls() {
 			Minimap::IsActive() ? Logger::Info("Minimap ON!") : Logger::Info("Minimap OFF!");
 		}
 		if (Engine::Keyboard::IsKeyPressed(GLFW_KEY_Z)) {
-			Surface::Wireframe = !Surface::Wireframe;
-			Surface::Wireframe ? Logger::Info("Wireframe ON!") : Logger::Info("Wireframe OFF!");
+			Map::Wireframe = !Map::Wireframe;
+			Map::Wireframe ? Logger::Info("Wireframe ON!") : Logger::Info("Wireframe OFF!");
 		}
 		// Grid
 		if (Engine::Keyboard::IsKeyPressed(GLFW_KEY_G)) {
-			if (Surface::IsGridEnabled()) Surface::DisableGrid();
-			else Surface::EnableGrid();
-			Surface::IsGridEnabled() ? Logger::Info("Grid ON!") : Logger::Info("Grid OFF!");
+			if (Map::IsGridEnabled()) Map::DisableGrid();
+			else Map::EnableGrid();
+			Map::IsGridEnabled() ? Logger::Info("Grid ON!") : Logger::Info("Grid OFF!");
 		}
 	}
 	if (Engine::Keyboard::IsKeyPressed(GLFW_KEY_ESCAPE)) {

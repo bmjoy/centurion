@@ -14,6 +14,8 @@
 #include <filled_rectangle.h>
 #include <minimap_rectangle.h>
 
+#include "mapObjects-xml.hxx"
+
 #pragma region Namespaces
 
 using namespace glb;
@@ -21,14 +23,130 @@ using namespace glb;
 #pragma endregion
 
 
-#pragma region Surface class
+#pragma region Map class
 
-bool Game::Surface::Wireframe = false;
-bool Game::Surface::isGridEnabled;
+bool Game::Map::Wireframe = false;
+bool Game::Map::isGridEnabled;
 
-Game::Surface::Surface() {}
+Game::Map::Map() {}
 
-void Game::Surface::Reset() {
+void Game::Map::LoadScenario(string scenarioName)
+{
+}
+
+void Game::Map::SaveScenario(string scenarioName)
+{
+	try
+	{
+		string scenarioPath = "scenarios/" + scenarioName;
+
+		if (FileManager::CheckIfFolderExists(scenarioPath) == false) {
+			FileManager::CreateFolder(scenarioPath);
+		}
+		
+		SaveHeights(scenarioPath + "/heights");
+		SaveTexture(scenarioPath + "/texture");
+		SaveMapObjectsToXml(scenarioPath + "/mapObjects.xml");
+
+		Logger::LogMessage msg = Logger::LogMessage("The scenario is saved with the following name: \"" + scenarioName + "\"", "", "Game::Map", "SaveScenario");
+		Logger::Info(msg);
+	}
+	catch (...)
+	{
+		Logger::LogMessage msg = Logger::LogMessage("An error occurred creating the following scenario: \"" + scenarioName + "\"", "", "Game::Map", "SaveScenario");
+		Logger::Error(msg);
+		throw;
+	}
+}
+
+void Game::Map::ReadMapObjectsFromXml(string xmlPath)
+{
+}
+
+void Game::Map::SaveMapObjectsToXml(string xmlPath)
+{
+	try
+	{
+		c_buildings _buildings = c_buildings();
+
+		for (int i = 0; i < MAX_NUMBER_OF_OBJECTS; i++) {
+
+			if (IsGameObjectNotNull(i) == false) continue;
+
+			if (GameObjects[i]->IsBuilding()) {
+
+				Building* gobj = GameObjects[i]->AsBuilding();
+
+				c_building b = c_building((c_building::class_type) gobj->GetClassName(),
+					(c_building::id_type)gobj->GetPickingID(),
+					(c_building::player_type)1,
+					(c_building::x_type)gobj->GetPosition().x,
+					(c_building::y_type)gobj->GetPosition().y,
+					(c_building::gold_type)100,
+					(c_building::food_type)100
+				);
+
+				b.healthperc(100);
+				b.name(gobj->GetName());
+				//b.icon = "";
+
+				_buildings.c_building().push_back(b);
+			}
+		}
+
+		c_decorations _decorations = c_decorations();
+
+		c_units _units = c_units();
+
+		c_mapObjects mapObjs = c_mapObjects(_buildings, _decorations, _units);
+
+		xml_schema::namespace_infomap map;
+		map[""].schema = "../../assets/xml-schemas/mapObjects.xsd";
+		ofstream ofs(xmlPath.c_str());
+		c_mapObjects_(ofs, mapObjs, map);
+	}
+	catch (const xml_schema::exception & e) {
+		std::cout << e << std::endl;
+		throw;
+	}
+	catch (...)
+	{
+		throw;
+	}
+}
+
+void Game::Map::SaveHeights(string path)
+{
+	ofstream heightsFile(path);
+	if (heightsFile.is_open()) {
+		for (int i = 0; i < mapgen::nVertices * 4; i += 4)
+			if (i == 0) {
+				heightsFile << mapgen::MapHeights()[i] << "," << mapgen::MapHeights()[i + 1] << "," << mapgen::MapHeights()[i + 2] << "," << mapgen::MapHeights()[i + 3];
+			}
+			else {
+				heightsFile << "," << mapgen::MapHeights()[i] << "," << mapgen::MapHeights()[i + 1] << "," << mapgen::MapHeights()[i + 2] << "," << mapgen::MapHeights()[i + 3];
+			}
+	}
+	heightsFile.close();
+}
+
+void Game::Map::SaveTexture(string path)
+{
+	ofstream textureFile(path);
+	if (textureFile.is_open()) {
+		for (int i = 0; i < mapgen::nVertices; i++)
+			if (i == 0) {
+				textureFile << mapgen::MapTextures()[i];
+			}
+			else {
+				textureFile << "," << mapgen::MapTextures()[i];
+			}
+	}
+	textureFile.close();
+}
+
+
+void Game::Map::Reset() {
 	isGridEnabled = false;
 	mapgen::reset_map();
 	MapGrid()->reset();
@@ -36,7 +154,7 @@ void Game::Surface::Reset() {
 	MapTerrain()->updateTextureBuffer();
 }
 
-void Game::Surface::CreateNoise() {
+void Game::Map::CreateNoise() {
 	mapgen::generateRandomMap();
 	MapTerrain()->updateHeightsBuffer();
 
@@ -47,11 +165,11 @@ void Game::Surface::CreateNoise() {
 	Logger::Info(ss.str());
 }
 
-void Game::Surface::UpdateGrid() {
+void Game::Map::UpdateGrid() {
 	MapGrid()->update();
 }
 
-void Game::Surface::Render(bool tracing) {
+void Game::Map::Render(bool tracing) {
 
 	MapTerrain()->render(tracing);
 
@@ -60,7 +178,7 @@ void Game::Surface::Render(bool tracing) {
 	}
 }
 
-Game::Surface::~Surface() {}
+Game::Map::~Map() {}
 
 #pragma endregion
 

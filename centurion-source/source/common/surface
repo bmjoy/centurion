@@ -33,23 +33,7 @@ namespace mapgen {
 
 	extern map<string, vector<string>> zonesMap;
 	extern map<string, terrainTexture> terrainsMap;
-}
-
-//
-//	SURFACE CLASS --> source/surface/surface.cpp
-//
-
-//class Surface
-//{
-//public:
-//	static bool Wireframe;
-//	Surface();
-//	void reset();
-//	void createNoise();
-//	void updateGrid();
-//	void render(bool tracing);
-//	~Surface();
-//};
+};
 
 //
 //	MAP GENERATION FUNCTIONS --> source/surface/mapgen.cpp
@@ -85,4 +69,4 @@ namespace mapgen {
 	float generateNoise(vec2 coords, string type);
 	void define_buildings_location(int num_players, int num_outposts, vector<vec2> *outpostslocation, vector<vec2> *townhallslocation);
 	void defineTerrainZones();
-}
+};

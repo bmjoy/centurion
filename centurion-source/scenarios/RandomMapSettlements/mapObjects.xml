@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no" ?>
+<c_mapObjects xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../assets/xml-schemas/mapObjects.xsd">
+  <c_buildings>
+    <c_building class="rtownhall" food="100" gold="100" healthperc="100" id="1" name="rtownhall_24" player="1" x="2397" y="18238"/>
+    <c_building class="rarena" food="100" gold="100" healthperc="100" id="2" name="rarena_25" player="1" x="3403" y="18534"/>
+    <c_building class="rblacksmith" food="100" gold="100" healthperc="100" id="3" name="rblacksmith_26" player="1" x="2368" y="18953"/>
+    <c_building class="rtemple" food="100" gold="100" healthperc="100" id="4" name="rtemple_27" player="1" x="3093" y="17648"/>
+    <c_building class="rtavern" food="100" gold="100" healthperc="100" id="5" name="rtavern_28" player="1" x="1734" y="17462"/>
+    <c_building class="rbarracks" food="100" gold="100" healthperc="100" id="6" name="rbarracks_29" player="1" x="1352" y="18392"/>
+    <c_building class="etownhall" food="100" gold="100" healthperc="100" id="7" name="etownhall_33" player="1" x="8808" y="17919"/>
+    <c_building class="eblacksmith" food="100" gold="100" healthperc="100" id="8" name="eblacksmith_34" player="1" x="8396" y="17010"/>
+    <c_building class="etavern" food="100" gold="100" healthperc="100" id="9" name="etavern_35" player="1" x="9768" y="17243"/>
+    <c_building class="etemple" food="100" gold="100" healthperc="100" id="10" name="etemple_36" player="1" x="9696" y="18392"/>
+    <c_building class="eosiristemple" food="100" gold="100" healthperc="100" id="11" name="eosiristemple_37" player="1" x="8387" y="18713"/>
+    <c_building class="ebarracks" food="100" gold="100" healthperc="100" id="12" name="ebarracks_38" player="1" x="7669" y="17814"/>
+  </c_buildings>
+  <c_decorations/>
+  <c_units/>
+</c_mapObjects>

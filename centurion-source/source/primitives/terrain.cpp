@@ -77,8 +77,8 @@ void Terrain::render(bool tracing) {
 	glUseProgram(shaderId);
 
 	// Wireframe
-	glUniform1i(glGetUniformLocation(shaderId, "wireframe"), int(Game::Surface::Wireframe));
-	if (Game::Surface::Wireframe && !tracing) {
+	glUniform1i(glGetUniformLocation(shaderId, "wireframe"), int(Game::Map::Wireframe));
+	if (Game::Map::Wireframe && !tracing) {
 		glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
 	}
 	else {

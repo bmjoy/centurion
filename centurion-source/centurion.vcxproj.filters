@@ -372,9 +372,6 @@
     <ClCompile Include="source\classes\game\mapObjects-xml.cxx">
       <Filter>Source Files\classes\game</Filter>
     </ClCompile>
-    <ClCompile Include="source\classes\game\mapObjects.cpp">
-      <Filter>Source Files\classes\game</Filter>
-    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="source\extern\includes\json.hpp">
@@ -579,9 +576,6 @@
       <Filter>Header Files\classes\object</Filter>
     </ClInclude>
     <ClInclude Include="source\classes\game\mapObjects-xml.hxx">
-      <Filter>Header Files\classes\game</Filter>
-    </ClInclude>
-    <ClInclude Include="source\classes\game\mapObjects.h">
       <Filter>Header Files\classes\game</Filter>
     </ClInclude>
   </ItemGroup>

@@ -12,6 +12,8 @@
 #endif
 #include <Windows.h>
 
+#include <direct.h>
+
 string FileManager::ReadFile(const char* fileLocation) {
 	try {
 		string content;
@@ -170,7 +172,7 @@ bool FileManager::CheckIfFolderExists(string folderPath) {
 		return false;
 	}
 	catch (...) {
-		Logger::LogMessage msg = Logger::LogMessage("An error occurred checking if this folder exists: \"" + folderPath + "\"", "", "Utils", "CheckIfFolderExists");
+		Logger::LogMessage msg = Logger::LogMessage("An error occurred checking if this folder exists: \"" + folderPath + "\"", "Utils", "", "CheckIfFolderExists");
 		Logger::Error(msg);
 		throw;
 	}
@@ -184,7 +186,21 @@ void FileManager::RemoveFile(string filePath)
 	}
 	catch (...)
 	{
-		Logger::LogMessage msg = Logger::LogMessage("An error occurred deleting this following file: \"" + filePath + "\"", "", "Utils", "RemoveFile");
+		Logger::LogMessage msg = Logger::LogMessage("An error occurred deleting this following file: \"" + filePath + "\"", "Utils", "", "RemoveFile");
+		Logger::Error(msg);
+		throw;
+	}
+}
+
+void FileManager::CreateFolder(string folderPath)
+{
+	try
+	{
+		_mkdir(folderPath.c_str());
+	}
+	catch (...)
+	{
+		Logger::LogMessage msg = Logger::LogMessage("An error occurred creating a folder with the following path: \"" + folderPath + "\"", "Utils", "", "CreateFolder");
 		Logger::Error(msg);
 		throw;
 	}

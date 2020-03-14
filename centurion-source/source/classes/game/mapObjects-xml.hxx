@@ -249,9 +249,14 @@ namespace xml_schema
 // Forward declarations.
 //
 class c_mapObjects;
-class object;
-class settlement;
-class object1;
+class c_buildings;
+class c_decorations;
+class c_units;
+class c_building;
+class c_settlement;
+class c_decoration;
+class c_unit;
+class c_building1;
 
 #include <memory>    // ::std::auto_ptr
 #include <limits>    // std::numeric_limits
@@ -269,43 +274,66 @@ class object1;
 class c_mapObjects : public ::xml_schema::type
 {
 public:
-	// object
+	// c_buildings
 	//
-	typedef ::object object_type;
-	typedef ::xsd::cxx::tree::sequence< object_type > object_sequence;
-	typedef object_sequence::iterator object_iterator;
-	typedef object_sequence::const_iterator object_const_iterator;
-	typedef ::xsd::cxx::tree::traits< object_type, char > object_traits;
+	typedef ::c_buildings c_buildings_type;
+	typedef ::xsd::cxx::tree::traits< c_buildings_type, char > c_buildings_traits;
 
-	const object_sequence&
-		object() const;
+	const c_buildings_type&
+		c_buildings() const;
 
-	object_sequence&
-		object();
+	c_buildings_type&
+		c_buildings();
 
 	void
-		object(const object_sequence& s);
-
-	// settlement
-	//
-	typedef ::settlement settlement_type;
-	typedef ::xsd::cxx::tree::sequence< settlement_type > settlement_sequence;
-	typedef settlement_sequence::iterator settlement_iterator;
-	typedef settlement_sequence::const_iterator settlement_const_iterator;
-	typedef ::xsd::cxx::tree::traits< settlement_type, char > settlement_traits;
-
-	const settlement_sequence&
-		settlement() const;
-
-	settlement_sequence&
-		settlement();
+		c_buildings(const c_buildings_type& x);
 
 	void
-		settlement(const settlement_sequence& s);
+		c_buildings(::std::auto_ptr< c_buildings_type > p);
+
+	// c_decorations
+	//
+	typedef ::c_decorations c_decorations_type;
+	typedef ::xsd::cxx::tree::traits< c_decorations_type, char > c_decorations_traits;
+
+	const c_decorations_type&
+		c_decorations() const;
+
+	c_decorations_type&
+		c_decorations();
+
+	void
+		c_decorations(const c_decorations_type& x);
+
+	void
+		c_decorations(::std::auto_ptr< c_decorations_type > p);
+
+	// c_units
+	//
+	typedef ::c_units c_units_type;
+	typedef ::xsd::cxx::tree::traits< c_units_type, char > c_units_traits;
+
+	const c_units_type&
+		c_units() const;
+
+	c_units_type&
+		c_units();
+
+	void
+		c_units(const c_units_type& x);
+
+	void
+		c_units(::std::auto_ptr< c_units_type > p);
 
 	// Constructors.
 	//
-	c_mapObjects();
+	c_mapObjects(const c_buildings_type&,
+		const c_decorations_type&,
+		const c_units_type&);
+
+	c_mapObjects(::std::auto_ptr< c_buildings_type >,
+		::std::auto_ptr< c_decorations_type >,
+		::std::auto_ptr< c_units_type >);
 
 	c_mapObjects(const ::xercesc::DOMElement& e,
 		::xml_schema::flags f = 0,
@@ -333,11 +361,189 @@ protected:
 			::xml_schema::flags);
 
 protected:
-	object_sequence object_;
-	settlement_sequence settlement_;
+	::xsd::cxx::tree::one< c_buildings_type > c_buildings_;
+	::xsd::cxx::tree::one< c_decorations_type > c_decorations_;
+	::xsd::cxx::tree::one< c_units_type > c_units_;
 };
 
-class object : public ::xml_schema::type
+class c_buildings : public ::xml_schema::type
+{
+public:
+	// c_building
+	//
+	typedef ::c_building c_building_type;
+	typedef ::xsd::cxx::tree::sequence< c_building_type > c_building_sequence;
+	typedef c_building_sequence::iterator c_building_iterator;
+	typedef c_building_sequence::const_iterator c_building_const_iterator;
+	typedef ::xsd::cxx::tree::traits< c_building_type, char > c_building_traits;
+
+	const c_building_sequence&
+		c_building() const;
+
+	c_building_sequence&
+		c_building();
+
+	void
+		c_building(const c_building_sequence& s);
+
+	// c_settlement
+	//
+	typedef ::c_settlement c_settlement_type;
+	typedef ::xsd::cxx::tree::sequence< c_settlement_type > c_settlement_sequence;
+	typedef c_settlement_sequence::iterator c_settlement_iterator;
+	typedef c_settlement_sequence::const_iterator c_settlement_const_iterator;
+	typedef ::xsd::cxx::tree::traits< c_settlement_type, char > c_settlement_traits;
+
+	const c_settlement_sequence&
+		c_settlement() const;
+
+	c_settlement_sequence&
+		c_settlement();
+
+	void
+		c_settlement(const c_settlement_sequence& s);
+
+	// Constructors.
+	//
+	c_buildings();
+
+	c_buildings(const ::xercesc::DOMElement& e,
+		::xml_schema::flags f = 0,
+		::xml_schema::container* c = 0);
+
+	c_buildings(const c_buildings& x,
+		::xml_schema::flags f = 0,
+		::xml_schema::container* c = 0);
+
+	virtual c_buildings*
+		_clone(::xml_schema::flags f = 0,
+			::xml_schema::container* c = 0) const;
+
+	c_buildings&
+		operator= (const c_buildings& x);
+
+	virtual
+		~c_buildings();
+
+	// Implementation.
+	//
+protected:
+	void
+		parse(::xsd::cxx::xml::dom::parser< char >&,
+			::xml_schema::flags);
+
+protected:
+	c_building_sequence c_building_;
+	c_settlement_sequence c_settlement_;
+};
+
+class c_decorations : public ::xml_schema::type
+{
+public:
+	// c_decoration
+	//
+	typedef ::c_decoration c_decoration_type;
+	typedef ::xsd::cxx::tree::sequence< c_decoration_type > c_decoration_sequence;
+	typedef c_decoration_sequence::iterator c_decoration_iterator;
+	typedef c_decoration_sequence::const_iterator c_decoration_const_iterator;
+	typedef ::xsd::cxx::tree::traits< c_decoration_type, char > c_decoration_traits;
+
+	const c_decoration_sequence&
+		c_decoration() const;
+
+	c_decoration_sequence&
+		c_decoration();
+
+	void
+		c_decoration(const c_decoration_sequence& s);
+
+	// Constructors.
+	//
+	c_decorations();
+
+	c_decorations(const ::xercesc::DOMElement& e,
+		::xml_schema::flags f = 0,
+		::xml_schema::container* c = 0);
+
+	c_decorations(const c_decorations& x,
+		::xml_schema::flags f = 0,
+		::xml_schema::container* c = 0);
+
+	virtual c_decorations*
+		_clone(::xml_schema::flags f = 0,
+			::xml_schema::container* c = 0) const;
+
+	c_decorations&
+		operator= (const c_decorations& x);
+
+	virtual
+		~c_decorations();
+
+	// Implementation.
+	//
+protected:
+	void
+		parse(::xsd::cxx::xml::dom::parser< char >&,
+			::xml_schema::flags);
+
+protected:
+	c_decoration_sequence c_decoration_;
+};
+
+class c_units : public ::xml_schema::type
+{
+public:
+	// c_unit
+	//
+	typedef ::c_unit c_unit_type;
+	typedef ::xsd::cxx::tree::sequence< c_unit_type > c_unit_sequence;
+	typedef c_unit_sequence::iterator c_unit_iterator;
+	typedef c_unit_sequence::const_iterator c_unit_const_iterator;
+	typedef ::xsd::cxx::tree::traits< c_unit_type, char > c_unit_traits;
+
+	const c_unit_sequence&
+		c_unit() const;
+
+	c_unit_sequence&
+		c_unit();
+
+	void
+		c_unit(const c_unit_sequence& s);
+
+	// Constructors.
+	//
+	c_units();
+
+	c_units(const ::xercesc::DOMElement& e,
+		::xml_schema::flags f = 0,
+		::xml_schema::container* c = 0);
+
+	c_units(const c_units& x,
+		::xml_schema::flags f = 0,
+		::xml_schema::container* c = 0);
+
+	virtual c_units*
+		_clone(::xml_schema::flags f = 0,
+			::xml_schema::container* c = 0) const;
+
+	c_units&
+		operator= (const c_units& x);
+
+	virtual
+		~c_units();
+
+	// Implementation.
+	//
+protected:
+	void
+		parse(::xsd::cxx::xml::dom::parser< char >&,
+			::xml_schema::flags);
+
+protected:
+	c_unit_sequence c_unit_;
+};
+
+class c_building : public ::xml_schema::type
 {
 public:
 	// class
@@ -473,31 +679,61 @@ public:
 	void
 		icon(::std::auto_ptr< icon_type > p);
 
+	// gold
+	//
+	typedef ::xml_schema::integer gold_type;
+	typedef ::xsd::cxx::tree::traits< gold_type, char > gold_traits;
+
+	const gold_type&
+		gold() const;
+
+	gold_type&
+		gold();
+
+	void
+		gold(const gold_type& x);
+
+	// food
+	//
+	typedef ::xml_schema::integer food_type;
+	typedef ::xsd::cxx::tree::traits< food_type, char > food_traits;
+
+	const food_type&
+		food() const;
+
+	food_type&
+		food();
+
+	void
+		food(const food_type& x);
+
 	// Constructors.
 	//
-	object(const class_type&,
+	c_building(const class_type&,
 		const id_type&,
 		const player_type&,
 		const x_type&,
-		const y_type&);
+		const y_type&,
+		const gold_type&,
+		const food_type&);
 
-	object(const ::xercesc::DOMElement& e,
+	c_building(const ::xercesc::DOMElement& e,
 		::xml_schema::flags f = 0,
 		::xml_schema::container* c = 0);
 
-	object(const object& x,
+	c_building(const c_building& x,
 		::xml_schema::flags f = 0,
 		::xml_schema::container* c = 0);
 
-	virtual object*
+	virtual c_building*
 		_clone(::xml_schema::flags f = 0,
 			::xml_schema::container* c = 0) const;
 
-	object&
-		operator= (const object& x);
+	c_building&
+		operator= (const c_building& x);
 
 	virtual
-		~object();
+		~c_building();
 
 	// Implementation.
 	//
@@ -515,58 +751,46 @@ protected:
 	::xsd::cxx::tree::one< y_type > y_;
 	name_optional name_;
 	icon_optional icon_;
+	::xsd::cxx::tree::one< gold_type > gold_;
+	::xsd::cxx::tree::one< food_type > food_;
 };
 
-class settlement : public ::xml_schema::type
+class c_settlement : public ::xml_schema::type
 {
 public:
-	// object
+	// c_building
 	//
-	typedef ::object1 object_type;
-	typedef ::xsd::cxx::tree::sequence< object_type > object_sequence;
-	typedef object_sequence::iterator object_iterator;
-	typedef object_sequence::const_iterator object_const_iterator;
-	typedef ::xsd::cxx::tree::traits< object_type, char > object_traits;
+	typedef ::c_building1 c_building_type;
+	typedef ::xsd::cxx::tree::sequence< c_building_type > c_building_sequence;
+	typedef c_building_sequence::iterator c_building_iterator;
+	typedef c_building_sequence::const_iterator c_building_const_iterator;
+	typedef ::xsd::cxx::tree::traits< c_building_type, char > c_building_traits;
 
-	const object_sequence&
-		object() const;
+	const c_building_sequence&
+		c_building() const;
 
-	object_sequence&
-		object();
+	c_building_sequence&
+		c_building();
 
 	void
-		object(const object_sequence& s);
+		c_building(const c_building_sequence& s);
 
-	// class
+	// name
 	//
-	typedef ::xml_schema::string class_type;
-	typedef ::xsd::cxx::tree::traits< class_type, char > class_traits;
+	typedef ::xml_schema::string name_type;
+	typedef ::xsd::cxx::tree::traits< name_type, char > name_traits;
 
-	const class_type&
-		class_() const;
+	const name_type&
+		name() const;
 
-	class_type&
-		class_();
-
-	void
-		class_(const class_type& x);
+	name_type&
+		name();
 
 	void
-		class_(::std::auto_ptr< class_type > p);
-
-	// id
-	//
-	typedef ::xml_schema::integer id_type;
-	typedef ::xsd::cxx::tree::traits< id_type, char > id_traits;
-
-	const id_type&
-		id() const;
-
-	id_type&
-		id();
+		name(const name_type& x);
 
 	void
-		id(const id_type& x);
+		name(::std::auto_ptr< name_type > p);
 
 	// player
 	//
@@ -610,60 +834,41 @@ public:
 	void
 		y(const y_type& x);
 
-	// name
-	//
-	typedef ::xml_schema::string name_type;
-	typedef ::xsd::cxx::tree::optional< name_type > name_optional;
-	typedef ::xsd::cxx::tree::traits< name_type, char > name_traits;
-
-	const name_optional&
-		name() const;
-
-	name_optional&
-		name();
-
-	void
-		name(const name_type& x);
-
-	void
-		name(const name_optional& x);
-
-	void
-		name(::std::auto_ptr< name_type > p);
-
 	// gold
 	//
 	typedef ::xml_schema::integer gold_type;
+	typedef ::xsd::cxx::tree::optional< gold_type > gold_optional;
 	typedef ::xsd::cxx::tree::traits< gold_type, char > gold_traits;
 
-	const gold_type&
+	const gold_optional&
 		gold() const;
 
-	gold_type&
+	gold_optional&
 		gold();
 
 	void
 		gold(const gold_type& x);
 
-	static gold_type
-		gold_default_value();
+	void
+		gold(const gold_optional& x);
 
 	// food
 	//
 	typedef ::xml_schema::integer food_type;
+	typedef ::xsd::cxx::tree::optional< food_type > food_optional;
 	typedef ::xsd::cxx::tree::traits< food_type, char > food_traits;
 
-	const food_type&
+	const food_optional&
 		food() const;
 
-	food_type&
+	food_optional&
 		food();
 
 	void
 		food(const food_type& x);
 
-	static food_type
-		food_default_value();
+	void
+		food(const food_optional& x);
 
 	// population
 	//
@@ -701,69 +906,30 @@ public:
 	void
 		maxpopulation(const maxpopulation_optional& x);
 
-	// healthperc
-	//
-	typedef ::xml_schema::integer healthperc_type;
-	typedef ::xsd::cxx::tree::traits< healthperc_type, char > healthperc_traits;
-
-	const healthperc_type&
-		healthperc() const;
-
-	healthperc_type&
-		healthperc();
-
-	void
-		healthperc(const healthperc_type& x);
-
-	static healthperc_type
-		healthperc_default_value();
-
-	// icon
-	//
-	typedef ::xml_schema::string icon_type;
-	typedef ::xsd::cxx::tree::optional< icon_type > icon_optional;
-	typedef ::xsd::cxx::tree::traits< icon_type, char > icon_traits;
-
-	const icon_optional&
-		icon() const;
-
-	icon_optional&
-		icon();
-
-	void
-		icon(const icon_type& x);
-
-	void
-		icon(const icon_optional& x);
-
-	void
-		icon(::std::auto_ptr< icon_type > p);
-
 	// Constructors.
 	//
-	settlement(const class_type&,
-		const id_type&,
+	c_settlement(const name_type&,
 		const player_type&,
 		const x_type&,
 		const y_type&);
 
-	settlement(const ::xercesc::DOMElement& e,
+	c_settlement(const ::xercesc::DOMElement& e,
 		::xml_schema::flags f = 0,
 		::xml_schema::container* c = 0);
 
-	settlement(const settlement& x,
+	c_settlement(const c_settlement& x,
 		::xml_schema::flags f = 0,
 		::xml_schema::container* c = 0);
 
-	virtual settlement*
+	virtual c_settlement*
 		_clone(::xml_schema::flags f = 0,
 			::xml_schema::container* c = 0) const;
 
-	settlement&
-		operator= (const settlement& x);
+	c_settlement&
+		operator= (const c_settlement& x);
 
 	virtual
-		~settlement();
+		~c_settlement();
 
 	// Implementation.
 	//
@@ -773,22 +939,492 @@ protected:
 			::xml_schema::flags);
 
 protected:
-	object_sequence object_;
-	::xsd::cxx::tree::one< class_type > class__;
-	::xsd::cxx::tree::one< id_type > id_;
+	c_building_sequence c_building_;
+	::xsd::cxx::tree::one< name_type > name_;
 	::xsd::cxx::tree::one< player_type > player_;
 	::xsd::cxx::tree::one< x_type > x_;
 	::xsd::cxx::tree::one< y_type > y_;
-	name_optional name_;
-	::xsd::cxx::tree::one< gold_type > gold_;
-	::xsd::cxx::tree::one< food_type > food_;
+	gold_optional gold_;
+	food_optional food_;
 	population_optional population_;
 	maxpopulation_optional maxpopulation_;
-	::xsd::cxx::tree::one< healthperc_type > healthperc_;
-	icon_optional icon_;
 };
 
-class object1 : public ::xml_schema::type
+class c_decoration : public ::xml_schema::type
+{
+public:
+	// class
+	//
+	typedef ::xml_schema::string class_type;
+	typedef ::xsd::cxx::tree::traits< class_type, char > class_traits;
+
+	const class_type&
+		class_() const;
+
+	class_type&
+		class_();
+
+	void
+		class_(const class_type& x);
+
+	void
+		class_(::std::auto_ptr< class_type > p);
+
+	// id
+	//
+	typedef ::xml_schema::integer id_type;
+	typedef ::xsd::cxx::tree::traits< id_type, char > id_traits;
+
+	const id_type&
+		id() const;
+
+	id_type&
+		id();
+
+	void
+		id(const id_type& x);
+
+	// x
+	//
+	typedef ::xml_schema::integer x_type;
+	typedef ::xsd::cxx::tree::traits< x_type, char > x_traits;
+
+	const x_type&
+		x() const;
+
+	x_type&
+		x();
+
+	void
+		x(const x_type& x);
+
+	// y
+	//
+	typedef ::xml_schema::integer y_type;
+	typedef ::xsd::cxx::tree::traits< y_type, char > y_traits;
+
+	const y_type&
+		y() const;
+
+	y_type&
+		y();
+
+	void
+		y(const y_type& x);
+
+	// xOffset
+	//
+	typedef ::xml_schema::integer xOffset_type;
+	typedef ::xsd::cxx::tree::optional< xOffset_type > xOffset_optional;
+	typedef ::xsd::cxx::tree::traits< xOffset_type, char > xOffset_traits;
+
+	const xOffset_optional&
+		xOffset() const;
+
+	xOffset_optional&
+		xOffset();
+
+	void
+		xOffset(const xOffset_type& x);
+
+	void
+		xOffset(const xOffset_optional& x);
+
+	// yOffset
+	//
+	typedef ::xml_schema::integer yOffset_type;
+	typedef ::xsd::cxx::tree::optional< yOffset_type > yOffset_optional;
+	typedef ::xsd::cxx::tree::traits< yOffset_type, char > yOffset_traits;
+
+	const yOffset_optional&
+		yOffset() const;
+
+	yOffset_optional&
+		yOffset();
+
+	void
+		yOffset(const yOffset_type& x);
+
+	void
+		yOffset(const yOffset_optional& x);
+
+	// settlementName
+	//
+	typedef ::xml_schema::string settlementName_type;
+	typedef ::xsd::cxx::tree::optional< settlementName_type > settlementName_optional;
+	typedef ::xsd::cxx::tree::traits< settlementName_type, char > settlementName_traits;
+
+	const settlementName_optional&
+		settlementName() const;
+
+	settlementName_optional&
+		settlementName();
+
+	void
+		settlementName(const settlementName_type& x);
+
+	void
+		settlementName(const settlementName_optional& x);
+
+	void
+		settlementName(::std::auto_ptr< settlementName_type > p);
+
+	// Constructors.
+	//
+	c_decoration(const class_type&,
+		const id_type&,
+		const x_type&,
+		const y_type&);
+
+	c_decoration(const ::xercesc::DOMElement& e,
+		::xml_schema::flags f = 0,
+		::xml_schema::container* c = 0);
+
+	c_decoration(const c_decoration& x,
+		::xml_schema::flags f = 0,
+		::xml_schema::container* c = 0);
+
+	virtual c_decoration*
+		_clone(::xml_schema::flags f = 0,
+			::xml_schema::container* c = 0) const;
+
+	c_decoration&
+		operator= (const c_decoration& x);
+
+	virtual
+		~c_decoration();
+
+	// Implementation.
+	//
+protected:
+	void
+		parse(::xsd::cxx::xml::dom::parser< char >&,
+			::xml_schema::flags);
+
+protected:
+	::xsd::cxx::tree::one< class_type > class__;
+	::xsd::cxx::tree::one< id_type > id_;
+	::xsd::cxx::tree::one< x_type > x_;
+	::xsd::cxx::tree::one< y_type > y_;
+	xOffset_optional xOffset_;
+	yOffset_optional yOffset_;
+	settlementName_optional settlementName_;
+};
+
+class c_unit : public ::xml_schema::type
+{
+public:
+	// class
+	//
+	typedef ::xml_schema::string class_type;
+	typedef ::xsd::cxx::tree::traits< class_type, char > class_traits;
+
+	const class_type&
+		class_() const;
+
+	class_type&
+		class_();
+
+	void
+		class_(const class_type& x);
+
+	void
+		class_(::std::auto_ptr< class_type > p);
+
+	// name
+	//
+	typedef ::xml_schema::string name_type;
+	typedef ::xsd::cxx::tree::optional< name_type > name_optional;
+	typedef ::xsd::cxx::tree::traits< name_type, char > name_traits;
+
+	const name_optional&
+		name() const;
+
+	name_optional&
+		name();
+
+	void
+		name(const name_type& x);
+
+	void
+		name(const name_optional& x);
+
+	void
+		name(::std::auto_ptr< name_type > p);
+
+	// id
+	//
+	typedef ::xml_schema::integer id_type;
+	typedef ::xsd::cxx::tree::traits< id_type, char > id_traits;
+
+	const id_type&
+		id() const;
+
+	id_type&
+		id();
+
+	void
+		id(const id_type& x);
+
+	// x
+	//
+	typedef ::xml_schema::integer x_type;
+	typedef ::xsd::cxx::tree::traits< x_type, char > x_traits;
+
+	const x_type&
+		x() const;
+
+	x_type&
+		x();
+
+	void
+		x(const x_type& x);
+
+	// y
+	//
+	typedef ::xml_schema::integer y_type;
+	typedef ::xsd::cxx::tree::traits< y_type, char > y_traits;
+
+	const y_type&
+		y() const;
+
+	y_type&
+		y();
+
+	void
+		y(const y_type& x);
+
+	// direction
+	//
+	typedef ::xml_schema::integer direction_type;
+	typedef ::xsd::cxx::tree::optional< direction_type > direction_optional;
+	typedef ::xsd::cxx::tree::traits< direction_type, char > direction_traits;
+
+	const direction_optional&
+		direction() const;
+
+	direction_optional&
+		direction();
+
+	void
+		direction(const direction_type& x);
+
+	void
+		direction(const direction_optional& x);
+
+	// level
+	//
+	typedef ::xml_schema::integer level_type;
+	typedef ::xsd::cxx::tree::traits< level_type, char > level_traits;
+
+	const level_type&
+		level() const;
+
+	level_type&
+		level();
+
+	void
+		level(const level_type& x);
+
+	// invisible
+	//
+	typedef ::xml_schema::boolean invisible_type;
+	typedef ::xsd::cxx::tree::optional< invisible_type > invisible_optional;
+	typedef ::xsd::cxx::tree::traits< invisible_type, char > invisible_traits;
+
+	const invisible_optional&
+		invisible() const;
+
+	invisible_optional&
+		invisible();
+
+	void
+		invisible(const invisible_type& x);
+
+	void
+		invisible(const invisible_optional& x);
+
+	// messenger_status
+	//
+	typedef ::xml_schema::boolean messenger_status_type;
+	typedef ::xsd::cxx::tree::optional< messenger_status_type > messenger_status_optional;
+	typedef ::xsd::cxx::tree::traits< messenger_status_type, char > messenger_status_traits;
+
+	const messenger_status_optional&
+		messenger_status() const;
+
+	messenger_status_optional&
+		messenger_status();
+
+	void
+		messenger_status(const messenger_status_type& x);
+
+	void
+		messenger_status(const messenger_status_optional& x);
+
+	// feeds
+	//
+	typedef ::xml_schema::boolean feeds_type;
+	typedef ::xsd::cxx::tree::optional< feeds_type > feeds_optional;
+	typedef ::xsd::cxx::tree::traits< feeds_type, char > feeds_traits;
+
+	const feeds_optional&
+		feeds() const;
+
+	feeds_optional&
+		feeds();
+
+	void
+		feeds(const feeds_type& x);
+
+	void
+		feeds(const feeds_optional& x);
+
+	// party
+	//
+	typedef ::xml_schema::boolean party_type;
+	typedef ::xsd::cxx::tree::optional< party_type > party_optional;
+	typedef ::xsd::cxx::tree::traits< party_type, char > party_traits;
+
+	const party_optional&
+		party() const;
+
+	party_optional&
+		party();
+
+	void
+		party(const party_type& x);
+
+	void
+		party(const party_optional& x);
+
+	// ai_ctrl
+	//
+	typedef ::xml_schema::boolean ai_ctrl_type;
+	typedef ::xsd::cxx::tree::optional< ai_ctrl_type > ai_ctrl_optional;
+	typedef ::xsd::cxx::tree::traits< ai_ctrl_type, char > ai_ctrl_traits;
+
+	const ai_ctrl_optional&
+		ai_ctrl() const;
+
+	ai_ctrl_optional&
+		ai_ctrl();
+
+	void
+		ai_ctrl(const ai_ctrl_type& x);
+
+	void
+		ai_ctrl(const ai_ctrl_optional& x);
+
+	// healthperc
+	//
+	typedef ::xml_schema::integer healthperc_type;
+	typedef ::xsd::cxx::tree::optional< healthperc_type > healthperc_optional;
+	typedef ::xsd::cxx::tree::traits< healthperc_type, char > healthperc_traits;
+
+	const healthperc_optional&
+		healthperc() const;
+
+	healthperc_optional&
+		healthperc();
+
+	void
+		healthperc(const healthperc_type& x);
+
+	void
+		healthperc(const healthperc_optional& x);
+
+	// stamina
+	//
+	typedef ::xml_schema::integer stamina_type;
+	typedef ::xsd::cxx::tree::optional< stamina_type > stamina_optional;
+	typedef ::xsd::cxx::tree::traits< stamina_type, char > stamina_traits;
+
+	const stamina_optional&
+		stamina() const;
+
+	stamina_optional&
+		stamina();
+
+	void
+		stamina(const stamina_type& x);
+
+	void
+		stamina(const stamina_optional& x);
+
+	// inventary
+	//
+	typedef ::xml_schema::string inventary_type;
+	typedef ::xsd::cxx::tree::optional< inventary_type > inventary_optional;
+	typedef ::xsd::cxx::tree::traits< inventary_type, char > inventary_traits;
+
+	const inventary_optional&
+		inventary() const;
+
+	inventary_optional&
+		inventary();
+
+	void
+		inventary(const inventary_type& x);
+
+	void
+		inventary(const inventary_optional& x);
+
+	void
+		inventary(::std::auto_ptr< inventary_type > p);
+
+	// Constructors.
+	//
+	c_unit(const class_type&,
+		const id_type&,
+		const x_type&,
+		const y_type&,
+		const level_type&);
+
+	c_unit(const ::xercesc::DOMElement& e,
+		::xml_schema::flags f = 0,
+		::xml_schema::container* c = 0);
+
+	c_unit(const c_unit& x,
+		::xml_schema::flags f = 0,
+		::xml_schema::container* c = 0);
+
+	virtual c_unit*
+		_clone(::xml_schema::flags f = 0,
+			::xml_schema::container* c = 0) const;
+
+	c_unit&
+		operator= (const c_unit& x);
+
+	virtual
+		~c_unit();
+
+	// Implementation.
+	//
+protected:
+	void
+		parse(::xsd::cxx::xml::dom::parser< char >&,
+			::xml_schema::flags);
+
+protected:
+	::xsd::cxx::tree::one< class_type > class__;
+	name_optional name_;
+	::xsd::cxx::tree::one< id_type > id_;
+	::xsd::cxx::tree::one< x_type > x_;
+	::xsd::cxx::tree::one< y_type > y_;
+	direction_optional direction_;
+	::xsd::cxx::tree::one< level_type > level_;
+	invisible_optional invisible_;
+	messenger_status_optional messenger_status_;
+	feeds_optional feeds_;
+	party_optional party_;
+	ai_ctrl_optional ai_ctrl_;
+	healthperc_optional healthperc_;
+	stamina_optional stamina_;
+	inventary_optional inventary_;
+};
+
+class c_building1 : public ::xml_schema::type
 {
 public:
 	// class
@@ -825,82 +1461,48 @@ public:
 	// healthperc
 	//
 	typedef ::xml_schema::integer healthperc_type;
+	typedef ::xsd::cxx::tree::optional< healthperc_type > healthperc_optional;
 	typedef ::xsd::cxx::tree::traits< healthperc_type, char > healthperc_traits;
 
-	const healthperc_type&
+	const healthperc_optional&
 		healthperc() const;
 
-	healthperc_type&
+	healthperc_optional&
 		healthperc();
 
 	void
 		healthperc(const healthperc_type& x);
 
-	static healthperc_type
-		healthperc_default_value();
+	void
+		healthperc(const healthperc_optional& x);
 
-	// player
+	// xOffset
 	//
-	typedef ::xml_schema::integer player_type;
-	typedef ::xsd::cxx::tree::traits< player_type, char > player_traits;
+	typedef ::xml_schema::integer xOffset_type;
+	typedef ::xsd::cxx::tree::traits< xOffset_type, char > xOffset_traits;
 
-	const player_type&
-		player() const;
+	const xOffset_type&
+		xOffset() const;
 
-	player_type&
-		player();
+	xOffset_type&
+		xOffset();
 
 	void
-		player(const player_type& x);
+		xOffset(const xOffset_type& x);
 
-	// x
+	// yOffset
 	//
-	typedef ::xml_schema::integer x_type;
-	typedef ::xsd::cxx::tree::traits< x_type, char > x_traits;
+	typedef ::xml_schema::integer yOffset_type;
+	typedef ::xsd::cxx::tree::traits< yOffset_type, char > yOffset_traits;
 
-	const x_type&
-		x() const;
+	const yOffset_type&
+		yOffset() const;
 
-	x_type&
-		x();
-
-	void
-		x(const x_type& x);
-
-	// y
-	//
-	typedef ::xml_schema::integer y_type;
-	typedef ::xsd::cxx::tree::traits< y_type, char > y_traits;
-
-	const y_type&
-		y() const;
-
-	y_type&
-		y();
+	yOffset_type&
+		yOffset();
 
 	void
-		y(const y_type& x);
-
-	// name
-	//
-	typedef ::xml_schema::string name_type;
-	typedef ::xsd::cxx::tree::optional< name_type > name_optional;
-	typedef ::xsd::cxx::tree::traits< name_type, char > name_traits;
-
-	const name_optional&
-		name() const;
-
-	name_optional&
-		name();
-
-	void
-		name(const name_type& x);
-
-	void
-		name(const name_optional& x);
-
-	void
-		name(::std::auto_ptr< name_type > p);
+		yOffset(const yOffset_type& x);
 
 	// icon
 	//
@@ -925,29 +1527,28 @@ public:
 
 	// Constructors.
 	//
-	object1(const class_type&,
+	c_building1(const class_type&,
 		const id_type&,
-		const player_type&,
-		const x_type&,
-		const y_type&);
+		const xOffset_type&,
+		const yOffset_type&);
 
-	object1(const ::xercesc::DOMElement& e,
+	c_building1(const ::xercesc::DOMElement& e,
 		::xml_schema::flags f = 0,
 		::xml_schema::container* c = 0);
 
-	object1(const object1& x,
+	c_building1(const c_building1& x,
 		::xml_schema::flags f = 0,
 		::xml_schema::container* c = 0);
 
-	virtual object1*
+	virtual c_building1*
 		_clone(::xml_schema::flags f = 0,
 			::xml_schema::container* c = 0) const;
 
-	object1&
-		operator= (const object1& x);
+	c_building1&
+		operator= (const c_building1& x);
 
 	virtual
-		~object1();
+		~c_building1();
 
 	// Implementation.
 	//
@@ -959,11 +1560,9 @@ protected:
 protected:
 	::xsd::cxx::tree::one< class_type > class__;
 	::xsd::cxx::tree::one< id_type > id_;
-	::xsd::cxx::tree::one< healthperc_type > healthperc_;
-	::xsd::cxx::tree::one< player_type > player_;
-	::xsd::cxx::tree::one< x_type > x_;
-	::xsd::cxx::tree::one< y_type > y_;
-	name_optional name_;
+	healthperc_optional healthperc_;
+	::xsd::cxx::tree::one< xOffset_type > xOffset_;
+	::xsd::cxx::tree::one< yOffset_type > yOffset_;
 	icon_optional icon_;
 };
 
@@ -1146,13 +1745,28 @@ void
 operator<< (::xercesc::DOMElement&, const c_mapObjects&);
 
 void
-operator<< (::xercesc::DOMElement&, const object&);
+operator<< (::xercesc::DOMElement&, const c_buildings&);
 
 void
-operator<< (::xercesc::DOMElement&, const settlement&);
+operator<< (::xercesc::DOMElement&, const c_decorations&);
 
 void
-operator<< (::xercesc::DOMElement&, const object1&);
+operator<< (::xercesc::DOMElement&, const c_units&);
+
+void
+operator<< (::xercesc::DOMElement&, const c_building&);
+
+void
+operator<< (::xercesc::DOMElement&, const c_settlement&);
+
+void
+operator<< (::xercesc::DOMElement&, const c_decoration&);
+
+void
+operator<< (::xercesc::DOMElement&, const c_unit&);
+
+void
+operator<< (::xercesc::DOMElement&, const c_building1&);
 
 #include <xsd/cxx/post.hxx>
 

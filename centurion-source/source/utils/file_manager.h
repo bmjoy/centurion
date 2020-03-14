@@ -33,6 +33,7 @@ namespace FileManager {
 
 	void RemoveFile(string filePath);
 
+	void CreateFolder(string folderPath);
 };
 
 #endif
