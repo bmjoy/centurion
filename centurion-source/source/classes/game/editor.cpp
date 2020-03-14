@@ -113,12 +113,9 @@ void Editor::Run() {
 	}
 }
 
-
-
 void Editor::handleKeyboardControls() {
 
 	using namespace editor;
-
 
 	//CTRL Hotkeys
 	if (!IsWindowOpened) {
@@ -155,7 +152,7 @@ void Editor::handleKeyboardControls() {
 		
 		if (Engine::Keyboard::IsKeyPressed(GLFW_KEY_SPACE) || Engine::Mouse::MiddleClick) {
 			if (Minimap::IsActive()) Minimap::Disable();
-			else Minimap::Enable();
+			else Minimap::Enable(); clearEditorVariables();
 			Minimap::IsActive() ? Logger::Info("Minimap ON!") : Logger::Info("Minimap OFF!");
 		}
 		if (Engine::Keyboard::IsKeyPressed(GLFW_KEY_Z)) {

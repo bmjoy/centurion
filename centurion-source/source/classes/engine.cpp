@@ -563,7 +563,7 @@ int Engine::launch() {
 
 		if (reset) {
 			reset = false;
-			if (environment == "editor") Editor::reset();
+			if (environment == "editor") Editor::reset(); editor::clearEditorVariables();
 			if (environment == "game") Strategy::reset();
 			MENU()->reset();
 			environment = "menu";
