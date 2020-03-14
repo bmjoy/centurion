@@ -29,7 +29,9 @@ private:
 	GLuint VerticesVBO, HeightsVBO, TexturesVBO;
 	int randomPos;
 	void genBuffers();
-
+	void ReadIndicesData(void);
+	void ReadVerticesData(void);
+	void ReadVerticesPosData(void);
 	vector<string> texturesName;
 	float width, height;
 

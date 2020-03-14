@@ -1,10 +1,9 @@
 #include "terrain.h"
 
+#include <surface>
 #include <stb_image.h>
 #include <game/strategy.h>
-#include <surface>
-#include <global>
-#include "game/game.h"
+#include <logger.h>
 
 using namespace glb;
 
@@ -17,12 +16,12 @@ Terrain::Terrain(){
 
 void Terrain::create() {
 	mapgen::init();
-
+	
 	// Read and store indices and vertices position information //
 
-	readIndicesData(mapgen::Indices(), "assets/terrain/emptymap/indices");
-	readVerticesData(mapgen::MapVertices(), "assets/terrain/emptymap/vertices");
-	readVerticesPosData(mapgen::VerticesPos(), "assets/terrain/emptymap/vertices_pos");
+	ReadIndicesData();
+	ReadVerticesData();
+	ReadVerticesPosData();
 
 	mapgen::reset_map();
 
@@ -185,6 +184,75 @@ void Terrain::genBuffers() {
 	glBindBuffer(GL_ARRAY_BUFFER, 0);
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
 	glBindVertexArray(0);
+}
+
+void Terrain::ReadIndicesData(void)
+{
+	try
+	{
+		fstream fin;
+		fin.open("assets/terrain/emptymap/indices");
+		string line, number;
+		getline(fin, line);
+		stringstream s(line);
+		int i = 0;
+		while (getline(s, number, ',')) {
+			mapgen::Indices()[i] = (unsigned int)stoi(number);
+			i++;
+		}
+	}
+	catch (...)
+	{
+		Logger::LogMessage msg = Logger::LogMessage("An error occurred reading the indices data", "", "Terrain", "ReadIndicesData");
+		Logger::Error(msg);
+		throw;
+	}
+	
+}
+
+void Terrain::ReadVerticesData(void)
+{
+	try
+	{
+		fstream fin;
+		fin.open("assets/terrain/emptymap/vertices");
+		string line, number;
+		getline(fin, line);
+		stringstream s(line);
+		int i = 0;
+		while (getline(s, number, ',')) {
+			mapgen::MapVertices()[i] = stof(number);
+			i++;
+		}
+	}
+	catch (...)
+	{
+		Logger::LogMessage msg = Logger::LogMessage("An error occurred reading the vertices data", "", "Terrain", "ReadVerticesData");
+		Logger::Error(msg);
+		throw;
+	}
+}
+
+void Terrain::ReadVerticesPosData(void)
+{
+	try {
+		fstream fin;
+		fin.open("assets/terrain/emptymap/vertices_pos");
+		string line, number;
+		getline(fin, line);
+		stringstream s(line);
+		int i = 0;
+		while (getline(s, number, ',')) {
+			mapgen::VerticesPos()[i] = stoi(number);
+			i++;
+		}
+	}
+	catch (...)
+	{
+		Logger::LogMessage msg = Logger::LogMessage("An error occurred reading the vertices pos data", "", "Terrain", "ReadVerticesPosData");
+		Logger::Error(msg);
+		throw;
+	}
 }
 
 void Terrain::updateHeightsBuffer() {

@@ -61,45 +61,6 @@ namespace glb {
 		}
 	}
 
-	void readIndicesData(unsigned int *indices, string path) {
-		fstream fin;
-		fin.open(path);
-		string line, number;
-		getline(fin, line);
-		stringstream s(line);
-		int i = 0;
-		while (getline(s, number, ',')) {
-			indices[i] = (unsigned int)stoi(number);
-			i++;
-		}
-	}
-
-	void readVerticesData(float *vertices, string path) {
-		fstream fin;
-		fin.open(path);
-		string line, number;
-		getline(fin, line);
-		stringstream s(line);
-		int i = 0;
-		while (getline(s, number, ',')) {
-			vertices[i] = stof(number);
-			i++;
-		}
-	}
-
-	void readVerticesPosData(int *verticesPos, string path) {
-		fstream fin;
-		fin.open(path);
-		string line, number;
-		getline(fin, line);
-		stringstream s(line);
-		int i = 0;
-		while (getline(s, number, ',')) {
-			verticesPos[i] = stoi(number);
-			i++;
-		}
-	}
-
 	void saveCurrentScenario(string name) {
 
 

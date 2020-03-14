@@ -196,7 +196,6 @@ void Game::Map::SaveTexture(string path)
 	textureFile.close();
 }
 
-
 void Game::Map::Reset() {
 	isGridEnabled = false;
 	mapgen::reset_map();
