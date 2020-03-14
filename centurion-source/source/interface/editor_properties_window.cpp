@@ -67,7 +67,7 @@ namespace editor {
 					type = "building";
 					building_pointer = bld;
 					text_input[0].create(bld->GetName(), startX + 246.f, startY - 85.f, 30);
-					text_input[1].create(bld->get_settlement_name(), startX + 246.f, startY - 129.f, 30);
+					text_input[1].create(bld->GetSettlement().GetSettlementName(), startX + 246.f, startY - 129.f, 30);
 					
 					PropertiesWindowIsOpen = true;
 					IsWindowOpened = true;

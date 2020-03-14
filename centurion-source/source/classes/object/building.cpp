@@ -14,7 +14,6 @@ using namespace glm;
 
 Building::Building() 
 {
-	//type = "building";
 	this->SetType("building");
 	isCreated = false;
 	waitingToBeErased = false;
@@ -24,21 +23,30 @@ Building::Building()
 	prop.is_villagehall = false;
 }
 
-void Building::prepare() {
+Settlement Building::GetSettlement(void)
+{
+	return this->settlement;
+}
+void Building::SetSettlement(const Settlement par_settlement)
+{
+	this->settlement = par_settlement;
+}
 
-	prop.type = data["type"].get<string>();
-	prop.race = data["race"].get<string>();
-	prop.class_name = data["class_name"].get<string>();
+void Building::prepare() 
+{
+	this->SetType(data["type"].get<string>());
+	this->SetRaceName(data["race"].get<string>());
+	this->SetClassName(data["class_name"].get<string>());
 	prop.is_indipendent = (bool)data["is_independent"].get<int>();
 	prop.category = data["category"].get<string>();
 	prop.ent_path = data["ent_path"].get<string>();
 	prop.pass_path = data["pass_path"].get<string>();
 	prop.clickable_in_minimap = (bool)data["clickable_in_minimap"].get<int>();
-	prop.is_townhall = (prop.class_name.substr(1) == "townhall");
-	prop.is_villagehall = (prop.class_name.substr(1) == "village");
+	prop.is_townhall = (this->GetClassName().substr(1) == "townhall");
+	prop.is_villagehall = (this->GetClassName().substr(1) == "village");
 
 	/* file pass */
-	string str_className = GetClassName();
+	string str_className = this->GetClassName();
 	pass_grid = astar::readPassMatrix(prop.pass_path, str_className);
 
 	vec2 spriteSize = getSpriteSize(prop.ent_path);
@@ -67,7 +75,8 @@ bool Building::is_near_to_independent(string *Category) {
 		float dist = math::euclidean_distance(bld->GetPosition().x, bld->GetPosition().y, this->GetPosition().x, this->GetPosition().y);
 		if (dist < 1500.f) {
 			set_settlement_building(bld);
-			set_settlement_name(bld->get_settlement_name());
+			string strSetName = bld->GetSettlement().GetSettlementName();
+			this->GetSettlement().SetSettlementName(strSetName);
 			(*Category) = bld->getCategory();
 			ok = true;
 			break;
@@ -77,16 +86,16 @@ bool Building::is_near_to_independent(string *Category) {
 }
 
 void Building::create(string Name) {
-	prop.type = data["type"].get<string>();
-	prop.race = data["race"].get<string>();
-	prop.class_name = data["class_name"].get<string>();
+	this->SetType(data["type"].get<string>());
+	this->SetRaceName(data["race"].get<string>());
+	this->SetClassName(data["class_name"].get<string>());
 	prop.is_indipendent = (bool)data["is_independent"].get<int>();
 	prop.category = data["category"].get<string>();
 	prop.ent_path = data["ent_path"].get<string>();
 	prop.pass_path = data["pass_path"].get<string>();
 	prop.clickable_in_minimap = (bool)data["clickable_in_minimap"].get<int>();
-	prop.is_townhall = (prop.class_name.substr(1) == "townhall");
-	prop.is_villagehall = (prop.class_name.substr(1) == "village");
+	prop.is_townhall = (this->GetClassName().substr(1) == "townhall");
+	prop.is_villagehall = (this->GetClassName().substr(1) == "village");
 
 	/* file pass */
 	string str_className = this->GetClassName();
@@ -102,7 +111,7 @@ void Building::create(string Name) {
 	this->SetName(name);
 
 	buildingUI = new game::ObjectUI();
-	buildingUI->create(prop.class_name);
+	buildingUI->create(this->GetClassName());
 
 	// selection circle (editor only)
 	circle[0] = gui::Circle();
@@ -121,9 +130,13 @@ void Building::render(bool picking, int clickID, bool not_placeable) {
 
 	// keep updated not central buildings "settlement name"
 	if (!prop.is_indipendent && isCreated)
-		if (settl_name != independent->get_settlement_name())
-			settl_name = independent->get_settlement_name();
-
+		if (this->GetSettlement().GetSettlementName() != independent->GetSettlement().GetSettlementName())
+		{
+			string strSetName;
+			strSetName = independent->GetSettlement().GetSettlementName();
+			this->GetSettlement().SetSettlementName(strSetName);
+		}
+		
 	// keep updated central buildings "subsidiaries buildings list"
 	if (Game::GetNumberOfBuildings() != buildingListSize && (prop.is_townhall || prop.is_villagehall)) {
 		subs_buildings.clear();
@@ -133,7 +146,8 @@ void Building::render(bool picking, int clickID, bool not_placeable) {
 		for (int i = 0; i < listOfBuildings.size(); i++) {
 			Building* bld = listOfBuildings[i];
 			if (bld->is_independent() == false) {
-				if (bld->get_settlement_name() == settl_name) {
+				if (bld->GetSettlement().GetSettlementName() == this->GetSettlement().GetSettlementName())
+				{
 					if (k == 0) { cout << "[DEBUG] Subsidiaries buildings to " + this->GetName() + " have been updated. Their names are: \n"; }
 					subs_buildings[bld->GetPickingID()] = bld;
 					cout << "   " << bld->GetName() << "\n";

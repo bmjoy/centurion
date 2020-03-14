@@ -482,7 +482,7 @@ namespace mapgen {
 				dist += rnoise;
 				if (dist <= d) {
 					d = dist;
-					string race = b->get_race();
+					string race = b->GetRaceName();
 					if (dist - rnoise > TOWNHALL_RADIUS - grid_size) zoneType = Game::GetRace(race)->getEnvironmentalZone();
 					else zoneType = "none";
 				}

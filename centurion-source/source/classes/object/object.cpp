@@ -46,12 +46,12 @@ void GObject::SetPickingID(const unsigned int par_pickingID)
 	pickingColor = vec3(r / 255.f, g / 255.f, b / 255.f);
 }
 
-unsigned short int GObject::GetRadius(void)
+float GObject::GetRadius(void)
 {
 	return this->radius;
 }
 
-void GObject::SetRadius(const unsigned short int par_radius)
+void GObject::SetRadius(const float par_radius)
 {
 	this->radius = par_radius;
 }
@@ -91,6 +91,16 @@ void GObject::SetName(const string par_name)
 unsigned short int GObject::GetRace(void)
 {
 	return this->race;
+}
+
+string GObject::GetRaceName(void)
+{
+	return this->raceName;
+}
+
+void GObject::SetRaceName(const string par_raceName)
+{
+	this->raceName = par_raceName;
 }
 
 void GObject::SetRace(const unsigned short int par_race)

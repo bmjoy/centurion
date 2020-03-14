@@ -144,7 +144,7 @@ namespace glb {
 				objectsFile << listOfBuildings[i]->GetType() << "\t";
 				objectsFile << listOfBuildings[i]->GetClassName() << "\t";
 				objectsFile << listOfBuildings[i]->GetName() << "\t";
-				objectsFile << listOfBuildings[i]->get_settlement_name() << "\t";
+				objectsFile << listOfBuildings[i]->GetSettlement().GetSettlementName() << "\t";
 				objectsFile << listOfBuildings[i]->GetPlayer() << "\t";
 				objectsFile << listOfBuildings[i]->GetPosition().x << "\t";
 				objectsFile << listOfBuildings[i]->GetPosition().y << "\t";
@@ -245,7 +245,7 @@ namespace glb {
 						b->SetPlayer(playerID);
 						b->SetPosition(vec3(xPos, yPos, 0.f));
 						b->SetPickingID(PickingObject::GetPickingId());
-						b->set_settlement_name(settl_name);
+						b->GetSettlement().SetSettlementName(settl_name);
 						b->SetType("building");
 						b->create(name);
 						Game::AddGameObject(b->GetPickingID(), b);

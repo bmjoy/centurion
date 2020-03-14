@@ -3,6 +3,7 @@
 #include <gui>
 #include <json.hpp>
 #include "object.h"
+#include "settlement.h"
 
 using namespace std;
 using namespace glm;
@@ -12,13 +13,78 @@ namespace game { class ObjectUI; };
 
 class Player;
 
+class Settlement;
+
 //
 //	BUILDING --> source/building/building.cpp
 //
 
+struct buildingProperties
+{
+	// properties from class 
+	string type;
+	string category;
+	string ent_path;
+	string pass_path;
+	bool is_indipendent;
+	bool clickable_in_minimap;
+	bool is_townhall;
+	bool is_villagehall;
+
+	// properties from sprite
+	float sprite_width, sprite_height;
+	GLuint textureID;
+};
+
+class Building : public GObject
+{
+public:
+	Settlement GetSettlement(void);
+	void SetSettlement(const Settlement par_settlement);
 
 
-struct buildingProperties {
+
+	void prepare() override;
+	void create(string Name = "");
+	void render(bool picking, int clickID = 0, bool not_placeable = false) override;
+	bool is_placeable();
+	void set_placeable(bool b) { isPlaceable = b; }
+	void set_status(bool b) { isCreated = b; }
+	bool is_independent() { return prop.is_indipendent; }
+
+	void set_settlement_building(Building *b) { independent = b; }
+	Building *get_settlement_building() { return independent; }
+	bool is_near_to_independent(string *Category);
+	int UnitsInBuilding();
+	vector<Unit> UnitsInHolder();
+	vector<int> buildingsInSettlementIds();
+	int buildingsInSettlementCount() { return (int)subs_buildings.size(); }
+	void setWaitingToBeErased(bool b) { waitingToBeErased = b; }
+	bool getWaitingToBeErased() { return waitingToBeErased; }
+	string getCategory() { return prop.category; }
+
+	Building();
+	~Building();
+	
+private:
+	game::ObjectUI* buildingUI;
+	map<int, Building*> subs_buildings; // dependent buildings connected to indipendent one
+	buildingProperties prop;
+	vector<Unit> unitsInside;
+	Building *independent;
+	bool waitingToBeErased;
+	bool isCreated;
+	size_t buildingListSize;
+	bool isPlaceable;
+	gui::Circle circle[2];
+	vec2 getSpriteSize(string ent_path);
+
+	Settlement settlement;
+	//sound selectionSound; TODO
+};
+
+/*struct buildingProperties 
+{
 	// properties from class 
 	string type;
 	string race;
@@ -78,3 +144,4 @@ private:
 	vec2 getSpriteSize(string ent_path);
 	//sound selectionSound; TODO
 };
+*/

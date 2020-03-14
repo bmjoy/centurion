@@ -398,7 +398,7 @@ void Game::GenerateOutposts(vector<vec2> &locs) {
 		b->SetPlayer(0);
 		b->SetPosition(vec3(locs[i].x, locs[i].y, 0.f));
 		b->SetPickingID(PickingObject::GetPickingId());
-		b->set_settlement_name("Outpost_" + i);
+		b->GetSettlement().SetSettlementName("Outpost_" + i);
 		b->create();
 		GameObjects[b->GetPickingID()] = b;
 	}
@@ -460,7 +460,7 @@ void Game::GenerateSettlements(vector<vec2> &locs) {
 						b->SetPlayer(i);
 						b->SetPosition(vec3(origin.x + xOffset, origin.y + yOffset, 0.f));
 						b->SetPickingID(PickingObject::GetPickingId());
-						b->set_settlement_name("Settlement_player_" + i);
+						b->GetSettlement().SetSettlementName("Settlement_player_" + i);
 						b->create();
 						GameObjects[b->GetPickingID()] = b;
 
@@ -521,7 +521,7 @@ void Game::UpdateSettlementBuildings() {
 		if (!bld->is_independent()) {
 			for (int j = 0; j < listOfIndipBuildings.size(); j++) {
 				Building* settl = listOfIndipBuildings[j];
-				if (settl->get_settlement_name() == bld->get_settlement_name()) {
+				if (settl->GetSettlement().GetSettlementName() == bld->GetSettlement().GetSettlementName()) {
 					bld->set_settlement_building(settl);
 					break;
 				}

@@ -366,6 +366,9 @@
     <ClCompile Include="source\utils\file_manager.cpp">
       <Filter>Source Files\utils</Filter>
     </ClCompile>
+    <ClCompile Include="source\classes\object\settlement.cpp">
+      <Filter>Source Files\classes\object</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="source\extern\includes\json.hpp">
@@ -565,6 +568,9 @@
     </ClInclude>
     <ClInclude Include="source\utils\file_manager.h">
       <Filter>Header Files\utils</Filter>
+    </ClInclude>
+    <ClInclude Include="source\classes\object\settlement.h">
+      <Filter>Header Files\classes\object</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

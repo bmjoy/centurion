@@ -422,7 +422,7 @@ namespace editor {
 			if (type == "building"){
 				building_pointer->SetName(text_input[0].get_text());
 				if (building_pointer->is_independent())
-					building_pointer->set_settlement_name(text_input[1].get_text());
+					building_pointer->GetSettlement().SetSettlementName(text_input[1].get_text());
 			}
 			PropertiesWindowIsOpen = false;
 			IsWindowOpened = false;

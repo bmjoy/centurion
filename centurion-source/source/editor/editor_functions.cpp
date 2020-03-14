@@ -117,7 +117,7 @@ namespace editor {
 				buildingTemp->create();
 				if (buildingTemp->is_independent()) 
 				{
-					buildingTemp->set_settlement_name("SETTL_" + buildingTemp->GetName());
+					buildingTemp->GetSettlement().SetSettlementName("SETTL_" + buildingTemp->GetName());
 				}
 				Game::AddGameObject(ID, buildingTemp);
 	

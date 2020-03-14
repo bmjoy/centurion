@@ -213,6 +213,7 @@ XCOPY "$(ProjectDir)xerces-c_3_1D_vc120.dll" "$(ProjectDir)$(OutDir)"</Command>
     <ClCompile Include="source\classes\object\object-data.cpp" />
     <ClCompile Include="source\classes\object\object-xml.cxx" />
     <ClCompile Include="source\classes\object\object.cpp" />
+    <ClCompile Include="source\classes\object\settlement.cpp" />
     <ClCompile Include="source\classes\object\unit.cpp" />
     <ClCompile Include="source\classes\picking.cpp" />
     <ClCompile Include="source\classes\Settings-xml.cxx" />
@@ -258,6 +259,7 @@ XCOPY "$(ProjectDir)xerces-c_3_1D_vc120.dll" "$(ProjectDir)$(OutDir)"</Command>
     <ClInclude Include="source\classes\engine.h" />
     <ClInclude Include="source\classes\ErrorCodes-xml.hxx" />
     <ClInclude Include="source\classes\errorCodes.h" />
+    <ClInclude Include="source\classes\object\settlement.h" />
     <ClInclude Include="source\classes\translationsTable.h" />
     <ClInclude Include="source\primitives\audio_manager.h" />
     <ClInclude Include="source\primitives\bitmap_font.h" />
