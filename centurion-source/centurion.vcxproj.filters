@@ -189,9 +189,6 @@
     <ClCompile Include="source\gui\circle.cpp">
       <Filter>Source Files\gui</Filter>
     </ClCompile>
-    <ClCompile Include="source\global.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="source\primitives\bitmap_font.cpp">
       <Filter>Source Files\primitives</Filter>
     </ClCompile>
@@ -435,9 +432,6 @@
       <Filter>Header Files\audio\interfaces</Filter>
     </ClInclude>
     <ClInclude Include="source\common\headers">
-      <Filter>Header Files\common</Filter>
-    </ClInclude>
-    <ClInclude Include="source\common\global">
       <Filter>Header Files\common</Filter>
     </ClInclude>
     <ClInclude Include="source\audio\vorbis\vorbis_file.h">

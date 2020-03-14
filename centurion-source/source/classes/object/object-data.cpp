@@ -1,5 +1,5 @@
 #include "object-data.h"
-#include <global>
+
 
 #include <file_manager.h>
 #include "object-xml.hxx"

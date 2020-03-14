@@ -8,12 +8,12 @@
 #include <engine.h>
 #include <surface>
 
-#include <global>
+
 
 #include <unit_sprite.h>
 
 using namespace math;
-using namespace glb;
+
 
 
 

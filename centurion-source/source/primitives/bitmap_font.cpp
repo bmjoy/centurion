@@ -8,7 +8,7 @@
 
 #include <file_manager.h>
 
-using namespace glb;
+
 
 namespace txt {
 	bool isArabic(int codepoint) {

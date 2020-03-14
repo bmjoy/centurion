@@ -7,7 +7,7 @@
 
 #include <terrain.h>
 
-using namespace glb;
+
 
 
 namespace editor {

@@ -222,7 +222,6 @@ XCOPY "$(ProjectDir)xerces-c_3_1D_vc120.dll" "$(ProjectDir)$(OutDir)"</Command>
     <ClCompile Include="source\classes\translationsTable-xml.cxx" />
     <ClCompile Include="source\classes\translationsTable.cpp" />
     <ClCompile Include="source\editor\editor_functions.cpp" />
-    <ClCompile Include="source\global.cpp" />
     <ClCompile Include="source\gui\text_box.cpp" />
     <ClCompile Include="source\gui\text_input.cpp" />
     <ClCompile Include="source\interface\editor_addobject_window.cpp" />
@@ -457,7 +456,6 @@ XCOPY "$(ProjectDir)xerces-c_3_1D_vc120.dll" "$(ProjectDir)$(OutDir)"</Command>
     <ClInclude Include="source\audio\sndfile.hh" />
     <ClInclude Include="source\audio\sound.h" />
     <ClInclude Include="source\audio\sound_buffer.h" />
-    <ClInclude Include="source\common\global" />
     <ClInclude Include="source\extern\includes\json.hpp" />
     <ClInclude Include="source\extern\includes\stb_image.h" />
   </ItemGroup>

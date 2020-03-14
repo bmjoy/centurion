@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no" ?>
+<c_mapObjects xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../assets/xml-schemas/mapObjects.xsd">
+  <c_buildings>
+    <c_settlement name="rtownhall_24" player="1" x="2397" y="18238">
+      <c_building class="rtownhall" healthperc="100" id="1" name="rtownhall_24" xOffset="0" yOffset="0"/>
+      <c_building class="rarena" healthperc="100" id="2" name="rarena_25" xOffset="1005" yOffset="296"/>
+      <c_building class="rblacksmith" healthperc="100" id="3" name="rblacksmith_26" xOffset="-29" yOffset="715"/>
+      <c_building class="rtemple" healthperc="100" id="4" name="rtemple_27" xOffset="695" yOffset="-589"/>
+      <c_building class="rtavern" healthperc="100" id="5" name="rtavern_28" xOffset="-662" yOffset="-775"/>
+      <c_building class="rbarracks" healthperc="100" id="6" name="rbarracks_29" xOffset="-1045" yOffset="154"/>
+      <c_building class="eblacksmith" healthperc="100" id="8" name="eblacksmith_34" xOffset="5998" yOffset="-1227"/>
+      <c_building class="etavern" healthperc="100" id="9" name="etavern_35" xOffset="7370" yOffset="-994"/>
+      <c_building class="etemple" healthperc="100" id="10" name="etemple_36" xOffset="7298" yOffset="154"/>
+      <c_building class="eosiristemple" healthperc="100" id="11" name="eosiristemple_37" xOffset="5989" yOffset="475"/>
+      <c_building class="ebarracks" healthperc="100" id="12" name="ebarracks_38" xOffset="5271" yOffset="-423"/>
+    </c_settlement>
+    <c_settlement name="etownhall_33" player="1" x="8808" y="17919">
+      <c_building class="etownhall" healthperc="100" id="7" name="etownhall_33" xOffset="0" yOffset="0"/>
+      <c_building class="rarena" healthperc="100" id="2" name="rarena_25" xOffset="-5405" yOffset="614"/>
+      <c_building class="rblacksmith" healthperc="100" id="3" name="rblacksmith_26" xOffset="-6440" yOffset="1034"/>
+      <c_building class="rtemple" healthperc="100" id="4" name="rtemple_27" xOffset="-5715" yOffset="-271"/>
+      <c_building class="rtavern" healthperc="100" id="5" name="rtavern_28" xOffset="-7073" yOffset="-457"/>
+      <c_building class="rbarracks" healthperc="100" id="6" name="rbarracks_29" xOffset="-7456" yOffset="473"/>
+      <c_building class="eblacksmith" healthperc="100" id="8" name="eblacksmith_34" xOffset="-412" yOffset="-908"/>
+      <c_building class="etavern" healthperc="100" id="9" name="etavern_35" xOffset="959" yOffset="-676"/>
+      <c_building class="etemple" healthperc="100" id="10" name="etemple_36" xOffset="887" yOffset="472"/>
+      <c_building class="eosiristemple" healthperc="100" id="11" name="eosiristemple_37" xOffset="-421" yOffset="793"/>
+      <c_building class="ebarracks" healthperc="100" id="12" name="ebarracks_38" xOffset="-1139" yOffset="-104"/>
+    </c_settlement>
+  </c_buildings>
+  <c_decorations>
+    <c_decoration class="broadleaf_1" id="13" x="1919" y="18857"/>
+    <c_decoration class="broadleaf_1" id="14" x="3444" y="18133"/>
+  </c_decorations>
+  <c_units/>
+</c_mapObjects>

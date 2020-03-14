@@ -1,7 +1,0 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no" ?>
-<c_mapObjects xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../assets/xml-schemas/mapObjects.xsd">
-  <object class="etownhall" healthperc="100" id="1" name="etownhall_1" player="1" x="1795" y="781"/>
-  <object class="etemple" healthperc="100" id="2" name="etemple_2" player="1" x="671" y="884"/>
-  <object class="ebarracks" healthperc="100" id="3" name="ebarracks_3" player="1" x="1394" y="1424"/>
-  <object class="broadleaf_1" id="4" player="1" x="1228" y="1136"/>
-</c_mapObjects>

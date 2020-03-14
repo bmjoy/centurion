@@ -1,5 +1,5 @@
 #include <gui>
-#include <global>
+
 #include <engine.h>
 
 #include <empty_circle.h>
@@ -8,7 +8,7 @@ namespace gui {
 
 	using namespace std;
 	using namespace glm;
-	using namespace glb;
+	
 
 	Circle::Circle() {
 		originMap["bottom-left"] = 0;

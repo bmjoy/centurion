@@ -6,11 +6,11 @@
 #include <picking.h>
 #include <object/unit.h>
 
-#include <global>
+
 
 #pragma region Namespaces
 
-using namespace glb;
+
 using namespace std;
 using namespace glm;
 

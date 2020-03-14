@@ -1,7 +1,7 @@
 #include "engine.h"
 #include <file_manager.h>
 
-#include <global>
+
 #include <translationsTable.h>
 #include <object/object-data.h>
 
@@ -24,6 +24,7 @@
 #include <object/unit.h>
 #include <surface>
 #include <settings.h>
+#include <errorCodes.h>
 
 // for mouse cursor
 #include <cursor_image.h>
@@ -41,7 +42,7 @@
 
 using namespace std;
 using namespace glm;
-using namespace glb;
+
 using namespace menu;
 using namespace debug;
 
@@ -483,6 +484,45 @@ bool Engine::reset;
 Engine::Engine() { }
 
 void Engine::Init() {
+
+	// old initParams (global)
+
+	try {
+
+		ErrorCodes::ReadErrorCodesXml();
+		Logger::CleanLogs();
+
+		Settings::Init();
+		Settings::ReadSettings();
+
+		Engine::myWindow::Ratio = Engine::myWindow::Width / Engine::myWindow::Height;
+		Engine::myWindow::WidthZoomed = Engine::myWindow::Width + (Engine::Camera::GetCurrentZoom() - 1) * Engine::Camera::GetZoomFactor();
+		Engine::myWindow::HeightZoomed = Engine::myWindow::Height + (Engine::Camera::GetCurrentZoom() - 1) * Engine::Camera::GetZoomFactor() / Engine::myWindow::Ratio;
+
+		setMenuProjectionMatrix(glm::ortho(0.0f, Engine::myWindow::Width, 0.0f, Engine::myWindow::Height, -100.0f, 100.0f));
+		setCameraProjectionMatrix(glm::ortho(0.0f, Engine::myWindow::WidthZoomed, 0.0f, Engine::myWindow::HeightZoomed, -(float)MEDIUM_MAP_WIDTH, (float)MEDIUM_MAP_WIDTH));
+
+
+		ifstream data_path("assets/data/data.json");
+		//Close the game if it wasn't able to find or process data.json file
+		if (!data_path.good()) {
+			//forceGameClosure("NOT_FOUND", "ERROR_data");
+		}
+		json data = json::parse(data_path);
+
+		for (int i = 0; i < data["player_colors"].size(); i++) {
+			vec3 color = vec3(data["player_colors"][i]["r"], data["player_colors"][i]["g"], data["player_colors"][i]["b"]);
+			Game::AddColor(color);
+		}
+
+
+	}
+	catch (...) {
+		std::cout << "An error occurred" << std::endl;
+	}
+
+	//------------------------------
+
 	nbFrames = 0;
 	Fps = 0;
 	Mpfs = 0;

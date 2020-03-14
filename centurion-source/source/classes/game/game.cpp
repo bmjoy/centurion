@@ -1,6 +1,6 @@
 #include "game.h"
 #include <surface>
-#include <global>
+
 #include "strategy.h"
 #include <picking.h>
 #include <maths.h>
@@ -18,7 +18,7 @@
 
 #pragma region Namespaces
 
-using namespace glb;
+
 
 #pragma endregion
 
@@ -32,6 +32,22 @@ Game::Map::Map() {}
 
 void Game::Map::LoadScenario(string scenarioName)
 {
+	try
+	{
+		string scenarioPath = "scenarios/" + scenarioName;
+
+		LoadHeights(scenarioPath + "/heights");
+		LoadTexture(scenarioPath + "/texture");
+		LoadMapObjectsFromXml(scenarioPath + "/mapObjects.xml");
+
+		UpdateSettlementBuildings();
+	}
+	catch (...)
+	{
+		Logger::LogMessage msg = Logger::LogMessage("An error occurred loading the following scenario: \"" + scenarioName + "\"", "", "Game::Map", "LoadScenario");
+		Logger::Error(msg);
+		throw;
+	}
 }
 
 void Game::Map::SaveScenario(string scenarioName)
@@ -57,10 +73,6 @@ void Game::Map::SaveScenario(string scenarioName)
 		Logger::Error(msg);
 		throw;
 	}
-}
-
-void Game::Map::ReadMapObjectsFromXml(string xmlPath)
-{
 }
 
 void Game::Map::SaveMapObjectsToXml(string xmlPath)
@@ -105,6 +117,7 @@ void Game::Map::SaveMapObjectsToXml(string xmlPath)
 					c_building1::yOffset_type(gobj2->GetPosition().y - gobj->GetPosition().y)
 				);
 				b2.healthperc(100);
+				b2.name(gobj2->GetName());
 				_settl.c_building().push_back(b2);
 			}
 
@@ -147,6 +160,18 @@ void Game::Map::SaveMapObjectsToXml(string xmlPath)
 
 		c_decorations _decorations = c_decorations();
 
+		vector<Decoration*> _decors = Game::GetListOfDecorations();
+		for (int i = 0; i < _decors.size(); i++) {
+			c_decoration _dec = c_decoration(
+				c_decoration::class_type(_decors[i]->GetClassName()),
+				c_decoration::id_type(_decors[i]->GetPickingID()),
+				c_decoration::x_type(_decors[i]->GetPosition().x),
+				c_decoration::y_type(_decors[i]->GetPosition().y)
+			);
+
+			_decorations.c_decoration().push_back(_dec);
+		}
+
 		c_units _units = c_units();
 
 		c_mapObjects mapObjs = c_mapObjects(_buildings, _decorations, _units);
@@ -168,32 +193,153 @@ void Game::Map::SaveMapObjectsToXml(string xmlPath)
 
 void Game::Map::SaveHeights(string path)
 {
-	ofstream heightsFile(path);
-	if (heightsFile.is_open()) {
-		for (int i = 0; i < mapgen::nVertices * 4; i += 4)
-			if (i == 0) {
-				heightsFile << mapgen::MapHeights()[i] << "," << mapgen::MapHeights()[i + 1] << "," << mapgen::MapHeights()[i + 2] << "," << mapgen::MapHeights()[i + 3];
-			}
-			else {
-				heightsFile << "," << mapgen::MapHeights()[i] << "," << mapgen::MapHeights()[i + 1] << "," << mapgen::MapHeights()[i + 2] << "," << mapgen::MapHeights()[i + 3];
-			}
+	try
+	{
+		ofstream heightsFile(path);
+		if (heightsFile.is_open()) {
+			for (int i = 0; i < mapgen::nVertices * 4; i += 4)
+				if (i == 0) {
+					heightsFile << mapgen::MapHeights()[i] << "," << mapgen::MapHeights()[i + 1] << "," << mapgen::MapHeights()[i + 2] << "," << mapgen::MapHeights()[i + 3];
+				}
+				else {
+					heightsFile << "," << mapgen::MapHeights()[i] << "," << mapgen::MapHeights()[i + 1] << "," << mapgen::MapHeights()[i + 2] << "," << mapgen::MapHeights()[i + 3];
+				}
+		}
+		heightsFile.close();
 	}
-	heightsFile.close();
+	catch (...)
+	{
+		throw;
+	}
+
 }
 
 void Game::Map::SaveTexture(string path)
 {
-	ofstream textureFile(path);
-	if (textureFile.is_open()) {
-		for (int i = 0; i < mapgen::nVertices; i++)
-			if (i == 0) {
-				textureFile << mapgen::MapTextures()[i];
-			}
-			else {
-				textureFile << "," << mapgen::MapTextures()[i];
-			}
+	try
+	{
+		ofstream textureFile(path);
+		if (textureFile.is_open()) {
+			for (int i = 0; i < mapgen::nVertices; i++)
+				if (i == 0) {
+					textureFile << mapgen::MapTextures()[i];
+				}
+				else {
+					textureFile << "," << mapgen::MapTextures()[i];
+				}
+		}
+		textureFile.close();
 	}
-	textureFile.close();
+	catch (...)
+	{
+		throw;
+	}
+}
+
+void Game::Map::LoadMapObjectsFromXml(string xmlPath)
+{
+	try
+	{
+		/*xml_schema::properties props;
+		props.no_namespace_schema_location("mapObjects.xsd");*/
+		auto_ptr<c_mapObjects> mapObjs = c_mapObjects_(xmlPath);
+
+		// buildings 
+
+		// independent buildings and their ...
+
+		c_buildings::c_settlement_iterator _settl;
+		for (_settl = mapObjs->c_buildings().c_settlement().begin(); _settl != mapObjs->c_buildings().c_settlement().end(); _settl++) {
+
+			c_settlement::c_building_iterator _bld;
+			for (_bld = _settl->c_building().begin(); _bld != _settl->c_building().end(); _bld++) {
+
+				Building* b = new Building();
+				b->SetClassName((string)_bld->class_());
+				b->SetPlayer(_settl->player());
+				b->SetPosition(vec3(_settl->x() - _bld->xOffset(), _settl->y() - _bld->yOffset(), 0.f));
+				b->SetPickingID(PickingObject::GetPickingId());
+				b->GetSettlement().SetSettlementName(_settl->name());
+				b->SetType("building");
+				b->create(_bld->name().get());
+				Game::AddGameObject(b->GetPickingID(), b);
+			}
+		}
+
+		// stand alone buildings!!
+
+
+		// decorations
+
+		c_decorations::c_decoration_iterator _dec;
+		for (_dec = mapObjs->c_decorations().c_decoration().begin(); _dec != mapObjs->c_decorations().c_decoration().end(); _dec++) {
+			
+			Decoration* d = new Decoration();
+			d->SetClassName(_dec->class_());
+			d->SetPlayer(0);
+			d->SetPosition(vec3(_dec->x(), _dec->y(), 0.f));
+			d->SetPickingID(PickingObject::GetPickingId());
+			d->create();
+			d->SetType("decoration");
+			Game::AddGameObject(d->GetPickingID(), d);
+		}
+
+		// units
+	}
+	catch (const xml_schema::exception & e) {
+		string emsg = string(e.what());
+		Logger::LogMessage msg = Logger::LogMessage(emsg, "", "Game::Map", "LoadMapObjectsFromXml");
+		Logger::Error(msg);
+		throw;
+	}
+	catch (...)
+	{
+		throw;
+	}
+}
+
+
+
+void Game::Map::LoadHeights(string path)
+{
+	try
+	{
+		fstream fin;
+		fin.open(path);
+		string line, number;
+		getline(fin, line);
+		stringstream s(line);
+		int i = 0;
+		while (getline(s, number, ',')) {
+			mapgen::MapHeights()[i] = stof(number);
+			i++;
+		}
+	}
+	catch (...)
+	{
+		throw;
+	}
+}
+
+void Game::Map::LoadTexture(string path)
+{
+	try
+	{
+		fstream fin;
+		fin.open(path);
+		string line, number;
+		getline(fin, line);
+		stringstream s(line);
+		int i = 0;
+		while (getline(s, number, ',')) {
+			mapgen::MapTextures()[i] = stof(number);
+			i++;
+		}
+	}
+	catch (...)
+	{
+		throw;
+	}
 }
 
 void Game::Map::Reset() {
@@ -487,7 +633,7 @@ vector<Unit*> Game::GetListOfUnits() {
 vector<Decoration*> Game::GetListOfDecorations() {
 	vector<Decoration*> output = vector<Decoration*>();
 	for (int i = 0; i < MAX_NUMBER_OF_OBJECTS; i++) {
-		if (GameObjects[i] != nullptr && GameObjects[i]->IsBuilding()) {
+		if (GameObjects[i] != nullptr && GameObjects[i]->IsDecoration()) {
 			output.push_back(GameObjects[i]->AsDecoration());
 		}
 	}

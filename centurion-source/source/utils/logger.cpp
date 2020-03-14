@@ -135,7 +135,7 @@ void Logger::SaveParamsXML() {
 }
 
 void Logger::PrintLogMessage(LogMessage msg) {
-	if (glb::Settings::DebugIsActive) {
+	if (Settings::DebugIsActive) {
 		cout << "[DEBUG] " << msg.text << endl;
 	}
 }

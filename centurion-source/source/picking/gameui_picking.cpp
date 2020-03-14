@@ -3,7 +3,7 @@
 #include <engine.h>
 #include <game/strategy.h>
 
-using namespace glb;
+
 
 
 namespace game {

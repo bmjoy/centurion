@@ -1,6 +1,6 @@
 #include <gui>
 #include <picking.h>
-#include <global>
+
 #include <engine.h>
 
 #include "empty_rectangle.h"
@@ -10,7 +10,7 @@ namespace gui {
 
 	using namespace std;
 	using namespace glm;
-	using namespace glb;
+	
 
 	Rectangle::Rectangle()
 	{

@@ -8,11 +8,11 @@
 
 #include <terrain.h>
 
-#include <global>
+
 #include <file_manager.h>
 
 
-using namespace glb;
+
 
 
 namespace editor {
@@ -90,8 +90,6 @@ namespace editor {
 
 				if (pos == 3) { // save
 					Game::Map::SaveScenario(currentMapName);
-					//saveCurrentScenario(currentMapName);
-					//MapObjects::SaveMapObjectsToXml("scenarios/mapObjTry/mapObjects.xml");
 
 					for (int i = 0; i < titles.size(); i++) {
 						std::string s = titlesList[i];
@@ -235,11 +233,12 @@ namespace editor {
 				cout << "[DEBUG] You've chosen the following scenario to open: " + availableScenarios[selectedID] << endl;
 				Game::ResetGameObjects();
 
-				
-				openScenario(availableScenarios[selectedID]);
+				Game::Map::LoadScenario(availableScenarios[selectedID]);
+
 				currentMapName = availableScenarios[selectedID];
 				MapTerrain()->updateHeightsBuffer();
 				MapTerrain()->updateTextureBuffer();
+
 				OpenMapWindowIsOpen = false;
 				IsWindowOpened = false;
 			}
@@ -279,7 +278,7 @@ namespace editor {
 				MapTerrain()->updateHeightsBuffer();
 				MapTerrain()->updateTextureBuffer();
 				clearEditorVariables();
-				saveCurrentScenario(currentMapName);
+				Game::Map::SaveScenario(currentMapName);
 			}
 			else
 				Q_WINDOW()->setQuestion("QUESTION_overwriteMap");
@@ -304,7 +303,7 @@ namespace editor {
 				mapgen::reset_map();
 				MapTerrain()->updateHeightsBuffer();
 				MapTerrain()->updateTextureBuffer();
-				saveCurrentScenario(currentMapName);
+				Game::Map::SaveScenario(currentMapName);
 				cout << "[DEBUG] Map " + currentMapName + " has been overwritten successfully!" << endl;
 			}
 			if (question == "QUESTION_deleteAll") {

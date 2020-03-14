@@ -6,7 +6,7 @@
         <xs:element name="c_buildings">
           <xs:complexType>
             <xs:sequence>
-              <xs:element maxOccurs="unbounded" name="c_building">
+              <xs:element minOccurs="0" maxOccurs="unbounded" name="c_building">
                 <xs:complexType>
                   <xs:attribute name="class" type="xs:string" use="required" />
                   <xs:attribute name="id" type="xs:integer" use="required" />
@@ -20,10 +20,10 @@
                   <xs:attribute name="food" type="xs:integer" use="required" />
                 </xs:complexType>
               </xs:element>
-              <xs:element maxOccurs="unbounded" name="c_settlement">
+              <xs:element minOccurs="0" maxOccurs="unbounded" name="c_settlement">
                 <xs:complexType>
                   <xs:sequence>
-                    <xs:element maxOccurs="unbounded" name="c_building">
+                    <xs:element minOccurs="0" maxOccurs="unbounded" name="c_building">
                       <xs:complexType>
                         <xs:attribute name="class" type="xs:string" use="required" />
 						<xs:attribute name="name" type="xs:string" use="optional" />
@@ -51,7 +51,7 @@
         <xs:element name="c_decorations">
           <xs:complexType>
             <xs:sequence>
-              <xs:element maxOccurs="unbounded" name="c_decoration">
+              <xs:element minOccurs="0" maxOccurs="unbounded" name="c_decoration">
                 <xs:complexType>
                   <xs:attribute name="class" type="xs:string" use="required" />
                   <xs:attribute name="id" type="xs:integer" use="required" />
@@ -68,7 +68,7 @@
         <xs:element name="c_units">
           <xs:complexType>
             <xs:sequence>
-              <xs:element maxOccurs="unbounded" name="c_unit">
+              <xs:element minOccurs="0" maxOccurs="unbounded" name="c_unit">
                 <xs:complexType>
                   <xs:attribute name="class" type="xs:string" use="required" />
                   <xs:attribute name="name" type="xs:string" use="optional" />

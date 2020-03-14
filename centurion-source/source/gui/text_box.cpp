@@ -1,5 +1,5 @@
 #include <gui>
-#include <global>
+
 #include <engine.h>
 
 #include "bitmap_font.h"
@@ -9,7 +9,7 @@ namespace gui {
 
 	using namespace std;
 	using namespace glm;
-	using namespace glb;
+	
 
 	TextBox::TextBox() {
 	}

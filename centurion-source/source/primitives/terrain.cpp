@@ -5,7 +5,7 @@
 #include <game/strategy.h>
 #include <logger.h>
 
-using namespace glb;
+
 
 
 Terrain::Terrain(){

@@ -1,5 +1,5 @@
 #include <menu>
-#include <global>
+
 #include <player>
 #include <picking.h>
 #include <game/strategy.h>
@@ -7,7 +7,7 @@
 #include <engine.h>
 #include <translationsTable.h>
 
-using namespace glb;
+
 using namespace std;
 
 

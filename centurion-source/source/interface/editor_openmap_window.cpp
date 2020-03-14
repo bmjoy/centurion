@@ -1,12 +1,12 @@
 #include <interface>
 #include <picking.h>
 #include <surface>
-#include <global>
+
 #include <engine.h>
 #include <file_manager.h>
 #include <translationsTable.h>
 
-using namespace glb;
+
 
 
 namespace editor {

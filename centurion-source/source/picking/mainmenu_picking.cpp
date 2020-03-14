@@ -3,11 +3,11 @@
 #include <engine.h>
 #include <settings.h>
 #include <game/strategy.h>
-#include <global>
+
 #include <player>
 #include <interface>
 
-using namespace glb;
+
 
 
 

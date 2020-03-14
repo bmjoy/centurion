@@ -3,10 +3,10 @@
 #include <game/strategy.h>
 #include <picking.h>
 
-#include <global>
+
 #include <translationsTable.h>
 
-using namespace glb;
+
 
 
 namespace menu{

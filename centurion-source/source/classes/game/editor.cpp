@@ -5,9 +5,9 @@
 #include <interface>
 #include <engine.h>
 
-#include <global>
 
-using namespace glb;
+
+
 
 
 #pragma region Static variables
@@ -122,7 +122,7 @@ void Editor::handleKeyboardControls() {
 		if (Engine::Keyboard::IsKeyPressed(GLFW_KEY_LEFT_CONTROL) || Engine::Keyboard::IsKeyPressed(GLFW_KEY_RIGHT_CONTROL)) {
 			if (Engine::Keyboard::IsKeyPressed(GLFW_KEY_N)) { NewMapWindowIsOpen = true; NewMapResetText = true; IsWindowOpened = true; }
 			if (Engine::Keyboard::IsKeyPressed(GLFW_KEY_O)) { OpenMapWindowIsOpen = true; OpenMapWindowUpdate = true; IsWindowOpened = true; }
-			if (Engine::Keyboard::IsKeyPressed(GLFW_KEY_S)) { saveCurrentScenario(currentMapName); }
+			if (Engine::Keyboard::IsKeyPressed(GLFW_KEY_S)) { Game::Map::SaveScenario(currentMapName); }
 			if (Engine::Keyboard::IsKeyPressed(GLFW_KEY_A)) { TerrainBrushIsActive = false; TerrainBrushWindowIsOpen = false; AddObjectWindowIsOpen = !AddObjectWindowIsOpen; }
 			if (Engine::Keyboard::IsKeyPressed(GLFW_KEY_T)) { AddObjectWindowIsOpen = false; TerrainBrushIsActive = !TerrainBrushWindowIsOpen; TerrainBrushWindowIsOpen = !TerrainBrushWindowIsOpen; }
 		}

@@ -1,5 +1,5 @@
 #include <gui>
-#include <global>
+
 #include <engine.h>
 
 #include <translationsTable.h>
@@ -8,7 +8,7 @@ namespace gui {
 
 	using namespace std;
 	using namespace glm;
-	using namespace glb;
+	
 
 	FormInput::FormInput(bool options) {
 		boolOptions = options;

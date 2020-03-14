@@ -1,6 +1,6 @@
 #include <surface>
 #include <maths.h>
-#include <global>
+
 #include <game/game.h>
 #include <game/strategy.h>
 #include <player>

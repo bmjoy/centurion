@@ -7,7 +7,7 @@
 #include <picking.h>
 #include <interface>
 
-using namespace glb;
+
 using namespace std;
 using namespace glm;
 

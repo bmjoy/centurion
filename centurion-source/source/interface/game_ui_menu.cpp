@@ -4,7 +4,7 @@
 #include <picking.h>
 #include <translationsTable.h>
 
-using namespace glb;
+
 
 namespace game {
 

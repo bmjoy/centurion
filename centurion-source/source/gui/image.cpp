@@ -1,6 +1,6 @@
 #include <gui>
 #include <picking.h>
-#include <global>
+
 #include <engine.h>
 
 #include "image_sprite.h"
@@ -9,7 +9,7 @@ namespace gui {
 
 	using namespace std;
 	using namespace glm;
-	using namespace glb;
+	
 
 	Image::Image(){}
 

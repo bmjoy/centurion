@@ -1,6 +1,6 @@
 #include <game/editor.h>
 #include <interface>
-#include <global>
+
 #include <picking.h>
 #include <player>
 #include <game/strategy.h>
@@ -11,7 +11,7 @@
 
 #include <terrain.h>
 
-using namespace glb;
+
 
 namespace editor {
 

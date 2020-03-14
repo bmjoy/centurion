@@ -35,10 +35,12 @@ public:
 		~Map();
 	private:
 		Map();
-		static void ReadMapObjectsFromXml(string xmlPath);
 		static void SaveMapObjectsToXml(string xmlPath);
 		static void SaveHeights(string path);
 		static void SaveTexture(string path);
+		static void LoadMapObjectsFromXml(string xmlPath);
+		static void LoadHeights(string path);
+		static void LoadTexture(string path);
 		static bool isGridEnabled; 
 	};
 

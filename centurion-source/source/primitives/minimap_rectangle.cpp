@@ -6,7 +6,7 @@
 #include <engine.h>
 
 
-using namespace glb;
+
 
 MinimapRectangle::MinimapRectangle()
 {

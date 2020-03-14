@@ -2,7 +2,7 @@
 #include <game/strategy.h>
 #include <engine.h>
 
-using namespace glb;
+
 
 
 
