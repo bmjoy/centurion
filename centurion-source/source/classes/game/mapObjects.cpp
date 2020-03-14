@@ -26,7 +26,8 @@ void MapObjects::SaveMapObjectsToXml(string xmlPath)
 
 				Building* gobj = Game::GameObjects[i]->AsBuilding();
 
-				object o = object(gobj->GetClassName(), gobj->GetPickingID(), 1, gobj->GetPosition().x, gobj->GetPosition().y);
+				object o = object((object::class_type)gobj->GetClassName(), (object::id_type)gobj->GetPickingID(), 
+					(object::player_type)1, (object::x_type)gobj->GetPosition().x, (object::y_type)gobj->GetPosition().y);
 				o.healthperc(100);
 				o.name(gobj->GetName());
 
@@ -39,7 +40,8 @@ void MapObjects::SaveMapObjectsToXml(string xmlPath)
 
 				Decoration* gobj = Game::GameObjects[i]->AsDecoration();
 
-				object o = object(gobj->GetClassName(), gobj->GetPickingID(), 1, gobj->GetPosition().x, gobj->GetPosition().y);
+				object o = object((object::class_type)gobj->GetClassName(), (object::id_type)gobj->GetPickingID(),
+					(object::player_type)1, (object::x_type)gobj->GetPosition().x, (object::y_type)gobj->GetPosition().y);
 				//o.healthperc(100);
 				//o.name(gobj->GetName());
 				mapObjs.object().push_back(o);

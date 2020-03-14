@@ -14,7 +14,6 @@ using namespace glm;
 
 Decoration::Decoration() 
 {
-	//type = "decoration";
 	this->SetType("decoration");
 	settlementName = "N/A";
 	settlID = 0;
@@ -116,6 +115,7 @@ void Decoration::render(bool picking, int clickID, bool not_placeable)  {
 	}
 
 	decorData.position = vec2(this->GetPosition().x, this->GetPosition().y);
+	cout << not_placeable << endl;
 	DSprite()->render(decorData, not_placeable);
 }
 

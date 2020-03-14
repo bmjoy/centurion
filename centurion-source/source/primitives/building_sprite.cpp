@@ -11,7 +11,6 @@ BuildingSprite::BuildingSprite(){
 	fPath = "assets/shaders/bsprite/fragment.glsl";
 }
 
-
 BuildingSprite::BuildingSprite(int shaderID){
 	vPath = "assets/shaders/bsprite/vertex.glsl";
 	fPath = "assets/shaders/bsprite/fragment.glsl";
