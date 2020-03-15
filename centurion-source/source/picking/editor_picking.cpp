@@ -412,7 +412,7 @@ namespace editor {
 		string clickName = PickingUI::getPickedObjectName(Picking::leftClickID_UI);
 
 		text_input[0].active(clickName == "PropertiesWindow_name");
-		if (building_pointer->is_independent())
+		if (building_pointer->GetSettlement().IsIndipendent())
 			text_input[1].active(clickName == "PropertiesWindow_settl_name");
 
 		if (clickName == "PropertiesWindow_cancel") { // CANCEL
@@ -423,7 +423,7 @@ namespace editor {
 		if (clickName == "PropertiesWindow_apply") { // APPLY
 			if (type == "building"){
 				building_pointer->SetName(text_input[0].get_text());
-				if (building_pointer->is_independent())
+				if (building_pointer->GetSettlement().IsIndipendent())
 					building_pointer->GetSettlement().SetSettlementName(text_input[1].get_text());
 			}
 			PropertiesWindowIsOpen = false;

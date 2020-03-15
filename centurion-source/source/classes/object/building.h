@@ -15,42 +15,25 @@ class Player;
 
 class Settlement;
 
-//
-//	BUILDING --> source/building/building.cpp
-//
-
-struct buildingProperties
-{
-	// properties from class 
-	string type;
-	string category;
-	string ent_path;
-	string pass_path;
-	bool is_indipendent;
-	bool clickable_in_minimap;
-	bool is_townhall;
-	bool is_villagehall;
-
-	// properties from sprite
-	float sprite_width, sprite_height;
-	GLuint textureID;
-};
-
 class Building : public GObject
 {
 public:
 	Settlement GetSettlement(void);
 	void SetSettlement(const Settlement par_settlement);
 
+	bool IsClickableInMimimap(void);
+	void CanBeClickableInMimimap(const bool par_clickable);
+
+	bool IsPlaceable();
+	void SetPlaceable(const bool placeable);
+
+	string GetCategory();
 
 
 	void prepare() override;
 	void create(string Name = "");
 	void render(bool picking, int clickID = 0, bool not_placeable = false) override;
-	bool is_placeable();
-	void set_placeable(bool b) { isPlaceable = b; }
 	void set_status(bool b) { isCreated = b; }
-	bool is_independent() { return prop.is_indipendent; }
 
 	void set_settlement_building(Building *b) { independent = b; }
 	Building *get_settlement_building() { return independent; }
@@ -61,7 +44,6 @@ public:
 	int buildingsInSettlementCount() { return (int)subs_buildings.size(); }
 	void setWaitingToBeErased(bool b) { waitingToBeErased = b; }
 	bool getWaitingToBeErased() { return waitingToBeErased; }
-	string getCategory() { return prop.category; }
 
 	Building();
 	~Building();
@@ -69,21 +51,32 @@ public:
 private:
 	game::ObjectUI* buildingUI;
 	map<int, Building*> subs_buildings; // dependent buildings connected to indipendent one
-	buildingProperties prop;
 	vector<Unit> unitsInside;
 	Building *independent;
 	bool waitingToBeErased;
 	bool isCreated;
 	size_t buildingListSize;
-	bool isPlaceable;
+	bool bIsPlaceable;
+	bool bIsClickableInMimimap;
 	gui::Circle circle[2];
-	vec2 getSpriteSize(string ent_path);
-
+	string category;
+	string ent_path;
+	string pass_path;
+	bool bIsTownhall;
+	bool bIsVillagehall;
+	bool bIsCentralBuilding = false;
 	Settlement settlement;
+
+	// properties from sprite
+	float sprite_width, sprite_height;
+	GLuint textureID;
+
+	vec2 getSpriteSize(string ent_path);
 	//sound selectionSound; TODO
 };
 
-/*struct buildingProperties 
+//struct buildingProperties 
+/*
 {
 	// properties from class 
 	string type;

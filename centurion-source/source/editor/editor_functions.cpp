@@ -80,21 +80,21 @@ namespace editor {
 		if (type == "buildings") {
 			buildingTemp->SetPosition(vec3(x, y, 0.f));
 			buildingTemp->set_status(false);
-			buildingTemp->render(false, 0, !buildingTemp->is_placeable());
+			buildingTemp->render(false, 0, !buildingTemp->IsPlaceable());
 			
 			//Player will be able to see info about placing status
-			if (!buildingTemp->is_independent()) {
+			if (!buildingTemp->GetSettlement().IsIndipendent()) {
 				string s = "";
 				if (!buildingTemp->is_near_to_independent(&s))
 					textInfo.render_dynamic(TranslationsTable::GetTranslation("EDITOR_noSettlementsAround"), "tahoma_15px", 10, Engine::myWindow::Height - 50, vec4(255.f), "left", "center");
 				else
-					if (!buildingTemp->is_placeable())
+					if (!buildingTemp->IsPlaceable())
 						textInfo.render_dynamic(TranslationsTable::GetTranslation("EDITOR_impassablePoint"), "tahoma_15px", 10, Engine::myWindow::Height - 50, vec4(255.f), "left", "center");
 					else
 						textInfo.render_dynamic(TranslationsTable::GetTranslation("EDITOR_canAddStructure"), "tahoma_15px", 10, Engine::myWindow::Height - 50, vec4(255.f), "left", "center");
 			}
 			else {
-				if (!buildingTemp->is_placeable())
+				if (!buildingTemp->IsPlaceable())
 					textInfo.render_dynamic(TranslationsTable::GetTranslation("EDITOR_impassablePoint"), "tahoma_15px", 10, Engine::myWindow::Height - 50, vec4(255.f), "left", "center");
 				else
 					textInfo.render_dynamic(TranslationsTable::GetTranslation("EDITOR_canAddStructure"), "tahoma_15px", 10, Engine::myWindow::Height - 50, vec4(255.f), "left", "center");
@@ -110,12 +110,12 @@ namespace editor {
 	{
 		if (type == "buildings") 
 		{
-			if (buildingTemp->is_placeable())
+			if (buildingTemp->IsPlaceable())
 			{
 				unsigned int ID = PickingObject::GetPickingId();
 				buildingTemp->SetPickingID(ID);
 				buildingTemp->create();
-				if (buildingTemp->is_independent()) 
+				if (buildingTemp->GetSettlement().IsIndipendent())
 				{
 					buildingTemp->GetSettlement().SetSettlementName("SETTL_" + buildingTemp->GetName());
 				}
@@ -199,35 +199,36 @@ namespace editor {
 				float dx = x1 - movingObjectStartXMouse;
 				float dy = y1 - movingObjectStartYMouse;
 
-				if (!bld->is_independent()){
+				if (!bld->GetSettlement().IsIndipendent())
+{
 					if (!movingObject) bld->clear_pass();
 					bld->SetPosition(vec3(movingObjectXPos + dx, movingObjectYPos + dy, 0.f));
-					if (!bld->is_placeable()) {
+					if (!bld->IsPlaceable()) {
 						string s = "";
 						if (!bld->is_near_to_independent(&s)) {
 							textInfo.render_dynamic(TranslationsTable::GetTranslation("EDITOR_noSettlementsAround"), "tahoma_15px", 10, Engine::myWindow::Height - 50, vec4(255.f), "left", "center");
 						}
 						else
 							textInfo.render_dynamic(TranslationsTable::GetTranslation("EDITOR_impassablePoint"), "tahoma_15px", 10, Engine::myWindow::Height - 50, vec4(255.f), "left", "center");
-						bld->set_placeable(false);
+						bld->SetPlaceable(false);
 						movingObjectRestore = true;
 					}
 					else {
 						textInfo.render_dynamic(TranslationsTable::GetTranslation("EDITOR_canAddStructure"), "tahoma_15px", 10, Engine::myWindow::Height - 50, vec4(255.f), "left", "center");
-						bld->set_placeable(true);
+						bld->SetPlaceable(true);
 					}
 				}
 				else {
 					if (!movingObject) bld->clear_pass();
 					bld->SetPosition(vec3(movingObjectXPos + dx, movingObjectYPos + dy, 0.f));
-					if (!bld->is_placeable()) {
-						bld->set_placeable(false);
+					if (!bld->IsPlaceable()) {
+						bld->SetPlaceable(false);
 						movingObjectRestore = true;
 					}
 					else {
-						bld->set_placeable(true);
+						bld->SetPlaceable(true);
 					}
-					if (!bld->is_placeable())
+					if (!bld->IsPlaceable())
 						textInfo.render_dynamic(TranslationsTable::GetTranslation("EDITOR_impassablePoint"), "tahoma_15px", 10, Engine::myWindow::Height - 50, vec4(255.f), "left", "center");
 					else
 						textInfo.render_dynamic(TranslationsTable::GetTranslation("EDITOR_canAddStructure"), "tahoma_15px", 10, Engine::myWindow::Height - 50, vec4(255.f), "left", "center");
@@ -243,11 +244,11 @@ namespace editor {
 				if (movingObjectRestore) {
 					bld->SetPosition(vec3(movingObjectXPos, movingObjectYPos, 0.f));
 					bld->clear_pass();
-					bld->set_placeable(true);
+					bld->SetPlaceable(true);
 					bld->update_pass();
 				}
 				else {
-					bld->set_placeable(true);
+					bld->SetPlaceable(true);
 					bld->update_pass();
 				}
 				movingObject = false;

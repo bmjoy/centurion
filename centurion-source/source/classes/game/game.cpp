@@ -579,7 +579,7 @@ vector<Building*> Game::GetListOfIndipendentBuildings() {
 	vector<Building*> indipBuildings = vector<Building*>();
 	for (int i = 0; i < MAX_NUMBER_OF_OBJECTS; i++) {
 		if (GameObjects[i] != nullptr && GameObjects[i]->IsBuilding()) {
-			if (GameObjects[i]->AsBuilding()->is_independent()) {
+			if (GameObjects[i]->AsBuilding()->GetSettlement().IsIndipendent()) {
 				indipBuildings.push_back(GameObjects[i]->AsBuilding());
 			}
 		}
@@ -592,7 +592,7 @@ vector<Building*> Game::GetListOfStandAloneBuildings()
 	vector<Building*> saBuildings = vector<Building*>();
 	for (int i = 0; i < MAX_NUMBER_OF_OBJECTS; i++) {
 		if (GameObjects[i] != nullptr && GameObjects[i]->IsBuilding()) {
-			if (GameObjects[i]->AsBuilding()->get_settlement_building() == nullptr && GameObjects[i]->AsBuilding()->is_independent() == false) {
+			if (GameObjects[i]->AsBuilding()->get_settlement_building() == nullptr && GameObjects[i]->AsBuilding()->GetSettlement().IsIndipendent() == false) {
 				saBuildings.push_back(GameObjects[i]->AsBuilding());
 			}
 		}
@@ -779,7 +779,7 @@ void Game::GenerateSettlements(vector<vec2> &locs) {
 						b->create();
 						GameObjects[b->GetPickingID()] = b;
 
-						if (b->is_independent()) {
+						if (b->GetSettlement().IsIndipendent()) {
 							// update terrain around the townhall
 							// N.B: mapgen::grid_size * 2 because the map has "borders"
 
@@ -833,7 +833,7 @@ void Game::UpdateSettlementBuildings() {
 
 	for (int i = 0; i < listOfBuildings.size(); i++) {
 		Building* bld = listOfBuildings[i];
-		if (!bld->is_independent()) {
+		if (!bld->GetSettlement().IsIndipendent()) {
 			for (int j = 0; j < listOfIndipBuildings.size(); j++) {
 				Building* settl = listOfIndipBuildings[j];
 				if (settl->GetSettlement().GetSettlementName() == bld->GetSettlement().GetSettlementName()) {

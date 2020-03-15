@@ -15,12 +15,12 @@ using namespace glm;
 Building::Building() 
 {
 	this->SetType("building");
-	isCreated = false;
-	waitingToBeErased = false;
-	isPlaceable = true;
-	buildingListSize = 0;
-	prop.is_townhall = false;
-	prop.is_villagehall = false;
+	this->isCreated = false;
+	this->waitingToBeErased = false;
+	this->bIsPlaceable = true;
+	this->buildingListSize = 0;
+	this->bIsTownhall = false;
+	this->bIsVillagehall = false;
 }
 
 Settlement Building::GetSettlement(void)
@@ -32,38 +32,62 @@ void Building::SetSettlement(const Settlement par_settlement)
 	this->settlement = par_settlement;
 }
 
+bool Building::IsClickableInMimimap(void)
+{
+	return this->bIsClickableInMimimap;
+}
+
+void Building::CanBeClickableInMimimap(const bool par_clickable)
+{
+	this->bIsClickableInMimimap = par_clickable;
+}
+
+bool Building::IsPlaceable()
+{
+	vec3 var_position = this->GetPosition();
+	bool placeable = astar::checkAvailability(pass_grid, var_position);
+	string indCategory = "";
+	bool nearToIndependent = is_near_to_independent(&indCategory);
+	if (!this->settlement.IsIndipendent())
+	{
+		placeable = placeable && nearToIndependent && indCategory == this->category;
+	}
+	return placeable;
+}
+
+void Building::SetPlaceable(bool placeable)
+{
+	this->bIsPlaceable = placeable;
+}
+
+string Building::GetCategory()
+{
+	return this->category;
+}
+
+
 void Building::prepare() 
 {
 	this->SetType(data["type"].get<string>());
 	this->SetRaceName(data["race"].get<string>());
 	this->SetClassName(data["class_name"].get<string>());
-	prop.is_indipendent = (bool)data["is_independent"].get<int>();
-	prop.category = data["category"].get<string>();
-	prop.ent_path = data["ent_path"].get<string>();
-	prop.pass_path = data["pass_path"].get<string>();
-	prop.clickable_in_minimap = (bool)data["clickable_in_minimap"].get<int>();
-	prop.is_townhall = (this->GetClassName().substr(1) == "townhall");
-	prop.is_villagehall = (this->GetClassName().substr(1) == "village");
+	this->category = data["category"].get<string>();
+	this->ent_path = data["ent_path"].get<string>();
+	this->pass_path = data["pass_path"].get<string>();
+	this->bIsClickableInMimimap = (bool)data["clickable_in_minimap"].get<int>();
+	this->bIsTownhall = (this->GetClassName().substr(1) == "townhall");
+	this->bIsVillagehall = (this->GetClassName().substr(1) == "village");
 
 	/* file pass */
 	string str_className = this->GetClassName();
-	pass_grid = astar::readPassMatrix(prop.pass_path, str_className);
+	this->pass_grid = astar::readPassMatrix(this->pass_path, str_className);
 
-	vec2 spriteSize = getSpriteSize(prop.ent_path);
-	prop.sprite_width = spriteSize.x;
-	prop.sprite_height = spriteSize.y;
-	prop.textureID = BSprite()->getTextureId(this->GetClassName());
+	vec2 spriteSize = getSpriteSize(this->ent_path);
+	this->sprite_width = spriteSize.x;
+	this->sprite_height = spriteSize.y;
+	this->textureID = BSprite()->getTextureId(this->GetClassName());
 
 	isCreated = false;
-}
-
-bool Building::is_placeable() {
-	vec3 var_position = this->GetPosition();
-	bool placeable = astar::checkAvailability(pass_grid, var_position);
-	string indCategory = "";
-	bool nearToIndependent = is_near_to_independent(&indCategory);
-	if (!prop.is_indipendent) placeable = placeable && nearToIndependent && indCategory == prop.category;
-	return placeable;
 }
 
 bool Building::is_near_to_independent(string *Category) {
@@ -77,7 +101,7 @@ bool Building::is_near_to_independent(string *Category) {
 			set_settlement_building(bld);
 			string strSetName = bld->GetSettlement().GetSettlementName();
 			this->GetSettlement().SetSettlementName(strSetName);
-			(*Category) = bld->getCategory();
+			(*Category) = bld->GetCategory();
 			ok = true;
 			break;
 		}
@@ -89,23 +113,23 @@ void Building::create(string Name) {
 	this->SetType(data["type"].get<string>());
 	this->SetRaceName(data["race"].get<string>());
 	this->SetClassName(data["class_name"].get<string>());
-	prop.is_indipendent = (bool)data["is_independent"].get<int>();
-	prop.category = data["category"].get<string>();
-	prop.ent_path = data["ent_path"].get<string>();
-	prop.pass_path = data["pass_path"].get<string>();
-	prop.clickable_in_minimap = (bool)data["clickable_in_minimap"].get<int>();
-	prop.is_townhall = (this->GetClassName().substr(1) == "townhall");
-	prop.is_villagehall = (this->GetClassName().substr(1) == "village");
+	//prop.is_indipendent = (bool)data["is_independent"].get<int>();
+	this->category = data["category"].get<string>();
+	this->ent_path = data["ent_path"].get<string>();
+	this->pass_path = data["pass_path"].get<string>();
+	this->bIsClickableInMimimap = (bool)data["clickable_in_minimap"].get<int>();
+	this->bIsTownhall = (this->GetClassName().substr(1) == "townhall");
+	this->bIsVillagehall = (this->GetClassName().substr(1) == "village");
 
 	/* file pass */
 	string str_className = this->GetClassName();
-	if (pass_grid.size() == 0) pass_grid = astar::readPassMatrix(prop.pass_path, str_className);
+	if (pass_grid.size() == 0) pass_grid = astar::readPassMatrix(this->pass_path, str_className);
 	update_pass();
 
-	vec2 spriteSize = getSpriteSize(prop.ent_path);
-	prop.sprite_width = spriteSize.x;
-	prop.sprite_height = spriteSize.y;
-	prop.textureID = BSprite()->getTextureId(this->GetClassName());
+	vec2 spriteSize = getSpriteSize(this->ent_path);
+	this->sprite_width = spriteSize.x;
+	this->sprite_height = spriteSize.y;
+	this->textureID = BSprite()->getTextureId(this->GetClassName());
 	string name;
 	(Name == "") ? name = this->GetClassName() + "_" + to_string(this->GetPickingID()) : name = Name;
 	this->SetName(name);
@@ -126,11 +150,11 @@ void Building::create(string Name) {
 
 
 void Building::render(bool picking, int clickID, bool not_placeable) {
-	not_placeable = (not_placeable || !isPlaceable);
+	not_placeable = (not_placeable || !this->bIsPlaceable);
 
 	// keep updated not central buildings "settlement name"
-	if (!prop.is_indipendent && isCreated)
-		if (this->GetSettlement().GetSettlementName() != independent->GetSettlement().GetSettlementName())
+	if (!this->settlement.IsIndipendent() && isCreated)
+		if (this->settlement.GetSettlementName() != independent->GetSettlement().GetSettlementName())
 		{
 			string strSetName;
 			strSetName = independent->GetSettlement().GetSettlementName();
@@ -138,17 +162,23 @@ void Building::render(bool picking, int clickID, bool not_placeable) {
 		}
 		
 	// keep updated central buildings "subsidiaries buildings list"
-	if (Game::GetNumberOfBuildings() != buildingListSize && (prop.is_townhall || prop.is_villagehall)) {
+	if (Game::GetNumberOfBuildings() != buildingListSize && (this->bIsTownhall || this->bIsVillagehall)) 
+	{
 		subs_buildings.clear();
 		int k = 0;
 
 		vector<Building*> listOfBuildings = Game::GetListOfBuildings();
-		for (int i = 0; i < listOfBuildings.size(); i++) {
+		for (int i = 0; i < listOfBuildings.size(); i++) 
+		{
 			Building* bld = listOfBuildings[i];
-			if (bld->is_independent() == false) {
+			if (bld->GetSettlement().IsIndipendent() == false) 
+			{
 				if (bld->GetSettlement().GetSettlementName() == this->GetSettlement().GetSettlementName())
 				{
-					if (k == 0) { cout << "[DEBUG] Subsidiaries buildings to " + this->GetName() + " have been updated. Their names are: \n"; }
+					if (k == 0)
+					{ 
+						cout << "[DEBUG] Subsidiaries buildings to " + this->GetName() + " have been updated. Their names are: \n"; 
+					}
 					subs_buildings[bld->GetPickingID()] = bld;
 					cout << "   " << bld->GetName() << "\n";
 					k++;
@@ -164,7 +194,7 @@ void Building::render(bool picking, int clickID, bool not_placeable) {
 
 	if (Engine::getEnvironment() == "editor" && !Game::Minimap::IsActive()) {
 		if (this->IsSelected() && !editor::addingObject) circle[0].render(vec4(255.f), this->GetPosition().x, this->GetPosition().y - data["radius"].get<float>() / 15.5f); // selection circle (editor only)
-		if (this->IsSelected() && (prop.is_townhall || prop.is_villagehall) && !editor::addingObject) circle[1].render(vec4(0, 255, 255, 255), this->GetPosition().x, this->GetPosition().y); // selection circle (editor only)
+		if (this->IsSelected() && (this->bIsTownhall || this->bIsVillagehall) && !editor::addingObject) circle[1].render(vec4(0, 255, 255, 255), this->GetPosition().x, this->GetPosition().y); // selection circle (editor only)
 	}
 
 	if (Engine::getEnvironment() == "game" && this->IsSelected()) {
@@ -172,38 +202,48 @@ void Building::render(bool picking, int clickID, bool not_placeable) {
 	}
 
 	// rendering
-	BSprite()->render(prop.textureID, prop.clickable_in_minimap, this->GetPosition().x, this->GetPosition().y, prop.sprite_width, prop.sprite_height, picking, this->GetPickingID(), this->IsSelected(), player->getPlayerColor(), not_placeable);
+	BSprite()->render(this->textureID, this->bIsClickableInMimimap, this->GetPosition().x, this->GetPosition().y, this->sprite_width, this->sprite_height, picking, this->GetPickingID(), this->IsSelected(), player->getPlayerColor(), not_placeable);
 }
 
-int Building::UnitsInBuilding() {
-	if (prop.clickable_in_minimap) {
+int Building::UnitsInBuilding()
+{
+	if(this->bIsClickableInMimimap)
+	{
 		return (int)unitsInside.size();
 	}
-	else {
+	else 
+	{
 		return 0;
 	}
 }
 
-vector<Unit> Building::UnitsInHolder() {
-	if (prop.clickable_in_minimap) {
+vector<Unit> Building::UnitsInHolder() 
+{
+	if(this->bIsClickableInMimimap)
+	{
 		return unitsInside;
 	}
-	else {
+	else 
+	{
 		return {};
 	}
 }
 
-vector<int> Building::buildingsInSettlementIds() {
+vector<int> Building::buildingsInSettlementIds() 
+{
 	vector<int> ids;
-	for (map<int, Building*>::iterator sub = subs_buildings.begin(); sub != subs_buildings.end(); sub++) {
+	for (map<int, Building*>::iterator sub = subs_buildings.begin(); sub != subs_buildings.end(); sub++) 
+	{
 		ids.push_back(sub->first);
 	}
 	return ids;
 }
 
-vec2 Building::getSpriteSize(string ent_path) {
+vec2 Building::getSpriteSize(string ent_path)
+{
 	ifstream path_ent(ent_path);
-	if (!path_ent.good()) {
+	if (!path_ent.good()) 
+	{
 		stringstream ss;
 
 		ss << "Unable to find or process " << ent_path << ". The relative building, therefore, won't be loaded into the game.";

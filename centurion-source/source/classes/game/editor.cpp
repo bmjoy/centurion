@@ -125,7 +125,7 @@ void Editor::handleKeyboardControls() {
 			if (Game::IsGameObjectNotNull(Picking::leftClickID)) {
 				Building* b = Game::GetGameObjectPtrById(Picking::leftClickID)->AsBuilding();
 				if (b->IsSelected()) {
-					if (b->is_independent()) {
+					if (b->GetSettlement().IsIndipendent()) {
 						if (b->buildingsInSettlementCount() > 0) {
 							b->setWaitingToBeErased(true);
 							Q_WINDOW()->setQuestion("QUESTION_deleteAll");
