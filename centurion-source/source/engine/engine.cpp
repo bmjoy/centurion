@@ -3,7 +3,7 @@
 
 
 #include <translationsTable.h>
-#include <object/object-data.h>
+#include <classes/object-data.h>
 
 #ifndef __MSXML_LIBRARY_DEFINED__
 #define __MSXML_LIBRARY_DEFINED__
@@ -21,7 +21,7 @@
 #include <player>
 #include <menu>
 #include <interface>
-#include <object/unit.h>
+#include <classes/unit.h>
 #include <surface>
 #include <settings.h>
 #include <errorCodes.h>

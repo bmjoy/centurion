@@ -1,4 +1,4 @@
-#include <object/decoration.h>
+#include <classes/decoration.h>
 #include <engine.h>
 #include <stb_image.h>
 #include <player>

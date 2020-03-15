@@ -2,7 +2,7 @@
 
 #include <gui>
 #include <json.hpp>
-#include <object/object.h>
+#include <classes/object.h>
 #include "game.h"
 
 using namespace std;

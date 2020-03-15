@@ -2,10 +2,10 @@
 
 #include <gui>
 #include <json.hpp>
-#include <object/object.h>
-#include <object/building.h>
-#include <object/unit.h>
-#include <object/decoration.h>
+#include <classes/object.h>
+#include <classes/building.h>
+#include <classes/unit.h>
+#include <classes/decoration.h>
 #include <player>
 #include "match.h"
 

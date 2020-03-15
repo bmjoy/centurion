@@ -4,7 +4,7 @@
 #include <surface>
 #include <game/editor.h>
 #include <game/strategy.h>
-#include <object/object.h>
+#include <classes/object.h>
 
 #include <terrain.h>
 

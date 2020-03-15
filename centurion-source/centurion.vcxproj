@@ -22,7 +22,7 @@
     <VCProjectVersion>15.0</VCProjectVersion>
     <ProjectGuid>{29C92E4D-97E2-4049-A35E-F6A42D1C8AB9}</ProjectGuid>
     <RootNamespace>centurion</RootNamespace>
-    <WindowsTargetPlatformVersion>10.0.18362.0</WindowsTargetPlatformVersion>
+    <WindowsTargetPlatformVersion>10.0.17763.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
@@ -96,7 +96,7 @@
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(ProjectDir)source\extern\includes;$(ProjectDir)source\common;$(ProjectDir)source\classes;$(ProjectDir)source\utils;$(ProjectDir)source\primitives</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir)source\extern\includes;$(ProjectDir)source\common;$(ProjectDir)source\engine;$(ProjectDir)source\util;$(ProjectDir)source\gl-items;$(ProjectDir)source\ui</AdditionalIncludeDirectories>
       <DisableSpecificWarnings>4250</DisableSpecificWarnings>
       <AdditionalOptions>/utf-8 %(AdditionalOptions)</AdditionalOptions>
       <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
@@ -159,7 +159,7 @@ XCOPY "$(ProjectDir)xerces-c_3_1D_vc120.dll" "$(ProjectDir)$(OutDir)"</Command>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(ProjectDir)source\extern\includes;$(ProjectDir)source\common;$(ProjectDir)source\classes;$(ProjectDir)source\utils;$(ProjectDir)source\primitives</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir)source\extern\includes;$(ProjectDir)source\common;$(ProjectDir)source\engine;$(ProjectDir)source\util;$(ProjectDir)source\gl-items;$(ProjectDir)source\ui</AdditionalIncludeDirectories>
       <DisableSpecificWarnings>4250</DisableSpecificWarnings>
       <AdditionalOptions>/utf-8 %(AdditionalOptions)</AdditionalOptions>
       <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
@@ -200,30 +200,44 @@ XCOPY "$(ProjectDir)xerces-c_3_1D_vc120.dll" "$(ProjectDir)$(OutDir)"</Command>
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="source\audio\vorbis\ogg_vorbis.cpp" />
-    <ClCompile Include="source\classes\engine.cpp" />
-    <ClCompile Include="source\classes\ErrorCodes-xml.cxx" />
-    <ClCompile Include="source\classes\errorCodes.cpp" />
-    <ClCompile Include="source\classes\fontCharacters-xml.cxx" />
-    <ClCompile Include="source\classes\game\editor.cpp" />
-    <ClCompile Include="source\classes\game\game.cpp" />
-    <ClCompile Include="source\classes\game\mapObjects-xml.cxx" />
-    <ClCompile Include="source\classes\game\match.cpp" />
-    <ClCompile Include="source\classes\game\strategy.cpp" />
-    <ClCompile Include="source\classes\object\building.cpp" />
-    <ClCompile Include="source\classes\object\decoration.cpp" />
-    <ClCompile Include="source\classes\object\object-data.cpp" />
-    <ClCompile Include="source\classes\object\object-xml.cxx" />
-    <ClCompile Include="source\classes\object\object.cpp" />
-    <ClCompile Include="source\classes\object\settlement.cpp" />
-    <ClCompile Include="source\classes\object\unit.cpp" />
-    <ClCompile Include="source\classes\picking.cpp" />
-    <ClCompile Include="source\classes\Settings-xml.cxx" />
-    <ClCompile Include="source\classes\settings.cpp" />
-    <ClCompile Include="source\classes\translationsTable-xml.cxx" />
-    <ClCompile Include="source\classes\translationsTable.cpp" />
     <ClCompile Include="source\editor\editor_functions.cpp" />
-    <ClCompile Include="source\gui\text_box.cpp" />
-    <ClCompile Include="source\gui\text_input.cpp" />
+    <ClCompile Include="source\engine\classes\building.cpp" />
+    <ClCompile Include="source\engine\classes\decoration.cpp" />
+    <ClCompile Include="source\engine\classes\object-data.cpp" />
+    <ClCompile Include="source\engine\classes\object-xml.cxx" />
+    <ClCompile Include="source\engine\classes\object.cpp" />
+    <ClCompile Include="source\engine\classes\settlement.cpp" />
+    <ClCompile Include="source\engine\classes\unit.cpp" />
+    <ClCompile Include="source\engine\engine.cpp" />
+    <ClCompile Include="source\engine\ErrorCodes-xml.cxx" />
+    <ClCompile Include="source\engine\errorCodes.cpp" />
+    <ClCompile Include="source\engine\fontCharacters-xml.cxx" />
+    <ClCompile Include="source\engine\game\editor.cpp" />
+    <ClCompile Include="source\engine\game\game.cpp" />
+    <ClCompile Include="source\engine\game\mapObjects-xml.cxx" />
+    <ClCompile Include="source\engine\game\match.cpp" />
+    <ClCompile Include="source\engine\game\strategy.cpp" />
+    <ClCompile Include="source\engine\picking.cpp" />
+    <ClCompile Include="source\engine\Settings-xml.cxx" />
+    <ClCompile Include="source\engine\settings.cpp" />
+    <ClCompile Include="source\engine\translationsTable-xml.cxx" />
+    <ClCompile Include="source\engine\translationsTable.cpp" />
+    <ClCompile Include="source\gl-items\audio_manager.cpp" />
+    <ClCompile Include="source\gl-items\bitmap_font.cpp" />
+    <ClCompile Include="source\gl-items\building_sprite.cpp" />
+    <ClCompile Include="source\gl-items\cursor_image.cpp" />
+    <ClCompile Include="source\gl-items\decoration_sprite.cpp" />
+    <ClCompile Include="source\gl-items\empty_circle.cpp" />
+    <ClCompile Include="source\gl-items\empty_rectangle.cpp" />
+    <ClCompile Include="source\gl-items\filled_rectangle.cpp" />
+    <ClCompile Include="source\gl-items\grid.cpp" />
+    <ClCompile Include="source\gl-items\image_sprite.cpp" />
+    <ClCompile Include="source\gl-items\light.cpp" />
+    <ClCompile Include="source\gl-items\minimap_rectangle.cpp" />
+    <ClCompile Include="source\gl-items\primitives.cpp" />
+    <ClCompile Include="source\gl-items\shader.cpp" />
+    <ClCompile Include="source\gl-items\terrain.cpp" />
+    <ClCompile Include="source\gl-items\unit_sprite.cpp" />
     <ClCompile Include="source\interface\editor_addobject_window.cpp" />
     <ClCompile Include="source\interface\editor_newmap_window.cpp" />
     <ClCompile Include="source\interface\editor_openmap_window.cpp" />
@@ -237,52 +251,59 @@ XCOPY "$(ProjectDir)xerces-c_3_1D_vc120.dll" "$(ProjectDir)$(OutDir)"</Command>
     <ClCompile Include="source\picking\editor_picking.cpp" />
     <ClCompile Include="source\picking\gameui_picking.cpp" />
     <ClCompile Include="source\picking\mainmenu_picking.cpp" />
-    <ClCompile Include="source\primitives\audio_manager.cpp" />
-    <ClCompile Include="source\primitives\bitmap_font.cpp" />
-    <ClCompile Include="source\primitives\building_sprite.cpp" />
-    <ClCompile Include="source\primitives\cursor_image.cpp" />
-    <ClCompile Include="source\primitives\decoration_sprite.cpp" />
-    <ClCompile Include="source\primitives\empty_circle.cpp" />
-    <ClCompile Include="source\primitives\empty_rectangle.cpp" />
-    <ClCompile Include="source\primitives\filled_rectangle.cpp" />
-    <ClCompile Include="source\primitives\grid.cpp" />
-    <ClCompile Include="source\primitives\image_sprite.cpp" />
-    <ClCompile Include="source\primitives\light.cpp" />
-    <ClCompile Include="source\primitives\minimap_rectangle.cpp" />
-    <ClCompile Include="source\primitives\primitives.cpp" />
-    <ClCompile Include="source\primitives\shader.cpp" />
-    <ClCompile Include="source\primitives\terrain.cpp" />
-    <ClCompile Include="source\primitives\unit_sprite.cpp" />
-    <ClCompile Include="source\utils\logger.cpp" />
-    <ClCompile Include="source\utils\maths.cpp" />
-    <ClCompile Include="source\utils\file_manager.cpp" />
-    <ClInclude Include="source\classes\engine.h" />
-    <ClInclude Include="source\classes\ErrorCodes-xml.hxx" />
-    <ClInclude Include="source\classes\errorCodes.h" />
-    <ClInclude Include="source\classes\game\mapObjects-xml.hxx" />
-    <ClInclude Include="source\classes\object\settlement.h" />
-    <ClInclude Include="source\classes\translationsTable.h" />
-    <ClInclude Include="source\primitives\audio_manager.h" />
-    <ClInclude Include="source\primitives\bitmap_font.h" />
-    <ClInclude Include="source\primitives\building_sprite.h" />
-    <ClInclude Include="source\primitives\cursor_image.h" />
-    <ClInclude Include="source\primitives\decoration_sprite.h" />
-    <ClInclude Include="source\primitives\empty_circle.h" />
-    <ClInclude Include="source\primitives\empty_rectangle.h" />
-    <ClInclude Include="source\primitives\filled_rectangle.h" />
-    <ClInclude Include="source\primitives\grid.h" />
-    <ClInclude Include="source\primitives\header_primitives.h" />
-    <ClInclude Include="source\primitives\image_sprite.h" />
-    <ClInclude Include="source\primitives\light.h" />
-    <ClInclude Include="source\primitives\minimap_rectangle.h" />
-    <ClInclude Include="source\primitives\primitives.h" />
-    <ClInclude Include="source\primitives\primitives_structs.h" />
-    <ClInclude Include="source\primitives\shader.h" />
-    <ClInclude Include="source\primitives\terrain.h" />
-    <ClInclude Include="source\primitives\unit_sprite.h" />
-    <ClInclude Include="source\utils\logger.h" />
-    <ClInclude Include="source\utils\maths.h" />
-    <ClInclude Include="source\utils\file_manager.h" />
+    <ClCompile Include="source\ui\button.cpp" />
+    <ClCompile Include="source\ui\circle.cpp" />
+    <ClCompile Include="source\ui\form_input.cpp" />
+    <ClCompile Include="source\ui\image.cpp" />
+    <ClCompile Include="source\ui\rectangle.cpp" />
+    <ClCompile Include="source\ui\simple_text.cpp" />
+    <ClCompile Include="source\ui\text_box.cpp" />
+    <ClCompile Include="source\ui\text_input.cpp" />
+    <ClCompile Include="source\util\file_manager.cpp" />
+    <ClCompile Include="source\util\logger.cpp" />
+    <ClCompile Include="source\util\maths.cpp" />
+    <ClInclude Include="source\engine\classes\building.h" />
+    <ClInclude Include="source\engine\classes\decoration.h" />
+    <ClInclude Include="source\engine\classes\object-data.h" />
+    <ClInclude Include="source\engine\classes\object-xml.hxx" />
+    <ClInclude Include="source\engine\classes\object.h" />
+    <ClInclude Include="source\engine\classes\settlement.h" />
+    <ClInclude Include="source\engine\classes\unit.h" />
+    <ClInclude Include="source\engine\engine.h" />
+    <ClInclude Include="source\engine\ErrorCodes-xml.hxx" />
+    <ClInclude Include="source\engine\errorCodes.h" />
+    <ClInclude Include="source\engine\fontCharacters-xml.hxx" />
+    <ClInclude Include="source\engine\game\editor.h" />
+    <ClInclude Include="source\engine\game\game.h" />
+    <ClInclude Include="source\engine\game\mapObjects-xml.hxx" />
+    <ClInclude Include="source\engine\game\match.h" />
+    <ClInclude Include="source\engine\game\strategy.h" />
+    <ClInclude Include="source\engine\picking.h" />
+    <ClInclude Include="source\engine\Settings-xml.hxx" />
+    <ClInclude Include="source\engine\settings.h" />
+    <ClInclude Include="source\engine\translationsTable-xml.hxx" />
+    <ClInclude Include="source\engine\translationsTable.h" />
+    <ClInclude Include="source\gl-items\audio_manager.h" />
+    <ClInclude Include="source\gl-items\bitmap_font.h" />
+    <ClInclude Include="source\gl-items\building_sprite.h" />
+    <ClInclude Include="source\gl-items\cursor_image.h" />
+    <ClInclude Include="source\gl-items\decoration_sprite.h" />
+    <ClInclude Include="source\gl-items\empty_circle.h" />
+    <ClInclude Include="source\gl-items\empty_rectangle.h" />
+    <ClInclude Include="source\gl-items\filled_rectangle.h" />
+    <ClInclude Include="source\gl-items\grid.h" />
+    <ClInclude Include="source\gl-items\header_primitives.h" />
+    <ClInclude Include="source\gl-items\image_sprite.h" />
+    <ClInclude Include="source\gl-items\light.h" />
+    <ClInclude Include="source\gl-items\minimap_rectangle.h" />
+    <ClInclude Include="source\gl-items\primitives.h" />
+    <ClInclude Include="source\gl-items\primitives_structs.h" />
+    <ClInclude Include="source\gl-items\shader.h" />
+    <ClInclude Include="source\gl-items\terrain.h" />
+    <ClInclude Include="source\gl-items\unit_sprite.h" />
+    <ClInclude Include="source\util\file_manager.h" />
+    <ClInclude Include="source\util\logger.h" />
+    <ClInclude Include="source\util\maths.h" />
     <None Include="assets\shaders\bsprite\fragment.glsl">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
       <FileType>Document</FileType>
@@ -386,12 +407,6 @@ XCOPY "$(ProjectDir)xerces-c_3_1D_vc120.dll" "$(ProjectDir)$(OutDir)"</Command>
     <ClCompile Include="source\audio\sound.cpp" />
     <ClCompile Include="source\audio\sound_buffer.cpp" />
     <ClCompile Include="source\game\game_functions.cpp" />
-    <ClCompile Include="source\gui\button.cpp" />
-    <ClCompile Include="source\gui\circle.cpp" />
-    <ClCompile Include="source\gui\image.cpp" />
-    <ClCompile Include="source\gui\simple_text.cpp" />
-    <ClCompile Include="source\gui\form_input.cpp" />
-    <ClCompile Include="source\gui\rectangle.cpp" />
     <ClCompile Include="source\interface\debug_ui.cpp" />
     <ClCompile Include="source\interface\editor_menu.cpp" />
     <ClCompile Include="source\interface\game_ui_menu.cpp" />
@@ -410,32 +425,7 @@ XCOPY "$(ProjectDir)xerces-c_3_1D_vc120.dll" "$(ProjectDir)$(OutDir)"</Command>
     <ClInclude Include="source\audio\vorbis\ogg.h" />
     <ClInclude Include="source\audio\vorbis\os_types.h" />
     <ClInclude Include="source\audio\vorbis\vorbis_file.h" />
-    <ClInclude Include="source\classes\fontCharacters-xml.hxx" />
-    <ClInclude Include="source\classes\game\editor.h" />
-    <ClInclude Include="source\classes\game\game.h" />
-    <ClInclude Include="source\classes\game\match.h" />
-    <ClInclude Include="source\classes\game\strategy.h" />
-    <ClInclude Include="source\classes\object\building.h" />
-    <ClInclude Include="source\classes\object\decoration.h" />
-    <ClInclude Include="source\classes\object\object-data.h" />
-    <ClInclude Include="source\classes\object\object-xml.hxx" />
-    <ClInclude Include="source\classes\object\object.h" />
-    <ClInclude Include="source\classes\object\unit.h" />
-    <ClInclude Include="source\classes\picking.h" />
-    <ClInclude Include="source\classes\Settings-xml.hxx" />
-    <ClInclude Include="source\classes\settings.h" />
-    <ClInclude Include="source\classes\translationsTable-xml.hxx" />
-    <ClInclude Include="source\common\headers">
-      <FileType>Document</FileType>
-      <DeploymentContent Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</DeploymentContent>
-      <DeploymentContent Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</DeploymentContent>
-    </ClInclude>
-    <None Include="source\common\gui" />
-    <None Include="source\common\interface" />
-    <None Include="source\common\menu" />
-    <None Include="source\common\pathfinding" />
-    <None Include="source\common\player" />
-    <None Include="source\common\surface" />
+    <None Include="source\ui\gui" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="source\audio\audio_context.h" />

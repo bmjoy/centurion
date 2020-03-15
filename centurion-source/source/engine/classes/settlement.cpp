@@ -1,5 +1,5 @@
 #include <game/strategy.h>
-#include <object/settlement.h>
+#include <classes/settlement.h>
 
 using namespace std;
 

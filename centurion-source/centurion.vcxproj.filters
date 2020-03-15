@@ -13,17 +13,11 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
-    <Filter Include="Header Files\common">
-      <UniqueIdentifier>{fd0bb532-3102-4522-8ece-cb442ec0dda9}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Header Files\extern">
       <UniqueIdentifier>{670470c3-1bc9-4848-8246-fb2915e33329}</UniqueIdentifier>
     </Filter>
     <Filter Include="Source Files\game">
       <UniqueIdentifier>{f41b8cb8-4254-44e2-ba57-e1fefa5b4a59}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source Files\gui">
-      <UniqueIdentifier>{cd7bb7aa-742f-4898-a811-99cdb9deff96}</UniqueIdentifier>
     </Filter>
     <Filter Include="Source Files\menu">
       <UniqueIdentifier>{6f5e5b9c-c05e-48f8-845b-a9701197e29f}</UniqueIdentifier>
@@ -79,9 +73,6 @@
     <Filter Include="Header Files\audio\interfaces">
       <UniqueIdentifier>{52fd4780-8021-4b6e-b3a4-824126b4890b}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source Files\primitives">
-      <UniqueIdentifier>{7544753c-c7b5-4c53-b891-33f775a026b8}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Source Files\picking">
       <UniqueIdentifier>{c285b1d1-3a64-4327-b215-8460e4967b7c}</UniqueIdentifier>
     </Filter>
@@ -91,43 +82,46 @@
     <Filter Include="Shader Files\dsprite">
       <UniqueIdentifier>{d5bb376d-55ab-4930-b78f-201bac1a493b}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Header Files\classes">
-      <UniqueIdentifier>{69eec375-ef93-4607-9b3f-a440839a91b8}</UniqueIdentifier>
+    <Filter Include="Source Files\ui">
+      <UniqueIdentifier>{cd7bb7aa-742f-4898-a811-99cdb9deff96}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source Files\classes">
+    <Filter Include="Header Files\ui">
+      <UniqueIdentifier>{39a7342d-67e1-4237-af68-5639c38b7672}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\engine">
       <UniqueIdentifier>{10e4802a-a190-46d5-93e6-0d48b95d7ebf}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Header Files\classes\game">
-      <UniqueIdentifier>{a9e919bf-51a6-4e28-953f-820dc87c10ce}</UniqueIdentifier>
+    <Filter Include="Header Files\engine">
+      <UniqueIdentifier>{69eec375-ef93-4607-9b3f-a440839a91b8}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source Files\classes\game">
-      <UniqueIdentifier>{e62e959c-2da3-4c6d-a46e-ed920f9c438b}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Header Files\classes\object">
-      <UniqueIdentifier>{11ed68f9-c16f-4596-b215-ee4b4d36739e}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source Files\classes\object">
-      <UniqueIdentifier>{351fdacb-0f47-4ff8-85c3-02f5d91e47be}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Header Files\utils">
-      <UniqueIdentifier>{6f8ededa-6012-4857-8e38-642ea6a629ab}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source Files\utils">
+    <Filter Include="Source Files\util">
       <UniqueIdentifier>{ed95aebc-0b19-4289-a4e3-948ac379884d}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Header Files\primitives">
+    <Filter Include="Header Files\util">
+      <UniqueIdentifier>{6f8ededa-6012-4857-8e38-642ea6a629ab}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\engine\classes">
+      <UniqueIdentifier>{eb59885f-ce0c-4a5a-903f-49903da40f1e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\engine\classes">
+      <UniqueIdentifier>{c3b4c0e4-29c3-45aa-952b-f01d3b770ca4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\engine\game">
+      <UniqueIdentifier>{891f8528-264c-4230-a662-ce3c75a0ad08}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\engine\game">
+      <UniqueIdentifier>{dd051414-7a7e-4c9f-ace9-2dbc97d6fbbe}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\gl-items">
+      <UniqueIdentifier>{7544753c-c7b5-4c53-b891-33f775a026b8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\gl-items">
       <UniqueIdentifier>{21c5b0f0-af5d-4410-9e26-5f766460cf8e}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
       <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="source\gui\button.cpp">
-      <Filter>Source Files\gui</Filter>
-    </ClCompile>
-    <ClCompile Include="source\gui\form_input.cpp">
-      <Filter>Source Files\gui</Filter>
     </ClCompile>
     <ClCompile Include="source\menu\menu.cpp">
       <Filter>Source Files\menu</Filter>
@@ -138,9 +132,6 @@
     <ClCompile Include="source\player\player.cpp">
       <Filter>Source Files\player</Filter>
     </ClCompile>
-    <ClCompile Include="source\gui\rectangle.cpp">
-      <Filter>Source Files\gui</Filter>
-    </ClCompile>
     <ClCompile Include="source\interface\game_ui.cpp">
       <Filter>Source Files\interface</Filter>
     </ClCompile>
@@ -150,14 +141,8 @@
     <ClCompile Include="source\interface\game_ui_menu.cpp">
       <Filter>Source Files\interface</Filter>
     </ClCompile>
-    <ClCompile Include="source\gui\simple_text.cpp">
-      <Filter>Source Files\gui</Filter>
-    </ClCompile>
     <ClCompile Include="source\interface\debug_ui.cpp">
       <Filter>Source Files\interface</Filter>
-    </ClCompile>
-    <ClCompile Include="source\gui\image.cpp">
-      <Filter>Source Files\gui</Filter>
     </ClCompile>
     <ClCompile Include="source\interface\editor_menu.cpp">
       <Filter>Source Files\interface</Filter>
@@ -185,48 +170,6 @@
     </ClCompile>
     <ClCompile Include="source\audio\sound_buffer.cpp">
       <Filter>Source Files\audio</Filter>
-    </ClCompile>
-    <ClCompile Include="source\gui\circle.cpp">
-      <Filter>Source Files\gui</Filter>
-    </ClCompile>
-    <ClCompile Include="source\primitives\bitmap_font.cpp">
-      <Filter>Source Files\primitives</Filter>
-    </ClCompile>
-    <ClCompile Include="source\primitives\building_sprite.cpp">
-      <Filter>Source Files\primitives</Filter>
-    </ClCompile>
-    <ClCompile Include="source\primitives\cursor_image.cpp">
-      <Filter>Source Files\primitives</Filter>
-    </ClCompile>
-    <ClCompile Include="source\primitives\empty_circle.cpp">
-      <Filter>Source Files\primitives</Filter>
-    </ClCompile>
-    <ClCompile Include="source\primitives\empty_rectangle.cpp">
-      <Filter>Source Files\primitives</Filter>
-    </ClCompile>
-    <ClCompile Include="source\primitives\filled_rectangle.cpp">
-      <Filter>Source Files\primitives</Filter>
-    </ClCompile>
-    <ClCompile Include="source\primitives\grid.cpp">
-      <Filter>Source Files\primitives</Filter>
-    </ClCompile>
-    <ClCompile Include="source\primitives\image_sprite.cpp">
-      <Filter>Source Files\primitives</Filter>
-    </ClCompile>
-    <ClCompile Include="source\primitives\light.cpp">
-      <Filter>Source Files\primitives</Filter>
-    </ClCompile>
-    <ClCompile Include="source\primitives\shader.cpp">
-      <Filter>Source Files\primitives</Filter>
-    </ClCompile>
-    <ClCompile Include="source\primitives\terrain.cpp">
-      <Filter>Source Files\primitives</Filter>
-    </ClCompile>
-    <ClCompile Include="source\primitives\unit_sprite.cpp">
-      <Filter>Source Files\primitives</Filter>
-    </ClCompile>
-    <ClCompile Include="source\primitives\audio_manager.cpp">
-      <Filter>Source Files\primitives</Filter>
     </ClCompile>
     <ClCompile Include="source\game\game_functions.cpp">
       <Filter>Source Files\game</Filter>
@@ -261,9 +204,6 @@
     <ClCompile Include="source\picking\editor_picking.cpp">
       <Filter>Source Files\picking</Filter>
     </ClCompile>
-    <ClCompile Include="source\gui\text_input.cpp">
-      <Filter>Source Files\gui</Filter>
-    </ClCompile>
     <ClCompile Include="source\interface\editor_newmap_window.cpp">
       <Filter>Source Files\interface</Filter>
     </ClCompile>
@@ -282,92 +222,152 @@
     <ClCompile Include="source\interface\editor_question_window.cpp">
       <Filter>Source Files\interface</Filter>
     </ClCompile>
-    <ClCompile Include="source\gui\text_box.cpp">
-      <Filter>Source Files\gui</Filter>
-    </ClCompile>
-    <ClCompile Include="source\primitives\decoration_sprite.cpp">
-      <Filter>Source Files\primitives</Filter>
-    </ClCompile>
-    <ClCompile Include="source\primitives\minimap_rectangle.cpp">
-      <Filter>Source Files\primitives</Filter>
-    </ClCompile>
     <ClCompile Include="source\interface\object_ui.cpp">
       <Filter>Source Files\interface</Filter>
     </ClCompile>
-    <ClCompile Include="source\classes\settings.cpp">
-      <Filter>Source Files\classes</Filter>
+    <ClCompile Include="source\ui\simple_text.cpp">
+      <Filter>Source Files\ui</Filter>
     </ClCompile>
-    <ClCompile Include="source\classes\Settings-xml.cxx">
-      <Filter>Source Files\classes</Filter>
+    <ClCompile Include="source\ui\text_box.cpp">
+      <Filter>Source Files\ui</Filter>
     </ClCompile>
-    <ClCompile Include="source\classes\fontCharacters-xml.cxx">
-      <Filter>Source Files\classes</Filter>
+    <ClCompile Include="source\ui\text_input.cpp">
+      <Filter>Source Files\ui</Filter>
     </ClCompile>
-    <ClCompile Include="source\classes\game\strategy.cpp">
-      <Filter>Source Files\classes\game</Filter>
+    <ClCompile Include="source\ui\button.cpp">
+      <Filter>Source Files\ui</Filter>
     </ClCompile>
-    <ClCompile Include="source\classes\game\game.cpp">
-      <Filter>Source Files\classes\game</Filter>
+    <ClCompile Include="source\ui\circle.cpp">
+      <Filter>Source Files\ui</Filter>
     </ClCompile>
-    <ClCompile Include="source\classes\game\editor.cpp">
-      <Filter>Source Files\classes\game</Filter>
+    <ClCompile Include="source\ui\form_input.cpp">
+      <Filter>Source Files\ui</Filter>
     </ClCompile>
-    <ClCompile Include="source\classes\game\match.cpp">
-      <Filter>Source Files\classes\game</Filter>
+    <ClCompile Include="source\ui\image.cpp">
+      <Filter>Source Files\ui</Filter>
     </ClCompile>
-    <ClCompile Include="source\classes\object\object.cpp">
-      <Filter>Source Files\classes\object</Filter>
+    <ClCompile Include="source\ui\rectangle.cpp">
+      <Filter>Source Files\ui</Filter>
     </ClCompile>
-    <ClCompile Include="source\classes\object\building.cpp">
-      <Filter>Source Files\classes\object</Filter>
+    <ClCompile Include="source\util\file_manager.cpp">
+      <Filter>Source Files\util</Filter>
     </ClCompile>
-    <ClCompile Include="source\classes\object\decoration.cpp">
-      <Filter>Source Files\classes\object</Filter>
+    <ClCompile Include="source\util\logger.cpp">
+      <Filter>Source Files\util</Filter>
     </ClCompile>
-    <ClCompile Include="source\classes\object\unit.cpp">
-      <Filter>Source Files\classes\object</Filter>
+    <ClCompile Include="source\util\maths.cpp">
+      <Filter>Source Files\util</Filter>
     </ClCompile>
-    <ClCompile Include="source\classes\picking.cpp">
-      <Filter>Source Files\classes</Filter>
+    <ClCompile Include="source\engine\classes\building.cpp">
+      <Filter>Source Files\engine\classes</Filter>
     </ClCompile>
-    <ClCompile Include="source\classes\object\object-xml.cxx">
-      <Filter>Source Files\classes\object</Filter>
+    <ClCompile Include="source\engine\classes\decoration.cpp">
+      <Filter>Source Files\engine\classes</Filter>
     </ClCompile>
-    <ClCompile Include="source\classes\object\object-data.cpp">
-      <Filter>Source Files\classes\object</Filter>
+    <ClCompile Include="source\engine\classes\object.cpp">
+      <Filter>Source Files\engine\classes</Filter>
     </ClCompile>
-    <ClCompile Include="source\classes\translationsTable.cpp">
-      <Filter>Source Files\classes</Filter>
+    <ClCompile Include="source\engine\classes\object-data.cpp">
+      <Filter>Source Files\engine\classes</Filter>
     </ClCompile>
-    <ClCompile Include="source\classes\translationsTable-xml.cxx">
-      <Filter>Source Files\classes</Filter>
+    <ClCompile Include="source\engine\classes\object-xml.cxx">
+      <Filter>Source Files\engine\classes</Filter>
     </ClCompile>
-    <ClCompile Include="source\classes\ErrorCodes-xml.cxx">
-      <Filter>Source Files\classes</Filter>
+    <ClCompile Include="source\engine\classes\settlement.cpp">
+      <Filter>Source Files\engine\classes</Filter>
     </ClCompile>
-    <ClCompile Include="source\classes\errorCodes.cpp">
-      <Filter>Source Files\classes</Filter>
+    <ClCompile Include="source\engine\classes\unit.cpp">
+      <Filter>Source Files\engine\classes</Filter>
     </ClCompile>
-    <ClCompile Include="source\primitives\primitives.cpp">
-      <Filter>Source Files\primitives</Filter>
+    <ClCompile Include="source\engine\game\editor.cpp">
+      <Filter>Source Files\engine\game</Filter>
     </ClCompile>
-    <ClCompile Include="source\classes\engine.cpp">
-      <Filter>Source Files\classes</Filter>
+    <ClCompile Include="source\engine\game\game.cpp">
+      <Filter>Source Files\engine\game</Filter>
     </ClCompile>
-    <ClCompile Include="source\utils\logger.cpp">
-      <Filter>Source Files\utils</Filter>
+    <ClCompile Include="source\engine\game\mapObjects-xml.cxx">
+      <Filter>Source Files\engine\game</Filter>
     </ClCompile>
-    <ClCompile Include="source\utils\maths.cpp">
-      <Filter>Source Files\utils</Filter>
+    <ClCompile Include="source\engine\game\match.cpp">
+      <Filter>Source Files\engine\game</Filter>
     </ClCompile>
-    <ClCompile Include="source\utils\file_manager.cpp">
-      <Filter>Source Files\utils</Filter>
+    <ClCompile Include="source\engine\game\strategy.cpp">
+      <Filter>Source Files\engine\game</Filter>
     </ClCompile>
-    <ClCompile Include="source\classes\object\settlement.cpp">
-      <Filter>Source Files\classes\object</Filter>
+    <ClCompile Include="source\engine\engine.cpp">
+      <Filter>Source Files\engine</Filter>
     </ClCompile>
-    <ClCompile Include="source\classes\game\mapObjects-xml.cxx">
-      <Filter>Source Files\classes\game</Filter>
+    <ClCompile Include="source\engine\errorCodes.cpp">
+      <Filter>Source Files\engine</Filter>
+    </ClCompile>
+    <ClCompile Include="source\engine\ErrorCodes-xml.cxx">
+      <Filter>Source Files\engine</Filter>
+    </ClCompile>
+    <ClCompile Include="source\engine\fontCharacters-xml.cxx">
+      <Filter>Source Files\engine</Filter>
+    </ClCompile>
+    <ClCompile Include="source\engine\picking.cpp">
+      <Filter>Source Files\engine</Filter>
+    </ClCompile>
+    <ClCompile Include="source\engine\settings.cpp">
+      <Filter>Source Files\engine</Filter>
+    </ClCompile>
+    <ClCompile Include="source\engine\Settings-xml.cxx">
+      <Filter>Source Files\engine</Filter>
+    </ClCompile>
+    <ClCompile Include="source\engine\translationsTable.cpp">
+      <Filter>Source Files\engine</Filter>
+    </ClCompile>
+    <ClCompile Include="source\engine\translationsTable-xml.cxx">
+      <Filter>Source Files\engine</Filter>
+    </ClCompile>
+    <ClCompile Include="source\gl-items\audio_manager.cpp">
+      <Filter>Source Files\gl-items</Filter>
+    </ClCompile>
+    <ClCompile Include="source\gl-items\bitmap_font.cpp">
+      <Filter>Source Files\gl-items</Filter>
+    </ClCompile>
+    <ClCompile Include="source\gl-items\building_sprite.cpp">
+      <Filter>Source Files\gl-items</Filter>
+    </ClCompile>
+    <ClCompile Include="source\gl-items\cursor_image.cpp">
+      <Filter>Source Files\gl-items</Filter>
+    </ClCompile>
+    <ClCompile Include="source\gl-items\decoration_sprite.cpp">
+      <Filter>Source Files\gl-items</Filter>
+    </ClCompile>
+    <ClCompile Include="source\gl-items\empty_circle.cpp">
+      <Filter>Source Files\gl-items</Filter>
+    </ClCompile>
+    <ClCompile Include="source\gl-items\empty_rectangle.cpp">
+      <Filter>Source Files\gl-items</Filter>
+    </ClCompile>
+    <ClCompile Include="source\gl-items\filled_rectangle.cpp">
+      <Filter>Source Files\gl-items</Filter>
+    </ClCompile>
+    <ClCompile Include="source\gl-items\grid.cpp">
+      <Filter>Source Files\gl-items</Filter>
+    </ClCompile>
+    <ClCompile Include="source\gl-items\image_sprite.cpp">
+      <Filter>Source Files\gl-items</Filter>
+    </ClCompile>
+    <ClCompile Include="source\gl-items\light.cpp">
+      <Filter>Source Files\gl-items</Filter>
+    </ClCompile>
+    <ClCompile Include="source\gl-items\minimap_rectangle.cpp">
+      <Filter>Source Files\gl-items</Filter>
+    </ClCompile>
+    <ClCompile Include="source\gl-items\primitives.cpp">
+      <Filter>Source Files\gl-items</Filter>
+    </ClCompile>
+    <ClCompile Include="source\gl-items\shader.cpp">
+      <Filter>Source Files\gl-items</Filter>
+    </ClCompile>
+    <ClCompile Include="source\gl-items\terrain.cpp">
+      <Filter>Source Files\gl-items</Filter>
+    </ClCompile>
+    <ClCompile Include="source\gl-items\unit_sprite.cpp">
+      <Filter>Source Files\gl-items</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -431,9 +431,6 @@
     <ClInclude Include="source\audio\interfaces\IListener.h">
       <Filter>Header Files\audio\interfaces</Filter>
     </ClInclude>
-    <ClInclude Include="source\common\headers">
-      <Filter>Header Files\common</Filter>
-    </ClInclude>
     <ClInclude Include="source\audio\vorbis\vorbis_file.h">
       <Filter>Header Files\audio\vorbis</Filter>
     </ClInclude>
@@ -446,131 +443,131 @@
     <ClInclude Include="source\audio\vorbis\os_types.h">
       <Filter>Header Files\audio\vorbis</Filter>
     </ClInclude>
-    <ClInclude Include="source\classes\settings.h">
-      <Filter>Header Files\classes</Filter>
+    <ClInclude Include="source\util\file_manager.h">
+      <Filter>Header Files\util</Filter>
     </ClInclude>
-    <ClInclude Include="source\classes\Settings-xml.hxx">
-      <Filter>Header Files\classes</Filter>
+    <ClInclude Include="source\util\logger.h">
+      <Filter>Header Files\util</Filter>
     </ClInclude>
-    <ClInclude Include="source\classes\fontCharacters-xml.hxx">
-      <Filter>Header Files\classes</Filter>
+    <ClInclude Include="source\util\maths.h">
+      <Filter>Header Files\util</Filter>
     </ClInclude>
-    <ClInclude Include="source\classes\game\strategy.h">
-      <Filter>Header Files\classes\game</Filter>
+    <ClInclude Include="source\engine\engine.h">
+      <Filter>Header Files\engine</Filter>
     </ClInclude>
-    <ClInclude Include="source\classes\game\game.h">
-      <Filter>Header Files\classes\game</Filter>
+    <ClInclude Include="source\engine\errorCodes.h">
+      <Filter>Header Files\engine</Filter>
     </ClInclude>
-    <ClInclude Include="source\classes\game\editor.h">
-      <Filter>Header Files\classes\game</Filter>
+    <ClInclude Include="source\engine\ErrorCodes-xml.hxx">
+      <Filter>Header Files\engine</Filter>
     </ClInclude>
-    <ClInclude Include="source\classes\game\match.h">
-      <Filter>Header Files\classes\game</Filter>
+    <ClInclude Include="source\engine\fontCharacters-xml.hxx">
+      <Filter>Header Files\engine</Filter>
     </ClInclude>
-    <ClInclude Include="source\classes\object\object.h">
-      <Filter>Header Files\classes\object</Filter>
+    <ClInclude Include="source\engine\picking.h">
+      <Filter>Header Files\engine</Filter>
     </ClInclude>
-    <ClInclude Include="source\classes\object\unit.h">
-      <Filter>Header Files\classes\object</Filter>
+    <ClInclude Include="source\engine\settings.h">
+      <Filter>Header Files\engine</Filter>
     </ClInclude>
-    <ClInclude Include="source\classes\object\building.h">
-      <Filter>Header Files\classes\object</Filter>
+    <ClInclude Include="source\engine\Settings-xml.hxx">
+      <Filter>Header Files\engine</Filter>
     </ClInclude>
-    <ClInclude Include="source\classes\object\decoration.h">
-      <Filter>Header Files\classes\object</Filter>
+    <ClInclude Include="source\engine\translationsTable.h">
+      <Filter>Header Files\engine</Filter>
     </ClInclude>
-    <ClInclude Include="source\classes\picking.h">
-      <Filter>Header Files\classes</Filter>
+    <ClInclude Include="source\engine\translationsTable-xml.hxx">
+      <Filter>Header Files\engine</Filter>
     </ClInclude>
-    <ClInclude Include="source\classes\object\object-xml.hxx">
-      <Filter>Header Files\classes\object</Filter>
+    <ClInclude Include="source\engine\classes\building.h">
+      <Filter>Header Files\engine\classes</Filter>
     </ClInclude>
-    <ClInclude Include="source\classes\object\object-data.h">
-      <Filter>Header Files\classes\object</Filter>
+    <ClInclude Include="source\engine\classes\decoration.h">
+      <Filter>Header Files\engine\classes</Filter>
     </ClInclude>
-    <ClInclude Include="source\classes\translationsTable.h">
-      <Filter>Header Files\classes</Filter>
+    <ClInclude Include="source\engine\classes\object.h">
+      <Filter>Header Files\engine\classes</Filter>
     </ClInclude>
-    <ClInclude Include="source\classes\translationsTable-xml.hxx">
-      <Filter>Header Files\classes</Filter>
+    <ClInclude Include="source\engine\classes\object-data.h">
+      <Filter>Header Files\engine\classes</Filter>
     </ClInclude>
-    <ClInclude Include="source\classes\ErrorCodes-xml.hxx">
-      <Filter>Header Files\classes</Filter>
+    <ClInclude Include="source\engine\classes\object-xml.hxx">
+      <Filter>Header Files\engine\classes</Filter>
     </ClInclude>
-    <ClInclude Include="source\classes\errorCodes.h">
-      <Filter>Header Files\classes</Filter>
+    <ClInclude Include="source\engine\classes\settlement.h">
+      <Filter>Header Files\engine\classes</Filter>
     </ClInclude>
-    <ClInclude Include="source\primitives\header_primitives.h">
-      <Filter>Header Files\primitives</Filter>
+    <ClInclude Include="source\engine\classes\unit.h">
+      <Filter>Header Files\engine\classes</Filter>
     </ClInclude>
-    <ClInclude Include="source\primitives\primitives.h">
-      <Filter>Header Files\primitives</Filter>
+    <ClInclude Include="source\engine\game\editor.h">
+      <Filter>Header Files\engine\game</Filter>
     </ClInclude>
-    <ClInclude Include="source\primitives\unit_sprite.h">
-      <Filter>Header Files\primitives</Filter>
+    <ClInclude Include="source\engine\game\game.h">
+      <Filter>Header Files\engine\game</Filter>
     </ClInclude>
-    <ClInclude Include="source\primitives\audio_manager.h">
-      <Filter>Header Files\primitives</Filter>
+    <ClInclude Include="source\engine\game\mapObjects-xml.hxx">
+      <Filter>Header Files\engine\game</Filter>
     </ClInclude>
-    <ClInclude Include="source\primitives\bitmap_font.h">
-      <Filter>Header Files\primitives</Filter>
+    <ClInclude Include="source\engine\game\match.h">
+      <Filter>Header Files\engine\game</Filter>
     </ClInclude>
-    <ClInclude Include="source\primitives\building_sprite.h">
-      <Filter>Header Files\primitives</Filter>
+    <ClInclude Include="source\engine\game\strategy.h">
+      <Filter>Header Files\engine\game</Filter>
     </ClInclude>
-    <ClInclude Include="source\primitives\cursor_image.h">
-      <Filter>Header Files\primitives</Filter>
+    <ClInclude Include="source\gl-items\audio_manager.h">
+      <Filter>Header Files\gl-items</Filter>
     </ClInclude>
-    <ClInclude Include="source\primitives\decoration_sprite.h">
-      <Filter>Header Files\primitives</Filter>
+    <ClInclude Include="source\gl-items\bitmap_font.h">
+      <Filter>Header Files\gl-items</Filter>
     </ClInclude>
-    <ClInclude Include="source\primitives\empty_circle.h">
-      <Filter>Header Files\primitives</Filter>
+    <ClInclude Include="source\gl-items\building_sprite.h">
+      <Filter>Header Files\gl-items</Filter>
     </ClInclude>
-    <ClInclude Include="source\primitives\empty_rectangle.h">
-      <Filter>Header Files\primitives</Filter>
+    <ClInclude Include="source\gl-items\cursor_image.h">
+      <Filter>Header Files\gl-items</Filter>
     </ClInclude>
-    <ClInclude Include="source\primitives\filled_rectangle.h">
-      <Filter>Header Files\primitives</Filter>
+    <ClInclude Include="source\gl-items\decoration_sprite.h">
+      <Filter>Header Files\gl-items</Filter>
     </ClInclude>
-    <ClInclude Include="source\primitives\grid.h">
-      <Filter>Header Files\primitives</Filter>
+    <ClInclude Include="source\gl-items\empty_circle.h">
+      <Filter>Header Files\gl-items</Filter>
     </ClInclude>
-    <ClInclude Include="source\primitives\image_sprite.h">
-      <Filter>Header Files\primitives</Filter>
+    <ClInclude Include="source\gl-items\empty_rectangle.h">
+      <Filter>Header Files\gl-items</Filter>
     </ClInclude>
-    <ClInclude Include="source\primitives\light.h">
-      <Filter>Header Files\primitives</Filter>
+    <ClInclude Include="source\gl-items\filled_rectangle.h">
+      <Filter>Header Files\gl-items</Filter>
     </ClInclude>
-    <ClInclude Include="source\primitives\minimap_rectangle.h">
-      <Filter>Header Files\primitives</Filter>
+    <ClInclude Include="source\gl-items\grid.h">
+      <Filter>Header Files\gl-items</Filter>
     </ClInclude>
-    <ClInclude Include="source\primitives\shader.h">
-      <Filter>Header Files\primitives</Filter>
+    <ClInclude Include="source\gl-items\header_primitives.h">
+      <Filter>Header Files\gl-items</Filter>
     </ClInclude>
-    <ClInclude Include="source\primitives\terrain.h">
-      <Filter>Header Files\primitives</Filter>
+    <ClInclude Include="source\gl-items\image_sprite.h">
+      <Filter>Header Files\gl-items</Filter>
     </ClInclude>
-    <ClInclude Include="source\primitives\primitives_structs.h">
-      <Filter>Header Files\primitives</Filter>
+    <ClInclude Include="source\gl-items\light.h">
+      <Filter>Header Files\gl-items</Filter>
     </ClInclude>
-    <ClInclude Include="source\classes\engine.h">
-      <Filter>Header Files\classes</Filter>
+    <ClInclude Include="source\gl-items\minimap_rectangle.h">
+      <Filter>Header Files\gl-items</Filter>
     </ClInclude>
-    <ClInclude Include="source\utils\logger.h">
-      <Filter>Header Files\utils</Filter>
+    <ClInclude Include="source\gl-items\primitives.h">
+      <Filter>Header Files\gl-items</Filter>
     </ClInclude>
-    <ClInclude Include="source\utils\maths.h">
-      <Filter>Header Files\utils</Filter>
+    <ClInclude Include="source\gl-items\primitives_structs.h">
+      <Filter>Header Files\gl-items</Filter>
     </ClInclude>
-    <ClInclude Include="source\utils\file_manager.h">
-      <Filter>Header Files\utils</Filter>
+    <ClInclude Include="source\gl-items\shader.h">
+      <Filter>Header Files\gl-items</Filter>
     </ClInclude>
-    <ClInclude Include="source\classes\object\settlement.h">
-      <Filter>Header Files\classes\object</Filter>
+    <ClInclude Include="source\gl-items\terrain.h">
+      <Filter>Header Files\gl-items</Filter>
     </ClInclude>
-    <ClInclude Include="source\classes\game\mapObjects-xml.hxx">
-      <Filter>Header Files\classes\game</Filter>
+    <ClInclude Include="source\gl-items\unit_sprite.h">
+      <Filter>Header Files\gl-items</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -628,29 +625,14 @@
     <None Include="assets\shaders\usprite\vertex.glsl">
       <Filter>Shader Files\usprite</Filter>
     </None>
-    <None Include="source\common\gui">
-      <Filter>Header Files\common</Filter>
-    </None>
-    <None Include="source\common\surface">
-      <Filter>Header Files\common</Filter>
-    </None>
-    <None Include="source\common\player">
-      <Filter>Header Files\common</Filter>
-    </None>
-    <None Include="source\common\pathfinding">
-      <Filter>Header Files\common</Filter>
-    </None>
-    <None Include="source\common\menu">
-      <Filter>Header Files\common</Filter>
-    </None>
-    <None Include="source\common\interface">
-      <Filter>Header Files\common</Filter>
-    </None>
     <None Include="assets\shaders\dsprite\vertex.glsl">
       <Filter>Shader Files\dsprite</Filter>
     </None>
     <None Include="assets\shaders\dsprite\fragment.glsl">
       <Filter>Shader Files\dsprite</Filter>
+    </None>
+    <None Include="source\ui\gui">
+      <Filter>Header Files\ui</Filter>
     </None>
   </ItemGroup>
 </Project>

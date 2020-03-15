@@ -1,4 +1,4 @@
-#include <object/building.h>
+#include <classes/building.h>
 #include <engine.h>
 #include <stb_image.h>
 #include <player>

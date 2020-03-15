@@ -1,4 +1,4 @@
-#include <object/object.h>
+#include <classes/object.h>
 #include <player>
 #include <game/strategy.h>
 #include <pathfinding>
