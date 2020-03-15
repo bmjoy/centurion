@@ -118,6 +118,9 @@
     <Filter Include="Header Files\gl-items">
       <UniqueIdentifier>{21c5b0f0-af5d-4410-9e26-5f766460cf8e}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\common">
+      <UniqueIdentifier>{e3cc3c6b-deba-434a-9d53-5f03b3e7b6de}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -633,6 +636,27 @@
     </None>
     <None Include="source\ui\gui">
       <Filter>Header Files\ui</Filter>
+    </None>
+    <None Include="source\common\headers">
+      <Filter>Header Files\common</Filter>
+    </None>
+    <None Include="source\common\interface">
+      <Filter>Header Files\common</Filter>
+    </None>
+    <None Include="source\common\mapgen">
+      <Filter>Header Files\common</Filter>
+    </None>
+    <None Include="source\common\menu">
+      <Filter>Header Files\common</Filter>
+    </None>
+    <None Include="source\common\pathfinding">
+      <Filter>Header Files\common</Filter>
+    </None>
+    <None Include="source\common\player">
+      <Filter>Header Files\common</Filter>
+    </None>
+    <None Include="source\common\surface">
+      <Filter>Header Files\common</Filter>
     </None>
   </ItemGroup>
 </Project>

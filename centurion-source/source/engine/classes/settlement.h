@@ -22,8 +22,8 @@ public:
 	void SetMaxPopulation(const unsigned short int max_population);
 
 	vector<Building> GetBuildingsBelongToSettlement(void);
-	void AddBuildingToSettlement(const Building& b);
-	void RemoveBuildingFromSettlement(const Building& b);
+	bool AddBuildingToSettlement(Building b);
+	bool RemoveBuildingFromSettlement(Building b);
 
 	Settlement() {};
 	~Settlement() {};
@@ -34,5 +34,5 @@ private:
 	int gold;
 	unsigned short int population;
 	unsigned short int max_population;
-	vector<Building> buildingsList;
+	map<unsigned int, Building> buildingsOfSettlement;
 };

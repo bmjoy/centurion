@@ -61,15 +61,29 @@ void Settlement::SetMaxPopulation(const unsigned short int max_population)
 
 vector<Building> Settlement::GetBuildingsBelongToSettlement(void)
 {
-	return this->buildingsList;
+	return vector<Building>();
 }
 
-void Settlement::AddBuildingToSettlement(const Building &b)
+bool Settlement::AddBuildingToSettlement(Building b)
 {
-	this->buildingsList.push_back(b);
+	bool bAddCorrectly = false;
+	//Adds a new building into the map only if it isn't already present.
+	if(this->buildingsOfSettlement.count(b.GetPickingID()) == 0)
+	{
+		this->buildingsOfSettlement.insert(std::pair<unsigned int, Building>(b.GetPickingID(), b));
+		bAddCorrectly = true;
+	}
+	return bAddCorrectly;
 }
 
-void Settlement::RemoveBuildingFromSettlement(const Building &b)
+bool Settlement::RemoveBuildingFromSettlement(Building b)
 {
-	//ToDO
+	bool bRemovedCorrectly = false;
+	//The building can be removed only if it is present in the map.
+	if (this->buildingsOfSettlement.count(b.GetPickingID()) > 0)
+	{
+		this->buildingsOfSettlement.erase(b.GetPickingID());
+		bRemovedCorrectly = true;
+	}
+	return bRemovedCorrectly;
 }

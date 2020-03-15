@@ -425,6 +425,13 @@ XCOPY "$(ProjectDir)xerces-c_3_1D_vc120.dll" "$(ProjectDir)$(OutDir)"</Command>
     <ClInclude Include="source\audio\vorbis\ogg.h" />
     <ClInclude Include="source\audio\vorbis\os_types.h" />
     <ClInclude Include="source\audio\vorbis\vorbis_file.h" />
+    <None Include="source\common\headers" />
+    <None Include="source\common\interface" />
+    <None Include="source\common\mapgen" />
+    <None Include="source\common\menu" />
+    <None Include="source\common\pathfinding" />
+    <None Include="source\common\player" />
+    <None Include="source\common\surface" />
     <None Include="source\ui\gui" />
   </ItemGroup>
   <ItemGroup>
