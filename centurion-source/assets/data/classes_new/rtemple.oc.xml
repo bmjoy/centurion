@@ -1,4 +1,4 @@
-<c_object parent="Building" type="building" class_name="RTemple" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../xml-schemas/Object.xsd">
+<c_object parent="Building" type="building" class_name="RTemple">
  <properties>
     <property name="race" value="Rome"/>
     <property name="radius" value="450"/>

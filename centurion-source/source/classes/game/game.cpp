@@ -16,13 +16,6 @@
 
 #include "mapObjects-xml.hxx"
 
-#pragma region Namespaces
-
-
-
-#pragma endregion
-
-
 #pragma region Map class
 
 bool Game::Map::Wireframe = false;
@@ -54,7 +47,7 @@ void Game::Map::SaveScenario(string scenarioName)
 {
 	try
 	{
-		string scenarioPath = "scenarios/" + scenarioName;
+		string scenarioPath = Folders::SCENARIOS + scenarioName;
 
 		if (FileManager::CheckIfFolderExists(scenarioPath) == false) {
 			FileManager::CreateFolder(scenarioPath);
@@ -124,9 +117,6 @@ void Game::Map::SaveMapObjectsToXml(string xmlPath)
 			_buildings.c_settlement().push_back(_settl);
 		}
 
-
-
-
 		//vector<Building*> indip_bs = GetListOfIndipendentBuildings();
 
 		//for (int i = 0; i < indip_bs.size(); i++) {
@@ -156,8 +146,6 @@ void Game::Map::SaveMapObjectsToXml(string xmlPath)
 		//	}
 		//}
 
-
-
 		c_decorations _decorations = c_decorations();
 
 		vector<Decoration*> _decors = Game::GetListOfDecorations();
@@ -177,7 +165,7 @@ void Game::Map::SaveMapObjectsToXml(string xmlPath)
 		c_mapObjects mapObjs = c_mapObjects(_buildings, _decorations, _units);
 
 		xml_schema::namespace_infomap map;
-		map[""].schema = "../../assets/xml-schemas/mapObjects.xsd";
+		map[""].schema = "";
 		ofstream ofs(xmlPath.c_str());
 		c_mapObjects_(ofs, mapObjs, map);
 	}
@@ -240,9 +228,9 @@ void Game::Map::LoadMapObjectsFromXml(string xmlPath)
 {
 	try
 	{
-		/*xml_schema::properties props;
-		props.no_namespace_schema_location("mapObjects.xsd");*/
-		auto_ptr<c_mapObjects> mapObjs = c_mapObjects_(xmlPath);
+		xml_schema::properties props;
+		props.no_namespace_schema_location(Folders::XML_SCHEMAS + "mapObjects.xsd");
+		auto_ptr<c_mapObjects> mapObjs = c_mapObjects_(xmlPath, 0, props);
 
 		// buildings 
 
@@ -256,7 +244,7 @@ void Game::Map::LoadMapObjectsFromXml(string xmlPath)
 
 				Building* b = new Building();
 				b->SetClassName((string)_bld->class_());
-				b->SetPlayer(_settl->player());
+				b->SetPlayer((const unsigned short)_settl->player());
 				b->SetPosition(vec3(_settl->x() - _bld->xOffset(), _settl->y() - _bld->yOffset(), 0.f));
 				b->SetPickingID(PickingObject::GetPickingId());
 				b->GetSettlement().SetSettlementName(_settl->name());

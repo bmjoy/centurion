@@ -9,6 +9,9 @@ using namespace std;
 namespace Folders {
 
 	extern string XML_SCHEMAS;
+	extern string SCENARIOS;
+	extern string GAME;
+	extern string DATA;
 
 };
 

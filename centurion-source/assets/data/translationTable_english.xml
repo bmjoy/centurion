@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="UTF-8" standalone="no" ?>
-<translationTable language="english" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../xml-schemas/TranslationTable.xsd">
+<translationTable language="english">
     <entry stringName="MAINMENU_buttonSinglePlayer" result="Singleplayer"/>
 	<entry stringName="MAINMENU_buttonEditor" result="Editor"/>
 	<entry stringName="MAINMENU_buttonOptions" result="Options"/>
@@ -37,6 +37,7 @@
 	<entry stringName="EDITOR_newScenarioName" result="Choose a name (max 30 characters)."/>
 	<entry stringName="EDITOR_properties" result="Object properties"/>
 	<entry stringName="EDITOR_propertiesName" result="Object name:"/>
+	<entry stringName="EDITOR_propertiesSettlement" result="Settlement name:"/>
 	<entry stringName="EDITOR_propertiesApply" result="Apply"/>
 	<entry stringName="EDITOR_propertiesCancel" result="Cancel"/>
 	<entry stringName="EDITOR_defaultMapName" result="Untitled"/>
@@ -97,8 +98,4 @@
 	<entry stringName="WORD_no" result="No"/>
 	<entry stringName="RACE_Rome" result="Rome"/>
 	<entry stringName="RACE_Egypt" result="Egypt"/>
-	<entry stringName="ERROR_data" result="Unable to find or process DATA file.\nForced application shutdown has started."/>
-	<entry stringName="ERROR_settlements" result="Unable to find or process SETTLEMENTS file.\nForced application shutdown has started."/>
-	<entry stringName="ERROR_menuData" result="Unable to find or process MENU DATA file.\nForced application shutdown has started."/>
-	<entry stringName="WARNING_audioDevice" result="Unable to find (or communicate with) the audio device.\nNo sound will be played as long as the error persists."/>
 </translationTable>

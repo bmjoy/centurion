@@ -1,4 +1,4 @@
-<c_object parent="Object" type="decoration" class_name="Palm_1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../xml-schemas/Object.xsd">
+<c_object parent="Object" type="decoration" class_name="Palm_1">
  <properties>
     <property name="category" value="trees"/>
     <property name="ent_path" value="assets/decorations/trees/palm_trees/palm_1.oe.json"/>

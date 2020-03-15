@@ -11,8 +11,6 @@ string ObjectData::dataClassesPath = "assets/data/classes_new/";
 
 #pragma endregion
 
-
-
 #pragma region ObjectXMLClassData class
 
 ObjectData::ObjectXMLClassData::ObjectXMLClassData(){}
@@ -20,8 +18,6 @@ ObjectData::ObjectXMLClassData::ObjectXMLClassData(){}
 ObjectData::ObjectXMLClassData::~ObjectXMLClassData(){}
 
 #pragma endregion
-
-
 
 #pragma region ObjectData class
 
@@ -34,16 +30,14 @@ void ObjectData::ReadDataClassesFromXml()
 		string path = dataClassesPath + files[i];
 
 		try {
-			auto_ptr<c_object> dataXML = c_object_(path);
+			xml_schema::properties props;
+			props.no_namespace_schema_location(Folders::XML_SCHEMAS + "object.xsd");
+			auto_ptr<c_object> dataXML = c_object_(path, 0, props);
 			std::cout << dataXML->class_name() << std::endl;
 		}
 		catch (const xml_schema::exception & e) {
 			std::cout << e << std::endl;
 		}
-
-
-		/*std::cout << dataXML->class_name() << std::endl;*/
-
 	}
 }
 
@@ -59,4 +53,3 @@ void ObjectData::ResetObjectData()
 }
 
 #pragma endregion
-

@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="UTF-8" standalone="no" ?>
-<translationTable language="italian" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../xml-schemas/TranslationTable.xsd">
+<translationTable language="italian">
 	<entry stringName="MAINMENU_buttonSinglePlayer" result="Giocatore singolo"/>
 	<entry stringName="MAINMENU_buttonEditor" result="Editor"/>
 	<entry stringName="MAINMENU_buttonOptions" result="Opzioni"/>
@@ -37,6 +37,7 @@
 	<entry stringName="EDITOR_newScenarioName" result="Scegli un nome (max 30 caratteri)."/>
 	<entry stringName="EDITOR_properties" result="Proprietà dell'oggetto"/>
 	<entry stringName="EDITOR_propertiesName" result="Nome dell'oggetto:"/>
+	<entry stringName="EDITOR_propertiesSettlement" result="Nome dell'insediamento:"/>
 	<entry stringName="EDITOR_propertiesApply" result="Applica"/>
 	<entry stringName="EDITOR_propertiesCancel" result="Annulla"/>
 	<entry stringName="EDITOR_defaultMapName" result="Senza titolo"/>
@@ -97,8 +98,4 @@
 	<entry stringName="WORD_no" result="No"/>
 	<entry stringName="RACE_Rome" result="Roma"/>
 	<entry stringName="RACE_Egypt" result="Egitto"/>
-	<entry stringName="ERROR_data" result="Impossibile trovare o leggere il file DATA.\nArresto forzato dell'applicazione in corso..."/>
-	<entry stringName="ERROR_settlements" result="Impossibile trovare o leggere il file SETTLEMENTS.\nArresto forzato dell'applicazione in corso..."/>
-	<entry stringName="ERROR_menuData" result="Impossibile trovare o leggere il file MENU DATA.\nArresto forzato dell'applicazione in corso..."/>
-	<entry stringName="WARNING_audioDevice" result="Impossibile trovare (o comunicare con) il dispositivo audio.\nNessun sarà riprodotto alcun suono finché l'errore persiste."/>
 </translationTable>

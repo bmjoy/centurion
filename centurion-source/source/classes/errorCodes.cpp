@@ -1,7 +1,7 @@
 #include "errorCodes.h"
 #include "ErrorCodes-xml.hxx"
-
 #include <logger.h>
+#include <file_manager.h>
 
 map<string, string> ErrorCodes::errorCodes;
 
@@ -56,8 +56,10 @@ void ErrorCodes::ReadErrorCodesXml(void)
 {
 	try
 	{
+		xml_schema::properties props;
+		props.no_namespace_schema_location(Folders::XML_SCHEMAS + "errorCodes.xsd");
 		string path = "assets/data/ErrorCodes.xml";
-		auto_ptr<c_error_codes> errorCodesXML = c_error_codes_(path);
+		auto_ptr<c_error_codes> errorCodesXML = c_error_codes_(path, 0, props);
 		c_error_codes::error_iterator it;
 		for (it = errorCodesXML->error().begin(); it != errorCodesXML->error().end(); it++) {
 			errorCodes[it->name()] = it->code();

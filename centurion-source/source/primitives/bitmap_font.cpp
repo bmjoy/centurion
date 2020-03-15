@@ -99,7 +99,9 @@ void BitmapFont::create() {
 		// LOAD DATA FROM XML
 		path = "assets/fonts/" + fontName + ".xml";
 		try {
-			auto_ptr<chars> charsXML = chars_(path);
+			xml_schema::properties props;
+			props.no_namespace_schema_location(Folders::XML_SCHEMAS + "characters.xsd");
+			auto_ptr<chars> charsXML = chars_(path, 0, props);
 
 			chars::char_iterator it;
 			for (it = charsXML->char_().begin(); it != charsXML->char_().end(); it++) {

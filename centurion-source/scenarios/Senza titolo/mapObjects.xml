@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no" ?>
-<c_mapObjects xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../assets/xml-schemas/mapObjects.xsd">
+<c_mapObjects>
   <c_buildings>
     <c_settlement name="etownhall_1" player="1" x="1613" y="833">
       <c_building class="etownhall" healthperc="100" id="1" name="etownhall_1" xOffset="0" yOffset="0"/>

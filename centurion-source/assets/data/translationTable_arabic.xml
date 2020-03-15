@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="UTF-8" standalone="no" ?>
-<translationTable language="arabic" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../xml-schemas/TranslationTable.xsd">
+<translationTable language="arabic">
 	<entry stringName='MAINMENU_buttonSinglePlayer' result='ﻻﻋﺐ ﻣﻔﺮﺩ'/>
 	<entry stringName='MAINMENU_buttonEditor' result='ﻣﺤﺮر اﻟﺨﺮاﺋﻄ'/>
 	<entry stringName='MAINMENU_buttonOptions' result='اﻋﺪادات'/>
@@ -37,6 +37,7 @@
 	<entry stringName='EDITOR_newScenarioName' result='اﺧﺘﻴﺎر اﺳﻢ ﻟﻠﺴﻴﻨﺎرﻳﻮ )ﻣﺎﻛﺲ 03 اﺣﺮڧ('/>
 	<entry stringName='EDITOR_properties' result='ﺧﺼﺎﺋﺺ اﻟﻜﺎﺋﻦ '/>
 	<entry stringName='EDITOR_propertiesName' result='اﺳﻢ اﻟﻜﺎﺋﻦ '/>
+	<entry stringName="EDITOR_propertiesSettlement" result=''/>
 	<entry stringName='EDITOR_propertiesApply' result='ﺗﻄﺒﻴﻖ'/>
 	<entry stringName='EDITOR_propertiesCancel' result='إﻟﻐﺎء'/>
 	<entry stringName='EDITOR_defaultMapName' result='ﺑﺪون ﻋﻨﻮان'/>

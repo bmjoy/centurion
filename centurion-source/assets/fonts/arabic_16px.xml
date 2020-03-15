@@ -1,4 +1,4 @@
-﻿<chars name="arabic_16px" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../xml-schemas/characters.xsd">
+﻿<chars name="arabic_16px">
 	<char id="32" x="6" y="294" width="5" height="20" xoffset="0" yoffset="0" xadvance="10" lineheight="19" />
 	<char id="33" x="314" y="273" width="6" height="20" xoffset="0" yoffset="0" xadvance="5" lineheight="19" />
 	<char id="34" x="230" y="273" width="6" height="20" xoffset="0" yoffset="0" xadvance="5" lineheight="19" />

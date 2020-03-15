@@ -1,4 +1,4 @@
-﻿<chars name="tahoma_13px" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../xml-schemas/characters.xsd">
+﻿<chars name="tahoma_13px">
     <char id="32" x="322" y="360" width="5" height="17" xoffset="0" yoffset="0" xadvance="4" lineheight="16" />
     <char id="33" x="442" y="360" width="5" height="17" xoffset="0" yoffset="0" xadvance="4" lineheight="16" />
     <char id="34" x="413" y="342" width="6" height="17" xoffset="0" yoffset="0" xadvance="5" lineheight="16" />

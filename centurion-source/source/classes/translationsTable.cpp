@@ -61,8 +61,10 @@ void TranslationsTable::ReadTranslationsTableXml(string lang)
 			}
 		}
 
+		xml_schema::properties props;
+		props.no_namespace_schema_location(Folders::XML_SCHEMAS + "translationTable.xsd");
 		string path = "assets/data/translationTable_" + lang + ".xml";
-		auto_ptr<translationTable> tTable = translationTable_(path);
+		auto_ptr<translationTable> tTable = translationTable_(path, 0, props);
 		translationTable::entry_iterator it;
 		for (it = tTable->entry().begin(); it != tTable->entry().end(); it++) {
 			translationsTable[it->stringName()] = it->result();

@@ -5,11 +5,6 @@
 #include <interface>
 #include <engine.h>
 
-
-
-
-
-
 #pragma region Static variables
 
 #pragma endregion

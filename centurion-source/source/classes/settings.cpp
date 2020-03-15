@@ -34,7 +34,10 @@ void Settings::Init() {
 void Settings::SetFolders(string exe_folder_path)
 {
 	if (exe_folder_path.empty() == false) {
-		Folders::XML_SCHEMAS = "file:///" + exe_folder_path + Folders::XML_SCHEMAS;
+		Folders::XML_SCHEMAS = exe_folder_path + Folders::XML_SCHEMAS;
+		Folders::SCENARIOS = exe_folder_path + Folders::SCENARIOS;
+		Folders::GAME = exe_folder_path + Folders::GAME;
+		Folders::DATA = exe_folder_path + Folders::DATA;
 	}
 }
 
@@ -42,7 +45,7 @@ void Settings::ReadSettings() {
 	try {
 		xml_schema::properties props;
 		props.no_namespace_schema_location(Folders::XML_SCHEMAS + "settings.xsd");
-		auto_ptr<c_settings> SettingsXML = c_settings_(SettingsPath, 0, props);
+		auto_ptr<c_settings> SettingsXML = c_settings_(Folders::GAME + SettingsPath, 0, props);
 		c_settings::setting_const_iterator it;
 		for (it = SettingsXML->setting().begin(); it != SettingsXML->setting().end(); it++) {
 			try {
@@ -140,9 +143,8 @@ void Settings::SaveXml()
 		}
 
 		xml_schema::namespace_infomap map;
-		//map[""].schema = "./assets/xml-schemas/settings.xsd";
 		map[""].schema = "";
-		ofstream ofs(SettingsPath.c_str());
+		ofstream ofs(Folders::GAME + SettingsPath);
 		c_settings_(ofs, settXML, map);
 	}
 	catch (...)

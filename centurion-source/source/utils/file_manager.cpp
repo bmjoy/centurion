@@ -17,6 +17,9 @@
 namespace Folders {
 
 	string XML_SCHEMAS = "\\assets\\xml-schemas\\";
+	string SCENARIOS = "\\scenarios\\";
+	string GAME = "\\";
+	string DATA = "\\assets\\data\\";
 
 };
 
