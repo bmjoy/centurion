@@ -79,12 +79,13 @@ namespace editor {
 		float y = round(Engine::Mouse::GetYPosition() * Engine::myWindow::HeightZoomed / Engine::myWindow::Height + Engine::Camera::GetYPosition());
 		if (type == "buildings") {
 			buildingTemp->SetPosition(vec3(x, y, 0.f));
-			buildingTemp->set_status(false);
+			buildingTemp->SetStatus(false);
 			buildingTemp->render(false, 0, !buildingTemp->IsPlaceable());
 			
 			//Player will be able to see info about placing status
 			if (!buildingTemp->GetSettlement().IsIndipendent()) {
 				string s = "";
+				/*
 				if (!buildingTemp->is_near_to_independent(&s))
 					textInfo.render_dynamic(TranslationsTable::GetTranslation("EDITOR_noSettlementsAround"), "tahoma_15px", 10, Engine::myWindow::Height - 50, vec4(255.f), "left", "center");
 				else
@@ -92,6 +93,7 @@ namespace editor {
 						textInfo.render_dynamic(TranslationsTable::GetTranslation("EDITOR_impassablePoint"), "tahoma_15px", 10, Engine::myWindow::Height - 50, vec4(255.f), "left", "center");
 					else
 						textInfo.render_dynamic(TranslationsTable::GetTranslation("EDITOR_canAddStructure"), "tahoma_15px", 10, Engine::myWindow::Height - 50, vec4(255.f), "left", "center");
+				*/
 			}
 			else {
 				if (!buildingTemp->IsPlaceable())
@@ -205,11 +207,13 @@ namespace editor {
 					bld->SetPosition(vec3(movingObjectXPos + dx, movingObjectYPos + dy, 0.f));
 					if (!bld->IsPlaceable()) {
 						string s = "";
+						/*
 						if (!bld->is_near_to_independent(&s)) {
 							textInfo.render_dynamic(TranslationsTable::GetTranslation("EDITOR_noSettlementsAround"), "tahoma_15px", 10, Engine::myWindow::Height - 50, vec4(255.f), "left", "center");
 						}
 						else
 							textInfo.render_dynamic(TranslationsTable::GetTranslation("EDITOR_impassablePoint"), "tahoma_15px", 10, Engine::myWindow::Height - 50, vec4(255.f), "left", "center");
+						*/
 						bld->SetPlaceable(false);
 						movingObjectRestore = true;
 					}

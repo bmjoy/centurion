@@ -33,15 +33,8 @@ public:
 	void prepare() override;
 	void create(string Name = "");
 	void render(bool picking, int clickID = 0, bool not_placeable = false) override;
-	void set_status(bool b) { isCreated = b; }
+	void SetStatus(const bool bIsCreated);
 
-	void set_settlement_building(Building *b) { independent = b; }
-	Building *get_settlement_building() { return independent; }
-	bool is_near_to_independent(string *Category);
-	int UnitsInBuilding();
-	vector<Unit> UnitsInHolder();
-	vector<int> buildingsInSettlementIds();
-	int buildingsInSettlementCount() { return (int)subs_buildings.size(); }
 	void setWaitingToBeErased(bool b) { waitingToBeErased = b; }
 	bool getWaitingToBeErased() { return waitingToBeErased; }
 
@@ -52,9 +45,8 @@ private:
 	game::ObjectUI* buildingUI;
 	map<int, Building*> subs_buildings; // dependent buildings connected to indipendent one
 	vector<Unit> unitsInside;
-	Building *independent;
 	bool waitingToBeErased;
-	bool isCreated;
+	bool bIsCreated;
 	size_t buildingListSize;
 	bool bIsPlaceable;
 	bool bIsClickableInMimimap;

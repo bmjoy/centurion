@@ -15,7 +15,7 @@ using namespace glm;
 Building::Building() 
 {
 	this->SetType("building");
-	this->isCreated = false;
+	this->bIsCreated = false;
 	this->waitingToBeErased = false;
 	this->bIsPlaceable = true;
 	this->buildingListSize = 0;
@@ -47,10 +47,11 @@ bool Building::IsPlaceable()
 	vec3 var_position = this->GetPosition();
 	bool placeable = astar::checkAvailability(pass_grid, var_position);
 	string indCategory = "";
-	bool nearToIndependent = is_near_to_independent(&indCategory);
+	//bool nearToIndependent = is_near_to_independent(&indCategory);
 	if (!this->settlement.IsIndipendent())
 	{
-		placeable = placeable && nearToIndependent && indCategory == this->category;
+		//placeable = placeable && nearToIndependent && indCategory == this->category;
+		placeable = placeable && indCategory == this->category;
 	}
 	return placeable;
 }
@@ -87,34 +88,16 @@ void Building::prepare()
 	this->sprite_height = spriteSize.y;
 	this->textureID = BSprite()->getTextureId(this->GetClassName());
 
-	isCreated = false;
+	this->bIsCreated = false;
 }
 
-bool Building::is_near_to_independent(string *Category) {
-	bool ok = false;
-	(*Category) = "";
-	vector<Building*> listOfIndipBuildings = Game::GetListOfIndipendentBuildings();
-	for (int i = 0; i < listOfIndipBuildings.size(); i++) {
-		Building* bld = listOfIndipBuildings[i];
-		float dist = math::euclidean_distance(bld->GetPosition().x, bld->GetPosition().y, this->GetPosition().x, this->GetPosition().y);
-		if (dist < 1500.f) {
-			set_settlement_building(bld);
-			string strSetName = bld->GetSettlement().GetSettlementName();
-			this->GetSettlement().SetSettlementName(strSetName);
-			(*Category) = bld->GetCategory();
-			ok = true;
-			break;
-		}
-	}
-	return ok;
-}
 
 void Building::create(string Name) {
 	this->SetType(data["type"].get<string>());
 	this->SetRaceName(data["race"].get<string>());
 	this->SetClassName(data["class_name"].get<string>());
 	//prop.is_indipendent = (bool)data["is_independent"].get<int>();
-	this->category = data["category"].get<string>();
+	//this->category = data["category"].get<string>();
 	this->ent_path = data["ent_path"].get<string>();
 	this->pass_path = data["pass_path"].get<string>();
 	this->bIsClickableInMimimap = (bool)data["clickable_in_minimap"].get<int>();
@@ -144,7 +127,7 @@ void Building::create(string Name) {
 	// townhall radius (editor only)
 	circle[1] = gui::Circle();
 	circle[1].create("border", 0.f, 0.f, TOWNHALL_RADIUS * 2.f, TOWNHALL_RADIUS * 2.f, 10.f, "center");
-	isCreated = true;
+	this->bIsCreated = true;
 }
 
 
@@ -153,13 +136,13 @@ void Building::render(bool picking, int clickID, bool not_placeable) {
 	not_placeable = (not_placeable || !this->bIsPlaceable);
 
 	// keep updated not central buildings "settlement name"
-	if (!this->settlement.IsIndipendent() && isCreated)
-		if (this->settlement.GetSettlementName() != independent->GetSettlement().GetSettlementName())
-		{
-			string strSetName;
-			strSetName = independent->GetSettlement().GetSettlementName();
-			this->GetSettlement().SetSettlementName(strSetName);
-		}
+	//if (!this->settlement.IsIndipendent() && isCreated)
+		//if (this->settlement.GetSettlementName() != independent->GetSettlement().GetSettlementName())
+		//{
+			//string strSetName;
+			//strSetName = independent->GetSettlement().GetSettlementName();
+			//this->GetSettlement().SetSettlementName(strSetName);
+		//}
 		
 	// keep updated central buildings "subsidiaries buildings list"
 	if (Game::GetNumberOfBuildings() != buildingListSize && (this->bIsTownhall || this->bIsVillagehall)) 
@@ -205,30 +188,12 @@ void Building::render(bool picking, int clickID, bool not_placeable) {
 	BSprite()->render(this->textureID, this->bIsClickableInMimimap, this->GetPosition().x, this->GetPosition().y, this->sprite_width, this->sprite_height, picking, this->GetPickingID(), this->IsSelected(), player->getPlayerColor(), not_placeable);
 }
 
-int Building::UnitsInBuilding()
+void Building::SetStatus(const bool bIsCreated)
 {
-	if(this->bIsClickableInMimimap)
-	{
-		return (int)unitsInside.size();
-	}
-	else 
-	{
-		return 0;
-	}
+	this->bIsCreated = bIsCreated;
 }
 
-vector<Unit> Building::UnitsInHolder() 
-{
-	if(this->bIsClickableInMimimap)
-	{
-		return unitsInside;
-	}
-	else 
-	{
-		return {};
-	}
-}
-
+/*
 vector<int> Building::buildingsInSettlementIds() 
 {
 	vector<int> ids;
@@ -238,6 +203,7 @@ vector<int> Building::buildingsInSettlementIds()
 	}
 	return ids;
 }
+*/
 
 vec2 Building::getSpriteSize(string ent_path)
 {

@@ -58,3 +58,18 @@ void Settlement::SetMaxPopulation(const unsigned short int max_population)
 {
 	this->max_population = max_population;
 }
+
+vector<Building> Settlement::GetBuildingsBelongToSettlement(void)
+{
+	return this->buildingsList;
+}
+
+void Settlement::AddBuildingToSettlement(const Building &b)
+{
+	this->buildingsList.push_back(b);
+}
+
+void Settlement::RemoveBuildingFromSettlement(const Building &b)
+{
+	//ToDO
+}

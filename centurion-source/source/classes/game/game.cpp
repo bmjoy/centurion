@@ -97,9 +97,8 @@ void Game::Map::SaveMapObjectsToXml(string xmlPath)
 			b.name(gobj->GetName());
 			_settl.c_building().push_back(b);
 
+			/*
 			vector<int> dip_bs = gobj->buildingsInSettlementIds();
-
-
 			for (int i = 0; i < dip_bs.size(); i++) {
 				int id = dip_bs[i];
 				Building* gobj2 = GameObjects[id]->AsBuilding();
@@ -113,7 +112,7 @@ void Game::Map::SaveMapObjectsToXml(string xmlPath)
 				b2.name(gobj2->GetName());
 				_settl.c_building().push_back(b2);
 			}
-
+			*/
 			_buildings.c_settlement().push_back(_settl);
 		}
 
@@ -587,6 +586,7 @@ vector<Building*> Game::GetListOfIndipendentBuildings() {
 	return indipBuildings;
 }
 
+/*
 vector<Building*> Game::GetListOfStandAloneBuildings()
 {
 	vector<Building*> saBuildings = vector<Building*>();
@@ -599,6 +599,7 @@ vector<Building*> Game::GetListOfStandAloneBuildings()
 	}
 	return saBuildings;
 }
+*/
 
 vector<Building*> Game::GetListOfBuildings() {
 	vector<Building*> indipBuildings = vector<Building*>();
@@ -837,7 +838,7 @@ void Game::UpdateSettlementBuildings() {
 			for (int j = 0; j < listOfIndipBuildings.size(); j++) {
 				Building* settl = listOfIndipBuildings[j];
 				if (settl->GetSettlement().GetSettlementName() == bld->GetSettlement().GetSettlementName()) {
-					bld->set_settlement_building(settl);
+					//bld->set_settlement_building(settl);
 					break;
 				}
 			}

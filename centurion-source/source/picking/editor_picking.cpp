@@ -315,9 +315,11 @@ namespace editor {
 					string settl_name = settl->GetName();
 					if (settl->getWaitingToBeErased()) {
 						idsToErase.push_back(settl->GetPickingID());
+						/*
 						for (int j = 0; j < settl->buildingsInSettlementIds().size(); j++) {
 							idsToErase.push_back(settl->buildingsInSettlementIds()[j]);
 						}
+						*/
 					}
 				}
 
