@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no" ?>
-<c_settings xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="./assets/xml-schemas/settings.xsd">
+<c_settings>
   <setting name="windowWidth" value="1366"/>
   <setting name="windowHeight" value="768"/>
   <setting name="cameraMovespeed" value="10"/>

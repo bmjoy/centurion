@@ -16,6 +16,7 @@ public:
 	// methods
 	static void Init();
 	static void ReadSettings();
+	static void SetFolders(string exe_folder_path);
 	static void SaveXml();
 	static void SetCameraMovespeed(float speed);
 	static void SetCameraMaxZoom(float zoom);

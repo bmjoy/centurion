@@ -6,6 +6,7 @@
 #include <iostream>
 #include <fstream>
 #include <settings-xml.hxx>
+#include <file_manager.h>
 
 // define private static variables
 float Settings::cameraMaxZoom;
@@ -30,9 +31,18 @@ void Settings::Init() {
 	FullScreen = false;
 }
 
+void Settings::SetFolders(string exe_folder_path)
+{
+	if (exe_folder_path.empty() == false) {
+		Folders::XML_SCHEMAS = "file:///" + exe_folder_path + Folders::XML_SCHEMAS;
+	}
+}
+
 void Settings::ReadSettings() {
 	try {
-		auto_ptr<c_settings> SettingsXML = c_settings_(SettingsPath);
+		xml_schema::properties props;
+		props.no_namespace_schema_location(Folders::XML_SCHEMAS + "settings.xsd");
+		auto_ptr<c_settings> SettingsXML = c_settings_(SettingsPath, 0, props);
 		c_settings::setting_const_iterator it;
 		for (it = SettingsXML->setting().begin(); it != SettingsXML->setting().end(); it++) {
 			try {
@@ -130,7 +140,8 @@ void Settings::SaveXml()
 		}
 
 		xml_schema::namespace_infomap map;
-		map[""].schema = "./assets/xml-schemas/settings.xsd";
+		//map[""].schema = "./assets/xml-schemas/settings.xsd";
+		map[""].schema = "";
 		ofstream ofs(SettingsPath.c_str());
 		c_settings_(ofs, settXML, map);
 	}

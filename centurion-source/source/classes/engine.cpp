@@ -483,12 +483,13 @@ bool Engine::reset;
 
 Engine::Engine() { }
 
-void Engine::Init() {
+void Engine::Init(const char* exe_root) {
 
 	// old initParams (global)
 
 	try {
 
+		Settings::SetFolders(FileManager::GetExeFolderPath(exe_root));
 		ErrorCodes::ReadErrorCodesXml();
 		Logger::CleanLogs();
 

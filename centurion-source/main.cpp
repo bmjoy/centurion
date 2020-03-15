@@ -7,7 +7,7 @@
 
 int main(int numArgs, char *args[]) {
 
-	Engine::Init();
+	Engine::Init(args[0]);
 	
 	if (Engine::myWindow::ShouldClose == false) {
 		try {

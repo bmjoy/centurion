@@ -14,6 +14,13 @@
 
 #include <direct.h>
 
+namespace Folders {
+
+	string XML_SCHEMAS = "\\assets\\xml-schemas\\";
+
+};
+
+
 string FileManager::ReadFile(const char* fileLocation) {
 	try {
 		string content;
@@ -206,3 +213,18 @@ void FileManager::CreateFolder(string folderPath)
 	}
 }
 
+string FileManager::GetExeFolderPath(const char *path) {
+	try
+	{
+		string path_str = (string)path;
+		std::string::size_type pos = path_str.find_last_of("\\/");
+		return path_str.substr(0, pos);
+	}
+	catch (const std::exception&)
+	{
+		Logger::LogMessage msg = Logger::LogMessage("An error occurred getting the exe folder path", "Utils", "", "GetExeFolderPath");
+		Logger::Error(msg);
+		throw;
+	}
+	
+}

@@ -6,6 +6,13 @@
 
 using namespace std;
 
+namespace Folders {
+
+	extern string XML_SCHEMAS;
+
+};
+
+
 namespace FileManager {
 
 	struct file_info {
@@ -34,6 +41,8 @@ namespace FileManager {
 	void RemoveFile(string filePath);
 
 	void CreateFolder(string folderPath);
+
+	string GetExeFolderPath(const char *path);
 };
 
 #endif

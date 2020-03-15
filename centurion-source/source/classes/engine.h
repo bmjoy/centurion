@@ -128,7 +128,7 @@ public:
 		static int charCodepointPressed;
 	};
 
-	static void Init();
+	static void Init(const char* exe_root);
 	static void Reset() { reset = true; }
 	static void setEnvironment(string s) { environment = s; }
 	static string getEnvironment() { return environment; }

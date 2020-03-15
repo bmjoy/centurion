@@ -2,22 +2,22 @@
 <Log>
 	<Params>
 		<Camera>
-			<xPosition>1</xPosition>
-			<yPosition>31</yPosition>
+			<xPosition>0</xPosition>
+			<yPosition>0</yPosition>
 		</Camera>
 		<Mouse>
 			<scrollValue>0</scrollValue>
-			<xLeftClick>1345</xLeftClick>
-			<xPosition>1345</xPosition>
-			<xRightClick>1345</xRightClick>
-			<y2dPosition>768</y2dPosition>
-			<y2dRightClick>768</y2dRightClick>
-			<yLeftClick>768</yLeftClick>
-			<yPosition>768</yPosition>
-			<yRightClick>768</yRightClick>
+			<xLeftClick>1209</xLeftClick>
+			<xPosition>1209</xPosition>
+			<xRightClick>1209</xRightClick>
+			<y2dPosition>77</y2dPosition>
+			<y2dRightClick>77</y2dRightClick>
+			<yLeftClick>77</yLeftClick>
+			<yPosition>77</yPosition>
+			<yRightClick>77</yRightClick>
 			<leftClick>0</leftClick>
-			<leftHold>0</leftHold>
-			<release>1</release>
+			<leftHold>1</leftHold>
+			<release>0</release>
 			<rightClick>0</rightClick>
 			<scrollBool>0</scrollBool>
 		</Mouse>
@@ -27,7 +27,7 @@
 			<widthZoomed>2066</widthZoomed>
 			<shouldClose>1</shouldClose>
 			<bottomBarHeight>0</bottomBarHeight>
-			<topBarHeight>30</topBarHeight>
+			<topBarHeight>0</topBarHeight>
 		</Window>
 	</Params>
 </Log>
