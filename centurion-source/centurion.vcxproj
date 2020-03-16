@@ -275,6 +275,8 @@ XCOPY "$(ProjectDir)lua53.dll" "$(ProjectDir)$(OutDir)"</Command>
     <ClCompile Include="source\picking\gameui_picking.cpp" />
     <ClCompile Include="source\ui\button.cpp" />
     <ClCompile Include="source\ui\circle.cpp" />
+    <ClCompile Include="source\ui\iframe-xml.cxx" />
+    <ClCompile Include="source\ui\iframe.cpp" />
     <ClCompile Include="source\ui\select.cpp" />
     <ClCompile Include="source\ui\image.cpp" />
     <ClCompile Include="source\ui\rectangle.cpp" />
@@ -347,6 +349,8 @@ XCOPY "$(ProjectDir)lua53.dll" "$(ProjectDir)$(OutDir)"</Command>
     <ClInclude Include="source\hector\hector-lua.h" />
     <ClInclude Include="source\ui\button.h" />
     <ClInclude Include="source\ui\circle.h" />
+    <ClInclude Include="source\ui\iframe-xml.hxx" />
+    <ClInclude Include="source\ui\iframe.h" />
     <ClInclude Include="source\ui\select.h" />
     <ClInclude Include="source\ui\image.h" />
     <ClInclude Include="source\ui\rectangle.h" />

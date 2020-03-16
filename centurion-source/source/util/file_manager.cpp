@@ -21,6 +21,7 @@ namespace Folders {
 	string GAME = "\\";
 	string DATA = "\\assets\\data\\";
 	string INTERFACE_MENU = "\\assets\\data\\interface\\menu\\";
+	string INTERFACE_IFRAME = "\\assets\\data\\interface\\iframe\\";
 
 };
 

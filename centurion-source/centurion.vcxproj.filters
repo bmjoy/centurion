@@ -423,6 +423,12 @@
     <ClCompile Include="source\engine\classes\wall.cpp">
       <Filter>Source Files\engine\classes</Filter>
     </ClCompile>
+    <ClCompile Include="source\ui\iframe.cpp">
+      <Filter>Source Files\ui</Filter>
+    </ClCompile>
+    <ClCompile Include="source\ui\iframe-xml.cxx">
+      <Filter>Source Files\ui</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="source\extern\includes\json.hpp">
@@ -712,6 +718,12 @@
     </ClInclude>
     <ClInclude Include="source\engine\classes\gate.h">
       <Filter>Header Files\engine\classes</Filter>
+    </ClInclude>
+    <ClInclude Include="source\ui\iframe-xml.hxx">
+      <Filter>Header Files\ui</Filter>
+    </ClInclude>
+    <ClInclude Include="source\ui\iframe.h">
+      <Filter>Header Files\ui</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

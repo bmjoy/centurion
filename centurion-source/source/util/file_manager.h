@@ -13,7 +13,7 @@ namespace Folders {
 	extern string GAME;
 	extern string DATA;
 	extern string INTERFACE_MENU;
-
+	extern string INTERFACE_IFRAME;
 };
 
 

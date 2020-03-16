@@ -9,6 +9,7 @@
 #include "simple_text.h"
 #include "text_box.h"
 #include "text_input.h"
+#include "iframe.h"
 
 using namespace primitives;
 

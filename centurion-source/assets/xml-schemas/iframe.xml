@@ -1,0 +1,11 @@
+﻿<c_iframe name="name">
+  <top_left image_name="image_name" repeat="none"/>
+  <top_right image_name="image_name" repeat="none"/>
+  <bottom_right image_name="image_name" repeat="none"/>
+  <bottom_left image_name="image_name" repeat="none"/>
+  <top image_name="image_name" repeat="x"/>
+  <right image_name="image_name" repeat="y"/>
+  <bottom image_name="image_name" repeat="x"/>
+  <left image_name="image_name" repeat="y"/>
+  <background image_name="image_name" repeat="none"/>
+</c_iframe>
