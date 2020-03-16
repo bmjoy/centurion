@@ -378,6 +378,51 @@
     <ClCompile Include="source\ui\select.cpp">
       <Filter>Source Files\ui</Filter>
     </ClCompile>
+    <ClCompile Include="source\engine\classes\habitable.cpp">
+      <Filter>Source Files\engine\classes</Filter>
+    </ClCompile>
+    <ClCompile Include="source\engine\classes\village.cpp">
+      <Filter>Source Files\engine\classes</Filter>
+    </ClCompile>
+    <ClCompile Include="source\engine\classes\shipyard.cpp">
+      <Filter>Source Files\engine\classes</Filter>
+    </ClCompile>
+    <ClCompile Include="source\engine\classes\house.cpp">
+      <Filter>Source Files\engine\classes</Filter>
+    </ClCompile>
+    <ClCompile Include="source\engine\classes\townhall.cpp">
+      <Filter>Source Files\engine\classes</Filter>
+    </ClCompile>
+    <ClCompile Include="source\engine\classes\stronghold.cpp">
+      <Filter>Source Files\engine\classes</Filter>
+    </ClCompile>
+    <ClCompile Include="source\engine\classes\barrack.cpp">
+      <Filter>Source Files\engine\classes</Filter>
+    </ClCompile>
+    <ClCompile Include="source\engine\classes\tavern.cpp">
+      <Filter>Source Files\engine\classes</Filter>
+    </ClCompile>
+    <ClCompile Include="source\engine\classes\temple.cpp">
+      <Filter>Source Files\engine\classes</Filter>
+    </ClCompile>
+    <ClCompile Include="source\engine\classes\arena.cpp">
+      <Filter>Source Files\engine\classes</Filter>
+    </ClCompile>
+    <ClCompile Include="source\engine\classes\blacksmith.cpp">
+      <Filter>Source Files\engine\classes</Filter>
+    </ClCompile>
+    <ClCompile Include="source\engine\classes\outpost.cpp">
+      <Filter>Source Files\engine\classes</Filter>
+    </ClCompile>
+    <ClCompile Include="source\engine\classes\gate.cpp">
+      <Filter>Source Files\engine\classes</Filter>
+    </ClCompile>
+    <ClCompile Include="source\engine\classes\tower.cpp">
+      <Filter>Source Files\engine\classes</Filter>
+    </ClCompile>
+    <ClCompile Include="source\engine\classes\wall.cpp">
+      <Filter>Source Files\engine\classes</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="source\extern\includes\json.hpp">
@@ -622,6 +667,51 @@
     </ClInclude>
     <ClInclude Include="source\ui\select.h">
       <Filter>Header Files\ui</Filter>
+    </ClInclude>
+    <ClInclude Include="source\engine\classes\habitable.h">
+      <Filter>Header Files\engine\classes</Filter>
+    </ClInclude>
+    <ClInclude Include="source\engine\classes\village.h">
+      <Filter>Header Files\engine\classes</Filter>
+    </ClInclude>
+    <ClInclude Include="source\engine\classes\house.h">
+      <Filter>Header Files\engine\classes</Filter>
+    </ClInclude>
+    <ClInclude Include="source\engine\classes\shipyard.h">
+      <Filter>Header Files\engine\classes</Filter>
+    </ClInclude>
+    <ClInclude Include="source\engine\classes\townhall.h">
+      <Filter>Header Files\engine\classes</Filter>
+    </ClInclude>
+    <ClInclude Include="source\engine\classes\stronghold.h">
+      <Filter>Header Files\engine\classes</Filter>
+    </ClInclude>
+    <ClInclude Include="source\engine\classes\barrack.h">
+      <Filter>Header Files\engine\classes</Filter>
+    </ClInclude>
+    <ClInclude Include="source\engine\classes\arena.h">
+      <Filter>Header Files\engine\classes</Filter>
+    </ClInclude>
+    <ClInclude Include="source\engine\classes\blacksmith.h">
+      <Filter>Header Files\engine\classes</Filter>
+    </ClInclude>
+    <ClInclude Include="source\engine\classes\tavern.h">
+      <Filter>Header Files\engine\classes</Filter>
+    </ClInclude>
+    <ClInclude Include="source\engine\classes\temple.h">
+      <Filter>Header Files\engine\classes</Filter>
+    </ClInclude>
+    <ClInclude Include="source\engine\classes\outpost.h">
+      <Filter>Header Files\engine\classes</Filter>
+    </ClInclude>
+    <ClInclude Include="source\engine\classes\tower.h">
+      <Filter>Header Files\engine\classes</Filter>
+    </ClInclude>
+    <ClInclude Include="source\engine\classes\wall.h">
+      <Filter>Header Files\engine\classes</Filter>
+    </ClInclude>
+    <ClInclude Include="source\engine\classes\gate.h">
+      <Filter>Header Files\engine\classes</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

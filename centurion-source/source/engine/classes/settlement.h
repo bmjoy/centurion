@@ -22,10 +22,10 @@ public:
 	void SetMaxPopulation(const unsigned short int max_population);
 
 	vector<Building> GetBuildingsBelongToSettlement(void);
-	bool AddBuildingToSettlement(Building b);
-	bool RemoveBuildingFromSettlement(Building b);
+	bool AddBuildingToSettlement(Building& b);
+	bool RemoveBuildingFromSettlement(Building& b);
 
-	Settlement() {};
+	Settlement();
 	~Settlement() {};
 private:
 	bool bIsIndipendent = false;

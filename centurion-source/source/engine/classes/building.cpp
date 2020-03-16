@@ -42,7 +42,7 @@ void Building::CanBeClickableInMimimap(const bool par_clickable)
 	this->bIsClickableInMimimap = par_clickable;
 }
 
-bool Building::IsPlaceable()
+bool Building::IsPlaceable(void)
 {
 	vec3 var_position = this->GetPosition();
 	bool placeable = astar::checkAvailability(pass_grid, var_position);
@@ -61,11 +61,15 @@ void Building::SetPlaceable(bool placeable)
 	this->bIsPlaceable = placeable;
 }
 
-string Building::GetCategory()
+bool Building::IsCentralBuilding(void)
+{
+	return this->bIsCentralBuilding;
+}
+
+string Building::GetCategory(void)
 {
 	return this->category;
 }
-
 
 void Building::prepare() 
 {
@@ -90,7 +94,6 @@ void Building::prepare()
 
 	this->bIsCreated = false;
 }
-
 
 void Building::create(string Name) {
 	this->SetType(data["type"].get<string>());
@@ -129,8 +132,6 @@ void Building::create(string Name) {
 	circle[1].create("border", 0.f, 0.f, TOWNHALL_RADIUS * 2.f, TOWNHALL_RADIUS * 2.f, 10.f, "center");
 	this->bIsCreated = true;
 }
-
-
 
 void Building::render(bool picking, int clickID, bool not_placeable) {
 	not_placeable = (not_placeable || !this->bIsPlaceable);
@@ -225,3 +226,9 @@ vec2 Building::getSpriteSize(string ent_path)
 }
 
 Building::~Building() {}
+
+void Building::IAmACentralBuilding(void)
+{
+	this->settlement = Settlement();
+	this->bIsCentralBuilding = true;
+}

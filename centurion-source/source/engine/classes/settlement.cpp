@@ -4,6 +4,14 @@
 using namespace std;
 
 
+Settlement::Settlement()
+{
+	this->population = 10;
+	this->max_population = 100;
+	this->food = 1000;
+	this->gold = 1000;
+}
+
 string Settlement::GetSettlementName(void)
 {
 	return this->name;
@@ -61,10 +69,11 @@ void Settlement::SetMaxPopulation(const unsigned short int max_population)
 
 vector<Building> Settlement::GetBuildingsBelongToSettlement(void)
 {
+	//To do
 	return vector<Building>();
 }
 
-bool Settlement::AddBuildingToSettlement(Building b)
+bool Settlement::AddBuildingToSettlement(Building& b)
 {
 	bool bAddCorrectly = false;
 	//Adds a new building into the map only if it isn't already present.
@@ -76,7 +85,7 @@ bool Settlement::AddBuildingToSettlement(Building b)
 	return bAddCorrectly;
 }
 
-bool Settlement::RemoveBuildingFromSettlement(Building b)
+bool Settlement::RemoveBuildingFromSettlement(Building& b)
 {
 	bool bRemovedCorrectly = false;
 	//The building can be removed only if it is present in the map.
@@ -87,3 +96,4 @@ bool Settlement::RemoveBuildingFromSettlement(Building b)
 	}
 	return bRemovedCorrectly;
 }
+
