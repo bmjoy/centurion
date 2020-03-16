@@ -96,7 +96,7 @@
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(ProjectDir)source\extern\includes;$(ProjectDir)source\common;$(ProjectDir)source\engine;$(ProjectDir)source\util;$(ProjectDir)source\gl-items;$(ProjectDir)source\ui</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir)source\extern\includes;$(ProjectDir)source\common;$(ProjectDir)source\engine;$(ProjectDir)source\util;$(ProjectDir)source\gl-items;$(ProjectDir)source\ui;$(ProjectDir)source\hector</AdditionalIncludeDirectories>
       <DisableSpecificWarnings>4250</DisableSpecificWarnings>
       <AdditionalOptions>/utf-8 %(AdditionalOptions)</AdditionalOptions>
       <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
@@ -111,8 +111,9 @@
       </Command>
     </PostBuildEvent>
     <PreBuildEvent>
-      <Command>DEL /Q "$(ProjectDir)$(OutDir)*"
-FOR /D %%P IN ("$(ProjectDir)$(OutDir)*.*") DO RMDIR "%%P" /S /Q
+      <Command>DEL "$(ProjectDir)$(OutDir)*" /S /Q
+RMDIR /S /Q "$(ProjectDir)$(OutDir)"
+MD "$(ProjectDir)$(OutDir)"
 MD "$(ProjectDir)$(OutDir)assets"
 MD "$(ProjectDir)$(OutDir)logs"
 MD "$(ProjectDir)$(OutDir)scenarios"
@@ -159,7 +160,7 @@ XCOPY "$(ProjectDir)lua53.dll" "$(ProjectDir)$(OutDir)"</Command>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(ProjectDir)source\extern\includes;$(ProjectDir)source\common;$(ProjectDir)source\engine;$(ProjectDir)source\util;$(ProjectDir)source\gl-items;$(ProjectDir)source\ui</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir)source\extern\includes;$(ProjectDir)source\common;$(ProjectDir)source\engine;$(ProjectDir)source\util;$(ProjectDir)source\gl-items;$(ProjectDir)source\ui;$(ProjectDir)source\hector</AdditionalIncludeDirectories>
       <DisableSpecificWarnings>4250</DisableSpecificWarnings>
       <AdditionalOptions>/utf-8 %(AdditionalOptions)</AdditionalOptions>
       <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
@@ -176,8 +177,9 @@ XCOPY "$(ProjectDir)lua53.dll" "$(ProjectDir)$(OutDir)"</Command>
       </Command>
     </PostBuildEvent>
     <PreBuildEvent>
-      <Command>DEL /Q "$(ProjectDir)$(OutDir)*"
-FOR /D %%P IN ("$(ProjectDir)$(OutDir)*.*") DO RMDIR "%%P" /S /Q
+      <Command>DEL "$(ProjectDir)$(OutDir)*" /S /Q
+RMDIR /S /Q "$(ProjectDir)$(OutDir)"
+MD "$(ProjectDir)$(OutDir)"
 MD "$(ProjectDir)$(OutDir)assets"
 MD "$(ProjectDir)$(OutDir)logs"
 MD "$(ProjectDir)$(OutDir)scenarios"
@@ -219,6 +221,7 @@ XCOPY "$(ProjectDir)lua53.dll" "$(ProjectDir)$(OutDir)"</Command>
     <ClCompile Include="source\engine\game\strategy.cpp" />
     <ClCompile Include="source\engine\mapgen\mapgen.cpp" />
     <ClCompile Include="source\engine\menu\menu.cpp" />
+    <ClCompile Include="source\engine\menu\menuPage-xml.cxx" />
     <ClCompile Include="source\engine\pathfinding\astar.cpp" />
     <ClCompile Include="source\engine\pathfinding\node.cpp" />
     <ClCompile Include="source\engine\picking.cpp" />
@@ -253,10 +256,8 @@ XCOPY "$(ProjectDir)lua53.dll" "$(ProjectDir)$(OutDir)"</Command>
     <ClCompile Include="source\interface\editor_ui.cpp" />
     <ClCompile Include="source\interface\menu_globaloptions.cpp" />
     <ClCompile Include="source\interface\object_ui.cpp" />
-    <ClCompile Include="source\menu\menu_functions.cpp" />
     <ClCompile Include="source\picking\editor_picking.cpp" />
     <ClCompile Include="source\picking\gameui_picking.cpp" />
-    <ClCompile Include="source\picking\mainmenu_picking.cpp" />
     <ClCompile Include="source\ui\button.cpp" />
     <ClCompile Include="source\ui\circle.cpp" />
     <ClCompile Include="source\ui\form_input.cpp" />
@@ -287,6 +288,7 @@ XCOPY "$(ProjectDir)lua53.dll" "$(ProjectDir)$(OutDir)"</Command>
     <ClInclude Include="source\engine\header.h" />
     <ClInclude Include="source\engine\mapgen\mapgen.h" />
     <ClInclude Include="source\engine\menu\menu.h" />
+    <ClInclude Include="source\engine\menu\menuPage-xml.hxx" />
     <ClInclude Include="source\engine\pathfinding\pathfinding.h" />
     <ClInclude Include="source\engine\picking.h" />
     <ClInclude Include="source\engine\player\player.h" />
@@ -423,7 +425,6 @@ XCOPY "$(ProjectDir)lua53.dll" "$(ProjectDir)$(OutDir)"</Command>
     <ClCompile Include="source\interface\game_ui_menu.cpp" />
     <ClCompile Include="source\interface\game_ui.cpp" />
     <ClCompile Include="source\interface\menu_players_list.cpp" />
-    <ClCompile Include="source\menu\menu_old.cpp" />
     <None Include="assets\shaders\bsprite\vertex.glsl">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
@@ -433,7 +434,6 @@ XCOPY "$(ProjectDir)lua53.dll" "$(ProjectDir)$(OutDir)"</Command>
     <ClInclude Include="source\audio\vorbis\os_types.h" />
     <ClInclude Include="source\audio\vorbis\vorbis_file.h" />
     <None Include="source\common\interface" />
-    <None Include="source\common\menu" />
     <None Include="source\ui\gui" />
   </ItemGroup>
   <ItemGroup>

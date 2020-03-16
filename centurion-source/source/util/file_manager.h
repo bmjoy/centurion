@@ -12,6 +12,7 @@ namespace Folders {
 	extern string SCENARIOS;
 	extern string GAME;
 	extern string DATA;
+	extern string INTERFACE_MENU;
 
 };
 

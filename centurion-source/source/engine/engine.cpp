@@ -19,13 +19,16 @@
 #include <game/editor.h>
 #include <game/strategy.h>
 #include <player/player.h>
-#include <menu>
+
+#include <menu/menu.h>
+
 #include <interface>
 #include <classes/unit.h>
 #include <mapgen/mapgen.h>
 #include <settings.h>
 #include <errorCodes.h>
 #include <logger.h>
+#include <hector-lua.h>
 
 // for mouse cursor
 #include <cursor_image.h>
@@ -85,7 +88,7 @@ void Engine::Mouse::create() {
 }
 void Engine::Mouse::render() {
 	Cursor()->render(position.x, position.y, currentState);
-	if (Engine::getEnvironment() == "game") {
+	if (Engine::getEnvironment() == STRATEGY_ENV) {
 		if (Game::Minimap::IsActive() == false) {
 			img.render(false, position.x, y2DPosition);
 		}
@@ -256,8 +259,21 @@ void Engine::myWindow::character_callback(GLFWwindow* window, unsigned int codep
 }
 
 void Engine::myWindow::handle_keys(GLFWwindow* window, int key, int code, int action, int mode) {
-	bool condition = (action == GLFW_PRESS || action == GLFW_REPEAT);
-	Keyboard::SetKeyStatus(key, condition);
+	try {
+		bool condition = (action == GLFW_PRESS || action == GLFW_REPEAT);
+		if (key >= 0 && key < 348) {
+			Keyboard::SetKeyStatus(key, condition);
+		}		
+		else {
+			Logger::LogMessage msg = Logger::LogMessage("The pressed button is not handled. No action will be performed", "Info", "", "Engine::myWindow", "handle_keys");
+			Logger::Info(msg);
+		}
+	}
+	catch (...) {
+		Logger::LogMessage msg = Logger::LogMessage("An error occurred while handling keyboard keys.", "Error", "", "Engine::myWindow", "handle_keys");
+		Logger::Error(msg);
+		throw;
+	}
 }
 
 void Engine::myWindow::handle_mouse(GLFWwindow* window, double xPos, double yPos) {
@@ -358,7 +374,7 @@ void Engine::Camera::mouseControl() {
 	threshold_y = MEDIUM_MAP_HEIGHT - 2 * MovementSpeed + (myWindow::HeightZoomed - myWindow::Height);
 
 	float threshold_top = CAMERA_THRESHOLD;
-	if (Engine::getEnvironment() == "editor") threshold_top += 30.f;
+	if (Engine::getEnvironment() == EDITOR_ENV) threshold_top += 30.f;
 
 	//Left margin
 	if (Mouse::GetXPosition() <= CAMERA_THRESHOLD && (abs_x > CAMERA_THRESHOLD) && Mouse::GetXPosition() > 0) {
@@ -476,13 +492,35 @@ void Engine::Keyboard::SetCharCodepointPressed(int codepoint)
 
 // define static variables
 gui::SimpleText Engine::text;
-string Engine::environment;
+int Engine::environment = MENU_ENV;
 double Engine::currentTime, Engine::lastTime, Engine::finalTime;
 int Engine::nbFrames, Engine::Fps, Engine::Mpfs;
 bool Engine::reset;
 // ---------- end definitions
 
 Engine::Engine() { }
+
+void Engine::GameClose()
+{
+	myWindow::ShouldClose = true;
+}
+
+void Engine::SetEnvironment(string s)
+{
+	if (s == "menu") {
+		environment = MENU_ENV;
+	}
+	else if (s == "editor") {
+		environment = EDITOR_ENV;
+	}
+	else if (s == "strategy") {
+		environment = STRATEGY_ENV;
+	}
+	else {
+		environment = MENU_ENV;
+	}
+	Mouse::LeftClick = false;
+}
 
 void Engine::Init(const char* exe_root) {
 
@@ -528,7 +566,7 @@ void Engine::Init(const char* exe_root) {
 	nbFrames = 0;
 	Fps = 0;
 	Mpfs = 0;
-	environment = "menu";
+	SetEnvironment("menu");
 	reset = false;
 }
 
@@ -553,6 +591,9 @@ int Engine::launch() {
 	ss << glGetString(GL_VERSION);
 	Logger::Info("Running OpenGL Version " + ss.str());
 
+	// Hector - Lua interpreter
+	Hector::Initialize();
+
 	while (myWindow::ShouldClose == false) {
 		glfwPollEvents();
 		window.ClearBuffers();
@@ -562,18 +603,20 @@ int Engine::launch() {
 
 		// ---- MENU ---- //
 
-		if (environment == "menu") {
-			if (!MENU()->menu_is_created()) {
+		if (getEnvironment() == MENU_ENV) {
+			
+			if (Menu::IsCreated() == false)
+			{
 				Audio()->MusicPlay("assets/music/menu.ogg");
-				MENU()->create();
+				Menu::Create();
 				Logger::Info("Main menu was created!");
 			}
-			MENU()->render();
+			Menu::Run();
 		}
 
-		// ---- GAME ---- //
+		// ---- STRATEGY ---- //
 
-		if (environment == "game") {
+		if (getEnvironment() == STRATEGY_ENV) {
 			if (!Strategy::IsCreated()) {
 				Audio()->MusicStop();
 
@@ -593,7 +636,7 @@ int Engine::launch() {
 
 		// ---- EDITOR ---- //
 
-		if (environment == "editor") {
+		if (getEnvironment() == EDITOR_ENV) {
 			if (!Editor::IsCreated()) {
 				Audio()->MusicStop();
 				Editor::Create();
@@ -605,10 +648,11 @@ int Engine::launch() {
 
 		if (reset) {
 			reset = false;
-			if (environment == "editor") Editor::reset(); editor::clearEditorVariables();
-			if (environment == "game") Strategy::reset();
-			MENU()->reset();
-			environment = "menu";
+			if (getEnvironment() == EDITOR_ENV) Editor::reset(); editor::clearEditorVariables();
+			if (getEnvironment() == STRATEGY_ENV) Strategy::reset();
+			//MENU()->reset();
+
+			SetEnvironment("menu");
 		}
 
 		// debug ui
@@ -630,9 +674,11 @@ int Engine::launch() {
 		fps_sleep();
 	}
 
-	if (MENU()->menu_is_created()) MENU()->reset();
+	//if (MENU()->menu_is_created()) MENU()->reset();
 	Logger::SaveParamsXML();
+	
 	Game::ResetGameObjects();
+	Menu::Clear();
 	myWindow::DeleteInstance();
 
 	glfwTerminate();

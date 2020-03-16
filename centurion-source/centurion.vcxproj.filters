@@ -16,9 +16,6 @@
     <Filter Include="Header Files\extern">
       <UniqueIdentifier>{670470c3-1bc9-4848-8246-fb2915e33329}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source Files\menu">
-      <UniqueIdentifier>{6f5e5b9c-c05e-48f8-845b-a9701197e29f}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Shader Files">
       <UniqueIdentifier>{3ce97d02-2958-4a71-bfb1-19102bd5a086}</UniqueIdentifier>
     </Filter>
@@ -179,12 +176,6 @@
     </ClCompile>
     <ClCompile Include="source\audio\sound_buffer.cpp">
       <Filter>Source Files\audio</Filter>
-    </ClCompile>
-    <ClCompile Include="source\menu\menu_functions.cpp">
-      <Filter>Source Files\menu</Filter>
-    </ClCompile>
-    <ClCompile Include="source\picking\mainmenu_picking.cpp">
-      <Filter>Source Files\picking</Filter>
     </ClCompile>
     <ClCompile Include="source\picking\gameui_picking.cpp">
       <Filter>Source Files\picking</Filter>
@@ -381,10 +372,10 @@
     <ClCompile Include="source\hector\hector-lua.cpp">
       <Filter>Source Files\hector</Filter>
     </ClCompile>
-    <ClCompile Include="source\menu\menu_old.cpp">
-      <Filter>Source Files\menu</Filter>
-    </ClCompile>
     <ClCompile Include="source\engine\menu\menu.cpp">
+      <Filter>Source Files\engine\menu</Filter>
+    </ClCompile>
+    <ClCompile Include="source\engine\menu\menuPage-xml.cxx">
       <Filter>Source Files\engine\menu</Filter>
     </ClCompile>
   </ItemGroup>
@@ -605,6 +596,9 @@
     <ClInclude Include="source\engine\menu\menu.h">
       <Filter>Header Files\engine\menu</Filter>
     </ClInclude>
+    <ClInclude Include="source\engine\menu\menuPage-xml.hxx">
+      <Filter>Header Files\engine\menu</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="assets\shaders\bsprite\fragment.glsl">
@@ -671,9 +665,6 @@
       <Filter>Header Files\ui</Filter>
     </None>
     <None Include="source\common\interface">
-      <Filter>Header Files\common</Filter>
-    </None>
-    <None Include="source\common\menu">
       <Filter>Header Files\common</Filter>
     </None>
   </ItemGroup>

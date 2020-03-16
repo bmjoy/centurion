@@ -8,9 +8,6 @@
 using namespace std;
 using namespace glm;
 
-
-
-
 namespace debug {
 
 	DebugUI *DEBUG_UI() { return &mydebugui; }

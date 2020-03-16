@@ -38,6 +38,7 @@ void Settings::SetFolders(string exe_folder_path)
 		Folders::SCENARIOS = exe_folder_path + Folders::SCENARIOS;
 		Folders::GAME = exe_folder_path + Folders::GAME;
 		Folders::DATA = exe_folder_path + Folders::DATA;
+		Folders::INTERFACE_MENU = exe_folder_path + Folders::INTERFACE_MENU;
 	}
 }
 

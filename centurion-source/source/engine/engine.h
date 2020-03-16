@@ -128,10 +128,20 @@ public:
 		static int charCodepointPressed;
 	};
 
+#define MENU_ENV 0
+#define EDITOR_ENV 1
+#define STRATEGY_ENV 2
+
+#pragma region TO-LUA Methods
+
+	static void GameClose();
+	static void SetEnvironment(string s);
+
+#pragma endregion
+	   	 
 	static void Init(const char* exe_root);
 	static void Reset() { reset = true; }
-	static void setEnvironment(string s) { environment = s; }
-	static string getEnvironment() { return environment; }
+	static int getEnvironment() { return environment; }
 	static int launch();
 	~Engine();
 
@@ -139,7 +149,7 @@ private:
 	Engine();
 	// objects 
 	static gui::SimpleText text;
-	static string environment;
+	static int environment;
 
 	// fps
 	static double currentTime, lastTime, finalTime;

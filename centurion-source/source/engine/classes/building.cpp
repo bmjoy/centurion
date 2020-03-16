@@ -175,12 +175,12 @@ void Building::render(bool picking, int clickID, bool not_placeable) {
 	bool bSelected = (this->GetPickingID() == clickID);
 	this->Select(bSelected);
 
-	if (Engine::getEnvironment() == "editor" && !Game::Minimap::IsActive()) {
+	if (Engine::getEnvironment() == EDITOR_ENV && !Game::Minimap::IsActive()) {
 		if (this->IsSelected() && !editor::addingObject) circle[0].render(vec4(255.f), this->GetPosition().x, this->GetPosition().y - data["radius"].get<float>() / 15.5f); // selection circle (editor only)
 		if (this->IsSelected() && (this->bIsTownhall || this->bIsVillagehall) && !editor::addingObject) circle[1].render(vec4(0, 255, 255, 255), this->GetPosition().x, this->GetPosition().y); // selection circle (editor only)
 	}
 
-	if (Engine::getEnvironment() == "game" && this->IsSelected()) {
+	if (Engine::getEnvironment() == STRATEGY_ENV && this->IsSelected()) {
 		game::GAME_UI()->set_ui(buildingUI);
 	}
 

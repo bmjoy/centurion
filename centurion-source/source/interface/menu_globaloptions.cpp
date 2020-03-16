@@ -1,7 +1,6 @@
 #include <interface>
 #include <game/strategy.h>
 #include <picking.h>
-#include <menu>
 #include <engine.h>
 #include <translationsTable.h>
 

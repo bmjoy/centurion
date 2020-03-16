@@ -20,6 +20,7 @@ namespace Folders {
 	string SCENARIOS = "\\scenarios\\";
 	string GAME = "\\";
 	string DATA = "\\assets\\data\\";
+	string INTERFACE_MENU = "\\assets\\data\\interface\\menu\\";
 
 };
 
