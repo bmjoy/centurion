@@ -4,6 +4,7 @@
     <property name="maxAttack" value="30"/>
     <property name="maxhealth" value="200"/>
     <property name="speed" value="50"/>
+    <property name="dualWeilding" value="false"/>
     <property name="ent_path" value="assets/units/hmyrmidon/hmyrmidon.oe.json"/>
   </properties>
   <methods>

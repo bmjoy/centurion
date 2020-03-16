@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Created with Liquid Technologies Online Tools 1.0 (https://www.liquid-technologies.com) -->
+<xs:schema attributeFormDefault="unqualified" elementFormDefault="qualified" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:element name="c_entity">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="properties">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element maxOccurs="unbounded" name="property">
+                <xs:complexType>
+                  <xs:attribute name="name" type="xs:integer" use="required"/>
+                  <xs:attribute name="value" type="xs:integer" use="required"/>
+                </xs:complexType>
+              </xs:element>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="points">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element minOccurs="0" maxOccurs="unbounded" name="point">
+                <xs:complexType>
+                  <xs:attribute name="id" type="xs:integer" use="required"/>
+                  <xs:attribute name="type" type="xs:integer" use="required"/>
+                  <xs:attribute name="x" type="xs:integer" use="required"/>
+                  <xs:attribute name="y" type="xs:integer" use="required"/>
+                </xs:complexType>
+              </xs:element>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="images">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element maxOccurs="unbounded" name="image">
+                <xs:complexType>
+                  <xs:attribute name="id" type="xs:integer" use="required"/>
+                  <xs:attribute name="file" type="xs:string" use="required"/>
+                  <xs:attribute name="drawmode" type="xs:string" use="required"/>
+                  <xs:attribute name="reverse" type="xs:boolean" use="required"/>
+                  <xs:attribute name="frames" type="xs:integer" use="required"/>
+                </xs:complexType>
+              </xs:element>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="layers">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element maxOccurs="unbounded" name="layer">
+                <xs:complexType>
+                  <xs:attribute name="id" type="xs:integer" use="required"/>
+                  <xs:attribute name="name" type="xs:string" use="required"/>
+                  <xs:attribute name="image" type="xs:integer" use="required"/>
+                  <xs:attribute name="x" type="xs:integer" use="required"/>
+                  <xs:attribute name="y" type="xs:integer" use="required"/>
+                </xs:complexType>
+              </xs:element>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="animations">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element maxOccurs="unbounded" name="animation">
+                <xs:complexType>
+                  <xs:sequence>
+                    <xs:element maxOccurs="unbounded" name="replace">
+                      <xs:complexType>
+                        <xs:attribute name="layer" type="xs:integer" use="required"/>
+                        <xs:attribute name="image" type="xs:integer" use="required"/>
+                        <xs:attribute name="x" type="xs:integer" use="required"/>
+                        <xs:attribute name="y" type="xs:integer" use="required"/>
+                      </xs:complexType>
+                    </xs:element>
+                    <xs:element maxOccurs="unbounded" name="frame">
+                      <xs:complexType>
+                        <xs:attribute name="id" type="xs:integer" use="required"/>
+                        <xs:attribute name="milliseconds" type="xs:integer" use="required"/>
+                      </xs:complexType>
+                    </xs:element>
+                  </xs:sequence>
+                  <xs:attribute name="id" type="xs:integer" use="required"/>
+                  <xs:attribute name="name" type="xs:string" use="required"/>
+                  <xs:attribute name="startstate" type="xs:integer" use="required"/>
+                  <xs:attribute name="endstate" type="xs:integer" use="required"/>
+                  <xs:attribute name="frames" type="xs:integer" use="required"/>
+                  <xs:attribute name="speedMultiplier" type="xs:integer" use="required"/>
+                </xs:complexType>
+              </xs:element>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:sequence>
+      <xs:attribute name="type" type="xs:string" use="required"/>
+      <xs:attribute name="directions" type="xs:integer" use="required"/>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>
