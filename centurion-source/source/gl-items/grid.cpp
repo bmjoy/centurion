@@ -1,8 +1,8 @@
 #include "grid.h"
 
 #include <game/strategy.h>
-#include <surface>
-#include <pathfinding>
+#include <mapgen/mapgen.h>
+#include <pathfinding/pathfinding.h>
 
 
 

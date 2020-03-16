@@ -1,6 +1,6 @@
 #include <menu>
 
-#include <player>
+#include <player/player.h>
 #include <picking.h>
 #include <game/strategy.h>
 #include <interface>

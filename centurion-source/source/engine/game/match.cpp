@@ -1,6 +1,6 @@
 #include "match.h"
 #include <engine.h>
-#include <surface>
+#include <mapgen/mapgen.h>
 
 Match::Match(){}
 

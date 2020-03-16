@@ -1,11 +1,10 @@
 ﻿#pragma once
 
-#include <headers>
+#include<array>
 
 // cpp file --> source/math.cpp
 
 using namespace std;
-using namespace glm;
 
 namespace math {
 	

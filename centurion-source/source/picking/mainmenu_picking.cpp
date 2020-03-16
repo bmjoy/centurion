@@ -2,14 +2,11 @@
 #include <picking.h>
 #include <engine.h>
 #include <settings.h>
+#include <logger.h>
 #include <game/strategy.h>
 
-#include <player>
+#include <player/player.h>
 #include <interface>
-
-
-
-
 
 namespace menu {
 	void Menu::picking() {

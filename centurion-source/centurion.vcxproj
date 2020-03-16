@@ -103,7 +103,7 @@
     </ClCompile>
     <Link>
       <AdditionalLibraryDirectories>$(ProjectDir)source/extern/libraries</AdditionalLibraryDirectories>
-      <AdditionalDependencies>xerces-c_3D.lib;opengl32.lib;glew32.lib;glfw3.lib;OpenAL32.lib;libsndfile-1.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>lua53.lib;xerces-c_3D.lib;opengl32.lib;glew32.lib;glfw3.lib;OpenAL32.lib;libsndfile-1.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <AdditionalOptions>/ignore:4217 %(AdditionalOptions)</AdditionalOptions>
     </Link>
     <PostBuildEvent>
@@ -125,13 +125,13 @@ XCOPY "$(ProjectDir)libsndfile-1.dll" "$(ProjectDir)$(OutDir)"
 XCOPY "$(ProjectDir)ogg.dll" "$(ProjectDir)$(OutDir)"
 XCOPY "$(ProjectDir)OpenAL32.dll" "$(ProjectDir)$(OutDir)"
 XCOPY "$(ProjectDir)settings.xml" "$(ProjectDir)$(OutDir)"
-XCOPY "$(ProjectDir)settings.xsd" "$(ProjectDir)$(OutDir)"
 XCOPY "$(ProjectDir)vorbis.dll" "$(ProjectDir)$(OutDir)"
 XCOPY "$(ProjectDir)vorbisfile.dll" "$(ProjectDir)$(OutDir)"
 XCOPY "$(ProjectDir)wrap_oal.dll" "$(ProjectDir)$(OutDir)"
 XCOPY "$(ProjectDir)msvcr120.dll" "$(ProjectDir)$(OutDir)"
 XCOPY "$(ProjectDir)msvcr120d.dll" "$(ProjectDir)$(OutDir)"
-XCOPY "$(ProjectDir)xerces-c_3_1D_vc120.dll" "$(ProjectDir)$(OutDir)"</Command>
+XCOPY "$(ProjectDir)xerces-c_3_1D_vc120.dll" "$(ProjectDir)$(OutDir)"
+XCOPY "$(ProjectDir)lua53.dll" "$(ProjectDir)$(OutDir)"</Command>
     </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -168,7 +168,7 @@ XCOPY "$(ProjectDir)xerces-c_3_1D_vc120.dll" "$(ProjectDir)$(OutDir)"</Command>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <AdditionalLibraryDirectories>$(ProjectDir)source/extern/libraries</AdditionalLibraryDirectories>
-      <AdditionalDependencies>xerces-c_3D.lib;opengl32.lib;glew32.lib;glfw3.lib;OpenAL32.lib;libsndfile-1.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>lua53.lib;xerces-c_3D.lib;opengl32.lib;glew32.lib;glfw3.lib;OpenAL32.lib;libsndfile-1.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <AdditionalOptions>/ignore:4217 %(AdditionalOptions)</AdditionalOptions>
     </Link>
     <PostBuildEvent>
@@ -195,12 +195,12 @@ XCOPY "$(ProjectDir)vorbisfile.dll" "$(ProjectDir)$(OutDir)"
 XCOPY "$(ProjectDir)wrap_oal.dll" "$(ProjectDir)$(OutDir)"
 XCOPY "$(ProjectDir)msvcr120.dll" "$(ProjectDir)$(OutDir)"
 XCOPY "$(ProjectDir)msvcr120d.dll" "$(ProjectDir)$(OutDir)"
-XCOPY "$(ProjectDir)xerces-c_3_1D_vc120.dll" "$(ProjectDir)$(OutDir)"</Command>
+XCOPY "$(ProjectDir)xerces-c_3_1D_vc120.dll" "$(ProjectDir)$(OutDir)"
+XCOPY "$(ProjectDir)lua53.dll" "$(ProjectDir)$(OutDir)"</Command>
     </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="source\audio\vorbis\ogg_vorbis.cpp" />
-    <ClCompile Include="source\editor\editor_functions.cpp" />
     <ClCompile Include="source\engine\classes\building.cpp" />
     <ClCompile Include="source\engine\classes\decoration.cpp" />
     <ClCompile Include="source\engine\classes\object-data.cpp" />
@@ -217,7 +217,12 @@ XCOPY "$(ProjectDir)xerces-c_3_1D_vc120.dll" "$(ProjectDir)$(OutDir)"</Command>
     <ClCompile Include="source\engine\game\mapObjects-xml.cxx" />
     <ClCompile Include="source\engine\game\match.cpp" />
     <ClCompile Include="source\engine\game\strategy.cpp" />
+    <ClCompile Include="source\engine\mapgen\mapgen.cpp" />
+    <ClCompile Include="source\engine\menu\menu.cpp" />
+    <ClCompile Include="source\engine\pathfinding\astar.cpp" />
+    <ClCompile Include="source\engine\pathfinding\node.cpp" />
     <ClCompile Include="source\engine\picking.cpp" />
+    <ClCompile Include="source\engine\player\player.cpp" />
     <ClCompile Include="source\engine\Settings-xml.cxx" />
     <ClCompile Include="source\engine\settings.cpp" />
     <ClCompile Include="source\engine\translationsTable-xml.cxx" />
@@ -238,6 +243,7 @@ XCOPY "$(ProjectDir)xerces-c_3_1D_vc120.dll" "$(ProjectDir)$(OutDir)"</Command>
     <ClCompile Include="source\gl-items\shader.cpp" />
     <ClCompile Include="source\gl-items\terrain.cpp" />
     <ClCompile Include="source\gl-items\unit_sprite.cpp" />
+    <ClCompile Include="source\hector\hector-lua.cpp" />
     <ClCompile Include="source\interface\editor_addobject_window.cpp" />
     <ClCompile Include="source\interface\editor_newmap_window.cpp" />
     <ClCompile Include="source\interface\editor_openmap_window.cpp" />
@@ -278,7 +284,12 @@ XCOPY "$(ProjectDir)xerces-c_3_1D_vc120.dll" "$(ProjectDir)$(OutDir)"</Command>
     <ClInclude Include="source\engine\game\mapObjects-xml.hxx" />
     <ClInclude Include="source\engine\game\match.h" />
     <ClInclude Include="source\engine\game\strategy.h" />
+    <ClInclude Include="source\engine\header.h" />
+    <ClInclude Include="source\engine\mapgen\mapgen.h" />
+    <ClInclude Include="source\engine\menu\menu.h" />
+    <ClInclude Include="source\engine\pathfinding\pathfinding.h" />
     <ClInclude Include="source\engine\picking.h" />
+    <ClInclude Include="source\engine\player\player.h" />
     <ClInclude Include="source\engine\Settings-xml.hxx" />
     <ClInclude Include="source\engine\settings.h" />
     <ClInclude Include="source\engine\translationsTable-xml.hxx" />
@@ -301,6 +312,7 @@ XCOPY "$(ProjectDir)xerces-c_3_1D_vc120.dll" "$(ProjectDir)$(OutDir)"</Command>
     <ClInclude Include="source\gl-items\shader.h" />
     <ClInclude Include="source\gl-items\terrain.h" />
     <ClInclude Include="source\gl-items\unit_sprite.h" />
+    <ClInclude Include="source\hector\hector-lua.h" />
     <ClInclude Include="source\util\file_manager.h" />
     <ClInclude Include="source\util\logger.h" />
     <ClInclude Include="source\util\maths.h" />
@@ -406,17 +418,12 @@ XCOPY "$(ProjectDir)xerces-c_3_1D_vc120.dll" "$(ProjectDir)$(OutDir)"</Command>
     <ClCompile Include="source\audio\recorder.cpp" />
     <ClCompile Include="source\audio\sound.cpp" />
     <ClCompile Include="source\audio\sound_buffer.cpp" />
-    <ClCompile Include="source\game\game_functions.cpp" />
     <ClCompile Include="source\interface\debug_ui.cpp" />
     <ClCompile Include="source\interface\editor_menu.cpp" />
     <ClCompile Include="source\interface\game_ui_menu.cpp" />
     <ClCompile Include="source\interface\game_ui.cpp" />
     <ClCompile Include="source\interface\menu_players_list.cpp" />
-    <ClCompile Include="source\menu\menu.cpp" />
-    <ClCompile Include="source\pathfinding\astar.cpp" />
-    <ClCompile Include="source\pathfinding\node.cpp" />
-    <ClCompile Include="source\player\player.cpp" />
-    <ClCompile Include="source\surface\mapgen.cpp" />
+    <ClCompile Include="source\menu\menu_old.cpp" />
     <None Include="assets\shaders\bsprite\vertex.glsl">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
@@ -425,13 +432,8 @@ XCOPY "$(ProjectDir)xerces-c_3_1D_vc120.dll" "$(ProjectDir)$(OutDir)"</Command>
     <ClInclude Include="source\audio\vorbis\ogg.h" />
     <ClInclude Include="source\audio\vorbis\os_types.h" />
     <ClInclude Include="source\audio\vorbis\vorbis_file.h" />
-    <None Include="source\common\headers" />
     <None Include="source\common\interface" />
-    <None Include="source\common\mapgen" />
     <None Include="source\common\menu" />
-    <None Include="source\common\pathfinding" />
-    <None Include="source\common\player" />
-    <None Include="source\common\surface" />
     <None Include="source\ui\gui" />
   </ItemGroup>
   <ItemGroup>

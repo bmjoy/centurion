@@ -1,9 +1,9 @@
-#include <surface>
+#include "mapgen.h"
 #include <maths.h>
 
 #include <game/game.h>
 #include <game/strategy.h>
-#include <player>
+#include <player/player.h>
 #include <random>
 #include <ctime>
 

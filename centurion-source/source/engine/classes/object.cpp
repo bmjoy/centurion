@@ -1,7 +1,7 @@
 #include <classes/object.h>
-#include <player>
+#include <player/player.h>
 #include <game/strategy.h>
-#include <pathfinding>
+#include <pathfinding/pathfinding.h>
 
 using namespace std;
 using namespace glm;

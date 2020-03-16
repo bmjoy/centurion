@@ -1,6 +1,6 @@
 #pragma once
 
-#include <headers>
+#include <header.h>
 
 using namespace std;
 using namespace glm;
@@ -33,13 +33,12 @@ namespace mapgen {
 
 	extern map<string, vector<string>> zonesMap;
 	extern map<string, terrainTexture> terrainsMap;
-};
 
-//
-//	MAP GENERATION FUNCTIONS --> source/surface/mapgen.cpp
-//
+	//
+	//	MAP GENERATION FUNCTIONS
+	//
 
-namespace mapgen {
+
 	struct Triangle {
 		vec3 a, b, c;
 	};

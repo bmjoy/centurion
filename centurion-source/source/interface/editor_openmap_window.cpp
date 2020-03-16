@@ -1,13 +1,12 @@
 #include <interface>
 #include <picking.h>
-#include <surface>
+#include <mapgen/mapgen.h>
 
 #include <engine.h>
 #include <file_manager.h>
 #include <translationsTable.h>
 
-
-
+#include <GLFW/glfw3.h>
 
 namespace editor {
 

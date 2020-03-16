@@ -1,11 +1,13 @@
 #include <game/strategy.h>
 #include <interface>
 #include <engine.h>
-#include <surface>
-#include <player>
+#include <mapgen/mapgen.h>
+#include <player/player.h>
 #include <picking.h>
 #include <classes/unit.h>
 
+#include <GLFW/glfw3.h>
+#include <logger.h>
 
 
 #pragma region Namespaces
@@ -17,6 +19,11 @@ using namespace glm;
 #pragma endregion
 
 #pragma region Static variables
+
+/* TEMPORARY */
+vector<string> outposts;
+array<Player, 8> playersList;
+/*-----------*/
 
 #pragma endregion
 

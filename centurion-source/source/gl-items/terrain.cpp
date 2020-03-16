@@ -1,6 +1,6 @@
 #include "terrain.h"
 
-#include <surface>
+#include <mapgen/mapgen.h>
 #include <stb_image.h>
 #include <game/strategy.h>
 #include <logger.h>

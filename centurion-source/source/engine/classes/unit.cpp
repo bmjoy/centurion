@@ -3,19 +3,17 @@
 #include <game/strategy.h>
 #include <game/game.h>
 #include <stb_image.h>
-#include <player>
-#include <pathfinding>
+#include <player/player.h>
+#include <pathfinding/pathfinding.h>
 #include <engine.h>
-#include <surface>
-
-
-
+#include <mapgen/mapgen.h>
 #include <unit_sprite.h>
+#include <settings.h>
+#include <logger.h>
+
+#include <GLFW/glfw3.h>
 
 using namespace math;
-
-
-
 
 int Unit::unitsCounter = 0;
 

@@ -18,13 +18,14 @@
 #include <game/game.h>
 #include <game/editor.h>
 #include <game/strategy.h>
-#include <player>
+#include <player/player.h>
 #include <menu>
 #include <interface>
 #include <classes/unit.h>
-#include <surface>
+#include <mapgen/mapgen.h>
 #include <settings.h>
 #include <errorCodes.h>
+#include <logger.h>
 
 // for mouse cursor
 #include <cursor_image.h>

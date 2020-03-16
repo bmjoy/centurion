@@ -1,4 +1,4 @@
-#include <pathfinding>
+#include "pathfinding.h"
 
 namespace astar {
 	Node::Node() {}

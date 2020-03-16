@@ -1,7 +1,6 @@
-#include <maths.h>
+#include "maths.h"
 
 using namespace std;
-using namespace glm;
 
 namespace math {
 

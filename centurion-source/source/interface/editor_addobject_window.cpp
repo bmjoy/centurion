@@ -1,6 +1,6 @@
 #include <interface>
 #include <picking.h>
-#include <surface>
+#include <mapgen/mapgen.h>
 #include <game/editor.h>
 #include <engine.h>
 #include <translationsTable.h>

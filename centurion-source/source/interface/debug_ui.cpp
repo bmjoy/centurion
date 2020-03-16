@@ -2,7 +2,7 @@
 #include <engine.h>
 #include <game/strategy.h>
 #include <picking.h>
-
+#include <settings.h>
 
 
 using namespace std;

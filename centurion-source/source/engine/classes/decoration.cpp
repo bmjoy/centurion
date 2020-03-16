@@ -1,8 +1,8 @@
 #include <classes/decoration.h>
 #include <engine.h>
 #include <stb_image.h>
-#include <player>
-#include <pathfinding>
+#include <player/player.h>
+#include <pathfinding/pathfinding.h>
 #include <game/strategy.h>
 #include <maths.h>
 #include <interface>

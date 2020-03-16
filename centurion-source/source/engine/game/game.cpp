@@ -1,5 +1,5 @@
 #include "game.h"
-#include <surface>
+#include <mapgen/mapgen.h>
 
 #include "strategy.h"
 #include <picking.h>
@@ -15,6 +15,9 @@
 #include <minimap_rectangle.h>
 
 #include "mapObjects-xml.hxx"
+
+#include <logger.h>
+#include <settings.h>
 
 #pragma region Map class
 

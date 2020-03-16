@@ -1,7 +1,7 @@
 #include <interface>
 #include <picking.h>
 #include <game/editor.h>
-#include <surface>
+#include <mapgen/mapgen.h>
 #include <game/strategy.h>
 #include <engine.h>
 

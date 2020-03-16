@@ -5,6 +5,7 @@
 #include <engine.h>
 #include <translationsTable.h>
 
+#include <settings.h>
 
 using namespace glm;
 

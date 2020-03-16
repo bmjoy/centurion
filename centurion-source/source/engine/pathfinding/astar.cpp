@@ -1,4 +1,9 @@
-#include <pathfinding>
+#include "pathfinding.h"
+
+#include <queue>
+
+#include <logger.h>
+#include <settings.h>
 
 using namespace std;
 using namespace glm;

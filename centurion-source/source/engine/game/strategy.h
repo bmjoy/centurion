@@ -6,7 +6,7 @@
 #include <classes/building.h>
 #include <classes/unit.h>
 #include <classes/decoration.h>
-#include <player>
+#include <player/player.h>
 #include "match.h"
 
 using namespace std;
