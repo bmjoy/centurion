@@ -1,4 +1,4 @@
-#include <gui>
+#include <ui.h>
 
 #include <hector-lua.h>
 
@@ -12,10 +12,10 @@ namespace gui {
 	}
 
 	void Button::create(string imageName, string Text, int x, int y, int pickingID, vec4 textColor, string luaCMD) {
-		buttonImage = Image(imageName);
-		buttonImage.create("center", (float)x, (float)y, 0, 0, pickingID);
-		buttonText = SimpleText("static");
-		buttonText.create_static(Text, "tahoma_13px", (float)x, (float)y, "center", "middle", textColor, "bold");
+		buttonImage = new Image(imageName);
+		buttonImage->create("center", (float)x, (float)y, 0, 0, pickingID);
+		buttonText = new SimpleText("static");
+		buttonText->create_static(Text, "tahoma_13px", (float)x, (float)y, "center", "middle", textColor, "bold");
 		
 		// save data
 		luaCmd = luaCMD;
@@ -24,9 +24,9 @@ namespace gui {
 
 
 	void Button::render(bool picking, int leftClickId) {
-		buttonImage.render(picking);
+		buttonImage->render(picking);
 		if (!picking) {
-			buttonText.render_static();
+			buttonText->render_static();
 
 			if (pickingId == leftClickId) {
 				Hector::ExecuteCommand(luaCmd);
@@ -34,5 +34,8 @@ namespace gui {
 		}
 	}
 
-	Button::~Button(){}
+	Button::~Button(){
+		/*if (buttonImage != nullptr) delete buttonImage;
+		if (buttonText != nullptr) delete buttonText;*/
+	}
 };

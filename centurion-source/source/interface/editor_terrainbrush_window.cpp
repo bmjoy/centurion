@@ -40,7 +40,7 @@ namespace editor {
 		terrainTypes.erase(unique(terrainTypes.begin(), terrainTypes.end()), terrainTypes.end());
 
 		for (int i = 0; i < terrainTypes.size(); i++){
-			gui::FormInput form = gui::FormInput(true);
+			gui::Select form = gui::Select(true);
 			form.create(startX + 20.f, startY - 20.f - 30 * i, 150.f, 20.f, terTypesMap[terrainTypes[i]], PickingUI::obtainPickingID());
 			PickingUI::addValueToPickingList(PickingUI::getLastID() + 1, "TerrainBrush_form_"+i);
 			forms.push_back(form);

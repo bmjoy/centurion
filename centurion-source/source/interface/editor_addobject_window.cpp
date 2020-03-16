@@ -48,13 +48,13 @@ namespace editor {
 		PickingUI::addValueToPickingList(PickingUI::getLastID() + 1, "AddObjWindow_rightarrow");
 
 
-		objectForms[0] = gui::FormInput(true);
+		objectForms[0] = gui::Select(true);
 		pickingIDs[0] = PickingUI::obtainPickingID();
 		objectForms[0].create(startX + 11.f, startY - 11.f, 150.f, 20.f, { "EDITOR_buildings", "EDITOR_decorations" }, pickingIDs[0]);
 		PickingUI::addValueToPickingList(pickingIDs[0], "AddObjWindow_form0");
 
 
-		objectForms[1] = gui::FormInput(true);
+		objectForms[1] = gui::Select(true);
 		pickingIDs[1] = PickingUI::obtainPickingID();
 		vector<string> form1Options = EditorAddObjectBuildingOptions;
 		sort(form1Options.begin(), form1Options.end());
@@ -63,7 +63,7 @@ namespace editor {
 		PickingUI::addValueToPickingList(pickingIDs[1], "AddObjWindow_form1");
 
 
-		objectForms[2] = gui::FormInput(true);
+		objectForms[2] = gui::Select(true);
 		pickingIDs[2] = PickingUI::obtainPickingID();
 		objectForms[2].create(startX + 11.f, startY - 11.f - 30.f * 2, 150.f, 20.f, { "" }, pickingIDs[2]);
 		PickingUI::addValueToPickingList(pickingIDs[2], "AddObjWindow_form2");

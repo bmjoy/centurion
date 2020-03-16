@@ -7,7 +7,7 @@
 #define MEDIUM_MAP_WIDTH 30000
 #define MEDIUM_MAP_HEIGHT 20000
 
-#include <gui>
+#include <ui.h>
 
 class GObject;
 class Building;

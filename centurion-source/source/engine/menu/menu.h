@@ -3,7 +3,7 @@
 
 #define MAX_NUMBER_OF_PAGES 50
 
-#include <gui>
+#include <ui.h>
 
 class Menu {
 

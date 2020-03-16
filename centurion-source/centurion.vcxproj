@@ -260,7 +260,7 @@ XCOPY "$(ProjectDir)lua53.dll" "$(ProjectDir)$(OutDir)"</Command>
     <ClCompile Include="source\picking\gameui_picking.cpp" />
     <ClCompile Include="source\ui\button.cpp" />
     <ClCompile Include="source\ui\circle.cpp" />
-    <ClCompile Include="source\ui\form_input.cpp" />
+    <ClCompile Include="source\ui\select.cpp" />
     <ClCompile Include="source\ui\image.cpp" />
     <ClCompile Include="source\ui\rectangle.cpp" />
     <ClCompile Include="source\ui\simple_text.cpp" />
@@ -315,6 +315,14 @@ XCOPY "$(ProjectDir)lua53.dll" "$(ProjectDir)$(OutDir)"</Command>
     <ClInclude Include="source\gl-items\terrain.h" />
     <ClInclude Include="source\gl-items\unit_sprite.h" />
     <ClInclude Include="source\hector\hector-lua.h" />
+    <ClInclude Include="source\ui\button.h" />
+    <ClInclude Include="source\ui\circle.h" />
+    <ClInclude Include="source\ui\select.h" />
+    <ClInclude Include="source\ui\image.h" />
+    <ClInclude Include="source\ui\rectangle.h" />
+    <ClInclude Include="source\ui\simple_text.h" />
+    <ClInclude Include="source\ui\text_box.h" />
+    <ClInclude Include="source\ui\text_input.h" />
     <ClInclude Include="source\util\file_manager.h" />
     <ClInclude Include="source\util\logger.h" />
     <ClInclude Include="source\util\maths.h" />
@@ -434,7 +442,7 @@ XCOPY "$(ProjectDir)lua53.dll" "$(ProjectDir)$(OutDir)"</Command>
     <ClInclude Include="source\audio\vorbis\os_types.h" />
     <ClInclude Include="source\audio\vorbis\vorbis_file.h" />
     <None Include="source\common\interface" />
-    <None Include="source\ui\gui" />
+    <None Include="source\ui\ui.h" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="source\audio\audio_context.h" />

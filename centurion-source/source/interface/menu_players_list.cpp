@@ -39,7 +39,7 @@ namespace menu{
 		for (int j = 0; j < MAX_NUMBER_OF_PLAYERS; j++) {
 
 			//Player color rectangle
-			gui::FormInput col_fi = gui::FormInput(false);
+			gui::Select col_fi = gui::Select(false);
 			col_fi.create((float)x, (float)y - deltaY * j, 20.f, 20.f, { "" }, PickingUI::obtainPickingID());
 			PickingUI::addValueToPickingList(PickingUI::getLastID() + 1, "ColForm_" + std::to_string(j));
 			if (j < 2) { (*players_color).push_back(j); }
@@ -47,12 +47,12 @@ namespace menu{
 			colors_Form.push_back(col_fi);
 
 			//Player name
-			gui::FormInput p_fi = gui::FormInput(false);
+			gui::Select p_fi = gui::Select(false);
 			p_fi.create((float)x + 50.0f, (float)y - deltaY * j, 200.f, 20.f, { "WORD_player_" + std::to_string(j + 1) }, 0);
 			players_Form.push_back(p_fi);
 
 			//Player civilization
-			gui::FormInput c_fi = gui::FormInput(true);
+			gui::Select c_fi = gui::Select(true);
 			c_fi.create((float)x + 280.f, (float)y - deltaY * j, 150.f, 20.f, Game::GetListOfRacesNames(), PickingUI::obtainPickingID());
 			PickingUI::addValueToPickingList(PickingUI::getLastID() + 1, "CivForm_" + std::to_string(j));
 			civiliz_Form.push_back(c_fi);

@@ -1,5 +1,5 @@
 #include <header.h>
-#include <gui>
+#include <ui.h>
 
 using namespace std;
 using namespace glm;
@@ -73,9 +73,9 @@ namespace menu {
 		string get_race(int i);
 		~PlayersList();
 	private:
-		vector<gui::FormInput> colors_Form;
-		vector<gui::FormInput> players_Form;
-		vector<gui::FormInput> civiliz_Form;
+		vector<gui::Select> colors_Form;
+		vector<gui::Select> players_Form;
+		vector<gui::Select> civiliz_Form;
 		gui::SimpleText dynamicText;
 		gui::Image arrowDown, arrowUp;
 		gui::Rectangle background;
@@ -97,7 +97,7 @@ namespace menu {
 	private:
 		gui::Rectangle back;
 		gui::SimpleText text[10];
-		gui::FormInput languages;	
+		gui::Select languages;	
 		float startX, startY;
 		void picking();
 	};
@@ -375,7 +375,7 @@ namespace editor {
 		gui::Image arrows[2];
 		gui::Image buttons[2];
 		gui::SimpleText buttons_text[2];
-		gui::FormInput objectForms[3];
+		gui::Select objectForms[3];
 		float startX, startY;
 		int pickingIDs[3];
 		string formSelectedTexts[3];
@@ -422,7 +422,7 @@ namespace editor {
 	private:
 		string selBrush;
 		gui::Rectangle back;
-		vector<gui::FormInput> forms;
+		vector<gui::Select> forms;
 		gui::Circle circle;
 		float startX, startY;
 		void picking();

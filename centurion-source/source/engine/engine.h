@@ -1,7 +1,7 @@
 #ifndef ENGINE_H
 #define ENGINE_H
 
-#include <gui>
+#include <ui.h>
 
 using namespace std;
 using namespace glm;

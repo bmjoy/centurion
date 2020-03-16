@@ -1,4 +1,4 @@
-#include <gui>
+#include <ui.h>
 #include <picking.h>
 
 #include <engine.h>

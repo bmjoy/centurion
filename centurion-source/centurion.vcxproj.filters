@@ -228,9 +228,6 @@
     <ClCompile Include="source\ui\circle.cpp">
       <Filter>Source Files\ui</Filter>
     </ClCompile>
-    <ClCompile Include="source\ui\form_input.cpp">
-      <Filter>Source Files\ui</Filter>
-    </ClCompile>
     <ClCompile Include="source\ui\image.cpp">
       <Filter>Source Files\ui</Filter>
     </ClCompile>
@@ -377,6 +374,9 @@
     </ClCompile>
     <ClCompile Include="source\engine\menu\menuPage-xml.cxx">
       <Filter>Source Files\engine\menu</Filter>
+    </ClCompile>
+    <ClCompile Include="source\ui\select.cpp">
+      <Filter>Source Files\ui</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -599,6 +599,30 @@
     <ClInclude Include="source\engine\menu\menuPage-xml.hxx">
       <Filter>Header Files\engine\menu</Filter>
     </ClInclude>
+    <ClInclude Include="source\ui\button.h">
+      <Filter>Header Files\ui</Filter>
+    </ClInclude>
+    <ClInclude Include="source\ui\circle.h">
+      <Filter>Header Files\ui</Filter>
+    </ClInclude>
+    <ClInclude Include="source\ui\image.h">
+      <Filter>Header Files\ui</Filter>
+    </ClInclude>
+    <ClInclude Include="source\ui\rectangle.h">
+      <Filter>Header Files\ui</Filter>
+    </ClInclude>
+    <ClInclude Include="source\ui\simple_text.h">
+      <Filter>Header Files\ui</Filter>
+    </ClInclude>
+    <ClInclude Include="source\ui\text_box.h">
+      <Filter>Header Files\ui</Filter>
+    </ClInclude>
+    <ClInclude Include="source\ui\text_input.h">
+      <Filter>Header Files\ui</Filter>
+    </ClInclude>
+    <ClInclude Include="source\ui\select.h">
+      <Filter>Header Files\ui</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="assets\shaders\bsprite\fragment.glsl">
@@ -661,11 +685,11 @@
     <None Include="assets\shaders\dsprite\fragment.glsl">
       <Filter>Shader Files\dsprite</Filter>
     </None>
-    <None Include="source\ui\gui">
-      <Filter>Header Files\ui</Filter>
-    </None>
     <None Include="source\common\interface">
       <Filter>Header Files\common</Filter>
+    </None>
+    <None Include="source\ui\ui.h">
+      <Filter>Header Files\ui</Filter>
     </None>
   </ItemGroup>
 </Project>
