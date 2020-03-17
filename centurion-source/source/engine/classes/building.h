@@ -29,6 +29,10 @@ public:
 	bool IsCentralBuilding(void);
 
 	string GetCategory(void);
+	bool IsVillageHall(void);
+	bool IsTownhall(void);
+	bool IsOutpost(void);
+	bool IsShipyard(void);
 
 
 	void prepare() override;
@@ -43,6 +47,10 @@ public:
 	~Building();
 protected:
 	void IAmACentralBuilding(void);
+	void IAmATownhall(void);
+	void IAmAnOutpost(void);
+	void IAmAVillageHall(void);
+	void IAmAShipyard(void);
 private:
 	game::ObjectUI* buildingUI;
 	map<int, Building*> subs_buildings; // dependent buildings connected to indipendent one
@@ -56,9 +64,11 @@ private:
 	string category;
 	string ent_path;
 	string pass_path;
-	bool bIsTownhall;
-	bool bIsVillagehall;
+	bool bIsOutpost = false;
+	bool bIsTownhall = false;
+	bool bIsVillageHall = false;
 	bool bIsCentralBuilding = false;
+	bool bIsShipyard = false;
 	Settlement settlement;
 
 	// properties from sprite

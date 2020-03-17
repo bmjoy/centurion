@@ -20,7 +20,9 @@ Building::Building()
 	this->bIsPlaceable = true;
 	this->buildingListSize = 0;
 	this->bIsTownhall = false;
-	this->bIsVillagehall = false;
+	this->bIsVillageHall = false;
+	this->bIsOutpost = false;
+	this->bIsShipyard = false;
 }
 
 Settlement Building::GetSettlement(void)
@@ -71,6 +73,26 @@ string Building::GetCategory(void)
 	return this->category;
 }
 
+bool Building::IsVillageHall(void)
+{
+	return this->bIsVillageHall;
+}
+
+bool Building::IsTownhall(void)
+{
+	return this->bIsTownhall;
+}
+
+bool Building::IsOutpost(void)
+{
+	return this->bIsOutpost;
+}
+
+bool Building::IsShipyard(void)
+{
+	return this->bIsShipyard;
+}
+
 void Building::prepare() 
 {
 	this->SetType(data["type"].get<string>());
@@ -81,7 +103,7 @@ void Building::prepare()
 	this->pass_path = data["pass_path"].get<string>();
 	this->bIsClickableInMimimap = (bool)data["clickable_in_minimap"].get<int>();
 	this->bIsTownhall = (this->GetClassName().substr(1) == "townhall");
-	this->bIsVillagehall = (this->GetClassName().substr(1) == "village");
+	this->bIsVillageHall = (this->GetClassName().substr(1) == "village");
 
 	/* file pass */
 	string str_className = this->GetClassName();
@@ -105,7 +127,7 @@ void Building::create(string Name) {
 	this->pass_path = data["pass_path"].get<string>();
 	this->bIsClickableInMimimap = (bool)data["clickable_in_minimap"].get<int>();
 	this->bIsTownhall = (this->GetClassName().substr(1) == "townhall");
-	this->bIsVillagehall = (this->GetClassName().substr(1) == "village");
+	this->bIsVillageHall = (this->GetClassName().substr(1) == "village");
 
 	/* file pass */
 	string str_className = this->GetClassName();
@@ -146,7 +168,7 @@ void Building::render(bool picking, int clickID, bool not_placeable) {
 		//}
 		
 	// keep updated central buildings "subsidiaries buildings list"
-	if (Game::GetNumberOfBuildings() != buildingListSize && (this->bIsTownhall || this->bIsVillagehall)) 
+	if (Game::GetNumberOfBuildings() != buildingListSize && (this->bIsTownhall || this->bIsVillageHall)) 
 	{
 		subs_buildings.clear();
 		int k = 0;
@@ -184,7 +206,7 @@ void Building::render(bool picking, int clickID, bool not_placeable) {
 
 	if (Engine::getEnvironment() == EDITOR_ENV && !Game::Minimap::IsActive()) {
 		if (this->IsSelected() && !editor::addingObject) circle[0].render(vec4(255.f), this->GetPosition().x, this->GetPosition().y - data["radius"].get<float>() / 15.5f); // selection circle (editor only)
-		if (this->IsSelected() && (this->bIsTownhall || this->bIsVillagehall) && !editor::addingObject) circle[1].render(vec4(0, 255, 255, 255), this->GetPosition().x, this->GetPosition().y); // selection circle (editor only)
+		if (this->IsSelected() && (this->bIsTownhall || this->bIsVillageHall) && !editor::addingObject) circle[1].render(vec4(0, 255, 255, 255), this->GetPosition().x, this->GetPosition().y); // selection circle (editor only)
 	}
 
 	if (Engine::getEnvironment() == STRATEGY_ENV && this->IsSelected()) {
@@ -237,4 +259,24 @@ void Building::IAmACentralBuilding(void)
 {
 	this->settlement = Settlement();
 	this->bIsCentralBuilding = true;
+}
+
+void Building::IAmATownhall(void)
+{
+	this->bIsTownhall = true;
+}
+
+void Building::IAmAnOutpost(void)
+{
+	this->bIsOutpost = true;
+}
+
+void Building::IAmAVillageHall(void)
+{
+	this->bIsVillageHall = true;
+}
+
+void Building::IAmAShipyard(void)
+{
+	this->bIsShipyard = true;
 }

@@ -8,10 +8,10 @@ using namespace std;
 using namespace glm;
 
 
-class Village : public Habitable
+class VillageHall : public Habitable
 {
 protected:
-	Village();
+	VillageHall();
 };
 
 #endif

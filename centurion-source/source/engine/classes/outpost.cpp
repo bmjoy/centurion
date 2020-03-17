@@ -15,4 +15,5 @@ using namespace glm;
 Outpost::Outpost()
 {
 	this->IAmACentralBuilding(); 
+	this->IAmAnOutpost();
 }

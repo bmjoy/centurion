@@ -12,8 +12,9 @@
 using namespace std;
 using namespace glm;
 
-Village::Village()
+VillageHall::VillageHall()
 {
 	this->IAmACentralBuilding();
+	this->IAmAVillageHall();
 	this->StartFoodProduction();
 }

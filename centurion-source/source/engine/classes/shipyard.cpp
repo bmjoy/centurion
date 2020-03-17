@@ -15,4 +15,5 @@ using namespace glm;
 Shipyard::Shipyard()
 {
 	this->IAmACentralBuilding();
+	this->IAmAShipyard();
 }

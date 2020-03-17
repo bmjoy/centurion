@@ -15,5 +15,6 @@ using namespace glm;
 Townhall::Townhall()
 {
 	this->IAmACentralBuilding(); 
+	this->IAmATownhall();
 	this->StartGoldProduction();
 }
