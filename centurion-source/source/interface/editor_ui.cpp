@@ -3,6 +3,7 @@
 #include <engine.h>
 
 #include <game/interface/editorMenuBar.h>
+#include <game/interface/editorWindows.h>
 
 
 
@@ -15,6 +16,8 @@ namespace editor {
 	void EditorUI::create() {
 		
 		EditorMenuBar::Create();
+		EditorWindows::Create();
+		
 		open_map_window.create();
 		new_map_window.create();
 		add_object_window.create();
@@ -46,6 +49,7 @@ namespace editor {
 		terrainbrush_window.render(picking);
 		Q_WINDOW()->render(picking);
 
+		EditorWindows::Render(picking);
 		EditorMenuBar::Render(picking); // always the last
 	}
 

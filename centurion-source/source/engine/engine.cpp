@@ -522,6 +522,11 @@ void Engine::SetEnvironment(string s)
 	Mouse::LeftClick = false;
 }
 
+void Engine::PrintToConsole(string s)
+{
+	cout << s << endl;
+}
+
 void Engine::Init(const char* exe_root) {
 
 	// old initParams (global)

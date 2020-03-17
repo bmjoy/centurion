@@ -104,6 +104,15 @@ public:
 		string t_class;
 	};
 
+#pragma region TO-LUA Methods
+
+	static GObject* GetSelectedObject() { return selectedObject; }
+	static bool IsGameObjectSelected(int id);
+	static bool IsGameObjectNotNull(int id);
+
+#pragma endregion
+
+
 #pragma region GameObjects List and Methods
 
 	static GObject* GameObjects[MAX_NUMBER_OF_OBJECTS]; // protected?
@@ -115,13 +124,13 @@ public:
 	static int GetNumberOfBuildings();
 	static int GetNumberOfUnits();
 	static int GetNumberOfDecorations();
-	static bool IsGameObjectNotNull(int i);
 	static vector<Building*> GetListOfIndipendentBuildings();
 	static vector<Building*> GetListOfStandAloneBuildings();
 	static vector<Building*> GetListOfBuildings();
 	static vector<Unit*> GetListOfUnits();
 	static vector<Decoration*> GetListOfDecorations();
 	static void UpdateSettlementBuildings();
+	static void SetSelectedObject(GObject* o) { selectedObject = o; }
 
 #pragma endregion
 
@@ -141,8 +150,6 @@ public:
 	static int GetNumberOfColors() { return (int)listOfColors.size(); }
 
 #pragma endregion
-
-
 
 	static bool IsCreated() { return isCreated; }
 	static void SetNumberOfPlayers(int n) { numberOfPlayers = n; }
@@ -166,4 +173,5 @@ protected:
 
 private:
 	static float cameraToX, cameraToY;
+	static GObject* selectedObject;
 };

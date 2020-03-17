@@ -267,15 +267,15 @@ namespace editor {
 			//Player will be able to see info about placing status
 			if (!buildingTemp->GetSettlement().IsIndipendent()) {
 				string s = "";
-				/*
-				if (!buildingTemp->is_near_to_independent(&s))
+				
+				/*if (!buildingTemp->is_near_to_independent(&s))
 					textInfo.render_dynamic(TranslationsTable::GetTranslation("EDITOR_noSettlementsAround"), "tahoma_15px", 10, Engine::myWindow::Height - 50, vec4(255.f), "left", "center");
+				else*/
+				if (!buildingTemp->IsPlaceable())
+					textInfo.render_dynamic(TranslationsTable::GetTranslation("EDITOR_impassablePoint"), "tahoma_15px", 10, Engine::myWindow::Height - 50, vec4(255.f), "left", "center");
 				else
-					if (!buildingTemp->IsPlaceable())
-						textInfo.render_dynamic(TranslationsTable::GetTranslation("EDITOR_impassablePoint"), "tahoma_15px", 10, Engine::myWindow::Height - 50, vec4(255.f), "left", "center");
-					else
-						textInfo.render_dynamic(TranslationsTable::GetTranslation("EDITOR_canAddStructure"), "tahoma_15px", 10, Engine::myWindow::Height - 50, vec4(255.f), "left", "center");
-				*/
+					textInfo.render_dynamic(TranslationsTable::GetTranslation("EDITOR_canAddStructure"), "tahoma_15px", 10, Engine::myWindow::Height - 50, vec4(255.f), "left", "center");
+				
 			}
 			else {
 				if (!buildingTemp->IsPlaceable())

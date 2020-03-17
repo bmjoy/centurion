@@ -508,6 +508,7 @@ GObject* Game::GameObjects[MAX_NUMBER_OF_OBJECTS] = { nullptr };
 vector<string> Game::racesName;
 map<string, Game::Race> Game::races;
 vector<vec3> Game::listOfColors;
+GObject* Game::selectedObject;
 
 #pragma endregion
 
@@ -573,8 +574,14 @@ int Game::GetNumberOfDecorations() {
 	return n;
 }
 
-bool Game::IsGameObjectNotNull(int i) {
-	return (GameObjects[i] != nullptr);
+bool Game::IsGameObjectSelected(int id)
+{
+	if (IsGameObjectNotNull(id) == false) return false;
+	return GameObjects[id]->IsSelected();
+}
+
+bool Game::IsGameObjectNotNull(int id) {
+	return (GameObjects[id] != nullptr);
 }
 
 vector<Building*> Game::GetListOfIndipendentBuildings() {

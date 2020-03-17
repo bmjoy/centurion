@@ -166,7 +166,6 @@ void EditorMenuBar::Render(bool picking)
 			if (picking == false) {
 				if (Engine::Mouse::LeftClick && Engine::Mouse::GetYPosition() < Engine::myWindow::Height - height) {
 					if (Picking::leftClickID_UI > minPickingId || Picking::leftClickID_UI < maxPickingId) {
-						cout << Picking::leftClickID_UI << " " << minPickingId << " " << maxPickingId << endl;
 						listOfMenus[i]->Close();
 					}
 				}

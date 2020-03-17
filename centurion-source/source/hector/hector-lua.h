@@ -10,6 +10,7 @@ class Hector {
 public:
 	static void Initialize();
 	static void ExecuteCommand(string cmd);
+	static bool ExecuteBooleanMethod(string cmd);
 
 private:
 	static lua_State* L;

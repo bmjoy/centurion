@@ -6,6 +6,12 @@
 # Exclude:
 centurion-source/screenshots/*
 !centurion-source/screenshots/readme.txt
+centurion-source/logs/debug/*
+!centurion-source/logs/debug/DEBUG_FOLDER
+centurion-source/logs/params/*
+!centurion-source/logs/params/PARAMS_FOLDER
+
+!centurion-source/screenshots/readme.txt
 
 # User-specific files
 *.suo

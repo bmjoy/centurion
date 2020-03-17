@@ -438,6 +438,12 @@
     <ClCompile Include="source\engine\game\interface\editorMenuBar.cpp">
       <Filter>Source Files\engine\game\interface</Filter>
     </ClCompile>
+    <ClCompile Include="source\engine\game\interface\editorWindows-xml.cxx">
+      <Filter>Source Files\engine\game\interface</Filter>
+    </ClCompile>
+    <ClCompile Include="source\engine\game\interface\editorWindows.cpp">
+      <Filter>Source Files\engine\game\interface</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="source\extern\includes\json.hpp">
@@ -738,6 +744,12 @@
       <Filter>Header Files\engine\game\interface</Filter>
     </ClInclude>
     <ClInclude Include="source\engine\game\interface\editorMenuBar.h">
+      <Filter>Header Files\engine\game\interface</Filter>
+    </ClInclude>
+    <ClInclude Include="source\engine\game\interface\editorWindows-xml.hxx">
+      <Filter>Header Files\engine\game\interface</Filter>
+    </ClInclude>
+    <ClInclude Include="source\engine\game\interface\editorWindows.h">
       <Filter>Header Files\engine\game\interface</Filter>
     </ClInclude>
   </ItemGroup>

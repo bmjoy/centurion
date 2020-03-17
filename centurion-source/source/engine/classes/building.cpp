@@ -46,13 +46,13 @@ bool Building::IsPlaceable(void)
 {
 	vec3 var_position = this->GetPosition();
 	bool placeable = astar::checkAvailability(pass_grid, var_position);
-	string indCategory = "";
+	//string indCategory = "";
 	//bool nearToIndependent = is_near_to_independent(&indCategory);
-	if (!this->settlement.IsIndipendent())
-	{
-		//placeable = placeable && nearToIndependent && indCategory == this->category;
-		placeable = placeable && indCategory == this->category;
-	}
+	//if (!this->settlement.IsIndipendent())
+	//{
+	//	//placeable = placeable && nearToIndependent && indCategory == this->category;
+	//	placeable = placeable && indCategory == this->category;
+	//}
 	return placeable;
 }
 
@@ -175,6 +175,12 @@ void Building::render(bool picking, int clickID, bool not_placeable) {
 	// has the building been selected?
 	bool bSelected = (this->GetPickingID() == clickID);
 	this->Select(bSelected);
+	if (bSelected) {
+		if (Game::GetSelectedObject() != this) {
+			Game::SetSelectedObject(this);
+		}
+	}
+	
 
 	if (Engine::getEnvironment() == EDITOR_ENV && !Game::Minimap::IsActive()) {
 		if (this->IsSelected() && !editor::addingObject) circle[0].render(vec4(255.f), this->GetPosition().x, this->GetPosition().y - data["radius"].get<float>() / 15.5f); // selection circle (editor only)

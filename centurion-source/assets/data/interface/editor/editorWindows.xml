@@ -1,0 +1,31 @@
+﻿<c_editorWindows>
+  <c_editorWindow id="0" name="Object properties" iframe="editor" x="100" y="200" width="200" height="400" isOpened="false">
+	<conditionScript function="ConditionProperties">
+		-- lua script
+		function ConditionProperties()
+			condition1 = Mouse.RightClick 
+			condition2 = Game.IsObjectNotNull(Mouse.RightClickID)
+			condition3 = Game.IsObjectSelected(Mouse.RightClickID)
+			return condition1 and condition2 and condition3
+		end
+	</conditionScript>
+    <openingScript>
+	  -- lua script
+	  --obj = Game.GetSelectedObject()
+      -- Engine.PrintToConsole(obj:GetClassName())
+    </openingScript>
+    <simpleText text="ciao" xOffset="100" yOffset="50" font="tahoma_13px">
+      <color r="0" g="0" b="0" />
+    </simpleText>
+    <!--<simpleText text="ciao" xOffset="100" yOffset="50" font="tahoma_13px">
+      <color r="0" g="0" b="0" />
+    </simpleText>
+    <scriptText src="ciao" xOffset="100" yOffset="50" font="tahoma_13px">
+      <color r="0" g="0" b="0" />
+    </scriptText>
+    <image image_name="image_name" xOffset="100" yOffset="50" onclick="ciao"/>
+    <image image_name="image_name" xOffset="100" yOffset="50" onclick="ciao"/>
+    <button name="" image_name="" xOffset="100" yOffset="50" onclick="ciao"/>
+    <button name="" image_name="" xOffset="100" yOffset="50" onclick="ciao"/>-->
+  </c_editorWindow>
+</c_editorWindows>

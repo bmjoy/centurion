@@ -14,7 +14,7 @@ int main(int numArgs, char *args[]) {
 			return Engine::launch();
 		}
 		catch (...) {
-
+			throw;
 		}
 	}
 	
