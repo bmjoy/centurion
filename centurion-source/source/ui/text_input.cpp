@@ -16,7 +16,6 @@ namespace gui {
 	void TextInput::create(string text, float x, float y, int maxChars) {
 		xPos = x; yPos = y; max_chars = maxChars;
 		
-		current_text = "prova";
 		static_text = gui::SimpleText("static");
 		static_text.create_static(text, "tahoma_15px", xPos, yPos, "left", "normal", vec4(255.f));
 		current_text = text;
@@ -44,7 +43,7 @@ namespace gui {
 				static_text.create_static(current_text, "tahoma_15px", xPos, yPos, "left", "normal", vec4(255.f));
 			}
 
-			text_cursor.render(vec4(255.f), false, xPos + static_text.get_width(cursorPosition), yPos);
+			text_cursor.render(vec4(255.f), false, 0, xPos + static_text.get_width(cursorPosition), yPos);
 		}
 		
 		static_text.render_static();

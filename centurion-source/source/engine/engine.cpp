@@ -598,6 +598,7 @@ int Engine::launch() {
 
 	// Hector - Lua interpreter
 	Hector::Initialize();
+	Hector::CreateConsole();
 
 	while (myWindow::ShouldClose == false) {
 		glfwPollEvents();
@@ -663,12 +664,14 @@ int Engine::launch() {
 		// debug ui
 		if (Settings::DebugIsActive)	DEBUG_UI()->render(Fps, Mpfs, Unit::GetCounter());
 
+		Hector::RenderConsole();
+
 		// mouse
 		Mouse::render();
 
 		if ((Keyboard::IsKeyPressed(GLFW_KEY_LEFT_SHIFT) || Keyboard::IsKeyPressed(GLFW_KEY_RIGHT_SHIFT)) && Keyboard::IsKeyPressed(GLFW_KEY_S)) {
-			Logger::Info("Screenshot taken!");
-			myWindow::TakeScreenshot();
+			//Logger::Info("Screenshot taken!");
+			//myWindow::TakeScreenshot();
 		}
 
 		Keyboard::SetCharCodepointPressed(-1);

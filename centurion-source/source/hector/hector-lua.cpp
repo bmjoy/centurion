@@ -12,9 +12,12 @@
 #include <game/game.h>
 #include <classes/object.h>
 
+#include <GLFW/glfw3.h>
+
 using namespace luabridge;
 
 lua_State* Hector::L;
+Hector::Console Hector::C;
 
 void Hector::Initialize()
 {
@@ -97,4 +100,46 @@ bool Hector::ExecuteBooleanMethod(string cmd)
 		}
 	}
 	return boolean;
+}
+
+void Hector::Console::Create()
+{
+	iframe = gui::Iframe("console");
+	iframe.Create(30, 30, Engine::myWindow::Width - 60, 30);
+	txtinput = gui::TextInput();
+	txtinput.create("", 35, 35, 200);
+	isOpened = false;
+}
+
+void Hector::Console::Render()
+{
+	if (Engine::Keyboard::IsKeyPressed(GLFW_KEY_F1)) {
+		isOpened = !isOpened;
+		txtinput.active(isOpened);
+		Engine::Keyboard::SetKeyStatus(GLFW_KEY_F1, false);
+	}
+	if (isOpened) {		
+		iframe.Render();
+		txtinput.render();
+
+		string cmd = txtinput.get_text();
+		if (Engine::Keyboard::IsKeyPressed(GLFW_KEY_ENTER)) {
+			if (cmd.size() > 0) {
+				ExecuteCommand(cmd);
+				txtinput.create("", 35, 35, 200);
+				Engine::Keyboard::SetKeyStatus(GLFW_KEY_ENTER, false);
+			}
+		}
+	}
+}
+
+
+void Hector::CreateConsole()
+{
+	C.Create();
+}
+
+void Hector::RenderConsole()
+{
+	C.Render();
 }

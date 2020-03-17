@@ -33,7 +33,7 @@ void ObjectData::ReadDataClassesFromXml()
 			xml_schema::properties props;
 			props.no_namespace_schema_location(Folders::XML_SCHEMAS + "object.xsd");
 			auto_ptr<c_object> dataXML = c_object_(path, 0, props);
-			std::cout << dataXML->class_name() << std::endl;
+			//std::cout << dataXML->class_name() << std::endl;
 		}
 		catch (const xml_schema::exception & e) {
 			std::cout << e << std::endl;
