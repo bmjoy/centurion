@@ -11,8 +11,6 @@ centurion-source/logs/debug/*
 centurion-source/logs/params/*
 !centurion-source/logs/params/PARAMS_FOLDER
 
-!centurion-source/screenshots/readme.txt
-
 # User-specific files
 *.suo
 *.user
