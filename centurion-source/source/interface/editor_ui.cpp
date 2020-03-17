@@ -2,7 +2,7 @@
 #include <game/strategy.h>
 #include <engine.h>
 
-
+#include <game/interface/editorMenuBar.h>
 
 
 
@@ -13,7 +13,8 @@ namespace editor {
 	EditorUI::EditorUI() {}
 
 	void EditorUI::create() {
-		editor_menu.create();
+		
+		EditorMenuBar::Create();
 		open_map_window.create();
 		new_map_window.create();
 		add_object_window.create();
@@ -45,7 +46,7 @@ namespace editor {
 		terrainbrush_window.render(picking);
 		Q_WINDOW()->render(picking);
 
-		editor_menu.render(picking); // always the last
+		EditorMenuBar::Render(picking); // always the last
 	}
 
 	EditorUI::~EditorUI() {}

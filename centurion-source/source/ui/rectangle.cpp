@@ -6,6 +6,8 @@
 #include "empty_rectangle.h"
 #include "filled_rectangle.h"
 
+#include "hector-lua.h"
+
 namespace gui {
 
 	using namespace std;
@@ -21,8 +23,10 @@ namespace gui {
 		originMap["bottom-right"] = 4;
 		data = RectangleData();
 		data.type = "filled";
+		pickingId = 0;
+		luaCmd = "";
 	}
-	void Rectangle::create(string Type, float x, float y, float w, float h, string origin, int pickingID) {
+	void Rectangle::create(string Type, float x, float y, float w, float h, string origin, int pickingID, string luaCMD) {
 
 		if (x < 0) x += Engine::myWindow::Width;
 		if (y < 0) y += Engine::myWindow::Height;
@@ -34,8 +38,16 @@ namespace gui {
 		data.h = h;
 		data.origin = originMap[origin];
 		data.pickingColor = vec4(Picking::getPickingColorFromID(pickingID), 1.f);
+		pickingId = pickingID;
+		luaCmd = luaCMD;
 	}
-	void Rectangle::render(vec4 Color, bool picking, float x, float y, float w, float h, int origin) {
+	void Rectangle::render(vec4 Color, bool picking, int leftClickId , float x, float y, float w, float h, int origin) {
+
+		if (picking == false) {
+			if (pickingId == leftClickId) {
+				Hector::ExecuteCommand(luaCmd);
+			}
+		}
 
 		if (x != 0.f) data.x = x;
 		if (y != 0.f) data.y = y;
@@ -57,6 +69,8 @@ namespace gui {
 			FRectangle()->render(data, picking);
 			ERectangle()->render(data);
 		}
+
+		
 	}
 
 	Rectangle::~Rectangle() {}

@@ -14,6 +14,7 @@ namespace Folders {
 	extern string DATA;
 	extern string INTERFACE_MENU;
 	extern string INTERFACE_IFRAME;
+	extern string INTERFACE_EDITOR;
 };
 
 

@@ -231,6 +231,8 @@ XCOPY "$(ProjectDir)lua53.dll" "$(ProjectDir)$(OutDir)"</Command>
     <ClCompile Include="source\engine\fontCharacters-xml.cxx" />
     <ClCompile Include="source\engine\game\editor.cpp" />
     <ClCompile Include="source\engine\game\game.cpp" />
+    <ClCompile Include="source\engine\game\interface\editorMenuBar-xml.cxx" />
+    <ClCompile Include="source\engine\game\interface\editorMenuBar.cpp" />
     <ClCompile Include="source\engine\game\mapObjects-xml.cxx" />
     <ClCompile Include="source\engine\game\match.cpp" />
     <ClCompile Include="source\engine\game\strategy.cpp" />
@@ -314,6 +316,8 @@ XCOPY "$(ProjectDir)lua53.dll" "$(ProjectDir)$(OutDir)"</Command>
     <ClInclude Include="source\engine\fontCharacters-xml.hxx" />
     <ClInclude Include="source\engine\game\editor.h" />
     <ClInclude Include="source\engine\game\game.h" />
+    <ClInclude Include="source\engine\game\interface\editorMenuBar-xml.hxx" />
+    <ClInclude Include="source\engine\game\interface\editorMenuBar.h" />
     <ClInclude Include="source\engine\game\mapObjects-xml.hxx" />
     <ClInclude Include="source\engine\game\match.h" />
     <ClInclude Include="source\engine\game\strategy.h" />
@@ -463,7 +467,6 @@ XCOPY "$(ProjectDir)lua53.dll" "$(ProjectDir)$(OutDir)"</Command>
     <ClCompile Include="source\audio\sound.cpp" />
     <ClCompile Include="source\audio\sound_buffer.cpp" />
     <ClCompile Include="source\interface\debug_ui.cpp" />
-    <ClCompile Include="source\interface\editor_menu.cpp" />
     <ClCompile Include="source\interface\game_ui_menu.cpp" />
     <ClCompile Include="source\interface\game_ui.cpp" />
     <ClCompile Include="source\interface\menu_players_list.cpp" />

@@ -435,7 +435,7 @@ void Game::SelectionRectangle::Render() {
 		if (w < 0 && h < 0) origin = 3; // top-right
 
 		if (abs(w) > 1 && abs(h) > 1) {
-			selRectangle.render(vec4(255.f), 0, Coordinates.startX, Coordinates.startY, abs(w), abs(h), origin);
+			selRectangle.render(vec4(255.f), 0, 0, Coordinates.startX, Coordinates.startY, abs(w), abs(h), origin);
 			Coordinates.minX = std::min(Coordinates.startX, Coordinates.lastX);
 			Coordinates.maxX = std::max(Coordinates.startX, Coordinates.lastX);
 			Coordinates.minY = std::min(Coordinates.startY, Coordinates.lastY);

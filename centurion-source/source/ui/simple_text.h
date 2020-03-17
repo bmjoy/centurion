@@ -6,6 +6,9 @@
 namespace gui {
 	class SimpleText {
 	public:
+		static float CalculateTextWidth(string text, string font, string fontWeight = "normal");
+
+
 		SimpleText(string Type = "static", bool Shadow = false);
 		void create_static(string text, string font, float x, float y, string halign, string valign, vec4 color, string fontWeight = "normal");
 		void render_static();

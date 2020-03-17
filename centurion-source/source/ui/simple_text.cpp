@@ -11,6 +11,13 @@ namespace gui {
 	using namespace glm;
 	
 
+	float SimpleText::CalculateTextWidth(string text, string font, string fontWeight)
+	{
+		gui::SimpleText temptext = gui::SimpleText("static");
+		temptext.create_static(text, font, 0, 0, "center", "middle", vec4(255), fontWeight);
+		return temptext.get_width();
+	}
+
 	SimpleText::SimpleText(string Type, bool Shadow) {
 		type = Type;
 		hAlign = "left";

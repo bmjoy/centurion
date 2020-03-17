@@ -241,47 +241,6 @@ namespace editor {
 
 	//---------------------------------------------------
 
-	struct menuData {
-		vector<string> options;
-		vector<string> hotkeys;
-		vector<gui::Rectangle> optionsBack;
-		vector<gui::SimpleText> optionsText;
-		vector<gui::SimpleText> optionsHotKeysText;
-		vector<ivec2> optionsPosition;
-		gui::Rectangle titleBack;
-		gui::SimpleText titleText;
-		vec4 color;
-		vec4 hoverColor;
-		vec4 pickingColor;
-		ivec2 titlePosition;
-		string title;
-		int titleWidth, titleHeight;
-		int optionsWidth, optionsHeight, optionsHotKeysWidth;
-		int optionsOffsetX;	
-		int pickingID;
-		bool isOpened;
-	};
-
-	class EditorMenu {
-	public:
-		EditorMenu();
-		void create();
-		void render(bool pick);
-		void closeMenu();
-		~EditorMenu();
-	private:
-		gui::Rectangle topBar;
-		vec4 barColor;
-		map<string, menuData> titles;
-		array<string, 3> titlesList;
-		map<string, int>pickingList;
-		int barHeight;
-		unsigned int minPickingID, maxPickingID;	
-
-		void picking(); // this function is here: source/picking/editormenu_picking.cpp
-		bool isHover(vec2 pos, int w, int h); // idem
-	};
-
 	//
 	//  OPEN MAP WINDOW
 	//
@@ -437,10 +396,10 @@ namespace editor {
 		EditorUI();
 		void create();
 		void render(bool picking);
-		void close_menu() { editor_menu.closeMenu(); }
+		//void close_menu() { editor_menu.closeMenu(); }
 		~EditorUI();
 	private:
-		EditorMenu editor_menu;
+		//EditorMenu editor_menu;
 		OpenMapWindow open_map_window;
 		NewMapWindow new_map_window;
 		AddObjectWindow add_object_window;

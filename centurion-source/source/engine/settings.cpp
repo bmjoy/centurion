@@ -40,6 +40,7 @@ void Settings::SetFolders(string exe_folder_path)
 		Folders::DATA = exe_folder_path + Folders::DATA;
 		Folders::INTERFACE_MENU = exe_folder_path + Folders::INTERFACE_MENU;
 		Folders::INTERFACE_IFRAME = exe_folder_path + Folders::INTERFACE_IFRAME;
+		Folders::INTERFACE_EDITOR = exe_folder_path + Folders::INTERFACE_EDITOR;
 	}
 }
 

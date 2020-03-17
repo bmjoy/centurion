@@ -6,6 +6,8 @@
 #include <menu/menu.h>
 #include <engine.h>
 
+#include "game/interface/editorMenuBar.h"
+
 using namespace luabridge;
 
 lua_State* Hector::L;
@@ -18,6 +20,7 @@ void Hector::Initialize()
 	getGlobalNamespace(L).addFunction("GameClose", Engine::GameClose);
 	getGlobalNamespace(L).addFunction("SetEnvironment", Engine::SetEnvironment);
 	getGlobalNamespace(L).addFunction("OpenMenuPage", Menu::OpenMenuPage);
+	getGlobalNamespace(L).addFunction("ToggleEditorMenu", EditorMenuBar::ToggleEditorMenu);
 }
 
 void Hector::ExecuteCommand(string cmd)

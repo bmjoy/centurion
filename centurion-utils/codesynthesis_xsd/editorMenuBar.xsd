@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema attributeFormDefault="unqualified" elementFormDefault="qualified" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:element name="c_editorMenuBar">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="c_background">
+          <xs:complexType>
+            <xs:attribute name="r" type="xs:integer" use="required" />
+            <xs:attribute name="g" type="xs:integer" use="required" />
+            <xs:attribute name="b" type="xs:integer" use="required" />
+          </xs:complexType>
+        </xs:element>
+		<xs:element name="c_hover">
+          <xs:complexType>
+            <xs:attribute name="r" type="xs:integer" use="required" />
+            <xs:attribute name="g" type="xs:integer" use="required" />
+            <xs:attribute name="b" type="xs:integer" use="required" />
+          </xs:complexType>
+        </xs:element>
+        <xs:element maxOccurs="unbounded" name="c_editorMenu">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element maxOccurs="unbounded" name="command">
+                <xs:complexType>
+                  <xs:attribute name="id" type="xs:integer" use="required" />
+                  <xs:attribute name="name" type="xs:string" use="required" />
+                  <xs:attribute name="hotkey1" type="xs:string" use="required" />
+                  <xs:attribute name="hotkey2" type="xs:string" use="required" />
+                  <xs:attribute name="hotkey3" type="xs:string" use="required" />
+                  <xs:attribute name="onclick" type="xs:string" use="required" />
+                </xs:complexType>
+              </xs:element>
+            </xs:sequence>
+            <xs:attribute name="id" type="xs:integer" use="required" />
+            <xs:attribute name="name" type="xs:string" use="required" />
+            <xs:attribute name="onclick" type="xs:string" use="required" />
+          </xs:complexType>
+        </xs:element>
+      </xs:sequence>
+      <xs:attribute name="height" type="xs:integer" use="required" />
+      <xs:attribute name="font" type="xs:string" use="required" />
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

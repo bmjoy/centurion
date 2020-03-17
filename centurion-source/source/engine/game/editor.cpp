@@ -43,6 +43,9 @@ void Editor::Create() {
 }
 
 void Editor::Run() {
+
+	Picking::leftClickID_UI = 0;
+
 	/* Keyboard control */
 	handleKeyboardControls();
 	if (!editor::IsWindowOpened) { // TODO: merge all these in a function in Editor->Editor_functions.cpp
@@ -57,6 +60,10 @@ void Editor::Run() {
 		projectionMatrix = getCameraProjectionMatrix();
 
 		editor::EDITOR_UI()->render(true);
+
+		if (Engine::Mouse::LeftClick) {
+			Picking::leftClickID_UI = PickingUI::GetIdFromClick();
+		}
 
 		// apply game matrices
 		applyGameMatrices(&projectionMatrix, &viewMatrix);
@@ -177,7 +184,7 @@ void Editor::handleKeyboardControls() {
 		}
 		else {
 			clearEditorVariables();
-			EDITOR_UI()->close_menu();
+			//EDITOR_UI()->close_menu();
 		}
 	}
 }

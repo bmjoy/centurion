@@ -133,6 +133,12 @@
     <Filter Include="Source Files\engine\menu">
       <UniqueIdentifier>{2bcfcdfe-7696-4084-8b35-2903f8edee9a}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\engine\game\interface">
+      <UniqueIdentifier>{ae15d81a-d764-4f16-81fb-447c547588ca}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\engine\game\interface">
+      <UniqueIdentifier>{8f5ddee1-41eb-4917-833d-37a2d60fa6f6}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -148,9 +154,6 @@
       <Filter>Source Files\interface</Filter>
     </ClCompile>
     <ClCompile Include="source\interface\debug_ui.cpp">
-      <Filter>Source Files\interface</Filter>
-    </ClCompile>
-    <ClCompile Include="source\interface\editor_menu.cpp">
       <Filter>Source Files\interface</Filter>
     </ClCompile>
     <ClCompile Include="source\audio\audio_context.cpp">
@@ -428,6 +431,12 @@
     </ClCompile>
     <ClCompile Include="source\ui\iframe-xml.cxx">
       <Filter>Source Files\ui</Filter>
+    </ClCompile>
+    <ClCompile Include="source\engine\game\interface\editorMenuBar-xml.cxx">
+      <Filter>Source Files\engine\game\interface</Filter>
+    </ClCompile>
+    <ClCompile Include="source\engine\game\interface\editorMenuBar.cpp">
+      <Filter>Source Files\engine\game\interface</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -724,6 +733,12 @@
     </ClInclude>
     <ClInclude Include="source\ui\iframe.h">
       <Filter>Header Files\ui</Filter>
+    </ClInclude>
+    <ClInclude Include="source\engine\game\interface\editorMenuBar-xml.hxx">
+      <Filter>Header Files\engine\game\interface</Filter>
+    </ClInclude>
+    <ClInclude Include="source\engine\game\interface\editorMenuBar.h">
+      <Filter>Header Files\engine\game\interface</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
