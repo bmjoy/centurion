@@ -1,4 +1,5 @@
-#pragma once
+#ifndef  _UNIT_H
+#define _UNIT_H
 
 #include <ui.h>
 #include "object.h"
@@ -10,9 +11,6 @@ using namespace glm;
 class Building;
 class Player;
 
-//
-//	UNIT  
-//
 
 class Unit : public GObject
 {
@@ -21,7 +19,7 @@ public:
 	static int GetCounter() { return unitsCounter; }
 	static void IncreaseCounter() { unitsCounter++; }
 	static void ResetCounter() { unitsCounter = 0; }
-	void set_position(float x, float y);
+	void SetPosition(const float x, const float y);
 	void create() override;
 	void render(bool picking, int clickID = 0, bool not_placeable = false) override;
 	~Unit();
@@ -69,3 +67,5 @@ float getAngle(vector<ivec2> &path, int &n);
 float getDistance(vector<ivec2> &path, int &n);
 float getResDistance(vector<ivec2> &path, int &n, vec3 &pos2d);
 vector<ivec2> getPath(vec2 &start, vec2 &end);
+
+#endif

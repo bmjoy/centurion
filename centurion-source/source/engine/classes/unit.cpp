@@ -32,7 +32,8 @@ Unit::Unit() {
 	rectangleSelection = false;
 }
 
-void Unit::set_position(float x, float y) {
+void Unit::SetPosition(const float x, const float y) 
+{
 	position2D.x = x;
 	position2D.y = y;
 	position3D.x = x;

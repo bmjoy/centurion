@@ -22,10 +22,6 @@ class Player;
 #define EGYPTIAN_RACE    2
 #endif 
 
-//
-//	GAME OBJECT --> source/object.cpp
-//
-
 
 class GObject
 {
