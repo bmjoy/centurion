@@ -581,7 +581,10 @@ bool Game::IsGameObjectSelected(int id)
 }
 
 bool Game::IsGameObjectNotNull(int id) {
-	return (GameObjects[id] != nullptr);
+	if (id < 0 || id > MAX_NUMBER_OF_OBJECTS)
+		return false;
+	else
+		return (GameObjects[id] != nullptr);
 }
 
 vector<Building*> Game::GetListOfIndipendentBuildings() {
@@ -674,7 +677,6 @@ void Game::RenderObjects() {
 			GameObjects[i]->render(false, Picking::leftClickID);
 		}
 	}
-	/*cout << gameMinimapStatus << " " << editor::IsWindowOpened << " " << editor::menuIsOpened << " " << editor::TerrainBrushIsActive << " " << leftClickID_UI << editor::movingObject << endl;*/
 	if (!Minimap::IsActive() && !editor::IsWindowOpened && !editor::menuIsOpened && !editor::TerrainBrushIsActive && Picking::leftClickID_UI == 0 && !editor::movingObject) SelectionRectangle::Render();
 }
 
@@ -684,15 +686,16 @@ void Game::GoToPointFromMinimap() {
 		cameraToY = Engine::Camera::GetYMinimapCoordinate(Engine::Mouse::GetYLeftClick()) / Engine::myWindow::Height*(float)MEDIUM_MAP_HEIGHT - Engine::myWindow::HeightZoomed / 2.f;
 		// if you are clicking on a townhall you have to double click 
 		// to move the camera there and quit minimap
+		cout << Picking::leftClickID << endl;
 		if (Picking::leftClickID > 0 && Picking::hasDoubleClicked()) {
 			cameraToX = GameObjects[Picking::leftClickID]->AsBuilding()->get_xPos() - Engine::myWindow::WidthZoomed / 2.f;
 			cameraToY = GameObjects[Picking::leftClickID]->AsBuilding()->get_yPos() - Engine::myWindow::HeightZoomed / 2.f;
-			Game::Minimap::Unblock();
+			Minimap::Unblock();
 		}
 		//------------------------------------------------
 		if (Game::Minimap::IsBlocked() == false) {
 			Engine::Camera::GoToPoint(cameraToX, cameraToY);
-			Game::Minimap::Disable();
+			Minimap::Disable();
 			Engine::Mouse::LeftClick = false;
 			Engine::Mouse::LeftHold = false;
 		}

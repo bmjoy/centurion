@@ -45,7 +45,7 @@ bool Picking::hasDoubleClicked(void)
 	bool output = false;
 
 	if (glfwGetTime() - doubleClickData.lastTime > 1.0f)
-	{
+	{ 
 		doubleClickData.clickCount = 0;
 	}
 	if (doubleClickData.clickCount == 0)

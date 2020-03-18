@@ -89,6 +89,7 @@ void Editor::Run() {
 
 		// editor ui picking */
 		editor::EDITOR_UI()->render(true);
+		RenderObjectsPicking(); //RIVEDERE QUESTA FUNZIONE
 
 		if (Minimap::IsCreated()) Minimap::Render();
 
@@ -129,11 +130,15 @@ void Editor::handleKeyboardControls() {
 	//CTRL Hotkeys
 	if (!IsWindowOpened) {
 		if (Engine::Keyboard::IsKeyPressed(GLFW_KEY_LEFT_CONTROL) || Engine::Keyboard::IsKeyPressed(GLFW_KEY_RIGHT_CONTROL)) {
-			if (Engine::Keyboard::IsKeyPressed(GLFW_KEY_N)) { NewMapWindowIsOpen = true; NewMapResetText = true; IsWindowOpened = true; }
-			if (Engine::Keyboard::IsKeyPressed(GLFW_KEY_O)) { OpenMapWindowIsOpen = true; OpenMapWindowUpdate = true; IsWindowOpened = true; }
-			if (Engine::Keyboard::IsKeyPressed(GLFW_KEY_S)) { Game::Map::SaveScenario(currentMapName); }
-			if (Engine::Keyboard::IsKeyPressed(GLFW_KEY_A)) { TerrainBrushIsActive = false; TerrainBrushWindowIsOpen = false; AddObjectWindowIsOpen = !AddObjectWindowIsOpen; }
-			if (Engine::Keyboard::IsKeyPressed(GLFW_KEY_T)) { AddObjectWindowIsOpen = false; TerrainBrushIsActive = !TerrainBrushWindowIsOpen; TerrainBrushWindowIsOpen = !TerrainBrushWindowIsOpen; }
+			if(!Minimap::IsActive()){
+				if (Engine::Keyboard::IsKeyPressed(GLFW_KEY_N)) { NewMapWindowIsOpen = true; NewMapResetText = true; IsWindowOpened = true; }
+				if (Engine::Keyboard::IsKeyPressed(GLFW_KEY_O)) { OpenMapWindowIsOpen = true; OpenMapWindowUpdate = true; IsWindowOpened = true; }
+				if (Engine::Keyboard::IsKeyPressed(GLFW_KEY_A)) { TerrainBrushIsActive = false; TerrainBrushWindowIsOpen = false; AddObjectWindowIsOpen = !AddObjectWindowIsOpen; }
+				if (Engine::Keyboard::IsKeyPressed(GLFW_KEY_T)) { AddObjectWindowIsOpen = false; TerrainBrushIsActive = !TerrainBrushWindowIsOpen; TerrainBrushWindowIsOpen = !TerrainBrushWindowIsOpen; }
+			}
+			else{
+				if (Engine::Keyboard::IsKeyPressed(GLFW_KEY_S)) { Game::Map::SaveScenario(currentMapName); }
+			}
 		}
 		if (Engine::Keyboard::IsKeyPressed(GLFW_KEY_DELETE)){
 			if (Game::IsGameObjectNotNull(Picking::leftClickID)) {
