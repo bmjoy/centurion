@@ -37,31 +37,31 @@ void gui::Iframe::Create(int xPos, int yPos, int width, int height)
 		string bottom_name = string(iframexml->bottom().image_name());
 
 		back = new gui::Image(back_name);
-		back->create("bottom-left", xPos, yPos, w, h, 0);
+		back->create("bottom-left", (float)xPos, (float)yPos, (float)w, (float)h, 0);
 		
 		left = new gui::Image(left_name);
-		left->create("bottom-left", xPos, yPos, 0, h, 0);
+		left->create("bottom-left", (float)xPos, (float)yPos, 0.f, (float)h, 0);
 
 		top = new gui::Image(top_name);
-		top->create("bottom-left", xPos, yPos + h, w, 0, 0);
+		top->create("bottom-left", (float)xPos, (float)yPos + (float)h, (float)w, 0.f, 0);
 
 		right = new gui::Image(right_name);
-		right->create("bottom-left", xPos + w, yPos , 0, h, 0);
+		right->create("bottom-left", (float)xPos + (float)w, (float)yPos , 0.f, (float)h, 0);
 
 		bottom = new gui::Image(bottom_name);
-		bottom->create("bottom-left", xPos, yPos, w, 0, 0);
+		bottom->create("bottom-left", (float)xPos, (float)yPos, (float)w, 0.f, 0);
 
 		topleft = new gui::Image(topleft_name);
-		topleft->create("bottom-left", xPos, yPos + h, 0, 0, 0);
+		topleft->create("bottom-left", (float)xPos, (float)yPos + (float)h, 0.f, 0.f, 0);
 
 		topright = new gui::Image(topright_name);
-		topright->create("bottom-left", xPos + w, yPos + h, 0, 0, 0);
+		topright->create("bottom-left", (float)xPos + w, (float)yPos + (float)h, 0.f, 0.f, 0);
 
 		bottomright = new gui::Image(bottomright_name);
-		bottomright->create("bottom-left", xPos + w, yPos, 0, 0, 0);
+		bottomright->create("bottom-left", (float)xPos + w, (float)yPos, 0.f, 0.f, 0);
 
 		bottomleft = new gui::Image(bottomleft_name);
-		bottomleft->create("bottom-left", xPos, yPos, 0, 0, 0);
+		bottomleft->create("bottom-left", (float)xPos, (float)yPos, 0.f, 0.f, 0);
 	}
 	catch (const xml_schema::exception & e) {
 		string emsg = string(e.what());

@@ -105,7 +105,7 @@ bool Hector::ExecuteBooleanMethod(string cmd)
 void Hector::Console::Create()
 {
 	iframe = gui::Iframe("console");
-	iframe.Create(30, 30, Engine::myWindow::Width - 60, 30);
+	iframe.Create(30, 30, (int)Engine::myWindow::Width - 60, 30);
 	txtinput = gui::TextInput();
 	txtinput.create("", 35, 35, 200);
 	isOpened = false;

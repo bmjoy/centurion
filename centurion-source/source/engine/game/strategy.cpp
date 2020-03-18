@@ -171,7 +171,7 @@ void Strategy::Run() {
 		applyMenuMatrices();
 		game::GAME_UI()->render(false);
 
-		if (Minimap::IsActive()) GoToPointFromMinimap();
+		GoToPointFromMinimap();
 	}
 
 	setCameraProjectionMatrix(ortho(0.0f, Engine::myWindow::WidthZoomed, 0.0f, Engine::myWindow::HeightZoomed, -(float)MEDIUM_MAP_WIDTH, (float)MEDIUM_MAP_WIDTH));

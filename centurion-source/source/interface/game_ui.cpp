@@ -79,7 +79,7 @@ namespace game {
 				x = std::max(x, 1.f);
 				y = std::max(y, Engine::myWindow::BottomBarHeight + 1.f);
 				y = std::min(y, Engine::myWindow::Height - Engine::myWindow::TopBarHeight - h);
-				minimapRectangle.render(vec4(255.f), false, x, y, w, h);
+				minimapRectangle.render(vec4(255.f), false, 0, x, y, w, h); //Il valore zero e' stato messo perche' e' stato cancellato per errore quello reale. Ricontrollare.
 			}
 			// Temporary bars:
 			top_bar.render(false, 0, 0, true);

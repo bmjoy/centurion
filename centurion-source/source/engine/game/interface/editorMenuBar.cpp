@@ -99,10 +99,10 @@ void EditorMenuBar::Create()
 
 			// ------ menu title
 			EditorMenu* _menu = new EditorMenu();
-			int _menu_id = _it_menu->id();
+			int _menu_id = (int)_it_menu->id();
 			string title = TranslationsTable::GetTranslation(string(_it_menu->name()));
 			string luaCmd = string(_it_menu->onclick());
-			float titleWidth = std::max(int(gui::SimpleText::CalculateTextWidth(title, font)) + 20, 60);
+			float titleWidth = std::max(gui::SimpleText::CalculateTextWidth(title, font) + 20.f, 60.f);
 
 			gui::Rectangle titleBack = gui::Rectangle();
 			titleBack.create("filled", titlePosX, titlePosY, titleWidth, height, "bottom-left", PickingUI::obtainPickingID(), luaCmd);

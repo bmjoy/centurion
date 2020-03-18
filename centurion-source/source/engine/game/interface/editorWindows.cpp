@@ -76,7 +76,7 @@ void EditorWindows::Create()
 			string luaConditionFun = string(_it_wind->conditionScript().function());
 
 			gui::Iframe iframe = gui::Iframe(string(_it_wind->iframe()));
-			iframe.Create(_it_wind->x(), _it_wind->y(), _it_wind->width(), _it_wind->height());
+			iframe.Create((int)_it_wind->x(), (int)_it_wind->y(), (int)_it_wind->width(), (int)_it_wind->height());
 
 			eWind->Create(luaOpeningCMD, luaConditionCMD, luaConditionFun, iframe);
 			AddWindow(id, eWind);
