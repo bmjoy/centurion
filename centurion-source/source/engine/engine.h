@@ -86,9 +86,18 @@ public:
 		static void character_callback(GLFWwindow* window, unsigned int codepoint);
 	};
 
+	struct HoldClickData
+	{
+		double lastTime = 0;
+		bool bIsTimeSaved = false;
+	};
+	
 	class Mouse
 	{
 	public:
+		static HoldClickData leftHoldClickData;
+		static HoldClickData rightHoldClickData;
+
 		Mouse();
 		static float ScrollValue;
 		static bool ScrollBool;
@@ -109,7 +118,9 @@ public:
 		static void create();
 		static void render();
 		static void mouse_control(int lastX, int lastY);
+		static void IsLeftHolding(void);
 		~Mouse();
+
 	private:
 		static gui::Image img;
 		static vec3 position;

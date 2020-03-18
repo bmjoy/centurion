@@ -4,6 +4,10 @@
 #include <translationsTable.h>
 #include <classes/object-data.h>
 
+#ifndef TIME_LEFT_HOLD 
+#define TIME_LEFT_HOLD 0.10f
+#endif
+
 #ifndef __MSXML_LIBRARY_DEFINED__
 #define __MSXML_LIBRARY_DEFINED__
 #endif
@@ -73,6 +77,8 @@ bool Engine::Mouse::RightClick = false;
 bool Engine::Mouse::LeftHold = false;
 bool Engine::Mouse::Release = false;
 bool Engine::Mouse::MiddleClick = false;
+Engine::HoldClickData Engine::Mouse::leftHoldClickData;
+Engine::HoldClickData Engine::Mouse::rightHoldClickData;
 // ------------ end definitions
 
 Engine::Mouse::Mouse() { }
@@ -130,6 +136,21 @@ void Engine::Mouse::mouse_control(int lastX, int lastY) {
 
 	if (Mouse::Release) {
 		currentState = "default";
+	}
+}
+
+void Engine::Mouse::IsLeftHolding(void)
+{
+	if (LeftClick == false)
+	{
+		leftHoldClickData.bIsTimeSaved = false;
+		LeftHold = false;
+		return;
+	}
+	if (glfwGetTime() - leftHoldClickData.lastTime > TIME_LEFT_HOLD && LeftClick)
+	{
+		LeftHold = true;
+		leftHoldClickData.lastTime = glfwGetTime();
 	}
 }
 
@@ -287,12 +308,15 @@ void Engine::myWindow::mouse_button_callback(GLFWwindow* window, int button, int
 		if (action == GLFW_PRESS) {
 			Mouse::LeftClick = true;
 			Mouse::Release = false;
-			Mouse::LeftHold = true;
+			if (Mouse::leftHoldClickData.bIsTimeSaved == false)
+			{
+				Mouse::leftHoldClickData.lastTime = glfwGetTime();
+				Mouse::leftHoldClickData.bIsTimeSaved = true;
+			}
 		}
 		else if (action == GLFW_RELEASE) {
 			Mouse::LeftClick = false;
 			Mouse::Release = true;
-			Mouse::LeftHold = false;
 		}
 	}
 	if (button == GLFW_MOUSE_BUTTON_RIGHT) {
@@ -613,6 +637,8 @@ int Engine::launch() {
 
 	while (myWindow::ShouldClose == false) {
 		glfwPollEvents();
+		Mouse::IsLeftHolding(); 
+		cout << Mouse::LeftHold << endl;
 		window.ClearBuffers();
 		fps();
 		Mouse::mouse_control(window.get_mouse_x(), window.get_mouse_y());
@@ -624,7 +650,7 @@ int Engine::launch() {
 			
 			if (Menu::IsCreated() == false)
 			{
-				Audio()->MusicPlay("assets/music/menu.ogg");
+				//Audio()->MusicPlay("assets/music/menu.ogg");
 				Menu::Create();
 				Logger::Info("Main menu was created!");
 			}
@@ -635,7 +661,7 @@ int Engine::launch() {
 
 		if (getEnvironment() == STRATEGY_ENV) {
 			if (!Strategy::IsCreated()) {
-				Audio()->MusicStop();
+				//Audio()->MusicStop();
 
 				window.ClearAndSwapBuffers();
 

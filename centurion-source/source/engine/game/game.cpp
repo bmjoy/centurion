@@ -411,7 +411,6 @@ bool Game::SelectionRectangle::IsInRectangle(array<float, 8> &coords) {
 
 void Game::SelectionRectangle::Render() {
 	if (Engine::Mouse::LeftHold) {
-
 		if (SelectionRectangle::IsActive() == false) {
 			Logger::Info("Selection rectangle enabled.");
 			Coordinates.startX = Engine::Mouse::GetXLeftClick() * Engine::myWindow::WidthZoomed / Engine::myWindow::Width + cameraLastX;
@@ -644,7 +643,7 @@ vector<Decoration*> Game::GetListOfDecorations() {
 }
 
 void Game::RenderObjectsPicking() {
-	if (Picking::leftClickID_UI != 0) {
+ 	if (Picking::leftClickID_UI != 0) {
 		Picking::leftClickID = 0;
 		Picking::rightClickID = 0;
 		return;
@@ -658,7 +657,11 @@ void Game::RenderObjectsPicking() {
 			}
 		}
 
-		if (Engine::Mouse::LeftClick) Picking::leftClickID = Picking::GetIdFromClick(PICKING_LEFT);
+		if (Engine::Mouse::LeftClick)
+		{
+			Picking::leftClickID = Picking::GetIdFromClick(PICKING_LEFT);
+			cout << Picking::leftClickID << endl;
+		}
 		if (Engine::Mouse::RightClick) Picking::rightClickID = Picking::GetIdFromClick(PICKING_RIGHT);
 
 		if (Minimap::IsActive()) {
@@ -687,7 +690,6 @@ void Game::GoToPointFromMinimap() {
 		cameraToY = Engine::Camera::GetYMinimapCoordinate(Engine::Mouse::GetYLeftClick()) / Engine::myWindow::Height*(float)MEDIUM_MAP_HEIGHT - Engine::myWindow::HeightZoomed / 2.f;
 		// if you are clicking on a townhall you have to double click 
 		// to move the camera there and quit minimap
-		cout << Picking::leftClickID << endl;
 		if (Picking::leftClickID > 0 && Picking::hasDoubleClicked()) {
 			cameraToX = GameObjects[Picking::leftClickID]->AsBuilding()->get_xPos() - Engine::myWindow::WidthZoomed / 2.f;
 			cameraToY = GameObjects[Picking::leftClickID]->AsBuilding()->get_yPos() - Engine::myWindow::HeightZoomed / 2.f;

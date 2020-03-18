@@ -40,8 +40,8 @@ void Picking::resetDoubleClickTime(void)
 	doubleClickData.lastTime = glfwGetTime();
 }
 
-bool Picking::hasDoubleClicked(void)
-{
+bool Picking::hasDoubleClicked(void) 
+ {
 	bool output = false;
 
 	if (glfwGetTime() - doubleClickData.lastTime > 1.0f)
@@ -62,7 +62,7 @@ bool Picking::hasDoubleClicked(void)
 			doubleClickData.clickIdList[1] = leftClickID;
 			if (doubleClickData.clickIdList[1] == doubleClickData.clickIdList[0])
 			{
-				output = true;
+				output = true; //Ho fatto doppio click
 			}
 			else
 			{

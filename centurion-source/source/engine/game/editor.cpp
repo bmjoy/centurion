@@ -42,8 +42,8 @@ void Editor::Create() {
 	Minimap::Update();
 }
 
-void Editor::Run() {
-
+void Editor::Run() 
+{
 	Picking::leftClickID_UI = 0;
 
 	/* Keyboard control */
@@ -53,7 +53,7 @@ void Editor::Run() {
 	}
 
 	/* If minimap is NOT active */
-	if (Minimap::IsActive() == false) {
+	if (!Minimap::IsActive()) {
 		if (!editor::IsWindowOpened && Engine::Mouse::GetYPosition() < Engine::myWindow::Height - 30.f && !editor::menuIsOpened)
 			Engine::Camera::mouseControl();
 		viewMatrix = Engine::Camera::calculateViewMatrix();
@@ -61,8 +61,8 @@ void Editor::Run() {
 
 		editor::EDITOR_UI()->render(true);
 
-		if (Engine::Mouse::LeftClick) {
-			Picking::leftClickID_UI = PickingUI::GetIdFromClick();
+ 		if (Engine::Mouse::LeftClick) {
+  			Picking::leftClickID_UI = PickingUI::GetIdFromClick();
 		}
 
 		// apply game matrices
@@ -83,7 +83,9 @@ void Editor::Run() {
 	}
 
 	/* If minimap is active */
-	else {
+	else 
+	{
+		cout << Picking::leftClickID << endl;
 		viewMatrix = mat4(1.0f);
 		projectionMatrix = getMinimapProjectionMatrix();
 
@@ -108,9 +110,9 @@ void Editor::Run() {
 
 	setCameraProjectionMatrix(glm::ortho(0.0f, Engine::myWindow::WidthZoomed, 0.0f, Engine::myWindow::HeightZoomed, -(float)MEDIUM_MAP_WIDTH, (float)MEDIUM_MAP_WIDTH));
 
-	Engine::Mouse::RightClick = false;
-	Engine::Mouse::LeftClick = false;
-	Engine::Mouse::MiddleClick = false;
+	//Engine::Mouse::RightClick = false;
+	//Engine::Mouse::LeftClick = false;
+	//Engine::Mouse::MiddleClick = false;
 	Engine::Keyboard::SetKeyStatus(GLFW_KEY_ESCAPE, false);
 
 	if (editor::IsWindowOpened) {
