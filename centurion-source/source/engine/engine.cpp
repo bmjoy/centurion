@@ -20,6 +20,7 @@
 #include <player/player.h>
 
 #include <menu/menu.h>
+#include <game/interface/editorWindows.h>
 
 #include <interface>
 #include <classes/unit.h>
@@ -526,6 +527,17 @@ void Engine::PrintToConsole(string s)
 	cout << s << endl;
 }
 
+vector<string>* Engine::GetListOfFolders(string s)
+{
+	if (FileManager::CheckIfFolderExists(s)) {
+		vector<string> list = FileManager::GetAllFoldersNamesWithinFolder(s);
+		vector<string>* _list = new vector<string>();
+		(*_list) = list;
+		return _list;
+	}
+	return nullptr;
+}
+
 void Engine::Init(const char* exe_root) {
 
 	// old initParams (global)
@@ -687,10 +699,14 @@ int Engine::launch() {
 	Game::ResetGameObjects();
 	Menu::Clear();
 	myWindow::DeleteInstance();
+	EditorWindows::Clear();
 
 	glfwTerminate();
 	return 0;
 }
+
+
+
 
 void Engine::read_data() {
 	//Read races data

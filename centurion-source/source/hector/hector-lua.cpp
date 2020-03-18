@@ -12,6 +12,10 @@
 #include <game/game.h>
 #include <classes/object.h>
 
+#include <ui.h>
+#include <file_manager.h>
+
+
 #include <GLFW/glfw3.h>
 
 using namespace luabridge;
@@ -28,6 +32,7 @@ void Hector::Initialize()
 		.addStaticFunction("GameClose", &Engine::GameClose)
 		.addStaticFunction("PrintToConsole", &Engine::PrintToConsole)
 		.addStaticFunction("SetEnvironment", &Engine::SetEnvironment)
+		.addStaticFunction("GetListOfFolders", Engine::GetListOfFolders)
 		.endClass();
 
 	getGlobalNamespace(L).beginClass<EditorMenuBar>("EditorMenuBar")
@@ -61,7 +66,18 @@ void Hector::Initialize()
 
 	getGlobalNamespace(L).beginNamespace("Mouse").addVariable("RightClick", &Engine::Mouse::RightClick).endNamespace();
 	getGlobalNamespace(L).beginNamespace("Mouse").addVariable("LeftClick", &Engine::Mouse::LeftClick).endNamespace();
-	
+
+	getGlobalNamespace(L)
+		.beginClass<vector<string>>("vector_string")
+		.endClass();
+
+	getGlobalNamespace(L)
+		.beginClass<gui::TextList>("TextList")
+		.addFunction("GetSelectedOption", &gui::TextList::GetSelectedOption)
+		.addStaticFunction("GetListById", gui::TextList::GetTextListById)
+		.addStaticFunction("UpdateListById", &gui::TextList::UpdateTextListById)
+		.endClass();
+
 }
 
 void Hector::ExecuteCommand(string cmd)

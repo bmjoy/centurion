@@ -60,6 +60,7 @@ void Game::Map::SaveScenario(string scenarioName)
 		SaveTexture(scenarioPath + "/texture");
 		SaveMapObjectsToXml(scenarioPath + "/mapObjects.xml");
 
+
 		Logger::LogMessage msg = Logger::LogMessage("The scenario is saved with the following name: \"" + scenarioName + "\"", "", "Game::Map", "SaveScenario");
 		Logger::Info(msg);
 	}

@@ -2,6 +2,7 @@
 
 #include <logger.h>
 #include <fstream>
+#include <iostream>
 #include <sstream>
 #include <algorithm>
 #include <queue>
@@ -98,6 +99,7 @@ vector<string> FileManager::GetAllFoldersNamesWithinFolder(string folder) {
 				if ((findfiledata.dwFileAttributes | FILE_ATTRIBUTE_DIRECTORY) == FILE_ATTRIBUTE_DIRECTORY
 					&& (findfiledata.cFileName[0] != '.'))
 				{
+				//	std::cout << findfiledata.cFileName << std::endl;
 					names.push_back(findfiledata.cFileName);
 				}
 			} while (FindNextFile(hFind, &findfiledata) != 0);

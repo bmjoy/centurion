@@ -6,23 +6,35 @@
 
 #include <translationsTable.h>
 
-namespace gui {
 
-	map<int, TextList*> TextList::TextLists;
+
+namespace gui {
+	array<TextList*, MAX_NUMBER_OF_TEXT_LISTS> TextList::TextLists = { nullptr };
 
 	TextList::TextList() {
 		optionsHeight = 25.f;
 		selectedOption = "";
+		options = vector<string>();
+	}
+
+	void TextList::AddTextListToArray(int id, TextList * txtList)
+	{
+		if (id < 0 || id > MAX_NUMBER_OF_TEXT_LISTS) return;
+		TextLists[id] = txtList;
 	}
 
 	TextList * TextList::GetTextListById(int id)
 	{
-		if (TextLists.count(id) > 0) {
-			return TextLists[id];
-		}
-		else {
-			return nullptr;
-		}
+		if (id < 0 || id > MAX_NUMBER_OF_TEXT_LISTS) return nullptr;
+
+		return TextLists[id];
+
+	}
+
+	void TextList::UpdateTextListById(int id, vector<string>* _options)
+	{
+		cout << TextLists[0]->font << endl;
+		TextLists[id]->Update(_options);
 	}
 
 	void TextList::Create(int _id, int _x, int _y, string _font, vec4 _color, vec4 _backColor, int _pickingId) {
@@ -33,18 +45,21 @@ namespace gui {
 		color = _color;
 		pickingId = _pickingId;
 		backColor = _backColor;
-
-		TextLists[id] = this;
 	}
 
-	void TextList::Update(vector<string> _options)
+	void TextList::Update(vector<string> *_options)
 	{
-		options = _options;
+		bool t = this == GetTextListById(0);
+		this->options = vector<string>();
+		string ss = (*_options)[0];
+		cout << (*_options)[0] << endl;
+		vector<string> culo = vector<string>(*_options);
+		options = culo;
 		n_options = (int)options.size();
 		selectedOption = options[0];
 		for (int i = 0; i < options.size(); i++) {
 			string option = options[i];
-			
+
 			float _y = y - (i + 1) * optionsHeight;
 
 			SimpleText optiontext = SimpleText("static");
@@ -62,8 +77,8 @@ namespace gui {
 
 	void TextList::Render(bool picking)
 	{
-		
-		if (Engine::Mouse::LeftClick) {
+
+		if (Engine::Mouse::LeftClick && Picking::leftClickID_UI == pickingId) {
 			selectedOption = options[GetIdFromClick()];
 			Engine::Mouse::LeftClick = false;
 		}

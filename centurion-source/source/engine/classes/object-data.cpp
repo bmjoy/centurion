@@ -33,6 +33,18 @@ void ObjectData::ReadDataClassesFromXml()
 			xml_schema::properties props;
 			props.no_namespace_schema_location(Folders::XML_SCHEMAS + "object.xsd");
 			auto_ptr<c_object> dataXML = c_object_(path, 0, props);
+
+			ObjectXMLClassData objData = ObjectXMLClassData();
+
+			properties::property_iterator _it_prop;
+			for (_it_prop = dataXML->properties().property().begin(); _it_prop == dataXML->properties().property().begin(); _it_prop++) {
+				objData.propertiesMap[_it_prop->name()] = _it_prop->value();
+			}
+
+			// for () --> methods
+
+			// for () --> sounds
+
 			//std::cout << dataXML->class_name() << std::endl;
 		}
 		catch (const xml_schema::exception & e) {

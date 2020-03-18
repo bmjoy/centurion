@@ -137,6 +137,7 @@ public:
 	static void GameClose();
 	static void SetEnvironment(string s);
 	static void PrintToConsole(string s);
+	static vector<string> *GetListOfFolders(string s);
 
 #pragma endregion
 	   	 

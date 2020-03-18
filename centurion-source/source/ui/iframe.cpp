@@ -3,6 +3,8 @@
 
 #include <file_manager.h>
 #include <logger.h>
+#include <picking.h>
+
 
 gui::Iframe::Iframe()
 {
@@ -11,6 +13,21 @@ gui::Iframe::Iframe()
 gui::Iframe::Iframe(string _name)
 {
 	name = _name;
+}
+
+void gui::Iframe::Clear()
+{
+	for (int i = 0; i < listOfTextLists.size(); i++) {
+		if (listOfTextLists[i] != nullptr) {
+			delete listOfTextLists[i];
+		}
+		listOfTextLists[i] = nullptr;
+	}
+}
+
+void gui::Iframe::AddTextList(TextList* txtList)
+{
+	listOfTextLists.push_back(txtList);
 }
 
 void gui::Iframe::Create(int xPos, int yPos, int width, int height)
@@ -105,7 +122,7 @@ void gui::Iframe::RenderImages(bool picking)
 void gui::Iframe::RenderButtons(bool picking)
 {
 	for (int i = 0; i < listOfButtons.size(); i++) {
-		listOfButtons[i].render(picking);
+		listOfButtons[i].render(picking, Picking::leftClickID_UI);
 	}
 }
 
@@ -119,7 +136,7 @@ void gui::Iframe::RenderTexts()
 void gui::Iframe::RenderTextLists(bool picking)
 {
 	for (int i = 0; i < listOfTextLists.size(); i++) {
-		listOfTextLists[i].Render(picking);
+		listOfTextLists[i]->Render(picking);
 	}
 }
 

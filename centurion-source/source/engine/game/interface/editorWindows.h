@@ -12,6 +12,7 @@ public:
 	public:
 		bool IsOpened() { return isOpened; }
 		void Open() { isOpened = true; opening = true; }
+		void Clear();
 		void Close() { isOpened = false; }
 		void Create(string _luaOpeningScript, string _luaConditionScript, string _luaConditionFunction, gui::Iframe _iframe);
 		void Render(bool picking);
@@ -24,11 +25,13 @@ public:
 		string luaConditionFunction;
 	};
 
+	static void Clear();
 	static void OpenWindow(int id);
 	static void Create();
 	static void Render(bool picking);
-
+	~EditorWindows();
 private:
+	EditorWindows();	
 	static void AddWindow(int id, EditorWindow* win) { listOfWindows[id] = win; }
 	static array<EditorWindow*, MAX_NUMBER_OF_EDITOR_WINDOWS> listOfWindows;
 };

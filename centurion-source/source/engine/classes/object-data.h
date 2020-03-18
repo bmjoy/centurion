@@ -16,7 +16,9 @@ public:
 		ObjectXMLClassData();
 		~ObjectXMLClassData();
 
-		
+		map<string, string> propertiesMap;
+		map<string, string> soundsMap;
+		map<string, string> methodsMap;
 	};
 
 	class BuildingXMLClassData : public ObjectXMLClassData {
