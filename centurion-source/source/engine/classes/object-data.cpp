@@ -1,12 +1,15 @@
 #include "object-data.h"
 
-
 #include <file_manager.h>
 #include "object-xml.hxx"
+#include <primitives.h>
+#include <building_sprite.h>
+#include <decoration_sprite.h>
+#include <unit_sprite.h>
 
 #pragma region Static variables
 
-map<string, ObjectData::ObjectXMLClassData*> ObjectData::objectsData;
+map<string, ObjectData::ObjectXMLClassData> ObjectData::objectsData;
 string ObjectData::dataClassesPath = "assets/data/classes_new/";
 
 #pragma endregion
@@ -14,6 +17,36 @@ string ObjectData::dataClassesPath = "assets/data/classes_new/";
 #pragma region ObjectXMLClassData class
 
 ObjectData::ObjectXMLClassData::ObjectXMLClassData(){}
+
+string ObjectData::ObjectXMLClassData::GetPropertyValue(string _property)
+{
+	if (propertiesMap.count(_property) > 0) {
+		return propertiesMap[_property];
+	}
+	else {
+		return "NOT_VALID";
+	}
+}
+
+string ObjectData::ObjectXMLClassData::GetSoundPath(string _sound)
+{
+	if (soundsMap.count(_sound) > 0) {
+		return soundsMap[_sound];
+	}
+	else {
+		return "NOT_VALID";
+	}
+}
+
+string ObjectData::ObjectXMLClassData::GetMethodScript(string _method)
+{
+	if (methodsMap.count(_method) > 0) {
+		return methodsMap[_method];
+	}
+	else {
+		return "NOT_VALID";
+	}
+}
 
 ObjectData::ObjectXMLClassData::~ObjectXMLClassData(){}
 
@@ -36,31 +69,43 @@ void ObjectData::ReadDataClassesFromXml()
 
 			ObjectXMLClassData objData = ObjectXMLClassData();
 
+			objData.SetClassName(string(dataXML->class_name()));
+			objData.SetClassType(string(dataXML->type()));
+			objData.SetParentClass(string(dataXML->parent()));
+
 			properties::property_iterator _it_prop;
 			for (_it_prop = dataXML->properties().property().begin(); _it_prop == dataXML->properties().property().begin(); _it_prop++) {
-				objData.propertiesMap[_it_prop->name()] = _it_prop->value();
+				objData.AddProperty(string(_it_prop->name()), string(_it_prop->value()));
 			}
 
-			// for () --> methods
+			methods::method_iterator _it_mtd;
+			for (_it_mtd = dataXML->methods().method().begin(); _it_mtd == dataXML->methods().method().begin(); _it_mtd++) {
+				objData.AddMethod(string(_it_mtd->name()), string(_it_mtd->script()));
+			}
+			
+			sounds::sound_iterator _it_snd;
+			for (_it_snd = dataXML->sounds().sound().begin(); _it_snd == dataXML->sounds().sound().begin(); _it_snd++) {
+				objData.AddSound(string(_it_snd->name()), string(_it_snd->path()));
+			}
 
-			// for () --> sounds
+			AddObjectXMLClassData(objData.GetClassName(), objData);
 
-			//std::cout << dataXML->class_name() << std::endl;
+			// Give Paths to Primitives
+			string path = objData.GetPropertyValue("ent_path");
+			if (path == "NOT_VALID") continue;
+			if (objData.GetClassType() == "building") {
+				primitives::BSprite()->addPath(path);
+			}
+			else if (objData.GetClassType() == "decoration") {
+				primitives::DSprite()->addPath(path);
+			}
+			else if (objData.GetClassType() == "unit") {
+				primitives::USprite()->addPath(path);
+			}
 		}
 		catch (const xml_schema::exception & e) {
 			std::cout << e << std::endl;
 		}
-	}
-}
-
-void ObjectData::ResetObjectData()
-{
-	for (map<string, ObjectXMLClassData*>::iterator i = objectsData.begin(); i != objectsData.end(); i++) {
-		string _class = i->first;
-		if (i->second != nullptr) {
-			delete objectsData[_class];
-		}
-		objectsData[_class] = nullptr;
 	}
 }
 

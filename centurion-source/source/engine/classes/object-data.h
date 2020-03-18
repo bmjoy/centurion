@@ -14,25 +14,32 @@ public:
 	class ObjectXMLClassData {
 	public:
 		ObjectXMLClassData();
-		~ObjectXMLClassData();
-
+		void AddProperty(string k, string v) { propertiesMap[k] = v; }
+		void AddSound(string k, string v) { soundsMap[k] = v; }
+		void AddMethod(string k, string v) { methodsMap[k] = v; }
+		string GetPropertyValue(string _property);
+		string GetSoundPath(string _sound);
+		string GetMethodScript(string _method);
+		void SetClassName(string _class) { className = _class; }
+		void SetParentClass(string _parent) { parent = _parent; }
+		void SetClassType(string _type) { type = _type; }
+		string GetClassName() { return className; }
+		string GetParentClass() { return parent; }
+		string GetClassType() { return type; }
+		~ObjectXMLClassData(); 
+	private:
 		map<string, string> propertiesMap;
 		map<string, string> soundsMap;
 		map<string, string> methodsMap;
+		string className, parent, type;
 	};
 
-	class BuildingXMLClassData : public ObjectXMLClassData {
-		bool getIsCentralBuilding() { return isCentralBuilding; }
-	private:
-		bool isCentralBuilding;
-	};
-
-	static ObjectXMLClassData* GetObjectData(string _class) { return objectsData[_class]; }
+	static ObjectXMLClassData GetObjectData(string _class) { return objectsData[_class]; }
 	static void ReadDataClassesFromXml();
-	static void ResetObjectData();
 
 private:
-	static map<string, ObjectXMLClassData*> objectsData;
+	static void AddObjectXMLClassData(string _class, ObjectXMLClassData objData) { objectsData[_class] = objData; }
+	static map<string, ObjectXMLClassData> objectsData;
 	static string dataClassesPath;
 };
 

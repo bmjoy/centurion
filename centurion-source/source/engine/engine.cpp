@@ -617,8 +617,8 @@ int Engine::launch() {
 	ObjectData::ReadDataClassesFromXml();
 	read_data();
 
-	compile();
-	create();
+	primitives::compile();
+	primitives::create();
 
 	lastTime = glfwGetTime();
 
@@ -749,48 +749,6 @@ void Engine::read_data() {
 		r.setRaceProperties(id, name, zone, t_class);
 		Game::AddRace(name, r);
 	}
-
-	vector<string> files = FileManager::GetAllFilesNamesWithinFolder("assets/data/classes");
-
-	/* buildings and units */
-
-	for (int i = 0; i < files.size(); ++i) {
-		ifstream path("assets/data/classes/" + files[i]);
-		json dataClass = json::parse(path);
-
-		if (dataClass["type"] == "building") {
-			BSprite()->addPath(dataClass["ent_path"]);
-
-			/* editor object string list */
-			editor::EditorObjectStringListForm0[i] = "buildings";
-			editor::EditorObjectStringListForm1[i] = dataClass["category"].get<string>();
-			editor::EditorObjectStringListForm2[i] = dataClass["class_name"].get<string>();
-
-			editor::EditorAddObjectBuildingOptions.push_back("EDITORTREE_CATEGORY_" + dataClass["category"].get<string>());
-
-			if (dataClass["category"].get<string>() == "outposts") outposts.push_back(dataClass["class_name"].get<string>());
-		}
-
-		if (dataClass["type"] == "unit") {
-			USprite()->addPath(dataClass["ent_path"]);
-
-			//EditorAddObjectUnitOptions.push_back(dataClass["race"].get<string>());
-		}
-
-		if (dataClass["type"] == "decoration") {
-			DSprite()->addPath(dataClass["ent_path"]);
-			/* editor object string list */
-			editor::EditorObjectStringListForm0[i] = "decorations";
-			editor::EditorObjectStringListForm1[i] = dataClass["category"].get<string>();
-			editor::EditorObjectStringListForm2[i] = dataClass["class_name"].get<string>();
-
-			editor::EditorAddObjectDecorationOptions.push_back("EDITORTREE_CATEGORY_" + dataClass["category"].get<string>());
-		}
-	}
-
-	editor::EditorAddObjectBuildingOptions.erase(unique(editor::EditorAddObjectBuildingOptions.begin(), editor::EditorAddObjectBuildingOptions.end()), editor::EditorAddObjectBuildingOptions.end());
-	//EditorAddObjectUnitOptions.erase(unique(EditorAddObjectUnitOptions.begin(), EditorAddObjectUnitOptions.end()), EditorAddObjectUnitOptions.end());
-	editor::EditorAddObjectDecorationOptions.erase(unique(editor::EditorAddObjectDecorationOptions.begin(), editor::EditorAddObjectDecorationOptions.end()), editor::EditorAddObjectDecorationOptions.end());
 
 	/* images */
 
