@@ -43,7 +43,7 @@ void EditorWindows::EditorWindow::Render(bool picking)
 	}
 
 	if (isOpened) {
-		iframe.Render();
+		iframe.Render(picking);
 	}
 }
 

@@ -444,6 +444,9 @@
     <ClCompile Include="source\engine\game\interface\editorWindows.cpp">
       <Filter>Source Files\engine\game\interface</Filter>
     </ClCompile>
+    <ClCompile Include="source\ui\text_list.cpp">
+      <Filter>Source Files\ui</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="source\extern\includes\json.hpp">
@@ -751,6 +754,9 @@
     </ClInclude>
     <ClInclude Include="source\engine\game\interface\editorWindows.h">
       <Filter>Header Files\engine\game\interface</Filter>
+    </ClInclude>
+    <ClInclude Include="source\ui\text_list.h">
+      <Filter>Header Files\ui</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

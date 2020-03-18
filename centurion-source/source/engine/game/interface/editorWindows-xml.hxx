@@ -229,7 +229,10 @@ class simpleText;
 class scriptText;
 class image;
 class button;
+class textList;
 class color;
+class text;
+class text_background;
 
 #include <memory>    // ::std::auto_ptr
 #include <limits>    // std::numeric_limits
@@ -406,6 +409,23 @@ public:
 	void
 		button(const button_sequence& s);
 
+	// textList
+	//
+	typedef ::textList textList_type;
+	typedef ::xsd::cxx::tree::sequence< textList_type > textList_sequence;
+	typedef textList_sequence::iterator textList_iterator;
+	typedef textList_sequence::const_iterator textList_const_iterator;
+	typedef ::xsd::cxx::tree::traits< textList_type, char > textList_traits;
+
+	const textList_sequence&
+		textList() const;
+
+	textList_sequence&
+		textList();
+
+	void
+		textList(const textList_sequence& s);
+
 	// id
 	//
 	typedef ::xml_schema::integer id_type;
@@ -580,6 +600,7 @@ protected:
 	scriptText_optional scriptText_;
 	image_sequence image_;
 	button_sequence button_;
+	textList_sequence textList_;
 	::xsd::cxx::tree::one< id_type > id_;
 	::xsd::cxx::tree::one< name_type > name_;
 	::xsd::cxx::tree::one< iframe_type > iframe_;
@@ -1137,6 +1158,132 @@ protected:
 	::xsd::cxx::tree::one< onclick_type > onclick_;
 };
 
+class textList : public ::xml_schema::type
+{
+public:
+	// text
+	//
+	typedef ::text text_type;
+	typedef ::xsd::cxx::tree::traits< text_type, char > text_traits;
+
+	const text_type&
+		text() const;
+
+	text_type&
+		text();
+
+	void
+		text(const text_type& x);
+
+	void
+		text(::std::auto_ptr< text_type > p);
+
+	// text_background
+	//
+	typedef ::text_background text_background_type;
+	typedef ::xsd::cxx::tree::traits< text_background_type, char > text_background_traits;
+
+	const text_background_type&
+		text_background() const;
+
+	text_background_type&
+		text_background();
+
+	void
+		text_background(const text_background_type& x);
+
+	void
+		text_background(::std::auto_ptr< text_background_type > p);
+
+	// textListId
+	//
+	typedef ::xml_schema::integer textListId_type;
+	typedef ::xsd::cxx::tree::traits< textListId_type, char > textListId_traits;
+
+	const textListId_type&
+		textListId() const;
+
+	textListId_type&
+		textListId();
+
+	void
+		textListId(const textListId_type& x);
+
+	// xOffset
+	//
+	typedef ::xml_schema::integer xOffset_type;
+	typedef ::xsd::cxx::tree::traits< xOffset_type, char > xOffset_traits;
+
+	const xOffset_type&
+		xOffset() const;
+
+	xOffset_type&
+		xOffset();
+
+	void
+		xOffset(const xOffset_type& x);
+
+	// yOffset
+	//
+	typedef ::xml_schema::integer yOffset_type;
+	typedef ::xsd::cxx::tree::traits< yOffset_type, char > yOffset_traits;
+
+	const yOffset_type&
+		yOffset() const;
+
+	yOffset_type&
+		yOffset();
+
+	void
+		yOffset(const yOffset_type& x);
+
+	// Constructors.
+	//
+	textList(const text_type&,
+		const text_background_type&,
+		const textListId_type&,
+		const xOffset_type&,
+		const yOffset_type&);
+
+	textList(::std::auto_ptr< text_type >,
+		::std::auto_ptr< text_background_type >,
+		const textListId_type&,
+		const xOffset_type&,
+		const yOffset_type&);
+
+	textList(const ::xercesc::DOMElement& e,
+		::xml_schema::flags f = 0,
+		::xml_schema::container* c = 0);
+
+	textList(const textList& x,
+		::xml_schema::flags f = 0,
+		::xml_schema::container* c = 0);
+
+	virtual textList*
+		_clone(::xml_schema::flags f = 0,
+			::xml_schema::container* c = 0) const;
+
+	textList&
+		operator= (const textList& x);
+
+	virtual
+		~textList();
+
+	// Implementation.
+	//
+protected:
+	void
+		parse(::xsd::cxx::xml::dom::parser< char >&,
+			::xml_schema::flags);
+
+protected:
+	::xsd::cxx::tree::one< text_type > text_;
+	::xsd::cxx::tree::one< text_background_type > text_background_;
+	::xsd::cxx::tree::one< textListId_type > textListId_;
+	::xsd::cxx::tree::one< xOffset_type > xOffset_;
+	::xsd::cxx::tree::one< yOffset_type > yOffset_;
+};
+
 class color : public ::xml_schema::type
 {
 public:
@@ -1205,6 +1352,189 @@ public:
 
 	virtual
 		~color();
+
+	// Implementation.
+	//
+protected:
+	void
+		parse(::xsd::cxx::xml::dom::parser< char >&,
+			::xml_schema::flags);
+
+protected:
+	::xsd::cxx::tree::one< r_type > r_;
+	::xsd::cxx::tree::one< g_type > g_;
+	::xsd::cxx::tree::one< b_type > b_;
+};
+
+class text : public ::xml_schema::type
+{
+public:
+	// font
+	//
+	typedef ::xml_schema::string font_type;
+	typedef ::xsd::cxx::tree::traits< font_type, char > font_traits;
+
+	const font_type&
+		font() const;
+
+	font_type&
+		font();
+
+	void
+		font(const font_type& x);
+
+	void
+		font(::std::auto_ptr< font_type > p);
+
+	// r
+	//
+	typedef ::xml_schema::integer r_type;
+	typedef ::xsd::cxx::tree::traits< r_type, char > r_traits;
+
+	const r_type&
+		r() const;
+
+	r_type&
+		r();
+
+	void
+		r(const r_type& x);
+
+	// g
+	//
+	typedef ::xml_schema::integer g_type;
+	typedef ::xsd::cxx::tree::traits< g_type, char > g_traits;
+
+	const g_type&
+		g() const;
+
+	g_type&
+		g();
+
+	void
+		g(const g_type& x);
+
+	// b
+	//
+	typedef ::xml_schema::integer b_type;
+	typedef ::xsd::cxx::tree::traits< b_type, char > b_traits;
+
+	const b_type&
+		b() const;
+
+	b_type&
+		b();
+
+	void
+		b(const b_type& x);
+
+	// Constructors.
+	//
+	text(const font_type&,
+		const r_type&,
+		const g_type&,
+		const b_type&);
+
+	text(const ::xercesc::DOMElement& e,
+		::xml_schema::flags f = 0,
+		::xml_schema::container* c = 0);
+
+	text(const text& x,
+		::xml_schema::flags f = 0,
+		::xml_schema::container* c = 0);
+
+	virtual text*
+		_clone(::xml_schema::flags f = 0,
+			::xml_schema::container* c = 0) const;
+
+	text&
+		operator= (const text& x);
+
+	virtual
+		~text();
+
+	// Implementation.
+	//
+protected:
+	void
+		parse(::xsd::cxx::xml::dom::parser< char >&,
+			::xml_schema::flags);
+
+protected:
+	::xsd::cxx::tree::one< font_type > font_;
+	::xsd::cxx::tree::one< r_type > r_;
+	::xsd::cxx::tree::one< g_type > g_;
+	::xsd::cxx::tree::one< b_type > b_;
+};
+
+class text_background : public ::xml_schema::type
+{
+public:
+	// r
+	//
+	typedef ::xml_schema::integer r_type;
+	typedef ::xsd::cxx::tree::traits< r_type, char > r_traits;
+
+	const r_type&
+		r() const;
+
+	r_type&
+		r();
+
+	void
+		r(const r_type& x);
+
+	// g
+	//
+	typedef ::xml_schema::integer g_type;
+	typedef ::xsd::cxx::tree::traits< g_type, char > g_traits;
+
+	const g_type&
+		g() const;
+
+	g_type&
+		g();
+
+	void
+		g(const g_type& x);
+
+	// b
+	//
+	typedef ::xml_schema::integer b_type;
+	typedef ::xsd::cxx::tree::traits< b_type, char > b_traits;
+
+	const b_type&
+		b() const;
+
+	b_type&
+		b();
+
+	void
+		b(const b_type& x);
+
+	// Constructors.
+	//
+	text_background(const r_type&,
+		const g_type&,
+		const b_type&);
+
+	text_background(const ::xercesc::DOMElement& e,
+		::xml_schema::flags f = 0,
+		::xml_schema::container* c = 0);
+
+	text_background(const text_background& x,
+		::xml_schema::flags f = 0,
+		::xml_schema::container* c = 0);
+
+	virtual text_background*
+		_clone(::xml_schema::flags f = 0,
+			::xml_schema::container* c = 0) const;
+
+	text_background&
+		operator= (const text_background& x);
+
+	virtual
+		~text_background();
 
 	// Implementation.
 	//

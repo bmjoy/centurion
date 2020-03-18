@@ -7,7 +7,7 @@ namespace gui {
 	using namespace std;
 	using namespace glm;
 
-	Button::Button(){
+	Button::Button() {
 		pickingId = 0;
 	}
 
@@ -16,7 +16,7 @@ namespace gui {
 		buttonImage->create("center", (float)x, (float)y, 0, 0, pickingID);
 		buttonText = new SimpleText("static");
 		buttonText->create_static(Text, "tahoma_13px", (float)x, (float)y, "center", "middle", textColor, "bold");
-		
+
 		// save data
 		luaCmd = luaCMD;
 		pickingId = pickingID;
@@ -34,8 +34,5 @@ namespace gui {
 		}
 	}
 
-	Button::~Button(){
-		/*if (buttonImage != nullptr) delete buttonImage;
-		if (buttonText != nullptr) delete buttonText;*/
-	}
+	Button::~Button() {	}
 };

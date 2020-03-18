@@ -16,6 +16,10 @@
     <image image_name="image_name" xOffset="100" yOffset="50" onclick="ciao"/>
     <button name="" image_name="" xOffset="100" yOffset="50" onclick="ciao"/>
     <button name="" image_name="" xOffset="100" yOffset="50" onclick="ciao"/>
+	<textList textListId="0" xOffset="10" yOffset="10">
+		<text font="tahoma_13px" r="255" g="255" b="255" />
+		<background r="0" g="0" b="0" />
+	</textList>
   </c_editorWindow>
   <c_editorWindow id="1" name="Object properties" iframe="editor" x="100" y="200" width="200" height="400">
     <openingScript>
@@ -34,5 +38,9 @@
     <image image_name="image_name" xOffset="100" yOffset="50" onclick="ciao"/>
     <button name="" image_name="" xOffset="100" yOffset="50" onclick="ciao"/>
     <button name="" image_name="" xOffset="100" yOffset="50" onclick="ciao"/>
+	<textList textListId="1" xOffset="10" yOffset="10">
+		<text font="tahoma_13px" r="255" g="255" b="255" />
+		<background r="0" g="0" b="0" />
+	</textList>
   </c_editorWindow>
 </c_editorWindows>

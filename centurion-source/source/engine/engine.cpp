@@ -1,7 +1,6 @@
 #include "engine.h"
 #include <file_manager.h>
 
-
 #include <translationsTable.h>
 #include <classes/object-data.h>
 

@@ -197,6 +197,24 @@ button(const button_sequence& s)
 	this->button_ = s;
 }
 
+const c_editorWindow::textList_sequence& c_editorWindow::
+textList() const
+{
+	return this->textList_;
+}
+
+c_editorWindow::textList_sequence& c_editorWindow::
+textList()
+{
+	return this->textList_;
+}
+
+void c_editorWindow::
+textList(const textList_sequence& s)
+{
+	this->textList_ = s;
+}
+
 const c_editorWindow::id_type& c_editorWindow::
 id() const
 {
@@ -806,6 +824,112 @@ onclick(::std::auto_ptr< onclick_type > x)
 }
 
 
+// textList
+// 
+
+const textList::text_type& textList::
+text() const
+{
+	return this->text_.get();
+}
+
+textList::text_type& textList::
+text()
+{
+	return this->text_.get();
+}
+
+void textList::
+text(const text_type& x)
+{
+	this->text_.set(x);
+}
+
+void textList::
+text(::std::auto_ptr< text_type > x)
+{
+	this->text_.set(x);
+}
+
+const textList::text_background_type& textList::
+text_background() const
+{
+	return this->text_background_.get();
+}
+
+textList::text_background_type& textList::
+text_background()
+{
+	return this->text_background_.get();
+}
+
+void textList::
+text_background(const text_background_type& x)
+{
+	this->text_background_.set(x);
+}
+
+void textList::
+text_background(::std::auto_ptr< text_background_type > x)
+{
+	this->text_background_.set(x);
+}
+
+const textList::textListId_type& textList::
+textListId() const
+{
+	return this->textListId_.get();
+}
+
+textList::textListId_type& textList::
+textListId()
+{
+	return this->textListId_.get();
+}
+
+void textList::
+textListId(const textListId_type& x)
+{
+	this->textListId_.set(x);
+}
+
+const textList::xOffset_type& textList::
+xOffset() const
+{
+	return this->xOffset_.get();
+}
+
+textList::xOffset_type& textList::
+xOffset()
+{
+	return this->xOffset_.get();
+}
+
+void textList::
+xOffset(const xOffset_type& x)
+{
+	this->xOffset_.set(x);
+}
+
+const textList::yOffset_type& textList::
+yOffset() const
+{
+	return this->yOffset_.get();
+}
+
+textList::yOffset_type& textList::
+yOffset()
+{
+	return this->yOffset_.get();
+}
+
+void textList::
+yOffset(const yOffset_type& x)
+{
+	this->yOffset_.set(x);
+}
+
+
 // color
 // 
 
@@ -858,6 +982,146 @@ b()
 }
 
 void color::
+b(const b_type& x)
+{
+	this->b_.set(x);
+}
+
+
+// text
+// 
+
+const text::font_type& text::
+font() const
+{
+	return this->font_.get();
+}
+
+text::font_type& text::
+font()
+{
+	return this->font_.get();
+}
+
+void text::
+font(const font_type& x)
+{
+	this->font_.set(x);
+}
+
+void text::
+font(::std::auto_ptr< font_type > x)
+{
+	this->font_.set(x);
+}
+
+const text::r_type& text::
+r() const
+{
+	return this->r_.get();
+}
+
+text::r_type& text::
+r()
+{
+	return this->r_.get();
+}
+
+void text::
+r(const r_type& x)
+{
+	this->r_.set(x);
+}
+
+const text::g_type& text::
+g() const
+{
+	return this->g_.get();
+}
+
+text::g_type& text::
+g()
+{
+	return this->g_.get();
+}
+
+void text::
+g(const g_type& x)
+{
+	this->g_.set(x);
+}
+
+const text::b_type& text::
+b() const
+{
+	return this->b_.get();
+}
+
+text::b_type& text::
+b()
+{
+	return this->b_.get();
+}
+
+void text::
+b(const b_type& x)
+{
+	this->b_.set(x);
+}
+
+
+// text_background
+// 
+
+const text_background::r_type& text_background::
+r() const
+{
+	return this->r_.get();
+}
+
+text_background::r_type& text_background::
+r()
+{
+	return this->r_.get();
+}
+
+void text_background::
+r(const r_type& x)
+{
+	this->r_.set(x);
+}
+
+const text_background::g_type& text_background::
+g() const
+{
+	return this->g_.get();
+}
+
+text_background::g_type& text_background::
+g()
+{
+	return this->g_.get();
+}
+
+void text_background::
+g(const g_type& x)
+{
+	this->g_.set(x);
+}
+
+const text_background::b_type& text_background::
+b() const
+{
+	return this->b_.get();
+}
+
+text_background::b_type& text_background::
+b()
+{
+	return this->b_.get();
+}
+
+void text_background::
 b(const b_type& x)
 {
 	this->b_.set(x);
@@ -969,6 +1233,7 @@ c_editorWindow(const conditionScript_type& conditionScript,
 	scriptText_(this),
 	image_(this),
 	button_(this),
+	textList_(this),
 	id_(id, this),
 	name_(name, this),
 	iframe_(iframe, this),
@@ -998,6 +1263,7 @@ c_editorWindow(::std::auto_ptr< conditionScript_type > conditionScript,
 	scriptText_(this),
 	image_(this),
 	button_(this),
+	textList_(this),
 	id_(id, this),
 	name_(name, this),
 	iframe_(iframe, this),
@@ -1020,6 +1286,7 @@ c_editorWindow(const c_editorWindow& x,
 	scriptText_(x.scriptText_, f, this),
 	image_(x.image_, f, this),
 	button_(x.button_, f, this),
+	textList_(x.textList_, f, this),
 	id_(x.id_, f, this),
 	name_(x.name_, f, this),
 	iframe_(x.iframe_, f, this),
@@ -1042,6 +1309,7 @@ c_editorWindow(const ::xercesc::DOMElement& e,
 	scriptText_(this),
 	image_(this),
 	button_(this),
+	textList_(this),
 	id_(this),
 	name_(this),
 	iframe_(this),
@@ -1140,6 +1408,17 @@ parse(::xsd::cxx::xml::dom::parser< char >& p,
 				button_traits::create(i, f, this));
 
 			this->button_.push_back(r);
+			continue;
+		}
+
+		// textList
+		//
+		if (n.name() == "textList" && n.namespace_().empty())
+		{
+			::std::auto_ptr< textList_type > r(
+				textList_traits::create(i, f, this));
+
+			this->textList_.push_back(r);
 			continue;
 		}
 
@@ -1291,6 +1570,7 @@ operator= (const c_editorWindow& x)
 		this->scriptText_ = x.scriptText_;
 		this->image_ = x.image_;
 		this->button_ = x.button_;
+		this->textList_ = x.textList_;
 		this->id_ = x.id_;
 		this->name_ = x.name_;
 		this->iframe_ = x.iframe_;
@@ -2077,6 +2357,200 @@ button::
 {
 }
 
+// textList
+//
+
+textList::
+textList(const text_type& text,
+	const text_background_type& text_background,
+	const textListId_type& textListId,
+	const xOffset_type& xOffset,
+	const yOffset_type& yOffset)
+	: ::xml_schema::type(),
+	text_(text, this),
+	text_background_(text_background, this),
+	textListId_(textListId, this),
+	xOffset_(xOffset, this),
+	yOffset_(yOffset, this)
+{
+}
+
+textList::
+textList(::std::auto_ptr< text_type > text,
+	::std::auto_ptr< text_background_type > text_background,
+	const textListId_type& textListId,
+	const xOffset_type& xOffset,
+	const yOffset_type& yOffset)
+	: ::xml_schema::type(),
+	text_(text, this),
+	text_background_(text_background, this),
+	textListId_(textListId, this),
+	xOffset_(xOffset, this),
+	yOffset_(yOffset, this)
+{
+}
+
+textList::
+textList(const textList& x,
+	::xml_schema::flags f,
+	::xml_schema::container* c)
+	: ::xml_schema::type(x, f, c),
+	text_(x.text_, f, this),
+	text_background_(x.text_background_, f, this),
+	textListId_(x.textListId_, f, this),
+	xOffset_(x.xOffset_, f, this),
+	yOffset_(x.yOffset_, f, this)
+{
+}
+
+textList::
+textList(const ::xercesc::DOMElement& e,
+	::xml_schema::flags f,
+	::xml_schema::container* c)
+	: ::xml_schema::type(e, f | ::xml_schema::flags::base, c),
+	text_(this),
+	text_background_(this),
+	textListId_(this),
+	xOffset_(this),
+	yOffset_(this)
+{
+	if ((f & ::xml_schema::flags::base) == 0)
+	{
+		::xsd::cxx::xml::dom::parser< char > p(e, true, false, true);
+		this->parse(p, f);
+	}
+}
+
+void textList::
+parse(::xsd::cxx::xml::dom::parser< char >& p,
+	::xml_schema::flags f)
+{
+	for (; p.more_content(); p.next_content(false))
+	{
+		const ::xercesc::DOMElement& i(p.cur_element());
+		const ::xsd::cxx::xml::qualified_name< char > n(
+			::xsd::cxx::xml::dom::name< char >(i));
+
+		// text
+		//
+		if (n.name() == "text" && n.namespace_().empty())
+		{
+			::std::auto_ptr< text_type > r(
+				text_traits::create(i, f, this));
+
+			if (!text_.present())
+			{
+				this->text_.set(r);
+				continue;
+			}
+		}
+
+		// text_background
+		//
+		if (n.name() == "text_background" && n.namespace_().empty())
+		{
+			::std::auto_ptr< text_background_type > r(
+				text_background_traits::create(i, f, this));
+
+			if (!text_background_.present())
+			{
+				this->text_background_.set(r);
+				continue;
+			}
+		}
+
+		break;
+	}
+
+	if (!text_.present())
+	{
+		throw ::xsd::cxx::tree::expected_element< char >(
+			"text",
+			"");
+	}
+
+	if (!text_background_.present())
+	{
+		throw ::xsd::cxx::tree::expected_element< char >(
+			"text_background",
+			"");
+	}
+
+	while (p.more_attributes())
+	{
+		const ::xercesc::DOMAttr& i(p.next_attribute());
+		const ::xsd::cxx::xml::qualified_name< char > n(
+			::xsd::cxx::xml::dom::name< char >(i));
+
+		if (n.name() == "textListId" && n.namespace_().empty())
+		{
+			this->textListId_.set(textListId_traits::create(i, f, this));
+			continue;
+		}
+
+		if (n.name() == "xOffset" && n.namespace_().empty())
+		{
+			this->xOffset_.set(xOffset_traits::create(i, f, this));
+			continue;
+		}
+
+		if (n.name() == "yOffset" && n.namespace_().empty())
+		{
+			this->yOffset_.set(yOffset_traits::create(i, f, this));
+			continue;
+		}
+	}
+
+	if (!textListId_.present())
+	{
+		throw ::xsd::cxx::tree::expected_attribute< char >(
+			"textListId",
+			"");
+	}
+
+	if (!xOffset_.present())
+	{
+		throw ::xsd::cxx::tree::expected_attribute< char >(
+			"xOffset",
+			"");
+	}
+
+	if (!yOffset_.present())
+	{
+		throw ::xsd::cxx::tree::expected_attribute< char >(
+			"yOffset",
+			"");
+	}
+}
+
+textList* textList::
+_clone(::xml_schema::flags f,
+	::xml_schema::container* c) const
+{
+	return new class textList(*this, f, c);
+}
+
+textList& textList::
+operator= (const textList& x)
+{
+	if (this != &x)
+	{
+		static_cast<::xml_schema::type&> (*this) = x;
+		this->text_ = x.text_;
+		this->text_background_ = x.text_background_;
+		this->textListId_ = x.textListId_;
+		this->xOffset_ = x.xOffset_;
+		this->yOffset_ = x.yOffset_;
+	}
+
+	return *this;
+}
+
+textList::
+~textList()
+{
+}
+
 // color
 //
 
@@ -2192,6 +2666,260 @@ operator= (const color& x)
 
 color::
 ~color()
+{
+}
+
+// text
+//
+
+text::
+text(const font_type& font,
+	const r_type& r,
+	const g_type& g,
+	const b_type& b)
+	: ::xml_schema::type(),
+	font_(font, this),
+	r_(r, this),
+	g_(g, this),
+	b_(b, this)
+{
+}
+
+text::
+text(const text& x,
+	::xml_schema::flags f,
+	::xml_schema::container* c)
+	: ::xml_schema::type(x, f, c),
+	font_(x.font_, f, this),
+	r_(x.r_, f, this),
+	g_(x.g_, f, this),
+	b_(x.b_, f, this)
+{
+}
+
+text::
+text(const ::xercesc::DOMElement& e,
+	::xml_schema::flags f,
+	::xml_schema::container* c)
+	: ::xml_schema::type(e, f | ::xml_schema::flags::base, c),
+	font_(this),
+	r_(this),
+	g_(this),
+	b_(this)
+{
+	if ((f & ::xml_schema::flags::base) == 0)
+	{
+		::xsd::cxx::xml::dom::parser< char > p(e, false, false, true);
+		this->parse(p, f);
+	}
+}
+
+void text::
+parse(::xsd::cxx::xml::dom::parser< char >& p,
+	::xml_schema::flags f)
+{
+	while (p.more_attributes())
+	{
+		const ::xercesc::DOMAttr& i(p.next_attribute());
+		const ::xsd::cxx::xml::qualified_name< char > n(
+			::xsd::cxx::xml::dom::name< char >(i));
+
+		if (n.name() == "font" && n.namespace_().empty())
+		{
+			this->font_.set(font_traits::create(i, f, this));
+			continue;
+		}
+
+		if (n.name() == "r" && n.namespace_().empty())
+		{
+			this->r_.set(r_traits::create(i, f, this));
+			continue;
+		}
+
+		if (n.name() == "g" && n.namespace_().empty())
+		{
+			this->g_.set(g_traits::create(i, f, this));
+			continue;
+		}
+
+		if (n.name() == "b" && n.namespace_().empty())
+		{
+			this->b_.set(b_traits::create(i, f, this));
+			continue;
+		}
+	}
+
+	if (!font_.present())
+	{
+		throw ::xsd::cxx::tree::expected_attribute< char >(
+			"font",
+			"");
+	}
+
+	if (!r_.present())
+	{
+		throw ::xsd::cxx::tree::expected_attribute< char >(
+			"r",
+			"");
+	}
+
+	if (!g_.present())
+	{
+		throw ::xsd::cxx::tree::expected_attribute< char >(
+			"g",
+			"");
+	}
+
+	if (!b_.present())
+	{
+		throw ::xsd::cxx::tree::expected_attribute< char >(
+			"b",
+			"");
+	}
+}
+
+text* text::
+_clone(::xml_schema::flags f,
+	::xml_schema::container* c) const
+{
+	return new class text(*this, f, c);
+}
+
+text& text::
+operator= (const text& x)
+{
+	if (this != &x)
+	{
+		static_cast<::xml_schema::type&> (*this) = x;
+		this->font_ = x.font_;
+		this->r_ = x.r_;
+		this->g_ = x.g_;
+		this->b_ = x.b_;
+	}
+
+	return *this;
+}
+
+text::
+~text()
+{
+}
+
+// text_background
+//
+
+text_background::
+text_background(const r_type& r,
+	const g_type& g,
+	const b_type& b)
+	: ::xml_schema::type(),
+	r_(r, this),
+	g_(g, this),
+	b_(b, this)
+{
+}
+
+text_background::
+text_background(const text_background& x,
+	::xml_schema::flags f,
+	::xml_schema::container* c)
+	: ::xml_schema::type(x, f, c),
+	r_(x.r_, f, this),
+	g_(x.g_, f, this),
+	b_(x.b_, f, this)
+{
+}
+
+text_background::
+text_background(const ::xercesc::DOMElement& e,
+	::xml_schema::flags f,
+	::xml_schema::container* c)
+	: ::xml_schema::type(e, f | ::xml_schema::flags::base, c),
+	r_(this),
+	g_(this),
+	b_(this)
+{
+	if ((f & ::xml_schema::flags::base) == 0)
+	{
+		::xsd::cxx::xml::dom::parser< char > p(e, false, false, true);
+		this->parse(p, f);
+	}
+}
+
+void text_background::
+parse(::xsd::cxx::xml::dom::parser< char >& p,
+	::xml_schema::flags f)
+{
+	while (p.more_attributes())
+	{
+		const ::xercesc::DOMAttr& i(p.next_attribute());
+		const ::xsd::cxx::xml::qualified_name< char > n(
+			::xsd::cxx::xml::dom::name< char >(i));
+
+		if (n.name() == "r" && n.namespace_().empty())
+		{
+			this->r_.set(r_traits::create(i, f, this));
+			continue;
+		}
+
+		if (n.name() == "g" && n.namespace_().empty())
+		{
+			this->g_.set(g_traits::create(i, f, this));
+			continue;
+		}
+
+		if (n.name() == "b" && n.namespace_().empty())
+		{
+			this->b_.set(b_traits::create(i, f, this));
+			continue;
+		}
+	}
+
+	if (!r_.present())
+	{
+		throw ::xsd::cxx::tree::expected_attribute< char >(
+			"r",
+			"");
+	}
+
+	if (!g_.present())
+	{
+		throw ::xsd::cxx::tree::expected_attribute< char >(
+			"g",
+			"");
+	}
+
+	if (!b_.present())
+	{
+		throw ::xsd::cxx::tree::expected_attribute< char >(
+			"b",
+			"");
+	}
+}
+
+text_background* text_background::
+_clone(::xml_schema::flags f,
+	::xml_schema::container* c) const
+{
+	return new class text_background(*this, f, c);
+}
+
+text_background& text_background::
+operator= (const text_background& x)
+{
+	if (this != &x)
+	{
+		static_cast<::xml_schema::type&> (*this) = x;
+		this->r_ = x.r_;
+		this->g_ = x.g_;
+		this->b_ = x.b_;
+	}
+
+	return *this;
+}
+
+text_background::
+~text_background()
 {
 }
 

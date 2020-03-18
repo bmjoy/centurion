@@ -6,10 +6,6 @@
 
 namespace gui {
 
-	using namespace std;
-	using namespace glm;
-	
-
 	Circle::Circle() {
 		originMap["bottom-left"] = 0;
 		originMap["top-left"] = 1;

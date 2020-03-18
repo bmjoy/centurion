@@ -36,32 +36,32 @@ void gui::Iframe::Create(int xPos, int yPos, int width, int height)
 		string top_name = string(iframexml->top().image_name());
 		string bottom_name = string(iframexml->bottom().image_name());
 
-		back = new gui::Image(back_name);
-		back->create("bottom-left", (float)xPos, (float)yPos, (float)w, (float)h, 0);
+		back = gui::Image(back_name);
+		back.create("bottom-left", (float)xPos, (float)yPos, (float)w, (float)h, 0);
 		
-		left = new gui::Image(left_name);
-		left->create("bottom-left", (float)xPos, (float)yPos, 0.f, (float)h, 0);
+		left = gui::Image(left_name);
+		left.create("bottom-left", (float)xPos, (float)yPos, 0.f, (float)h, 0);
 
-		top = new gui::Image(top_name);
-		top->create("bottom-left", (float)xPos, (float)yPos + (float)h, (float)w, 0.f, 0);
+		top = gui::Image(top_name);
+		top.create("bottom-left", (float)xPos, (float)yPos + (float)h, (float)w, 0.f, 0);
 
-		right = new gui::Image(right_name);
-		right->create("bottom-left", (float)xPos + (float)w, (float)yPos , 0.f, (float)h, 0);
+		right = gui::Image(right_name);
+		right.create("bottom-left", (float)xPos + (float)w, (float)yPos , 0.f, (float)h, 0);
 
-		bottom = new gui::Image(bottom_name);
-		bottom->create("bottom-left", (float)xPos, (float)yPos, (float)w, 0.f, 0);
+		bottom = gui::Image(bottom_name);
+		bottom.create("bottom-left", (float)xPos, (float)yPos, (float)w, 0.f, 0);
 
-		topleft = new gui::Image(topleft_name);
-		topleft->create("bottom-left", (float)xPos, (float)yPos + (float)h, 0.f, 0.f, 0);
+		topleft = gui::Image(topleft_name);
+		topleft.create("bottom-left", (float)xPos, (float)yPos + (float)h, 0.f, 0.f, 0);
 
-		topright = new gui::Image(topright_name);
-		topright->create("bottom-left", (float)xPos + w, (float)yPos + (float)h, 0.f, 0.f, 0);
+		topright = gui::Image(topright_name);
+		topright.create("bottom-left", (float)xPos + w, (float)yPos + (float)h, 0.f, 0.f, 0);
 
-		bottomright = new gui::Image(bottomright_name);
-		bottomright->create("bottom-left", (float)xPos + w, (float)yPos, 0.f, 0.f, 0);
+		bottomright = gui::Image(bottomright_name);
+		bottomright.create("bottom-left", (float)xPos + w, (float)yPos, 0.f, 0.f, 0);
 
-		bottomleft = new gui::Image(bottomleft_name);
-		bottomleft->create("bottom-left", (float)xPos, (float)yPos, 0.f, 0.f, 0);
+		bottomleft = gui::Image(bottomleft_name);
+		bottomleft.create("bottom-left", (float)xPos, (float)yPos, 0.f, 0.f, 0);
 	}
 	catch (const xml_schema::exception & e) {
 		string emsg = string(e.what());
@@ -77,17 +77,50 @@ void gui::Iframe::Create(int xPos, int yPos, int width, int height)
 	}
 }
 
-void gui::Iframe::Render()
+void gui::Iframe::Render(bool picking)
 {
-	back->render(false, 0, 0, true);
-	left->render(false, 0, 0, true);
-	top->render(false, 0, 0, true);
-	right->render(false, 0, 0, true);
-	bottom->render(false, 0, 0, true);
-	topleft->render(false);
-	topright->render(false);
-	bottomright->render(false);
-	bottomleft->render(false);
+	back.render(false, 0, 0, true);
+	left.render(false, 0, 0, true);
+	top.render(false, 0, 0, true);
+	right.render(false, 0, 0, true);
+	bottom.render(false, 0, 0, true);
+	topleft.render(false);
+	topright.render(false);
+	bottomright.render(false);
+	bottomleft.render(false);
+	   
+	RenderImages(picking);
+	RenderButtons(picking);
+	RenderTexts();
+	RenderTextLists(picking);
+}
+
+void gui::Iframe::RenderImages(bool picking)
+{
+	for (int i = 0; i < listOfImages.size(); i++) {
+		listOfImages[i].render(picking);
+	}
+}
+
+void gui::Iframe::RenderButtons(bool picking)
+{
+	for (int i = 0; i < listOfButtons.size(); i++) {
+		listOfButtons[i].render(picking);
+	}
+}
+
+void gui::Iframe::RenderTexts()
+{
+	for (int i = 0; i < listOfTexts.size(); i++) {
+		listOfTexts[i].render_static();
+	}
+}
+
+void gui::Iframe::RenderTextLists(bool picking)
+{
+	for (int i = 0; i < listOfTextLists.size(); i++) {
+		listOfTextLists[i].Render(picking);
+	}
 }
 
 gui::Iframe::~Iframe()

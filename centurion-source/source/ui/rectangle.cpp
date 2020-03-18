@@ -10,10 +10,6 @@
 
 namespace gui {
 
-	using namespace std;
-	using namespace glm;
-	
-
 	Rectangle::Rectangle()
 	{
 		originMap["bottom-left"] = 0;

@@ -7,10 +7,6 @@
 
 namespace gui {
 
-	using namespace std;
-	using namespace glm;
-	
-
 	TextBox::TextBox() {
 	}
 

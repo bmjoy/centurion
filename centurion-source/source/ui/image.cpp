@@ -7,10 +7,6 @@
 
 namespace gui {
 
-	using namespace std;
-	using namespace glm;
-	
-
 	Image::Image(){}
 
 	Image::Image(string ImageName) {

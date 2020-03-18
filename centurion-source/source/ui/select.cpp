@@ -25,38 +25,38 @@ namespace gui {
 		mainTextPos = vec2(x + 2.f, (y - 1.f) - height / 1.5f - 5.f);
 		nOptions = (int)options.size();
 
-		back = new gui::Rectangle();
-		back->create("border-filled", x, y, width, height, "top-left", pickingID);
+		back = gui::Rectangle();
+		back.create("border-filled", x, y, width, height, "top-left", pickingID);
 
 		optionsText = {};
 		back_options_picking = {};
 
 		if (boolOptions) {
 
-			text = new gui::SimpleText("dynamic"); // this is for selected text;
+			text = gui::SimpleText("dynamic"); // this is for selected text;
 
-			back_options = new gui::Rectangle();
-			back_options->create("border-filled", x, y - height - 1, width, height * nOptions, "top-left", 0);
+			back_options = gui::Rectangle();
+			back_options.create("border-filled", x, y - height - 1, width, height * nOptions, "top-left", 0);
 
 			for (int j = 0; j < nOptions; j++) {
 				float y1 = y - 1.f - (j + 1)*height + j;
 
 				/* options background saved in memory for picking */
-				gui::Rectangle* tempRect = new gui::Rectangle();
-				tempRect->create("filled", x, y1, width - 1, height - 1, "top-left", pickingID);
+				gui::Rectangle tempRect = gui::Rectangle();
+				tempRect.create("filled", x, y1, width - 1, height - 1, "top-left", pickingID);
 				back_options_picking.push_back(tempRect);
 
 				/* options text saved in memory */
-				gui::SimpleText* tempText = new gui::SimpleText("static");
-				tempText->create_static(TranslationsTable::GetTranslation(form_options[j]), "tahoma_15px", x + 2.f, y1 - height / 1.5f - 5.f, "left", "normal", vec4(255.f));
+				gui::SimpleText tempText = gui::SimpleText("static");
+				tempText.create_static(TranslationsTable::GetTranslation(form_options[j]), "tahoma_15px", x + 2.f, y1 - height / 1.5f - 5.f, "left", "normal", vec4(255.f));
 				optionsText.push_back(tempText);
 			}
 		}
 		else { // in this case the forminput cannot be opened
 			if (hasText) {
-				text = new gui::SimpleText("static");
+				text = gui::SimpleText("static");
 	
-				text->create_static(TranslationsTable::GetTranslation(form_options[selectedTextID]), "tahoma_15px", mainTextPos.x, mainTextPos.y, "left", "normal", vec4(255.f));
+				text.create_static(TranslationsTable::GetTranslation(form_options[selectedTextID]), "tahoma_15px", mainTextPos.x, mainTextPos.y, "left", "normal", vec4(255.f));
 			}
 		}
 		selectedText = form_options[selectedTextID];
@@ -64,28 +64,28 @@ namespace gui {
 	void Select::render(bool picking, vec4 color) {
 
 		if (picking) {
-			back->render(vec4(), true);
+			back.render(vec4(), true);
 			if (boolOptions && isOpened) {
 				for (int j = 0; j < nOptions; j++) {
-					back_options_picking[j]->render(color, true);
+					back_options_picking[j].render(color, true);
 				}
 			}
 		}
 		else {
 
-			back->render(color, false);
+			back.render(color, false);
 
 			if (boolOptions) {
 				// selected text
-				text->render_dynamic(TranslationsTable::GetTranslation(selectedText), "tahoma_15px", mainTextPos.x, mainTextPos.y, vec4(255.f), "left", "normal");
+				text.render_dynamic(TranslationsTable::GetTranslation(selectedText), "tahoma_15px", mainTextPos.x, mainTextPos.y, vec4(255.f), "left", "normal");
 				if (isOpened) {
 
 					// background and border
-					back_options->render(color, false);
+					back_options.render(color, false);
 
 					// text
 					for (int j = 0; j < nOptions; j++) {
-						optionsText[j]->render_static();
+						optionsText[j].render_static();
 					}
 
 				}
@@ -93,7 +93,7 @@ namespace gui {
 			else {
 				if (hasText) {
 					// selected text
-					text->render_static();
+					text.render_static();
 				}
 			}
 		}
@@ -125,14 +125,5 @@ namespace gui {
 	}
 
 	Select::~Select() {
-		/*if (back != nullptr) delete back;
-		if (back_options != nullptr) delete back_options;
-		if (text != nullptr) delete text;
-		for (int i = 0; i < back_options_picking.size(); i++) {
-			if (back_options_picking[i] != nullptr) delete back_options_picking[i];
-		}
-		for (int i = 0; i < optionsText.size(); i++) {
-			if (optionsText[i] != nullptr) delete optionsText[i];
-		}*/
 	}
 };

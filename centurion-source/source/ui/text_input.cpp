@@ -8,9 +8,6 @@
 
 namespace gui {
 
-	using namespace std;
-	using namespace glm;
-
 	TextInput::TextInput() {}
 	
 	void TextInput::create(string text, float x, float y, int maxChars) {

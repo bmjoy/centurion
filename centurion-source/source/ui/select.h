@@ -3,11 +3,11 @@
 
 #include <primitives.h>
 
+#include "rectangle.h"
+#include "simple_text.h"
+
 namespace gui {
 	
-	class Rectangle;
-	class SimpleText;
-
 	class Select {
 	public:
 		Select(bool options = true);
@@ -22,11 +22,11 @@ namespace gui {
 		string selectedText;
 		~Select();
 	private:
-		Rectangle* back;
-		Rectangle* back_options;
-		vector<Rectangle*> back_options_picking;
-		SimpleText* text;
-		vector<SimpleText*> optionsText;
+		Rectangle back;
+		Rectangle back_options;
+		vector<Rectangle> back_options_picking;
+		SimpleText text;
+		vector<SimpleText> optionsText;
 		float width, height, x, y;
 		vector<string> form_options;
 		vec2 mainTextPos;

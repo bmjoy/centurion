@@ -7,10 +7,6 @@
 
 namespace gui {
 
-	using namespace std;
-	using namespace glm;
-	
-
 	float SimpleText::CalculateTextWidth(string text, string font, string fontWeight)
 	{
 		gui::SimpleText temptext = gui::SimpleText("static");
