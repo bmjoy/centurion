@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no" ?>
-<c_object parent="Habitable" type="building" class_name="Shipyard">
+<c_object parent="Building" type="cpp_noclass" class_name="BaseTower">
   <properties>
   </properties>
   <methods>

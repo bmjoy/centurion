@@ -1,4 +1,4 @@
-<c_object parent="Building" type="building" class_name="ROutpost">
+<c_object parent="Building" type="cpp_buildingclass" class_name="ROutpost">
  <properties>
     <property name="race" value="Rome"/>
     <property name="radius" value="500"/>

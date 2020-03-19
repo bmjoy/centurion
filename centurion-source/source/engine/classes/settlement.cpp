@@ -36,12 +36,12 @@ unsigned short int Settlement::GetFood(void)
 void Settlement::SetFood(unsigned short int food)
 {
 	if (food < 0) {
-		food = 0;
+		this->food = 0;
 	}
 
 	//TRANSFORM THE VALUE INTO A CONSTANT
 	if (food > 999999)
-		food = (unsigned short int)999999;
+		this->food = (unsigned short int)999999;
 	else
 		this->food = food;
 }
@@ -56,7 +56,7 @@ void Settlement::SetGold(int gold)
 	//LOAN OR NOT LESS THAN 0?
 	//TRANSFORM THE VALUE INTO A CONSTANT
 	if (gold > 999999)
-		gold = 999999;
+		this->gold = 999999;
 	else
 		this->gold = gold;
 }
@@ -69,11 +69,11 @@ unsigned short int Settlement::GetPopulation(void)
 void Settlement::SetPopulation(unsigned short int population)
 {
 	if (population < 0) {
-		population = 0;
+		this->population = 0;
 	}
 
 	if (population > GetMaxPopulation())
-		population = GetMaxPopulation();
+		this->population = GetMaxPopulation();
 	else
 		this->population = population;
 }
@@ -86,12 +86,12 @@ unsigned short int Settlement::GetMaxPopulation(void)
 void Settlement::SetMaxPopulation(unsigned short int max_population)
 {
 	if (max_population < 0) {
-		max_population = 0;
+		this->max_population = 0;
 	}
 
 	//TRANSFORM THE VALUE INTO A CONSTANT
 	if (max_population > 5000)
-		max_population = (unsigned short int)5000;
+		this->max_population = (unsigned short int)5000;
 	else
 		this->max_population = max_population;
 }

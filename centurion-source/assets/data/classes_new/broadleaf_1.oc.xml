@@ -1,4 +1,4 @@
-<c_object parent="Trees" type="decoration" class_name="Broadleaf_1">
+<c_object parent="Trees" type="cpp_decorationclass" class_name="Broadleaf_1">
  <properties>
     <property name="category" value="trees"/>
     <property name="ent_path" value="assets/decorations/trees/broadleaves/broadleaf_1.oe.json"/>

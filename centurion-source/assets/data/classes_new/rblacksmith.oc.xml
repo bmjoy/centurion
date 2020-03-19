@@ -1,4 +1,4 @@
-<c_object parent="Blacksmith" type="building" class_name="RBlacksmith">
+<c_object parent="BaseBlacksmith" type="cpp_buildingclass" class_name="RBlacksmith">
  <properties>
     <property name="race" value="Rome"/>
     <property name="radius" value="450"/>

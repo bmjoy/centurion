@@ -1,4 +1,4 @@
-<c_object parent="Arena" type="building" class_name="RArena">
+<c_object parent="BaseArena" type="cpp_buildingclass" class_name="RArena">
  <properties>
     <property name="race" value="Rome"/>
     <property name="radius" value="600"/>

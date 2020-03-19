@@ -1,4 +1,4 @@
-<c_object parent="Barracks" type="building" class_name="EBarracks">
+<c_object parent="BaseBarracks" type="cpp_buildingclass" class_name="EBarracks">
  <properties>
     <property name="race" value="Egypt"/>
     <property name="radius" value="1000"/>

@@ -1,4 +1,4 @@
-<c_object parent="Tavern" type="building" class_name="ETavern">
+<c_object parent="BaseTavern" type="cpp_buildingclass" class_name="ETavern">
  <properties>
     <property name="race" value="Egypt"/>
     <property name="radius" value="1000"/>

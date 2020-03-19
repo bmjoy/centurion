@@ -1,4 +1,4 @@
-<c_object parent="Temple" type="building" class_name="EOsiristemple">
+<c_object parent="BaseTemple" type="cpp_buildingclass" class_name="EOsiristemple">
  <properties>
     <property name="race" value="Egypt"/>
     <property name="radius" value="1000"/>

@@ -1,4 +1,4 @@
-<c_object parent="Trees" type="decoration" class_name="Jasmimmanga">
+<c_object parent="Trees" type="cpp_decorationclass" class_name="Jasmimmanga">
  <properties>
     <property name="category" value="trees"/>
     <property name="ent_path" value="assets/decorations/trees/tropicals/jasmimmanga.oe.json"/>

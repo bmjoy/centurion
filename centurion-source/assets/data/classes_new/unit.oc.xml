@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no" ?>
-<c_object parent="Object" type="" class_name="Unit">
+<c_object parent="Object" type="cpp_abstractclass" class_name="Unit">
   <properties>
   	  <property name="damageType" value="slash"/>
   	  <property name="minAttack" value="10"/>
