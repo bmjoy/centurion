@@ -7,6 +7,8 @@
 #include <picking.h>
 #include <hector-lua.h>
 
+#include <engine.h>
+
 #pragma region static variables
 
 array<EditorWindows::EditorWindow*, MAX_NUMBER_OF_EDITOR_WINDOWS> EditorWindows::listOfWindows = { nullptr };

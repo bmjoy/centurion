@@ -4,6 +4,8 @@
 #include <logger.h>
 #include <file_manager.h>
 
+#include <engine.h>
+
 #pragma region Static variables
 
 map<string, int> TranslationsTable::languagesMap;

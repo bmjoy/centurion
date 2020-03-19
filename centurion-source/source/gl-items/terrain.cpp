@@ -5,8 +5,7 @@
 #include <game/strategy.h>
 #include <logger.h>
 
-
-
+#include <engine.h>
 
 Terrain::Terrain(){
 	vPath = "assets/shaders/terrain/vertex.glsl";

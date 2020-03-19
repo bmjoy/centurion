@@ -7,7 +7,7 @@
         <xs:element name="properties">
           <xs:complexType>
             <xs:sequence>
-              <xs:element maxOccurs="unbounded" name="property">
+              <xs:element minOccurs="0" maxOccurs="unbounded" name="property">
                 <xs:complexType>
                   <xs:attribute name="name" type="xs:string" use="required" />
                   <xs:attribute name="value" type="xs:string" use="required" />
@@ -19,7 +19,7 @@
         <xs:element name="methods">
           <xs:complexType>
             <xs:sequence>
-              <xs:element maxOccurs="unbounded" name="method">
+              <xs:element minOccurs="0"  maxOccurs="unbounded" name="method">
                 <xs:complexType>
                   <xs:attribute name="name" type="xs:string" use="required" />
                   <xs:attribute name="script" type="xs:string" use="required" />
@@ -31,7 +31,7 @@
         <xs:element name="sounds">
           <xs:complexType>
             <xs:sequence>
-              <xs:element maxOccurs="unbounded" name="sound">
+              <xs:element minOccurs="0"  maxOccurs="unbounded" name="sound">
                 <xs:complexType>
                   <xs:attribute name="name" type="xs:string" use="required" />
                   <xs:attribute name="path" type="xs:string" use="required" />

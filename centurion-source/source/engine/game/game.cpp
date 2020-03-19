@@ -592,7 +592,7 @@ void Game::CreateObject(string className, float x, float y, int player)
 {
 	string type = ObjectData::GetObjectData(className)->GetClassType();
 
-	if (type == "building") {
+	if (type == "cpp_buildingclass") {
 		Building* newBuilding = new Building();
 		newBuilding->SetPosition(vec3(x, y, 10));
 		newBuilding->Create(className);

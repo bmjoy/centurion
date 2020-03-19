@@ -1,7 +1,0 @@
-{
-	"type": "unit",
-	"ent_path": "assets/units/hmyrmidon/hmyrmidon.oe.json",
-	"movement_speed": 1.5,
-	"health": 2,
-	"attackFabio": 3
-}

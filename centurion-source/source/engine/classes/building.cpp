@@ -143,6 +143,8 @@ void Building::prepare()
 void Building::Create(string className) {
 
 	ObjectData::ObjectXMLClassData objData = *ObjectData::GetObjectData(className);
+	ObjectData::SetFixedPtr(&objData);
+	objData.GetParentData(objData.GetParentClass());
 	// here the recursive function that takes the parent xml data
 
 	// class data
@@ -155,6 +157,8 @@ void Building::Create(string className) {
 	this->spriteData.pickingColor = Picking::getPickingColorFromID(this->GetPickingID());
 
 	Game::AddGameObject(this->GetPickingID(), this);
+
+
 
 	//---------------------------
 

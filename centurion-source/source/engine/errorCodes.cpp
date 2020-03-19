@@ -3,6 +3,8 @@
 #include <logger.h>
 #include <file_manager.h>
 
+#include <engine.h>
+
 map<string, string> ErrorCodes::errorCodes;
 
 void ErrorCodes::SetErrorCode(string error, string code)

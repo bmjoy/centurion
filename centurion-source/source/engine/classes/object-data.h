@@ -14,10 +14,18 @@ public:
 
 	class ObjectXMLClassData {
 	public:
+		
 		ObjectXMLClassData();
+		void GetParentData(string _parent);
 		void AddProperty(string k, string v) { propertiesMap[k] = v; }
+		void AddPropertyIfMissing(string k, string v);
 		void AddSound(string k, string v) { soundsMap[k] = v; }
+		void AddSoundIfMissing(string k, string v);
 		void AddMethod(string k, string v) { methodsMap[k] = v; }
+		void AddMethodIfMissing(string k, string v);
+		bool HasProperty(string k) { return (propertiesMap.count(k) > 0); }
+		bool HasMethod(string k) { return (methodsMap.count(k) > 0); }
+		bool HasSound(string k) { return (soundsMap.count(k) > 0); }
 		string GetPropertyValue(string _property);
 		string GetSoundPath(string _sound);
 		string GetMethodScript(string _method);
@@ -31,6 +39,7 @@ public:
 		ObjectSprite::SpriteData GetSpriteData() { return spriteData; }
 		~ObjectXMLClassData();
 	private:
+		
 		map<string, string> propertiesMap;
 		map<string, string> soundsMap;
 		map<string, string> methodsMap;
@@ -38,10 +47,12 @@ public:
 		ObjectSprite::SpriteData spriteData;
 	};
 
-	static ObjectXMLClassData* GetObjectData(string _class) { return &(objectsData[_class]); }
+	static void SetFixedPtr(ObjectXMLClassData* _ptr) { objDataXmlFixedPtr = _ptr; }
+	static ObjectXMLClassData* GetObjectData(string _class);
 	static void ReadDataClassesFromXml();
 
 private:
+	static ObjectXMLClassData* objDataXmlFixedPtr;
 	static void AddObjectXMLClassData(string _class, ObjectXMLClassData objData) { objectsData[_class] = objData; }
 	static map<string, ObjectXMLClassData> objectsData;
 	static string dataClassesPath;

@@ -81,6 +81,7 @@ bool Engine::Mouse::MiddleHold = false;
 bool Engine::Mouse::Release = false;
 Engine::HoldClickData Engine::Mouse::leftHoldClickData;
 Engine::HoldClickData Engine::Mouse::rightHoldClickData;
+Engine::HoldClickData Engine::Mouse::middleHoldClickData;
 // ------------ end definitions
 
 Engine::Mouse::Mouse() { }
@@ -438,7 +439,7 @@ void Engine::Camera::mouseControl() {
 	}
 
 	/* MOUSE SCROLLING --> CAMERA ZOOM */
-	if (!game::GameMenu::IsActive() && (Keyboard::IsKeyPressed(GLFW_KEY_LEFT_CONTROL) || Keyboard::IsKeyPressed(GLFW_KEY_RIGHT_CONTROL)) && Mouse::ScrollBool) {
+	if (!game::GameMenu::IsActive() && (Keyboard::IsKeyNotReleased(GLFW_KEY_LEFT_CONTROL) || Keyboard::IsKeyNotReleased(GLFW_KEY_RIGHT_CONTROL)) && Mouse::ScrollBool) {
 		if (Mouse::ScrollValue > 0 && currentZoom > 1.0f) {
 			currentZoom -= (int)Mouse::ScrollValue;
 		}

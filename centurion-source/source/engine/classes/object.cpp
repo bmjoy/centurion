@@ -63,8 +63,6 @@ string GObject::GetClassName(void)
 
 void GObject::SetClassName(string parClassName)
 {
-	ifstream path("assets/data/classes/" + parClassName + ".oc.json");
-	data = json::parse(path);
 	this->className = parClassName;
 }
 

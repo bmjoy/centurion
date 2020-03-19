@@ -11,12 +11,61 @@
 
 map<string, ObjectData::ObjectXMLClassData> ObjectData::objectsData;
 string ObjectData::dataClassesPath = "assets/data/classes/";
-
+ObjectData::ObjectXMLClassData* ObjectData::objDataXmlFixedPtr = nullptr;
 #pragma endregion
 
 #pragma region ObjectXMLClassData class
 
 ObjectData::ObjectXMLClassData::ObjectXMLClassData(){}
+
+void ObjectData::ObjectXMLClassData::GetParentData(string _parent)
+{
+	if (objDataXmlFixedPtr == nullptr) return;
+	if (_parent == "") return;
+
+	ObjectXMLClassData *objData = GetObjectData(_parent);
+	if (objData == nullptr) return;
+	for (map<string, string>::iterator _prop = objData->propertiesMap.begin(); _prop != objData->propertiesMap.end(); _prop++)
+	{
+		string name = _prop->first;
+		string value = _prop->second;
+		objDataXmlFixedPtr->AddPropertyIfMissing(name, value);
+	}
+	for (map<string, string>::iterator _method = objData->methodsMap.begin(); _method != objData->methodsMap.end(); _method++)
+	{
+		string name = _method->first;
+		string script = _method->second;
+		objDataXmlFixedPtr->AddMethodIfMissing(name, script);
+	}
+	for (map<string, string>::iterator _sound = objData->soundsMap.begin(); _sound != objData->soundsMap.end(); _sound++)
+	{
+		string name = _sound->first;
+		string path = _sound->second;
+		objDataXmlFixedPtr->AddSoundIfMissing(name, path);
+	}
+
+	// recursive call
+	string p = objData->GetParentClass();
+	GetParentData(p);
+}
+
+void ObjectData::ObjectXMLClassData::AddPropertyIfMissing(string k, string v)
+{
+	if (this->HasProperty(k)) return;
+	this->AddProperty(k, v);
+}
+
+void ObjectData::ObjectXMLClassData::AddSoundIfMissing(string k, string v)
+{
+	if (this->HasMethod(k)) return;
+	this->AddMethod(k, v);
+}
+
+void ObjectData::ObjectXMLClassData::AddMethodIfMissing(string k, string v)
+{
+	if (this->HasSound(k)) return;
+	this->AddSound(k, v);
+}
 
 string ObjectData::ObjectXMLClassData::GetPropertyValue(string _property)
 {
@@ -53,6 +102,16 @@ ObjectData::ObjectXMLClassData::~ObjectXMLClassData(){}
 #pragma endregion
 
 #pragma region ObjectData class
+
+ObjectData::ObjectXMLClassData * ObjectData::GetObjectData(string _class)
+{
+	if (objectsData.count(_class) > 0) {
+		return &(objectsData[_class]);
+	}
+	else {
+		return nullptr;
+	}
+}
 
 void ObjectData::ReadDataClassesFromXml()
 {
@@ -94,13 +153,13 @@ void ObjectData::ReadDataClassesFromXml()
 
 			string path = objData.GetPropertyValue("ent_path");
 			if (path == "NOT_VALID") continue;
-			if (objData.GetClassType() == "building") {
+			if (objData.GetClassType() == "cpp_buildingclass") {
 				primitives::BSprite()->AddEntityPath(path);
 			}
-			else if (objData.GetClassType() == "decoration") {
+			else if (objData.GetClassType() == "cpp_decorationclass") {
 				primitives::DSprite()->AddEntityPath(path);
 			}
-			else if (objData.GetClassType() == "unit") {
+			else if (objData.GetClassType() == "cpp_unitclass") {
 				primitives::USprite()->AddEntityPath(path);
 			}
 		}

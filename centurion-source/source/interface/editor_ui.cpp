@@ -50,7 +50,10 @@ namespace editor {
 		Q_WINDOW()->render(picking);
 
 		EditorWindows::Render(picking);
-		EditorMenuBar::Render(picking); // always the last
+
+		if (Game::Minimap::IsActive() == false) {
+			EditorMenuBar::Render(picking); // always the last
+		}
 	}
 
 	EditorUI::~EditorUI() {}

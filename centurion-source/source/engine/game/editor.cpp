@@ -25,7 +25,7 @@ void Editor::Create() {
 
 	Strategy::reset();
 	Engine::myWindow::BottomBarHeight = 0.f;
-	Engine::myWindow::TopBarHeight = 30.f;
+	Engine::myWindow::TopBarHeight = 0.f;
 
 	setMinimapProjectionMatrix();
 

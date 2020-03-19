@@ -5,6 +5,7 @@
 #include <logger.h>
 #include <picking.h>
 
+#include <engine.h>
 
 gui::Iframe::Iframe()
 {

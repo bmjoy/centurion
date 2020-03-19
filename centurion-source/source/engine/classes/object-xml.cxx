@@ -43,150 +43,148 @@
 // c_object
 // 
 
-XERCES_CPP_NAMESPACE_QUALIFIER DOMDocument * fDoc;
-
 const c_object::properties_type& c_object::
-properties () const
+properties() const
 {
-  return this->properties_.get ();
+	return this->properties_.get();
 }
 
 c_object::properties_type& c_object::
-properties ()
+properties()
 {
-  return this->properties_.get ();
+	return this->properties_.get();
 }
 
 void c_object::
-properties (const properties_type& x)
+properties(const properties_type& x)
 {
-  this->properties_.set (x);
+	this->properties_.set(x);
 }
 
 void c_object::
-properties (::std::auto_ptr< properties_type > x)
+properties(::std::auto_ptr< properties_type > x)
 {
-  this->properties_.set (x);
+	this->properties_.set(x);
 }
 
 const c_object::methods_type& c_object::
-methods () const
+methods() const
 {
-  return this->methods_.get ();
+	return this->methods_.get();
 }
 
 c_object::methods_type& c_object::
-methods ()
+methods()
 {
-  return this->methods_.get ();
+	return this->methods_.get();
 }
 
 void c_object::
-methods (const methods_type& x)
+methods(const methods_type& x)
 {
-  this->methods_.set (x);
+	this->methods_.set(x);
 }
 
 void c_object::
-methods (::std::auto_ptr< methods_type > x)
+methods(::std::auto_ptr< methods_type > x)
 {
-  this->methods_.set (x);
+	this->methods_.set(x);
 }
 
 const c_object::sounds_type& c_object::
-sounds () const
+sounds() const
 {
-  return this->sounds_.get ();
+	return this->sounds_.get();
 }
 
 c_object::sounds_type& c_object::
-sounds ()
+sounds()
 {
-  return this->sounds_.get ();
+	return this->sounds_.get();
 }
 
 void c_object::
-sounds (const sounds_type& x)
+sounds(const sounds_type& x)
 {
-  this->sounds_.set (x);
+	this->sounds_.set(x);
 }
 
 void c_object::
-sounds (::std::auto_ptr< sounds_type > x)
+sounds(::std::auto_ptr< sounds_type > x)
 {
-  this->sounds_.set (x);
+	this->sounds_.set(x);
 }
 
 const c_object::parent_type& c_object::
-parent () const
+parent() const
 {
-  return this->parent_.get ();
+	return this->parent_.get();
 }
 
 c_object::parent_type& c_object::
-parent ()
+parent()
 {
-  return this->parent_.get ();
+	return this->parent_.get();
 }
 
 void c_object::
-parent (const parent_type& x)
+parent(const parent_type& x)
 {
-  this->parent_.set (x);
+	this->parent_.set(x);
 }
 
 void c_object::
-parent (::std::auto_ptr< parent_type > x)
+parent(::std::auto_ptr< parent_type > x)
 {
-  this->parent_.set (x);
+	this->parent_.set(x);
 }
 
 const c_object::type_type& c_object::
-type () const
+type() const
 {
-  return this->type_.get ();
+	return this->type_.get();
 }
 
 c_object::type_type& c_object::
-type ()
+type()
 {
-  return this->type_.get ();
+	return this->type_.get();
 }
 
 void c_object::
-type (const type_type& x)
+type(const type_type& x)
 {
-  this->type_.set (x);
+	this->type_.set(x);
 }
 
 void c_object::
-type (::std::auto_ptr< type_type > x)
+type(::std::auto_ptr< type_type > x)
 {
-  this->type_.set (x);
+	this->type_.set(x);
 }
 
 const c_object::class_name_type& c_object::
-class_name () const
+class_name() const
 {
-  return this->class_name_.get ();
+	return this->class_name_.get();
 }
 
 c_object::class_name_type& c_object::
-class_name ()
+class_name()
 {
-  return this->class_name_.get ();
+	return this->class_name_.get();
 }
 
 void c_object::
-class_name (const class_name_type& x)
+class_name(const class_name_type& x)
 {
-  this->class_name_.set (x);
+	this->class_name_.set(x);
 }
 
 void c_object::
-class_name (::std::auto_ptr< class_name_type > x)
+class_name(::std::auto_ptr< class_name_type > x)
 {
-  this->class_name_.set (x);
+	this->class_name_.set(x);
 }
 
 
@@ -194,21 +192,21 @@ class_name (::std::auto_ptr< class_name_type > x)
 // 
 
 const properties::property_sequence& properties::
-property () const
+property() const
 {
-  return this->property_;
+	return this->property_;
 }
 
 properties::property_sequence& properties::
-property ()
+property()
 {
-  return this->property_;
+	return this->property_;
 }
 
 void properties::
-property (const property_sequence& s)
+property(const property_sequence& s)
 {
-  this->property_ = s;
+	this->property_ = s;
 }
 
 
@@ -216,21 +214,21 @@ property (const property_sequence& s)
 // 
 
 const methods::method_sequence& methods::
-method () const
+method() const
 {
-  return this->method_;
+	return this->method_;
 }
 
 methods::method_sequence& methods::
-method ()
+method()
 {
-  return this->method_;
+	return this->method_;
 }
 
 void methods::
-method (const method_sequence& s)
+method(const method_sequence& s)
 {
-  this->method_ = s;
+	this->method_ = s;
 }
 
 
@@ -238,21 +236,21 @@ method (const method_sequence& s)
 // 
 
 const sounds::sound_sequence& sounds::
-sound () const
+sound() const
 {
-  return this->sound_;
+	return this->sound_;
 }
 
 sounds::sound_sequence& sounds::
-sound ()
+sound()
 {
-  return this->sound_;
+	return this->sound_;
 }
 
 void sounds::
-sound (const sound_sequence& s)
+sound(const sound_sequence& s)
 {
-  this->sound_ = s;
+	this->sound_ = s;
 }
 
 
@@ -260,51 +258,51 @@ sound (const sound_sequence& s)
 // 
 
 const property::name_type& property::
-name () const
+name() const
 {
-  return this->name_.get ();
+	return this->name_.get();
 }
 
 property::name_type& property::
-name ()
+name()
 {
-  return this->name_.get ();
+	return this->name_.get();
 }
 
 void property::
-name (const name_type& x)
+name(const name_type& x)
 {
-  this->name_.set (x);
+	this->name_.set(x);
 }
 
 void property::
-name (::std::auto_ptr< name_type > x)
+name(::std::auto_ptr< name_type > x)
 {
-  this->name_.set (x);
+	this->name_.set(x);
 }
 
 const property::value_type& property::
-value () const
+value() const
 {
-  return this->value_.get ();
+	return this->value_.get();
 }
 
 property::value_type& property::
-value ()
+value()
 {
-  return this->value_.get ();
+	return this->value_.get();
 }
 
 void property::
-value (const value_type& x)
+value(const value_type& x)
 {
-  this->value_.set (x);
+	this->value_.set(x);
 }
 
 void property::
-value (::std::auto_ptr< value_type > x)
+value(::std::auto_ptr< value_type > x)
 {
-  this->value_.set (x);
+	this->value_.set(x);
 }
 
 
@@ -312,51 +310,51 @@ value (::std::auto_ptr< value_type > x)
 // 
 
 const method::name_type& method::
-name () const
+name() const
 {
-  return this->name_.get ();
+	return this->name_.get();
 }
 
 method::name_type& method::
-name ()
+name()
 {
-  return this->name_.get ();
+	return this->name_.get();
 }
 
 void method::
-name (const name_type& x)
+name(const name_type& x)
 {
-  this->name_.set (x);
+	this->name_.set(x);
 }
 
 void method::
-name (::std::auto_ptr< name_type > x)
+name(::std::auto_ptr< name_type > x)
 {
-  this->name_.set (x);
+	this->name_.set(x);
 }
 
 const method::script_type& method::
-script () const
+script() const
 {
-  return this->script_.get ();
+	return this->script_.get();
 }
 
 method::script_type& method::
-script ()
+script()
 {
-  return this->script_.get ();
+	return this->script_.get();
 }
 
 void method::
-script (const script_type& x)
+script(const script_type& x)
 {
-  this->script_.set (x);
+	this->script_.set(x);
 }
 
 void method::
-script (::std::auto_ptr< script_type > x)
+script(::std::auto_ptr< script_type > x)
 {
-  this->script_.set (x);
+	this->script_.set(x);
 }
 
 
@@ -364,51 +362,51 @@ script (::std::auto_ptr< script_type > x)
 // 
 
 const sound::name_type& sound::
-name () const
+name() const
 {
-  return this->name_.get ();
+	return this->name_.get();
 }
 
 sound::name_type& sound::
-name ()
+name()
 {
-  return this->name_.get ();
+	return this->name_.get();
 }
 
 void sound::
-name (const name_type& x)
+name(const name_type& x)
 {
-  this->name_.set (x);
+	this->name_.set(x);
 }
 
 void sound::
-name (::std::auto_ptr< name_type > x)
+name(::std::auto_ptr< name_type > x)
 {
-  this->name_.set (x);
+	this->name_.set(x);
 }
 
 const sound::path_type& sound::
-path () const
+path() const
 {
-  return this->path_.get ();
+	return this->path_.get();
 }
 
 sound::path_type& sound::
-path ()
+path()
 {
-  return this->path_.get ();
+	return this->path_.get();
 }
 
 void sound::
-path (const path_type& x)
+path(const path_type& x)
 {
-  this->path_.set (x);
+	this->path_.set(x);
 }
 
 void sound::
-path (::std::auto_ptr< path_type > x)
+path(::std::auto_ptr< path_type > x)
 {
-  this->path_.set (x);
+	this->path_.set(x);
 }
 
 
@@ -418,221 +416,221 @@ path (::std::auto_ptr< path_type > x)
 //
 
 c_object::
-c_object (const properties_type& properties,
-          const methods_type& methods,
-          const sounds_type& sounds,
-          const parent_type& parent,
-          const type_type& type,
-          const class_name_type& class_name)
-: ::xml_schema::type (),
-  properties_ (properties, this),
-  methods_ (methods, this),
-  sounds_ (sounds, this),
-  parent_ (parent, this),
-  type_ (type, this),
-  class_name_ (class_name, this)
+c_object(const properties_type& properties,
+	const methods_type& methods,
+	const sounds_type& sounds,
+	const parent_type& parent,
+	const type_type& type,
+	const class_name_type& class_name)
+	: ::xml_schema::type(),
+	properties_(properties, this),
+	methods_(methods, this),
+	sounds_(sounds, this),
+	parent_(parent, this),
+	type_(type, this),
+	class_name_(class_name, this)
 {
 }
 
 c_object::
-c_object (::std::auto_ptr< properties_type > properties,
-          ::std::auto_ptr< methods_type > methods,
-          ::std::auto_ptr< sounds_type > sounds,
-          const parent_type& parent,
-          const type_type& type,
-          const class_name_type& class_name)
-: ::xml_schema::type (),
-  properties_ (properties, this),
-  methods_ (methods, this),
-  sounds_ (sounds, this),
-  parent_ (parent, this),
-  type_ (type, this),
-  class_name_ (class_name, this)
+c_object(::std::auto_ptr< properties_type > properties,
+	::std::auto_ptr< methods_type > methods,
+	::std::auto_ptr< sounds_type > sounds,
+	const parent_type& parent,
+	const type_type& type,
+	const class_name_type& class_name)
+	: ::xml_schema::type(),
+	properties_(properties, this),
+	methods_(methods, this),
+	sounds_(sounds, this),
+	parent_(parent, this),
+	type_(type, this),
+	class_name_(class_name, this)
 {
 }
 
 c_object::
-c_object (const c_object& x,
-          ::xml_schema::flags f,
-          ::xml_schema::container* c)
-: ::xml_schema::type (x, f, c),
-  properties_ (x.properties_, f, this),
-  methods_ (x.methods_, f, this),
-  sounds_ (x.sounds_, f, this),
-  parent_ (x.parent_, f, this),
-  type_ (x.type_, f, this),
-  class_name_ (x.class_name_, f, this)
+c_object(const c_object& x,
+	::xml_schema::flags f,
+	::xml_schema::container* c)
+	: ::xml_schema::type(x, f, c),
+	properties_(x.properties_, f, this),
+	methods_(x.methods_, f, this),
+	sounds_(x.sounds_, f, this),
+	parent_(x.parent_, f, this),
+	type_(x.type_, f, this),
+	class_name_(x.class_name_, f, this)
 {
 }
 
 c_object::
-c_object (const ::xercesc::DOMElement& e,
-          ::xml_schema::flags f,
-          ::xml_schema::container* c)
-: ::xml_schema::type (e, f | ::xml_schema::flags::base, c),
-  properties_ (this),
-  methods_ (this),
-  sounds_ (this),
-  parent_ (this),
-  type_ (this),
-  class_name_ (this)
+c_object(const ::xercesc::DOMElement& e,
+	::xml_schema::flags f,
+	::xml_schema::container* c)
+	: ::xml_schema::type(e, f | ::xml_schema::flags::base, c),
+	properties_(this),
+	methods_(this),
+	sounds_(this),
+	parent_(this),
+	type_(this),
+	class_name_(this)
 {
-  if ((f & ::xml_schema::flags::base) == 0)
-  {
-    ::xsd::cxx::xml::dom::parser< char > p (e, true, false, true);
-    this->parse (p, f);
-  }
+	if ((f & ::xml_schema::flags::base) == 0)
+	{
+		::xsd::cxx::xml::dom::parser< char > p(e, true, false, true);
+		this->parse(p, f);
+	}
 }
 
 void c_object::
-parse (::xsd::cxx::xml::dom::parser< char >& p,
-       ::xml_schema::flags f)
+parse(::xsd::cxx::xml::dom::parser< char >& p,
+	::xml_schema::flags f)
 {
-  for (; p.more_content (); p.next_content (false))
-  {
-    const ::xercesc::DOMElement& i (p.cur_element ());
-    const ::xsd::cxx::xml::qualified_name< char > n (
-      ::xsd::cxx::xml::dom::name< char > (i));
+	for (; p.more_content(); p.next_content(false))
+	{
+		const ::xercesc::DOMElement& i(p.cur_element());
+		const ::xsd::cxx::xml::qualified_name< char > n(
+			::xsd::cxx::xml::dom::name< char >(i));
 
-    // properties
-    //
-    if (n.name () == "properties" && n.namespace_ ().empty ())
-    {
-      ::std::auto_ptr< properties_type > r (
-        properties_traits::create (i, f, this));
+		// properties
+		//
+		if (n.name() == "properties" && n.namespace_().empty())
+		{
+			::std::auto_ptr< properties_type > r(
+				properties_traits::create(i, f, this));
 
-      if (!properties_.present ())
-      {
-        this->properties_.set (r);
-        continue;
-      }
-    }
+			if (!properties_.present())
+			{
+				this->properties_.set(r);
+				continue;
+			}
+		}
 
-    // methods
-    //
-    if (n.name () == "methods" && n.namespace_ ().empty ())
-    {
-      ::std::auto_ptr< methods_type > r (
-        methods_traits::create (i, f, this));
+		// methods
+		//
+		if (n.name() == "methods" && n.namespace_().empty())
+		{
+			::std::auto_ptr< methods_type > r(
+				methods_traits::create(i, f, this));
 
-      if (!methods_.present ())
-      {
-        this->methods_.set (r);
-        continue;
-      }
-    }
+			if (!methods_.present())
+			{
+				this->methods_.set(r);
+				continue;
+			}
+		}
 
-    // sounds
-    //
-    if (n.name () == "sounds" && n.namespace_ ().empty ())
-    {
-      ::std::auto_ptr< sounds_type > r (
-        sounds_traits::create (i, f, this));
+		// sounds
+		//
+		if (n.name() == "sounds" && n.namespace_().empty())
+		{
+			::std::auto_ptr< sounds_type > r(
+				sounds_traits::create(i, f, this));
 
-      if (!sounds_.present ())
-      {
-        this->sounds_.set (r);
-        continue;
-      }
-    }
+			if (!sounds_.present())
+			{
+				this->sounds_.set(r);
+				continue;
+			}
+		}
 
-    break;
-  }
+		break;
+	}
 
-  if (!properties_.present ())
-  {
-    throw ::xsd::cxx::tree::expected_element< char > (
-      "properties",
-      "");
-  }
+	if (!properties_.present())
+	{
+		throw ::xsd::cxx::tree::expected_element< char >(
+			"properties",
+			"");
+	}
 
-  if (!methods_.present ())
-  {
-    throw ::xsd::cxx::tree::expected_element< char > (
-      "methods",
-      "");
-  }
+	if (!methods_.present())
+	{
+		throw ::xsd::cxx::tree::expected_element< char >(
+			"methods",
+			"");
+	}
 
-  if (!sounds_.present ())
-  {
-    throw ::xsd::cxx::tree::expected_element< char > (
-      "sounds",
-      "");
-  }
+	if (!sounds_.present())
+	{
+		throw ::xsd::cxx::tree::expected_element< char >(
+			"sounds",
+			"");
+	}
 
-  while (p.more_attributes ())
-  {
-    const ::xercesc::DOMAttr& i (p.next_attribute ());
-    const ::xsd::cxx::xml::qualified_name< char > n (
-      ::xsd::cxx::xml::dom::name< char > (i));
+	while (p.more_attributes())
+	{
+		const ::xercesc::DOMAttr& i(p.next_attribute());
+		const ::xsd::cxx::xml::qualified_name< char > n(
+			::xsd::cxx::xml::dom::name< char >(i));
 
-    if (n.name () == "parent" && n.namespace_ ().empty ())
-    {
-      this->parent_.set (parent_traits::create (i, f, this));
-      continue;
-    }
+		if (n.name() == "parent" && n.namespace_().empty())
+		{
+			this->parent_.set(parent_traits::create(i, f, this));
+			continue;
+		}
 
-    if (n.name () == "type" && n.namespace_ ().empty ())
-    {
-      this->type_.set (type_traits::create (i, f, this));
-      continue;
-    }
+		if (n.name() == "type" && n.namespace_().empty())
+		{
+			this->type_.set(type_traits::create(i, f, this));
+			continue;
+		}
 
-    if (n.name () == "class_name" && n.namespace_ ().empty ())
-    {
-      this->class_name_.set (class_name_traits::create (i, f, this));
-      continue;
-    }
-  }
+		if (n.name() == "class_name" && n.namespace_().empty())
+		{
+			this->class_name_.set(class_name_traits::create(i, f, this));
+			continue;
+		}
+	}
 
-  if (!parent_.present ())
-  {
-    throw ::xsd::cxx::tree::expected_attribute< char > (
-      "parent",
-      "");
-  }
+	if (!parent_.present())
+	{
+		throw ::xsd::cxx::tree::expected_attribute< char >(
+			"parent",
+			"");
+	}
 
-  if (!type_.present ())
-  {
-    throw ::xsd::cxx::tree::expected_attribute< char > (
-      "type",
-      "");
-  }
+	if (!type_.present())
+	{
+		throw ::xsd::cxx::tree::expected_attribute< char >(
+			"type",
+			"");
+	}
 
-  if (!class_name_.present ())
-  {
-    throw ::xsd::cxx::tree::expected_attribute< char > (
-      "class_name",
-      "");
-  }
+	if (!class_name_.present())
+	{
+		throw ::xsd::cxx::tree::expected_attribute< char >(
+			"class_name",
+			"");
+	}
 }
 
 c_object* c_object::
-_clone (::xml_schema::flags f,
-        ::xml_schema::container* c) const
+_clone(::xml_schema::flags f,
+	::xml_schema::container* c) const
 {
-  return new class c_object (*this, f, c);
+	return new class c_object(*this, f, c);
 }
 
 c_object& c_object::
 operator= (const c_object& x)
 {
-  if (this != &x)
-  {
-    static_cast< ::xml_schema::type& > (*this) = x;
-    this->properties_ = x.properties_;
-    this->methods_ = x.methods_;
-    this->sounds_ = x.sounds_;
-    this->parent_ = x.parent_;
-    this->type_ = x.type_;
-    this->class_name_ = x.class_name_;
-  }
+	if (this != &x)
+	{
+		static_cast<::xml_schema::type&> (*this) = x;
+		this->properties_ = x.properties_;
+		this->methods_ = x.methods_;
+		this->sounds_ = x.sounds_;
+		this->parent_ = x.parent_;
+		this->type_ = x.type_;
+		this->class_name_ = x.class_name_;
+	}
 
-  return *this;
+	return *this;
 }
 
 c_object::
-~c_object ()
+~c_object()
 {
 }
 
@@ -640,81 +638,81 @@ c_object::
 //
 
 properties::
-properties ()
-: ::xml_schema::type (),
-  property_ (this)
+properties()
+	: ::xml_schema::type(),
+	property_(this)
 {
 }
 
 properties::
-properties (const properties& x,
-            ::xml_schema::flags f,
-            ::xml_schema::container* c)
-: ::xml_schema::type (x, f, c),
-  property_ (x.property_, f, this)
+properties(const properties& x,
+	::xml_schema::flags f,
+	::xml_schema::container* c)
+	: ::xml_schema::type(x, f, c),
+	property_(x.property_, f, this)
 {
 }
 
 properties::
-properties (const ::xercesc::DOMElement& e,
-            ::xml_schema::flags f,
-            ::xml_schema::container* c)
-: ::xml_schema::type (e, f | ::xml_schema::flags::base, c),
-  property_ (this)
+properties(const ::xercesc::DOMElement& e,
+	::xml_schema::flags f,
+	::xml_schema::container* c)
+	: ::xml_schema::type(e, f | ::xml_schema::flags::base, c),
+	property_(this)
 {
-  if ((f & ::xml_schema::flags::base) == 0)
-  {
-    ::xsd::cxx::xml::dom::parser< char > p (e, true, false, false);
-    this->parse (p, f);
-  }
+	if ((f & ::xml_schema::flags::base) == 0)
+	{
+		::xsd::cxx::xml::dom::parser< char > p(e, true, false, false);
+		this->parse(p, f);
+	}
 }
 
 void properties::
-parse (::xsd::cxx::xml::dom::parser< char >& p,
-       ::xml_schema::flags f)
+parse(::xsd::cxx::xml::dom::parser< char >& p,
+	::xml_schema::flags f)
 {
-  for (; p.more_content (); p.next_content (false))
-  {
-    const ::xercesc::DOMElement& i (p.cur_element ());
-    const ::xsd::cxx::xml::qualified_name< char > n (
-      ::xsd::cxx::xml::dom::name< char > (i));
+	for (; p.more_content(); p.next_content(false))
+	{
+		const ::xercesc::DOMElement& i(p.cur_element());
+		const ::xsd::cxx::xml::qualified_name< char > n(
+			::xsd::cxx::xml::dom::name< char >(i));
 
-    // property
-    //
-    if (n.name () == "property" && n.namespace_ ().empty ())
-    {
-      ::std::auto_ptr< property_type > r (
-        property_traits::create (i, f, this));
+		// property
+		//
+		if (n.name() == "property" && n.namespace_().empty())
+		{
+			::std::auto_ptr< property_type > r(
+				property_traits::create(i, f, this));
 
-      this->property_.push_back (r);
-      continue;
-    }
+			this->property_.push_back(r);
+			continue;
+		}
 
-    break;
-  }
+		break;
+	}
 }
 
 properties* properties::
-_clone (::xml_schema::flags f,
-        ::xml_schema::container* c) const
+_clone(::xml_schema::flags f,
+	::xml_schema::container* c) const
 {
-  return new class properties (*this, f, c);
+	return new class properties(*this, f, c);
 }
 
 properties& properties::
 operator= (const properties& x)
 {
-  if (this != &x)
-  {
-    static_cast< ::xml_schema::type& > (*this) = x;
-    this->property_ = x.property_;
-  }
+	if (this != &x)
+	{
+		static_cast<::xml_schema::type&> (*this) = x;
+		this->property_ = x.property_;
+	}
 
-  return *this;
+	return *this;
 }
 
 properties::
-~properties ()
+~properties()
 {
 }
 
@@ -722,81 +720,81 @@ properties::
 //
 
 methods::
-methods ()
-: ::xml_schema::type (),
-  method_ (this)
+methods()
+	: ::xml_schema::type(),
+	method_(this)
 {
 }
 
 methods::
-methods (const methods& x,
-         ::xml_schema::flags f,
-         ::xml_schema::container* c)
-: ::xml_schema::type (x, f, c),
-  method_ (x.method_, f, this)
+methods(const methods& x,
+	::xml_schema::flags f,
+	::xml_schema::container* c)
+	: ::xml_schema::type(x, f, c),
+	method_(x.method_, f, this)
 {
 }
 
 methods::
-methods (const ::xercesc::DOMElement& e,
-         ::xml_schema::flags f,
-         ::xml_schema::container* c)
-: ::xml_schema::type (e, f | ::xml_schema::flags::base, c),
-  method_ (this)
+methods(const ::xercesc::DOMElement& e,
+	::xml_schema::flags f,
+	::xml_schema::container* c)
+	: ::xml_schema::type(e, f | ::xml_schema::flags::base, c),
+	method_(this)
 {
-  if ((f & ::xml_schema::flags::base) == 0)
-  {
-    ::xsd::cxx::xml::dom::parser< char > p (e, true, false, false);
-    this->parse (p, f);
-  }
+	if ((f & ::xml_schema::flags::base) == 0)
+	{
+		::xsd::cxx::xml::dom::parser< char > p(e, true, false, false);
+		this->parse(p, f);
+	}
 }
 
 void methods::
-parse (::xsd::cxx::xml::dom::parser< char >& p,
-       ::xml_schema::flags f)
+parse(::xsd::cxx::xml::dom::parser< char >& p,
+	::xml_schema::flags f)
 {
-  for (; p.more_content (); p.next_content (false))
-  {
-    const ::xercesc::DOMElement& i (p.cur_element ());
-    const ::xsd::cxx::xml::qualified_name< char > n (
-      ::xsd::cxx::xml::dom::name< char > (i));
+	for (; p.more_content(); p.next_content(false))
+	{
+		const ::xercesc::DOMElement& i(p.cur_element());
+		const ::xsd::cxx::xml::qualified_name< char > n(
+			::xsd::cxx::xml::dom::name< char >(i));
 
-    // method
-    //
-    if (n.name () == "method" && n.namespace_ ().empty ())
-    {
-      ::std::auto_ptr< method_type > r (
-        method_traits::create (i, f, this));
+		// method
+		//
+		if (n.name() == "method" && n.namespace_().empty())
+		{
+			::std::auto_ptr< method_type > r(
+				method_traits::create(i, f, this));
 
-      this->method_.push_back (r);
-      continue;
-    }
+			this->method_.push_back(r);
+			continue;
+		}
 
-    break;
-  }
+		break;
+	}
 }
 
 methods* methods::
-_clone (::xml_schema::flags f,
-        ::xml_schema::container* c) const
+_clone(::xml_schema::flags f,
+	::xml_schema::container* c) const
 {
-  return new class methods (*this, f, c);
+	return new class methods(*this, f, c);
 }
 
 methods& methods::
 operator= (const methods& x)
 {
-  if (this != &x)
-  {
-    static_cast< ::xml_schema::type& > (*this) = x;
-    this->method_ = x.method_;
-  }
+	if (this != &x)
+	{
+		static_cast<::xml_schema::type&> (*this) = x;
+		this->method_ = x.method_;
+	}
 
-  return *this;
+	return *this;
 }
 
 methods::
-~methods ()
+~methods()
 {
 }
 
@@ -804,81 +802,81 @@ methods::
 //
 
 sounds::
-sounds ()
-: ::xml_schema::type (),
-  sound_ (this)
+sounds()
+	: ::xml_schema::type(),
+	sound_(this)
 {
 }
 
 sounds::
-sounds (const sounds& x,
-        ::xml_schema::flags f,
-        ::xml_schema::container* c)
-: ::xml_schema::type (x, f, c),
-  sound_ (x.sound_, f, this)
+sounds(const sounds& x,
+	::xml_schema::flags f,
+	::xml_schema::container* c)
+	: ::xml_schema::type(x, f, c),
+	sound_(x.sound_, f, this)
 {
 }
 
 sounds::
-sounds (const ::xercesc::DOMElement& e,
-        ::xml_schema::flags f,
-        ::xml_schema::container* c)
-: ::xml_schema::type (e, f | ::xml_schema::flags::base, c),
-  sound_ (this)
+sounds(const ::xercesc::DOMElement& e,
+	::xml_schema::flags f,
+	::xml_schema::container* c)
+	: ::xml_schema::type(e, f | ::xml_schema::flags::base, c),
+	sound_(this)
 {
-  if ((f & ::xml_schema::flags::base) == 0)
-  {
-    ::xsd::cxx::xml::dom::parser< char > p (e, true, false, false);
-    this->parse (p, f);
-  }
+	if ((f & ::xml_schema::flags::base) == 0)
+	{
+		::xsd::cxx::xml::dom::parser< char > p(e, true, false, false);
+		this->parse(p, f);
+	}
 }
 
 void sounds::
-parse (::xsd::cxx::xml::dom::parser< char >& p,
-       ::xml_schema::flags f)
+parse(::xsd::cxx::xml::dom::parser< char >& p,
+	::xml_schema::flags f)
 {
-  for (; p.more_content (); p.next_content (false))
-  {
-    const ::xercesc::DOMElement& i (p.cur_element ());
-    const ::xsd::cxx::xml::qualified_name< char > n (
-      ::xsd::cxx::xml::dom::name< char > (i));
+	for (; p.more_content(); p.next_content(false))
+	{
+		const ::xercesc::DOMElement& i(p.cur_element());
+		const ::xsd::cxx::xml::qualified_name< char > n(
+			::xsd::cxx::xml::dom::name< char >(i));
 
-    // sound
-    //
-    if (n.name () == "sound" && n.namespace_ ().empty ())
-    {
-      ::std::auto_ptr< sound_type > r (
-        sound_traits::create (i, f, this));
+		// sound
+		//
+		if (n.name() == "sound" && n.namespace_().empty())
+		{
+			::std::auto_ptr< sound_type > r(
+				sound_traits::create(i, f, this));
 
-      this->sound_.push_back (r);
-      continue;
-    }
+			this->sound_.push_back(r);
+			continue;
+		}
 
-    break;
-  }
+		break;
+	}
 }
 
 sounds* sounds::
-_clone (::xml_schema::flags f,
-        ::xml_schema::container* c) const
+_clone(::xml_schema::flags f,
+	::xml_schema::container* c) const
 {
-  return new class sounds (*this, f, c);
+	return new class sounds(*this, f, c);
 }
 
 sounds& sounds::
 operator= (const sounds& x)
 {
-  if (this != &x)
-  {
-    static_cast< ::xml_schema::type& > (*this) = x;
-    this->sound_ = x.sound_;
-  }
+	if (this != &x)
+	{
+		static_cast<::xml_schema::type&> (*this) = x;
+		this->sound_ = x.sound_;
+	}
 
-  return *this;
+	return *this;
 }
 
 sounds::
-~sounds ()
+~sounds()
 {
 }
 
@@ -886,99 +884,99 @@ sounds::
 //
 
 property::
-property (const name_type& name,
-          const value_type& value)
-: ::xml_schema::type (),
-  name_ (name, this),
-  value_ (value, this)
+property(const name_type& name,
+	const value_type& value)
+	: ::xml_schema::type(),
+	name_(name, this),
+	value_(value, this)
 {
 }
 
 property::
-property (const property& x,
-          ::xml_schema::flags f,
-          ::xml_schema::container* c)
-: ::xml_schema::type (x, f, c),
-  name_ (x.name_, f, this),
-  value_ (x.value_, f, this)
+property(const property& x,
+	::xml_schema::flags f,
+	::xml_schema::container* c)
+	: ::xml_schema::type(x, f, c),
+	name_(x.name_, f, this),
+	value_(x.value_, f, this)
 {
 }
 
 property::
-property (const ::xercesc::DOMElement& e,
-          ::xml_schema::flags f,
-          ::xml_schema::container* c)
-: ::xml_schema::type (e, f | ::xml_schema::flags::base, c),
-  name_ (this),
-  value_ (this)
+property(const ::xercesc::DOMElement& e,
+	::xml_schema::flags f,
+	::xml_schema::container* c)
+	: ::xml_schema::type(e, f | ::xml_schema::flags::base, c),
+	name_(this),
+	value_(this)
 {
-  if ((f & ::xml_schema::flags::base) == 0)
-  {
-    ::xsd::cxx::xml::dom::parser< char > p (e, false, false, true);
-    this->parse (p, f);
-  }
+	if ((f & ::xml_schema::flags::base) == 0)
+	{
+		::xsd::cxx::xml::dom::parser< char > p(e, false, false, true);
+		this->parse(p, f);
+	}
 }
 
 void property::
-parse (::xsd::cxx::xml::dom::parser< char >& p,
-       ::xml_schema::flags f)
+parse(::xsd::cxx::xml::dom::parser< char >& p,
+	::xml_schema::flags f)
 {
-  while (p.more_attributes ())
-  {
-    const ::xercesc::DOMAttr& i (p.next_attribute ());
-    const ::xsd::cxx::xml::qualified_name< char > n (
-      ::xsd::cxx::xml::dom::name< char > (i));
+	while (p.more_attributes())
+	{
+		const ::xercesc::DOMAttr& i(p.next_attribute());
+		const ::xsd::cxx::xml::qualified_name< char > n(
+			::xsd::cxx::xml::dom::name< char >(i));
 
-    if (n.name () == "name" && n.namespace_ ().empty ())
-    {
-      this->name_.set (name_traits::create (i, f, this));
-      continue;
-    }
+		if (n.name() == "name" && n.namespace_().empty())
+		{
+			this->name_.set(name_traits::create(i, f, this));
+			continue;
+		}
 
-    if (n.name () == "value" && n.namespace_ ().empty ())
-    {
-      this->value_.set (value_traits::create (i, f, this));
-      continue;
-    }
-  }
+		if (n.name() == "value" && n.namespace_().empty())
+		{
+			this->value_.set(value_traits::create(i, f, this));
+			continue;
+		}
+	}
 
-  if (!name_.present ())
-  {
-    throw ::xsd::cxx::tree::expected_attribute< char > (
-      "name",
-      "");
-  }
+	if (!name_.present())
+	{
+		throw ::xsd::cxx::tree::expected_attribute< char >(
+			"name",
+			"");
+	}
 
-  if (!value_.present ())
-  {
-    throw ::xsd::cxx::tree::expected_attribute< char > (
-      "value",
-      "");
-  }
+	if (!value_.present())
+	{
+		throw ::xsd::cxx::tree::expected_attribute< char >(
+			"value",
+			"");
+	}
 }
 
 property* property::
-_clone (::xml_schema::flags f,
-        ::xml_schema::container* c) const
+_clone(::xml_schema::flags f,
+	::xml_schema::container* c) const
 {
-  return new class property (*this, f, c);
+	return new class property(*this, f, c);
 }
 
 property& property::
 operator= (const property& x)
 {
-  if (this != &x)
-  {
-    static_cast< ::xml_schema::type& > (*this) = x;
-    this->name_ = x.name_;
-    this->value_ = x.value_;
-  }
+	if (this != &x)
+	{
+		static_cast<::xml_schema::type&> (*this) = x;
+		this->name_ = x.name_;
+		this->value_ = x.value_;
+	}
 
-  return *this;
+	return *this;
 }
 
 property::
-~property ()
+~property()
 {
 }
 
@@ -986,99 +984,99 @@ property::
 //
 
 method::
-method (const name_type& name,
-        const script_type& script)
-: ::xml_schema::type (),
-  name_ (name, this),
-  script_ (script, this)
+method(const name_type& name,
+	const script_type& script)
+	: ::xml_schema::type(),
+	name_(name, this),
+	script_(script, this)
 {
 }
 
 method::
-method (const method& x,
-        ::xml_schema::flags f,
-        ::xml_schema::container* c)
-: ::xml_schema::type (x, f, c),
-  name_ (x.name_, f, this),
-  script_ (x.script_, f, this)
+method(const method& x,
+	::xml_schema::flags f,
+	::xml_schema::container* c)
+	: ::xml_schema::type(x, f, c),
+	name_(x.name_, f, this),
+	script_(x.script_, f, this)
 {
 }
 
 method::
-method (const ::xercesc::DOMElement& e,
-        ::xml_schema::flags f,
-        ::xml_schema::container* c)
-: ::xml_schema::type (e, f | ::xml_schema::flags::base, c),
-  name_ (this),
-  script_ (this)
+method(const ::xercesc::DOMElement& e,
+	::xml_schema::flags f,
+	::xml_schema::container* c)
+	: ::xml_schema::type(e, f | ::xml_schema::flags::base, c),
+	name_(this),
+	script_(this)
 {
-  if ((f & ::xml_schema::flags::base) == 0)
-  {
-    ::xsd::cxx::xml::dom::parser< char > p (e, false, false, true);
-    this->parse (p, f);
-  }
+	if ((f & ::xml_schema::flags::base) == 0)
+	{
+		::xsd::cxx::xml::dom::parser< char > p(e, false, false, true);
+		this->parse(p, f);
+	}
 }
 
 void method::
-parse (::xsd::cxx::xml::dom::parser< char >& p,
-       ::xml_schema::flags f)
+parse(::xsd::cxx::xml::dom::parser< char >& p,
+	::xml_schema::flags f)
 {
-  while (p.more_attributes ())
-  {
-    const ::xercesc::DOMAttr& i (p.next_attribute ());
-    const ::xsd::cxx::xml::qualified_name< char > n (
-      ::xsd::cxx::xml::dom::name< char > (i));
+	while (p.more_attributes())
+	{
+		const ::xercesc::DOMAttr& i(p.next_attribute());
+		const ::xsd::cxx::xml::qualified_name< char > n(
+			::xsd::cxx::xml::dom::name< char >(i));
 
-    if (n.name () == "name" && n.namespace_ ().empty ())
-    {
-      this->name_.set (name_traits::create (i, f, this));
-      continue;
-    }
+		if (n.name() == "name" && n.namespace_().empty())
+		{
+			this->name_.set(name_traits::create(i, f, this));
+			continue;
+		}
 
-    if (n.name () == "script" && n.namespace_ ().empty ())
-    {
-      this->script_.set (script_traits::create (i, f, this));
-      continue;
-    }
-  }
+		if (n.name() == "script" && n.namespace_().empty())
+		{
+			this->script_.set(script_traits::create(i, f, this));
+			continue;
+		}
+	}
 
-  if (!name_.present ())
-  {
-    throw ::xsd::cxx::tree::expected_attribute< char > (
-      "name",
-      "");
-  }
+	if (!name_.present())
+	{
+		throw ::xsd::cxx::tree::expected_attribute< char >(
+			"name",
+			"");
+	}
 
-  if (!script_.present ())
-  {
-    throw ::xsd::cxx::tree::expected_attribute< char > (
-      "script",
-      "");
-  }
+	if (!script_.present())
+	{
+		throw ::xsd::cxx::tree::expected_attribute< char >(
+			"script",
+			"");
+	}
 }
 
 method* method::
-_clone (::xml_schema::flags f,
-        ::xml_schema::container* c) const
+_clone(::xml_schema::flags f,
+	::xml_schema::container* c) const
 {
-  return new class method (*this, f, c);
+	return new class method(*this, f, c);
 }
 
 method& method::
 operator= (const method& x)
 {
-  if (this != &x)
-  {
-    static_cast< ::xml_schema::type& > (*this) = x;
-    this->name_ = x.name_;
-    this->script_ = x.script_;
-  }
+	if (this != &x)
+	{
+		static_cast<::xml_schema::type&> (*this) = x;
+		this->name_ = x.name_;
+		this->script_ = x.script_;
+	}
 
-  return *this;
+	return *this;
 }
 
 method::
-~method ()
+~method()
 {
 }
 
@@ -1086,99 +1084,99 @@ method::
 //
 
 sound::
-sound (const name_type& name,
-       const path_type& path)
-: ::xml_schema::type (),
-  name_ (name, this),
-  path_ (path, this)
+sound(const name_type& name,
+	const path_type& path)
+	: ::xml_schema::type(),
+	name_(name, this),
+	path_(path, this)
 {
 }
 
 sound::
-sound (const sound& x,
-       ::xml_schema::flags f,
-       ::xml_schema::container* c)
-: ::xml_schema::type (x, f, c),
-  name_ (x.name_, f, this),
-  path_ (x.path_, f, this)
+sound(const sound& x,
+	::xml_schema::flags f,
+	::xml_schema::container* c)
+	: ::xml_schema::type(x, f, c),
+	name_(x.name_, f, this),
+	path_(x.path_, f, this)
 {
 }
 
 sound::
-sound (const ::xercesc::DOMElement& e,
-       ::xml_schema::flags f,
-       ::xml_schema::container* c)
-: ::xml_schema::type (e, f | ::xml_schema::flags::base, c),
-  name_ (this),
-  path_ (this)
+sound(const ::xercesc::DOMElement& e,
+	::xml_schema::flags f,
+	::xml_schema::container* c)
+	: ::xml_schema::type(e, f | ::xml_schema::flags::base, c),
+	name_(this),
+	path_(this)
 {
-  if ((f & ::xml_schema::flags::base) == 0)
-  {
-    ::xsd::cxx::xml::dom::parser< char > p (e, false, false, true);
-    this->parse (p, f);
-  }
+	if ((f & ::xml_schema::flags::base) == 0)
+	{
+		::xsd::cxx::xml::dom::parser< char > p(e, false, false, true);
+		this->parse(p, f);
+	}
 }
 
 void sound::
-parse (::xsd::cxx::xml::dom::parser< char >& p,
-       ::xml_schema::flags f)
+parse(::xsd::cxx::xml::dom::parser< char >& p,
+	::xml_schema::flags f)
 {
-  while (p.more_attributes ())
-  {
-    const ::xercesc::DOMAttr& i (p.next_attribute ());
-    const ::xsd::cxx::xml::qualified_name< char > n (
-      ::xsd::cxx::xml::dom::name< char > (i));
+	while (p.more_attributes())
+	{
+		const ::xercesc::DOMAttr& i(p.next_attribute());
+		const ::xsd::cxx::xml::qualified_name< char > n(
+			::xsd::cxx::xml::dom::name< char >(i));
 
-    if (n.name () == "name" && n.namespace_ ().empty ())
-    {
-      this->name_.set (name_traits::create (i, f, this));
-      continue;
-    }
+		if (n.name() == "name" && n.namespace_().empty())
+		{
+			this->name_.set(name_traits::create(i, f, this));
+			continue;
+		}
 
-    if (n.name () == "path" && n.namespace_ ().empty ())
-    {
-      this->path_.set (path_traits::create (i, f, this));
-      continue;
-    }
-  }
+		if (n.name() == "path" && n.namespace_().empty())
+		{
+			this->path_.set(path_traits::create(i, f, this));
+			continue;
+		}
+	}
 
-  if (!name_.present ())
-  {
-    throw ::xsd::cxx::tree::expected_attribute< char > (
-      "name",
-      "");
-  }
+	if (!name_.present())
+	{
+		throw ::xsd::cxx::tree::expected_attribute< char >(
+			"name",
+			"");
+	}
 
-  if (!path_.present ())
-  {
-    throw ::xsd::cxx::tree::expected_attribute< char > (
-      "path",
-      "");
-  }
+	if (!path_.present())
+	{
+		throw ::xsd::cxx::tree::expected_attribute< char >(
+			"path",
+			"");
+	}
 }
 
 sound* sound::
-_clone (::xml_schema::flags f,
-        ::xml_schema::container* c) const
+_clone(::xml_schema::flags f,
+	::xml_schema::container* c) const
 {
-  return new class sound (*this, f, c);
+	return new class sound(*this, f, c);
 }
 
 sound& sound::
 operator= (const sound& x)
 {
-  if (this != &x)
-  {
-    static_cast< ::xml_schema::type& > (*this) = x;
-    this->name_ = x.name_;
-    this->path_ = x.path_;
-  }
+	if (this != &x)
+	{
+		static_cast<::xml_schema::type&> (*this) = x;
+		this->name_ = x.name_;
+		this->path_ = x.path_;
+	}
 
-  return *this;
+	return *this;
 }
 
 sound::
-~sound ()
+~sound()
 {
 }
 
@@ -1187,268 +1185,269 @@ sound::
 #include <xsd/cxx/tree/error-handler.hxx>
 
 ::std::auto_ptr< ::c_object >
-c_object_ (const ::std::string& u,
-           ::xml_schema::flags f,
-           const ::xml_schema::properties& p)
+c_object_(const ::std::string& u,
+	::xml_schema::flags f,
+	const ::xml_schema::properties& p)
 {
-  ::xsd::cxx::xml::auto_initializer i (
-    (f & ::xml_schema::flags::dont_initialize) == 0,
-    (f & ::xml_schema::flags::keep_dom) == 0);
+	::xsd::cxx::xml::auto_initializer i(
+		(f & ::xml_schema::flags::dont_initialize) == 0,
+		(f & ::xml_schema::flags::keep_dom) == 0);
 
-  ::xsd::cxx::tree::error_handler< char > h;
+	::xsd::cxx::tree::error_handler< char > h;
 
-  ::xml_schema::dom::auto_ptr< ::xercesc::DOMDocument > d (
-    ::xsd::cxx::xml::dom::parse< char > (
-      u, h, p, f));
+	::xml_schema::dom::auto_ptr< ::xercesc::DOMDocument > d(
+		::xsd::cxx::xml::dom::parse< char >(
+			u, h, p, f));
 
-  h.throw_if_failed< ::xsd::cxx::tree::parsing< char > > ();
+	h.throw_if_failed< ::xsd::cxx::tree::parsing< char > >();
 
-  return ::std::auto_ptr< ::c_object > (
-    ::c_object_ (
-      d, f | ::xml_schema::flags::own_dom, p));
+	return ::std::auto_ptr< ::c_object >(
+		::c_object_(
+			d, f | ::xml_schema::flags::own_dom, p));
 }
 
 ::std::auto_ptr< ::c_object >
-c_object_ (const ::std::string& u,
-           ::xml_schema::error_handler& h,
-           ::xml_schema::flags f,
-           const ::xml_schema::properties& p)
+c_object_(const ::std::string& u,
+	::xml_schema::error_handler& h,
+	::xml_schema::flags f,
+	const ::xml_schema::properties& p)
 {
-  ::xsd::cxx::xml::auto_initializer i (
-    (f & ::xml_schema::flags::dont_initialize) == 0,
-    (f & ::xml_schema::flags::keep_dom) == 0);
+	::xsd::cxx::xml::auto_initializer i(
+		(f & ::xml_schema::flags::dont_initialize) == 0,
+		(f & ::xml_schema::flags::keep_dom) == 0);
 
-  ::xml_schema::dom::auto_ptr< ::xercesc::DOMDocument > d (
-    ::xsd::cxx::xml::dom::parse< char > (
-      u, h, p, f));
+	::xml_schema::dom::auto_ptr< ::xercesc::DOMDocument > d(
+		::xsd::cxx::xml::dom::parse< char >(
+			u, h, p, f));
 
-  if (!d.get ())
-    throw ::xsd::cxx::tree::parsing< char > ();
+	if (!d.get())
+		throw ::xsd::cxx::tree::parsing< char >();
 
-  return ::std::auto_ptr< ::c_object > (
-    ::c_object_ (
-      d, f | ::xml_schema::flags::own_dom, p));
-}
-::std::auto_ptr< ::c_object >
-c_object_ (const ::std::string& u,
-           ::xercesc::DOMErrorHandler& h,
-           ::xml_schema::flags f,
-           const ::xml_schema::properties& p)
-{
-  ::xml_schema::dom::auto_ptr< ::xercesc::DOMDocument > d (
-    ::xsd::cxx::xml::dom::parse< char > (
-      u, h, p, f));
-
-  if (!d.get ())
-    throw ::xsd::cxx::tree::parsing< char > ();
-
-  return ::std::auto_ptr< ::c_object > (
-    ::c_object_ (
-      d, f | ::xml_schema::flags::own_dom, p));
+	return ::std::auto_ptr< ::c_object >(
+		::c_object_(
+			d, f | ::xml_schema::flags::own_dom, p));
 }
 
 ::std::auto_ptr< ::c_object >
-c_object_ (::std::istream& is,
-           ::xml_schema::flags f,
-           const ::xml_schema::properties& p)
+c_object_(const ::std::string& u,
+	::xercesc::DOMErrorHandler& h,
+	::xml_schema::flags f,
+	const ::xml_schema::properties& p)
 {
-  ::xsd::cxx::xml::auto_initializer i (
-    (f & ::xml_schema::flags::dont_initialize) == 0,
-    (f & ::xml_schema::flags::keep_dom) == 0);
+	::xml_schema::dom::auto_ptr< ::xercesc::DOMDocument > d(
+		::xsd::cxx::xml::dom::parse< char >(
+			u, h, p, f));
 
-  ::xsd::cxx::xml::sax::std_input_source isrc (is);
-  return ::c_object_ (isrc, f, p);
+	if (!d.get())
+		throw ::xsd::cxx::tree::parsing< char >();
+
+	return ::std::auto_ptr< ::c_object >(
+		::c_object_(
+			d, f | ::xml_schema::flags::own_dom, p));
 }
 
 ::std::auto_ptr< ::c_object >
-c_object_ (::std::istream& is,
-           ::xml_schema::error_handler& h,
-           ::xml_schema::flags f,
-           const ::xml_schema::properties& p)
+c_object_(::std::istream& is,
+	::xml_schema::flags f,
+	const ::xml_schema::properties& p)
 {
-  ::xsd::cxx::xml::auto_initializer i (
-    (f & ::xml_schema::flags::dont_initialize) == 0,
-    (f & ::xml_schema::flags::keep_dom) == 0);
+	::xsd::cxx::xml::auto_initializer i(
+		(f & ::xml_schema::flags::dont_initialize) == 0,
+		(f & ::xml_schema::flags::keep_dom) == 0);
 
-  ::xsd::cxx::xml::sax::std_input_source isrc (is);
-  return ::c_object_ (isrc, h, f, p);
+	::xsd::cxx::xml::sax::std_input_source isrc(is);
+	return ::c_object_(isrc, f, p);
 }
 
 ::std::auto_ptr< ::c_object >
-c_object_ (::std::istream& is,
-           ::xercesc::DOMErrorHandler& h,
-           ::xml_schema::flags f,
-           const ::xml_schema::properties& p)
+c_object_(::std::istream& is,
+	::xml_schema::error_handler& h,
+	::xml_schema::flags f,
+	const ::xml_schema::properties& p)
 {
-  ::xsd::cxx::xml::sax::std_input_source isrc (is);
-  return ::c_object_ (isrc, h, f, p);
+	::xsd::cxx::xml::auto_initializer i(
+		(f & ::xml_schema::flags::dont_initialize) == 0,
+		(f & ::xml_schema::flags::keep_dom) == 0);
+
+	::xsd::cxx::xml::sax::std_input_source isrc(is);
+	return ::c_object_(isrc, h, f, p);
 }
 
 ::std::auto_ptr< ::c_object >
-c_object_ (::std::istream& is,
-           const ::std::string& sid,
-           ::xml_schema::flags f,
-           const ::xml_schema::properties& p)
+c_object_(::std::istream& is,
+	::xercesc::DOMErrorHandler& h,
+	::xml_schema::flags f,
+	const ::xml_schema::properties& p)
 {
-  ::xsd::cxx::xml::auto_initializer i (
-    (f & ::xml_schema::flags::dont_initialize) == 0,
-    (f & ::xml_schema::flags::keep_dom) == 0);
-
-  ::xsd::cxx::xml::sax::std_input_source isrc (is, sid);
-  return ::c_object_ (isrc, f, p);
+	::xsd::cxx::xml::sax::std_input_source isrc(is);
+	return ::c_object_(isrc, h, f, p);
 }
 
 ::std::auto_ptr< ::c_object >
-c_object_ (::std::istream& is,
-           const ::std::string& sid,
-           ::xml_schema::error_handler& h,
-           ::xml_schema::flags f,
-           const ::xml_schema::properties& p)
+c_object_(::std::istream& is,
+	const ::std::string& sid,
+	::xml_schema::flags f,
+	const ::xml_schema::properties& p)
 {
-  ::xsd::cxx::xml::auto_initializer i (
-    (f & ::xml_schema::flags::dont_initialize) == 0,
-    (f & ::xml_schema::flags::keep_dom) == 0);
+	::xsd::cxx::xml::auto_initializer i(
+		(f & ::xml_schema::flags::dont_initialize) == 0,
+		(f & ::xml_schema::flags::keep_dom) == 0);
 
-  ::xsd::cxx::xml::sax::std_input_source isrc (is, sid);
-  return ::c_object_ (isrc, h, f, p);
+	::xsd::cxx::xml::sax::std_input_source isrc(is, sid);
+	return ::c_object_(isrc, f, p);
 }
 
 ::std::auto_ptr< ::c_object >
-c_object_ (::std::istream& is,
-           const ::std::string& sid,
-           ::xercesc::DOMErrorHandler& h,
-           ::xml_schema::flags f,
-           const ::xml_schema::properties& p)
+c_object_(::std::istream& is,
+	const ::std::string& sid,
+	::xml_schema::error_handler& h,
+	::xml_schema::flags f,
+	const ::xml_schema::properties& p)
 {
-  ::xsd::cxx::xml::sax::std_input_source isrc (is, sid);
-  return ::c_object_ (isrc, h, f, p);
+	::xsd::cxx::xml::auto_initializer i(
+		(f & ::xml_schema::flags::dont_initialize) == 0,
+		(f & ::xml_schema::flags::keep_dom) == 0);
+
+	::xsd::cxx::xml::sax::std_input_source isrc(is, sid);
+	return ::c_object_(isrc, h, f, p);
 }
 
 ::std::auto_ptr< ::c_object >
-c_object_ (::xercesc::InputSource& i,
-           ::xml_schema::flags f,
-           const ::xml_schema::properties& p)
+c_object_(::std::istream& is,
+	const ::std::string& sid,
+	::xercesc::DOMErrorHandler& h,
+	::xml_schema::flags f,
+	const ::xml_schema::properties& p)
 {
-  ::xsd::cxx::tree::error_handler< char > h;
-
-  ::xml_schema::dom::auto_ptr< ::xercesc::DOMDocument > d (
-    ::xsd::cxx::xml::dom::parse< char > (
-      i, h, p, f));
-
-  h.throw_if_failed< ::xsd::cxx::tree::parsing< char > > ();
-
-  return ::std::auto_ptr< ::c_object > (
-    ::c_object_ (
-      d, f | ::xml_schema::flags::own_dom, p));
+	::xsd::cxx::xml::sax::std_input_source isrc(is, sid);
+	return ::c_object_(isrc, h, f, p);
 }
 
 ::std::auto_ptr< ::c_object >
-c_object_ (::xercesc::InputSource& i,
-           ::xml_schema::error_handler& h,
-           ::xml_schema::flags f,
-           const ::xml_schema::properties& p)
+c_object_(::xercesc::InputSource& i,
+	::xml_schema::flags f,
+	const ::xml_schema::properties& p)
 {
-  ::xml_schema::dom::auto_ptr< ::xercesc::DOMDocument > d (
-    ::xsd::cxx::xml::dom::parse< char > (
-      i, h, p, f));
+	::xsd::cxx::tree::error_handler< char > h;
 
-  if (!d.get ())
-    throw ::xsd::cxx::tree::parsing< char > ();
+	::xml_schema::dom::auto_ptr< ::xercesc::DOMDocument > d(
+		::xsd::cxx::xml::dom::parse< char >(
+			i, h, p, f));
 
-  return ::std::auto_ptr< ::c_object > (
-    ::c_object_ (
-      d, f | ::xml_schema::flags::own_dom, p));
+	h.throw_if_failed< ::xsd::cxx::tree::parsing< char > >();
+
+	return ::std::auto_ptr< ::c_object >(
+		::c_object_(
+			d, f | ::xml_schema::flags::own_dom, p));
 }
 
 ::std::auto_ptr< ::c_object >
-c_object_ (::xercesc::InputSource& i,
-           ::xercesc::DOMErrorHandler& h,
-           ::xml_schema::flags f,
-           const ::xml_schema::properties& p)
+c_object_(::xercesc::InputSource& i,
+	::xml_schema::error_handler& h,
+	::xml_schema::flags f,
+	const ::xml_schema::properties& p)
 {
-  ::xml_schema::dom::auto_ptr< ::xercesc::DOMDocument > d (
-    ::xsd::cxx::xml::dom::parse< char > (
-      i, h, p, f));
+	::xml_schema::dom::auto_ptr< ::xercesc::DOMDocument > d(
+		::xsd::cxx::xml::dom::parse< char >(
+			i, h, p, f));
 
-  if (!d.get ())
-    throw ::xsd::cxx::tree::parsing< char > ();
+	if (!d.get())
+		throw ::xsd::cxx::tree::parsing< char >();
 
-  return ::std::auto_ptr< ::c_object > (
-    ::c_object_ (
-      d, f | ::xml_schema::flags::own_dom, p));
+	return ::std::auto_ptr< ::c_object >(
+		::c_object_(
+			d, f | ::xml_schema::flags::own_dom, p));
 }
 
 ::std::auto_ptr< ::c_object >
-c_object_ (const ::xercesc::DOMDocument& doc,
-           ::xml_schema::flags f,
-           const ::xml_schema::properties& p)
+c_object_(::xercesc::InputSource& i,
+	::xercesc::DOMErrorHandler& h,
+	::xml_schema::flags f,
+	const ::xml_schema::properties& p)
 {
-  if (f & ::xml_schema::flags::keep_dom)
-  {
-    ::xml_schema::dom::auto_ptr< ::xercesc::DOMDocument > d (
-      static_cast< ::xercesc::DOMDocument* > (doc.cloneNode (true)));
+	::xml_schema::dom::auto_ptr< ::xercesc::DOMDocument > d(
+		::xsd::cxx::xml::dom::parse< char >(
+			i, h, p, f));
 
-    return ::std::auto_ptr< ::c_object > (
-      ::c_object_ (
-        d, f | ::xml_schema::flags::own_dom, p));
-  }
+	if (!d.get())
+		throw ::xsd::cxx::tree::parsing< char >();
 
-  const ::xercesc::DOMElement& e (*doc.getDocumentElement ());
-  const ::xsd::cxx::xml::qualified_name< char > n (
-    ::xsd::cxx::xml::dom::name< char > (e));
-
-  if (n.name () == "c_object" &&
-      n.namespace_ () == "")
-  {
-    ::std::auto_ptr< ::c_object > r (
-      ::xsd::cxx::tree::traits< ::c_object, char >::create (
-        e, f, 0));
-    return r;
-  }
-
-  throw ::xsd::cxx::tree::unexpected_element < char > (
-    n.name (),
-    n.namespace_ (),
-    "c_object",
-    "");
+	return ::std::auto_ptr< ::c_object >(
+		::c_object_(
+			d, f | ::xml_schema::flags::own_dom, p));
 }
 
 ::std::auto_ptr< ::c_object >
-c_object_ (::xml_schema::dom::auto_ptr< ::xercesc::DOMDocument > d,
-           ::xml_schema::flags f,
-           const ::xml_schema::properties&)
+c_object_(const ::xercesc::DOMDocument& doc,
+	::xml_schema::flags f,
+	const ::xml_schema::properties& p)
 {
-  ::xml_schema::dom::auto_ptr< ::xercesc::DOMDocument > c (
-    ((f & ::xml_schema::flags::keep_dom) &&
-     !(f & ::xml_schema::flags::own_dom))
-    ? static_cast< ::xercesc::DOMDocument* > (d->cloneNode (true))
-    : 0);
+	if (f & ::xml_schema::flags::keep_dom)
+	{
+		::xml_schema::dom::auto_ptr< ::xercesc::DOMDocument > d(
+			static_cast<::xercesc::DOMDocument*> (doc.cloneNode(true)));
 
-  ::xercesc::DOMDocument& doc (c.get () ? *c : *d);
-  const ::xercesc::DOMElement& e (*doc.getDocumentElement ());
+		return ::std::auto_ptr< ::c_object >(
+			::c_object_(
+				d, f | ::xml_schema::flags::own_dom, p));
+	}
 
-  const ::xsd::cxx::xml::qualified_name< char > n (
-    ::xsd::cxx::xml::dom::name< char > (e));
+	const ::xercesc::DOMElement& e(*doc.getDocumentElement());
+	const ::xsd::cxx::xml::qualified_name< char > n(
+		::xsd::cxx::xml::dom::name< char >(e));
 
-  if (f & ::xml_schema::flags::keep_dom)
-    doc.setUserData (::xml_schema::dom::tree_node_key,
-                     (c.get () ? &c : &d),
-                     0);
+	if (n.name() == "c_object" &&
+		n.namespace_() == "")
+	{
+		::std::auto_ptr< ::c_object > r(
+			::xsd::cxx::tree::traits< ::c_object, char >::create(
+				e, f, 0));
+		return r;
+	}
 
-  if (n.name () == "c_object" &&
-      n.namespace_ () == "")
-  {
-    ::std::auto_ptr< ::c_object > r (
-      ::xsd::cxx::tree::traits< ::c_object, char >::create (
-        e, f, 0));
-    return r;
-  }
+	throw ::xsd::cxx::tree::unexpected_element < char >(
+		n.name(),
+		n.namespace_(),
+		"c_object",
+		"");
+}
 
-  throw ::xsd::cxx::tree::unexpected_element < char > (
-    n.name (),
-    n.namespace_ (),
-    "c_object",
-    "");
+::std::auto_ptr< ::c_object >
+c_object_(::xml_schema::dom::auto_ptr< ::xercesc::DOMDocument > d,
+	::xml_schema::flags f,
+	const ::xml_schema::properties&)
+{
+	::xml_schema::dom::auto_ptr< ::xercesc::DOMDocument > c(
+		((f & ::xml_schema::flags::keep_dom) &&
+			!(f & ::xml_schema::flags::own_dom))
+		? static_cast<::xercesc::DOMDocument*> (d->cloneNode(true))
+		: 0);
+
+	::xercesc::DOMDocument& doc(c.get() ? *c : *d);
+	const ::xercesc::DOMElement& e(*doc.getDocumentElement());
+
+	const ::xsd::cxx::xml::qualified_name< char > n(
+		::xsd::cxx::xml::dom::name< char >(e));
+
+	if (f & ::xml_schema::flags::keep_dom)
+		doc.setUserData(::xml_schema::dom::tree_node_key,
+		(c.get() ? &c : &d),
+			0);
+
+	if (n.name() == "c_object" &&
+		n.namespace_() == "")
+	{
+		::std::auto_ptr< ::c_object > r(
+			::xsd::cxx::tree::traits< ::c_object, char >::create(
+				e, f, 0));
+		return r;
+	}
+
+	throw ::xsd::cxx::tree::unexpected_element < char >(
+		n.name(),
+		n.namespace_(),
+		"c_object",
+		"");
 }
 
 #include <xsd/cxx/post.hxx>

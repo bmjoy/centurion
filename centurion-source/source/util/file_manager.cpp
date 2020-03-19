@@ -15,6 +15,8 @@
 
 #include <direct.h>
 
+#include <engine.h>
+
 namespace Folders {
 
 	string XML_SCHEMAS = "\\assets\\xml-schemas\\";
