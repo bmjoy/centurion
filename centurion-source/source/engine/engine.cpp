@@ -74,9 +74,11 @@ float Engine::Mouse::ScrollValue = 0;
 bool Engine::Mouse::ScrollBool = false;
 bool Engine::Mouse::LeftClick = false;
 bool Engine::Mouse::RightClick = false;
-bool Engine::Mouse::LeftHold = false;
-bool Engine::Mouse::Release = false;
 bool Engine::Mouse::MiddleClick = false;
+bool Engine::Mouse::LeftHold = false;
+bool Engine::Mouse::RightHold = false;
+bool Engine::Mouse::MiddleHold = false;
+bool Engine::Mouse::Release = false;
 Engine::HoldClickData Engine::Mouse::leftHoldClickData;
 Engine::HoldClickData Engine::Mouse::rightHoldClickData;
 // ------------ end definitions
@@ -139,18 +141,16 @@ void Engine::Mouse::mouse_control(int lastX, int lastY) {
 	}
 }
 
-void Engine::Mouse::IsLeftHolding(void)
+void Engine::Mouse::IsHolding(void)
 {
-	if (LeftClick == false)
-	{
-		leftHoldClickData.bIsTimeSaved = false;
-		LeftHold = false;
-		return;
-	}
-	if (glfwGetTime() - leftHoldClickData.lastTime > TIME_LEFT_HOLD && LeftClick)
-	{
+	if (glfwGetTime() - leftHoldClickData.lastTime > TIME_LEFT_HOLD && leftHoldClickData.bIsTimeSaved){
 		LeftHold = true;
-		leftHoldClickData.lastTime = glfwGetTime();
+	}
+	if (glfwGetTime() - rightHoldClickData.lastTime > TIME_LEFT_HOLD && rightHoldClickData.bIsTimeSaved) {
+		RightHold = true;
+	}
+	if (glfwGetTime() - middleHoldClickData.lastTime > TIME_LEFT_HOLD && middleHoldClickData.bIsTimeSaved) {
+		MiddleHold = true;
 	}
 }
 
@@ -213,7 +213,7 @@ void Engine::myWindow::TakeScreenshot(void)
 	}
 	catch (const std::exception&)
 	{
-		throw;
+		Engine::GameClose();
 	}
 }
 
@@ -281,9 +281,8 @@ void Engine::myWindow::character_callback(GLFWwindow* window, unsigned int codep
 
 void Engine::myWindow::handle_keys(GLFWwindow* window, int key, int code, int action, int mode) {
 	try {
-		bool condition = (action == GLFW_PRESS || action == GLFW_REPEAT);
 		if (key >= 0 && key < 348) {
-			Keyboard::SetKeyStatus(key, condition);
+			Keyboard::SetKeyStatus(key, action);
 		}		
 		else {
 			Logger::LogMessage msg = Logger::LogMessage("The pressed button is not handled. No action will be performed", "Info", "", "Engine::myWindow", "handle_keys");
@@ -293,7 +292,7 @@ void Engine::myWindow::handle_keys(GLFWwindow* window, int key, int code, int ac
 	catch (...) {
 		Logger::LogMessage msg = Logger::LogMessage("An error occurred while handling keyboard keys.", "Error", "", "Engine::myWindow", "handle_keys");
 		Logger::Error(msg);
-		throw;
+		Engine::GameClose();
 	}
 }
 
@@ -307,34 +306,49 @@ void Engine::myWindow::mouse_button_callback(GLFWwindow* window, int button, int
 	if (button == GLFW_MOUSE_BUTTON_LEFT) {
 		if (action == GLFW_PRESS) {
 			Mouse::LeftClick = true;
-			Mouse::Release = false;
-			if (Mouse::leftHoldClickData.bIsTimeSaved == false)
-			{
+			if (Mouse::leftHoldClickData.bIsTimeSaved == false){
 				Mouse::leftHoldClickData.lastTime = glfwGetTime();
 				Mouse::leftHoldClickData.bIsTimeSaved = true;
 			}
 		}
 		else if (action == GLFW_RELEASE) {
-			Mouse::LeftClick = false;
 			Mouse::Release = true;
+			if (Mouse::leftHoldClickData.bIsTimeSaved) {
+				Mouse::leftHoldClickData.bIsTimeSaved = false;
+				Mouse::LeftHold = false;
+			}
 		}
 	}
 	if (button == GLFW_MOUSE_BUTTON_RIGHT) {
 		if (action == GLFW_PRESS) {
 			Mouse::RightClick = true;
-			Mouse::Release = false;
+			if (Mouse::rightHoldClickData.bIsTimeSaved == false){
+				Mouse::rightHoldClickData.lastTime = glfwGetTime();
+				Mouse::rightHoldClickData.bIsTimeSaved = true;
+			}
 		}
 		else if (action == GLFW_RELEASE) {
-			Mouse::RightClick = false;
 			Mouse::Release = true;
+			if (Mouse::rightHoldClickData.bIsTimeSaved) {
+				Mouse::rightHoldClickData.bIsTimeSaved = false;
+				Mouse::RightHold = false;
+			}
 		}
 	}
 	if (button == GLFW_MOUSE_BUTTON_MIDDLE) {
 		if (action == GLFW_PRESS) {
 			Mouse::MiddleClick = true;
+			if (Mouse::middleHoldClickData.bIsTimeSaved == false) {
+				Mouse::middleHoldClickData.lastTime = glfwGetTime();
+				Mouse::middleHoldClickData.bIsTimeSaved = true;
+			}
 		}
 		else if (action == GLFW_RELEASE) {
 			Mouse::MiddleClick = false;
+			if (Mouse::middleHoldClickData.bIsTimeSaved) {
+				Mouse::middleHoldClickData.bIsTimeSaved = false;
+				Mouse::MiddleHold = false;
+			}
 		}
 	}
 }
@@ -496,7 +510,7 @@ Engine::Camera::~Camera()
 #pragma region Keyboard class
 
 // static variables
-bool Engine::Keyboard::keyCode[348] = { false };
+int Engine::Keyboard::keyCode[348] = { 0 };
 int Engine::Keyboard::charCodepointPressed = -1;
 
 void Engine::Keyboard::SetCharCodepointPressed(int codepoint)
@@ -510,7 +524,6 @@ void Engine::Keyboard::SetCharCodepointPressed(int codepoint)
 }
 
 #pragma endregion
-
 
 #pragma region Engine class
 
@@ -637,7 +650,7 @@ int Engine::launch() {
 
 	while (myWindow::ShouldClose == false) {
 		glfwPollEvents();
-		Mouse::IsLeftHolding(); 
+		Mouse::IsHolding(); 
 		window.ClearBuffers();
 		fps();
 		Mouse::mouse_control(window.get_mouse_x(), window.get_mouse_y());
@@ -711,7 +724,7 @@ int Engine::launch() {
 		}
 
 		Keyboard::SetCharCodepointPressed(-1);
-		resetKeyCodes();
+		ResetPeriphericsInput();
 
 		window.SwapBuffers();
 
@@ -729,9 +742,6 @@ int Engine::launch() {
 	glfwTerminate();
 	return 0;
 }
-
-
-
 
 void Engine::read_data() {
 	//Read races data
@@ -764,22 +774,23 @@ void Engine::read_data() {
 		MapTerrain()->addPath(texturesInfoList[i].name, texturesInfoList[i].path);
 }
 
-void Engine::resetKeyCodes() {
-	Keyboard::SetKeyStatus(GLFW_KEY_SPACE, false);
-	Keyboard::SetKeyStatus(GLFW_KEY_Z, false);
-	Keyboard::SetKeyStatus(GLFW_KEY_A, false);
-	Keyboard::SetKeyStatus(GLFW_KEY_S, false);
-	Keyboard::SetKeyStatus(GLFW_KEY_T, false);
-	Keyboard::SetKeyStatus(GLFW_KEY_F10, false);
-	Keyboard::SetKeyStatus(GLFW_KEY_ENTER, false);
-}
-
 void Engine::handleGlobalKeys() {
 	// activate or deactivate debug ui
 	if (Settings::DebugIsActive && Keyboard::IsKeyPressed(GLFW_KEY_F10)) {
 		debug::DEBUG_UI()->setStatus(!debug::DEBUG_UI()->getStatus());
 		debug::DEBUG_UI()->getStatus() ? Logger::Info("Debug UI ON!") : Logger::Info("Debug UI OFF!");
 	}
+}
+
+void Engine::ResetPeriphericsInput()
+{
+	//Keyboard buttons
+	Keyboard::ResetKeys();
+
+	//Mouse buttons
+	Mouse::LeftClick = false;
+	Mouse::RightClick = false;
+	Mouse::MiddleClick = false;
 }
 
 void Engine::fps() {

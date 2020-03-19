@@ -69,7 +69,7 @@ void Logger::CleanLogs(void)
 	{
 		Logger::LogMessage msg = Logger::LogMessage("An error occurred cleaning the log files", "", "Logger", "CleanLogs");
 		Logger::Error(msg);
-		throw;
+		Engine::GameClose();
 	}	
 }
 

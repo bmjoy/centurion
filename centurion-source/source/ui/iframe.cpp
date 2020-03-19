@@ -84,13 +84,13 @@ void gui::Iframe::Create(int xPos, int yPos, int width, int height)
 		string emsg = string(e.what());
 		Logger::LogMessage msg = Logger::LogMessage(emsg, "gui", "Iframe", "Create");
 		Logger::Error(msg);
-		throw;
+		Engine::GameClose();
 	}
 	catch (...)
 	{
 		Logger::LogMessage msg = Logger::LogMessage("An error occurred reading the iframe data of \"" + name + "\"", "gui", "Iframe", "Create");
 		Logger::Error(msg);
-		throw;
+		Engine::GameClose();
 	}
 }
 

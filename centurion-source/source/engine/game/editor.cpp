@@ -74,7 +74,7 @@ void Editor::Run()
 		// rendering
 		Map::Render(false);
 		RenderObjects();
-		if (!editor::IsWindowOpened && !editor::addingObject && !editor::TerrainBrushIsActive) editor::moveObjects();
+		//if (!editor::IsWindowOpened && !editor::addingObject && !editor::TerrainBrushIsActive) editor::moveObjects();
 
 		// apply menu matrices
 		applyMenuMatrices();
@@ -108,20 +108,6 @@ void Editor::Run()
 	}
 
 	setCameraProjectionMatrix(glm::ortho(0.0f, Engine::myWindow::WidthZoomed, 0.0f, Engine::myWindow::HeightZoomed, -(float)MEDIUM_MAP_WIDTH, (float)MEDIUM_MAP_WIDTH));
-
-	//Engine::Mouse::RightClick = false;
-	//Engine::Mouse::LeftClick = false;
-	//Engine::Mouse::MiddleClick = false;
-	Engine::Keyboard::SetKeyStatus(GLFW_KEY_ESCAPE, false);
-
-	if (editor::IsWindowOpened) {
-		Engine::Keyboard::SetKeyStatus(GLFW_KEY_BACKSPACE, false);
-		Engine::Keyboard::SetKeyStatus(GLFW_KEY_DELETE, false);
-		Engine::Keyboard::SetKeyStatus(GLFW_KEY_UP, false);
-		Engine::Keyboard::SetKeyStatus(GLFW_KEY_DOWN, false);
-		Engine::Keyboard::SetKeyStatus(GLFW_KEY_LEFT, false);
-		Engine::Keyboard::SetKeyStatus(GLFW_KEY_RIGHT, false);
-	}
 }
 
 void Editor::handleKeyboardControls() {
@@ -431,21 +417,21 @@ namespace editor {
 		}
 		else {
 			// buildings
-			if (Game::IsGameObjectNotNull(Picking::leftClickID)) {
-				Building* bld = Game::GetGameObjectPtrById(Picking::leftClickID)->AsBuilding();
-				if (movingObjectRestore) {
-					bld->SetPosition(vec3(movingObjectXPos, movingObjectYPos, 0.f));
-					bld->clear_pass();
-					bld->SetPlaceable(true);
-					bld->update_pass();
-				}
-				else {
-					bld->SetPlaceable(true);
-					bld->update_pass();
-				}
-				movingObject = false;
-				movingObjectRestore = false;
-			}
+			//if (Game::IsGameObjectNotNull(Picking::leftClickID)) {
+			//	Building* bld = Game::GetGameObjectPtrById(Picking::leftClickID)->AsBuilding();
+			//	if (movingObjectRestore) {
+			//		bld->SetPosition(vec3(movingObjectXPos, movingObjectYPos, 0.f));
+			//		bld->clear_pass();
+			//		bld->SetPlaceable(true);
+			//		bld->update_pass();
+			//	}
+			//	else {
+			//		bld->SetPlaceable(true);
+			//		bld->update_pass();
+			//	}
+			//	movingObject = false;
+			//	movingObjectRestore = false;
+			//}
 		}
 	}
 }

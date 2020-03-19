@@ -1,5 +1,5 @@
-#ifndef _GATE_H
-#define _GATE_H
+#ifndef _BASEGATE_H
+#define _BASEGATE_H
 
 
 #include <ui.h>
@@ -9,7 +9,7 @@ using namespace std;
 using namespace glm;
 
 
-class Gate : public Building
+class BaseGate : public Building
 {
 
 };

@@ -150,11 +150,11 @@ void EditorMenuBar::Create()
 	}
 	catch (const xml_schema::exception & e) {
 		std::cout << e << std::endl;
-		throw;
+		Engine::GameClose();
 	}
 	catch (const std::exception&)
 	{
-		throw;
+		Engine::GameClose();
 	}
 }
 

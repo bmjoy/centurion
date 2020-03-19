@@ -51,6 +51,10 @@ protected:
 	void IAmAnOutpost(void);
 	void IAmAVillageHall(void);
 	void IAmAShipyard(void);
+	void StartGoldProduction(void);
+	void StopGoldProduction(void);
+	void StartFoodProduction(void);
+	void StopFoodProduction(void);
 private:
 	game::ObjectUI* buildingUI;
 	map<int, Building*> subs_buildings; // dependent buildings connected to indipendent one
@@ -69,6 +73,9 @@ private:
 	bool bIsVillageHall = false;
 	bool bIsCentralBuilding = false;
 	bool bIsShipyard = false;
+	bool bCanProduceGold = false;
+	bool bCanProduceFood = false;
+	vector<Unit> holdUnits;
 	Settlement settlement;
 
 	//sound selectionSound; TODO

@@ -205,7 +205,7 @@ void Terrain::ReadIndicesData(void)
 	{
 		Logger::LogMessage msg = Logger::LogMessage("An error occurred reading the indices data", "", "Terrain", "ReadIndicesData");
 		Logger::Error(msg);
-		throw;
+		Engine::GameClose();
 	}
 	
 }
@@ -229,7 +229,7 @@ void Terrain::ReadVerticesData(void)
 	{
 		Logger::LogMessage msg = Logger::LogMessage("An error occurred reading the vertices data", "", "Terrain", "ReadVerticesData");
 		Logger::Error(msg);
-		throw;
+		Engine::GameClose();
 	}
 }
 
@@ -251,7 +251,7 @@ void Terrain::ReadVerticesPosData(void)
 	{
 		Logger::LogMessage msg = Logger::LogMessage("An error occurred reading the vertices pos data", "", "Terrain", "ReadVerticesPosData");
 		Logger::Error(msg);
-		throw;
+		Engine::GameClose();
 	}
 }
 

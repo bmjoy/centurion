@@ -142,7 +142,6 @@ void Hector::Console::Render()
 	if (Engine::Keyboard::IsKeyPressed(GLFW_KEY_F1)) {
 		isOpened = !isOpened;
 		txtinput.active(isOpened);
-		Engine::Keyboard::SetKeyStatus(GLFW_KEY_F1, false);
 	}
 	if (isOpened) {		
 		iframe.Render();
@@ -153,7 +152,6 @@ void Hector::Console::Render()
 			if (cmd.size() > 0) {
 				ExecuteCommand(cmd);
 				txtinput.create("", 35, 35, 200);
-				Engine::Keyboard::SetKeyStatus(GLFW_KEY_ENTER, false);
 			}
 		}
 	}

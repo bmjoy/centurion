@@ -48,7 +48,7 @@ string FileManager::ReadFile(const char* fileLocation) {
 		return content;
 	}
 	catch (...) {
-		throw;
+		Engine::GameClose();
 	}
 }
 
@@ -80,7 +80,7 @@ vector<string> FileManager::GetAllFilesNamesWithinFolder(string folder, string t
 		return names;
 	}
 	catch (...) {
-		throw;
+		Engine::GameClose();
 	}
 }
 
@@ -107,7 +107,7 @@ vector<string> FileManager::GetAllFoldersNamesWithinFolder(string folder) {
 		return names;
 	}
 	catch (...) {
-		throw;
+		Engine::GameClose();
 	}
 }
 
@@ -161,7 +161,7 @@ vector<FileManager::file_info> FileManager::GetAllFilesNamesWithinSubfolders(str
 		return output;
 	}
 	catch (...) {
-		throw;
+		Engine::GameClose();
 	}
 }
 
@@ -175,7 +175,7 @@ string FileManager::CurrentDateTime(const char * format) {
 		return buf;
 	}
 	catch (...) {
-		throw;
+		Engine::GameClose();
 	}
 }
 
@@ -189,7 +189,7 @@ bool FileManager::CheckIfFolderExists(string folderPath) {
 	catch (...) {
 		Logger::LogMessage msg = Logger::LogMessage("An error occurred checking if this folder exists: \"" + folderPath + "\"", "Utils", "", "CheckIfFolderExists");
 		Logger::Error(msg);
-		throw;
+		Engine::GameClose();
 	}
 }
 
@@ -203,7 +203,7 @@ void FileManager::RemoveFile(string filePath)
 	{
 		Logger::LogMessage msg = Logger::LogMessage("An error occurred deleting this following file: \"" + filePath + "\"", "Utils", "", "RemoveFile");
 		Logger::Error(msg);
-		throw;
+		Engine::GameClose();
 	}
 }
 
@@ -217,7 +217,7 @@ void FileManager::CreateFolder(string folderPath)
 	{
 		Logger::LogMessage msg = Logger::LogMessage("An error occurred creating a folder with the following path: \"" + folderPath + "\"", "Utils", "", "CreateFolder");
 		Logger::Error(msg);
-		throw;
+		Engine::GameClose();
 	}
 }
 
@@ -232,7 +232,7 @@ string FileManager::GetExeFolderPath(const char *path) {
 	{
 		Logger::LogMessage msg = Logger::LogMessage("An error occurred getting the exe folder path", "Utils", "", "GetExeFolderPath");
 		Logger::Error(msg);
-		throw;
+		Engine::GameClose();
 	}
 	
 }

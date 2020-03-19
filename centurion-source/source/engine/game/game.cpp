@@ -43,7 +43,7 @@ void Game::Map::LoadScenario(string scenarioName)
 	{
 		Logger::LogMessage msg = Logger::LogMessage("An error occurred loading the following scenario: \"" + scenarioName + "\"", "", "Game::Map", "LoadScenario");
 		Logger::Error(msg);
-		throw;
+		Engine::GameClose();
 	}
 }
 
@@ -69,7 +69,7 @@ void Game::Map::SaveScenario(string scenarioName)
 	{
 		Logger::LogMessage msg = Logger::LogMessage("An error occurred creating the following scenario: \"" + scenarioName + "\"", "", "Game::Map", "SaveScenario");
 		Logger::Error(msg);
-		throw;
+		Engine::GameClose();
 	}
 }
 
@@ -175,11 +175,11 @@ void Game::Map::SaveMapObjectsToXml(string xmlPath)
 	}
 	catch (const xml_schema::exception & e) {
 		std::cout << e << std::endl;
-		throw;
+		Engine::GameClose();
 	}
 	catch (...)
 	{
-		throw;
+		Engine::GameClose();
 	}
 }
 
@@ -201,7 +201,7 @@ void Game::Map::SaveHeights(string path)
 	}
 	catch (...)
 	{
-		throw;
+		Engine::GameClose();
 	}
 
 }
@@ -224,7 +224,7 @@ void Game::Map::SaveTexture(string path)
 	}
 	catch (...)
 	{
-		throw;
+		Engine::GameClose();
 	}
 }
 
@@ -282,11 +282,11 @@ void Game::Map::LoadMapObjectsFromXml(string xmlPath)
 		string emsg = string(e.what());
 		Logger::LogMessage msg = Logger::LogMessage(emsg, "", "Game::Map", "LoadMapObjectsFromXml");
 		Logger::Error(msg);
-		throw;
+		Engine::GameClose();
 	}
 	catch (...)
 	{
-		throw;
+		Engine::GameClose();
 	}
 }
 
@@ -309,7 +309,7 @@ void Game::Map::LoadHeights(string path)
 	}
 	catch (...)
 	{
-		throw;
+		Engine::GameClose();
 	}
 }
 
@@ -330,7 +330,7 @@ void Game::Map::LoadTexture(string path)
 	}
 	catch (...)
 	{
-		throw;
+		Engine::GameClose();
 	}
 }
 
@@ -672,7 +672,6 @@ void Game::RenderObjectsPicking() {
 		if (Engine::Mouse::LeftClick)
 		{
 			Picking::leftClickID = Picking::GetIdFromClick(PICKING_LEFT);
-			cout << Picking::leftClickID << endl;
 		}
 		if (Engine::Mouse::RightClick) Picking::rightClickID = Picking::GetIdFromClick(PICKING_RIGHT);
 

@@ -150,7 +150,7 @@ void Menu::Create()
 	}
 	catch (const std::exception&)
 	{
-		throw;
+		Engine::GameClose();
 	}
 	
 }

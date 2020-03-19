@@ -110,7 +110,7 @@ void Settings::ChangeLanguage(string lang)
 	catch (...) {
 		Logger::LogMessage msg = Logger::LogMessage("An error occurred changing the language to \"" + lang + "\"", "Error", "", "Settings", "ChangeLanguage");
 		Logger::Error(msg);
-		throw;
+		Engine::GameClose();
 	}
 }
 
@@ -154,7 +154,7 @@ void Settings::SaveXml()
 	{
 		Logger::LogMessage msg = Logger::LogMessage("An error occurred saving \"Settings.XML\"", "Error", "", "Settings", "ChangeLanguage");
 		Logger::Error(msg);
-		throw;
+		Engine::GameClose();
 	}
 }
 

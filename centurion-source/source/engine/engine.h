@@ -97,6 +97,7 @@ public:
 	public:
 		static HoldClickData leftHoldClickData;
 		static HoldClickData rightHoldClickData;
+		static HoldClickData middleHoldClickData;
 
 		Mouse();
 		static float ScrollValue;
@@ -112,13 +113,15 @@ public:
 		static bool IsCursorInGameScreen();
 		static bool LeftClick;
 		static bool RightClick;
-		static bool LeftHold;
 		static bool MiddleClick;
+		static bool LeftHold;
+		static bool RightHold;
+		static bool MiddleHold;
 		static bool Release;
 		static void create();
 		static void render();
 		static void mouse_control(int lastX, int lastY);
-		static void IsLeftHolding(void);
+		static void IsHolding(void);
 		~Mouse();
 
 	private:
@@ -130,12 +133,16 @@ public:
 
 	class Keyboard {
 	public:
-		static void SetKeyStatus(unsigned int key_code, bool condition) { keyCode[key_code] = condition; }
-		static bool IsKeyPressed(unsigned int key_code) { return keyCode[key_code]; }
+		static void SetKeyStatus(unsigned int key_code, int action) { keyCode[key_code] = action; }
+		static bool IsKeyReleased(unsigned int key_code) { return keyCode[key_code]==0; }
+		static bool IsKeyPressed(unsigned int key_code) { return keyCode[key_code]==1; }
+		static bool IsKeyHold(unsigned int key_code) { return keyCode[key_code]==2; }
+		static bool IsKeyNotReleased(unsigned int key_code) { return keyCode[key_code] != 0; }
 		static int GetCharCodepointPressed(void) { return charCodepointPressed; }
 		static void SetCharCodepointPressed(int codepoint);
+		static void ResetKeys() { std::fill(keyCode, keyCode + 348, 0); }
 	private:
-		static bool keyCode[348];
+		static int keyCode[348];
 		static int charCodepointPressed;
 	};
 
@@ -170,11 +177,11 @@ private:
 	static bool reset;
 
 	// Private methods
-	static void resetKeyCodes();
 	static void fps();
 	static void fps_sleep();
 	static void read_data();
 	static void handleGlobalKeys();
+	static void ResetPeriphericsInput();
 };
 
 #endif

@@ -1,13 +1,15 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no" ?>
 <c_object parent="Object" type="cpp_abstractclass" class_name="Building">
   <properties>
+    <property name="singularName" value="Building"/>
+    <property name="pluralName" value="Buildings"/>
     <property name="maxHealth" value="5000"/>
     <property name="repairRate" value="100"/>
-    <property name="loyaltyFearHealthPercent" value="50"/>  <!-- Nuova idea. Se la salute di un edificio è inferiore al numero espresso in value l'edificio perderà la lealtà più velocemente (ad esempio un villaggio che, attaccato, si sente indifeso) -->
+    <property name="loyaltyFearHealthPercent" value="1"/>  <!-- Nuova idea. Se la salute di un edificio è inferiore al numero espresso in value l'edificio perderà la lealtà più velocemente (ad esempio un villaggio che, attaccato, si sente indifeso) -->
     <property name="isCentralBuilding" value="false"/>
     <property name="clickable_in_minimap" value="false"/>
     <property name="autoRepair" value="true"/>
-	<property name="canProduceGold" value="false"/>
+    <property name="canProduceGold" value="false"/>
     <property name="canProduceFood" value="false"/>
   </properties>
   <methods>

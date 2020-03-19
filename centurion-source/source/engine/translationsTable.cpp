@@ -22,7 +22,7 @@ unsigned int TranslationsTable::GetLanguageId(string lan)
 	catch (...) {
 		Logger::LogMessage msg = Logger::LogMessage("An error occurred getting the language id", "Error", "", "TranslationsTable", "GetLanguageId");
 		Logger::Error(msg);
-		throw;
+		Engine::GameClose();
 	}
 }
 
@@ -79,6 +79,6 @@ void TranslationsTable::ReadTranslationsTableXml(string lang)
 	{
 		Logger::LogMessage msg = Logger::LogMessage("An error occurred parsing the translations table XML file", "Error", "", "TranslationsTable", "ReadTranslationsTableXml");
 		Logger::Error(msg);
-		throw;
+		Engine::GameClose();
 	}
 }

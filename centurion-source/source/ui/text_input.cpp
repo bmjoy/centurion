@@ -34,7 +34,7 @@ namespace gui {
 				static_text.create_static(current_text, "tahoma_15px", xPos, yPos, "left", "normal", vec4(255.f));
 			}
 
-			if (Engine::Keyboard::IsKeyPressed(GLFW_KEY_BACKSPACE) && current_text.size() > 0) {
+			if (Engine::Keyboard::IsKeyNotReleased(GLFW_KEY_BACKSPACE) && current_text.size() > 0) {
 				current_text.erase(current_text.end() - 1);
 				cursorPosition--;
 				static_text.create_static(current_text, "tahoma_15px", xPos, yPos, "left", "normal", vec4(255.f));

@@ -1,4 +1,4 @@
-#include <classes/shipyard.h>
+#include <classes/base_gate.h>
 #include <engine.h>
 #include <stb_image.h>
 #include <player/player.h>
@@ -12,8 +12,3 @@
 using namespace std;
 using namespace glm;
 
-Shipyard::Shipyard()
-{
-	this->IAmACentralBuilding();
-	this->IAmAShipyard();
-}

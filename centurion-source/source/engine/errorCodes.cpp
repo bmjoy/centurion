@@ -27,7 +27,7 @@ void ErrorCodes::SetErrorCode(string error, string code)
 	{
 		Logger::LogMessage msg = Logger::LogMessage("An error occurred setting the code of the following error string: \"" + error + "\"", "Error", "", "ErrorCodes", "SetErrorCode");
 		Logger::Error(msg);
-		throw;
+		Engine::GameClose();
 	}
 }
 
@@ -48,7 +48,7 @@ string ErrorCodes::GetErrorCode(string error)
 	{
 		Logger::LogMessage msg = Logger::LogMessage("An error occurred getting the code of the following error string: \"" + error + "\"", "Error", "", "ErrorCodes", "GetErrorCode");
 		Logger::Error(msg);
-		throw;
+		Engine::GameClose();
 	}
 }
 
@@ -74,6 +74,6 @@ void ErrorCodes::ReadErrorCodesXml(void)
 	{
 		Logger::LogMessage msg = Logger::LogMessage("An error occurred reading \"ErrorCodes.XML\"", "Error", "", "ErrorCodes", "ReadErrorCodesXml");
 		Logger::Error(msg);
-		throw;
+		Engine::GameClose();
 	}
 }

@@ -96,6 +96,26 @@ bool Building::IsShipyard(void)
 	return this->bIsShipyard;
 }
 
+void Building::StartGoldProduction(void)
+{
+	this->bCanProduceGold = true;
+}
+
+void Building::StopGoldProduction(void)
+{
+	this->bCanProduceGold = true;
+}
+
+void Building::StartFoodProduction(void)
+{
+	this->bCanProduceFood = true;
+}
+
+void Building::StopFoodProduction(void)
+{
+	this->bCanProduceFood = false;
+}
+
 void Building::prepare() 
 {
 	//this->SetType(data["type"].get<string>());
