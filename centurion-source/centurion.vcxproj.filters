@@ -447,6 +447,9 @@
     <ClCompile Include="source\ui\text_list.cpp">
       <Filter>Source Files\ui</Filter>
     </ClCompile>
+    <ClCompile Include="source\engine\classes\trees.cpp">
+      <Filter>Source Files\engine\classes</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="source\extern\includes\json.hpp">
@@ -757,6 +760,9 @@
     </ClInclude>
     <ClInclude Include="source\ui\text_list.h">
       <Filter>Header Files\ui</Filter>
+    </ClInclude>
+    <ClInclude Include="source\engine\classes\trees.h">
+      <Filter>Header Files\engine\classes</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

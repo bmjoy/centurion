@@ -13,13 +13,13 @@ public:
 	bool IsIndipendent(void);
 
 	unsigned short int GetFood(void);
-	void SetFood(const unsigned short int food);
+	void SetFood(unsigned short int food);
 	int GetGold(void);
-	void SetGold(const int gold);
+	void SetGold(int gold);
 	unsigned short int GetPopulation(void);
-	void SetPopulation(const unsigned short int population);
+	void SetPopulation(unsigned short int population);
 	unsigned short int GetMaxPopulation(void);
-	void SetMaxPopulation(const unsigned short int max_population);
+	void SetMaxPopulation(unsigned short int max_population);
 
 	vector<Building> GetBuildingsBelongToSettlement(void);
 	bool AddBuildingToSettlement(Building& b);

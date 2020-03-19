@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no" ?>
+<c_object parent="Object" type="" class_name="Decoration">
+  <properties>
+    <property name="player" value="0"/>
+    <property name="race" value="None"/>
+  </properties>
+  <methods>
+  </methods>
+  <sounds>
+  </sounds>
+</c_object>

@@ -6,6 +6,7 @@ using namespace std;
 
 Settlement::Settlement()
 {
+	//READ THOSE VALUES FROM SETTLEMENT.OC.XML
 	this->population = 10;
 	this->max_population = 100;
 	this->food = 1000;
@@ -32,9 +33,17 @@ unsigned short int Settlement::GetFood(void)
 	return this->food;
 }
 
-void Settlement::SetFood(const unsigned short int food)
+void Settlement::SetFood(unsigned short int food)
 {
-	this->food = food;
+	if (food < 0) {
+		food = 0;
+	}
+
+	//TRANSFORM THE VALUE INTO A CONSTANT
+	if (food > 999999)
+		food = (unsigned short int)999999;
+	else
+		this->food = food;
 }
 
 int Settlement::GetGold(void)
@@ -42,9 +51,14 @@ int Settlement::GetGold(void)
 	return this->gold;
 }
 
-void Settlement::SetGold(const int gold)
+void Settlement::SetGold(int gold)
 {
-	this->gold = gold;
+	//LOAN OR NOT LESS THAN 0?
+	//TRANSFORM THE VALUE INTO A CONSTANT
+	if (gold > 999999)
+		gold = 999999;
+	else
+		this->gold = gold;
 }
 
 unsigned short int Settlement::GetPopulation(void)
@@ -52,9 +66,16 @@ unsigned short int Settlement::GetPopulation(void)
 	return this->population;
 }
 
-void Settlement::SetPopulation(const unsigned short int population)
+void Settlement::SetPopulation(unsigned short int population)
 {
-	this->population = population;
+	if (population < 0) {
+		population = 0;
+	}
+
+	if (population > GetMaxPopulation())
+		population = GetMaxPopulation();
+	else
+		this->population = population;
 }
 
 unsigned short int Settlement::GetMaxPopulation(void)
@@ -62,9 +83,17 @@ unsigned short int Settlement::GetMaxPopulation(void)
 	return this->max_population;
 }
 
-void Settlement::SetMaxPopulation(const unsigned short int max_population)
+void Settlement::SetMaxPopulation(unsigned short int max_population)
 {
-	this->max_population = max_population;
+	if (max_population < 0) {
+		max_population = 0;
+	}
+
+	//TRANSFORM THE VALUE INTO A CONSTANT
+	if (max_population > 5000)
+		max_population = (unsigned short int)5000;
+	else
+		this->max_population = max_population;
 }
 
 vector<Building> Settlement::GetBuildingsBelongToSettlement(void)

@@ -22,7 +22,7 @@
     <VCProjectVersion>15.0</VCProjectVersion>
     <ProjectGuid>{29C92E4D-97E2-4049-A35E-F6A42D1C8AB9}</ProjectGuid>
     <RootNamespace>centurion</RootNamespace>
-    <WindowsTargetPlatformVersion>10.0.17763.0</WindowsTargetPlatformVersion>
+    <WindowsTargetPlatformVersion>10.0.18362.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
@@ -222,6 +222,7 @@ XCOPY "$(ProjectDir)lua53.dll" "$(ProjectDir)$(OutDir)"</Command>
     <ClCompile Include="source\engine\classes\temple.cpp" />
     <ClCompile Include="source\engine\classes\tower.cpp" />
     <ClCompile Include="source\engine\classes\townhall.cpp" />
+    <ClCompile Include="source\engine\classes\trees.cpp" />
     <ClCompile Include="source\engine\classes\unit.cpp" />
     <ClCompile Include="source\engine\classes\village.cpp" />
     <ClCompile Include="source\engine\classes\wall.cpp" />
@@ -310,6 +311,7 @@ XCOPY "$(ProjectDir)lua53.dll" "$(ProjectDir)$(OutDir)"</Command>
     <ClInclude Include="source\engine\classes\temple.h" />
     <ClInclude Include="source\engine\classes\tower.h" />
     <ClInclude Include="source\engine\classes\townhall.h" />
+    <ClInclude Include="source\engine\classes\trees.h" />
     <ClInclude Include="source\engine\classes\unit.h" />
     <ClInclude Include="source\engine\classes\village.h" />
     <ClInclude Include="source\engine\classes\wall.h" />

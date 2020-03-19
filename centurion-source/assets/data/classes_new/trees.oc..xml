@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no" ?>
+<c_object parent="Decoration" type="" class_name="Trees">
+  <properties>
+    <property name="canBeClonedInEditor" value="false"/>
+  </properties>
+  <methods>
+  </methods>
+  <sounds>
+  </sounds>
+</c_object>

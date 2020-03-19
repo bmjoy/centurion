@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no" ?>
+<c_object parent="Habitable" type="building" class_name="Shipyard">
+  <properties>
+  </properties>
+  <methods>
+  </methods>
+  <sounds>
+  </sounds>
+</c_object>

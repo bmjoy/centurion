@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no" ?>
+<c_object parent="Object" type="" class_name="Unit">
+  <properties>
+  	  <property name="damageType" value="slash"/>
+  	  <property name="minAttack" value="10"/>
+  	  <property name="maxAttack" value="30"/>
+  	  <property name="armorPierce" value="10"/>
+  	  <property name="armorSlash" value="10"/>
+	  <property name="maxHealth" value="200"/>
+	  <property name="maxFood" value="20"/>
+	  <property name="speed" value="50"/>
+	  <property name="range" value="5"/>
+	  <property name="healingRate" value="10"/>
+	  <property name="healingSpeedRate" value="1"/>
+	  <property name="formationDistance" value="15"/>
+	  <property name="zOffset" value="0"/> <!-- For flying unit -->
+	  <property name="canBeDamagedByGhost" value="true"/>
+	  <property name="canBeInvisible" value="true"/> <!-- Fishes can't be hided by mages -->
+  	  <property name="canFly" value="false"/>
+  </properties>
+  <methods>
+  </methods>
+  <sounds>
+  </sounds>
+</c_object>

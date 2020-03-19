@@ -1,12 +1,12 @@
-<c_object parent="Building" type="building" class_name="EBlacksmith">
+<c_object parent="Blacksmith" type="building" class_name="EBlacksmith">
  <properties>
     <property name="race" value="Egypt"/>
     <property name="radius" value="1000"/>
-    <property name="isCentralBuilding" value="0"/>
+    <property name="isCentralBuilding" value="false"/>
     <property name="category" value="egyptianstronghold"/>
     <property name="ent_path" value="assets/buildings/egypt/blacksmith/eblacksmith.oe.json"/>
     <property name="pass_path" value="assets/buildings/egypt/blacksmith/eblacksmith.pass"/>
-    <property name="clickable_in_minimap" value="0"/>
+    <property name="clickable_in_minimap" value="false"/>
   </properties>
   <methods>
     <method name="" script=""/>

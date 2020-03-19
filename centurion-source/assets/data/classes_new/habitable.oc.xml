@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no" ?>
+<c_object parent="Building" type="" class_name="Habitable">
+  <properties>
+    <property name="canProduceGold" value="true"/>
+    <property name="canProduceFood" value="false"/>
+  </properties>
+  <methods>
+  </methods>
+  <sounds>
+  </sounds>
+</c_object>

@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no" ?>
+<c_object parent="Habitable" type="" class_name="Stronghold">
+  <properties>
+	<property name="category" value="egyptianstronghold"/>
+  </properties>
+  <methods>
+  </methods>
+  <sounds>
+  </sounds>
+</c_object>

@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no" ?>
+<c_object parent="" type="" class_name="Settlement">
+  <properties>
+    <property name="gold" value="500"/>
+    <property name="food" value="500"/>
+    <property name="maxPopulation" value="50"/>
+  </properties>
+  <methods>
+  </methods>
+  <sounds>
+  </sounds>
+</c_object>
