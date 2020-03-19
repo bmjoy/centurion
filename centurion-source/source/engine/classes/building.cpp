@@ -122,7 +122,7 @@ void Building::prepare()
 
 void Building::Create(string className) {
 
-	ObjectData::ObjectXMLClassData objData = ObjectData::GetObjectData(className);
+	ObjectData::ObjectXMLClassData objData = *ObjectData::GetObjectData(className);
 	// here the recursive function that takes the parent xml data
 
 	// class data

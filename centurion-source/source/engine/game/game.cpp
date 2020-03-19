@@ -590,7 +590,7 @@ bool Game::IsGameObjectNotNull(int id) {
 
 void Game::CreateObject(string className, float x, float y, int player)
 {
-	string type = ObjectData::GetObjectData(className).GetClassType();
+	string type = ObjectData::GetObjectData(className)->GetClassType();
 
 	if (type == "building") {
 		Building* newBuilding = new Building();

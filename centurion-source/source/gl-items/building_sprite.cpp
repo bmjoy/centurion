@@ -58,7 +58,7 @@ void BuildingSprite::create() {
 			spriteData.textureId = textureID;
 
 			// send data to objectData via classname
-			ObjectData::GetObjectData(className).SetSpriteData(spriteData);
+			ObjectData::GetObjectData(className)->SetSpriteData(spriteData);
 
 			stbi_image_free(data);			
 		}

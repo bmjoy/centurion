@@ -74,17 +74,17 @@ void ObjectData::ReadDataClassesFromXml()
 			objData.SetParentClass(string(dataXML->parent()));
 
 			properties::property_iterator _it_prop;
-			for (_it_prop = dataXML->properties().property().begin(); _it_prop == dataXML->properties().property().begin(); _it_prop++) {
+			for (_it_prop = dataXML->properties().property().begin(); _it_prop != dataXML->properties().property().end(); _it_prop++) {
 				objData.AddProperty(string(_it_prop->name()), string(_it_prop->value()));
 			}
 
 			methods::method_iterator _it_mtd;
-			for (_it_mtd = dataXML->methods().method().begin(); _it_mtd == dataXML->methods().method().begin(); _it_mtd++) {
+			for (_it_mtd = dataXML->methods().method().begin(); _it_mtd != dataXML->methods().method().end(); _it_mtd++) {
 				objData.AddMethod(string(_it_mtd->name()), string(_it_mtd->script()));
 			}
 			
 			sounds::sound_iterator _it_snd;
-			for (_it_snd = dataXML->sounds().sound().begin(); _it_snd == dataXML->sounds().sound().begin(); _it_snd++) {
+			for (_it_snd = dataXML->sounds().sound().begin(); _it_snd != dataXML->sounds().sound().end(); _it_snd++) {
 				objData.AddSound(string(_it_snd->name()), string(_it_snd->path()));
 			}
 

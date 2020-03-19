@@ -38,7 +38,7 @@ public:
 		ObjectSprite::SpriteData spriteData;
 	};
 
-	static ObjectXMLClassData GetObjectData(string _class) { return objectsData[_class]; }
+	static ObjectXMLClassData* GetObjectData(string _class) { return &(objectsData[_class]); }
 	static void ReadDataClassesFromXml();
 
 private:
