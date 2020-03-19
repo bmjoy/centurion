@@ -33,7 +33,6 @@ namespace gui {
 
 	void TextList::UpdateTextListById(int id, vector<string>* _options)
 	{
-		cout << TextLists[0]->font << endl;
 		TextLists[id]->Update(_options);
 	}
 
@@ -49,12 +48,7 @@ namespace gui {
 
 	void TextList::Update(vector<string> *_options)
 	{
-		bool t = this == GetTextListById(0);
-		this->options = vector<string>();
-		string ss = (*_options)[0];
-		cout << (*_options)[0] << endl;
-		vector<string> culo = vector<string>(*_options);
-		options = culo;
+		options = vector<string>(*_options);
 		n_options = (int)options.size();
 		selectedOption = options[0];
 		for (int i = 0; i < options.size(); i++) {

@@ -15,7 +15,6 @@
 #include <ui.h>
 #include <file_manager.h>
 
-
 #include <GLFW/glfw3.h>
 
 using namespace luabridge;

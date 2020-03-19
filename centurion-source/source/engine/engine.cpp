@@ -524,6 +524,20 @@ void Engine::Keyboard::SetCharCodepointPressed(int codepoint)
 	}
 }
 
+void Engine::Keyboard::ResetKeys()
+{
+	for (int key = 0; key < GLFW_KEY_LAST; key++) {
+		if (key == GLFW_KEY_LEFT_CONTROL) continue;
+		if (key == GLFW_KEY_RIGHT_CONTROL) continue;
+		if (key == GLFW_KEY_LEFT_SHIFT) continue;
+		if (key == GLFW_KEY_RIGHT_SHIFT) continue;
+		if (key == GLFW_KEY_LEFT_ALT) continue;
+		if (key == GLFW_KEY_RIGHT_ALT) continue;
+
+		keyCode[key] = GLFW_RELEASE;
+	}
+}
+
 #pragma endregion
 
 #pragma region Engine class
@@ -719,9 +733,11 @@ int Engine::launch() {
 		// mouse
 		Mouse::render();
 
-		if ((Keyboard::IsKeyPressed(GLFW_KEY_LEFT_SHIFT) || Keyboard::IsKeyPressed(GLFW_KEY_RIGHT_SHIFT)) && Keyboard::IsKeyPressed(GLFW_KEY_S)) {
-			//Logger::Info("Screenshot taken!");
-			//myWindow::TakeScreenshot();
+		if (Hector::ConsoleIsActive() == false) {
+			if ((Keyboard::IsKeyNotReleased(GLFW_KEY_LEFT_SHIFT) || Keyboard::IsKeyNotReleased(GLFW_KEY_RIGHT_SHIFT)) && Keyboard::IsKeyNotReleased(GLFW_KEY_S)) {
+				Logger::Info("Screenshot taken!");
+				myWindow::TakeScreenshot();
+			}
 		}
 
 		Keyboard::SetCharCodepointPressed(-1);

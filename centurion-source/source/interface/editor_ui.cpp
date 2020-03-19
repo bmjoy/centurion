@@ -14,14 +14,11 @@ namespace editor {
 	EditorUI::EditorUI() {}
 
 	void EditorUI::create() {
-		
+
 		EditorMenuBar::Create();
 		EditorWindows::Create();
-		
-		open_map_window.create();
+
 		new_map_window.create();
-		//add_object_window.create();
-		properties_window.create();
 		terrainbrush_window.create();
 		Q_WINDOW()->create();
 
@@ -42,10 +39,7 @@ namespace editor {
 			minimapRectangle.render(vec4(255.f), false, 0, x, y, w, h);
 		}
 
-		open_map_window.render(picking);
 		new_map_window.render(picking);
-		//add_object_window.render(picking);
-		properties_window.render(picking);
 		terrainbrush_window.render(picking);
 		Q_WINDOW()->render(picking);
 
@@ -57,5 +51,5 @@ namespace editor {
 	}
 
 	EditorUI::~EditorUI() {}
-	
+
 };

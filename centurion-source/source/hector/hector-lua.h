@@ -11,6 +11,7 @@ public:
 
 	class Console {
 	public:
+		bool IsOpened() { return isOpened; }
 		void Create();
 		void Render();
 	private:
@@ -19,6 +20,7 @@ public:
 		bool isOpened;
 	};
 
+	static bool ConsoleIsActive() { return C.IsOpened(); }
 	static void CreateConsole();
 	static void RenderConsole();
 	static void Initialize();

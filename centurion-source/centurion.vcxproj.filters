@@ -186,9 +186,6 @@
     <ClCompile Include="source\audio\vorbis\ogg_vorbis.cpp">
       <Filter>Source Files\audio</Filter>
     </ClCompile>
-    <ClCompile Include="source\interface\editor_openmap_window.cpp">
-      <Filter>Source Files\interface</Filter>
-    </ClCompile>
     <ClCompile Include="source\interface\editor_ui.cpp">
       <Filter>Source Files\interface</Filter>
     </ClCompile>
@@ -199,9 +196,6 @@
       <Filter>Source Files\interface</Filter>
     </ClCompile>
     <ClCompile Include="source\interface\editor_addobject_window.cpp">
-      <Filter>Source Files\interface</Filter>
-    </ClCompile>
-    <ClCompile Include="source\interface\editor_properties_window.cpp">
       <Filter>Source Files\interface</Filter>
     </ClCompile>
     <ClCompile Include="source\interface\editor_terrainbrush_window.cpp">

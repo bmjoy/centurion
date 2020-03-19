@@ -140,7 +140,7 @@ public:
 		static bool IsKeyNotReleased(unsigned int key_code) { return keyCode[key_code] != 0; }
 		static int GetCharCodepointPressed(void) { return charCodepointPressed; }
 		static void SetCharCodepointPressed(int codepoint);
-		static void ResetKeys() { std::fill(keyCode, keyCode + 348, 0); }
+		static void ResetKeys();
 	private:
 		static int keyCode[348];
 		static int charCodepointPressed;

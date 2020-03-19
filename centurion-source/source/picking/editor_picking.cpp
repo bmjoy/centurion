@@ -5,58 +5,10 @@
 #include <game/editor.h>
 #include <game/strategy.h>
 #include <classes/object.h>
-
 #include <terrain.h>
-
-
 #include <file_manager.h>
 
-
-
-
-
 namespace editor {
-
-	/*---------------------------*/
-	/*      OPEN MAP WINDOW      */
-	/*---------------------------*/
-
-	void OpenMapWindow::picking() {
-		GLint mouseX = (GLint)Engine::Mouse::GetXPosition();
-		GLint mouseY = (GLint)Engine::Mouse::GetYPosition();
-		Picking::leftClickID_UI = Picking::GetIdFromClick();
-		string clickName = PickingUI::getPickedObjectName(Picking::leftClickID_UI);
-		int pos = (int)((mouseY - startY + map_list.padding_top)*(-1)) / (int)map_list.option_height;
-
-		if (Picking::leftClickID_UI == 0) selectedID = -1;
-
-		if (Picking::leftClickID_UI == map_list.pickingID) {
-			if (pos >= 0) {
-				selectedID = pos;
-			}
-		}
-		
-		if (clickName == "OpenMapWindow_close") { // CLOSE
-			OpenMapWindowIsOpen = false;
-			IsWindowOpened = false;
-		}
-
-		if (clickName == "OpenMapWindow_open" || (selectedID == pos && Picking::hasDoubleClicked())) { // OPEN
-			if (selectedID != -1) {
-				cout << "[DEBUG] You've chosen the following scenario to open: " + availableScenarios[selectedID] << endl;
-				Game::ResetGameObjects();
-
-				Game::Map::LoadScenario(availableScenarios[selectedID]);
-
-				currentMapName = availableScenarios[selectedID];
-				MapTerrain()->updateHeightsBuffer();
-				MapTerrain()->updateTextureBuffer();
-
-				OpenMapWindowIsOpen = false;
-				IsWindowOpened = false;
-			}
-		}
-	}
 
 	/*--------------------------*/
 	/*      NEW MAP WINDOW      */
@@ -216,36 +168,6 @@ namespace editor {
 		}
 	}
 
-	/*-----------------------------*/
-	/*      PROPERTIES WINDOW      */
-	/*-----------------------------*/
-
-	void PropertiesWindow::picking() {
-		GLint mouseX = (GLint)Engine::Mouse::GetXPosition();
-		GLint mouseY = (GLint)Engine::Mouse::GetYPosition();
-		Picking::leftClickID_UI = Picking::GetIdFromClick();
-		string clickName = PickingUI::getPickedObjectName(Picking::leftClickID_UI);
-
-		text_input[0].active(clickName == "PropertiesWindow_name");
-		if (building_pointer->GetSettlement().IsIndipendent())
-			text_input[1].active(clickName == "PropertiesWindow_settl_name");
-
-		if (clickName == "PropertiesWindow_cancel") { // CANCEL
-			PropertiesWindowIsOpen = false;
-			IsWindowOpened = false;
-			Engine::Mouse::LeftClick = false;
-		}
-		if (clickName == "PropertiesWindow_apply") { // APPLY
-			if (type == "building"){
-				building_pointer->SetName(text_input[0].get_text());
-				if (building_pointer->GetSettlement().IsIndipendent())
-					building_pointer->GetSettlement().SetSettlementName(text_input[1].get_text());
-			}
-			PropertiesWindowIsOpen = false;
-			IsWindowOpened = false;
-			Engine::Mouse::LeftClick = false;
-		}
-	}
 
 	/*--------------------------------*/
 	/*      TERRAIN BRUSH WINDOW      */

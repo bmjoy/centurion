@@ -10,6 +10,8 @@
 #include <translationsTable.h>
 #include <terrain.h>
 
+#include <hector-lua.h>
+
 #include <GLFW/glfw3.h>
 
 #pragma region Static variables
@@ -152,21 +154,26 @@ void Editor::handleKeyboardControls() {
 				}
 			}
 		}
-		
-		if (Engine::Keyboard::IsKeyPressed(GLFW_KEY_SPACE) || Engine::Mouse::MiddleClick) {
-			if (Minimap::IsActive()) Minimap::Disable();
-			else Minimap::Enable(); clearEditorVariables();
-			Minimap::IsActive() ? Logger::Info("Minimap ON!") : Logger::Info("Minimap OFF!");
+		if (Hector::ConsoleIsActive() == false) {
+			if (Engine::Keyboard::IsKeyPressed(GLFW_KEY_SPACE) || Engine::Mouse::MiddleClick) {
+				if (Minimap::IsActive()) Minimap::Disable();
+				else Minimap::Enable(); clearEditorVariables();
+				Minimap::IsActive() ? Logger::Info("Minimap ON!") : Logger::Info("Minimap OFF!");
+			}
 		}
-		if (Engine::Keyboard::IsKeyPressed(GLFW_KEY_Z)) {
-			Map::Wireframe = !Map::Wireframe;
-			Map::Wireframe ? Logger::Info("Wireframe ON!") : Logger::Info("Wireframe OFF!");
+		if (Hector::ConsoleIsActive() == false) {
+			if (Engine::Keyboard::IsKeyPressed(GLFW_KEY_Z)) {
+				Map::Wireframe = !Map::Wireframe;
+				Map::Wireframe ? Logger::Info("Wireframe ON!") : Logger::Info("Wireframe OFF!");
+			}
 		}
 		// Grid
-		if (Engine::Keyboard::IsKeyPressed(GLFW_KEY_G)) {
-			if (Map::IsGridEnabled()) Map::DisableGrid();
-			else Map::EnableGrid();
-			Map::IsGridEnabled() ? Logger::Info("Grid ON!") : Logger::Info("Grid OFF!");
+		if (Hector::ConsoleIsActive() == false) {
+			if (Engine::Keyboard::IsKeyPressed(GLFW_KEY_G)) {
+				if (Map::IsGridEnabled()) Map::DisableGrid();
+				else Map::EnableGrid();
+				Map::IsGridEnabled() ? Logger::Info("Grid ON!") : Logger::Info("Grid OFF!");
+			}
 		}
 	}
 	if (Engine::Keyboard::IsKeyPressed(GLFW_KEY_ESCAPE)) {

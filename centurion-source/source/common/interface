@@ -242,37 +242,6 @@ namespace editor {
 	//---------------------------------------------------
 
 	//
-	//  OPEN MAP WINDOW
-	//
-
-	struct MapList {
-		vector<gui::Rectangle> back_options;
-		vector<gui::SimpleText> text_options;
-		gui::Rectangle back_picking;
-		float padding_left, padding_top;
-		float option_height;
-		int pickingID;
-	};
-
-	class OpenMapWindow {
-	public:
-		OpenMapWindow();
-		void create();
-		void update();
-		void render(bool pick);
-		~OpenMapWindow();
-	private:
-		gui::Image back_image;
-		gui::Image buttons[2];
-		gui::SimpleText buttons_text[2];
-		vec4 back_color;
-		float startX, startY;
-		MapList map_list;
-		void picking();
-		int selectedID;
-	};
-
-	//
 	//	NEW MAP WINDOW
 	//
 
@@ -344,29 +313,6 @@ namespace editor {
 		void update();
 	};
 
-	//
-	//	PROPERTIES WINDOW
-	//
-
-	class PropertiesWindow {
-	public:
-		PropertiesWindow();
-		void create();
-		void render(bool pick);
-		~PropertiesWindow();
-	private:
-		gui::TextInput text_input[2];
-		gui::Image back_image;
-		gui::Image buttons[2];
-		gui::Image textinput_back[2];
-		gui::SimpleText buttons_text[2];
-		gui::SimpleText text[3];
-		float startX, startY;
-		void picking();
-		Building *building_pointer;
-		Unit *unit_pointer;
-		string type;
-	};
 
 	//
 	//	TERRAIN BRUSH WINDOW
@@ -396,14 +342,10 @@ namespace editor {
 		EditorUI();
 		void create();
 		void render(bool picking);
-		//void close_menu() { editor_menu.closeMenu(); }
 		~EditorUI();
 	private:
-		//EditorMenu editor_menu;
-		OpenMapWindow open_map_window;
 		NewMapWindow new_map_window;
 		AddObjectWindow add_object_window;
-		PropertiesWindow properties_window;
 		TerrainBrushWindow terrainbrush_window;
 		gui::Rectangle minimapRectangle;
 	};
