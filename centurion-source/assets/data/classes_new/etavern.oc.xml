@@ -1,12 +1,12 @@
 <c_object parent="BaseTavern" type="cpp_buildingclass" class_name="ETavern">
  <properties>
+    <property name="singularName" value="Egyptian tavern"/>
+    <property name="pluralName" value="Egyptian taverns"/>
     <property name="race" value="Egypt"/>
     <property name="radius" value="1000"/>
-    <property name="isCentralBuilding" value="false"/>
     <property name="category" value="egyptianstronghold"/>
     <property name="ent_path" value="assets/buildings/egypt/tavern/etavern.oe.json"/>
     <property name="pass_path" value="assets/buildings/egypt/tavern/etavern.pass"/>
-    <property name="clickable_in_minimap" value="false"/>
   </properties>
   <methods>
     <method name="" script=""/>

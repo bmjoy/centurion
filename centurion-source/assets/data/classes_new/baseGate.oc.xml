@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no" ?>
-<c_object parent="Building" type="cpp_abstractclass" class_name="BaseGate">
+<c_object parent="Stronghold" type="cpp_abstractclass" class_name="BaseGate">
   <properties>
+    <property name="singularName" value="Gate"/>
+    <property name="pluralName" value="Gates"/>
   </properties>
   <methods>
   </methods>

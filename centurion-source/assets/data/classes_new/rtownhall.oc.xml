@@ -1,12 +1,12 @@
 <c_object parent="BaseTownhall" type="cpp_buildingclass" class_name="RTownhall">
  <properties>
+    <property name="singularName" value="Roman townhall"/>
+    <property name="pluralName" value="Roman townhalls"/>
     <property name="race" value="Rome"/>
     <property name="radius" value="500"/>
-    <property name="isCentralBuilding" value="true"/>
     <property name="category" value="romanstronghold"/>
     <property name="ent_path" value="assets/buildings/rome/townhall/rtownhall.oe.json"/>
     <property name="pass_path" value="assets/buildings/rome/townhall/rtownhall.pass"/>
-    <property name="clickable_in_minimap" value="true"/>
   </properties>
   <methods>
     <method name="feedAllies" script="buildingFeedAllies.Lua"/>

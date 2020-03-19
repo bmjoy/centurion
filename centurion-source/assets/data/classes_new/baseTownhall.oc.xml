@@ -1,6 +1,11 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no" ?>
 <c_object parent="Stronghold" type="cpp_noclass" class_name="BaseTownhall">
   <properties>
+    <property name="singularName" value="Townhall"/>
+    <property name="pluralName" value="Townhalls"/>
+    <property name="isCentralBuilding" value="true"/>
+    <property name="clickable_in_minimap" value="true"/>
+    <property name="canProduceGold" value="true"/>
   </properties>
   <methods>
   </methods>

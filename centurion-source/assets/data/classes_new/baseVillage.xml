@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no" ?>
-<c_object parent="Habitable" type="cpp_noclass" class_name="baseVillage">
+<c_object parent="Habitable" type="cpp_noclass" class_name="BaseVillage">
   <properties>
+    <property name="singularName" value="Village"/>
+    <property name="pluralName" value="Villages"/>
+    <property name="loyaltyFearHealthPercent" value="50"/>
     <property name="canProduceGold" value="false"/>
     <property name="canProduceFood" value="true"/>
   </properties>

@@ -1,12 +1,12 @@
 <c_object parent="BaseTemple" type="cpp_buildingclass" class_name="RTemple">
  <properties>
+    <property name="singularName" value="Roman temple"/>
+    <property name="pluralName" value="Roman temples"/>
     <property name="race" value="Rome"/>
     <property name="radius" value="450"/>
-    <property name="isCentralBuilding" value="false"/>
     <property name="category" value="romanstronghold"/>
     <property name="ent_path" value="assets/buildings/rome/temple/rtemple.oe.json"/>
     <property name="pass_path" value="assets/buildings/rome/temple/rtemple.pass"/>
-    <property name="clickable_in_minimap" value="false"/>
   </properties>
   <methods>
     <method name="" script=""/>

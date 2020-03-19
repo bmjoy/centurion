@@ -1,12 +1,12 @@
 <c_object parent="BaseBarracks" type="cpp_buildingclass" class_name="RBarracks">
  <properties>
+    <property name="singularName" value="Roman barracks"/>
+    <property name="pluralName" value="Roman barracks"/>
     <property name="race" value="Rome"/>
     <property name="radius" value="600"/>
-    <property name="isCentralBuilding" value="false"/>
     <property name="category" value="romanstronghold"/>
     <property name="ent_path" value="assets/buildings/rome/barracks/rbarracks.oe.json"/>
     <property name="pass_path" value="assets/buildings/rome/barracks/rbarracks.pass"/>
-    <property name="clickable_in_minimap" value="false"/>
   </properties>
   <methods>
     <method name="" script=""/>

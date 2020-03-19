@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no" ?>
 <c_object parent="Habitable" type="cpp_buildingclass" class_name="BaseHouse">
   <properties>
+    <property name="singularName" value="House"/>
+    <property name="pluralName" value="Houses"/>
   </properties>
   <methods>
   </methods>

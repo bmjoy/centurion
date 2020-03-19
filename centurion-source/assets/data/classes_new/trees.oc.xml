@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no" ?>
 <c_object parent="Decoration" type="cpp_noclass" class_name="Trees">
   <properties>
+    <property name="singularName" value="Tree"/>
+    <property name="pluralName" value="Trees"/>
     <property name="canBeClonedInEditor" value="false"/>
   </properties>
   <methods>

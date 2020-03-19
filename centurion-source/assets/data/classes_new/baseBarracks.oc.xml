@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no" ?>
 <c_object parent="Stronghold" type="cpp_noclass" class_name="BaseBarracks">
   <properties>
+    <property name="singularName" value="Barracks"/>
+    <property name="pluralName" value="Barracks"/>
   </properties>
   <methods>
   </methods>

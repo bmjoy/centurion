@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no" ?>
 <c_object parent="Object" type="cpp_abstractclass" class_name="Unit">
   <properties>
+  	  <property name="singularName" value="Unit"/>
+  	  <property name="pluralName" value="Units"/>
   	  <property name="damageType" value="slash"/>
   	  <property name="minAttack" value="10"/>
   	  <property name="maxAttack" value="30"/>
@@ -14,6 +16,7 @@
 	  <property name="healingSpeedRate" value="1"/>
 	  <property name="formationDistance" value="15"/>
 	  <property name="zOffset" value="0"/> <!-- For flying unit -->
+	  <property name="dualWeilding" value="false"/>
 	  <property name="canBeDamagedByGhost" value="true"/>
 	  <property name="canBeInvisible" value="true"/> <!-- Fishes can't be hided by mages -->
   	  <property name="canFly" value="false"/>

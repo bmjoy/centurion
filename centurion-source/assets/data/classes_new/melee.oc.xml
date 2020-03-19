@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no" ?>
-<c_object parent="Military" type="cpp_noclass" class_name="Ranged">
+<c_object parent="Military" type="cpp_noclass" class_name="Melee">
   <properties>
-    <property name="range" value="100"/>
   </properties>
   <methods>
   </methods>

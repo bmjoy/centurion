@@ -3,6 +3,7 @@
   <properties>
     <property name="singularName" value="Building"/>
     <property name="pluralName" value="Buildings"/>
+    <property name="category" value=""/>
     <property name="maxHealth" value="5000"/>
     <property name="repairRate" value="100"/>
     <property name="loyaltyFearHealthPercent" value="1"/>  <!-- Nuova idea. Se la salute di un edificio è inferiore al numero espresso in value l'edificio perderà la lealtà più velocemente (ad esempio un villaggio che, attaccato, si sente indifeso) -->

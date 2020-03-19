@@ -1,5 +1,7 @@
 <c_object parent="Trees" type="cpp_decorationclass" class_name="Palm_1">
  <properties>
+    <property name="singularName" value="Palm 1"/>
+    <property name="pluralName" value="Palms 1"/>
     <property name="category" value="trees"/>
     <property name="ent_path" value="assets/decorations/trees/palm_trees/palm_1.oe.json"/>
     <property name="pass_path" value="assets/decorations/trees/palm_trees/palm_1.pass"/>
