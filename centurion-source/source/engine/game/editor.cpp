@@ -85,7 +85,6 @@ void Editor::Run()
 	/* If minimap is active */
 	else 
 	{
-		cout << Picking::leftClickID << endl;
 		viewMatrix = mat4(1.0f);
 		projectionMatrix = getMinimapProjectionMatrix();
 

@@ -2,6 +2,7 @@
 
 #include <ui.h>
 #include <json.hpp>
+#include <object_sprite.h>
 
 using namespace std;
 using namespace glm;
@@ -92,8 +93,9 @@ public:
 	virtual void render(bool picking, int clickID = 0, bool not_placeable = false) {};
 
 	~GObject();
-protected:
 	GObject();
+protected:
+	ObjectSprite::SpriteData spriteData;
 	Player *player;
 	vec3 pickingColor;
 	json data;

@@ -638,7 +638,6 @@ int Engine::launch() {
 	while (myWindow::ShouldClose == false) {
 		glfwPollEvents();
 		Mouse::IsLeftHolding(); 
-		cout << Mouse::LeftHold << endl;
 		window.ClearBuffers();
 		fps();
 		Mouse::mouse_control(window.get_mouse_x(), window.get_mouse_y());

@@ -109,7 +109,7 @@ public:
 	static GObject* GetSelectedObject() { return selectedObject; }
 	static bool IsGameObjectSelected(int id);
 	static bool IsGameObjectNotNull(int id);
-
+	static void CreateObject(string className, float x, float y, int player);
 #pragma endregion
 
 

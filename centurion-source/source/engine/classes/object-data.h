@@ -5,6 +5,7 @@
 #include <string>
 #include <vector>
 #include <iostream>
+#include <object_sprite.h>
 
 using namespace std;
 
@@ -26,12 +27,15 @@ public:
 		string GetClassName() { return className; }
 		string GetParentClass() { return parent; }
 		string GetClassType() { return type; }
-		~ObjectXMLClassData(); 
+		void SetSpriteData(ObjectSprite::SpriteData _spriteData) { spriteData = _spriteData; }
+		ObjectSprite::SpriteData GetSpriteData() { return spriteData; }
+		~ObjectXMLClassData();
 	private:
 		map<string, string> propertiesMap;
 		map<string, string> soundsMap;
 		map<string, string> methodsMap;
 		string className, parent, type;
+		ObjectSprite::SpriteData spriteData;
 	};
 
 	static ObjectXMLClassData GetObjectData(string _class) { return objectsData[_class]; }

@@ -28,6 +28,26 @@ void Hector::Initialize()
 	L = luaL_newstate();
 	luaL_openlibs(L);
 
+	// global variables
+
+	getGlobalNamespace(L).beginNamespace("Mouse").addVariable("RightClickID", &Picking::rightClickID).endNamespace();
+	getGlobalNamespace(L).beginNamespace("Mouse").addVariable("LeftClickID", &Picking::leftClickID).endNamespace();
+
+	getGlobalNamespace(L).beginNamespace("Mouse").addVariable("RightClick", &Engine::Mouse::RightClick).endNamespace();
+	getGlobalNamespace(L).beginNamespace("Mouse").addVariable("LeftClick", &Engine::Mouse::LeftClick).endNamespace();
+
+	// types 
+
+	getGlobalNamespace(L)
+		.beginClass<vector<string>>("vector_string")
+		.endClass();
+
+	getGlobalNamespace(L)
+		.beginClass<vec3>("vec3")
+		.endClass();
+
+	// functions
+
 	getGlobalNamespace(L).beginClass<Engine>("Engine")
 		.addStaticFunction("GameClose", &Engine::GameClose)
 		.addStaticFunction("PrintToConsole", &Engine::PrintToConsole)
@@ -59,16 +79,7 @@ void Hector::Initialize()
 		.addStaticFunction("GetSelectedObject", &Game::GetSelectedObject)
 		.addStaticFunction("IsObjectSelected", &Game::IsGameObjectSelected)
 		.addStaticFunction("IsObjectNotNull", &Game::IsGameObjectNotNull)
-		.endClass();
-
-	getGlobalNamespace(L).beginNamespace("Mouse").addVariable("RightClickID", &Picking::rightClickID).endNamespace();
-	getGlobalNamespace(L).beginNamespace("Mouse").addVariable("LeftClickID", &Picking::leftClickID).endNamespace();
-
-	getGlobalNamespace(L).beginNamespace("Mouse").addVariable("RightClick", &Engine::Mouse::RightClick).endNamespace();
-	getGlobalNamespace(L).beginNamespace("Mouse").addVariable("LeftClick", &Engine::Mouse::LeftClick).endNamespace();
-
-	getGlobalNamespace(L)
-		.beginClass<vector<string>>("vector_string")
+		.addStaticFunction("CreateObject", &Game::CreateObject)
 		.endClass();
 
 	getGlobalNamespace(L)
@@ -76,8 +87,7 @@ void Hector::Initialize()
 		.addFunction("GetSelectedOption", &gui::TextList::GetSelectedOption)
 		.addStaticFunction("GetListById", gui::TextList::GetTextListById)
 		.addStaticFunction("UpdateListById", &gui::TextList::UpdateTextListById)
-		.endClass();
-
+		.endClass();	
 }
 
 void Hector::ExecuteCommand(string cmd)

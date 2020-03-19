@@ -36,7 +36,7 @@ public:
 
 
 	void prepare() override;
-	void create(string Name = "");
+	void Create(string className);
 	void render(bool picking, int clickID = 0, bool not_placeable = false) override;
 	void SetStatus(const bool bIsCreated);
 
@@ -71,10 +71,5 @@ private:
 	bool bIsShipyard = false;
 	Settlement settlement;
 
-	// properties from sprite
-	float sprite_width, sprite_height;
-	GLuint textureID;
-
-	vec2 getSpriteSize(string ent_path);
 	//sound selectionSound; TODO
 };

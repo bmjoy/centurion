@@ -22,7 +22,7 @@
     <VCProjectVersion>15.0</VCProjectVersion>
     <ProjectGuid>{29C92E4D-97E2-4049-A35E-F6A42D1C8AB9}</ProjectGuid>
     <RootNamespace>centurion</RootNamespace>
-    <WindowsTargetPlatformVersion>10.0.18362.0</WindowsTargetPlatformVersion>
+    <WindowsTargetPlatformVersion>10.0.17763.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
@@ -264,6 +264,7 @@ XCOPY "$(ProjectDir)lua53.dll" "$(ProjectDir)$(OutDir)"</Command>
     <ClCompile Include="source\gl-items\minimap_rectangle.cpp" />
     <ClCompile Include="source\gl-items\primitives.cpp" />
     <ClCompile Include="source\gl-items\shader.cpp" />
+    <ClCompile Include="source\gl-items\object_sprite.cpp" />
     <ClCompile Include="source\gl-items\terrain.cpp" />
     <ClCompile Include="source\gl-items\unit_sprite.cpp" />
     <ClCompile Include="source\hector\hector-lua.cpp" />
@@ -355,6 +356,7 @@ XCOPY "$(ProjectDir)lua53.dll" "$(ProjectDir)$(OutDir)"</Command>
     <ClInclude Include="source\gl-items\primitives.h" />
     <ClInclude Include="source\gl-items\primitives_structs.h" />
     <ClInclude Include="source\gl-items\shader.h" />
+    <ClInclude Include="source\gl-items\object_sprite.h" />
     <ClInclude Include="source\gl-items\terrain.h" />
     <ClInclude Include="source\gl-items\unit_sprite.h" />
     <ClInclude Include="source\hector\hector-lua.h" />

@@ -10,7 +10,7 @@
 #pragma region Static variables
 
 map<string, ObjectData::ObjectXMLClassData> ObjectData::objectsData;
-string ObjectData::dataClassesPath = "assets/data/classes_new/";
+string ObjectData::dataClassesPath = "assets/data/classes/";
 
 #pragma endregion
 
@@ -90,17 +90,18 @@ void ObjectData::ReadDataClassesFromXml()
 
 			AddObjectXMLClassData(objData.GetClassName(), objData);
 
-			// Give Paths to Primitives
+			// READ THE ENTITY.XML FILES AND PREPARE THE PRIMITIVES
+
 			string path = objData.GetPropertyValue("ent_path");
 			if (path == "NOT_VALID") continue;
 			if (objData.GetClassType() == "building") {
-				primitives::BSprite()->addPath(path);
+				primitives::BSprite()->AddEntityPath(path);
 			}
 			else if (objData.GetClassType() == "decoration") {
-				primitives::DSprite()->addPath(path);
+				primitives::DSprite()->AddEntityPath(path);
 			}
 			else if (objData.GetClassType() == "unit") {
-				primitives::USprite()->addPath(path);
+				primitives::USprite()->AddEntityPath(path);
 			}
 		}
 		catch (const xml_schema::exception & e) {

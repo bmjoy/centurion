@@ -450,6 +450,9 @@
     <ClCompile Include="source\engine\classes\trees.cpp">
       <Filter>Source Files\engine\classes</Filter>
     </ClCompile>
+    <ClCompile Include="source\gl-items\object_sprite.cpp">
+      <Filter>Source Files\gl-items</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="source\extern\includes\json.hpp">
@@ -763,6 +766,9 @@
     </ClInclude>
     <ClInclude Include="source\engine\classes\trees.h">
       <Filter>Header Files\engine\classes</Filter>
+    </ClInclude>
+    <ClInclude Include="source\gl-items\object_sprite.h">
+      <Filter>Header Files\gl-items</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

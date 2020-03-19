@@ -18,6 +18,7 @@
 
 #include <logger.h>
 #include <settings.h>
+#include <classes/object-data.h>
 
 #pragma region Map class
 
@@ -239,7 +240,7 @@ void Game::Map::LoadMapObjectsFromXml(string xmlPath)
 
 		// independent buildings and their ...
 
-		c_buildings::c_settlement_iterator _settl;
+		/*c_buildings::c_settlement_iterator _settl;
 		for (_settl = mapObjs->c_buildings().c_settlement().begin(); _settl != mapObjs->c_buildings().c_settlement().end(); _settl++) {
 
 			c_settlement::c_building_iterator _bld;
@@ -255,14 +256,14 @@ void Game::Map::LoadMapObjectsFromXml(string xmlPath)
 				b->create(_bld->name().get());
 				Game::AddGameObject(b->GetPickingID(), b);
 			}
-		}
+		}*/
 
 		// stand alone buildings!!
 
 
 		// decorations
 
-		c_decorations::c_decoration_iterator _dec;
+		/*c_decorations::c_decoration_iterator _dec;
 		for (_dec = mapObjs->c_decorations().c_decoration().begin(); _dec != mapObjs->c_decorations().c_decoration().end(); _dec++) {
 			
 			Decoration* d = new Decoration();
@@ -273,7 +274,7 @@ void Game::Map::LoadMapObjectsFromXml(string xmlPath)
 			d->create();
 			d->SetType("decoration");
 			Game::AddGameObject(d->GetPickingID(), d);
-		}
+		}*/
 
 		// units
 	}
@@ -585,6 +586,17 @@ bool Game::IsGameObjectNotNull(int id) {
 		return false;
 	else
 		return (GameObjects[id] != nullptr);
+}
+
+void Game::CreateObject(string className, float x, float y, int player)
+{
+	string type = ObjectData::GetObjectData(className).GetClassType();
+
+	if (type == "building") {
+		Building* newBuilding = new Building();
+		newBuilding->SetPosition(vec3(x, y, 10));
+		newBuilding->Create(className);
+	}
 }
 
 vector<Building*> Game::GetListOfIndipendentBuildings() {
