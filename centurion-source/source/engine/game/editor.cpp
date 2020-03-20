@@ -133,7 +133,7 @@ void Editor::handleKeyboardControls() {
 			if (Game::IsGameObjectNotNull(Picking::leftClickID)) {
 				Building* b = Game::GetGameObjectPtrById(Picking::leftClickID)->AsBuilding();
 				if (b->IsSelected()) {
-					if (b->GetSettlement().IsIndipendent()) {
+					if (b->GetSettlement()->IsIndipendent()) {
 						/*
 						if (b->buildingsInSettlementCount() > 0) {
 							b->setWaitingToBeErased(true);
@@ -147,7 +147,7 @@ void Editor::handleKeyboardControls() {
 						*/
 					}
 					else {
-						cout << "[DEBUG] Building " << b->GetName() << " deleted!\n";
+						cout << "[DEBUG] Building " << b->GetSingularName() << " deleted!\n";
 						b->clear_pass();
 						Game::RemoveGameObject(Picking::leftClickID);
 					}
@@ -264,7 +264,7 @@ namespace editor {
 			buildingTemp->render(false, 0, !buildingTemp->IsPlaceable());
 
 			//Player will be able to see info about placing status
-			if (!buildingTemp->GetSettlement().IsIndipendent()) {
+			if (!buildingTemp->GetSettlement()->IsIndipendent()) {
 				string s = "";
 				
 				/*if (!buildingTemp->is_near_to_independent(&s))
@@ -382,7 +382,7 @@ namespace editor {
 				float dx = x1 - movingObjectStartXMouse;
 				float dy = y1 - movingObjectStartYMouse;
 
-				if (!bld->GetSettlement().IsIndipendent())
+				if (!bld->GetSettlement()->IsIndipendent())
 				{
 					if (!movingObject) bld->clear_pass();
 					bld->SetPosition(vec3(movingObjectXPos + dx, movingObjectYPos + dy, 0.f));

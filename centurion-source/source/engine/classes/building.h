@@ -18,22 +18,40 @@ class Settlement;
 class Building : public GObject
 {
 public:
-	Settlement GetSettlement(void);
-	void SetSettlement(const Settlement par_settlement);
+	Settlement *GetSettlement(void);
+	void SetSettlement(Settlement *par_settlement);
 
-	bool IsClickableInMimimap(void);
-	void CanBeClickableInMimimap(const bool par_clickable);
-
-	bool IsPlaceable(void);
-	void SetPlaceable(const bool placeable);
-	bool IsCentralBuilding(void);
-
+	void SetCategory(const string par_category);
 	string GetCategory(void);
+
+	void SetMaxHealth(const unsigned int par_maxHealth);
+	unsigned int GetMaxHealth(void);
+
+	void SetRepairRate(const unsigned int par_repairRate);
+	unsigned int GetRepairRate(void);
+
+	void SetLoyaltyFearHealthPercent(const unsigned int par_loyaltyFearHealthPercent);
+	unsigned int GetLoyaltyFearHealthPercent(void);
+
+	void CanBeClickableInMimimap(const bool par_clickable);
+	bool IsClickableInMimimap(void);
+
+	bool IsCentralBuilding(void);
 	bool IsVillageHall(void);
 	bool IsTownhall(void);
 	bool IsOutpost(void);
 	bool IsShipyard(void);
+	
+	void SetPlaceable(const bool placeable);
+	bool IsPlaceable(void);
+	
+	void StartGoldProduction(void);
+	void StopGoldProduction(void);
+	void StartFoodProduction(void);
+	void StopFoodProduction(void);
 
+	void SetEntPath(const string par_ent_path);
+	void SetPassPath(const string par_pass_path);
 
 	void prepare() override;
 	//void Create(string className);
@@ -46,16 +64,7 @@ public:
 
 	Building();
 	~Building();
-protected:
-	void IAmACentralBuilding(void);
-	void IAmATownhall(void);
-	void IAmAnOutpost(void);
-	void IAmAVillageHall(void);
-	void IAmAShipyard(void);
-	void StartGoldProduction(void);
-	void StopGoldProduction(void);
-	void StartFoodProduction(void);
-	void StopFoodProduction(void);
+
 private:
 	game::ObjectUI* buildingUI;
 	map<int, Building*> subs_buildings; // dependent buildings connected to indipendent one
@@ -63,21 +72,25 @@ private:
 	bool waitingToBeErased;
 	bool bIsCreated;
 	size_t buildingListSize;
-	bool bIsPlaceable;
-	bool bIsClickableInMimimap;
 	gui::Circle circle[2];
 	string category;
-	string ent_path;
-	string pass_path;
+	unsigned int maxHealth;
+	unsigned int repairRate;
+	unsigned int loyaltyFearHealthPercent;
+	bool bIsClickableInMimimap = false;
+	bool bIsCentralBuilding = false;
 	bool bIsOutpost = false;
 	bool bIsTownhall = false;
 	bool bIsVillageHall = false;
-	bool bIsCentralBuilding = false;
 	bool bIsShipyard = false;
+	bool bIsPlaceable = false;
+	bool bAutoRepair = false;
 	bool bCanProduceGold = false;
 	bool bCanProduceFood = false;
+	string ent_path;
+	string pass_path;
 	vector<Unit> holdUnits;
-	Settlement settlement;
+	Settlement *settlement;
 
 	//sound selectionSound; TODO
 };

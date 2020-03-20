@@ -28,22 +28,14 @@ bool Settlement::IsIndipendent(void)
 	return this->bIsIndipendent;
 }
 
-unsigned short int Settlement::GetFood(void)
+unsigned int Settlement::GetFood(void)
 {
 	return this->food;
 }
 
-void Settlement::SetFood(unsigned short int food)
+void Settlement::SetFood(const unsigned int par_food)
 {
-	if (food < 0) {
-		this->food = 0;
-	}
-
-	//TRANSFORM THE VALUE INTO A CONSTANT
-	if (food > 999999)
-		this->food = (unsigned short int)999999;
-	else
-		this->food = food;
+	this->food = par_food <= FOOD_LIMIT ? par_food : FOOD_LIMIT;
 }
 
 int Settlement::GetGold(void)
@@ -51,49 +43,40 @@ int Settlement::GetGold(void)
 	return this->gold;
 }
 
-void Settlement::SetGold(int gold)
+void Settlement::SetGold(int par_gold)
 {
-	//LOAN OR NOT LESS THAN 0?
-	//TRANSFORM THE VALUE INTO A CONSTANT
-	if (gold > 999999)
-		this->gold = 999999;
+	if (par_gold >= 0)
+	{
+		this->gold = par_gold <= GOLD_LIMIT ? par_gold : GOLD_LIMIT;
+	}
 	else
-		this->gold = gold;
+	{
+		this->gold = par_gold >= (-GOLD_LIMIT) ? par_gold : (-GOLD_LIMIT);
+	}
 }
 
-unsigned short int Settlement::GetPopulation(void)
+unsigned int Settlement::GetPopulation(void)
 {
 	return this->population;
 }
 
-void Settlement::SetPopulation(unsigned short int population)
+void Settlement::SetPopulation(const unsigned int par_population)
 {
-	if (population < 0) {
-		this->population = 0;
+	this->population = par_population <= POPULATION_LIMIT ? par_population : POPULATION_LIMIT;
+	if (this->population > this->max_population)
+	{
+		this->population = this->max_population;
 	}
-
-	if (population > GetMaxPopulation())
-		this->population = GetMaxPopulation();
-	else
-		this->population = population;
 }
 
-unsigned short int Settlement::GetMaxPopulation(void)
+unsigned int Settlement::GetMaxPopulation(void)
 {
 	return this->max_population;
 }
 
-void Settlement::SetMaxPopulation(unsigned short int max_population)
+void Settlement::SetMaxPopulation(const unsigned int par_max_population)
 {
-	if (max_population < 0) {
-		this->max_population = 0;
-	}
-
-	//TRANSFORM THE VALUE INTO A CONSTANT
-	if (max_population > 5000)
-		this->max_population = (unsigned short int)5000;
-	else
-		this->max_population = max_population;
+	this->max_population = par_max_population <= POPULATION_LIMIT ? par_max_population : POPULATION_LIMIT;
 }
 
 vector<Building> Settlement::GetBuildingsBelongToSettlement(void)
@@ -125,4 +108,3 @@ bool Settlement::RemoveBuildingFromSettlement(Building& b)
 	}
 	return bRemovedCorrectly;
 }
-

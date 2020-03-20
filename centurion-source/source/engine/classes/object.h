@@ -43,29 +43,41 @@ public:
 	//Radius methods
 	float GetRadius(void);
 	void SetRadius(const float par_radius);
+	float GetSelectionRadius(void);
+	void SetSelectionRadius(const float par_selectionRadius);
 
 	//Class name methods
 	string GetClassName(void);
 	void SetClassName(const string par_className);
 
 	//Object name methods
-	string GetName(void);
-	void SetName(const string par_name);
+	void SetSingularName(const string par_singularName);
+	string GetSingularName(void);
+	void SetPluralName(const string par_pluralName);
+	string GetPluralName(void);
 
 	//Race methods
-	unsigned short int GetRace(void);
+	unsigned int GetRace(void);
 	void SetRace(const unsigned short int par_race);
 	string GetRaceName(void);
 	void SetRaceName(const string par_raceName);
 
 	//Sight methods
-	unsigned short int GetSight(void);
+	unsigned int GetSight(void);
 	void SetSight(const unsigned short int par_sight);
 
-	//Positioing into water methods
+	//Positioning into water methods
 	bool CanBePositionedIntoWater(void);
 	void AllowPositioningIntoWater(void);
 	void DenyPositioningIntoWater(void);
+
+	//Duplication into editor methods
+	bool GetCanBeClonedInEditor(void);
+	void SetCanBeClonedInEditor(const bool par_canBeClonedInEditor);
+
+	//Visibility into minimap:
+	bool GetAlwaysVisibleInGameMinimap(void);
+	void SetAlwaysVisibleInGameMinimap(const bool par_alwaysVisibleInGameMinimap);
 
 	//Type methods
 	string GetType(void);
@@ -90,7 +102,7 @@ public:
 	void clear_pass(void);
 
 	virtual void prepare(void) { };
-	void Create(string _className);
+	void Create(const string _className);
 	virtual void render(bool picking, int clickID = 0, bool not_placeable = false) {};
 
 	GObject();
@@ -102,17 +114,23 @@ protected:
 	vec3 pickingColor;
 	json data;
 	vector<vector<int>> pass_grid;
+	map<string, string> methods;
+	map<string, string> sounds;
 private:
 	unsigned short int playerID;
 	unsigned int pickingID;
-	unsigned short int race;
-	unsigned short int sight;
+	unsigned int race;
+	unsigned int sight;
+	float selectionRadius;
 	float radius;
 	vec3 position;
+	string singularName;
+	string pluralName;
 	string raceName;
 	string className;
-	string name;
 	string type;
-	bool selected = false;
-	bool isWaterObject = false;
+	bool bSelected = false;
+	bool bIsWaterObject = false;
+	bool canBeClonedInEditor = false;
+	bool bAlwaysVisibleInGameMinimap = false;
 };

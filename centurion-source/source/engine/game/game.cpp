@@ -87,7 +87,7 @@ void Game::Map::SaveMapObjectsToXml(string xmlPath)
 
 			Building* gobj = indip_bs[i];
 
-			c_settlement _settl = c_settlement((c_settlement::name_type)gobj->GetName(),
+			c_settlement _settl = c_settlement((c_settlement::name_type)gobj->GetSingularName(),
 				(c_settlement::player_type)1,
 				(c_settlement::x_type)gobj->GetPosition().x,
 				(c_settlement::y_type)gobj->GetPosition().y
@@ -99,7 +99,7 @@ void Game::Map::SaveMapObjectsToXml(string xmlPath)
 				(c_building1::yOffset_type)0
 			);
 			b.healthperc(100);
-			b.name(gobj->GetName());
+			b.name(gobj->GetSingularName());
 			_settl.c_building().push_back(b);
 
 			/*
@@ -592,7 +592,7 @@ vector<Building*> Game::GetListOfIndipendentBuildings() {
 	vector<Building*> indipBuildings = vector<Building*>();
 	for (int i = 0; i < MAX_NUMBER_OF_OBJECTS; i++) {
 		if (GameObjects[i] != nullptr && GameObjects[i]->IsBuilding()) {
-			if (GameObjects[i]->AsBuilding()->GetSettlement().IsIndipendent()) {
+			if (GameObjects[i]->AsBuilding()->GetSettlement()->IsIndipendent()) {
 				indipBuildings.push_back(GameObjects[i]->AsBuilding());
 			}
 		}
@@ -874,9 +874,12 @@ void Game::CreateObject(string className, float x, float y, int player)
 	
 	string type = objData->GetClassType();
 
-	if (type == "cpp_buildingclass") {
+	if (type == "cpp_buildingclass")
+	{
 		Building* newBuilding = new Building();
 		newBuilding->SetPosition(vec3(x, y, 10));
+		newBuilding->SetClassName(className);
+		newBuilding->SetType(type);
 		newBuilding->Create(className);
 	}
 }

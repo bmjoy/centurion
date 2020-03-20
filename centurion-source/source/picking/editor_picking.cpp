@@ -77,7 +77,7 @@ namespace editor {
 				
 				for (int i = 0; i < indipBuildings.size(); i++) {
 					Building* settl = indipBuildings[i]->AsBuilding();
-					string settl_name = settl->GetName();
+					string settl_name = settl->GetSingularName();
 					if (settl->getWaitingToBeErased()) {
 						idsToErase.push_back(settl->GetPickingID());
 						/*

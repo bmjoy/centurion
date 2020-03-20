@@ -77,7 +77,8 @@ void Decoration::checkSettlement() {
 	vector<Building*> listOfIndipBuildings = Game::GetListOfIndipendentBuildings();
 	for (int i = 0; i < listOfIndipBuildings.size(); i++) {
 		Building* bld = listOfIndipBuildings[i];
-		string settlName = bld->GetSettlement().GetSettlementName();
+
+		string settlName = bld->GetSettlement()->GetSettlementName();
 		float settlX = bld->GetPosition().x;
 		float settlY = bld->GetPosition().y;
 

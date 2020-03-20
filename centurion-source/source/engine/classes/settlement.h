@@ -3,6 +3,18 @@
 #include <string>
 #include "building.h"
 
+#ifndef POPULATION_LIMIT
+#define POPULATION_LIMIT   10000
+#endif 
+
+#ifndef GOLD_LIMIT
+#define GOLD_LIMIT   1000000000
+#endif 
+
+#ifndef FOOD_LIMIT
+#define FOOD_LIMIT   1000000000
+#endif 
+
 using namespace std;
 
 class Settlement
@@ -12,14 +24,14 @@ public:
 	void SetSettlementName(const string par_settlementName);
 	bool IsIndipendent(void);
 
-	unsigned short int GetFood(void);
-	void SetFood(unsigned short int food);
+	unsigned int GetFood(void);
+	void SetFood(const unsigned int par_food);
 	int GetGold(void);
-	void SetGold(int gold);
-	unsigned short int GetPopulation(void);
-	void SetPopulation(unsigned short int population);
-	unsigned short int GetMaxPopulation(void);
-	void SetMaxPopulation(unsigned short int max_population);
+	void SetGold(int par_gold);
+	unsigned int GetPopulation(void);
+	void SetPopulation(const unsigned int par_population);
+	unsigned int GetMaxPopulation(void);
+	void SetMaxPopulation(const unsigned int par_max_population);
 
 	vector<Building> GetBuildingsBelongToSettlement(void);
 	bool AddBuildingToSettlement(Building& b);
@@ -32,7 +44,7 @@ private:
 	string name;
 	unsigned int food;
 	int gold;
-	unsigned short int population;
-	unsigned short int max_population;
+	unsigned int population;
+	unsigned int max_population;
 	map<unsigned int, Building> buildingsOfSettlement;
 };

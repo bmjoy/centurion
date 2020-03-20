@@ -16,7 +16,6 @@ using namespace glm;
 
 Building::Building() 
 {
-	this->SetType("building");
 	this->bIsCreated = false;
 	this->waitingToBeErased = false;
 	this->bIsPlaceable = true;
@@ -27,18 +26,53 @@ Building::Building()
 	this->bIsShipyard = false;
 }
 
-Settlement Building::GetSettlement(void)
+Settlement *Building::GetSettlement(void)
 {
 	return this->settlement;
 }
-void Building::SetSettlement(const Settlement par_settlement)
+void Building::SetSettlement(Settlement *par_settlement)
 {
 	this->settlement = par_settlement;
 }
 
-bool Building::IsClickableInMimimap(void)
+void Building::SetCategory(const string par_category)
 {
-	return this->bIsClickableInMimimap;
+	this->category = par_category;
+}
+
+string Building::GetCategory(void)
+{
+	return this->category;
+}
+
+void Building::SetMaxHealth(const unsigned int par_maxHealth)
+{
+	this->maxHealth = par_maxHealth;
+}
+
+unsigned int Building::GetMaxHealth(void)
+{
+	return this->maxHealth;
+}
+
+void Building::SetRepairRate(const unsigned int par_repairRate)
+{
+	this->repairRate = par_repairRate;
+}
+
+unsigned int Building::GetRepairRate(void)
+{
+	return this->repairRate;
+}
+
+void Building::SetLoyaltyFearHealthPercent(const unsigned int par_loyaltyFearHealthPercent)
+{
+	this->loyaltyFearHealthPercent = par_loyaltyFearHealthPercent;
+}
+
+unsigned int Building::GetLoyaltyFearHealthPercent(void)
+{
+	return this->loyaltyFearHealthPercent;
 }
 
 void Building::CanBeClickableInMimimap(const bool par_clickable)
@@ -46,33 +80,14 @@ void Building::CanBeClickableInMimimap(const bool par_clickable)
 	this->bIsClickableInMimimap = par_clickable;
 }
 
-bool Building::IsPlaceable(void)
+bool Building::IsClickableInMimimap(void)
 {
-	vec3 var_position = this->GetPosition();
-	bool placeable = astar::checkAvailability(pass_grid, var_position);
-	//string indCategory = "";
-	//bool nearToIndependent = is_near_to_independent(&indCategory);
-	//if (!this->settlement.IsIndipendent())
-	//{
-	//	//placeable = placeable && nearToIndependent && indCategory == this->category;
-	//	placeable = placeable && indCategory == this->category;
-	//}
-	return placeable;
-}
-
-void Building::SetPlaceable(bool placeable)
-{
-	this->bIsPlaceable = placeable;
+	return this->bIsClickableInMimimap;
 }
 
 bool Building::IsCentralBuilding(void)
 {
 	return this->bIsCentralBuilding;
-}
-
-string Building::GetCategory(void)
-{
-	return this->category;
 }
 
 bool Building::IsVillageHall(void)
@@ -95,6 +110,25 @@ bool Building::IsShipyard(void)
 	return this->bIsShipyard;
 }
 
+void Building::SetPlaceable(bool placeable)
+{
+	this->bIsPlaceable = placeable;
+}
+
+bool Building::IsPlaceable(void)
+{
+	vec3 var_position = this->GetPosition();
+	bool placeable = astar::checkAvailability(pass_grid, var_position);
+	//string indCategory = "";
+	//bool nearToIndependent = is_near_to_independent(&indCategory);
+	//if (!this->settlement.IsIndipendent())
+	//{
+	//	//placeable = placeable && nearToIndependent && indCategory == this->category;
+	//	placeable = placeable && indCategory == this->category;
+	//}
+	return placeable;
+}
+
 void Building::StartGoldProduction(void)
 {
 	this->bCanProduceGold = true;
@@ -113,6 +147,16 @@ void Building::StartFoodProduction(void)
 void Building::StopFoodProduction(void)
 {
 	this->bCanProduceFood = false;
+}
+
+void Building::SetEntPath(const string par_ent_path)
+{
+	this->ent_path = par_ent_path;
+}
+
+void Building::SetPassPath(const string par_pass_path)
+{
+	this->pass_path = par_pass_path;
 }
 
 void Building::prepare() 
@@ -139,8 +183,9 @@ void Building::prepare()
 	//this->bIsCreated = false;
 }
 
-//void Building::Create(string className) {
-
+/*
+//void Building::Create(string className) 
+//{
 	//this->SetType(data["type"].get<string>());
 	//this->SetRaceName(data["race"].get<string>());
 	//this->SetClassName(data["class_name"].get<string>());
@@ -152,7 +197,7 @@ void Building::prepare()
 	//this->bIsTownhall = (this->GetClassName().substr(1) == "townhall");
 	//this->bIsVillageHall = (this->GetClassName().substr(1) == "village");
 
-	///* file pass */
+	// file pass 
 	//string str_className = this->GetClassName();
 	//if (pass_grid.size() == 0) pass_grid = astar::readPassMatrix(this->pass_path, str_className);
 	//update_pass();
@@ -176,23 +221,63 @@ void Building::prepare()
 	//circle[1] = gui::Circle();
 	//circle[1].create("border", 0.f, 0.f, TOWNHALL_RADIUS * 2.f, TOWNHALL_RADIUS * 2.f, 10.f, "center");
 	//this->bIsCreated = true;
-
 //}
+*/
 
 void Building::SetBuildingProperties(ObjectData::ObjectXMLClassData &objData)
 {
-	// qui si puo fare cosi oppure si puo settare radius come protetta (e non privata)
-	// e quindi passare &radius al posto di creare e passare &_radius
-	// si risparmia giusto una riga di codice :)
-	float _radius = 0.f;
-	ObjectData::TryParseFloat(objData.GetPropertiesMap(), "radius", &_radius);
-	this->SetRadius(_radius);
-
 	// TryParseFloat, TryParseInteger, TryParseString
+	float fProperty = 0.f;
+	int iProperty = 0;
+	string strProperty = "";
+
+	//Object's properties:
+	ObjectData::TryParseString(objData.GetPropertiesMap(), "singularName", &strProperty);
+	this->SetSingularName(strProperty);
+	ObjectData::TryParseString(objData.GetPropertiesMap(), "pluralName", &strProperty);
+	this->SetPluralName(strProperty);
+	ObjectData::TryParseString(objData.GetPropertiesMap(), "race", &strProperty);
+	this->SetRaceName(strProperty);
+	ObjectData::TryParseFloat(objData.GetPropertiesMap(), "radius", &fProperty);
+	this->SetRadius(fProperty);
+	ObjectData::TryParseInteger(objData.GetPropertiesMap(), "sight", &iProperty);
+	this->SetSight(iProperty);
+	ObjectData::TryParseFloat(objData.GetPropertiesMap(), "selectionRadius", &fProperty);
+	this->SetSelectionRadius(fProperty);
+	ObjectData::TryParseString(objData.GetPropertiesMap(), "canBeClonedInEditor", &strProperty);
+	strProperty == "true" ? this->SetCanBeClonedInEditor(true) : this->SetCanBeClonedInEditor(false);
+	ObjectData::TryParseString(objData.GetPropertiesMap(), "isWaterObject", &strProperty);
+	strProperty == "true" ? this->AllowPositioningIntoWater() : this->DenyPositioningIntoWater();
+	ObjectData::TryParseString(objData.GetPropertiesMap(), "alwaysVisibleInGameMinimap", &strProperty);
+	strProperty == "true" ? this->SetAlwaysVisibleInGameMinimap(true) : this->SetAlwaysVisibleInGameMinimap(false);
+
+	//Building's properties:
+	ObjectData::TryParseString(objData.GetPropertiesMap(), "category", &strProperty);
+	this->category = strProperty;
+	ObjectData::TryParseInteger(objData.GetPropertiesMap(), "maxHealth", &iProperty);
+	this->maxHealth = iProperty;
+	ObjectData::TryParseInteger(objData.GetPropertiesMap(), "repairRate", &iProperty);
+	this->repairRate = iProperty;
+	ObjectData::TryParseInteger(objData.GetPropertiesMap(), "loyaltyFearHealthPercent", &iProperty);
+	this->loyaltyFearHealthPercent = iProperty;
+	ObjectData::TryParseString(objData.GetPropertiesMap(), "isCentralBuilding", &strProperty);
+	this->bIsCentralBuilding = strProperty == "true" ? true : false;
+	ObjectData::TryParseString(objData.GetPropertiesMap(), "clickable_in_minimap", &strProperty);
+	this->bIsClickableInMimimap = strProperty == "true" ? true : false;
+	ObjectData::TryParseString(objData.GetPropertiesMap(), "autoRepair", &strProperty);
+	this->bAutoRepair = strProperty == "true" ? true : false;
+	ObjectData::TryParseString(objData.GetPropertiesMap(), "canProduceGold", &strProperty);
+	this->bCanProduceGold = strProperty == "true" ? true : false;
+	ObjectData::TryParseString(objData.GetPropertiesMap(), "canProduceFood", &strProperty);
+	this->bCanProduceFood = strProperty == "true" ? true : false;
+	ObjectData::TryParseString(objData.GetPropertiesMap(), "ent_path", &strProperty);
+	this->ent_path = strProperty;
+	ObjectData::TryParseString(objData.GetPropertiesMap(), "pass_path", &strProperty);
+	this->pass_path = strProperty;
 }
 
-void Building::render(bool picking, int clickID, bool not_placeable) {
-
+void Building::render(bool picking, int clickID, bool not_placeable) 
+{
 	BSprite()->render(spriteData, GetPosition().x, GetPosition().y, picking, false, vec3(0), false);
 
 	//---------------------------
@@ -274,29 +359,3 @@ vector<int> Building::buildingsInSettlementIds()
 */
 
 Building::~Building() {}
-
-void Building::IAmACentralBuilding(void)
-{
-	this->settlement = Settlement();
-	this->bIsCentralBuilding = true;
-}
-
-void Building::IAmATownhall(void)
-{
-	this->bIsTownhall = true;
-}
-
-void Building::IAmAnOutpost(void)
-{
-	this->bIsOutpost = true;
-}
-
-void Building::IAmAVillageHall(void)
-{
-	this->bIsVillageHall = true;
-}
-
-void Building::IAmAShipyard(void)
-{
-	this->bIsShipyard = true;
-}
