@@ -4,10 +4,10 @@
   <xs:element name="c_entity">
     <xs:complexType>
       <xs:sequence>
-        <xs:element name="properties">
+        <xs:element name="ent_properties">
           <xs:complexType>
             <xs:sequence>
-              <xs:element maxOccurs="unbounded" name="property">
+              <xs:element minOccurs="0" maxOccurs="unbounded" name="ent_property">
                 <xs:complexType>
                   <xs:attribute name="name" type="xs:integer" use="required"/>
                   <xs:attribute name="value" type="xs:integer" use="required"/>
@@ -16,10 +16,10 @@
             </xs:sequence>
           </xs:complexType>
         </xs:element>
-        <xs:element name="points">
+        <xs:element name="ent_points">
           <xs:complexType>
             <xs:sequence>
-              <xs:element minOccurs="0" maxOccurs="unbounded" name="point">
+              <xs:element minOccurs="0" maxOccurs="unbounded" name="ent_point">
                 <xs:complexType>
                   <xs:attribute name="id" type="xs:integer" use="required"/>
                   <xs:attribute name="type" type="xs:integer" use="required"/>
@@ -30,10 +30,10 @@
             </xs:sequence>
           </xs:complexType>
         </xs:element>
-        <xs:element name="images">
+        <xs:element name="ent_images">
           <xs:complexType>
             <xs:sequence>
-              <xs:element maxOccurs="unbounded" name="image">
+              <xs:element minOccurs="0" maxOccurs="unbounded" name="ent_image">
                 <xs:complexType>
                   <xs:attribute name="id" type="xs:integer" use="required"/>
                   <xs:attribute name="file" type="xs:string" use="required"/>
@@ -45,10 +45,10 @@
             </xs:sequence>
           </xs:complexType>
         </xs:element>
-        <xs:element name="layers">
+        <xs:element name="ent_layers">
           <xs:complexType>
             <xs:sequence>
-              <xs:element maxOccurs="unbounded" name="layer">
+              <xs:element minOccurs="0"  maxOccurs="unbounded" name="ent_layer">
                 <xs:complexType>
                   <xs:attribute name="id" type="xs:integer" use="required"/>
                   <xs:attribute name="name" type="xs:string" use="required"/>
@@ -60,13 +60,13 @@
             </xs:sequence>
           </xs:complexType>
         </xs:element>
-        <xs:element name="animations">
+        <xs:element name="ent_animations">
           <xs:complexType>
             <xs:sequence>
-              <xs:element maxOccurs="unbounded" name="animation">
+              <xs:element minOccurs="0" maxOccurs="unbounded" name="ent_animation">
                 <xs:complexType>
                   <xs:sequence>
-                    <xs:element maxOccurs="unbounded" name="replace">
+                    <xs:element minOccurs="0"  maxOccurs="unbounded" name="replace">
                       <xs:complexType>
                         <xs:attribute name="layer" type="xs:integer" use="required"/>
                         <xs:attribute name="image" type="xs:integer" use="required"/>
@@ -74,7 +74,7 @@
                         <xs:attribute name="y" type="xs:integer" use="required"/>
                       </xs:complexType>
                     </xs:element>
-                    <xs:element maxOccurs="unbounded" name="frame">
+                    <xs:element minOccurs="0" maxOccurs="unbounded" name="frame">
                       <xs:complexType>
                         <xs:attribute name="id" type="xs:integer" use="required"/>
                         <xs:attribute name="milliseconds" type="xs:integer" use="required"/>
@@ -93,6 +93,7 @@
           </xs:complexType>
         </xs:element>
       </xs:sequence>
+      <xs:attribute name="class_name" type="xs:string" use="required"/>
       <xs:attribute name="type" type="xs:string" use="required"/>
       <xs:attribute name="directions" type="xs:integer" use="required"/>
     </xs:complexType>

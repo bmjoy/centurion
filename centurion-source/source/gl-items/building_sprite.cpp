@@ -1,10 +1,14 @@
 #include "building_sprite.h"
+#include "entity-xml.hxx"
+
 #include <stb_image.h>
 #include <json.hpp>
 
 #include <game/strategy.h>
 #include <classes/object-data.h>
 
+#include <file_manager.h>
+#include <logger.h>
 
 BuildingSprite::BuildingSprite(){
 	vPath = "assets/shaders/bsprite/vertex.glsl";
@@ -12,57 +16,77 @@ BuildingSprite::BuildingSprite(){
 }
 
 void BuildingSprite::create() {
-	
-	glUseProgram(shaderId);
-	GenerateBuffers();
-	
-	//int k = 0;
+	string spritePath = "";
+	try
+	{
+		glUseProgram(shaderId);
+		GenerateBuffers();
 
-	std::string className;
-	std::string fullName;
-	SpriteData spriteData = SpriteData();
+		std::string fullName;
+		SpriteData spriteData = SpriteData();
 
-	for (int j = 0; j < entPathList.size(); ++j) {
+		xml_schema::properties props;
+		props.no_namespace_schema_location(Folders::XML_SCHEMAS + "entity.xsd");
+		
+		for (int j = 0; j < entPathList.size(); ++j) {
+			
+			spritePath = entPathList[j];
+			fullName = Folders::GAME + entPathList[j];
+			string entityFolder = FileManager::GetFileFolderPath(fullName.c_str());
 
-		std::ifstream ent_path(entPathList[j]);
-		json ent_data = json::parse(ent_path);
-		string texturePath;
+			try {
+				auto_ptr<c_entity> entXml = c_entity_(fullName, 0, props);
+				std::string _className = string(entXml->class_name());
 
-		for (int i = 0; i < ent_data["sprites"].size(); i++) {
+				ent_images::ent_image_iterator _img_it;
+				for (_img_it = entXml->ent_images().ent_image().begin(); _img_it != entXml->ent_images().ent_image().end(); _img_it++) {
 
-			className = ent_data["class_name"].get<std::string>();
-			fullName = className + "_" + ent_data["sprites"][i]["type"].get<std::string>();
-			texturePath = ent_data["path"].get<std::string>() + ent_data["sprites"][i]["name"].get<std::string>();
+					string image_name = string(_img_it->file() + ".png");
+					string image_path = entityFolder + "\\" + image_name;
 
-			/* save texture info */
-			int width, height, nrChannels;
-			GLuint textureID;
-			data = stbi_load(texturePath.c_str(), &width, &height, &nrChannels, 0);
-			if (!data) { 
-				std::cout << "Failed to load texture" << std::endl; 
+					/* save texture info */
+					int width, height, nrChannels;
+					GLuint textureID;
+					data = stbi_load(image_path.c_str(), &width, &height, &nrChannels, 0);
+					if (!data) {
+						std::cout << "Failed to load texture" << std::endl;
+					}
+
+					/* load texture to gpu */
+					glGenTextures(1, &textureID);
+					glBindTexture(GL_TEXTURE_2D, textureID);
+					glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+
+					// create texture and generate mipmaps
+					glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, width, height, 0, GL_RGBA, GL_UNSIGNED_BYTE, data);
+					glGenerateMipmap(GL_TEXTURE_2D);
+					glBindTexture(GL_TEXTURE_2D, 0);
+
+					// save sprite data
+					spriteData.width = float(width);
+					spriteData.height = float(height);
+					spriteData.textureId = textureID;
+
+					// send data to objectData via classname
+					ObjectData::GetObjectData(_className)->SetSpriteData(spriteData);
+
+					stbi_image_free(data);
+				}
 			}
-
-			/* load texture to gpu */
-			glGenTextures(1, &textureID);
-			glBindTexture(GL_TEXTURE_2D, textureID);
-			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-
-			// create texture and generate mipmaps
-			glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, width, height, 0, GL_RGBA, GL_UNSIGNED_BYTE, data);
-			glGenerateMipmap(GL_TEXTURE_2D);
-			glBindTexture(GL_TEXTURE_2D, 0);
-
-			// save sprite data
-			spriteData.width = float(width);
-			spriteData.height = float(height);
-			spriteData.textureId = textureID;
-
-			// send data to objectData via classname
-			ObjectData::GetObjectData(className)->SetSpriteData(spriteData);
-
-			stbi_image_free(data);			
+			catch (const xml_schema::exception & e) {
+				string emsg = string(e.what());
+				Logger::LogMessage msg = Logger::LogMessage("An error occurred reading the following sprite: \"" + spritePath + "\". This was the error message: \"" + emsg + "\"", "Warn", "", "BuildingSprite", "Create");
+				Logger::Warn(msg);
+			}
 		}
-	}	
+	}
+	catch (const std::exception&)
+	{
+		Logger::LogMessage msg = Logger::LogMessage("An error occurred reading the following sprite: \"" + spritePath + "\"", "Warn", "", "BuildingSprite", "Create");
+		Logger::Warn(msg);
+	}
+
+	
 }
 
 void BuildingSprite::render(SpriteData &data, float x, float y, bool picking, bool selected, vec3 playerColor, bool not_placeable) {

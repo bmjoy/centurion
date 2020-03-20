@@ -213,7 +213,7 @@ void Engine::Init(const char* exe_root) {
 
 	try {
 
-		Settings::SetFolders(FileManager::GetExeFolderPath(exe_root));
+		Settings::SetFolders(FileManager::GetFileFolderPath(exe_root));
 		ErrorCodes::ReadErrorCodesXml();
 		Logger::CleanLogs();
 

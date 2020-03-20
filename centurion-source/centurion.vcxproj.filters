@@ -420,6 +420,9 @@
     <ClCompile Include="source\engine\peripherics\mywindow.cpp">
       <Filter>Source Files\engine\peripherics</Filter>
     </ClCompile>
+    <ClCompile Include="source\gl-items\entity-xml.cxx">
+      <Filter>Source Files\gl-items</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="source\extern\includes\json.hpp">
@@ -703,6 +706,9 @@
     </ClInclude>
     <ClInclude Include="source\engine\peripherics\mywindow.h">
       <Filter>Header Files\engine\peripherics</Filter>
+    </ClInclude>
+    <ClInclude Include="source\gl-items\entity-xml.hxx">
+      <Filter>Header Files\gl-items</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

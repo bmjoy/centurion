@@ -47,7 +47,7 @@ namespace FileManager {
 
 	void CreateFolder(string folderPath);
 
-	string GetExeFolderPath(const char *path);
+	string GetFileFolderPath(const char *path);
 };
 
 #endif

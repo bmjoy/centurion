@@ -51,6 +51,7 @@ namespace Engine {
 	void GameClose();
 	void SetEnvironment(string s);
 	void PrintToConsole(string s);
+
 	vector<string> *GetListOfFolders(string s);
 
 	// Functions
@@ -62,7 +63,6 @@ namespace Engine {
 	void read_data();
 	void handleGlobalKeys();
 	void ResetPeriphericsInput();
-
 };
 
 #endif

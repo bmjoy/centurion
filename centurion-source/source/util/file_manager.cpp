@@ -189,7 +189,7 @@ bool FileManager::CheckIfFolderExists(string folderPath) {
 		return false;
 	}
 	catch (...) {
-		Logger::LogMessage msg = Logger::LogMessage("An error occurred checking if this folder exists: \"" + folderPath + "\"", "Utils", "", "CheckIfFolderExists");
+		Logger::LogMessage msg = Logger::LogMessage("An error occurred checking if this folder exists: \"" + folderPath + "\"", "Error", "Utils", "", "CheckIfFolderExists");
 		Logger::Error(msg);
 		Engine::GameClose();
 	}
@@ -203,7 +203,7 @@ void FileManager::RemoveFile(string filePath)
 	}
 	catch (...)
 	{
-		Logger::LogMessage msg = Logger::LogMessage("An error occurred deleting this following file: \"" + filePath + "\"", "Utils", "", "RemoveFile");
+		Logger::LogMessage msg = Logger::LogMessage("An error occurred deleting this following file: \"" + filePath + "\"", "Error", "Utils", "", "RemoveFile");
 		Logger::Error(msg);
 		Engine::GameClose();
 	}
@@ -217,13 +217,13 @@ void FileManager::CreateFolder(string folderPath)
 	}
 	catch (...)
 	{
-		Logger::LogMessage msg = Logger::LogMessage("An error occurred creating a folder with the following path: \"" + folderPath + "\"", "Utils", "", "CreateFolder");
+		Logger::LogMessage msg = Logger::LogMessage("An error occurred creating a folder with the following path: \"" + folderPath + "\"", "Error", "Utils", "", "CreateFolder");
 		Logger::Error(msg);
 		Engine::GameClose();
 	}
 }
 
-string FileManager::GetExeFolderPath(const char *path) {
+string FileManager::GetFileFolderPath(const char *path) {
 	try
 	{
 		string path_str = (string)path;
@@ -232,7 +232,7 @@ string FileManager::GetExeFolderPath(const char *path) {
 	}
 	catch (const std::exception&)
 	{
-		Logger::LogMessage msg = Logger::LogMessage("An error occurred getting the exe folder path", "Utils", "", "GetExeFolderPath");
+		Logger::LogMessage msg = Logger::LogMessage("An error occurred getting the exe folder path", "Error", "Utils", "", "GetExeFolderPath");
 		Logger::Error(msg);
 		Engine::GameClose();
 	}
