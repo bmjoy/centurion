@@ -1,5 +1,7 @@
-#include <classes/object.h>
+#include "object.h"
+
 #include <player/player.h>
+#include <picking.h>
 #include <game/strategy.h>
 #include <pathfinding/pathfinding.h>
 
@@ -166,6 +168,27 @@ void GObject::update_pass(void)
 void GObject::clear_pass(void) 
 {
 	astar::clearPassMatrix(this->pass_grid, this->position);
+}
+
+void GObject::Create(string _className)
+{
+	ObjectData::ObjectXMLClassData objData = *ObjectData::GetObjectData(_className);
+	ObjectData::SetFixedPtr(&objData);
+	objData.GetParentData(objData.GetParentClass());
+	ObjectData::SetFixedPtr(nullptr);
+
+	// class data
+	this->SetClassName(_className);
+	this->SetPickingID(PickingObject::GetPickingId());
+
+	// entity data
+	this->spriteData = objData.GetSpriteData();
+	this->spriteData.pickingId = this->GetPickingID();
+	this->spriteData.pickingColor = Picking::getPickingColorFromID(this->GetPickingID());
+
+	if (this->IsBuilding()) this->AsBuilding()->SetBuildingProperties(objData);
+
+	Game::AddGameObject(this->GetPickingID(), this);
 }
 
 void GObject::SetPosition(const vec3 pos)

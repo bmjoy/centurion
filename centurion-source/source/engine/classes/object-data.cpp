@@ -6,6 +6,7 @@
 #include <building_sprite.h>
 #include <decoration_sprite.h>
 #include <unit_sprite.h>
+#include <logger.h>
 
 #pragma region Static variables
 
@@ -102,6 +103,55 @@ ObjectData::ObjectXMLClassData::~ObjectXMLClassData(){}
 #pragma endregion
 
 #pragma region ObjectData class
+
+void ObjectData::TryParseInteger(map<string, string> _map, string _name, int * variable_ptr)
+{
+	if (_map.count(_name) > 0) {
+		string value = _map[_name];
+		try {
+			int value_int = std::stoi(value);
+			(*variable_ptr) = value_int;
+		}
+		catch (...) {
+			Logger::LogMessage msg = Logger::LogMessage("The value of variable \"" + _name + "\" is not an integer", "Warn", "", "ObjectData", "TryParseFloat");
+			Logger::Warn(msg);
+			(*variable_ptr) = -1;
+		}
+	}
+	else {
+		(*variable_ptr) = -1;
+	}
+}
+
+void ObjectData::TryParseFloat(map<string, string> _map, string _name, float * variable_ptr)
+{
+	if (_map.count(_name) > 0) {
+		string value = _map[_name];
+		try {
+			float value_int = std::stof(value);
+			(*variable_ptr) = value_int;
+		}
+		catch (...) {
+			Logger::LogMessage msg = Logger::LogMessage("The value of variable \"" + _name + "\" is not a float", "Warn", "", "ObjectData", "TryParseFloat");
+			Logger::Warn(msg);
+			(*variable_ptr) = -1;
+		}
+	}
+	else {
+		(*variable_ptr) = -1;
+	}
+}
+
+void ObjectData::TryParseString(map<string, string> _map, string _name, string * variable_ptr)
+{
+	if (_map.count(_name) > 0) {
+		string value = _map[_name];
+		(*variable_ptr) = value;
+	}
+	else {
+		(*variable_ptr) = "";
+	}
+}
 
 ObjectData::ObjectXMLClassData * ObjectData::GetObjectData(string _class)
 {

@@ -20,7 +20,7 @@ public:
 	static void IncreaseCounter() { unitsCounter++; }
 	static void ResetCounter() { unitsCounter = 0; }
 	void SetPosition(const float x, const float y);
-	void create() override;
+	void create();
 	void render(bool picking, int clickID = 0, bool not_placeable = false) override;
 	~Unit();
 private:

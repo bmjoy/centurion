@@ -1,5 +1,4 @@
 #include "building.h"
-#include "object-data.h"
 
 #include <engine.h>
 #include <stb_image.h>
@@ -140,27 +139,7 @@ void Building::prepare()
 	//this->bIsCreated = false;
 }
 
-void Building::Create(string className) {
-
-	ObjectData::ObjectXMLClassData objData = *ObjectData::GetObjectData(className);
-	ObjectData::SetFixedPtr(&objData);
-	objData.GetParentData(objData.GetParentClass());
-	// here the recursive function that takes the parent xml data
-
-	// class data
-	this->SetClassName(className);
-	this->SetPickingID(PickingObject::GetPickingId());
-	
-	// entity data
-	this->spriteData = objData.GetSpriteData();
-	this->spriteData.pickingId = this->GetPickingID();
-	this->spriteData.pickingColor = Picking::getPickingColorFromID(this->GetPickingID());
-
-	Game::AddGameObject(this->GetPickingID(), this);
-
-
-
-	//---------------------------
+//void Building::Create(string className) {
 
 	//this->SetType(data["type"].get<string>());
 	//this->SetRaceName(data["race"].get<string>());
@@ -198,6 +177,18 @@ void Building::Create(string className) {
 	//circle[1].create("border", 0.f, 0.f, TOWNHALL_RADIUS * 2.f, TOWNHALL_RADIUS * 2.f, 10.f, "center");
 	//this->bIsCreated = true;
 
+//}
+
+void Building::SetBuildingProperties(ObjectData::ObjectXMLClassData &objData)
+{
+	// qui si puo fare cosi oppure si puo settare radius come protetta (e non privata)
+	// e quindi passare &radius al posto di creare e passare &_radius
+	// si risparmia giusto una riga di codice :)
+	float _radius = 0.f;
+	ObjectData::TryParseFloat(objData.GetPropertiesMap(), "radius", &_radius);
+	this->SetRadius(_radius);
+
+	// TryParseFloat, TryParseInteger, TryParseString
 }
 
 void Building::render(bool picking, int clickID, bool not_placeable) {

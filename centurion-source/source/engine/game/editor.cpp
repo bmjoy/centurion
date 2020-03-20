@@ -293,7 +293,7 @@ namespace editor {
 	{
 		if (type == "buildings")
 		{
-			if (buildingTemp->IsPlaceable())
+			/*if (buildingTemp->IsPlaceable())
 			{
 				unsigned int ID = PickingObject::GetPickingId();
 				buildingTemp->SetPickingID(ID);
@@ -306,11 +306,11 @@ namespace editor {
 
 				Engine::Mouse::LeftClick = false;
 				addingObject = false;
-			}
+			}*/
 		}
 		if (type == "decorations")
 		{
-			if (decorTemp->is_placeable())
+			/*if (decorTemp->is_placeable())
 			{
 				unsigned int ID = PickingObject::GetPickingId();
 				decorTemp->SetPickingID(ID);
@@ -318,7 +318,7 @@ namespace editor {
 				Game::AddGameObject(ID, decorTemp);
 				Engine::Mouse::LeftClick = false;
 				addingObject = false;
-			}
+			}*/
 		}
 		Game::Minimap::Update();
 	}

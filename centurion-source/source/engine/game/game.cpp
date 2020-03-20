@@ -588,17 +588,6 @@ bool Game::IsGameObjectNotNull(int id) {
 		return (GameObjects[id] != nullptr);
 }
 
-void Game::CreateObject(string className, float x, float y, int player)
-{
-	string type = ObjectData::GetObjectData(className)->GetClassType();
-
-	if (type == "cpp_buildingclass") {
-		Building* newBuilding = new Building();
-		newBuilding->SetPosition(vec3(x, y, 10));
-		newBuilding->Create(className);
-	}
-}
-
 vector<Building*> Game::GetListOfIndipendentBuildings() {
 	vector<Building*> indipBuildings = vector<Building*>();
 	for (int i = 0; i < MAX_NUMBER_OF_OBJECTS; i++) {
@@ -734,7 +723,7 @@ void Game::GenerateOutposts(vector<vec2> &locs) {
 
 	string className = "routpost";
 
-	for (int i = 0; i < locs.size(); i++) {
+	/*for (int i = 0; i < locs.size(); i++) {
 		Building* b = new Building();
 		b->SetClassName(className);
 		b->SetType("building");
@@ -744,7 +733,7 @@ void Game::GenerateOutposts(vector<vec2> &locs) {
 		b->GetSettlement().SetSettlementName("Outpost_" + i);
 		b->create();
 		GameObjects[b->GetPickingID()] = b;
-	}
+	}*/
 }
 
 #pragma region Map Generation Methods
@@ -797,50 +786,50 @@ void Game::GenerateSettlements(vector<vec2> &locs) {
 					float yEditorPos = stof(objectsInfo[6]);
 
 					if (type == "building") {
-						Building* b = new Building();
-						b->SetClassName(className);
-						b->SetType(type);
-						b->SetPlayer(i);
-						b->SetPosition(vec3(origin.x + xOffset, origin.y + yOffset, 0.f));
-						b->SetPickingID(PickingObject::GetPickingId());
-						b->GetSettlement().SetSettlementName("Settlement_player_" + i);
-						b->create();
-						GameObjects[b->GetPickingID()] = b;
+						//Building* b = new Building();
+						//b->SetClassName(className);
+						//b->SetType(type);
+						//b->SetPlayer(i);
+						//b->SetPosition(vec3(origin.x + xOffset, origin.y + yOffset, 0.f));
+						//b->SetPickingID(PickingObject::GetPickingId());
+						//b->GetSettlement().SetSettlementName("Settlement_player_" + i);
+						//b->create();
+						//GameObjects[b->GetPickingID()] = b;
 
-						if (b->GetSettlement().IsIndipendent()) {
-							// update terrain around the townhall
-							// N.B: mapgen::grid_size * 2 because the map has "borders"
+						//if (b->GetSettlement().IsIndipendent()) {
+						//	// update terrain around the townhall
+						//	// N.B: mapgen::grid_size * 2 because the map has "borders"
 
-							int EditorStartPointX = (int)xEditorPos - TOWNHALL_RADIUS + mapgen::grid_size * 2;
-							int EditorStartPointY = (int)yEditorPos - TOWNHALL_RADIUS + mapgen::grid_size * 2;
-							int NewMapStartPointX = (int)origin.x - TOWNHALL_RADIUS + mapgen::grid_size * 2;
-							int NewMapStartPointY = (int)origin.y - TOWNHALL_RADIUS + mapgen::grid_size * 2;
+						//	int EditorStartPointX = (int)xEditorPos - TOWNHALL_RADIUS + mapgen::grid_size * 2;
+						//	int EditorStartPointY = (int)yEditorPos - TOWNHALL_RADIUS + mapgen::grid_size * 2;
+						//	int NewMapStartPointX = (int)origin.x - TOWNHALL_RADIUS + mapgen::grid_size * 2;
+						//	int NewMapStartPointY = (int)origin.y - TOWNHALL_RADIUS + mapgen::grid_size * 2;
 
-							for (int iHoriz = 0; iHoriz <= TOWNHALL_RADIUS * 2; iHoriz += mapgen::grid_size) {
-								for (int iVert = 0; iVert <= TOWNHALL_RADIUS * 2; iVert += mapgen::grid_size) {
+						//	for (int iHoriz = 0; iHoriz <= TOWNHALL_RADIUS * 2; iHoriz += mapgen::grid_size) {
+						//		for (int iVert = 0; iVert <= TOWNHALL_RADIUS * 2; iVert += mapgen::grid_size) {
 
-									int EditorPointX = EditorStartPointX + iHoriz;
-									int EditorPointY = EditorStartPointY + iVert;
-									int NewMapPointX = NewMapStartPointX + iHoriz;
-									int NewMapPointY = NewMapStartPointY + iVert;
+						//			int EditorPointX = EditorStartPointX + iHoriz;
+						//			int EditorPointY = EditorStartPointY + iVert;
+						//			int NewMapPointX = NewMapStartPointX + iHoriz;
+						//			int NewMapPointY = NewMapStartPointY + iVert;
 
-									if (math::euclidean_distance((float)NewMapPointX, (float)NewMapPointY, origin.x + mapgen::grid_size * 2.f, origin.y + mapgen::grid_size * 2.f) > TOWNHALL_RADIUS) continue;
+						//			if (math::euclidean_distance((float)NewMapPointX, (float)NewMapPointY, origin.x + mapgen::grid_size * 2.f, origin.y + mapgen::grid_size * 2.f) > TOWNHALL_RADIUS) continue;
 
-									int EditorPointLoc = mapgen::getVertexPos(EditorPointX, EditorPointY);
-									int NewMapPointLoc = mapgen::getVertexPos(NewMapPointX, NewMapPointY);
-									mapgen::MapTextures()[NewMapPointLoc] = float(TemporaryMapTextures[EditorPointLoc]);
-								}
-							}
-						}
+						//			int EditorPointLoc = mapgen::getVertexPos(EditorPointX, EditorPointY);
+						//			int NewMapPointLoc = mapgen::getVertexPos(NewMapPointX, NewMapPointY);
+						//			mapgen::MapTextures()[NewMapPointLoc] = float(TemporaryMapTextures[EditorPointLoc]);
+						//		}
+						//	}
+						//}
 					}
 					if (type == "decoration") {
-						Decoration* d = new Decoration();
+						/*Decoration* d = new Decoration();
 						d->SetClassName(className);
 						d->SetPlayer(0);
 						d->SetPosition(vec3(origin.x + xOffset, origin.y + yOffset, 0.f));
 						d->SetPickingID(PickingObject::GetPickingId());
 						d->create();
-						GameObjects[d->GetPickingID()] = d;
+						GameObjects[d->GetPickingID()] = d;*/
 					}
 				}
 			}
@@ -856,7 +845,7 @@ void Game::GenerateSettlements(vector<vec2> &locs) {
 }
 
 void Game::UpdateSettlementBuildings() {
-	vector<Building*> listOfBuildings = Game::GetListOfBuildings();
+	/*vector<Building*> listOfBuildings = Game::GetListOfBuildings();
 	vector<Building*> listOfIndipBuildings = Game::GetListOfIndipendentBuildings();
 
 	for (int i = 0; i < listOfBuildings.size(); i++) {
@@ -865,12 +854,32 @@ void Game::UpdateSettlementBuildings() {
 			for (int j = 0; j < listOfIndipBuildings.size(); j++) {
 				Building* settl = listOfIndipBuildings[j];
 				if (settl->GetSettlement().GetSettlementName() == bld->GetSettlement().GetSettlementName()) {
-					//bld->set_settlement_building(settl);
+					bld->set_settlement_building(settl);
 					break;
 				}
 			}
 		}
+	}*/
+}
+
+#pragma endregion
+
+
+#pragma region TO-LUA METHODS
+
+void Game::CreateObject(string className, float x, float y, int player)
+{
+	ObjectData::ObjectXMLClassData *objData = ObjectData::GetObjectData(className);
+	if (objData == nullptr) return;
+	
+	string type = objData->GetClassType();
+
+	if (type == "cpp_buildingclass") {
+		Building* newBuilding = new Building();
+		newBuilding->SetPosition(vec3(x, y, 10));
+		newBuilding->Create(className);
 	}
 }
 
 #pragma endregion
+

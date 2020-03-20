@@ -3,6 +3,7 @@
 #include <ui.h>
 #include <json.hpp>
 #include <object_sprite.h>
+#include "object-data.h"
 
 using namespace std;
 using namespace glm;
@@ -89,11 +90,12 @@ public:
 	void clear_pass(void);
 
 	virtual void prepare(void) { };
-	virtual void create(void) { };
+	void Create(string _className);
 	virtual void render(bool picking, int clickID = 0, bool not_placeable = false) {};
 
-	~GObject();
 	GObject();
+
+	~GObject();
 protected:
 	ObjectSprite::SpriteData spriteData;
 	Player *player;

@@ -36,7 +36,8 @@ public:
 
 
 	void prepare() override;
-	void Create(string className);
+	//void Create(string className);
+	void SetBuildingProperties(ObjectData::ObjectXMLClassData &objData);
 	void render(bool picking, int clickID = 0, bool not_placeable = false) override;
 	void SetStatus(const bool bIsCreated);
 

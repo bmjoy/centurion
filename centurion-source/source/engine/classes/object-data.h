@@ -37,6 +37,9 @@ public:
 		string GetClassType() { return type; }
 		void SetSpriteData(ObjectSprite::SpriteData _spriteData) { spriteData = _spriteData; }
 		ObjectSprite::SpriteData GetSpriteData() { return spriteData; }
+		map<string, string> GetPropertiesMap() { return propertiesMap; }
+		map<string, string> GetMethodsMap() { return methodsMap; }
+		map<string, string> GetSoundsMap() { return soundsMap; }
 		~ObjectXMLClassData();
 	private:
 		
@@ -47,6 +50,9 @@ public:
 		ObjectSprite::SpriteData spriteData;
 	};
 
+	static void TryParseInteger(map<string, string> _map, string _name, int *variable_ptr);
+	static void TryParseFloat(map<string, string> _map, string _name, float *variable_ptr);
+	static void TryParseString(map<string, string> _map, string _name, string *variable_ptr);
 	static void SetFixedPtr(ObjectXMLClassData* _ptr) { objDataXmlFixedPtr = _ptr; }
 	static ObjectXMLClassData* GetObjectData(string _class);
 	static void ReadDataClassesFromXml();
