@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<c_entity class_name="EBlacksmith" type="cpp_building" directions="1">
+	<ent_properties>
+	</ent_properties>
+	<ent_points>
+	</ent_points>
+	<ent_images>
+		<ent_image id="0" file="eblacksmith" drawmode="colors" reverse="false" frames="1"/>
+	</ent_images>
+	<ent_layers>
+		<ent_layer id="0" name="layer0" image="0" x="0" y="0"/>
+	</ent_layers>
+	<ent_animations>
+	</ent_animations>
+</c_entity>

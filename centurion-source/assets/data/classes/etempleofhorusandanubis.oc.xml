@@ -1,0 +1,17 @@
+<c_object parent="BaseArena" type="cpp_buildingclass" class_name="ETempleOfHorusAndAnubis">
+ <properties>
+    <property name="singularName" value="Temple of Horus and Anubis"/>
+    <property name="pluralName" value="Temples of Horus and Anubis"/>
+    <property name="race" value="Egypt"/>
+    <property name="radius" value="1000"/>
+    <property name="category" value="egyptianstronghold"/>
+    <property name="ent_path" value="assets/buildings/egypt/templeofhorusandanubis/etempleofhorusandanubis.oe.xml"/>
+    <property name="pass_path" value="assets/buildings/egypt/templeofhorusandanubis/etempleofhorusandanubis.pass"/>
+  </properties>
+  <methods>
+    <method name="" script=""/>
+  </methods>
+  <sounds>
+    <sound name="select" path="sounds/eTempleSelect.ogg"/>
+  </sounds>
+</c_object>

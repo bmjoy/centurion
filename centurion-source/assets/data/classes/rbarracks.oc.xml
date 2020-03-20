@@ -5,7 +5,7 @@
     <property name="race" value="Rome"/>
     <property name="radius" value="600"/>
     <property name="category" value="romanstronghold"/>
-    <property name="ent_path" value="assets/buildings/rome/barracks/rbarracks.oe.json"/>
+    <property name="ent_path" value="assets/buildings/rome/barracks/rbarracks.oe.xml"/>
     <property name="pass_path" value="assets/buildings/rome/barracks/rbarracks.pass"/>
   </properties>
   <methods>

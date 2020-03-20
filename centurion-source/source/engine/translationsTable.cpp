@@ -26,7 +26,7 @@ unsigned int TranslationsTable::GetLanguageId(string lan)
 		Logger::Error(msg);
 		Engine::GameClose();
 	}
-}
+	}
 
 string TranslationsTable::GetTranslation(string string_name)
 {
