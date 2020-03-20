@@ -139,6 +139,12 @@
     <Filter Include="Source Files\engine\game\interface">
       <UniqueIdentifier>{8f5ddee1-41eb-4917-833d-37a2d60fa6f6}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\engine\peripherics">
+      <UniqueIdentifier>{8e405985-9f4f-4f74-bb32-cae8aeafae2d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\engine\peripherics">
+      <UniqueIdentifier>{32f5025d-f5c5-46be-9753-d23a4c904505}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -401,6 +407,18 @@
     </ClCompile>
     <ClCompile Include="source\engine\classes\base_gate.cpp">
       <Filter>Source Files\engine\classes</Filter>
+    </ClCompile>
+    <ClCompile Include="source\engine\peripherics\camera.cpp">
+      <Filter>Source Files\engine\peripherics</Filter>
+    </ClCompile>
+    <ClCompile Include="source\engine\peripherics\keyboard.cpp">
+      <Filter>Source Files\engine\peripherics</Filter>
+    </ClCompile>
+    <ClCompile Include="source\engine\peripherics\mouse.cpp">
+      <Filter>Source Files\engine\peripherics</Filter>
+    </ClCompile>
+    <ClCompile Include="source\engine\peripherics\mywindow.cpp">
+      <Filter>Source Files\engine\peripherics</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -673,6 +691,18 @@
     </ClInclude>
     <ClInclude Include="source\engine\classes\base_gate.h">
       <Filter>Header Files\engine\classes</Filter>
+    </ClInclude>
+    <ClInclude Include="source\engine\peripherics\camera.h">
+      <Filter>Header Files\engine\peripherics</Filter>
+    </ClInclude>
+    <ClInclude Include="source\engine\peripherics\keyboard.h">
+      <Filter>Header Files\engine\peripherics</Filter>
+    </ClInclude>
+    <ClInclude Include="source\engine\peripherics\mouse.h">
+      <Filter>Header Files\engine\peripherics</Filter>
+    </ClInclude>
+    <ClInclude Include="source\engine\peripherics\mywindow.h">
+      <Filter>Header Files\engine\peripherics</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

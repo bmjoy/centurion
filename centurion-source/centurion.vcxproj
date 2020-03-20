@@ -229,6 +229,10 @@ XCOPY "$(ProjectDir)lua53.dll" "$(ProjectDir)$(OutDir)"</Command>
     <ClCompile Include="source\engine\menu\menuPage-xml.cxx" />
     <ClCompile Include="source\engine\pathfinding\astar.cpp" />
     <ClCompile Include="source\engine\pathfinding\node.cpp" />
+    <ClCompile Include="source\engine\peripherics\camera.cpp" />
+    <ClCompile Include="source\engine\peripherics\keyboard.cpp" />
+    <ClCompile Include="source\engine\peripherics\mouse.cpp" />
+    <ClCompile Include="source\engine\peripherics\mywindow.cpp" />
     <ClCompile Include="source\engine\picking.cpp" />
     <ClCompile Include="source\engine\player\player.cpp" />
     <ClCompile Include="source\engine\Settings-xml.cxx" />
@@ -302,6 +306,10 @@ XCOPY "$(ProjectDir)lua53.dll" "$(ProjectDir)$(OutDir)"</Command>
     <ClInclude Include="source\engine\menu\menu.h" />
     <ClInclude Include="source\engine\menu\menuPage-xml.hxx" />
     <ClInclude Include="source\engine\pathfinding\pathfinding.h" />
+    <ClInclude Include="source\engine\peripherics\camera.h" />
+    <ClInclude Include="source\engine\peripherics\keyboard.h" />
+    <ClInclude Include="source\engine\peripherics\mouse.h" />
+    <ClInclude Include="source\engine\peripherics\mywindow.h" />
     <ClInclude Include="source\engine\picking.h" />
     <ClInclude Include="source\engine\player\player.h" />
     <ClInclude Include="source\engine\Settings-xml.hxx" />

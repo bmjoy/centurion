@@ -1,6 +1,5 @@
 //#pragma comment(linker, "/SUBSYSTEM:windows /ENTRY:mainCRTStartup")
 
-
 #include <engine.h>
 
 // main function
@@ -11,7 +10,7 @@ int main(int numArgs, char *args[]) {
 	
 	if (Engine::myWindow::ShouldClose == false) {
 		try {
-			return Engine::launch();
+			return Engine::Launch();
 		}
 		catch (...) {
 			Engine::GameClose();

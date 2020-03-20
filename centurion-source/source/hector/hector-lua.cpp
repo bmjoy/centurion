@@ -47,12 +47,12 @@ void Hector::Initialize()
 
 	// functions
 
-	getGlobalNamespace(L).beginClass<Engine>("Engine")
-		.addStaticFunction("GameClose", &Engine::GameClose)
-		.addStaticFunction("PrintToConsole", &Engine::PrintToConsole)
-		.addStaticFunction("SetEnvironment", &Engine::SetEnvironment)
-		.addStaticFunction("GetListOfFolders", Engine::GetListOfFolders)
-		.endClass();
+	getGlobalNamespace(L).beginNamespace("Engine")
+		.addFunction("GameClose", &Engine::GameClose)
+		.addFunction("PrintToConsole", &Engine::PrintToConsole)
+		.addFunction("SetEnvironment", &Engine::SetEnvironment)
+		.addFunction("GetListOfFolders", Engine::GetListOfFolders)
+		.endNamespace();
 
 	getGlobalNamespace(L).beginClass<EditorMenuBar>("EditorMenuBar")
 		.addStaticFunction("ToggleMenu", &EditorMenuBar::ToggleEditorMenu)
