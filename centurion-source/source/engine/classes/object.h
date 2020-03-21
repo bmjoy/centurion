@@ -14,6 +14,10 @@ class Decoration;
 
 class Player;
 
+#ifndef MAX_NUMBER_OF_OBJECTS
+#define MAX_NUMBER_OF_OBJECTS 100
+#endif
+
 #ifndef UNDEFINED_RACE
 #define UNDEFINED_RACE    0
 #endif 
@@ -105,6 +109,17 @@ public:
 	void Create(const string _className);
 	virtual void render(bool picking, int clickID = 0, bool not_placeable = false) {};
 
+	//Static methods
+	static unsigned int GetNumberOfObjects(void);
+	static unsigned int GetNumberOfBuildings(void);
+	static unsigned int GetNumberOfUnits(void);
+	static unsigned int GetNumberOfDecorations(void);
+
+	static void AddGameObject(const unsigned int index, GObject* object);
+	static void RemoveGameObject(const unsigned int index);
+	static void ResetGameObjects(void);
+	static GObject* GetObjectByID(const unsigned int ID);
+
 	GObject();
 
 	~GObject();
@@ -133,4 +148,11 @@ private:
 	bool bIsWaterObject = false;
 	bool canBeClonedInEditor = false;
 	bool bAlwaysVisibleInGameMinimap = false;
+
+	//Properties for static methods:
+	static unsigned int numberOfObjects;
+	static unsigned int numberOfBuildings;
+	static unsigned int numberOfUnits;
+	static unsigned int numberOfDecorations;
+	static GObject* GameObjects[MAX_NUMBER_OF_OBJECTS];
 };

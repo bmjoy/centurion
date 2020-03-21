@@ -227,12 +227,21 @@ void GObject::Create(const string _className)
 	this->spriteData.pickingId = this->GetPickingID();
 	this->spriteData.pickingColor = Picking::getPickingColorFromID(this->GetPickingID());
 
-	if (this->IsBuilding())
+	if (this->IsBuilding() == true)
 	{
 		this->AsBuilding()->SetBuildingProperties(objData);
+		GObject::numberOfBuildings += 1;
+	}
+	else if (this->IsDecoration() == true)
+	{
+		;
+	}
+	else if (this->IsUnit() == true)
+	{
+		;
 	}
 
-	Game::AddGameObject(this->GetPickingID(), this);
+	GObject::AddGameObject(this->GetPickingID(), this);
 }
 
 void GObject::SetPosition(const vec3 pos)
@@ -258,3 +267,99 @@ GObject::~GObject(void)
 {
 	//TODO
 }
+
+
+#pragma region Static variables
+unsigned int GObject::numberOfObjects = 0;
+unsigned int GObject::numberOfBuildings = 0;
+unsigned int GObject::numberOfDecorations = 0;
+unsigned int GObject::numberOfUnits = 0;
+GObject* GObject::GameObjects[MAX_NUMBER_OF_OBJECTS] = { nullptr };
+#pragma endregion
+
+#pragma region Static Members
+unsigned int GObject::GetNumberOfObjects(void)
+{
+	return GObject::numberOfObjects;
+}
+
+unsigned int GObject::GetNumberOfBuildings(void)
+{
+	return GObject::numberOfBuildings;
+}
+
+unsigned int GObject::GetNumberOfUnits(void)
+{
+	return GObject::numberOfUnits;
+}
+
+unsigned int GObject::GetNumberOfDecorations(void)
+{
+	return GObject::numberOfDecorations;
+}
+
+void GObject::AddGameObject(const unsigned int index, GObject* object)
+{
+	GObject::GameObjects[index] = object;
+	if (object->IsBuilding() == true)
+	{
+		GObject::numberOfBuildings += 1;
+	}
+	else if (object->IsDecoration() == true)
+	{
+		GObject::numberOfDecorations += 1;
+	}
+	else if (object->IsUnit() == true)
+	{
+		GObject::numberOfUnits += 1;
+	}
+	GObject::numberOfObjects += 1;
+}
+
+void GObject::RemoveGameObject(const unsigned int index)
+{
+	if (index >= 1 && index < MAX_NUMBER_OF_OBJECTS) 
+	{
+		if (GameObjects[index] != nullptr)
+		{
+			PickingObject::addUnsedPickingID(GameObjects[index]->GetPickingID());
+			if (GameObjects[index]->IsBuilding() == true)
+			{
+				GObject::numberOfBuildings -= 1;
+			}
+			else if (GameObjects[index]->IsDecoration() == true)
+			{
+				GObject::numberOfDecorations -= 1;
+			}
+			else if (GameObjects[index]->IsUnit() == true)
+			{
+				GObject::numberOfUnits -= 1;
+			}
+			GObject::numberOfObjects -= 1;
+			delete GameObjects[index];
+		}
+		GameObjects[index] = nullptr;
+	}
+}
+
+void GObject::ResetGameObjects(void)
+{
+	for (size_t i = 0; i < MAX_NUMBER_OF_OBJECTS; i++) 
+	{
+		if (GObject::GameObjects[i] != nullptr)
+		{
+			delete GObject::GetObjectByID(i);
+		}
+		GObject::GameObjects[i] = nullptr;
+	}
+	GObject::numberOfObjects = 0;
+	GObject::numberOfBuildings = 0;
+	GObject::numberOfDecorations = 0;
+	GObject::numberOfUnits = 0;
+}
+
+GObject* GObject::GetObjectByID(const unsigned int ID)
+{
+	return (ID >= 1 && ID < MAX_NUMBER_OF_OBJECTS) ? GObject::GameObjects[ID] : nullptr;
+}
+#pragma endregion

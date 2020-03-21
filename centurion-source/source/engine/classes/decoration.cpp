@@ -109,7 +109,7 @@ void Decoration::render(bool picking, int clickID, bool not_placeable)  {
 
 	if (Engine::getEnvironment() == EDITOR_ENV) {
 		if (Game::IsGameObjectNotNull(settlID)) {
-			if (oldX != this->GetPosition().x || oldY != this->GetPosition().y || oldSettlX != Game::GetGameObjectPtrById(settlID)->GetPosition().x || oldSettlY != Game::GetGameObjectPtrById(settlID)->GetPosition().y) {
+			if (oldX != this->GetPosition().x || oldY != this->GetPosition().y || oldSettlX != GObject::GetObjectByID(settlID)->GetPosition().x || oldSettlY != GObject::GetObjectByID(settlID)->GetPosition().y) {
 				checkSettlement();
 			}
 		}

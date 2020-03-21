@@ -159,7 +159,7 @@ int Engine::Launch() {
 	//if (MENU()->menu_is_created()) MENU()->reset();
 	Logger::SaveParamsXML();
 	
-	Game::ResetGameObjects();
+	GObject::ResetGameObjects();
 	Menu::Clear();
 	myWindow::DeleteInstance();
 	EditorWindows::Clear();

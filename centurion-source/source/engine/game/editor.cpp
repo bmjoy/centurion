@@ -131,7 +131,7 @@ void Editor::handleKeyboardControls() {
 		}
 		if (Engine::Keyboard::IsKeyPressed(GLFW_KEY_DELETE)){
 			if (Game::IsGameObjectNotNull(Picking::leftClickID)) {
-				Building* b = Game::GetGameObjectPtrById(Picking::leftClickID)->AsBuilding();
+				Building* b = GObject::GObject::GetObjectByID(Picking::leftClickID)->AsBuilding();
 				if (b->IsSelected()) {
 					if (b->GetSettlement()->IsIndipendent()) {
 						/*
@@ -142,14 +142,14 @@ void Editor::handleKeyboardControls() {
 						else {
 							cout << "[DEBUG] Settlement " << b->GetName() << " deleted!\n";
 							b->clear_pass();
-							Game::RemoveGameObject(Picking::leftClickID);
+							GObject::RemoveGameObject(Picking::leftClickID);
 						}
 						*/
 					}
 					else {
 						cout << "[DEBUG] Building " << b->GetSingularName() << " deleted!\n";
 						b->clear_pass();
-						Game::RemoveGameObject(Picking::leftClickID);
+						GObject::RemoveGameObject(Picking::leftClickID);
 					}
 				}
 			}
@@ -369,7 +369,7 @@ namespace editor {
 		if (Engine::Mouse::LeftHold) {
 			// buildings
 			if (Game::IsGameObjectNotNull(Picking::leftClickID)) {
-				Building* bld = Game::GetGameObjectPtrById(Picking::leftClickID)->AsBuilding();
+				Building* bld = GObject::GObject::GetObjectByID(Picking::leftClickID)->AsBuilding();
 				movingObjectRestore = false;
 				if (!movingObject) {
 					movingObjectXPos = bld->GetPosition().x;
@@ -425,7 +425,7 @@ namespace editor {
 		else {
 			// buildings
 			//if (Game::IsGameObjectNotNull(Picking::leftClickID)) {
-			//	Building* bld = Game::GetGameObjectPtrById(Picking::leftClickID)->AsBuilding();
+			//	Building* bld = GObject::GObject::GetObjectByID(Picking::leftClickID)->AsBuilding();
 			//	if (movingObjectRestore) {
 			//		bld->SetPosition(vec3(movingObjectXPos, movingObjectYPos, 0.f));
 			//		bld->clear_pass();

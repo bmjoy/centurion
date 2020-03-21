@@ -31,7 +31,7 @@ Strategy::Strategy() { }
 
 void Strategy::reset() {
 
-	ResetGameObjects();
+	GObject::ResetGameObjects();
 
 	isCreated = false;
 	game::GameMenu::Disable();
@@ -88,7 +88,7 @@ void Strategy::Create() {
 			u->SetPlayer(0);
 			u->SetPosition(playersList[0].getStartPoint().x + i * 50, playersList[0].getStartPoint().y - 1000 - j * 50);
 			u->create();
-			GameObjects[u->GetPickingID()] = u;
+			//GObject::GetObjectByID(u->GetPickingID()) = u;
 			//units[u->GetPickingID()] = u;
 		}
 	}

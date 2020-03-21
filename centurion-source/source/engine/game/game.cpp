@@ -106,7 +106,7 @@ void Game::Map::SaveMapObjectsToXml(string xmlPath)
 			vector<int> dip_bs = gobj->buildingsInSettlementIds();
 			for (int i = 0; i < dip_bs.size(); i++) {
 				int id = dip_bs[i];
-				Building* gobj2 = GameObjects[id]->AsBuilding();
+				Building* gobj2 = GObject::GetObjectByID(id)->AsBuilding();
 
 				c_building1 b2 = c_building1((c_building1::class_type) gobj2->GetClassName(),
 					(c_building1::id_type)gobj2->GetPickingID(),
@@ -505,7 +505,7 @@ bool Game::isCreated = false;
 float Game::cameraToX;
 float Game::cameraToY;
 int Game::numberOfPlayers = 1;
-GObject* Game::GameObjects[MAX_NUMBER_OF_OBJECTS] = { nullptr };
+//GObject* Game::GameObjects[MAX_NUMBER_OF_OBJECTS] = { nullptr };
 vector<string> Game::racesName;
 map<string, Game::Race> Game::races;
 vector<vec3> Game::listOfColors;
@@ -516,84 +516,26 @@ GObject* Game::selectedObject;
 Game::Game() {}
 Game::~Game() {}
 
-void Game::RemoveGameObject(int i) {
-	if (i >= 1 && i < MAX_NUMBER_OF_OBJECTS) {
-		if (GameObjects[i] != nullptr) {
-			PickingObject::addUnsedPickingID(GameObjects[i]->GetPickingID());
-			delete GameObjects[i];
-		}
-		GameObjects[i] = nullptr;
-	}
-}
-
-void Game::ResetGameObjects() {
-	for (int i = 0; i < MAX_NUMBER_OF_OBJECTS; i++) {
-		if (GameObjects[i] != nullptr) {
-			delete GameObjects[i];
-		}
-		GameObjects[i] = nullptr;
-	}
-}
-
-int Game::GetNumberOfGameObjects() {
-	int n = 0;
-	for (int i = 0; i < MAX_NUMBER_OF_OBJECTS; i++) {
-		if (GameObjects[i] != nullptr) {
-			n++;
-		}
-	}
-	return n;
-}
-
-int Game::GetNumberOfBuildings() {
-	int n = 0;
-	for (int i = 0; i < MAX_NUMBER_OF_OBJECTS; i++) {
-		if (GameObjects[i] != nullptr && GameObjects[i]->IsBuilding()) {
-			n++;
-		}
-	}
-	return n;
-}
-
-int Game::GetNumberOfUnits() {
-	int n = 0;
-	for (int i = 0; i < MAX_NUMBER_OF_OBJECTS; i++) {
-		if (GameObjects[i] != nullptr && GameObjects[i]->IsUnit()) {
-			n++;
-		}
-	}
-	return n;
-}
-
-int Game::GetNumberOfDecorations() {
-	int n = 0;
-	for (int i = 0; i < MAX_NUMBER_OF_OBJECTS; i++) {
-		if (GameObjects[i] != nullptr && GameObjects[i]->IsDecoration()) {
-			n++;
-		}
-	}
-	return n;
-}
-
-bool Game::IsGameObjectSelected(int id)
+;
+bool Game::IsGameObjectSelected(const unsigned int id)
 {
 	if (IsGameObjectNotNull(id) == false) return false;
-	return GameObjects[id]->IsSelected();
+	return GObject::GetObjectByID(id)->IsSelected();
 }
 
 bool Game::IsGameObjectNotNull(int id) {
 	if (id < 0 || id > MAX_NUMBER_OF_OBJECTS)
 		return false;
 	else
-		return (GameObjects[id] != nullptr);
+		return (GObject::GetObjectByID(id) != nullptr);
 }
 
 vector<Building*> Game::GetListOfIndipendentBuildings() {
 	vector<Building*> indipBuildings = vector<Building*>();
 	for (int i = 0; i < MAX_NUMBER_OF_OBJECTS; i++) {
-		if (GameObjects[i] != nullptr && GameObjects[i]->IsBuilding()) {
-			if (GameObjects[i]->AsBuilding()->GetSettlement()->IsIndipendent()) {
-				indipBuildings.push_back(GameObjects[i]->AsBuilding());
+		if (GObject::GetObjectByID(i) != nullptr && GObject::GetObjectByID(i)->IsBuilding()) {
+			if (GObject::GetObjectByID(i)->AsBuilding()->GetSettlement()->IsIndipendent()) {
+				indipBuildings.push_back(GObject::GetObjectByID(i)->AsBuilding());
 			}
 		}
 	}
@@ -605,9 +547,9 @@ vector<Building*> Game::GetListOfStandAloneBuildings()
 {
 	vector<Building*> saBuildings = vector<Building*>();
 	for (int i = 0; i < MAX_NUMBER_OF_OBJECTS; i++) {
-		if (GameObjects[i] != nullptr && GameObjects[i]->IsBuilding()) {
-			if (GameObjects[i]->AsBuilding()->get_settlement_building() == nullptr && GameObjects[i]->AsBuilding()->GetSettlement().IsIndipendent() == false) {
-				saBuildings.push_back(GameObjects[i]->AsBuilding());
+		if (GObject::GetObjectByID(i) != nullptr && GObject::GetObjectByID(i)->IsBuilding()) {
+			if (GObject::GetObjectByID(i)->AsBuilding()->get_settlement_building() == nullptr && GObject::GetObjectByID(i)->AsBuilding()->GetSettlement().IsIndipendent() == false) {
+				saBuildings.push_back(GObject::GetObjectByID(i)->AsBuilding());
 			}
 		}
 	}
@@ -618,8 +560,8 @@ vector<Building*> Game::GetListOfStandAloneBuildings()
 vector<Building*> Game::GetListOfBuildings() {
 	vector<Building*> indipBuildings = vector<Building*>();
 	for (int i = 0; i < MAX_NUMBER_OF_OBJECTS; i++) {
-		if (GameObjects[i] != nullptr && GameObjects[i]->IsBuilding()) {
-			indipBuildings.push_back(GameObjects[i]->AsBuilding());
+		if (GObject::GetObjectByID(i) != nullptr && GObject::GetObjectByID(i)->IsBuilding()) {
+			indipBuildings.push_back(GObject::GetObjectByID(i)->AsBuilding());
 		}
 	}
 	return indipBuildings;
@@ -627,8 +569,8 @@ vector<Building*> Game::GetListOfBuildings() {
 vector<Unit*> Game::GetListOfUnits() {
 	vector<Unit*> output = vector<Unit*>();
 	for (int i = 0; i < MAX_NUMBER_OF_OBJECTS; i++) {
-		if (GameObjects[i] != nullptr && GameObjects[i]->IsUnit()) {
-			output.push_back(GameObjects[i]->AsUnit());
+		if (GObject::GetObjectByID(i) != nullptr && GObject::GetObjectByID(i)->IsUnit()) {
+			output.push_back(GObject::GetObjectByID(i)->AsUnit());
 		}
 	}
 	return output;
@@ -636,8 +578,8 @@ vector<Unit*> Game::GetListOfUnits() {
 vector<Decoration*> Game::GetListOfDecorations() {
 	vector<Decoration*> output = vector<Decoration*>();
 	for (int i = 0; i < MAX_NUMBER_OF_OBJECTS; i++) {
-		if (GameObjects[i] != nullptr && GameObjects[i]->IsDecoration()) {
-			output.push_back(GameObjects[i]->AsDecoration());
+		if (GObject::GetObjectByID(i) != nullptr && GObject::GetObjectByID(i)->IsDecoration()) {
+			output.push_back(GObject::GetObjectByID(i)->AsDecoration());
 		}
 	}
 	return output;
@@ -653,8 +595,8 @@ void Game::RenderObjectsPicking() {
 	if ((Engine::Mouse::RightClick || Engine::Mouse::LeftClick) && !SelectionRectangle::IsActive()) {
 
 		for (int i = 1; i < MAX_NUMBER_OF_OBJECTS; i++) {
-			if (GameObjects[i] != nullptr) {
-				GameObjects[i]->render(true);
+			if (GObject::GetObjectByID(i) != nullptr) {
+				GObject::GetObjectByID(i)->render(true);
 			}
 		}
 
@@ -677,8 +619,8 @@ void Game::RenderObjects() {
 	//int selectedBuildings = 0;
 
 	for (int i = 1; i < MAX_NUMBER_OF_OBJECTS; i++) {
-		if (GameObjects[i] != nullptr) {
-			GameObjects[i]->render(false, Picking::leftClickID);
+		if (GObject::GetObjectByID(i) != nullptr) {
+			GObject::GetObjectByID(i)->render(false, Picking::leftClickID);
 		}
 	}
 	if (!Minimap::IsActive() && !editor::IsWindowOpened && !editor::menuIsOpened && !editor::TerrainBrushIsActive && Picking::leftClickID_UI == 0 && !editor::movingObject) SelectionRectangle::Render();
@@ -691,8 +633,8 @@ void Game::GoToPointFromMinimap() {
 		// if you are clicking on a townhall you have to double click 
 		// to move the camera there and quit minimap
 		if (Picking::leftClickID > 0 && Picking::hasDoubleClicked()) {
-			cameraToX = GameObjects[Picking::leftClickID]->AsBuilding()->get_xPos() - Engine::myWindow::WidthZoomed / 2.f;
-			cameraToY = GameObjects[Picking::leftClickID]->AsBuilding()->get_yPos() - Engine::myWindow::HeightZoomed / 2.f;
+			cameraToX = GObject::GetObjectByID(Picking::leftClickID)->AsBuilding()->get_xPos() - Engine::myWindow::WidthZoomed / 2.f;
+			cameraToY = GObject::GetObjectByID(Picking::leftClickID)->AsBuilding()->get_yPos() - Engine::myWindow::HeightZoomed / 2.f;
 			Minimap::Unblock();
 		}
 		//------------------------------------------------

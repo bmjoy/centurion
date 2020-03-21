@@ -37,7 +37,7 @@ namespace editor {
 
 			//Does the map folder already exist?
 			if (FileManager::CheckIfFolderExists("scenarios/" + currentMapName)) {
-				Game::ResetGameObjects();
+				GObject::ResetGameObjects();
 
 				mapgen::reset_map();
 				MapTerrain()->updateHeightsBuffer();
@@ -63,7 +63,7 @@ namespace editor {
 		// Yes
 		if (clickName == "QuestionWindow_Yes") { 
 			if (question == "QUESTION_overwriteMap") {
-				Game::ResetGameObjects();
+				GObject::ResetGameObjects();
 
 				mapgen::reset_map();
 				MapTerrain()->updateHeightsBuffer();
@@ -90,8 +90,8 @@ namespace editor {
 
 				if (idsToErase.size() > 0){
 					for (int i = 0; i < idsToErase.size(); i++) {
-						Game::GetGameObjectPtrById(idsToErase[i])->AsBuilding()->clear_pass();
-						Game::RemoveGameObject(idsToErase[i]);
+						GObject::GObject::GetObjectByID(idsToErase[i])->AsBuilding()->clear_pass();
+						GObject::RemoveGameObject(idsToErase[i]);
 					}
 					cout << "[DEBUG]: Settlement " << idsToErase[0] << " completly erased!\n";
 				}
@@ -105,7 +105,7 @@ namespace editor {
 
 				vector<Building*> indipBuildings = Game::GetListOfIndipendentBuildings();
 				for (int i = 0; i < indipBuildings.size(); i++) {
-					Game::GetGameObjectPtrById(i)->AsBuilding()->setWaitingToBeErased(false);
+					GObject::GObject::GetObjectByID(i)->AsBuilding()->setWaitingToBeErased(false);
 				}
 			}
 			clearEditorVariables();

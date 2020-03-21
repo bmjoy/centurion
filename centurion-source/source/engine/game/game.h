@@ -1,6 +1,5 @@
 #pragma once
 
-#define MAX_NUMBER_OF_OBJECTS 100
 #define MAX_NUMBER_OF_PLAYERS 8
 #define TOWNHALL_RADIUS 1875
 #define OUTPOST_RADIUS 700
@@ -107,7 +106,7 @@ public:
 #pragma region TO-LUA Methods
 
 	static GObject* GetSelectedObject() { return selectedObject; }
-	static bool IsGameObjectSelected(int id);
+	static bool IsGameObjectSelected(const unsigned int id);
 	static bool IsGameObjectNotNull(int id);
 	static void CreateObject(string className, float x, float y, int player);
 #pragma endregion
@@ -115,15 +114,6 @@ public:
 
 #pragma region GameObjects List and Methods
 
-	static GObject* GameObjects[MAX_NUMBER_OF_OBJECTS]; // protected?
-	static void RemoveGameObject(int i);
-	static void AddGameObject(int i, GObject* o) { GameObjects[i] = o; }
-	static void ResetGameObjects();
-	static GObject* GetGameObjectPtrById(int id) { return GameObjects[id]; }
-	static int GetNumberOfGameObjects();
-	static int GetNumberOfBuildings();
-	static int GetNumberOfUnits();
-	static int GetNumberOfDecorations();
 	static vector<Building*> GetListOfIndipendentBuildings();
 	static vector<Building*> GetListOfStandAloneBuildings();
 	static vector<Building*> GetListOfBuildings();
