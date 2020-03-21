@@ -786,6 +786,7 @@ void Game::GenerateSettlements(vector<vec2> &locs) {
 bool Game::CreateObject(const string className, const float x, const float y, const unsigned int player)
 {
 	bool bObjectCreated = false;
+	if (Engine::getEnvironment() == MENU_ENV) return bObjectCreated;
 
 	if (player <= MAX_NUMBER_OF_OBJECTS)
 	{
