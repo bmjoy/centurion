@@ -55,7 +55,7 @@ public:
 
 	void prepare() override;
 	//void Create(string className);
-	void SetBuildingProperties(ObjectData::ObjectXMLClassData &objData);
+	bool SetBuildingProperties(ObjectData::ObjectXMLClassData &objData);
 	void render(bool picking, int clickID = 0, bool not_placeable = false) override;
 	void SetStatus(const bool bIsCreated);
 
@@ -91,6 +91,8 @@ private:
 	string pass_path;
 	vector<Unit> holdUnits;
 	Settlement *settlement;
+	//Private members:
+	bool FindASettlement(Building* b);
 
 	//sound selectionSound; TODO
 };

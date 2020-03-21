@@ -105,8 +105,9 @@ public:
 	void update_pass(void);
 	void clear_pass(void);
 
+	//Others methods
 	virtual void prepare(void) { };
-	void Create(const string _className);
+	bool Create(const string _className);
 	virtual void render(bool picking, int clickID = 0, bool not_placeable = false) {};
 
 	//Static methods
@@ -119,6 +120,10 @@ public:
 	static void RemoveGameObject(const unsigned int index);
 	static void ResetGameObjects(void);
 	static GObject* GetObjectByID(const unsigned int ID);
+
+	static vector<Building*> GetListOfBuildings(void);
+	static vector<Unit*> GetListOfUnits(void);
+	static vector<Decoration*> GetListOfDecorations(void);
 
 	GObject();
 
@@ -155,4 +160,7 @@ private:
 	static unsigned int numberOfUnits;
 	static unsigned int numberOfDecorations;
 	static GObject* GameObjects[MAX_NUMBER_OF_OBJECTS];
+
+	//Private members:
+	void SetObjectProperties(ObjectData::ObjectXMLClassData &objData);
 };

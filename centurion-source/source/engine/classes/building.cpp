@@ -24,6 +24,7 @@ Building::Building()
 	this->bIsVillageHall = false;
 	this->bIsOutpost = false;
 	this->bIsShipyard = false;
+	this->settlement = nullptr;
 }
 
 Settlement *Building::GetSettlement(void)
@@ -224,56 +225,42 @@ void Building::prepare()
 //}
 */
 
-void Building::SetBuildingProperties(ObjectData::ObjectXMLClassData &objData)
+bool Building::SetBuildingProperties(ObjectData::ObjectXMLClassData &objData)
 {
+	bool bBuildingCreated = false;
 	// TryParseFloat, TryParseInteger, TryParseString
 	float fProperty = 0.f;
 	int iProperty = 0;
 	string strProperty = "";
 
-	//Object's properties:
-	ObjectData::TryParseString(objData.GetPropertiesMap(), "singularName", &strProperty);
-	this->SetSingularName(strProperty);
-	ObjectData::TryParseString(objData.GetPropertiesMap(), "pluralName", &strProperty);
-	this->SetPluralName(strProperty);
-	ObjectData::TryParseString(objData.GetPropertiesMap(), "race", &strProperty);
-	this->SetRaceName(strProperty);
-	ObjectData::TryParseFloat(objData.GetPropertiesMap(), "radius", &fProperty);
-	this->SetRadius(fProperty);
-	ObjectData::TryParseInteger(objData.GetPropertiesMap(), "sight", &iProperty);
-	this->SetSight(iProperty);
-	ObjectData::TryParseFloat(objData.GetPropertiesMap(), "selectionRadius", &fProperty);
-	this->SetSelectionRadius(fProperty);
-	ObjectData::TryParseString(objData.GetPropertiesMap(), "canBeClonedInEditor", &strProperty);
-	strProperty == "true" ? this->SetCanBeClonedInEditor(true) : this->SetCanBeClonedInEditor(false);
-	ObjectData::TryParseString(objData.GetPropertiesMap(), "isWaterObject", &strProperty);
-	strProperty == "true" ? this->AllowPositioningIntoWater() : this->DenyPositioningIntoWater();
-	ObjectData::TryParseString(objData.GetPropertiesMap(), "alwaysVisibleInGameMinimap", &strProperty);
-	strProperty == "true" ? this->SetAlwaysVisibleInGameMinimap(true) : this->SetAlwaysVisibleInGameMinimap(false);
-
 	//Building's properties:
-	ObjectData::TryParseString(objData.GetPropertiesMap(), "category", &strProperty);
-	this->category = strProperty;
-	ObjectData::TryParseInteger(objData.GetPropertiesMap(), "maxHealth", &iProperty);
-	this->maxHealth = iProperty;
-	ObjectData::TryParseInteger(objData.GetPropertiesMap(), "repairRate", &iProperty);
-	this->repairRate = iProperty;
-	ObjectData::TryParseInteger(objData.GetPropertiesMap(), "loyaltyFearHealthPercent", &iProperty);
-	this->loyaltyFearHealthPercent = iProperty;
 	ObjectData::TryParseString(objData.GetPropertiesMap(), "isCentralBuilding", &strProperty);
 	this->bIsCentralBuilding = strProperty == "true" ? true : false;
-	ObjectData::TryParseString(objData.GetPropertiesMap(), "clickable_in_minimap", &strProperty);
-	this->bIsClickableInMimimap = strProperty == "true" ? true : false;
-	ObjectData::TryParseString(objData.GetPropertiesMap(), "autoRepair", &strProperty);
-	this->bAutoRepair = strProperty == "true" ? true : false;
-	ObjectData::TryParseString(objData.GetPropertiesMap(), "canProduceGold", &strProperty);
-	this->bCanProduceGold = strProperty == "true" ? true : false;
-	ObjectData::TryParseString(objData.GetPropertiesMap(), "canProduceFood", &strProperty);
-	this->bCanProduceFood = strProperty == "true" ? true : false;
-	ObjectData::TryParseString(objData.GetPropertiesMap(), "ent_path", &strProperty);
-	this->ent_path = strProperty;
-	ObjectData::TryParseString(objData.GetPropertiesMap(), "pass_path", &strProperty);
-	this->pass_path = strProperty;
+	bBuildingCreated = this->FindASettlement(this);
+	if (bBuildingCreated == true)
+	{
+		ObjectData::TryParseString(objData.GetPropertiesMap(), "category", &strProperty);
+		this->category = strProperty;
+		ObjectData::TryParseInteger(objData.GetPropertiesMap(), "maxHealth", &iProperty);
+		this->maxHealth = iProperty;
+		ObjectData::TryParseInteger(objData.GetPropertiesMap(), "repairRate", &iProperty);
+		this->repairRate = iProperty;
+		ObjectData::TryParseInteger(objData.GetPropertiesMap(), "loyaltyFearHealthPercent", &iProperty);
+		this->loyaltyFearHealthPercent = iProperty;
+		ObjectData::TryParseString(objData.GetPropertiesMap(), "clickable_in_minimap", &strProperty);
+		this->bIsClickableInMimimap = strProperty == "true" ? true : false;
+		ObjectData::TryParseString(objData.GetPropertiesMap(), "autoRepair", &strProperty);
+		this->bAutoRepair = strProperty == "true" ? true : false;
+		ObjectData::TryParseString(objData.GetPropertiesMap(), "canProduceGold", &strProperty);
+		this->bCanProduceGold = strProperty == "true" ? true : false;
+		ObjectData::TryParseString(objData.GetPropertiesMap(), "canProduceFood", &strProperty);
+		this->bCanProduceFood = strProperty == "true" ? true : false;
+		ObjectData::TryParseString(objData.GetPropertiesMap(), "ent_path", &strProperty);
+		this->ent_path = strProperty;
+		ObjectData::TryParseString(objData.GetPropertiesMap(), "pass_path", &strProperty);
+		this->pass_path = strProperty;
+	}
+	return bBuildingCreated;
 }
 
 void Building::render(bool picking, int clickID, bool not_placeable) 
@@ -325,7 +312,7 @@ void Building::render(bool picking, int clickID, bool not_placeable)
 	//this->Select(bSelected);
 	//if (bSelected) {
 	//	if (Game::GetSelectedObject() != this) {
-	//		Game::SetSelectedObject(this);
+			//Game::SetSelectedObject(this);
 	//	}
 	//}
 	//if (Engine::getEnvironment() == EDITOR_ENV && !Game::Minimap::IsActive()) {
@@ -358,4 +345,30 @@ vector<int> Building::buildingsInSettlementIds()
 }
 */
 
-Building::~Building() {}
+Building::~Building() 
+{
+	if (this->settlement != nullptr)
+	{
+		delete this->settlement;
+		this->settlement = nullptr;
+	}
+}
+
+#pragma region Private members
+bool Building::FindASettlement(Building* b)
+{
+	bool bSettlementDiscovered = false;
+
+	if (b->bIsCentralBuilding == false)
+	{
+		;
+	}
+	else
+	{
+		this->settlement = new Settlement();
+		bSettlementDiscovered = this->settlement->AddBuildingToSettlement(b); //Here, it should be return always true.
+	}
+
+	return bSettlementDiscovered;
+}
+#pragma endregion

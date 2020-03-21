@@ -85,13 +85,13 @@ vector<Building> Settlement::GetBuildingsBelongToSettlement(void)
 	return vector<Building>();
 }
 
-bool Settlement::AddBuildingToSettlement(Building& b)
+bool Settlement::AddBuildingToSettlement(Building* b)
 {
 	bool bAddCorrectly = false;
 	//Adds a new building into the map only if it isn't already present.
-	if(this->buildingsOfSettlement.count(b.GetPickingID()) == 0)
+	if(this->buildingsOfSettlement.count(b->GetPickingID()) == 0)
 	{
-		this->buildingsOfSettlement.insert(std::pair<unsigned int, Building>(b.GetPickingID(), b));
+		this->buildingsOfSettlement.insert(std::pair<unsigned int, Building*>(b->GetPickingID(), b));
 		bAddCorrectly = true;
 	}
 	return bAddCorrectly;

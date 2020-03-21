@@ -34,7 +34,7 @@ public:
 	void SetMaxPopulation(const unsigned int par_max_population);
 
 	vector<Building> GetBuildingsBelongToSettlement(void);
-	bool AddBuildingToSettlement(Building& b);
+	bool AddBuildingToSettlement(Building* b);
 	bool RemoveBuildingFromSettlement(Building& b);
 
 	Settlement();
@@ -46,5 +46,5 @@ private:
 	int gold;
 	unsigned int population;
 	unsigned int max_population;
-	map<unsigned int, Building> buildingsOfSettlement;
+	map<unsigned int, Building*> buildingsOfSettlement;
 };

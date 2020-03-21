@@ -211,8 +211,9 @@ void GObject::clear_pass(void)
 	astar::clearPassMatrix(this->pass_grid, this->position);
 }
 
-void GObject::Create(const string _className)
+bool GObject::Create(const string _className)
 {
+	bool bObjectedCreated = true;
 	ObjectData::ObjectXMLClassData objData = *ObjectData::GetObjectData(_className);
 	ObjectData::SetFixedPtr(&objData);
 	objData.GetParentData(objData.GetParentClass());
@@ -227,10 +228,10 @@ void GObject::Create(const string _className)
 	this->spriteData.pickingId = this->GetPickingID();
 	this->spriteData.pickingColor = Picking::getPickingColorFromID(this->GetPickingID());
 
+	this->SetObjectProperties(objData);
 	if (this->IsBuilding() == true)
 	{
-		this->AsBuilding()->SetBuildingProperties(objData);
-		GObject::numberOfBuildings += 1;
+		bObjectedCreated = this->AsBuilding()->SetBuildingProperties(objData);
 	}
 	else if (this->IsDecoration() == true)
 	{
@@ -241,7 +242,12 @@ void GObject::Create(const string _className)
 		;
 	}
 
-	GObject::AddGameObject(this->GetPickingID(), this);
+	if (bObjectedCreated == true)
+	{
+		GObject::AddGameObject(this->GetPickingID(), this);
+	}
+
+	return bObjectedCreated;
 }
 
 void GObject::SetPosition(const vec3 pos)
@@ -265,7 +271,6 @@ int GObject::get_yPos(void)
 
 GObject::~GObject(void) 
 {
-	//TODO
 }
 
 
@@ -344,7 +349,7 @@ void GObject::RemoveGameObject(const unsigned int index)
 
 void GObject::ResetGameObjects(void)
 {
-	for (size_t i = 0; i < MAX_NUMBER_OF_OBJECTS; i++) 
+	for (unsigned int i = 0; i < MAX_NUMBER_OF_OBJECTS; i++) 
 	{
 		if (GObject::GameObjects[i] != nullptr)
 		{
@@ -361,5 +366,72 @@ void GObject::ResetGameObjects(void)
 GObject* GObject::GetObjectByID(const unsigned int ID)
 {
 	return (ID >= 1 && ID < MAX_NUMBER_OF_OBJECTS) ? GObject::GameObjects[ID] : nullptr;
+}
+
+vector<Building*> GObject::GetListOfBuildings(void)
+{
+	vector<Building*> buildingsList = vector<Building*>();
+	for (size_t i = 0; i < MAX_NUMBER_OF_OBJECTS; i++) 
+	{
+		if (GObject::GameObjects[i] != nullptr && GObject::GameObjects[i]->IsBuilding() == true)
+		{
+			buildingsList.push_back(GObject::GameObjects[i]->AsBuilding());
+		}
+	}
+	return buildingsList;
+}
+vector<Unit*> GObject::GetListOfUnits(void)
+{
+	vector<Unit*> unitsList = vector<Unit*>();
+	for (size_t i = 0; i < MAX_NUMBER_OF_OBJECTS; i++)
+	{
+		if (GObject::GameObjects[i] != nullptr && GObject::GameObjects[i]->IsUnit() == true)
+		{
+			unitsList.push_back(GameObjects[i]->AsUnit());
+		}
+	}
+	return unitsList;
+}
+vector<Decoration*> GObject::GetListOfDecorations(void)
+{
+	vector<Decoration*> decorationsList = vector<Decoration*>();
+	for (size_t i = 0; i < MAX_NUMBER_OF_OBJECTS; i++)
+	{
+		if (GObject::GameObjects[i] != nullptr && GObject::GameObjects[i]->IsDecoration())
+		{
+			decorationsList.push_back(GObject::GameObjects[i]->AsDecoration());
+		}
+	}
+	return decorationsList;
+}
+#pragma endregion
+
+#pragma region Private members
+void GObject::SetObjectProperties(ObjectData::ObjectXMLClassData &objData)
+{
+	// TryParseFloat, TryParseInteger, TryParseString
+	float fProperty = 0.f;
+	int iProperty = 0;
+	string strProperty = "";
+
+	//Object's properties:
+	ObjectData::TryParseString(objData.GetPropertiesMap(), "singularName", &strProperty);
+	this->singularName = strProperty;
+	ObjectData::TryParseString(objData.GetPropertiesMap(), "pluralName", &strProperty);
+	this->pluralName = strProperty;
+	ObjectData::TryParseString(objData.GetPropertiesMap(), "race", &strProperty);
+	this->raceName = strProperty;
+	ObjectData::TryParseFloat(objData.GetPropertiesMap(), "radius", &fProperty);
+	this->radius = fProperty;
+	ObjectData::TryParseInteger(objData.GetPropertiesMap(), "sight", &iProperty);
+	this->sight = iProperty;
+	ObjectData::TryParseFloat(objData.GetPropertiesMap(), "selectionRadius", &fProperty);
+	this->selectionRadius = fProperty;
+	ObjectData::TryParseString(objData.GetPropertiesMap(), "canBeClonedInEditor", &strProperty);
+	this->canBeClonedInEditor = strProperty == "true" ? true : false;
+	ObjectData::TryParseString(objData.GetPropertiesMap(), "isWaterObject", &strProperty);
+	this->bIsWaterObject = strProperty == "true" ? true : false;
+	ObjectData::TryParseString(objData.GetPropertiesMap(), "alwaysVisibleInGameMinimap", &strProperty);
+	this->bAlwaysVisibleInGameMinimap = strProperty == "true" ? true : false;
 }
 #pragma endregion

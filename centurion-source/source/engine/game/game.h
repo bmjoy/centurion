@@ -108,18 +108,14 @@ public:
 	static GObject* GetSelectedObject() { return selectedObject; }
 	static bool IsGameObjectSelected(const unsigned int id);
 	static bool IsGameObjectNotNull(int id);
-	static void CreateObject(string className, float x, float y, int player);
+	static bool CreateObject(const string className, const float x, const float y, const unsigned int player);
 #pragma endregion
 
 
 #pragma region GameObjects List and Methods
 
 	static vector<Building*> GetListOfIndipendentBuildings();
-	static vector<Building*> GetListOfStandAloneBuildings();
-	static vector<Building*> GetListOfBuildings();
-	static vector<Unit*> GetListOfUnits();
-	static vector<Decoration*> GetListOfDecorations();
-	static void UpdateSettlementBuildings();
+	//static void UpdateSettlementBuildings();
 	static void SetSelectedObject(GObject* o) { selectedObject = o; }
 
 #pragma endregion

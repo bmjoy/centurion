@@ -37,7 +37,7 @@ void Game::Map::LoadScenario(string scenarioName)
 		LoadTexture(scenarioPath + "/texture");
 		LoadMapObjectsFromXml(scenarioPath + "/mapObjects.xml");
 
-		UpdateSettlementBuildings();
+		//UpdateSettlementBuildings();
 	}
 	catch (...)
 	{
@@ -152,7 +152,7 @@ void Game::Map::SaveMapObjectsToXml(string xmlPath)
 
 		c_decorations _decorations = c_decorations();
 
-		vector<Decoration*> _decors = Game::GetListOfDecorations();
+		vector<Decoration*> _decors = GObject::GetListOfDecorations();
 		for (int i = 0; i < _decors.size(); i++) {
 			c_decoration _dec = c_decoration(
 				c_decoration::class_type(_decors[i]->GetClassName()),
@@ -505,7 +505,6 @@ bool Game::isCreated = false;
 float Game::cameraToX;
 float Game::cameraToY;
 int Game::numberOfPlayers = 1;
-//GObject* Game::GameObjects[MAX_NUMBER_OF_OBJECTS] = { nullptr };
 vector<string> Game::racesName;
 map<string, Game::Race> Game::races;
 vector<vec3> Game::listOfColors;
@@ -530,6 +529,7 @@ bool Game::IsGameObjectNotNull(int id) {
 		return (GObject::GetObjectByID(id) != nullptr);
 }
 
+
 vector<Building*> Game::GetListOfIndipendentBuildings() {
 	vector<Building*> indipBuildings = vector<Building*>();
 	for (int i = 0; i < MAX_NUMBER_OF_OBJECTS; i++) {
@@ -541,6 +541,7 @@ vector<Building*> Game::GetListOfIndipendentBuildings() {
 	}
 	return indipBuildings;
 }
+
 
 /*
 vector<Building*> Game::GetListOfStandAloneBuildings()
@@ -556,34 +557,6 @@ vector<Building*> Game::GetListOfStandAloneBuildings()
 	return saBuildings;
 }
 */
-
-vector<Building*> Game::GetListOfBuildings() {
-	vector<Building*> indipBuildings = vector<Building*>();
-	for (int i = 0; i < MAX_NUMBER_OF_OBJECTS; i++) {
-		if (GObject::GetObjectByID(i) != nullptr && GObject::GetObjectByID(i)->IsBuilding()) {
-			indipBuildings.push_back(GObject::GetObjectByID(i)->AsBuilding());
-		}
-	}
-	return indipBuildings;
-}
-vector<Unit*> Game::GetListOfUnits() {
-	vector<Unit*> output = vector<Unit*>();
-	for (int i = 0; i < MAX_NUMBER_OF_OBJECTS; i++) {
-		if (GObject::GetObjectByID(i) != nullptr && GObject::GetObjectByID(i)->IsUnit()) {
-			output.push_back(GObject::GetObjectByID(i)->AsUnit());
-		}
-	}
-	return output;
-}
-vector<Decoration*> Game::GetListOfDecorations() {
-	vector<Decoration*> output = vector<Decoration*>();
-	for (int i = 0; i < MAX_NUMBER_OF_OBJECTS; i++) {
-		if (GObject::GetObjectByID(i) != nullptr && GObject::GetObjectByID(i)->IsDecoration()) {
-			output.push_back(GObject::GetObjectByID(i)->AsDecoration());
-		}
-	}
-	return output;
-}
 
 void Game::RenderObjectsPicking() {
  	if (Picking::leftClickID_UI != 0) {
@@ -615,11 +588,12 @@ void Game::RenderObjectsPicking() {
 	}
 }
 
-void Game::RenderObjects() {
-	//int selectedBuildings = 0;
-
-	for (int i = 1; i < MAX_NUMBER_OF_OBJECTS; i++) {
-		if (GObject::GetObjectByID(i) != nullptr) {
+void Game::RenderObjects() 
+{
+	for (unsigned int i = 1; i < MAX_NUMBER_OF_OBJECTS; i++) 
+	{
+		if (GObject::GetObjectByID(i) != nullptr) 
+		{
 			GObject::GetObjectByID(i)->render(false, Picking::leftClickID);
 		}
 	}
@@ -783,10 +757,10 @@ void Game::GenerateSettlements(vector<vec2> &locs) {
 	MapTerrain()->updateTextureBuffer();
 
 	// update buildings info
-	UpdateSettlementBuildings();
+	//UpdateSettlementBuildings();
 }
 
-void Game::UpdateSettlementBuildings() {
+//void Game::UpdateSettlementBuildings() {
 	/*vector<Building*> listOfBuildings = Game::GetListOfBuildings();
 	vector<Building*> listOfIndipBuildings = Game::GetListOfIndipendentBuildings();
 
@@ -802,28 +776,42 @@ void Game::UpdateSettlementBuildings() {
 			}
 		}
 	}*/
-}
+//}
 
 #pragma endregion
 
 
 #pragma region TO-LUA METHODS
 
-void Game::CreateObject(string className, float x, float y, int player)
+bool Game::CreateObject(const string className, const float x, const float y, const unsigned int player)
 {
-	ObjectData::ObjectXMLClassData *objData = ObjectData::GetObjectData(className);
-	if (objData == nullptr) return;
-	
-	string type = objData->GetClassType();
+	bool bObjectedCreated = false;
 
-	if (type == "cpp_buildingclass")
+	if (player <= MAX_NUMBER_OF_OBJECTS)
 	{
-		Building* newBuilding = new Building();
-		newBuilding->SetPosition(vec3(x, y, 10));
-		newBuilding->SetClassName(className);
-		newBuilding->SetType(type);
-		newBuilding->Create(className);
+		ObjectData::ObjectXMLClassData *objData = ObjectData::GetObjectData(className);
+		if (objData == nullptr)
+		{
+			return bObjectedCreated;
+		}
+
+		string type = objData->GetClassType();
+
+		if (type == "cpp_buildingclass")
+		{
+			Building* newBuilding = new Building();
+			newBuilding->SetPosition(vec3(x, y, 10));
+			newBuilding->SetPlayer(player);
+			newBuilding->SetType(type);
+			bObjectedCreated = newBuilding->Create(className);
+			if (bObjectedCreated == false)
+			{
+				delete newBuilding;
+				newBuilding = nullptr;
+			}
+		}
 	}
+	return bObjectedCreated;
 }
 
 #pragma endregion
