@@ -13,7 +13,6 @@ Building::Building()
 	this->bIsCreated = false;
 	this->waitingToBeErased = false;
 	this->bIsPlaceable = true;
-	this->buildingListSize = 0;
 	this->bIsTownhall = false;
 	this->bIsVillageHall = false;
 	this->bIsOutpost = false;
@@ -361,31 +360,41 @@ bool Building::FindASettlement(Building* b)
 	{
 		for (unsigned int settlementsCounter = 0; settlementsCounter < numOfSettlements && bSettlementDiscovered == false; settlementsCounter++)
 		{
-			size_t numOfBuildings = Building::settlementsList[settlementsCounter].xPoint.size();
-			for (unsigned int buildingsCounter = 0; buildingsCounter < numOfBuildings && bSettlementDiscovered == false; buildingsCounter++)
+			if ( (b->GetPlayer() == Building::settlementsList[settlementsCounter].set->GetPlayer())
+				&& (Building::settlementsList[settlementsCounter].set->IsIndipendent() == false) )
 			{
-				float xPos = Building::settlementsList[settlementsCounter].xPoint[buildingsCounter];
-				float yPos = Building::settlementsList[settlementsCounter].xPoint[buildingsCounter];
-				float distance = sqrt(pow(b_xPos - xPos, 2) + pow(b_yPos - yPos, 2));
-				if (distance <= b->GetRadius())
+				size_t numOfBuildings = Building::settlementsList[settlementsCounter].xPoint.size();
+				for (unsigned int buildingsCounter = 0; buildingsCounter < numOfBuildings && bSettlementDiscovered == false; buildingsCounter++)
 				{
-					b->settlement = Building::settlementsList[settlementsCounter].set;
-					Building::settlementsList[settlementsCounter].xPoint.push_back(b_xPos);
-					Building::settlementsList[settlementsCounter].yPoint.push_back(b_yPos);
-					bSettlementDiscovered = true;
+					float xPos = Building::settlementsList[settlementsCounter].xPoint[buildingsCounter];
+					float yPos = Building::settlementsList[settlementsCounter].xPoint[buildingsCounter];
+					float distance = sqrt(pow(b_xPos - xPos, 2) + pow(b_yPos - yPos, 2));
+					if (distance <= b->GetRadius()) //If the two buildings are close enough 
+					{
+						float distance2 = sqrt(pow((b_xPos - RADIUS_OFFSET) - (xPos - RADIUS_OFFSET), 2) + pow((b_yPos - RADIUS_OFFSET) - (yPos -RADIUS_OFFSET), 2));
+						if (distance2 > b->GetRadius() + Building::settlementsList[settlementsCounter].radius[buildingsCounter]) //If the two buildings don't intersect each others 
+						{
+							b->settlement = Building::settlementsList[settlementsCounter].set;
+							Building::settlementsList[settlementsCounter].xPoint.push_back(b_xPos);
+							Building::settlementsList[settlementsCounter].yPoint.push_back(b_yPos);
+							Building::settlementsList[settlementsCounter].radius.push_back(b->GetRadius());
+							bSettlementDiscovered = true;
+							bSettlementDiscovered = bSettlementDiscovered = b->settlement->AddBuildingToSettlement(b); //Here, it should be return always true.
+						}
+					}
 				}
 			}
 		}
 	}
 	else
 	{
-		b->settlement = new Settlement();
+		b->settlement = new Settlement(b->GetPlayer());
 		Building::settlementsList[numOfSettlements].set = b->settlement;
 		Building::settlementsList[numOfSettlements].xPoint.push_back(b_xPos);
 		Building::settlementsList[numOfSettlements].yPoint.push_back(b_yPos);
+		Building::settlementsList[numOfSettlements].radius.push_back(b->GetRadius());
 		bSettlementDiscovered = b->settlement->AddBuildingToSettlement(b); //Here, it should be return always true.
 	}
-
 	return bSettlementDiscovered;
 }
 #pragma endregion

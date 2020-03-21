@@ -4,8 +4,10 @@
 using namespace std;
 
 
-Settlement::Settlement()
+Settlement::Settlement(const unsigned int par_player)
 {
+	this->player = par_player;
+	this->bIsIndipendent = false;
 	//READ THOSE VALUES FROM SETTLEMENT.OC.XML
 	this->population = 10;
 	this->max_population = 100;
@@ -79,10 +81,31 @@ void Settlement::SetMaxPopulation(const unsigned int par_max_population)
 	this->max_population = par_max_population <= POPULATION_LIMIT ? par_max_population : POPULATION_LIMIT;
 }
 
-vector<Building> Settlement::GetBuildingsBelongToSettlement(void)
+unsigned int Settlement::GetPlayer(void)
 {
-	//To do
-	return vector<Building>();
+	return this->player;
+}
+
+void Settlement::SetPlayer(const unsigned int par_player)
+{
+	if (par_player != this->player)
+	{
+		this->player = par_player;
+		for (map<unsigned int, Building*>::iterator mapIterator = this->buildingsOfSettlement.begin(); mapIterator != this->buildingsOfSettlement.end(); mapIterator++)
+		{
+			mapIterator->second->SetPlayer(par_player);
+		}
+	}
+}
+
+vector<Building*> Settlement::GetBuildingsBelongToSettlement(void)
+{
+	vector<Building*> list;
+	for (map<unsigned int, Building*>::iterator mapIterator = this->buildingsOfSettlement.begin(); mapIterator != this->buildingsOfSettlement.end(); mapIterator++)
+	{
+		list.push_back(mapIterator->second);
+	}
+	return list;
 }
 
 bool Settlement::AddBuildingToSettlement(Building* b)

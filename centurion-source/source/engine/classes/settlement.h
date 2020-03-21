@@ -32,18 +32,21 @@ public:
 	void SetPopulation(const unsigned int par_population);
 	unsigned int GetMaxPopulation(void);
 	void SetMaxPopulation(const unsigned int par_max_population);
+	unsigned int GetPlayer(void);
+	void SetPlayer(const unsigned int par_player);
 
-	vector<Building> GetBuildingsBelongToSettlement(void);
+	vector<Building*> GetBuildingsBelongToSettlement(void);
 	bool AddBuildingToSettlement(Building* b);
 	bool RemoveBuildingFromSettlement(Building& b);
 
-	Settlement();
+	Settlement(const unsigned int par_player);
 	~Settlement() {};
 private:
 	bool bIsIndipendent = false;
 	string name;
 	unsigned int food;
 	int gold;
+	unsigned int player;
 	unsigned int population;
 	unsigned int max_population;
 	map<unsigned int, Building*> buildingsOfSettlement;

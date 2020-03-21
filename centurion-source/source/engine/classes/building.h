@@ -1,9 +1,13 @@
 #pragma once
 
-#include <ui.h>
 #include <json.hpp>
 #include "object.h"
 #include "settlement.h"
+
+#ifndef RADIUS_OFFSET
+#define RADIUS_OFFSET 20
+#endif
+
 
 using namespace std;
 using namespace glm;
@@ -69,7 +73,6 @@ private:
 	vector<Unit> unitsInside;
 	bool waitingToBeErased;
 	bool bIsCreated;
-	size_t buildingListSize;
 	gui::Circle circle[2];
 	string category;
 	unsigned int maxHealth;
@@ -98,6 +101,7 @@ private:
 		Settlement *set;
 		vector<float> xPoint;
 		vector<float> yPoint;
+		vector<float> radius;
 	};
 	static vector<SettlementSet> settlementsList;
 	//sound selectionSound; TODO
