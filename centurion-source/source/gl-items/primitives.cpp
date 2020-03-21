@@ -104,12 +104,15 @@ namespace primitives {
 		Text()->create();
 		Cursor()->create();
 		ECircle()->create();
+
 		ERectangle()->create();
 		FRectangle()->create();
-		BSprite()->create();
-		DSprite()->create();
+		
+		BSprite()->Create();
+		DSprite()->Create();
+		USprite()->Create();
+
 		Img()->create();
-		USprite()->create();
 
 		//----
 

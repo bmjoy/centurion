@@ -8,9 +8,7 @@ class DecorationSprite : public ObjectSprite
 {
 public:
 	DecorationSprite();
-	GLuint getTextureID(string classname);
-	void create();
-	void render(DecorationData d, bool not_placeable = false);
+	void Render(SpriteData &data, float x, float y, bool not_placeable = false);
 	~DecorationSprite();
 };
 

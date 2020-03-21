@@ -265,7 +265,7 @@ bool Building::SetBuildingProperties(ObjectData::ObjectXMLClassData &objData)
 
 void Building::render(bool picking, int clickID, bool not_placeable) 
 {
-	BSprite()->render(spriteData, GetPosition().x, GetPosition().y, picking, false, vec3(0), false);
+	BSprite()->Render(spriteData, GetPosition().x, GetPosition().y, picking, false, vec3(0), false);
 
 	//---------------------------
 

@@ -10,8 +10,8 @@ uniform mat4 view;
 uniform float x;
 uniform float y;
 uniform float z;
-uniform int w;
-uniform int h;
+uniform float w;
+uniform float h;
 
 void main()
 {

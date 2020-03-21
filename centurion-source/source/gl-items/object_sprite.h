@@ -19,6 +19,7 @@ public:
 	};
 
 	ObjectSprite();
+	virtual void Create();
 	void AddEntityPath(string Path) { entPathList.push_back(Path); }
 	~ObjectSprite();
 
@@ -37,7 +38,7 @@ protected:
 		0.5f,		0.5f,		0.0f,		1.0, 0.0f,   // in alto a dx
 		-0.5f,		0.5f,		0.0f,		0.0f, 0.0f   // in alto a sx
 	};
-	
+
 	void GenerateBuffers();
 
 };

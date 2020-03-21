@@ -8,7 +8,7 @@ class BuildingSprite : public ObjectSprite
 public:
 	BuildingSprite();
 	void create();
-	void render(SpriteData &data, float x, float y, bool picking, bool selected, vec3 playerColor, bool not_placeable = false);
+	void Render(SpriteData &data, float x, float y, bool picking, bool selected, vec3 playerColor, bool not_placeable = false);
 	~BuildingSprite();
 };
 

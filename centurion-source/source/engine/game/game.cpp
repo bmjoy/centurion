@@ -785,14 +785,14 @@ void Game::GenerateSettlements(vector<vec2> &locs) {
 
 bool Game::CreateObject(const string className, const float x, const float y, const unsigned int player)
 {
-	bool bObjectedCreated = false;
+	bool bObjectCreated = false;
 
 	if (player <= MAX_NUMBER_OF_OBJECTS)
 	{
 		ObjectData::ObjectXMLClassData *objData = ObjectData::GetObjectData(className);
 		if (objData == nullptr)
 		{
-			return bObjectedCreated;
+			return bObjectCreated;
 		}
 
 		string type = objData->GetClassType();
@@ -801,17 +801,26 @@ bool Game::CreateObject(const string className, const float x, const float y, co
 		{
 			Building* newBuilding = new Building();
 			newBuilding->SetPosition(vec3(x, y, 10));
-			newBuilding->SetPlayer(player);
-			newBuilding->SetType(type);
-			bObjectedCreated = newBuilding->Create(className);
-			if (bObjectedCreated == false)
+			newBuilding->SetPlayer(player);			
+			bObjectCreated = newBuilding->Create(className);
+			if (bObjectCreated == false)
 			{
 				delete newBuilding;
 				newBuilding = nullptr;
 			}
 		}
+		if (type == "cpp_decorationclass") {
+			Decoration* newDecoration = new Decoration();
+			newDecoration->SetPosition(vec3(x, y, 10));
+			bObjectCreated = newDecoration->Create(className);
+			if (bObjectCreated == false)
+			{
+				delete newDecoration;
+				newDecoration = nullptr;
+			}
+		}
 	}
-	return bObjectedCreated;
+	return bObjectCreated;
 }
 
 #pragma endregion

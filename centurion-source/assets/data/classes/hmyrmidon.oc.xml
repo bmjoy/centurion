@@ -2,7 +2,7 @@
  <properties>
     <property name="singularName" value="Myrmidon"/>
     <property name="pluralName" value="Myrmidons"/>
-    <property name="ent_path" value="assets/units/hmyrmidon/hmyrmidon.oe.json"/>
+    <property name="ent_path" value="assets/units/hmyrmidon/hmyrmidon.oe.xml"/>
   </properties>
   <methods>
     <method name="" script=""/>

@@ -3,7 +3,7 @@
     <property name="singularName" value="Broadleaf 1"/>
     <property name="pluralName" value="Broadleaves 1"/>
     <property name="category" value="trees"/>
-    <property name="ent_path" value="assets/decorations/trees/broadleaves/broadleaf_2.oe.json"/>
+    <property name="ent_path" value="assets/decorations/trees/broadleaves/broadleaf_2.oe.xml"/>
     <property name="pass_path" value="assets/decorations/trees/broadleaves/broadleaf_2.pass"/>
   </properties>
   <methods>

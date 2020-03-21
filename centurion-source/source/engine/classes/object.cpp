@@ -213,7 +213,7 @@ void GObject::clear_pass(void)
 
 bool GObject::Create(const string _className)
 {
-	bool bObjectedCreated = true;
+	bool bObjectCreated = true;
 	ObjectData::ObjectXMLClassData objData = *ObjectData::GetObjectData(_className);
 	ObjectData::SetFixedPtr(&objData);
 	objData.GetParentData(objData.GetParentClass());
@@ -231,23 +231,23 @@ bool GObject::Create(const string _className)
 	this->SetObjectProperties(objData);
 	if (this->IsBuilding() == true)
 	{
-		bObjectedCreated = this->AsBuilding()->SetBuildingProperties(objData);
+		bObjectCreated = this->AsBuilding()->SetBuildingProperties(objData);
 	}
 	else if (this->IsDecoration() == true)
 	{
-		;
+		bObjectCreated = true;
 	}
 	else if (this->IsUnit() == true)
 	{
 		;
 	}
 
-	if (bObjectedCreated == true)
+	if (bObjectCreated == true)
 	{
 		GObject::AddGameObject(this->GetPickingID(), this);
 	}
 
-	return bObjectedCreated;
+	return bObjectCreated;
 }
 
 void GObject::SetPosition(const vec3 pos)
