@@ -474,61 +474,39 @@ public:
 	void
 		iframe(::std::auto_ptr< iframe_type > p);
 
-	// x
+	// size
 	//
-	typedef ::xml_schema::integer x_type;
-	typedef ::xsd::cxx::tree::traits< x_type, char > x_traits;
+	typedef ::xml_schema::string size_type;
+	typedef ::xsd::cxx::tree::traits< size_type, char > size_traits;
 
-	const x_type&
-		x() const;
+	const size_type&
+		size() const;
 
-	x_type&
-		x();
+	size_type&
+		size();
 
 	void
-		x(const x_type& x);
-
-	// y
-	//
-	typedef ::xml_schema::integer y_type;
-	typedef ::xsd::cxx::tree::traits< y_type, char > y_traits;
-
-	const y_type&
-		y() const;
-
-	y_type&
-		y();
+		size(const size_type& x);
 
 	void
-		y(const y_type& x);
+		size(::std::auto_ptr< size_type > p);
 
-	// width
+	// position
 	//
-	typedef ::xml_schema::integer width_type;
-	typedef ::xsd::cxx::tree::traits< width_type, char > width_traits;
+	typedef ::xml_schema::string position_type;
+	typedef ::xsd::cxx::tree::traits< position_type, char > position_traits;
 
-	const width_type&
-		width() const;
+	const position_type&
+		position() const;
 
-	width_type&
-		width();
+	position_type&
+		position();
 
 	void
-		width(const width_type& x);
-
-	// height
-	//
-	typedef ::xml_schema::integer height_type;
-	typedef ::xsd::cxx::tree::traits< height_type, char > height_traits;
-
-	const height_type&
-		height() const;
-
-	height_type&
-		height();
+		position(const position_type& x);
 
 	void
-		height(const height_type& x);
+		position(::std::auto_ptr< position_type > p);
 
 	// isOpened
 	//
@@ -551,10 +529,8 @@ public:
 		const id_type&,
 		const name_type&,
 		const iframe_type&,
-		const x_type&,
-		const y_type&,
-		const width_type&,
-		const height_type&,
+		const size_type&,
+		const position_type&,
 		const isOpened_type&);
 
 	c_editorWindow(::std::auto_ptr< conditionScript_type >,
@@ -562,10 +538,8 @@ public:
 		const id_type&,
 		const name_type&,
 		const iframe_type&,
-		const x_type&,
-		const y_type&,
-		const width_type&,
-		const height_type&,
+		const size_type&,
+		const position_type&,
 		const isOpened_type&);
 
 	c_editorWindow(const ::xercesc::DOMElement& e,
@@ -604,10 +578,8 @@ protected:
 	::xsd::cxx::tree::one< id_type > id_;
 	::xsd::cxx::tree::one< name_type > name_;
 	::xsd::cxx::tree::one< iframe_type > iframe_;
-	::xsd::cxx::tree::one< x_type > x_;
-	::xsd::cxx::tree::one< y_type > y_;
-	::xsd::cxx::tree::one< width_type > width_;
-	::xsd::cxx::tree::one< height_type > height_;
+	::xsd::cxx::tree::one< size_type > size_;
+	::xsd::cxx::tree::one< position_type > position_;
 	::xsd::cxx::tree::one< isOpened_type > isOpened_;
 };
 

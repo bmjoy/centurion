@@ -38,7 +38,8 @@ void EditorWindows::EditorWindow::Render(bool picking)
 {
 	if (isOpened == false) {
 
-		bool conditionResult = Hector::ExecuteBooleanMethod(luaConditionFunction);
+		bool conditionResult = false;
+		Hector::ExecuteBooleanMethod(luaConditionFunction, &conditionResult);
 		if (conditionResult) {
 			this->Open();
 		}
@@ -85,7 +86,19 @@ void EditorWindows::Create()
 			string luaConditionFun = string(_it_wind->conditionScript().function());
 
 			gui::Iframe iframe = gui::Iframe(string(_it_wind->iframe()));
-			iframe.Create((int)_it_wind->x(), (int)_it_wind->y(), (int)_it_wind->width(), (int)_it_wind->height());
+
+			string sizeScript = string(_it_wind->size());
+			string positionScript = string(_it_wind->position());
+
+			Hector::ExecuteCommand(sizeScript);
+			Hector::ExecuteCommand(positionScript);
+			int x = 0, y = 0, w = 0, h = 0;
+			Hector::GetIntegerVariable("x", &x);
+			Hector::GetIntegerVariable("y", &y);
+			Hector::GetIntegerVariable("width", &w);
+			Hector::GetIntegerVariable("height", &h);
+
+			iframe.Create(x, y, w, h);
 
 			// text lists 
 
@@ -95,8 +108,8 @@ void EditorWindows::Create()
 				gui::TextList* _list = new gui::TextList();
 				_list->Create(
 					int(_it_txtlist->textListId()),
-					int(_it_wind->x() + _it_txtlist->xOffset()),
-					int(_it_wind->y() + _it_txtlist->yOffset()),
+					x + int(_it_txtlist->xOffset()),
+					y + int(_it_txtlist->yOffset()),
 					string(_it_txtlist->text().font()),
 					vec4(_it_txtlist->text().r(), _it_txtlist->text().g(), _it_txtlist->text().b(), 255.f),
 					vec4(_it_txtlist->text_background().r(), _it_txtlist->text_background().g(), _it_txtlist->text_background().b(), 255.f),
@@ -117,8 +130,8 @@ void EditorWindows::Create()
 				btn.create(
 					string(_it_btn->image_name()),
 					string(_it_btn->name()),
-					int(_it_wind->x() + _it_btn->xOffset()),
-					int(_it_wind->y() + _it_btn->yOffset()),
+					x + int(_it_btn->xOffset()),
+					y + int(_it_btn->yOffset()),
 					PickingUI::obtainPickingID(),
 					vec4(0, 0, 0, 255),
 					string(_it_btn->onclick())

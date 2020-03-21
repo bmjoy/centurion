@@ -25,7 +25,12 @@ public:
 	static void RenderConsole();
 	static void Initialize();
 	static void ExecuteCommand(string cmd);
-	static bool ExecuteBooleanMethod(string cmd);
+	static void ExecuteBooleanMethod(string cmd, bool *boolean);
+	static void ExecuteStringMethod(string cmd, string *_string);
+	static void ExecuteIntegerMethod(string cmd, int *integer);
+	static void ExecuteFloatMethod(string cmd, float *_float);
+
+	static void GetIntegerVariable(string name, int *integer);
 
 private:
 	static lua_State* L;

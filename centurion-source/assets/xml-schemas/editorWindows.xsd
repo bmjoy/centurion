@@ -95,10 +95,8 @@
             <xs:attribute name="id" type="xs:integer" use="required" />
             <xs:attribute name="name" type="xs:string" use="required" />
             <xs:attribute name="iframe" type="xs:string" use="required" />
-            <xs:attribute name="x" type="xs:integer" use="required" />
-            <xs:attribute name="y" type="xs:integer" use="required" />
-            <xs:attribute name="width" type="xs:integer" use="required" />
-            <xs:attribute name="height" type="xs:integer" use="required" />
+            <xs:attribute name="size" type="xs:string" use="required" />
+            <xs:attribute name="position" type="xs:string" use="required" />
             <xs:attribute name="isOpened" type="xs:boolean" use="required" />
           </xs:complexType>
         </xs:element>

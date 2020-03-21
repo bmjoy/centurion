@@ -281,76 +281,52 @@ iframe(::std::auto_ptr< iframe_type > x)
 	this->iframe_.set(x);
 }
 
-const c_editorWindow::x_type& c_editorWindow::
-x() const
+const c_editorWindow::size_type& c_editorWindow::
+size() const
 {
-	return this->x_.get();
+	return this->size_.get();
 }
 
-c_editorWindow::x_type& c_editorWindow::
-x()
+c_editorWindow::size_type& c_editorWindow::
+size()
 {
-	return this->x_.get();
-}
-
-void c_editorWindow::
-x(const x_type& x)
-{
-	this->x_.set(x);
-}
-
-const c_editorWindow::y_type& c_editorWindow::
-y() const
-{
-	return this->y_.get();
-}
-
-c_editorWindow::y_type& c_editorWindow::
-y()
-{
-	return this->y_.get();
+	return this->size_.get();
 }
 
 void c_editorWindow::
-y(const y_type& x)
+size(const size_type& x)
 {
-	this->y_.set(x);
-}
-
-const c_editorWindow::width_type& c_editorWindow::
-width() const
-{
-	return this->width_.get();
-}
-
-c_editorWindow::width_type& c_editorWindow::
-width()
-{
-	return this->width_.get();
+	this->size_.set(x);
 }
 
 void c_editorWindow::
-width(const width_type& x)
+size(::std::auto_ptr< size_type > x)
 {
-	this->width_.set(x);
+	this->size_.set(x);
 }
 
-const c_editorWindow::height_type& c_editorWindow::
-height() const
+const c_editorWindow::position_type& c_editorWindow::
+position() const
 {
-	return this->height_.get();
+	return this->position_.get();
 }
 
-c_editorWindow::height_type& c_editorWindow::
-height()
+c_editorWindow::position_type& c_editorWindow::
+position()
 {
-	return this->height_.get();
+	return this->position_.get();
 }
 
 void c_editorWindow::
-height(const height_type& x)
+position(const position_type& x)
 {
-	this->height_.set(x);
+	this->position_.set(x);
+}
+
+void c_editorWindow::
+position(::std::auto_ptr< position_type > x)
+{
+	this->position_.set(x);
 }
 
 const c_editorWindow::isOpened_type& c_editorWindow::
@@ -1221,10 +1197,8 @@ c_editorWindow(const conditionScript_type& conditionScript,
 	const id_type& id,
 	const name_type& name,
 	const iframe_type& iframe,
-	const x_type& x,
-	const y_type& y,
-	const width_type& width,
-	const height_type& height,
+	const size_type& size,
+	const position_type& position,
 	const isOpened_type& isOpened)
 	: ::xml_schema::type(),
 	conditionScript_(conditionScript, this),
@@ -1237,10 +1211,8 @@ c_editorWindow(const conditionScript_type& conditionScript,
 	id_(id, this),
 	name_(name, this),
 	iframe_(iframe, this),
-	x_(x, this),
-	y_(y, this),
-	width_(width, this),
-	height_(height, this),
+	size_(size, this),
+	position_(position, this),
 	isOpened_(isOpened, this)
 {
 }
@@ -1251,10 +1223,8 @@ c_editorWindow(::std::auto_ptr< conditionScript_type > conditionScript,
 	const id_type& id,
 	const name_type& name,
 	const iframe_type& iframe,
-	const x_type& x,
-	const y_type& y,
-	const width_type& width,
-	const height_type& height,
+	const size_type& size,
+	const position_type& position,
 	const isOpened_type& isOpened)
 	: ::xml_schema::type(),
 	conditionScript_(conditionScript, this),
@@ -1267,10 +1237,8 @@ c_editorWindow(::std::auto_ptr< conditionScript_type > conditionScript,
 	id_(id, this),
 	name_(name, this),
 	iframe_(iframe, this),
-	x_(x, this),
-	y_(y, this),
-	width_(width, this),
-	height_(height, this),
+	size_(size, this),
+	position_(position, this),
 	isOpened_(isOpened, this)
 {
 }
@@ -1290,10 +1258,8 @@ c_editorWindow(const c_editorWindow& x,
 	id_(x.id_, f, this),
 	name_(x.name_, f, this),
 	iframe_(x.iframe_, f, this),
-	x_(x.x_, f, this),
-	y_(x.y_, f, this),
-	width_(x.width_, f, this),
-	height_(x.height_, f, this),
+	size_(x.size_, f, this),
+	position_(x.position_, f, this),
 	isOpened_(x.isOpened_, f, this)
 {
 }
@@ -1313,10 +1279,8 @@ c_editorWindow(const ::xercesc::DOMElement& e,
 	id_(this),
 	name_(this),
 	iframe_(this),
-	x_(this),
-	y_(this),
-	width_(this),
-	height_(this),
+	size_(this),
+	position_(this),
 	isOpened_(this)
 {
 	if ((f & ::xml_schema::flags::base) == 0)
@@ -1463,27 +1427,15 @@ parse(::xsd::cxx::xml::dom::parser< char >& p,
 			continue;
 		}
 
-		if (n.name() == "x" && n.namespace_().empty())
+		if (n.name() == "size" && n.namespace_().empty())
 		{
-			this->x_.set(x_traits::create(i, f, this));
+			this->size_.set(size_traits::create(i, f, this));
 			continue;
 		}
 
-		if (n.name() == "y" && n.namespace_().empty())
+		if (n.name() == "position" && n.namespace_().empty())
 		{
-			this->y_.set(y_traits::create(i, f, this));
-			continue;
-		}
-
-		if (n.name() == "width" && n.namespace_().empty())
-		{
-			this->width_.set(width_traits::create(i, f, this));
-			continue;
-		}
-
-		if (n.name() == "height" && n.namespace_().empty())
-		{
-			this->height_.set(height_traits::create(i, f, this));
+			this->position_.set(position_traits::create(i, f, this));
 			continue;
 		}
 
@@ -1515,31 +1467,17 @@ parse(::xsd::cxx::xml::dom::parser< char >& p,
 			"");
 	}
 
-	if (!x_.present())
+	if (!size_.present())
 	{
 		throw ::xsd::cxx::tree::expected_attribute< char >(
-			"x",
+			"size",
 			"");
 	}
 
-	if (!y_.present())
+	if (!position_.present())
 	{
 		throw ::xsd::cxx::tree::expected_attribute< char >(
-			"y",
-			"");
-	}
-
-	if (!width_.present())
-	{
-		throw ::xsd::cxx::tree::expected_attribute< char >(
-			"width",
-			"");
-	}
-
-	if (!height_.present())
-	{
-		throw ::xsd::cxx::tree::expected_attribute< char >(
-			"height",
+			"position",
 			"");
 	}
 
@@ -1574,10 +1512,8 @@ operator= (const c_editorWindow& x)
 		this->id_ = x.id_;
 		this->name_ = x.name_;
 		this->iframe_ = x.iframe_;
-		this->x_ = x.x_;
-		this->y_ = x.y_;
-		this->width_ = x.width_;
-		this->height_ = x.height_;
+		this->size_ = x.size_;
+		this->position_ = x.position_;
 		this->isOpened_ = x.isOpened_;
 	}
 

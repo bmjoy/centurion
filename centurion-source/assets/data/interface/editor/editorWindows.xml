@@ -2,7 +2,7 @@
   
   <!-- OBJECT PROPERTIES WINDOW -->
   
-  <c_editorWindow id="0" name="Object properties" iframe="editor" x="100" y="200" width="200" height="400" isOpened="false">
+  <c_editorWindow id="0" name="Object properties" iframe="editor" position="x=Engine.WindowWidth/2-300; y=Engine.WindowHeight/2-200" size="width=600; height=400" isOpened="false">
 	<conditionScript function="ConditionProperties">
 		-- lua script
 		function ConditionProperties()
@@ -24,7 +24,7 @@
   
   <!-- OPEN SCENARIO WINDOW -->
   
-  <c_editorWindow id="1" name="Open scenario" iframe="editor" x="300" y="300" width="200" height="200" isOpened="false">
+  <c_editorWindow id="1" name="Open scenario" iframe="editor" position="x=Engine.WindowWidth/2-200; y=Engine.WindowHeight/2-160" size="width=400; height=320" isOpened="false">
 	<conditionScript function="">
 		-- lua script
 		
@@ -34,8 +34,8 @@
 	  _folderList = Engine.GetListOfFolders("scenarios")
 	  TextList.UpdateListById(0, _folderList)
     </openingScript>
-	<button name="Open" image_name="button_1" xOffset="200" yOffset="100" onclick='Engine.PrintToConsole(TextList.GetListById(0):GetSelectedOption())'/>
-	<textList textListId="0" xOffset="20" yOffset="100">
+	<button name="Open" image_name="button_1" xOffset="200" yOffset="60" onclick='Engine.PrintToConsole(TextList.GetListById(0):GetSelectedOption())'/>
+	<textList textListId="0" xOffset="50" yOffset="270">
 		<text font="tahoma_13px" r="255" g="255" b="255" />
 		<text_background r="0" g="0" b="0" />
 	</textList>

@@ -52,6 +52,8 @@ void Hector::Initialize()
 		.addFunction("PrintToConsole", &Engine::PrintToConsole)
 		.addFunction("SetEnvironment", &Engine::SetEnvironment)
 		.addFunction("GetListOfFolders", Engine::GetListOfFolders)
+		.addVariable("WindowWidth", &Engine::myWindow::Width)
+		.addVariable("WindowHeight", &Engine::myWindow::Height)
 		.endNamespace();
 
 	getGlobalNamespace(L).beginClass<EditorMenuBar>("EditorMenuBar")
@@ -101,30 +103,102 @@ void Hector::ExecuteCommand(string cmd)
 	}
 }
 
-bool Hector::ExecuteBooleanMethod(string cmd)
+void Hector::ExecuteBooleanMethod(string cmd, bool *boolean)
 {
-	bool boolean = false;
-
 	if (cmd != "") {
 
 		lua_getglobal(L, cmd.c_str());
 
 		if (lua_pcall(L, 0, 1, 0) != 0) {
 			std::cout << "ERROR ON CALLING FUNCTION: " << lua_tostring(L, -1) << std::endl;
-			boolean = false;
+			(*boolean) = false;
 		}
 
 		if (!lua_isboolean(L, -1)) {
 			std::cout << "ERROR ON X RETURNING TYPE" << std::endl;
-			boolean = false;
+			(*boolean) = false;
 		}
 
 		else {
-			boolean = (bool)lua_toboolean(L, -1);
+			(*boolean) = (bool)lua_toboolean(L, -1);
 			lua_pop(L, 1);
 		}
 	}
-	return boolean;
+}
+
+void Hector::ExecuteStringMethod(string cmd, string *_string)
+{
+	if (cmd != "") {
+
+		lua_getglobal(L, cmd.c_str());
+
+		if (lua_pcall(L, 0, 1, 0) != 0) {
+			std::cout << "ERROR ON CALLING FUNCTION: " << lua_tostring(L, -1) << std::endl;
+		}
+
+		if (!lua_isstring(L, -1)) {
+			std::cout << "ERROR ON RETURNING TYPE" << std::endl;
+		}
+
+		else {
+			(*_string) = string(lua_tostring(L, -1));
+			lua_pop(L, 1);
+		}
+	}
+}
+
+void Hector::ExecuteIntegerMethod(string cmd, int *integer)
+{
+	if (cmd != "") {
+
+		lua_getglobal(L, cmd.c_str());
+
+		if (lua_pcall(L, 0, 1, 0) != 0) {
+			std::cout << "ERROR ON CALLING FUNCTION: " << lua_tostring(L, -1) << std::endl;
+		}
+
+		if (!lua_isnumber(L, -1)) {
+			std::cout << "ERROR ON RETURNING TYPE" << std::endl;
+		}
+
+		else {
+			(*integer) = int(lua_tonumber(L, -1));
+			lua_pop(L, 1);
+		}
+	}
+}
+
+void Hector::ExecuteFloatMethod(string cmd, float *_float)
+{
+	if (cmd != "") {
+
+		lua_getglobal(L, cmd.c_str());
+
+		if (lua_pcall(L, 0, 1, 0) != 0) {
+			std::cout << "ERROR ON CALLING FUNCTION: " << lua_tostring(L, -1) << std::endl;
+		}
+
+		if (!lua_isnumber(L, -1)) {
+			std::cout << "ERROR ON RETURNING TYPE" << std::endl;
+		}
+
+		else {
+			(*_float) = (float)lua_tonumber(L, -1);
+			lua_pop(L, 1);
+		}
+	}
+}
+
+void Hector::GetIntegerVariable(string name, int * integer)
+{
+	lua_getglobal(L, name.c_str());
+	if (lua_isnil(L, -1)) {
+		std::cout << "VARIABLE \"" << name << "\" IS UNDEFINED" << std::endl;
+		return;
+	}
+
+	(*integer) = (int)lua_tonumber(L, -1);
+	lua_pop(L, 1);
 }
 
 void Hector::Console::Create()
