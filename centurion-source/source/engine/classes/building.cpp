@@ -1,15 +1,9 @@
 #include "building.h"
-
-#include <engine.h>
-#include <stb_image.h>
-#include <player/player.h>
+#include "Unit.h"
 #include <pathfinding/pathfinding.h>
-#include <game/strategy.h>
-#include <maths.h>
-#include <interface>
 #include <building_sprite.h>
 #include <logger.h>
-#include <picking.h>
+#include <math.h>
 
 using namespace std;
 using namespace glm;
@@ -355,18 +349,41 @@ Building::~Building()
 }
 
 #pragma region Private members
+vector<Building::SettlementSet> Building::settlementsList;
 bool Building::FindASettlement(Building* b)
 {
 	bool bSettlementDiscovered = false;
+	size_t numOfSettlements = Building::settlementsList.size();
+	float b_xPos = b->get_xPos();
+	float b_yPos = b->get_yPos();
 
 	if (b->bIsCentralBuilding == false)
 	{
-		;
+		for (unsigned int settlementsCounter = 0; settlementsCounter < numOfSettlements && bSettlementDiscovered == false; settlementsCounter++)
+		{
+			size_t numOfBuildings = Building::settlementsList[settlementsCounter].xPoint.size();
+			for (unsigned int buildingsCounter = 0; buildingsCounter < numOfBuildings && bSettlementDiscovered == false; buildingsCounter++)
+			{
+				float xPos = Building::settlementsList[settlementsCounter].xPoint[buildingsCounter];
+				float yPos = Building::settlementsList[settlementsCounter].xPoint[buildingsCounter];
+				float distance = sqrt(pow(b_xPos - xPos, 2) + pow(b_yPos - yPos, 2));
+				if (distance <= b->GetRadius())
+				{
+					b->settlement = Building::settlementsList[settlementsCounter].set;
+					Building::settlementsList[settlementsCounter].xPoint.push_back(b_xPos);
+					Building::settlementsList[settlementsCounter].yPoint.push_back(b_yPos);
+					bSettlementDiscovered = true;
+				}
+			}
+		}
 	}
 	else
 	{
-		this->settlement = new Settlement();
-		bSettlementDiscovered = this->settlement->AddBuildingToSettlement(b); //Here, it should be return always true.
+		b->settlement = new Settlement();
+		Building::settlementsList[numOfSettlements].set = b->settlement;
+		Building::settlementsList[numOfSettlements].xPoint.push_back(b_xPos);
+		Building::settlementsList[numOfSettlements].yPoint.push_back(b_yPos);
+		bSettlementDiscovered = b->settlement->AddBuildingToSettlement(b); //Here, it should be return always true.
 	}
 
 	return bSettlementDiscovered;

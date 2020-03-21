@@ -98,8 +98,8 @@ public:
 	//Position methods
 	void SetPosition(const vec3 pos);
 	vec3 GetPosition(void);
-	int get_xPos(void);
-	int get_yPos(void);
+	float get_xPos(void);
+	float get_yPos(void);
 	
 	//Pass methods
 	void update_pass(void);

@@ -10,9 +10,7 @@ using namespace glm;
 
 class Unit;
 namespace game { class ObjectUI; };
-
 class Player;
-
 class Settlement;
 
 class Building : public GObject
@@ -92,7 +90,15 @@ private:
 	vector<Unit> holdUnits;
 	Settlement *settlement;
 	//Private members:
-	bool FindASettlement(Building* b);
-
+	static bool FindASettlement(Building* b);
+	//static properties
+	class SettlementSet
+	{
+	public:
+		Settlement *set;
+		vector<float> xPoint;
+		vector<float> yPoint;
+	};
+	static vector<SettlementSet> settlementsList;
 	//sound selectionSound; TODO
 };

@@ -260,13 +260,13 @@ vec3 GObject::GetPosition(void)
 	return this->position;
 }
 
-int GObject::get_xPos(void)
-{ 
-	return (int)position.x; 
+float GObject::get_xPos(void)
+{
+	return (float)position.x;
 }
-int GObject::get_yPos(void)
-{ 
-	return (int)position.y; 
+float GObject::get_yPos(void)
+{
+	return (float)position.y;
 }
 
 GObject::~GObject(void) 
