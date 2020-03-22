@@ -7,6 +7,11 @@ class ObjectSprite : public Shader {
 
 public:
 
+	/// <summary>
+	/// Struct that holds the Sprite Data.
+	/// It's work in progress (WIP)
+	/// Probably will be promoted to Class
+	/// </summary>
 	struct SpriteData {
 		vec3 pickingColor;
 		float width;
@@ -18,9 +23,32 @@ public:
 		bool isClickable;
 	};
 
+	/// <summary>
+	/// Constructor
+	/// </summary>
 	ObjectSprite();
-	virtual void Create();
+
+	/// <summary>
+	/// Create function. It reads all the information of the .eo.xml files (Entity Object) 
+	/// and adds it to SpriteData variables. Then these variables are sent to 
+	/// their relative ObjectXMLClassData using the classname as key.
+	/// </summary>
+	void Create();
+
+	/// <summary>
+	/// Render function. Empty, it's work in progress (WIP)
+	/// </summary>
+	void Render();
+
+	/// <summary>
+	/// This function adds the path to the list of paths, that is read in the "Create" function.
+	/// </summary>
+	/// <param name="Path">The Entity Object XML file path.</param>
 	void AddEntityPath(string Path) { entPathList.push_back(Path); }
+
+	/// <summary>
+	/// Destructor
+	/// </summary>
 	~ObjectSprite();
 
 protected:
@@ -39,6 +67,9 @@ protected:
 		-0.5f,		0.5f,		0.0f,		0.0f, 0.0f   // in alto a sx
 	};
 
+	/// <summary>
+	/// This function generates the OpenGL buffers.
+	/// </summary>
 	void GenerateBuffers();
 
 };

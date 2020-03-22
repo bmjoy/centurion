@@ -10,11 +10,6 @@ using namespace glm;
 class Building;
 class Player;
 
-//
-//	GAME OBJECT --> source/object.cpp
-//
-
-
 class Decoration : public GObject
 {
 public:
@@ -28,7 +23,6 @@ public:
 	~Decoration();
 
 private:
-	DecorationData decorData;
 	string settlementName;
 	float oldX, oldY, oldSettlX, oldSettlY;
 	int settlID;

@@ -16,35 +16,6 @@ struct ImageData {
 	GLuint textureID;
 };
 
-namespace txt {
-
-	struct CharData {
-		int charWidth[256];
-		float fontHeight;
-		float fontWidth;
-		int startChar;
-	};
-
-	struct Character {
-		int x, y, width, height, xoffset, yoffset, xadvance, line_height, base_width;
-	};
-
-	struct StaticData {
-		vector<float> X;
-		vector<float> Y;
-		vector<Character> charList;
-		vector<int> charsWidth;
-		GLint textureID;
-		vec4 color;
-		float y;
-		int textSize;
-		int totalWidth;
-		int startChar;
-		int fontHeight;
-		bool shadow;
-	};
-};
-
 struct RectangleData {
 	vec4 borderColor, backColor, pickingColor;
 	string type;
@@ -74,14 +45,6 @@ struct UnitData {
 	int currentDir;
 	int yOffset;
 	int maxDirections;
-	GLuint textureID;
-};
-
-struct DecorationData {
-	string className;
-	vec2 position;
-	int width;
-	int height;
 	GLuint textureID;
 };
 

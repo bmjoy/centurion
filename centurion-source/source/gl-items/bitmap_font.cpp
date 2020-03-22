@@ -102,7 +102,7 @@ void BitmapFont::create() {
 
 			chars::char_iterator it;
 			for (it = charsXML->char_().begin(); it != charsXML->char_().end(); it++) {
-				txt::Character CharData = txt::Character();
+				Character CharData = Character();
 				int charID = int(it->id());
 				CharData.x = int(it->x());
 				CharData.y = int(it->y());
@@ -200,8 +200,8 @@ void BitmapFont::render_dynamic(string &font, float xPos, float yPos, string &te
 
 /* Static text */
 
-txt::StaticData BitmapFont::create_static(string &font, string &text, float x, float y, bool bold, int line_number) {
-	txt::StaticData static_data = txt::StaticData();
+BitmapFont::StaticTextData BitmapFont::create_static(string &font, string &text, float x, float y, bool bold, int line_number) {
+	StaticTextData static_data = StaticTextData();
 	wstring_convert<codecvt_utf8_utf16<wchar_t>> converter;
 	wstring wtext = converter.from_bytes(text);
 
@@ -243,7 +243,7 @@ txt::StaticData BitmapFont::create_static(string &font, string &text, float x, f
 	return static_data;
 }
 
-void BitmapFont::render_static(txt::StaticData &data) {
+void BitmapFont::render_static(StaticTextData &data) {
 
 	glUseProgram(shaderId);
 	glUniform4f(glGetUniformLocation(shaderId, "color"), data.color.x / 255.f, data.color.y / 255.f, data.color.z / 255.f, data.color.w / 255.f);

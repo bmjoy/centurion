@@ -14,7 +14,7 @@
 // define static variables (default values)
 gui::Image Engine::Mouse::img;
 vec3 Engine::Mouse::position;
-string Engine::Mouse::currentState = "default";
+int Engine::Mouse::currentState = CURSOR_DEFAULT;
 float Engine::Mouse::znoise = 0;
 float Engine::Mouse::yzoomed = 0;
 float Engine::Mouse::xPosGrid = 0;
@@ -50,14 +50,20 @@ void Engine::Mouse::create() {
 	img = gui::Image("circle_pos");
 	img.create("center", 0.f, 0.f, 0, 0, 0);
 }
+
+
 void Engine::Mouse::render() {
+
 	Cursor()->render(position.x, position.y, currentState);
+
 	if (Engine::getEnvironment() == STRATEGY_ENV) {
 		if (Game::Minimap::IsActive() == false) {
 			img.render(false, position.x, y2DPosition);
 		}
 	}
 }
+
+
 void Engine::Mouse::mouse_control(int lastX, int lastY) {
 	position.x = (GLfloat)lastX;
 	position.y = (GLfloat)lastY;
@@ -73,7 +79,7 @@ void Engine::Mouse::mouse_control(int lastX, int lastY) {
 		yLeftClick = position.y;
 	}
 	else {
-		currentState = "left";
+		currentState = CURSOR_LEFT_CLICK;
 
 		stringstream ss;
 		ss << "You have left-clicked on (X=" << (int)xLeftClick << ", Y=" << (int)yLeftClick << ")";
@@ -86,14 +92,15 @@ void Engine::Mouse::mouse_control(int lastX, int lastY) {
 		y2DRightClick = y2DPosition;
 	}
 	else {
-		currentState = "right";
+		currentState = CURSOR_RIGHT_CLICK;
 
 		stringstream ss;
 		ss << "You have right-clicked on (X=" << (int)xRightClick << ", Y=" << (int)yRightClick << ")";
+		Logger::Info(ss.str());
 	}
 
 	if (Mouse::Release) {
-		currentState = "default";
+		currentState = CURSOR_DEFAULT;
 	}
 }
 

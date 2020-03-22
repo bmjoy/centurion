@@ -5,23 +5,25 @@
 CursorImage::CursorImage(){
 	vPath = "assets/shaders/mouse/vertex.glsl";
 	fPath = "assets/shaders/mouse/fragment.glsl";
-	w = 36.0; h = 36.0;
+	cursorImgWidth = 36.0; cursorImgHeight = 36.0;
 	initPath = "assets/ui/mouse/";
 	texturePaths = { initPath + "default.png", initPath + "right.png", initPath + "left.png" };
-	textureNames = { "default", "right", "left" };
+	textureIds[3] = { 0 };
 }
 
 void CursorImage::create() {
+
 	for (int i = 0; i < 3; ++i) {
+
 		unsigned int indices[] = {
 		0, 1, 3,   // first triangle
 		1, 2, 3    // second triangle
 		};
 		GLfloat vertices[] = {
 			// positions						// uv coords		
-			0.0,		-h,			0.0f,		0.0f, 1.0,   // in basso a sx
-			w,			-h,			0.0f,		1.0, 1.0,    // in basso a dx
-			w,			0.0,		0.0f,		1.0, 0.0f,   // in alto a dx
+			0.0,		-cursorImgHeight,			0.0f,		0.0f, 1.0,   // in basso a sx
+			cursorImgWidth,			-cursorImgHeight,			0.0f,		1.0, 1.0,    // in basso a dx
+			cursorImgWidth,			0.0,		0.0f,		1.0, 0.0f,   // in alto a dx
 			0.0,		0.0,		0.0f,		0.0f, 0.0f   // in alto a sx
 		};
 
@@ -41,20 +43,21 @@ void CursorImage::create() {
 		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
 		glBindVertexArray(0);
 
-		textureIdMap[textureNames[i]] = 0;
-		textureInfoList.push_back(glm::ivec3(0, 0, 0));
+		int width, height, nrChannels;
 
-		unsigned char *data = stbi_load(texturePaths[i].c_str(), &textureInfoList[0].x, &textureInfoList[0].y, &textureInfoList[0].z, 0);
-		if (!data) { std::cout << "Failed to load texture" << std::endl; }
+		unsigned char *data = stbi_load(texturePaths[i].c_str(), &width, &height, &nrChannels, 0);
+		if (!data) { 
+			std::cout << "Failed to load texture" << std::endl; 
+		}
 
 		// TEXTURE
-		glGenTextures(1, &textureIdMap[textureNames[i]]);
-		glBindTexture(GL_TEXTURE_2D, textureIdMap[textureNames[i]]);
+		glGenTextures(1, &textureIds[i]);
+		glBindTexture(GL_TEXTURE_2D, textureIds[i]);
 		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
 		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
 		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
 		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-		glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, textureInfoList[0].x, textureInfoList[0].y, 0, GL_RGBA, GL_UNSIGNED_BYTE, data);
+		glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, width, height, 0, GL_RGBA, GL_UNSIGNED_BYTE, data);
 		glGenerateMipmap(GL_TEXTURE_2D);
 		glBindTexture(GL_TEXTURE_2D, 0);
 
@@ -62,7 +65,7 @@ void CursorImage::create() {
 	}
 }
 
-void CursorImage::render(float x, float y, std::string &currentState) {
+void CursorImage::render(float x, float y, int currentState) {
 
 	glUseProgram(shaderId);
 
@@ -74,7 +77,7 @@ void CursorImage::render(float x, float y, std::string &currentState) {
 	/* Draw */
 	glBindVertexArray(VAO);
 	glActiveTexture(GL_TEXTURE0);
-	glBindTexture(GL_TEXTURE_2D, textureIdMap[currentState]);
+	glBindTexture(GL_TEXTURE_2D, textureIds[currentState]);
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, IBO);
 	glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);

@@ -35,16 +35,16 @@ namespace gui {
 			fontName = fontName + "_bold";
 			isBold = true;
 		}
-		data = Text()->create_static(fontName, text, x, y, isBold);
-		data.y = y;
-		data.color = color;
-		data.shadow = shadow;
+		staticData = Text()->create_static(fontName, text, x, y, isBold);
+		staticData.y = y;
+		staticData.color = color;
+		staticData.shadow = shadow;
 	}
 
 	void SimpleText::render_static() {
 		if (type == "dynamic") Logger::Info("Dynamic text rendered with static option");
 		Text()->set_align(hAlign, vAlign);		
-		Text()->render_static(data);
+		Text()->render_static(staticData);
 	}
 	void SimpleText::render_dynamic(string text, string Font, float x, float y, vec4 color, string halign, string valign, string fontWeight) {
 		if (type == "static") Logger::Info("Static text rendered with dynamic option");
@@ -60,12 +60,12 @@ namespace gui {
 	float SimpleText::get_width(int pos) {
 		float tot_width = 0.f;
 		if (pos == 0) {
-			tot_width = (float)data.totalWidth;
+			tot_width = (float)staticData.totalWidth;
 		}
 		else {
-			int j = std::min(pos, data.textSize);
+			int j = std::min(pos, staticData.textSize);
 			for (int i = 0; i < j; ++i) {
-				tot_width += data.charsWidth[i];
+				tot_width += staticData.charsWidth[i];
 			}
 		}
 		return tot_width;

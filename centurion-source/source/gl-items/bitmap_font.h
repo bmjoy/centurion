@@ -17,6 +17,32 @@
 class BitmapFont : public Shader
 {
 public:
+	
+	/// <summary>
+	/// Struct that holds the character information.
+	/// </summary>
+	struct Character {
+		int x, y, width, height, xoffset, yoffset, xadvance, line_height, base_width;
+	};
+
+	/// <summary>
+	/// Struct that holds the data for static text (useful when it doesn't change run-time).
+	/// </summary>
+	struct StaticTextData {
+		vector<float> X; // Vector with all X-coordinates of each letter
+		vector<float> Y; // Vector with all Y-coordinates of each letter
+		vector<Character> charList;
+		vector<int> charsWidth;
+		GLint textureID;
+		vec4 color;
+		float y;
+		int textSize;
+		int totalWidth;
+		int startChar;
+		int fontHeight;
+		bool shadow;
+	};
+
 	/// <summary>
 	/// Public constructor.
 	/// </summary>
@@ -44,7 +70,7 @@ public:
 	/// <param name="bold">The font-weight. True = "bold", false = "normal";</param>
 	/// <param name="line_number">The line of the current word/text. This is used in the case of text-boxes;</param>
 	/// <returns>The StaticData used to render the text with "render_static" function.</returns>
-	txt::StaticData create_static(string &font, string &text, float x, float y, bool bold = false, int line_number = 0);
+	StaticTextData create_static(string &font, string &text, float x, float y, bool bold = false, int line_number = 0);
 
 	/// <summary>
 	/// This function is used to dynamically render a text. It's useful when the text is changing
@@ -63,7 +89,7 @@ public:
 	/// This function is used to render a text created with "create_static" function. 
 	/// </summary>
 	/// <param name="data">The StaticData information, usually provided by "create_static" function.</param>
-	void render_static(txt::StaticData &data);
+	void render_static(StaticTextData &data);
 	
 	/// <summary>
 	/// The destructor.
@@ -78,7 +104,7 @@ private:
 	/// <returns>True if arabic, false if not arabic.</returns>
 	bool isArabic(int codepoint);
 
-	map<int, txt::Character> fontData[10];
+	map<int, Character> fontData[10];
 	map<string, int> fontIdMap;
 	string h_align, v_align, path;
 	int total_width;

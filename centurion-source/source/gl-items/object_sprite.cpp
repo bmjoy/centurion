@@ -82,6 +82,10 @@ void ObjectSprite::Create() {
 	}
 }
 
+void ObjectSprite::Render()
+{
+}
+
 void ObjectSprite::GenerateBuffers()
 {
 	glGenVertexArrays(1, &VAO);

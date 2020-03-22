@@ -50,7 +50,7 @@ namespace Engine {
 	private:
 		static gui::Image img;
 		static vec3 position;
-		static string currentState;
+		static int currentState;
 		static float znoise, yzoomed, xPosGrid, yPosGrid, xLeftClick, yLeftClick, xRightClick, yRightClick, y2DPosition, y2DRightClick;
 	};
 

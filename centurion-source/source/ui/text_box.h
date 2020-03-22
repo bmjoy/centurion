@@ -1,7 +1,7 @@
 #ifndef TEXT_BOX_H
 #define TEXT_BOX_H
 
-#include <primitives.h>
+#include <bitmap_font.h>
 
 namespace gui {
 	class TextBox {
@@ -11,7 +11,7 @@ namespace gui {
 		void render();
 		~TextBox();
 	private:
-		vector<txt::StaticData> lines_data;
+		vector<BitmapFont::StaticTextData> lines_data;
 		vector<string> lines;
 		string hAlign, vAlign;
 	};
