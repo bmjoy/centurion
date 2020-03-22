@@ -5,9 +5,6 @@
 #include <pathfinding/pathfinding.h>
 #include <engine.h>
 
-
-
-
 MinimapRectangle::MinimapRectangle()
 {
 	vPath = "assets/shaders/minimap/vertex.glsl";
@@ -52,9 +49,6 @@ void MinimapRectangle::create() {
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
 	glBindVertexArray(0);
 
-
-	/* This texture comes from the real grid of 0/1 */
-
 	unsigned char* imageData = new unsigned char[int(w * h * 4)];
 
 	imageData = { 0 };
@@ -69,11 +63,11 @@ void MinimapRectangle::create() {
 
 void MinimapRectangle::update() {
 	glUseProgram(shaderId);
-	/* This texture comes from the real grid of 0/1 */
+	
+	/* This texture comes from the minimap */
 
 	int w = (int)Engine::myWindow::Width;
 	int h = (int)Engine::myWindow::Height;
-
 	unsigned char* imageData = new unsigned char[int(w * h * 4)];
 	glReadPixels(0, 0, w, h, GL_RGBA, GL_UNSIGNED_BYTE, imageData);
 

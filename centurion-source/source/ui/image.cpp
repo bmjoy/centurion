@@ -3,14 +3,12 @@
 
 #include <engine.h>
 
-#include "image_sprite.h"
-
 namespace gui {
 
 	Image::Image(){}
 
 	Image::Image(string ImageName) {
-		imgData = ImageData();
+		imgData = ImageSprite::ImageData();
 		imageName = ImageName;
 		originMap["bottom-left"] = 0;
 		originMap["center"] = 1;

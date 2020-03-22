@@ -13,7 +13,7 @@ void ImageSprite::create() {
 
 	glUseProgram(shaderId);
 
-	genBuffers();
+	GenerateBuffers();
 
 	int k = 0;
 	int w, h, nrChannels;
@@ -97,7 +97,7 @@ void ImageSprite::render(ImageData &imageData, bool picking, bool repeat) {
 	glBindVertexArray(0);
 }
 
-void ImageSprite::genBuffers() {
+void ImageSprite::GenerateBuffers() {
 	glGenVertexArrays(1, &VAO);
 	glBindVertexArray(VAO);
 

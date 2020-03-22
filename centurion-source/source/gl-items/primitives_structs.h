@@ -6,15 +6,7 @@
 using namespace std;
 using namespace glm;
 
-struct ImageData {
-	vec3 pickingColor;
-	string imageName;
-	float x, y, w, h;
-	float texW, texH, ratioX, ratioY;
-	int pickingID;
-	int origin;
-	GLuint textureID;
-};
+
 
 struct UnitData {
 	map<int, int[2]> spriteSize;

@@ -50,7 +50,6 @@ void Engine::Mouse::create() {
 
 
 void Engine::Mouse::render() {
-	cout << currentState << endl;
 	Cursor()->render(position.x, position.y, currentState);
 
 	if (Engine::getEnvironment() == STRATEGY_ENV) {

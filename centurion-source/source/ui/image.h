@@ -1,7 +1,7 @@
 #ifndef IMAGE_H
 #define IMAGE_H
 
-#include <primitives.h>
+#include <image_sprite.h>
 
 namespace gui {
 	class Image {
@@ -14,7 +14,7 @@ namespace gui {
 		vec2 getImageSize() { return vec2(imgData.w, imgData.h); }
 		~Image();
 	private:
-		ImageData imgData;
+		ImageSprite::ImageData imgData;
 		string imageName;
 		map<string, int> originMap;
 	};

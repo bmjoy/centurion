@@ -27,6 +27,7 @@ private:
 	int vertexShader, fragmentShader;
 	const GLchar* vShaderCode;
 	const GLchar* fShaderCode;
+
 };
 
 #endif // !SHADER_H
