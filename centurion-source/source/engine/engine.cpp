@@ -188,7 +188,6 @@ void Engine::SetEnvironment(string s)
 	else {
 		ENVIRONMENT = MENU_ENV;
 	}
-	Mouse::LeftClick = false;
 }
 
 void Engine::PrintToConsole(string s)
@@ -309,6 +308,7 @@ void Engine::ResetPeriphericsInput()
 	Mouse::LeftClick = false;
 	Mouse::RightClick = false;
 	Mouse::MiddleClick = false;
+	Mouse::Release = false;
 }
 
 Engine::Fps::Fps()
