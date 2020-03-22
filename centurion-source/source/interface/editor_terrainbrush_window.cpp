@@ -23,7 +23,7 @@ namespace editor {
 		back.create("filled", startX, startY, 190.f, 150.f, "top-left", PickingUI::obtainPickingID());
 
 		circle = gui::Circle();
-		circle.create("border", Engine::Mouse::GetXPosition(), Engine::Mouse::GetYPosition(), 150.f, 100.f, 5.f, "center");
+		circle.create(Engine::Mouse::GetXPosition(), Engine::Mouse::GetYPosition(), 150.f, 100.f, 5.f, "center");
 
 		vector<string> terrainList = MapTerrain()->getTerrainList();
 		vector<string> terrainTypes;

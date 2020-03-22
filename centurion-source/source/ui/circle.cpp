@@ -1,8 +1,5 @@
 #include <ui.h>
-
 #include <engine.h>
-
-#include <empty_circle.h>
 
 namespace gui {
 
@@ -12,14 +9,12 @@ namespace gui {
 		originMap["center"] = 2;
 		originMap["top-right"] = 3;
 		originMap["bottom-right"] = 4;
-		data = CircleData();
-		data.type = "filled";
+		data = EmptyCircle::CircleData();
 	}
 
-	void Circle::create(string Type, float x, float y, float w, float h, float borderWidth, string origin) {
+	void Circle::create(float x, float y, float w, float h, float borderWidth, string origin) {
 		if (x < 0) x += Engine::myWindow::Width;
 		if (y < 0) y += Engine::myWindow::Height;
-		data.type = Type;
 		data.x = x;
 		data.y = y;
 		data.w = w;
@@ -33,11 +28,9 @@ namespace gui {
 		if (w != 0.f) data.w = w;
 		if (h != 0.f) data.h = h;
 		if (origin != -1) data.origin = origin;
-		if (data.type == "border") {
-			data.borderColor = Color;
-			ECircle()->render(data);
-		}
+		data.borderColor = Color;
+		ECircle()->render(data);
 	}
 
-	Circle::~Circle(){}
+	Circle::~Circle() {}
 };

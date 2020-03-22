@@ -63,7 +63,7 @@ void Unit::create() {
 	USprite()->getTextureInfo(&unitData);
 
 	selectionCircle = gui::Circle();
-	selectionCircle.create("border", 0.f, 0.f, 35.f, 23.f, 8.f, "center");
+	selectionCircle.create(0.f, 0.f, 35.f, 23.f, 8.f, "center");
 
 	// hitbox 
 	hitbox.rectangle = gui::Rectangle();

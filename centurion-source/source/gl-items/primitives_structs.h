@@ -23,14 +23,6 @@ struct RectangleData {
 	int origin;
 };
 
-struct CircleData {
-	vec4 borderColor, backColor;
-	string type;
-	float x, y, w, h;
-	float borderWidth;
-	int origin;
-};
-
 struct UnitData {
 	map<int, int[2]> spriteSize;
 	map<int, int> Frames;

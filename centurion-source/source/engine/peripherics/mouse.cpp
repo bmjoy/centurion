@@ -2,11 +2,8 @@
 
 #include <game/game.h>
 #include <mapgen/mapgen.h>
-
 #include <logger.h>
 #include <Settings.h>
-
-// for mouse cursor
 #include <cursor_image.h>
 
 #include <GLFW/glfw3.h>
