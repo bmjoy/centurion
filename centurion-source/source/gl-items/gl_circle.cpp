@@ -1,11 +1,11 @@
-#include "empty_circle.h"
+#include "gl_circle.h"
 
-EmptyCircle::EmptyCircle(){
+glCircle::glCircle(){
 	vPath = "assets/shaders/empty_circle/vertex.glsl";
 	fPath = "assets/shaders/empty_circle/fragment.glsl";
 }
 
-void EmptyCircle::create() {
+void glCircle::create() {
 
 	float size = 1.f;
 
@@ -41,7 +41,7 @@ void EmptyCircle::create() {
 	glBindVertexArray(0);
 }
 
-void EmptyCircle::render(CircleData &data) {
+void glCircle::render(CircleData &data) {
 
 	glUseProgram(shaderId);
 
@@ -63,4 +63,4 @@ void EmptyCircle::render(CircleData &data) {
 	
 }
 
-EmptyCircle::~EmptyCircle(){}
+glCircle::~glCircle(){}

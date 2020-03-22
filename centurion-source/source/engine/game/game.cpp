@@ -10,8 +10,7 @@
 
 #include <terrain.h>
 #include <grid.h>
-#include <empty_rectangle.h>
-#include <filled_rectangle.h>
+#include <gl_rectangle.h>
 #include <minimap_rectangle.h>
 
 #include "mapObjects-xml.hxx"

@@ -3,9 +3,6 @@
 
 #include <engine.h>
 
-#include "empty_rectangle.h"
-#include "filled_rectangle.h"
-
 #include "hector-lua.h"
 
 namespace gui {
@@ -17,7 +14,7 @@ namespace gui {
 		originMap["center"] = 2;
 		originMap["top-right"] = 3;
 		originMap["bottom-right"] = 4;
-		data = RectangleData();
+		data = glRectangle::RectangleData();
 		data.type = "filled";
 		pickingId = 0;
 		luaCmd = "";

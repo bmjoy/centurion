@@ -5,9 +5,8 @@
 #include "building_sprite.h"
 #include "decoration_sprite.h"
 #include "cursor_image.h"
-#include "empty_circle.h"
-#include "filled_rectangle.h"
-#include "empty_rectangle.h"
+#include "gl_circle.h"
+#include "gl_rectangle.h"
 #include "image_sprite.h"
 #include "unit_sprite.h"
 #include "terrain.h"
@@ -25,7 +24,7 @@ namespace primitives {
 	BuildingSprite *BSprite() { return &bsprite; }
 	DecorationSprite *DSprite() { return &dsprite; }
 	CursorImage *Cursor() { return &cursor; }
-	EmptyCircle *ECircle() { return &eCircle; }
+	glCircle *ECircle() { return &eCircle; }
 	EmptyRectangle *ERectangle() { return &eRect; }
 	FilledRectangle *FRectangle() { return &fRect; }
 	ImageSprite *Img() { return &img; }
@@ -70,7 +69,7 @@ namespace primitives {
 		*BSprite() = BuildingSprite();
 		*DSprite() = DecorationSprite();
 		*Cursor() = CursorImage();
-		*ECircle() = EmptyCircle();
+		*ECircle() = glCircle();
 		*ERectangle() = EmptyRectangle();
 		*FRectangle() = FilledRectangle();
 		*Img() = ImageSprite();

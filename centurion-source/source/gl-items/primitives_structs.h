@@ -16,13 +16,6 @@ struct ImageData {
 	GLuint textureID;
 };
 
-struct RectangleData {
-	vec4 borderColor, backColor, pickingColor;
-	string type;
-	float x, y, w, h;
-	int origin;
-};
-
 struct UnitData {
 	map<int, int[2]> spriteSize;
 	map<int, int> Frames;

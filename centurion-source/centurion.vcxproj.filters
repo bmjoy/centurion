@@ -324,15 +324,6 @@
     <ClCompile Include="source\gl-items\decoration_sprite.cpp">
       <Filter>Source Files\gl-items</Filter>
     </ClCompile>
-    <ClCompile Include="source\gl-items\empty_circle.cpp">
-      <Filter>Source Files\gl-items</Filter>
-    </ClCompile>
-    <ClCompile Include="source\gl-items\empty_rectangle.cpp">
-      <Filter>Source Files\gl-items</Filter>
-    </ClCompile>
-    <ClCompile Include="source\gl-items\filled_rectangle.cpp">
-      <Filter>Source Files\gl-items</Filter>
-    </ClCompile>
     <ClCompile Include="source\gl-items\grid.cpp">
       <Filter>Source Files\gl-items</Filter>
     </ClCompile>
@@ -421,6 +412,12 @@
       <Filter>Source Files\engine\peripherics</Filter>
     </ClCompile>
     <ClCompile Include="source\gl-items\entity-xml.cxx">
+      <Filter>Source Files\gl-items</Filter>
+    </ClCompile>
+    <ClCompile Include="source\gl-items\gl_rectangle.cpp">
+      <Filter>Source Files\gl-items</Filter>
+    </ClCompile>
+    <ClCompile Include="source\gl-items\gl_circle.cpp">
       <Filter>Source Files\gl-items</Filter>
     </ClCompile>
   </ItemGroup>
@@ -584,15 +581,6 @@
     <ClInclude Include="source\gl-items\decoration_sprite.h">
       <Filter>Header Files\gl-items</Filter>
     </ClInclude>
-    <ClInclude Include="source\gl-items\empty_circle.h">
-      <Filter>Header Files\gl-items</Filter>
-    </ClInclude>
-    <ClInclude Include="source\gl-items\empty_rectangle.h">
-      <Filter>Header Files\gl-items</Filter>
-    </ClInclude>
-    <ClInclude Include="source\gl-items\filled_rectangle.h">
-      <Filter>Header Files\gl-items</Filter>
-    </ClInclude>
     <ClInclude Include="source\gl-items\grid.h">
       <Filter>Header Files\gl-items</Filter>
     </ClInclude>
@@ -708,6 +696,12 @@
       <Filter>Header Files\engine\peripherics</Filter>
     </ClInclude>
     <ClInclude Include="source\gl-items\entity-xml.hxx">
+      <Filter>Header Files\gl-items</Filter>
+    </ClInclude>
+    <ClInclude Include="source\gl-items\gl_rectangle.h">
+      <Filter>Header Files\gl-items</Filter>
+    </ClInclude>
+    <ClInclude Include="source\gl-items\gl_circle.h">
       <Filter>Header Files\gl-items</Filter>
     </ClInclude>
   </ItemGroup>

@@ -9,7 +9,7 @@ namespace gui {
 		originMap["center"] = 2;
 		originMap["top-right"] = 3;
 		originMap["bottom-right"] = 4;
-		data = EmptyCircle::CircleData();
+		data = glCircle::CircleData();
 	}
 
 	void Circle::create(float x, float y, float w, float h, float borderWidth, string origin) {

@@ -1,7 +1,7 @@
 #ifndef RECTANGLE_H
 #define RECTANGLE_H
 
-#include <primitives.h>
+#include <gl_rectangle.h>
 
 namespace gui {
 	class Rectangle {
@@ -13,7 +13,7 @@ namespace gui {
 	private:
 		int pickingId;
 		string luaCmd;
-		RectangleData data;
+		glRectangle::RectangleData data;
 		map<string, int> originMap;
 	};
 };

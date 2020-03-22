@@ -1,7 +1,7 @@
 #ifndef CIRCLE_H
 #define CIRCLE_H
 
-#include <empty_circle.h>
+#include <gl_circle.h>
 
 namespace gui {
 	class Circle {
@@ -11,7 +11,7 @@ namespace gui {
 		void render(vec4 Color, float x = 0.f, float y = 0.f, float w = 0.f, float h = 0.f, int origin = -1);
 		~Circle();
 	private:
-		EmptyCircle::CircleData data;
+		glCircle::CircleData data;
 		map<string, int> originMap;
 	};
 };

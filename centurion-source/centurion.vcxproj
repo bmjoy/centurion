@@ -244,10 +244,9 @@ XCOPY "$(ProjectDir)lua53.dll" "$(ProjectDir)$(OutDir)"</Command>
     <ClCompile Include="source\gl-items\building_sprite.cpp" />
     <ClCompile Include="source\gl-items\cursor_image.cpp" />
     <ClCompile Include="source\gl-items\decoration_sprite.cpp" />
-    <ClCompile Include="source\gl-items\empty_circle.cpp" />
-    <ClCompile Include="source\gl-items\empty_rectangle.cpp" />
+    <ClCompile Include="source\gl-items\gl_circle.cpp" />
+    <ClCompile Include="source\gl-items\gl_rectangle.cpp" />
     <ClCompile Include="source\gl-items\entity-xml.cxx" />
-    <ClCompile Include="source\gl-items\filled_rectangle.cpp" />
     <ClCompile Include="source\gl-items\grid.cpp" />
     <ClCompile Include="source\gl-items\image_sprite.cpp" />
     <ClCompile Include="source\gl-items\light.cpp" />
@@ -322,10 +321,9 @@ XCOPY "$(ProjectDir)lua53.dll" "$(ProjectDir)$(OutDir)"</Command>
     <ClInclude Include="source\gl-items\building_sprite.h" />
     <ClInclude Include="source\gl-items\cursor_image.h" />
     <ClInclude Include="source\gl-items\decoration_sprite.h" />
-    <ClInclude Include="source\gl-items\empty_circle.h" />
-    <ClInclude Include="source\gl-items\empty_rectangle.h" />
+    <ClInclude Include="source\gl-items\gl_circle.h" />
+    <ClInclude Include="source\gl-items\gl_rectangle.h" />
     <ClInclude Include="source\gl-items\entity-xml.hxx" />
-    <ClInclude Include="source\gl-items\filled_rectangle.h" />
     <ClInclude Include="source\gl-items\grid.h" />
     <ClInclude Include="source\gl-items\header_primitives.h" />
     <ClInclude Include="source\gl-items\image_sprite.h" />

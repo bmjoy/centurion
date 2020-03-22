@@ -6,15 +6,15 @@
 * ---------------------------
 */
 
-#ifndef EMPTYCIRCLE_H
-#define EMPTYCIRCLE_H
+#ifndef GLCIRCLE_H
+#define GLCIRCLE_H
 
 #include "shader.h"
 
 /// <summary>
 /// This class is used to render empty circles (or border circles).
 /// </summary>
-class EmptyCircle : public Shader
+class glCircle : public Shader
 {
 public:
 	/// <summary>
@@ -30,7 +30,7 @@ public:
 	/// <summary>
 	/// Constructor
 	/// </summary>
-	EmptyCircle();
+	glCircle();
 
 	/// <summary>
 	/// Create function
@@ -46,9 +46,9 @@ public:
 	/// <summary>
 	/// Destructor
 	/// </summary>
-	~EmptyCircle();
+	~glCircle();
 };
 
-static EmptyCircle eCircle;
+static glCircle eCircle;
 
 #endif

@@ -11,7 +11,7 @@ class BuildingSprite;
 class CursorImage;
 class DecorationSprite;
 class EmptyRectangle;
-class EmptyCircle;
+class glCircle;
 class FilledRectangle;
 class ImageSprite;
 class UnitSprite;
@@ -26,7 +26,7 @@ namespace primitives {
 	CursorImage *Cursor();
 	DecorationSprite *DSprite();
 	EmptyRectangle *ERectangle();
-	EmptyCircle *ECircle();
+	glCircle *ECircle();
 	FilledRectangle *FRectangle();
 	ImageSprite *Img();
 	UnitSprite *USprite();
