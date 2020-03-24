@@ -10,7 +10,6 @@
 #define DECORATIONSPRITE_H
 
 #include "object_sprite.h"
-#include "primitives_structs.h"
 
 /// <summary>
 /// This class is used to hold Decoration-specific methods for graphic rendering

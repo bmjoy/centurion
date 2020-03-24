@@ -9,6 +9,7 @@ MinimapRectangle::MinimapRectangle()
 {
 	vPath = "assets/shaders/minimap/vertex.glsl";
 	fPath = "assets/shaders/minimap/fragment.glsl";
+	textureID = 0;
 }
 
 void MinimapRectangle::create() {
@@ -18,15 +19,15 @@ void MinimapRectangle::create() {
 		1, 2, 3    // second triangle
 	};
 
-	float w = Engine::myWindow::Width;
-	float h = Engine::myWindow::Height;
+	textureWidth = (int)Engine::myWindow::Width;
+	textureHeight = (int)Engine::myWindow::Height;
 
 	float vertices[] = {
 		// X,Y,Z			// uv coords		
-		0.f, 0.f, 0.f,		0.f, 0.f,  // in basso a sx
-		w, 0.f, 0.f,		1.f, 0.f,  // in basso a dx
-		w, h, 0.f,			1.f, 1.f,  // in alto a dx
-		0.f, h, 0.f,		0.f, 1.f   // in alto a sx
+		0.f, 0.f, 0.f, 0.f, 0.f,  // in basso a sx
+		textureWidth, 0.f, 0.f, 1.f, 0.f,  // in basso a dx
+		textureWidth, textureHeight, 0.f, 1.f, 1.f,  // in alto a dx
+		0.f, textureHeight, 0.f, 0.f, 1.f   // in alto a sx
 	};
 
 	glGenVertexArrays(1, &VAO);
@@ -49,16 +50,14 @@ void MinimapRectangle::create() {
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
 	glBindVertexArray(0);
 
-	unsigned char* imageData = new unsigned char[int(w * h * 4)];
+	unsigned char* imageData = new unsigned char[textureWidth * textureHeight * 4];
 
 	imageData = { 0 };
-	textureIdList.push_back(0);
-
-	glGenTextures(1, &textureIdList[0]);
-	glBindTexture(GL_TEXTURE_2D, textureIdList[0]);
+	glGenTextures(1, &textureID);
+	glBindTexture(GL_TEXTURE_2D, textureID);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
-	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA8, int(w), int(h), 0, GL_RGBA, GL_UNSIGNED_BYTE, (GLvoid*)imageData);
+	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA8, textureWidth, textureHeight, 0, GL_RGBA, GL_UNSIGNED_BYTE, (GLvoid*)imageData);
 }
 
 void MinimapRectangle::update() {
@@ -66,36 +65,27 @@ void MinimapRectangle::update() {
 	
 	/* This texture comes from the minimap */
 
-	int w = (int)Engine::myWindow::Width;
-	int h = (int)Engine::myWindow::Height;
-	unsigned char* imageData = new unsigned char[int(w * h * 4)];
-	glReadPixels(0, 0, w, h, GL_RGBA, GL_UNSIGNED_BYTE, imageData);
+	unsigned char* imageData = new unsigned char[textureWidth * textureHeight * 4];
+	glReadPixels(0, 0, textureWidth, textureHeight, GL_RGBA, GL_UNSIGNED_BYTE, imageData);
 
-	glBindTexture(GL_TEXTURE_2D, textureIdList[0]);
+	glBindTexture(GL_TEXTURE_2D, textureID);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
-	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA8, w, h, 0, GL_RGBA, GL_UNSIGNED_BYTE, (GLvoid*)imageData);
+	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA8, textureWidth, textureHeight, 0, GL_RGBA, GL_UNSIGNED_BYTE, (GLvoid*)imageData);
 }
 
 void MinimapRectangle::render() {
 
 	glUseProgram(shaderId);
-
 	/* Draw */
-
 	glBindVertexArray(VAO);
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, IBO);
-
 	glUniform1i(glGetUniformLocation(shaderId, "texture1"), 0);
-
 	glActiveTexture(GL_TEXTURE0);
-	glBindTexture(GL_TEXTURE_2D, textureIdList[0]);
-
+	glBindTexture(GL_TEXTURE_2D, textureID);
 	glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
-
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
 	glBindVertexArray(0);
-
 }
 
 MinimapRectangle::~MinimapRectangle()

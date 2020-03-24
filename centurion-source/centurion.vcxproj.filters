@@ -599,9 +599,6 @@
     <ClInclude Include="source\gl-items\primitives.h">
       <Filter>Header Files\gl-items</Filter>
     </ClInclude>
-    <ClInclude Include="source\gl-items\primitives_structs.h">
-      <Filter>Header Files\gl-items</Filter>
-    </ClInclude>
     <ClInclude Include="source\gl-items\shader.h">
       <Filter>Header Files\gl-items</Filter>
     </ClInclude>

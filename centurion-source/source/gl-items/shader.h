@@ -1,15 +1,46 @@
+/*
+* ---------------------------
+* CENTURION
+* [2019] - [2020] Rattlesmake
+* All Rights Reserved.
+* ---------------------------
+*/
+
 #ifndef SHADER_H
 #define SHADER_H
 
-#include "primitives_structs.h"
+#include <header_primitives.h>
 
 class Shader {
 public:
+	/// <summary>
+	/// Constructor
+	/// </summary>
 	Shader();
+
+	/// <summary>
+	/// This method compiles the vertex and fragment shaders
+	/// </summary>
 	void compile();
+
+	/// <summary>
+	/// This method applies the projection matrix to the object
+	/// </summary>
 	void apply_projection_matrix(mat4 mat = mat4(1.0f));
+	
+	/// <summary>
+	/// This method applies the view matrix to the object
+	/// </summary>
 	void apply_view_matrix(mat4 mat = mat4(1.0f));
+
+	/// <summary>
+	/// This method applies the model matrix to the object
+	/// </summary>
 	void apply_model_matrix(mat4 mat = mat4(1.0f));
+
+	/// <summary>
+	/// Destructor
+	/// </summary>
 	~Shader();
 
 protected:

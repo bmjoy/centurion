@@ -7,7 +7,6 @@
 #include <pathfinding/pathfinding.h>
 #include <engine.h>
 #include <mapgen/mapgen.h>
-#include <unit_sprite.h>
 #include <settings.h>
 #include <logger.h>
 
@@ -18,7 +17,7 @@ using namespace math;
 int Unit::unitsCounter = 0;
 
 Unit::Unit() {
-	unitData = UnitData();
+	unitData = UnitSprite::UnitData();
 	unitData.currentDir = 0;
 	unitData.currentFrame = 0;
 

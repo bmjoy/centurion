@@ -330,7 +330,6 @@ XCOPY "$(ProjectDir)lua53.dll" "$(ProjectDir)$(OutDir)"</Command>
     <ClInclude Include="source\gl-items\light.h" />
     <ClInclude Include="source\gl-items\minimap_rectangle.h" />
     <ClInclude Include="source\gl-items\primitives.h" />
-    <ClInclude Include="source\gl-items\primitives_structs.h" />
     <ClInclude Include="source\gl-items\shader.h" />
     <ClInclude Include="source\gl-items\object_sprite.h" />
     <ClInclude Include="source\gl-items\terrain.h" />

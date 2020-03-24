@@ -1,9 +1,10 @@
 #ifndef  _UNIT_H
 #define _UNIT_H
 
-#include <ui.h>
 #include "object.h"
+#include <ui.h>
 #include <json.hpp>
+#include <unit_sprite.h>
 
 using namespace std;
 using namespace glm;
@@ -24,7 +25,7 @@ public:
 	void render(bool picking, int clickID = 0, bool not_placeable = false) override;
 	~Unit();
 private:
-	UnitData unitData;
+	UnitSprite::UnitData unitData;
 
 	static int unitsCounter;
 
