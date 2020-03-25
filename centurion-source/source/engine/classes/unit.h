@@ -1,5 +1,12 @@
-#ifndef  _UNIT_H
-#define _UNIT_H
+/*
+* ---------------------------
+* CENTURION
+* [2019] - [2020] Rattlesmake
+* All Rights Reserved.
+* ---------------------------
+*/
+
+#pragma once
 
 #include "object.h"
 #include <ui.h>
@@ -12,7 +19,9 @@ using namespace glm;
 class Building;
 class Player;
 
-
+/// <summary>
+/// (???) Classe da rivedere quasi completamente!
+/// </summary>
 class Unit : public GObject
 {
 public:
@@ -68,5 +77,3 @@ float getAngle(vector<ivec2> &path, int &n);
 float getDistance(vector<ivec2> &path, int &n);
 float getResDistance(vector<ivec2> &path, int &n, vec3 &pos2d);
 vector<ivec2> getPath(vec2 &start, vec2 &end);
-
-#endif

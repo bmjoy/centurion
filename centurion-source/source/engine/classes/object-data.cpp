@@ -50,25 +50,25 @@ void ObjectData::ObjectXMLClassData::GetParentData(string _parent)
 	GetParentData(p);
 }
 
-void ObjectData::ObjectXMLClassData::AddPropertyIfMissing(string k, string v)
+void ObjectData::ObjectXMLClassData::AddPropertyIfMissing(const string k, const string v)
 {
 	if (this->HasProperty(k)) return;
 	this->AddProperty(k, v);
 }
 
-void ObjectData::ObjectXMLClassData::AddSoundIfMissing(string k, string v)
+void ObjectData::ObjectXMLClassData::AddSoundIfMissing(const string k, const string v)
 {
 	if (this->HasMethod(k)) return;
 	this->AddMethod(k, v);
 }
 
-void ObjectData::ObjectXMLClassData::AddMethodIfMissing(string k, string v)
+void ObjectData::ObjectXMLClassData::AddMethodIfMissing(const string k, const string v)
 {
 	if (this->HasSound(k)) return;
 	this->AddSound(k, v);
 }
 
-string ObjectData::ObjectXMLClassData::GetPropertyValue(string _property)
+string ObjectData::ObjectXMLClassData::GetPropertyValue(const string _property)
 {
 	if (propertiesMap.count(_property) > 0) {
 		return propertiesMap[_property];
@@ -78,7 +78,7 @@ string ObjectData::ObjectXMLClassData::GetPropertyValue(string _property)
 	}
 }
 
-string ObjectData::ObjectXMLClassData::GetSoundPath(string _sound)
+string ObjectData::ObjectXMLClassData::GetSoundPath(const string _sound)
 {
 	if (soundsMap.count(_sound) > 0) {
 		return soundsMap[_sound];
@@ -88,7 +88,7 @@ string ObjectData::ObjectXMLClassData::GetSoundPath(string _sound)
 	}
 }
 
-string ObjectData::ObjectXMLClassData::GetMethodScript(string _method)
+string ObjectData::ObjectXMLClassData::GetMethodScript(const string _method)
 {
 	if (methodsMap.count(_method) > 0) {
 		return methodsMap[_method];
@@ -163,7 +163,7 @@ ObjectData::ObjectXMLClassData * ObjectData::GetObjectData(string _class)
 	}
 }
 
-void ObjectData::ReadDataClassesFromXml()
+void ObjectData::ReadDataClassesFromXml(void)
 {
 	vector<string> files = FileManager::GetAllFilesNamesWithinFolder(dataClassesPath, "xml");
 

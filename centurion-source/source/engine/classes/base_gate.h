@@ -1,6 +1,12 @@
-#ifndef _BASEGATE_H
-#define _BASEGATE_H
+/*
+* ---------------------------
+* CENTURION
+* [2019] - [2020] Rattlesmake
+* All Rights Reserved.
+* ---------------------------
+*/
 
+#pragma once
 
 #include <ui.h>
 #include "building.h"
@@ -13,5 +19,3 @@ class BaseGate : public Building
 {
 
 };
-
-#endif

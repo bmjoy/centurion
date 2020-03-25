@@ -1,8 +1,14 @@
+/*
+* ---------------------------
+* CENTURION
+* [2019] - [2020] Rattlesmake
+* All Rights Reserved.
+* ---------------------------
+*/
+
 #pragma once
 
-#include <ui.h>
 #include "object.h"
-#include <json.hpp>
 
 using namespace std;
 using namespace glm;
@@ -10,10 +16,17 @@ using namespace glm;
 class Building;
 class Player;
 
+/// <summary>
+/// (???) Da rivedere e in parte da riscrivere. 
+/// </summary>
 class Decoration : public GObject
 {
 public:
+	/// <summary>
+	/// Public constructor.
+	/// </summary>
 	Decoration();
+
 	void prepare() override;
 	bool is_placeable();
 	void create();
