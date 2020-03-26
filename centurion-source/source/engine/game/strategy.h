@@ -10,28 +10,28 @@
 #include "match.h"
 
 using namespace std;
-//
-//
-//
-
 // global game variables  --> see source/game/game_functions.cpp
 
+/// <summary>
+/// (???) Da rivedere --> le variabili extern non sono il massimo nella programmazione.
+/// </summary>
 extern vector<string> outposts;
 extern array<Player, 8> playersList;
 
-//
-//	GAME CLASS --> source/game/game.cpp
-//
 
-class Strategy : public Match {
+/// <summary>
+/// (???) Classe probabilemnte da rivedere, completare.
+/// </summary>
+class Strategy : public Match 
+{
 public:
-	static void handleKeyboardControls();
-	static void reset();
-	static void Create();
-	static void Run();
+	static void HandleKeyboardControls(void);
+	static void Reset(void);
+	static void Create(void);
+	static void Run(void);
 	
-	~Strategy();
+	~Strategy(void);
 private:
-	Strategy();
+	Strategy(void);
 };
 

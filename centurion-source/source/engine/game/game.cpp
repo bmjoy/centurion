@@ -19,14 +19,16 @@
 #include <settings.h>
 #include <classes/object-data.h>
 
+using namespace std;
+
 #pragma region Map class
 
 bool Game::Map::Wireframe = false;
 bool Game::Map::isGridEnabled;
 
-Game::Map::Map() {}
+Game::Map::Map(void) {}
 
-void Game::Map::LoadScenario(string scenarioName)
+void Game::Map::LoadScenario(const string scenarioName)
 {
 	try
 	{
@@ -46,13 +48,14 @@ void Game::Map::LoadScenario(string scenarioName)
 	}
 }
 
-void Game::Map::SaveScenario(string scenarioName)
+void Game::Map::SaveScenario(const string scenarioName)
 {
 	try
 	{
 		string scenarioPath = Folders::SCENARIOS + scenarioName;
 
-		if (FileManager::CheckIfFolderExists(scenarioPath) == false) {
+		if (FileManager::CheckIfFolderExists(scenarioPath) == false) 
+		{
 			FileManager::CreateFolder(scenarioPath);
 		}
 
@@ -72,7 +75,7 @@ void Game::Map::SaveScenario(string scenarioName)
 	}
 }
 
-void Game::Map::SaveMapObjectsToXml(string xmlPath)
+void Game::Map::SaveMapObjectsToXml(const string xmlPath)
 {
 	try
 	{
@@ -182,7 +185,7 @@ void Game::Map::SaveMapObjectsToXml(string xmlPath)
 	}
 }
 
-void Game::Map::SaveHeights(string path)
+void Game::Map::SaveHeights(const string path)
 {
 	try
 	{
@@ -205,7 +208,7 @@ void Game::Map::SaveHeights(string path)
 
 }
 
-void Game::Map::SaveTexture(string path)
+void Game::Map::SaveTexture(const string path)
 {
 	try
 	{
@@ -227,7 +230,7 @@ void Game::Map::SaveTexture(string path)
 	}
 }
 
-void Game::Map::LoadMapObjectsFromXml(string xmlPath)
+void Game::Map::LoadMapObjectsFromXml(const string xmlPath)
 {
 	try
 	{
@@ -291,7 +294,7 @@ void Game::Map::LoadMapObjectsFromXml(string xmlPath)
 
 
 
-void Game::Map::LoadHeights(string path)
+void Game::Map::LoadHeights(const string path)
 {
 	try
 	{
@@ -312,7 +315,7 @@ void Game::Map::LoadHeights(string path)
 	}
 }
 
-void Game::Map::LoadTexture(string path)
+void Game::Map::LoadTexture(const string path)
 {
 	try
 	{
@@ -333,7 +336,23 @@ void Game::Map::LoadTexture(string path)
 	}
 }
 
-void Game::Map::Reset() {
+bool Game::Map::IsGridEnabled(void)
+{
+	return Game::Map::isGridEnabled;
+}
+
+void Game::Map::EnableGrid(void)
+{
+	Game::Map::isGridEnabled = true;
+}
+
+void Game::Map::DisableGrid(void)
+{
+	Game::Map::isGridEnabled = false;
+}
+
+void Game::Map::Reset(void) 
+{
 	isGridEnabled = false;
 	mapgen::reset_map();
 	MapGrid()->reset();
@@ -341,7 +360,8 @@ void Game::Map::Reset() {
 	MapTerrain()->updateTextureBuffer();
 }
 
-void Game::Map::CreateNoise() {
+void Game::Map::CreateNoise(void) 
+{
 	mapgen::generateRandomMap();
 	MapTerrain()->updateHeightsBuffer();
 
@@ -352,20 +372,21 @@ void Game::Map::CreateNoise() {
 	Logger::Info(ss.str());
 }
 
-void Game::Map::UpdateGrid() {
+void Game::Map::UpdateGrid(void) 
+{
 	MapGrid()->update();
 }
 
-void Game::Map::Render(bool tracing) {
-
+void Game::Map::Render(const bool tracing) 
+{
 	MapTerrain()->render(tracing);
-
-	if (isGridEnabled && !tracing) {
+	if (isGridEnabled && !tracing) 
+	{
 		MapGrid()->render();
 	}
 }
 
-Game::Map::~Map() {}
+Game::Map::~Map(void) {}
 
 #pragma endregion
 
@@ -377,9 +398,15 @@ float Game::SelectionRectangle::cameraLastY = 0.f;
 bool Game::SelectionRectangle::isActive = false;
 gui::Rectangle Game::SelectionRectangle::selRectangle;
 
-Game::SelectionRectangle::SelectionRectangle() {}
+void Game::SelectionRectangle::Disable(void)
+{
+	Game::SelectionRectangle::isActive = false;
+}
 
-void Game::SelectionRectangle::Create() {
+Game::SelectionRectangle::SelectionRectangle(void) {}
+
+void Game::SelectionRectangle::Create(void) 
+{
 	cameraLastX = 0.f;
 	cameraLastY = 0.f;
 	selRectangle = gui::Rectangle();
@@ -409,7 +436,8 @@ bool Game::SelectionRectangle::IsInRectangle(array<float, 8> &coords) {
 		);
 }
 
-void Game::SelectionRectangle::Render() {
+void Game::SelectionRectangle::Render(void) 
+{
 	if (Engine::Mouse::LeftHold) {
 		if (SelectionRectangle::IsActive() == false) {
 			Logger::Info("Selection rectangle enabled.");
@@ -465,6 +493,16 @@ void Game::SelectionRectangle::Render() {
 	}
 }
 
+bool Game::SelectionRectangle::IsActive(void)
+{
+	return Game::SelectionRectangle::isActive;
+}
+
+void Game::SelectionRectangle::Enable(void)
+{
+	Game::SelectionRectangle::isActive = true;
+}
+
 #pragma endregion
 
 #pragma region Minimap prerendered class
@@ -473,18 +511,60 @@ bool Game::Minimap::isCreated = false;
 bool Game::Minimap::isActive = false;
 bool Game::Minimap::isBlocked = false;
 
-Game::Minimap::Minimap() {}
+Game::Minimap::Minimap(void) {}
 
-void Game::Minimap::Create() {
+void Game::Minimap::Create(void) 
+{
 	MMRectangle()->update();
 	isCreated = true;
 }
 
-void Game::Minimap::Render() {
+void Game::Minimap::Render(void) 
+{
 	MMRectangle()->render();
 }
 
-Game::Minimap::~Minimap() {}
+void Game::Minimap::Update(void)
+{
+	Game::Minimap::isCreated = false;
+}
+
+bool Game::Minimap::IsCreated(void)
+{
+	return Game::Minimap::isCreated;
+}
+
+void Game::Minimap::Enable(void)
+{
+	Game::Minimap::isActive = true;
+}
+
+void Game::Minimap::Disable(void)
+{
+	Game::Minimap::isActive = false;
+}
+
+bool Game::Minimap::IsActive(void)
+{
+	return Game::Minimap::isActive;
+}
+
+bool Game::Minimap::IsBlocked(void)
+{
+	return Game::Minimap::isBlocked;
+}
+
+void Game::Minimap::Block(void)
+{
+	Game::Minimap::isBlocked = true;
+}
+
+void Game::Minimap::Unblock(void)
+{
+	Game::Minimap::isBlocked = false;
+}
+
+Game::Minimap::~Minimap(void) {}
 
 #pragma endregion
 
@@ -521,7 +601,8 @@ bool Game::IsGameObjectSelected(const unsigned int id)
 	return GObject::GetObjectByID(id)->IsSelected();
 }
 
-bool Game::IsGameObjectNotNull(int id) {
+bool Game::IsGameObjectNotNull(int id) 
+{
 	if (id < 0 || id > MAX_NUMBER_OF_OBJECTS)
 		return false;
 	else
@@ -529,11 +610,15 @@ bool Game::IsGameObjectNotNull(int id) {
 }
 
 
-vector<Building*> Game::GetListOfIndipendentBuildings() {
+vector<Building*> Game::GetListOfIndipendentBuildings(void) 
+{
 	vector<Building*> indipBuildings = vector<Building*>();
-	for (int i = 0; i < MAX_NUMBER_OF_OBJECTS; i++) {
-		if (GObject::GetObjectByID(i) != nullptr && GObject::GetObjectByID(i)->IsBuilding()) {
-			if (GObject::GetObjectByID(i)->AsBuilding()->GetSettlement()->IsIndipendent()) {
+	for (int i = 0; i < MAX_NUMBER_OF_OBJECTS; i++) 
+	{
+		if (GObject::GetObjectByID(i) != nullptr && GObject::GetObjectByID(i)->IsBuilding()) 
+		{
+			if (GObject::GetObjectByID(i)->AsBuilding()->GetSettlement()->IsIndipendent()) 
+			{
 				indipBuildings.push_back(GObject::GetObjectByID(i)->AsBuilding());
 			}
 		}
@@ -632,6 +717,26 @@ Game::Race *Game::GetRace(string race_name)
 		return &races[race_name];
 	}
 	return nullptr;
+}
+
+void Game::AddColor(const vec3 col)
+{
+	Game::listOfColors.push_back(col);
+}
+
+vector<vec3> Game::GetListOfColors(void)
+{
+	return Game::listOfColors;
+}
+
+vec3 Game::GetColor(const unsigned int i)
+{
+	return Game::listOfColors[i];
+}
+
+unsigned int Game::GetNumberOfColors(void)
+{
+	return (unsigned int)Game::listOfColors.size();
 }
 
 void Game::GenerateOutposts(vector<vec2> &locs) {

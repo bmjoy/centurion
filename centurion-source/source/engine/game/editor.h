@@ -8,34 +8,45 @@
 using namespace std;
 using namespace glm;
 
-class UIGame;
-class Player;
-class Building;
-class Unit;
-class Decoration;
+//class UIGame;
+//class Player;
+//class Building;
+//class Unit;
+//class Decoration;
 
-//
-//	EDITOR CLASS --> source/editor/editor.cpp
-//
 
 class Editor : public Game
 {
 public:
-	static void reset() { isCreated = false; }
-	static void Create();
-	static void Run();
-	static void handleKeyboardControls();
-	~Editor();
+	/// <summary>
+	/// This function resets the game.
+	/// </summary>
+	static void reset(void);
+	/// <summary>
+	/// This function create a new editor.
+	/// </summary>
+	static void Create(void);
+	/// <summary>
+	/// This function runs the editor and perfoms the rendering of the editor.
+	/// </summary>
+	static void Run(void);
+	/// <summary>
+	/// (???) Da rivedere. 
+	/// This function notices the pressure of a specific key and consequently performs an appropriate action. 
+	/// </summary>
+	static void handleKeyboardControls(void);
+	/// <summary>
+	/// The destructor.
+	/// </summary>
+	~Editor(void);
 private:
-	Editor();
+	Editor(void);
 };
 
-// 
-//	EDITOR FUNCTIONS
-//
+#pragma region Editor functions 
 
-namespace editor {
-	
+namespace editor 
+{
 	//extern Unit unitTemp;
 	extern Building* buildingTemp;
 	extern Decoration* decorTemp;
@@ -43,14 +54,30 @@ namespace editor {
 	static float movingObjectXPos, movingObjectYPos, movingObjectStartXMouse, movingObjectStartYMouse;
 	static bool movingObjectRestore;
 
-	void prepareObject(string type, string classname);
-	void insertingObject(string type, string classname);
-	void addObject(string type);
-	void changeTerrain(int terrainType);
-	void clearEditorVariables();
-	bool areWindowsClosed();
-	void moveObjects();
+	/// <summary>
+	/// (???) Le tre funzioni di seguito sono da rivedere/cancellare.
+	/// </summary>
+	void prepareObject(const string type, const string classname);
+	void insertingObject(const string type, const string classname);
+	void addObject(const string type);
+	/// <summary>
+	/// This function changes the terrain.
+	/// </summary>
+	void changeTerrain(const int terrainType);
+	/// <summary>
+	/// This function resets all the variables belonging to the editor.
+	/// </summary>
+	void clearEditorVariables(void);
+	/// <summary>
+	/// This function checks if the windows of the editor are closed or not.
+	/// </summary>
+	/// <returns>True if the windows are closed; false otherwise</returns>
+	bool areWindowsClosed(void);
+	/// <summary>
+	/// (???) Da rivedere.
+	/// This function allows the movement of an object in the editor.
+	/// </summary>
+	void moveObjects(void);
 };
 
-
-
+#pragma endregion

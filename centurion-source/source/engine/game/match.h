@@ -2,16 +2,15 @@
 
 #include "game.h"
 
-
-	
 class Match : public Game 
 {
 public:
-	Match();
-	~Match();
+	Match(void);
+	~Match(void);
 
 protected:
-	static void Tracing();
+	/// <summary>
+	/// (???) Cosa fa?
+	/// </summary>
+	static void Tracing(void);
 };
-
-

@@ -27,10 +27,10 @@ array<Player, 8> playersList;
 
 #pragma endregion
 
-Strategy::Strategy() { }
+Strategy::Strategy(void) { }
 
-void Strategy::reset() {
-
+void Strategy::Reset(void)
+{
 	GObject::ResetGameObjects();
 
 	isCreated = false;
@@ -41,12 +41,12 @@ void Strategy::reset() {
 	Minimap::Update();
 }
 
-void Strategy::Create() {
-
+void Strategy::Create(void) 
+{
 	PickingObject::resetPicking();
 	PickingUI::resetPicking();
 
-	reset();
+	Reset();
 	Engine::myWindow::BottomBarHeight = 100.f;
 	Engine::myWindow::TopBarHeight = 100.f;
 
@@ -111,13 +111,14 @@ void Strategy::Create() {
 	Picking::resetDoubleClickTime();
 }
 
-void Strategy::Run() {
+void Strategy::Run(void)
+{
 	Unit::ResetCounter();
 	Picking::leftClickID_UI = 0;
 	Engine::Camera::keyboardControl();
 
 	/* Keyboard controls handling*/
-	if (!game::GameMenu::IsActive()) handleKeyboardControls();
+	if (!game::GameMenu::IsActive()) HandleKeyboardControls();
 
 	/* If minimap is NOT active */
 	if (Minimap::IsActive() == false) {
@@ -182,8 +183,8 @@ void Strategy::Run() {
 	Engine::Mouse::MiddleClick = false;
 }
 
-void Strategy::handleKeyboardControls() {
-
+void Strategy::HandleKeyboardControls(void)
+{
 	//Open or close minimap
 	if (Engine::Keyboard::IsKeyPressed(GLFW_KEY_SPACE) || Engine::Mouse::MiddleClick) {
 		if (Minimap::IsActive()) Minimap::Disable();
@@ -209,4 +210,4 @@ void Strategy::handleKeyboardControls() {
 	}
 }
 
-Strategy::~Strategy() {}
+Strategy::~Strategy(void) {}

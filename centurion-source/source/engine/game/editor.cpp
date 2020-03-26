@@ -14,18 +14,20 @@
 
 #include <GLFW/glfw3.h>
 
-#pragma region Static variables
 
-#pragma endregion
+Editor::Editor(void) {}
 
+void Editor::reset(void)
+{
+	Game::isCreated = false;
+}
 
-Editor::Editor() {}
-
-void Editor::Create() {
+void Editor::Create(void)
+{
 	PickingUI::resetPicking();
 	PickingObject::resetPicking();
 
-	Strategy::reset();
+	Strategy::Reset();
 	Engine::myWindow::BottomBarHeight = 0.f;
 	Engine::myWindow::TopBarHeight = 0.f;
 
@@ -44,18 +46,20 @@ void Editor::Create() {
 	Minimap::Update();
 }
 
-void Editor::Run() 
+void Editor::Run(void)
 {
 	Picking::leftClickID_UI = 0;
 
 	/* Keyboard control */
 	handleKeyboardControls();
-	if (!editor::IsWindowOpened) { // TODO: merge all these in a function in Editor->Editor_functions.cpp
+	if (!editor::IsWindowOpened) 
+	{ // TODO: merge all these in a function in Editor->Editor_functions.cpp
 		Engine::Camera::keyboardControl();
 	}
 
 	/* If minimap is NOT active */
-	if (!Minimap::IsActive()) {
+	if (!Minimap::IsActive()) 
+	{
 		if (!editor::IsWindowOpened && Engine::Mouse::GetYPosition() < Engine::myWindow::Height - 30.f && !editor::menuIsOpened)
 			Engine::Camera::mouseControl();
 		viewMatrix = Engine::Camera::calculateViewMatrix();
@@ -63,7 +67,8 @@ void Editor::Run()
 
 		editor::EDITOR_UI()->render(true);
 
- 		if (Engine::Mouse::LeftClick) {
+ 		if (Engine::Mouse::LeftClick) 
+		{
   			Picking::leftClickID_UI = PickingUI::GetIdFromClick();
 		}
 
@@ -71,7 +76,8 @@ void Editor::Run()
 		applyGameMatrices(&projectionMatrix, &viewMatrix);
 
 		// picking
-		if (!editor::IsWindowOpened && !editor::addingObject && !editor::TerrainBrushIsActive) RenderObjectsPicking();
+		if (!editor::IsWindowOpened && !editor::addingObject && !editor::TerrainBrushIsActive) 
+			RenderObjectsPicking();
 
 		// rendering
 		Map::Render(false);
@@ -112,28 +118,39 @@ void Editor::Run()
 	setCameraProjectionMatrix(glm::ortho(0.0f, Engine::myWindow::WidthZoomed, 0.0f, Engine::myWindow::HeightZoomed, -(float)MEDIUM_MAP_WIDTH, (float)MEDIUM_MAP_WIDTH));
 }
 
-void Editor::handleKeyboardControls() {
-
+void Editor::handleKeyboardControls(void) 
+{
 	using namespace editor;
 
 	//CTRL Hotkeys
-	if (!IsWindowOpened) {
-		if (Engine::Keyboard::IsKeyPressed(GLFW_KEY_LEFT_CONTROL) || Engine::Keyboard::IsKeyPressed(GLFW_KEY_RIGHT_CONTROL)) {
-			if(!Minimap::IsActive()){
+	if (!IsWindowOpened) 
+	{
+		if (Engine::Keyboard::IsKeyPressed(GLFW_KEY_LEFT_CONTROL) || Engine::Keyboard::IsKeyPressed(GLFW_KEY_RIGHT_CONTROL)) 
+		{
+			if(!Minimap::IsActive())
+			{
 				if (Engine::Keyboard::IsKeyPressed(GLFW_KEY_N)) { NewMapWindowIsOpen = true; NewMapResetText = true; IsWindowOpened = true; }
 				if (Engine::Keyboard::IsKeyPressed(GLFW_KEY_O)) { OpenMapWindowIsOpen = true; OpenMapWindowUpdate = true; IsWindowOpened = true; }
 				if (Engine::Keyboard::IsKeyPressed(GLFW_KEY_A)) { TerrainBrushIsActive = false; TerrainBrushWindowIsOpen = false; AddObjectWindowIsOpen = !AddObjectWindowIsOpen; }
 				if (Engine::Keyboard::IsKeyPressed(GLFW_KEY_T)) { AddObjectWindowIsOpen = false; TerrainBrushIsActive = !TerrainBrushWindowIsOpen; TerrainBrushWindowIsOpen = !TerrainBrushWindowIsOpen; }
 			}
-			else{
-				if (Engine::Keyboard::IsKeyPressed(GLFW_KEY_S)) { Game::Map::SaveScenario(currentMapName); }
+			else
+			{
+				if (Engine::Keyboard::IsKeyPressed(GLFW_KEY_S)) 
+				{ 
+					Game::Map::SaveScenario(currentMapName); 
+				}
 			}
 		}
-		if (Engine::Keyboard::IsKeyPressed(GLFW_KEY_DELETE)){
-			if (Game::IsGameObjectNotNull(Picking::leftClickID)) {
+		if (Engine::Keyboard::IsKeyPressed(GLFW_KEY_DELETE))
+		{
+			if (Game::IsGameObjectNotNull(Picking::leftClickID)) 
+			{
 				Building* b = GObject::GObject::GetObjectByID(Picking::leftClickID)->AsBuilding();
-				if (b->IsSelected()) {
-					if (b->GetSettlement()->IsIndipendent()) {
+				if (b->IsSelected()) 
+				{
+					if (b->GetSettlement()->IsIndipendent())
+					{
 						/*
 						if (b->buildingsInSettlementCount() > 0) {
 							b->setWaitingToBeErased(true);
@@ -154,48 +171,57 @@ void Editor::handleKeyboardControls() {
 				}
 			}
 		}
-		if (Hector::ConsoleIsActive() == false) {
-			if (Engine::Keyboard::IsKeyPressed(GLFW_KEY_SPACE) || Engine::Mouse::MiddleClick) {
+		if (Hector::ConsoleIsActive() == false)
+		{
+			if (Engine::Keyboard::IsKeyPressed(GLFW_KEY_SPACE) || Engine::Mouse::MiddleClick)
+			{
 				if (Minimap::IsActive()) Minimap::Disable();
 				else Minimap::Enable(); clearEditorVariables();
 				Minimap::IsActive() ? Logger::Info("Minimap ON!") : Logger::Info("Minimap OFF!");
 			}
 		}
-		if (Hector::ConsoleIsActive() == false) {
-			if (Engine::Keyboard::IsKeyPressed(GLFW_KEY_Z)) {
+		if (Hector::ConsoleIsActive() == false) 
+		{
+			if (Engine::Keyboard::IsKeyPressed(GLFW_KEY_Z)) 
+			{
 				Map::Wireframe = !Map::Wireframe;
 				Map::Wireframe ? Logger::Info("Wireframe ON!") : Logger::Info("Wireframe OFF!");
 			}
 		}
 		// Grid
-		if (Hector::ConsoleIsActive() == false) {
-			if (Engine::Keyboard::IsKeyPressed(GLFW_KEY_G)) {
+		if (Hector::ConsoleIsActive() == false) 
+		{
+			if (Engine::Keyboard::IsKeyPressed(GLFW_KEY_G))
+			{
 				if (Map::IsGridEnabled()) Map::DisableGrid();
 				else Map::EnableGrid();
 				Map::IsGridEnabled() ? Logger::Info("Grid ON!") : Logger::Info("Grid OFF!");
 			}
 		}
 	}
-	if (Engine::Keyboard::IsKeyPressed(GLFW_KEY_ESCAPE)) {
-		if (areWindowsClosed()) {
+	if (Engine::Keyboard::IsKeyPressed(GLFW_KEY_ESCAPE)) 
+	{
+		if (areWindowsClosed()) 
+		{
 			clearEditorVariables();
 			Engine::Reset();
 		}
-		else {
+		else 
+		{
 			clearEditorVariables();
 			//EDITOR_UI()->close_menu();
 		}
 	}
 }
 
-Editor::~Editor() { }
+Editor::~Editor(void) { }
 
 
 /* EDITOR FUNCTIONS */
 
 
-namespace editor {
-
+namespace editor 
+{
 	/* extern variables definitions */
 
 	bool menuIsOpened = false;
@@ -236,7 +262,8 @@ namespace editor {
 
 
 	/* tools */
-	void prepareObject(string type, string classname) {
+	void prepareObject(const string type, const string classname) 
+	{
 		if (type == "buildings") {
 			buildingTemp = new Building();
 			buildingTemp->SetClassName(classname);
@@ -255,7 +282,8 @@ namespace editor {
 		}
 	}
 
-	void insertingObject(string type, string classname) {
+	void insertingObject(const string type, const string classname)
+	{
 		float x = round(Engine::Mouse::GetXPosition() * Engine::myWindow::WidthZoomed / Engine::myWindow::Width + Engine::Camera::GetXPosition());
 		float y = round(Engine::Mouse::GetYPosition() * Engine::myWindow::HeightZoomed / Engine::myWindow::Height + Engine::Camera::GetYPosition());
 		if (type == "buildings") {
@@ -289,7 +317,7 @@ namespace editor {
 		}
 	}
 
-	void addObject(string type)
+	void addObject(const string type)
 	{
 		if (type == "buildings")
 		{
@@ -323,7 +351,8 @@ namespace editor {
 		Game::Minimap::Update();
 	}
 
-	void changeTerrain(int terrainType) {
+	void changeTerrain(const int terrainType)
+	{
 		float x1 = (Engine::Mouse::GetXPosition() * Engine::myWindow::WidthZoomed / Engine::myWindow::Width + Engine::Camera::GetXPosition());
 		float y1 = (Engine::Mouse::GetYPosition() * Engine::myWindow::HeightZoomed / Engine::myWindow::Height + Engine::Camera::GetYPosition());
 		float type = float(terrainType);
@@ -334,14 +363,16 @@ namespace editor {
 
 		int j = mapgen::getVertexPos(x, y);
 
-		if (mapgen::MapTextures()[j] != type) {
+		if (mapgen::MapTextures()[j] != type) 
+		{
 			mapgen::MapTextures()[j] = type;
 			MapTerrain()->updateTextureBuffer();
 			Game::Minimap::Update();
 		}
 	}
 
-	void clearEditorVariables() {
+	void clearEditorVariables(void) 
+	{
 		IsWindowOpened = false;
 		QuestionWindowIsOpen = false;
 		NewMapWindowIsOpen = false;
@@ -359,13 +390,13 @@ namespace editor {
 		addingObject = false;
 	}
 
-	bool areWindowsClosed() {
-		if (IsWindowOpened || menuIsOpened)
-			return false;
-		return true;
+	bool areWindowsClosed(void)
+	{
+		return !(IsWindowOpened || menuIsOpened);
 	}
 
-	void moveObjects() {
+	void moveObjects(void) 
+	{
 		if (Engine::Mouse::LeftHold) {
 			// buildings
 			if (Game::IsGameObjectNotNull(Picking::leftClickID)) {

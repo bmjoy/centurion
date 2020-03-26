@@ -1,21 +1,51 @@
-#ifndef EDITORWINDOWS_H
-#define EDITORWINDOWS_H
+#pragma once
 
 #include <ui.h>
 
 #define MAX_NUMBER_OF_EDITOR_WINDOWS 20
 
-class EditorWindows {
+/// <summary>
+/// This class corresponds to all the windows of the editor.
+/// </summary>
+class EditorWindows 
+{
 public:
-
-	class EditorWindow {
+	/// <summary>
+	/// This class corresponds to a generic window of the editor.
+	/// </summary>
+	class EditorWindow 
+	{
 	public:
-		bool IsOpened() { return isOpened; }
-		void Open() { isOpened = true; opening = true; }
-		void Clear();
-		void Close() { isOpened = false; }
+		/// <summary>
+		/// This function checks if the generic windows is opened or not.
+		/// </summary>
+		/// <returns>True if it's opened; false otherwise.</returns>
+		bool IsOpened(void);
+		/// <summary>
+		/// This function opens a generic window.
+		/// </summary>
+		void Open(void); 
+		/// <summary>
+		/// This function closes a generic window.
+		/// </summary>
+		void Close(void);
+		/// <summary>
+		/// This function clears a genric window.
+		/// </summary>
+		void Clear(void);
+		/// <summary>
+		/// This funtio creates a generic window.
+		/// </summary>
+		/// <param name="_luaOpeningScript"></param>
+		/// <param name="_luaConditionScript"></param>
+		/// <param name="_luaConditionFunction"></param>
+		/// <param name="_iframe"></param>
 		void Create(string _luaOpeningScript, string _luaConditionScript, string _luaConditionFunction, gui::Iframe _iframe);
-		void Render(bool picking);
+		/// <summary>
+		/// This function performs the rendiring of a generic window.
+		/// </summary>
+		/// <param name="picking"></param>
+		void Render(const bool picking);
 	private:
 		gui::Iframe iframe;
 		bool isOpened;
@@ -25,15 +55,33 @@ public:
 		string luaConditionFunction;
 	};
 
-	static void Clear();
-	static void OpenWindow(int id);
-	static void Create();
-	static void Render(bool picking);
-	~EditorWindows();
+	/// <summary>
+	/// This function clears all the windows of the editor.
+	/// </summary>
+	static void Clear(void);
+	/// <summary>
+	/// This function opens a specific window of the editor.
+	/// </summary>
+	/// <param name="id"></param>
+	static void OpenWindow(const unsigned int id);
+	/// <summary>
+	/// This function creates an editor set of windows from an XML file. 
+	/// </summary>
+	static void Create(void);
+	/// <summary>
+	/// This function performs the rendering of all the windows of the editor.
+	/// </summary>
+	/// <param name="picking"></param>
+	static void Render(const bool picking);
+	~EditorWindows(void);
 private:
-	EditorWindows();	
-	static void AddWindow(int id, EditorWindow* win) { listOfWindows[id] = win; }
+	EditorWindows(void);	
+	/// <summary>
+	/// (???) Cosa succede se la finestra non esiste?
+	/// This function adds a window.
+	/// </summary>
+	/// <param name="id">The id of the window.</param>
+	/// <param name="win">The window.</param>
+	static void AddWindow(const unsigned int id, EditorWindow* win);
 	static array<EditorWindow*, MAX_NUMBER_OF_EDITOR_WINDOWS> listOfWindows;
 };
-
-#endif 

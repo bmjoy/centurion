@@ -127,7 +127,7 @@ int Engine::Launch() {
 		if (ENGINE_RESET) {
 			ENGINE_RESET = false;
 			if (getEnvironment() == EDITOR_ENV) Editor::reset(); editor::clearEditorVariables();
-			if (getEnvironment() == STRATEGY_ENV) Strategy::reset();
+			if (getEnvironment() == STRATEGY_ENV) Strategy::Reset();
 			//MENU()->reset();
 
 			SetEnvironment("menu");

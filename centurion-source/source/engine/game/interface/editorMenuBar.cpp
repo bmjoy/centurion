@@ -23,6 +23,21 @@ string EditorMenuBar::font = "tahoma_13px";
 
 #pragma region EditorMenu class
 
+bool EditorMenuBar::EditorMenu::IsOpened(void)
+{
+	return EditorMenu::isOpened;
+}
+
+void EditorMenuBar::EditorMenu::Open(void)
+{
+	EditorMenu::isOpened = true;
+}
+
+void EditorMenuBar::EditorMenu::Close(void)
+{
+	EditorMenu::isOpened = false;
+}
+
 void EditorMenuBar::EditorMenu::Create(gui::Rectangle _titleBack, gui::SimpleText _titleText, vector<gui::Rectangle> _optionsBack, vector<gui::SimpleText> _optionsText)
 {
 	titleBack = _titleBack;
@@ -31,7 +46,7 @@ void EditorMenuBar::EditorMenu::Create(gui::Rectangle _titleBack, gui::SimpleTex
 	optionsText = _optionsText;
 }
 
-void EditorMenuBar::EditorMenu::Render(bool picking, vec4 &color)
+void EditorMenuBar::EditorMenu::Render(const bool picking, const vec4 &color)
 {
 	titleBack.render(color, picking, Picking::leftClickID_UI);
 	if (picking == false) { 
@@ -51,7 +66,7 @@ void EditorMenuBar::EditorMenu::Render(bool picking, vec4 &color)
 #pragma endregion
 
 
-void EditorMenuBar::ToggleEditorMenu(int id)
+void EditorMenuBar::ToggleEditorMenu(const unsigned int id)
 {
 	if (Engine::Mouse::LeftClick) {
 		if (listOfMenus[id]->IsOpened()) {
@@ -69,7 +84,7 @@ void EditorMenuBar::ToggleEditorMenu(int id)
 	}
 }
 
-void EditorMenuBar::Create()
+void EditorMenuBar::Create(void)
 {
 	try
 	{
@@ -158,7 +173,7 @@ void EditorMenuBar::Create()
 	}
 }
 
-void EditorMenuBar::Render(bool picking)
+void EditorMenuBar::Render(const bool picking)
 {
 	topBar.render(color, picking);
 	for (int i = 0; i < MAX_NUMBER_OF_EDITOR_MENUS; i++) {
@@ -173,5 +188,10 @@ void EditorMenuBar::Render(bool picking)
 			listOfMenus[i]->Render(picking, color);
 		}
 	}
+}
+
+void EditorMenuBar::AddMenu(const unsigned int id, EditorMenu * menu)
+{
+	EditorMenuBar::listOfMenus[id] = menu;
 }
 

@@ -17,7 +17,23 @@ array<EditorWindows::EditorWindow*, MAX_NUMBER_OF_EDITOR_WINDOWS> EditorWindows:
 
 #pragma region EditorWindow class
 
-void EditorWindows::EditorWindow::Clear()
+bool EditorWindows::EditorWindow::IsOpened(void)
+{
+	return EditorWindow::isOpened;
+}
+
+void EditorWindows::EditorWindow::Open(void)
+{
+	EditorWindow::isOpened = true;
+	EditorWindow::opening = true;
+}
+
+void EditorWindows::EditorWindow::Close(void)
+{
+	EditorWindow::isOpened = false;
+}
+
+void EditorWindows::EditorWindow::Clear(void)
 {
 	iframe.Clear();
 }
@@ -34,7 +50,7 @@ void EditorWindows::EditorWindow::Create(string _luaOpeningScript, string _luaCo
 	Hector::ExecuteCommand(luaConditionScript);
 }
 
-void EditorWindows::EditorWindow::Render(bool picking)
+void EditorWindows::EditorWindow::Render(const bool picking)
 {
 	if (isOpened == false) {
 
@@ -57,16 +73,15 @@ void EditorWindows::EditorWindow::Render(bool picking)
 
 #pragma endregion
 
-void EditorWindows::OpenWindow(int id)
+void EditorWindows::OpenWindow(const unsigned int id)
 {
 	if (id < 0 || id > MAX_NUMBER_OF_EDITOR_WINDOWS) return;
 	if (listOfWindows[id] == nullptr) return;
 
-
 	listOfWindows[id]->Open();
 }
 
-void EditorWindows::Create()
+void EditorWindows::Create(void)
 {
 	try
 	{
@@ -158,7 +173,7 @@ void EditorWindows::Create()
 	}
 }
 
-void EditorWindows::Render(bool picking)
+void EditorWindows::Render(const bool picking)
 {
 	for (int i = 0; i < MAX_NUMBER_OF_EDITOR_WINDOWS; i++) {
 		if (listOfWindows[i] != nullptr) {
@@ -168,10 +183,12 @@ void EditorWindows::Render(bool picking)
 }
 
 
-void EditorWindows::Clear()
+void EditorWindows::Clear(void)
 {
-	for (int i = 0; i < MAX_NUMBER_OF_EDITOR_WINDOWS; i++) {
-		if (listOfWindows[i] != nullptr) {
+	for (int i = 0; i < MAX_NUMBER_OF_EDITOR_WINDOWS; i++) 
+	{
+		if (listOfWindows[i] != nullptr)
+		{
 			listOfWindows[i]->Clear();
 			delete listOfWindows[i];
 		}
@@ -179,6 +196,11 @@ void EditorWindows::Clear()
 	}
 }
 
-EditorWindows::~EditorWindows()
+EditorWindows::~EditorWindows(void)
 {
+}
+
+void EditorWindows::AddWindow(const unsigned int id, EditorWindow * win)
+{
+	EditorWindows::listOfWindows[id] = win;
 }
