@@ -1,3 +1,11 @@
+/*
+* ---------------------------
+* CENTURION
+* [2019] - [2020] Rattlesmake
+* All Rights Reserved.
+* ---------------------------
+*/
+
 #pragma once
 
 #define MAX_NUMBER_OF_PLAYERS 8
