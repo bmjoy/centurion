@@ -222,7 +222,7 @@ public:
 	};
 
 	/// <summary>
-	/// (???) Classe da rivedere e forse da posizionare altrove perché deve poter interagire con Object.h.
+	/// (???) Classe da rivedere e forse da posizionare altrove perche deve poter interagire con Object.h.
 	/// </summary>
 	class Race 
 	{
@@ -270,7 +270,7 @@ public:
 #pragma region Race methods
 
 	/// <summary>
-	/// Metodi da rivedere. La gestione delle razze va rivista perché deve poter interagire anche con object.h.
+	/// Metodi da rivedere. La gestione delle razze va rivista perche deve poter interagire anche con object.h.
 	/// </summary>
 	/// <param name="race_name"></param>
 	/// <param name="r"></param>
@@ -283,7 +283,7 @@ public:
 #pragma region Colors methods
 
 	/// <summary>
-	/// (???) Da sistemare --> dovrebbe controllare che il colore non è già presente.
+	/// (???) Da sistemare --> dovrebbe controllare che il colore non e gia presente.
 	/// This function add a new color.
 	/// </summary>
 	/// <param name="col">A new color.</param>
@@ -294,7 +294,7 @@ public:
 	/// <returns>A list of color.</returns>
 	static vector<vec3> GetListOfColors(void);
 	/// <summary>
-	/// (???) Cosa succede se il colore non è presente nella lista?
+	/// (???) Cosa succede se il colore non e presente nella lista?
 	/// This function returns a specific color.
 	/// </summary>
 	/// <param name="i">The index of the color.</param>

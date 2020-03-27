@@ -48,7 +48,7 @@ public:
 	/// <returns>The number of the player.</returns>
 	unsigned short int GetPlayer(void);
 	/// <summary>
-	/// (???) Da rivedere se l'object è una struttura.
+	/// (???) Da rivedere se l'object e una struttura.
 	/// This function sets the player of current the object.
 	/// </summary>
 	/// <param name="par_playerID"></param>
@@ -88,7 +88,7 @@ public:
 	/// <param name="par_radius">The radius of the current object. It should be a value greater than 0.</param>
 	void SetRadius(const float par_radius);
 	/// <summary>
-	/// (???) Da cancellare perché un duplicato -> Da cancellare soprattutto nei vari XML.
+	/// (???) Da cancellare perche un duplicato -> Da cancellare soprattutto nei vari XML.
 	/// </summary>
 	/// <returns></returns>
 	float GetSelectionRadius(void);

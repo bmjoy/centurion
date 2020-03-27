@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no" ?>
 <c_settings>
   <setting name="windowWidth" value="1000"/>
-  <setting name="windowHeight" value="700"/>
+  <setting name="windowHeight" value="600"/>
   <setting name="cameraMovespeed" value="10"/>
   <setting name="cameraMaxZoom" value="20"/>
   <setting name="language" value="italian"/>
-  <setting name="debug" value="true"/>
+  <setting name="debug" value="false"/>
   <setting name="fullScreen" value="false"/>
 </c_settings>

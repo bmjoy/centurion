@@ -25,9 +25,9 @@ void MinimapRectangle::create() {
 	float vertices[] = {
 		// X,Y,Z			// uv coords		
 		0.f, 0.f, 0.f, 0.f, 0.f,  // in basso a sx
-		textureWidth, 0.f, 0.f, 1.f, 0.f,  // in basso a dx
-		textureWidth, textureHeight, 0.f, 1.f, 1.f,  // in alto a dx
-		0.f, textureHeight, 0.f, 0.f, 1.f   // in alto a sx
+		1.f*textureWidth, 0.f, 0.f, 1.f, 0.f,  // in basso a dx
+		1.f*textureWidth, 1.f*textureHeight, 0.f, 1.f, 1.f,  // in alto a dx
+		0.f, 1.f*textureHeight, 0.f, 0.f, 1.f   // in alto a sx
 	};
 
 	glGenVertexArrays(1, &VAO);
