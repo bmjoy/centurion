@@ -45,7 +45,8 @@ using namespace debug;
 int Engine::ENVIRONMENT = MENU_ENV;
 bool Engine::ENGINE_RESET;
 
-int Engine::Launch() {
+int Engine::Launch(void) 
+{
 	myWindow window = myWindow::GetInstance();
 	init();
 
@@ -71,17 +72,19 @@ int Engine::Launch() {
 	Fps _fps = Fps();
 	_fps.SetLastTime(glfwGetTime());
 
-	while (myWindow::ShouldClose == false) {
+	while (myWindow::ShouldClose == false) 
+	{
 		glfwPollEvents();
 		Mouse::IsHolding(); 
 		window.ClearBuffers();
 		_fps.Update();
 		Mouse::mouse_control(window.get_mouse_x(), window.get_mouse_y());
-		handleGlobalKeys();
+		HandleGlobalKeys();
 
 		// ---- MENU ---- //
 
-		if (getEnvironment() == MENU_ENV) {
+		if (GetEnvironment() == MENU_ENV)
+		{
 			
 			if (Menu::IsCreated() == false)
 			{
@@ -94,8 +97,10 @@ int Engine::Launch() {
 
 		// ---- STRATEGY ---- //
 
-		if (getEnvironment() == STRATEGY_ENV) {
-			if (!Strategy::IsCreated()) {
+		if (GetEnvironment() == STRATEGY_ENV)
+		{
+			if (!Strategy::IsCreated()) 
+			{
 				//Audio()->MusicStop();
 
 				//window.ClearAndSwapBuffers();
@@ -114,8 +119,10 @@ int Engine::Launch() {
 
 		// ---- EDITOR ---- //
 
-		if (getEnvironment() == EDITOR_ENV) {
-			if (!Editor::IsCreated()) {
+		if (GetEnvironment() == EDITOR_ENV) 
+		{
+			if (!Editor::IsCreated()) 
+			{
 				Audio()->MusicStop();
 				Editor::Create();
 			}
@@ -124,25 +131,29 @@ int Engine::Launch() {
 
 		// -------------- //
 
-		if (ENGINE_RESET) {
+		if (ENGINE_RESET)
+		{
 			ENGINE_RESET = false;
-			if (getEnvironment() == EDITOR_ENV) Editor::reset(); editor::clearEditorVariables();
-			if (getEnvironment() == STRATEGY_ENV) Strategy::Reset();
+			if (GetEnvironment() == EDITOR_ENV) Editor::reset(); editor::clearEditorVariables();
+			if (GetEnvironment() == STRATEGY_ENV) Strategy::Reset();
 			//MENU()->reset();
 
 			SetEnvironment("menu");
 		}
 
 		// debug ui
-		if (Settings::DebugIsActive) DEBUG_UI()->render(_fps.GetFps(), _fps.GetMpfs(), Unit::GetCounter());
+		if (Settings::DebugIsActive) 
+			DEBUG_UI()->render(_fps.GetFps(), _fps.GetMpfs(), Unit::GetCounter());
 
 		Hector::RenderConsole();
 
 		// mouse
 		Mouse::render();
 
-		if (Hector::ConsoleIsActive() == false) {
-			if ((Keyboard::IsKeyNotReleased(GLFW_KEY_LEFT_SHIFT) || Keyboard::IsKeyNotReleased(GLFW_KEY_RIGHT_SHIFT)) && Keyboard::IsKeyNotReleased(GLFW_KEY_S)) {
+		if (Hector::ConsoleIsActive() == false) 
+		{
+			if ((Keyboard::IsKeyNotReleased(GLFW_KEY_LEFT_SHIFT) || Keyboard::IsKeyNotReleased(GLFW_KEY_RIGHT_SHIFT)) && Keyboard::IsKeyNotReleased(GLFW_KEY_S)) 
+			{
 				Logger::Info("Screenshot taken!");
 				myWindow::TakeScreenshot();
 			}
@@ -169,35 +180,40 @@ int Engine::Launch() {
 }
 
 
-void Engine::GameClose()
+void Engine::GameClose(void)
 {
 	myWindow::ShouldClose = true;
 }
 
-void Engine::SetEnvironment(string s)
+void Engine::SetEnvironment(const string s)
 {
-	if (s == "menu") {
+	if (s == "menu") 
+	{
 		ENVIRONMENT = MENU_ENV;
 	}
-	else if (s == "editor") {
+	else if (s == "editor") 
+	{
 		ENVIRONMENT = EDITOR_ENV;
 	}
-	else if (s == "strategy") {
+	else if (s == "strategy") 
+	{
 		ENVIRONMENT = STRATEGY_ENV;
 	}
-	else {
+	else 
+	{
 		ENVIRONMENT = MENU_ENV;
 	}
 }
 
-void Engine::PrintToConsole(string s)
+void Engine::PrintToConsole(const string s)
 {
 	cout << s << endl;
 }
 
-vector<string>* Engine::GetListOfFolders(string s)
+vector<string>* Engine::GetListOfFolders(const string s)
 {
-	if (FileManager::CheckIfFolderExists(s)) {
+	if (FileManager::CheckIfFolderExists(s))
+	{
 		vector<string> list = FileManager::GetAllFoldersNamesWithinFolder(s);
 		vector<string>* _list = new vector<string>();
 		(*_list) = list;
@@ -206,12 +222,11 @@ vector<string>* Engine::GetListOfFolders(string s)
 	return nullptr;
 }
 
-void Engine::Init(const char* exe_root) {
-
+void Engine::Init(const char* exe_root)
+{
 	// old initParams (global)
-
-	try {
-
+	try
+	{
 		Settings::SetFolders(FileManager::GetFileFolderPath(exe_root));
 		ErrorCodes::ReadErrorCodesXml();
 		Logger::CleanLogs();
@@ -229,19 +244,20 @@ void Engine::Init(const char* exe_root) {
 
 		ifstream data_path("assets/data/data.json");
 		//Close the game if it wasn't able to find or process data.json file
-		if (!data_path.good()) {
+		if (!data_path.good()) 
+		{
 			//forceGameClosure("NOT_FOUND", "ERROR_data");
 		}
 		json data = json::parse(data_path);
 
-		for (int i = 0; i < data["player_colors"].size(); i++) {
+		for (int i = 0; i < data["player_colors"].size(); i++) 
+		{
 			vec3 color = vec3(data["player_colors"][i]["r"], data["player_colors"][i]["g"], data["player_colors"][i]["b"]);
 			Game::AddColor(color);
 		}
-
-
 	}
-	catch (...) {
+	catch (...) 
+	{
 		std::cout << "An error occurred" << std::endl;
 	}
 
@@ -250,17 +266,18 @@ void Engine::Init(const char* exe_root) {
 	SetEnvironment("menu");
 }
 
-void Engine::Reset()
+void Engine::Reset(void)
 {
 	ENGINE_RESET = true;
 }
 
-int Engine::getEnvironment()
+unsigned int Engine::GetEnvironment(void)
 {
 	return ENVIRONMENT;
 }
 
-void Engine::read_data() {
+void Engine::read_data(void) 
+{
 	//Read races data
 	vector<string> r_files = FileManager::GetAllFilesNamesWithinFolder("assets/data/races");
 	for (int i = 0; i < r_files.size(); ++i) {
@@ -291,15 +308,17 @@ void Engine::read_data() {
 		MapTerrain()->addPath(texturesInfoList[i].name, texturesInfoList[i].path);
 }
 
-void Engine::handleGlobalKeys() {
+void Engine::HandleGlobalKeys(void)
+{
 	// activate or deactivate debug ui
-	if (Settings::DebugIsActive && Keyboard::IsKeyPressed(GLFW_KEY_F10)) {
+	if (Settings::DebugIsActive && Keyboard::IsKeyPressed(GLFW_KEY_F10)) 
+	{
 		debug::DEBUG_UI()->setStatus(!debug::DEBUG_UI()->getStatus());
 		debug::DEBUG_UI()->getStatus() ? Logger::Info("Debug UI ON!") : Logger::Info("Debug UI OFF!");
 	}
 }
 
-void Engine::ResetPeriphericsInput()
+void Engine::ResetPeriphericsInput(void)
 {
 	//Keyboard buttons
 	Keyboard::ResetKeys();
@@ -311,17 +330,34 @@ void Engine::ResetPeriphericsInput()
 	Mouse::Release = false;
 }
 
-Engine::Fps::Fps()
+Engine::Fps::Fps(void)
 {
 	this->nbFrames = 0;
 	this->_Fps = 0;
 	this->Mpfs = 0;
 }
 
-void Engine::Fps::Update(void) {
+void Engine::Fps::SetLastTime(const double lastTime)
+{
+	this->lastTime = lastTime;
+}
+
+int Engine::Fps::GetFps(void)
+{
+	return this->_Fps;;
+}
+
+int Engine::Fps::GetMpfs(void)
+{
+	return this->Mpfs;
+}
+
+void Engine::Fps::Update(void) 
+{
 	this->currentTime = glfwGetTime();
 	this->nbFrames++;
-	if (this->currentTime - this->lastTime >= 1.0) { // If last prinf() was more than 1 sec ago
+	if (this->currentTime - this->lastTime >= 1.0) 
+	{ // If last prinf() was more than 1 sec ago
 		this->_Fps = this->nbFrames;
 		this->Mpfs = 1000 / this->nbFrames;
 		this->lastTime += 1.0;
@@ -329,12 +365,13 @@ void Engine::Fps::Update(void) {
 	}
 }
 
-void Engine::Fps::SleepFps(void) {
+void Engine::Fps::SleepFps(void) 
+{
 	this->finalTime = glfwGetTime();
-	if (this->finalTime - this->currentTime < 1.0 / 60.0) {
+	if (this->finalTime - this->currentTime < 1.0 / 60.0) 
+	{
 		Sleep(DWORD(1000 * (1.0 / 60.0 - (this->finalTime - this->currentTime))));
 	}
 }
 
-Engine::Fps::~Fps() {}
-
+Engine::Fps::~Fps(void) {}

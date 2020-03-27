@@ -52,7 +52,7 @@ void Engine::Mouse::create() {
 void Engine::Mouse::render() {
 	Cursor()->render(position.x, position.y, currentState);
 
-	if (Engine::getEnvironment() == STRATEGY_ENV) {
+	if (Engine::GetEnvironment() == STRATEGY_ENV) {
 		if (Game::Minimap::IsActive() == false) {
 			img.render(false, position.x, y2DPosition);
 		}

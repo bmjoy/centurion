@@ -28,7 +28,7 @@ extern array<Player, 8> playersList;
 
 
 /// <summary>
-/// (???) Classe probabilemnte da rivedere, completare.
+/// (???) Classe probabilmente da rivedere, completare.
 /// </summary>
 class Strategy : public Match 
 {

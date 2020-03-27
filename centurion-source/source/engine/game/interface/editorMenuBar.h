@@ -42,8 +42,8 @@ public:
 		/// <summary>
 		/// This function performs the rendering of the editor menu.
 		/// </summary>
-		/// <param name="picking"></param>
-		/// <param name="color"></param>
+		/// <param name="picking">Checks if it's the picking phase.</param>
+		/// <param name="color">The color to use.</param>
 		void Render(const bool picking, const vec4 &color);
 	private:
 		gui::Rectangle titleBack;

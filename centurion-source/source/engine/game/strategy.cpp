@@ -86,7 +86,7 @@ void Strategy::Create(void)
 			u->SetClassName("hmyrmidon");
 			u->SetPickingID(PickingObject::GetPickingId());
 			u->SetPlayer(0);
-			u->SetPosition(playersList[0].getStartPoint().x + i * 50, playersList[0].getStartPoint().y - 1000 - j * 50);
+			u->SetPosition(playersList[0].GetStartPoint().x + i * 50, playersList[0].GetStartPoint().y - 1000 - j * 50);
 			u->create();
 			//GObject::GetObjectByID(u->GetPickingID()) = u;
 			//units[u->GetPickingID()] = u;
@@ -97,11 +97,11 @@ void Strategy::Create(void)
 
 	//ui = new UIGame();
 
-	game::GAME_UI()->create(playersList[0].getPlayerRace().substr(5));
+	game::GAME_UI()->create(playersList[0].GetPlayerRace().substr(5));
 
 	Engine::Camera::GoToPoint(
-		(GLfloat)(playersList[0].getStartPoint().x - Engine::myWindow::WidthZoomed / 2.f),
-		(GLfloat)(playersList[0].getStartPoint().y - Engine::myWindow::HeightZoomed / 2.f)
+		(GLfloat)(playersList[0].GetStartPoint().x - Engine::myWindow::WidthZoomed / 2.f),
+		(GLfloat)(playersList[0].GetStartPoint().y - Engine::myWindow::HeightZoomed / 2.f)
 	);
 
 	//---------------------------------------

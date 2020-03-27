@@ -780,9 +780,9 @@ void Game::GenerateSettlements(vector<vec2> &locs) {
 	}
 
 	for (int i = 0; i < num_townhalls; i++) {
-		string r = playersList[i].getPlayerRace().substr(5);
+		string r = playersList[i].GetPlayerRace().substr(5);
 		vec2 origin = locs[i];
-		playersList[i].setStartPoint(origin);
+		playersList[i].SetStartPoint(origin);
 		string SettlementRace = "Settlement_" + r + "_1";
 		fstream fin;
 		fin.open(RandomMapSettlementPath + "objects.tsv");
@@ -890,7 +890,7 @@ void Game::GenerateSettlements(vector<vec2> &locs) {
 bool Game::CreateObject(const string className, const float x, const float y, const unsigned int player)
 {
 	bool bObjectCreated = false;
-	if (Engine::getEnvironment() == MENU_ENV) return bObjectCreated;
+	if (Engine::GetEnvironment() == MENU_ENV) return bObjectCreated;
 
 	if (player <= MAX_NUMBER_OF_OBJECTS)
 	{

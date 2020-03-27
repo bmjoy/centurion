@@ -53,7 +53,7 @@ void Engine::Camera::mouseControl() {
 	threshold_y = MEDIUM_MAP_HEIGHT - 2 * MovementSpeed + (myWindow::HeightZoomed - myWindow::Height);
 
 	float threshold_top = CAMERA_THRESHOLD;
-	if (Engine::getEnvironment() == EDITOR_ENV) threshold_top += 30.f;
+	if (Engine::GetEnvironment() == EDITOR_ENV) threshold_top += 30.f;
 
 	//Left margin
 	if (Mouse::GetXPosition() <= CAMERA_THRESHOLD && (abs_x > CAMERA_THRESHOLD) && Mouse::GetXPosition() > 0) {

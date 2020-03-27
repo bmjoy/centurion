@@ -52,7 +52,7 @@ public:
 		/// <summary>
 		/// This function performs the rendiring of a generic window.
 		/// </summary>
-		/// <param name="picking"></param>
+		/// <param name="picking">Checks if it's the picking phase.</param>
 		void Render(const bool picking);
 	private:
 		gui::Iframe iframe;

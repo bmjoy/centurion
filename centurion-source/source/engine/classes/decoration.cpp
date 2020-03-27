@@ -103,11 +103,11 @@ bool Decoration::is_placeable()
 	return astar::checkAvailability(pass_grid, var_position);
 }
 
-void Decoration::render(bool picking, int clickID, bool not_placeable)  {
-
+void Decoration::render(bool picking, int clickID, bool not_placeable)  
+{
 	if (picking) return;
 
-	if (Engine::getEnvironment() == EDITOR_ENV) {
+	if (Engine::GetEnvironment() == EDITOR_ENV) {
 		if (Game::IsGameObjectNotNull(settlID)) {
 			if (oldX != this->GetPosition().x || oldY != this->GetPosition().y || oldSettlX != GObject::GetObjectByID(settlID)->GetPosition().x || oldSettlY != GObject::GetObjectByID(settlID)->GetPosition().y) {
 				checkSettlement();

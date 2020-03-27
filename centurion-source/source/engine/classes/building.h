@@ -194,7 +194,7 @@ public:
 	/// <summary>
 	/// This function performs the rendiring of the current building.
 	/// </summary>
-	/// <param name="picking"></param>
+	/// <param name="picking">Checks if it's the picking phase.</param>
 	/// <param name="clickID"></param>
 	/// <param name="not_placeable"></param>
 	void render(bool picking, int clickID = 0, bool not_placeable = false) override;

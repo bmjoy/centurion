@@ -20,9 +20,14 @@ int Menu::currentPageId = 0;
 
 #pragma region Menupage class
 
-Menu::MenuPage::MenuPage() {}
+Menu::MenuPage::MenuPage(void) {}
 
-int Menu::MenuPage::Create(string name)
+string Menu::MenuPage::GetPageName(void)
+{
+	return this->pageName;
+}
+
+unsigned int Menu::MenuPage::Create(const string name)
 {
 	string fileName = Folders::INTERFACE_MENU + name;
 	listOfButtons = vector<gui::Button>();
@@ -76,64 +81,79 @@ int Menu::MenuPage::Create(string name)
 	return int(dataXML->id());
 }
 
-void Menu::MenuPage::Render(bool picking)
+void Menu::MenuPage::Render(const bool picking)
 {
-	for (int i = 0; i < listOfImages.size(); i++) {
+	for (int i = 0; i < listOfImages.size(); i++) 
+	{
 		listOfImages[i].render(picking);
 	}
-	for (int i = 0; i < listOfButtons.size(); i++) {
+	for (int i = 0; i < listOfButtons.size(); i++) 
+	{
 		listOfButtons[i].render(picking, Picking::leftClickID_UI);
 	}
 }
 
-void Menu::MenuPage::AddButton(gui::Button btn)
+void Menu::MenuPage::AddButton(const gui::Button btn)
 {
 	listOfButtons.push_back(btn);
 }
 
-void Menu::MenuPage::AddImage(gui::Image img)
+void Menu::MenuPage::AddImage(const gui::Image img)
 {
 	listOfImages.push_back(img);
 }
 
-Menu::MenuPage::~MenuPage() {}
+Menu::MenuPage::~MenuPage(void) {}
 
 #pragma endregion
 
 
 
-void Menu::RenderPage(int id, bool picking)
+void Menu::RenderPage(const unsigned int id, const bool picking)
 {
 	listOfPages[id]->Render(picking);
 }
 
-void Menu::OpenMenuPage(int id)
+void Menu::OpenMenuPage(const unsigned int id)
 {
 	currentPageId = id;
 	Engine::Mouse::LeftClick = false;
 }
 
-void Menu::Reset()
+bool Menu::IsCreated(void)
+{
+	return Menu::isCreated;
+}
+
+void Menu::AddMenuPage(const unsigned int id, MenuPage * mp)
+{
+	Menu::listOfPages[id] = mp;
+}
+
+void Menu::Reset(void)
 {
 }
 
-void Menu::Clear()
+void Menu::Clear(void)
 {
-	for (int i = 0; i < MAX_NUMBER_OF_PAGES; i++) {
-		if (listOfPages[i] != nullptr) {
+	for (int i = 0; i < MAX_NUMBER_OF_PAGES; i++) 
+	{
+		if (listOfPages[i] != nullptr) 
+		{
 			delete listOfPages[i];
 		}
 		listOfPages[i] = nullptr;
 	}
 }
 
-void Menu::Create()
+void Menu::Create(void)
 {
 	try
 	{
 		vector<string> files = FileManager::GetAllFilesNamesWithinFolder(Folders::INTERFACE_MENU, "xml");
 
-		for (vector<string>::iterator it = files.begin(); it != files.end(); it++) {
+		for (vector<string>::iterator it = files.begin(); it != files.end(); it++) 
+		{
 
 			MenuPage* mpage = new MenuPage();
 			int pageId = mpage->Create(*it);
@@ -145,28 +165,30 @@ void Menu::Create()
 		currentPageId = 0;
 		applyMenuMatrices();
 	}
-	catch (const xml_schema::exception & e) {
+	catch (const xml_schema::exception & e) 
+	{
 		std::cout << e << std::endl;
 	}
 	catch (const std::exception&)
 	{
 		Engine::GameClose();
 	}
-	
 }
 
-void Menu::Run()
+void Menu::Run(void)
 {
 	// picking
 	Picking::leftClickID_UI = 0;
 	RenderPage(currentPageId, true);
-	if (Engine::Mouse::LeftClick) Picking::leftClickID_UI = Picking::GetIdFromClick();
-
-
+	if (Engine::Mouse::LeftClick) 
+		Picking::leftClickID_UI = Picking::GetIdFromClick();
 
 	// rendering
 	RenderPage(currentPageId, false);
 }
 
-Menu::~Menu() {}
+Menu::~Menu(void) 
+{
+	this->Clear();
+}
 

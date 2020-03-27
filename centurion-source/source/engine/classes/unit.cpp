@@ -56,7 +56,7 @@ void Unit::create() {
 	unitData.hitBox[0] = entityData["hitbox"][0].get<int>();
 	unitData.hitBox[1] = entityData["hitbox"][1].get<int>();
 	unitData.yOffset = entityData["yOffset"].get<int>();
-	unitData.playerColor = *(player->getPlayerColor());
+	unitData.playerColor = *(player->GetPlayerColor());
 	unitData.pickingColor = pickingColor;
 	unitData.className = this->GetClassName();
 	USprite()->getTextureInfo(&unitData);
