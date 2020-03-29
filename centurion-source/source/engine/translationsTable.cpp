@@ -25,8 +25,9 @@ unsigned int TranslationsTable::GetLanguageId(string lan)
 		Logger::LogMessage msg = Logger::LogMessage("An error occurred getting the language id", "Error", "", "TranslationsTable", "GetLanguageId");
 		Logger::Error(msg);
 		Engine::GameClose();
+		throw;
 	}
-	}
+}
 
 string TranslationsTable::GetTranslation(string string_name)
 {

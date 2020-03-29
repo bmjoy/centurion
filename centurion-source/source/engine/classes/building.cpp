@@ -258,7 +258,12 @@ bool Building::SetBuildingProperties(ObjectData::ObjectXMLClassData &objData)
 
 void Building::render(bool picking, int clickID, bool not_placeable) 
 {
-	BSprite()->Render(spriteData, GetPosition().x, GetPosition().y, picking, false, vec3(0), false);
+
+	//CheckIfSelected(clickID);
+
+	bool bSelect = (this->GetPickingID() == clickID);
+
+	BSprite()->Render(spriteData, GetPosition().x, GetPosition().y, picking, bSelect, vec3(0), false);
 
 	//---------------------------
 

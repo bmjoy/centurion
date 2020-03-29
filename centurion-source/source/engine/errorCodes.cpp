@@ -51,6 +51,7 @@ string ErrorCodes::GetErrorCode(string error)
 		Logger::LogMessage msg = Logger::LogMessage("An error occurred getting the code of the following error string: \"" + error + "\"", "Error", "", "ErrorCodes", "GetErrorCode");
 		Logger::Error(msg);
 		Engine::GameClose();
+		throw;
 	}
 }
 

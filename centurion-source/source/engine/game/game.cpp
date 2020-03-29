@@ -661,7 +661,9 @@ void Game::RenderObjectsPicking() {
 		{
 			Picking::leftClickID = Picking::GetIdFromClick(PICKING_LEFT);
 		}
-		if (Engine::Mouse::RightClick) Picking::rightClickID = Picking::GetIdFromClick(PICKING_RIGHT);
+		if (Engine::Mouse::RightClick) {
+			Picking::rightClickID = Picking::GetIdFromClick(PICKING_RIGHT);
+		}
 
 		if (Minimap::IsActive()) {
 			Minimap::Unblock();

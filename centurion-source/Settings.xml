@@ -5,6 +5,6 @@
   <setting name="cameraMovespeed" value="10"/>
   <setting name="cameraMaxZoom" value="20"/>
   <setting name="language" value="italian"/>
-  <setting name="debug" value="false"/>
+  <setting name="debug" value="true"/>
   <setting name="fullScreen" value="false"/>
 </c_settings>

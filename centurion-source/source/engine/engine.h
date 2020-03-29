@@ -132,4 +132,9 @@ namespace Engine
 	/// This function resets mouse and keyboard restoring their default status. 
 	/// </summary>
 	void ResetperipheralsInput(void);
+
+	/// <summary>
+	/// This function returns the Cpp compiler version.
+	/// </summary>
+	string GetCppVersion();
 };

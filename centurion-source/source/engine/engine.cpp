@@ -65,6 +65,8 @@ int Engine::Launch(void)
 	ss << glGetString(GL_VERSION);
 	Logger::Info("Running OpenGL Version " + ss.str());
 
+	Logger::Info("C++ Compiler Version: " + GetCppVersion());
+
 	// Hector - Lua interpreter
 	Hector::Initialize();
 	Hector::CreateConsole();
@@ -328,6 +330,17 @@ void Engine::ResetperipheralsInput(void)
 	Mouse::RightClick = false;
 	Mouse::MiddleClick = false;
 	Mouse::Release = false;
+}
+
+string Engine::GetCppVersion()
+{
+	string version;
+	if (__cplusplus == 201703L) version = "C++17\n";
+	else if (__cplusplus == 201402L) version = "C++14\n";
+	else if (__cplusplus == 201103L) version = "C++11\n";
+	else if (__cplusplus == 199711L) version = "C++98\n";
+	else version = "pre-standard C++\n";
+	return version;
 }
 
 Engine::Fps::Fps(void)
