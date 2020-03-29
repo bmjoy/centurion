@@ -15,7 +15,7 @@ namespace editor {
 		back_size.x = 790; back_size.y = 260;
 
 		back_image = gui::Image("addobjectwindow_back");
-		back_image.create("center", Engine::myWindow::Width/2.f, back_size.y / 2.f, 0, 0, PickingUI::obtainPickingID());
+		back_image.create("center", Engine::myWindow::Width/2.f, back_size.y / 2.f, 0, 0, PickingUI::ObtainPickingID());
 
 
 
@@ -24,13 +24,13 @@ namespace editor {
 		startY = back_size.y / 2.f + back_image.getImageSize().y / 2.f;
 
 		buttons[0] = gui::Image("addobjectwindow_button1");
-		buttons[0].create("top-left", startX, startY, 0, 0, PickingUI::obtainPickingID());
-		PickingUI::addValueToPickingList(PickingUI::getLastID() + 1, "AddObjWindow_add");
+		buttons[0].create("top-left", startX, startY, 0, 0, PickingUI::ObtainPickingID());
+		PickingUI::AddValueToPickingList(PickingUI::GetLastPickingID() + 1, "AddObjWindow_add");
 
 
 		buttons[1] = gui::Image("addobjectwindow_button2");
-		buttons[1].create("top-left", startX, startY, 0, 0, PickingUI::obtainPickingID());
-		PickingUI::addValueToPickingList(PickingUI::getLastID() + 1, "AddObjWindow_close");
+		buttons[1].create("top-left", startX, startY, 0, 0, PickingUI::ObtainPickingID());
+		PickingUI::AddValueToPickingList(PickingUI::GetLastPickingID() + 1, "AddObjWindow_close");
 
 
 		buttons_text[0] = gui::SimpleText("static");
@@ -39,34 +39,34 @@ namespace editor {
 		buttons_text[1].create_static(TranslationsTable::GetTranslation("EDITOR_newMapButtonClose"), "tahoma_13px", startX + 725.f, startY - 233.f, "center", "middle", vec4(255.f), "bold");
 
 		arrows[0] = gui::Image("addobjectwindow_arrowleft");
-		arrows[0].create("top-left", startX, startY, 0, 0, PickingUI::obtainPickingID());
-		PickingUI::addValueToPickingList(PickingUI::getLastID() + 1, "AddObjWindow_leftarrow");
+		arrows[0].create("top-left", startX, startY, 0, 0, PickingUI::ObtainPickingID());
+		PickingUI::AddValueToPickingList(PickingUI::GetLastPickingID() + 1, "AddObjWindow_leftarrow");
 
 
 		arrows[1] = gui::Image("addobjectwindow_arrowright");
-		arrows[1].create("top-left", startX, startY, 0, 0, PickingUI::obtainPickingID());
-		PickingUI::addValueToPickingList(PickingUI::getLastID() + 1, "AddObjWindow_rightarrow");
+		arrows[1].create("top-left", startX, startY, 0, 0, PickingUI::ObtainPickingID());
+		PickingUI::AddValueToPickingList(PickingUI::GetLastPickingID() + 1, "AddObjWindow_rightarrow");
 
 
 		objectForms[0] = gui::Select(true);
-		pickingIDs[0] = PickingUI::obtainPickingID();
+		pickingIDs[0] = PickingUI::ObtainPickingID();
 		objectForms[0].create(startX + 11.f, startY - 11.f, 150.f, 20.f, { "EDITOR_buildings", "EDITOR_decorations" }, pickingIDs[0]);
-		PickingUI::addValueToPickingList(pickingIDs[0], "AddObjWindow_form0");
+		PickingUI::AddValueToPickingList(pickingIDs[0], "AddObjWindow_form0");
 
 
 		objectForms[1] = gui::Select(true);
-		pickingIDs[1] = PickingUI::obtainPickingID();
+		pickingIDs[1] = PickingUI::ObtainPickingID();
 		vector<string> form1Options = EditorAddObjectBuildingOptions;
 		sort(form1Options.begin(), form1Options.end());
 		form1Options.erase(unique(form1Options.begin(), form1Options.end()), form1Options.end());
 		objectForms[1].create(startX + 11.f, startY - 11.f - 30.f, 150.f, 20.f, form1Options, pickingIDs[1]);
-		PickingUI::addValueToPickingList(pickingIDs[1], "AddObjWindow_form1");
+		PickingUI::AddValueToPickingList(pickingIDs[1], "AddObjWindow_form1");
 
 
 		objectForms[2] = gui::Select(true);
-		pickingIDs[2] = PickingUI::obtainPickingID();
+		pickingIDs[2] = PickingUI::ObtainPickingID();
 		objectForms[2].create(startX + 11.f, startY - 11.f - 30.f * 2, 150.f, 20.f, { "" }, pickingIDs[2]);
-		PickingUI::addValueToPickingList(pickingIDs[2], "AddObjWindow_form2");
+		PickingUI::AddValueToPickingList(pickingIDs[2], "AddObjWindow_form2");
 
 
 		AddObjectWindowUpdateForm2 = true;

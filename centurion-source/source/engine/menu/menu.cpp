@@ -46,7 +46,7 @@ unsigned int Menu::MenuPage::Create(const string name)
 			TranslationsTable::GetTranslation(string(_it_btn->name())),
 			int(_it_btn->x()),
 			int(_it_btn->y()),
-			PickingUI::obtainPickingID(),
+			PickingUI::ObtainPickingID(),
 			glm::vec4(0.f, 0.f, 0.f, 255.f),
 			string(_it_btn->onclick())
 		);
@@ -63,7 +63,7 @@ unsigned int Menu::MenuPage::Create(const string name)
 				string(_it_img->align()),
 				float(_it_img->x()),
 				float(_it_img->y()),
-				0.f, 0.f, PickingUI::obtainPickingID() * clickable
+				0.f, 0.f, PickingUI::ObtainPickingID() * clickable
 			);
 		}
 		else if (string(_it_img->size()) == "max") {
@@ -71,7 +71,7 @@ unsigned int Menu::MenuPage::Create(const string name)
 				string(_it_img->align()),
 				float(_it_img->x()),
 				float(_it_img->y()),
-				Engine::myWindow::Width, Engine::myWindow::Height, PickingUI::obtainPickingID() * clickable
+				Engine::myWindow::Width, Engine::myWindow::Height, PickingUI::ObtainPickingID() * clickable
 			);
 		}
 		this->AddImage(img);

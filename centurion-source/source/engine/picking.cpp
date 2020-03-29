@@ -27,7 +27,7 @@ unsigned int Picking::GetIdFromClick(const unsigned short int LeftRight)
 	return pickedID;
 }
 
-vec3 Picking::getPickingColorFromID(const unsigned int par_pickingID)
+vec3 Picking::GetPickingColorFromID(const unsigned int par_pickingID)
 {
 	unsigned int r = (par_pickingID & 0x000000FF) >> 0;
 	unsigned int g = (par_pickingID & 0x0000FF00) >> 8;
@@ -35,12 +35,12 @@ vec3 Picking::getPickingColorFromID(const unsigned int par_pickingID)
 	return vec3(r, g, b);
 }
 
-void Picking::resetDoubleClickTime(void)
+void Picking::ResetDoubleClickTime(void)
 {
 	doubleClickData.lastTime = glfwGetTime();
 }
 
-bool Picking::hasDoubleClicked(void) 
+bool Picking::HasDoubleClicked(void) 
  {
 	bool output = false;
 
@@ -73,7 +73,7 @@ bool Picking::hasDoubleClicked(void)
 	return output;
 }
 
-Picking::~Picking(){}
+Picking::~Picking(void){}
 
 #pragma endregion
 
@@ -83,31 +83,31 @@ Picking::~Picking(){}
 unsigned int PickingUI::pickingID_UI = PICKING_ID_MAX;
 map<unsigned int, string> PickingUI::pickingList_UI;
 
-unsigned int PickingUI::obtainPickingID(void)
+unsigned int PickingUI::ObtainPickingID(void)
 {
 	unsigned int pickingID = pickingID_UI;
 	pickingID_UI--;
 	return pickingID;
 }
 
-unsigned int PickingUI::getLastID(void)
+unsigned int PickingUI::GetLastPickingID(void)
 {
 	return pickingID_UI;
 }
 
-void PickingUI::resetPicking(void)
+void PickingUI::ResetPicking(void)
 {
 	pickingID_UI = PICKING_ID_MAX;
 	pickingList_UI.clear();
 	pickingList_UI[0] = "background";
 }
 
-void PickingUI::addValueToPickingList(unsigned int picking_id, const string par_value)
+void PickingUI::AddValueToPickingList(const unsigned int picking_id, const string par_value)
 {
 	pickingList_UI[picking_id] = par_value;
 }
 
-string PickingUI::getPickedObjectName(const unsigned int par_pickingID_UI)
+string PickingUI::GetPickedObjectName(const unsigned int par_pickingID_UI)
 {
 	return pickingList_UI[par_pickingID_UI];
 }
@@ -122,7 +122,7 @@ PickingUI::~PickingUI() {}
 unsigned int PickingObject::pickingID_Object = PICKING_ID_MIN;
 vector<unsigned int> PickingObject::unsedPickingID;
 
-unsigned int PickingObject::GetPickingId(void)
+unsigned int PickingObject::ObtainPickingID(void)
 {
 	unsigned int pickingID = pickingID_Object;
 	
@@ -138,22 +138,22 @@ unsigned int PickingObject::GetPickingId(void)
 	return pickingID;
 }
 
-void PickingObject::addUnsedPickingID(const unsigned int par_pickingID)
+void PickingObject::AddUnsedPickingID(const unsigned int par_pickingID)
 {
 	unsedPickingID.push_back(par_pickingID);
 }
 
-unsigned int PickingObject::getLastPickingID(void)
+unsigned int PickingObject::GetLastPickingID(void)
 {
 	return pickingID_Object;
 }
 
-void PickingObject::resetPicking(void)
+void PickingObject::ResetPicking(void)
 {
 	pickingID_Object = PICKING_ID_MIN;
 	unsedPickingID.clear();
 }
 
-PickingObject::~PickingObject(){}
+PickingObject::~PickingObject(void){}
 
 #pragma endregion

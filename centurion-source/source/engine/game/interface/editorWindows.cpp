@@ -128,7 +128,7 @@ void EditorWindows::Create(void)
 					string(_it_txtlist->text().font()),
 					vec4(_it_txtlist->text().r(), _it_txtlist->text().g(), _it_txtlist->text().b(), 255.f),
 					vec4(_it_txtlist->text_background().r(), _it_txtlist->text_background().g(), _it_txtlist->text_background().b(), 255.f),
-					PickingUI::obtainPickingID()
+					PickingUI::ObtainPickingID()
 				);
 
 				gui::TextList::AddTextListToArray(int(_it_txtlist->textListId()), _list);
@@ -147,7 +147,7 @@ void EditorWindows::Create(void)
 					string(_it_btn->name()),
 					x + int(_it_btn->xOffset()),
 					y + int(_it_btn->yOffset()),
-					PickingUI::obtainPickingID(),
+					PickingUI::ObtainPickingID(),
 					vec4(0, 0, 0, 255),
 					string(_it_btn->onclick())
 				);

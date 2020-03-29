@@ -24,13 +24,13 @@ namespace menu{
 		dynamicText = gui::SimpleText("dynamic", true);
 
 		arrowDown = gui::Image("arrowDown");
-		arrowDown.create("center", (float)x + 240, (float)y + 50, 0, 0, PickingUI::obtainPickingID());
+		arrowDown.create("center", (float)x + 240, (float)y + 50, 0, 0, PickingUI::ObtainPickingID());
 
-		PickingUI::addValueToPickingList(PickingUI::getLastID() + 1, "arrowDown");
+		PickingUI::AddValueToPickingList(PickingUI::GetLastPickingID() + 1, "arrowDown");
 	
 		arrowUp = gui::Image("arrowUp");
-		arrowUp.create("center", (float)x + 280, (float)y + 50, 0, 0, PickingUI::obtainPickingID());
-		PickingUI::addValueToPickingList(PickingUI::getLastID() + 1, "arrowUp");
+		arrowUp.create("center", (float)x + 280, (float)y + 50, 0, 0, PickingUI::ObtainPickingID());
+		PickingUI::AddValueToPickingList(PickingUI::GetLastPickingID() + 1, "arrowUp");
 	
 		background = gui::Rectangle();
 		background.create("border-filled", (float)x - 30, (float)y + 80, (float)w, (float)h, "top-left", 0);
@@ -40,8 +40,8 @@ namespace menu{
 
 			//Player color rectangle
 			gui::Select col_fi = gui::Select(false);
-			col_fi.create((float)x, (float)y - deltaY * j, 20.f, 20.f, { "" }, PickingUI::obtainPickingID());
-			PickingUI::addValueToPickingList(PickingUI::getLastID() + 1, "ColForm_" + std::to_string(j));
+			col_fi.create((float)x, (float)y - deltaY * j, 20.f, 20.f, { "" }, PickingUI::ObtainPickingID());
+			PickingUI::AddValueToPickingList(PickingUI::GetLastPickingID() + 1, "ColForm_" + std::to_string(j));
 			if (j < 2) { (*players_color).push_back(j); }
 			else { (*players_color).push_back(-1); }
 			colors_Form.push_back(col_fi);
@@ -53,8 +53,8 @@ namespace menu{
 
 			//Player civilization
 			gui::Select c_fi = gui::Select(true);
-			c_fi.create((float)x + 280.f, (float)y - deltaY * j, 150.f, 20.f, Game::GetListOfRacesNames(), PickingUI::obtainPickingID());
-			PickingUI::addValueToPickingList(PickingUI::getLastID() + 1, "CivForm_" + std::to_string(j));
+			c_fi.create((float)x + 280.f, (float)y - deltaY * j, 150.f, 20.f, Game::GetListOfRacesNames(), PickingUI::ObtainPickingID());
+			PickingUI::AddValueToPickingList(PickingUI::GetLastPickingID() + 1, "CivForm_" + std::to_string(j));
 			civiliz_Form.push_back(c_fi);
 		}
 	}
@@ -94,7 +94,7 @@ namespace menu{
 
 	void PlayersList::picking(int *numPlayers, std::vector<int> *players_color, int clickId) {
 	
-		std::string clickedName = PickingUI::getPickedObjectName(clickId);
+		std::string clickedName = PickingUI::GetPickedObjectName(clickId);
 
 		if (clickedName == "arrowDown") {
 			if (*numPlayers > 2 && *numPlayers <= 8) {

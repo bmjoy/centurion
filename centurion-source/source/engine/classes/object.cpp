@@ -203,12 +203,12 @@ bool GObject::Create(const string _className)
 
 	// class data
 	this->SetClassName(_className);
-	this->SetPickingID(PickingObject::GetPickingId());
+	this->SetPickingID(PickingObject::ObtainPickingID());
 
 	// entity data
 	this->spriteData = objData.GetSpriteData();
 	this->spriteData.pickingId = this->GetPickingID();
-	this->spriteData.pickingColor = Picking::getPickingColorFromID(this->GetPickingID());
+	this->spriteData.pickingColor = Picking::GetPickingColorFromID(this->GetPickingID());
 
 	this->SetObjectProperties(objData);
 	if (this->IsBuilding() == true)
@@ -308,7 +308,7 @@ void GObject::RemoveGameObject(const unsigned int index)
 	{
 		if (GameObjects[index] != nullptr)
 		{
-			PickingObject::addUnsedPickingID(GameObjects[index]->GetPickingID());
+			PickingObject::AddUnsedPickingID(GameObjects[index]->GetPickingID());
 			if (GameObjects[index]->IsBuilding() == true)
 			{
 				GObject::numberOfBuildings -= 1;

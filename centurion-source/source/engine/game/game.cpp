@@ -252,7 +252,7 @@ void Game::Map::LoadMapObjectsFromXml(const string xmlPath)
 				b->SetClassName((string)_bld->class_());
 				b->SetPlayer((const unsigned short)_settl->player());
 				b->SetPosition(vec3(_settl->x() - _bld->xOffset(), _settl->y() - _bld->yOffset(), 0.f));
-				b->SetPickingID(PickingObject::GetPickingId());
+				b->SetPickingID(PickingObject::ObtainPickingID());
 				b->GetSettlement().SetSettlementName(_settl->name());
 				b->SetType("building");
 				b->create(_bld->name().get());
@@ -272,7 +272,7 @@ void Game::Map::LoadMapObjectsFromXml(const string xmlPath)
 			d->SetClassName(_dec->class_());
 			d->SetPlayer(0);
 			d->SetPosition(vec3(_dec->x(), _dec->y(), 0.f));
-			d->SetPickingID(PickingObject::GetPickingId());
+			d->SetPickingID(PickingObject::ObtainPickingID());
 			d->create();
 			d->SetType("decoration");
 			Game::AddGameObject(d->GetPickingID(), d);
@@ -692,7 +692,7 @@ void Game::GoToPointFromMinimap() {
 		cameraToY = Engine::Camera::GetYMinimapCoordinate(Engine::Mouse::GetYLeftClick()) / Engine::myWindow::Height*(float)MEDIUM_MAP_HEIGHT - Engine::myWindow::HeightZoomed / 2.f;
 		// if you are clicking on a townhall you have to double click 
 		// to move the camera there and quit minimap
-		if (Picking::leftClickID > 0 && Picking::hasDoubleClicked()) {
+		if (Picking::leftClickID > 0 && Picking::HasDoubleClicked()) {
 			cameraToX = GObject::GetObjectByID(Picking::leftClickID)->AsBuilding()->get_xPos() - Engine::myWindow::WidthZoomed / 2.f;
 			cameraToY = GObject::GetObjectByID(Picking::leftClickID)->AsBuilding()->get_yPos() - Engine::myWindow::HeightZoomed / 2.f;
 			Minimap::Unblock();
@@ -751,7 +751,7 @@ void Game::GenerateOutposts(vector<vec2> &locs) {
 		b->SetType("building");
 		b->SetPlayer(0);
 		b->SetPosition(vec3(locs[i].x, locs[i].y, 0.f));
-		b->SetPickingID(PickingObject::GetPickingId());
+		b->SetPickingID(PickingObject::ObtainPickingID());
 		b->GetSettlement().SetSettlementName("Outpost_" + i);
 		b->create();
 		GameObjects[b->GetPickingID()] = b;
@@ -813,7 +813,7 @@ void Game::GenerateSettlements(vector<vec2> &locs) {
 						//b->SetType(type);
 						//b->SetPlayer(i);
 						//b->SetPosition(vec3(origin.x + xOffset, origin.y + yOffset, 0.f));
-						//b->SetPickingID(PickingObject::GetPickingId());
+						//b->SetPickingID(PickingObject::ObtainPickingID());
 						//b->GetSettlement().SetSettlementName("Settlement_player_" + i);
 						//b->create();
 						//GameObjects[b->GetPickingID()] = b;
@@ -849,7 +849,7 @@ void Game::GenerateSettlements(vector<vec2> &locs) {
 						d->SetClassName(className);
 						d->SetPlayer(0);
 						d->SetPosition(vec3(origin.x + xOffset, origin.y + yOffset, 0.f));
-						d->SetPickingID(PickingObject::GetPickingId());
+						d->SetPickingID(PickingObject::ObtainPickingID());
 						d->create();
 						GameObjects[d->GetPickingID()] = d;*/
 					}

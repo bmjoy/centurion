@@ -24,8 +24,8 @@ void Editor::reset(void)
 
 void Editor::Create(void)
 {
-	PickingUI::resetPicking();
-	PickingObject::resetPicking();
+	PickingUI::ResetPicking();
+	PickingObject::ResetPicking();
 
 	Strategy::Reset();
 	Engine::myWindow::BottomBarHeight = 0.f;
@@ -323,7 +323,7 @@ namespace editor
 		{
 			/*if (buildingTemp->IsPlaceable())
 			{
-				unsigned int ID = PickingObject::GetPickingId();
+				unsigned int ID = PickingObject::ObtainPickingID();
 				buildingTemp->SetPickingID(ID);
 				buildingTemp->create();
 				if (buildingTemp->GetSettlement().IsIndipendent())
@@ -340,7 +340,7 @@ namespace editor
 		{
 			/*if (decorTemp->is_placeable())
 			{
-				unsigned int ID = PickingObject::GetPickingId();
+				unsigned int ID = PickingObject::ObtainPickingID();
 				decorTemp->SetPickingID(ID);
 				decorTemp->create();
 				Game::AddGameObject(ID, decorTemp);

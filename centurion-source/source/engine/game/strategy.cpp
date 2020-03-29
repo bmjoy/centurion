@@ -43,8 +43,8 @@ void Strategy::Reset(void)
 
 void Strategy::Create(void) 
 {
-	PickingObject::resetPicking();
-	PickingUI::resetPicking();
+	PickingObject::ResetPicking();
+	PickingUI::ResetPicking();
 
 	Reset();
 	Engine::myWindow::BottomBarHeight = 100.f;
@@ -84,7 +84,7 @@ void Strategy::Create(void)
 		for (int j = 0; j < 5; j++) {
 			Unit* u = new Unit();
 			u->SetClassName("hmyrmidon");
-			u->SetPickingID(PickingObject::GetPickingId());
+			u->SetPickingID(PickingObject::ObtainPickingID());
 			u->SetPlayer(0);
 			u->SetPosition(playersList[0].GetStartPoint().x + i * 50, playersList[0].GetStartPoint().y - 1000 - j * 50);
 			u->create();
@@ -108,7 +108,7 @@ void Strategy::Create(void)
 	isCreated = true;
 	Picking::leftClickID = 0;
 	Picking::leftClickID_UI = 0;
-	Picking::resetDoubleClickTime();
+	Picking::ResetDoubleClickTime();
 }
 
 void Strategy::Run(void)

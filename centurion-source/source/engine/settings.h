@@ -1,5 +1,12 @@
-#ifndef SETTINGS_H
-#define SETTINGS_H
+/*
+* ---------------------------
+* CENTURION
+* [2019] - [2020] Rattlesmake
+* All Rights Reserved.
+* ---------------------------
+*/
+
+#pragma once
 
 #include <string>
 
@@ -14,10 +21,25 @@ public:
 	static bool FullScreen;
 
 	// methods
-	static void Init();
-	static void ReadSettings();
+	/// <summary>
+	/// This function initializes the settingsof the game. 
+	/// </summary>
+	static void Init(void);
+	/// <summary>
+	/// This function reads the setting from an XML file.
+	/// It could throw an exception if an erroroccurs during the reading of the file. 
+	/// </summary>
+	static void ReadSettings(void);
+	/// <summary>
+	/// This functions sets all the folders from which to read the data of the game.
+	/// </summary>
+	/// <param name="exe_folder_path">The home path.</param>
 	static void SetFolders(string exe_folder_path);
-	static void SaveXml();
+	/// <summary>
+	/// This function saves all the settings into an XML file.
+	/// It could be throws an exception if an error occurs during the save. 
+	/// </summary>
+	static void SaveXml(void);
 	static void SetCameraMovespeed(float speed);
 	static void SetCameraMaxZoom(float zoom);
 	static void SetWindowSize(float width, float height);
@@ -37,5 +59,3 @@ private:
 	static float cameraMaxZoom;
 	static float cameraMovespeed;
 };
-
-#endif

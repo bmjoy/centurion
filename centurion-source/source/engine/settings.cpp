@@ -21,7 +21,8 @@ string Settings::SettingsPath;
 
 Settings::Settings() { }
 
-void Settings::Init() {
+void Settings::Init(void) 
+{
 	Language = "english";
 	SettingsPath = "settings.xml";
 	cameraMaxZoom = 20.f;
@@ -31,9 +32,10 @@ void Settings::Init() {
 	FullScreen = false;
 }
 
-void Settings::SetFolders(string exe_folder_path)
+void Settings::SetFolders(const string exe_folder_path)
 {
-	if (exe_folder_path.empty() == false) {
+	if (exe_folder_path.empty() == false) 
+	{
 		Folders::XML_SCHEMAS = exe_folder_path + Folders::XML_SCHEMAS;
 		Folders::SCENARIOS = exe_folder_path + Folders::SCENARIOS;
 		Folders::GAME = exe_folder_path + Folders::GAME;
@@ -44,8 +46,10 @@ void Settings::SetFolders(string exe_folder_path)
 	}
 }
 
-void Settings::ReadSettings() {
-	try {
+void Settings::ReadSettings(void)
+{
+	try 
+	{
 		xml_schema::properties props;
 		props.no_namespace_schema_location(Folders::XML_SCHEMAS + "settings.xsd");
 		auto_ptr<c_settings> SettingsXML = c_settings_(Folders::GAME + SettingsPath, 0, props);
@@ -63,7 +67,8 @@ void Settings::ReadSettings() {
 				if (name == "debug") ParseBool(name, value, &DebugIsActive);
 				if (name == "fullScreen") ParseBool(name, value, &FullScreen);
 			}
-			catch (...) {
+			catch (...) 
+			{
 				std::cout << "An error occurred parsing the XML file. Using default values.";
 				SaveXml();
 			}
@@ -140,7 +145,8 @@ void Settings::SaveXml()
 		settings_.push_back({ "debug", debugStr });
 		settings_.push_back({ "fullScreen", fullScreenStr });
 
-		for (int i = 0; i < settings_.size(); i++) {
+		for (int i = 0; i < settings_.size(); i++) 
+		{
 			setting xml_setting = setting(settings_[i].first, settings_[i].second);
 			settXML.setting().push_back(xml_setting);
 		}

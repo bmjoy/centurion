@@ -20,14 +20,14 @@ namespace menu {
 		back.create("border-filled", startX, startY, 600.f, 400.f, "top-left", 0);
 
 		vector<string> form_options;
-		map<string, int> langMap = TranslationsTable::GetLanguagesMap();
-		for (map<string, int>::iterator i = langMap.begin(); i != langMap.end(); i++) {
+		map<string, unsigned int> langMap = TranslationsTable::GetLanguagesMap();
+		for (map<string, unsigned int>::iterator i = langMap.begin(); i != langMap.end(); i++) {
 			form_options.push_back("LANG_" + i->first);
 		}
 		languages = gui::Select(true);
-		languages.create(startX + 150.f, startY - 77.f, 150.f, 20.f, form_options, PickingUI::obtainPickingID());
+		languages.create(startX + 150.f, startY - 77.f, 150.f, 20.f, form_options, PickingUI::ObtainPickingID());
 		languages.selectedText = "LANG_"+ Settings::Language;
-		PickingUI::addValueToPickingList(PickingUI::getLastID() + 1, "GlobalOptions_formLanguages");
+		PickingUI::AddValueToPickingList(PickingUI::GetLastPickingID() + 1, "GlobalOptions_formLanguages");
 
 		text[0] = gui::SimpleText("static");
 		text[0].create_static(TranslationsTable::GetTranslation("OPTIONS_Title"), "tahoma_15px", startX + 20.f, startY - 40.f, "left", "normal", vec4(255), "bold");
@@ -54,7 +54,7 @@ namespace menu {
 		GLint mouseX = (GLint)Engine::Mouse::GetXPosition();
 		GLint mouseY = (GLint)Engine::Mouse::GetYPosition();
 		Picking::leftClickID_UI = Picking::GetIdFromClick();
-		string clickName = PickingUI::getPickedObjectName(Picking::leftClickID_UI);
+		string clickName = PickingUI::GetPickedObjectName(Picking::leftClickID_UI);
 
 		if (Picking::leftClickID_UI == 0)
 			languages.close();

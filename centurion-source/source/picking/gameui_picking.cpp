@@ -9,7 +9,7 @@
 namespace game {
 	void UIGame::picking() {
 		Picking::leftClickID_UI = Picking::GetIdFromClick();
-		string clickName = PickingUI::getPickedObjectName(Picking::leftClickID_UI);
+		string clickName = PickingUI::GetPickedObjectName(Picking::leftClickID_UI);
 		if (clickName == "GAME_pauseMenuButtonClose") {
 			GameMenu::Disable();
 		}

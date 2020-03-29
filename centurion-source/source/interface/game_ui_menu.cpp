@@ -36,13 +36,13 @@ namespace game {
 				TranslationsTable::GetTranslation(data[s][i]["name"].get<std::string>()), 
 				(int)x + data[s][i]["x"].get<int>(),
 				(int)y + data[s][i]["y"].get<int>(),
-				PickingUI::obtainPickingID(),
+				PickingUI::ObtainPickingID(),
 				glm::vec4(0.f, 0.f, 0.f, 255.f)
 			);
 			buttons.push_back(btn);
 
 			/* update picking */
-			PickingUI::addValueToPickingList(PickingUI::getLastID() + 1, data[s][i]["name"].get<std::string>());
+			PickingUI::AddValueToPickingList(PickingUI::GetLastPickingID() + 1, data[s][i]["name"].get<std::string>());
 		}
 
 		background = gui::Rectangle();

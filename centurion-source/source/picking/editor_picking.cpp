@@ -18,7 +18,7 @@ namespace editor {
 		GLint mouseX = (GLint)Engine::Mouse::GetXPosition();
 		GLint mouseY = (GLint)Engine::Mouse::GetYPosition();
 		Picking::leftClickID_UI = Picking::GetIdFromClick();
-		string clickName = PickingUI::getPickedObjectName(Picking::leftClickID_UI);
+		string clickName = PickingUI::GetPickedObjectName(Picking::leftClickID_UI);
 
 		if (clickName == "NewMapWindow_close") { // CLOSE
 			currentMapName = text_input.get_text();
@@ -58,7 +58,7 @@ namespace editor {
 		GLint mouseX = (GLint)Engine::Mouse::GetXPosition();
 		GLint mouseY = (GLint)Engine::Mouse::GetYPosition();
 		Picking::leftClickID_UI = Picking::GetIdFromClick();
-		string clickName = PickingUI::getPickedObjectName(Picking::leftClickID_UI);
+		string clickName = PickingUI::GetPickedObjectName(Picking::leftClickID_UI);
 
 		// Yes
 		if (clickName == "QuestionWindow_Yes") { 
@@ -120,9 +120,9 @@ namespace editor {
 		GLint mouseX = (GLint)Engine::Mouse::GetXPosition();
 		GLint mouseY = (GLint)Engine::Mouse::GetYPosition();
 		Picking::leftClickID_UI = Picking::GetIdFromClick();
-		string clickName = PickingUI::getPickedObjectName(Picking::leftClickID_UI);
+		string clickName = PickingUI::GetPickedObjectName(Picking::leftClickID_UI);
 
-		if (Picking::leftClickID_UI == 0 || Picking::leftClickID_UI == back_image.obtainPickingID())
+		if (Picking::leftClickID_UI == 0 || Picking::leftClickID_UI == back_image.ObtainPickingID())
 			for (int j = 0; j < 3; j++)
 				objectForms[j].close();
 
@@ -177,7 +177,7 @@ namespace editor {
 		GLint mouseX = (GLint)Engine::Mouse::GetXPosition();
 		GLint mouseY = (GLint)Engine::Mouse::GetYPosition();
 		Picking::leftClickID_UI = Picking::GetIdFromClick();
-		string clickName = PickingUI::getPickedObjectName(Picking::leftClickID_UI);
+		string clickName = PickingUI::GetPickedObjectName(Picking::leftClickID_UI);
 
 		if (Picking::leftClickID_UI == 0)
 			for (int i = 0; i < forms.size(); i++) {

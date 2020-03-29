@@ -19,7 +19,7 @@ namespace gui {
 		if (y < 0) y += Engine::myWindow::Height;
 		imgData.pickingID = pickingID;
 		imgData.imageName = imageName;
-		imgData.pickingColor = PickingUI::getPickingColorFromID(pickingID);
+		imgData.pickingColor = PickingUI::GetPickingColorFromID(pickingID);
 		imgData.origin = originMap[Origin];
 		imgData.x = x;
 		imgData.y = y;

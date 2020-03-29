@@ -20,7 +20,7 @@ namespace editor {
 		startX = 0.f; startY = Engine::myWindow::Height/2.f + 150.f / 2.f;
 
 		back = gui::Rectangle();
-		back.create("filled", startX, startY, 190.f, 150.f, "top-left", PickingUI::obtainPickingID());
+		back.create("filled", startX, startY, 190.f, 150.f, "top-left", PickingUI::ObtainPickingID());
 
 		circle = gui::Circle();
 		circle.create(Engine::Mouse::GetXPosition(), Engine::Mouse::GetYPosition(), 150.f, 100.f, 5.f, "center");
@@ -41,8 +41,8 @@ namespace editor {
 
 		for (int i = 0; i < terrainTypes.size(); i++){
 			gui::Select form = gui::Select(true);
-			form.create(startX + 20.f, startY - 20.f - 30 * i, 150.f, 20.f, terTypesMap[terrainTypes[i]], PickingUI::obtainPickingID());
-			PickingUI::addValueToPickingList(PickingUI::getLastID() + 1, "TerrainBrush_form_"+i);
+			form.create(startX + 20.f, startY - 20.f - 30 * i, 150.f, 20.f, terTypesMap[terrainTypes[i]], PickingUI::ObtainPickingID());
+			PickingUI::AddValueToPickingList(PickingUI::GetLastPickingID() + 1, "TerrainBrush_form_"+i);
 			forms.push_back(form);
 		}
 

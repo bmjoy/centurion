@@ -30,7 +30,7 @@ namespace gui {
 		data.w = w;
 		data.h = h;
 		data.origin = originMap[origin];
-		data.pickingColor = vec4(Picking::getPickingColorFromID(pickingID), 1.f);
+		data.pickingColor = vec4(Picking::GetPickingColorFromID(pickingID), 1.f);
 		pickingId = pickingID;
 		luaCmd = luaCMD;
 	}

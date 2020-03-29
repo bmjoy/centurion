@@ -108,7 +108,7 @@ void EditorMenuBar::Create(void)
 		float titlePosX = 0.f;
 		float titlePosY = Engine::myWindow::Height - height;
 		 
-		minPickingId = PickingUI::getLastID();
+		minPickingId = PickingUI::GetLastPickingID();
 
 		for (_it_menu = menuXML->c_editorMenu().begin(); _it_menu != menuXML->c_editorMenu().end(); _it_menu++) {
 
@@ -120,7 +120,7 @@ void EditorMenuBar::Create(void)
 			float titleWidth = std::max(gui::SimpleText::CalculateTextWidth(title, font) + 20.f, 60.f);
 
 			gui::Rectangle titleBack = gui::Rectangle();
-			titleBack.create("filled", titlePosX, titlePosY, titleWidth, height, "bottom-left", PickingUI::obtainPickingID(), luaCmd);
+			titleBack.create("filled", titlePosX, titlePosY, titleWidth, height, "bottom-left", PickingUI::ObtainPickingID(), luaCmd);
 			gui::SimpleText titleText = gui::SimpleText("static");
 			titleText.create_static(title, font, titlePosX + 0.5f * titleWidth, titlePosY + 0.5f * height, "center", "middle", vec4(255.f), "normal");
 			
@@ -146,7 +146,7 @@ void EditorMenuBar::Create(void)
 				int j = int(_it_cmd->id());
 
 				gui::Rectangle optionback = gui::Rectangle();
-				optionback.create("filled", titlePosX, titlePosY - height * (j + 1), optionsWidth, height, "bottom-left", PickingUI::obtainPickingID(), optionLuaCmd);
+				optionback.create("filled", titlePosX, titlePosY - height * (j + 1), optionsWidth, height, "bottom-left", PickingUI::ObtainPickingID(), optionLuaCmd);
 
 				gui::SimpleText optiontext = gui::SimpleText("static");
 				optiontext.create_static(optionstring, font, titlePosX + offSetX, titlePosY - height * (j + 1) + height * 0.5f, "left", "middle", vec4(255.f), "normal");
@@ -160,7 +160,7 @@ void EditorMenuBar::Create(void)
 			AddMenu(_menu_id, _menu);
 			titlePosX += titleWidth;
 		}
-		maxPickingId = PickingUI::getLastID() + 1;
+		maxPickingId = PickingUI::GetLastPickingID() + 1;
 
 	}
 	catch (const xml_schema::exception & e) {

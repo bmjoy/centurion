@@ -8,20 +8,23 @@
 
 #pragma region Static variables
 
-map<string, int> TranslationsTable::languagesMap;
+map<string, unsigned int> TranslationsTable::languagesMap;
 map<string, string> TranslationsTable::translationsTable;
 
 #pragma endregion
 
-unsigned int TranslationsTable::GetLanguageId(string lan)
+unsigned int TranslationsTable::GetLanguageId(const string lan)
 {
-	try {
-		if (languagesMap.count(lan) > 0) {
+	try 
+	{
+		if (languagesMap.count(lan) > 0) 
+		{
 			return languagesMap[lan];
 		}
 		return 0;
 	}
-	catch (...) {
+	catch (...) 
+	{
 		Logger::LogMessage msg = Logger::LogMessage("An error occurred getting the language id", "Error", "", "TranslationsTable", "GetLanguageId");
 		Logger::Error(msg);
 		Engine::GameClose();
@@ -29,34 +32,46 @@ unsigned int TranslationsTable::GetLanguageId(string lan)
 	}
 }
 
-string TranslationsTable::GetTranslation(string string_name)
+map<string, unsigned int> TranslationsTable::GetLanguagesMap(void)
 {
-	try {
-		if (translationsTable.count(string_name) > 0) {
+	return TranslationsTable::languagesMap;
+}
+
+string TranslationsTable::GetTranslation(const string string_name)
+{
+	try 
+	{
+		if (translationsTable.count(string_name) > 0) 
+		{
 			return translationsTable[string_name];
 		}
-		else {
+		else 
+		{
 			Logger::LogMessage msg = Logger::LogMessage("Translation of the word \"" + string_name + "\" is missing", "Warn", "TranslationsTable", "GetTranslation");
 			Logger::Warn(msg);
 			return string_name;
 		}
 	}
-	catch (...) {
+	catch (...) 
+	{
 		Logger::LogMessage msg = Logger::LogMessage("An error occurred getting the translation of \"" + string_name + "\"", "Error", "", "TranslationsTable", "GetTranslation");
 		Logger::Error(msg);
 		return string_name;
 	}
 }
 
-void TranslationsTable::ReadTranslationsTableXml(string lang)
+void TranslationsTable::ReadTranslationsTableXml(const string lang)
 {
 	try
 	{
-		if (languagesMap.empty()) {
+		if (languagesMap.empty())
+		{
 			int nLanguages = 0;
 			vector<string> filesName = FileManager::GetAllFilesNamesWithinFolder("assets/data");
-			for (int i = 0; i < filesName.size(); i++) {
-				if (filesName[i].substr(0, filesName[i].find('_')) == "translationTable") {
+			for (int i = 0; i < filesName.size(); i++) 
+			{
+				if (filesName[i].substr(0, filesName[i].find('_')) == "translationTable") 
+				{
 					string lan = filesName[i].substr(filesName[i].find('_'));
 					languagesMap[lan.substr(1, lan.find('.') - 1)] = nLanguages;
 					nLanguages++;
@@ -69,11 +84,13 @@ void TranslationsTable::ReadTranslationsTableXml(string lang)
 		string path = "assets/data/translationTable_" + lang + ".xml";
 		auto_ptr<translationTable> tTable = translationTable_(path, 0, props);
 		translationTable::entry_iterator it;
-		for (it = tTable->entry().begin(); it != tTable->entry().end(); it++) {
+		for (it = tTable->entry().begin(); it != tTable->entry().end(); it++) 
+		{
 			translationsTable[it->stringName()] = it->result();
 		}
 	}
-	catch (const xml_schema::exception & e) {
+	catch (const xml_schema::exception & e) 
+	{
 		string errorMsg = (string)e.what();
 		Logger::LogMessage msg = Logger::LogMessage(errorMsg, "Error", "", "TranslationsTable", "ReadTranslationsTableXml");
 		Logger::Error(msg);
