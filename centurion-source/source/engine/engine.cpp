@@ -160,7 +160,7 @@ int Engine::Launch(void)
 		}
 
 		Keyboard::SetCharCodepointPressed(-1);
-		ResetPeriphericsInput();
+		ResetperipheralsInput();
 
 		window.SwapBuffers();
 
@@ -318,7 +318,7 @@ void Engine::HandleGlobalKeys(void)
 	}
 }
 
-void Engine::ResetPeriphericsInput(void)
+void Engine::ResetperipheralsInput(void)
 {
 	//Keyboard buttons
 	Keyboard::ResetKeys();

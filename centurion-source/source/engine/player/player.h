@@ -39,7 +39,7 @@ public:
 	/// <returns>The start point of the current player</returns>
 	vec2 GetStartPoint(void);
 	/// <summary>
-	/// (???) Da rivedere. Restituire i riferimenti ai dati privati di un oggetto è pericoloso (li rende in pratica NON privati).
+	/// (???) Da rivedere. Restituire i riferimenti ai dati privati di un oggetto e pericoloso (li rende in pratica NON privati).
 	/// This function returns the color of the current player.
 	/// </summary>
 	/// <returns>The color of the current player</returns>

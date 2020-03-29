@@ -10,10 +10,10 @@
 
 #include <ui.h>
 
-#include <peripherics/camera.h>
-#include <peripherics/mywindow.h>
-#include <peripherics/mouse.h>
-#include <peripherics/keyboard.h>
+#include <peripherals/camera.h>
+#include <peripherals/mywindow.h>
+#include <peripherals/mouse.h>
+#include <peripherals/keyboard.h>
 
 #ifndef MENU_ENV
 #define MENU_ENV 0
@@ -131,5 +131,5 @@ namespace Engine
 	/// <summary>
 	/// This function resets mouse and keyboard restoring their default status. 
 	/// </summary>
-	void ResetPeriphericsInput(void);
+	void ResetperipheralsInput(void);
 };

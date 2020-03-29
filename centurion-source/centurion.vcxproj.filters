@@ -139,10 +139,10 @@
     <Filter Include="Source Files\engine\game\interface">
       <UniqueIdentifier>{8f5ddee1-41eb-4917-833d-37a2d60fa6f6}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Header Files\engine\peripherics">
+    <Filter Include="Header Files\engine\peripherals">
       <UniqueIdentifier>{8e405985-9f4f-4f74-bb32-cae8aeafae2d}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source Files\engine\peripherics">
+    <Filter Include="Source Files\engine\peripherals">
       <UniqueIdentifier>{32f5025d-f5c5-46be-9753-d23a4c904505}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
@@ -399,18 +399,6 @@
     <ClCompile Include="source\engine\classes\base_gate.cpp">
       <Filter>Source Files\engine\classes</Filter>
     </ClCompile>
-    <ClCompile Include="source\engine\peripherics\camera.cpp">
-      <Filter>Source Files\engine\peripherics</Filter>
-    </ClCompile>
-    <ClCompile Include="source\engine\peripherics\keyboard.cpp">
-      <Filter>Source Files\engine\peripherics</Filter>
-    </ClCompile>
-    <ClCompile Include="source\engine\peripherics\mouse.cpp">
-      <Filter>Source Files\engine\peripherics</Filter>
-    </ClCompile>
-    <ClCompile Include="source\engine\peripherics\mywindow.cpp">
-      <Filter>Source Files\engine\peripherics</Filter>
-    </ClCompile>
     <ClCompile Include="source\gl-items\entity-xml.cxx">
       <Filter>Source Files\gl-items</Filter>
     </ClCompile>
@@ -419,6 +407,18 @@
     </ClCompile>
     <ClCompile Include="source\gl-items\gl_circle.cpp">
       <Filter>Source Files\gl-items</Filter>
+    </ClCompile>
+    <ClCompile Include="source\engine\peripherals\camera.cpp">
+      <Filter>Source Files\engine\peripherals</Filter>
+    </ClCompile>
+    <ClCompile Include="source\engine\peripherals\keyboard.cpp">
+      <Filter>Source Files\engine\peripherals</Filter>
+    </ClCompile>
+    <ClCompile Include="source\engine\peripherals\mouse.cpp">
+      <Filter>Source Files\engine\peripherals</Filter>
+    </ClCompile>
+    <ClCompile Include="source\engine\peripherals\mywindow.cpp">
+      <Filter>Source Files\engine\peripherals</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -680,18 +680,6 @@
     <ClInclude Include="source\engine\classes\base_gate.h">
       <Filter>Header Files\engine\classes</Filter>
     </ClInclude>
-    <ClInclude Include="source\engine\peripherics\camera.h">
-      <Filter>Header Files\engine\peripherics</Filter>
-    </ClInclude>
-    <ClInclude Include="source\engine\peripherics\keyboard.h">
-      <Filter>Header Files\engine\peripherics</Filter>
-    </ClInclude>
-    <ClInclude Include="source\engine\peripherics\mouse.h">
-      <Filter>Header Files\engine\peripherics</Filter>
-    </ClInclude>
-    <ClInclude Include="source\engine\peripherics\mywindow.h">
-      <Filter>Header Files\engine\peripherics</Filter>
-    </ClInclude>
     <ClInclude Include="source\gl-items\entity-xml.hxx">
       <Filter>Header Files\gl-items</Filter>
     </ClInclude>
@@ -700,6 +688,18 @@
     </ClInclude>
     <ClInclude Include="source\gl-items\gl_circle.h">
       <Filter>Header Files\gl-items</Filter>
+    </ClInclude>
+    <ClInclude Include="source\engine\peripherals\camera.h">
+      <Filter>Header Files\engine\peripherals</Filter>
+    </ClInclude>
+    <ClInclude Include="source\engine\peripherals\keyboard.h">
+      <Filter>Header Files\engine\peripherals</Filter>
+    </ClInclude>
+    <ClInclude Include="source\engine\peripherals\mouse.h">
+      <Filter>Header Files\engine\peripherals</Filter>
+    </ClInclude>
+    <ClInclude Include="source\engine\peripherals\mywindow.h">
+      <Filter>Header Files\engine\peripherals</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
