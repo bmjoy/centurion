@@ -1,8 +1,10 @@
 #ifndef AUDIOMANAGER_H
 #define AUDIOMANAGER_H
 
-#include "../audio/music.h"
-#include "header_primitives.h"
+#include "music.h"
+#include <string>
+
+using namespace std;
 
 class AudioManager {
 public:

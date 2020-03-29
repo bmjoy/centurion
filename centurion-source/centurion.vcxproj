@@ -96,7 +96,7 @@
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(ProjectDir)source\extern\includes;$(ProjectDir)source\common;$(ProjectDir)source\engine;$(ProjectDir)source\util;$(ProjectDir)source\gl-items;$(ProjectDir)source\ui;$(ProjectDir)source\hector</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir)source\extern\includes;$(ProjectDir)source\common;$(ProjectDir)source\engine;$(ProjectDir)source\util;$(ProjectDir)source\gl-items;$(ProjectDir)source\ui;$(ProjectDir)source\hector;$(ProjectDir)source\audio</AdditionalIncludeDirectories>
       <DisableSpecificWarnings>4250</DisableSpecificWarnings>
       <AdditionalOptions>/utf-8 %(AdditionalOptions)</AdditionalOptions>
       <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
@@ -160,7 +160,7 @@ XCOPY "$(ProjectDir)lua53.dll" "$(ProjectDir)$(OutDir)"</Command>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(ProjectDir)source\extern\includes;$(ProjectDir)source\common;$(ProjectDir)source\engine;$(ProjectDir)source\util;$(ProjectDir)source\gl-items;$(ProjectDir)source\ui;$(ProjectDir)source\hector</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir)source\extern\includes;$(ProjectDir)source\common;$(ProjectDir)source\engine;$(ProjectDir)source\util;$(ProjectDir)source\gl-items;$(ProjectDir)source\ui;$(ProjectDir)source\hector;$(ProjectDir)source\audio</AdditionalIncludeDirectories>
       <DisableSpecificWarnings>4250</DisableSpecificWarnings>
       <AdditionalOptions>/utf-8 %(AdditionalOptions)</AdditionalOptions>
       <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
@@ -202,6 +202,7 @@ XCOPY "$(ProjectDir)lua53.dll" "$(ProjectDir)$(OutDir)"</Command>
     </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="source\audio\audio_manager.cpp" />
     <ClCompile Include="source\audio\vorbis\ogg_vorbis.cpp" />
     <ClCompile Include="source\engine\classes\building.cpp" />
     <ClCompile Include="source\engine\classes\decoration.cpp" />
@@ -239,7 +240,6 @@ XCOPY "$(ProjectDir)lua53.dll" "$(ProjectDir)$(OutDir)"</Command>
     <ClCompile Include="source\engine\settings.cpp" />
     <ClCompile Include="source\engine\translationsTable-xml.cxx" />
     <ClCompile Include="source\engine\translationsTable.cpp" />
-    <ClCompile Include="source\gl-items\audio_manager.cpp" />
     <ClCompile Include="source\gl-items\bitmap_font.cpp" />
     <ClCompile Include="source\gl-items\building_sprite.cpp" />
     <ClCompile Include="source\gl-items\cursor_image.cpp" />
@@ -280,6 +280,7 @@ XCOPY "$(ProjectDir)lua53.dll" "$(ProjectDir)$(OutDir)"</Command>
     <ClCompile Include="source\util\file_manager.cpp" />
     <ClCompile Include="source\util\logger.cpp" />
     <ClCompile Include="source\util\maths.cpp" />
+    <ClInclude Include="source\audio\audio_manager.h" />
     <ClInclude Include="source\engine\classes\building.h" />
     <ClInclude Include="source\engine\classes\decoration.h" />
     <ClInclude Include="source\engine\classes\base_gate.h" />
@@ -316,7 +317,6 @@ XCOPY "$(ProjectDir)lua53.dll" "$(ProjectDir)$(OutDir)"</Command>
     <ClInclude Include="source\engine\settings.h" />
     <ClInclude Include="source\engine\translationsTable-xml.hxx" />
     <ClInclude Include="source\engine\translationsTable.h" />
-    <ClInclude Include="source\gl-items\audio_manager.h" />
     <ClInclude Include="source\gl-items\bitmap_font.h" />
     <ClInclude Include="source\gl-items\building_sprite.h" />
     <ClInclude Include="source\gl-items\cursor_image.h" />

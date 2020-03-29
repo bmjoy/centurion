@@ -51,6 +51,8 @@ string FileManager::ReadFile(const char* fileLocation) {
 	}
 	catch (...) {
 		Engine::GameClose();
+		throw;
+
 	}
 }
 
@@ -83,6 +85,8 @@ vector<string> FileManager::GetAllFilesNamesWithinFolder(string folder, string t
 	}
 	catch (...) {
 		Engine::GameClose();
+		throw;
+
 	}
 }
 
@@ -110,6 +114,7 @@ vector<string> FileManager::GetAllFoldersNamesWithinFolder(string folder) {
 	}
 	catch (...) {
 		Engine::GameClose();
+		throw;
 	}
 }
 
@@ -164,6 +169,8 @@ vector<FileManager::file_info> FileManager::GetAllFilesNamesWithinSubfolders(str
 	}
 	catch (...) {
 		Engine::GameClose();
+		throw;
+
 	}
 }
 
@@ -178,6 +185,8 @@ string FileManager::CurrentDateTime(const char * format) {
 	}
 	catch (...) {
 		Engine::GameClose();
+		throw;
+
 	}
 }
 
@@ -192,6 +201,8 @@ bool FileManager::CheckIfFolderExists(string folderPath) {
 		Logger::LogMessage msg = Logger::LogMessage("An error occurred checking if this folder exists: \"" + folderPath + "\"", "Error", "Utils", "", "CheckIfFolderExists");
 		Logger::Error(msg);
 		Engine::GameClose();
+		throw;
+
 	}
 }
 
@@ -235,6 +246,8 @@ string FileManager::GetFileFolderPath(const char *path) {
 		Logger::LogMessage msg = Logger::LogMessage("An error occurred getting the exe folder path", "Error", "Utils", "", "GetExeFolderPath");
 		Logger::Error(msg);
 		Engine::GameClose();
+		throw;
+
 	}
 	
 }

@@ -309,9 +309,6 @@
     <ClCompile Include="source\engine\translationsTable-xml.cxx">
       <Filter>Source Files\engine</Filter>
     </ClCompile>
-    <ClCompile Include="source\gl-items\audio_manager.cpp">
-      <Filter>Source Files\gl-items</Filter>
-    </ClCompile>
     <ClCompile Include="source\gl-items\bitmap_font.cpp">
       <Filter>Source Files\gl-items</Filter>
     </ClCompile>
@@ -419,6 +416,9 @@
     </ClCompile>
     <ClCompile Include="source\engine\peripherals\mywindow.cpp">
       <Filter>Source Files\engine\peripherals</Filter>
+    </ClCompile>
+    <ClCompile Include="source\audio\audio_manager.cpp">
+      <Filter>Source Files\audio</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -566,9 +566,6 @@
     <ClInclude Include="source\engine\game\strategy.h">
       <Filter>Header Files\engine\game</Filter>
     </ClInclude>
-    <ClInclude Include="source\gl-items\audio_manager.h">
-      <Filter>Header Files\gl-items</Filter>
-    </ClInclude>
     <ClInclude Include="source\gl-items\bitmap_font.h">
       <Filter>Header Files\gl-items</Filter>
     </ClInclude>
@@ -700,6 +697,9 @@
     </ClInclude>
     <ClInclude Include="source\engine\peripherals\mywindow.h">
       <Filter>Header Files\engine\peripherals</Filter>
+    </ClInclude>
+    <ClInclude Include="source\audio\audio_manager.h">
+      <Filter>Header Files\audio</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

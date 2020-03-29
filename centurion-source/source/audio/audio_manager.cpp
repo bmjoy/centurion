@@ -1,10 +1,10 @@
 #include "audio_manager.h"
 
-#include "logger.h"
+#include <logger.h>
 
 AudioManager::AudioManager(){}
 
-void AudioManager::MusicPlay(std::string name, bool looping) {
+void AudioManager::MusicPlay(string name, bool looping) {
 	device = new AudioDevice();
 	if (device){
 		music = device->CreateMusic();
