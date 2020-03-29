@@ -4,6 +4,7 @@
 
 AudioManager::AudioManager(){}
 
+#pragma region Music section
 void AudioManager::MusicPlay(string name, bool looping) {
 	device = new AudioDevice();
 	if (device){
@@ -16,9 +17,6 @@ void AudioManager::MusicPlay(string name, bool looping) {
 			music->Play();
 			MusicLoop(looping);
 		}
-	}
-	else {
-		//showGameWarning("WARNING_audioDevice");
 	}
 }
 
@@ -34,7 +32,7 @@ void AudioManager::MusicStop() {
 			music->Stop();
 		}
 		else {
-			Logger::Info("Music is not playing.");
+			Logger::Info("No music is playing.");
 		}
 	}
 }
@@ -56,15 +54,23 @@ void AudioManager::MusicLoop(bool loop) {
 }
 
 void AudioManager::MusicVolume(int value) {
-	music->SetVolume(value);
-}
-
-void AudioManager::Playlist() {
-
+	if (value > 100) {
+		music->SetVolume(100);
+	}
+	if (value < 0) {
+		music->SetVolume(0);
+	}
+	else {
+		music->SetVolume(value);
+	}
 }
 
 bool AudioManager::IsMusicPlaying() {
 	return music->IsPlaying();
+}
+
+bool AudioManager::IsMusicPaused() {
+	return music->IsPaused();
 }
 
 bool AudioManager::IsMusicLooping() {
@@ -75,6 +81,88 @@ bool AudioManager::IsMusicLooping() {
 		return false;
 	}
 }
+#pragma endregion
+
+#pragma region SFX section
+void AudioManager::SoundPlay(string name, bool looping) {
+	device = new AudioDevice();
+	if (device) {
+		sound = device->CreateSound();
+		if (!sound->LoadFromFile(name.c_str())) {
+			Logger::Warn("Impossible to find or parse audio file. No sound will be played.");
+		}
+		else {
+			Logger::Info("Sound file detected. Starting the playing function.");
+			sound->Play();
+			SoundLoop(looping);
+		}
+	}
+	else {
+	}
+}
+
+void AudioManager::SoundStop() {
+	if (sound) {
+		if (device) {
+			delete device;
+		}
+		sound->Stop();
+		Logger::Info("Sound variable is working properly.");
+		if (IsSoundPlaying()) {
+			Logger::Info("Music is playing!");
+			sound->Stop();
+		}
+		else {
+			Logger::Info("No sound is playing.");
+		}
+	}
+}
+
+void AudioManager::SoundPause() {
+	if (sound) {
+		sound->Pause();
+	}
+}
+
+void AudioManager::SoundRewind() {
+	if (sound) {
+		sound->Rewind();
+	}
+}
+
+void AudioManager::SoundLoop(bool loop) {
+	sound->SetLooping(loop);
+}
+
+void AudioManager::SoundVolume(int value) {
+	if (value > 100) {
+		sound->SetVolume(100);
+	}
+	if (value < 0) {
+		sound->SetVolume(0);
+	}
+	else {
+		sound->SetVolume(value);
+	}
+}
+
+bool AudioManager::IsSoundPlaying() {
+	return sound->IsPlaying();
+}
+
+bool AudioManager::IsSoundPaused() {
+	return sound->IsPaused();
+}
+
+bool AudioManager::IsSoundLooping() {
+	if (sound) {
+		return sound->IsLooping();
+	}
+	else {
+		return false;
+	}
+}
+#pragma endregion
 
 AudioManager::~AudioManager(){
 }

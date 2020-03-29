@@ -40,12 +40,20 @@ public:
 	/// This function returns the number of channels of a sound (1 = mono; 2 = stereo).
 	/// </summary>
 	virtual unsigned int GetChannels();
+
+	/// <summary>
+	/// This function returns the number of sound buffer frames size.
+	/// </summary>
 	virtual unsigned int GetFrames();
 
 	/// <summary>
 	/// This function returns the sample rate of a sound (value expressed in Hz).
 	/// </summary>
 	virtual unsigned int GetSampleRate();
+
+	/// <summary>
+	/// This function returns the number of sound samples.
+	/// </summary>
 	virtual unsigned int GetSampleCount();
 
 	/// <summary>
@@ -60,9 +68,18 @@ public:
 	/// <param name="channels">Number of channels. It supports only non-negative integer values.</param>
 	virtual void SetChannels(unsigned int channels);
 
-
+	/// <summary>
+	/// This function sets the number of sound buffer's frames.
+	/// </summary>
+	/// <param name="frames">Number of frames. It supports only non-negative integer values.</param>
 	virtual void SetFrames(unsigned int frames);
+
+	/// <summary>
+	/// This function sets the number of sound samples.
+	/// </summary>
+	/// <param name="count">Number of samples. It supports only non-negative integer values.</param>
 	virtual void SetSampleCount(unsigned int count);
+
 	ALuint GetBufferID()
 	{
 		return m_buffer[0];

@@ -31,7 +31,7 @@ public:
 	virtual bool Ready();
 	
 	/// <summary>
-	/// This function aquire the audio context.
+	/// This function aquires the audio context.
 	/// </summary>
 	virtual IAudioContext *GetContext();
 
@@ -46,7 +46,7 @@ public:
 	virtual ISound *CreateSound();
 
 	/// <summary>
-	/// This function aquire the audio listener.
+	/// This function aquires the audio listener.
 	/// </summary>
 	virtual IListener* GetListener();
 
