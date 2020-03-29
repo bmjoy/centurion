@@ -22,7 +22,7 @@
     <VCProjectVersion>15.0</VCProjectVersion>
     <ProjectGuid>{29C92E4D-97E2-4049-A35E-F6A42D1C8AB9}</ProjectGuid>
     <RootNamespace>centurion</RootNamespace>
-    <WindowsTargetPlatformVersion>10.0.18362.0</WindowsTargetPlatformVersion>
+    <WindowsTargetPlatformVersion>10.0.17763.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
@@ -280,6 +280,7 @@ XCOPY "$(ProjectDir)lua53.dll" "$(ProjectDir)$(OutDir)"</Command>
     <ClCompile Include="source\util\file_manager.cpp" />
     <ClCompile Include="source\util\logger.cpp" />
     <ClCompile Include="source\util\maths.cpp" />
+    <ClCompile Include="source\util\tinyxml2.cpp" />
     <ClInclude Include="source\audio\audio_manager.h" />
     <ClInclude Include="source\engine\classes\building.h" />
     <ClInclude Include="source\engine\classes\decoration.h" />
@@ -349,6 +350,7 @@ XCOPY "$(ProjectDir)lua53.dll" "$(ProjectDir)$(OutDir)"</Command>
     <ClInclude Include="source\util\file_manager.h" />
     <ClInclude Include="source\util\logger.h" />
     <ClInclude Include="source\util\maths.h" />
+    <ClInclude Include="source\util\tinyxml2.h" />
     <None Include="assets\shaders\bsprite\fragment.glsl">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
       <FileType>Document</FileType>

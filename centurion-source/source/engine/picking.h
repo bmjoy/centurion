@@ -27,7 +27,7 @@ class Picking
 public: 
 	/// <summary>
 	/// This struct handles the double click.
-	/// (???) Da rivedere. Renderla privata così come le variabili seguenti per rispettare il principio dell'incapsulamento.
+	/// (???) Da rivedere. Renderla privata cosi come le variabili seguenti per rispettare il principio dell'incapsulamento.
 	/// </summary>
 	struct DoubleClickData 
 	{

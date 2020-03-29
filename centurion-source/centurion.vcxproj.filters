@@ -420,6 +420,9 @@
     <ClCompile Include="source\audio\audio_manager.cpp">
       <Filter>Source Files\audio</Filter>
     </ClCompile>
+    <ClCompile Include="source\util\tinyxml2.cpp">
+      <Filter>Source Files\util</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="source\extern\includes\json.hpp">
@@ -700,6 +703,9 @@
     </ClInclude>
     <ClInclude Include="source\audio\audio_manager.h">
       <Filter>Header Files\audio</Filter>
+    </ClInclude>
+    <ClInclude Include="source\util\tinyxml2.h">
+      <Filter>Header Files\util</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
