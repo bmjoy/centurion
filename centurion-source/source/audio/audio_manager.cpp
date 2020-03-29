@@ -109,7 +109,7 @@ void AudioManager::SoundStop() {
 		sound->Stop();
 		Logger::Info("Sound variable is working properly.");
 		if (IsSoundPlaying()) {
-			Logger::Info("Music is playing!");
+			Logger::Info("Sound is playing!");
 			sound->Stop();
 		}
 		else {
