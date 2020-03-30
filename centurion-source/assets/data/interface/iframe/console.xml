@@ -1,4 +1,4 @@
-﻿<c_iframe name="console">
+﻿<iframe name="console">
   <top_left image_name="iframe_console_topleft" repeat="none"/>
   <top_right image_name="iframe_console_topright" repeat="none"/>
   <bottom_right image_name="iframe_console_bottomright" repeat="none"/>
@@ -8,4 +8,4 @@
   <bottom image_name="iframe_console_bottom" repeat="x"/>
   <left image_name="iframe_console_left" repeat="y"/>
   <background image_name="iframe_console_back" repeat="none"/>
-</c_iframe>
+</iframe>

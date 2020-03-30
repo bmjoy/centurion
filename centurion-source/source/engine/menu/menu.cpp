@@ -5,9 +5,9 @@
 #include <file_manager.h>
 #include <picking.h>
 #include <engine.h>
-
-#include "menuPage-xml.hxx"
 #include <translationsTable.h>
+
+#include <tinyxml2.h>
 
 #pragma region Static variables
 
@@ -33,61 +33,88 @@ unsigned int Menu::MenuPage::Create(const string name)
 	listOfButtons = vector<gui::Button>();
 	listOfImages = vector<gui::Image>();
 
-	xml_schema::properties props;
-	props.no_namespace_schema_location(Folders::XML_SCHEMAS + "menuPage.xsd");
-	auto_ptr<c_menuPage> dataXML = c_menuPage_(fileName, 0, props);
+	tinyxml2::XMLDocument xmlFile;
+	xmlFile.LoadFile(fileName.c_str());
 
-	c_buttons::c_button_iterator _it_btn;
-	for (_it_btn = dataXML->c_buttons().c_button().begin(); _it_btn != dataXML->c_buttons().c_button().end(); _it_btn++)
+	tinyxml2::XMLElement *_buttons = xmlFile.FirstChildElement("menuPage")->FirstChildElement("buttons");
+	for (tinyxml2::XMLElement* child = _buttons->FirstChildElement(); child != NULL; child = child->NextSiblingElement())
 	{
-		gui::Button btn = gui::Button();
-		btn.create(
-			string(_it_btn->image_name()),
-			TranslationsTable::GetTranslation(string(_it_btn->name())),
-			int(_it_btn->x()),
-			int(_it_btn->y()),
-			PickingUI::ObtainPickingID(),
-			glm::vec4(0.f, 0.f, 0.f, 255.f),
-			string(_it_btn->onclick())
-		);
-		this->AddButton(btn);
+		try
+		{
+			string btn_name = string(child->Attribute("name"));
+			string image_name = string(child->Attribute("image_name"));
+			string x = string(child->Attribute("x"));
+			string y = string(child->Attribute("y"));
+			string onclick = string(child->Attribute("onclick"));
+
+			gui::Button btn = gui::Button();
+			btn.create(image_name, TranslationsTable::GetTranslation(btn_name), stoi(x), stoi(y), PickingUI::ObtainPickingID(), glm::vec4(0.f, 0.f, 0.f, 255.f), onclick);
+			this->AddButton(btn);
+		}
+		catch (const std::exception&)
+		{
+			string msg = "An error occurred creating a button on menu page \"" + name + "\"";
+			Logger::LogMessage logmsg = Logger::LogMessage(msg, "Error", "", "Menu::MenuPage", "Create");
+			Logger::Error(logmsg);
+			throw;
+		}
 	}
 
-	c_images::c_image_iterator _it_img;
-	for (_it_img = dataXML->c_images().c_image().begin(); _it_img != dataXML->c_images().c_image().end(); _it_img++)
+	tinyxml2::XMLElement *_images = xmlFile.FirstChildElement("menuPage")->FirstChildElement("images");
+	for (tinyxml2::XMLElement* child = _images->FirstChildElement(); child != NULL; child = child->NextSiblingElement())
 	{
-		gui::Image img = gui::Image(string(_it_img->image_name()));
-		int clickable = int(string(_it_img->onclick()) != "");
-		if (string(_it_img->size()) == "auto") {
-			img.create(
-				string(_it_img->align()),
-				float(_it_img->x()),
-				float(_it_img->y()),
-				0.f, 0.f, PickingUI::ObtainPickingID() * clickable
-			);
-		}
-		else if (string(_it_img->size()) == "max") {
-			img.create(
-				string(_it_img->align()),
-				float(_it_img->x()),
-				float(_it_img->y()),
-				Engine::myWindow::Width, Engine::myWindow::Height, PickingUI::ObtainPickingID() * clickable
-			);
-		}
-		this->AddImage(img);
-	}
+		try
+		{
+			string img_name = string(child->Attribute("name"));
+			string image_name = string(child->Attribute("image_name"));
+			string x = string(child->Attribute("x"));
+			string y = string(child->Attribute("y"));
+			string onclick = string(child->Attribute("onclick"));
+			string size = string(child->Attribute("size"));
+			string align = string(child->Attribute("align"));
 
-	pageName = dataXML->name();
-	return int(dataXML->id());
+			int clickable = int(onclick != "");
+			gui::Image img = gui::Image(image_name);
+			if (size == "auto") {
+				img.create(align, stof(x), stof(y), 0.f, 0.f, PickingUI::ObtainPickingID() * clickable);
+			}
+			else if (size == "max") {
+				img.create(align, stof(x), stof(y), Engine::myWindow::Width, Engine::myWindow::Height, PickingUI::ObtainPickingID() * clickable);
+			}
+			this->AddImage(img);
+		}
+		catch (const std::exception&)
+		{
+			string msg = "An error occurred creating an image on menu page \"" + name + "\"";
+			Logger::LogMessage logmsg = Logger::LogMessage(msg, "Error", "", "Menu::MenuPage", "Create");
+			Logger::Error(logmsg);
+			throw;
+		}
+	}
+	pageName = (string)xmlFile.FirstChildElement("menuPage")->Attribute("name");
+	int id;
+	try
+	{
+		string idStr = (string)xmlFile.FirstChildElement("menuPage")->Attribute("id");
+		id = stoi(idStr);
+	}
+	catch (const std::exception&)
+	{
+		string msg = "An error occurred reading the id of the menu page \"" + name + "\"";
+		Logger::LogMessage logmsg = Logger::LogMessage(msg, "Error", "", "Menu::MenuPage", "Create");
+		Logger::Error(logmsg);
+		throw;
+	}
+	return id;
 }
 
 void Menu::MenuPage::Render(const bool picking)
 {
-	for (int i = 0; i < listOfImages.size(); i++) 
+	for (int i = 0; i < listOfImages.size(); i++)
 	{
 		listOfImages[i].render(picking);
 	}
-	for (int i = 0; i < listOfButtons.size(); i++) 
+	for (int i = 0; i < listOfButtons.size(); i++)
 	{
 		listOfButtons[i].render(picking, Picking::leftClickID_UI);
 	}
@@ -136,9 +163,9 @@ void Menu::Reset(void)
 
 void Menu::Clear(void)
 {
-	for (int i = 0; i < MAX_NUMBER_OF_PAGES; i++) 
+	for (int i = 0; i < MAX_NUMBER_OF_PAGES; i++)
 	{
-		if (listOfPages[i] != nullptr) 
+		if (listOfPages[i] != nullptr)
 		{
 			delete listOfPages[i];
 		}
@@ -152,7 +179,7 @@ void Menu::Create(void)
 	{
 		vector<string> files = FileManager::GetAllFilesNamesWithinFolder(Folders::INTERFACE_MENU, "xml");
 
-		for (vector<string>::iterator it = files.begin(); it != files.end(); it++) 
+		for (vector<string>::iterator it = files.begin(); it != files.end(); it++)
 		{
 
 			MenuPage* mpage = new MenuPage();
@@ -165,10 +192,6 @@ void Menu::Create(void)
 		currentPageId = 0;
 		applyMenuMatrices();
 	}
-	catch (const xml_schema::exception & e) 
-	{
-		std::cout << e << std::endl;
-	}
 	catch (const std::exception&)
 	{
 		Engine::GameClose();
@@ -180,14 +203,14 @@ void Menu::Run(void)
 	// picking
 	Picking::leftClickID_UI = 0;
 	RenderPage(currentPageId, true);
-	if (Engine::Mouse::LeftClick) 
+	if (Engine::Mouse::LeftClick)
 		Picking::leftClickID_UI = Picking::GetIdFromClick();
 
 	// rendering
 	RenderPage(currentPageId, false);
 }
 
-Menu::~Menu(void) 
+Menu::~Menu(void)
 {
 	this->Clear();
 }

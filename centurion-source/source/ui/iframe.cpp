@@ -1,11 +1,10 @@
 #include <ui.h>
-#include "iframe-xml.hxx"
-
 #include <file_manager.h>
 #include <logger.h>
 #include <picking.h>
 
 #include <engine.h>
+#include <tinyxml2.h>
 
 gui::Iframe::Iframe()
 {
@@ -40,19 +39,20 @@ void gui::Iframe::Create(int xPos, int yPos, int width, int height)
 
 	try
 	{
-		xml_schema::properties props;
-		props.no_namespace_schema_location(Folders::XML_SCHEMAS + "iframe.xsd");
-		auto_ptr<c_iframe> iframexml = c_iframe_(Folders::INTERFACE_IFRAME + name + ".xml", 0, props);
+
+		string path = Folders::INTERFACE_IFRAME + name + ".xml";
+		tinyxml2::XMLDocument xmlFile;
+		xmlFile.LoadFile(path.c_str());
 		
-		string back_name = string(iframexml->background().image_name());
-		string topleft_name = string(iframexml->top_left().image_name());
-		string topright_name = string(iframexml->top_right().image_name());
-		string bottomright_name = string(iframexml->bottom_right().image_name());
-		string bottomleft_name = string(iframexml->bottom_left().image_name());
-		string right_name = string(iframexml->right().image_name());
-		string left_name = string(iframexml->left().image_name());
-		string top_name = string(iframexml->top().image_name());
-		string bottom_name = string(iframexml->bottom().image_name());
+		string back_name = (string)xmlFile.FirstChildElement("iframe")->FirstChildElement("background")->Attribute("image_name");
+		string topleft_name = (string)xmlFile.FirstChildElement("iframe")->FirstChildElement("top_left")->Attribute("image_name");
+		string topright_name = (string)xmlFile.FirstChildElement("iframe")->FirstChildElement("top_right")->Attribute("image_name");
+		string bottomright_name = (string)xmlFile.FirstChildElement("iframe")->FirstChildElement("bottom_right")->Attribute("image_name");
+		string bottomleft_name = (string)xmlFile.FirstChildElement("iframe")->FirstChildElement("bottom_left")->Attribute("image_name");
+		string right_name = (string)xmlFile.FirstChildElement("iframe")->FirstChildElement("right")->Attribute("image_name");
+		string left_name = (string)xmlFile.FirstChildElement("iframe")->FirstChildElement("left")->Attribute("image_name");
+		string top_name = (string)xmlFile.FirstChildElement("iframe")->FirstChildElement("top")->Attribute("image_name");
+		string bottom_name = (string)xmlFile.FirstChildElement("iframe")->FirstChildElement("bottom")->Attribute("image_name");
 
 		back = gui::Image(back_name);
 		back.create("bottom-left", (float)xPos, (float)yPos, (float)w, (float)h, 0);
@@ -80,12 +80,6 @@ void gui::Iframe::Create(int xPos, int yPos, int width, int height)
 
 		bottomleft = gui::Image(bottomleft_name);
 		bottomleft.create("bottom-left", (float)xPos, (float)yPos, 0.f, 0.f, 0);
-	}
-	catch (const xml_schema::exception & e) {
-		string emsg = string(e.what());
-		Logger::LogMessage msg = Logger::LogMessage(emsg, "gui", "Iframe", "Create");
-		Logger::Error(msg);
-		Engine::GameClose();
 	}
 	catch (...)
 	{

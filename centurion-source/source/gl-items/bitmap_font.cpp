@@ -4,10 +4,9 @@
 #include <stb_image.h>
 #include <codecvt>
 #include <locale>
-#include <fontCharacters-xml.hxx>
-
 #include <file_manager.h>
 
+#include <tinyxml2.h>
 
 bool BitmapFont::isArabic(int codepoint) {
 	return ((codepoint >= 1536 && codepoint <= 1919) || (codepoint >= 2208 && codepoint <= 2303) || (codepoint >= 64336 && codepoint <= 64831) || (codepoint >= 65010 && codepoint <= 65276) || (codepoint == 32));
@@ -94,29 +93,44 @@ void BitmapFont::create() {
 		textureIdMap[fontName] = textureIdList[i];
 		
 		// LOAD DATA FROM XML
-		path = "assets/fonts/" + fontName + ".xml";
+		path = Folders::GAME + "assets//fonts//" + fontName + ".xml";
 		try {
-			xml_schema::properties props;
-			props.no_namespace_schema_location(Folders::XML_SCHEMAS + "characters.xsd");
-			auto_ptr<chars> charsXML = chars_(path, 0, props);
-
-			chars::char_iterator it;
-			for (it = charsXML->char_().begin(); it != charsXML->char_().end(); it++) {
+			tinyxml2::XMLDocument xmlFile;
+			xmlFile.LoadFile(path.c_str());
+			tinyxml2::XMLElement *levelElement = xmlFile.FirstChildElement("chars");
+			for (tinyxml2::XMLElement* child = levelElement->FirstChildElement(); child != NULL; child = child->NextSiblingElement())
+			{
 				Character CharData = Character();
-				int charID = int(it->id());
-				CharData.x = int(it->x());
-				CharData.y = int(it->y());
-				CharData.width = int(it->width());
-				CharData.height = int(it->height());
-				CharData.xoffset = int(it->xoffset());
-				CharData.yoffset = int(it->yoffset());
-				CharData.xadvance = int(it->xadvance());
-				CharData.line_height = int(it->lineheight());
+				string parsedStr;
+
+				parsedStr = child->Attribute("id");
+				int charID = stoi(parsedStr);
+
+				parsedStr = child->Attribute("x");
+				CharData.x = stoi(parsedStr);
+
+				parsedStr = child->Attribute("y");
+				CharData.y = stoi(parsedStr);
+
+				parsedStr = child->Attribute("width");
+				CharData.width = stoi(parsedStr);
+
+				parsedStr = child->Attribute("height");
+				CharData.height = stoi(parsedStr);
+
+				parsedStr = child->Attribute("xoffset");
+				CharData.xoffset = stoi(parsedStr);
+
+				parsedStr = child->Attribute("yoffset");
+				CharData.yoffset = stoi(parsedStr);
+
+				parsedStr = child->Attribute("xadvance");
+				CharData.xadvance = stoi(parsedStr);
+
+				parsedStr = child->Attribute("lineheight");
+				CharData.line_height = stoi(parsedStr);
 				fontData[i][charID] = CharData;
 			}
-		}
-		catch(const xml_schema::exception & e) {
-			std::cout << e << std::endl;
 		}
 		catch (...) {
 			std::cout << "An error occurred reading font XML files." << std::endl;

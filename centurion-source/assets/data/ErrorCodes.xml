@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no" ?>
-<c_error_codes>
+<errorCodes>
    <error name="NOT_FOUND" code="0x00000001"/>
    <error name="AUDIO" code="0x00000002"/>
-</c_error_codes>
+</errorCodes>

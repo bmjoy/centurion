@@ -1,9 +1,10 @@
 #include "errorCodes.h"
-#include "ErrorCodes-xml.hxx"
 #include <logger.h>
 #include <file_manager.h>
 
 #include <engine.h>
+
+#include <tinyxml2.h>
 
 map<string, string> ErrorCodes::errorCodes;
 
@@ -65,21 +66,16 @@ void ErrorCodes::ReadErrorCodesXml(void)
 {
 	try
 	{
-		xml_schema::properties props;
-		props.no_namespace_schema_location(Folders::XML_SCHEMAS + "errorCodes.xsd");
-		string path = "assets/data/ErrorCodes.xml";
-		auto_ptr<c_error_codes> errorCodesXML = c_error_codes_(path, 0, props);
-		c_error_codes::error_iterator it;
-		for (it = errorCodesXML->error().begin(); it != errorCodesXML->error().end(); it++) 
+		string path = Folders::DATA + "ErrorCodes.xml";
+		tinyxml2::XMLDocument xmlFile;
+		xmlFile.LoadFile(path.c_str());
+		tinyxml2::XMLElement *levelElement = xmlFile.FirstChildElement("errorCodes");
+		for (tinyxml2::XMLElement* child = levelElement->FirstChildElement(); child != NULL; child = child->NextSiblingElement())
 		{
-			errorCodes[it->name()] = it->code();
+			string name = string(child->Attribute("name"));
+			string code = string(child->Attribute("code"));
+			errorCodes[name] = code;
 		}
-	}
-	catch (const xml_schema::exception & e) 
-	{
-		string errorMsg = (string)e.what();
-		Logger::LogMessage msg = Logger::LogMessage(errorMsg, "Error", "", "ErrorCodes", "ReadErrorCodesXml");
-		Logger::Error(msg);
 	}
 	catch (...)
 	{

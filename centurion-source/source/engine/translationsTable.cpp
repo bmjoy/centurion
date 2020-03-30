@@ -1,10 +1,9 @@
 #include "translationsTable.h"
-#include "translationsTable-xml.hxx"
 
 #include <logger.h>
 #include <file_manager.h>
-
 #include <engine.h>
+#include <tinyxml2.h>
 
 #pragma region Static variables
 
@@ -79,21 +78,18 @@ void TranslationsTable::ReadTranslationsTableXml(const string lang)
 			}
 		}
 
-		xml_schema::properties props;
-		props.no_namespace_schema_location(Folders::XML_SCHEMAS + "translationTable.xsd");
-		string path = "assets/data/translationTable_" + lang + ".xml";
-		auto_ptr<translationTable> tTable = translationTable_(path, 0, props);
-		translationTable::entry_iterator it;
-		for (it = tTable->entry().begin(); it != tTable->entry().end(); it++) 
+		string path = Folders::DATA + "translationTable_" + lang + ".xml";
+
+		tinyxml2::XMLDocument xmlFile;
+		xmlFile.LoadFile(path.c_str());
+
+		tinyxml2::XMLElement *levelElement = xmlFile.FirstChildElement("translationTable");
+		for (tinyxml2::XMLElement* child = levelElement->FirstChildElement(); child != NULL; child = child->NextSiblingElement())
 		{
-			translationsTable[it->stringName()] = it->result();
+			string stringName = string(child->Attribute("stringName"));
+			string result = string(child->Attribute("result"));
+			translationsTable[stringName] = result;
 		}
-	}
-	catch (const xml_schema::exception & e) 
-	{
-		string errorMsg = (string)e.what();
-		Logger::LogMessage msg = Logger::LogMessage(errorMsg, "Error", "", "TranslationsTable", "ReadTranslationsTableXml");
-		Logger::Error(msg);
 	}
 	catch (...)
 	{

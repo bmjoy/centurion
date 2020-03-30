@@ -1,10 +1,10 @@
-<c_menuPage id="0" name="mainMenu">
-    <c_buttons>
-        <c_button name="MAINMENU_buttonQuit" image_name="button_1" x="-150" y="75" onclick='Engine.GameClose()'/>
-        <c_button name="MAINMENU_buttonEditor" image_name="button_1" x="-150" y="550" onclick='Engine.SetEnvironment("editor")'/>
-		<c_button name="MAINMENU_buttonOptions" image_name="button_1" x="-150" y="500" onclick='Menu.OpenMenuPage(1)'/>
-    </c_buttons>
-    <c_images>
-        <c_image name="background" image_name="main_background" onclick="" x="0" y="0" size="max" align="bottom-left"/>
-    </c_images>
-</c_menuPage>
+<menuPage id="0" name="mainMenu">
+    <buttons>
+        <button name="MAINMENU_buttonQuit" image_name="button_1" x="-150" y="75" onclick='Engine.GameClose()'/>
+        <button name="MAINMENU_buttonEditor" image_name="button_1" x="-150" y="550" onclick='Engine.SetEnvironment("editor")'/>
+		<button name="MAINMENU_buttonOptions" image_name="button_1" x="-150" y="500" onclick='Menu.OpenMenuPage(1)'/>
+    </buttons>
+    <images>
+        <image name="background" image_name="main_background" onclick="" x="0" y="0" size="max" align="bottom-left"/>
+    </images>
+</menuPage>

@@ -1,5 +1,4 @@
-﻿<?xml version="1.0" encoding="UTF-8" standalone="no" ?>
-<translationTable language="italian">
+﻿<translationTable language="italian">
 	<entry stringName="MAINMENU_buttonSinglePlayer" result="Giocatore singolo"/>
 	<entry stringName="MAINMENU_buttonEditor" result="Editor"/>
 	<entry stringName="MAINMENU_buttonOptions" result="Opzioni"/>

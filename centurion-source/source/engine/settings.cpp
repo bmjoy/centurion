@@ -94,17 +94,22 @@ void Settings::ChangeLanguage(string lang)
 
 void Settings::Serialize(void)
 {
+	string debugStr = "false";
+	if (DebugIsActive) debugStr = "true";
+	string fullScreenStr = "false";
+	if (FullScreen) fullScreenStr = "true";
+
 	ofstream xmlFile(SettingsPath);
 	if (xmlFile.is_open()) {
-		xmlFile << "<?xml version=\"1.0\" encoding=\"utf-8\"?>" << endl <<
+		xmlFile << 
 			"<settings>" << endl <<
 			"\t<windowWidth>" << windowWidth << "</windowWidth>" << endl <<
 			"\t<windowHeight>" << windowHeight << "</windowHeight>" << endl <<
 			"\t<cameraMovespeed>" << cameraMovespeed << "</cameraMovespeed>" << endl <<
 			"\t<cameraMaxZoom>" << cameraMaxZoom << "</cameraMaxZoom>" << endl <<
 			"\t<language>" << Language << "</language>" << endl <<
-			"\t<debug>" << DebugIsActive << "</debug>" << endl <<
-			"\t<fullScreen>" << FullScreen << "</fullScreen>" << endl <<
+			"\t<debug>" << debugStr << "</debug>" << endl <<
+			"\t<fullScreen>" << fullScreenStr << "</fullScreen>" << endl <<
 			"</settings>" << endl;
 	}
 	xmlFile.close();

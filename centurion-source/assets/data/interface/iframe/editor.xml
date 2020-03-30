@@ -1,4 +1,4 @@
-﻿<c_iframe name="editor">
+﻿<iframe name="editor">
   <top_left image_name="iframe_editor_topleft" repeat="none"/>
   <top_right image_name="iframe_editor_topright" repeat="none"/>
   <bottom_right image_name="iframe_editor_bottomright" repeat="none"/>
@@ -8,4 +8,4 @@
   <bottom image_name="iframe_editor_bottom" repeat="x"/>
   <left image_name="iframe_editor_left" repeat="y"/>
   <background image_name="iframe_editor_back" repeat="none"/>
-</c_iframe>
+</iframe>
