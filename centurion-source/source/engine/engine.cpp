@@ -4,11 +4,6 @@
 #include <translationsTable.h>
 #include <classes/object-data.h>
 
-#ifndef __MSXML_LIBRARY_DEFINED__
-#define __MSXML_LIBRARY_DEFINED__
-#endif
-#include <Windows.h>
-
 #include <GLFW/glfw3.h>
 
 #include <tinyxml2.h>
@@ -38,6 +33,9 @@
 #include "terrain.h"
 #include "image_sprite.h"
 // 
+
+#include <chrono>
+#include <thread>
 
 using namespace menu;
 using namespace debug;
@@ -380,7 +378,8 @@ void Engine::Fps::SleepFps(void)
 	this->finalTime = glfwGetTime();
 	if (this->finalTime - this->currentTime < 1.0 / 60.0) 
 	{
-		Sleep(DWORD(1000 * (1.0 / 60.0 - (this->finalTime - this->currentTime))));
+		int x = 1000 * int(1.0 / 60.0 - (this->finalTime - this->currentTime));
+		std::this_thread::sleep_for(std::chrono::milliseconds(x));
 	}
 }
 

@@ -7,11 +7,6 @@
 #define STB_IMAGE_WRITE_IMPLEMENTATION
 #include <stb_image_write.h>
 
-#ifndef __MSXML_LIBRARY_DEFINED__
-#define __MSXML_LIBRARY_DEFINED__
-#endif
-#include <Windows.h>
-
 #include <GLFW/glfw3.h>
 
 using namespace std;
