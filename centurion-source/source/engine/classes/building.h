@@ -193,7 +193,7 @@ public:
 	/// <param name="picking">Checks if it's the picking phase.</param>
 	/// <param name="clickID"></param>
 	/// <param name="not_placeable"></param>
-	void render(bool picking, int clickID = 0, bool not_placeable = false) override;
+	void Render(const bool picking, const unsigned int clickID = 0, const bool not_placeable = false) override;
 	void SetStatus(const bool bIsCreated);
 
 	/// <summary>

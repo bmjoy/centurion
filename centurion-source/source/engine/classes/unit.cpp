@@ -77,12 +77,12 @@ void Unit::create() {
 	//creationTime = (float)glfwGetTime();
 }
 
-void Unit::render(bool picking, int clickID, bool not_placeable) 
+void Unit::Render(const bool picking, const unsigned int clickID, const bool not_placeable)
 {
 	clickSelection = (this->GetPickingID() == clickID);
 	if (Game::SelectionRectangle::IsActive()) rectangleSelection = Game::SelectionRectangle::IsInRectangle(hitbox.coords);
 	bool select = (clickSelection + rectangleSelection > 0);
-	this->Select(select);
+	this->Select();
 
 	hitbox.coords = get_rectangle_coords(position3D.x - unitData.hitBox[0] / 2.f, position3D.y + unitData.hitBox[1] / 2.f + unitData.yOffset, (float)unitData.hitBox[0], (float)unitData.hitBox[1]);
 

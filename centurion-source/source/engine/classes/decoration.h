@@ -27,7 +27,7 @@ public:
 	void prepare() override;
 	bool is_placeable();
 	void create();
-	void render(bool picking, int clickID = 0, bool not_placeable = false) override;
+	void Render(const bool picking, const unsigned int clickID = 0, const bool not_placeable = false) override;
 	Building *get_settlement_building() { return independent; }
 	std::string get_settlement_name() { return settlementName; }
 	~Decoration();

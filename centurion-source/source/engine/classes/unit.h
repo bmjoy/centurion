@@ -27,7 +27,7 @@ public:
 	static void ResetCounter() { unitsCounter = 0; }
 	void SetPosition(const float x, const float y);
 	void create();
-	void render(bool picking, int clickID = 0, bool not_placeable = false) override;
+	void Render(const bool picking, const unsigned int clickID = 0, const bool not_placeable = false) override;
 	~Unit();
 private:
 	UnitSprite::UnitData unitData;

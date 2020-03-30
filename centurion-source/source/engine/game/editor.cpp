@@ -291,7 +291,7 @@ namespace editor
 		if (type == "buildings") {
 			buildingTemp->SetPosition(vec3(x, y, 0.f));
 			buildingTemp->SetStatus(false);
-			buildingTemp->render(false, 0, !buildingTemp->IsPlaceable());
+			buildingTemp->Render(false, 0, !buildingTemp->IsPlaceable());
 
 			//Player will be able to see info about placing status
 			if (!buildingTemp->GetSettlement()->IsIndipendent()) {
@@ -315,7 +315,7 @@ namespace editor
 		}
 		if (type == "decorations") {
 			decorTemp->SetPosition(vec3(x, y, 0.f));
-			decorTemp->render(!decorTemp->is_placeable());
+			decorTemp->Render(!decorTemp->is_placeable());
 		}
 	}
 

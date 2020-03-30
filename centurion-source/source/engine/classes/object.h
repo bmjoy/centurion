@@ -56,11 +56,11 @@ public:
 	/// <returns>True if the object is selected; false otherwise.</returns>
 	bool IsSelected(void);
 	/// <summary>
-	/// (???) Da rivedere.
-	/// This function marks the current object as selected (true) or not (false).
+	/// <summary>
+	/// Da rivedere.
+	/// This function marks the current object as selected.
 	/// </summary>
-	/// <param name="par_selected"></param>
-	void Select(bool par_selected);
+	void Select(void);
 
 	/// <summary>
 	/// This function retrieves the unique picking ID of the current object.
@@ -273,7 +273,7 @@ public:
 	/// <summary>
 	/// This function perfoms the rendering of the current object. It must be overread.
 	/// </summary>
-	virtual void render(bool picking, int clickID = 0, bool not_placeable = false) {};
+	virtual void Render(const bool picking, const unsigned int clickID = 0, const bool not_placeable = false) {};
 
 	#pragma region Static members
 	/// <summary>
@@ -351,6 +351,19 @@ protected:
 	std::vector<std::vector<int>> pass_grid;
 	std::map<std::string, std::string> methods;
 	std::map<std::string, std::string> sounds;
+	#pragma region Protected members
+	/// <summary>
+	/// This function checks if the current object is the selected object (namely, if the user has done left click on it).
+	/// </summary>
+	/// <param name="par_clickID">The click.</param>
+	/// <returns>True if the current object is selected; false otherwise.</returns>
+	bool CheckIfSelected(const unsigned int par_clickID);
+	/// <summary>
+	/// This function marks the current object as selected (true) or not selected (false).
+	/// </summary>
+	/// <param name="par_selected">If the current objects must be marked as selected or not selected.</param>
+	void MarkAsSelected(const bool par_selected);
+	#pragma endregion
 private:
 	unsigned short int playerID;
 	unsigned int pickingID;

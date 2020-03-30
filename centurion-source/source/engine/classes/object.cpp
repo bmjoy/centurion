@@ -27,9 +27,9 @@ bool GObject::IsSelected(void)
 {
 	return this->bSelected;
 }
-void GObject::Select(bool par_selected)
+void GObject::Select(void)
 {
-	this->bSelected = par_selected;
+	this->bSelected = true;
 }
 
 unsigned int GObject::GetPickingID(void)
@@ -384,6 +384,20 @@ vector<Decoration*> GObject::GetListOfDecorations(void)
 		}
 	}
 	return decorationsList;
+}
+#pragma endregion
+
+#pragma region Protected Members
+bool GObject::CheckIfSelected(const unsigned int par_clickID)
+{
+	bool bSelected = (this->GetPickingID() == par_clickID);
+	MarkAsSelected(bSelected);
+	return bSelected;
+}
+
+void GObject::MarkAsSelected(const bool par_selected)
+{
+	this->bSelected = par_selected;
 }
 #pragma endregion
 

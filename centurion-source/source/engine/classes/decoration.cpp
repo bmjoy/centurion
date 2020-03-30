@@ -103,7 +103,7 @@ bool Decoration::is_placeable()
 	return astar::checkAvailability(pass_grid, var_position);
 }
 
-void Decoration::render(bool picking, int clickID, bool not_placeable)  
+void Decoration::Render(const bool picking, const unsigned int clickID, const bool not_placeable)
 {
 	if (picking) return;
 

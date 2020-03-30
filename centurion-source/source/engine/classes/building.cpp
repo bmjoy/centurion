@@ -256,14 +256,11 @@ bool Building::SetBuildingProperties(ObjectData::ObjectXMLClassData &objData)
 	return bBuildingCreated;
 }
 
-void Building::render(bool picking, int clickID, bool not_placeable) 
+void Building::Render(const bool picking, const unsigned int clickID, const bool not_placeable)
 {
+	const bool bCurrentlySelected = this->CheckIfSelected(clickID);
 
-	//CheckIfSelected(clickID);
-
-	bool bSelect = (this->GetPickingID() == clickID);
-
-	BSprite()->Render(spriteData, GetPosition().x, GetPosition().y, picking, bSelect, vec3(0), false);
+	BSprite()->Render(spriteData, GetPosition().x, GetPosition().y, picking, bCurrentlySelected, vec3(0), false);
 
 	//---------------------------
 

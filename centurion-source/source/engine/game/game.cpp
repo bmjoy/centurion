@@ -505,7 +505,7 @@ void Game::RenderObjectsPicking() {
 
 		for (int i = 1; i < MAX_NUMBER_OF_OBJECTS; i++) {
 			if (GObject::GetObjectByID(i) != nullptr) {
-				GObject::GetObjectByID(i)->render(true);
+				GObject::GetObjectByID(i)->Render(true);
 			}
 		}
 
@@ -532,7 +532,7 @@ void Game::RenderObjects()
 	{
 		if (GObject::GetObjectByID(i) != nullptr) 
 		{
-			GObject::GetObjectByID(i)->render(false, Picking::leftClickID);
+			GObject::GetObjectByID(i)->Render(false, Picking::leftClickID);
 		}
 	}
 	if (!Minimap::IsActive() && !editor::IsWindowOpened && !editor::menuIsOpened && !editor::TerrainBrushIsActive && Picking::leftClickID_UI == 0 && !editor::movingObject) SelectionRectangle::Render();
