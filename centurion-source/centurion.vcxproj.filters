@@ -258,9 +258,6 @@
     <ClCompile Include="source\engine\classes\object-data.cpp">
       <Filter>Source Files\engine\classes</Filter>
     </ClCompile>
-    <ClCompile Include="source\engine\classes\object-xml.cxx">
-      <Filter>Source Files\engine\classes</Filter>
-    </ClCompile>
     <ClCompile Include="source\engine\classes\settlement.cpp">
       <Filter>Source Files\engine\classes</Filter>
     </ClCompile>
@@ -271,9 +268,6 @@
       <Filter>Source Files\engine\game</Filter>
     </ClCompile>
     <ClCompile Include="source\engine\game\game.cpp">
-      <Filter>Source Files\engine\game</Filter>
-    </ClCompile>
-    <ClCompile Include="source\engine\game\mapObjects-xml.cxx">
       <Filter>Source Files\engine\game</Filter>
     </ClCompile>
     <ClCompile Include="source\engine\game\match.cpp">
@@ -357,13 +351,7 @@
     <ClCompile Include="source\ui\iframe.cpp">
       <Filter>Source Files\ui</Filter>
     </ClCompile>
-    <ClCompile Include="source\engine\game\interface\editorMenuBar-xml.cxx">
-      <Filter>Source Files\engine\game\interface</Filter>
-    </ClCompile>
     <ClCompile Include="source\engine\game\interface\editorMenuBar.cpp">
-      <Filter>Source Files\engine\game\interface</Filter>
-    </ClCompile>
-    <ClCompile Include="source\engine\game\interface\editorWindows-xml.cxx">
       <Filter>Source Files\engine\game\interface</Filter>
     </ClCompile>
     <ClCompile Include="source\engine\game\interface\editorWindows.cpp">
@@ -377,9 +365,6 @@
     </ClCompile>
     <ClCompile Include="source\engine\classes\base_gate.cpp">
       <Filter>Source Files\engine\classes</Filter>
-    </ClCompile>
-    <ClCompile Include="source\gl-items\entity-xml.cxx">
-      <Filter>Source Files\gl-items</Filter>
     </ClCompile>
     <ClCompile Include="source\gl-items\gl_rectangle.cpp">
       <Filter>Source Files\gl-items</Filter>
@@ -515,9 +500,6 @@
     <ClInclude Include="source\engine\classes\object-data.h">
       <Filter>Header Files\engine\classes</Filter>
     </ClInclude>
-    <ClInclude Include="source\engine\classes\object-xml.hxx">
-      <Filter>Header Files\engine\classes</Filter>
-    </ClInclude>
     <ClInclude Include="source\engine\classes\settlement.h">
       <Filter>Header Files\engine\classes</Filter>
     </ClInclude>
@@ -528,9 +510,6 @@
       <Filter>Header Files\engine\game</Filter>
     </ClInclude>
     <ClInclude Include="source\engine\game\game.h">
-      <Filter>Header Files\engine\game</Filter>
-    </ClInclude>
-    <ClInclude Include="source\engine\game\mapObjects-xml.hxx">
       <Filter>Header Files\engine\game</Filter>
     </ClInclude>
     <ClInclude Include="source\engine\game\match.h">
@@ -623,13 +602,7 @@
     <ClInclude Include="source\ui\iframe.h">
       <Filter>Header Files\ui</Filter>
     </ClInclude>
-    <ClInclude Include="source\engine\game\interface\editorMenuBar-xml.hxx">
-      <Filter>Header Files\engine\game\interface</Filter>
-    </ClInclude>
     <ClInclude Include="source\engine\game\interface\editorMenuBar.h">
-      <Filter>Header Files\engine\game\interface</Filter>
-    </ClInclude>
-    <ClInclude Include="source\engine\game\interface\editorWindows-xml.hxx">
       <Filter>Header Files\engine\game\interface</Filter>
     </ClInclude>
     <ClInclude Include="source\engine\game\interface\editorWindows.h">
@@ -643,9 +616,6 @@
     </ClInclude>
     <ClInclude Include="source\engine\classes\base_gate.h">
       <Filter>Header Files\engine\classes</Filter>
-    </ClInclude>
-    <ClInclude Include="source\gl-items\entity-xml.hxx">
-      <Filter>Header Files\gl-items</Filter>
     </ClInclude>
     <ClInclude Include="source\gl-items\gl_rectangle.h">
       <Filter>Header Files\gl-items</Filter>

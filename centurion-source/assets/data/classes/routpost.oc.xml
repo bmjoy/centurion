@@ -1,4 +1,4 @@
-<c_object parent="Building" type="cpp_buildingclass" class_name="ROutpost">
+<object parent="Building" type="cpp_buildingclass" class_name="ROutpost">
  <properties>
     <property name="singularName" value="Roman outpost"/>
     <property name="pluralName" value="Roman outposts"/>
@@ -14,4 +14,4 @@
   <sounds>
     <sound name="select" path="sounds/outpostSelect.ogg"/>
   </sounds>
-</c_object>
+</object>

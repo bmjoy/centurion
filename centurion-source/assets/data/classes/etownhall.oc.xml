@@ -1,4 +1,4 @@
-<c_object parent="BaseTownhall" type="cpp_buildingclass" class_name="ETownhall">
+<object parent="BaseTownhall" type="cpp_buildingclass" class_name="ETownhall">
  <properties>
     <property name="singularName" value="Egyptian townhall"/>
     <property name="pluralName" value="Egyptian townhalls"/>
@@ -14,4 +14,4 @@
   <sounds>
     <sound name="select" path="sounds/eTownhallSelect.ogg"/>
   </sounds>
-</c_object>
+</object>

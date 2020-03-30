@@ -4,8 +4,8 @@
 #include <stb_image.h>
 #include <game/strategy.h>
 #include <logger.h>
-
 #include <engine.h>
+#include <json.hpp>
 
 Terrain::Terrain(){
 	vPath = "assets/shaders/terrain/vertex.glsl";

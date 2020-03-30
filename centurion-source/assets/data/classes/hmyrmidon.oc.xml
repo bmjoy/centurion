@@ -1,4 +1,4 @@
-<c_object parent="Ranged" type="cpp_unitclass" class_name="HMyrmidon">
+<object parent="Ranged" type="cpp_unitclass" class_name="HMyrmidon">
  <properties>
     <property name="singularName" value="Myrmidon"/>
     <property name="pluralName" value="Myrmidons"/>
@@ -10,4 +10,4 @@
   <sounds>
     <sound name="" path=""/>
   </sounds>
-</c_object>
+</object>

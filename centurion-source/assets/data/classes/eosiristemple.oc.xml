@@ -1,4 +1,4 @@
-<c_object parent="BaseTemple" type="cpp_buildingclass" class_name="EOsiristemple">
+<object parent="BaseTemple" type="cpp_buildingclass" class_name="EOsiristemple">
  <properties>
     <property name="singularName" value="Osiris temple"/>
     <property name="pluralName" value="Osiris temples"/>
@@ -14,4 +14,4 @@
   <sounds>
     <sound name="select" path="sounds/eOsiristempleSelect.ogg"/>
   </sounds>
-</c_object>
+</object>

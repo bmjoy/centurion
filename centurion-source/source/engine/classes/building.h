@@ -8,7 +8,6 @@
 
 #pragma once
 
-#include <json.hpp>
 #include "object.h"
 #include "settlement.h"
 

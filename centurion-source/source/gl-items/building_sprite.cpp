@@ -1,5 +1,4 @@
 #include "building_sprite.h"
-#include "entity-xml.hxx"
 
 #include <stb_image.h>
 

@@ -1,4 +1,4 @@
-<c_object parent="BaseTavern" type="cpp_buildingclass" class_name="RTavern">
+<object parent="BaseTavern" type="cpp_buildingclass" class_name="RTavern">
  <properties>
     <property name="singularName" value="Roman tavern"/>
     <property name="pluralName" value="Roman taverns"/>
@@ -14,4 +14,4 @@
   <sounds>
     <sound name="select" path="sounds/rTavernSelect.ogg"/>
   </sounds>
-</c_object>
+</object>

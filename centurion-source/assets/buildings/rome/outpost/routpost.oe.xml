@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<c_entity class_name="ROutpost" type="cpp_building" directions="1">
+<entity class_name="ROutpost" type="cpp_building" directions="1">
 	<ent_properties>
 	</ent_properties>
 	<ent_points>
@@ -12,4 +12,4 @@
 	</ent_layers>
 	<ent_animations>
 	</ent_animations>
-</c_entity>
+</entity>

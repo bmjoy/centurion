@@ -1,10 +1,13 @@
 #include "object_sprite.h"
-#include "entity-xml.hxx"
 
 #include <stb_image.h>
 #include <classes/object-data.h>
 #include <file_manager.h>
 #include <logger.h>
+
+#include <tinyxml2.h>
+
+using namespace tinyxml2;
 
 ObjectSprite::ObjectSprite() {}
 
@@ -20,9 +23,6 @@ void ObjectSprite::Create() {
 		std::string fullName;
 		SpriteData spriteData = SpriteData();
 
-		xml_schema::properties props;
-		props.no_namespace_schema_location(Folders::XML_SCHEMAS + "entity.xsd");
-
 		for (int j = 0; j < entPathList.size(); ++j) {
 
 			spritePath = entPathList[j];
@@ -30,13 +30,16 @@ void ObjectSprite::Create() {
 			string entityFolder = FileManager::GetFileFolderPath(fullName.c_str());
 
 			try {
-				auto_ptr<c_entity> entXml = c_entity_(fullName, 0, props);
-				std::string _className = string(entXml->class_name());
 
-				ent_images::ent_image_iterator _img_it;
-				for (_img_it = entXml->ent_images().ent_image().begin(); _img_it != entXml->ent_images().ent_image().end(); _img_it++) {
+				XMLDocument xmlFile;
+				xmlFile.LoadFile(fullName.c_str());
+				XMLElement *_entityXml = xmlFile.FirstChildElement("entity");
 
-					string image_name = string(_img_it->file() + ".png");
+				std::string _className = string(_entityXml->Attribute("class_name"));
+
+				for (XMLElement* _img_it = _entityXml->FirstChildElement("ent_images")->FirstChildElement(); _img_it != NULL; _img_it = _img_it->NextSiblingElement())
+				{
+					string image_name = string(_img_it->Attribute("file")) + ".png";
 					string image_path = entityFolder + "\\" + image_name;
 
 					/* save texture info */
@@ -68,9 +71,8 @@ void ObjectSprite::Create() {
 					stbi_image_free(data);
 				}
 			}
-			catch (const xml_schema::exception & e) {
-				string emsg = string(e.what());
-				Logger::LogMessage msg = Logger::LogMessage("An error occurred reading the following sprite: \"" + spritePath + "\". This was the error message: \"" + emsg + "\"", "Warn", "", "BuildingSprite", "Create");
+			catch (...) {
+				Logger::LogMessage msg = Logger::LogMessage("An error occurred reading the following sprite: \"" + spritePath + "\". ", "Warn", "", "BuildingSprite", "Create");
 				Logger::Warn(msg);
 			}
 		}

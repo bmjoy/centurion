@@ -42,37 +42,37 @@ void Unit::SetPosition(const float x, const float y)
 void Unit::create() {
 
 	/* store data from entity json */
-	std::string state;
-	std::ifstream path(data["ent_path"].get<std::string>());
-	entityData = json::parse(path);
+	//std::string state;
+	//std::ifstream path(data["ent_path"].get<std::string>());
+	//entityData = json::parse(path);
 
-	unitData.maxDirections = entityData["directions"];
-	for (int i = 0; i < entityData["spriteList"].size(); i++) {
-		state = entityData["spriteList"][i].get<std::string>();
-		unitData.States[state] = i;
-		unitData.Frames[i] = entityData["sprites"][state]["frames"].get<int>();
-		unitData.Durations[i] = entityData["sprites"][state]["duration"].get<int>();
-	}
-	unitData.hitBox[0] = entityData["hitbox"][0].get<int>();
-	unitData.hitBox[1] = entityData["hitbox"][1].get<int>();
-	unitData.yOffset = entityData["yOffset"].get<int>();
-	unitData.playerColor = *(player->GetPlayerColor());
-	unitData.pickingColor = pickingColor;
-	unitData.className = this->GetClassName();
-	USprite()->getTextureInfo(&unitData);
+	//unitData.maxDirections = entityData["directions"];
+	//for (int i = 0; i < entityData["spriteList"].size(); i++) {
+	//	state = entityData["spriteList"][i].get<std::string>();
+	//	unitData.States[state] = i;
+	//	unitData.Frames[i] = entityData["sprites"][state]["frames"].get<int>();
+	//	unitData.Durations[i] = entityData["sprites"][state]["duration"].get<int>();
+	//}
+	//unitData.hitBox[0] = entityData["hitbox"][0].get<int>();
+	//unitData.hitBox[1] = entityData["hitbox"][1].get<int>();
+	//unitData.yOffset = entityData["yOffset"].get<int>();
+	//unitData.playerColor = *(player->GetPlayerColor());
+	//unitData.pickingColor = pickingColor;
+	//unitData.className = this->GetClassName();
+	//USprite()->getTextureInfo(&unitData);
 
-	selectionCircle = gui::Circle();
-	selectionCircle.create(0.f, 0.f, 35.f, 23.f, 8.f, "center");
+	//selectionCircle = gui::Circle();
+	//selectionCircle.create(0.f, 0.f, 35.f, 23.f, 8.f, "center");
 
-	// hitbox 
-	hitbox.rectangle = gui::Rectangle();
-	hitbox.rectangle.create("border", 0.0f, 0.0f, (float)unitData.hitBox[0], (float)unitData.hitBox[1], "center", 0);
+	//// hitbox 
+	//hitbox.rectangle = gui::Rectangle();
+	//hitbox.rectangle.create("border", 0.0f, 0.0f, (float)unitData.hitBox[0], (float)unitData.hitBox[1], "center", 0);
 
-	//Show circle position under the unit (Debug only)
-	circlePos = gui::Image("circle_pos");
-	circlePos.create("center", 0, 0, 0, 0, 0);
+	////Show circle position under the unit (Debug only)
+	//circlePos = gui::Image("circle_pos");
+	//circlePos.create("center", 0, 0, 0, 0, 0);
 
-	creationTime = (float)glfwGetTime();
+	//creationTime = (float)glfwGetTime();
 }
 
 void Unit::render(bool picking, int clickID, bool not_placeable) 
@@ -127,38 +127,38 @@ void Unit::render(bool picking, int clickID, bool not_placeable)
 }
 
 void Unit::position_update() {
-	if (is_Moving && pathCount < path.size() - 2) {
-		currentStateStr = "walk";
-		unitData.currentState = unitData.States[currentStateStr];
+	//if (is_Moving && pathCount < path.size() - 2) {
+	//	currentStateStr = "walk";
+	//	unitData.currentState = unitData.States[currentStateStr];
 
-		position2D.x += (path[pathCount + 1].x - path[pathCount].x) / distance * data["movement_speed"];
-		position2D.y += (path[pathCount + 1].y - path[pathCount].y) / distance * data["movement_speed"];
+	//	position2D.x += (path[pathCount + 1].x - path[pathCount].x) / distance * data["movement_speed"];
+	//	position2D.y += (path[pathCount + 1].y - path[pathCount].y) / distance * data["movement_speed"];
 
-		delta = getResDistance(path, pathCount, position2D) - res_distance;
-		res_distance = getResDistance(path, pathCount, position2D);
+	//	delta = getResDistance(path, pathCount, position2D) - res_distance;
+	//	res_distance = getResDistance(path, pathCount, position2D);
 
-		if (res_distance < 20 || delta > 0) {
+	//	if (res_distance < 20 || delta > 0) {
 
-			pathCount += 1;
+	//		pathCount += 1;
 
-			// update distance
-			distance = getDistance(path, pathCount);
-			res_distance = distance;
+	//		// update distance
+	//		distance = getDistance(path, pathCount);
+	//		res_distance = distance;
 
-			// update direction
-			if (pathCount < path.size() - 2) {
-				angle = getAngle(path, pathCount);
-				unitData.currentDir = (int)round(angle / 360 * unitData.maxDirections);
-			}
-		}
-	}
-	if (pathCount == path.size() - 2) {
-		pathCount = 0;
-		is_Moving = false;
-		currentStateStr = "idle";
-		unitData.currentState = unitData.States[currentStateStr];
-		pathQuadsList = { };
-	}
+	//		// update direction
+	//		if (pathCount < path.size() - 2) {
+	//			angle = getAngle(path, pathCount);
+	//			unitData.currentDir = (int)round(angle / 360 * unitData.maxDirections);
+	//		}
+	//	}
+	//}
+	//if (pathCount == path.size() - 2) {
+	//	pathCount = 0;
+	//	is_Moving = false;
+	//	currentStateStr = "idle";
+	//	unitData.currentState = unitData.States[currentStateStr];
+	//	pathQuadsList = { };
+	//}
 }
 
 void Unit::walk_behaviour() {

@@ -1,19 +1,13 @@
-{
-  "class_name": "hmyrmidon",
-  "yOffset": 30,
-  "hitbox": [ 30, 70 ],
-  "spriteList": [ "idle", "walk" ],
-  "directions": 8,
-  "sprites": {
-    "idle": {
-      "filePath": "assets/units/hmyrmidon/idle.png",
-      "frames": 11,
-      "duration": 30
-    },
-    "walk": {
-      "filePath": "assets/units/hmyrmidon/walk.png",
-      "frames": 11,
-      "duration": 15
-    }
-  }
-}
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<entity class_name="HMyrmidon" type="cpp_unit" directions="1">
+	<ent_properties>
+	</ent_properties>
+	<ent_points>
+	</ent_points>
+	<ent_images>
+	</ent_images>
+	<ent_layers>
+	</ent_layers>
+	<ent_animations>
+	</ent_animations>
+</entity>

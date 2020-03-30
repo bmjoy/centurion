@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no" ?>
-<c_object parent="Stronghold" type="cpp_noclass" class_name="BaseArena">
+<object parent="Stronghold" type="cpp_noclass" class_name="BaseArena">
   <properties>
     <property name="singularName" value="Arena"/>
     <property name="pluralName" value="Arenas"/>
@@ -8,4 +8,4 @@
   </methods>
   <sounds>
   </sounds>
-</c_object>
+</object>

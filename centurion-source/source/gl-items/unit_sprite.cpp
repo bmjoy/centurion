@@ -1,7 +1,6 @@
 #include "unit_sprite.h"
 
 #include <stb_image.h>
-#include <json.hpp>
 #include <fstream>
 
 UnitSprite::UnitSprite(){
@@ -11,53 +10,53 @@ UnitSprite::UnitSprite(){
 
 void UnitSprite::create() {
 	
-	glUseProgram(shaderId);
-	GenerateBuffers();
+	//glUseProgram(shaderId);
+	//GenerateBuffers();
 
-	int k = 0;
-	int w, h, nrChannels;
-	GLuint texID;
+	//int k = 0;
+	//int w, h, nrChannels;
+	//GLuint texID;
 
-	std::string className;
-	std::string fullName;
-	std::string state;
+	//std::string className;
+	//std::string fullName;
+	//std::string state;
 
-	for (int j = 0; j < entPathList.size(); ++j) {
+	//for (int j = 0; j < entPathList.size(); ++j) {
 
-		std::ifstream ent_path(entPathList[j]);
-		json ent_data = json::parse(ent_path);
+	//	std::ifstream ent_path(entPathList[j]);
+	//	json ent_data = json::parse(ent_path);
 
-		for (int i = 0; i < ent_data["spriteList"].size(); i++) {
+	//	for (int i = 0; i < ent_data["spriteList"].size(); i++) {
 
-			w = 0; h = 0; nrChannels = 0; texID = 0;
+	//		w = 0; h = 0; nrChannels = 0; texID = 0;
 
-			className = ent_data["class_name"].get<std::string>();
-			state = ent_data["spriteList"][i].get<std::string>();
-			fullName = className + "_" + state;
-			string texturePath = ent_data["sprites"][state]["filePath"].get<std::string>();
+	//		className = ent_data["class_name"].get<std::string>();
+	//		state = ent_data["spriteList"][i].get<std::string>();
+	//		fullName = className + "_" + state;
+	//		string texturePath = ent_data["sprites"][state]["filePath"].get<std::string>();
 
-			/* texture info */
-			data = stbi_load(texturePath.c_str(), &w, &h, &nrChannels, 0);
-			if (!data) { std::cout << "Failed to load texture" << std::endl; }
+	//		/* texture info */
+	//		data = stbi_load(texturePath.c_str(), &w, &h, &nrChannels, 0);
+	//		if (!data) { std::cout << "Failed to load texture" << std::endl; }
 
-			/* texture */
-			glGenTextures(1, &texID);
-			glBindTexture(GL_TEXTURE_2D, texID);
-			// create texture and generate mipmaps
-			glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, w, h, 0, GL_RGBA, GL_UNSIGNED_BYTE, data);
-			glGenerateMipmap(GL_TEXTURE_2D);
-			glBindTexture(GL_TEXTURE_2D, 0);
+	//		/* texture */
+	//		glGenTextures(1, &texID);
+	//		glBindTexture(GL_TEXTURE_2D, texID);
+	//		// create texture and generate mipmaps
+	//		glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, w, h, 0, GL_RGBA, GL_UNSIGNED_BYTE, data);
+	//		glGenerateMipmap(GL_TEXTURE_2D);
+	//		glBindTexture(GL_TEXTURE_2D, 0);
 
-			stbi_image_free(data);
+	//		stbi_image_free(data);
 
-			/* store information */
-			textureIdMap[fullName] = texID;
-			spriteSize[fullName][0] = w;
-			spriteSize[fullName][1] = h;
+	//		/* store information */
+	//		textureIdMap[fullName] = texID;
+	//		spriteSize[fullName][0] = w;
+	//		spriteSize[fullName][1] = h;
 
-			k++;
-		}
-	}	
+	//		k++;
+	//	}
+	//}	
 }
 
 void UnitSprite::getTextureInfo(UnitData *uData) {

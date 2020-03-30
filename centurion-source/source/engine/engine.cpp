@@ -26,6 +26,7 @@
 #include <logger.h>
 #include <hector-lua.h>
 
+#include <json.hpp>
 
 // audio
 #include "audio_manager.h"

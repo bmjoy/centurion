@@ -1,12 +1,16 @@
 #include "object-data.h"
 
 #include <file_manager.h>
-#include "object-xml.hxx"
 #include <primitives.h>
 #include <building_sprite.h>
 #include <decoration_sprite.h>
 #include <unit_sprite.h>
 #include <logger.h>
+
+#include <tinyxml2.h>
+
+
+using namespace tinyxml2;
 
 #pragma region Static variables
 
@@ -172,29 +176,30 @@ void ObjectData::ReadDataClassesFromXml(void)
 		string path = dataClassesPath + files[i];
 
 		try {
-			xml_schema::properties props;
-			props.no_namespace_schema_location(Folders::XML_SCHEMAS + "object.xsd");
-			auto_ptr<c_object> dataXML = c_object_(path, 0, props);
+			XMLDocument xmlFile;
+			xmlFile.LoadFile(path.c_str());
+			XMLElement *_objectXml = xmlFile.FirstChildElement("object");
 
 			ObjectXMLClassData objData = ObjectXMLClassData();
 
-			objData.SetClassName(string(dataXML->class_name()));
-			objData.SetClassType(string(dataXML->type()));
-			objData.SetParentClass(string(dataXML->parent()));
+			objData.SetClassName(string(_objectXml->Attribute("class_name")));
+			objData.SetClassType(string(_objectXml->Attribute("type")));
+			objData.SetParentClass(string(_objectXml->Attribute("parent")));
 
-			properties::property_iterator _it_prop;
-			for (_it_prop = dataXML->properties().property().begin(); _it_prop != dataXML->properties().property().end(); _it_prop++) {
-				objData.AddProperty(string(_it_prop->name()), string(_it_prop->value()));
-			}
 
-			methods::method_iterator _it_mtd;
-			for (_it_mtd = dataXML->methods().method().begin(); _it_mtd != dataXML->methods().method().end(); _it_mtd++) {
-				objData.AddMethod(string(_it_mtd->name()), string(_it_mtd->script()));
+			for (XMLElement* _it_prop = _objectXml->FirstChildElement("properties")->FirstChildElement(); _it_prop != NULL; _it_prop = _it_prop->NextSiblingElement())
+			{
+				objData.AddProperty(string(_it_prop->Attribute("name")), string(_it_prop->Attribute("value")));
 			}
 			
-			sounds::sound_iterator _it_snd;
-			for (_it_snd = dataXML->sounds().sound().begin(); _it_snd != dataXML->sounds().sound().end(); _it_snd++) {
-				objData.AddSound(string(_it_snd->name()), string(_it_snd->path()));
+			for (XMLElement* _it_mtd = _objectXml->FirstChildElement("methods")->FirstChildElement(); _it_mtd != NULL; _it_mtd = _it_mtd->NextSiblingElement())
+			{
+				objData.AddMethod(string(_it_mtd->Attribute("name")), string(_it_mtd->Attribute("script")));
+			}
+			
+			for (XMLElement* _it_snd = _objectXml->FirstChildElement("sounds")->FirstChildElement(); _it_snd != NULL; _it_snd = _it_snd->NextSiblingElement())
+			{
+				objData.AddSound(string(_it_snd->Attribute("name")), string(_it_snd->Attribute("path")));
 			}
 
 			AddObjectXMLClassData(objData.GetClassName(), objData);
@@ -213,8 +218,8 @@ void ObjectData::ReadDataClassesFromXml(void)
 				primitives::USprite()->AddEntityPath(path);
 			}
 		}
-		catch (const xml_schema::exception & e) {
-			std::cout << e << std::endl;
+		catch (...) {
+			std::cout << "An error occurred" << std::endl;
 		}
 	}
 }

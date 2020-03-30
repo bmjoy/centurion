@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no" ?>
-<c_object parent="Unit" type="cpp_noclass" class_name="Military">
+<object parent="Unit" type="cpp_noclass" class_name="Military">
   <properties>
   </properties>
   <methods>
   </methods>
   <sounds>
   </sounds>
-</c_object>
+</object>

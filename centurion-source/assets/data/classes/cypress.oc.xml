@@ -1,4 +1,4 @@
-<c_object parent="Trees" type="cpp_decorationclass" class_name="Cypress">
+<object parent="Trees" type="cpp_decorationclass" class_name="Cypress">
  <properties>
     <property name="singularName" value="Cypress"/>
     <property name="pluralName" value="Cypresses"/>
@@ -12,4 +12,4 @@
   <sounds>
     <sound name="" path=""/>
   </sounds>
-</c_object>
+</object>

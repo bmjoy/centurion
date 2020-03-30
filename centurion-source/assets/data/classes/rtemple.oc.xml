@@ -1,4 +1,4 @@
-<c_object parent="BaseTemple" type="cpp_buildingclass" class_name="RTemple">
+<object parent="BaseTemple" type="cpp_buildingclass" class_name="RTemple">
  <properties>
     <property name="singularName" value="Roman temple"/>
     <property name="pluralName" value="Roman temples"/>
@@ -14,4 +14,4 @@
   <sounds>
     <sound name="select" path="sounds/rTempleSelect.ogg"/>
   </sounds>
-</c_object>
+</object>

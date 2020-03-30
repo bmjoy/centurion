@@ -1,4 +1,4 @@
-<c_object parent="BaseBlacksmith" type="cpp_buildingclass" class_name="RBlacksmith">
+<object parent="BaseBlacksmith" type="cpp_buildingclass" class_name="RBlacksmith">
  <properties>
     <property name="singularName" value="Roman blacksmith"/>
     <property name="pluralName" value="Roman blacksmiths"/>
@@ -14,4 +14,4 @@
   <sounds>
     <sound name="select" path="sounds/rBlacksmithSelect.ogg"/>
   </sounds>
-</c_object>
+</object>

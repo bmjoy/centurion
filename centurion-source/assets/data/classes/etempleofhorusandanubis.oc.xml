@@ -1,4 +1,4 @@
-<c_object parent="BaseArena" type="cpp_buildingclass" class_name="ETempleOfHorusAndAnubis">
+<object parent="BaseArena" type="cpp_buildingclass" class_name="ETempleOfHorusAndAnubis">
  <properties>
     <property name="singularName" value="Temple of Horus and Anubis"/>
     <property name="pluralName" value="Temples of Horus and Anubis"/>
@@ -14,4 +14,4 @@
   <sounds>
     <sound name="select" path="sounds/eTempleSelect.ogg"/>
   </sounds>
-</c_object>
+</object>

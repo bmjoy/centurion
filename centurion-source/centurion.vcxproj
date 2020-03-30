@@ -103,7 +103,7 @@
     </ClCompile>
     <Link>
       <AdditionalLibraryDirectories>$(ProjectDir)source/extern/libraries</AdditionalLibraryDirectories>
-      <AdditionalDependencies>lua53.lib;xerces-c_3D.lib;opengl32.lib;glew32.lib;glfw3.lib;OpenAL32.lib;libsndfile-1.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>lua53.lib;opengl32.lib;glew32.lib;glfw3.lib;OpenAL32.lib;libsndfile-1.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <AdditionalOptions>/ignore:4217 %(AdditionalOptions)</AdditionalOptions>
     </Link>
     <PostBuildEvent>
@@ -129,9 +129,6 @@ XCOPY "$(ProjectDir)settings.xml" "$(ProjectDir)$(OutDir)"
 XCOPY "$(ProjectDir)vorbis.dll" "$(ProjectDir)$(OutDir)"
 XCOPY "$(ProjectDir)vorbisfile.dll" "$(ProjectDir)$(OutDir)"
 XCOPY "$(ProjectDir)wrap_oal.dll" "$(ProjectDir)$(OutDir)"
-XCOPY "$(ProjectDir)msvcr120.dll" "$(ProjectDir)$(OutDir)"
-XCOPY "$(ProjectDir)msvcr120d.dll" "$(ProjectDir)$(OutDir)"
-XCOPY "$(ProjectDir)xerces-c_3_1D_vc120.dll" "$(ProjectDir)$(OutDir)"
 XCOPY "$(ProjectDir)lua53.dll" "$(ProjectDir)$(OutDir)"</Command>
     </PreBuildEvent>
   </ItemDefinitionGroup>
@@ -169,7 +166,7 @@ XCOPY "$(ProjectDir)lua53.dll" "$(ProjectDir)$(OutDir)"</Command>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <AdditionalLibraryDirectories>$(ProjectDir)source/extern/libraries</AdditionalLibraryDirectories>
-      <AdditionalDependencies>lua53.lib;xerces-c_3D.lib;opengl32.lib;glew32.lib;glfw3.lib;OpenAL32.lib;libsndfile-1.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>lua53.lib;opengl32.lib;glew32.lib;glfw3.lib;OpenAL32.lib;libsndfile-1.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <AdditionalOptions>/ignore:4217 %(AdditionalOptions)</AdditionalOptions>
     </Link>
     <PostBuildEvent>
@@ -195,9 +192,6 @@ XCOPY "$(ProjectDir)settings.xml" "$(ProjectDir)$(OutDir)"
 XCOPY "$(ProjectDir)vorbis.dll" "$(ProjectDir)$(OutDir)"
 XCOPY "$(ProjectDir)vorbisfile.dll" "$(ProjectDir)$(OutDir)"
 XCOPY "$(ProjectDir)wrap_oal.dll" "$(ProjectDir)$(OutDir)"
-XCOPY "$(ProjectDir)msvcr120.dll" "$(ProjectDir)$(OutDir)"
-XCOPY "$(ProjectDir)msvcr120d.dll" "$(ProjectDir)$(OutDir)"
-XCOPY "$(ProjectDir)xerces-c_3_1D_vc120.dll" "$(ProjectDir)$(OutDir)"
 XCOPY "$(ProjectDir)lua53.dll" "$(ProjectDir)$(OutDir)"</Command>
     </PreBuildEvent>
   </ItemDefinitionGroup>
@@ -208,7 +202,6 @@ XCOPY "$(ProjectDir)lua53.dll" "$(ProjectDir)$(OutDir)"</Command>
     <ClCompile Include="source\engine\classes\decoration.cpp" />
     <ClCompile Include="source\engine\classes\base_gate.cpp" />
     <ClCompile Include="source\engine\classes\object-data.cpp" />
-    <ClCompile Include="source\engine\classes\object-xml.cxx" />
     <ClCompile Include="source\engine\classes\object.cpp" />
     <ClCompile Include="source\engine\classes\settlement.cpp" />
     <ClCompile Include="source\engine\classes\unit.cpp" />
@@ -216,11 +209,8 @@ XCOPY "$(ProjectDir)lua53.dll" "$(ProjectDir)$(OutDir)"</Command>
     <ClCompile Include="source\engine\errorCodes.cpp" />
     <ClCompile Include="source\engine\game\editor.cpp" />
     <ClCompile Include="source\engine\game\game.cpp" />
-    <ClCompile Include="source\engine\game\interface\editorMenuBar-xml.cxx" />
     <ClCompile Include="source\engine\game\interface\editorMenuBar.cpp" />
-    <ClCompile Include="source\engine\game\interface\editorWindows-xml.cxx" />
     <ClCompile Include="source\engine\game\interface\editorWindows.cpp" />
-    <ClCompile Include="source\engine\game\mapObjects-xml.cxx" />
     <ClCompile Include="source\engine\game\match.cpp" />
     <ClCompile Include="source\engine\game\strategy.cpp" />
     <ClCompile Include="source\engine\mapgen\mapgen.cpp" />
@@ -241,7 +231,6 @@ XCOPY "$(ProjectDir)lua53.dll" "$(ProjectDir)$(OutDir)"</Command>
     <ClCompile Include="source\gl-items\decoration_sprite.cpp" />
     <ClCompile Include="source\gl-items\gl_circle.cpp" />
     <ClCompile Include="source\gl-items\gl_rectangle.cpp" />
-    <ClCompile Include="source\gl-items\entity-xml.cxx" />
     <ClCompile Include="source\gl-items\grid.cpp" />
     <ClCompile Include="source\gl-items\image_sprite.cpp" />
     <ClCompile Include="source\gl-items\light.cpp" />
@@ -280,7 +269,6 @@ XCOPY "$(ProjectDir)lua53.dll" "$(ProjectDir)$(OutDir)"</Command>
     <ClInclude Include="source\engine\classes\decoration.h" />
     <ClInclude Include="source\engine\classes\base_gate.h" />
     <ClInclude Include="source\engine\classes\object-data.h" />
-    <ClInclude Include="source\engine\classes\object-xml.hxx" />
     <ClInclude Include="source\engine\classes\object.h" />
     <ClInclude Include="source\engine\classes\settlement.h" />
     <ClInclude Include="source\engine\classes\unit.h" />
@@ -288,11 +276,8 @@ XCOPY "$(ProjectDir)lua53.dll" "$(ProjectDir)$(OutDir)"</Command>
     <ClInclude Include="source\engine\errorCodes.h" />
     <ClInclude Include="source\engine\game\editor.h" />
     <ClInclude Include="source\engine\game\game.h" />
-    <ClInclude Include="source\engine\game\interface\editorMenuBar-xml.hxx" />
     <ClInclude Include="source\engine\game\interface\editorMenuBar.h" />
-    <ClInclude Include="source\engine\game\interface\editorWindows-xml.hxx" />
     <ClInclude Include="source\engine\game\interface\editorWindows.h" />
-    <ClInclude Include="source\engine\game\mapObjects-xml.hxx" />
     <ClInclude Include="source\engine\game\match.h" />
     <ClInclude Include="source\engine\game\strategy.h" />
     <ClInclude Include="source\engine\header.h" />
@@ -313,7 +298,6 @@ XCOPY "$(ProjectDir)lua53.dll" "$(ProjectDir)$(OutDir)"</Command>
     <ClInclude Include="source\gl-items\decoration_sprite.h" />
     <ClInclude Include="source\gl-items\gl_circle.h" />
     <ClInclude Include="source\gl-items\gl_rectangle.h" />
-    <ClInclude Include="source\gl-items\entity-xml.hxx" />
     <ClInclude Include="source\gl-items\grid.h" />
     <ClInclude Include="source\gl-items\header_primitives.h" />
     <ClInclude Include="source\gl-items\image_sprite.h" />

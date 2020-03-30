@@ -9,7 +9,6 @@
 #pragma once
 
 #include <ui.h>
-#include <json.hpp>
 #include <object_sprite.h>
 #include "object-data.h"
 
@@ -352,7 +351,6 @@ protected:
 	ObjectSprite::SpriteData spriteData;
 	Player *player;
 	vec3 pickingColor;
-	json data;
 	vector<vector<int>> pass_grid;
 	map<string, string> methods;
 	map<string, string> sounds;

@@ -1,5 +1,4 @@
 #include "editorMenuBar.h"
-#include "editorMenuBar-xml.hxx"
 
 #include <file_manager.h>
 #include <logger.h>
@@ -7,6 +6,7 @@
 #include <engine.h>
 #include <picking.h>
 #include <translationsTable.h>
+#include <tinyxml2.h>
 
 #pragma region Static variables
 
@@ -88,35 +88,40 @@ void EditorMenuBar::Create(void)
 {
 	try
 	{
-		xml_schema::properties props;
-		props.no_namespace_schema_location(Folders::XML_SCHEMAS + "editorMenuBar.xsd");
-		auto_ptr<c_editorMenuBar> menuXML = c_editorMenuBar_(Folders::INTERFACE_EDITOR + "editorMenuBar.xml", 0, props);
+		string path = Folders::INTERFACE_EDITOR + "editorMenuBar.xml";
+		tinyxml2::XMLDocument xmlFile;
+		xmlFile.LoadFile(path.c_str());
 
 		/* bar properties */
 
-		font = string(menuXML->font());
-		color = vec4(menuXML->c_background().r(), menuXML->c_background().g(), menuXML->c_background().b(), 255.f);
+		font = string(xmlFile.FirstChildElement("editorMenuBar")->Attribute("font"));
+
+		tinyxml2::XMLElement *_background = xmlFile.FirstChildElement("editorMenuBar")->FirstChildElement("background");
+		color = vec4(stoi(_background->Attribute("r")), stoi(_background->Attribute("g")), stoi(_background->Attribute("b")), 255.f);
+
 		width = Engine::myWindow::Width;
-		height = float(menuXML->height());
+
+		string height_str = string(xmlFile.FirstChildElement("editorMenuBar")->Attribute("height"));
+		height = stof(height_str);
 
 		topBar = gui::Rectangle();
 		topBar.create("filled", 0.0f, (float)-height, Engine::myWindow::Width, (float)height, "bottom-left", 0);
 
 		/* menus properties */
 
-		c_editorMenuBar::c_editorMenu_iterator _it_menu;
 		float titlePosX = 0.f;
 		float titlePosY = Engine::myWindow::Height - height;
 		 
 		minPickingId = PickingUI::GetLastPickingID();
 
-		for (_it_menu = menuXML->c_editorMenu().begin(); _it_menu != menuXML->c_editorMenu().end(); _it_menu++) {
-
+		tinyxml2::XMLElement *levelElement = xmlFile.FirstChildElement("editorMenuBar")->FirstChildElement("editorMenuArray");
+		for (tinyxml2::XMLElement* _it_menu = levelElement->FirstChildElement(); _it_menu != NULL; _it_menu = _it_menu->NextSiblingElement())
+		{
 			// ------ menu title
 			EditorMenu* _menu = new EditorMenu();
-			int _menu_id = (int)_it_menu->id();
-			string title = TranslationsTable::GetTranslation(string(_it_menu->name()));
-			string luaCmd = string(_it_menu->onclick());
+			int _menu_id = stoi(_it_menu->Attribute("id"));
+			string title = TranslationsTable::GetTranslation(string(_it_menu->Attribute("name")));
+			string luaCmd = string(_it_menu->Attribute("onclick"));
 			float titleWidth = std::max(gui::SimpleText::CalculateTextWidth(title, font) + 20.f, 60.f);
 
 			gui::Rectangle titleBack = gui::Rectangle();
@@ -126,12 +131,12 @@ void EditorMenuBar::Create(void)
 			
 			// ------ menu options
 
-			c_editorMenu::command_iterator _it_cmd;
 			float maxOptionWordSize = 0;
 			
 			// calculate the submenu width
-			for (_it_cmd = _it_menu->command().begin(); _it_cmd != _it_menu->command().end(); _it_cmd++) {
-				string optionstring = title + "_" + string(_it_cmd->name());
+			for (tinyxml2::XMLElement* _it_cmd = _it_menu->FirstChildElement(); _it_cmd != NULL; _it_cmd = _it_cmd->NextSiblingElement())
+			{
+				string optionstring = title + "_" + string(_it_cmd->Attribute("name"));
 				maxOptionWordSize = std::max(maxOptionWordSize, gui::SimpleText::CalculateTextWidth(optionstring, font));
 			}
 			float optionsWidth = maxOptionWordSize + 50;
@@ -140,10 +145,11 @@ void EditorMenuBar::Create(void)
 			// create vectors
 			vector<gui::Rectangle> optionsBack = vector<gui::Rectangle>();
 			vector<gui::SimpleText> optionsText = vector<gui::SimpleText>();
-			for (_it_cmd = _it_menu->command().begin(); _it_cmd != _it_menu->command().end(); _it_cmd++) {
-				string optionstring = TranslationsTable::GetTranslation(string(_it_menu->name()) + "_" + string(_it_cmd->name()));
-				string optionLuaCmd = string(_it_cmd->onclick());
-				int j = int(_it_cmd->id());
+			for (tinyxml2::XMLElement* _it_cmd = _it_menu->FirstChildElement(); _it_cmd != NULL; _it_cmd = _it_cmd->NextSiblingElement())
+			{
+				string optionstring = TranslationsTable::GetTranslation(string(_it_menu->Attribute("name")) + "_" + string(_it_cmd->Attribute("name")));
+				string optionLuaCmd = string(_it_cmd->Attribute("onclick"));
+				int j = stoi(_it_cmd->Attribute("id"));
 
 				gui::Rectangle optionback = gui::Rectangle();
 				optionback.create("filled", titlePosX, titlePosY - height * (j + 1), optionsWidth, height, "bottom-left", PickingUI::ObtainPickingID(), optionLuaCmd);
@@ -162,10 +168,6 @@ void EditorMenuBar::Create(void)
 		}
 		maxPickingId = PickingUI::GetLastPickingID() + 1;
 
-	}
-	catch (const xml_schema::exception & e) {
-		std::cout << e << std::endl;
-		Engine::GameClose();
 	}
 	catch (const std::exception&)
 	{

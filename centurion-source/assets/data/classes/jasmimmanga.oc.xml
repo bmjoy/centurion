@@ -1,4 +1,4 @@
-<c_object parent="Trees" type="cpp_decorationclass" class_name="Jasmimmanga">
+<object parent="Trees" type="cpp_decorationclass" class_name="Jasmimmanga">
  <properties>
     <property name="singularName" value="Jasmim manga"/>
     <property name="pluralName" value="Jasmim mangas"/>
@@ -12,4 +12,4 @@
   <sounds>
     <sound name="" path=""/>
   </sounds>
-</c_object>
+</object>

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no" ?>
-<c_object parent="Habitable" type="cpp_noclass" class_name="BaseShipyard">
+<object parent="Habitable" type="cpp_noclass" class_name="BaseShipyard">
   <properties>
     <property name="singularName" value="Shipyard"/>
     <property name="pluralName" value="Shipyards"/>
@@ -10,6 +10,6 @@
   </methods>
   <sounds>
   </sounds>
-</c_object>
+</object>
 
 <!-- Il parent non è Building ma Habitable perché Gaetano vuole rendere "vivibile" i porti -->

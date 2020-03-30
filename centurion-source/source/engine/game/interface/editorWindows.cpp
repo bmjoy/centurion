@@ -1,6 +1,4 @@
 #include "editorWindows.h"
-#include "editorWindows-xml.hxx"
-
 #include <file_manager.h>
 #include <logger.h>
 #include <settings.h>
@@ -8,6 +6,7 @@
 #include <hector-lua.h>
 
 #include <engine.h>
+#include <tinyxml2.h>
 
 #pragma region static variables
 
@@ -85,25 +84,27 @@ void EditorWindows::Create(void)
 {
 	try
 	{
-		xml_schema::properties props;
-		props.no_namespace_schema_location(Folders::XML_SCHEMAS + "editorWindows.xsd");
-		auto_ptr<c_editorWindows> winXml = c_editorWindows_(Folders::INTERFACE_EDITOR + "editorWindows.xml", 0, props);
+		string path = Folders::INTERFACE_EDITOR + "editorWindows.xml";
+		tinyxml2::XMLDocument xmlFile;
+		xmlFile.LoadFile(path.c_str());
 
-		c_editorWindows::c_editorWindow_iterator _it_wind;
-		for (_it_wind = winXml->c_editorWindow().begin(); _it_wind != winXml->c_editorWindow().end(); _it_wind++) {
 
+		for (tinyxml2::XMLElement* _it_wind = xmlFile.FirstChildElement("editorWindows")->FirstChildElement(); _it_wind != NULL; _it_wind = _it_wind->NextSiblingElement())
+		{
 			EditorWindow* eWind = new EditorWindow();
 
-			int id = int(_it_wind->id());
-			bool isOpened = bool(_it_wind->isOpened());
-			string luaOpeningCMD = string(_it_wind->openingScript());
-			string luaConditionCMD = string(_it_wind->conditionScript());
-			string luaConditionFun = string(_it_wind->conditionScript().function());
+			int id = stoi(string(_it_wind->Attribute("id")));
 
-			gui::Iframe iframe = gui::Iframe(string(_it_wind->iframe()));
+			string isOpenedStr = string(_it_wind->Attribute("isOpened"));
+			bool isOpened = (isOpenedStr == "true");
+			string luaOpeningCMD = string(_it_wind->FirstChildElement("openingScript")->GetText());
+			string luaConditionCMD = string(_it_wind->FirstChildElement("conditionScript")->GetText());
+			string luaConditionFun = string(_it_wind->FirstChildElement("conditionScript")->Attribute("function"));
 
-			string sizeScript = string(_it_wind->size());
-			string positionScript = string(_it_wind->position());
+			gui::Iframe iframe = gui::Iframe(string(_it_wind->Attribute("iframe")));
+
+			string sizeScript = string(_it_wind->Attribute("size"));
+			string positionScript = string(_it_wind->Attribute("position"));
 
 			Hector::ExecuteCommand(sizeScript);
 			Hector::ExecuteCommand(positionScript);
@@ -116,40 +117,41 @@ void EditorWindows::Create(void)
 			iframe.Create(x, y, w, h);
 
 			// text lists 
-
-			c_editorWindow::textList_iterator _it_txtlist;
-			for (_it_txtlist = _it_wind->textList().begin(); _it_txtlist != _it_wind->textList().end(); _it_txtlist++) {
-
+			for (tinyxml2::XMLElement* _it_txtlist = _it_wind->FirstChildElement("textListArray")->FirstChildElement(); _it_txtlist != NULL; _it_txtlist = _it_txtlist->NextSiblingElement())
+			{
 				gui::TextList* _list = new gui::TextList();
+				int textListID = stoi(_it_txtlist->Attribute("textListId"));
 				_list->Create(
-					int(_it_txtlist->textListId()),
-					x + int(_it_txtlist->xOffset()),
-					y + int(_it_txtlist->yOffset()),
-					string(_it_txtlist->text().font()),
-					vec4(_it_txtlist->text().r(), _it_txtlist->text().g(), _it_txtlist->text().b(), 255.f),
-					vec4(_it_txtlist->text_background().r(), _it_txtlist->text_background().g(), _it_txtlist->text_background().b(), 255.f),
+					textListID,
+					x + stoi(_it_txtlist->Attribute("xOffset")),
+					y + stoi(_it_txtlist->Attribute("yOffset")),
+					string(_it_txtlist->FirstChildElement("text")->Attribute("font")),
+					vec4(stoi(_it_txtlist->FirstChildElement("text")->Attribute("r")),
+						stoi(_it_txtlist->FirstChildElement("text")->Attribute("g")),
+						stoi(_it_txtlist->FirstChildElement("text")->Attribute("b")),
+						255.f),
+					vec4(stoi(_it_txtlist->FirstChildElement("text_background")->Attribute("r")),
+						stoi(_it_txtlist->FirstChildElement("text_background")->Attribute("g")),
+						stoi(_it_txtlist->FirstChildElement("text_background")->Attribute("b")),
+						255.f),
 					PickingUI::ObtainPickingID()
 				);
-
-				gui::TextList::AddTextListToArray(int(_it_txtlist->textListId()), _list);
+				gui::TextList::AddTextListToArray(textListID, _list);
 				iframe.AddTextList(_list);
-
-
-
 			}
 
-			c_editorWindow::button_iterator _it_btn;
-			for (_it_btn = _it_wind->button().begin(); _it_btn != _it_wind->button().end(); _it_btn++) {
-
+			// buttons
+			for (tinyxml2::XMLElement* _it_btn = _it_wind->FirstChildElement("buttonArray")->FirstChildElement(); _it_btn != NULL; _it_btn = _it_btn->NextSiblingElement())
+			{
 				gui::Button btn = gui::Button();
 				btn.create(
-					string(_it_btn->image_name()),
-					string(_it_btn->name()),
-					x + int(_it_btn->xOffset()),
-					y + int(_it_btn->yOffset()),
+					string(_it_btn->Attribute("image_name")),
+					string(_it_btn->Attribute("name")),
+					x + stoi(_it_btn->Attribute("xOffset")),
+					y + stoi(_it_btn->Attribute("yOffset")),
 					PickingUI::ObtainPickingID(),
 					vec4(0, 0, 0, 255),
-					string(_it_btn->onclick())
+					string(_it_btn->Attribute("onclick"))
 				);
 
 				iframe.AddButton(btn);
@@ -161,12 +163,6 @@ void EditorWindows::Create(void)
 			AddWindow(id, eWind);
 		}
 	}
-
-	catch (const xml_schema::exception & e) {
-		std::cout << e << std::endl;
-		Engine::GameClose();
-	}
-
 	catch (const std::exception&)
 	{
 		Engine::GameClose();
@@ -185,7 +181,7 @@ void EditorWindows::Render(const bool picking)
 
 void EditorWindows::Clear(void)
 {
-	for (int i = 0; i < MAX_NUMBER_OF_EDITOR_WINDOWS; i++) 
+	for (int i = 0; i < MAX_NUMBER_OF_EDITOR_WINDOWS; i++)
 	{
 		if (listOfWindows[i] != nullptr)
 		{

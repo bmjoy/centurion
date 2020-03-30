@@ -13,11 +13,10 @@
 #include <gl_rectangle.h>
 #include <minimap_rectangle.h>
 
-#include "mapObjects-xml.hxx"
-
 #include <logger.h>
 #include <settings.h>
 #include <classes/object-data.h>
+#include <file_manager.h>
 
 using namespace std;
 
@@ -79,105 +78,7 @@ void Game::Map::SaveMapObjectsToXml(const string xmlPath)
 {
 	try
 	{
-		c_buildings _buildings = c_buildings();
-
-		/* settlements */
-
-		vector<Building*> indip_bs = GetListOfIndipendentBuildings();
-
-		for (int i = 0; i < indip_bs.size(); i++) {
-
-			Building* gobj = indip_bs[i];
-
-			c_settlement _settl = c_settlement((c_settlement::name_type)gobj->GetSingularName(),
-				(c_settlement::player_type)1,
-				(c_settlement::x_type)gobj->GetPosition().x,
-				(c_settlement::y_type)gobj->GetPosition().y
-			);
-
-			c_building1 b = c_building1((c_building1::class_type) gobj->GetClassName(),
-				(c_building1::id_type)gobj->GetPickingID(),
-				(c_building1::xOffset_type)0,
-				(c_building1::yOffset_type)0
-			);
-			b.healthperc(100);
-			b.name(gobj->GetSingularName());
-			_settl.c_building().push_back(b);
-
-			/*
-			vector<int> dip_bs = gobj->buildingsInSettlementIds();
-			for (int i = 0; i < dip_bs.size(); i++) {
-				int id = dip_bs[i];
-				Building* gobj2 = GObject::GetObjectByID(id)->AsBuilding();
-
-				c_building1 b2 = c_building1((c_building1::class_type) gobj2->GetClassName(),
-					(c_building1::id_type)gobj2->GetPickingID(),
-					c_building1::xOffset_type(gobj2->GetPosition().x - gobj->GetPosition().x),
-					c_building1::yOffset_type(gobj2->GetPosition().y - gobj->GetPosition().y)
-				);
-				b2.healthperc(100);
-				b2.name(gobj2->GetName());
-				_settl.c_building().push_back(b2);
-			}
-			*/
-			_buildings.c_settlement().push_back(_settl);
-		}
-
-		//vector<Building*> indip_bs = GetListOfIndipendentBuildings();
-
-		//for (int i = 0; i < indip_bs.size(); i++) {
-
-		//	c_settlement _settl = c_settlement((c_settlement::name_type)gobj->GetClassName(),
-
-		//		);
-
-		//	if (indip_bs[i]->IsBuilding()) {
-
-		//		Building* gobj = indip_bs[i];
-
-		//		c_building b = c_building((c_building::class_type) gobj->GetClassName(),
-		//			(c_building::id_type)gobj->GetPickingID(),
-		//			(c_building::player_type)1,
-		//			(c_building::x_type)gobj->GetPosition().x,
-		//			(c_building::y_type)gobj->GetPosition().y,
-		//			(c_building::gold_type)100,
-		//			(c_building::food_type)100
-		//		);
-
-		//		b.healthperc(100);
-		//		b.name(gobj->GetName());
-		//		//b.icon = "";
-
-		//		_buildings.c_building().push_back(b);
-		//	}
-		//}
-
-		c_decorations _decorations = c_decorations();
-
-		vector<Decoration*> _decors = GObject::GetListOfDecorations();
-		for (int i = 0; i < _decors.size(); i++) {
-			c_decoration _dec = c_decoration(
-				c_decoration::class_type(_decors[i]->GetClassName()),
-				c_decoration::id_type(_decors[i]->GetPickingID()),
-				c_decoration::x_type(_decors[i]->GetPosition().x),
-				c_decoration::y_type(_decors[i]->GetPosition().y)
-			);
-
-			_decorations.c_decoration().push_back(_dec);
-		}
-
-		c_units _units = c_units();
-
-		c_mapObjects mapObjs = c_mapObjects(_buildings, _decorations, _units);
-
-		xml_schema::namespace_infomap map;
-		map[""].schema = "";
-		ofstream ofs(xmlPath.c_str());
-		c_mapObjects_(ofs, mapObjs, map);
-	}
-	catch (const xml_schema::exception & e) {
-		std::cout << e << std::endl;
-		Engine::GameClose();
+		// save buildings, settlements, decorations, units
 	}
 	catch (...)
 	{
@@ -234,57 +135,7 @@ void Game::Map::LoadMapObjectsFromXml(const string xmlPath)
 {
 	try
 	{
-		xml_schema::properties props;
-		props.no_namespace_schema_location(Folders::XML_SCHEMAS + "mapObjects.xsd");
-		auto_ptr<c_mapObjects> mapObjs = c_mapObjects_(xmlPath, 0, props);
-
-		// buildings 
-
-		// independent buildings and their ...
-
-		/*c_buildings::c_settlement_iterator _settl;
-		for (_settl = mapObjs->c_buildings().c_settlement().begin(); _settl != mapObjs->c_buildings().c_settlement().end(); _settl++) {
-
-			c_settlement::c_building_iterator _bld;
-			for (_bld = _settl->c_building().begin(); _bld != _settl->c_building().end(); _bld++) {
-
-				Building* b = new Building();
-				b->SetClassName((string)_bld->class_());
-				b->SetPlayer((const unsigned short)_settl->player());
-				b->SetPosition(vec3(_settl->x() - _bld->xOffset(), _settl->y() - _bld->yOffset(), 0.f));
-				b->SetPickingID(PickingObject::ObtainPickingID());
-				b->GetSettlement().SetSettlementName(_settl->name());
-				b->SetType("building");
-				b->create(_bld->name().get());
-				Game::AddGameObject(b->GetPickingID(), b);
-			}
-		}*/
-
-		// stand alone buildings!!
-
-
-		// decorations
-
-		/*c_decorations::c_decoration_iterator _dec;
-		for (_dec = mapObjs->c_decorations().c_decoration().begin(); _dec != mapObjs->c_decorations().c_decoration().end(); _dec++) {
-			
-			Decoration* d = new Decoration();
-			d->SetClassName(_dec->class_());
-			d->SetPlayer(0);
-			d->SetPosition(vec3(_dec->x(), _dec->y(), 0.f));
-			d->SetPickingID(PickingObject::ObtainPickingID());
-			d->create();
-			d->SetType("decoration");
-			Game::AddGameObject(d->GetPickingID(), d);
-		}*/
-
-		// units
-	}
-	catch (const xml_schema::exception & e) {
-		string emsg = string(e.what());
-		Logger::LogMessage msg = Logger::LogMessage(emsg, "", "Game::Map", "LoadMapObjectsFromXml");
-		Logger::Error(msg);
-		Engine::GameClose();
+		// load buildings, settlements, decorations, units
 	}
 	catch (...)
 	{

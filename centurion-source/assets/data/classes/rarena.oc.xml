@@ -1,4 +1,4 @@
-<c_object parent="BaseArena" type="cpp_buildingclass" class_name="RArena">
+<object parent="BaseArena" type="cpp_buildingclass" class_name="RArena">
  <properties>
     <property name="singularName" value="Roman arena"/>
     <property name="pluralName" value="Roman arenas"/>
@@ -14,4 +14,4 @@
   <sounds>
     <sound name="select" path="sounds/rArenaSelect.ogg"/>
   </sounds>
-</c_object>
+</object>

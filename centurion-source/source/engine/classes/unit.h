@@ -10,7 +10,6 @@
 
 #include "object.h"
 #include <ui.h>
-#include <json.hpp>
 #include <unit_sprite.h>
 
 using namespace std;
@@ -40,7 +39,6 @@ private:
 
 	/* unit properties & data */
 	string currentStateStr;
-	json entityData;
 	float creationTime;
 
 	/* unit position */

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no" ?>
-<c_object parent="Object" type="cpp_abstractclass" class_name="Building">
+<object parent="Object" type="cpp_abstractclass" class_name="Building">
   <properties>
     <property name="singularName" value="Building"/>
     <property name="pluralName" value="Buildings"/>
@@ -17,4 +17,4 @@
   </methods>
   <sounds>
   </sounds>
-</c_object>
+</object>

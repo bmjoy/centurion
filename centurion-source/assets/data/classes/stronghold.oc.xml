@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no" ?>
-<c_object parent="Habitable" type="cpp_noclass" class_name="Stronghold">
+<object parent="Habitable" type="cpp_noclass" class_name="Stronghold">
   <properties>
   </properties>
   <methods>
   </methods>
   <sounds>
   </sounds>
-</c_object>
+</object>
