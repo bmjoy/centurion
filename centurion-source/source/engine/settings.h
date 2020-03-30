@@ -23,10 +23,10 @@ public:
 	// methods
 	/// <summary>
 	/// This function initializes the settingsof the game. 
-	/// </summary>
+	/// </summary> 
 	static void Init(void);
 	/// <summary>
-	/// This function reads the setting from an XML file.
+	/// This function reads the setting, using the Serialize function.
 	/// It could throw an exception if an erroroccurs during the reading of the file. 
 	/// </summary>
 	static void ReadSettings(void);
@@ -35,11 +35,7 @@ public:
 	/// </summary>
 	/// <param name="exe_folder_path">The home path.</param>
 	static void SetFolders(string exe_folder_path);
-	/// <summary>
-	/// This function saves all the settings into an XML file.
-	/// It could be throws an exception if an error occurs during the save. 
-	/// </summary>
-	static void SaveXml(void);
+	
 	static void SetCameraMovespeed(float speed);
 	static void SetCameraMaxZoom(float zoom);
 	static void SetWindowSize(float width, float height);
@@ -49,10 +45,19 @@ public:
 private:
 	Settings();
 	~Settings();
-	static void ParseInt(string name, string value, int* var);
-	static void ParseFloat(string name, string value, float* var);
-	static void ParseString(string name, string value, string* var);
-	static void ParseBool(string name, string value, bool* var);
+
+	/// <summary>
+	/// This function reads all the settings from an XML file.
+	/// It could be throws an exception if an error occurs during the process 
+	/// </summary>
+	static void Serialize(void);
+
+	/// <summary>
+	/// This function saves all the settings into an XML file.
+	/// It could be throws an exception if an error occurs during the process 
+	/// </summary>
+	static void Deserialize(void);
+
 	static string SettingsPath;
 	static float windowWidth;
 	static float windowHeight;

@@ -5,8 +5,9 @@
 #include <translationsTable.h>
 #include <iostream>
 #include <fstream>
-#include <settings-xml.hxx>
 #include <file_manager.h>
+
+#include <tinyxml2.h>
 
 // define private static variables
 float Settings::cameraMaxZoom;
@@ -48,37 +49,9 @@ void Settings::SetFolders(const string exe_folder_path)
 
 void Settings::ReadSettings(void)
 {
-	try 
-	{
-		xml_schema::properties props;
-		props.no_namespace_schema_location(Folders::XML_SCHEMAS + "settings.xsd");
-		auto_ptr<c_settings> SettingsXML = c_settings_(Folders::GAME + SettingsPath, 0, props);
-		c_settings::setting_const_iterator it;
-		for (it = SettingsXML->setting().begin(); it != SettingsXML->setting().end(); it++) {
-			try {
-				string name = it->name();
-				string value = it->value();
-
-				if (name == "windowWidth") ParseFloat(name, value, &windowWidth);
-				if (name == "windowHeight") ParseFloat(name, value, &windowHeight);
-				if (name == "cameraMovespeed") ParseFloat(name, value, &cameraMovespeed);
-				if (name == "cameraMaxZoom") ParseFloat(name, value, &cameraMaxZoom);
-				if (name == "language") ParseString(name, value, &Language);
-				if (name == "debug") ParseBool(name, value, &DebugIsActive);
-				if (name == "fullScreen") ParseBool(name, value, &FullScreen);
-			}
-			catch (...) 
-			{
-				std::cout << "An error occurred parsing the XML file. Using default values.";
-				SaveXml();
-			}
-		}
-		TranslationsTable::ReadTranslationsTableXml(Language);
-	}
-	catch (const xml_schema::exception & e) {
-		std::cout << e << std::endl;
-		SaveXml();
-	}
+	Deserialize();
+	Serialize();
+	TranslationsTable::ReadTranslationsTableXml(Language);
 
 	Engine::myWindow::Width = windowWidth;
 	Engine::myWindow::Height = windowHeight;
@@ -110,7 +83,7 @@ void Settings::ChangeLanguage(string lang)
 	try {
 		Language = lang;
 		TranslationsTable::ReadTranslationsTableXml(lang);
-		SaveXml();
+		Serialize();
 	}
 	catch (...) {
 		Logger::LogMessage msg = Logger::LogMessage("An error occurred changing the language to \"" + lang + "\"", "Error", "", "Settings", "ChangeLanguage");
@@ -119,82 +92,115 @@ void Settings::ChangeLanguage(string lang)
 	}
 }
 
-void Settings::SaveXml()
+void Settings::Serialize(void)
 {
+	ofstream xmlFile(SettingsPath);
+	if (xmlFile.is_open()) {
+		xmlFile << "<?xml version=\"1.0\" encoding=\"utf-8\"?>" << endl <<
+			"<settings>" << endl <<
+			"\t<windowWidth>" << windowWidth << "</windowWidth>" << endl <<
+			"\t<windowHeight>" << windowHeight << "</windowHeight>" << endl <<
+			"\t<cameraMovespeed>" << cameraMovespeed << "</cameraMovespeed>" << endl <<
+			"\t<cameraMaxZoom>" << cameraMaxZoom << "</cameraMaxZoom>" << endl <<
+			"\t<language>" << Language << "</language>" << endl <<
+			"\t<debug>" << DebugIsActive << "</debug>" << endl <<
+			"\t<fullScreen>" << FullScreen << "</fullScreen>" << endl <<
+			"</settings>" << endl;
+	}
+	xmlFile.close();
+}
+
+void Settings::Deserialize(void)
+{
+	tinyxml2::XMLDocument xmlFile;
+	xmlFile.LoadFile(SettingsPath.c_str());
+
 	try
 	{
-		c_settings settXML = c_settings();
-		vector<pair<string, string>> settings_;
-
-		// Define strings for the XML
-		ostringstream windowWidthStr, windowHeightStr, cameraMovespeedStr, cameraMaxZoomStr;
-		windowWidthStr << (int)windowWidth;
-		windowHeightStr << (int)windowHeight;
-		cameraMovespeedStr << (int)cameraMovespeed;
-		cameraMaxZoomStr << (int)cameraMaxZoom;
-		string debugStr = "false";
-		if (DebugIsActive) debugStr = "true";
-		string fullScreenStr = "false";
-		if (FullScreen) fullScreenStr = "true";
-
-		settings_.push_back({ "windowWidth", windowWidthStr.str() });
-		settings_.push_back({ "windowHeight", windowHeightStr.str() });
-		settings_.push_back({ "cameraMovespeed", cameraMovespeedStr.str() });
-		settings_.push_back({ "cameraMaxZoom", cameraMaxZoomStr.str() });
-		settings_.push_back({ "language", Language });
-		settings_.push_back({ "debug", debugStr });
-		settings_.push_back({ "fullScreen", fullScreenStr });
-
-		for (int i = 0; i < settings_.size(); i++) 
-		{
-			setting xml_setting = setting(settings_[i].first, settings_[i].second);
-			settXML.setting().push_back(xml_setting);
-		}
-
-		xml_schema::namespace_infomap map;
-		map[""].schema = "";
-		ofstream ofs(Folders::GAME + SettingsPath);
-		c_settings_(ofs, settXML, map);
+		string windowWidthStr = (string)xmlFile.FirstChildElement("settings")->FirstChildElement("windowWidth")->GetText();
+		windowWidth = stof(windowWidthStr);
 	}
-	catch (...)
+	catch (const std::exception&)
 	{
-		Logger::LogMessage msg = Logger::LogMessage("An error occurred saving \"Settings.XML\"", "Error", "", "Settings", "ChangeLanguage");
-		Logger::Error(msg);
-		Engine::GameClose();
+		windowWidth = 1366.f;
+		string msg = "An error occurred parsing the \"windowWidth\"  value. Using default value.";
+		Logger::LogMessage logmsg = Logger::LogMessage(msg, "Warn", "", "Settings", "Deserialize");
+		Logger::Warn(logmsg);
 	}
-}
+	try
+	{
+		string windowHeightStr = (string)xmlFile.FirstChildElement("settings")->FirstChildElement("windowHeight")->GetText();
+		windowHeight = stof(windowHeightStr);
+	}
+	catch (const std::exception&)
+	{
+		windowHeight = 768.f;
+		string msg = "An error occurred parsing the \"windowHeight\"  value. Using default value.";
+		Logger::LogMessage logmsg = Logger::LogMessage(msg, "Warn", "", "Settings", "Deserialize");
+		Logger::Warn(logmsg);
+	}
+	try
+	{
+		string cameraMovespeedStr = (string)xmlFile.FirstChildElement("settings")->FirstChildElement("cameraMovespeed")->GetText();
+		cameraMovespeed = stof(cameraMovespeedStr);
+	}
+	catch (const std::exception&)
+	{
+		cameraMovespeed = 10.f;
+		string msg = "An error occurred parsing the \"cameraMovespeed\"  value. Using default value.";
+		Logger::LogMessage logmsg = Logger::LogMessage(msg, "Warn", "", "Settings", "Deserialize");
+		Logger::Warn(logmsg);
+	}
+	try
+	{
+		string cameraMaxZoomStr = (string)xmlFile.FirstChildElement("settings")->FirstChildElement("cameraMaxZoom")->GetText();
+		cameraMaxZoom = stof(cameraMaxZoomStr);
+	}
+	catch (const std::exception&)
+	{
+		cameraMaxZoom = 20.f;
+		string msg = "An error occurred parsing the \"cameraMaxZoom\"  value. Using default value.";
+		Logger::LogMessage logmsg = Logger::LogMessage(msg, "Warn", "", "Settings", "Deserialize");
+		Logger::Warn(logmsg);
+	}
+	try
+	{
+		string languageStr = (string)xmlFile.FirstChildElement("settings")->FirstChildElement("language")->GetText();
+		Language = languageStr;
+	}
+	catch (const std::exception&)
+	{
+		Language = "english";
+		string msg = "An error occurred parsing the \"Language\"  value. Using default value.";
+		Logger::LogMessage logmsg = Logger::LogMessage(msg, "Warn", "", "Settings", "Deserialize");
+		Logger::Warn(logmsg);
+	}
+	try
+	{
+		string debugStr = (string)xmlFile.FirstChildElement("settings")->FirstChildElement("debug")->GetText();
+		DebugIsActive = (debugStr == "true");
 
-void Settings::ParseInt(string name, string value, int* var) {
-	try {
-		(*var) = std::stoi(value);
 	}
-	catch (...) {
-		std::cout << "An error occurred parsing the \"" + name + "\"  value. Using default value.";
+	catch (const std::exception&)
+	{
+		DebugIsActive = false;
+		string msg = "An error occurred parsing the \"DebugIsActive\"  value. Using default value.";
+		Logger::LogMessage logmsg = Logger::LogMessage(msg, "Warn", "", "Settings", "Deserialize");
+		Logger::Warn(logmsg);
 	}
-}
-void Settings::ParseFloat(string name, string value, float* var) {
-	try {
-		(*var) = std::stof(value);
+	try
+	{
+		string fullScreenStr = (string)xmlFile.FirstChildElement("settings")->FirstChildElement("fullScreen")->GetText();
+		FullScreen = (fullScreenStr == "true");
 	}
-	catch (...) {
-		std::cout << "An error occurred parsing the \"" + name + "\"  value. Using default value.";
+	catch (const std::exception&)
+	{
+		FullScreen = false;
+		string msg = "An error occurred parsing the \"FullScreen\"  value. Using default value.";
+		Logger::LogMessage logmsg = Logger::LogMessage(msg, "Warn", "", "Settings", "Deserialize");
+		Logger::Warn(logmsg);
 	}
-}
-void Settings::ParseString(string name, string value, string* var) {
-	try {
-		(*var) = (value);
-	}
-	catch (...) {
-		std::cout << "An error occurred parsing the \"" + name + "\"  value. Using default value.";
-	}
-}
-void Settings::ParseBool(string name, string value, bool* var) {
-	try {
-		(*var) = (value == "true");
-	}
-	catch (...) {
-		std::cout << "An error occurred parsing the \"" + name + "\"  value. Using default value.";
-	}
+	
 }
 
 Settings::~Settings() {	}
