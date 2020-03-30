@@ -21,7 +21,7 @@ public:
 	/// Probably will be promoted to Class
 	/// </summary>
 	struct SpriteData {
-		vec3 pickingColor;
+		glm::vec3 pickingColor;
 		float width;
 		float height;
 		GLuint textureId;
@@ -52,7 +52,7 @@ public:
 	/// This function adds the path to the list of paths, that is read in the "Create" function.
 	/// </summary>
 	/// <param name="Path">The Entity Object XML file path.</param>
-	void AddEntityPath(string Path) { entPathList.push_back(Path); }
+	void AddEntityPath(std::string Path) { entPathList.push_back(Path); }
 
 	/// <summary>
 	/// Destructor
@@ -61,7 +61,7 @@ public:
 
 protected:
 
-	vector<string> entPathList;
+	std::vector<std::string> entPathList;
 	unsigned char *data;
 	unsigned int indices[6] = {
 		0, 1, 3,   // first triangle

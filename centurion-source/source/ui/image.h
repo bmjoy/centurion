@@ -7,16 +7,16 @@ namespace gui {
 	class Image {
 	public:
 		Image();
-		Image(string ImageName);
+		Image(std::string ImageName);
 		int ObtainPickingID() { return imgData.pickingID; }
-		void create(string Origin, float x, float y, float w, float h, int pickingID);
+		void create(std::string Origin, float x, float y, float w, float h, int pickingID);
 		void render(bool picking, float x = 0.f, float y = 0.f, bool repeat = false);
-		vec2 getImageSize() { return vec2(imgData.w, imgData.h); }
+		glm::vec2 getImageSize() { return glm::vec2(imgData.w, imgData.h); }
 		~Image();
 	private:
 		ImageSprite::ImageData imgData;
-		string imageName;
-		map<string, int> originMap;
+		std::string imageName;
+		std::map<std::string, int> originMap;
 	};
 };
 

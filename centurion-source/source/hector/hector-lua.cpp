@@ -18,6 +18,8 @@
 #include <GLFW/glfw3.h>
 
 using namespace luabridge;
+using namespace std;
+using namespace glm;
 
 lua_State* Hector::L;
 Hector::Console Hector::C;

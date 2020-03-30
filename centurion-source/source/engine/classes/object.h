@@ -12,9 +12,6 @@
 #include <object_sprite.h>
 #include "object-data.h"
 
-using namespace std;
-using namespace glm;
-
 class Unit;
 class Building;
 class Decoration;
@@ -97,33 +94,33 @@ public:
 	/// This function returns the class name of the current object.
 	/// </summary>
 	/// <returns>The class name of the current object.</returns>
-	string GetClassName(void);
+	std::string GetClassName(void);
 	/// <summary>
 	/// This function sets the class name of the current object.
 	/// </summary>
 	/// <param name="par_className">The class name.</param>
-	void SetClassName(const string par_className);
+	void SetClassName(const std::string par_className);
 
 	/// <summary>
 	/// This function sets the name of the current object that will be shown when a single object is selected.
 	/// </summary>
 	/// <param name="par_singularName">The singular name of the object.</param>
-	void SetSingularName(const string par_singularName);
+	void SetSingularName(const std::string par_singularName);
 	/// <summary>
 	/// This function returns the name of the current object that will be shown when a single object is selected.
 	/// </summary>
 	/// <returns>The singular name of the object.</returns>
-	string GetSingularName(void);
+	std::string GetSingularName(void);
 	/// <summary>
 	/// This function sets the prural of the current object that will be shown when more objects belong to the same class are selected at the same time.
 	/// </summary>
 	/// <param name="par_pluralName">The prural name.</param>
-	void SetPluralName(const string par_pluralName);
+	void SetPluralName(const std::string par_pluralName);
 	/// <summary>
 	/// This function returns the prural of the current object that will be shown when more objects belong to the same class are selected at the same time.
 	/// </summary>
 	/// <returns>The prural name.</returns>
-	string GetPluralName(void);
+	std::string GetPluralName(void);
 
 	/// <summary>
 	/// This function returns the race ID of the current object.
@@ -140,12 +137,12 @@ public:
 	/// This function return the race name of the current object.
 	/// </summary>
 	/// <returns>The race name of the current object.</returns>
-	string GetRaceName(void);
+	std::string GetRaceName(void);
 	/// <summary>
 	/// This function sets the race name of the current object.
 	/// </summary>
 	/// <param name="par_raceName">The race name.</param>
-	void SetRaceName(const string par_raceName);
+	void SetRaceName(const std::string par_raceName);
 
 	/// <summary>
 	/// This function returns the sight og the current object.
@@ -198,12 +195,12 @@ public:
 	/// This function return the type of the current object.
 	/// </summary>
 	/// <returns>The type of the current object.</returns>
-	string GetType(void);
+	std::string GetType(void);
 	/// <summary>
 	/// This function sets the type of the current object.
 	/// </summary>
 	/// <param name="par_type">The type of the current object.</param>
-	void SetType(const string par_type);
+	void SetType(const std::string par_type);
 
 	/// <summary>
 	/// This function check if the current object belong to the building classes family or not.
@@ -242,12 +239,12 @@ public:
 	/// This function sets the position of the current object.
 	/// </summary>
 	/// <param name="pos">The position (x and y)</param>
-	void SetPosition(const vec3 pos);
+	void SetPosition(const glm::vec3 pos);
 	/// <summary>
 	/// This function returns the position of the current object.
 	/// </summary>
 	/// <returns></returns>
-	vec3 GetPosition(void);
+	glm::vec3 GetPosition(void);
 	/// <summary>
 	/// This function returns only the x position of the current object.
 	/// </summary>
@@ -272,7 +269,7 @@ public:
 	/// </summary>
 	/// <param name="_className">The class of the object.</param>
 	/// <returns>Trye if the object has been created; false otherwise.</returns>
-	bool Create(const string _className);
+	bool Create(const std::string _className);
 	/// <summary>
 	/// This function perfoms the rendering of the current object. It must be overread.
 	/// </summary>
@@ -326,17 +323,17 @@ public:
 	/// This function return a list of all the buildings of the game.
 	/// </summary>
 	/// <returns>A list of buildings.</returns>
-	static vector<Building*> GetListOfBuildings(void);
+	static std::vector<Building*> GetListOfBuildings(void);
 	/// <summary>
 	/// This function returns a list of all the units of the game.
 	/// </summary>
 	/// <returns>A list of units.</returns>
-	static vector<Unit*> GetListOfUnits(void);
+	static std::vector<Unit*> GetListOfUnits(void);
 	/// <summary>
 	/// This function returns a list of all the decoration of the game.
 	/// </summary>
 	/// <returns>A list of decoration</returns>
-	static vector<Decoration*> GetListOfDecorations(void);
+	static std::vector<Decoration*> GetListOfDecorations(void);
 	#pragma endregion
 
 	/// <summary>
@@ -350,10 +347,10 @@ public:
 protected:
 	ObjectSprite::SpriteData spriteData;
 	Player *player;
-	vec3 pickingColor;
-	vector<vector<int>> pass_grid;
-	map<string, string> methods;
-	map<string, string> sounds;
+	glm::vec3 pickingColor;
+	std::vector<std::vector<int>> pass_grid;
+	std::map<std::string, std::string> methods;
+	std::map<std::string, std::string> sounds;
 private:
 	unsigned short int playerID;
 	unsigned int pickingID;
@@ -361,12 +358,12 @@ private:
 	unsigned int sight;
 	float selectionRadius;
 	float radius;
-	vec3 position;
-	string singularName;
-	string pluralName;
-	string raceName;
-	string className;
-	string type;
+	glm::vec3 position;
+	std::string singularName;
+	std::string pluralName;
+	std::string raceName;
+	std::string className;
+	std::string type;
 	bool bSelected = false;
 	bool bIsWaterObject = false;
 	bool canBeClonedInEditor = false;

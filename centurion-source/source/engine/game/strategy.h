@@ -16,15 +16,13 @@
 #include <player/player.h>
 #include "match.h"
 
-using namespace std;
 // global game variables  --> see source/game/game_functions.cpp
 
 /// <summary>
 /// (???) Da rivedere --> le variabili extern non sono il massimo nella programmazione.
 /// </summary>
-extern vector<string> outposts;
-extern array<Player, 8> playersList;
-
+extern std::vector<std::string> outposts;
+extern std::array<Player, 8> playersList;
 
 /// <summary>
 /// (???) Classe probabilmente da rivedere, completare.

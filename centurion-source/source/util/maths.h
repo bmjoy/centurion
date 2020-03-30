@@ -12,8 +12,6 @@
 
 // cpp file --> source/math.cpp
 
-using namespace std;
-
 /// <summary>
 /// This namespace contains some mathematical functions.
 /// </summary>
@@ -45,5 +43,5 @@ namespace math {
 	/// <param name="y0">Y coordinate of the rectangle</param>
 	/// <param name="w">Rectangle width</param>
 	/// <param name="h">Rectangle height</param>
-	array<float, 8> get_rectangle_coords(float x0, float y0, float w, float h);
+	std::array<float, 8> get_rectangle_coords(float x0, float y0, float w, float h);
 };

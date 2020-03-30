@@ -3,6 +3,9 @@
 #define STB_IMAGE_IMPLEMENTATION  
 #include <stb_image.h>  // manip. texture
 
+using namespace std;
+using namespace glm;
+
 ImageSprite::ImageSprite(){
 	vPath = "assets/shaders/image/vertex.glsl";
 	fPath = "assets/shaders/image/fragment.glsl";

@@ -86,18 +86,18 @@ namespace Engine
 	/// This functions sets an environment where the game is (for instance: editor, strategy, menu).
 	/// </summary>
 	/// <param name="s">The name of the enviroment. </param>
-	void SetEnvironment(const string s);
+	void SetEnvironment(const std::string s);
 	/// <summary>
 	/// This functions displays a text to the console.
 	/// </summary>
 	/// <param name="s">The text you want to print to the console.</param>
-	void PrintToConsole(const string s);
+	void PrintToConsole(const std::string s);
 	/// <summary>
 	/// This functions searches all the directories starting from a path.
 	/// </summary>
 	/// <param name="s">The path.</param>
 	/// <returns>A list of folders; null if there are no folders.</returns>
-	vector<string> *GetListOfFolders(const string s);
+	std::vector<std::string> *GetListOfFolders(const std::string s);
 
 	// Functions
 	/// <summary>
@@ -136,5 +136,5 @@ namespace Engine
 	/// <summary>
 	/// This function returns the Cpp compiler version.
 	/// </summary>
-	string GetCppVersion();
+	std::string GetCppVersion();
 };

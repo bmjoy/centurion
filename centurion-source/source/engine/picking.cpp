@@ -5,6 +5,9 @@
 
 #pragma region Picking Class
 
+using namespace std;
+using namespace glm;
+
 /* static variables */
 unsigned int Picking::leftClickID = 0;
 unsigned int Picking::leftClickID_UI = 0;

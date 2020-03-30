@@ -53,8 +53,8 @@ public:
 	~CursorImage();
 private:
 	float cursorImgWidth, cursorImgHeight;
-	string initPath;
-	array<string, 3> texturePaths;
+	std::string initPath;
+	std::array<std::string, 3> texturePaths;
 	GLuint textureIds[3];
 };
 

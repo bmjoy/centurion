@@ -9,7 +9,8 @@
 
 #include <tinyxml2.h>
 
-
+using namespace std;
+using namespace glm;
 using namespace tinyxml2;
 
 #pragma region Static variables

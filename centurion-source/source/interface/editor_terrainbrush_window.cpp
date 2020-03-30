@@ -7,7 +7,8 @@
 
 #include <terrain.h>
 
-
+using namespace std;
+using namespace glm;
 
 
 namespace editor {

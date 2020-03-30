@@ -13,9 +13,9 @@
 #include "light.h"
 
 struct terrainTexture {
-	vector<string> zones;
-	vector<float> frequencies;
-	string name;
+	std::vector<std::string> zones;
+	std::vector<float> frequencies;
+	std::string name;
 	int id;
 };
 
@@ -33,7 +33,7 @@ public:
 	/// <summary>
 	/// This function returns the list of textures names
 	/// </summary>
-	vector<string> getTerrainList() { return texturesName; }
+	std::vector<std::string> getTerrainList() { return texturesName; }
 
 	/// <summary>
 	/// Create function.
@@ -80,7 +80,7 @@ private:
 	/// TODO
 	/// </summary>
 	void ReadVerticesPosData(void);
-	vector<string> texturesName;
+	std::vector<std::string> texturesName;
 	float width, height;
 
 	// light 

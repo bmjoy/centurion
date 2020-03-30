@@ -1,9 +1,6 @@
 #include <header.h>
 #include <ui.h>
 
-using namespace std;
-using namespace glm;
-
 //----------------------------------------------------------------------------------
 //----------------------------------------------------------------------------------
 //----------------------------------------------------------------------------------
@@ -29,9 +26,9 @@ namespace debug {
 		~DebugUI();
 	private:
 		// text
-		array<string, 10> staticTextList;
-		array<string, 10> dynamicTextList;
-		vector<gui::SimpleText> staticText;
+		std::array<std::string, 10> staticTextList;
+		std::array<std::string, 10> dynamicTextList;
+		std::vector<gui::SimpleText> staticText;
 		gui::SimpleText dynamicText;
 		gui::SimpleText debugText[2];
 		float startX, startY, deltaY;
@@ -39,7 +36,7 @@ namespace debug {
 		bool debuguiIsActive;
 		// background
 		gui::Rectangle back;
-		string currentLan;
+		std::string currentLan;
 	};
 
 	static DebugUI mydebugui;
@@ -66,16 +63,16 @@ namespace menu {
 	class PlayersList {
 	public:
 		PlayersList();
-		void create(int startX, int startY, vector<int> *players_color);
+		void create(int startX, int startY, std::vector<int> *players_color);
 		void close();
-		void picking(int *numPlayers, vector<int> *players_color, int clickId);
-		void render(int numPlayers, vector<int> players_color, bool picking);
-		string get_race(int i);
+		void picking(int *numPlayers, std::vector<int> *players_color, int clickId);
+		void render(int numPlayers, std::vector<int> players_color, bool picking);
+		std::string get_race(int i);
 		~PlayersList();
 	private:
-		vector<gui::Select> colors_Form;
-		vector<gui::Select> players_Form;
-		vector<gui::Select> civiliz_Form;
+		std::vector<gui::Select> colors_Form;
+		std::vector<gui::Select> players_Form;
+		std::vector<gui::Select> civiliz_Form;
 		gui::SimpleText dynamicText;
 		gui::Image arrowDown, arrowUp;
 		gui::Rectangle background;
@@ -92,7 +89,7 @@ namespace menu {
 		GlobalOptions();
 		void create();		
 		void render(bool pick);
-		string currentLan;
+		std::string currentLan;
 		~GlobalOptions();
 	private:
 		gui::Rectangle back;
@@ -116,7 +113,7 @@ namespace game {
 	class ObjectUI {
 	public:
 		ObjectUI();
-		void create(string className);
+		void create(std::string className);
 		void render();
 		~ObjectUI();
 	private:
@@ -146,8 +143,8 @@ namespace game {
 	private:
 		gui::Button btn;
 		gui::Rectangle background;
-		vector<gui::Button> buttons;
-		string s;
+		std::vector<gui::Button> buttons;
+		std::string s;
 		float w, h, x, y;
 		static bool isActive;
 	};
@@ -159,14 +156,14 @@ namespace game {
 	class UIGame {
 	public:
 		UIGame();
-		void create(string race);
+		void create(std::string race);
 		void set_ui(ObjectUI* obj_ui);
 		void render(bool pick);
 		~UIGame();
 	private:
 		struct Time {
 			double lastTime;
-			string seconds_str, minutes_str, hours_str;
+			std::string seconds_str, minutes_str, hours_str;
 			int seconds, minutes, hours;
 			gui::SimpleText text;
 			float x;
@@ -217,10 +214,10 @@ namespace editor {
 	extern bool NewMapResetText;
 	extern bool PropertiesWindowIsOpen;
 	extern bool PropertiesWindowResetText;
-	extern string currentMapName;
+	extern std::string currentMapName;
 	extern bool OpenMapWindowIsOpen;
 	extern bool OpenMapWindowUpdate;
-	extern vector<string> availableScenarios;
+	extern std::vector<std::string> availableScenarios;
 	extern bool AddObjectWindowIsOpen;
 	extern bool AddObjectWindowUpdateForm1and2;
 	extern bool AddObjectWindowUpdateForm2;
@@ -231,13 +228,13 @@ namespace editor {
 	extern gui::SimpleText textInfo;
 
 	static const int NumberOfObjects = 100;
-	extern string EditorObjectStringListForm0[NumberOfObjects];
-	extern string EditorObjectStringListForm1[NumberOfObjects];
-	extern string EditorObjectStringListForm2[NumberOfObjects];
+	extern std::string EditorObjectStringListForm0[NumberOfObjects];
+	extern std::string EditorObjectStringListForm1[NumberOfObjects];
+	extern std::string EditorObjectStringListForm2[NumberOfObjects];
 
-	extern vector<string> EditorAddObjectBuildingOptions;
-	extern vector<string> EditorAddObjectUnitOptions;
-	extern vector<string> EditorAddObjectDecorationOptions;
+	extern std::vector<std::string> EditorAddObjectBuildingOptions;
+	extern std::vector<std::string> EditorAddObjectUnitOptions;
+	extern std::vector<std::string> EditorAddObjectDecorationOptions;
 
 	//---------------------------------------------------
 
@@ -271,7 +268,7 @@ namespace editor {
 		QuestionWindow();
 		void create();
 		void render(bool pick);
-		void setQuestion(string Question);
+		void setQuestion(std::string Question);
 		~QuestionWindow();
 	private:
 		gui::TextInput text_input;
@@ -280,7 +277,7 @@ namespace editor {
 		gui::SimpleText buttons_text[2];
 		gui::TextBox questionText;
 		float startX, startY;
-		string question;
+		std::string question;
 		void picking();
 	};
 
@@ -306,9 +303,9 @@ namespace editor {
 		gui::Select objectForms[3];
 		float startX, startY;
 		int pickingIDs[3];
-		string formSelectedTexts[3];
-		string selectedObject;
-		ivec2 back_size;
+		std::string formSelectedTexts[3];
+		std::string selectedObject;
+		glm::ivec2 back_size;
 		void picking();
 		void update();
 	};
@@ -325,9 +322,9 @@ namespace editor {
 		void render(bool pick);
 		~TerrainBrushWindow();
 	private:
-		string selBrush;
+		std::string selBrush;
 		gui::Rectangle back;
-		vector<gui::Select> forms;
+		std::vector<gui::Select> forms;
 		gui::Circle circle;
 		float startX, startY;
 		void picking();

@@ -11,25 +11,25 @@ namespace gui {
 	class Select {
 	public:
 		Select(bool options = true);
-		void create(float x, float y, float w, float h, vector<string> options, int pickingID);
-		void render(bool picking, vec4 color);
+		void create(float x, float y, float w, float h, std::vector<std::string> options, int pickingID);
+		void render(bool picking, glm::vec4 color);
 		void open_close();
 		void close();
 		void select_option(int i);
 		void select_next();
 		void select_previous();
 		int get_clicked_option();
-		string selectedText;
+		std::string selectedText;
 		~Select();
 	private:
 		Rectangle back;
 		Rectangle back_options;
-		vector<Rectangle> back_options_picking;
+		std::vector<Rectangle> back_options_picking;
 		SimpleText text;
-		vector<SimpleText> optionsText;
+		std::vector<SimpleText> optionsText;
 		float width, height, x, y;
-		vector<string> form_options;
-		vec2 mainTextPos;
+		std::vector<std::string> form_options;
+		glm::vec2 mainTextPos;
 		bool boolOptions;
 		bool isOpened;
 		bool hasText;

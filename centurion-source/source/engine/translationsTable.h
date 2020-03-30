@@ -11,8 +11,6 @@
 #include <map>
 #include <string>
 
-using namespace std;
-
 /// <summary>
 /// This class handles the translation in different languages of all the words in the game.
 /// </summary>
@@ -24,25 +22,25 @@ public:
 	/// </summary>
 	/// <param name="lan">The wanted language.</param>
 	/// <returns>The ID of a specific language.</returns>
-	static unsigned int GetLanguageId(const string lan);
+	static unsigned int GetLanguageId(const std::string lan);
 	/// <summary>
 	/// This function returns the map of all available languages. 
 	/// </summary>
 	/// <returns>The map of all available languages.</returns>
-	static map<string, unsigned int> GetLanguagesMap(void);
+	static std::map<std::string, unsigned int> GetLanguagesMap(void);
 	/// <summary>
 	/// This function returns the translation of a specific word.
 	/// </summary>
 	/// <param name="string_name">The word you want to translate.</param>
 	/// <returns>The translation of a specific word.</returns>
-	static string GetTranslation(string string_name);
+	static std::string GetTranslation(std::string string_name);
 	/// <summary>
 	/// This function reads the translations table of a specific language from an XML file.
 	/// It could throw an exception if an error occurs. 
 	/// </summary>
 	/// <param name="lang">The wanted language.</param>
-	static void ReadTranslationsTableXml(const string lang);
+	static void ReadTranslationsTableXml(const std::string lang);
 private:
-	static map<string, unsigned int> languagesMap;
-	static map<string, string> translationsTable;
+	static std::map<std::string, unsigned int> languagesMap;
+	static std::map<std::string, std::string> translationsTable;
 };

@@ -5,7 +5,7 @@
 AudioManager::AudioManager(){}
 
 #pragma region Music section
-void AudioManager::MusicPlay(string name, bool looping) {
+void AudioManager::MusicPlay(std::string name, bool looping) {
 	device = new AudioDevice();
 	if (device){
 		music = device->CreateMusic();
@@ -84,7 +84,7 @@ bool AudioManager::IsMusicLooping() {
 #pragma endregion
 
 #pragma region SFX section
-void AudioManager::SoundPlay(string name, bool looping) {
+void AudioManager::SoundPlay(std::string name, bool looping) {
 	device = new AudioDevice();
 	if (device) {
 		sound = device->CreateSound();

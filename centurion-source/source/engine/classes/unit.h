@@ -12,9 +12,6 @@
 #include <ui.h>
 #include <unit_sprite.h>
 
-using namespace std;
-using namespace glm;
-
 class Building;
 class Player;
 
@@ -38,11 +35,11 @@ private:
 	static int unitsCounter;
 
 	/* unit properties & data */
-	string currentStateStr;
+	std::string currentStateStr;
 	float creationTime;
 
 	/* unit position */
-	vec3 position2D, position3D;
+	glm::vec3 position2D, position3D;
 	bool clickSelection, rectangleSelection;
 
 	/* unit circle if selected */
@@ -52,16 +49,16 @@ private:
 	bool is_Moving;
 	int pathCount;
 	float angle, delta, distance, res_distance;
-	vector<ivec2> path;
-	vec2 startPoint, endPoint;
+	std::vector<glm::ivec2> path;
+	glm::vec2 startPoint, endPoint;
 	void position_update();
 	void walk_behaviour();
 
 	/* debug objects */
-	vector<gui::Rectangle> pathQuadsList;
+	std::vector<gui::Rectangle> pathQuadsList;
 	struct HitBox {
 		gui::Rectangle rectangle;
-		array<float, 8> coords;
+		std::array<float, 8> coords;
 	} hitbox;
 	gui::Image circlePos;
 };
@@ -69,9 +66,9 @@ private:
 
 // UNIT FUNCTIONS --> source/unit/functions.cpp
 
-void updateZ(vec3 &pos2d, vec3 *pos3d);
+void updateZ(glm::vec3 &pos2d, glm::vec3 *pos3d);
 void updateFrame(float *creationTime, int *frame, int max_frames, int duration);
-float getAngle(vector<ivec2> &path, int &n);
-float getDistance(vector<ivec2> &path, int &n);
-float getResDistance(vector<ivec2> &path, int &n, vec3 &pos2d);
-vector<ivec2> getPath(vec2 &start, vec2 &end);
+float getAngle(std::vector<glm::ivec2> &path, int &n);
+float getDistance(std::vector<glm::ivec2> &path, int &n);
+float getResDistance(std::vector<glm::ivec2> &path, int &n, glm::vec3 &pos2d);
+std::vector<glm::ivec2> getPath(glm::vec2 &start, glm::vec2 &end);

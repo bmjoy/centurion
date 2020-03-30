@@ -9,6 +9,9 @@
 #include <tinyxml2.h>
 #include <file_manager.h>
 
+using namespace std;
+using namespace glm;
+
 Terrain::Terrain(){
 	vPath = "assets/shaders/terrain/vertex.glsl";
 	fPath = "assets/shaders/terrain/fragment.glsl";

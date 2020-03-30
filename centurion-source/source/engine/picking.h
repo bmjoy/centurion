@@ -15,9 +15,6 @@
 
 #include <header.h>
 
-using namespace glm;
-using namespace std;
-
 /// <summary>
 /// This class handles the picking ID.
 /// (???) Molte di queste funzioni dovrebbero controllare che il picking ID sia effettivamente valido.
@@ -51,7 +48,7 @@ public:
 	/// </summary>
 	/// <param name="par_pickingID">The picking Id of the object. </param>
 	/// <returns></returns>
-	static vec3 GetPickingColorFromID(const unsigned int par_pickingID);
+	static glm::vec3 GetPickingColorFromID(const unsigned int par_pickingID);
 	/// <summary>
 	/// This function resets the time that indicate when there was a double click.
 	/// </summary>
@@ -98,17 +95,17 @@ public:
 	/// </summary>
 	/// <param name="picking_id">The picking ID of the UI element.</param>
 	/// <param name="par_value">The name of the UI element.</param>
-	static void AddValueToPickingList(const unsigned int picking_id, const string par_value);
+	static void AddValueToPickingList(const unsigned int picking_id, const std::string par_value);
 	/// <summary>
 	/// This function returns the name of an UI element through its picking ID. 
 	/// </summary>
 	/// <param name="par_pickingID_UI">The picking ID of an UI element.</param>
 	/// <returns>The name of an UI element.</returns>
-	static string GetPickedObjectName(const unsigned int par_pickingID_UI);
+	static std::string GetPickedObjectName(const unsigned int par_pickingID_UI);
 	~PickingUI();
 private:
 	static unsigned int pickingID_UI;
-	static map<unsigned int, string> pickingList_UI;
+	static std::map<unsigned int, std::string> pickingList_UI;
 	PickingUI();
 };
 
@@ -141,6 +138,6 @@ public:
 	~PickingObject(void);
 private:
 	static unsigned int pickingID_Object;
-	static vector<unsigned int> unsedPickingID;
+	static std::vector<unsigned int> unsedPickingID;
 	PickingObject(void);
 };

@@ -21,8 +21,8 @@ public:
 	/// This struct holds the rectangle information
 	/// </summary>
 	struct RectangleData {
-		vec4 borderColor, backColor, pickingColor;
-		string type;
+		glm::vec4 borderColor, backColor, pickingColor;
+		std::string type;
 		float x, y, w, h;
 		int origin;
 	};

@@ -1,10 +1,13 @@
 #include <ui.h>
-#include <codecvt>
-#include <locale>
+//#include <codecvt>
+//#include <locale>
 //
 #include <engine.h>
 
 #include <GLFW/glfw3.h>
+
+using namespace std;
+using namespace glm;
 
 namespace gui {
 
@@ -25,12 +28,12 @@ namespace gui {
 		if (is_active) {
 
 			if (Engine::Keyboard::GetCharCodepointPressed() != -1 && current_text.size() <= max_chars) {
-				wstring_convert<codecvt_utf8_utf16<wchar_t>> converter;
-				wstring wchar = L" ";
-				wchar[0] = Engine::Keyboard::GetCharCodepointPressed();
-				string c = converter.to_bytes(wchar);
-				current_text += c;
-				cursorPosition++;
+				//wstring_convert<codecvt_utf8_utf16<wchar_t>> converter;
+				//wstring wchar = L" ";
+				//wchar[0] = Engine::Keyboard::GetCharCodepointPressed();
+				//string c = converter.to_bytes(wchar);
+				//current_text += c;
+				//cursorPosition++;
 				static_text.create_static(current_text, "tahoma_15px", xPos, yPos, "left", "normal", vec4(255.f));
 			}
 

@@ -21,8 +21,8 @@ public:
 	/// This struct contains every image information and it's needed to render the image
 	/// </summary>
 	struct ImageData {
-		vec3 pickingColor;
-		string imageName;
+		glm::vec3 pickingColor;
+		std::string imageName;
 		float x, y, w, h;
 		float texW, texH, ratioX, ratioY;
 		int pickingID;
@@ -41,7 +41,7 @@ public:
 	/// </summary>
 	/// <param name="imageName">The image name, useful to identify an image in the whole code;</param>
 	/// <param name="path">The image folder path;</param>
-	void addPath(string imageName, string path) { imagesPathMap[imageName] = path; }
+	void addPath(std::string imageName, std::string path) { imagesPathMap[imageName] = path; }
 
 	/// <summary>
 	/// This function reads every image and prepare the textureID.
@@ -68,8 +68,8 @@ public:
 	~ImageSprite();
 
 private:
-	map<string, string> imagesPathMap;
-	map<GLuint, int[2]> imageSize;
+	std::map<std::string, std::string> imagesPathMap;
+	std::map<GLuint, int[2]> imageSize;
 
 	unsigned char *data;
 	unsigned int indices[6] = {

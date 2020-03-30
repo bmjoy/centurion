@@ -8,6 +8,9 @@
 #include <file_manager.h>
 #include <logger.h>
 
+using namespace std;
+using namespace glm;
+
 BuildingSprite::BuildingSprite(){
 	vPath = "assets/shaders/bsprite/vertex.glsl";
 	fPath = "assets/shaders/bsprite/fragment.glsl";

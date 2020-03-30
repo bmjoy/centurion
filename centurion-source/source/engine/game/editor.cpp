@@ -14,6 +14,8 @@
 
 #include <GLFW/glfw3.h>
 
+using namespace std;
+using namespace glm;
 
 Editor::Editor(void) {}
 

@@ -11,7 +11,7 @@ namespace gui {
 	class Iframe {
 	public:
 		Iframe();
-		Iframe(string _name);
+		Iframe(std::string _name);
 		void AddImage(Image img) { listOfImages.push_back(img); }
 		void AddButton(Button btn) { listOfButtons.push_back(btn); }
 		void AddText(SimpleText txt) { listOfTexts.push_back(txt); }
@@ -25,10 +25,10 @@ namespace gui {
 		void RenderButtons(bool picking);
 		void RenderTexts();
 		void RenderTextLists(bool picking);
-		vector<Image> listOfImages;
-		vector<Button> listOfButtons;
-		vector<SimpleText> listOfTexts;
-		vector<TextList*> listOfTextLists;
+		std::vector<Image> listOfImages;
+		std::vector<Button> listOfButtons;
+		std::vector<SimpleText> listOfTexts;
+		std::vector<TextList*> listOfTextLists;
 		Image back;
 		Image topleft;
 		Image topright;
@@ -38,7 +38,7 @@ namespace gui {
 		Image left;
 		Image top;
 		Image bottom;
-		string name;
+		std::string name;
 		int x, y, w, h;
 	};
 };

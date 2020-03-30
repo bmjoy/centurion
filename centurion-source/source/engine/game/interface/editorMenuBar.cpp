@@ -8,6 +8,9 @@
 #include <translationsTable.h>
 #include <tinyxml2.h>
 
+using namespace std;
+using namespace glm;
+
 #pragma region Static variables
 
 array<EditorMenuBar::EditorMenu*, MAX_NUMBER_OF_EDITOR_MENUS> EditorMenuBar::listOfMenus = { nullptr };

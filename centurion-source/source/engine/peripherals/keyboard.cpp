@@ -2,6 +2,9 @@
 
 #include <GLFW/glfw3.h>
 
+using namespace std;
+using namespace glm;
+
 // static variables
 int Engine::Keyboard::keyCode[348] = { 0 };
 int Engine::Keyboard::charCodepointPressed = -1;

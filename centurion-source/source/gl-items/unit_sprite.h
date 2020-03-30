@@ -16,13 +16,13 @@ class UnitSprite : public ObjectSprite
 public:
 
 	struct UnitData {
-		map<int, int[2]> spriteSize;
-		map<int, int> Frames;
-		map<int, int> Durations;
-		map<string, int> States;
-		vec3 playerColor;
-		vec3 pickingColor;
-		string className;
+		std::map<int, int[2]> spriteSize;
+		std::map<int, int> Frames;
+		std::map<int, int> Durations;
+		std::map<std::string, int> States;
+		glm::vec3 playerColor;
+		glm::vec3 pickingColor;
+		std::string className;
 		int hitBox[2];
 		GLint currentState;
 		int currentFrame;
@@ -35,11 +35,11 @@ public:
 	UnitSprite();
 	void create();
 	void getTextureInfo(UnitData *uData);
-	void render(UnitData d, vec3 &pos, bool picking);
+	void render(UnitData d, glm::vec3 &pos, bool picking);
 	~UnitSprite();
 
 private:
-	map<string, int[2]> spriteSize;
+	std::map<std::string, int[2]> spriteSize;
 
 };
 

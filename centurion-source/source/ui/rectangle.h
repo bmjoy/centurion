@@ -7,14 +7,14 @@ namespace gui {
 	class Rectangle {
 	public:
 		Rectangle();
-		void create(string type, float x, float y, float w, float h, string origin, int pickingID, string luaCMD = "");
-		void render(vec4 Color, bool picking = false, int leftClickId = 0, float x = 0.f, float y = 0.f, float w = 0.f, float h = 0.f, int origin = -1);
+		void create(std::string type, float x, float y, float w, float h, std::string origin, int pickingID, std::string luaCMD = "");
+		void render(glm::vec4 Color, bool picking = false, int leftClickId = 0, float x = 0.f, float y = 0.f, float w = 0.f, float h = 0.f, int origin = -1);
 		~Rectangle();
 	private:
 		int pickingId;
-		string luaCmd;
+		std::string luaCmd;
 		glRectangle::RectangleData data;
-		map<string, int> originMap;
+		std::map<std::string, int> originMap;
 	};
 };
 

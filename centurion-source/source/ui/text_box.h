@@ -7,13 +7,13 @@ namespace gui {
 	class TextBox {
 	public:
 		TextBox();
-		void create(string text, string font, float x, float y, float width, float height, string halign, string valign, vec4 color, string fontWeight);
+		void create(std::string text, std::string font, float x, float y, float width, float height, std::string halign, std::string valign, glm::vec4 color, std::string fontWeight);
 		void render();
 		~TextBox();
 	private:
-		vector<BitmapFont::StaticTextData> lines_data;
-		vector<string> lines;
-		string hAlign, vAlign;
+		std::vector<BitmapFont::StaticTextData> lines_data;
+		std::vector<std::string> lines;
+		std::string hAlign, vAlign;
 	};
 };
 

@@ -2,6 +2,8 @@
 #include <stb_image.h>
 #include <fstream>
 
+using namespace std;
+using namespace glm;
 
 DecorationSprite::DecorationSprite(){
 	vPath = "assets/shaders/dsprite/vertex.glsl";

@@ -1,5 +1,8 @@
 #include "gl_circle.h"
 
+using namespace std;
+using namespace glm;
+
 glCircle::glCircle(){
 	vPath = "assets/shaders/empty_circle/vertex.glsl";
 	fPath = "assets/shaders/empty_circle/fragment.glsl";

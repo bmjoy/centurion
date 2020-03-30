@@ -14,6 +14,8 @@
 
 #include <GLFW/glfw3.h>
 
+using namespace std;
+using namespace glm;
 
 // Define static variables (default values)
 bool Engine::myWindow::ShouldClose = false;

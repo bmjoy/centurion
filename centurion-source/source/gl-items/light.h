@@ -36,11 +36,11 @@ public:
 	~Light();
 private:
 	// ambient light
-	vec3 colour;
+	glm::vec3 colour;
 	GLfloat ambientIntensity;
 
 	// diffuse light
-	vec3 direction;
+	glm::vec3 direction;
 	GLfloat diffuseIntensity;
 };
 

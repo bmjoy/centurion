@@ -5,6 +5,9 @@
 #include <logger.h>
 #include "bitmap_font.h"
 
+using namespace std;
+using namespace glm;
+
 namespace gui {
 
 	float SimpleText::CalculateTextWidth(string text, string font, string fontWeight)

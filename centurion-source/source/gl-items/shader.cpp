@@ -5,6 +5,9 @@
 #include <file_manager.h>
 #include <logger.h>
 
+using namespace std;
+using namespace glm;
+
 Shader::Shader() {
 	VAO = 0; VBO = 0; IBO = 0;
 	shaderId = 0;

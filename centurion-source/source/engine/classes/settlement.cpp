@@ -2,6 +2,7 @@
 #include <classes/settlement.h>
 
 using namespace std;
+using namespace glm;
 
 
 Settlement::Settlement(const unsigned int par_player)

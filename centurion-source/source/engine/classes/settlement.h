@@ -23,8 +23,6 @@
 #define FOOD_LIMIT   1000000000
 #endif 
 
-using namespace std;
-
 /// <summary>
 /// This class represents a set of buildings that cooperate each other and are closely conencted each other.
 /// </summary>
@@ -35,12 +33,12 @@ public:
 	/// This function return the name of the current settlement.
 	/// </summary>
 	/// <returns>The name of the current settlement.</returns>
-	string GetSettlementName(void);
+	std::string GetSettlementName(void);
 	/// <summary>
 	/// This function sets the name of the current settlement. This name can be usad into the scripts.
 	/// </summary>
 	/// <param name="par_settlementName">A name for the current settlement.</param>
-	void SetSettlementName(const string par_settlementName);
+	void SetSettlementName(const std::string par_settlementName);
 	/// <summary>
 	/// This function checks if the settlement belong to a player that is not a human player or a player drived by the AI.
 	/// </summary>
@@ -102,7 +100,7 @@ public:
 	/// This function provides a list of all the buildings belonging to the current settlement.
 	/// </summary>
 	/// <returns>A list of pointers to buildings; this list can be empty if the settlement hasn't got any building.</returns>
-	vector<Building*> GetBuildingsBelongToSettlement(void);
+	std::vector<Building*> GetBuildingsBelongToSettlement(void);
 	/// <summary>
 	/// This function allows to add a new building to the current settlement.
 	/// </summary>
@@ -127,11 +125,11 @@ public:
 	~Settlement() {};
 private:
 	bool bIsIndipendent = false;
-	string name;
+	std::string name;
 	unsigned int food;
 	int gold;
 	unsigned int player;
 	unsigned int population;
 	unsigned int max_population;
-	map<unsigned int, Building*> buildingsOfSettlement;
+	std::map<unsigned int, Building*> buildingsOfSettlement;
 };

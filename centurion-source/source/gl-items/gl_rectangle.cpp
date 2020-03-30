@@ -1,5 +1,8 @@
 #include "gl_rectangle.h"
 
+using namespace std;
+using namespace glm;
+
 #pragma region Empty Rectangle
 
 EmptyRectangle::EmptyRectangle() {

@@ -29,13 +29,13 @@ public:
 		/// This function return the name of the page.
 		/// </summary>
 		/// <returns>The name of the page.</returns>
-		string GetPageName(void);
+		std::string GetPageName(void);
 		/// <summary>
 		/// This function creates a new page.
 		/// </summary>
 		/// <param name="name">The name to be assigned to the new page.</param>
 		/// <returns>The ID assigned to the new page</returns>
-		unsigned int Create(const string name);
+		unsigned int Create(const std::string name);
 		/// <summary>
 		/// This function adds a new button to the page.
 		/// </summary>
@@ -53,9 +53,9 @@ public:
 		void Render(const bool picking);
 		~MenuPage(void);
 	private:
-		string pageName;
-		vector<gui::Button> listOfButtons;
-		vector<gui::Image> listOfImages;
+		std::string pageName;
+		std::vector<gui::Button> listOfButtons;
+		std::vector<gui::Image> listOfImages;
 	};
 
 
@@ -109,7 +109,7 @@ private:
 	/// <param name="picking">Checks if it's the picking phase (true) or not (false).</param>
 	static void RenderPage(const unsigned int id, const bool picking);
 
-	static array<MenuPage*, MAX_NUMBER_OF_PAGES> listOfPages;
+	static std::array<MenuPage*, MAX_NUMBER_OF_PAGES> listOfPages;
 	static bool isCreated;
 	static int currentPageId;
 

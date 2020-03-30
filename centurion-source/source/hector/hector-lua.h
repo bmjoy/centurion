@@ -11,7 +11,6 @@
 
 #include <ui.h>
 
-using namespace std;
 struct lua_State;
 
 /// <summary>
@@ -58,42 +57,42 @@ public:
 	/// This function tries to execute a specified command by using the console.
 	/// </summary>
 	/// <param name="cmd">Command that should be executed. Supports strings.</param>
-	static void ExecuteCommand(string cmd);
+	static void ExecuteCommand(std::string cmd);
 
 	/// <summary>
 	/// This function tries to execute a specified boolean method by using the console.
 	/// </summary>
 	/// <param name="cmd">Command that should be executed. Supports strings.</param>
 	/// <param name="*boolean">Default value that should be returned. It supports only referenced booleans.</param>
-	static void ExecuteBooleanMethod(string cmd, bool *boolean);
+	static void ExecuteBooleanMethod(std::string cmd, bool *boolean);
 
 	/// <summary>
 	/// This function tries to execute a specified string method by using the console.
 	/// </summary>
 	/// <param name="cmd">Command that should be executed. Supports strings.</param>
 	/// <param name="*_string">Default value that should be used. It supports only referenced strings.</param>
-	static void ExecuteStringMethod(string cmd, string *_string);
+	static void ExecuteStringMethod(std::string cmd, std::string *_string);
 
 	/// <summary>
 	/// This function tries to execute a specified integer method by using the console.
 	/// </summary>
 	/// <param name="cmd">Command that should be executed. Supports strings.</param>
 	/// <param name="*integer">Default value that should be used. It supports only referenced integers.</param>
-	static void ExecuteIntegerMethod(string cmd, int *integer);
+	static void ExecuteIntegerMethod(std::string cmd, int *integer);
 
 	/// <summary>
 	/// This function tries to execute a specified floating method by using the console.
 	/// </summary>
 	/// <param name="cmd">Command that should be executed. Supports strings.</param>
 	/// <param name="*_float">Default value that should be used. It supports only referenced floats.</param>
-	static void ExecuteFloatMethod(string cmd, float *_float);
+	static void ExecuteFloatMethod(std::string cmd, float *_float);
 
 	/// <summary>
 	/// This function is used to return the value of a specified integer variable.
 	/// </summary>
 	/// <param name="name">Name of the variable that should be used. Supports strings.</param>
 	/// <param name="*integer">Default value. It supports only referenced integers.</param>
-	static void GetIntegerVariable(string name, int *integer);
+	static void GetIntegerVariable(std::string name, int *integer);
 
 private:
 	static lua_State* L;

@@ -5,6 +5,10 @@
 #include <engine.h>
 #include <file_manager.h>
 
+using namespace std;
+using namespace glm;
+
+
 vector<Logger::LogMessage> Logger::Messages;
 string Logger::fileDebugName = "logs/debug/Debug " + FileManager::CurrentDateTime("%Y%m%d-%H%M%S") + ".xml";
 string Logger::fileParamsName = "logs/params/Params " + FileManager::CurrentDateTime("%Y%m%d-%H%M%S") + ".xml";

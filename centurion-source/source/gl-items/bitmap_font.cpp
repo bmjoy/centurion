@@ -2,11 +2,14 @@
 
 #include <settings.h>
 #include <stb_image.h>
-#include <codecvt>
-#include <locale>
+//#include <codecvt>
+//#include <locale>
 #include <file_manager.h>
 
 #include <tinyxml2.h>
+
+using namespace std;
+using namespace glm;
 
 bool BitmapFont::isArabic(int codepoint) {
 	return ((codepoint >= 1536 && codepoint <= 1919) || (codepoint >= 2208 && codepoint <= 2303) || (codepoint >= 64336 && codepoint <= 64831) || (codepoint >= 65010 && codepoint <= 65276) || (codepoint == 32));
@@ -152,15 +155,17 @@ void BitmapFont::render_dynamic(string &font, float xPos, float yPos, string &te
 	glUniform1i(glGetUniformLocation(shaderId, "vAlign"), vAlignMap[v_align]);
 	glUniform1i(glGetUniformLocation(shaderId, "fontHeight"), 18);
 	glUniform1i(glGetUniformLocation(shaderId, "shadow"), 0);
-	wstring_convert<codecvt_utf8_utf16<wchar_t>> converter;
-	wstring wtext = converter.from_bytes(text);
+	//wstring_convert<codecvt_utf8_utf16<wchar_t>> converter;
+	//wstring wtext = converter.from_bytes(text);
 	
+	string wtext = text;
+
 	textureID = textureIdMap[font];
 	fontID = fontIdMap[font];
 
 	int letterspacing = 0;
 
-	if (Settings::Language == "arabic" && this->isArabic((GLint)wtext[0])) {
+	/*if (Settings::Language == "arabic" && this->isArabic((GLint)wtext[0])) {
 		if (!bold) {
 			fontID = fontIdMap["arabic_16px"];
 			textureID = textureIdMap["arabic_16px"];
@@ -170,7 +175,7 @@ void BitmapFont::render_dynamic(string &font, float xPos, float yPos, string &te
 			textureID = textureIdMap["arabic_16px_bold"];
 		}
 		letterspacing = -1;
-	}
+	}*/
 
 	if (h_align != "left"){
 		total_width = 0;
@@ -216,13 +221,16 @@ void BitmapFont::render_dynamic(string &font, float xPos, float yPos, string &te
 
 BitmapFont::StaticTextData BitmapFont::create_static(string &font, string &text, float x, float y, bool bold, int line_number) {
 	StaticTextData static_data = StaticTextData();
-	wstring_convert<codecvt_utf8_utf16<wchar_t>> converter;
-	wstring wtext = converter.from_bytes(text);
+	//wstring_convert<codecvt_utf8_utf16<wchar_t>> converter;
+	//wstring wtext = converter.from_bytes(text);
+
+	string wtext = text;
 
 	int fontID, letterspacing = 0;
 	fontID = fontIdMap[font];
 	static_data.textureID = textureIdMap[font];
-	if (Settings::Language == "arabic" && this->isArabic((GLint)wtext[0])) {
+	
+	/*if (Settings::Language == "arabic" && this->isArabic((GLint)wtext[0])) {
 		if (!bold) {
 			fontID = fontIdMap["arabic_16px"];
 			static_data.textureID = textureIdMap["arabic_16px"];
@@ -232,7 +240,7 @@ BitmapFont::StaticTextData BitmapFont::create_static(string &font, string &text,
 			static_data.textureID = textureIdMap["arabic_16px_bold"];
 		}
 		letterspacing = -1;
-	}
+	}*/
 
 	// x positions, chars and total width
 	

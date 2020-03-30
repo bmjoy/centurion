@@ -5,6 +5,9 @@
 #include <pathfinding/pathfinding.h>
 #include <engine.h>
 
+using namespace std;
+using namespace glm;
+
 MinimapRectangle::MinimapRectangle()
 {
 	vPath = "assets/shaders/minimap/vertex.glsl";

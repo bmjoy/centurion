@@ -6,7 +6,8 @@
 
 #include <translationsTable.h>
 
-
+using namespace std;
+using namespace glm;
 
 namespace gui {
 	array<TextList*, MAX_NUMBER_OF_TEXT_LISTS> TextList::TextLists = { nullptr };

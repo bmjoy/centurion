@@ -5,7 +5,8 @@
 #include <engine.h>
 #include <translationsTable.h>
 
-
+using namespace std;
+using namespace glm;
 
 namespace editor {
 

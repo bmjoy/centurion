@@ -6,6 +6,9 @@
 
 #include <tinyxml2.h>
 
+using namespace std;
+using namespace glm;
+
 map<string, string> ErrorCodes::errorCodes;
 
 void ErrorCodes::SetErrorCode(const string error, const string code)

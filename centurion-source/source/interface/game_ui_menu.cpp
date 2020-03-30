@@ -3,7 +3,8 @@
 #include <picking.h>
 #include <translationsTable.h>
 
-
+using namespace std;
+using namespace glm;
 
 namespace game {
 

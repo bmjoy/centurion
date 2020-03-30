@@ -17,6 +17,9 @@
 #include <engine.h>
 #include <maths.h>
 
+using namespace std;
+using namespace glm;
+
 namespace primitives {
 
 	AudioManager *Audio() { return &audioM; }

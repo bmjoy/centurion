@@ -4,12 +4,11 @@
 
 #include <translationsTable.h>
 
+using namespace std;
+using namespace glm;
+
 namespace gui {
-
-	using namespace std;
-	using namespace glm;
 	
-
 	Select::Select(bool options) {
 		boolOptions = options;
 		hasText = true;

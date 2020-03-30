@@ -8,6 +8,8 @@
 #include <tinyxml2.h>
 
 using namespace tinyxml2;
+using namespace std;
+using namespace glm;
 
 ObjectSprite::ObjectSprite() {}
 

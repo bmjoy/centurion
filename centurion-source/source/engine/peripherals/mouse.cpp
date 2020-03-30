@@ -8,6 +8,9 @@
 
 #include <GLFW/glfw3.h>
 
+using namespace std;
+using namespace glm;
+
 // define static variables (default values)
 gui::Image Engine::Mouse::img;
 vec3 Engine::Mouse::position;

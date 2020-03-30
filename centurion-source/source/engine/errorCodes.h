@@ -11,8 +11,6 @@
 #include <string>
 #include <map>
 
-using namespace std;
-
 class ErrorCodes
 {
 public:
@@ -21,14 +19,14 @@ public:
 	/// </summary>
 	/// <param name="error">The error message.</param>
 	/// <param name="code">An error code. It's length should be equal to 10.</param>
-	static void SetErrorCode(const string error, const string code);
+	static void SetErrorCode(const std::string error, const std::string code);
 	/// <summary>
 	/// This function returns the error code corresponding to an error message. 
 	/// It could throw an exception if the required error doesn't have a code or if an other error occurs.
 	/// </summary>
 	/// <param name="error">The error message.</param>
 	/// <returns>An erro code.</returns>
-	static string GetErrorCode(const string error);
+	static std::string GetErrorCode(const std::string error);
 	/// <summary>
 	/// This function reads some errors code from an XML file. 
 	/// It could throw an exception if some error occurs during the reading from file. 
@@ -36,5 +34,5 @@ public:
 	static void ReadErrorCodesXml(void);
 
 private:
-	static map<string, string> errorCodes;
+	static std::map<std::string, std::string> errorCodes;
 };

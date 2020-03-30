@@ -9,6 +9,11 @@
 
 #include <tinyxml2.h>
 
+
+using namespace std;
+using namespace glm;
+
+
 #pragma region Static variables
 
 array<Menu::MenuPage*, MAX_NUMBER_OF_PAGES> Menu::listOfPages = { nullptr };

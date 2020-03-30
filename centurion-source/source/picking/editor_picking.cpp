@@ -8,6 +8,9 @@
 #include <terrain.h>
 #include <file_manager.h>
 
+using namespace std;
+using namespace glm;
+
 namespace editor {
 
 	/*--------------------------*/

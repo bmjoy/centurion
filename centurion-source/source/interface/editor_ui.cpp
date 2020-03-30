@@ -5,7 +5,8 @@
 #include <game/interface/editorMenuBar.h>
 #include <game/interface/editorWindows.h>
 
-
+using namespace std;
+using namespace glm;
 
 namespace editor {
 

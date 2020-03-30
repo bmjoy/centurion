@@ -26,17 +26,17 @@ public:
 	/// <summary>
 	/// This method applies the projection matrix to the object
 	/// </summary>
-	void apply_projection_matrix(mat4 mat = mat4(1.0f));
+	void apply_projection_matrix(glm::mat4 mat = glm::mat4(1.0f));
 	
 	/// <summary>
 	/// This method applies the view matrix to the object
 	/// </summary>
-	void apply_view_matrix(mat4 mat = mat4(1.0f));
+	void apply_view_matrix(glm::mat4 mat = glm::mat4(1.0f));
 
 	/// <summary>
 	/// This method applies the model matrix to the object
 	/// </summary>
-	void apply_model_matrix(mat4 mat = mat4(1.0f));
+	void apply_model_matrix(glm::mat4 mat = glm::mat4(1.0f));
 
 	/// <summary>
 	/// Destructor
@@ -48,9 +48,9 @@ protected:
 	const char* fPath;
 	int shaderId;
 	GLuint VAO, VBO, IBO;
-	vector<GLuint> textureIdList;
-	map<string, GLuint> textureIdMap;
-	vector<ivec3> textureInfoList; // width, height, nrChannels
+	std::vector<GLuint> textureIdList;
+	std::map<std::string, GLuint> textureIdMap;
+	std::vector<glm::ivec3> textureInfoList; // width, height, nrChannels
 
 private:
 	int success;

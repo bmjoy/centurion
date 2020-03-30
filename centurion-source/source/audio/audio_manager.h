@@ -12,8 +12,6 @@
 #include "music.h"
 #include <string>
 
-using namespace std;
-
 /// <summary>
 /// This class is used to handle audio in game (SDT and SFX).
 /// </summary>
@@ -48,7 +46,7 @@ public:
 	/// </summary>
 	/// <param name="name">Name of the music file. It supports only strings.</param>
 	/// <param name="loop">Looping value. It supports only booleans.</param>
-	void MusicPlay(string name, bool looping = true);
+	void MusicPlay(std::string name, bool looping = true);
 
 	/// <summary>
 	/// This function sets the global volume of music.
@@ -99,7 +97,7 @@ public:
 	/// </summary>
 	/// <param name="name">Name of the sound file. It supports only strings.</param>
 	/// <param name="loop">Looping value. It supports only booleans.</param>
-	void SoundPlay(string name, bool looping = true);
+	void SoundPlay(std::string name, bool looping = true);
 
 	/// <summary>
 	/// This function sets the global volume of sounds.

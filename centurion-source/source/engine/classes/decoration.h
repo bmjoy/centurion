@@ -10,9 +10,6 @@
 
 #include "object.h"
 
-using namespace std;
-using namespace glm;
-
 class Building;
 class Player;
 
@@ -32,11 +29,11 @@ public:
 	void create();
 	void render(bool picking, int clickID = 0, bool not_placeable = false) override;
 	Building *get_settlement_building() { return independent; }
-	string get_settlement_name() { return settlementName; }
+	std::string get_settlement_name() { return settlementName; }
 	~Decoration();
 
 private:
-	string settlementName;
+	std::string settlementName;
 	float oldX, oldY, oldSettlX, oldSettlY;
 	int settlID;
 	void checkSettlement();

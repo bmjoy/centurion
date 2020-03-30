@@ -18,9 +18,6 @@
 #define RADIUS_OFFSET 20
 #endif
 
-using namespace std;
-using namespace glm;
-
 class Unit;
 namespace game { class ObjectUI; };
 class Player;
@@ -46,13 +43,13 @@ public:
 	/// This function sets a category for the current building.
 	/// </summary>
 	/// <param name="par_category">The category</param>
-	void SetCategory(const string par_category);
+	void SetCategory(const std::string par_category);
 
 	/// <summary>
 	/// This function return the category of the current building.
 	/// </summary>
 	/// <returns>The category of the string</returns>
-	string GetCategory(void);
+	std::string GetCategory(void);
 
 	/// <summary>
 	/// This functions set the max health of the current building..
@@ -168,12 +165,12 @@ public:
 	/// This function sets the path in which can be found the entity of the current building.
 	/// </summary>
 	/// <param name="par_ent_path">The path of the entity.</param>
-	void SetEntPath(const string par_ent_path);
+	void SetEntPath(const std::string par_ent_path);
 	/// <summary>
 	/// This function sets the path in which can be found the pass table of the current building.
 	/// </summary>
 	/// <param name="par_ent_path">The path og the pass table.</param>
-	void SetPassPath(const string par_pass_path);
+	void SetPassPath(const std::string par_pass_path);
 
 	/// <summary>
 	/// (???) Da rivedere
@@ -223,7 +220,7 @@ private:
 	bool waitingToBeErased;
 	bool bIsCreated;
 	gui::Circle circle[2];
-	string category;
+	std::string category;
 	unsigned int maxHealth;
 	unsigned int repairRate;
 	unsigned int loyaltyFearHealthPercent;
@@ -237,9 +234,9 @@ private:
 	bool bAutoRepair = false;
 	bool bCanProduceGold = false;
 	bool bCanProduceFood = false;
-	string ent_path;
-	string pass_path;
-	vector<Unit> holdUnits;
+	std::string ent_path;
+	std::string pass_path;
+	std::vector<Unit> holdUnits;
 	Settlement *settlement;
 	//Private members:
 	/// <summary>
@@ -255,10 +252,10 @@ private:
 	{
 	public:
 		Settlement *set;
-		vector<float> xPoint;
-		vector<float> yPoint;
-		vector<float> radius;
+		std::vector<float> xPoint;
+		std::vector<float> yPoint;
+		std::vector<float> radius;
 	};
-	static vector<SettlementSet> settlementsList;
+	static std::vector<SettlementSet> settlementsList;
 	//sound selectionSound; TODO
 };

@@ -22,8 +22,6 @@ class Decoration;
 class Unit;
 //class PickingObject;
 
-using namespace std;
-
 class Game 
 {
 public:
@@ -34,12 +32,12 @@ public:
 		/// This function loads a new scenario. It can throw an exception if an error occurs during the loading of the scenario.
 		/// </summary>
 		/// <param name="scenarioName">The name of the scanario (not the path!).</param>
-		static void LoadScenario(const string scenarioName);
+		static void LoadScenario(const std::string scenarioName);
 		/// <summary>
 		/// This function saves a scenario. 
 		/// </summary>
 		/// <param name="scenarioName">The name of the scanario (not the path!).</param>
-		static void SaveScenario(const string scenarioName);
+		static void SaveScenario(const std::string scenarioName);
 
 		/// <summary>
 		/// This function checks if the grid in the game map is enabled or not.
@@ -84,33 +82,33 @@ public:
 		/// This function saves al the objectes contained in the map on an XML file. 
 		/// </summary>
 		/// <param name="xmlPath">The path of the XML file.</param>
-		static void SaveMapObjectsToXml(const string xmlPath);
+		static void SaveMapObjectsToXml(const std::string xmlPath);
 		/// <summary>
 		/// This function saves on a file the heights of the map. It can throw an exception if an error occurs.
 		/// </summary>
 		/// <param name="path">The path of the file.</param>
-		static void SaveHeights(const string path);
+		static void SaveHeights(const std::string path);
 		/// <summary>
 		/// This function saves on a file the textures of the map. It can throw an exception if an error occurs.
 		/// </summary>
 		/// <param name="path">The path of the file.</param>
-		static void SaveTexture(const string path);
+		static void SaveTexture(const std::string path);
 		/// <summary>
 		/// (???) Da rivedere.
 		/// This function loads from a file all the objects of the map. It can throw an exception if an error occurs.
 		/// </summary>
 		/// <param name="path">The path of the file.</param>
-		static void LoadMapObjectsFromXml(const string xmlPath);
+		static void LoadMapObjectsFromXml(const std::string xmlPath);
 		/// <summary>
 		/// This function loads from a file the heights of the map. It can throw an exception if an error occurs.
 		/// </summary>
 		/// <param name="path">The path of the file.</param>
-		static void LoadHeights(const string path);
+		static void LoadHeights(const std::string path);
 		/// <summary>
 		/// This function loads from a file the textures of the map. It can throw an exception if an error occurs.
 		/// </summary>
 		/// <param name="path">The path of the file.</param>
-		static void LoadTexture(const string path);
+		static void LoadTexture(const std::string path);
 
 		static bool isGridEnabled; 
 	};
@@ -228,17 +226,17 @@ public:
 	{
 	public:
 		Race();
-		void setRaceProperties(int p1, string p2, string p3, string p4) { p_id = p1; name = p2; zone = p3; t_class = p4; }
+		void setRaceProperties(int p1, std::string p2, std::string p3, std::string p4) { p_id = p1; name = p2; zone = p3; t_class = p4; }
 		int getRaceId() { return p_id; };
-		string getRaceName() { return name; }
-		string getEnvironmentalZone() { return zone; }
-		string getFoodTransportClass() { return t_class; }
+		std::string getRaceName() { return name; }
+		std::string getEnvironmentalZone() { return zone; }
+		std::string getFoodTransportClass() { return t_class; }
 		~Race();
 	private:
 		int p_id;
-		string name;
-		string zone;
-		string t_class;
+		std::string name;
+		std::string zone;
+		std::string t_class;
 	};
 
 #pragma region TO-LUA Methods
@@ -249,7 +247,7 @@ public:
 	static GObject* GetSelectedObject(void) { return selectedObject; }
 	static bool IsGameObjectSelected(const unsigned int id);
 	static bool IsGameObjectNotNull(int id);
-	static bool CreateObject(const string className, const float x, const float y, const unsigned int player);
+	static bool CreateObject(const std::string className, const float x, const float y, const unsigned int player);
 
 #pragma endregion
 
@@ -261,7 +259,7 @@ public:
 	/// This function returns a list of all the indipendent buildings in the game.
 	/// </summary>
 	/// <returns>A list of buildings.</returns>
-	static vector<Building*> GetListOfIndipendentBuildings(void);
+	static std::vector<Building*> GetListOfIndipendentBuildings(void);
 	//static void UpdateSettlementBuildings();
 	static void SetSelectedObject(GObject* o) { selectedObject = o; }
 
@@ -274,9 +272,9 @@ public:
 	/// </summary>
 	/// <param name="race_name"></param>
 	/// <param name="r"></param>
-	static void AddRace(string race_name, Race r);
-	static vector<string> GetListOfRacesNames() { return racesName; }
-	static Race* GetRace(string race_name);
+	static void AddRace(std::string race_name, Race r);
+	static std::vector<std::string> GetListOfRacesNames() { return racesName; }
+	static Race* GetRace(std::string race_name);
 
 #pragma endregion
 
@@ -287,19 +285,19 @@ public:
 	/// This function add a new color.
 	/// </summary>
 	/// <param name="col">A new color.</param>
-	static void AddColor(const vec3 col);
+	static void AddColor(const glm::vec3 col);
 	/// <summary>
 	/// This function returns all the available colors.
 	/// </summary>
 	/// <returns>A list of color.</returns>
-	static vector<vec3> GetListOfColors(void);
+	static std::vector<glm::vec3> GetListOfColors(void);
 	/// <summary>
 	/// (???) Cosa succede se il colore non e presente nella lista?
 	/// This function returns a specific color.
 	/// </summary>
 	/// <param name="i">The index of the color.</param>
 	/// <returns>A color.</returns>
-	static vec3 GetColor(const unsigned int i);
+	static glm::vec3 GetColor(const unsigned int i);
 	/// <summary>
 	/// This function return the number of available colors.
 	/// </summary>
@@ -319,12 +317,12 @@ protected:
 	static glm::mat4 projectionMatrix, viewMatrix;
 	static bool isCreated;
 	static int numberOfPlayers;
-	static vector<string> racesName;
-	static map<string, Race> races;
-	static vector<vec3> listOfColors;
+	static std::vector<std::string> racesName;
+	static std::map<std::string, Race> races;
+	static std::vector<glm::vec3> listOfColors;
 
-	static void GenerateSettlements(vector<vec2> &locs);
-	static void GenerateOutposts(vector<vec2> &locs);
+	static void GenerateSettlements(std::vector<glm::vec2> &locs);
+	static void GenerateOutposts(std::vector<glm::vec2> &locs);
 	static void GoToPointFromMinimap();
 	static void RenderObjectsPicking();
 	static void RenderObjects();

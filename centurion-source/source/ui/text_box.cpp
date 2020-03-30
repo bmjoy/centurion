@@ -4,6 +4,8 @@
 
 #include "bitmap_font.h"
 
+using namespace std;
+using namespace glm;
 
 namespace gui {
 

@@ -1,5 +1,8 @@
 #include "player.h"
 
+using namespace std;
+using namespace glm;
+
 Player::Player(void)
 {
 	id = 0;

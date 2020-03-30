@@ -2,6 +2,9 @@
 
 #include <stb_image.h>
 
+using namespace std;
+using namespace glm;
+
 CursorImage::CursorImage(){
 	vPath = "assets/shaders/mouse/vertex.glsl";
 	fPath = "assets/shaders/mouse/fragment.glsl";

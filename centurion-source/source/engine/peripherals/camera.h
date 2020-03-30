@@ -20,18 +20,18 @@ namespace Engine {
 		static void SetZoomFactor(float f) { zoomCameraFactor = f; }
 		static float GetXPosition() { return position.x; }
 		static float GetYPosition() { return position.y; }
-		static vec2 GetZoomedCoords(float xCoord, float yCoord);
+		static glm::vec2 GetZoomedCoords(float xCoord, float yCoord);
 		static float GetYMinimapCoordinate(float y);
-		static void Init(vec3 startPosition, vec3 startUp, GLfloat startYaw, GLfloat startPitch);
+		static void Init(glm::vec3 startPosition, glm::vec3 startUp, GLfloat startYaw, GLfloat startPitch);
 		static void mouseControl();
 		static void keyboardControl();
 		static void GoToPoint(GLfloat x, GLfloat y);
-		static mat4 calculateViewMatrix();
+		static glm::mat4 calculateViewMatrix();
 	private:
 		Camera();
 		~Camera();
-		static vec3 position;
-		static vec3 front, up, right, worldUp;
+		static glm::vec3 position;
+		static glm::vec3 front, up, right, worldUp;
 		static GLfloat yaw, pitch;
 		static float threshold_x, threshold_y, abs_x, abs_y;
 		static float zoomCameraFactor;

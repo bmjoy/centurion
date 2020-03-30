@@ -2,6 +2,9 @@
 #include <engine.h>
 #include <mapgen/mapgen.h>
 
+using namespace std;
+using namespace glm;
+
 Match::Match(void) {}
 
 void Match::Tracing(void)

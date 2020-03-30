@@ -1,6 +1,9 @@
 #include <ui.h>
 #include <engine.h>
 
+using namespace std;
+using namespace glm;
+
 namespace gui {
 
 	Circle::Circle() {

@@ -49,7 +49,7 @@ namespace Engine {
 
 	private:
 		static gui::Image img;
-		static vec3 position;
+		static glm::vec3 position;
 		static int currentState;
 		static float znoise, yzoomed, xPosGrid, yPosGrid, xLeftClick, yLeftClick, xRightClick, yRightClick, y2DPosition, y2DRightClick;
 	};

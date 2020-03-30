@@ -9,6 +9,9 @@
 
 #include <tinyxml2.h>
 
+using namespace std;
+using namespace glm;
+
 // define private static variables
 float Settings::cameraMaxZoom;
 float Settings::cameraMovespeed;

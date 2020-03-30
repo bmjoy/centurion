@@ -48,7 +48,7 @@ public:
 		/// <param name="_luaConditionScript"></param>
 		/// <param name="_luaConditionFunction"></param>
 		/// <param name="_iframe"></param>
-		void Create(string _luaOpeningScript, string _luaConditionScript, string _luaConditionFunction, gui::Iframe _iframe);
+		void Create(std::string _luaOpeningScript, std::string _luaConditionScript, std::string _luaConditionFunction, gui::Iframe _iframe);
 		/// <summary>
 		/// This function performs the rendiring of a generic window.
 		/// </summary>
@@ -58,9 +58,9 @@ public:
 		gui::Iframe iframe;
 		bool isOpened;
 		bool opening;
-		string luaOpeningScript;
-		string luaConditionScript;
-		string luaConditionFunction;
+		std::string luaOpeningScript;
+		std::string luaConditionScript;
+		std::string luaConditionFunction;
 	};
 
 	/// <summary>
@@ -91,5 +91,5 @@ private:
 	/// <param name="id">The id of the window.</param>
 	/// <param name="win">The window.</param>
 	static void AddWindow(const unsigned int id, EditorWindow* win);
-	static array<EditorWindow*, MAX_NUMBER_OF_EDITOR_WINDOWS> listOfWindows;
+	static std::array<EditorWindow*, MAX_NUMBER_OF_EDITOR_WINDOWS> listOfWindows;
 };

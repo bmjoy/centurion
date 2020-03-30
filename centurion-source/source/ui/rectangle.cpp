@@ -5,6 +5,9 @@
 
 #include "hector-lua.h"
 
+using namespace std;
+using namespace glm;
+
 namespace gui {
 
 	Rectangle::Rectangle()

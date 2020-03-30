@@ -29,12 +29,12 @@ public:
 	/// Struct that holds the data for static text (useful when it doesn't change run-time).
 	/// </summary>
 	struct StaticTextData {
-		vector<float> X; // Vector with all X-coordinates of each letter
-		vector<float> Y; // Vector with all Y-coordinates of each letter
-		vector<Character> charList;
-		vector<int> charsWidth;
+		std::vector<float> X; // Vector with all X-coordinates of each letter
+		std::vector<float> Y; // Vector with all Y-coordinates of each letter
+		std::vector<Character> charList;
+		std::vector<int> charsWidth;
 		GLint textureID;
-		vec4 color;
+		glm::vec4 color;
 		float y;
 		int textSize;
 		int totalWidth;
@@ -53,7 +53,7 @@ public:
 	/// </summary>
 	/// <param name="hAlign">The horizontal alignment. Supported values are "left" and "center";</param>
 	/// <param name="vAlign">The vertical alignment. Supported values are "normal" and "middle";</param>
-	void set_align(string hAlign = "left", string vAlign = "normal");
+	void set_align(std::string hAlign = "left", std::string vAlign = "normal");
 
 	/// <summary>
 	/// This function initializes and creates the BitmapFont shader with all fonts and settings.
@@ -70,7 +70,7 @@ public:
 	/// <param name="bold">The font-weight. True = "bold", false = "normal";</param>
 	/// <param name="line_number">The line of the current word/text. This is used in the case of text-boxes;</param>
 	/// <returns>The StaticData used to render the text with "render_static" function.</returns>
-	StaticTextData create_static(string &font, string &text, float x, float y, bool bold = false, int line_number = 0);
+	StaticTextData create_static(std::string &font, std::string &text, float x, float y, bool bold = false, int line_number = 0);
 
 	/// <summary>
 	/// This function is used to dynamically render a text. It's useful when the text is changing
@@ -83,7 +83,7 @@ public:
 	/// <param name="color">The text color;</param>
 	/// <param name="shadow"></param>
 	/// <param name="bold"></param>
-	void render_dynamic(string &font, float xPos, float yPos, string &text, vec4 &color, bool shadow, bool bold = false);
+	void render_dynamic(std::string &font, float xPos, float yPos, std::string &text, glm::vec4 &color, bool shadow, bool bold = false);
 
 	/// <summary>
 	/// This function is used to render a text created with "create_static" function. 
@@ -104,13 +104,13 @@ private:
 	/// <returns>True if arabic, false if not arabic.</returns>
 	bool isArabic(int codepoint);
 
-	map<int, Character> fontData[10];
-	map<string, int> fontIdMap;
-	string h_align, v_align, path;
+	std::map<int, Character> fontData[10];
+	std::map<std::string, int> fontIdMap;
+	std::string h_align, v_align, path;
 	int total_width;
 	int offset_x;
-	map<string, int> hAlignMap;
-	map<string, int> vAlignMap;
+	std::map<std::string, int> hAlignMap;
+	std::map<std::string, int> vAlignMap;
 
 };
 

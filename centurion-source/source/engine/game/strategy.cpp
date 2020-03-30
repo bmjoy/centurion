@@ -12,7 +12,6 @@
 
 #pragma region Namespaces
 
-
 using namespace std;
 using namespace glm;
 

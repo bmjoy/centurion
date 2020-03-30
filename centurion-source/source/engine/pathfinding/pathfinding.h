@@ -2,9 +2,6 @@
 
 #include <header.h>
 
-using namespace std;
-using namespace glm;
-
 namespace astar {
 
 	//
@@ -40,10 +37,10 @@ namespace astar {
 	int *ClosedNodes();
 	int *OpenNodes();
 	int *DirMap();
-	vector<vector<int>> readPassMatrix(string &path, string &classname);
-	void updatePassMatrix(vector<vector<int>> &building_grid, vec3 &position);
-	void clearPassMatrix(vector<vector<int>> &building_grid, vec3 &position);
-	bool checkAvailability(vector<vector<int>> &building_grid, vec3 &position);
+	std::vector<std::vector<int>> readPassMatrix(std::string &path, std::string &classname);
+	void updatePassMatrix(std::vector<std::vector<int>> &building_grid, glm::vec3 &position);
+	void clearPassMatrix(std::vector<std::vector<int>> &building_grid, glm::vec3 &position);
+	bool checkAvailability(std::vector<std::vector<int>> &building_grid, glm::vec3 &position);
 	int getGridInfoFromPoint(float x, float y);
 	static int JDIM = 1500;
 	static int IDIM = 1000;
@@ -51,7 +48,7 @@ namespace astar {
 	static int iDir[NDIR] = { 1, 1, 0, -1, -1, -1, 0, 1 };
 	static int jDir[NDIR] = { 0, 1, 1, 1, 0, -1, -1, -1 };
 	
-	vector<ivec2> pathFind(const Location &locStart, const Location &locFinish);
+	std::vector<glm::ivec2> pathFind(const Location &locStart, const Location &locFinish);
 
 	//
 	//	NODE CLASS --> source/pathfinding/node.cpp

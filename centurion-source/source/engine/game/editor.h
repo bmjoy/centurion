@@ -12,9 +12,6 @@
 #include <classes/object.h>
 #include "game.h"
 
-using namespace std;
-using namespace glm;
-
 //class UIGame;
 //class Player;
 //class Building;
@@ -64,9 +61,9 @@ namespace editor
 	/// <summary>
 	/// (???) Le tre funzioni di seguito sono da rivedere/cancellare.
 	/// </summary>
-	void prepareObject(const string type, const string classname);
-	void insertingObject(const string type, const string classname);
-	void addObject(const string type);
+	void prepareObject(const std::string type, const std::string classname);
+	void insertingObject(const std::string type, const std::string classname);
+	void addObject(const std::string type);
 	/// <summary>
 	/// This function changes the terrain.
 	/// </summary>

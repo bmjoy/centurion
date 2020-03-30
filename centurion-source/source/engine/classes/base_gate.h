@@ -11,10 +11,6 @@
 #include <ui.h>
 #include "building.h"
 
-using namespace std;
-using namespace glm;
-
-
 class BaseGate : public Building
 {
 

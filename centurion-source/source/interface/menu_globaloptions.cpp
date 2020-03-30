@@ -6,6 +6,7 @@
 
 #include <settings.h>
 
+using namespace std;
 using namespace glm;
 
 namespace menu {

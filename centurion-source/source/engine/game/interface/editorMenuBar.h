@@ -38,18 +38,18 @@ public:
 		/// <param name="_titleText"></param>
 		/// <param name="_optionsBack"></param>
 		/// <param name="_optionsText"></param>
-		void Create(gui::Rectangle _titleBack, gui::SimpleText _titleText, vector<gui::Rectangle> _optionsBack, vector<gui::SimpleText> _optionsText);
+		void Create(gui::Rectangle _titleBack, gui::SimpleText _titleText, std::vector<gui::Rectangle> _optionsBack, std::vector<gui::SimpleText> _optionsText);
 		/// <summary>
 		/// This function performs the rendering of the editor menu.
 		/// </summary>
 		/// <param name="picking">Checks if it's the picking phase.</param>
 		/// <param name="color">The color to use.</param>
-		void Render(const bool picking, const vec4 &color);
+		void Render(const bool picking, const glm::vec4 &color);
 	private:
 		gui::Rectangle titleBack;
 		gui::SimpleText titleText;
-		vector<gui::Rectangle> optionsBack;
-		vector<gui::SimpleText> optionsText;
+		std::vector<gui::Rectangle> optionsBack;
+		std::vector<gui::SimpleText> optionsText;
 		bool isOpened;
 	};
 
@@ -81,9 +81,9 @@ private:
 	/// <param name="menu">The editor menu</param>
 	static void AddMenu(const unsigned int id, EditorMenu* menu);
 	static unsigned int minPickingId, maxPickingId;
-	static string font;
+	static std::string font;
 	static float height, width;
-	static vec4 color;
+	static glm::vec4 color;
 	static gui::Rectangle topBar;
-	static array<EditorMenu*, MAX_NUMBER_OF_EDITOR_MENUS> listOfMenus;
+	static std::array<EditorMenu*, MAX_NUMBER_OF_EDITOR_MENUS> listOfMenus;
 };

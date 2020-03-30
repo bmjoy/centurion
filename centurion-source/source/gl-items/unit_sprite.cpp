@@ -3,6 +3,9 @@
 #include <stb_image.h>
 #include <fstream>
 
+using namespace std;
+using namespace glm;
+
 UnitSprite::UnitSprite(){
 	vPath = "assets/shaders/usprite/vertex.glsl";
 	fPath = "assets/shaders/usprite/fragment.glsl";

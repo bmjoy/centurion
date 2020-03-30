@@ -1,5 +1,8 @@
 #include "pathfinding.h"
 
+using namespace std;
+using namespace glm;
+
 namespace astar {
 	Node::Node() {}
 

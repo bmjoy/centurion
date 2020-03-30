@@ -9,6 +9,9 @@
 
 #include <terrain.h>
 
+using namespace std;
+using namespace glm;
+
 namespace mapgen {
 
 	map<string, vector<string>> zonesMap;

@@ -6,7 +6,8 @@
 
 #include <translationsTable.h>
 
-
+using namespace std;
+using namespace glm;
 
 
 namespace menu{

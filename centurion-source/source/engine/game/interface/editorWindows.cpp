@@ -8,6 +8,9 @@
 #include <engine.h>
 #include <tinyxml2.h>
 
+using namespace std;
+using namespace glm;
+
 #pragma region static variables
 
 array<EditorWindows::EditorWindow*, MAX_NUMBER_OF_EDITOR_WINDOWS> EditorWindows::listOfWindows = { nullptr };

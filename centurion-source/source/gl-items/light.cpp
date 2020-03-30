@@ -1,5 +1,8 @@
 #include "light.h"
 
+using namespace std;
+using namespace glm;
+
 Light::Light(){
 	colour = glm::vec3(1.0f, 1.0f, 1.0f);
 	ambientIntensity = 1.0f;

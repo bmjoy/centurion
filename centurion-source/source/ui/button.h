@@ -23,7 +23,7 @@ namespace gui {
 		/// This function get Lua Command of Button
 		/// </summary>
 		/// <returns>return luaCmd</returns>
-		string GetLuaCommand() { return luaCmd; }
+		std::string GetLuaCommand() { return luaCmd; }
 
 		/// <summary>
 		/// This function create Button
@@ -35,7 +35,7 @@ namespace gui {
 		/// <param name="pickingID">???</param>
 		/// <param name="textColor">Text Color in Button</param>
 		/// <param name="luaCMD">Command in lua to creat Button</param>
-		void create(string imageName, string Text, int x, int y, int pickingID, vec4 textColor, string luaCMD = "");
+		void create(std::string imageName, std::string Text, int x, int y, int pickingID, glm::vec4 textColor, std::string luaCMD = "");
 
 		/// <summary>
 		/// This function render the button 
@@ -63,7 +63,7 @@ namespace gui {
 		/// <summary>
 		/// Return a lua command
 		/// </summary>
-		string luaCmd;
+		std::string luaCmd;
 
 		/// <summary>
 		/// ???

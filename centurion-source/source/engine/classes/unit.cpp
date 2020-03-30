@@ -12,6 +12,8 @@
 
 #include <GLFW/glfw3.h>
 
+using namespace std;
+using namespace glm;
 using namespace math;
 
 int Unit::unitsCounter = 0;

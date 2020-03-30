@@ -2,10 +2,10 @@
 
 #include <hector-lua.h>
 
-namespace gui {
+using namespace std;
+using namespace glm;
 
-	using namespace std;
-	using namespace glm;
+namespace gui {
 
 	Button::Button() {
 		pickingId = 0;

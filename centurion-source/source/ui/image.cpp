@@ -3,6 +3,9 @@
 
 #include <engine.h>
 
+using namespace std;
+using namespace glm;
+
 namespace gui {
 
 	Image::Image(){}

@@ -4,7 +4,8 @@
 #include <mapgen/mapgen.h>
 #include <pathfinding/pathfinding.h>
 
-
+using namespace std;
+using namespace glm;
 
 Grid::Grid()
 {

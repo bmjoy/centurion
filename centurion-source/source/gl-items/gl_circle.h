@@ -21,7 +21,7 @@ public:
 	/// This struct holds the circle data needed to use the render function
 	/// </summary>
 	struct CircleData {
-		vec4 borderColor, backColor;
+		glm::vec4 borderColor, backColor;
 		float x, y, w, h;
 		float borderWidth;
 		int origin;

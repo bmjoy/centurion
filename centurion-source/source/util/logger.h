@@ -12,8 +12,6 @@
 #include <string>
 #include <vector>
 
-using namespace std;
-
 /// <summary>
 /// This class handles logging system.
 /// </summary>
@@ -28,9 +26,9 @@ public:
 	{
 	public:
 		LogMessage();
-		LogMessage(string txt, string typ = "Info", string nms = "", string clss = "", string mtd = "");
+		LogMessage(std::string txt, std::string typ = "Info", std::string nms = "", std::string clss = "", std::string mtd = "");
 		~LogMessage();
-		string date, type, cpp_namespace, cpp_class, method, text;
+		std::string date, type, cpp_namespace, cpp_class, method, text;
 	};
 
 	/// <summary>
@@ -40,10 +38,10 @@ public:
 	static void Info(LogMessage msg);
 
 	/// <summary>
-	/// This function creates an instance of LogMessage about game informations, using a string.
+	/// This function creates an instance of LogMessage about game informations, using a std::string.
 	/// </summary>
-	/// <param name="msg">This parameter sets a LogMessage information message from a string.</param>
-	static void Info(string msg);
+	/// <param name="msg">This parameter sets a LogMessage information message from a std::string.</param>
+	static void Info(std::string msg);
 
 	/// <summary>
 	/// This function creates an instance of LogMessage about game warnings.
@@ -52,10 +50,10 @@ public:
 	static void Warn(LogMessage msg);
 
 	/// <summary>
-	/// This function creates an instance of LogMessage about game warnings, using a string.
+	/// This function creates an instance of LogMessage about game warnings, using a std::string.
 	/// </summary>
-	/// <param name="msg">This parameter sets a LogMessage warning message from a string.</param>
-	static void Warn(string msg);
+	/// <param name="msg">This parameter sets a LogMessage warning message from a std::string.</param>
+	static void Warn(std::string msg);
 
 	/// <summary>
 	/// This function creates an instance of LogMessage about game errors.
@@ -64,10 +62,10 @@ public:
 	static void Error(LogMessage msg);
 
 	/// <summary>
-	/// This function creates an instance of LogMessage about game errors, using a string.
+	/// This function creates an instance of LogMessage about game errors, using a std::string.
 	/// </summary>
-	/// <param name="msg">This parameter sets a LogMessage error message from a string.</param>
-	static void Error(string msg);
+	/// <param name="msg">This parameter sets a LogMessage error message from a std::string.</param>
+	static void Error(std::string msg);
 
 	/// <summary>
 	/// This function clear the entire Log file.
@@ -97,9 +95,9 @@ public:
 	static void PrintLogMessage(LogMessage msg);
 	~Logger();
 private:
-	static vector<LogMessage> Messages;
-	static string fileDebugName;
-	static string fileParamsName;
+	static std::vector<LogMessage> Messages;
+	static std::string fileDebugName;
+	static std::string fileParamsName;
 	Logger();
 };
 

@@ -41,7 +41,8 @@
 
 using namespace menu;
 using namespace debug;
-
+using namespace std;
+using namespace glm;
 
 int Engine::ENVIRONMENT = MENU_ENV;
 bool Engine::ENGINE_RESET;

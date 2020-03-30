@@ -17,6 +17,10 @@
 
 #include <engine.h>
 
+
+using namespace std;
+using namespace glm;
+
 namespace Folders {
 
 	string XML_SCHEMAS = "\\assets\\xml-schemas\\";

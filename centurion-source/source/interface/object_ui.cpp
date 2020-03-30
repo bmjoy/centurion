@@ -1,6 +1,9 @@
 #include <ui.h>
 #include <interface>
 
+using namespace std;
+using namespace glm;
+
 namespace game {
 	ObjectUI::ObjectUI() {}
 

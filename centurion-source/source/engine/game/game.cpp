@@ -19,6 +19,7 @@
 #include <file_manager.h>
 
 using namespace std;
+using namespace glm;
 
 #pragma region Map class
 

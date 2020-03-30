@@ -5,6 +5,9 @@
 
 #include <GLFW/glfw3.h>
 
+using namespace std;
+using namespace glm;
+
 // define static variables
 float Engine::Camera::MaxZoom = 20.f;
 float Engine::Camera::MovementSpeed = 10.f;
