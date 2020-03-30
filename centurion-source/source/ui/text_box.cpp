@@ -61,7 +61,7 @@ namespace gui {
 						//cout << TEXT << " [IF]" << endl;
 					}
 					else {
-						lines_data.push_back(Text()->create_static(fontName, TEXT, x, y, isBold, line_number));
+						lines_data.push_back(Text()->create_static(fontName, TEXT.c_str(), x, y, isBold, line_number));
 						line_width = tempWidth;
 						TEXT.clear();
 						TEXT = TEXT + word;
@@ -71,7 +71,7 @@ namespace gui {
 					k = j + 1;
 				}
 				if (j == line.size() - 1) {
-					lines_data.push_back(Text()->create_static(fontName, TEXT, x, y, isBold, line_number));
+					lines_data.push_back(Text()->create_static(fontName, TEXT.c_str(), x, y, isBold, line_number));
 					line_number++;
 					//cout << "      " << TEXT << " [LAST]" << endl;
 				}

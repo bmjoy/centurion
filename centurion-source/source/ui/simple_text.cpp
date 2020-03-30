@@ -38,7 +38,28 @@ namespace gui {
 			fontName = fontName + "_bold";
 			isBold = true;
 		}
-		staticData = Text()->create_static(fontName, text, x, y, isBold);
+		staticData = Text()->create_static(fontName, text.c_str(), x, y, isBold);
+		staticData.y = y;
+		staticData.color = color;
+		staticData.shadow = shadow;
+	}
+
+	void SimpleText::create_static(const int * codepoints, int textSize, std::string font, float x, float y, std::string halign, std::string valign, glm::vec4 color, std::string fontWeight)
+	{
+		if (type == "dynamic") Logger::Info("Dynamic text created with static option");
+		if (x < 0) x += Engine::myWindow::Width;
+		if (y < 0) y += Engine::myWindow::Height;
+
+		hAlign = halign;
+		vAlign = valign;
+
+		string fontName = font;
+		bool isBold = false;
+		if (fontWeight == "bold") {
+			fontName = fontName + "_bold";
+			isBold = true;
+		}
+		staticData = Text()->create_static(fontName, codepoints, textSize, x, y, isBold);
 		staticData.y = y;
 		staticData.color = color;
 		staticData.shadow = shadow;

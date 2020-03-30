@@ -2,6 +2,7 @@
 //#include <codecvt>
 //#include <locale>
 //
+//#include <cwchar>
 #include <engine.h>
 
 #include <GLFW/glfw3.h>
@@ -18,35 +19,43 @@ namespace gui {
 		
 		static_text = gui::SimpleText("static");
 		static_text.create_static(text, "tahoma_15px", xPos, yPos, "left", "normal", vec4(255.f));
-		current_text = text;
 
 		text_cursor.create("filled", 0, 0, 2.f, 15.f, "bottom-left", 0);
 		cursorPosition = (int)text.size();
+
+		for (int i = 0; i < 100; i++) currentText[i] = 0;
 	}
 
 	void TextInput::render() {
 		if (is_active) {
 
-			if (Engine::Keyboard::GetCharCodepointPressed() != -1 && current_text.size() <= max_chars) {
-				//wstring_convert<codecvt_utf8_utf16<wchar_t>> converter;
-				//wstring wchar = L" ";
-				//wchar[0] = Engine::Keyboard::GetCharCodepointPressed();
-				//string c = converter.to_bytes(wchar);
-				//current_text += c;
-				//cursorPosition++;
-				static_text.create_static(current_text, "tahoma_15px", xPos, yPos, "left", "normal", vec4(255.f));
+			if (Engine::Keyboard::GetCharCodepointPressed() != -1 && cursorPosition <= max_chars) {
+				currentText[cursorPosition] = Engine::Keyboard::GetCharCodepointPressed();
+				cursorPosition++;
+				static_text.create_static(currentText, cursorPosition + 1, "tahoma_15px", xPos, yPos, "left", "normal", vec4(255.f));
 			}
 
-			if (Engine::Keyboard::IsKeyNotReleased(GLFW_KEY_BACKSPACE) && current_text.size() > 0) {
-				current_text.erase(current_text.end() - 1);
+			if (Engine::Keyboard::IsKeyNotReleased(GLFW_KEY_BACKSPACE) && cursorPosition > 0) {
+				currentText[cursorPosition - 1] = 0;
 				cursorPosition--;
-				static_text.create_static(current_text, "tahoma_15px", xPos, yPos, "left", "normal", vec4(255.f));
+				static_text.create_static(currentText, cursorPosition + 1, "tahoma_15px", xPos, yPos, "left", "normal", vec4(255.f));
 			}
 
 			text_cursor.render(vec4(255.f), false, 0, xPos + static_text.get_width(cursorPosition), yPos);
 		}
 		
 		static_text.render_static();
+	}
+
+	std::string TextInput::get_text()
+	{
+		std::string text;
+		for (int i = 0; i < 100; i++) {
+			if (currentText[i] != 0) {
+				text += (char)currentText[i];
+			}
+		}
+		return text;
 	}
 
 	TextInput::~TextInput() {}
