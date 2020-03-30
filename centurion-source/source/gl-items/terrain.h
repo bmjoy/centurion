@@ -31,13 +31,6 @@ public:
 	Terrain();
 
 	/// <summary>
-	/// This function adds a terrain texture path to the path map
-	/// </summary>
-	/// <param name="terrainID">The terrain ID</param>
-	/// <param name="path">The terrain texture path</param>
-	void addPath(string terrainID, string path) { terrainPathMap[terrainID] = path; }
-
-	/// <summary>
 	/// This function returns the list of textures names
 	/// </summary>
 	vector<string> getTerrainList() { return texturesName; }
@@ -68,7 +61,6 @@ public:
 	/// </summary>
 	~Terrain();
 private:
-	map<string, string> terrainPathMap;
 	float randomX, randomY;
 	GLuint VerticesVBO, HeightsVBO, TexturesVBO;
 	int randomPos;

@@ -11,6 +11,8 @@
 
 #include <GLFW/glfw3.h>
 
+#include <tinyxml2.h>
+
 #include <game/game.h>
 #include <game/editor.h>
 #include <game/strategy.h>
@@ -25,8 +27,6 @@
 #include <errorCodes.h>
 #include <logger.h>
 #include <hector-lua.h>
-
-#include <json.hpp>
 
 // audio
 #include "audio_manager.h"
@@ -244,19 +244,36 @@ void Engine::Init(const char* exe_root)
 		setMenuProjectionMatrix(glm::ortho(0.0f, Engine::myWindow::Width, 0.0f, Engine::myWindow::Height, -100.0f, 100.0f));
 		setCameraProjectionMatrix(glm::ortho(0.0f, Engine::myWindow::WidthZoomed, 0.0f, Engine::myWindow::HeightZoomed, -(float)MEDIUM_MAP_WIDTH, (float)MEDIUM_MAP_WIDTH));
 
+		// read data.xml
 
-		ifstream data_path("assets/data/data.json");
-		//Close the game if it wasn't able to find or process data.json file
-		if (!data_path.good()) 
-		{
-			//forceGameClosure("NOT_FOUND", "ERROR_data");
-		}
-		json data = json::parse(data_path);
+		string path = Folders::DATA + "data.xml";
+		tinyxml2::XMLDocument xmlFile;
+		xmlFile.LoadFile(path.c_str());
 
-		for (int i = 0; i < data["player_colors"].size(); i++) 
+		// colors 
+
+		tinyxml2::XMLElement *_colorsArray = xmlFile.FirstChildElement("data")->FirstChildElement("playerColorArray");
+		for (tinyxml2::XMLElement* _color = _colorsArray->FirstChildElement(); _color != NULL; _color = _color->NextSiblingElement())
 		{
-			vec3 color = vec3(data["player_colors"][i]["r"], data["player_colors"][i]["g"], data["player_colors"][i]["b"]);
+			int r = stoi(_color->Attribute("r"));
+			int g = stoi(_color->Attribute("g"));
+			int b = stoi(_color->Attribute("b"));
+			vec3 color = vec3(r, g, b);
 			Game::AddColor(color);
+		}
+
+		// races
+
+		tinyxml2::XMLElement *_racesArray = xmlFile.FirstChildElement("data")->FirstChildElement("raceArray");
+		for (tinyxml2::XMLElement* _race = _racesArray->FirstChildElement(); _race != NULL; _race = _race->NextSiblingElement())
+		{
+			Game::Race r = Game::Race();
+			int id = stoi(_race->Attribute("id"));
+			string name = string(_race->Attribute("name"));
+			string zone = string(_race->Attribute("zone"));
+			string food_transport_class = string(_race->Attribute("food_transport_class"));
+			r.setRaceProperties(id, name, zone, food_transport_class);
+			Game::AddRace(name, r);
 		}
 	}
 	catch (...) 
@@ -281,34 +298,12 @@ unsigned int Engine::GetEnvironment(void)
 
 void Engine::read_data(void) 
 {
-	//Read races data
-	vector<string> r_files = FileManager::GetAllFilesNamesWithinFolder("assets/data/races");
-	for (int i = 0; i < r_files.size(); ++i) {
-		ifstream path("assets/data/races/" + r_files[i]);
-		json dataRaces = json::parse(path);
-
-		Game::Race r = Game::Race();
-		int id = dataRaces["race_id"].get<int>();
-		string name = dataRaces["race_name"].get<string>();
-		string zone = dataRaces["zone"].get<string>();
-		string t_class = dataRaces["food_transport_class"].get<string>();
-		r.setRaceProperties(id, name, zone, t_class);
-		Game::AddRace(name, r);
-	}
-
 	/* images */
 
 	vector<FileManager::file_info> imagesInfoList = FileManager::GetAllFilesNamesWithinSubfolders("assets\\ui", "png");
 
 	for (int i = 0; i < imagesInfoList.size(); i++)
 		Img()->addPath(imagesInfoList[i].name, imagesInfoList[i].path);
-
-	/* terrain textures */
-
-	vector<FileManager::file_info> texturesInfoList = FileManager::GetAllFilesNamesWithinSubfolders("assets\\terrain\\textures", "png");
-
-	for (int i = 0; i < texturesInfoList.size(); i++)
-		MapTerrain()->addPath(texturesInfoList[i].name, texturesInfoList[i].path);
 }
 
 void Engine::HandleGlobalKeys(void)

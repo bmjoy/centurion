@@ -5,12 +5,13 @@
 #include <game/strategy.h>
 #include <logger.h>
 #include <engine.h>
-#include <json.hpp>
+
+#include <tinyxml2.h>
+#include <file_manager.h>
 
 Terrain::Terrain(){
 	vPath = "assets/shaders/terrain/vertex.glsl";
 	fPath = "assets/shaders/terrain/fragment.glsl";
-	terrainPathMap = map<string, string>();
 }
 
 void Terrain::create() {
@@ -31,25 +32,32 @@ void Terrain::create() {
 
 	int k = 0;
 
-	ifstream path("assets/terrain/terrains.json");
-	json terrainData = json::parse(path);
+	string path = Folders::GAME + "assets\\terrain\\terrains.xml";
+	tinyxml2::XMLDocument xmlFile;
+	xmlFile.LoadFile(path.c_str());
 
-	for (map<string, string>::iterator i = terrainPathMap.begin(); i != terrainPathMap.end(); i++) {
-		string texName = i->first;
-		string texturePath = i->second;
-		texturesName.push_back(texName);
-
+	tinyxml2::XMLElement *_terrains = xmlFile.FirstChildElement("terrains");
+	for (tinyxml2::XMLElement* _terr = _terrains->FirstChildElement(); _terr != NULL; _terr = _terr->NextSiblingElement())
+	{
 		//Terrain data
 		terrainTexture tData = terrainTexture();
-		tData.id = terrainData[texName]["id"].get<int>();
-		tData.name = texName;
-		tData.zones = terrainData[texName]["zone"].get<vector<string>>();
-		tData.frequencies = terrainData[texName]["frequency"].get<vector<float>>();
-		for (int j = 0; j < tData.zones.size(); j++)
-			mapgen::zonesMap[tData.zones[j]].push_back(texName);
-		mapgen::terrainsMap[texName] = tData;
+		tData.id = stoi(_terr->Attribute("id"));
+		tData.name = _terr->Attribute("name");
+		tData.zones = vector<string>();
+		tData.frequencies = vector<float>();
+		tinyxml2::XMLElement *_zones = _terr->FirstChildElement("zoneArray");
+		for (tinyxml2::XMLElement* _zone = _zones->FirstChildElement(); _zone != NULL; _zone = _zone->NextSiblingElement())
+		{
+			tData.zones.push_back(string(_zone->Attribute("name")));
+			tData.frequencies.push_back(stof(string(_zone->Attribute("frequency"))));
+
+			mapgen::zonesMap[string(_zone->Attribute("name"))].push_back(tData.name);
+		}
+		mapgen::terrainsMap[tData.name] = tData;
+		texturesName.push_back(tData.name);
 
 		// load image
+		string texturePath = Folders::GAME + "assets\\terrain\\Textures\\" + tData.name + ".png";
 		textureIdList.push_back(0);
 		textureInfoList.push_back(glm::ivec3(0, 0, 0));
 		unsigned char *data = stbi_load(texturePath.c_str(), &textureInfoList[k].x, &textureInfoList[k].y, &textureInfoList[k].z, 0);
