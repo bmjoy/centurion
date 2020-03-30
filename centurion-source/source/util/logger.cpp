@@ -10,7 +10,7 @@ using namespace glm;
 
 
 vector<Logger::LogMessage> Logger::Messages;
-string Logger::fileDebugName = "logs/debug/Debug " + FileManager::CurrentDateTime("%Y%m%d-%H%M%S") + ".xml";
+string Logger::fileDebugName = "logs/logmessages/Debug " + FileManager::CurrentDateTime("%Y%m%d-%H%M%S") + ".xml";
 string Logger::fileParamsName = "logs/params/Params " + FileManager::CurrentDateTime("%Y%m%d-%H%M%S") + ".xml";
 
 #pragma region Logger
@@ -60,9 +60,9 @@ void Logger::CleanLogs(void)
 {
 	try
 	{
-		vector<string> debugFiles = FileManager::GetAllFilesNamesWithinFolder("logs/debug/");
+		vector<string> debugFiles = FileManager::GetAllFilesNamesWithinFolder("logs/logmessages/");
 		if (debugFiles.size() >= 10) {
-			FileManager::RemoveFile("logs/debug/" + debugFiles[0]);
+			FileManager::RemoveFile("logs/logmessages/" + debugFiles[0]);
 		}
 		vector<string> paramsFiles = FileManager::GetAllFilesNamesWithinFolder("logs/params/");
 		if (paramsFiles.size() >= 10) {

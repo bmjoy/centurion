@@ -3,14 +3,6 @@
 ##
 ## Get latest from https://github.com/github/gitignore/blob/master/VisualStudio.gitignore
 
-# Exclude:
-centurion-source/screenshots/*
-!centurion-source/screenshots/readme.txt
-centurion-source/logs/debug/*
-!centurion-source/logs/debug/DEBUG_FOLDER
-centurion-source/logs/params/*
-!centurion-source/logs/params/PARAMS_FOLDER
-
 # User-specific files
 *.suo
 *.user
@@ -336,3 +328,11 @@ ASALocalRun/
 
 # MFractors (Xamarin productivity tool) working folder 
 .mfractor/
+
+# Exclude:
+centurion-source/screenshots/*
+centurion-source/logs/logmessages/*
+centurion-source/logs/params/*
+!centurion-source/screenshots/readme.txt
+!centurion-source/logs/logmessages/LOGMESSAGES_FOLDER
+!centurion-source/logs/params/PARAMS_FOLDER
