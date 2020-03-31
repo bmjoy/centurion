@@ -4,6 +4,10 @@
 #include <image_sprite.h>
 
 namespace gui {
+
+	/// <summary>
+	/// Class of image
+	/// </summary>
 	class Image {
 	public:
 		Image();
