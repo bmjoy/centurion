@@ -1,3 +1,11 @@
+/*
+* ---------------------------
+* CENTURION
+* [2019] - [2020] Rattlesmake
+* All Rights Reserved.
+* ---------------------------
+*/
+
 #ifndef IFRAME_H
 #define IFRAME_H
 
@@ -9,169 +17,96 @@
 namespace gui {
 	
 	/// <summary>
-	/// Class of Iframe;
-	/// Iframe are dinamic windows that show scenarios in editor
+	/// This class handles Iframes, dynamic windows that list one or more files.
 	/// </summary>
 	class Iframe {
 	public:
-
-		/// <summary>
-		/// Costructor of iFrame
-		/// </summary>
 		Iframe();
-
-		/// <summary>
-		/// This function return a string with name of map
-		/// </summary>
-		/// <param name="_name">Name of the map</param>
 		Iframe(std::string _name);
 
 		/// <summary>
-		/// This function insert add image to the list
+		/// This function adds an image to the iframe window.
 		/// </summary>
-		/// <param name="img">image for the scenario</param>
+		/// <param name="img">Image that would be added. It only supports Image classes.</param>
 		void AddImage(Image img) { listOfImages.push_back(img); }
 
 		/// <summary>
-		/// This funciotn insert add scenario to the list
+		/// This function adds a button to the iframe window.
 		/// </summary>
-		/// <param name="btn">add buttun</param>
+		/// <param name="btn">Button that would be added. It only supports Button classes.</param>
 		void AddButton(Button btn) { listOfButtons.push_back(btn); }
 
 		/// <summary>
-		/// This function insert add text to the list
+		/// This function adds a text to the iframe texts list.
 		/// </summary>
-		/// <param name="txt">text to show</param>
+		/// <param name="txt">Text that would be added. It only supports SimpleText classes.</param>
 		void AddText(SimpleText txt) { listOfTexts.push_back(txt); }
 
 		/// <summary>
-		/// ??? Clean the terminal 
+		/// This function clears the entire texts list. 
 		/// </summary>
 		void Clear();
 
 		/// <summary>
-		/// This function add text list
+		/// This function adds a specific texts list to the iframe.
 		/// </summary>
-		/// <param name="txtList">text of list</param>
+		/// <param name="txtList">Texts list that would be added. It only supports referenced TextList classes.</param>
 		void AddTextList(TextList* txtList);
 
 		/// <summary>
-		/// This function create the list
+		/// This function creates an instance of Iframe.
 		/// </summary>
-		/// <param name="xPos">x postition of the list</param>
-		/// <param name="yPos">y position of the list</param>
-		/// <param name="width">width dimension of the list</param>
-		/// <param name="height">height dimension of the list</param>
+		/// <param name="xPos">X postition of the Iframe. It only supports integers.</param>
+		/// <param name="yPos">Y postition of the Iframe. It only supports integers.</param>
+		/// <param name="width">Width of the Iframe. It only supports integers.</param>
+		/// <param name="height">Height of the Iframe. It only supports integers.</param>
 		void Create(int xPos, int yPos, int width, int height);
 
 		/// <summary>
-		/// Thi function render the list
+		/// This function starts the rendering process of the Iframe.
 		/// </summary>
-		/// <param name="picking">Default 0</param>
+		/// <param name="picking">This boolean parameter enables or disables render picking. Default value is false.</param>
 		void Render(bool picking = false);
 
-		/// <summary>
-		/// Destructor of Ifram
-		/// </summary>
 		~Iframe();
 	private:
-
 		/// <summary>
-		/// Images Render
+		/// This function starts the rendering process of images within the Iframe.
 		/// </summary>
-		/// <param name="picking">Default value 0</param>
+		/// <param name="picking">This boolean parameter enables or disables render picking. Default value is false.</param>
 		void RenderImages(bool picking);
 		
 		/// <summary>
-		/// Buttons render
+		/// This function starts the rendering process of buttons within the Iframe.
 		/// </summary>
-		/// <param name="picking">Defaults value <0/param>
+		/// <param name="picking">This boolean parameter enables or disables render picking. Default value is false.</param>
 		void RenderButtons(bool picking);
 
 		/// <summary>
-		/// Text render
+		/// This function starts the rendering process of texts within the Iframe text list.
 		/// </summary>
 		void RenderTexts();
 
 		/// <summary>
-		/// Render text list
+		/// This function starts the rendering process of text lists within the Iframe.
 		/// </summary>
-		/// <param name="picking">Defalut value </param>
+		/// <param name="picking">This boolean parameter enables or disables render picking. Default value is false.</param>
 		void RenderTextLists(bool picking);
 
-		/// <summary>
-		/// Return a list of image
-		/// </summary>
 		std::vector<Image> listOfImages;
-
-		/// <summary>
-		/// return a list of buttons
-		/// </summary>
 		std::vector<Button> listOfButtons;
-
-		/// <summary>
-		/// return a list of text
-		/// </summary>
 		std::vector<SimpleText> listOfTexts;
-
-		/// <summary>
-		/// return the text list
-		/// </summary>
 		std::vector<TextList*> listOfTextLists;
-
-		/// <summary>
-		/// take back image of iframe
-		/// </summary>
 		Image back;
-
-		/// <summary>
-		/// take the top left image of ifram
-		/// </summary>
 		Image topleft;
-
-		/// <summary>
-		/// take topright image of ifram
-		/// </summary>
 		Image topright;
-
-		/// <summary>
-		/// take bottomright image of ifram
-		/// </summary>
 		Image bottomright;
-
-		/// <summary>
-		/// take bottomleft image of ifram
-		/// </summary>
 		Image bottomleft;
-
-		/// <summary>
-		/// take right image of iframe
-		/// </summary>
 		Image right;
-
-		/// <summary>
-		/// take left image of ifram
-		/// </summary>
 		Image left;
-
-		/// <summary>
-		/// take the top image of ifram
-		/// </summary>
 		Image top;
-
-		/// <summary>
-		/// take the bottom image of ifram
-		/// </summary>
 		Image bottom;
-
-		/// <summary>
-		/// ??? 
-		/// </summary>
 		std::string name;
-
-		/// <summary>
-		/// position of iframe
-		/// </summary>
 		int x, y, w, h;
 	};
 };
