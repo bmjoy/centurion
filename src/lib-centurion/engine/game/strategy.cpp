@@ -1,5 +1,5 @@
 #include <game/strategy.h>
-#include <interface>
+
 #include <engine.h>
 #include <mapgen/mapgen.h>
 #include <player/player.h>
@@ -33,7 +33,7 @@ void Strategy::Reset(void)
 	GObject::ResetGameObjects();
 
 	isCreated = false;
-	game::GameMenu::Disable();
+	//game::GameMenu::Disable();
 	Map::DisableGrid();
 	Minimap::Unblock();
 	Minimap::Disable();
@@ -96,7 +96,7 @@ void Strategy::Create(void)
 
 	//ui = new UIGame();
 
-	game::GAME_UI()->create(playersList[0].GetPlayerRace().substr(5));
+	//game::GAME_UI()->create(playersList[0].GetPlayerRace().substr(5));
 
 	Engine::Camera::GoToPoint(
 		(GLfloat)(playersList[0].GetStartPoint().x - Engine::myWindow::WidthZoomed / 2.f),
@@ -117,7 +117,7 @@ void Strategy::Run(void)
 	Engine::Camera::keyboardControl();
 
 	/* Keyboard controls handling*/
-	if (!game::GameMenu::IsActive()) HandleKeyboardControls();
+	//if (!game::GameMenu::IsActive()) HandleKeyboardControls();
 
 	/* If minimap is NOT active */
 	if (Minimap::IsActive() == false) {
@@ -126,14 +126,14 @@ void Strategy::Run(void)
 		viewMatrix = Engine::Camera::calculateViewMatrix();
 		projectionMatrix = getCameraProjectionMatrix();
 
-		game::GAME_UI()->render(true);
+		//game::GAME_UI()->render(true);
 
 		// apply game matrices:
 		applyGameMatrices(&projectionMatrix, &viewMatrix);
 
 		/* Tracing and Picking */
 		Tracing();
-		if (!game::GameMenu::IsActive()) RenderObjectsPicking();
+		//if (!game::GameMenu::IsActive()) RenderObjectsPicking();
 
 		/* Rendering */
 		Map::Render(false);
@@ -142,7 +142,7 @@ void Strategy::Run(void)
 		// apply menu matrices:
 		applyMenuMatrices();
 
-		game::GAME_UI()->render(false);
+		//game::GAME_UI()->render(false);
 
 	}
 
@@ -152,11 +152,11 @@ void Strategy::Run(void)
 		viewMatrix = mat4(1.0f);
 		projectionMatrix = getMinimapProjectionMatrix();
 
-		game::GAME_UI()->render(true);
+		//game::GAME_UI()->render(true);
 
 		// apply game matrices:
 		applyGameMatrices(&projectionMatrix, &viewMatrix);
-		if (!game::GameMenu::IsActive()) RenderObjectsPicking();
+		//if (!game::GameMenu::IsActive()) RenderObjectsPicking();
 
 		if (Minimap::IsCreated()) Minimap::Render();
 
@@ -169,7 +169,7 @@ void Strategy::Run(void)
 
 		// apply menu matrices:	
 		applyMenuMatrices();
-		game::GAME_UI()->render(false);
+		//game::GAME_UI()->render(false);
 
 		GoToPointFromMinimap();
 	}
@@ -192,9 +192,9 @@ void Strategy::HandleKeyboardControls(void)
 	}
 	//Open in-game menu
 	if (Engine::Keyboard::IsKeyPressed(GLFW_KEY_ESCAPE)) {
-		if (game::GameMenu::IsActive()) game::GameMenu::Disable();
+		/*if (game::GameMenu::IsActive()) game::GameMenu::Disable();
 		else game::GameMenu::Enable();
-		game::GameMenu::IsActive() ? Logger::Info("Pause Menu ON!") : Logger::Info("Pause Menu OFF!");
+		game::GameMenu::IsActive() ? Logger::Info("Pause Menu ON!") : Logger::Info("Pause Menu OFF!");*/
 	}
 	// Wireframe
 	if (Engine::Keyboard::IsKeyPressed(GLFW_KEY_Z)) {

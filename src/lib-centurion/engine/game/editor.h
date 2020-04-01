@@ -52,11 +52,11 @@ private:
 namespace editor 
 {
 	//extern Unit unitTemp;
-	extern Building* buildingTemp;
-	extern Decoration* decorTemp;
-	extern bool movingObject;
-	static float movingObjectXPos, movingObjectYPos, movingObjectStartXMouse, movingObjectStartYMouse;
-	static bool movingObjectRestore;
+	//extern Building* buildingTemp;
+	//extern Decoration* decorTemp;
+	//extern bool movingObject;
+	//static float movingObjectXPos, movingObjectYPos, movingObjectStartXMouse, movingObjectStartYMouse;
+	//static bool movingObjectRestore;
 
 	/// <summary>
 	/// (???) Le tre funzioni di seguito sono da rivedere/cancellare.

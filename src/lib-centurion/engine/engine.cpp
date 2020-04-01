@@ -1,4 +1,7 @@
 #include "engine.h"
+
+#include "debugUi.h"
+
 #include <file_manager.h>
 
 #include <translationsTable.h>
@@ -16,7 +19,6 @@
 #include <menu/menu.h>
 #include <game/interface/editorWindows.h>
 
-#include <interface>
 #include <classes/unit.h>
 #include <settings.h>
 #include <errorCodes.h>
@@ -37,8 +39,6 @@
 #include <chrono>
 #include <thread>
 
-using namespace menu;
-using namespace debug;
 using namespace std;
 using namespace glm;
 
@@ -59,7 +59,8 @@ int Engine::Launch(void)
 	Camera::Init(vec3(0.0f, 0.0f, 0.0f), vec3(0.0f, 1.0f, 0.0f), -90.0f, 0.0f);
 	Mouse::create();
 
-	DEBUG_UI()->create();
+	DebugUI debugUI = DebugUI();
+	debugUI.create();
 
 	std::ostringstream ss;
 	ss << glGetString(GL_VERSION);
@@ -81,7 +82,6 @@ int Engine::Launch(void)
 		window.ClearBuffers();
 		_fps.Update();
 		Mouse::mouse_control(window.get_mouse_x(), window.get_mouse_y());
-		HandleGlobalKeys();
 
 		// ---- MENU ---- //
 
@@ -144,8 +144,10 @@ int Engine::Launch(void)
 		}
 
 		// debug ui
-		if (Settings::DebugIsActive) 
-			DEBUG_UI()->render(_fps.GetFps(), _fps.GetMpfs(), Unit::GetCounter());
+		if (Settings::DebugIsActive)
+		{
+			debugUI.render(_fps.GetFps(), _fps.GetMpfs(), Unit::GetCounter());
+		}
 
 		Hector::RenderConsole();
 
@@ -303,16 +305,6 @@ void Engine::read_data(void)
 
 	for (int i = 0; i < imagesInfoList.size(); i++)
 		Img()->addPath(imagesInfoList[i].name, imagesInfoList[i].path);
-}
-
-void Engine::HandleGlobalKeys(void)
-{
-	// activate or deactivate debug ui
-	if (Settings::DebugIsActive && Keyboard::IsKeyPressed(GLFW_KEY_F10)) 
-	{
-		debug::DEBUG_UI()->setStatus(!debug::DEBUG_UI()->getStatus());
-		debug::DEBUG_UI()->getStatus() ? Logger::Info("Debug UI ON!") : Logger::Info("Debug UI OFF!");
-	}
 }
 
 void Engine::ResetperipheralsInput(void)

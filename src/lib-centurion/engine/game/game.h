@@ -217,6 +217,7 @@ public:
 		static bool isActive;
 		static bool isCreated;
 		static bool isBlocked;
+		static gui::Rectangle minimapRectangle;
 	};
 
 	/// <summary>

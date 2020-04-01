@@ -1,6 +1,5 @@
 #include <engine.h>
 
-#include <interface>
 #include <game/game.h>
 
 #include <GLFW/glfw3.h>
@@ -82,7 +81,8 @@ void Engine::Camera::mouseControl() {
 	}
 
 	/* MOUSE SCROLLING --> CAMERA ZOOM */
-	if (!game::GameMenu::IsActive() && (Keyboard::IsKeyNotReleased(GLFW_KEY_LEFT_CONTROL) || Keyboard::IsKeyNotReleased(GLFW_KEY_RIGHT_CONTROL)) && Mouse::ScrollBool) {
+	//!game::GameMenu::IsActive() && 
+	if ((Keyboard::IsKeyNotReleased(GLFW_KEY_LEFT_CONTROL) || Keyboard::IsKeyNotReleased(GLFW_KEY_RIGHT_CONTROL)) && Mouse::ScrollBool) {
 		if (Mouse::ScrollValue > 0 && currentZoom > 1.0f) {
 			currentZoom -= (int)Mouse::ScrollValue;
 		}

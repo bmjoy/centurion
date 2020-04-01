@@ -207,12 +207,15 @@ XCOPY "$(ProjectDir)lua53.dll" "$(ProjectDir)$(OutDir)"</Command>
     <ClCompile Include="lib-centurion\engine\classes\object.cpp" />
     <ClCompile Include="lib-centurion\engine\classes\settlement.cpp" />
     <ClCompile Include="lib-centurion\engine\classes\unit.cpp" />
+    <ClCompile Include="lib-centurion\engine\debugUi.cpp" />
     <ClCompile Include="lib-centurion\engine\engine.cpp" />
     <ClCompile Include="lib-centurion\engine\errorCodes.cpp" />
     <ClCompile Include="lib-centurion\engine\game\editor.cpp" />
     <ClCompile Include="lib-centurion\engine\game\game.cpp" />
     <ClCompile Include="lib-centurion\engine\game\interface\editorMenuBar.cpp" />
+    <ClCompile Include="lib-centurion\engine\game\interface\editorUi.cpp" />
     <ClCompile Include="lib-centurion\engine\game\interface\editorWindows.cpp" />
+    <ClCompile Include="lib-centurion\engine\game\interface\matchUi.cpp" />
     <ClCompile Include="lib-centurion\engine\game\match.cpp" />
     <ClCompile Include="lib-centurion\engine\game\strategy.cpp" />
     <ClCompile Include="lib-centurion\engine\mapgen\mapgen.cpp" />
@@ -243,15 +246,6 @@ XCOPY "$(ProjectDir)lua53.dll" "$(ProjectDir)$(OutDir)"</Command>
     <ClCompile Include="lib-centurion\gl-items\terrain.cpp" />
     <ClCompile Include="lib-centurion\gl-items\unit_sprite.cpp" />
     <ClCompile Include="lib-centurion\hector\hector-lua.cpp" />
-    <ClCompile Include="lib-centurion\interface\editor_addobject_window.cpp" />
-    <ClCompile Include="lib-centurion\interface\editor_newmap_window.cpp" />
-    <ClCompile Include="lib-centurion\interface\editor_question_window.cpp" />
-    <ClCompile Include="lib-centurion\interface\editor_terrainbrush_window.cpp" />
-    <ClCompile Include="lib-centurion\interface\editor_ui.cpp" />
-    <ClCompile Include="lib-centurion\interface\menu_globaloptions.cpp" />
-    <ClCompile Include="lib-centurion\interface\object_ui.cpp" />
-    <ClCompile Include="lib-centurion\picking\editor_picking.cpp" />
-    <ClCompile Include="lib-centurion\picking\gameui_picking.cpp" />
     <ClCompile Include="lib-centurion\ui\button.cpp" />
     <ClCompile Include="lib-centurion\ui\circle.cpp" />
     <ClCompile Include="lib-centurion\ui\iframe.cpp" />
@@ -273,12 +267,15 @@ XCOPY "$(ProjectDir)lua53.dll" "$(ProjectDir)$(OutDir)"</Command>
     <ClInclude Include="lib-centurion\engine\classes\object.h" />
     <ClInclude Include="lib-centurion\engine\classes\settlement.h" />
     <ClInclude Include="lib-centurion\engine\classes\unit.h" />
+    <ClInclude Include="lib-centurion\engine\debugUi.h" />
     <ClInclude Include="lib-centurion\engine\engine.h" />
     <ClInclude Include="lib-centurion\engine\errorCodes.h" />
     <ClInclude Include="lib-centurion\engine\game\editor.h" />
     <ClInclude Include="lib-centurion\engine\game\game.h" />
     <ClInclude Include="lib-centurion\engine\game\interface\editorMenuBar.h" />
+    <ClInclude Include="lib-centurion\engine\game\interface\editorUi.h" />
     <ClInclude Include="lib-centurion\engine\game\interface\editorWindows.h" />
+    <ClInclude Include="lib-centurion\engine\game\interface\matchUi.h" />
     <ClInclude Include="lib-centurion\engine\game\match.h" />
     <ClInclude Include="lib-centurion\engine\game\strategy.h" />
     <ClInclude Include="lib-centurion\engine\header.h" />
@@ -426,10 +423,6 @@ XCOPY "$(ProjectDir)lua53.dll" "$(ProjectDir)$(OutDir)"</Command>
     <ClCompile Include="lib-centurion\audio\recorder.cpp" />
     <ClCompile Include="lib-centurion\audio\sound.cpp" />
     <ClCompile Include="lib-centurion\audio\sound_buffer.cpp" />
-    <ClCompile Include="lib-centurion\interface\debug_ui.cpp" />
-    <ClCompile Include="lib-centurion\interface\game_ui_menu.cpp" />
-    <ClCompile Include="lib-centurion\interface\game_ui.cpp" />
-    <ClCompile Include="lib-centurion\interface\menu_players_list.cpp" />
     <None Include="assets\shaders\bsprite\vertex.glsl">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
@@ -438,7 +431,6 @@ XCOPY "$(ProjectDir)lua53.dll" "$(ProjectDir)$(OutDir)"</Command>
     <ClInclude Include="lib-centurion\audio\vorbis\ogg.h" />
     <ClInclude Include="lib-centurion\audio\vorbis\os_types.h" />
     <ClInclude Include="lib-centurion\audio\vorbis\vorbis_file.h" />
-    <None Include="lib-centurion\common\interface" />
     <None Include="lib-centurion\ui\ui.h" />
   </ItemGroup>
   <ItemGroup>

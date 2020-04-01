@@ -5,7 +5,6 @@
 #include <pathfinding/pathfinding.h>
 #include <game/strategy.h>
 #include <maths.h>
-#include <interface>
 
 #include <decoration_sprite.h>
 

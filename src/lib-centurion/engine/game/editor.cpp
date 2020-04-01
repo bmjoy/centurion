@@ -1,8 +1,10 @@
 #include "editor.h"
+
+#include "interface/editorUi.h"
+
 #include <mapgen/mapgen.h>
 #include <game/strategy.h>
 #include <picking.h>
-#include <interface>
 #include <engine.h>
 
 #include <logger.h>
@@ -36,7 +38,7 @@ void Editor::Create(void)
 	setMinimapProjectionMatrix();
 
 	Map::Reset();
-	editor::EDITOR_UI()->create();
+	EditorUI::Create();
 
 	SelectionRectangle::Create();
 
@@ -54,7 +56,7 @@ void Editor::Run(void)
 
 	/* Keyboard control */
 	handleKeyboardControls();
-	if (!editor::IsWindowOpened) 
+	//if (!editor::IsWindowOpened) 
 	{ // TODO: merge all these in a function in Editor->Editor_functions.cpp
 		Engine::Camera::keyboardControl();
 	}
@@ -62,12 +64,15 @@ void Editor::Run(void)
 	/* If minimap is NOT active */
 	if (!Minimap::IsActive()) 
 	{
-		if (!editor::IsWindowOpened && Engine::Mouse::GetYPosition() < Engine::myWindow::Height - 30.f && !editor::menuIsOpened)
+		//if (!editor::IsWindowOpened && Engine::Mouse::GetYPosition() < Engine::myWindow::Height - 30.f && !editor::menuIsOpened)
+		{
 			Engine::Camera::mouseControl();
+		}
 		viewMatrix = Engine::Camera::calculateViewMatrix();
 		projectionMatrix = getCameraProjectionMatrix();
 
-		editor::EDITOR_UI()->render(true);
+		// PICKING UI RENDERING
+		EditorUI::Render(true);
 
  		if (Engine::Mouse::LeftClick) 
 		{
@@ -77,11 +82,13 @@ void Editor::Run(void)
 		// apply game matrices
 		applyGameMatrices(&projectionMatrix, &viewMatrix);
 
-		// picking
-		if (!editor::IsWindowOpened && !editor::addingObject && !editor::TerrainBrushIsActive) 
+		// PICKING OBJECTS RENDERING
+		//if (!editor::IsWindowOpened && !editor::addingObject && !editor::TerrainBrushIsActive) 
+		{
 			RenderObjectsPicking();
+		}
 
-		// rendering
+		// NORMAL RENDERING
 		Map::Render(false);
 		RenderObjects();
 		//if (!editor::IsWindowOpened && !editor::addingObject && !editor::TerrainBrushIsActive) editor::moveObjects();
@@ -89,7 +96,7 @@ void Editor::Run(void)
 		// apply menu matrices
 		applyMenuMatrices();
 
-		editor::EDITOR_UI()->render(false);
+		EditorUI::Render(false);
 	}
 
 	/* If minimap is active */
@@ -98,21 +105,24 @@ void Editor::Run(void)
 		viewMatrix = mat4(1.0f);
 		projectionMatrix = getMinimapProjectionMatrix();
 
-		// editor ui picking */
-		editor::EDITOR_UI()->render(true);
+		// PICKING RENDERING
+		EditorUI::Render(true);
 		RenderObjectsPicking(); //RIVEDERE QUESTA FUNZIONE
 
-		if (Minimap::IsCreated()) Minimap::Render();
-
-		if (!Minimap::IsCreated()) {
+		// NORMAL RENDERING 
+		if (Minimap::IsCreated()) 
+		{
+			Minimap::Render();
+		}
+		else 
+		{
 			applyGameMatrices(&projectionMatrix, &viewMatrix);
 			Map::Render(false);
 			RenderObjects();
 			Minimap::Create();
 			applyMenuMatrices();
 		}
-
-		editor::EDITOR_UI()->render(false);
+		EditorUI::Render(false);
 
 		if (Picking::leftClickID_UI == 0) GoToPointFromMinimap();
 	}
@@ -125,22 +135,22 @@ void Editor::handleKeyboardControls(void)
 	using namespace editor;
 
 	//CTRL Hotkeys
-	if (!IsWindowOpened) 
+	//if (!IsWindowOpened) 
 	{
 		if (Engine::Keyboard::IsKeyPressed(GLFW_KEY_LEFT_CONTROL) || Engine::Keyboard::IsKeyPressed(GLFW_KEY_RIGHT_CONTROL)) 
 		{
 			if(!Minimap::IsActive())
 			{
-				if (Engine::Keyboard::IsKeyPressed(GLFW_KEY_N)) { NewMapWindowIsOpen = true; NewMapResetText = true; IsWindowOpened = true; }
-				if (Engine::Keyboard::IsKeyPressed(GLFW_KEY_O)) { OpenMapWindowIsOpen = true; OpenMapWindowUpdate = true; IsWindowOpened = true; }
-				if (Engine::Keyboard::IsKeyPressed(GLFW_KEY_A)) { TerrainBrushIsActive = false; TerrainBrushWindowIsOpen = false; AddObjectWindowIsOpen = !AddObjectWindowIsOpen; }
-				if (Engine::Keyboard::IsKeyPressed(GLFW_KEY_T)) { AddObjectWindowIsOpen = false; TerrainBrushIsActive = !TerrainBrushWindowIsOpen; TerrainBrushWindowIsOpen = !TerrainBrushWindowIsOpen; }
+				//if (Engine::Keyboard::IsKeyPressed(GLFW_KEY_N)) { NewMapWindowIsOpen = true; NewMapResetText = true; IsWindowOpened = true; }
+				//if (Engine::Keyboard::IsKeyPressed(GLFW_KEY_O)) { OpenMapWindowIsOpen = true; OpenMapWindowUpdate = true; IsWindowOpened = true; }
+				//if (Engine::Keyboard::IsKeyPressed(GLFW_KEY_A)) { TerrainBrushIsActive = false; TerrainBrushWindowIsOpen = false; AddObjectWindowIsOpen = !AddObjectWindowIsOpen; }
+				//if (Engine::Keyboard::IsKeyPressed(GLFW_KEY_T)) { AddObjectWindowIsOpen = false; TerrainBrushIsActive = !TerrainBrushWindowIsOpen; TerrainBrushWindowIsOpen = !TerrainBrushWindowIsOpen; }
 			}
 			else
 			{
 				if (Engine::Keyboard::IsKeyPressed(GLFW_KEY_S)) 
 				{ 
-					Game::Map::SaveScenario(currentMapName); 
+					//Game::Map::SaveScenario(currentMapName); 
 				}
 			}
 		}
@@ -226,7 +236,7 @@ namespace editor
 {
 	/* extern variables definitions */
 
-	bool menuIsOpened = false;
+	/*bool menuIsOpened = false;
 	bool IsWindowOpened = false;
 	bool OpenMapWindowIsOpen = false;
 	bool OpenMapWindowUpdate = false;
@@ -252,21 +262,17 @@ namespace editor
 
 	vector<string> EditorAddObjectBuildingOptions;
 	vector<string> EditorAddObjectUnitOptions;
-	vector<string> EditorAddObjectDecorationOptions;
+	vector<string> EditorAddObjectDecorationOptions;*/
 
 	//Unit unitTemp;
-	Building* buildingTemp;
-	Decoration* decorTemp;
-
-
-	QuestionWindow *Q_WINDOW() { return &myquestionwindow; }
-
+	//Building* buildingTemp;
+	//Decoration* decorTemp;
 
 
 	/* tools */
 	void prepareObject(const string type, const string classname) 
 	{
-		if (type == "buildings") {
+		/*if (type == "buildings") {
 			buildingTemp = new Building();
 			buildingTemp->SetClassName(classname);
 			buildingTemp->SetPickingID(0);
@@ -281,42 +287,42 @@ namespace editor
 			decorTemp->SetPlayer(0);
 			decorTemp->SetPosition(vec3(0));
 			decorTemp->prepare();
-		}
+		}*/
 	}
 
 	void insertingObject(const string type, const string classname)
 	{
-		float x = round(Engine::Mouse::GetXPosition() * Engine::myWindow::WidthZoomed / Engine::myWindow::Width + Engine::Camera::GetXPosition());
-		float y = round(Engine::Mouse::GetYPosition() * Engine::myWindow::HeightZoomed / Engine::myWindow::Height + Engine::Camera::GetYPosition());
-		if (type == "buildings") {
-			buildingTemp->SetPosition(vec3(x, y, 0.f));
-			buildingTemp->SetStatus(false);
-			buildingTemp->Render(false, 0, !buildingTemp->IsPlaceable());
+		//float x = round(Engine::Mouse::GetXPosition() * Engine::myWindow::WidthZoomed / Engine::myWindow::Width + Engine::Camera::GetXPosition());
+		//float y = round(Engine::Mouse::GetYPosition() * Engine::myWindow::HeightZoomed / Engine::myWindow::Height + Engine::Camera::GetYPosition());
+		//if (type == "buildings") {
+		//	buildingTemp->SetPosition(vec3(x, y, 0.f));
+		//	buildingTemp->SetStatus(false);
+		//	buildingTemp->Render(false, 0, !buildingTemp->IsPlaceable());
 
-			//Player will be able to see info about placing status
-			if (!buildingTemp->GetSettlement()->IsIndipendent()) {
-				string s = "";
-				
-				/*if (!buildingTemp->is_near_to_independent(&s))
-					textInfo.render_dynamic(TranslationsTable::GetTranslation("EDITOR_noSettlementsAround"), "tahoma_15px", 10, Engine::myWindow::Height - 50, vec4(255.f), "left", "center");
-				else*/
-				if (!buildingTemp->IsPlaceable())
-					textInfo.render_dynamic(TranslationsTable::GetTranslation("EDITOR_impassablePoint"), "tahoma_15px", 10, Engine::myWindow::Height - 50, vec4(255.f), "left", "center");
-				else
-					textInfo.render_dynamic(TranslationsTable::GetTranslation("EDITOR_canAddStructure"), "tahoma_15px", 10, Engine::myWindow::Height - 50, vec4(255.f), "left", "center");
-				
-			}
-			else {
-				if (!buildingTemp->IsPlaceable())
-					textInfo.render_dynamic(TranslationsTable::GetTranslation("EDITOR_impassablePoint"), "tahoma_15px", 10, Engine::myWindow::Height - 50, vec4(255.f), "left", "center");
-				else
-					textInfo.render_dynamic(TranslationsTable::GetTranslation("EDITOR_canAddStructure"), "tahoma_15px", 10, Engine::myWindow::Height - 50, vec4(255.f), "left", "center");
-			}
-		}
-		if (type == "decorations") {
-			decorTemp->SetPosition(vec3(x, y, 0.f));
-			decorTemp->Render(!decorTemp->is_placeable());
-		}
+		//	//Player will be able to see info about placing status
+		//	if (!buildingTemp->GetSettlement()->IsIndipendent()) {
+		//		string s = "";
+		//		
+		//		/*if (!buildingTemp->is_near_to_independent(&s))
+		//			textInfo.render_dynamic(TranslationsTable::GetTranslation("EDITOR_noSettlementsAround"), "tahoma_15px", 10, Engine::myWindow::Height - 50, vec4(255.f), "left", "center");
+		//		else*/
+		//		if (!buildingTemp->IsPlaceable())
+		//			textInfo.render_dynamic(TranslationsTable::GetTranslation("EDITOR_impassablePoint"), "tahoma_15px", 10, Engine::myWindow::Height - 50, vec4(255.f), "left", "center");
+		//		else
+		//			textInfo.render_dynamic(TranslationsTable::GetTranslation("EDITOR_canAddStructure"), "tahoma_15px", 10, Engine::myWindow::Height - 50, vec4(255.f), "left", "center");
+		//		
+		//	}
+		//	else {
+		//		if (!buildingTemp->IsPlaceable())
+		//			textInfo.render_dynamic(TranslationsTable::GetTranslation("EDITOR_impassablePoint"), "tahoma_15px", 10, Engine::myWindow::Height - 50, vec4(255.f), "left", "center");
+		//		else
+		//			textInfo.render_dynamic(TranslationsTable::GetTranslation("EDITOR_canAddStructure"), "tahoma_15px", 10, Engine::myWindow::Height - 50, vec4(255.f), "left", "center");
+		//	}
+		//}
+		//if (type == "decorations") {
+		//	decorTemp->SetPosition(vec3(x, y, 0.f));
+		//	decorTemp->Render(!decorTemp->is_placeable());
+		//}
 	}
 
 	void addObject(const string type)
@@ -375,7 +381,7 @@ namespace editor
 
 	void clearEditorVariables(void) 
 	{
-		IsWindowOpened = false;
+		/*IsWindowOpened = false;
 		QuestionWindowIsOpen = false;
 		NewMapWindowIsOpen = false;
 		NewMapResetText = false;
@@ -389,71 +395,72 @@ namespace editor
 		TerrainBrushWindowIsOpen = false;
 		TerrainBrushIsActive = false;
 		menuIsOpened = false;
-		addingObject = false;
+		addingObject = false;*/
 	}
 
 	bool areWindowsClosed(void)
 	{
-		return !(IsWindowOpened || menuIsOpened);
+		return true;
+		//return !(IsWindowOpened || menuIsOpened);
 	}
 
 	void moveObjects(void) 
 	{
 		if (Engine::Mouse::LeftHold) {
 			// buildings
-			if (Game::IsGameObjectNotNull(Picking::leftClickID)) {
-				Building* bld = GObject::GObject::GetObjectByID(Picking::leftClickID)->AsBuilding();
-				movingObjectRestore = false;
-				if (!movingObject) {
-					movingObjectXPos = bld->GetPosition().x;
-					movingObjectYPos = bld->GetPosition().y;
-					movingObjectStartXMouse = Engine::Mouse::GetXPosition() * Engine::myWindow::WidthZoomed / Engine::myWindow::Width + Engine::Camera::GetXPosition();
-					movingObjectStartYMouse = Engine::Mouse::GetYPosition() * Engine::myWindow::HeightZoomed / Engine::myWindow::Height + Engine::Camera::GetYPosition();
-				}
-				float x1 = (Engine::Mouse::GetXPosition() * Engine::myWindow::WidthZoomed / Engine::myWindow::Width + Engine::Camera::GetXPosition());
-				float y1 = (Engine::Mouse::GetYPosition() * Engine::myWindow::HeightZoomed / Engine::myWindow::Height + Engine::Camera::GetYPosition());
-				float dx = x1 - movingObjectStartXMouse;
-				float dy = y1 - movingObjectStartYMouse;
+			//if (Game::IsGameObjectNotNull(Picking::leftClickID)) {
+			//	Building* bld = GObject::GObject::GetObjectByID(Picking::leftClickID)->AsBuilding();
+			//	movingObjectRestore = false;
+			//	if (!movingObject) {
+			//		movingObjectXPos = bld->GetPosition().x;
+			//		movingObjectYPos = bld->GetPosition().y;
+			//		movingObjectStartXMouse = Engine::Mouse::GetXPosition() * Engine::myWindow::WidthZoomed / Engine::myWindow::Width + Engine::Camera::GetXPosition();
+			//		movingObjectStartYMouse = Engine::Mouse::GetYPosition() * Engine::myWindow::HeightZoomed / Engine::myWindow::Height + Engine::Camera::GetYPosition();
+			//	}
+			//	float x1 = (Engine::Mouse::GetXPosition() * Engine::myWindow::WidthZoomed / Engine::myWindow::Width + Engine::Camera::GetXPosition());
+			//	float y1 = (Engine::Mouse::GetYPosition() * Engine::myWindow::HeightZoomed / Engine::myWindow::Height + Engine::Camera::GetYPosition());
+			//	float dx = x1 - movingObjectStartXMouse;
+			//	float dy = y1 - movingObjectStartYMouse;
 
-				if (!bld->GetSettlement()->IsIndipendent())
-				{
-					if (!movingObject) bld->clear_pass();
-					bld->SetPosition(vec3(movingObjectXPos + dx, movingObjectYPos + dy, 0.f));
-					if (!bld->IsPlaceable()) {
-						string s = "";
-						/*
-						if (!bld->is_near_to_independent(&s)) {
-							textInfo.render_dynamic(TranslationsTable::GetTranslation("EDITOR_noSettlementsAround"), "tahoma_15px", 10, Engine::myWindow::Height - 50, vec4(255.f), "left", "center");
-						}
-						else
-							textInfo.render_dynamic(TranslationsTable::GetTranslation("EDITOR_impassablePoint"), "tahoma_15px", 10, Engine::myWindow::Height - 50, vec4(255.f), "left", "center");
-						*/
-						bld->SetPlaceable(false);
-						movingObjectRestore = true;
-					}
-					else {
-						textInfo.render_dynamic(TranslationsTable::GetTranslation("EDITOR_canAddStructure"), "tahoma_15px", 10, Engine::myWindow::Height - 50, vec4(255.f), "left", "center");
-						bld->SetPlaceable(true);
-					}
-				}
-				else {
-					if (!movingObject) bld->clear_pass();
-					bld->SetPosition(vec3(movingObjectXPos + dx, movingObjectYPos + dy, 0.f));
-					if (!bld->IsPlaceable()) {
-						bld->SetPlaceable(false);
-						movingObjectRestore = true;
-					}
-					else {
-						bld->SetPlaceable(true);
-					}
-					if (!bld->IsPlaceable())
-						textInfo.render_dynamic(TranslationsTable::GetTranslation("EDITOR_impassablePoint"), "tahoma_15px", 10, Engine::myWindow::Height - 50, vec4(255.f), "left", "center");
-					else
-						textInfo.render_dynamic(TranslationsTable::GetTranslation("EDITOR_canAddStructure"), "tahoma_15px", 10, Engine::myWindow::Height - 50, vec4(255.f), "left", "center");
-				}
-				movingObject = true;
-				Game::Minimap::Update();
-			}
+			//	if (!bld->GetSettlement()->IsIndipendent())
+			//	{
+			//		if (!movingObject) bld->clear_pass();
+			//		bld->SetPosition(vec3(movingObjectXPos + dx, movingObjectYPos + dy, 0.f));
+			//		if (!bld->IsPlaceable()) {
+			//			string s = "";
+			//			/*
+			//			if (!bld->is_near_to_independent(&s)) {
+			//				textInfo.render_dynamic(TranslationsTable::GetTranslation("EDITOR_noSettlementsAround"), "tahoma_15px", 10, Engine::myWindow::Height - 50, vec4(255.f), "left", "center");
+			//			}
+			//			else
+			//				textInfo.render_dynamic(TranslationsTable::GetTranslation("EDITOR_impassablePoint"), "tahoma_15px", 10, Engine::myWindow::Height - 50, vec4(255.f), "left", "center");
+			//			*/
+			//			bld->SetPlaceable(false);
+			//			movingObjectRestore = true;
+			//		}
+			//		else {
+			//			textInfo.render_dynamic(TranslationsTable::GetTranslation("EDITOR_canAddStructure"), "tahoma_15px", 10, Engine::myWindow::Height - 50, vec4(255.f), "left", "center");
+			//			bld->SetPlaceable(true);
+			//		}
+			//	}
+			//	else {
+			//		if (!movingObject) bld->clear_pass();
+			//		bld->SetPosition(vec3(movingObjectXPos + dx, movingObjectYPos + dy, 0.f));
+			//		if (!bld->IsPlaceable()) {
+			//			bld->SetPlaceable(false);
+			//			movingObjectRestore = true;
+			//		}
+			//		else {
+			//			bld->SetPlaceable(true);
+			//		}
+			//		if (!bld->IsPlaceable())
+			//			textInfo.render_dynamic(TranslationsTable::GetTranslation("EDITOR_impassablePoint"), "tahoma_15px", 10, Engine::myWindow::Height - 50, vec4(255.f), "left", "center");
+			//		else
+			//			textInfo.render_dynamic(TranslationsTable::GetTranslation("EDITOR_canAddStructure"), "tahoma_15px", 10, Engine::myWindow::Height - 50, vec4(255.f), "left", "center");
+			//	}
+			//	movingObject = true;
+			//	Game::Minimap::Update();
+			//}
 		}
 		else {
 			// buildings

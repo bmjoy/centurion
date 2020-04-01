@@ -1,4 +1,5 @@
-//#pragma comment(linker, "/SUBSYSTEM:windows /ENTRY:mainCRTStartup")
+// to hide the cmd:
+// #pragma comment(linker, "/SUBSYSTEM:windows /ENTRY:mainCRTStartup")
 
 #include <engine.h>
 

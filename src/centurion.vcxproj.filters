@@ -40,9 +40,6 @@
     <Filter Include="Shader Files\terrain">
       <UniqueIdentifier>{8fe8393a-be2f-4070-ad63-c95ba5235aef}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source Files\interface">
-      <UniqueIdentifier>{f775fef9-e31d-462f-88bc-301349d95e3d}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Source Files\audio">
       <UniqueIdentifier>{9d7b770e-e74f-47c1-9a3c-753413d9c75d}</UniqueIdentifier>
     </Filter>
@@ -51,9 +48,6 @@
     </Filter>
     <Filter Include="Header Files\audio\interfaces">
       <UniqueIdentifier>{52fd4780-8021-4b6e-b3a4-824126b4890b}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source Files\picking">
-      <UniqueIdentifier>{c285b1d1-3a64-4327-b215-8460e4967b7c}</UniqueIdentifier>
     </Filter>
     <Filter Include="Header Files\audio\vorbis">
       <UniqueIdentifier>{3f286ea6-3dbc-4e58-ab28-17869728873e}</UniqueIdentifier>
@@ -93,9 +87,6 @@
     </Filter>
     <Filter Include="Header Files\gl-items">
       <UniqueIdentifier>{21c5b0f0-af5d-4410-9e26-5f766460cf8e}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Header Files\common">
-      <UniqueIdentifier>{e3cc3c6b-deba-434a-9d53-5f03b3e7b6de}</UniqueIdentifier>
     </Filter>
     <Filter Include="Header Files\engine\pathfinding">
       <UniqueIdentifier>{240f44fa-c69d-4622-a90d-b64cdbaaff28}</UniqueIdentifier>
@@ -150,18 +141,6 @@
     <ClCompile Include="main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="lib-centurion\interface\game_ui.cpp">
-      <Filter>Source Files\interface</Filter>
-    </ClCompile>
-    <ClCompile Include="lib-centurion\interface\menu_players_list.cpp">
-      <Filter>Source Files\interface</Filter>
-    </ClCompile>
-    <ClCompile Include="lib-centurion\interface\game_ui_menu.cpp">
-      <Filter>Source Files\interface</Filter>
-    </ClCompile>
-    <ClCompile Include="lib-centurion\interface\debug_ui.cpp">
-      <Filter>Source Files\interface</Filter>
-    </ClCompile>
     <ClCompile Include="lib-centurion\audio\audio_context.cpp">
       <Filter>Source Files\audio</Filter>
     </ClCompile>
@@ -186,35 +165,8 @@
     <ClCompile Include="lib-centurion\audio\sound_buffer.cpp">
       <Filter>Source Files\audio</Filter>
     </ClCompile>
-    <ClCompile Include="lib-centurion\picking\gameui_picking.cpp">
-      <Filter>Source Files\picking</Filter>
-    </ClCompile>
     <ClCompile Include="lib-centurion\audio\vorbis\ogg_vorbis.cpp">
       <Filter>Source Files\audio</Filter>
-    </ClCompile>
-    <ClCompile Include="lib-centurion\interface\editor_ui.cpp">
-      <Filter>Source Files\interface</Filter>
-    </ClCompile>
-    <ClCompile Include="lib-centurion\picking\editor_picking.cpp">
-      <Filter>Source Files\picking</Filter>
-    </ClCompile>
-    <ClCompile Include="lib-centurion\interface\editor_newmap_window.cpp">
-      <Filter>Source Files\interface</Filter>
-    </ClCompile>
-    <ClCompile Include="lib-centurion\interface\editor_addobject_window.cpp">
-      <Filter>Source Files\interface</Filter>
-    </ClCompile>
-    <ClCompile Include="lib-centurion\interface\editor_terrainbrush_window.cpp">
-      <Filter>Source Files\interface</Filter>
-    </ClCompile>
-    <ClCompile Include="lib-centurion\interface\menu_globaloptions.cpp">
-      <Filter>Source Files\interface</Filter>
-    </ClCompile>
-    <ClCompile Include="lib-centurion\interface\editor_question_window.cpp">
-      <Filter>Source Files\interface</Filter>
-    </ClCompile>
-    <ClCompile Include="lib-centurion\interface\object_ui.cpp">
-      <Filter>Source Files\interface</Filter>
     </ClCompile>
     <ClCompile Include="lib-centurion\ui\simple_text.cpp">
       <Filter>Source Files\ui</Filter>
@@ -389,6 +341,15 @@
     </ClCompile>
     <ClCompile Include="lib-extern\etc\tinyxml2.cpp">
       <Filter>Source Files\extern cpp</Filter>
+    </ClCompile>
+    <ClCompile Include="lib-centurion\engine\game\interface\editorUi.cpp">
+      <Filter>Source Files\engine\game\interface</Filter>
+    </ClCompile>
+    <ClCompile Include="lib-centurion\engine\game\interface\matchUi.cpp">
+      <Filter>Source Files\engine\game\interface</Filter>
+    </ClCompile>
+    <ClCompile Include="lib-centurion\engine\debugUi.cpp">
+      <Filter>Source Files\engine</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -632,6 +593,15 @@
     <ClInclude Include="lib-centurion\audio\audio_manager.h">
       <Filter>Header Files\audio</Filter>
     </ClInclude>
+    <ClInclude Include="lib-centurion\engine\game\interface\editorUi.h">
+      <Filter>Header Files\engine\game\interface</Filter>
+    </ClInclude>
+    <ClInclude Include="lib-centurion\engine\game\interface\matchUi.h">
+      <Filter>Header Files\engine\game\interface</Filter>
+    </ClInclude>
+    <ClInclude Include="lib-centurion\engine\debugUi.h">
+      <Filter>Header Files\engine</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="assets\shaders\bsprite\fragment.glsl">
@@ -693,9 +663,6 @@
     </None>
     <None Include="assets\shaders\dsprite\fragment.glsl">
       <Filter>Shader Files\dsprite</Filter>
-    </None>
-    <None Include="lib-centurion\common\interface">
-      <Filter>Header Files\common</Filter>
     </None>
     <None Include="lib-centurion\ui\ui.h">
       <Filter>Header Files\ui</Filter>

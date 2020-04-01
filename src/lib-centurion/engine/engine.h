@@ -124,11 +124,6 @@ namespace Engine
 	/// </summary>
 	void read_data(void);
 	/// <summary>
-	/// (???) Da completare?
-	/// This function performs a specific action for each gloabal key (for instance: F10).
-	/// </summary>
-	void HandleGlobalKeys(void);
-	/// <summary>
 	/// This function resets mouse and keyboard restoring their default status. 
 	/// </summary>
 	void ResetperipheralsInput(void);

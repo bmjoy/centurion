@@ -5,7 +5,7 @@
 #include <picking.h>
 #include <maths.h>
 #include <engine.h>
-#include <interface>
+
 #include "editor.h"
 
 #include <terrain.h>
@@ -362,18 +362,21 @@ void Game::SelectionRectangle::Enable(void)
 bool Game::Minimap::isCreated = false;
 bool Game::Minimap::isActive = false;
 bool Game::Minimap::isBlocked = false;
+gui::Rectangle Game::Minimap::minimapRectangle;
 
 Game::Minimap::Minimap(void) {}
 
 void Game::Minimap::Create(void) 
 {
 	MMRectangle()->update();
+	minimapRectangle = gui::Rectangle();
 	isCreated = true;
 }
 
 void Game::Minimap::Render(void) 
 {
 	MMRectangle()->render();
+	minimapRectangle.render(vec4(255.f));
 }
 
 void Game::Minimap::Update(void)
@@ -389,6 +392,15 @@ bool Game::Minimap::IsCreated(void)
 void Game::Minimap::Enable(void)
 {
 	Game::Minimap::isActive = true;
+
+	float x = Engine::Camera::GetXPosition() / MEDIUM_MAP_WIDTH * Engine::myWindow::Width;
+	float y = Engine::Camera::GetYPosition() / MEDIUM_MAP_HEIGHT * (Engine::myWindow::Height - Engine::myWindow::BottomBarHeight - Engine::myWindow::TopBarHeight) + Engine::myWindow::BottomBarHeight;
+	float w = Engine::myWindow::WidthZoomed * Engine::myWindow::Width / MEDIUM_MAP_WIDTH;
+	float h = Engine::myWindow::HeightZoomed * (Engine::myWindow::Height - Engine::myWindow::BottomBarHeight - Engine::myWindow::TopBarHeight) / MEDIUM_MAP_HEIGHT;
+	x = std::max(x, 1.f);
+	y = std::max(y, Engine::myWindow::BottomBarHeight + 1.f);
+	y = std::min(y, Engine::myWindow::Height - Engine::myWindow::TopBarHeight - h);
+	minimapRectangle.create("border", x, y, w, h, "bottom-left", 0);
 }
 
 void Game::Minimap::Disable(void)
@@ -535,7 +547,8 @@ void Game::RenderObjects()
 			GObject::GetObjectByID(i)->Render(false, Picking::leftClickID);
 		}
 	}
-	if (!Minimap::IsActive() && !editor::IsWindowOpened && !editor::menuIsOpened && !editor::TerrainBrushIsActive && Picking::leftClickID_UI == 0 && !editor::movingObject) SelectionRectangle::Render();
+
+	if (!Minimap::IsActive() && Picking::leftClickID_UI == 0) SelectionRectangle::Render(); //&& !editor::movingObject
 }
 
 void Game::GoToPointFromMinimap() {
