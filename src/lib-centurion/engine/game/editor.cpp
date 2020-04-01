@@ -63,18 +63,13 @@ void Editor::Run(void)
 
 	/* Keyboard control */
 	handleKeyboardControls();
-	//if (!editor::IsWindowOpened) 
-	{ // TODO: merge all these in a function in Editor->Editor_functions.cpp
-		Engine::Camera::keyboardControl();
-	}
 
 	/* If minimap is NOT active */
 	if (!Minimap::IsActive()) 
 	{
-		//if (!editor::IsWindowOpened && Engine::Mouse::GetYPosition() < Engine::myWindow::Height - 30.f && !editor::menuIsOpened)
-		{
-			Engine::Camera::mouseControl();
-		}
+		Engine::Camera::mouseControl();
+		Engine::Camera::keyboardControl();
+
 		viewMatrix = Engine::Camera::calculateViewMatrix();
 		projectionMatrix = getCameraProjectionMatrix();
 

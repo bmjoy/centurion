@@ -33,8 +33,11 @@ namespace gui {
 		/// <summary>
 		/// This function adds a button to the iframe window.
 		/// </summary>
-		/// <param name="btn">Button that would be added. It only supports Button classes.</param>
-		void AddButton(Button btn) { listOfButtons.push_back(btn); }
+		/// <param name="text">The button text</param>
+		/// <param name="xBtn">The button X position</param>
+		/// <param name="yBtn">The button Y position</param>
+		/// <param name="luaCmd">The button Lua command. Default = empty string</param>
+		void AddButton(const std::string text, const int xBtn, const int yBtn, const std::string luaCmd = "");
 
 		/// <summary>
 		/// This function adds a text to the iframe texts list.
@@ -108,6 +111,10 @@ namespace gui {
 		Image bottom;
 		std::string name;
 		int x, y, w, h;
+
+		// button data
+		std::string button_img_name, button_font;
+		glm::vec4 button_txt_color;
 	};
 };
 

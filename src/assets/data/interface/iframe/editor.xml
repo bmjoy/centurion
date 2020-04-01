@@ -1,11 +1,15 @@
 ﻿<iframe name="editor">
-  <top_left image_name="iframe_editor_topleft" repeat="none"/>
-  <top_right image_name="iframe_editor_topright" repeat="none"/>
-  <bottom_right image_name="iframe_editor_bottomright" repeat="none"/>
-  <bottom_left image_name="iframe_editor_bottomleft" repeat="none"/>
-  <top image_name="iframe_editor_top" repeat="x"/>
-  <right image_name="iframe_editor_right" repeat="y"/>
-  <bottom image_name="iframe_editor_bottom" repeat="x"/>
-  <left image_name="iframe_editor_left" repeat="y"/>
-  <background image_name="iframe_editor_back" repeat="none"/>
+	<top_left image_name="iframe_editor_topleft" repeat="none"/>
+	<top_right image_name="iframe_editor_topright" repeat="none"/>
+	<bottom_right image_name="iframe_editor_bottomright" repeat="none"/>
+	<bottom_left image_name="iframe_editor_bottomleft" repeat="none"/>
+	<top image_name="iframe_editor_top" repeat="x"/>
+	<right image_name="iframe_editor_right" repeat="y"/>
+	<bottom image_name="iframe_editor_bottom" repeat="x"/>
+	<left image_name="iframe_editor_left" repeat="y"/>
+	<background image_name="iframe_editor_back" repeat="none"/>
+  	<button image_name="iframe_editor_button">
+		<textColor r="255" g="255" b="255" />
+		<font name="tahoma_13px" />
+	</button>
 </iframe>

@@ -23,11 +23,11 @@ class Editor : public Game
 {
 public:
 	/// <summary>
-	/// This function resets the game.
+	/// This function resets the editor.
 	/// </summary>
 	static void reset(void);
 	/// <summary>
-	/// This function create a new editor.
+	/// This function create the editor.
 	/// </summary>
 	static void Create(void);
 	/// <summary>

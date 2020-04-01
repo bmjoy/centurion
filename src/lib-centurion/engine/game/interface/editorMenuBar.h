@@ -73,6 +73,11 @@ public:
 	/// <param name="picking"></param>
 	static void Render(const bool picking);
 
+	/// <summary>
+	/// This function returns the editor menu bar height
+	/// </summary>
+	static float GetHeight(void) { return height; }
+
 private:
 	/// <summary>
 	/// This function adds a EditorMenu object to the editor menu bar.

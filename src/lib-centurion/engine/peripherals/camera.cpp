@@ -1,6 +1,7 @@
 #include <engine.h>
 
 #include <game/game.h>
+#include <game/interface/editorMenuBar.h>
 
 #include <GLFW/glfw3.h>
 
@@ -47,6 +48,13 @@ void Engine::Camera::update() {
 }
 
 void Engine::Camera::mouseControl() {
+
+	// Conditions for NOT moving
+
+	// 1. Block the movement if the mouse is hovering the editor menu bar
+	if (GetEnvironment() == EDITOR_ENV)
+		if (Mouse::GetYPosition() >= Engine::myWindow::Height - EditorMenuBar::GetHeight())
+			return;
 
 	abs_x = Mouse::GetXPosition() + position.x;
 	abs_y = Mouse::GetYPosition() + position.y;
@@ -108,6 +116,10 @@ void Engine::Camera::mouseControl() {
 }
 
 void Engine::Camera::keyboardControl() {
+
+	// Conditions for NOT moving
+
+
 	//Left margin
 	if (Keyboard::IsKeyPressed(GLFW_KEY_LEFT) && position.x > 0) {
 		position -= right * MovementSpeed;

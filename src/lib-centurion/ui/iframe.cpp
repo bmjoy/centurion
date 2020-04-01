@@ -18,6 +18,14 @@ gui::Iframe::Iframe(string _name)
 	name = _name;
 }
 
+void gui::Iframe::AddButton(const std::string text, const int xBtn, const int yBtn, const std::string luaCmd)
+{
+	gui::Button btn = gui::Button();
+	int btnId = PickingUI::ObtainPickingID();
+	btn.create(button_img_name, text, x + xBtn, y + yBtn, btnId, button_txt_color, luaCmd);
+	listOfButtons.push_back(btn);
+}
+
 void gui::Iframe::Clear()
 {
 	for (int i = 0; i < listOfTextLists.size(); i++) {
@@ -46,7 +54,7 @@ void gui::Iframe::Create(int xPos, int yPos, int width, int height)
 		string path = Folders::INTERFACE_IFRAME + name + ".xml";
 		tinyxml2::XMLDocument xmlFile;
 		xmlFile.LoadFile(path.c_str());
-		
+
 		string back_name = (string)xmlFile.FirstChildElement("iframe")->FirstChildElement("background")->Attribute("image_name");
 		string topleft_name = (string)xmlFile.FirstChildElement("iframe")->FirstChildElement("top_left")->Attribute("image_name");
 		string topright_name = (string)xmlFile.FirstChildElement("iframe")->FirstChildElement("top_right")->Attribute("image_name");
@@ -57,9 +65,30 @@ void gui::Iframe::Create(int xPos, int yPos, int width, int height)
 		string top_name = (string)xmlFile.FirstChildElement("iframe")->FirstChildElement("top")->Attribute("image_name");
 		string bottom_name = (string)xmlFile.FirstChildElement("iframe")->FirstChildElement("bottom")->Attribute("image_name");
 
+		// button data
+
+		if (xmlFile.FirstChildElement("iframe")->FirstChildElement("button") != NULL)
+		{
+			int r = 0, g = 0, b = 0;
+			button_img_name = (string)xmlFile.FirstChildElement("iframe")->FirstChildElement("button")->Attribute("image_name");
+			try {
+				r = stoi(string(xmlFile.FirstChildElement("iframe")->FirstChildElement("button")->FirstChildElement("textColor")->Attribute("r")));
+				g = stoi(string(xmlFile.FirstChildElement("iframe")->FirstChildElement("button")->FirstChildElement("textColor")->Attribute("g")));
+				b = stoi(string(xmlFile.FirstChildElement("iframe")->FirstChildElement("button")->FirstChildElement("textColor")->Attribute("b")));
+			}
+			catch (...) {
+				Logger::LogMessage lmsg = Logger::LogMessage("An error occurred parsing the textColor tag of the following iframe: " + name + ".xml", "Warn", "gui", "Iframe", "Create");
+				Logger::Warn(lmsg);
+			}
+			button_txt_color = vec4(r, g, b, 255);
+			button_font = (string)xmlFile.FirstChildElement("iframe")->FirstChildElement("button")->FirstChildElement("font")->Attribute("name");
+		}
+
+		//--------------
+
 		back = gui::Image(back_name);
 		back.create("bottom-left", (float)xPos, (float)yPos, (float)w, (float)h, 0);
-		
+
 		left = gui::Image(left_name);
 		left.create("bottom-left", (float)xPos, (float)yPos, 0.f, (float)h, 0);
 
@@ -67,7 +96,7 @@ void gui::Iframe::Create(int xPos, int yPos, int width, int height)
 		top.create("bottom-left", (float)xPos, (float)yPos + (float)h, (float)w, 0.f, 0);
 
 		right = gui::Image(right_name);
-		right.create("bottom-left", (float)xPos + (float)w, (float)yPos , 0.f, (float)h, 0);
+		right.create("bottom-left", (float)xPos + (float)w, (float)yPos, 0.f, (float)h, 0);
 
 		bottom = gui::Image(bottom_name);
 		bottom.create("bottom-left", (float)xPos, (float)yPos, (float)w, 0.f, 0);
@@ -103,7 +132,7 @@ void gui::Iframe::Render(bool picking)
 	topright.render(false);
 	bottomright.render(false);
 	bottomleft.render(false);
-	   
+
 	RenderImages(picking);
 	RenderButtons(picking);
 	RenderTexts();

@@ -146,18 +146,11 @@ void EditorWindows::Create(void)
 			// buttons
 			for (tinyxml2::XMLElement* _it_btn = _it_wind->FirstChildElement("buttonArray")->FirstChildElement(); _it_btn != NULL; _it_btn = _it_btn->NextSiblingElement())
 			{
-				gui::Button btn = gui::Button();
-				btn.create(
-					string(_it_btn->Attribute("image_name")),
-					string(_it_btn->Attribute("name")),
-					x + stoi(_it_btn->Attribute("xOffset")),
-					y + stoi(_it_btn->Attribute("yOffset")),
-					PickingUI::ObtainPickingID(),
-					vec4(0, 0, 0, 255),
-					string(_it_btn->Attribute("onclick"))
-				);
-
-				iframe.AddButton(btn);
+				string btnText = _it_btn->Attribute("text");
+				string btnLuaCmd = _it_btn->Attribute("onclick");
+				int btnX = stoi(_it_btn->Attribute("xOffset"));
+				int btnY = stoi(_it_btn->Attribute("yOffset"));
+				iframe.AddButton(btnText, btnX, btnY, btnLuaCmd);
 			}
 
 			eWind->Create(luaOpeningCMD, luaConditionCMD, luaConditionFun, iframe);
