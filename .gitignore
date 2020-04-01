@@ -330,9 +330,9 @@ ASALocalRun/
 .mfractor/
 
 # Exclude:
-centurion-source/screenshots/*
-centurion-source/logs/logmessages/*
-centurion-source/logs/params/*
-!centurion-source/screenshots/readme.txt
-!centurion-source/logs/logmessages/LOGMESSAGES_FOLDER
-!centurion-source/logs/params/PARAMS_FOLDER
+src/screenshots/*
+src/logs/logmessages/*
+src/logs/params/*
+!src/screenshots/readme.txt
+!src/logs/logmessages/LOGMESSAGES_FOLDER
+!src/logs/params/PARAMS_FOLDER
