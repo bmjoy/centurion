@@ -2,7 +2,7 @@
   
   <!-- OBJECT PROPERTIES WINDOW -->
   
-  <editorWindow id="0" name="Object properties" iframe="editor" position="x=Engine.WindowWidth/2-300; y=Engine.WindowHeight/2-200;" size="w=600; h=400;" isOpened="false">
+  <editorWindow id="0" name="Object properties" iframe="editor" position="x=Engine.WindowWidth/2-w/2; y=Engine.WindowHeight/2-h/2;" size="w=600; h=400;" isOpened="false">
 	<conditionScript function="ConditionProperties">
 		-- lua script
 		function ConditionProperties()
@@ -22,13 +22,13 @@
 	<simpleTextArray>
 		<simpleText text="ciao" xOffset="100" yOffset="50" font="tahoma_13px">
 		  <color r="0" g="0" b="0" />
-		</simpleText>
+		</simpleText> 
 	</simpleTextArray>
   </editorWindow>
   
   <!-- OPEN SCENARIO WINDOW -->
   
-  <editorWindow id="1" name="Open scenario" iframe="editor" position="x=Engine.WindowWidth/2-200; y=Engine.WindowHeight/2-160;" size="w=400; h=320;" isOpened="false">
+  <editorWindow id="1" name="Open scenario" iframe="editor" position="x=Engine.WindowWidth/2-w/2; y=Engine.WindowHeight/2-h/2;" size="w=400; h=320;" isOpened="false">
 	<conditionScript function="">
 		-- lua script
 		
@@ -40,10 +40,45 @@
     </openingScript>
 	<simpleTextArray></simpleTextArray>
 	<buttonArray>
-		<button text="Open" xOffset="200" yOffset="60" onclick='Engine.PrintToConsole(TextList.GetListById(0):GetSelectedOption())'/>
+		<button text="Open" xOffset="200" yOffset="60">
+			<onclickScript>
+				Engine.PrintToConsole(TextList.GetListById(0):GetSelectedOption())
+				Editor.CloseWindow(1)
+			</onclickScript>
+		</button>
 	</buttonArray>
 	<textListArray>
 		<textList textListId="0" xOffset="50" yOffset="270" />
+	</textListArray>
+  </editorWindow>
+  
+  <!-- ADD OBJECT WINDOW -->
+  
+  <editorWindow id="2" name="Add object" iframe="editor" position="x=Engine.WindowWidth/2-w/2; y=0" size="w=600; h=200;" isOpened="false">
+	<conditionScript function="">
+		-- lua script
+		
+	</conditionScript>
+    <openingScript>
+	  -- lua script
+	  _folderList = Engine.GetListOfFolders("scenarios")
+	  TextList.UpdateListById(1, _folderList)
+	  TextList.UpdateListById(2, _folderList)
+	  TextList.UpdateListById(3, _folderList)
+    </openingScript>
+	<simpleTextArray></simpleTextArray>
+	<buttonArray>
+		<button text="Open" xOffset="500" yOffset="30">
+			<onclickScript>
+				Engine.PrintToConsole(TextList.GetListById(1):GetSelectedOption())
+				Editor.CloseWindow(2)
+			</onclickScript>
+		</button>
+	</buttonArray>
+	<textListArray>
+		<textList textListId="1" xOffset="20" yOffset="185" />
+		<textList textListId="2" xOffset="220" yOffset="185" />
+		<textList textListId="3" xOffset="420" yOffset="185" />
 	</textListArray>
   </editorWindow>
 </editorWindows>

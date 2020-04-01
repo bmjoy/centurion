@@ -73,6 +73,11 @@ public:
 	/// <param name="id"></param>
 	static void OpenWindow(const unsigned int id);
 	/// <summary>
+	/// This function closes a specific window of the editor.
+	/// </summary>
+	/// <param name="id"></param>
+	static void CloseWindow(const unsigned int id);
+	/// <summary>
 	/// This function creates an editor set of windows from an XML file. 
 	/// </summary>
 	static void Create(void);

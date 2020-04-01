@@ -59,20 +59,11 @@ void Hector::Initialize()
 		.addVariable("WindowHeight", &Engine::myWindow::Height)
 		.endNamespace();
 
-	getGlobalNamespace(L).beginClass<EditorMenuBar>("EditorMenuBar")
-		.addStaticFunction("ToggleMenu", &EditorMenuBar::ToggleEditorMenu)
-		.endClass();
-
 	getGlobalNamespace(L).beginClass<Editor>("Editor")
 		.addStaticFunction("Close", &Editor::Close)
-		.endClass();
-
-	getGlobalNamespace(L).beginClass<EditorWindows>("EditorWindows")
-		.addStaticFunction("Open", &EditorWindows::OpenWindow)
-		.endClass();
-
-	getGlobalNamespace(L).beginClass<EditorWindows>("EditorWindows")
-		.addStaticFunction("Open", &EditorWindows::OpenWindow)
+		.addStaticFunction("ToggleMenu", &EditorMenuBar::ToggleEditorMenu)
+		.addStaticFunction("OpenWindow", &EditorWindows::OpenWindow)
+		.addStaticFunction("CloseWindow", &EditorWindows::CloseWindow)
 		.endClass();
 
 	getGlobalNamespace(L).beginClass<Menu>("Menu")

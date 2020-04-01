@@ -2,7 +2,7 @@
   <background r="60" g="68" b="104"/>
   <hover r="100" g="100" b="100"/>
   <editorMenuArray>
-	  <editorMenu id="0" name="EDITOR_File" onclick='EditorMenuBar.ToggleMenu(0)'>
+	  <editorMenu id="0" name="EDITOR_File" onclick='Editor.ToggleMenu(0)'>
 		<command id="0" name="New" hotkey1="CTRL" hotkey2="N" hotkey3="">
 			<onclickScript>
 			-- Lua Script
@@ -11,8 +11,8 @@
 		<command id="1" name="Open" hotkey1="CTRL" hotkey2="N" hotkey3="">
 			<onclickScript>
 			-- Lua Script
-			EditorWindows.Open(1)
-			EditorMenuBar.ToggleMenu(0)
+			Editor.OpenWindow(1)
+			Editor.ToggleMenu(0)
 			</onclickScript>
 		</command>
 		<command id="2" name="Save" hotkey1="CTRL" hotkey2="N" hotkey3="">
@@ -27,7 +27,7 @@
 			</onclickScript>
 		</command>
 	  </editorMenu>
-	  <editorMenu id="1" name="EDITOR_Edit" onclick='EditorMenuBar.ToggleMenu(1)'>
+	  <editorMenu id="1" name="EDITOR_Edit" onclick='Editor.ToggleMenu(1)'>
 		<command id="0" name="UpdateNormals" hotkey1="CTRL" hotkey2="N" hotkey3="">
 			<onclickScript>
 			-- Lua Script
@@ -36,7 +36,8 @@
 		<command id="1" name="Properties" hotkey1="CTRL" hotkey2="N" hotkey3="">
 			<onclickScript>
 			-- Lua Script
-			EditorWindows.Open(0)
+			Editor.OpenWindow(0)
+			Editor.ToggleMenu(1)
 			</onclickScript>
 		</command>
 		<command id="2" name="New" hotkey1="CTRL" hotkey2="N" hotkey3="">
@@ -45,10 +46,12 @@
 			</onclickScript>
 		</command>
 	  </editorMenu>
-	  <editorMenu id="2" name="EDITOR_Tools" onclick='EditorMenuBar.ToggleMenu(2)'>
+	  <editorMenu id="2" name="EDITOR_Tools" onclick='Editor.ToggleMenu(2)'>
 		<command id="0" name="AddObject" hotkey1="CTRL" hotkey2="N" hotkey3="">
 			<onclickScript>
 			-- Lua Script
+			Editor.OpenWindow(2)
+			Editor.ToggleMenu(2)
 			</onclickScript>
 		</command>
 		<command id="1" name="TerrainBrush" hotkey1="CTRL" hotkey2="N" hotkey3="">

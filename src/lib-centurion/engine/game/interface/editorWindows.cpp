@@ -83,6 +83,14 @@ void EditorWindows::OpenWindow(const unsigned int id)
 	listOfWindows[id]->Open();
 }
 
+void EditorWindows::CloseWindow(const unsigned int id)
+{
+	if (id < 0 || id > MAX_NUMBER_OF_EDITOR_WINDOWS) return;
+	if (listOfWindows[id] == nullptr) return;
+
+	listOfWindows[id]->Close();
+}
+
 void EditorWindows::Create(void)
 {
 	try
@@ -96,7 +104,7 @@ void EditorWindows::Create(void)
 		{
 			EditorWindow* eWind = new EditorWindow();
 
-			int id = stoi(string(_it_wind->Attribute("id")));
+			int id = _it_wind->IntAttribute("id");
 
 			string isOpenedStr = string(_it_wind->Attribute("isOpened"));
 			bool isOpened = (isOpenedStr == "true");
@@ -114,9 +122,9 @@ void EditorWindows::Create(void)
 			// text lists 
 			for (tinyxml2::XMLElement* _it_txtlist = _it_wind->FirstChildElement("textListArray")->FirstChildElement(); _it_txtlist != NULL; _it_txtlist = _it_txtlist->NextSiblingElement())
 			{
-				int textListID = stoi(_it_txtlist->Attribute("textListId"));
-				int xOffset = stoi(_it_txtlist->Attribute("xOffset"));
-				int yOffset = stoi(_it_txtlist->Attribute("yOffset"));
+				int textListID = _it_txtlist->IntAttribute("textListId");
+				int xOffset = _it_txtlist->IntAttribute("xOffset");
+				int yOffset = _it_txtlist->IntAttribute("yOffset");
 				iframe.AddTextList(textListID, xOffset, yOffset);
 			}
 
@@ -124,15 +132,15 @@ void EditorWindows::Create(void)
 			for (tinyxml2::XMLElement* _it_btn = _it_wind->FirstChildElement("buttonArray")->FirstChildElement(); _it_btn != NULL; _it_btn = _it_btn->NextSiblingElement())
 			{
 				string btnText = _it_btn->Attribute("text");
-				string btnLuaCmd = _it_btn->Attribute("onclick");
-				int btnX = stoi(_it_btn->Attribute("xOffset"));
-				int btnY = stoi(_it_btn->Attribute("yOffset"));
+				string btnLuaCmd = _it_btn->FirstChildElement("onclickScript")->GetText();
+				int btnX = _it_btn->IntAttribute("xOffset");
+				int btnY = _it_btn->IntAttribute("yOffset");
 				iframe.AddButton(btnText, btnX, btnY, btnLuaCmd);
 			}
 
 			eWind->Create(luaOpeningCMD, luaConditionCMD, luaConditionFun, iframe);
 			if (isOpened) eWind->Open();
-
+			
 			AddWindow(id, eWind);
 		}
 	}

@@ -199,32 +199,34 @@ void gui::Iframe::ReadXml()
 
 void gui::Iframe::CreateBackgroundImage()
 {
+	int commonPickingId = PickingUI::ObtainPickingID();
+
 	back = gui::Image(back_name);
-	back.create("bottom-left", (float)x, (float)y, (float)w, (float)h, 0);
+	back.create("bottom-left", (float)x, (float)y, (float)w, (float)h, commonPickingId);
 
 	left = gui::Image(left_name);
-	left.create("bottom-left", (float)x, (float)y, 0.f, (float)h, 0);
+	left.create("bottom-left", (float)x, (float)y, 0.f, (float)h, commonPickingId);
 
 	top = gui::Image(top_name);
-	top.create("bottom-left", (float)x, (float)y + (float)h, (float)w, 0.f, 0);
+	top.create("bottom-left", (float)x, (float)y + (float)h, (float)w, 0.f, commonPickingId);
 
 	right = gui::Image(right_name);
-	right.create("bottom-left", (float)x + (float)w, (float)y, 0.f, (float)h, 0);
+	right.create("bottom-left", (float)x + (float)w, (float)y, 0.f, (float)h, commonPickingId);
 
 	bottom = gui::Image(bottom_name);
-	bottom.create("bottom-left", (float)x, (float)y, (float)w, 0.f, 0);
+	bottom.create("bottom-left", (float)x, (float)y, (float)w, 0.f, commonPickingId);
 
 	topleft = gui::Image(topleft_name);
-	topleft.create("bottom-left", (float)x, (float)y + (float)h, 0.f, 0.f, 0);
+	topleft.create("bottom-left", (float)x, (float)y + (float)h, 0.f, 0.f, commonPickingId);
 
 	topright = gui::Image(topright_name);
-	topright.create("bottom-left", (float)x + w, (float)y + (float)h, 0.f, 0.f, 0);
+	topright.create("bottom-left", (float)x + w, (float)y + (float)h, 0.f, 0.f, commonPickingId);
 
 	bottomright = gui::Image(bottomright_name);
-	bottomright.create("bottom-left", (float)x + w, (float)y, 0.f, 0.f, 0);
+	bottomright.create("bottom-left", (float)x + w, (float)y, 0.f, 0.f, commonPickingId);
 
 	bottomleft = gui::Image(bottomleft_name);
-	bottomleft.create("bottom-left", (float)x, (float)y, 0.f, 0.f, 0);
+	bottomleft.create("bottom-left", (float)x, (float)y, 0.f, 0.f, commonPickingId);
 }
 
 gui::Iframe::~Iframe()
