@@ -2,7 +2,8 @@
  <properties>
     <property name="singularName" value="Cypress"/>
     <property name="pluralName" value="Cypresses"/>
-    <property name="category" value="trees"/>
+    <property name="editorFilter1" value="decoration"/>
+ 	<property name="editorFilter2" value="trees"/>
     <property name="ent_path" value="assets/decorations/trees/pine_trees/cypress.oe.xml"/>
     <property name="pass_path" value="assets/decorations/trees/pine_trees/cypress.pass"/>
   </properties>
