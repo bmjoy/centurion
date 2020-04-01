@@ -14,6 +14,7 @@
 #include <iostream>
 #include <object_sprite.h>
 
+
 /// <summary>
 /// This class reads the properties of the object's family from some XML files and store the information into a map; 
 /// the key of the map is the name of a property.
@@ -206,4 +207,6 @@ private:
 	static void AddObjectXMLClassData(std::string _class, ObjectXMLClassData objData) { objectsData[_class] = objData; }
 	static std::map<std::string, ObjectXMLClassData> objectsData;
 	static std::string dataClassesPath;
+
+	static std::string PROPERTY_NOT_VALID;
 };

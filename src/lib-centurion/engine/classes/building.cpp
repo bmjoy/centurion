@@ -29,16 +29,6 @@ void Building::SetSettlement(Settlement *par_settlement)
 	this->settlement = par_settlement;
 }
 
-void Building::SetCategory(const string par_category)
-{
-	this->category = par_category;
-}
-
-string Building::GetCategory(void)
-{
-	return this->category;
-}
-
 void Building::SetMaxHealth(const unsigned int par_maxHealth)
 {
 	this->maxHealth = par_maxHealth;
@@ -232,8 +222,6 @@ bool Building::SetBuildingProperties(ObjectData::ObjectXMLClassData &objData)
 	bBuildingCreated = this->FindASettlement(this);
 	if (bBuildingCreated == true)
 	{
-		ObjectData::TryParseString(objData.GetPropertiesMap(), "category", &strProperty);
-		this->category = strProperty;
 		ObjectData::TryParseInteger(objData.GetPropertiesMap(), "maxHealth", &iProperty);
 		this->maxHealth = iProperty;
 		ObjectData::TryParseInteger(objData.GetPropertiesMap(), "repairRate", &iProperty);
@@ -247,7 +235,7 @@ bool Building::SetBuildingProperties(ObjectData::ObjectXMLClassData &objData)
 		ObjectData::TryParseString(objData.GetPropertiesMap(), "canProduceGold", &strProperty);
 		this->bCanProduceGold = strProperty == "true" ? true : false;
 		ObjectData::TryParseString(objData.GetPropertiesMap(), "canProduceFood", &strProperty);
-		this->bCanProduceFood = strProperty == "true" ? true : false;
+		this->bCanProduceFood = strProperty == "true" ? true : false; 
 		ObjectData::TryParseString(objData.GetPropertiesMap(), "ent_path", &strProperty);
 		this->ent_path = strProperty;
 		ObjectData::TryParseString(objData.GetPropertiesMap(), "pass_path", &strProperty);

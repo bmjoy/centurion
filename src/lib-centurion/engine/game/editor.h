@@ -37,6 +37,16 @@ public:
 	static void handleKeyboardControls(void);
 
 	/// <summary>
+	/// This function adds an element into the editor tree.
+	/// </summary>
+	/// <param name="element">The element.</param>
+	static void AddEditorTreeElement(const std::string& filter1, const std::string& filter2, const std::string& filter3);
+
+	static std::vector<std::string>* GetEditorTreeList1(void);
+	static std::vector<std::string>* GetEditorTreeList2(const std::string filter1);
+	static std::vector<std::string>* GetEditorTreeList3(void);
+
+	/// <summary>
 	/// This method closes and resets the editor, and sets the environment to "menu"
 	/// </summary>
 	static void Close(void);
@@ -45,6 +55,10 @@ public:
 	/// </summary>
 	~Editor(void);
 private:
+	static std::vector<std::array<std::string, 3>> editorTree;
+	static std::vector<std::string> editorTreeList1;
+	static std::vector<std::string> editorTreeList2;
+	static std::vector<std::string> editorTreeList3;
 	Editor(void);
 };
 

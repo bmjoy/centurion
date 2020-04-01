@@ -40,18 +40,6 @@ public:
 	Settlement *GetSettlement(void);
 
 	/// <summary>
-	/// This function sets a category for the current building.
-	/// </summary>
-	/// <param name="par_category">The category</param>
-	void SetCategory(const std::string par_category);
-
-	/// <summary>
-	/// This function return the category of the current building.
-	/// </summary>
-	/// <returns>The category of the string</returns>
-	std::string GetCategory(void);
-
-	/// <summary>
 	/// This functions set the max health of the current building..
 	/// </summary>
 	/// <param name="par_maxHealth">The max health of the building.</param>
@@ -68,6 +56,7 @@ public:
 	/// </summary>
 	/// <param name="par_repairRate">The repair rate of the current building.</param>
 	void SetRepairRate(const unsigned int par_repairRate);
+
 	/// <summary>
 	/// This function returns the repair rate with which the repair building will be repaired 
 	/// when its health is less than its max health.
@@ -82,6 +71,7 @@ public:
 	/// </summary>
 	/// <param name="par_loyaltyFearHealthPercent"></param>
 	void SetLoyaltyFearHealthPercent(const unsigned int par_loyaltyFearHealthPercent);
+
 	/// <summary>
 	/// This function returns the loyalty fear health percent of the current building.
 	/// If the health of the current building is less than the value of this parameter, 
@@ -220,7 +210,6 @@ private:
 	bool waitingToBeErased;
 	bool bIsCreated;
 	gui::Circle circle[2];
-	std::string category;
 	unsigned int maxHealth;
 	unsigned int repairRate;
 	unsigned int loyaltyFearHealthPercent;

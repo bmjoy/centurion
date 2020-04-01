@@ -19,6 +19,13 @@
 using namespace std;
 using namespace glm;
 
+#pragma region static variables:
+std::vector<std::array<std::string, 3>> Editor::editorTree;
+std::vector<std::string> Editor::editorTreeList1;
+std::vector<std::string> Editor::editorTreeList2;
+std::vector<std::string> Editor::editorTreeList3;
+#pragma endregion
+
 Editor::Editor(void) {}
 
 void Editor::Create(void)
@@ -43,6 +50,42 @@ void Editor::Create(void)
 
 	isCreated = true;
 	Minimap::Update();
+}
+
+void Editor::AddEditorTreeElement(const std::string& filter1, const std::string& filter2, const std::string& filter3)
+{
+	std::array<std::string, 3> element = { filter1, filter2, filter3 };
+	Editor::editorTree.push_back(element);
+}
+
+std::vector<std::string>* Editor::GetEditorTreeList1(void)
+{
+	Editor::editorTreeList1.clear();
+	for(auto i : Editor::editorTree)
+	{
+		if (std::find(Editor::editorTreeList1.begin(), Editor::editorTreeList1.end(), i[0]) != Editor::editorTreeList1.end())
+			continue;
+		Editor::editorTreeList1.push_back(i[0]);
+	}
+	return &Editor::editorTreeList1;
+}
+
+std::vector<std::string>* Editor::GetEditorTreeList2(const std::string filter1)
+{
+	Editor::editorTreeList2.clear();
+	for (auto i : Editor::editorTree)
+	{
+		if (std::find(Editor::editorTreeList2.begin(), Editor::editorTreeList2.end(), i[1]) != Editor::editorTreeList2.end())
+			continue;
+		if (i[0] != filter1) continue;
+		Editor::editorTreeList2.push_back(i[1]);
+	}
+	return &Editor::editorTreeList2;
+}
+
+std::vector<std::string>* Editor::GetEditorTreeList3(void)
+{
+	return nullptr;
 }
 
 void Editor::Close(void)

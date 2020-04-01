@@ -6,6 +6,7 @@
 #include <decoration_sprite.h>
 #include <unit_sprite.h>
 #include <logger.h>
+#include <game/editor.h>
 
 #include <tinyxml2.h>
 
@@ -18,11 +19,12 @@ using namespace tinyxml2;
 map<string, ObjectData::ObjectXMLClassData> ObjectData::objectsData;
 string ObjectData::dataClassesPath = "assets/data/classes/";
 ObjectData::ObjectXMLClassData* ObjectData::objDataXmlFixedPtr = nullptr;
+std::string ObjectData::PROPERTY_NOT_VALID = "NA";
 #pragma endregion
 
 #pragma region ObjectXMLClassData class
 
-ObjectData::ObjectXMLClassData::ObjectXMLClassData(){}
+ObjectData::ObjectXMLClassData::ObjectXMLClassData() {}
 
 void ObjectData::ObjectXMLClassData::GetParentData(string _parent)
 {
@@ -79,7 +81,7 @@ string ObjectData::ObjectXMLClassData::GetPropertyValue(const string _property)
 		return propertiesMap[_property];
 	}
 	else {
-		return "NOT_VALID";
+		return PROPERTY_NOT_VALID;
 	}
 }
 
@@ -89,7 +91,7 @@ string ObjectData::ObjectXMLClassData::GetSoundPath(const string _sound)
 		return soundsMap[_sound];
 	}
 	else {
-		return "NOT_VALID";
+		return PROPERTY_NOT_VALID;
 	}
 }
 
@@ -99,11 +101,11 @@ string ObjectData::ObjectXMLClassData::GetMethodScript(const string _method)
 		return methodsMap[_method];
 	}
 	else {
-		return "NOT_VALID";
+		return PROPERTY_NOT_VALID;
 	}
 }
 
-ObjectData::ObjectXMLClassData::~ObjectXMLClassData(){}
+ObjectData::ObjectXMLClassData::~ObjectXMLClassData() {}
 
 #pragma endregion
 
@@ -192,12 +194,12 @@ void ObjectData::ReadDataClassesFromXml(void)
 			{
 				objData.AddProperty(string(_it_prop->Attribute("name")), string(_it_prop->Attribute("value")));
 			}
-			
+
 			for (XMLElement* _it_mtd = _objectXml->FirstChildElement("methods")->FirstChildElement(); _it_mtd != NULL; _it_mtd = _it_mtd->NextSiblingElement())
 			{
 				objData.AddMethod(string(_it_mtd->Attribute("name")), string(_it_mtd->Attribute("script")));
 			}
-			
+
 			for (XMLElement* _it_snd = _objectXml->FirstChildElement("sounds")->FirstChildElement(); _it_snd != NULL; _it_snd = _it_snd->NextSiblingElement())
 			{
 				objData.AddSound(string(_it_snd->Attribute("name")), string(_it_snd->Attribute("path")));
@@ -208,15 +210,32 @@ void ObjectData::ReadDataClassesFromXml(void)
 			// READ THE ENTITY.XML FILES AND PREPARE THE PRIMITIVES
 
 			string path = objData.GetPropertyValue("ent_path");
-			if (path == "NOT_VALID") continue;
-			if (objData.GetClassType() == "cpp_buildingclass") {
-				primitives::BSprite()->AddEntityPath(path);
+			if (path != PROPERTY_NOT_VALID)
+			{
+				if (objData.GetClassType() == "cpp_buildingclass")
+				{
+					primitives::BSprite()->AddEntityPath(path);
+				}
+				else if (objData.GetClassType() == "cpp_decorationclass")
+				{
+					primitives::DSprite()->AddEntityPath(path);
+				}
+				else if (objData.GetClassType() == "cpp_unitclass")
+				{
+					primitives::USprite()->AddEntityPath(path);
+				}
 			}
-			else if (objData.GetClassType() == "cpp_decorationclass") {
-				primitives::DSprite()->AddEntityPath(path);
-			}
-			else if (objData.GetClassType() == "cpp_unitclass") {
-				primitives::USprite()->AddEntityPath(path);
+
+			// ADD VALUES TO EDITOR TREE
+			std::string editorFilter1 = objData.GetPropertyValue("editorFilter1");
+			std::string editorFilter2 = objData.GetPropertyValue("editorFilter2");
+			if (editorFilter1 != PROPERTY_NOT_VALID || editorFilter2 != PROPERTY_NOT_VALID)
+			{
+				std::string editorFilter3 = objData.GetClassName();
+				if (objData.GetClassType() == "cpp_buildingclass" || objData.GetClassType() == "cpp_decorationclass" || objData.GetClassType() == "cpp_unitclass")
+				{
+					Editor::AddEditorTreeElement(editorFilter1, editorFilter2, editorFilter3);
+				}
 			}
 		}
 		catch (...) {

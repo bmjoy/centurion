@@ -64,6 +64,9 @@ void Hector::Initialize()
 		.addStaticFunction("ToggleMenu", &EditorMenuBar::ToggleEditorMenu)
 		.addStaticFunction("OpenWindow", &EditorWindows::OpenWindow)
 		.addStaticFunction("CloseWindow", &EditorWindows::CloseWindow)
+		.addStaticFunction("GetTreeList1", Editor::GetEditorTreeList1)
+		.addStaticFunction("GetTreeList2", Editor::GetEditorTreeList2)
+		.addStaticFunction("GetTreeList3", Editor::GetEditorTreeList3)
 		.endClass();
 
 	getGlobalNamespace(L).beginClass<Menu>("Menu")

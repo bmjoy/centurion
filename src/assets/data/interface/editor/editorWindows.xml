@@ -62,10 +62,11 @@
 	</conditionScript>
     <openingScript>
 	  -- lua script
-	  _folderList = Engine.GetListOfFolders("scenarios")
-	  TextList.UpdateListById(1, _folderList)
-	  TextList.UpdateListById(2, _folderList)
-	  TextList.UpdateListById(3, _folderList)
+	  _editorList1 = Editor.GetTreeList1()
+	  TextList.UpdateListById(1, _editorList1)
+	  _editorList2 = Editor.GetTreeList2(TextList.GetListById(1):GetSelectedOption())
+	  TextList.UpdateListById(2, _editorList2)
+	  TextList.UpdateListById(3, _editorList3)
     </openingScript>
 	<simpleTextArray></simpleTextArray>
 	<buttonArray>
@@ -79,7 +80,8 @@
 	<textListArray>
 		<textList textListId="1" xOffset="20" yOffset="185">
 			<onclickScript>
-				-- lua script
+				_editorList2 = Editor.GetTreeList2(TextList.GetListById(1):GetSelectedOption())
+				TextList.UpdateListById(2, _editorList2)
 			</onclickScript>
 		</textList>
 		<textList textListId="2" xOffset="220" yOffset="185">
