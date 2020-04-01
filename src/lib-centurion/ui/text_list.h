@@ -17,7 +17,7 @@ namespace gui {
 		static void UpdateTextListById(int id, std::vector<std::string> *_options);
 		int GetId() { return id; }
 		std::string GetSelectedOption() { return selectedOption; }
-		void Create(int _id, int _x, int _y, std::string _font, glm::vec4 _color, glm::vec4 _backColor, int _pickingId);
+		void Create(int _id, int _x, int _y, std::string _font, glm::vec4 _color, glm::vec4 _backColor, int _pickingId, const std::string & luaCmd = "");
 		void Update(std::vector<std::string> *_options);
 		void Render(bool picking);
 		~TextList();
@@ -28,6 +28,7 @@ namespace gui {
 		std::vector<SimpleText> optionsText;
 		std::vector<std::string> options;
 		std::string font;
+		std::string luaCommand;
 		std::string selectedOption;
 		glm::vec4 color, backColor;
 		float optionsHeight;

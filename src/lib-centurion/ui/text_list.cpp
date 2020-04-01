@@ -3,6 +3,7 @@
 
 #include <engine.h>
 #include <picking.h>
+#include <hector-lua.h>
 
 #include <translationsTable.h>
 
@@ -37,7 +38,7 @@ namespace gui {
 		TextLists[id]->Update(_options);
 	}
 
-	void TextList::Create(int _id, int _x, int _y, string _font, vec4 _color, vec4 _backColor, int _pickingId) {
+	void TextList::Create(int _id, int _x, int _y, string _font, vec4 _color, vec4 _backColor, int _pickingId, const std::string & luaCmd) {
 		id = _id;
 		x = _x;
 		y = _y;
@@ -45,6 +46,7 @@ namespace gui {
 		color = _color;
 		pickingId = _pickingId;
 		backColor = _backColor;
+		luaCommand = luaCmd;
 
 		AddTextListToArray(this->id, this);
 	}
@@ -78,6 +80,8 @@ namespace gui {
 		if (Engine::Mouse::LeftClick && Picking::leftClickID_UI == pickingId) {
 			selectedOption = options[GetIdFromClick()];
 			Engine::Mouse::LeftClick = false;
+
+			Hector::ExecuteCommand(luaCommand);
 		}
 		for (int i = 0; i < n_options; i++) {
 			if (picking) {

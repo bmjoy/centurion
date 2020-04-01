@@ -48,7 +48,8 @@
 		</button>
 	</buttonArray>
 	<textListArray>
-		<textList textListId="0" xOffset="50" yOffset="270" />
+		<textList textListId="0" xOffset="50" yOffset="270">
+		</textList>
 	</textListArray>
   </editorWindow>
   
@@ -76,9 +77,18 @@
 		</button>
 	</buttonArray>
 	<textListArray>
-		<textList textListId="1" xOffset="20" yOffset="185" />
-		<textList textListId="2" xOffset="220" yOffset="185" />
-		<textList textListId="3" xOffset="420" yOffset="185" />
+		<textList textListId="1" xOffset="20" yOffset="185">
+			<onclickScript>
+				-- lua script
+			</onclickScript>
+		</textList>
+		<textList textListId="2" xOffset="220" yOffset="185">
+			<onclickScript>
+				-- lua script
+			</onclickScript>
+		</textList>
+		<textList textListId="3" xOffset="420" yOffset="185">
+		</textList>
 	</textListArray>
   </editorWindow>
 </editorWindows>

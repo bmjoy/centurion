@@ -125,7 +125,11 @@ void EditorWindows::Create(void)
 				int textListID = _it_txtlist->IntAttribute("textListId");
 				int xOffset = _it_txtlist->IntAttribute("xOffset");
 				int yOffset = _it_txtlist->IntAttribute("yOffset");
-				iframe.AddTextList(textListID, xOffset, yOffset);
+				string txtListLuaCmd = "";
+				if (_it_txtlist->FirstChildElement("onclickScript") != NULL) {
+					txtListLuaCmd = _it_txtlist->FirstChildElement("onclickScript")->GetText();
+				}
+				iframe.AddTextList(textListID, xOffset, yOffset, txtListLuaCmd);
 			}
 
 			// buttons

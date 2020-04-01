@@ -56,7 +56,8 @@ namespace gui {
 		/// <param name="textListId">The text list id</param>
 		/// <param name="xPos">The text list x-position, relative to the iframe x-position</param>
 		/// <param name="yPos">The text list y-position, relative to the iframe y-position</param>
-		void AddTextList(const int textListId, const int xPos, const int yPos);
+		/// <param name="luaCmd">The Lua command to execute when you click on one option</param>
+		void AddTextList(const int textListId, const int xPos, const int yPos, const std::string & luaCmd = "");
 
 		/// <summary>
 		/// This function creates an instance of Iframe.
