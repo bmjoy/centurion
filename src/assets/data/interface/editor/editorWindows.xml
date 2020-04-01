@@ -2,7 +2,7 @@
   
   <!-- OBJECT PROPERTIES WINDOW -->
   
-  <editorWindow id="0" name="Object properties" iframe="editor" position="x=Engine.WindowWidth/2-300; y=Engine.WindowHeight/2-200" size="width=600; height=400" isOpened="false">
+  <editorWindow id="0" name="Object properties" iframe="editor" position="x=Engine.WindowWidth/2-300; y=Engine.WindowHeight/2-200;" size="w=600; h=400;" isOpened="false">
 	<conditionScript function="ConditionProperties">
 		-- lua script
 		function ConditionProperties()
@@ -28,7 +28,7 @@
   
   <!-- OPEN SCENARIO WINDOW -->
   
-  <editorWindow id="1" name="Open scenario" iframe="editor" position="x=Engine.WindowWidth/2-200; y=Engine.WindowHeight/2-160" size="width=400; height=320" isOpened="false">
+  <editorWindow id="1" name="Open scenario" iframe="editor" position="x=Engine.WindowWidth/2-200; y=Engine.WindowHeight/2-160;" size="w=400; h=320;" isOpened="false">
 	<conditionScript function="">
 		-- lua script
 		
@@ -43,10 +43,7 @@
 		<button text="Open" xOffset="200" yOffset="60" onclick='Engine.PrintToConsole(TextList.GetListById(0):GetSelectedOption())'/>
 	</buttonArray>
 	<textListArray>
-		<textList textListId="0" xOffset="50" yOffset="270">
-			<text font="tahoma_13px" r="255" g="255" b="255" />
-			<text_background r="0" g="0" b="0" />
-		</textList>
+		<textList textListId="0" xOffset="50" yOffset="270" />
 	</textListArray>
   </editorWindow>
 </editorWindows>

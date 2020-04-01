@@ -151,7 +151,7 @@ void EditorMenuBar::Create(void)
 			for (tinyxml2::XMLElement* _it_cmd = _it_menu->FirstChildElement(); _it_cmd != NULL; _it_cmd = _it_cmd->NextSiblingElement())
 			{
 				string optionstring = TranslationsTable::GetTranslation(string(_it_menu->Attribute("name")) + "_" + string(_it_cmd->Attribute("name")));
-				string optionLuaCmd = string(_it_cmd->Attribute("onclick"));
+				string optionLuaCmd = string(_it_cmd->FirstChildElement("onclickScript")->GetText());
 				int j = stoi(_it_cmd->Attribute("id"));
 
 				gui::Rectangle optionback = gui::Rectangle();

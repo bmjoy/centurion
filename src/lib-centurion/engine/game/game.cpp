@@ -467,6 +467,16 @@ GObject* Game::selectedObject;
 #pragma endregion
 
 Game::Game() {}
+
+void Game::ResetGame()
+{
+	GObject::ResetGameObjects();
+	//game::GameMenu::Disable();
+	Map::DisableGrid();
+	Minimap::Unblock();
+	Minimap::Disable();
+}
+
 Game::~Game() {}
 
 ;

@@ -315,6 +315,8 @@ public:
 
 	static bool IsCreated() { return isCreated; }
 	static void SetNumberOfPlayers(int n) { numberOfPlayers = n; }
+	static void ResetGame(void);
+
 	~Game();
 
 protected:

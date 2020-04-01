@@ -6,7 +6,7 @@
 #include <game/strategy.h>
 #include <picking.h>
 #include <engine.h>
-
+#include <menu/menu.h>
 #include <logger.h>
 #include <settings.h>
 #include <translationsTable.h>
@@ -21,17 +21,12 @@ using namespace glm;
 
 Editor::Editor(void) {}
 
-void Editor::reset(void)
-{
-	Game::isCreated = false;
-}
-
 void Editor::Create(void)
 {
 	PickingUI::ResetPicking();
 	PickingObject::ResetPicking();
 
-	Strategy::Reset();
+	ResetGame();
 	Engine::myWindow::BottomBarHeight = 0.f;
 	Engine::myWindow::TopBarHeight = 0.f;
 
@@ -48,6 +43,13 @@ void Editor::Create(void)
 
 	isCreated = true;
 	Minimap::Update();
+}
+
+void Editor::Close(void)
+{
+	isCreated = false;
+	Engine::SetEnvironment("menu");
+	Menu::Reset();
 }
 
 void Editor::Run(void)
@@ -186,7 +188,7 @@ void Editor::handleKeyboardControls(void)
 			if (Engine::Keyboard::IsKeyPressed(GLFW_KEY_SPACE) || Engine::Mouse::MiddleClick)
 			{
 				if (Minimap::IsActive()) Minimap::Disable();
-				else Minimap::Enable(); clearEditorVariables();
+				else Minimap::Enable(); 
 				Minimap::IsActive() ? Logger::Info("Minimap ON!") : Logger::Info("Minimap OFF!");
 			}
 		}
@@ -211,16 +213,7 @@ void Editor::handleKeyboardControls(void)
 	}
 	if (Engine::Keyboard::IsKeyPressed(GLFW_KEY_ESCAPE)) 
 	{
-		if (areWindowsClosed()) 
-		{
-			clearEditorVariables();
-			Engine::Reset();
-		}
-		else 
-		{
-			clearEditorVariables();
-			//EDITOR_UI()->close_menu();
-		}
+		Close();
 	}
 }
 
@@ -375,25 +368,6 @@ namespace editor
 			MapTerrain()->updateTextureBuffer();
 			Game::Minimap::Update();
 		}
-	}
-
-	void clearEditorVariables(void) 
-	{
-		/*IsWindowOpened = false;
-		QuestionWindowIsOpen = false;
-		NewMapWindowIsOpen = false;
-		NewMapResetText = false;
-		PropertiesWindowIsOpen = false;
-		PropertiesWindowResetText = false;
-		OpenMapWindowIsOpen = false;
-		OpenMapWindowUpdate = false;
-		AddObjectWindowIsOpen = false;
-		AddObjectWindowUpdateForm1and2 = false;
-		AddObjectWindowUpdateForm2 = false;
-		TerrainBrushWindowIsOpen = false;
-		TerrainBrushIsActive = false;
-		menuIsOpened = false;
-		addingObject = false;*/
 	}
 
 	bool areWindowsClosed(void)

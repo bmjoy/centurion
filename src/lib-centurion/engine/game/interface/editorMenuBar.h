@@ -60,7 +60,6 @@ public:
 	/// </summary>
 	/// <param name="id">The id that corresponds to the editor menu.</param>
 	static void ToggleEditorMenu(const unsigned int id);
-
 #pragma endregion
 
 	/// <summary>

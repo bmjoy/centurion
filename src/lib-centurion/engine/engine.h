@@ -32,7 +32,6 @@ namespace Engine
 {
 	// Variables
 	extern int ENVIRONMENT;
-	extern bool ENGINE_RESET;
 
 	/// <summary>
 	/// This class handles a FPS.
@@ -104,10 +103,6 @@ namespace Engine
 	/// Thois function initializes the game; it thorws an exception if it wasn't able to process the game.
 	/// </summary>
 	void Init (const char* exe_root);
-	/// <summary>
-	/// This function resets the engine. 
-	/// </summary>
-	void Reset(void);
 	/// <summary>
 	/// This functions returns the environment in which the game is (for instance editor, strategy, menu). 
 	/// <returns>A value corresponding to the current environment.</returns>

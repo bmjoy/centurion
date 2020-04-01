@@ -164,6 +164,7 @@ void Menu::AddMenuPage(const unsigned int id, MenuPage * mp)
 
 void Menu::Reset(void)
 {
+	isCreated = false;
 }
 
 void Menu::Clear(void)
@@ -180,10 +181,10 @@ void Menu::Clear(void)
 
 void Menu::Create(void)
 {
+	PickingUI::ResetPicking();
 	try
 	{
 		vector<string> files = FileManager::GetAllFilesNamesWithinFolder(Folders::INTERFACE_MENU, "xml");
-
 		for (vector<string>::iterator it = files.begin(); it != files.end(); it++)
 		{
 

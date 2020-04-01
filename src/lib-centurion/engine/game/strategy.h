@@ -31,7 +31,6 @@ class Strategy : public Match
 {
 public:
 	static void HandleKeyboardControls(void);
-	static void Reset(void);
 	static void Create(void);
 	static void Run(void);
 	

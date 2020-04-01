@@ -23,10 +23,6 @@ class Editor : public Game
 {
 public:
 	/// <summary>
-	/// This function resets the editor.
-	/// </summary>
-	static void reset(void);
-	/// <summary>
 	/// This function create the editor.
 	/// </summary>
 	static void Create(void);
@@ -39,6 +35,11 @@ public:
 	/// This function notices the pressure of a specific key and consequently performs an appropriate action. 
 	/// </summary>
 	static void handleKeyboardControls(void);
+
+	/// <summary>
+	/// This method closes and resets the editor, and sets the environment to "menu"
+	/// </summary>
+	static void Close(void);
 	/// <summary>
 	/// The destructor.
 	/// </summary>
@@ -68,10 +69,6 @@ namespace editor
 	/// This function changes the terrain.
 	/// </summary>
 	void changeTerrain(const int terrainType);
-	/// <summary>
-	/// This function resets all the variables belonging to the editor.
-	/// </summary>
-	void clearEditorVariables(void);
 	/// <summary>
 	/// This function checks if the windows of the editor are closed or not.
 	/// </summary>

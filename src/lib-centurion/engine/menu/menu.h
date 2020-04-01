@@ -81,7 +81,7 @@ public:
 	/// <param name="mp">The menu page to add.</param>
 	static void AddMenuPage(const unsigned int id, MenuPage* mp);
 	/// <summary>
-	/// (???) Da fare.
+	/// This function resets the menu (implies to create everything at first run)
 	/// </summary>
 	static void Reset(void);
 	/// <summary>

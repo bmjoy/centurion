@@ -4,6 +4,7 @@
 #include <LuaBridge/LuaBridge.h>
 
 #include <menu/menu.h>
+#include <game/editor.h>
 #include <engine.h>
 #include <picking.h>
 
@@ -60,6 +61,10 @@ void Hector::Initialize()
 
 	getGlobalNamespace(L).beginClass<EditorMenuBar>("EditorMenuBar")
 		.addStaticFunction("ToggleMenu", &EditorMenuBar::ToggleEditorMenu)
+		.endClass();
+
+	getGlobalNamespace(L).beginClass<Editor>("Editor")
+		.addStaticFunction("Close", &Editor::Close)
 		.endClass();
 
 	getGlobalNamespace(L).beginClass<EditorWindows>("EditorWindows")

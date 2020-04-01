@@ -109,38 +109,15 @@ void EditorWindows::Create(void)
 			string sizeScript = string(_it_wind->Attribute("size"));
 			string positionScript = string(_it_wind->Attribute("position"));
 
-			Hector::ExecuteCommand(sizeScript);
-			Hector::ExecuteCommand(positionScript);
-			int x = 0, y = 0, w = 0, h = 0;
-			Hector::GetIntegerVariable("x", &x);
-			Hector::GetIntegerVariable("y", &y);
-			Hector::GetIntegerVariable("width", &w);
-			Hector::GetIntegerVariable("height", &h);
-
-			iframe.Create(x, y, w, h);
+			iframe.Create(sizeScript + positionScript);
 
 			// text lists 
 			for (tinyxml2::XMLElement* _it_txtlist = _it_wind->FirstChildElement("textListArray")->FirstChildElement(); _it_txtlist != NULL; _it_txtlist = _it_txtlist->NextSiblingElement())
 			{
-				gui::TextList* _list = new gui::TextList();
 				int textListID = stoi(_it_txtlist->Attribute("textListId"));
-				_list->Create(
-					textListID,
-					x + stoi(_it_txtlist->Attribute("xOffset")),
-					y + stoi(_it_txtlist->Attribute("yOffset")),
-					string(_it_txtlist->FirstChildElement("text")->Attribute("font")),
-					vec4(stoi(_it_txtlist->FirstChildElement("text")->Attribute("r")),
-						stoi(_it_txtlist->FirstChildElement("text")->Attribute("g")),
-						stoi(_it_txtlist->FirstChildElement("text")->Attribute("b")),
-						255.f),
-					vec4(stoi(_it_txtlist->FirstChildElement("text_background")->Attribute("r")),
-						stoi(_it_txtlist->FirstChildElement("text_background")->Attribute("g")),
-						stoi(_it_txtlist->FirstChildElement("text_background")->Attribute("b")),
-						255.f),
-					PickingUI::ObtainPickingID()
-				);
-				gui::TextList::AddTextListToArray(textListID, _list);
-				iframe.AddTextList(_list);
+				int xOffset = stoi(_it_txtlist->Attribute("xOffset"));
+				int yOffset = stoi(_it_txtlist->Attribute("yOffset"));
+				iframe.AddTextList(textListID, xOffset, yOffset);
 			}
 
 			// buttons

@@ -45,6 +45,8 @@ namespace gui {
 		color = _color;
 		pickingId = _pickingId;
 		backColor = _backColor;
+
+		AddTextListToArray(this->id, this);
 	}
 
 	void TextList::Update(vector<string> *_options)

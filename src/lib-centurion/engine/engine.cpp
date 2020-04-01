@@ -43,7 +43,6 @@ using namespace std;
 using namespace glm;
 
 int Engine::ENVIRONMENT = MENU_ENV;
-bool Engine::ENGINE_RESET;
 
 int Engine::Launch(void) 
 {
@@ -105,16 +104,6 @@ int Engine::Launch(void)
 		}
 
 		// -------------- //
-
-		if (ENGINE_RESET)
-		{
-			ENGINE_RESET = false;
-			if (GetEnvironment() == EDITOR_ENV) Editor::reset(); editor::clearEditorVariables();
-			if (GetEnvironment() == STRATEGY_ENV) Strategy::Reset();
-			//MENU()->reset();
-
-			SetEnvironment("menu");
-		}
 
 		// debug ui
 		if (Settings::DebugIsActive)
@@ -258,11 +247,6 @@ void Engine::Init(const char* exe_root)
 	//------------------------------
 
 	SetEnvironment("menu");
-}
-
-void Engine::Reset(void)
-{
-	ENGINE_RESET = true;
 }
 
 unsigned int Engine::GetEnvironment(void)

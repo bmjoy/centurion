@@ -12,4 +12,9 @@
 		<textColor r="255" g="255" b="255" />
 		<font name="tahoma_13px" />
 	</button>
+	<textList>
+		<textColor r="255" g="255" b="255" />
+		<font name="tahoma_13px" />
+		<background r="0" g="0" b="0" />
+	</textList>
 </iframe>

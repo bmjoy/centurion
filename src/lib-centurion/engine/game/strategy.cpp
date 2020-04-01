@@ -28,24 +28,12 @@ array<Player, 8> playersList;
 
 Strategy::Strategy(void) { }
 
-void Strategy::Reset(void)
-{
-	GObject::ResetGameObjects();
-
-	isCreated = false;
-	//game::GameMenu::Disable();
-	Map::DisableGrid();
-	Minimap::Unblock();
-	Minimap::Disable();
-	Minimap::Update();
-}
-
 void Strategy::Create(void) 
 {
 	PickingObject::ResetPicking();
 	PickingUI::ResetPicking();
 
-	Reset();
+	ResetGame();
 	Engine::myWindow::BottomBarHeight = 100.f;
 	Engine::myWindow::TopBarHeight = 100.f;
 
