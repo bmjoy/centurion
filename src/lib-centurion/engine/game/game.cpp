@@ -377,13 +377,16 @@ void Game::Minimap::Create(void)
 	isCreated = true;
 }
 
-void Game::Minimap::Render(void) 
+void Game::Minimap::RenderMapAndObjects(void)
 {
 	if (IsCreated() == false) {
 		Minimap::Create();
 	}
-
 	MMRectangle()->render();
+}
+
+void Game::Minimap::RenderRectangle(void)
+{
 	minimapRectangle.render(vec4(255.f));
 }
 

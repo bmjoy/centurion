@@ -175,7 +175,11 @@ public:
 		/// <summary>
 		/// This function performs the rendering of a minimap.
 		/// </summary>
-		static void Render(void);
+		static void RenderMapAndObjects(void);
+		/// <summary>
+		/// This function performs the rendering of the minimap rectangle.
+		/// </summary>
+		static void RenderRectangle(void);
 		/// <summary>
 		/// This functions updates the minimap.
 		/// </summary>

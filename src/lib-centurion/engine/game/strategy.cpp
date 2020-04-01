@@ -158,7 +158,7 @@ void Strategy::Run(void)
 		applyGameMatrices(&projectionMatrix, &viewMatrix);
 		//if (!game::GameMenu::IsActive()) RenderObjectsPicking();
 
-		if (Minimap::IsCreated()) Minimap::Render();
+		//if (Minimap::IsCreated()) Minimap::Render();
 
 		/* Rendering */
 		if (!Minimap::IsCreated()) {

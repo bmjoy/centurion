@@ -114,12 +114,17 @@ void Editor::Run(void)
 
 		// PICKING RENDERING
 		EditorUI::Render(true);
+
+		applyGameMatrices(&projectionMatrix, &viewMatrix);
+
 		RenderObjectsPicking(); //RIVEDERE QUESTA FUNZIONE
 
 		// NORMAL RENDERING 
-		Minimap::Render();
+		Minimap::RenderMapAndObjects();
 
 		applyMenuMatrices();
+
+		Minimap::RenderRectangle();
 		EditorUI::Render(false);
 
 		if (Picking::leftClickID_UI == 0) GoToPointFromMinimap();
