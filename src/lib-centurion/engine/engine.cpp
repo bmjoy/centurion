@@ -43,6 +43,7 @@ using namespace std;
 using namespace glm;
 
 int Engine::ENVIRONMENT = MENU_ENV;
+std::vector<std::string> Engine::listOfFoldersTemp;
 
 int Engine::Launch(void) 
 {
@@ -180,10 +181,9 @@ vector<string>* Engine::GetListOfFolders(const string s)
 {
 	if (FileManager::CheckIfFolderExists(s))
 	{
-		vector<string> list = FileManager::GetAllFoldersNamesWithinFolder(s);
-		vector<string>* _list = new vector<string>();
-		(*_list) = list;
-		return _list;
+		listOfFoldersTemp.clear();
+		listOfFoldersTemp = FileManager::GetAllFoldersNamesWithinFolder(s);
+		return &listOfFoldersTemp;
 	}
 	return nullptr;
 }

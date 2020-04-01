@@ -97,6 +97,7 @@ namespace Engine
 	/// <param name="s">The path.</param>
 	/// <returns>A list of folders; null if there are no folders.</returns>
 	std::vector<std::string> *GetListOfFolders(const std::string s);
+	extern std::vector<std::string> listOfFoldersTemp;
 
 	// Functions
 	/// <summary>
