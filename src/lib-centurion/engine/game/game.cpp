@@ -364,17 +364,25 @@ bool Game::Minimap::isActive = false;
 bool Game::Minimap::isBlocked = false;
 gui::Rectangle Game::Minimap::minimapRectangle;
 
-Game::Minimap::Minimap(void) {}
+Game::Minimap::Minimap(void) {
+	minimapRectangle = gui::Rectangle();
+}
 
 void Game::Minimap::Create(void) 
 {
+	applyGameMatrices(&projectionMatrix, &viewMatrix);
+	Map::Render(false);
+	RenderObjects();
 	MMRectangle()->update();
-	minimapRectangle = gui::Rectangle();
 	isCreated = true;
 }
 
 void Game::Minimap::Render(void) 
 {
+	if (IsCreated() == false) {
+		Minimap::Create();
+	}
+
 	MMRectangle()->render();
 	minimapRectangle.render(vec4(255.f));
 }
@@ -758,8 +766,9 @@ bool Game::CreateObject(const string className, const float x, const float y, co
 {
 	bool bObjectCreated = false;
 	if (Engine::GetEnvironment() == MENU_ENV) return bObjectCreated;
+	Game::Minimap::Update();
 
-	if (player <= MAX_NUMBER_OF_OBJECTS)
+	if (player <= MAX_NUMBER_OF_PLAYERS)
 	{
 		ObjectData::ObjectXMLClassData *objData = ObjectData::GetObjectData(className);
 		if (objData == nullptr)

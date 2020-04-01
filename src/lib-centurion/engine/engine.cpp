@@ -87,13 +87,6 @@ int Engine::Launch(void)
 
 		if (GetEnvironment() == MENU_ENV)
 		{
-			
-			if (Menu::IsCreated() == false)
-			{
-				//Audio()->MusicPlay("assets/music/menu.ogg");
-				Menu::Create();
-				Logger::Info("Main menu was created!");
-			}
 			Menu::Run();
 		}
 
@@ -101,33 +94,13 @@ int Engine::Launch(void)
 
 		if (GetEnvironment() == STRATEGY_ENV)
 		{
-			if (!Strategy::IsCreated()) 
-			{
-				//Audio()->MusicStop();
-
-				//window.ClearAndSwapBuffers();
-
-				//{
-					//text = gui::SimpleText("dynamic");
-					//text.render_dynamic(TranslationsTable::GetTranslation("WORD_gameStarted"), "tahoma_15px", myWindow::Width / 2.f, myWindow::Height / 2.f, vec4(255.f), "center", "middle");
-				//}
-
-				//window.SwapBuffers();
-
-				Strategy::Create();
-			}
-			Strategy::Run();
+			//Strategy::Run();
 		}
 
 		// ---- EDITOR ---- //
 
 		if (GetEnvironment() == EDITOR_ENV) 
 		{
-			if (!Editor::IsCreated()) 
-			{
-				Audio()->MusicStop();
-				Editor::Create();
-			}
 			Editor::Run();
 		}
 
@@ -322,11 +295,11 @@ void Engine::ResetperipheralsInput(void)
 string Engine::GetCppVersion()
 {
 	string version;
-	if (__cplusplus == 201703L) version = "C++17\n";
-	else if (__cplusplus == 201402L) version = "C++14\n";
-	else if (__cplusplus == 201103L) version = "C++11\n";
-	else if (__cplusplus == 199711L) version = "C++98\n";
-	else version = "pre-standard C++\n";
+	if (__cplusplus == 201703L) version = "C++17";
+	else if (__cplusplus == 201402L) version = "C++14";
+	else if (__cplusplus == 201103L) version = "C++11";
+	else if (__cplusplus == 199711L) version = "C++98";
+	else version = "pre-standard C++";
 	return version;
 }
 

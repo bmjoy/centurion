@@ -205,6 +205,12 @@ void Menu::Create(void)
 
 void Menu::Run(void)
 {
+	if (IsCreated() == false) {
+		//Audio()->MusicPlay("assets/music/menu.ogg");
+		Menu::Create();
+		Logger::Info("Main menu has been created!");
+	}
+
 	// picking
 	Picking::leftClickID_UI = 0;
 	RenderPage(currentPageId, true);

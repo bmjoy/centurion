@@ -52,6 +52,13 @@ void Editor::Create(void)
 
 void Editor::Run(void)
 {
+	if (IsCreated() == false) {
+		//Audio()->MusicStop();
+		Create();
+		Logger::Info("Editor has been created!");
+	}
+
+
 	Picking::leftClickID_UI = 0;
 
 	/* Keyboard control */
@@ -110,18 +117,9 @@ void Editor::Run(void)
 		RenderObjectsPicking(); //RIVEDERE QUESTA FUNZIONE
 
 		// NORMAL RENDERING 
-		if (Minimap::IsCreated()) 
-		{
-			Minimap::Render();
-		}
-		else 
-		{
-			applyGameMatrices(&projectionMatrix, &viewMatrix);
-			Map::Render(false);
-			RenderObjects();
-			Minimap::Create();
-			applyMenuMatrices();
-		}
+		Minimap::Render();
+
+		applyMenuMatrices();
 		EditorUI::Render(false);
 
 		if (Picking::leftClickID_UI == 0) GoToPointFromMinimap();
