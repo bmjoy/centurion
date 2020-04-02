@@ -40,13 +40,13 @@
 	<entry stringName="EDITOR_propertiesApply" result="Apply"/>
 	<entry stringName="EDITOR_propertiesCancel" result="Cancel"/>
 	<entry stringName="EDITOR_defaultMapName" result="Untitled"/>
-	<entry stringName="EDITOR_buildings" result="Buildings"/>
-	<entry stringName="EDITOR_units" result="Units"/>
-	<entry stringName="EDITOR_decorations" result="Decorations"/>
-	<entry stringName="EDITORTREE_CATEGORY_egyptianstronghold" result="Egyptian stronghold"/>
-	<entry stringName="EDITORTREE_CATEGORY_romanstronghold" result="Roman stronghold"/>
-	<entry stringName="EDITORTREE_CATEGORY_outposts" result="Outposts"/>
-	<entry stringName="EDITORTREE_CATEGORY_trees" result="Trees"/>
+	<entry stringName="EDITORTREE_buildings" result="Buildings"/>
+	<entry stringName="EDITORTREE_units" result="Units"/>
+	<entry stringName="EDITORTREE_decorations" result="Decorations"/>
+	<entry stringName="EDITORTREE_egyptianstronghold" result="Egyptian stronghold"/>
+	<entry stringName="EDITORTREE_romanstronghold" result="Roman stronghold"/>
+	<entry stringName="EDITORTREE_outposts" result="Outposts"/>
+	<entry stringName="EDITORTREE_trees" result="Trees"/>
 	<entry stringName="EDITORBRUSH_GRASS" result="Grass"/>
 	<entry stringName="EDITORBRUSH_GRASS_1" result="Grass 1"/>
 	<entry stringName="EDITORBRUSH_GRASS_2" result="Grass 2"/>
@@ -63,25 +63,24 @@
 	<entry stringName="EDITOR_canAddStructure" result="Press the LEFT mouse button to position the structure in the desired point. Press the RIGHT mouse button to abort this operation."/>
 	<entry stringName="QUESTION_deleteAll" result="Deleting this structure the rest of the settlement will also be eliminated. Do you really want to proceed?"/>
 	<entry stringName="QUESTION_overwriteMap" result="Typed name corresponds to an existing map. Do you want to overwrite it?"/>
-	<entry stringName="EDITORTREE_CATEGORY_trees" result="Trees"/>
-	<entry stringName="WORD_ebarracks" result="Barracks"/>
-	<entry stringName="WORD_eblacksmith" result="Blacksmith"/>
-	<entry stringName="WORD_eosiristemple" result="Temple of Osiris"/>
-	<entry stringName="WORD_etavern" result="Tavern"/>
-	<entry stringName="WORD_etemple" result="Temple"/>
-	<entry stringName="WORD_etownhall" result="Townhall"/>
-	<entry stringName="WORD_rarena" result="Arena"/>
-	<entry stringName="WORD_rbarracks" result="Barracks"/>
-	<entry stringName="WORD_rblacksmith" result="Blacksmith"/>
-	<entry stringName="WORD_rtavern" result="Tavern"/>
-	<entry stringName="WORD_rtemple" result="Temple"/>
-	<entry stringName="WORD_rtownhall" result="Townhall"/>
-	<entry stringName="WORD_routpost" result="Roman outpost"/>
-	<entry stringName="WORD_broadleaf_1" result="Broadleaf 1"/>
-	<entry stringName="WORD_broadleaf_2" result="Broadleaf 2"/>
-	<entry stringName="WORD_cypress" result="Cypress"/>
-	<entry stringName="WORD_jasmimmanga" result="Tropical tree 1"/>
-	<entry stringName="WORD_palm_1" result="Palm 1"/>
+	<entry stringName="WORD_EBarracks" result="Barracks"/>
+	<entry stringName="WORD_EBlacksmith" result="Blacksmith"/>
+	<entry stringName="WORD_EOsiristemple" result="Temple of Osiris"/>
+	<entry stringName="WORD_ETavern" result="Tavern"/>
+	<entry stringName="WORD_ETempleOfHorusAndAnubis" result="Temple of Horus and Anubis"/>
+	<entry stringName="WORD_ETownhall" result="Townhall"/>
+	<entry stringName="WORD_RArena" result="Arena"/>
+	<entry stringName="WORD_RBarracks" result="Barracks"/>
+	<entry stringName="WORD_RBlacksmith" result="Blacksmith"/>
+	<entry stringName="WORD_RTavern" result="Tavern"/>
+	<entry stringName="WORD_RTemple" result="Temple"/>
+	<entry stringName="WORD_RTownhall" result="Townhall"/>
+	<entry stringName="WORD_ROutpost" result="Roman outpost"/>
+	<entry stringName="WORD_Broadleaf_1" result="Broadleaf 1"/>
+	<entry stringName="WORD_Broadleaf_2" result="Broadleaf 2"/>
+	<entry stringName="WORD_Cypress" result="Cypress"/>
+	<entry stringName="WORD_Jasmimmanga" result="Tropical tree 1"/>
+	<entry stringName="WORD_Palm_1" result="Palm 1"/>
 	<entry stringName="WORD_gameStarted" result="Game is being started..."/>
 	<entry stringName="WORD_player_1" result="Player 1"/>
 	<entry stringName="WORD_player_2" result="Player 2"/>
