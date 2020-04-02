@@ -40,13 +40,13 @@
 	<entry stringName="EDITOR_propertiesApply" result="Aplicar"/>
 	<entry stringName="EDITOR_propertiesCancel" result="Cancelar"/>
 	<entry stringName="EDITOR_defaultMapName" result="Intitulado"/>
-	<entry stringName="EDITOR_buildings" result="Edificios"/>
-	<entry stringName="EDITOR_units" result="Unidades"/>
-	<entry stringName="EDITOR_decorations" result="Decoraciones"/>
-	<entry stringName="EDITORTREE_CATEGORY_egyptianstronghold" result="Fortaleza egipcia"/>
-	<entry stringName="EDITORTREE_CATEGORY_romanstronghold" result="Fortaleza romana"/>
-	<entry stringName="EDITORTREE_CATEGORY_outposts" result="Puesto de Avanzada"/>
-	<entry stringName="EDITORTREE_CATEGORY_trees" result="Árboles"/>
+	<entry stringName="EDITORTREE_buildings" result="Edificios"/>
+	<entry stringName="EDITORTREE_units" result="Unidades"/>
+	<entry stringName="EDITORTREE_decorations" result="Decoraciones"/>
+	<entry stringName="EDITORTREE_egyptianstronghold" result="Fortaleza egipcia"/>
+	<entry stringName="EDITORTREE_romanstronghold" result="Fortaleza romana"/>
+	<entry stringName="EDITORTREE_outposts" result="Puesto de Avanzada"/>
+	<entry stringName="EDITORTREE_trees" result="Árboles"/>
 	<entry stringName="EDITORBRUSH_GRASS" result="Hierba"/>
 	<entry stringName="EDITORBRUSH_GRASS_1" result="Hierba 1"/>
 	<entry stringName="EDITORBRUSH_GRASS_2" result="Hierba 2"/>
@@ -63,25 +63,24 @@
 	<entry stringName="EDITOR_canAddStructure" result="--"/>
 	<entry stringName="QUESTION_deleteAll" result="--"/>
 	<entry stringName="QUESTION_overwriteMap" result="El nombre escrito corresponde a un mapa existente"/>
-	<entry stringName="EDITORTREE_CATEGORY_trees" result="Árboles"/>
-	<entry stringName="WORD_ebarracks" result="Cuartel"/>
-	<entry stringName="WORD_eblacksmith" result="Herrería"/>
-	<entry stringName="WORD_eosiristemple" result="Templo de Osiris"/>
-	<entry stringName="WORD_etavern" result="Taberna"/>
-	<entry stringName="WORD_etemple" result="Templo"/>
-	<entry stringName="WORD_etownhall" result="Foro"/>
-	<entry stringName="WORD_rarena" result="Arena"/>
-	<entry stringName="WORD_rbarracks" result="Cuartel"/>
-	<entry stringName="WORD_rblacksmith" result="Herrería"/>
-	<entry stringName="WORD_rtavern" result="Taberna"/>
-	<entry stringName="WORD_rtemple" result="Templo"/>
-	<entry stringName="WORD_rtownhall" result="Foro"/>
-	<entry stringName="WORD_routpost" result="Puesto de Avanzada romano"/>
-	<entry stringName="WORD_broadleaf_1" result="--"/>
-	<entry stringName="WORD_broadleaf_2" result="--"/>
-	<entry stringName="WORD_cypress" result="Ciprès"/>
-	<entry stringName="WORD_jasmimmanga" result="Planta tropical 1"/>
-	<entry stringName="WORD_palm_1" result="Palmera 1"/>
+	<entry stringName="WORD_EBarracks" result="Cuartel"/>
+	<entry stringName="WORD_EBlacksmith" result="Herrería"/>
+	<entry stringName="WORD_EOsiristemple" result="Templo de Osiris"/>
+	<entry stringName="WORD_ETavern" result="Taberna"/>
+	<entry stringName="WORD_ETempleOfHorusAndAnubis" result="Templo de Horus y Anubis"/>
+	<entry stringName="WORD_ETownhall" result="Foro"/>
+	<entry stringName="WORD_RArena" result="Arena"/>
+	<entry stringName="WORD_RBarracks" result="Cuartel"/>
+	<entry stringName="WORD_RBlacksmith" result="Herrería"/>
+	<entry stringName="WORD_RTavern" result="Taberna"/>
+	<entry stringName="WORD_RTemple" result="Templo"/>
+	<entry stringName="WORD_RTownhall" result="Foro"/>
+	<entry stringName="WORD_ROutpost" result="Puesto de Avanzada romano"/>
+	<entry stringName="WORD_Broadleaf_1" result="--"/>
+	<entry stringName="WORD_Broadleaf_2" result="--"/>
+	<entry stringName="WORD_Cypress" result="Ciprès"/>
+	<entry stringName="WORD_Jasmimmanga" result="Planta tropical 1"/>
+	<entry stringName="WORD_Palm_1" result="Palmera 1"/>
 	<entry stringName="WORD_gameStarted" result="El juego se está iniciando..."/>
 	<entry stringName="WORD_player_1" result="Jugador 1"/>
 	<entry stringName="WORD_player_2" result="Jugador 2"/>

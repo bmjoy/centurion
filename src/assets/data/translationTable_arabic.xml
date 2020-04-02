@@ -40,13 +40,13 @@
 	<entry stringName='EDITOR_propertiesApply' result='ﺗﻄﺒﻴﻖ'/>
 	<entry stringName='EDITOR_propertiesCancel' result='إﻟﻐﺎء'/>
 	<entry stringName='EDITOR_defaultMapName' result='ﺑﺪون ﻋﻨﻮان'/>
-	<entry stringName='EDITOR_buildings' result='اﻟﻤﺮاﻓﻖ'/>
-	<entry stringName='EDITOR_units' result='ﺟﻨﻮد'/>
-	<entry stringName='EDITOR_decorations' result='زﻳﻨﺔ'/>
-	<entry stringName='EDITORTREE_CATEGORY_egyptianstronghold' result='اﻟﻘﻠﻌﺔ اﻟﻤﺼﺮﻳﺔ  '/>
-	<entry stringName='EDITORTREE_CATEGORY_romanstronghold' result='اﻟﻘﻠﻌﺔ اﻟﺮوﻣﺎﻧﻴﺔ  '/>
-	<entry stringName='EDITORTREE_CATEGORY_outposts' result='اﻟﺒﺆر اﻻﺳﺘﻴﻄﺎﻧﻴﺔ '/>
-	<entry stringName='EDITORTREE_CATEGORY_trees' result='اﻷﺷﺠﺎر'/>
+	<entry stringName='EDITORTREE_buildings' result='اﻟﻤﺮاﻓﻖ'/>
+	<entry stringName='EDITORTREE_units' result='ﺟﻨﻮد'/>
+	<entry stringName='EDITORTREE_decorations' result='زﻳﻨﺔ'/>
+	<entry stringName='EDITORTREE_egyptianstronghold' result='اﻟﻘﻠﻌﺔ اﻟﻤﺼﺮﻳﺔ  '/>
+	<entry stringName='EDITORTREE_romanstronghold' result='اﻟﻘﻠﻌﺔ اﻟﺮوﻣﺎﻧﻴﺔ  '/>
+	<entry stringName='EDITORTREE_outposts' result='اﻟﺒﺆر اﻻﺳﺘﻴﻄﺎﻧﻴﺔ '/>
+	<entry stringName='EDITORTREE_trees' result='اﻷﺷﺠﺎر'/>
 	<entry stringName='EDITORBRUSH_GRASS' result='ﻋﺸﺐ'/>
 	<entry stringName='EDITORBRUSH_GRASS_1' result='ﻋﺸﺐ 1'/>
 	<entry stringName='EDITORBRUSH_GRASS_2' result='ﻋﺸﺐ 2'/>
@@ -63,25 +63,24 @@
 	<entry stringName='EDITOR_canAddStructure' result='--'/>
 	<entry stringName='QUESTION_deleteAll' result='--'/>
 	<entry stringName='QUESTION_overwriteMap' result='--'/>
-	<entry stringName='EDITORTREE_CATEGORY_trees' result='--'/>
-	<entry stringName='WORD_ebarracks' result='اﻟﺜﻜﻨﺎت'/>
-	<entry stringName='WORD_eblacksmith' result='دﻛﺎن اﻟﺤﺪاد'/>
-	<entry stringName='WORD_eosiristemple' result='ﻣﻌﺒﺪ  أوزورﻳﺲ'/>
-	<entry stringName='WORD_etavern' result='ﺣﺎﻧﺔ'/>
-	<entry stringName='WORD_etemple' result='ﻣﻌﺒﺪ  '/>
-	<entry stringName='WORD_etownhall' result='اﻟﻤﻘﺮ'/>
-	<entry stringName='WORD_rarena' result='ﺣﻠﺒﺔ'/>
-	<entry stringName='WORD_rbarracks' result='اﻟﺜﻜﻨﺎت'/>
-	<entry stringName='WORD_rblacksmith' result='دﻛﺎن اﻟﺤﺪاد'/>
-	<entry stringName='WORD_rtavern' result='ﺣﺎﻧﺔ'/>
-	<entry stringName='WORD_rtemple' result='ﻣﻌﺒﺪ'/>
-	<entry stringName='WORD_rtownhall' result='اﻟﻤﻘﺮ'/>
-	<entry stringName='WORD_routpost' result='اﻟﺒﺆرة اﻻﺳﺘﻴﻄﺎﻧﻴﺔ  اﻟﺮوﻣﺎﻧﻴﺔ  '/>
-	<entry stringName='WORD_broadleaf_1' result='اﻷﺧﺸﺎب اﻟﺼﻠﺒﺔ1'/>
-	<entry stringName='WORD_broadleaf_2' result='اﻷﺧﺸﺎب اﻟﺼﻠﺒﺔ2'/>
-	<entry stringName='WORD_cypress' result='ﺷﺠﺮ اﻟﺴﺮو'/>
-	<entry stringName='WORD_jasmimmanga' result='اﻟﻨﺒﺎﺗﺎت اﻻﺳﺘﻮاﺋﻴﺔ'/>
-	<entry stringName='WORD_palm_1' result='ﻧﺨﻠﺔ1'/>
+	<entry stringName='WORD_EBarracks' result='اﻟﺜﻜﻨﺎت'/>
+	<entry stringName='WORD_EBlacksmith' result='دﻛﺎن اﻟﺤﺪاد'/>
+	<entry stringName='WORD_EOsiristemple' result='ﻣﻌﺒﺪ  أوزورﻳﺲ'/>
+	<entry stringName='WORD_ETavern' result='ﺣﺎﻧﺔ'/>
+	<entry stringName='WORD_ETempleOfHorusAndAnubis' result='معبد حورس و أنوبيس'/>
+	<entry stringName='WORD_ETownhall' result='اﻟﻤﻘﺮ'/>
+	<entry stringName='WORD_RArena' result='ﺣﻠﺒﺔ'/>
+	<entry stringName='WORD_RBarracks' result='اﻟﺜﻜﻨﺎت'/>
+	<entry stringName='WORD_RBlacksmith' result='دﻛﺎن اﻟﺤﺪاد'/>
+	<entry stringName='WORD_RTavern' result='ﺣﺎﻧﺔ'/>
+	<entry stringName='WORD_RTemple' result='ﻣﻌﺒﺪ'/>
+	<entry stringName='WORD_RTownhall' result='اﻟﻤﻘﺮ'/>
+	<entry stringName='WORD_ROutpost' result='اﻟﺒﺆرة اﻻﺳﺘﻴﻄﺎﻧﻴﺔ  اﻟﺮوﻣﺎﻧﻴﺔ  '/>
+	<entry stringName='WORD_Broadleaf_1' result='اﻷﺧﺸﺎب اﻟﺼﻠﺒﺔ1'/>
+	<entry stringName='WORD_Broadleaf_2' result='اﻷﺧﺸﺎب اﻟﺼﻠﺒﺔ2'/>
+	<entry stringName='WORD_Cypress' result='ﺷﺠﺮ اﻟﺴﺮو'/>
+	<entry stringName='WORD_Jasmimmanga' result='اﻟﻨﺒﺎﺗﺎت اﻻﺳﺘﻮاﺋﻴﺔ'/>
+	<entry stringName='WORD_Palm_1' result='ﻧﺨﻠﺔ1'/>
 	<entry stringName='WORD_gameStarted' result='...ﺑﺪء اﻟﻠﻌﺒﺔ'/>
 	<entry stringName='WORD_player_1' result='ﻻﻋﺐ 1'/>
 	<entry stringName='WORD_player_2' result='ﻻﻋﺐ 2'/>

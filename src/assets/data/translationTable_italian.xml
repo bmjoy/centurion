@@ -63,12 +63,11 @@
 	<entry stringName="EDITOR_canAddStructure" result="Clicca con il tasto SINISTRO del mouse per posizionare la struttura nel punto desiderato. Premi il tastro DESTRO per annullare l'operazione."/>
 	<entry stringName="QUESTION_deleteAll" result="Con la cancellazione di questa struttura sarà eliminato anche il resto dell'insediamento. Vuoi procedere con l'operazione?"/>
 	<entry stringName="QUESTION_overwriteMap" result="Il nome digitato corrisponde ad una mappa già esistente. Vuoi sovrascriverla?"/>
-	<entry stringName="EDITORTREE_CATEGORY_trees" result="Alberi"/>
 	<entry stringName="WORD_EBarracks" result="Caserma"/>
 	<entry stringName="WORD_EBlacksmith" result="Fucina"/>
 	<entry stringName="WORD_EOsiristemple" result="Tempio di Osiris"/>
 	<entry stringName="WORD_ETavern" result="Taverna"/>
-	<entry stringName="WORD_ETemple" result="Tempio"/>
+	<entry stringName="WORD_ETempleOfHorusAndAnubis" result="Tempio di Horus e Anubis"/>
 	<entry stringName="WORD_ETownhall" result="Foro"/>
 	<entry stringName="WORD_RArena" result="Arena"/>
 	<entry stringName="WORD_RBarracks" result="Caserma"/>
