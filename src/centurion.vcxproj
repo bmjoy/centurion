@@ -317,6 +317,7 @@ XCOPY "$(ProjectDir)lua53.dll" "$(ProjectDir)$(OutDir)"</Command>
     <ClInclude Include="lib-centurion\ui\simple_text.h" />
     <ClInclude Include="lib-centurion\ui\text_box.h" />
     <ClInclude Include="lib-centurion\ui\text_input.h" />
+    <ClInclude Include="lib-centurion\util\encoding.hpp" />
     <ClInclude Include="lib-centurion\util\file_manager.h" />
     <ClInclude Include="lib-centurion\util\logger.h" />
     <ClInclude Include="lib-centurion\util\maths.h" />

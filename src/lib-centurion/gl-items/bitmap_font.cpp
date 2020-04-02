@@ -221,11 +221,6 @@ void BitmapFont::render_dynamic(string &font, float xPos, float yPos, string &te
 
 BitmapFont::StaticTextData BitmapFont::create_static(string &font, const char* text, float x, float y, bool bold, int line_number) {
 	StaticTextData static_data = StaticTextData();
-	//wstring_convert<codecvt_utf8_utf16<wchar_t>> converter;
-	//wstring wtext = converter.from_bytes(text);
-
-	//string wtext = text;
-
 	int fontID, letterspacing = 0;
 	fontID = fontIdMap[font];
 	static_data.textureID = textureIdMap[font];
@@ -245,6 +240,36 @@ BitmapFont::StaticTextData BitmapFont::create_static(string &font, const char* t
 	// x positions, chars and total width
 
 	size_t textSize = string(text).size();
+
+	int totw = 0;
+	for (int i = 0; i < textSize; i++) {
+
+		GLint codepoint;
+		if (Settings::Language == "arabic" && this->isArabic((GLint)text[0])) codepoint = GLint(text[textSize - i - 1]);
+		else codepoint = GLint(text[i]);
+
+		static_data.X.push_back(x + totw);
+		static_data.Y.push_back(y - line_number * fontData[fontID][codepoint].line_height);
+		static_data.charList.push_back(fontData[fontID][codepoint]);
+		static_data.charsWidth.push_back(fontData[fontID][codepoint].xadvance + letterspacing);
+		totw += (fontData[fontID][codepoint].xadvance + letterspacing);
+	}
+	static_data.totalWidth = totw;
+
+	// other information
+	static_data.textSize = (int)textSize;
+	static_data.fontHeight = 18;
+	return static_data;
+}
+
+BitmapFont::StaticTextData BitmapFont::create_static(std::string & font, const wchar_t * text, float x, float y, bool bold, int line_number)
+{
+	StaticTextData static_data = StaticTextData();
+	int fontID, letterspacing = 0;
+	fontID = fontIdMap[font];
+	static_data.textureID = textureIdMap[font];
+
+	size_t textSize = wstring(text).size();
 
 	int totw = 0;
 	for (int i = 0; i < textSize; i++) {

@@ -9,6 +9,7 @@ namespace gui {
 		static float CalculateTextWidth(std::string text, std::string font, std::string fontWeight = "normal");
 		SimpleText(std::string Type = "static", bool Shadow = false);
 		void create_static(std::string text, std::string font, float x, float y, std::string halign, std::string valign, glm::vec4 color, std::string fontWeight = "normal");
+		void create_static(std::wstring wtext, std::string font, float x, float y, std::string halign, std::string valign, glm::vec4 color, std::string fontWeight = "normal");
 		void create_static(const int* codepoints, int textSize, std::string font, float x, float y, std::string halign, std::string valign, glm::vec4 color, std::string fontWeight = "normal");
 		void render_static();
 		void render_dynamic(std::string text, std::string Font, float x, float y, glm::vec4 color, std::string halign, std::string valign, std::string fontWeight = "normal");

@@ -34,6 +34,13 @@ public:
 	/// <param name="string_name">The word you want to translate.</param>
 	/// <returns>The translation of a specific word.</returns>
 	static std::string GetTranslation(std::string string_name);
+
+	/// <summary>
+	/// This function returns the translation of a specific word.
+	/// </summary>
+	/// <param name="string_name">The word you want to translate.</param>
+	/// <returns>The translation of a specific word, in wstring format.</returns>
+	static std::wstring GetWTranslation(std::string string_name);
 	/// <summary>
 	/// This function reads the translations table of a specific language from an XML file.
 	/// It could throw an exception if an error occurs. 
@@ -42,5 +49,5 @@ public:
 	static void ReadTranslationsTableXml(const std::string lang);
 private:
 	static std::map<std::string, unsigned int> languagesMap;
-	static std::map<std::string, std::string> translationsTable;
+	static std::map<std::string, std::wstring> translationsTable;
 };

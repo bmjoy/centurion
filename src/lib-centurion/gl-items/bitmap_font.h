@@ -71,6 +71,7 @@ public:
 	/// <param name="line_number">The line of the current word/text. This is used in the case of text-boxes;</param>
 	/// <returns>The StaticData used to render the text with "render_static" function.</returns>
 	StaticTextData create_static(std::string &font, const char* text, float x, float y, bool bold = false, int line_number = 0);
+	StaticTextData create_static(std::string &font, const wchar_t* text, float x, float y, bool bold = false, int line_number = 0);
 	StaticTextData create_static(std::string &font, const int* codepoints, int textSize, float x, float y, bool bold = false, int line_number = 0);
 
 	/// <summary>

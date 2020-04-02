@@ -85,9 +85,6 @@
     <Filter Include="Source Files\gl-items">
       <UniqueIdentifier>{7544753c-c7b5-4c53-b891-33f775a026b8}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Header Files\gl-items">
-      <UniqueIdentifier>{21c5b0f0-af5d-4410-9e26-5f766460cf8e}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Header Files\engine\pathfinding">
       <UniqueIdentifier>{240f44fa-c69d-4622-a90d-b64cdbaaff28}</UniqueIdentifier>
     </Filter>
@@ -135,6 +132,9 @@
     </Filter>
     <Filter Include="Source Files\extern cpp">
       <UniqueIdentifier>{c2c3308b-e00f-443a-86f2-0242dfe7273f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\hector\gl-items">
+      <UniqueIdentifier>{21c5b0f0-af5d-4410-9e26-5f766460cf8e}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -474,43 +474,43 @@
       <Filter>Header Files\engine\game</Filter>
     </ClInclude>
     <ClInclude Include="lib-centurion\gl-items\bitmap_font.h">
-      <Filter>Header Files\gl-items</Filter>
+      <Filter>Header Files\hector\gl-items</Filter>
     </ClInclude>
     <ClInclude Include="lib-centurion\gl-items\building_sprite.h">
-      <Filter>Header Files\gl-items</Filter>
+      <Filter>Header Files\hector\gl-items</Filter>
     </ClInclude>
     <ClInclude Include="lib-centurion\gl-items\cursor_image.h">
-      <Filter>Header Files\gl-items</Filter>
+      <Filter>Header Files\hector\gl-items</Filter>
     </ClInclude>
     <ClInclude Include="lib-centurion\gl-items\decoration_sprite.h">
-      <Filter>Header Files\gl-items</Filter>
+      <Filter>Header Files\hector\gl-items</Filter>
     </ClInclude>
     <ClInclude Include="lib-centurion\gl-items\grid.h">
-      <Filter>Header Files\gl-items</Filter>
+      <Filter>Header Files\hector\gl-items</Filter>
     </ClInclude>
     <ClInclude Include="lib-centurion\gl-items\header_primitives.h">
-      <Filter>Header Files\gl-items</Filter>
+      <Filter>Header Files\hector\gl-items</Filter>
     </ClInclude>
     <ClInclude Include="lib-centurion\gl-items\image_sprite.h">
-      <Filter>Header Files\gl-items</Filter>
+      <Filter>Header Files\hector\gl-items</Filter>
     </ClInclude>
     <ClInclude Include="lib-centurion\gl-items\light.h">
-      <Filter>Header Files\gl-items</Filter>
+      <Filter>Header Files\hector\gl-items</Filter>
     </ClInclude>
     <ClInclude Include="lib-centurion\gl-items\minimap_rectangle.h">
-      <Filter>Header Files\gl-items</Filter>
+      <Filter>Header Files\hector\gl-items</Filter>
     </ClInclude>
     <ClInclude Include="lib-centurion\gl-items\primitives.h">
-      <Filter>Header Files\gl-items</Filter>
+      <Filter>Header Files\hector\gl-items</Filter>
     </ClInclude>
     <ClInclude Include="lib-centurion\gl-items\shader.h">
-      <Filter>Header Files\gl-items</Filter>
+      <Filter>Header Files\hector\gl-items</Filter>
     </ClInclude>
     <ClInclude Include="lib-centurion\gl-items\terrain.h">
-      <Filter>Header Files\gl-items</Filter>
+      <Filter>Header Files\hector\gl-items</Filter>
     </ClInclude>
     <ClInclude Include="lib-centurion\gl-items\unit_sprite.h">
-      <Filter>Header Files\gl-items</Filter>
+      <Filter>Header Files\hector\gl-items</Filter>
     </ClInclude>
     <ClInclude Include="lib-centurion\engine\pathfinding\pathfinding.h">
       <Filter>Header Files\engine\pathfinding</Filter>
@@ -567,16 +567,16 @@
       <Filter>Header Files\ui</Filter>
     </ClInclude>
     <ClInclude Include="lib-centurion\gl-items\object_sprite.h">
-      <Filter>Header Files\gl-items</Filter>
+      <Filter>Header Files\hector\gl-items</Filter>
     </ClInclude>
     <ClInclude Include="lib-centurion\engine\classes\base_gate.h">
       <Filter>Header Files\engine\classes</Filter>
     </ClInclude>
     <ClInclude Include="lib-centurion\gl-items\gl_rectangle.h">
-      <Filter>Header Files\gl-items</Filter>
+      <Filter>Header Files\hector\gl-items</Filter>
     </ClInclude>
     <ClInclude Include="lib-centurion\gl-items\gl_circle.h">
-      <Filter>Header Files\gl-items</Filter>
+      <Filter>Header Files\hector\gl-items</Filter>
     </ClInclude>
     <ClInclude Include="lib-centurion\engine\peripherals\camera.h">
       <Filter>Header Files\engine\peripherals</Filter>
@@ -601,6 +601,9 @@
     </ClInclude>
     <ClInclude Include="lib-centurion\engine\debugUi.h">
       <Filter>Header Files\engine</Filter>
+    </ClInclude>
+    <ClInclude Include="lib-centurion\util\encoding.hpp">
+      <Filter>Header Files\util</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

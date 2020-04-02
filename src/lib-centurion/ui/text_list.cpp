@@ -60,7 +60,7 @@ namespace gui {
 		n_options = (int)options.size();
 		selectedOption = options[0];
 		for (int i = 0; i < options.size(); i++) {
-			string option = TranslationsTable::GetTranslation(prefix + options[i]);
+			wstring option = TranslationsTable::GetWTranslation(prefix + options[i]);
 
 			float _y = y - (i + 1) * optionsHeight;
 
