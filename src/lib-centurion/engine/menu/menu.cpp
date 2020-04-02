@@ -53,7 +53,7 @@ unsigned int Menu::MenuPage::Create(const string name)
 			string onclick = string(child->Attribute("onclick"));
 
 			gui::Button btn = gui::Button();
-			btn.create(image_name, TranslationsTable::GetTranslation(btn_name), stoi(x), stoi(y), PickingUI::ObtainPickingID(), glm::vec4(0.f, 0.f, 0.f, 255.f), onclick);
+			btn.create(image_name, TranslationsTable::GetWTranslation(btn_name), stoi(x), stoi(y), PickingUI::ObtainPickingID(), glm::vec4(0.f, 0.f, 0.f, 255.f), onclick);
 			this->AddButton(btn);
 		}
 		catch (const std::exception&)

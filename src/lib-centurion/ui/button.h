@@ -29,13 +29,13 @@ namespace gui {
 		/// This function create Button
 		/// </summary>
 		/// <param name="imageName">Name of Button image</param>
-		/// <param name="Text">Text in Button </param>
+		/// <param name="Text">Text (wstring) in Button </param>
 		/// <param name="x">X Position of Button</param>
 		/// <param name="y">y Position of Button</param>
-		/// <param name="pickingID">???</param>
+		/// <param name="pickingID">The picking ID to use</param>
 		/// <param name="textColor">Text Color in Button</param>
 		/// <param name="luaCMD">Command in lua to creat Button</param>
-		void create(std::string imageName, std::string Text, int x, int y, int pickingID, glm::vec4 textColor, std::string luaCMD = "");
+		void create(std::string imageName, std::wstring Text, int x, int y, int pickingID, glm::vec4 textColor, std::string luaCMD = "");
 
 		/// <summary>
 		/// This function render the button 

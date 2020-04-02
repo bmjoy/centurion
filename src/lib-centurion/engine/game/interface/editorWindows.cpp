@@ -7,6 +7,7 @@
 
 #include <engine.h>
 #include <tinyxml2.h>
+#include <translationsTable.h>
 
 using namespace std;
 using namespace glm;
@@ -135,7 +136,7 @@ void EditorWindows::Create(void)
 			// buttons
 			for (tinyxml2::XMLElement* _it_btn = _it_wind->FirstChildElement("buttonArray")->FirstChildElement(); _it_btn != NULL; _it_btn = _it_btn->NextSiblingElement())
 			{
-				string btnText = _it_btn->Attribute("text");
+				wstring btnText = TranslationsTable::GetWTranslation(_it_btn->Attribute("text"));
 				string btnLuaCmd = _it_btn->FirstChildElement("onclickScript")->GetText();
 				int btnX = _it_btn->IntAttribute("xOffset");
 				int btnY = _it_btn->IntAttribute("yOffset");

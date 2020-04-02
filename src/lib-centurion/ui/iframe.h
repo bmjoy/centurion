@@ -37,7 +37,7 @@ namespace gui {
 		/// <param name="xBtn">The button x-position, relative to the iframe x-position</param>
 		/// <param name="yBtn">The button y-position, relative to the iframe y-position</param>
 		/// <param name="luaCmd">The button Lua command. Default = empty string</param>
-		void AddButton(const std::string &text, const int xBtn, const int yBtn, const std::string &luaCmd = "");
+		void AddButton(const std::wstring &text, const int xBtn, const int yBtn, const std::string &luaCmd = "");
 
 		/// <summary>
 		/// This function adds a text to the iframe texts list.

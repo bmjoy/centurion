@@ -11,7 +11,7 @@ namespace gui {
 		pickingId = 0;
 	}
 
-	void Button::create(string imageName, string Text, int x, int y, int pickingID, vec4 textColor, string luaCMD) {
+	void Button::create(string imageName, wstring Text, int x, int y, int pickingID, vec4 textColor, string luaCMD) {
 		buttonImage = new Image(imageName);
 		buttonImage->create("center", (float)x, (float)y, 0, 0, pickingID);
 		buttonText = new SimpleText("static");
@@ -21,7 +21,6 @@ namespace gui {
 		luaCmd = luaCMD;
 		pickingId = pickingID;
 	}
-
 
 	void Button::render(bool picking, int leftClickId) {
 		buttonImage->render(picking);

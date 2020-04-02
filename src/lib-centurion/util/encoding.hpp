@@ -32,7 +32,7 @@ namespace encode {
 			if (u <= 126) {
 				ws += (wchar_t)u;
 			}
-			else if (u > 126 && i < len - 2) {
+			else if (u > 126 && i < len - 1) {
 				int u2 = (int)src[i + 1];
 				if (u2 < 0) u2 = 256 + u2;
 				ws += (wchar_t)u2 + 64;

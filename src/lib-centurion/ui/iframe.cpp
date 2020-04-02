@@ -21,7 +21,7 @@ gui::Iframe::Iframe(string _name)
 	backgroundIsCreated = false;
 }
 
-void gui::Iframe::AddButton(const std::string &text, const int xBtn, const int yBtn, const std::string &luaCmd)
+void gui::Iframe::AddButton(const std::wstring &text, const int xBtn, const int yBtn, const std::string &luaCmd)
 {
 	gui::Button btn = gui::Button();
 	int btnId = PickingUI::ObtainPickingID();
