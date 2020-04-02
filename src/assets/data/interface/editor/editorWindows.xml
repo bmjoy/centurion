@@ -73,8 +73,8 @@
 	<buttonArray>
 		<button text="Add" xOffset="500" yOffset="30">
 			<onclickScript>
-				Engine.PrintToConsole(TextList.GetListById(3):GetSelectedOption())
 				Editor.CloseWindow(2)
+				Editor.AddObject(TextList.GetListById(1):GetSelectedOption(), TextList.GetListById(3):GetSelectedOption())
 			</onclickScript>
 		</button>
 	</buttonArray>

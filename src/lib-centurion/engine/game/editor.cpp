@@ -16,14 +16,19 @@
 
 #include <GLFW/glfw3.h>
 
+#include <chrono>
+#include <thread>
+
 using namespace std;
 using namespace glm;
+
 
 #pragma region static variables:
 std::vector<std::array<std::string, 3>> Editor::editorTree;
 std::vector<std::string> Editor::editorTreeList1;
 std::vector<std::string> Editor::editorTreeList2;
 std::vector<std::string> Editor::editorTreeList3;
+GObject* Editor::tmpObject = nullptr;
 #pragma endregion
 
 Editor::Editor(void) {}
@@ -97,6 +102,39 @@ std::vector<std::string>* Editor::GetEditorTreeList3(const std::string filter1, 
 	}
 	std::sort(Editor::editorTreeList3.begin(), Editor::editorTreeList3.end());
 	return &Editor::editorTreeList3;
+}
+
+void Editor::AddObject(const std::string type, const std::string className)
+{
+	if (type == "buildings")
+	{
+		Editor::tmpObject = new Building();
+	}
+	else if (type == "units")
+	{
+		Editor::tmpObject = new Unit();
+	}
+	else if (type == "decorations")
+	{
+		Editor::tmpObject = new Decoration();
+	}
+	else
+		return;
+
+	if (Editor::tmpObject->Create(className) == false)
+	{
+		delete Editor::tmpObject;
+		Editor::tmpObject = nullptr;
+		return;
+	}
+	
+	float x;
+	float y;
+	Editor::tmpObject->SetPlayer(1);	
+	x = round(Engine::Mouse::GetXPosition() * Engine::myWindow::WidthZoomed / Engine::myWindow::Width + Engine::Camera::GetXPosition());
+	y = round(Engine::Mouse::GetYPosition() * Engine::myWindow::HeightZoomed / Engine::myWindow::Height + Engine::Camera::GetYPosition());
+	Editor::tmpObject->SetPosition(vec3(x, y, 0.f));
+	Editor::tmpObject->Render(false, 0, true);
 }
 
 void Editor::Close(void)
@@ -271,7 +309,14 @@ void Editor::handleKeyboardControls(void)
 	}
 }
 
-Editor::~Editor(void) { }
+Editor::~Editor(void) 
+{ 
+	if (Editor::tmpObject != nullptr)
+	{
+		delete Editor::tmpObject;
+		Editor::tmpObject = nullptr;
+	}
+}
 
 
 /* EDITOR FUNCTIONS */

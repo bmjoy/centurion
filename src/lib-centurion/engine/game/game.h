@@ -15,6 +15,7 @@
 #define MEDIUM_MAP_HEIGHT 20000
 
 #include <ui.h>
+#include <classes/object.h>
 
 class GObject;
 class Building;
