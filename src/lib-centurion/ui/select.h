@@ -9,7 +9,7 @@
 namespace gui {
 	
 
-	Class of the Select
+	///Class of the Select
 	class Select {
 	public:
 
