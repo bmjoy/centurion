@@ -4,7 +4,7 @@
     <property name="pluralName" value="Osiris temples"/>
     <property name="race" value="Egypt"/>
     <property name="radius" value="1000"/>
-    <property name="editorFilter1" value="building"/>
+    <property name="editorFilter1" value="buildings"/>
 	<property name="editorFilter2" value="egyptianstronghold"/>
     <property name="ent_path" value="assets/buildings/egypt/osiristemple/eosiristemple.oe.xml"/>
     <property name="pass_path" value="assets/buildings/egypt/osiristemple/eosiristemple.pass"/>

@@ -33,9 +33,9 @@ namespace gui {
 
 	}
 
-	void TextList::UpdateTextListById(int id, vector<string>* _options)
+	void TextList::UpdateTextListById(int id, vector<string>* _options, const std::string prefix)
 	{
-		TextLists[id]->Update(_options);
+		TextLists[id]->Update(_options, prefix);
 	}
 
 	void TextList::Create(int _id, int _x, int _y, string _font, vec4 _color, vec4 _backColor, int _pickingId, const std::string & luaCmd) {
@@ -51,13 +51,16 @@ namespace gui {
 		AddTextListToArray(this->id, this);
 	}
 
-	void TextList::Update(vector<string> *_options)
+	void TextList::Update(vector<string> *_options, const std::string prefix)
 	{
+		optionsBack.clear();
+		optionsText.clear();
+
 		options = vector<string>(*_options);
 		n_options = (int)options.size();
 		selectedOption = options[0];
 		for (int i = 0; i < options.size(); i++) {
-			string option = options[i];
+			string option = TranslationsTable::GetTranslation(prefix + options[i]);
 
 			float _y = y - (i + 1) * optionsHeight;
 
@@ -76,7 +79,6 @@ namespace gui {
 
 	void TextList::Render(bool picking)
 	{
-
 		if (Engine::Mouse::LeftClick && Picking::leftClickID_UI == pickingId) {
 			selectedOption = options[GetIdFromClick()];
 			Engine::Mouse::LeftClick = false;

@@ -4,7 +4,7 @@
     <property name="pluralName" value="Roman blacksmiths"/>
     <property name="race" value="Rome"/>
     <property name="radius" value="450"/>
-    <property name="editorFilter1" value="building"/>
+    <property name="editorFilter1" value="buildings"/>
  	<property name="editorFilter2" value="romanstronghold"/>
     <property name="ent_path" value="assets/buildings/rome/blacksmith/rblacksmith.oe.xml"/>
     <property name="pass_path" value="assets/buildings/rome/blacksmith/rblacksmith.pass"/>

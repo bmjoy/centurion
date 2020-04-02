@@ -2,7 +2,7 @@
  <properties>
     <property name="singularName" value="Myrmidon"/>
     <property name="pluralName" value="Myrmidons"/>
-	<property name="editorFilter1" value="unit"/>
+	<property name="editorFilter1" value="units"/>
  	<property name="editorFilter2" value="test"/>
     <property name="ent_path" value="assets/units/hmyrmidon/hmyrmidon.oe.xml"/>
   </properties>

@@ -67,6 +67,7 @@ std::vector<std::string>* Editor::GetEditorTreeList1(void)
 			continue;
 		Editor::editorTreeList1.push_back(i[0]);
 	}
+	std::sort(Editor::editorTreeList1.begin(), Editor::editorTreeList1.end());
 	return &Editor::editorTreeList1;
 }
 
@@ -80,12 +81,22 @@ std::vector<std::string>* Editor::GetEditorTreeList2(const std::string filter1)
 		if (i[0] != filter1) continue;
 		Editor::editorTreeList2.push_back(i[1]);
 	}
+	std::sort(Editor::editorTreeList2.begin(), Editor::editorTreeList2.end());
 	return &Editor::editorTreeList2;
 }
 
-std::vector<std::string>* Editor::GetEditorTreeList3(void)
+std::vector<std::string>* Editor::GetEditorTreeList3(const std::string filter1, const std::string filter2)
 {
-	return nullptr;
+	Editor::editorTreeList3.clear();
+	for (auto i : Editor::editorTree)
+	{
+		if (std::find(Editor::editorTreeList3.begin(), Editor::editorTreeList3.end(), i[1]) != Editor::editorTreeList3.end())
+			continue;
+		if (i[0] != filter1 || i[1] != filter2) continue;
+		Editor::editorTreeList3.push_back(i[2]);
+	}
+	std::sort(Editor::editorTreeList3.begin(), Editor::editorTreeList3.end());
+	return &Editor::editorTreeList3;
 }
 
 void Editor::Close(void)

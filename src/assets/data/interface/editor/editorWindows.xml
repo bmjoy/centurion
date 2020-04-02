@@ -63,16 +63,17 @@
     <openingScript>
 	  -- lua script
 	  _editorList1 = Editor.GetTreeList1()
-	  TextList.UpdateListById(1, _editorList1)
+	  TextList.UpdateListById(1, _editorList1, "EDITORTREE_")
 	  _editorList2 = Editor.GetTreeList2(TextList.GetListById(1):GetSelectedOption())
-	  TextList.UpdateListById(2, _editorList2)
-	  TextList.UpdateListById(3, _editorList3)
+	  TextList.UpdateListById(2, _editorList2, "EDITORTREE_")
+	  _editorList3 = Editor.GetTreeList3(TextList.GetListById(1):GetSelectedOption(), TextList.GetListById(2):GetSelectedOption())
+	  TextList.UpdateListById(3, _editorList3, "WORD_")
     </openingScript>
 	<simpleTextArray></simpleTextArray>
 	<buttonArray>
-		<button text="Open" xOffset="500" yOffset="30">
+		<button text="Add" xOffset="500" yOffset="30">
 			<onclickScript>
-				Engine.PrintToConsole(TextList.GetListById(1):GetSelectedOption())
+				Engine.PrintToConsole(TextList.GetListById(3):GetSelectedOption())
 				Editor.CloseWindow(2)
 			</onclickScript>
 		</button>
@@ -81,12 +82,15 @@
 		<textList textListId="1" xOffset="20" yOffset="185">
 			<onclickScript>
 				_editorList2 = Editor.GetTreeList2(TextList.GetListById(1):GetSelectedOption())
-				TextList.UpdateListById(2, _editorList2)
+				TextList.UpdateListById(2, _editorList2, "EDITORTREE_")
+				_editorList3 = Editor.GetTreeList3(TextList.GetListById(1):GetSelectedOption(), TextList.GetListById(2):GetSelectedOption())
+				TextList.UpdateListById(3, _editorList3, "WORD_")
 			</onclickScript>
 		</textList>
 		<textList textListId="2" xOffset="220" yOffset="185">
 			<onclickScript>
-				-- lua script
+				_editorList3 = Editor.GetTreeList3(TextList.GetListById(1):GetSelectedOption(), TextList.GetListById(2):GetSelectedOption())
+				TextList.UpdateListById(3, _editorList3, "WORD_")
 			</onclickScript>
 		</textList>
 		<textList textListId="3" xOffset="420" yOffset="185">

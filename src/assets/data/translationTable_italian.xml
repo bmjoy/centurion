@@ -40,13 +40,13 @@
 	<entry stringName="EDITOR_propertiesApply" result="Applica"/>
 	<entry stringName="EDITOR_propertiesCancel" result="Annulla"/>
 	<entry stringName="EDITOR_defaultMapName" result="Senza titolo"/>
-	<entry stringName="EDITOR_buildings" result="Strutture"/>
-	<entry stringName="EDITOR_units" result="Unità"/>
-	<entry stringName="EDITOR_decorations" result="Decorazioni"/>
-	<entry stringName="EDITORTREE_CATEGORY_egyptianstronghold" result="Fortezza egizia"/>
-	<entry stringName="EDITORTREE_CATEGORY_romanstronghold" result="Fortezza romana"/>
-	<entry stringName="EDITORTREE_CATEGORY_outposts" result="Avamposti"/>
-	<entry stringName="EDITORTREE_CATEGORY_trees" result="Alberi"/>
+	<entry stringName="EDITORTREE_buildings" result="Strutture"/>
+	<entry stringName="EDITORTREE_units" result="Unità"/>
+	<entry stringName="EDITORTREE_decorations" result="Decorazioni"/>
+	<entry stringName="EDITORTREE_egyptianstronghold" result="Fortezza egizia"/>
+	<entry stringName="EDITORTREE_romanstronghold" result="Fortezza romana"/>
+	<entry stringName="EDITORTREE_outposts" result="Avamposti"/>
+	<entry stringName="EDITORTREE_trees" result="Alberi"/>
 	<entry stringName="EDITORBRUSH_GRASS" result="Erba"/>
 	<entry stringName="EDITORBRUSH_GRASS_1" result="Erba 1"/>
 	<entry stringName="EDITORBRUSH_GRASS_2" result="Erba 2"/>
@@ -64,24 +64,24 @@
 	<entry stringName="QUESTION_deleteAll" result="Con la cancellazione di questa struttura sarà eliminato anche il resto dell'insediamento. Vuoi procedere con l'operazione?"/>
 	<entry stringName="QUESTION_overwriteMap" result="Il nome digitato corrisponde ad una mappa già esistente. Vuoi sovrascriverla?"/>
 	<entry stringName="EDITORTREE_CATEGORY_trees" result="Alberi"/>
-	<entry stringName="WORD_ebarracks" result="Caserma"/>
-	<entry stringName="WORD_eblacksmith" result="Fucina"/>
-	<entry stringName="WORD_eosiristemple" result="Tempio di Osiris"/>
-	<entry stringName="WORD_etavern" result="Taverna"/>
-	<entry stringName="WORD_etemple" result="Tempio"/>
-	<entry stringName="WORD_etownhall" result="Foro"/>
-	<entry stringName="WORD_rarena" result="Arena"/>
-	<entry stringName="WORD_rbarracks" result="Caserma"/>
-	<entry stringName="WORD_rblacksmith" result="Fucina"/>
-	<entry stringName="WORD_rtavern" result="Taverna"/>
-	<entry stringName="WORD_rtemple" result="Tempio"/>
-	<entry stringName="WORD_rtownhall" result="Foro"/>
-	<entry stringName="WORD_routpost" result="Avamposto romano"/>
-	<entry stringName="WORD_broadleaf_1" result="Latifoglie 1"/>
-	<entry stringName="WORD_broadleaf_2" result="Latifoglie 2"/>
-	<entry stringName="WORD_cypress" result="Cipresso"/>
-	<entry stringName="WORD_jasmimmanga" result="Pianta tropicale 1"/>
-	<entry stringName="WORD_palm_1" result="Palma 1"/>
+	<entry stringName="WORD_EBarracks" result="Caserma"/>
+	<entry stringName="WORD_EBlacksmith" result="Fucina"/>
+	<entry stringName="WORD_EOsiristemple" result="Tempio di Osiris"/>
+	<entry stringName="WORD_ETavern" result="Taverna"/>
+	<entry stringName="WORD_ETemple" result="Tempio"/>
+	<entry stringName="WORD_ETownhall" result="Foro"/>
+	<entry stringName="WORD_RArena" result="Arena"/>
+	<entry stringName="WORD_RBarracks" result="Caserma"/>
+	<entry stringName="WORD_RBlacksmith" result="Fucina"/>
+	<entry stringName="WORD_RTavern" result="Taverna"/>
+	<entry stringName="WORD_RTemple" result="Tempio"/>
+	<entry stringName="WORD_RTownhall" result="Foro"/>
+	<entry stringName="WORD_ROutpost" result="Avamposto romano"/>
+	<entry stringName="WORD_Broadleaf_1" result="Latifoglie 1"/>
+	<entry stringName="WORD_Broadleaf_2" result="Latifoglie 2"/>
+	<entry stringName="WORD_Cypress" result="Cipresso"/>
+	<entry stringName="WORD_Jasmimmanga" result="Pianta tropicale 1"/>
+	<entry stringName="WORD_Palm_1" result="Palma 1"/>
 	<entry stringName="WORD_gameStarted" result="Avvio della partita in corso..."/>
 	<entry stringName="WORD_player_1" result="Giocatore 1"/>
 	<entry stringName="WORD_player_2" result="Giocatore 2"/>

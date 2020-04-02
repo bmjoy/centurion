@@ -44,7 +44,7 @@ public:
 
 	static std::vector<std::string>* GetEditorTreeList1(void);
 	static std::vector<std::string>* GetEditorTreeList2(const std::string filter1);
-	static std::vector<std::string>* GetEditorTreeList3(void);
+	static std::vector<std::string>* GetEditorTreeList3(const std::string filter1, const std::string filter2);
 
 	/// <summary>
 	/// This method closes and resets the editor, and sets the environment to "menu"

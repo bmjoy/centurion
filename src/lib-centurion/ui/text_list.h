@@ -14,11 +14,11 @@ namespace gui {
 		TextList();
 		static void AddTextListToArray(int id, TextList* txtList);
 		static TextList* GetTextListById(int id);
-		static void UpdateTextListById(int id, std::vector<std::string> *_options);
+		static void UpdateTextListById(int id, std::vector<std::string> *_options, const std::string prefix = "");
 		int GetId() { return id; }
 		std::string GetSelectedOption() { return selectedOption; }
 		void Create(int _id, int _x, int _y, std::string _font, glm::vec4 _color, glm::vec4 _backColor, int _pickingId, const std::string & luaCmd = "");
-		void Update(std::vector<std::string> *_options);
+		void Update(std::vector<std::string> *_options, const std::string prefix = "");
 		void Render(bool picking);
 		~TextList();
 
