@@ -8,9 +8,26 @@
 
 namespace gui {
 	
+
+	Class of the Select
 	class Select {
 	public:
+
+		/// <summary>
+		/// ??? This function  
+		/// </summary>
+		/// <param name="options"></param>
 		Select(bool options = true);
+
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="x"></param>
+		/// <param name="y"></param>
+		/// <param name="w"></param>
+		/// <param name="h"></param>
+		/// <param name="options"></param>
+		/// <param name="pickingID"></param>
 		void create(float x, float y, float w, float h, std::vector<std::string> options, int pickingID);
 		void render(bool picking, glm::vec4 color);
 		void open_close();
