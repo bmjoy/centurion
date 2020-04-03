@@ -34,6 +34,10 @@ public:
 		/// </summary>
 		void Open(void); 
 		/// <summary>
+		/// This function toggles a generic window.
+		/// </summary>
+		void Toggle(void);
+		/// <summary>
 		/// This function closes a generic window.
 		/// </summary>
 		void Close(void);
@@ -78,6 +82,11 @@ public:
 	/// <param name="id"></param>
 	static void CloseWindow(const unsigned int id);
 	/// <summary>
+	/// This function toggles a specific window of the editor.
+	/// </summary>
+	/// <param name="id"></param>
+	static void ToggleWindow(const unsigned int id);
+	/// <summary>
 	/// This function creates an editor set of windows from an XML file. 
 	/// </summary>
 	static void Create(void);
@@ -86,6 +95,16 @@ public:
 	/// </summary>
 	/// <param name="picking"></param>
 	static void Render(const bool picking);
+
+	/// <summary>
+	/// This method hides the editor windows
+	/// </summary>
+	static void Hide(void) { isHidden = true; }
+	
+	/// <summary>
+	/// This method shows the editor windows
+	/// </summary>
+	static void Show(void) { isHidden = false; }
 	~EditorWindows(void);
 private:
 	EditorWindows(void);	
@@ -97,4 +116,5 @@ private:
 	/// <param name="win">The window.</param>
 	static void AddWindow(const unsigned int id, EditorWindow* win);
 	static std::array<EditorWindow*, MAX_NUMBER_OF_EDITOR_WINDOWS> listOfWindows;
+	static bool isHidden;
 };

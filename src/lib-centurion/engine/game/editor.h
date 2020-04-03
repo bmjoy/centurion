@@ -83,6 +83,12 @@ public:
 	static bool IsInsertingObject(void);
 
 	/// <summary>
+	/// This function returns a boolean that indicates if an object is being moved
+	/// </summary>
+	/// <returns></returns>
+	static bool IsMovingObject(void);
+
+	/// <summary>
 	/// This method closes and resets the editor, and sets the environment to "menu"
 	/// </summary>
 	static void Close(void);
@@ -97,5 +103,12 @@ private:
 	static std::vector<std::string> editorTreeList3;
 
 	static GObject* tmpObject;
+
+	static bool isMovingObject;
+	static float movingObjectXPos;
+	static float movingObjectYPos;
+	static float movingObjectStartXMouse;
+	static float movingObjectStartYMouse;
+
 	Editor(void);
 };

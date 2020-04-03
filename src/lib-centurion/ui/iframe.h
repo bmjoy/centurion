@@ -57,7 +57,8 @@ namespace gui {
 		/// <param name="xPos">The text list x-position, relative to the iframe x-position</param>
 		/// <param name="yPos">The text list y-position, relative to the iframe y-position</param>
 		/// <param name="luaCmd">The Lua command to execute when you click on one option</param>
-		void AddTextList(const int textListId, const int xPos, const int yPos, const std::string & luaCmd = "");
+		/// <param name="maxOptions">The maximum number of options to display</param>
+		void AddTextList(const int textListId, const int xPos, const int yPos, const std::string & luaCmd = "", const unsigned int maxOptions = MAX_OPTIONS_DEFAULT, const unsigned int borderWidth = BORDERWIDTH_DEFAULT);
 
 		/// <summary>
 		/// This function creates an instance of Iframe.

@@ -323,6 +323,8 @@ bool Game::SelectionRectangle::IsInRectangle(array<float, 8> &coords) {
 
 void Game::SelectionRectangle::Render(void) 
 {
+	if (Editor::IsMovingObject()) return;
+
 	if (Engine::Mouse::LeftClick) {
 		if (SelectionRectangle::IsActive() == false) {
 			Logger::Info("Selection rectangle enabled.");

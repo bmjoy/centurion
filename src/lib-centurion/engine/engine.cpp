@@ -274,6 +274,7 @@ void Engine::ResetperipheralsInput(void)
 	Mouse::RightClick = false;
 	Mouse::MiddleClick = false;
 	Mouse::Release = false;
+	Mouse::ScrollBool = false;
 }
 
 string Engine::GetCppVersion()

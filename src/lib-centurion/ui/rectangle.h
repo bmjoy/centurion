@@ -82,6 +82,10 @@ namespace gui {
 		/// <param name="origin">Origin of the rectangle</param>
 		void render(glm::vec4 Color, bool picking = false, int leftClickId = 0, float x = 0.f, float y = 0.f, float w = 0.f, float h = 0.f, int origin = DEFAULT_ORIGIN);
 
+		/// <summary>
+		/// This function increase the y position of the rectangle
+		/// </summary>
+		void IncreaseYPosition(float y) { data.y += y; }
 
 		~Rectangle();
 	private:

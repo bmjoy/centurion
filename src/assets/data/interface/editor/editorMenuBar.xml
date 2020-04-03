@@ -50,7 +50,7 @@
 		<command id="0" name="AddObject" hotkey1="CTRL" hotkey2="N" hotkey3="">
 			<onclickScript>
 			-- Lua Script
-			Editor.OpenWindow(2)
+			Editor.ToggleWindow(2)
 			Editor.ToggleMenu(2)
 			</onclickScript>
 		</command>

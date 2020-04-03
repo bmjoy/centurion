@@ -39,11 +39,11 @@ void gui::Iframe::Clear()
 	}
 }
 
-void gui::Iframe::AddTextList(const int textListId, const int xPos, const int yPos, const std::string & luaCmd)
+void gui::Iframe::AddTextList(const int textListId, const int xPos, const int yPos, const std::string & luaCmd, const unsigned int maxOptions, const unsigned int borderWidth)
 {
 	gui::TextList* _list = new gui::TextList();
 	int txtListPickingId = PickingUI::ObtainPickingID();
-	_list->Create(textListId, x + xPos, y + yPos, text_list_font, text_list_color, text_list_background, txtListPickingId, luaCmd);
+	_list->Create(textListId, x + xPos, y + yPos, text_list_font, text_list_color, text_list_background, txtListPickingId, luaCmd, maxOptions, borderWidth);
 	listOfTextLists.push_back(_list);
 }
 

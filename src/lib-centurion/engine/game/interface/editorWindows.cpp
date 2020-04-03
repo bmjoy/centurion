@@ -15,6 +15,7 @@ using namespace glm;
 #pragma region static variables
 
 array<EditorWindows::EditorWindow*, MAX_NUMBER_OF_EDITOR_WINDOWS> EditorWindows::listOfWindows = { nullptr };
+bool EditorWindows::isHidden = false;
 
 #pragma endregion
 
@@ -22,18 +23,29 @@ array<EditorWindows::EditorWindow*, MAX_NUMBER_OF_EDITOR_WINDOWS> EditorWindows:
 
 bool EditorWindows::EditorWindow::IsOpened(void)
 {
-	return EditorWindow::isOpened;
+	return this->isOpened;
 }
 
 void EditorWindows::EditorWindow::Open(void)
 {
-	EditorWindow::isOpened = true;
-	EditorWindow::opening = true;
+	this->isOpened = true;
+	this->opening = true;
+}
+
+void EditorWindows::EditorWindow::Toggle(void)
+{
+	if (this->isOpened == false)
+	{
+		this->Open();
+	}
+	else {
+		this->Close();
+	}
 }
 
 void EditorWindows::EditorWindow::Close(void)
 {
-	EditorWindow::isOpened = false;
+	this->isOpened = false;
 }
 
 void EditorWindows::EditorWindow::Clear(void)
@@ -92,6 +104,14 @@ void EditorWindows::CloseWindow(const unsigned int id)
 	listOfWindows[id]->Close();
 }
 
+void EditorWindows::ToggleWindow(const unsigned int id)
+{
+	if (id < 0 || id > MAX_NUMBER_OF_EDITOR_WINDOWS) return;
+	if (listOfWindows[id] == nullptr) return;
+
+	listOfWindows[id]->Toggle();
+}
+
 void EditorWindows::Create(void)
 {
 	try
@@ -126,11 +146,13 @@ void EditorWindows::Create(void)
 				int textListID = _it_txtlist->IntAttribute("textListId");
 				int xOffset = _it_txtlist->IntAttribute("xOffset");
 				int yOffset = _it_txtlist->IntAttribute("yOffset");
+				int maxOpt = _it_txtlist->IntAttribute("maxOptions");
+				int tlWidth = _it_txtlist->IntAttribute("width");
 				string txtListLuaCmd = "";
 				if (_it_txtlist->FirstChildElement("onclickScript") != NULL) {
 					txtListLuaCmd = _it_txtlist->FirstChildElement("onclickScript")->GetText();
 				}
-				iframe.AddTextList(textListID, xOffset, yOffset, txtListLuaCmd);
+				iframe.AddTextList(textListID, xOffset, yOffset, txtListLuaCmd, maxOpt, tlWidth);
 			}
 
 			// buttons
@@ -148,6 +170,7 @@ void EditorWindows::Create(void)
 			
 			AddWindow(id, eWind);
 		}
+		isHidden = false;
 	}
 	catch (const std::exception&)
 	{
@@ -157,6 +180,8 @@ void EditorWindows::Create(void)
 
 void EditorWindows::Render(const bool picking)
 {
+	if (isHidden) return;
+
 	for (int i = 0; i < MAX_NUMBER_OF_EDITOR_WINDOWS; i++) {
 		if (listOfWindows[i] != nullptr) {
 			listOfWindows[i]->Render(picking);

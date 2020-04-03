@@ -48,7 +48,7 @@
 		</button>
 	</buttonArray>
 	<textListArray>
-		<textList textListId="0" xOffset="50" yOffset="270">
+		<textList textListId="0" xOffset="50" yOffset="270" maxOptions="10" width="163">
 		</textList>
 	</textListArray>
   </editorWindow>
@@ -73,13 +73,12 @@
 	<buttonArray>
 		<button text="Add" xOffset="500" yOffset="30">
 			<onclickScript>
-				Editor.CloseWindow(2)
 				Editor.InsertObject(TextList.GetListById(1):GetSelectedOption(), TextList.GetListById(3):GetSelectedOption())
 			</onclickScript>
 		</button>
 	</buttonArray>
 	<textListArray>
-		<textList textListId="1" xOffset="20" yOffset="185">
+		<textList textListId="1" xOffset="20" yOffset="185" maxOptions="5" width="163">
 			<onclickScript>
 				_editorList2 = Editor.GetTreeList2(TextList.GetListById(1):GetSelectedOption())
 				TextList.UpdateListById(2, _editorList2, "EDITORTREE_")
@@ -87,13 +86,13 @@
 				TextList.UpdateListById(3, _editorList3, "WORD_")
 			</onclickScript>
 		</textList>
-		<textList textListId="2" xOffset="220" yOffset="185">
+		<textList textListId="2" xOffset="220" yOffset="185" maxOptions="5" width="163">
 			<onclickScript>
 				_editorList3 = Editor.GetTreeList3(TextList.GetListById(1):GetSelectedOption(), TextList.GetListById(2):GetSelectedOption())
 				TextList.UpdateListById(3, _editorList3, "WORD_")
 			</onclickScript>
 		</textList>
-		<textList textListId="3" xOffset="420" yOffset="185">
+		<textList textListId="3" xOffset="420" yOffset="185" maxOptions="5" width="163">
 		</textList>
 	</textListArray>
   </editorWindow>

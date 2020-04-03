@@ -12,6 +12,7 @@
 #include <translationsTable.h>
 #include <terrain.h>
 #include <game/interface/editorMenuBar.h>
+#include <game/interface/editorWindows.h>
 
 #include <hector-lua.h>
 
@@ -27,6 +28,11 @@ std::vector<std::string> Editor::editorTreeList1;
 std::vector<std::string> Editor::editorTreeList2;
 std::vector<std::string> Editor::editorTreeList3;
 GObject* Editor::tmpObject = nullptr;
+float Editor::movingObjectXPos = 0.f;
+float Editor::movingObjectYPos = 0.f;
+float Editor::movingObjectStartXMouse = 0.f;
+float Editor::movingObjectStartYMouse = 0.f;
+bool Editor::isMovingObject = false;
 #pragma endregion
 
 Editor::Editor(void) {}
@@ -50,12 +56,13 @@ void Editor::Create(void)
 	Engine::Mouse::LeftClick = false;
 	Engine::Mouse::RightClick = false;
 	Engine::Mouse::LeftHold = false;
-	
+
 	Editor::tmpObject = nullptr;
-	
+
 	Engine::Camera::GoToPoint(1.f, 1.f);
 
 	isCreated = true;
+	isMovingObject = false;
 	Minimap::Update();
 }
 
@@ -108,7 +115,7 @@ std::vector<std::string>* Editor::GetEditorTreeList3(const std::string filter1, 
 
 void Editor::InsertingObject(std::string type, std::string className)
 {
-	if (type.empty() == false && className.empty() == false) 
+	if (type.empty() == false && className.empty() == false)
 	{
 		if (type == "buildings")
 		{
@@ -133,6 +140,7 @@ void Editor::InsertingObject(std::string type, std::string className)
 		}
 		Editor::tmpObject->SetPlayer(1);
 		EditorMenuBar::Hide();
+		EditorWindows::Hide();
 		return;
 	}
 
@@ -143,6 +151,7 @@ void Editor::InsertingObject(std::string type, std::string className)
 		delete Editor::tmpObject;
 		Editor::tmpObject = nullptr;
 		EditorMenuBar::Show();
+		EditorWindows::Show();
 		Engine::Mouse::RightClick = false;
 	}
 
@@ -152,6 +161,7 @@ void Editor::InsertingObject(std::string type, std::string className)
 		delete Editor::tmpObject;
 		Editor::tmpObject = nullptr;
 		EditorMenuBar::Show();
+		EditorWindows::Show();
 		Engine::Mouse::LeftClick = false;
 	}
 
@@ -163,20 +173,33 @@ void Editor::InsertingObject(std::string type, std::string className)
 
 void Editor::ShiftSelectedObject(void)
 {
+	isMovingObject = false;
 	GObject *obj = Game::GetSelectedObject();
-	if (obj != nullptr)
+	if (obj == nullptr) return;
+
+	if (Engine::Mouse::LeftHold == false)
 	{
-		if (Engine::Mouse::LeftHold == true)
-		{
-			obj->SetPosition(vec3(Engine::Mouse::GetXMapCoordinate(), Engine::Mouse::GetYMapCoordinate(), 0.f));
-			obj->Render(false, 0, true);
-		}
+		movingObjectXPos = obj->GetPosition().x;
+		movingObjectYPos = obj->GetPosition().y;
+		movingObjectStartXMouse = Engine::Mouse::GetXMapCoordinate();
+		movingObjectStartYMouse = Engine::Mouse::GetYMapCoordinate();
+		return;
 	}
+
+	float dx = Engine::Mouse::GetXMapCoordinate() - movingObjectStartXMouse;
+	float dy = Engine::Mouse::GetYMapCoordinate() - movingObjectStartYMouse;
+	obj->SetPosition(vec3(movingObjectXPos + dx, movingObjectYPos + dy, 0.f));
+	isMovingObject = true;
 }
 
 bool Editor::IsInsertingObject(void)
 {
 	return (Editor::tmpObject != nullptr);
+}
+
+bool Editor::IsMovingObject(void)
+{
+	return isMovingObject;
 }
 
 void Editor::Close(void)
@@ -229,9 +252,9 @@ void Editor::Run(void)
 
 		// NORMAL RENDERING
 		Map::Render(false);
+		Editor::ShiftSelectedObject();
 		Game::RenderObjects();
 		Editor::InsertingObject();
-		Editor::ShiftSelectedObject();
 
 		//if (!editor::IsWindowOpened && !editor::addingObject && !editor::TerrainBrushIsActive) editor::moveObjects();
 
