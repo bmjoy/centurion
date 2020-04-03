@@ -290,14 +290,16 @@ bool Game::SelectionRectangle::IsInRectangle(array<float, 8> &coords) {
 
 void Game::SelectionRectangle::Render(void) 
 {
-	if (Engine::Mouse::LeftHold) {
+	if (Engine::Mouse::LeftClick) {
 		if (SelectionRectangle::IsActive() == false) {
 			Logger::Info("Selection rectangle enabled.");
 			Coordinates.startX = Engine::Mouse::GetXLeftClick() * Engine::myWindow::WidthZoomed / Engine::myWindow::Width + cameraLastX;
 			Coordinates.startY = Engine::Mouse::GetYLeftClick() * Engine::myWindow::HeightZoomed / Engine::myWindow::Height + cameraLastY;
 		}
-		Coordinates.lastX = Engine::Mouse::GetXPosition() * Engine::myWindow::WidthZoomed / Engine::myWindow::Width + Engine::Camera::GetXPosition();
-		Coordinates.lastY = Engine::Mouse::GetYPosition() * Engine::myWindow::HeightZoomed / Engine::myWindow::Height + Engine::Camera::GetYPosition();
+	}
+	if (Engine::Mouse::LeftHold) {
+		Coordinates.lastX = Engine::Mouse::GetInMapCoordinates().x;
+		Coordinates.lastY = Engine::Mouse::GetInMapCoordinates().y;
 		if (Engine::Mouse::GetYPosition() < Engine::myWindow::BottomBarHeight) {
 			Coordinates.lastY = Engine::myWindow::BottomBarHeight*Engine::myWindow::HeightZoomed / Engine::myWindow::Height + 1.0f + Engine::Camera::GetYPosition();
 		}
@@ -333,8 +335,6 @@ void Game::SelectionRectangle::Render(void)
 		if (SelectionRectangle::IsActive()) Logger::Info("Selection rectangle disabled.");
 		cameraLastX = Engine::Camera::GetXPosition();
 		cameraLastY = Engine::Camera::GetYPosition();
-		Coordinates.startX = -0.1f;
-		Coordinates.startY = -0.1f;
 		Coordinates.lastX = -0.1f;
 		Coordinates.lastY = -0.1f;
 		Coordinates.minX = -0.1f;

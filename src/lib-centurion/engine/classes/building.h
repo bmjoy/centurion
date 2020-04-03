@@ -44,6 +44,7 @@ public:
 	/// </summary>
 	/// <param name="par_maxHealth">The max health of the building.</param>
 	void SetMaxHealth(const unsigned int par_maxHealth);
+
 	/// <summary>
 	/// This function returns the max health of the current building..
 	/// </summary>
@@ -86,6 +87,7 @@ public:
 	/// </summary>
 	/// <param name="par_clickable">True = clickable; false = not clickable</param>
 	void CanBeClickableInMimimap(const bool par_clickable);
+
 	/// <summary>
 	/// This function checks if the current building can be clickable in minimap.
 	/// </summary>
@@ -98,24 +100,28 @@ public:
 	/// </summary>
 	/// <returns>True if it is centra building; false otherwise.</returns>
 	bool IsCentralBuilding(void);
+	
 	/// <summary>
 	/// This functionc checks if the the class of the current building is an heir of Village Hall class,
 	/// and consequently if it is a central building.
 	/// </summary>
 	/// <returns>True if it is an heir of VillageHall class; false otherwise.</returns>
 	bool IsVillageHall(void);
+	
 	/// <summary>
 	/// This functionc checks if the the class of the current building is an heir of Townhall class,
 	/// and consequently if it is a central building.
 	/// </summary>
 	/// <returns>True if it is an heir of Townhall class; false otherwise.</returns>
 	bool IsTownhall(void);
+	
 	/// <summary>
 	/// This functionc checks if the the class of the current building is an heir of Outpost class,
 	/// and consequently if it is a central building.
 	/// </summary>
 	/// <returns>True if it is an heir of Outpost class; false otherwise.</returns>
 	bool IsOutpost(void);
+	
 	/// <summary>
 	/// This functionc checks if the the class of the current building is an heir of Shipyward class,
 	/// and consequently if it is a central building.
@@ -138,14 +144,17 @@ public:
 	/// This function allows the current building to produce gold if it couldn't previously. 
 	/// </summary>
 	void StartGoldProduction(void);
+
 	/// <summary>
 	/// This function prevents the current building to produce gold if it could previously. 
 	/// </summary>
 	void StopGoldProduction(void);
+
 	/// <summary>
 	/// This function allows the current building to produce food if it couldn't previously. 
 	/// </summary>
 	void StartFoodProduction(void);
+
 	/// <summary>
 	/// This function prevents the current building to produce food if it could previously. 
 	/// </summary>
@@ -156,6 +165,7 @@ public:
 	/// </summary>
 	/// <param name="par_ent_path">The path of the entity.</param>
 	void SetEntPath(const std::string par_ent_path);
+
 	/// <summary>
 	/// This function sets the path in which can be found the pass table of the current building.
 	/// </summary>
@@ -177,8 +187,9 @@ public:
 	/// <param name="objData">The object in which are stored the properties of the current building.</param>
 	/// <returns>True if the building can be created; false otherwise.</returns>
 	bool SetBuildingProperties(ObjectData::ObjectXMLClassData &objData);
+
 	/// <summary>
-	/// This function performs the rendiring of the current building.
+	/// This function performs the rendering of the current building.
 	/// </summary>
 	/// <param name="picking">Checks if it's the picking phase.</param>
 	/// <param name="clickID"></param>
@@ -191,19 +202,14 @@ public:
 	/// </summary>
 	/// <param name="b"></param>
 	void setWaitingToBeErased(bool b) { waitingToBeErased = b; }
+
 	/// <summary>
 	/// (???) Da rivedere.
 	/// </summary>
 	/// <returns></returns>
 	bool getWaitingToBeErased() { return waitingToBeErased; }
 
-	/// <summary>
-	/// Public constructor.
-	/// </summary>
 	Building();
-	/// <summary>
-	/// The destructor.
-	/// </summary>
 	~Building();
 private:
 	//game::ObjectUI* buildingUI;

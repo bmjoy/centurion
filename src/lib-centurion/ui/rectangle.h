@@ -1,3 +1,11 @@
+/*
+* ---------------------------
+* CENTURION
+* [2019] - [2020] Rattlesmake
+* All Rights Reserved.
+* ---------------------------
+*/
+
 #ifndef RECTANGLE_H
 #define RECTANGLE_H
 
@@ -6,31 +14,31 @@
 namespace gui {
 
 	/// <summary>
-	/// Clas of Rectangle
+	/// This class handles a UI rectangle.
 	/// </summary>
 	class Rectangle {
 	public:
 		Rectangle();
 
 		/// <summary>
-		/// This function create a rectangle 
+		/// This function creates a rectangle.
 		/// </summary>
-		/// <param name="type">??? Type of rectangle</param>
-		/// <param name="x">X position of rectangle</param>
-		/// <param name="y">Y Position of rectangle</param>
-		/// <param name="w">Weight of rectangle</param>
-		/// <param name="h">Height of rectangle</param>
-		/// <param name="origin">Origin of rectangle</param>
-		/// <param name="pickingID">The picking ID to use</param>
-		/// <param name="luaCMD">Command in lua to create the rectangle</param>
+		/// <param name="type">Type of rectangle</param>
+		/// <param name="x">X position of the rectangle</param>
+		/// <param name="y">Y Position of the rectangle</param>
+		/// <param name="w">Weight of the rectangle</param>
+		/// <param name="h">Height of the rectangle</param>
+		/// <param name="origin">Origin of the rectangle</param>
+		/// <param name="pickingID">Picking ID value for render picking</param>
+		/// <param name="luaCMD">LUA command that should be executed when this rectangle is created</param>
 		void create(std::string type, float x, float y, float w, float h, std::string origin, int pickingID, std::string luaCMD = "");
 
 		/// <summary>
-		/// This function render the rectangle
+		/// This function renders the rectangle
 		/// </summary>
-		/// <param name="Color">Color of rectangle. It only support glm::vec4 RGBA</param>
+		/// <param name="Color">Color of the rectangle. It only support glm::vec4 RGBA</param>
 		/// <param name="picking">This boolean parameter enables or disables render picking.</param>
-		/// <param name="leftClickId">??? left click id</param>
+		/// <param name="leftClickId">Picking ID value for picking</param>
 		/// <param name="x">X offset of the rectangle</param>
 		/// <param name="y">Y offset of the rectangle</param>
 		/// <param name="w">Weight offest of the rectangle</param>

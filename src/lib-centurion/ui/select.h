@@ -1,3 +1,11 @@
+/*
+* ---------------------------
+* CENTURION
+* [2019] - [2020] Rattlesmake
+* All Rights Reserved.
+* ---------------------------
+*/
+
 #ifndef SELECT_H
 #define SELECT_H
 
@@ -7,14 +15,13 @@
 #include "simple_text.h"
 
 namespace gui {
-	
 
 	///Class of the Select
 	class Select {
 	public:
 
 		/// <summary>
-		/// ??? This function  
+		/// ??? This function  performs the rendering of the current select.
 		/// </summary>
 		/// <param name="options"></param>
 		Select(bool options = true);
@@ -29,6 +36,12 @@ namespace gui {
 		/// <param name="options"></param>
 		/// <param name="pickingID"></param>
 		void create(float x, float y, float w, float h, std::vector<std::string> options, int pickingID);
+
+		/// <summary>
+		/// This function performs the rendiring of the current building.
+		/// </summary>
+		/// <param name="picking"></param>
+		/// <param name="color"></param>
 		void render(bool picking, glm::vec4 color);
 		void open_close();
 		void close();

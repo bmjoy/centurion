@@ -159,8 +159,8 @@ void Editor::InsertingObject(std::string type, std::string className)
 
 	float x;
 	float y;
-	x = round(Engine::Mouse::GetXPosition() * Engine::myWindow::WidthZoomed / Engine::myWindow::Width + Engine::Camera::GetXPosition());
-	y = round(Engine::Mouse::GetYPosition() * Engine::myWindow::HeightZoomed / Engine::myWindow::Height + Engine::Camera::GetYPosition());
+	x = Engine::Mouse::GetInMapCoordinates().x;
+	y = Engine::Mouse::GetInMapCoordinates().y;
 	Editor::tmpObject->SetPosition(vec3(x, y, 0.f));
 	Editor::tmpObject->Render(false, 0, true);
 }

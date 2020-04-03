@@ -28,6 +28,10 @@ void Engine::Keyboard::ResetKeys()
 		if (key == GLFW_KEY_RIGHT_SHIFT) continue;
 		if (key == GLFW_KEY_LEFT_ALT) continue;
 		if (key == GLFW_KEY_RIGHT_ALT) continue;
+		if (key == GLFW_KEY_RIGHT) continue;
+		if (key == GLFW_KEY_LEFT) continue;
+		if (key == GLFW_KEY_UP) continue;
+		if (key == GLFW_KEY_DOWN) continue;
 
 		keyCode[key] = GLFW_RELEASE;
 	}
