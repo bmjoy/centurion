@@ -71,8 +71,14 @@ public:
 	/// This function adds a specific object, selected from the object menu, into the editor map.
 	/// </summary>
 	/// <param name="type">The object's type (building, decoration, unit).</param>
-	/// <param name="className">The object's class name (for instance: Etownhall, EArcher). </param>
-	static void AddObject(const std::string type, const std::string className);
+	/// <param name="className">The object's class name (for instance: ETownhall, EArcher). </param>
+	static void InsertingObject(std::string type = "", std::string className = "");
+
+	/// <summary>
+	/// This function returns a boolean that indicates if an object is being inserted
+	/// </summary>
+	/// <returns></returns>
+	static bool IsInsertingObject(void) { return (tmpObject != nullptr); }
 
 	/// <summary>
 	/// This method closes and resets the editor, and sets the environment to "menu"
@@ -91,38 +97,3 @@ private:
 	static GObject* tmpObject;
 	Editor(void);
 };
-
-#pragma region Editor functions 
-
-namespace editor 
-{
-	//extern Unit unitTemp;
-	//extern Building* buildingTemp;
-	//extern Decoration* decorTemp;
-	//extern bool movingObject;
-	//static float movingObjectXPos, movingObjectYPos, movingObjectStartXMouse, movingObjectStartYMouse;
-	//static bool movingObjectRestore;
-
-	/// <summary>
-	/// (???) Le tre funzioni di seguito sono da rivedere/cancellare.
-	/// </summary>
-	void prepareObject(const std::string type, const std::string classname);
-	void insertingObject(const std::string type, const std::string classname);
-	void addObject(const std::string type);
-	/// <summary>
-	/// This function changes the terrain.
-	/// </summary>
-	void changeTerrain(const int terrainType);
-	/// <summary>
-	/// This function checks if the windows of the editor are closed or not.
-	/// </summary>
-	/// <returns>True if the windows are closed; false otherwise</returns>
-	bool areWindowsClosed(void);
-	/// <summary>
-	/// (???) Da rivedere.
-	/// This function allows the movement of an object in the editor.
-	/// </summary>
-	void moveObjects(void);
-};
-
-#pragma endregion

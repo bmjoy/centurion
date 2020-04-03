@@ -17,9 +17,8 @@ void EditorUI::Create()
 void EditorUI::Render(bool picking)
 {
 	EditorWindows::Render(picking);
-	if (Game::Minimap::IsActive() == false) {
-		EditorMenuBar::Render(picking); // always the last
-	}
+	EditorMenuBar::Render(picking); // always the last
+
 }
 
 EditorUI::~EditorUI() {}

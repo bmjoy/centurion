@@ -53,8 +53,13 @@ void Engine::Camera::mouseControl() {
 
 	// 1. Block the movement if the mouse is hovering the editor menu bar
 	if (GetEnvironment() == EDITOR_ENV)
-		if (Mouse::GetYPosition() >= Engine::myWindow::Height - EditorMenuBar::GetHeight())
-			return;
+	{
+		if (EditorMenuBar::IsHidden() == false)
+		{
+			if (Mouse::GetYPosition() >= Engine::myWindow::Height - EditorMenuBar::GetHeight()) return;
+			if (EditorMenuBar::IsOpened()) return;
+		}
+	}
 
 	abs_x = Mouse::GetXPosition() + position.x;
 	abs_y = Mouse::GetYPosition() + position.y;
@@ -63,7 +68,7 @@ void Engine::Camera::mouseControl() {
 	threshold_y = MEDIUM_MAP_HEIGHT - 2 * MovementSpeed + (myWindow::HeightZoomed - myWindow::Height);
 
 	float threshold_top = CAMERA_THRESHOLD;
-	if (Engine::GetEnvironment() == EDITOR_ENV) threshold_top += 30.f;
+	if (GetEnvironment() == EDITOR_ENV) threshold_top += myWindow::TopBarHeight;
 
 	//Left margin
 	if (Mouse::GetXPosition() <= CAMERA_THRESHOLD && (abs_x > CAMERA_THRESHOLD) && Mouse::GetXPosition() > 0) {

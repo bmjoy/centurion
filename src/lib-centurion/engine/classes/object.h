@@ -268,8 +268,9 @@ public:
 	/// This function create a specific object.
 	/// </summary>
 	/// <param name="_className">The class of the object.</param>
+	/// <param name="_temporary">Boolean: true = the object is temporary (e.g. an object that is being inserted in the editor)</param>
 	/// <returns>Trye if the object has been created; false otherwise.</returns>
-	bool Create(const std::string _className);
+	bool Create(const std::string _className, const bool _temporary = false);
 	/// <summary>
 	/// This function perfoms the rendering of the current object. It must be overread.
 	/// </summary>

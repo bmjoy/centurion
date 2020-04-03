@@ -193,7 +193,7 @@ void GObject::clear_pass(void)
 	astar::clearPassMatrix(this->pass_grid, this->position);
 }
 
-bool GObject::Create(const string _className)
+bool GObject::Create(const string _className, const bool _temporary)
 {
 	bool bObjectCreated = true;
 	ObjectData::ObjectXMLClassData objData = *ObjectData::GetObjectData(_className);
@@ -203,25 +203,28 @@ bool GObject::Create(const string _className)
 
 	// class data
 	this->SetClassName(_className);
-	this->SetPickingID(PickingObject::ObtainPickingID());
+	(_temporary) ? this->SetPickingID(0) : this->SetPickingID(PickingObject::ObtainPickingID());
+
 
 	// entity data
 	this->spriteData = objData.GetSpriteData();
 	this->spriteData.pickingId = this->GetPickingID();
 	this->spriteData.pickingColor = Picking::GetPickingColorFromID(this->GetPickingID());
 
-	this->SetObjectProperties(objData);
-	if (this->IsBuilding() == true)
-	{
-		bObjectCreated = this->AsBuilding()->SetBuildingProperties(objData);
-	}
-	else if (this->IsDecoration() == true)
-	{
-		bObjectCreated = true;
-	}
-	else if (this->IsUnit() == true)
-	{
-		;
+	if (_temporary == false) {
+		this->SetObjectProperties(objData);
+		if (this->IsBuilding() == true)
+		{
+			bObjectCreated = this->AsBuilding()->SetBuildingProperties(objData);
+		}
+		else if (this->IsDecoration() == true)
+		{
+			bObjectCreated = true;
+		}
+		else if (this->IsUnit() == true)
+		{
+			;
+		}
 	}
 
 	if (bObjectCreated == true)

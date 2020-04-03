@@ -74,7 +74,7 @@
 		<button text="Add" xOffset="500" yOffset="30">
 			<onclickScript>
 				Editor.CloseWindow(2)
-				Editor.AddObject(TextList.GetListById(1):GetSelectedOption(), TextList.GetListById(3):GetSelectedOption())
+				Editor.InsertObject(TextList.GetListById(1):GetSelectedOption(), TextList.GetListById(3):GetSelectedOption())
 			</onclickScript>
 		</button>
 	</buttonArray>

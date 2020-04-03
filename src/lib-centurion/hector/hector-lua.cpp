@@ -67,7 +67,7 @@ void Hector::Initialize()
 		.addStaticFunction("GetTreeList1", Editor::GetEditorTreeList1)
 		.addStaticFunction("GetTreeList2", Editor::GetEditorTreeList2)
 		.addStaticFunction("GetTreeList3", Editor::GetEditorTreeList3)
-		.addStaticFunction("AddObject", Editor::AddObject)
+		.addStaticFunction("InsertObject", Editor::InsertingObject)
 		.endClass();
 
 	getGlobalNamespace(L).beginClass<Menu>("Menu")

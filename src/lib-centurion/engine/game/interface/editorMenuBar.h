@@ -77,6 +77,27 @@ public:
 	/// </summary>
 	static float GetHeight(void) { return height; }
 
+	/// <summary>
+	/// This function hides the menu bar
+	/// </summary>
+	static void Hide(void);
+
+	/// <summary>
+	/// This function displays the menu bar
+	/// </summary>
+	static void Show(void);
+
+	/// <summary>
+	/// This function says if the menubar is hidden or not.
+	/// </summary>
+	static bool IsHidden(void) { return isHidden; }
+
+	/// <summary>
+	/// This function says if the menubar is opened or not
+	/// </summary>
+	/// <returns></returns>
+	static bool IsOpened(void);
+
 private:
 	/// <summary>
 	/// This function adds a EditorMenu object to the editor menu bar.
@@ -90,4 +111,6 @@ private:
 	static glm::vec4 color;
 	static gui::Rectangle topBar;
 	static std::array<EditorMenu*, MAX_NUMBER_OF_EDITOR_MENUS> listOfMenus;
+
+	static bool isHidden;
 };

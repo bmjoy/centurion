@@ -4,6 +4,7 @@
 #include <logger.h>
 #include <settings.h>
 #include <engine.h>
+#include <peripherals/mywindow.h>
 #include <picking.h>
 #include <translationsTable.h>
 #include <tinyxml2.h>
@@ -18,6 +19,7 @@ gui::Rectangle EditorMenuBar::topBar;
 vec4 EditorMenuBar::color;
 float EditorMenuBar::height;
 float EditorMenuBar::width;
+bool EditorMenuBar::isHidden = false;
 unsigned int EditorMenuBar::minPickingId = 0, EditorMenuBar::maxPickingId = 0;
 string EditorMenuBar::font = "tahoma_13px";
 
@@ -28,7 +30,10 @@ string EditorMenuBar::font = "tahoma_13px";
 
 bool EditorMenuBar::EditorMenu::IsOpened(void)
 {
-	return EditorMenu::isOpened;
+	if (this != nullptr) {
+		return EditorMenu::isOpened;
+	}
+	return false;
 }
 
 void EditorMenuBar::EditorMenu::Open(void)
@@ -38,6 +43,7 @@ void EditorMenuBar::EditorMenu::Open(void)
 
 void EditorMenuBar::EditorMenu::Close(void)
 {
+
 	EditorMenu::isOpened = false;
 }
 
@@ -52,8 +58,8 @@ void EditorMenuBar::EditorMenu::Create(gui::Rectangle _titleBack, gui::SimpleTex
 void EditorMenuBar::EditorMenu::Render(const bool picking, const vec4 &color)
 {
 	titleBack.render(color, picking, Picking::leftClickID_UI);
-	if (picking == false) { 
-		titleText.render_static(); 
+	if (picking == false) {
+		titleText.render_static();
 	}
 
 	if (isOpened == false) return;
@@ -114,7 +120,7 @@ void EditorMenuBar::Create(void)
 
 		float titlePosX = 0.f;
 		float titlePosY = Engine::myWindow::Height - height;
-		 
+
 		minPickingId = PickingUI::GetLastPickingID();
 
 		tinyxml2::XMLElement *levelElement = xmlFile.FirstChildElement("editorMenuBar")->FirstChildElement("editorMenuArray");
@@ -131,11 +137,11 @@ void EditorMenuBar::Create(void)
 			titleBack.create("filled", titlePosX, titlePosY, titleWidth, height, "bottom-left", PickingUI::ObtainPickingID(), luaCmd);
 			gui::SimpleText titleText = gui::SimpleText("static");
 			titleText.create_static(title, font, titlePosX + 0.5f * titleWidth, titlePosY + 0.5f * height, "center", "middle", vec4(255.f), "normal");
-			
+
 			// ------ menu options
 
 			float maxOptionWordSize = 0;
-			
+
 			// calculate the submenu width
 			for (tinyxml2::XMLElement* _it_cmd = _it_menu->FirstChildElement(); _it_cmd != NULL; _it_cmd = _it_cmd->NextSiblingElement())
 			{
@@ -170,7 +176,7 @@ void EditorMenuBar::Create(void)
 			titlePosX += titleWidth;
 		}
 		maxPickingId = PickingUI::GetLastPickingID() + 1;
-
+		Engine::myWindow::TopBarHeight = height;
 	}
 	catch (const std::exception&)
 	{
@@ -180,6 +186,8 @@ void EditorMenuBar::Create(void)
 
 void EditorMenuBar::Render(const bool picking)
 {
+	if (isHidden) return;
+
 	topBar.render(color, picking);
 	for (int i = 0; i < MAX_NUMBER_OF_EDITOR_MENUS; i++) {
 		if (listOfMenus[i] != nullptr) {
@@ -193,6 +201,27 @@ void EditorMenuBar::Render(const bool picking)
 			listOfMenus[i]->Render(picking, color);
 		}
 	}
+}
+
+void EditorMenuBar::Hide(void)
+{
+	isHidden = true;
+	Engine::myWindow::TopBarHeight = 0;
+}
+
+void EditorMenuBar::Show(void)
+{
+	isHidden = false;
+	Engine::myWindow::TopBarHeight = height;
+}
+
+bool EditorMenuBar::IsOpened(void)
+{
+	for (auto i : EditorMenuBar::listOfMenus)
+	{
+		if (i->IsOpened()) return true;
+	}
+	return false;
 }
 
 void EditorMenuBar::AddMenu(const unsigned int id, EditorMenu * menu)
