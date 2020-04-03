@@ -33,7 +33,8 @@ namespace Engine {
 		static float GetXRightClick() { return xRightClick; }
 		static float GetYRightClick() { return yRightClick; }
 		static float GetY2DRightClick() { return y2DRightClick; }
-		static glm::vec2 GetInMapCoordinates();
+		static float GetXMapCoordinate();
+		static float GetYMapCoordinate();
 		static bool IsCursorInGameScreen();
 		static bool LeftClick;
 		static bool RightClick;

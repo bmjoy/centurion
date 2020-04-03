@@ -157,11 +157,7 @@ void Editor::InsertingObject(std::string type, std::string className)
 
 	if (Editor::tmpObject == nullptr) return;
 
-	float x;
-	float y;
-	x = Engine::Mouse::GetInMapCoordinates().x;
-	y = Engine::Mouse::GetInMapCoordinates().y;
-	Editor::tmpObject->SetPosition(vec3(x, y, 0.f));
+	Editor::tmpObject->SetPosition(vec3(Engine::Mouse::GetXMapCoordinate(), Engine::Mouse::GetYMapCoordinate(), 0.f));
 	Editor::tmpObject->Render(false, 0, true);
 }
 

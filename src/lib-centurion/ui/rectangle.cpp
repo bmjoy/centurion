@@ -12,13 +12,13 @@ namespace gui {
 
 	Rectangle::Rectangle()
 	{
-		originMap["bottom-left"] = 0;
-		originMap["top-left"] = 1;
-		originMap["center"] = 2;
-		originMap["top-right"] = 3;
-		originMap["bottom-right"] = 4;
+		originMap["bottom-left"] = BOTTOMLEFT_ORIGIN;
+		originMap["top-left"] = TOPLEFT_ORIGIN;
+		originMap["center"] = CENTER_ORIGIN;
+		originMap["top-right"] = TOPRIGHT_ORIGIN;
+		originMap["bottom-right"] = BOTTOMRIGHT_ORIGIN;
 		data = glRectangle::RectangleData();
-		data.type = "filled";
+		data.type = FILLED_RECTANGLE;
 		pickingId = 0;
 		luaCmd = "";
 	}
@@ -27,7 +27,16 @@ namespace gui {
 		if (x < 0) x += Engine::myWindow::Width;
 		if (y < 0) y += Engine::myWindow::Height;
 
-		data.type = Type;
+		if (Type == "border") {
+			data.type = BORDER_RECTANGLE;
+		}
+		else if (Type == "border-filled") {
+			data.type = BORDER_FILLED_RECTANGLE;
+		}
+		else {
+			data.type = FILLED_RECTANGLE;
+		}
+		
 		data.x = x;
 		data.y = y;
 		data.w = w;
@@ -49,17 +58,17 @@ namespace gui {
 		if (y != 0.f) data.y = y;
 		if (w != 0.f) data.w = w;
 		if (h != 0.f) data.h = h;
-		if (origin != -1) data.origin = origin;
+		if (origin != DEFAULT_ORIGIN) data.origin = origin;
 
-		if (data.type == "filled") {
+		if (data.type == FILLED_RECTANGLE) {
 			data.backColor = Color;
 			FRectangle()->render(data, picking);
 		}
-		if (data.type == "border") {
+		if (data.type == BORDER_RECTANGLE) {
 			data.borderColor = Color;
 			ERectangle()->render(data);
 		}
-		if (data.type == "border-filled") {
+		if (data.type == BORDER_FILLED_RECTANGLE) {
 			data.backColor = Color;
 			data.borderColor = vec4(255.f);
 			FRectangle()->render(data, picking);

@@ -160,6 +160,21 @@ public:
 		static void Disable(void);
 
 	private:
+		/// <summary>
+		/// This method resets the minX, maxX, minY, maxY
+		/// </summary>
+		static void ResetExtremeValues(void);
+
+		/// <summary>
+		/// This method sets the minX, maxX, minY, maxY using the rectangle coordinates data
+		/// </summary>
+		static void SetExtremeValues(void);
+
+		/// <summary>
+		/// This method calculates the size and the origin of the rectangle
+		/// </summary>
+		static void CalculateSizeAndOrigin(float *width, float *height, int *origin);
+		
 		SelectionRectangle(void);
 		static gui::Rectangle selRectangle;
 		static bool isActive;

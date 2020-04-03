@@ -41,11 +41,14 @@ Engine::HoldClickData Engine::Mouse::middleHoldClickData;
 
 Engine::Mouse::Mouse() { }
 
-vec2 Engine::Mouse::GetInMapCoordinates()
+float Engine::Mouse::GetXMapCoordinate()
 {
-	float x = round(Engine::Mouse::GetXPosition() * Engine::myWindow::WidthZoomed / Engine::myWindow::Width + Engine::Camera::GetXPosition());
-	float y = round(Engine::Mouse::GetYPosition() * Engine::myWindow::HeightZoomed / Engine::myWindow::Height + Engine::Camera::GetYPosition());
-	return vec2(x, y);
+	return round(Engine::Mouse::GetXPosition() * Engine::myWindow::WidthZoomed / Engine::myWindow::Width + Engine::Camera::GetXPosition());
+}
+
+float Engine::Mouse::GetYMapCoordinate()
+{
+	return round(Engine::Mouse::GetYPosition() * Engine::myWindow::HeightZoomed / Engine::myWindow::Height + Engine::Camera::GetYPosition());
 }
 
 bool Engine::Mouse::IsCursorInGameScreen()

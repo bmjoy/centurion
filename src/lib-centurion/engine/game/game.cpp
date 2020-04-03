@@ -255,6 +255,38 @@ void Game::SelectionRectangle::Disable(void)
 	Game::SelectionRectangle::isActive = false;
 }
 
+void Game::SelectionRectangle::ResetExtremeValues(void)
+{
+	Coordinates.minX = -0.1f;
+	Coordinates.maxX = -0.1f;
+	Coordinates.minY = -0.1f;
+	Coordinates.maxY = -0.1f;
+}
+
+void Game::SelectionRectangle::SetExtremeValues(void)
+{
+	Coordinates.minX = std::min(Coordinates.startX, Coordinates.lastX);
+	Coordinates.maxX = std::max(Coordinates.startX, Coordinates.lastX);
+	Coordinates.minY = std::min(Coordinates.startY, Coordinates.lastY);
+	Coordinates.maxY = std::max(Coordinates.startY, Coordinates.lastY);
+}
+
+void Game::SelectionRectangle::CalculateSizeAndOrigin(float * width, float * height, int * origin)
+{
+	float _width = Coordinates.lastX - Coordinates.startX;
+	float _height = Coordinates.lastY - Coordinates.startY;
+
+	int _origin = 0;
+	if (_width < 0 && _height < 0) _origin = TOPRIGHT_ORIGIN;
+	else if (_width > 0 && _height > 0) _origin = BOTTOMLEFT_ORIGIN; 
+	else if (_width > 0 && _height < 0) _origin = TOPLEFT_ORIGIN; 
+	else _origin = BOTTOMRIGHT_ORIGIN; 
+
+	(*width) = std::abs(_width);
+	(*height) = std::abs(_height);
+	(*origin) = _origin;
+}
+
 Game::SelectionRectangle::SelectionRectangle(void) {}
 
 void Game::SelectionRectangle::Create(void) 
@@ -266,6 +298,7 @@ void Game::SelectionRectangle::Create(void)
 }
 
 bool Game::SelectionRectangle::IsInRectangle(array<float, 8> &coords) {
+	if (IsActive() == false) return false;
 	return(
 		// are the 4 points in selection rectangle ?
 		(coords[0] > Coordinates.minX && coords[0] < Coordinates.maxX &&
@@ -298,36 +331,25 @@ void Game::SelectionRectangle::Render(void)
 		}
 	}
 	if (Engine::Mouse::LeftHold) {
-		Coordinates.lastX = Engine::Mouse::GetInMapCoordinates().x;
-		Coordinates.lastY = Engine::Mouse::GetInMapCoordinates().y;
+		Coordinates.lastX = Engine::Mouse::GetXMapCoordinate();
+		Coordinates.lastY = Engine::Mouse::GetYMapCoordinate();
 		if (Engine::Mouse::GetYPosition() < Engine::myWindow::BottomBarHeight) {
-			Coordinates.lastY = Engine::myWindow::BottomBarHeight*Engine::myWindow::HeightZoomed / Engine::myWindow::Height + 1.0f + Engine::Camera::GetYPosition();
+			Coordinates.lastY = Engine::myWindow::BottomBarHeight * Engine::myWindow::HeightZoomed / Engine::myWindow::Height + 1.0f + Engine::Camera::GetYPosition();
 		}
 		if (Engine::Mouse::GetYPosition() > Engine::myWindow::Height - Engine::myWindow::TopBarHeight) {
 			Coordinates.lastY = Engine::myWindow::HeightZoomed - Engine::myWindow::TopBarHeight*Engine::myWindow::HeightZoomed / Engine::myWindow::Height - 1.0f + Engine::Camera::GetYPosition();
 		}
 
-		float w = (Coordinates.lastX - Coordinates.startX);
-		float h = (Coordinates.lastY - Coordinates.startY);
+		float w, h;
+		int origin;
+		CalculateSizeAndOrigin(&w, &h, &origin);
 
-		int origin = 0;
-		if (w > 0 && h > 0) origin = 0; // bottom-left
-		if (w > 0 && h < 0) origin = 1; // top-left
-		if (w < 0 && h > 0) origin = 4; // bottom-right
-		if (w < 0 && h < 0) origin = 3; // top-right
-
-		if (abs(w) > 1 && abs(h) > 1) {
-			selRectangle.render(vec4(255.f), 0, 0, Coordinates.startX, Coordinates.startY, abs(w), abs(h), origin);
-			Coordinates.minX = std::min(Coordinates.startX, Coordinates.lastX);
-			Coordinates.maxX = std::max(Coordinates.startX, Coordinates.lastX);
-			Coordinates.minY = std::min(Coordinates.startY, Coordinates.lastY);
-			Coordinates.maxY = std::max(Coordinates.startY, Coordinates.lastY);
+		if (w > 1 && h > 1) {
+			selRectangle.render(vec4(255.f), 0, 0, Coordinates.startX, Coordinates.startY, w, h, origin);
+			SetExtremeValues();
 		}
 		else {
-			Coordinates.minX = -0.1f;
-			Coordinates.maxX = -0.1f;
-			Coordinates.minY = -0.1f;
-			Coordinates.maxY = -0.1f;
+			ResetExtremeValues();
 		}
 		SelectionRectangle::Enable();
 	}
@@ -335,12 +357,7 @@ void Game::SelectionRectangle::Render(void)
 		if (SelectionRectangle::IsActive()) Logger::Info("Selection rectangle disabled.");
 		cameraLastX = Engine::Camera::GetXPosition();
 		cameraLastY = Engine::Camera::GetYPosition();
-		Coordinates.lastX = -0.1f;
-		Coordinates.lastY = -0.1f;
-		Coordinates.minX = -0.1f;
-		Coordinates.maxX = -0.1f;
-		Coordinates.minY = -0.1f;
-		Coordinates.maxY = -0.1f;
+		ResetExtremeValues();
 		SelectionRectangle::Disable();
 	}
 }

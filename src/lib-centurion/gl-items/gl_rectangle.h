@@ -22,8 +22,8 @@ public:
 	/// </summary>
 	struct RectangleData {
 		glm::vec4 borderColor, backColor, pickingColor;
-		std::string type;
 		float x, y, w, h;
+		int type;
 		int origin;
 	};
 

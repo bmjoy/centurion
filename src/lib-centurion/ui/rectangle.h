@@ -11,6 +11,42 @@
 
 #include <gl_rectangle.h>
 
+#ifndef BOTTOMLEFT_ORIGIN
+#define BOTTOMLEFT_ORIGIN 0
+#endif
+
+#ifndef TOPLEFT_ORIGIN
+#define TOPLEFT_ORIGIN 1
+#endif
+
+#ifndef CENTER_ORIGIN
+#define CENTER_ORIGIN 2
+#endif
+
+#ifndef TOPRIGHT_ORIGIN
+#define TOPRIGHT_ORIGIN 3
+#endif
+
+#ifndef BOTTOMRIGHT_ORIGIN
+#define BOTTOMRIGHT_ORIGIN 4
+#endif
+
+#ifndef DEFAULT_ORIGIN
+#define DEFAULT_ORIGIN 5
+#endif
+
+#ifndef FILLED_RECTANGLE
+#define FILLED_RECTANGLE 0
+#endif
+
+#ifndef BORDER_RECTANGLE
+#define BORDER_RECTANGLE 1
+#endif
+
+#ifndef BORDER_FILLED_RECTANGLE
+#define BORDER_FILLED_RECTANGLE 2
+#endif
+
 namespace gui {
 
 	/// <summary>
@@ -44,7 +80,7 @@ namespace gui {
 		/// <param name="w">Weight offest of the rectangle</param>
 		/// <param name="h">Height offset of the rectangle</param>
 		/// <param name="origin">Origin of the rectangle</param>
-		void render(glm::vec4 Color, bool picking = false, int leftClickId = 0, float x = 0.f, float y = 0.f, float w = 0.f, float h = 0.f, int origin = -1);
+		void render(glm::vec4 Color, bool picking = false, int leftClickId = 0, float x = 0.f, float y = 0.f, float w = 0.f, float h = 0.f, int origin = DEFAULT_ORIGIN);
 
 
 		~Rectangle();
