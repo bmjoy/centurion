@@ -211,27 +211,25 @@ bool GObject::Create(const string _className, const bool _temporary)
 	this->spriteData.pickingId = this->GetPickingID();
 	this->spriteData.pickingColor = Picking::GetPickingColorFromID(this->GetPickingID());
 
-	if (_temporary == false) {
-		this->SetObjectProperties(objData);
-		if (this->IsBuilding() == true)
-		{
-			bObjectCreated = this->AsBuilding()->SetBuildingProperties(objData);
-		}
-		else if (this->IsDecoration() == true)
-		{
-			bObjectCreated = true;
-		}
-		else if (this->IsUnit() == true)
-		{
-			;
-		}
+	if (_temporary == true) return bObjectCreated;
+	
+	this->SetObjectProperties(objData);
+	if (this->IsBuilding() == true)
+	{
+		bObjectCreated = this->AsBuilding()->SetBuildingProperties(objData);
 	}
-
+	else if (this->IsDecoration() == true)
+	{
+		bObjectCreated = true;
+	}
+	else if (this->IsUnit() == true)
+	{
+		;
+	}
 	if (bObjectCreated == true)
 	{
 		GObject::AddGameObject(this->GetPickingID(), this);
 	}
-
 	return bObjectCreated;
 }
 
