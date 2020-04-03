@@ -47,8 +47,12 @@ void Editor::Create(void)
 
 	SelectionRectangle::Create();
 
+	Engine::Mouse::LeftClick = false;
+	Engine::Mouse::RightClick = false;
 	Engine::Mouse::LeftHold = false;
-
+	
+	Editor::tmpObject = nullptr;
+	
 	Engine::Camera::GoToPoint(1.f, 1.f);
 
 	isCreated = true;
@@ -129,7 +133,7 @@ void Editor::InsertingObject(std::string type, std::string className)
 		}
 		Editor::tmpObject->SetPlayer(1);
 		EditorMenuBar::Hide();
-		Engine::Mouse::LeftClick = false;
+		return;
 	}
 
 	if (Editor::tmpObject == nullptr) return;
