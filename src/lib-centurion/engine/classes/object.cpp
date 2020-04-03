@@ -4,6 +4,7 @@
 #include <picking.h>
 #include <game/strategy.h>
 #include <pathfinding/pathfinding.h>
+#include <game/editor.h>
 
 using namespace std;
 using namespace glm;
@@ -399,6 +400,14 @@ bool GObject::CheckIfSelected(const unsigned int par_clickID)
 void GObject::MarkAsSelected(const bool par_selected)
 {
 	this->bSelected = par_selected;
+	if (par_selected == true && Editor::IsInsertingObject() == false)
+	{
+		Game::SetSelectedObject(this);
+	}
+	else if(Picking::GetIdFromClick(PICKING_LEFT) == PICKING_TERRAIN_ID)
+	{
+		Game::SetSelectedObject(nullptr);
+	}
 }
 #pragma endregion
 

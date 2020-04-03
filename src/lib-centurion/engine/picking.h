@@ -12,6 +12,7 @@
 #define PICKING_ID_MAX 16777215
 #define PICKING_LEFT 1
 #define PICKING_RIGHT 2
+#define PICKING_TERRAIN_ID 0
 
 #include <header.h>
 

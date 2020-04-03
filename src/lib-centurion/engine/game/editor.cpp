@@ -108,8 +108,8 @@ std::vector<std::string>* Editor::GetEditorTreeList3(const std::string filter1, 
 
 void Editor::InsertingObject(std::string type, std::string className)
 {
-	if (type.empty() == false && className.empty() == false) {
-
+	if (type.empty() == false && className.empty() == false) 
+	{
 		if (type == "buildings")
 		{
 			Editor::tmpObject = new Building();
@@ -161,6 +161,24 @@ void Editor::InsertingObject(std::string type, std::string className)
 	Editor::tmpObject->Render(false, 0, true);
 }
 
+void Editor::ShiftSelectedObject(void)
+{
+	GObject *obj = Game::GetSelectedObject();
+	if (obj != nullptr)
+	{
+		if (Engine::Mouse::LeftHold == true)
+		{
+			obj->SetPosition(vec3(Engine::Mouse::GetXMapCoordinate(), Engine::Mouse::GetYMapCoordinate(), 0.f));
+			obj->Render(false, 0, true);
+		}
+	}
+}
+
+bool Editor::IsInsertingObject(void)
+{
+	return (Editor::tmpObject != nullptr);
+}
+
 void Editor::Close(void)
 {
 	isCreated = false;
@@ -170,7 +188,8 @@ void Editor::Close(void)
 
 void Editor::Run(void)
 {
-	if (IsCreated() == false) {
+	if (IsCreated() == false)
+	{
 		//Audio()->MusicStop();
 		Create();
 		Logger::Info("Editor has been created!");
@@ -210,8 +229,10 @@ void Editor::Run(void)
 
 		// NORMAL RENDERING
 		Map::Render(false);
-		RenderObjects();
-		InsertingObject();
+		Game::RenderObjects();
+		Editor::InsertingObject();
+		Editor::ShiftSelectedObject();
+
 		//if (!editor::IsWindowOpened && !editor::addingObject && !editor::TerrainBrushIsActive) editor::moveObjects();
 
 		// apply menu matrices

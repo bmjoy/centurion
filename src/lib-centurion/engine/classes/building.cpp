@@ -10,6 +10,7 @@ using namespace glm;
 
 Building::Building() 
 {
+	this->MarkAsSelected(false);
 	this->bIsCreated = false;
 	this->waitingToBeErased = false;
 	this->bIsPlaceable = true;
@@ -328,7 +329,7 @@ vector<int> Building::buildingsInSettlementIds()
 }
 */
 
-Building::~Building() 
+Building::~Building(void) 
 {
 	if (this->settlement != nullptr)
 	{

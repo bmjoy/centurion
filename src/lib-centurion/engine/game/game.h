@@ -261,13 +261,19 @@ public:
 	};
 
 #pragma region TO-LUA Methods
+
+	/// <summary>
+	/// This functions returns the current selected object.
+	/// </summary>
+	/// <returns>The current selected object.</returns>
+	/// 
+	static GObject* GetSelectedObject(void);
 	/// <summary>
 	/// (???) Metodi da rivedere/spostare?
 	/// </summary>
 	/// <returns></returns>
-	static GObject* GetSelectedObject(void) { return selectedObject; }
 	static bool IsGameObjectSelected(const unsigned int id);
-	static bool IsGameObjectNotNull(int id);
+	static bool IsGameObjectNotNull(const unsigned int id);
 	static bool CreateObject(const std::string className, const float x, const float y, const unsigned int player);
 
 #pragma endregion
@@ -281,8 +287,14 @@ public:
 	/// </summary>
 	/// <returns>A list of buildings.</returns>
 	static std::vector<Building*> GetListOfIndipendentBuildings(void);
+
 	//static void UpdateSettlementBuildings();
-	static void SetSelectedObject(GObject* o) { selectedObject = o; }
+
+	/// <summary>
+	/// This function sets the current selected object. 
+	/// </summary>
+	/// <param name="o">The selected object.</param>
+	static void SetSelectedObject(GObject* o);
 
 #pragma endregion
 

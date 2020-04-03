@@ -74,11 +74,13 @@ public:
 	/// <param name="className">The object's class name (for instance: ETownhall, EArcher). </param>
 	static void InsertingObject(std::string type = "", std::string className = "");
 
+	static void ShiftSelectedObject(void);
+
 	/// <summary>
 	/// This function returns a boolean that indicates if an object is being inserted
 	/// </summary>
 	/// <returns></returns>
-	static bool IsInsertingObject(void) { return (tmpObject != nullptr); }
+	static bool IsInsertingObject(void);
 
 	/// <summary>
 	/// This method closes and resets the editor, and sets the environment to "menu"

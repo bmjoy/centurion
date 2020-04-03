@@ -479,7 +479,7 @@ int Game::numberOfPlayers = 1;
 vector<string> Game::racesName;
 map<string, Game::Race> Game::races;
 vector<vec3> Game::listOfColors;
-GObject* Game::selectedObject;
+GObject* Game::selectedObject = nullptr;
 
 #pragma endregion
 
@@ -494,23 +494,12 @@ void Game::ResetGame()
 	Minimap::Disable();
 }
 
-Game::~Game() {}
+Game::~Game(void) {};
 
-;
-bool Game::IsGameObjectSelected(const unsigned int id)
+void Game::SetSelectedObject(GObject* o)
 {
-	if (IsGameObjectNotNull(id) == false) return false;
-	return GObject::GetObjectByID(id)->IsSelected();
+	Game::selectedObject = o;
 }
-
-bool Game::IsGameObjectNotNull(int id) 
-{
-	if (id < 0 || id > MAX_NUMBER_OF_OBJECTS)
-		return false;
-	else
-		return (GObject::GetObjectByID(id) != nullptr);
-}
-
 
 vector<Building*> Game::GetListOfIndipendentBuildings(void) 
 {
@@ -586,7 +575,8 @@ void Game::RenderObjects()
 		}
 	}
 
-	if (!Minimap::IsActive() && Picking::leftClickID_UI == 0) SelectionRectangle::Render(); //&& !editor::movingObject
+	if (!Minimap::IsActive() && Picking::leftClickID_UI == 0) 
+		SelectionRectangle::Render(); //&& !editor::movingObject
 }
 
 void Game::GoToPointFromMinimap() {
@@ -791,6 +781,26 @@ void Game::GenerateSettlements(vector<vec2> &locs) {
 
 
 #pragma region TO-LUA METHODS
+
+GObject* Game::GetSelectedObject(void)
+{
+	return Game::selectedObject;
+}
+
+bool Game::IsGameObjectSelected(const unsigned int id)
+{
+	if (IsGameObjectNotNull(id) == false)
+		return false;
+	return GObject::GetObjectByID(id)->IsSelected();
+}
+
+bool Game::IsGameObjectNotNull(const unsigned int id)
+{
+	if (id > MAX_NUMBER_OF_OBJECTS)
+		return false;
+	else
+		return (GObject::GetObjectByID(id) != nullptr);
+}
 
 bool Game::CreateObject(const string className, const float x, const float y, const unsigned int player)
 {
