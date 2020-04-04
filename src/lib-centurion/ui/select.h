@@ -16,7 +16,7 @@
 
 namespace gui {
 
-	///Class of the Select
+	///Class of the Select; Create a menu with option
 	class Select {
 	public:
 
@@ -27,28 +27,58 @@ namespace gui {
 		Select(bool options = true);
 
 		/// <summary>
-		/// 
+		/// This function create the menu.
 		/// </summary>
-		/// <param name="x"></param>
-		/// <param name="y"></param>
-		/// <param name="w"></param>
-		/// <param name="h"></param>
-		/// <param name="options"></param>
-		/// <param name="pickingID"></param>
+		/// <param name="x">X position of the menu</param>
+		/// <param name="y">Y position of the menu</param>
+		/// <param name="w">weight of the menu</param>
+		/// <param name="h">height of the menu</param>
+		/// <param name="options">??? Take options string</param>
+		/// <param name="pickingID">Picking ID value for render picking</param>
 		void create(float x, float y, float w, float h, std::vector<std::string> options, int pickingID);
 
 		/// <summary>
 		/// This function performs the rendiring of the current building.
 		/// </summary>
-		/// <param name="picking"></param>
-		/// <param name="color"></param>
+		/// <param name="picking">Dafault value 0.</param>
+		/// <param name="color">Color of the ???menu/building. It only support glm::vec4 RGBA</param>
 		void render(bool picking, glm::vec4 color);
+
+		/// <summary>
+		/// ??? This function open and close the menu.
+		/// </summary>
 		void open_close();
+
+		/// <summary>
+		/// This function close the menu.
+		/// </summary>
 		void close();
+
+		/// <summary>
+		/// ??? This function create a button to show option
+		/// </summary>
+		/// <param name="i">???</param>
 		void select_option(int i);
+
+		/// <summary>
+		/// This function create a button to go on with the list
+		/// </summary>
 		void select_next();
+
+		/// <summary>
+		/// This function create a button to go back with the list
+		/// </summary>
 		void select_previous();
+
+		/// <summary>
+		/// This function get the status of the mouse on option nutton. 
+		/// </summary>
+		/// <returns></returns>
 		int get_clicked_option();
+
+		/// <summary>
+		/// This function return the text on the button.
+		/// </summary>
 		std::string selectedText;
 		~Select();
 	private:
