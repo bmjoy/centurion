@@ -100,7 +100,7 @@ public:
 	/// This function provides a list of all the buildings belonging to the current settlement.
 	/// </summary>
 	/// <returns>A list of pointers to buildings; this list can be empty if the settlement hasn't got any building.</returns>
-	std::vector<Building*> GetBuildingsBelongToSettlement(void);
+	const std::vector<Building*> GetBuildingsBelongToSettlement(void);
 	/// <summary>
 	/// This function allows to add a new building to the current settlement.
 	/// </summary>

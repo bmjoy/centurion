@@ -3,7 +3,7 @@
     <property name="singularName" value="Roman barracks"/>
     <property name="pluralName" value="Roman barracks"/>
     <property name="race" value="Rome"/>
-    <property name="radius" value="600"/>
+    <property name="radius" value="245"/>
     <property name="editorFilter1" value="buildings"/>
  	<property name="editorFilter2" value="romanstronghold"/>
     <property name="ent_path" value="assets/buildings/rome/barracks/rbarracks.oe.xml"/>

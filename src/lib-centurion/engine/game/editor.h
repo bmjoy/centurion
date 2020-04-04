@@ -74,6 +74,9 @@ public:
 	/// <param name="className">The object's class name (for instance: ETownhall, EArcher). </param>
 	static void InsertingObject(std::string type = "", std::string className = "");
 
+	/// <summary>
+	/// This function moves an object in the editor map. 
+	/// </summary>
 	static void ShiftSelectedObject(void);
 
 	/// <summary>

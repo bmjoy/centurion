@@ -99,7 +99,7 @@ void Settlement::SetPlayer(const unsigned int par_player)
 	}
 }
 
-vector<Building*> Settlement::GetBuildingsBelongToSettlement(void)
+const vector<Building*> Settlement::GetBuildingsBelongToSettlement(void)
 {
 	vector<Building*> list;
 	for (map<unsigned int, Building*>::iterator mapIterator = this->buildingsOfSettlement.begin(); mapIterator != this->buildingsOfSettlement.end(); mapIterator++)

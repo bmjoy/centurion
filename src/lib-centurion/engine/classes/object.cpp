@@ -160,7 +160,7 @@ void GObject::SetAlwaysVisibleInGameMinimap(const bool par_alwaysVisibleInGameMi
 
 bool GObject::IsBuilding(void)
 {
-	return (this->type == "building");
+	return (this->type == "cpp_buildingclass");
 }
 bool GObject::IsUnit(void)
 {
@@ -205,7 +205,6 @@ bool GObject::Create(const string _className, const bool _temporary)
 	// class data
 	this->SetClassName(_className);
 	(_temporary) ? this->SetPickingID(0) : this->SetPickingID(PickingObject::ObtainPickingID());
-
 
 	// entity data
 	this->spriteData = objData.GetSpriteData();

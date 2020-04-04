@@ -15,8 +15,10 @@
 /// (???)Avoid overlap beetwen two buildings when a new building is about to be created.
 /// </summary>
 #ifndef RADIUS_OFFSET
-#define RADIUS_OFFSET 20
+#define RADIUS_OFFSET 200
 #endif
+
+#define MAX_DISTANCE  800
 
 class Unit;
 namespace game { class ObjectUI; };
@@ -243,6 +245,7 @@ private:
 	/// <returns>True if there is a settlement; false otherwise.</returns>
 	static bool FindASettlement(Building* b);
 	//static properties
+	/*/
 	class SettlementSet
 	{
 	public:
@@ -251,6 +254,7 @@ private:
 		std::vector<float> yPoint;
 		std::vector<float> radius;
 	};
-	static std::vector<SettlementSet> settlementsList;
+	*/
+	static std::vector<Settlement*> settlementsList;
 	//sound selectionSound; TODO
 };

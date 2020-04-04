@@ -31,6 +31,7 @@ Unit::Unit() {
 	creationTime = 0.f;
 	clickSelection = false;
 	rectangleSelection = false;
+	this->SetType("decoration");
 }
 
 void Unit::SetPosition(const float x, const float y) 

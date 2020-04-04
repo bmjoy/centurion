@@ -3,7 +3,7 @@
     <property name="singularName" value="Egyptian barracks"/>
     <property name="pluralName" value="Egyptian barracks"/>
     <property name="race" value="Egypt"/>
-    <property name="radius" value="1000"/>
+    <property name="radius" value="190"/>
     <property name="editorFilter1" value="buildings"/>
  	<property name="editorFilter2" value="egyptianstronghold"/>
     <property name="ent_path" value="assets/buildings/egypt/barracks/ebarracks.oe.xml"/>

@@ -166,14 +166,13 @@ void Editor::InsertingObject(std::string type, std::string className)
 	}
 
 	if (Editor::tmpObject == nullptr) return;
-
 	Editor::tmpObject->SetPosition(vec3(Engine::Mouse::GetXMapCoordinate(), Engine::Mouse::GetYMapCoordinate(), 0.f));
 	Editor::tmpObject->Render(false, 0, true);
 }
 
 void Editor::ShiftSelectedObject(void)
 {
-	isMovingObject = false;
+	Editor::isMovingObject = false;
 	GObject *obj = Game::GetSelectedObject();
 	if (obj == nullptr) return;
 
@@ -189,7 +188,7 @@ void Editor::ShiftSelectedObject(void)
 	float dx = Engine::Mouse::GetXMapCoordinate() - movingObjectStartXMouse;
 	float dy = Engine::Mouse::GetYMapCoordinate() - movingObjectStartYMouse;
 	obj->SetPosition(vec3(movingObjectXPos + dx, movingObjectYPos + dy, 0.f));
-	isMovingObject = true;
+	Editor::isMovingObject = true;
 }
 
 bool Editor::IsInsertingObject(void)
@@ -217,7 +216,6 @@ void Editor::Run(void)
 		Create();
 		Logger::Info("Editor has been created!");
 	}
-
 
 	Picking::leftClickID_UI = 0;
 
@@ -372,6 +370,8 @@ void Editor::handleKeyboardControls(void)
 	}
 	if (Engine::Keyboard::IsKeyPressed(GLFW_KEY_ESCAPE))
 	{
+		//(???)Da sistermare! Rimangono i riferimenti ai settlement quando si esce dall'editor e poi si rientra.
+		GObject::ResetGameObjects();
 		Close();
 	}
 }

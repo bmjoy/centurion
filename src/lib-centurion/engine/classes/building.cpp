@@ -4,11 +4,12 @@
 #include <building_sprite.h>
 #include <logger.h>
 #include <math.h>
+#include <engine.h>
 
 using namespace std;
 using namespace glm;
 
-Building::Building() 
+Building::Building(void) 
 {
 	this->MarkAsSelected(false);
 	this->bIsCreated = false;
@@ -19,6 +20,7 @@ Building::Building()
 	this->bIsOutpost = false;
 	this->bIsShipyard = false;
 	this->settlement = nullptr;
+	this->SetType("cpp_buildingclass");
 }
 
 Settlement *Building::GetSettlement(void)
@@ -339,7 +341,7 @@ Building::~Building(void)
 }
 
 #pragma region Private members
-vector<Building::SettlementSet> Building::settlementsList;
+vector<Settlement*> Building::settlementsList;
 bool Building::FindASettlement(Building* b)
 {
 	bool bSettlementDiscovered = false;
@@ -349,26 +351,33 @@ bool Building::FindASettlement(Building* b)
 
 	if (b->bIsCentralBuilding == false)
 	{
+		if (numOfSettlements == 0)
+		{
+			return bSettlementDiscovered;
+		}
 		for (unsigned int settlementsCounter = 0; settlementsCounter < numOfSettlements && bSettlementDiscovered == false; settlementsCounter++)
 		{
-			if ( (b->GetPlayer() == Building::settlementsList[settlementsCounter].set->GetPlayer())
-				&& (Building::settlementsList[settlementsCounter].set->IsIndipendent() == false) )
+			//Check if the building and the settlement belong to the same player and if the settlement is not indipendent.
+			if ( (b->GetPlayer() == Building::settlementsList[settlementsCounter]->GetPlayer())
+				&& (Building::settlementsList[settlementsCounter]->IsIndipendent() == false) )
 			{
-				size_t numOfBuildings = Building::settlementsList[settlementsCounter].xPoint.size();
+				const vector<Building*> settBuildings = Building::settlementsList[settlementsCounter]->GetBuildingsBelongToSettlement();
+				size_t numOfBuildings = settBuildings.size();
 				for (unsigned int buildingsCounter = 0; buildingsCounter < numOfBuildings && bSettlementDiscovered == false; buildingsCounter++)
 				{
-					float xPos = Building::settlementsList[settlementsCounter].xPoint[buildingsCounter];
-					float yPos = Building::settlementsList[settlementsCounter].xPoint[buildingsCounter];
+					float xPos = settBuildings[buildingsCounter]->get_xPos();
+					float yPos = settBuildings[buildingsCounter]->get_yPos();
 					float distance = sqrt(pow(b_xPos - xPos, 2) + pow(b_yPos - yPos, 2));
-					if (distance <= b->GetRadius()) //If the two buildings are close enough 
+					//If the two buildings are close enough 
+					if (distance <= MAX_DISTANCE)
 					{
 						float distance2 = sqrt(pow((b_xPos - RADIUS_OFFSET) - (xPos - RADIUS_OFFSET), 2) + pow((b_yPos - RADIUS_OFFSET) - (yPos -RADIUS_OFFSET), 2));
-						if (distance2 > b->GetRadius() + Building::settlementsList[settlementsCounter].radius[buildingsCounter]) //If the two buildings don't intersect each others 
+						//If the two buildings don't intersect each others
+						//if (distance2 > b->GetRadius() + settBuildings[buildingsCounter]->GetRadius())  
+						//(???) Come detrminare le intersezioni?
+						if(true)
 						{
-							b->settlement = Building::settlementsList[settlementsCounter].set;
-							Building::settlementsList[settlementsCounter].xPoint.push_back(b_xPos);
-							Building::settlementsList[settlementsCounter].yPoint.push_back(b_yPos);
-							Building::settlementsList[settlementsCounter].radius.push_back(b->GetRadius());
+							b->settlement = Building::settlementsList[settlementsCounter];
 							bSettlementDiscovered = true;
 							bSettlementDiscovered = bSettlementDiscovered = b->settlement->AddBuildingToSettlement(b); //Here, it should be return always true.
 						}
@@ -380,10 +389,7 @@ bool Building::FindASettlement(Building* b)
 	else
 	{
 		b->settlement = new Settlement(b->GetPlayer());
-		Building::settlementsList[numOfSettlements].set = b->settlement;
-		Building::settlementsList[numOfSettlements].xPoint.push_back(b_xPos);
-		Building::settlementsList[numOfSettlements].yPoint.push_back(b_yPos);
-		Building::settlementsList[numOfSettlements].radius.push_back(b->GetRadius());
+		Building::settlementsList.push_back(b->settlement);
 		bSettlementDiscovered = b->settlement->AddBuildingToSettlement(b); //Here, it should be return always true.
 	}
 	return bSettlementDiscovered;
