@@ -21,7 +21,7 @@ namespace gui {
 	public:
 
 		/// <summary>
-		/// ??? This function  performs the rendering of the current select.
+		/// ??? This function performs the rendering of the current select.
 		/// </summary>
 		/// <param name="options"></param>
 		Select(bool options = true);
@@ -76,9 +76,6 @@ namespace gui {
 		/// <returns></returns>
 		int get_clicked_option();
 
-		/// <summary>
-		/// This function return the text on the button.
-		/// </summary>
 		std::string selectedText;
 		~Select();
 	private:

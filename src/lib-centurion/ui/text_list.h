@@ -19,9 +19,7 @@
 
 #ifndef BORDERWIDTH_DEFAULT
 #define BORDERWIDTH_DEFAULT 0
-#endif 
-
-
+#endif
 
 #include <primitives.h>
 
@@ -46,29 +44,29 @@ namespace gui {
 		/// <summary>
 		/// This function gets the selected option
 		/// </summary>
-		/// <returns>Returns the selected option, an element of type std::string.</returns>
+		/// <returns>Returns the selected option, a std::string.</returns>
 		std::string GetSelectedOption() { return selectedOption; }
 
 		/// <summary>
 		/// This function creates the text list
 		/// </summary>
-		/// <param name="_id">id of array that contain the list</param>
-		/// <param name="_x">x position of the list</param>
-		/// <param name="_y">y position of the list</param>
-		/// <param name="_font">font of text in the list</param>
-		/// <param name="_color">color of the text in the list</param>
-		/// <param name="_backColor">color of background list</param>
-		/// <param name="_pickingId">rendering id</param>
-		/// <param name="luaCmd">return lua command to create/show list</param>
-		/// <param name="_maxOptions">max option in the list</param>
-		/// <param name="_borderWidth">widht border of the list</param>
+		/// <param name="_id">Array ID that contains the list</param>
+		/// <param name="_x">X position of the list</param>
+		/// <param name="_y">Y position of the list</param>
+		/// <param name="_font">Font of the text in the list</param>
+		/// <param name="_color">Color of the text in the list</param>
+		/// <param name="_backColor">Background color of the list</param>
+		/// <param name="_pickingId">Picking ID value for render picking</param>
+		/// <param name="luaCmd">LUA command that should be executed. It supports only const string and the default value is empty</param>
+		/// <param name="_maxOptions">Max number of options in the list</param>
+		/// <param name="_borderWidth">Border thickness of the list</param>
 		void Create(int _id, int _x, int _y, std::string _font, glm::vec4 _color, glm::vec4 _backColor, int _pickingId, const std::string & luaCmd = "", const unsigned int _maxOptions = MAX_OPTIONS_DEFAULT, const unsigned int _borderWidth =  BORDERWIDTH_DEFAULT);
 
 		/// <summary>
 		/// This function updates the text list
 		/// </summary>
-		/// <param name="_options">refresh option</param>
-		/// <param name="prefix">refresh prefix</param>
+		/// <param name="_options">Refresh options. It supports only referenced string vectors</param>
+		/// <param name="prefix">Refresh prefix. It supports only strings and the default value is empty</param>
 		void Update(std::vector<std::string> *_options, const std::string prefix = "");
 
 		/// <summary>
@@ -77,8 +75,7 @@ namespace gui {
 		/// <param name="picking">Boolean: true = picking, false = normal rendering.</param>
 		void Render(bool picking);
 
-#pragma region Static methods
-
+	#pragma region Static methods
 		/// <summary>
 		/// This function adds a text list to the array
 		/// </summary>
@@ -100,9 +97,7 @@ namespace gui {
 		/// <param name="_options">List of options</param>
 		/// <param name="prefix">The prefix of the text (e.g. "WORD_" if the word has a translation with this prefix)</param>
 		static void UpdateTextListById(int id, std::vector<std::string> *_options, const std::string prefix = "");
-
-#pragma endregion
-
+	#pragma endregion
 
 		~TextList();
 

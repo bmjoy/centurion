@@ -99,7 +99,7 @@
 
   <!-- OBJECT PROPERTIES WINDOW -->
 
-  <editorWindow id="3" name="Object properties" iframe="editor" position="x=Engine.WindowWidth/2-w/2; y=Engine.WindowHeight/2-h/2;" size="w=600; h=450;" isOpened="false">
+  <editorWindow id="3" name="EDITOR_properties" iframe="editor" position="x=Engine.WindowWidth/2-w/2; y=Engine.WindowHeight/2-h/2;" size="w=600; h=450;" isOpened="false">
     <conditionScript function="ConditionProperties">
       -- lua script
       function ConditionProperties()
@@ -123,7 +123,7 @@
 
   <!-- ADD OBJECT WINDOW -->
 
-  <editorWindow id="4" name="Add object" iframe="editor" position="x=Engine.WindowWidth/2-w/2; y=0" size="w=600; h=250;" isOpened="false">
+  <editorWindow id="4" name="EDITOR_addObject" iframe="editor" position="x=Engine.WindowWidth/2-w/2; y=0" size="w=600; h=250;" isOpened="false">
     <conditionScript function="">
       -- lua script
 
