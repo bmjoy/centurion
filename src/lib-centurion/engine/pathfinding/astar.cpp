@@ -16,8 +16,8 @@ namespace astar {
 	int *OpenNodes() { return openNodes; }
 	int *DirMap() { return dirMap; }
 
-	vector<vector<int>> readPassMatrix(string &path, string &classname) {
-		vector<vector<int>> mat;
+	vector<vector<unsigned int>> readPassMatrix(string &path, string &classname) {
+		vector<vector<unsigned int>> mat;
 		ifstream fin(path);
 		if (!fin.good()) {
 			stringstream ss;
@@ -29,7 +29,7 @@ namespace astar {
 			string line, value;
 			while (getline(fin, line)) {
 				if (line.length() > 0){
-					vector<int> line_values;
+					vector<unsigned int> line_values;
 					stringstream s(line);
 					while (getline(s, value, ',')) line_values.push_back(stoi(value));
 					mat.push_back(line_values);
@@ -38,7 +38,7 @@ namespace astar {
 		}
 		return mat;
 	}
-	bool checkAvailability(vector<vector<int>> &building_grid, vec3 &position) {
+	bool checkAvailability(vector<vector<unsigned int>> &building_grid, vec3 &position) {
 		bool b = true;
 		vec2 pos = vec2((int)position.x / astar::cellGridSize - building_grid[0].size() / 2, (int)position.y / astar::cellGridSize - building_grid.size() / 2);
 		for (int i = 0; i < building_grid.size(); i++) {
@@ -58,7 +58,7 @@ namespace astar {
 		}
 		return b;
 	}
-	void updatePassMatrix(vector<vector<int>> &building_grid, vec3 &position) {
+	void updatePassMatrix(vector<vector<unsigned int>> &building_grid, vec3 &position) {
 		vec2 pos = vec2((int)position.x / astar::cellGridSize - building_grid[0].size() / 2, (int)position.y / astar::cellGridSize - building_grid.size() / 2);
 		for (int i = 0; i < building_grid.size(); i++) {
 			for (int j = 0; j < building_grid[0].size(); j++) {
@@ -70,7 +70,7 @@ namespace astar {
 		}
 	}
 
-	void clearPassMatrix(vector<vector<int>> &building_grid, vec3 &position) {
+	void clearPassMatrix(vector<vector<unsigned int>> &building_grid, vec3 &position) {
 		vec2 pos = vec2((int)position.x / astar::cellGridSize - building_grid[0].size() / 2, (int)position.y / astar::cellGridSize - building_grid.size() / 2);
 		for (int i = 0; i < building_grid.size(); i++) {
 			for (int j = 0; j < building_grid[0].size(); j++) {

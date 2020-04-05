@@ -37,10 +37,10 @@ namespace astar {
 	int *ClosedNodes();
 	int *OpenNodes();
 	int *DirMap();
-	std::vector<std::vector<int>> readPassMatrix(std::string &path, std::string &classname);
-	void updatePassMatrix(std::vector<std::vector<int>> &building_grid, glm::vec3 &position);
-	void clearPassMatrix(std::vector<std::vector<int>> &building_grid, glm::vec3 &position);
-	bool checkAvailability(std::vector<std::vector<int>> &building_grid, glm::vec3 &position);
+	std::vector<std::vector<unsigned int>> readPassMatrix(std::string &path, std::string &classname);
+	void updatePassMatrix(std::vector<std::vector<unsigned int>> &building_grid, glm::vec3 &position);
+	void clearPassMatrix(std::vector<std::vector<unsigned int>> &building_grid, glm::vec3 &position);
+	bool checkAvailability(std::vector<std::vector<unsigned int>> &building_grid, glm::vec3 &position);
 	int getGridInfoFromPoint(float x, float y);
 	static int JDIM = 1500;
 	static int IDIM = 1000;

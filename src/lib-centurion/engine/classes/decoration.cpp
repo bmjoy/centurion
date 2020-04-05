@@ -47,7 +47,7 @@ void Decoration::create() {
 	//string pass_path = data["pass_path"].get<string>();
 	//string str_className = this->GetClassName();
 	//if (pass_grid.size() == 0) pass_grid = astar::readPassMatrix(pass_path, str_className);
-	//update_pass();
+	//UpdatePass();
 
 	//int w, h, nrChannels;
 
@@ -99,7 +99,8 @@ void Decoration::checkSettlement() {
 bool Decoration::is_placeable()
 {
 	vec3 var_position = this->GetPosition();
-	return astar::checkAvailability(pass_grid, var_position);
+	std::vector<std::vector<unsigned int>> passGrid = this->GetPass();
+	return astar::checkAvailability(passGrid, var_position);
 }
 
 void Decoration::Render(const bool picking, const unsigned int clickID, const bool not_placeable)

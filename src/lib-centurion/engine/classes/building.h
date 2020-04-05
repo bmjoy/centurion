@@ -15,10 +15,10 @@
 /// (???)Avoid overlap beetwen two buildings when a new building is about to be created.
 /// </summary>
 #ifndef RADIUS_OFFSET
-#define RADIUS_OFFSET 200
+#define RADIUS_OFFSET 100
 #endif
 
-#define MAX_DISTANCE  800
+#define MAX_DISTANCE  2000
 
 class Unit;
 namespace game { class ObjectUI; };

@@ -94,7 +94,7 @@ public:
 	/// This function returns the class name of the current object.
 	/// </summary>
 	/// <returns>The class name of the current object.</returns>
-	std::string GetClassName(void);
+	std::string GetClassName(void) const;
 	/// <summary>
 	/// This function sets the class name of the current object.
 	/// </summary>
@@ -257,8 +257,10 @@ public:
 	float get_yPos(void);
 	
 	//Pass methods
-	void update_pass(void);
-	void clear_pass(void);
+	void SetPass(std::string & path);
+	std::vector<std::vector<unsigned int>> GetPass(void) const;
+	void UpdatePass(void);
+	void ClearPass(void);
 
 	/// <summary>
 	/// (???)
@@ -349,7 +351,6 @@ protected:
 	ObjectSprite::SpriteData spriteData;
 	Player *player;
 	glm::vec3 pickingColor;
-	std::vector<std::vector<int>> pass_grid;
 	std::map<std::string, std::string> methods;
 	std::map<std::string, std::string> sounds;
 	#pragma region Protected members
@@ -372,6 +373,7 @@ private:
 	unsigned int sight;
 	float selectionRadius;
 	float radius;
+	std::vector<std::vector<unsigned int>> pass_grid;
 	glm::vec3 position;
 	std::string singularName;
 	std::string pluralName;

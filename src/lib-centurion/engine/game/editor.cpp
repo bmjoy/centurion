@@ -347,14 +347,14 @@ void Editor::handleKeyboardControls(void)
 					}
 					else {
 						cout << "[DEBUG] Settlement " << b->GetName() << " deleted!\n";
-						b->clear_pass();
+						b->ClearPass();
 						GObject::RemoveGameObject(Picking::leftClickID);
 					}
 					*/
 				}
 				else {
 					cout << "[DEBUG] Building " << b->GetSingularName() << " deleted!\n";
-					b->clear_pass();
+					b->ClearPass();
 					GObject::RemoveGameObject(Picking::leftClickID);
 				}
 			}

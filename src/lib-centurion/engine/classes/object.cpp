@@ -64,11 +64,11 @@ void GObject::SetSelectionRadius(const float par_selectionRadius)
 	this->selectionRadius = par_selectionRadius >= 0 ? par_selectionRadius : 0;
 }
 
-string GObject::GetClassName(void)
+string GObject::GetClassName(void) const
 {
 	return this->className;
 }
-void GObject::SetClassName(string parClassName)
+void GObject::SetClassName(string parClassName) 
 {
 	this->className = parClassName;
 }
@@ -184,12 +184,27 @@ Decoration* GObject::AsDecoration()
 	return (Decoration*)this;
 }
 
-void GObject::update_pass(void) 
+void GObject::SetPass(string & path)
 {
-	astar::updatePassMatrix(this->pass_grid, this->position);
+	if (this->pass_grid.size() == 0)
+	{
+		string str_className = this->GetClassName();
+		this->pass_grid = astar::readPassMatrix(path, str_className);
+	}
 }
 
-void GObject::clear_pass(void) 
+std::vector<std::vector<unsigned int>> GObject::GetPass(void) const
+{
+	return this->pass_grid;
+}
+
+void GObject::UpdatePass(void)
+{
+	std::vector<std::vector<unsigned int>> passGrid = this->GetPass();
+	astar::updatePassMatrix(passGrid, this->position);
+}
+
+void GObject::ClearPass(void) 
 {
 	astar::clearPassMatrix(this->pass_grid, this->position);
 }
@@ -211,9 +226,9 @@ bool GObject::Create(const string _className, const bool _temporary)
 	this->spriteData.pickingId = this->GetPickingID();
 	this->spriteData.pickingColor = Picking::GetPickingColorFromID(this->GetPickingID());
 
+	this->SetObjectProperties(objData);
 	if (_temporary == true) return bObjectCreated;
 	
-	this->SetObjectProperties(objData);
 	if (this->IsBuilding() == true)
 	{
 		bObjectCreated = this->AsBuilding()->SetBuildingProperties(objData);

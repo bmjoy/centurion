@@ -21,6 +21,7 @@ Building::Building(void)
 	this->bIsShipyard = false;
 	this->settlement = nullptr;
 	this->SetType("cpp_buildingclass");
+	this->SetPosition(vec3(Engine::Mouse::GetXMapCoordinate(), Engine::Mouse::GetYMapCoordinate(), 10.f));
 }
 
 Settlement *Building::GetSettlement(void)
@@ -105,7 +106,8 @@ void Building::SetPlaceable(bool placeable)
 bool Building::IsPlaceable(void)
 {
 	vec3 var_position = this->GetPosition();
-	bool placeable = astar::checkAvailability(pass_grid, var_position);
+	std::vector<std::vector<unsigned int>> passGrid = this->GetPass();
+	bool placeable = astar::checkAvailability(passGrid, var_position);
 	//string indCategory = "";
 	//bool nearToIndependent = is_near_to_independent(&indCategory);
 	//if (!this->settlement.IsIndipendent())
@@ -187,7 +189,7 @@ void Building::prepare()
 	// file pass 
 	//string str_className = this->GetClassName();
 	//if (pass_grid.size() == 0) pass_grid = astar::readPassMatrix(this->pass_path, str_className);
-	//update_pass();
+	//UpdatePass();
 
 	//vec2 spriteSize = getSpriteSize(this->ent_path);
 	//this->sprite_width = spriteSize.x;
@@ -222,6 +224,10 @@ bool Building::SetBuildingProperties(ObjectData::ObjectXMLClassData &objData)
 	//Building's properties:
 	ObjectData::TryParseString(objData.GetPropertiesMap(), "isCentralBuilding", &strProperty);
 	this->bIsCentralBuilding = strProperty == "true" ? true : false;
+	ObjectData::TryParseString(objData.GetPropertiesMap(), "pass_path", &strProperty);
+	this->pass_path = strProperty;
+	this->SetPass(strProperty);
+	UpdatePass();
 	bBuildingCreated = this->FindASettlement(this);
 	if (bBuildingCreated == true)
 	{
@@ -241,8 +247,6 @@ bool Building::SetBuildingProperties(ObjectData::ObjectXMLClassData &objData)
 		this->bCanProduceFood = strProperty == "true" ? true : false; 
 		ObjectData::TryParseString(objData.GetPropertiesMap(), "ent_path", &strProperty);
 		this->ent_path = strProperty;
-		ObjectData::TryParseString(objData.GetPropertiesMap(), "pass_path", &strProperty);
-		this->pass_path = strProperty;
 	}
 	return bBuildingCreated;
 }
@@ -345,12 +349,13 @@ vector<Settlement*> Building::settlementsList;
 bool Building::FindASettlement(Building* b)
 {
 	bool bSettlementDiscovered = false;
-	size_t numOfSettlements = Building::settlementsList.size();
-	float b_xPos = b->get_xPos();
-	float b_yPos = b->get_yPos();
+
+	if (b->IsPlaceable() == false) return bSettlementDiscovered;
 
 	if (b->bIsCentralBuilding == false)
 	{
+		const size_t numOfSettlements = Building::settlementsList.size();
+
 		if (numOfSettlements == 0)
 		{
 			return bSettlementDiscovered;
@@ -358,31 +363,44 @@ bool Building::FindASettlement(Building* b)
 		for (unsigned int settlementsCounter = 0; settlementsCounter < numOfSettlements && bSettlementDiscovered == false; settlementsCounter++)
 		{
 			//Check if the building and the settlement belong to the same player and if the settlement is not indipendent.
-			if ( (b->GetPlayer() == Building::settlementsList[settlementsCounter]->GetPlayer())
-				&& (Building::settlementsList[settlementsCounter]->IsIndipendent() == false) )
+			if ((b->GetPlayer() != Building::settlementsList[settlementsCounter]->GetPlayer())
+				|| (Building::settlementsList[settlementsCounter]->IsIndipendent() == true))
 			{
-				const vector<Building*> settBuildings = Building::settlementsList[settlementsCounter]->GetBuildingsBelongToSettlement();
-				size_t numOfBuildings = settBuildings.size();
-				for (unsigned int buildingsCounter = 0; buildingsCounter < numOfBuildings && bSettlementDiscovered == false; buildingsCounter++)
+				return bSettlementDiscovered;
+			}
+
+			bool bValidSettlement = true;
+			const vector<Building*> settBuildings = Building::settlementsList[settlementsCounter]->GetBuildingsBelongToSettlement();
+			size_t numOfBuildings = settBuildings.size();
+			for (unsigned int buildingsCounter = 0; buildingsCounter < numOfBuildings && bSettlementDiscovered == false; buildingsCounter++)
+			{
+				float b_xPos = b->get_xPos();
+				float b_yPos = b->get_yPos();
+				float xPos = settBuildings[buildingsCounter]->get_xPos();
+				float yPos = settBuildings[buildingsCounter]->get_yPos();
+				float distance = sqrt( pow(b_xPos - xPos, 2) + pow(b_yPos - yPos, 2) );
+
+				//If the two buildings are close enough 
+				bValidSettlement = (distance <= MAX_DISTANCE);
+				if (bValidSettlement == true)
 				{
-					float xPos = settBuildings[buildingsCounter]->get_xPos();
-					float yPos = settBuildings[buildingsCounter]->get_yPos();
-					float distance = sqrt(pow(b_xPos - xPos, 2) + pow(b_yPos - yPos, 2));
-					//If the two buildings are close enough 
-					if (distance <= MAX_DISTANCE)
+					bValidSettlement = true;
+					const float radius1 = b->GetRadius();
+					const float radius2 = settBuildings[buildingsCounter]->GetRadius();
+					//If the two buildings don't intersect each others
+					if (distance <= radius1 + radius2)
 					{
-						float distance2 = sqrt(pow((b_xPos - RADIUS_OFFSET) - (xPos - RADIUS_OFFSET), 2) + pow((b_yPos - RADIUS_OFFSET) - (yPos -RADIUS_OFFSET), 2));
-						//If the two buildings don't intersect each others
-						//if (distance2 > b->GetRadius() + settBuildings[buildingsCounter]->GetRadius())  
-						//(???) Come detrminare le intersezioni?
-						if(true)
-						{
-							b->settlement = Building::settlementsList[settlementsCounter];
-							bSettlementDiscovered = true;
-							bSettlementDiscovered = bSettlementDiscovered = b->settlement->AddBuildingToSettlement(b); //Here, it should be return always true.
-						}
+						bValidSettlement = false;
+						break;
 					}
 				}
+			}
+			if (bValidSettlement == true)
+			{
+				//The settlement is valid
+				b->settlement = Building::settlementsList[settlementsCounter];
+				bSettlementDiscovered = true;
+				bSettlementDiscovered = bSettlementDiscovered = b->settlement->AddBuildingToSettlement(b); //Here, it should be return always true.
 			}
 		}
 	}
