@@ -108,7 +108,7 @@ namespace gui {
 	void TextList::Render(bool picking)
 	{
 		deltaY = 0.f;
-		if (MouseIsHover() && picking) {
+		if (MouseIsHover() && !picking) {
 			ScrollOptions();
 		}
 
