@@ -5,10 +5,7 @@ MAINMENU_buttonOptions,Options,Opzioni,Options,Opciones
 MAINMENU_buttonQuit,Exit,Esci dal gioco,Sortir du jeu,Salir
 SINGLEPLAYER_buttonStart,Start!,Avvia la partita!,Commencer le jeu!,Comenzar
 SINGLEPLAYER_buttonExit,Back to menu,Menù principale,Menu principal,Menú principal
-OPTIONS_buttonApply,Apply,Applica,Appliquer,Aplicar
 OPTIONS_buttonSave,Save and close,Salva e chiudi,Sauver et fermer,Guardar y cerrar
-OPTIONS_buttonCancel,Cancel,Annulla,Annuler,Cancelar
-OPTIONS_Title,Options,Opzioni,Options,Opciones
 OPTIONS_LanguageText,Language,Lingua,Langue,Idioma
 LANG_english,English,Inglese,Anglais,Inglés
 LANG_italian,Italian,Italiano,Italien,Italiano
@@ -18,27 +15,18 @@ LANG_arabic,Arabic,Arabo,Arabe,Arabé
 GAME_pauseMenuButtonQuit,Quit,Esci dalla partita,Sortir du jeu,Salir
 GAME_pauseMenuButtonClose,Close,Chiudi il menù,Fermer le menu,Cerrar
 EDITOR_File,File,File,Fichier,Archivo
-EDITOR_File_New,New,Nuovo,Nouveau,Nuevo
-EDITOR_File_Open,Open,Apri,Ouvrir,Abrir
-EDITOR_File_Save,Save,Salva,Enregistrer,Guardar
-EDITOR_File_Exit,Exit,Esci,Sortir,Salir
 EDITOR_Edit,Edit,Modifica,Éditer,Editar
 EDITOR_Edit_UpdateNormals,Update Normals,Ricalcola Normali,Recalculer les normales,Actualizar Normales
 EDITOR_Tools,Tools,Strumenti,Outils,Herramientas
 EDITOR_Tools_AddObject,Toggle Add Object window,Attiva/Disattiva la finestra Aggiungi oggetto,Activer/Désactiver la fenêtre Ajouter un objet,Activar / Desactivar la ventana Agregar objeto
 EDITOR_Tools_TerrainBrush,Toggle terrain brushes,Attiva/Disattiva i pennelli dei terreni,Activer/Désactiver les brosses de terrain,Activar / Desactivar pinceles de terreno
-EDITOR_addObjectButtonAdd,Add,Aggiungi,Ajouter,Añadir
-EDITOR_newMapButtonClose,Close,Chiudi,Fermer,Cerrar
-EDITOR_newMapButtonCreate,Create,Crea,Creér,Crear
-EDITOR_openMapButtonClose,Close,Chiudi,Fermer,Cerrar
-EDITOR_openMapButtonOpen,Open,Apri,Ouvrir,Abierto
-EDITOR_newScenario,Create new scenario,Crea nuovo scenario,Crée a nouveau scénario,Crear nuevo escenario
+EDITOR_newScenario,Create new scenario,Crea nuovo scenario,Créer a nouveau scénario,Crear nuevo escenario
 EDITOR_newScenarioName,Choose a name (max 30 characters).,Scegli un nome (max 30 caratteri).,Choisir un nom (30 caractères maximum).,Elegir un nombre (máximo 30 caracteres).
+EDITOR_openScenario,Open scenario,Apri uno scenario,Ouvrir a scénario,Abrir un escenario
+EDITOR_saveAs,Save scenario as...,Salva scenario come...,Sauve scénario comme...,Guardar el escenario como...
 EDITOR_properties,Object properties,Proprietà dell'oggetto,Propriétés de l'objet,Propiedades del objeto
 EDITOR_propertiesName,Object name:,Nome dell'oggetto:,Nom de l'objet,Nombre del objeto:
 EDITOR_propertiesSettlement,Settlement name:,Nome dell'insediamento:,Nom de l'installation:,Nombre del asentamiento:
-EDITOR_propertiesApply,Apply,Applica,Appliquer,Aplicar
-EDITOR_propertiesCancel,Cancel,Annulla,Annuler,Cancelar
 EDITOR_defaultMapName,Untitled,Senza titolo,Sans titre,Intitulado
 EDITORTREE_buildings,Buildings,Strutture,Édifices,Edificios
 EDITORTREE_units,Units,Unità,Unités,Unidades
@@ -94,5 +82,14 @@ WORD_playersNumber,Number of players,Numero di giocatori,Nombre de joueurs,Núme
 WORD_errorCode,Error code,Codice errore,Code d'erreur,Código de error
 WORD_yes,Yes,Sì,Oui,Sí
 WORD_no,No,No,Non,No
+WORD_Close,Close,Chiudi,Fermer,Cerrar
+WORD_Save,Save,Salva,Sauver,Guardar
+WORD_Open,Open,Apri,Ouvrir,Abrir
+WORD_Create,Create,Crea,Créer,Crear
+WORD_Add,Add,Aggiungi,Ajouter,Añadir
+WORD_Apply,Apply,Applica,Appliquer,Aplicar
+WORD_Cancel,Cancel,Annulla,Annuler,Cancelar
+WORD_New,New,Nuovo,Nouveau,Nuevo
+WORD_Exit,Exit,Esci,Sortir,Salir
 RACE_Rome,Rome,Roma,Rome,Roma
 RACE_Egypt,Egypt,Egitto,Egypte,Egipto

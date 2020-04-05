@@ -129,7 +129,7 @@ void EditorMenuBar::Create(void)
 			// ------ menu title
 			EditorMenu* _menu = new EditorMenu();
 			int _menu_id = stoi(_it_menu->Attribute("id"));
-			string title = TranslationsTable::GetTranslation(string(_it_menu->Attribute("name")));
+			wstring title = TranslationsTable::GetWTranslation(string(_it_menu->Attribute("name")));
 			string luaCmd = string(_it_menu->Attribute("onclick"));
 			float titleWidth = std::max(gui::SimpleText::CalculateTextWidth(title, font) + 20.f, 60.f);
 
@@ -145,7 +145,7 @@ void EditorMenuBar::Create(void)
 			// calculate the submenu width
 			for (tinyxml2::XMLElement* _it_cmd = _it_menu->FirstChildElement(); _it_cmd != NULL; _it_cmd = _it_cmd->NextSiblingElement())
 			{
-				string optionstring = title + "_" + string(_it_cmd->Attribute("name"));
+				wstring optionstring = TranslationsTable::GetWTranslation(_it_cmd->Attribute("name"));
 				maxOptionWordSize = std::max(maxOptionWordSize, gui::SimpleText::CalculateTextWidth(optionstring, font));
 			}
 			float optionsWidth = maxOptionWordSize + 50;
@@ -156,7 +156,7 @@ void EditorMenuBar::Create(void)
 			vector<gui::SimpleText> optionsText = vector<gui::SimpleText>();
 			for (tinyxml2::XMLElement* _it_cmd = _it_menu->FirstChildElement(); _it_cmd != NULL; _it_cmd = _it_cmd->NextSiblingElement())
 			{
-				string optionstring = TranslationsTable::GetTranslation(string(_it_menu->Attribute("name")) + "_" + string(_it_cmd->Attribute("name")));
+				wstring optionstring = TranslationsTable::GetWTranslation(_it_cmd->Attribute("name"));
 				string optionLuaCmd = string(_it_cmd->FirstChildElement("onclickScript")->GetText());
 				int j = stoi(_it_cmd->Attribute("id"));
 

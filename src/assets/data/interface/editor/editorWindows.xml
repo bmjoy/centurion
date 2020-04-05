@@ -13,9 +13,16 @@
       <simpleText name="EDITOR_newScenarioName" xOffset="20" yOffset="80" />
     </simpleTextArray>
     <buttonArray>
-      <button text="EDITOR_File_Save" xOffset="320" yOffset="30">
+      <button text="WORD_Close" xOffset="335" yOffset="30">
         <onclickScript>
           --lua script
+          Editor.CloseWindow(0)
+        </onclickScript>
+      </button>
+      <button text="WORD_Close" xOffset="220" yOffset="30">
+        <onclickScript>
+          --lua script
+          Editor.CloseWindow(0)
         </onclickScript>
       </button>
     </buttonArray>
@@ -27,7 +34,7 @@
 
   <!-- OPEN SCENARIO WINDOW -->
 
-  <editorWindow id="1" name="Open scenario" iframe="editor" position="x=Engine.WindowWidth/2-w/2; y=Engine.WindowHeight/2-h/2;" size="w=400; h=320;" isOpened="false">
+  <editorWindow id="1" name="EDITOR_openScenario" iframe="editor" position="x=Engine.WindowWidth/2-w/2; y=Engine.WindowHeight/2-h/2;" size="w=400; h=370;" isOpened="false">
     <conditionScript function="">
       -- lua script
 
@@ -39,15 +46,20 @@
     </openingScript>
     <simpleTextArray></simpleTextArray>
     <buttonArray>
-      <button text="Open" xOffset="200" yOffset="60">
+      <button text="WORD_Open" xOffset="335" yOffset="30">
         <onclickScript>
           Engine.PrintToConsole(TextList.GetListById(0):GetSelectedOption())
           Editor.CloseWindow(1)
         </onclickScript>
       </button>
+      <button text="WORD_Close" xOffset="220" yOffset="30">
+        <onclickScript>
+          Editor.CloseWindow(1)
+        </onclickScript>
+      </button>
     </buttonArray>
     <textListArray>
-      <textList textListId="0" xOffset="50" yOffset="270" maxOptions="10" width="163">
+      <textList textListId="0" xOffset="50" yOffset="320" maxOptions="10" width="270">
       </textList>
     </textListArray>
     <textInputArray></textInputArray>
@@ -55,7 +67,7 @@
 
   <!-- SAVE SCENARIO WINDOW -->
 
-  <editorWindow id="2" name="EDITOR_newScenario" iframe="editor" position="x=Engine.WindowWidth/2-w/2; y=Engine.WindowHeight/2-h/2;" size="w=400; h=150;" isOpened="false">
+  <editorWindow id="2" name="EDITOR_saveAs" iframe="editor" position="x=Engine.WindowWidth/2-w/2; y=Engine.WindowHeight/2-h/2;" size="w=400; h=150;" isOpened="false">
     <conditionScript function="">
       -- lua script
     </conditionScript>
@@ -66,9 +78,16 @@
       <simpleText name="EDITOR_newScenarioName" xOffset="20" yOffset="80" />
     </simpleTextArray>
     <buttonArray>
-      <button text="EDITOR_File_Save" xOffset="320" yOffset="30">
+      <button text="WORD_Save" xOffset="335" yOffset="30">
         <onclickScript>
           --lua script
+          Editor.CloseWindow(2)
+        </onclickScript>
+      </button>
+      <button text="WORD_Close" xOffset="220" yOffset="30">
+        <onclickScript>
+          --lua script
+          Editor.CloseWindow(2)
         </onclickScript>
       </button>
     </buttonArray>
@@ -80,7 +99,7 @@
 
   <!-- OBJECT PROPERTIES WINDOW -->
 
-  <editorWindow id="3" name="Object properties" iframe="editor" position="x=Engine.WindowWidth/2-w/2; y=Engine.WindowHeight/2-h/2;" size="w=600; h=400;" isOpened="false">
+  <editorWindow id="3" name="Object properties" iframe="editor" position="x=Engine.WindowWidth/2-w/2; y=Engine.WindowHeight/2-h/2;" size="w=600; h=450;" isOpened="false">
     <conditionScript function="ConditionProperties">
       -- lua script
       function ConditionProperties()
@@ -104,7 +123,7 @@
 
   <!-- ADD OBJECT WINDOW -->
 
-  <editorWindow id="4" name="Add object" iframe="editor" position="x=Engine.WindowWidth/2-w/2; y=0" size="w=600; h=200;" isOpened="false">
+  <editorWindow id="4" name="Add object" iframe="editor" position="x=Engine.WindowWidth/2-w/2; y=0" size="w=600; h=250;" isOpened="false">
     <conditionScript function="">
       -- lua script
 
@@ -120,7 +139,7 @@
     </openingScript>
     <simpleTextArray></simpleTextArray>
     <buttonArray>
-      <button text="Add" xOffset="500" yOffset="30">
+      <button text="WORD_Add" xOffset="500" yOffset="30">
         <onclickScript>
           Editor.InsertObject(TextList.GetListById(1):GetSelectedOption(), TextList.GetListById(3):GetSelectedOption())
         </onclickScript>

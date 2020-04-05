@@ -1,103 +1,96 @@
-﻿<translationTable language="spanish">
-	<entry stringName="MAINMENU_buttonSinglePlayer" result="Un jugador"/>
-	<entry stringName="MAINMENU_buttonEditor" result="Editor"/>
-	<entry stringName="MAINMENU_buttonOptions" result="Opciones"/>
-	<entry stringName="MAINMENU_buttonQuit" result="Salir"/>
-	<entry stringName="SINGLEPLAYER_buttonStart" result="Comenzar"/>
-	<entry stringName="SINGLEPLAYER_buttonExit" result="Menú principal"/>
-	<entry stringName="OPTIONS_buttonApply" result="Aplicar"/>
-	<entry stringName="OPTIONS_buttonSave" result="Guardar y cerrar"/>
-	<entry stringName="OPTIONS_buttonCancel" result="Cancelar"/>
-	<entry stringName="OPTIONS_Title" result="Opciones"/>
-	<entry stringName="OPTIONS_LanguageText" result="Idioma"/>
-	<entry stringName="LANG_english" result="Inglés"/>
-	<entry stringName="LANG_italian" result="Italiano"/>
-	<entry stringName="LANG_spanish" result="Español"/>
-	<entry stringName="LANG_french" result="Francés"/>
-	<entry stringName="LANG_arabic" result="Arabé"/>
-	<entry stringName="GAME_pauseMenuButtonQuit" result="Salir"/>
-	<entry stringName="GAME_pauseMenuButtonClose" result="Cerrar"/>
-	<entry stringName="EDITOR_File" result="Archivo"/>
-	<entry stringName="EDITOR_File_New" result="Nuevo"/>
-	<entry stringName="EDITOR_File_Open" result="Abrir"/>
-	<entry stringName="EDITOR_File_Save" result="Guardar"/>
-	<entry stringName="EDITOR_File_Exit" result="Salir"/>
-	<entry stringName="EDITOR_Edit" result="Editar"/>
-	<entry stringName="EDITOR_Edit_UpdateNormals" result="Actualizar Normales"/>
-	<entry stringName="EDITOR_Tools" result="Herramientas"/>
-	<entry stringName="EDITOR_Tools_AddObject" result='Activar / Desactivar la ventana "Agregar objeto"'/>
-	<entry stringName="EDITOR_Tools_TerrainBrush" result="Activar / Desactivar pinceles de terreno"/>
-	<entry stringName="EDITOR_addObjectButtonAdd" result="Añadir"/>
-	<entry stringName="EDITOR_newMapButtonClose" result="Cerrar"/>
-	<entry stringName="EDITOR_newMapButtonCreate" result="Crear"/>
-	<entry stringName="EDITOR_openMapButtonClose" result="Cerrar"/>
-	<entry stringName="EDITOR_openMapButtonOpen" result="Abierto"/>
-	<entry stringName="EDITOR_newScenario" result="Crear nuevo escenario"/>
-	<entry stringName="EDITOR_newScenarioName" result="Elegir un nombre (máximo 30 caracteres)."/>
-	<entry stringName="EDITOR_properties" result="Propiedades del objeto"/>
-	<entry stringName="EDITOR_propertiesName" result="Nombre del objeto:"/>
-	<entry stringName="EDITOR_propertiesSettlement" result="Nombre del asentamiento:"/>
-	<entry stringName="EDITOR_propertiesApply" result="Aplicar"/>
-	<entry stringName="EDITOR_propertiesCancel" result="Cancelar"/>
-	<entry stringName="EDITOR_defaultMapName" result="Intitulado"/>
-	<entry stringName="EDITORTREE_buildings" result="Edificios"/>
-	<entry stringName="EDITORTREE_units" result="Unidades"/>
-	<entry stringName="EDITORTREE_decorations" result="Decoraciones"/>
-	<entry stringName="EDITORTREE_egyptianstronghold" result="Fortaleza egipcia"/>
-	<entry stringName="EDITORTREE_romanstronghold" result="Fortaleza romana"/>
-	<entry stringName="EDITORTREE_outposts" result="Puesto de Avanzada"/>
-	<entry stringName="EDITORTREE_trees" result="Árboles"/>
-	<entry stringName="EDITORBRUSH_GRASS" result="Hierba"/>
-	<entry stringName="EDITORBRUSH_GRASS_1" result="Hierba 1"/>
-	<entry stringName="EDITORBRUSH_GRASS_2" result="Hierba 2"/>
-	<entry stringName="EDITORBRUSH_GRASS_3" result="Hierba 3"/>
-	<entry stringName="EDITORBRUSH_ROAD_1" result="Carretera 1"/>
-	<entry stringName="EDITORBRUSH_ROAD_2" result="Carretera 2"/>
-	<entry stringName="EDITORBRUSH_ROAD_3" result="Carretera 3"/>
-	<entry stringName="EDITORBRUSH_GROUND_1" result="Terreno 1"/>
-	<entry stringName="EDITORBRUSH_GROUND_2" result="Terreno 2"/>
-	<entry stringName="EDITORBRUSH_GROUND_3" result="Terreno 3"/>
-	<entry stringName="EDITORBRUSH_SAND_1" result="Arena 1"/>
-	<entry stringName="EDITOR_noSettlementsAround" result="--"/>
-	<entry stringName="EDITOR_impassablePoint" result="--"/>
-	<entry stringName="EDITOR_canAddStructure" result="--"/>
-	<entry stringName="QUESTION_deleteAll" result="--"/>
-	<entry stringName="QUESTION_overwriteMap" result="El nombre escrito corresponde a un mapa existente"/>
-	<entry stringName="WORD_EBarracks" result="Cuartel"/>
-	<entry stringName="WORD_EBlacksmith" result="Herrería"/>
-	<entry stringName="WORD_EOsiristemple" result="Templo de Osiris"/>
-	<entry stringName="WORD_ETavern" result="Taberna"/>
-	<entry stringName="WORD_ETempleOfHorusAndAnubis" result="Templo de Horus y Anubis"/>
-	<entry stringName="WORD_ETownhall" result="Foro"/>
-	<entry stringName="WORD_RArena" result="Arena"/>
-	<entry stringName="WORD_RBarracks" result="Cuartel"/>
-	<entry stringName="WORD_RBlacksmith" result="Herrería"/>
-	<entry stringName="WORD_RTavern" result="Taberna"/>
-	<entry stringName="WORD_RTemple" result="Templo"/>
-	<entry stringName="WORD_RTownhall" result="Foro"/>
-	<entry stringName="WORD_ROutpost" result="Puesto de Avanzada romano"/>
-	<entry stringName="WORD_Broadleaf_1" result="--"/>
-	<entry stringName="WORD_Broadleaf_2" result="--"/>
-	<entry stringName="WORD_Cypress" result="Ciprès"/>
-	<entry stringName="WORD_Jasmimmanga" result="Planta tropical 1"/>
-	<entry stringName="WORD_Palm_1" result="Palmera 1"/>
-	<entry stringName="WORD_gameStarted" result="El juego se está iniciando..."/>
-	<entry stringName="WORD_player_1" result="Jugador 1"/>
-	<entry stringName="WORD_player_2" result="Jugador 2"/>
-	<entry stringName="WORD_player_3" result="Jugador 3"/>
-	<entry stringName="WORD_player_4" result="Jugador 4"/>
-	<entry stringName="WORD_player_5" result="Jugador 5"/>
-	<entry stringName="WORD_player_6" result="Jugador 6"/>
-	<entry stringName="WORD_player_7" result="Jugador 7"/>
-	<entry stringName="WORD_player_8" result="Jugador 8"/>
-	<entry stringName="WORD_playersNumber" result="Número de jugadores"/>
-	<entry stringName="WORD_errorCode" result="Código de error"/>
-	<entry stringName="WORD_yes" result="Sí"/>
-	<entry stringName="WORD_no" result="No"/>
-	<entry stringName="RACE_Rome" result="Roma"/>
-	<entry stringName="RACE_Egypt" result="Egipto"/>
-	<entry stringName="ERROR_data" result="No se puede encontrar o procesar el fichero DATA.\nLa aplicación va a ser cerrada automáticamente."/>
-	<entry stringName="ERROR_settlements" result="No se puede encontrar o procesar el fichero SETTLEMENTS.\nLa aplicación va a ser cerrada automáticamente."/>
-	<entry stringName="ERROR_menuData" result="No se puede encontrar o procesar el fichero MENU DATA.\nLa aplicación va a ser cerrada automáticamente."/>
-	<entry stringName="WARNING_audioDevice" result="No se puede encontrar (o comunicar con) el dispositivo de audio.\nNo se reproducirá ningún sonido mientras persista el error."/>
+<translationTable language="spanish">
+	<entry stringName="MAINMENU_buttonSinglePlayer" result="Un jugador" />
+	<entry stringName="MAINMENU_buttonEditor" result="Editor" />
+	<entry stringName="MAINMENU_buttonOptions" result="Opciones" />
+	<entry stringName="MAINMENU_buttonQuit" result="Salir" />
+	<entry stringName="SINGLEPLAYER_buttonStart" result="Comenzar" />
+	<entry stringName="SINGLEPLAYER_buttonExit" result="Menú principal" />
+	<entry stringName="OPTIONS_buttonSave" result="Guardar y cerrar" />
+	<entry stringName="OPTIONS_LanguageText" result="Idioma" />
+	<entry stringName="LANG_english" result="Inglés" />
+	<entry stringName="LANG_italian" result="Italiano" />
+	<entry stringName="LANG_spanish" result="Español" />
+	<entry stringName="LANG_french" result="Francés" />
+	<entry stringName="LANG_arabic" result="Arabé" />
+	<entry stringName="GAME_pauseMenuButtonQuit" result="Salir" />
+	<entry stringName="GAME_pauseMenuButtonClose" result="Cerrar" />
+	<entry stringName="EDITOR_File" result="Archivo" />
+	<entry stringName="EDITOR_Edit" result="Editar" />
+	<entry stringName="EDITOR_Edit_UpdateNormals" result="Actualizar Normales" />
+	<entry stringName="EDITOR_Tools" result="Herramientas" />
+	<entry stringName="EDITOR_Tools_AddObject" result="Activar / Desactivar la ventana Agregar objeto" />
+	<entry stringName="EDITOR_Tools_TerrainBrush" result="Activar / Desactivar pinceles de terreno" />
+	<entry stringName="EDITOR_newScenario" result="Crear nuevo escenario" />
+	<entry stringName="EDITOR_newScenarioName" result="Elegir un nombre (máximo 30 caracteres)." />
+	<entry stringName="EDITOR_openScenario" result="Abrir un escenario" />
+	<entry stringName="EDITOR_saveAs" result="Guardar el escenario como..." />
+	<entry stringName="EDITOR_properties" result="Propiedades del objeto" />
+	<entry stringName="EDITOR_propertiesName" result="Nombre del objeto:" />
+	<entry stringName="EDITOR_propertiesSettlement" result="Nombre del asentamiento:" />
+	<entry stringName="EDITOR_defaultMapName" result="Intitulado" />
+	<entry stringName="EDITORTREE_buildings" result="Edificios" />
+	<entry stringName="EDITORTREE_units" result="Unidades" />
+	<entry stringName="EDITORTREE_decorations" result="Decoraciones" />
+	<entry stringName="EDITORTREE_egyptianstronghold" result="Fortaleza egipcia" />
+	<entry stringName="EDITORTREE_romanstronghold" result="Fortaleza romana" />
+	<entry stringName="EDITORTREE_outposts" result="Puesto de Avanzada" />
+	<entry stringName="EDITORTREE_trees" result="Árboles" />
+	<entry stringName="EDITORBRUSH_GRASS" result="Hierba" />
+	<entry stringName="EDITORBRUSH_GRASS_1" result="Hierba 1" />
+	<entry stringName="EDITORBRUSH_GRASS_2" result="Hierba 2" />
+	<entry stringName="EDITORBRUSH_GRASS_3" result="Hierba 3" />
+	<entry stringName="EDITORBRUSH_ROAD_1" result="Carretera 1" />
+	<entry stringName="EDITORBRUSH_ROAD_2" result="Carretera 2" />
+	<entry stringName="EDITORBRUSH_ROAD_3" result="Carretera 3" />
+	<entry stringName="EDITORBRUSH_GROUND_1" result="Terreno 1" />
+	<entry stringName="EDITORBRUSH_GROUND_2" result="Terreno 2" />
+	<entry stringName="EDITORBRUSH_GROUND_3" result="Terreno 3" />
+	<entry stringName="EDITORBRUSH_SAND_1" result="Arena 1" />
+	<entry stringName="EDITOR_noSettlementsAround" result="--" />
+	<entry stringName="EDITOR_impassablePoint" result="--" />
+	<entry stringName="EDITOR_canAddStructure" result="--" />
+	<entry stringName="QUESTION_deleteAll" result="--" />
+	<entry stringName="QUESTION_overwriteMap" result="El nombre escrito corresponde a un mapa existente" />
+	<entry stringName="WORD_EBarracks" result="Cuartel" />
+	<entry stringName="WORD_EBlacksmith" result="Herrería" />
+	<entry stringName="WORD_EOsiristemple" result="Templo de Osiris" />
+	<entry stringName="WORD_ETavern" result="Taberna" />
+	<entry stringName="WORD_ETempleOfHorusAndAnubis" result="Templo de Horus y Anubis" />
+	<entry stringName="WORD_ETownhall" result="Foro" />
+	<entry stringName="WORD_RArena" result="Arena" />
+	<entry stringName="WORD_RBarracks" result="Cuartel" />
+	<entry stringName="WORD_RBlacksmith" result="Herrería" />
+	<entry stringName="WORD_RTavern" result="Taberna" />
+	<entry stringName="WORD_RTemple" result="Templo" />
+	<entry stringName="WORD_RTownhall" result="Foro" />
+	<entry stringName="WORD_ROutpost" result="Puesto de Avanzada romano" />
+	<entry stringName="WORD_Broadleaf_1" result="--" />
+	<entry stringName="WORD_Broadleaf_2" result="--" />
+	<entry stringName="WORD_Cypress" result="Ciprès" />
+	<entry stringName="WORD_Jasmimmanga" result="Planta tropical 1" />
+	<entry stringName="WORD_Palm_1" result="Palmera 1" />
+	<entry stringName="WORD_gameStarted" result="El juego se está iniciando..." />
+	<entry stringName="WORD_player_1" result="Jugador 1" />
+	<entry stringName="WORD_player_2" result="Jugador 2" />
+	<entry stringName="WORD_player_3" result="Jugador 3" />
+	<entry stringName="WORD_player_4" result="Jugador 4" />
+	<entry stringName="WORD_player_5" result="Jugador 5" />
+	<entry stringName="WORD_player_6" result="Jugador 6" />
+	<entry stringName="WORD_player_7" result="Jugador 7" />
+	<entry stringName="WORD_player_8" result="Jugador 8" />
+	<entry stringName="WORD_playersNumber" result="Número de jugadores" />
+	<entry stringName="WORD_errorCode" result="Código de error" />
+	<entry stringName="WORD_yes" result="Sí" />
+	<entry stringName="WORD_no" result="No" />
+	<entry stringName="WORD_Close" result="Cerrar" />
+	<entry stringName="WORD_Save" result="Guardar" />
+	<entry stringName="WORD_Open" result="Abrir" />
+	<entry stringName="WORD_Create" result="Crear" />
+	<entry stringName="WORD_Add" result="Añadir" />
+	<entry stringName="WORD_Apply" result="Aplicar" />
+	<entry stringName="WORD_Cancel" result="Cancelar" />
+	<entry stringName="WORD_New" result="Nuevo" />
+	<entry stringName="WORD_Exit" result="Salir" />
+	<entry stringName="RACE_Rome" result="Roma" />
+	<entry stringName="RACE_Egypt" result="Egipto" />
 </translationTable>

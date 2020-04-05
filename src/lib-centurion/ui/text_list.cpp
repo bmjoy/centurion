@@ -5,6 +5,8 @@
 #include <picking.h>
 #include <hector-lua.h>
 
+#include <encoding.hpp>
+
 #include <translationsTable.h>
 
 using namespace std;
@@ -74,7 +76,14 @@ namespace gui {
 		float borderwidthvar = 0.f;
 		selectedOption = options[0];
 		for (int i = 0; i < options.size(); i++) {
-			wstring option = TranslationsTable::GetWTranslation(prefix + options[i]);
+			wstring option;
+			if (prefix == "")
+			{
+				option = encode::GetWideString(options[i].c_str());
+			}
+			else {
+				option = TranslationsTable::GetWTranslation(prefix + options[i]);
+			}
 
 			float _y = y - (i + 1) * optionsHeight;
 

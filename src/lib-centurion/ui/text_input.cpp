@@ -76,7 +76,7 @@ namespace gui {
 					static_text.create_static(currentText, cursorPosition + 1, "tahoma_15px", xPos, yPos, "left", "normal", vec4(255.f));
 				}
 
-				text_cursor.render(vec4(255.f), vec4(), false, 0, xPos + static_text.get_width(cursorPosition), yPos);
+				text_cursor.render(vec4(255.f), vec4(), false, 0, xPos + static_text.get_width(cursorPosition) + 1, yPos + 1);
 			}
 			static_text.render_static();
 		}

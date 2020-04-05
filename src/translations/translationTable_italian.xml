@@ -4,11 +4,8 @@
 	<entry stringName="MAINMENU_buttonOptions" result="Opzioni" />
 	<entry stringName="MAINMENU_buttonQuit" result="Esci dal gioco" />
 	<entry stringName="SINGLEPLAYER_buttonStart" result="Avvia la partita!" />
-	<entry stringName="SINGLEPLAYER_buttonExit" result="Menù principale" />
-	<entry stringName="OPTIONS_buttonApply" result="Applica" />
+	<entry stringName="SINGLEPLAYER_buttonExit" result="MenÃ¹ principale" />
 	<entry stringName="OPTIONS_buttonSave" result="Salva e chiudi" />
-	<entry stringName="OPTIONS_buttonCancel" result="Annulla" />
-	<entry stringName="OPTIONS_Title" result="Opzioni" />
 	<entry stringName="OPTIONS_LanguageText" result="Lingua" />
 	<entry stringName="LANG_english" result="Inglese" />
 	<entry stringName="LANG_italian" result="Italiano" />
@@ -16,32 +13,23 @@
 	<entry stringName="LANG_french" result="Francese" />
 	<entry stringName="LANG_arabic" result="Arabo" />
 	<entry stringName="GAME_pauseMenuButtonQuit" result="Esci dalla partita" />
-	<entry stringName="GAME_pauseMenuButtonClose" result="Chiudi il menù" />
+	<entry stringName="GAME_pauseMenuButtonClose" result="Chiudi il menÃ¹" />
 	<entry stringName="EDITOR_File" result="File" />
-	<entry stringName="EDITOR_File_New" result="Nuovo" />
-	<entry stringName="EDITOR_File_Open" result="Apri" />
-	<entry stringName="EDITOR_File_Save" result="Salva" />
-	<entry stringName="EDITOR_File_Exit" result="Esci" />
 	<entry stringName="EDITOR_Edit" result="Modifica" />
 	<entry stringName="EDITOR_Edit_UpdateNormals" result="Ricalcola Normali" />
 	<entry stringName="EDITOR_Tools" result="Strumenti" />
 	<entry stringName="EDITOR_Tools_AddObject" result="Attiva/Disattiva la finestra Aggiungi oggetto" />
 	<entry stringName="EDITOR_Tools_TerrainBrush" result="Attiva/Disattiva i pennelli dei terreni" />
-	<entry stringName="EDITOR_addObjectButtonAdd" result="Aggiungi" />
-	<entry stringName="EDITOR_newMapButtonClose" result="Chiudi" />
-	<entry stringName="EDITOR_newMapButtonCreate" result="Crea" />
-	<entry stringName="EDITOR_openMapButtonClose" result="Chiudi" />
-	<entry stringName="EDITOR_openMapButtonOpen" result="Apri" />
 	<entry stringName="EDITOR_newScenario" result="Crea nuovo scenario" />
 	<entry stringName="EDITOR_newScenarioName" result="Scegli un nome (max 30 caratteri)." />
-	<entry stringName="EDITOR_properties" result="Proprietà dell'oggetto" />
+	<entry stringName="EDITOR_openScenario" result="Apri uno scenario" />
+	<entry stringName="EDITOR_saveAs" result="Salva scenario come..." />
+	<entry stringName="EDITOR_properties" result="ProprietÃ  dell'oggetto" />
 	<entry stringName="EDITOR_propertiesName" result="Nome dell'oggetto:" />
 	<entry stringName="EDITOR_propertiesSettlement" result="Nome dell'insediamento:" />
-	<entry stringName="EDITOR_propertiesApply" result="Applica" />
-	<entry stringName="EDITOR_propertiesCancel" result="Annulla" />
 	<entry stringName="EDITOR_defaultMapName" result="Senza titolo" />
 	<entry stringName="EDITORTREE_buildings" result="Strutture" />
-	<entry stringName="EDITORTREE_units" result="Unità" />
+	<entry stringName="EDITORTREE_units" result="UnitÃ " />
 	<entry stringName="EDITORTREE_decorations" result="Decorazioni" />
 	<entry stringName="EDITORTREE_egyptianstronghold" result="Fortezza egizia" />
 	<entry stringName="EDITORTREE_romanstronghold" result="Fortezza romana" />
@@ -58,11 +46,11 @@
 	<entry stringName="EDITORBRUSH_GROUND_2" result="Terra 2" />
 	<entry stringName="EDITORBRUSH_GROUND_3" result="Terra 3" />
 	<entry stringName="EDITORBRUSH_SAND_1" result="Sabbia 1" />
-	<entry stringName="EDITOR_noSettlementsAround" result="Impossibile posizionare la struttura nel punto selezionato, poiché non vi sono insediamenti nelle vicinanze." />
+	<entry stringName="EDITOR_noSettlementsAround" result="Impossibile posizionare la struttura nel punto selezionato, poichÃ© non vi sono insediamenti nelle vicinanze." />
 	<entry stringName="EDITOR_impassablePoint" result="Impossibile posizionare la struttura nel punto selezionato, in quanto si tratta di un luogo scosceso o inaccessibile, come il mare." />
 	<entry stringName="EDITOR_canAddStructure" result="Clicca con il tasto SINISTRO del mouse per posizionare la struttura nel punto desiderato. Premi il tastro DESTRO per annullare l'operazione." />
-	<entry stringName="QUESTION_deleteAll" result="Con la cancellazione di questa struttura sarà eliminato anche il resto dell'insediamento. Vuoi procedere con l'operazione?" />
-	<entry stringName="QUESTION_overwriteMap" result="Il nome digitato corrisponde ad una mappa già esistente. Vuoi sovrascriverla?" />
+	<entry stringName="QUESTION_deleteAll" result="Con la cancellazione di questa struttura sarÃ  eliminato anche il resto dell'insediamento. Vuoi procedere con l'operazione?" />
+	<entry stringName="QUESTION_overwriteMap" result="Il nome digitato corrisponde ad una mappa giÃ  esistente. Vuoi sovrascriverla?" />
 	<entry stringName="WORD_EBarracks" result="Caserma" />
 	<entry stringName="WORD_EBlacksmith" result="Fucina" />
 	<entry stringName="WORD_EOsiristemple" result="Tempio di Osiris" />
@@ -92,8 +80,17 @@
 	<entry stringName="WORD_player_8" result="Giocatore 8" />
 	<entry stringName="WORD_playersNumber" result="Numero di giocatori" />
 	<entry stringName="WORD_errorCode" result="Codice errore" />
-	<entry stringName="WORD_yes" result="Sì" />
+	<entry stringName="WORD_yes" result="SÃ¬" />
 	<entry stringName="WORD_no" result="No" />
+	<entry stringName="WORD_Close" result="Chiudi" />
+	<entry stringName="WORD_Save" result="Salva" />
+	<entry stringName="WORD_Open" result="Apri" />
+	<entry stringName="WORD_Create" result="Crea" />
+	<entry stringName="WORD_Add" result="Aggiungi" />
+	<entry stringName="WORD_Apply" result="Applica" />
+	<entry stringName="WORD_Cancel" result="Annulla" />
+	<entry stringName="WORD_New" result="Nuovo" />
+	<entry stringName="WORD_Exit" result="Esci" />
 	<entry stringName="RACE_Rome" result="Roma" />
 	<entry stringName="RACE_Egypt" result="Egitto" />
 </translationTable>

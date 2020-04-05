@@ -5,10 +5,7 @@
 	<entry stringName="MAINMENU_buttonQuit" result="Exit" />
 	<entry stringName="SINGLEPLAYER_buttonStart" result="Start!" />
 	<entry stringName="SINGLEPLAYER_buttonExit" result="Back to menu" />
-	<entry stringName="OPTIONS_buttonApply" result="Apply" />
 	<entry stringName="OPTIONS_buttonSave" result="Save and close" />
-	<entry stringName="OPTIONS_buttonCancel" result="Cancel" />
-	<entry stringName="OPTIONS_Title" result="Options" />
 	<entry stringName="OPTIONS_LanguageText" result="Language" />
 	<entry stringName="LANG_english" result="English" />
 	<entry stringName="LANG_italian" result="Italian" />
@@ -18,27 +15,18 @@
 	<entry stringName="GAME_pauseMenuButtonQuit" result="Quit" />
 	<entry stringName="GAME_pauseMenuButtonClose" result="Close" />
 	<entry stringName="EDITOR_File" result="File" />
-	<entry stringName="EDITOR_File_New" result="New" />
-	<entry stringName="EDITOR_File_Open" result="Open" />
-	<entry stringName="EDITOR_File_Save" result="Save" />
-	<entry stringName="EDITOR_File_Exit" result="Exit" />
 	<entry stringName="EDITOR_Edit" result="Edit" />
 	<entry stringName="EDITOR_Edit_UpdateNormals" result="Update Normals" />
 	<entry stringName="EDITOR_Tools" result="Tools" />
 	<entry stringName="EDITOR_Tools_AddObject" result="Toggle Add Object window" />
 	<entry stringName="EDITOR_Tools_TerrainBrush" result="Toggle terrain brushes" />
-	<entry stringName="EDITOR_addObjectButtonAdd" result="Add" />
-	<entry stringName="EDITOR_newMapButtonClose" result="Close" />
-	<entry stringName="EDITOR_newMapButtonCreate" result="Create" />
-	<entry stringName="EDITOR_openMapButtonClose" result="Close" />
-	<entry stringName="EDITOR_openMapButtonOpen" result="Open" />
 	<entry stringName="EDITOR_newScenario" result="Create new scenario" />
 	<entry stringName="EDITOR_newScenarioName" result="Choose a name (max 30 characters)." />
+	<entry stringName="EDITOR_openScenario" result="Open scenario" />
+	<entry stringName="EDITOR_saveAs" result="Save scenario as..." />
 	<entry stringName="EDITOR_properties" result="Object properties" />
 	<entry stringName="EDITOR_propertiesName" result="Object name:" />
 	<entry stringName="EDITOR_propertiesSettlement" result="Settlement name:" />
-	<entry stringName="EDITOR_propertiesApply" result="Apply" />
-	<entry stringName="EDITOR_propertiesCancel" result="Cancel" />
 	<entry stringName="EDITOR_defaultMapName" result="Untitled" />
 	<entry stringName="EDITORTREE_buildings" result="Buildings" />
 	<entry stringName="EDITORTREE_units" result="Units" />
@@ -94,6 +82,15 @@
 	<entry stringName="WORD_errorCode" result="Error code" />
 	<entry stringName="WORD_yes" result="Yes" />
 	<entry stringName="WORD_no" result="No" />
+	<entry stringName="WORD_Close" result="Close" />
+	<entry stringName="WORD_Save" result="Save" />
+	<entry stringName="WORD_Open" result="Open" />
+	<entry stringName="WORD_Create" result="Create" />
+	<entry stringName="WORD_Add" result="Add" />
+	<entry stringName="WORD_Apply" result="Apply" />
+	<entry stringName="WORD_Cancel" result="Cancel" />
+	<entry stringName="WORD_New" result="New" />
+	<entry stringName="WORD_Exit" result="Exit" />
 	<entry stringName="RACE_Rome" result="Rome" />
 	<entry stringName="RACE_Egypt" result="Egypt" />
 </translationTable>

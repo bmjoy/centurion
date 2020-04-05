@@ -1,4 +1,5 @@
 import pandas as pd
+import codecs
 
 def GenerateTranslationsTableXml():
     try:
@@ -7,7 +8,7 @@ def GenerateTranslationsTableXml():
         languages = df.columns.values 
         files = []
         for lan in languages:
-            f = open("translationTable_" + lan + ".xml", "w")
+            f = codecs.open("translationTable_" + lan + ".xml", "w", "utf-8")
             f.write("<translationTable language=\"" + lan + "\">\n")
             files.append(f)
 

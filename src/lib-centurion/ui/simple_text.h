@@ -18,7 +18,7 @@ namespace gui {
 	/// </summary>
 	class SimpleText {
 	public:
-		static float CalculateTextWidth(std::string text, std::string font, std::string fontWeight = "normal");
+		static float CalculateTextWidth(std::wstring text, std::string font, std::string fontWeight = "normal");
 		SimpleText(std::string Type = "static", bool Shadow = false);
 		
 		/// <summary>

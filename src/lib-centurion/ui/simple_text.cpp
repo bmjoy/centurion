@@ -10,7 +10,7 @@ using namespace glm;
 
 namespace gui {
 
-	float SimpleText::CalculateTextWidth(string text, string font, string fontWeight)
+	float SimpleText::CalculateTextWidth(wstring text, string font, string fontWeight)
 	{
 		gui::SimpleText temptext = gui::SimpleText("static");
 		temptext.create_static(text, font, 0, 0, "center", "middle", vec4(255), fontWeight);

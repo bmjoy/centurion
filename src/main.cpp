@@ -17,7 +17,7 @@ int main(int numArgs, char *args[]) {
 			Engine::GameClose();
 		}
 	}
-	
+
 	else {
 		return 0;
 	}

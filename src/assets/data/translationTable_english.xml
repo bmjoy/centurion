@@ -1,99 +1,96 @@
-﻿<translationTable language="english">
-    <entry stringName="MAINMENU_buttonSinglePlayer" result="Singleplayer"/>
-	<entry stringName="MAINMENU_buttonEditor" result="Editor"/>
-	<entry stringName="MAINMENU_buttonOptions" result="Options"/>
-	<entry stringName="MAINMENU_buttonQuit" result="Exit"/>
-	<entry stringName="SINGLEPLAYER_buttonStart" result="Start!"/>
-	<entry stringName="SINGLEPLAYER_buttonExit" result="Back to menu"/>
-	<entry stringName="OPTIONS_buttonApply" result="Apply"/>
-	<entry stringName="OPTIONS_buttonSave" result="Save and close"/>
-	<entry stringName="OPTIONS_buttonCancel" result="Cancel"/>
-	<entry stringName="OPTIONS_Title" result="Options"/>
-	<entry stringName="OPTIONS_LanguageText" result="Language"/>
-	<entry stringName="LANG_english" result="English"/>
-	<entry stringName="LANG_italian" result="Italian"/>
-	<entry stringName="LANG_spanish" result="Spanish"/>
-	<entry stringName="LANG_french" result="French"/>
-	<entry stringName="LANG_arabic" result="Arabic"/>
-	<entry stringName="GAME_pauseMenuButtonQuit" result="Quit"/>
-	<entry stringName="GAME_pauseMenuButtonClose" result="Close"/>
-	<entry stringName="EDITOR_File" result="File"/>
-	<entry stringName="EDITOR_File_New" result="New"/>
-	<entry stringName="EDITOR_File_Open" result="Open"/>
-	<entry stringName="EDITOR_File_Save" result="Save"/>
-	<entry stringName="EDITOR_File_Exit" result="Exit"/>
-	<entry stringName="EDITOR_Edit" result="Edit"/>
-	<entry stringName="EDITOR_Edit_UpdateNormals" result="Update Normals"/>
-	<entry stringName="EDITOR_Tools" result="Tools"/>
-	<entry stringName="EDITOR_Tools_AddObject" result='Toggle "Add Object" window'/>
-	<entry stringName="EDITOR_Tools_TerrainBrush" result="Toggle terrain brushes"/>
-	<entry stringName="EDITOR_addObjectButtonAdd" result="Add"/>
-	<entry stringName="EDITOR_newMapButtonClose" result="Close"/>
-	<entry stringName="EDITOR_newMapButtonCreate" result="Create"/>
-	<entry stringName="EDITOR_openMapButtonClose" result="Close"/>
-	<entry stringName="EDITOR_openMapButtonOpen" result="Open"/>
-	<entry stringName="EDITOR_newScenario" result="Create new scenario"/>
-	<entry stringName="EDITOR_newScenarioName" result="Choose a name (max 30 characters)."/>
-	<entry stringName="EDITOR_properties" result="Object properties"/>
-	<entry stringName="EDITOR_propertiesName" result="Object name:"/>
-	<entry stringName="EDITOR_propertiesSettlement" result="Settlement name:"/>
-	<entry stringName="EDITOR_propertiesApply" result="Apply"/>
-	<entry stringName="EDITOR_propertiesCancel" result="Cancel"/>
-	<entry stringName="EDITOR_defaultMapName" result="Untitled"/>
-	<entry stringName="EDITORTREE_buildings" result="Buildings"/>
-	<entry stringName="EDITORTREE_units" result="Units"/>
-	<entry stringName="EDITORTREE_decorations" result="Decorations"/>
-	<entry stringName="EDITORTREE_egyptianstronghold" result="Egyptian stronghold"/>
-	<entry stringName="EDITORTREE_romanstronghold" result="Roman stronghold"/>
-	<entry stringName="EDITORTREE_outposts" result="Outposts"/>
-	<entry stringName="EDITORTREE_trees" result="Trees"/>
-	<entry stringName="EDITORBRUSH_GRASS" result="Grass"/>
-	<entry stringName="EDITORBRUSH_GRASS_1" result="Grass 1"/>
-	<entry stringName="EDITORBRUSH_GRASS_2" result="Grass 2"/>
-	<entry stringName="EDITORBRUSH_GRASS_3" result="Grass 3"/>
-	<entry stringName="EDITORBRUSH_ROAD_1" result="Road 1"/>
-	<entry stringName="EDITORBRUSH_ROAD_2" result="Road 2"/>
-	<entry stringName="EDITORBRUSH_ROAD_3" result="Road 3"/>
-	<entry stringName="EDITORBRUSH_GROUND_1" result="Ground 1"/>
-	<entry stringName="EDITORBRUSH_GROUND_2" result="Ground 2"/>
-	<entry stringName="EDITORBRUSH_GROUND_3" result="Ground 3"/>
-	<entry stringName="EDITORBRUSH_SAND_1" result="Sand 1"/>
-	<entry stringName="EDITOR_noSettlementsAround" result="Unable to place the building at the selected point, as there are no nearby settlements."/>
-	<entry stringName="EDITOR_impassablePoint" result="Unable to place the building at the selected point, as it is a steep or inaccessible place, like the sea."/>
-	<entry stringName="EDITOR_canAddStructure" result="Press the LEFT mouse button to position the structure in the desired point. Press the RIGHT mouse button to abort this operation."/>
-	<entry stringName="QUESTION_deleteAll" result="Deleting this structure the rest of the settlement will also be eliminated. Do you really want to proceed?"/>
-	<entry stringName="QUESTION_overwriteMap" result="Typed name corresponds to an existing map. Do you want to overwrite it?"/>
-	<entry stringName="WORD_EBarracks" result="Barracks"/>
-	<entry stringName="WORD_EBlacksmith" result="Blacksmith"/>
-	<entry stringName="WORD_EOsiristemple" result="Temple of Osiris"/>
-	<entry stringName="WORD_ETavern" result="Tavern"/>
-	<entry stringName="WORD_ETempleOfHorusAndAnubis" result="Temple of Horus and Anubis"/>
-	<entry stringName="WORD_ETownhall" result="Townhall"/>
-	<entry stringName="WORD_RArena" result="Arena"/>
-	<entry stringName="WORD_RBarracks" result="Barracks"/>
-	<entry stringName="WORD_RBlacksmith" result="Blacksmith"/>
-	<entry stringName="WORD_RTavern" result="Tavern"/>
-	<entry stringName="WORD_RTemple" result="Temple"/>
-	<entry stringName="WORD_RTownhall" result="Townhall"/>
-	<entry stringName="WORD_ROutpost" result="Roman outpost"/>
-	<entry stringName="WORD_Broadleaf_1" result="Broadleaf 1"/>
-	<entry stringName="WORD_Broadleaf_2" result="Broadleaf 2"/>
-	<entry stringName="WORD_Cypress" result="Cypress"/>
-	<entry stringName="WORD_Jasmimmanga" result="Tropical tree 1"/>
-	<entry stringName="WORD_Palm_1" result="Palm 1"/>
-	<entry stringName="WORD_gameStarted" result="Game is being started..."/>
-	<entry stringName="WORD_player_1" result="Player 1"/>
-	<entry stringName="WORD_player_2" result="Player 2"/>
-	<entry stringName="WORD_player_3" result="Player 3"/>
-	<entry stringName="WORD_player_4" result="Player 4"/>
-	<entry stringName="WORD_player_5" result="Player 5"/>
-	<entry stringName="WORD_player_6" result="Player 6"/>
-	<entry stringName="WORD_player_7" result="Player 7"/>
-	<entry stringName="WORD_player_8" result="Player 8"/>
-	<entry stringName="WORD_playersNumber" result="Number of players"/>
-	<entry stringName="WORD_errorCode" result="Error code"/>
-	<entry stringName="WORD_yes" result="Yes"/>
-	<entry stringName="WORD_no" result="No"/>
-	<entry stringName="RACE_Rome" result="Rome"/>
-	<entry stringName="RACE_Egypt" result="Egypt"/>
+<translationTable language="english">
+	<entry stringName="MAINMENU_buttonSinglePlayer" result="Singleplayer" />
+	<entry stringName="MAINMENU_buttonEditor" result="Editor" />
+	<entry stringName="MAINMENU_buttonOptions" result="Options" />
+	<entry stringName="MAINMENU_buttonQuit" result="Exit" />
+	<entry stringName="SINGLEPLAYER_buttonStart" result="Start!" />
+	<entry stringName="SINGLEPLAYER_buttonExit" result="Back to menu" />
+	<entry stringName="OPTIONS_buttonSave" result="Save and close" />
+	<entry stringName="OPTIONS_LanguageText" result="Language" />
+	<entry stringName="LANG_english" result="English" />
+	<entry stringName="LANG_italian" result="Italian" />
+	<entry stringName="LANG_spanish" result="Spanish" />
+	<entry stringName="LANG_french" result="French" />
+	<entry stringName="LANG_arabic" result="Arabic" />
+	<entry stringName="GAME_pauseMenuButtonQuit" result="Quit" />
+	<entry stringName="GAME_pauseMenuButtonClose" result="Close" />
+	<entry stringName="EDITOR_File" result="File" />
+	<entry stringName="EDITOR_Edit" result="Edit" />
+	<entry stringName="EDITOR_Edit_UpdateNormals" result="Update Normals" />
+	<entry stringName="EDITOR_Tools" result="Tools" />
+	<entry stringName="EDITOR_Tools_AddObject" result="Toggle Add Object window" />
+	<entry stringName="EDITOR_Tools_TerrainBrush" result="Toggle terrain brushes" />
+	<entry stringName="EDITOR_newScenario" result="Create new scenario" />
+	<entry stringName="EDITOR_newScenarioName" result="Choose a name (max 30 characters)." />
+	<entry stringName="EDITOR_openScenario" result="Open scenario" />
+	<entry stringName="EDITOR_saveAs" result="Save scenario as..." />
+	<entry stringName="EDITOR_properties" result="Object properties" />
+	<entry stringName="EDITOR_propertiesName" result="Object name:" />
+	<entry stringName="EDITOR_propertiesSettlement" result="Settlement name:" />
+	<entry stringName="EDITOR_defaultMapName" result="Untitled" />
+	<entry stringName="EDITORTREE_buildings" result="Buildings" />
+	<entry stringName="EDITORTREE_units" result="Units" />
+	<entry stringName="EDITORTREE_decorations" result="Decorations" />
+	<entry stringName="EDITORTREE_egyptianstronghold" result="Egyptian stronghold" />
+	<entry stringName="EDITORTREE_romanstronghold" result="Roman stronghold" />
+	<entry stringName="EDITORTREE_outposts" result="Outposts" />
+	<entry stringName="EDITORTREE_trees" result="Trees" />
+	<entry stringName="EDITORBRUSH_GRASS" result="Grass" />
+	<entry stringName="EDITORBRUSH_GRASS_1" result="Grass 1" />
+	<entry stringName="EDITORBRUSH_GRASS_2" result="Grass 2" />
+	<entry stringName="EDITORBRUSH_GRASS_3" result="Grass 3" />
+	<entry stringName="EDITORBRUSH_ROAD_1" result="Road 1" />
+	<entry stringName="EDITORBRUSH_ROAD_2" result="Road 2" />
+	<entry stringName="EDITORBRUSH_ROAD_3" result="Road 3" />
+	<entry stringName="EDITORBRUSH_GROUND_1" result="Ground 1" />
+	<entry stringName="EDITORBRUSH_GROUND_2" result="Ground 2" />
+	<entry stringName="EDITORBRUSH_GROUND_3" result="Ground 3" />
+	<entry stringName="EDITORBRUSH_SAND_1" result="Sand 1" />
+	<entry stringName="EDITOR_noSettlementsAround" result="Unable to place the building at the selected point, as there are no nearby settlements." />
+	<entry stringName="EDITOR_impassablePoint" result="Unable to place the building at the selected point, as it is a steep or inaccessible place, like the sea." />
+	<entry stringName="EDITOR_canAddStructure" result="Press the LEFT mouse button to position the structure in the desired point. Press the RIGHT mouse button to abort this operation." />
+	<entry stringName="QUESTION_deleteAll" result="Deleting this structure the rest of the settlement will also be eliminated. Do you really want to proceed?" />
+	<entry stringName="QUESTION_overwriteMap" result="Typed name corresponds to an existing map. Do you want to overwrite it?" />
+	<entry stringName="WORD_EBarracks" result="Barracks" />
+	<entry stringName="WORD_EBlacksmith" result="Blacksmith" />
+	<entry stringName="WORD_EOsiristemple" result="Temple of Osiris" />
+	<entry stringName="WORD_ETavern" result="Tavern" />
+	<entry stringName="WORD_ETempleOfHorusAndAnubis" result="Temple of Horus and Anubis" />
+	<entry stringName="WORD_ETownhall" result="Townhall" />
+	<entry stringName="WORD_RArena" result="Arena" />
+	<entry stringName="WORD_RBarracks" result="Barracks" />
+	<entry stringName="WORD_RBlacksmith" result="Blacksmith" />
+	<entry stringName="WORD_RTavern" result="Tavern" />
+	<entry stringName="WORD_RTemple" result="Temple" />
+	<entry stringName="WORD_RTownhall" result="Townhall" />
+	<entry stringName="WORD_ROutpost" result="Roman outpost" />
+	<entry stringName="WORD_Broadleaf_1" result="Broadleaf 1" />
+	<entry stringName="WORD_Broadleaf_2" result="Broadleaf 2" />
+	<entry stringName="WORD_Cypress" result="Cypress" />
+	<entry stringName="WORD_Jasmimmanga" result="Tropical tree 1" />
+	<entry stringName="WORD_Palm_1" result="Palm 1" />
+	<entry stringName="WORD_gameStarted" result="Game is being started..." />
+	<entry stringName="WORD_player_1" result="Player 1" />
+	<entry stringName="WORD_player_2" result="Player 2" />
+	<entry stringName="WORD_player_3" result="Player 3" />
+	<entry stringName="WORD_player_4" result="Player 4" />
+	<entry stringName="WORD_player_5" result="Player 5" />
+	<entry stringName="WORD_player_6" result="Player 6" />
+	<entry stringName="WORD_player_7" result="Player 7" />
+	<entry stringName="WORD_player_8" result="Player 8" />
+	<entry stringName="WORD_playersNumber" result="Number of players" />
+	<entry stringName="WORD_errorCode" result="Error code" />
+	<entry stringName="WORD_yes" result="Yes" />
+	<entry stringName="WORD_no" result="No" />
+	<entry stringName="WORD_Close" result="Close" />
+	<entry stringName="WORD_Save" result="Save" />
+	<entry stringName="WORD_Open" result="Open" />
+	<entry stringName="WORD_Create" result="Create" />
+	<entry stringName="WORD_Add" result="Add" />
+	<entry stringName="WORD_Apply" result="Apply" />
+	<entry stringName="WORD_Cancel" result="Cancel" />
+	<entry stringName="WORD_New" result="New" />
+	<entry stringName="WORD_Exit" result="Exit" />
+	<entry stringName="RACE_Rome" result="Rome" />
+	<entry stringName="RACE_Egypt" result="Egypt" />
 </translationTable>
