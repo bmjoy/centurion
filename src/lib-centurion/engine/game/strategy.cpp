@@ -93,15 +93,14 @@ void Strategy::Create(void)
 
 	//---------------------------------------
 	isCreated = true;
-	Picking::leftClickID = 0;
-	Picking::leftClickID_UI = 0;
+	Picking::ResetAllClickIds();
 	Picking::ResetDoubleClickTime();
 }
 
 void Strategy::Run(void)
 {
 	Unit::ResetCounter();
-	Picking::leftClickID_UI = 0;
+	Picking::ResetAllClickIds();
 	Engine::Camera::keyboardControl();
 
 	/* Keyboard controls handling*/

@@ -136,7 +136,7 @@ void gui::Iframe::RenderImages(bool picking)
 void gui::Iframe::RenderButtons(bool picking)
 {
 	for (int i = 0; i < listOfButtons.size(); i++) {
-		listOfButtons[i].render(picking, Picking::leftClickID_UI);
+		listOfButtons[i].render(picking, PickingUI::GetLeftClickId());
 	}
 }
 

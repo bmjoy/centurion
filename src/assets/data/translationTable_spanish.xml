@@ -86,7 +86,7 @@
 	<entry stringName="WORD_no" result="No" />
 	<entry stringName="WORD_Close" result="Cerrar" />
 	<entry stringName="WORD_Save" result="Guardar" />
-	<entry stringName="WORD_Save" result="Guardar" />
+	<entry stringName="WORD_SaveAs" result="Guardar como..." />
 	<entry stringName="WORD_Open" result="Abrir" />
 	<entry stringName="WORD_Create" result="Crear" />
 	<entry stringName="WORD_Add" result="Añadir" />

@@ -57,7 +57,7 @@ void EditorMenuBar::EditorMenu::Create(gui::Rectangle _titleBack, gui::SimpleTex
 
 void EditorMenuBar::EditorMenu::Render(const bool picking, const vec4 &color)
 {
-	titleBack.render(color, vec4(), picking, Picking::leftClickID_UI);
+	titleBack.render(color, vec4(), picking, PickingUI::GetLeftClickId());
 	if (picking == false) {
 		titleText.render_static();
 	}
@@ -65,7 +65,7 @@ void EditorMenuBar::EditorMenu::Render(const bool picking, const vec4 &color)
 	if (isOpened == false) return;
 
 	for (int i = 0; i < optionsBack.size(); i++) {
-		optionsBack[i].render(color, vec4(), picking, Picking::leftClickID_UI);
+		optionsBack[i].render(color, vec4(), picking, PickingUI::GetLeftClickId());
 		if (picking == false) {
 			optionsText[i].render_static();
 		}
@@ -193,7 +193,7 @@ void EditorMenuBar::Render(const bool picking)
 		if (listOfMenus[i] != nullptr) {
 			if (picking == false) {
 				if (Engine::Mouse::LeftClick && Engine::Mouse::GetYPosition() < Engine::myWindow::Height - height) {
-					if (Picking::leftClickID_UI > minPickingId || Picking::leftClickID_UI < maxPickingId) {
+					if (PickingUI::GetLeftClickId() > minPickingId || PickingUI::GetLeftClickId() < maxPickingId) {
 						listOfMenus[i]->Close();
 					}
 				}

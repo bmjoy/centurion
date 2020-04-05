@@ -4,6 +4,7 @@
 #include "editorMenuBar.h"
 
 #include <game/game.h>
+#include <engine.h>
 
 using namespace std;
 using namespace glm;
@@ -16,9 +17,19 @@ void EditorUI::Create()
 
 void EditorUI::Render(bool picking)
 {
-	EditorWindows::Render(picking);
-	EditorMenuBar::Render(picking); // always the last
-
+	if (picking)
+	{
+		if (Engine::Mouse::LeftClick || Engine::Mouse::RightClick)
+		{
+			EditorWindows::Render(true);
+			EditorMenuBar::Render(true); 
+		}
+	}
+	else
+	{
+		EditorWindows::Render(false);
+		EditorMenuBar::Render(false);
+	}
 }
 
 EditorUI::~EditorUI() {}

@@ -121,7 +121,7 @@ void Menu::MenuPage::Render(const bool picking)
 	}
 	for (int i = 0; i < listOfButtons.size(); i++)
 	{
-		listOfButtons[i].render(picking, Picking::leftClickID_UI);
+		listOfButtons[i].render(picking, PickingUI::GetLeftClickId());
 	}
 }
 
@@ -213,11 +213,11 @@ void Menu::Run(void)
 	}
 
 	// picking
-	Picking::leftClickID_UI = 0;
+	Picking::ResetAllClickIds();
 	if (Engine::Mouse::LeftClick)
 	{
 		RenderPage(currentPageId, true);
-		Picking::leftClickID_UI = Picking::GetIdFromClick();
+		PickingUI::UpdateClickIds();
 	}
 	
 	// rendering

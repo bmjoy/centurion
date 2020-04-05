@@ -13,7 +13,7 @@
       <simpleText name="EDITOR_newScenarioName" xOffset="20" yOffset="80" />
     </simpleTextArray>
     <buttonArray>
-      <button text="WORD_Close" xOffset="335" yOffset="30">
+      <button text="WORD_Create" xOffset="335" yOffset="30">
         <onclickScript>
           --lua script
           Editor.CloseWindow(0)
@@ -104,8 +104,8 @@
       -- lua script
       function ConditionProperties()
       condition1 = Mouse.RightClick
-      condition2 = Game.IsObjectNotNull(Mouse.RightClickID)
-      condition3 = Game.IsObjectSelected(Mouse.RightClickID)
+      condition2 = Game.IsObjectNotNull(Mouse.GetRightClickId())
+      condition3 = Game.IsObjectSelected(Mouse.GetRightClickId())
       return condition1 and condition2 and condition3
       end
     </conditionScript>

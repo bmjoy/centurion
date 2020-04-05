@@ -18,6 +18,8 @@
 #include <classes/object-data.h>
 #include <file_manager.h>
 
+#include <game/interface/editorWindows.h>
+
 using namespace std;
 using namespace glm;
 
@@ -536,33 +538,22 @@ vector<Building*> Game::GetListOfStandAloneBuildings()
 */
 
 void Game::RenderObjectsPicking() {
- 	if (Picking::leftClickID_UI != 0) {
-		Picking::leftClickID = 0;
-		Picking::rightClickID = 0;
+
+	// Various exceptions
+	if (EditorWindows::AnyWindowIsOpened()) return;
+	if (Editor::IsInsertingObject()) return;
+	if (Editor::IsMovingObject()) return;
+	if (SelectionRectangle::IsActive()) return;
+	if (!Engine::Mouse::RightClick && !Engine::Mouse::LeftClick) return;
+
+ 	if (PickingUI::GetLeftClickId() != 0) {
+		PickingObject::ResetClickIds();
 		return;
 	}
 
-	if ((Engine::Mouse::RightClick || Engine::Mouse::LeftClick) && !SelectionRectangle::IsActive()) {
-
-		for (int i = 1; i < MAX_NUMBER_OF_OBJECTS; i++) {
-			if (GObject::GetObjectByID(i) != nullptr) {
-				GObject::GetObjectByID(i)->Render(true);
-			}
-		}
-
-		if (Engine::Mouse::LeftClick)
-		{
-			Picking::leftClickID = Picking::GetIdFromClick(PICKING_LEFT);
-		}
-		if (Engine::Mouse::RightClick) {
-			Picking::rightClickID = Picking::GetIdFromClick(PICKING_RIGHT);
-		}
-
-		if (Minimap::IsActive()) {
-			Minimap::Unblock();
-			if (Picking::leftClickID > 0) {
-				Minimap::Block();
-			}
+	for (int i = 1; i < MAX_NUMBER_OF_OBJECTS; i++) {
+		if (GObject::GetObjectByID(i) != nullptr) {
+			GObject::GetObjectByID(i)->Render(true);
 		}
 	}
 }
@@ -573,11 +564,11 @@ void Game::RenderObjects()
 	{
 		if (GObject::GetObjectByID(i) != nullptr) 
 		{
-			GObject::GetObjectByID(i)->Render(false, Picking::leftClickID);
+			GObject::GetObjectByID(i)->Render(false, PickingObject::GetLeftClickId());
 		}
 	}
 
-	if (!Minimap::IsActive() && Picking::leftClickID_UI == 0) 
+	if (!Minimap::IsActive() && PickingUI::GetLeftClickId() == 0) 
 		SelectionRectangle::Render(); //&& !editor::movingObject
 }
 
@@ -587,9 +578,9 @@ void Game::GoToPointFromMinimap() {
 		cameraToY = Engine::Camera::GetYMinimapCoordinate(Engine::Mouse::GetYLeftClick()) / Engine::myWindow::Height*(float)MEDIUM_MAP_HEIGHT - Engine::myWindow::HeightZoomed / 2.f;
 		// if you are clicking on a townhall you have to double click 
 		// to move the camera there and quit minimap
-		if (Picking::leftClickID > 0 && Picking::HasDoubleClicked()) {
-			cameraToX = GObject::GetObjectByID(Picking::leftClickID)->AsBuilding()->get_xPos() - Engine::myWindow::WidthZoomed / 2.f;
-			cameraToY = GObject::GetObjectByID(Picking::leftClickID)->AsBuilding()->get_yPos() - Engine::myWindow::HeightZoomed / 2.f;
+		if (PickingObject::GetLeftClickId() > 0 && Picking::HasDoubleClicked()) {
+			cameraToX = GObject::GetObjectByID(PickingObject::GetLeftClickId())->AsBuilding()->get_xPos() - Engine::myWindow::WidthZoomed / 2.f;
+			cameraToY = GObject::GetObjectByID(PickingObject::GetLeftClickId())->AsBuilding()->get_yPos() - Engine::myWindow::HeightZoomed / 2.f;
 			Minimap::Unblock();
 		}
 		//------------------------------------------------

@@ -32,11 +32,12 @@ void Hector::Initialize()
 
 	// global variables
 
-	getGlobalNamespace(L).beginNamespace("Mouse").addVariable("RightClickID", &Picking::rightClickID).endNamespace();
-	getGlobalNamespace(L).beginNamespace("Mouse").addVariable("LeftClickID", &Picking::leftClickID).endNamespace();
-
-	getGlobalNamespace(L).beginNamespace("Mouse").addVariable("RightClick", &Engine::Mouse::RightClick).endNamespace();
-	getGlobalNamespace(L).beginNamespace("Mouse").addVariable("LeftClick", &Engine::Mouse::LeftClick).endNamespace();
+	getGlobalNamespace(L).beginNamespace("Mouse")
+		.addVariable("RightClick", &Engine::Mouse::RightClick)
+		.addVariable("LeftClick", &Engine::Mouse::LeftClick)
+		.addFunction("GetLeftClickId", &PickingObject::GetLeftClickId)
+		.addFunction("GetRightClickId", &PickingObject::GetRightClickId)
+		.endNamespace();
 
 	// types 
 
@@ -249,11 +250,16 @@ void Hector::CreateConsole()
 
 void Hector::RenderConsole(bool picking)
 {
-	if (Engine::Mouse::LeftClick)
+	if (C.IsOpened())
 	{
-		C.Render(true);
-		Picking::leftClickID_UI = Picking::GetIdFromClick();
-	}
+		Picking::ResetAllClickIds();
+		if (Engine::Mouse::LeftClick)
+		{
+			C.Render(true);
+			PickingUI::UpdateClickIds();
+		}
 
-	C.Render(false);
+		C.Render(false);
+	}
+	
 }

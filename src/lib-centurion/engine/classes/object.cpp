@@ -417,7 +417,7 @@ void GObject::MarkAsSelected(const bool par_selected)
 	{
 		Game::SetSelectedObject(this);
 	}
-	else if(Picking::GetIdFromClick(PICKING_LEFT) == PICKING_TERRAIN_ID)
+	else if(PickingObject::GetLeftClickId() == PICKING_TERRAIN_ID)
 	{
 		Game::SetSelectedObject(nullptr);
 	}

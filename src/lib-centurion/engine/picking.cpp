@@ -9,11 +9,18 @@ using namespace std;
 using namespace glm;
 
 /* static variables */
-unsigned int Picking::leftClickID = 0;
-unsigned int Picking::leftClickID_UI = 0;
 unsigned int Picking::rightClickID = 0;
 Picking::DoubleClickData Picking::doubleClickData;
 
+
+void Picking::ResetAllClickIds()
+{
+	if (Engine::Mouse::LeftClick || Engine::Mouse::RightClick)
+	{
+		PickingUI::ResetClickIds();
+		PickingObject::ResetClickIds();
+	}
+}
 
 unsigned int Picking::GetIdFromClick(const unsigned short int LeftRight)
 {
@@ -54,7 +61,7 @@ bool Picking::HasDoubleClicked(void)
 	if (doubleClickData.clickCount == 0)
 	{
 		doubleClickData.clickCount++;
-		doubleClickData.clickIdList[0] = leftClickID;
+		doubleClickData.clickIdList[0] = PickingObject::GetLeftClickId();
 		doubleClickData.lastTime = glfwGetTime();
 		output = false;
 	}
@@ -62,14 +69,14 @@ bool Picking::HasDoubleClicked(void)
 	{
 		if (glfwGetTime() - doubleClickData.lastTime < 1.0f)
 		{
-			doubleClickData.clickIdList[1] = leftClickID;
+			doubleClickData.clickIdList[1] = PickingObject::GetLeftClickId();
 			if (doubleClickData.clickIdList[1] == doubleClickData.clickIdList[0])
 			{
 				output = true; //Ho fatto doppio click
 			}
 			else
 			{
-				doubleClickData.clickIdList[0] = leftClickID;
+				doubleClickData.clickIdList[0] = PickingObject::GetLeftClickId();
 			}
 		}
 	}
@@ -84,7 +91,39 @@ Picking::~Picking(void){}
 
 /* static variables */
 unsigned int PickingUI::pickingID_UI = PICKING_ID_MAX;
+unsigned int PickingUI::leftClickId_UI = 0;
+unsigned int PickingUI::rightClickId_UI = 0;
 map<unsigned int, string> PickingUI::pickingList_UI;
+
+void PickingUI::ResetClickIds(void)
+{
+	leftClickId_UI = 0;
+	rightClickId_UI = 0;
+}
+
+unsigned int PickingUI::GetLeftClickId(void)
+{
+	return leftClickId_UI;
+}
+
+unsigned int PickingUI::GetRightClickId(void)
+{
+	return rightClickId_UI;
+}
+
+void PickingUI::UpdateClickIds(void)
+{
+	if (Engine::Mouse::LeftClick)
+	{
+		leftClickId_UI = Picking::GetIdFromClick(PICKING_LEFT);
+		rightClickId_UI = 0;
+	}
+	else if (Engine::Mouse::RightClick)
+	{
+		leftClickId_UI = 0;
+		rightClickId_UI = Picking::GetIdFromClick(PICKING_RIGHT);
+	}
+}
 
 unsigned int PickingUI::ObtainPickingID(void)
 {
@@ -122,12 +161,44 @@ PickingUI::~PickingUI() {}
 #pragma region PickingObject Class
 
 /* static variables */
-unsigned int PickingObject::pickingID_Object = PICKING_ID_MIN;
+unsigned int PickingObject::pickingID_Obj = PICKING_ID_MIN;
 vector<unsigned int> PickingObject::unsedPickingID;
+unsigned int PickingObject::leftClickID_Obj = 0;
+unsigned int PickingObject::rightClickID_Obj = 0;
+
+void PickingObject::ResetClickIds(void)
+{
+	leftClickID_Obj = 0;
+	rightClickID_Obj = 0;
+}
+
+unsigned int PickingObject::GetLeftClickId(void)
+{
+	return leftClickID_Obj;
+}
+
+unsigned int PickingObject::GetRightClickId(void)
+{
+	return rightClickID_Obj;
+}
+
+void PickingObject::UpdateClickIds(void)
+{
+	if (Engine::Mouse::LeftClick)
+	{
+		leftClickID_Obj = Picking::GetIdFromClick(PICKING_LEFT);
+		rightClickID_Obj = 0;
+	}
+	else if (Engine::Mouse::RightClick)
+	{
+		leftClickID_Obj = 0;
+		rightClickID_Obj = Picking::GetIdFromClick(PICKING_RIGHT);
+	}
+}
 
 unsigned int PickingObject::ObtainPickingID(void)
 {
-	unsigned int pickingID = pickingID_Object;
+	unsigned int pickingID = pickingID_Obj;
 	
 	if (unsedPickingID.empty() == false)
 	{
@@ -136,7 +207,7 @@ unsigned int PickingObject::ObtainPickingID(void)
 	}
 	else
 	{
-		pickingID_Object += 1;
+		pickingID_Obj += 1;
 	}
 	return pickingID;
 }
@@ -148,12 +219,12 @@ void PickingObject::AddUnsedPickingID(const unsigned int par_pickingID)
 
 unsigned int PickingObject::GetLastPickingID(void)
 {
-	return pickingID_Object;
+	return pickingID_Obj;
 }
 
 void PickingObject::ResetPicking(void)
 {
-	pickingID_Object = PICKING_ID_MIN;
+	pickingID_Obj = PICKING_ID_MIN;
 	unsedPickingID.clear();
 }
 

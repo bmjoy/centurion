@@ -219,7 +219,7 @@ void Editor::Run(void)
 		Logger::Info("Editor has been created!");
 	}
 
-	Picking::leftClickID_UI = 0;
+	Picking::ResetAllClickIds();
 
 	/* Keyboard control */
 	handleKeyboardControls();
@@ -234,28 +234,21 @@ void Editor::Run(void)
 		projectionMatrix = getCameraProjectionMatrix();
 
 		// PICKING UI RENDERING
-		if (Engine::Mouse::LeftClick || Engine::Mouse::RightClick)
-		{
-			EditorUI::Render(true);
-			Picking::leftClickID_UI = PickingUI::GetIdFromClick();
-		}
-
+		EditorUI::Render(true);
+		PickingUI::UpdateClickIds();
+		
 		// apply game matrices
 		applyGameMatrices(&projectionMatrix, &viewMatrix);
 
 		// PICKING OBJECTS RENDERING
-		//if (!editor::IsWindowOpened && !editor::addingObject && !editor::TerrainBrushIsActive) 
-		{
-			RenderObjectsPicking();
-		}
+		RenderObjectsPicking();
+		PickingObject::UpdateClickIds();
 
 		// NORMAL RENDERING
 		Map::Render(false);
 		Editor::ShiftSelectedObject();
 		Game::RenderObjects();
 		Editor::InsertingObject();
-
-		//if (!editor::IsWindowOpened && !editor::addingObject && !editor::TerrainBrushIsActive) editor::moveObjects();
 
 		// apply menu matrices
 		applyMenuMatrices();
@@ -271,20 +264,30 @@ void Editor::Run(void)
 
 		// PICKING RENDERING
 		EditorUI::Render(true);
+		PickingUI::UpdateClickIds();
 
+		// apply game matrices
 		applyGameMatrices(&projectionMatrix, &viewMatrix);
 
+		// PICKING OBJECTS RENDERING
 		RenderObjectsPicking(); //RIVEDERE QUESTA FUNZIONE
 
 		// NORMAL RENDERING 
 		Minimap::RenderMapAndObjects();
+		PickingObject::UpdateClickIds();
 
+		Minimap::Unblock();
+		if (PickingObject::GetLeftClickId() > 0) {
+			Minimap::Block();
+		}
+
+		// apply menu matrices
 		applyMenuMatrices();
 
 		Minimap::RenderRectangle();
 		EditorUI::Render(false);
 
-		if (Picking::leftClickID_UI == 0) GoToPointFromMinimap();
+		if (PickingUI::GetLeftClickId() == 0) GoToPointFromMinimap();
 	}
 
 	setCameraProjectionMatrix(glm::ortho(0.0f, Engine::myWindow::WidthZoomed, 0.0f, Engine::myWindow::HeightZoomed, -(float)MEDIUM_MAP_WIDTH, (float)MEDIUM_MAP_WIDTH));
@@ -335,9 +338,9 @@ void Editor::handleKeyboardControls(void)
 
 	if (Engine::Keyboard::IsKeyPressed(GLFW_KEY_DELETE))
 	{
-		if (Game::IsGameObjectNotNull(Picking::leftClickID))
+		if (Game::IsGameObjectNotNull(PickingObject::GetLeftClickId()))
 		{
-			Building* b = GObject::GObject::GetObjectByID(Picking::leftClickID)->AsBuilding();
+			Building* b = GObject::GObject::GetObjectByID(PickingObject::GetLeftClickId())->AsBuilding();
 			if (b->IsSelected())
 			{
 				if (b->GetSettlement()->IsIndipendent())
@@ -350,14 +353,14 @@ void Editor::handleKeyboardControls(void)
 					else {
 						cout << "[DEBUG] Settlement " << b->GetName() << " deleted!\n";
 						b->ClearPass();
-						GObject::RemoveGameObject(Picking::leftClickID);
+						GObject::RemoveGameObject(PickingObject::GetLeftClickId());
 					}
 					*/
 				}
 				else {
 					cout << "[DEBUG] Building " << b->GetSingularName() << " deleted!\n";
 					b->ClearPass();
-					GObject::RemoveGameObject(Picking::leftClickID);
+					GObject::RemoveGameObject(PickingObject::GetLeftClickId());
 				}
 			}
 		}
