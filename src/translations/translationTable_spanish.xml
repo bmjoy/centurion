@@ -17,6 +17,7 @@
 	<entry stringName="EDITOR_File" result="Archivo" />
 	<entry stringName="EDITOR_Edit" result="Editar" />
 	<entry stringName="EDITOR_Edit_UpdateNormals" result="Actualizar Normales" />
+	<entry stringName="EDITOR_Edit_Properties" result="Editar propiedades de objeto" />
 	<entry stringName="EDITOR_Tools" result="Herramientas" />
 	<entry stringName="EDITOR_Tools_AddObject" result="Activar / Desactivar la ventana Agregar objeto" />
 	<entry stringName="EDITOR_Tools_TerrainBrush" result="Activar / Desactivar pinceles de terreno" />
@@ -24,6 +25,7 @@
 	<entry stringName="EDITOR_newScenarioName" result="Elegir un nombre (máximo 30 caracteres)." />
 	<entry stringName="EDITOR_openScenario" result="Abrir un escenario" />
 	<entry stringName="EDITOR_saveAs" result="Guardar el escenario como..." />
+	<entry stringName="EDITOR_addObject" result="Añadir objeto" />
 	<entry stringName="EDITOR_properties" result="Propiedades del objeto" />
 	<entry stringName="EDITOR_propertiesName" result="Nombre del objeto:" />
 	<entry stringName="EDITOR_propertiesSettlement" result="Nombre del asentamiento:" />
@@ -64,8 +66,8 @@
 	<entry stringName="WORD_RTemple" result="Templo" />
 	<entry stringName="WORD_RTownhall" result="Foro" />
 	<entry stringName="WORD_ROutpost" result="Puesto de Avanzada romano" />
-	<entry stringName="WORD_Broadleaf_1" result="--" />
-	<entry stringName="WORD_Broadleaf_2" result="--" />
+	<entry stringName="WORD_Broadleaf_1" result="De hoja ancha 1" />
+	<entry stringName="WORD_Broadleaf_2" result="De hoja ancha 2" />
 	<entry stringName="WORD_Cypress" result="Ciprès" />
 	<entry stringName="WORD_Jasmimmanga" result="Planta tropical 1" />
 	<entry stringName="WORD_Palm_1" result="Palmera 1" />
@@ -83,6 +85,7 @@
 	<entry stringName="WORD_yes" result="Sí" />
 	<entry stringName="WORD_no" result="No" />
 	<entry stringName="WORD_Close" result="Cerrar" />
+	<entry stringName="WORD_Save" result="Guardar" />
 	<entry stringName="WORD_Save" result="Guardar" />
 	<entry stringName="WORD_Open" result="Abrir" />
 	<entry stringName="WORD_Create" result="Crear" />

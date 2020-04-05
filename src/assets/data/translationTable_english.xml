@@ -17,6 +17,7 @@
 	<entry stringName="EDITOR_File" result="File" />
 	<entry stringName="EDITOR_Edit" result="Edit" />
 	<entry stringName="EDITOR_Edit_UpdateNormals" result="Update Normals" />
+	<entry stringName="EDITOR_Edit_Properties" result="Edit object properties" />
 	<entry stringName="EDITOR_Tools" result="Tools" />
 	<entry stringName="EDITOR_Tools_AddObject" result="Toggle Add Object window" />
 	<entry stringName="EDITOR_Tools_TerrainBrush" result="Toggle terrain brushes" />
@@ -24,6 +25,7 @@
 	<entry stringName="EDITOR_newScenarioName" result="Choose a name (max 30 characters)." />
 	<entry stringName="EDITOR_openScenario" result="Open scenario" />
 	<entry stringName="EDITOR_saveAs" result="Save scenario as..." />
+	<entry stringName="EDITOR_addObject" result="Add object" />
 	<entry stringName="EDITOR_properties" result="Object properties" />
 	<entry stringName="EDITOR_propertiesName" result="Object name:" />
 	<entry stringName="EDITOR_propertiesSettlement" result="Settlement name:" />
@@ -83,6 +85,7 @@
 	<entry stringName="WORD_yes" result="Yes" />
 	<entry stringName="WORD_no" result="No" />
 	<entry stringName="WORD_Close" result="Close" />
+	<entry stringName="WORD_Save" result="Save" />
 	<entry stringName="WORD_Save" result="Save" />
 	<entry stringName="WORD_Open" result="Open" />
 	<entry stringName="WORD_Create" result="Create" />

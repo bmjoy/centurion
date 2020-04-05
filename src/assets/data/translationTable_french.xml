@@ -17,13 +17,15 @@
 	<entry stringName="EDITOR_File" result="Fichier" />
 	<entry stringName="EDITOR_Edit" result="Éditer" />
 	<entry stringName="EDITOR_Edit_UpdateNormals" result="Recalculer les normales" />
+	<entry stringName="EDITOR_Edit_Properties" result="Éditer propriétés de l'objet" />
 	<entry stringName="EDITOR_Tools" result="Outils" />
 	<entry stringName="EDITOR_Tools_AddObject" result="Activer/Désactiver la fenêtre Ajouter un objet" />
 	<entry stringName="EDITOR_Tools_TerrainBrush" result="Activer/Désactiver les brosses de terrain" />
-	<entry stringName="EDITOR_newScenario" result="Créer a nouveau scénario" />
+	<entry stringName="EDITOR_newScenario" result="Créer nouveau scénario" />
 	<entry stringName="EDITOR_newScenarioName" result="Choisir un nom (30 caractères maximum)." />
 	<entry stringName="EDITOR_openScenario" result="Ouvrir a scénario" />
 	<entry stringName="EDITOR_saveAs" result="Sauve scénario comme..." />
+	<entry stringName="EDITOR_addObject" result="Ajouter objet" />
 	<entry stringName="EDITOR_properties" result="Propriétés de l'objet" />
 	<entry stringName="EDITOR_propertiesName" result="Nom de l'objet" />
 	<entry stringName="EDITOR_propertiesSettlement" result="Nom de l'installation:" />
@@ -83,6 +85,7 @@
 	<entry stringName="WORD_yes" result="Oui" />
 	<entry stringName="WORD_no" result="Non" />
 	<entry stringName="WORD_Close" result="Fermer" />
+	<entry stringName="WORD_Save" result="Sauver" />
 	<entry stringName="WORD_Save" result="Sauver" />
 	<entry stringName="WORD_Open" result="Ouvrir" />
 	<entry stringName="WORD_Create" result="Créer" />
