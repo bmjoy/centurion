@@ -30,6 +30,7 @@ bool EditorWindows::EditorWindow::IsOpened(void)
 
 void EditorWindows::EditorWindow::Open(void)
 {
+	EditorWindows::CloseEveryWindow();
 	this->isOpened = true;
 	this->opening = true;
 }
@@ -38,6 +39,7 @@ void EditorWindows::EditorWindow::Toggle(void)
 {
 	if (this->isOpened == false)
 	{
+		EditorWindows::CloseEveryWindow();
 		this->Open();
 	}
 	else {
@@ -95,6 +97,7 @@ void EditorWindows::OpenWindow(const unsigned int id)
 	if (id < 0 || id > MAX_NUMBER_OF_EDITOR_WINDOWS) return;
 	if (listOfWindows[id] == nullptr) return;
 
+	
 	listOfWindows[id]->Open();
 }
 
