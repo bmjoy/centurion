@@ -347,7 +347,7 @@ void Game::SelectionRectangle::Render(void)
 		CalculateSizeAndOrigin(&w, &h, &origin);
 
 		if (w > 1 && h > 1) {
-			selRectangle.render(vec4(255.f), 0, 0, Coordinates.startX, Coordinates.startY, w, h, origin);
+			selRectangle.render(vec4(), vec4(255.f), 0, 0, Coordinates.startX, Coordinates.startY, w, h, origin);
 			SetExtremeValues();
 		}
 		else {
@@ -406,7 +406,7 @@ void Game::Minimap::RenderMapAndObjects(void)
 
 void Game::Minimap::RenderRectangle(void)
 {
-	minimapRectangle.render(vec4(255.f));
+	minimapRectangle.render(vec4(), vec4(255.f));
 }
 
 void Game::Minimap::Update(void)

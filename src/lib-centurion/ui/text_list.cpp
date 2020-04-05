@@ -128,14 +128,14 @@ namespace gui {
 
 			if (picking) {
 				if (i >= firstOption && i <= lastOption) {
-					optionsBack[i].render(vec4(), true);
+					optionsBack[i].render(vec4(), vec4(), true);
 				}
 			}
 
 			else {
 				if (options[i] == selectedOption) {
 					if (i >= firstOption && i <= lastOption) {
-						optionsBack[i].render(backColor, false);
+						optionsBack[i].render(backColor, vec4(), false);
 					}
 				}
 				if (i >= firstOption && i <= lastOption) {
@@ -144,7 +144,7 @@ namespace gui {
 			}
 		}
 
-		border.render(borderColor);
+		border.render(vec4(), borderColor);
 	}
 
 	int TextList::GetIdFromClick()

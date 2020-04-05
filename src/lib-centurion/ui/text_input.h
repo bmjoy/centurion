@@ -31,16 +31,24 @@ namespace gui {
 		/// <summary>
 		/// This function creates the text input
 		/// </summary>
+		/// <param name="_id">the text input id</param>
+		/// <param name="picking_id">the text input picking id</param>
 		/// <param name="x">x position of text input</param>
 		/// <param name="y">y position of the text input</param>
+		/// <param name="width">The width of the textinput</param>
+		/// <param name="font">The font name</param>
+		/// <param name="fontWeight">The font weight (normal - bold)</param>
+		/// <param name="backCol">The background color</param>
+		/// <param name="borderCol">The border color</param>
 		/// <param name="maxChars">max characters of text input</param>
 		/// <param name="text">the placeholder text as wide string</param>
-		void Create(const int _id, float x, float y, int maxChars = TEXT_INPUT_MAX_CHARS_DEFAULT, std::wstring placeholderText = L"");
+		void Create(const int _id, const int picking_id, const int x, const int y, const int width, const std::string font, const bool hasBackground, const glm::vec4 backCol, const glm::vec4 borderCol, const std::string fontWeight = "normal", const std::wstring placeholderText = L"");
 
 		/// <summary>
 		/// This function renders the Input text
 		/// </summary>
-		void Render();
+		/// <param name="picking">Boolean: true = picking is active, false = normal rendering</param>
+		void Render(bool picking = false);
 
 		/// <summary>
 		/// This function enables the text input
@@ -51,6 +59,11 @@ namespace gui {
 		/// This function disables the text input
 		/// </summary>
 		void Disable(void) { isActive = false; }
+
+		/// <summary>
+		/// This method resets the whole TextInput
+		/// </summary>
+		void Reset(void);
 
 		/// <summary>
 		/// This method returns the text
@@ -78,6 +91,10 @@ namespace gui {
 
 		~TextInput();
 	private:
+		gui::Rectangle rectangle;
+		glm::vec4 backColor, borderColor;
+		bool displayRectangle;
+
 		gui::Rectangle text_cursor;
 		gui::SimpleText static_text;
 		bool isActive;

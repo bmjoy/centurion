@@ -43,15 +43,17 @@ namespace gui {
 		/// <param name="yBtn">The button y-position, relative to the iframe y-position</param>
 		/// <param name="luaCmd">The button Lua command. Default = empty string</param>
 		void AddButton(const std::wstring &text, const int xBtn, const int yBtn, const std::string &luaCmd = "");
-
+	
 		/// <summary>
-		/// This function adds a text to the iframe texts list.
+		/// This function adds a SimpleText to the iframe texts list.
 		/// </summary>
-		/// <param name="txt">Text that would be added. It only supports SimpleText classes.</param>
-		void AddText(SimpleText txt) { listOfTexts.push_back(txt); }
+		/// <param name="text">The text to display</param>
+		/// <param name="xPos">The xPosition of the text, relative to the iframe x-position</param>
+		/// <param name="yPos">The yPosition of the text, relative to the iframe y-position</param>
+		void AddText(const std::wstring &wtext, const int xPos, const int yPos);
 
 		/// <summary>
-		/// This function adds a specific texts list to the iframe.
+		/// This function adds a specific text list to the iframe.
 		/// </summary>
 		/// <param name="textListId">The text list id</param>
 		/// <param name="xPos">The text list x-position, relative to the iframe x-position</param>
@@ -60,7 +62,15 @@ namespace gui {
 		/// <param name="maxOptions">The maximum number of options to display</param>
 		void AddTextList(const int textListId, const int xPos, const int yPos, const std::string & luaCmd = "", const unsigned int maxOptions = MAX_OPTIONS_DEFAULT, const unsigned int borderWidth = BORDERWIDTH_DEFAULT);
 
-		void AddTextInput(const int textInputId, const int xPos, const int yPos, const int maxChars = TEXT_INPUT_MAX_CHARS_DEFAULT, std::wstring placeholderText = L"");
+		/// <summary>
+		/// This function adds a specific text input to the iframe.
+		/// </summary>
+		/// <param name="textInputId">The text input id</param>
+		/// <param name="xPos">The text input x-position, relative to the iframe x-position</param>
+		/// <param name="yPos">The text input y-position, relative to the iframe y-position</param>
+		/// <param name="width">The text input width</param>
+		/// <param name="placeholderText">The placeholder text; default value is an empty string</param>
+		void AddTextInput(const int textInputId, const int xPos, const int yPos, const int width, std::wstring placeholderText = L"");
 
 		/// <summary>
 		/// This function creates an instance of Iframe.
@@ -160,9 +170,14 @@ namespace gui {
 		std::string button_img_name, button_font;
 		glm::vec4 button_txt_color;
 
-		// textListData
+		// textList Data
 		std::string text_list_font; 
 		glm::vec4 text_list_background, text_list_color;
+		
+		// textInput Data
+		std::string text_input_font, text_input_fontweight;
+		glm::vec4 text_input_background, text_input_border, text_input_color;
+		bool text_input_has_background;
 	};
 };
 

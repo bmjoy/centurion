@@ -214,10 +214,12 @@ void Menu::Run(void)
 
 	// picking
 	Picking::leftClickID_UI = 0;
-	RenderPage(currentPageId, true);
 	if (Engine::Mouse::LeftClick)
+	{
+		RenderPage(currentPageId, true);
 		Picking::leftClickID_UI = Picking::GetIdFromClick();
-
+	}
+	
 	// rendering
 	RenderPage(currentPageId, false);
 }

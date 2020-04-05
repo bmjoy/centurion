@@ -138,7 +138,7 @@ void EditorWindows::Create(void)
 
 			string sizeScript = _it_wind->Attribute("size");
 			string positionScript = _it_wind->Attribute("position");
-			wstring iframeTitle = encode::GetWideString(_it_wind->Attribute("name"));
+			wstring iframeTitle = TranslationsTable::GetWTranslation(_it_wind->Attribute("name"));
 
 
 			iframe.Create(sizeScript + positionScript, iframeTitle);
@@ -174,9 +174,18 @@ void EditorWindows::Create(void)
 				int textInputId = _it_txtinput->IntAttribute("textInputId");
 				int xOffset = _it_txtinput->IntAttribute("xOffset");
 				int yOffset = _it_txtinput->IntAttribute("yOffset");
-				int maxChars = _it_txtinput->IntAttribute("maxChars");
-				wstring placeholder = encode::GetWideString(_it_txtinput->Attribute("placeholder"));
-				iframe.AddTextInput(textInputId, xOffset, yOffset, maxChars, placeholder);
+				int tiWidth = _it_txtinput->IntAttribute("width");
+				wstring placeholder = TranslationsTable::GetWTranslation(_it_txtinput->Attribute("placeholder"));
+				iframe.AddTextInput(textInputId, xOffset, yOffset, tiWidth, placeholder);
+			}
+
+			// simple texts
+			for (tinyxml2::XMLElement* _it_txt = _it_wind->FirstChildElement("simpleTextArray")->FirstChildElement(); _it_txt != NULL; _it_txt = _it_txt->NextSiblingElement())
+			{
+				int xOffset = _it_txt->IntAttribute("xOffset");
+				int yOffset = _it_txt->IntAttribute("yOffset");
+				std::wstring wtext = TranslationsTable::GetWTranslation(_it_txt->Attribute("name"));
+				iframe.AddText(wtext, xOffset, yOffset);
 			}
 
 			eWind->Create(luaOpeningCMD, luaConditionCMD, luaConditionFun, iframe);

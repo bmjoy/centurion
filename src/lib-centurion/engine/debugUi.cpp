@@ -68,7 +68,7 @@ void DebugUI::render(int fps, int mpfs, int selUnits) {
 			currentLan = Settings::Language;
 		}
 
-		back.render(vec4(0.f, 0.f, 0.f, 0.5f));
+		back.render(vec4(0.f, 0.f, 0.f, 0.5f), vec4(255.f));
 
 		debugText[0].render_static();
 		debugText[1].render_static();

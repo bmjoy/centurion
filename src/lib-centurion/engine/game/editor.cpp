@@ -232,10 +232,9 @@ void Editor::Run(void)
 		projectionMatrix = getCameraProjectionMatrix();
 
 		// PICKING UI RENDERING
-		EditorUI::Render(true);
-
-		if (Engine::Mouse::LeftClick)
+		if (Engine::Mouse::LeftClick || Engine::Mouse::RightClick)
 		{
+			EditorUI::Render(true);
 			Picking::leftClickID_UI = PickingUI::GetIdFromClick();
 		}
 

@@ -17,4 +17,10 @@
 		<font name="tahoma_13px" />
 		<background r="0" g="0" b="0" />
 	</textList>
+	<textInput>
+		<font name="tahoma_13px" weight="bold" />
+		<textColor r="255" g="255" b="255" />
+		<background r="0" g="0" b="0" />
+		<border r="40" g="240" b="120" />
+	</textInput>
 </iframe>

@@ -32,6 +32,11 @@ namespace gui {
 		float GetYPosition(void) { return staticData.y; }
 
 		/// <summary>
+		/// This function returns the font height
+		/// </summary>
+		float GetTextHeight(void) { return (float)staticData.fontHeight; }
+
+		/// <summary>
 		/// This function create a static text.
 		/// </summary>
 		/// <param name="text"></param>

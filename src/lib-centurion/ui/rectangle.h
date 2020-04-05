@@ -80,12 +80,19 @@ namespace gui {
 		/// <param name="w">Weight offest of the rectangle</param>
 		/// <param name="h">Height offset of the rectangle</param>
 		/// <param name="origin">Origin of the rectangle</param>
-		void render(glm::vec4 Color, bool picking = false, int leftClickId = 0, float x = 0.f, float y = 0.f, float w = 0.f, float h = 0.f, int origin = DEFAULT_ORIGIN);
+		void render(glm::vec4 backColor, glm::vec4 borderColor, bool picking = false, int leftClickId = 0, float x = 0.f, float y = 0.f, float w = 0.f, float h = 0.f, int origin = DEFAULT_ORIGIN);
 
 		/// <summary>
 		/// This function increase the y position of the rectangle
 		/// </summary>
 		void IncreaseYPosition(float y) { data.y += y; }
+
+		/// <summary>
+		/// This method checks if the rectangle is being clicked
+		/// </summary>
+		/// <param name="leftclickID">The left click picking ID</param>
+		/// <returns>True if clicked, false if not.</returns>
+		bool IsClicked(int leftclickID);
 
 		~Rectangle();
 	private:
@@ -93,6 +100,8 @@ namespace gui {
 		std::string luaCmd;
 		glRectangle::RectangleData data;
 		std::map<std::string, int> originMap;
+
+		bool isHover;
 	};
 };
 

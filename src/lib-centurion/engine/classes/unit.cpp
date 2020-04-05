@@ -111,13 +111,14 @@ void Unit::Render(const bool picking, const unsigned int clickID, const bool not
 
 		// **** Rectangle Path **** //	
 		for (int i = 0; i < pathQuadsList.size(); i++) {
-			pathQuadsList[i].render(glm::vec4(255.f, 0.f, 0.f, 255.f));
+			pathQuadsList[i].render(glm::vec4(255.f, 0.f, 0.f, 255.f), vec4());
 		}
 		// ************************ //
 
 		if (Game::Minimap::IsActive() == false) {
 			circlePos.render(false, position2D.x, position2D.y);
 			hitbox.rectangle.render(
+				vec4(),
 				this->IsSelected() ? glm::vec4(255.0f, 0.0f, 255.0f, 1.0f) : glm::vec4(255.0f, 242.0f, 0.0f, 1.0f),
 				0,
 				(int)position3D.x,

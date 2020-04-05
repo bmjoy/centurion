@@ -26,10 +26,10 @@ public:
 	public:
 		bool IsOpened() { return isOpened; }
 		void Create();
-		void Render();
+		void Render(bool picking);
 	private:
 		gui::Iframe iframe;
-		gui::TextInput txtinput;
+		unsigned int TEXTINPUT_ID;
 		bool isOpened;
 	};
 
@@ -46,7 +46,8 @@ public:
 	/// <summary>
 	/// This function handles the command console rendering instructions.
 	/// </summary>
-	static void RenderConsole();
+	/// <param name="picking">Boolean: true = picking is active; false = normal rendering</param>
+	static void RenderConsole(bool picking = false);
 
 	/// <summary>
 	/// This function initializes main HECTOR-LUA variables and methods.

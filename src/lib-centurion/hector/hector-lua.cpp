@@ -206,33 +206,39 @@ void Hector::GetIntegerVariable(string name, int * integer)
 
 void Hector::Console::Create()
 {
+	TEXTINPUT_ID = MAX_NUMBER_OF_TEXT_INPUTS - 1;
 	iframe = gui::Iframe("console");
 	iframe.Create(30, 30, (int)Engine::myWindow::Width - 60, 30);
-	txtinput = gui::TextInput();
-	txtinput.Create(MAX_NUMBER_OF_TEXT_INPUTS - 1, 35, 35, 200);
+	iframe.AddTextInput(TEXTINPUT_ID, 5, 5, (int)Engine::myWindow::Width - 60);
+	gui::TextInput::GetTextInputById(TEXTINPUT_ID)->Enable();
 	isOpened = false;
 }
 
-void Hector::Console::Render()
+void Hector::Console::Render(bool picking)
 {
-	if (Engine::Keyboard::IsKeyPressed(GLFW_KEY_F1)) {
+	if (Engine::Keyboard::IsKeyPressed(GLFW_KEY_F1) && picking == false) {
 		isOpened = !isOpened;
 		isOpened ? EditorWindows::Hide() : EditorWindows::Show();
 		isOpened ? EditorMenuBar::Hide() : EditorMenuBar::Show();
-		txtinput.Enable();
 	}
-	if (isOpened) {		
-		iframe.Render();
-		txtinput.Render();
 
-		string cmd = txtinput.GetText();
-		if (Engine::Keyboard::IsKeyPressed(GLFW_KEY_ENTER)) {
-			if (cmd.size() > 0) {
-				ExecuteCommand(cmd);
-				txtinput.Create(MAX_NUMBER_OF_TEXT_INPUTS - 1, 35, 35, 200);
-			}
+	if (isOpened == false) return;
+
+	if (picking)
+	{
+		iframe.Render(true);
+		return;
+	}
+	
+	iframe.Render();
+	string cmd = gui::TextInput::GetTextInputById(TEXTINPUT_ID)->GetText();
+	if (Engine::Keyboard::IsKeyPressed(GLFW_KEY_ENTER)) {
+		if (cmd.size() > 0) {
+			ExecuteCommand(cmd);
+			gui::TextInput::GetTextInputById(TEXTINPUT_ID)->Reset();
 		}
 	}
+	
 }
 
 
@@ -241,7 +247,13 @@ void Hector::CreateConsole()
 	C.Create();
 }
 
-void Hector::RenderConsole()
+void Hector::RenderConsole(bool picking)
 {
-	C.Render();
+	if (Engine::Mouse::LeftClick)
+	{
+		C.Render(true);
+		Picking::leftClickID_UI = Picking::GetIdFromClick();
+	}
+
+	C.Render(false);
 }

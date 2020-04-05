@@ -21,6 +21,7 @@ namespace gui {
 		data.type = FILLED_RECTANGLE;
 		pickingId = 0;
 		luaCmd = "";
+		isHover = false;
 	}
 	void Rectangle::create(string Type, float x, float y, float w, float h, string origin, int pickingID, string luaCMD) {
 
@@ -46,10 +47,18 @@ namespace gui {
 		pickingId = pickingID;
 		luaCmd = luaCMD;
 	}
-	void Rectangle::render(vec4 Color, bool picking, int leftClickId , float x, float y, float w, float h, int origin) {
+
+	bool Rectangle::IsClicked(int leftclickID)
+	{
+		return (pickingId == leftclickID);
+	}
+
+	void Rectangle::render(vec4 backColor, glm::vec4 borderColor, bool picking, int leftClickId , float x, float y, float w, float h, int origin) {
+		
+		isHover = false;
 
 		if (picking == false) {
-			if (pickingId == leftClickId) {
+			if (IsClicked(leftClickId)) {
 				Hector::ExecuteCommand(luaCmd);
 			}
 		}
@@ -61,16 +70,16 @@ namespace gui {
 		if (origin != DEFAULT_ORIGIN) data.origin = origin;
 
 		if (data.type == FILLED_RECTANGLE) {
-			data.backColor = Color;
+			data.backColor = backColor;
 			FRectangle()->render(data, picking);
 		}
 		if (data.type == BORDER_RECTANGLE) {
-			data.borderColor = Color;
+			data.borderColor = borderColor;
 			ERectangle()->render(data);
 		}
 		if (data.type == BORDER_FILLED_RECTANGLE) {
-			data.backColor = Color;
-			data.borderColor = vec4(255.f);
+			data.backColor = backColor;
+			data.borderColor = borderColor;
 			FRectangle()->render(data, picking);
 			ERectangle()->render(data);
 		}

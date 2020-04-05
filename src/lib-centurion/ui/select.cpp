@@ -63,16 +63,16 @@ namespace gui {
 	void Select::render(bool picking, vec4 color) {
 
 		if (picking) {
-			back.render(vec4(), true);
+			back.render(vec4(), vec4(), true);
 			if (boolOptions && isOpened) {
 				for (int j = 0; j < nOptions; j++) {
-					back_options_picking[j].render(color, true);
+					back_options_picking[j].render(color, vec4(), true);
 				}
 			}
 		}
 		else {
 
-			back.render(color, false);
+			back.render(color, vec4(), false);
 
 			if (boolOptions) {
 				// selected text
@@ -80,7 +80,7 @@ namespace gui {
 				if (isOpened) {
 
 					// background and border
-					back_options.render(color, false);
+					back_options.render(color, vec4(), false);
 
 					// text
 					for (int j = 0; j < nOptions; j++) {

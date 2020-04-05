@@ -113,7 +113,7 @@ int Engine::Launch(void)
 		}
 
 		Hector::RenderConsole();
-
+		
 		// mouse
 		Mouse::render();
 

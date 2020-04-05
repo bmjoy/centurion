@@ -20,6 +20,8 @@
       <command id="2" name="Save" hotkey1="CTRL" hotkey2="N" hotkey3="">
         <onclickScript>
           -- Lua Script
+          Editor.OpenWindow(2)
+          Editor.ToggleMenu(0)
         </onclickScript>
       </command>
       <command id="3" name="Exit" hotkey1="CTRL" hotkey2="N" hotkey3="">
@@ -38,7 +40,7 @@
       <command id="1" name="Properties" hotkey1="CTRL" hotkey2="N" hotkey3="">
         <onclickScript>
           -- Lua Script
-          Editor.OpenWindow(2)
+          Editor.OpenWindow(3)
           Editor.ToggleMenu(1)
         </onclickScript>
       </command>
@@ -52,7 +54,7 @@
       <command id="0" name="AddObject" hotkey1="CTRL" hotkey2="N" hotkey3="">
         <onclickScript>
           -- Lua Script
-          Editor.ToggleWindow(3)
+          Editor.ToggleWindow(4)
           Editor.ToggleMenu(2)
         </onclickScript>
       </command>

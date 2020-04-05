@@ -8,4 +8,8 @@
 	<bottom image_name="iframe_console_bottom" repeat="x"/>
 	<left image_name="iframe_console_left" repeat="y"/>
 	<background image_name="iframe_console_back" repeat="none"/>
+	<textInput>
+		<font name="tahoma_13px" weight="bold" />
+		<textColor r="255" g="255" b="255" />
+	</textInput>
 </iframe>
