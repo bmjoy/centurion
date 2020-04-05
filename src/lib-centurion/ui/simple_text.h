@@ -37,6 +37,12 @@ namespace gui {
 		float GetTextHeight(void) { return (float)staticData.fontHeight; }
 
 		/// <summary>
+		/// This function sets the font color
+		/// </summary>
+		/// <param name="col">A glm::vec4 indicating the text color</param>
+		void SetColor(glm::vec4 col = glm::vec4(255.f)) { staticData.color = col; }
+
+		/// <summary>
 		/// This function create a static text.
 		/// </summary>
 		/// <param name="text"></param>

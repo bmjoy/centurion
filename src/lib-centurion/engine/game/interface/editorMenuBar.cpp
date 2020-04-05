@@ -8,6 +8,7 @@
 #include <picking.h>
 #include <translationsTable.h>
 #include <tinyxml2.h>
+#include <hector-lua.h>
 
 using namespace std;
 using namespace glm;
@@ -47,12 +48,14 @@ void EditorMenuBar::EditorMenu::Close(void)
 	EditorMenu::isOpened = false;
 }
 
-void EditorMenuBar::EditorMenu::Create(gui::Rectangle _titleBack, gui::SimpleText _titleText, vector<gui::Rectangle> _optionsBack, vector<gui::SimpleText> _optionsText)
+void EditorMenuBar::EditorMenu::Create(gui::Rectangle _titleBack, gui::SimpleText _titleText, vector<gui::Rectangle> _optionsBack, vector<gui::SimpleText> _optionsText, std::vector<std::string> _optionsLuaCondition)
 {
 	titleBack = _titleBack;
 	titleText = _titleText;
 	optionsBack = _optionsBack;
 	optionsText = _optionsText;
+	optionsLuaCondition = _optionsLuaCondition;
+	for (int i = 0; i < optionsBack.size(); i++) optionsBooleans.push_back(true);
 }
 
 void EditorMenuBar::EditorMenu::Render(const bool picking, const vec4 &color)
@@ -67,6 +70,18 @@ void EditorMenuBar::EditorMenu::Render(const bool picking, const vec4 &color)
 	for (int i = 0; i < optionsBack.size(); i++) {
 		optionsBack[i].render(color, vec4(), picking, PickingUI::GetLeftClickId());
 		if (picking == false) {
+			
+			bool bCond = true;
+			Hector::ExecuteBooleanMethod(optionsLuaCondition[i], &bCond);
+			
+			if (optionsBooleans[i] != bCond)
+			{
+				glm::vec4 textColor;
+				(bCond) ? textColor = vec4(255.f) : textColor = vec4(127.f, 127.f, 127.f, 255.f);
+				optionsText[i].SetColor(textColor);
+				optionsBooleans[i] = bCond;
+			}
+			
 			optionsText[i].render_static();
 		}
 	}
@@ -154,10 +169,11 @@ void EditorMenuBar::Create(void)
 			// create vectors
 			vector<gui::Rectangle> optionsBack = vector<gui::Rectangle>();
 			vector<gui::SimpleText> optionsText = vector<gui::SimpleText>();
+			vector<std::string> optionsLuaCondition = vector<std::string>();
 			for (tinyxml2::XMLElement* _it_cmd = _it_menu->FirstChildElement(); _it_cmd != NULL; _it_cmd = _it_cmd->NextSiblingElement())
 			{
 				wstring optionstring = TranslationsTable::GetWTranslation(_it_cmd->Attribute("name"));
-				string optionLuaCmd = string(_it_cmd->FirstChildElement("onclickScript")->GetText());
+				string optionLuaCmd = _it_cmd->FirstChildElement("onclickScript")->GetText();
 				int j = stoi(_it_cmd->Attribute("id"));
 
 				gui::Rectangle optionback = gui::Rectangle();
@@ -166,11 +182,22 @@ void EditorMenuBar::Create(void)
 				gui::SimpleText optiontext = gui::SimpleText("static");
 				optiontext.create_static(optionstring, font, titlePosX + offSetX, titlePosY - height * (j + 1) + height * 0.5f, "left", "middle", vec4(255.f), "normal");
 
+				std::string optionLuaCond = "";
+				
+				if (_it_cmd->FirstChildElement("conditionScript") != NULL)
+				{
+					std::string luaConditionScript = _it_cmd->FirstChildElement("conditionScript")->GetText();
+					Hector::ExecuteCommand(luaConditionScript);
+
+					optionLuaCond = _it_cmd->FirstChildElement("conditionScript")->Attribute("function");
+				}
+
 				optionsBack.push_back(optionback);
 				optionsText.push_back(optiontext);
+				optionsLuaCondition.push_back(optionLuaCond);
 			}
 
-			_menu->Create(titleBack, titleText, optionsBack, optionsText);
+			_menu->Create(titleBack, titleText, optionsBack, optionsText, optionsLuaCondition);
 
 			AddMenu(_menu_id, _menu);
 			titlePosX += titleWidth;

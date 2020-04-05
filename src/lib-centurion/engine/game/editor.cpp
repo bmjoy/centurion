@@ -219,7 +219,7 @@ void Editor::Run(void)
 		Logger::Info("Editor has been created!");
 	}
 
-	Picking::ResetAllClickIds();
+	PickingUI::ResetClickIds();
 
 	/* Keyboard control */
 	handleKeyboardControls();
@@ -242,7 +242,6 @@ void Editor::Run(void)
 
 		// PICKING OBJECTS RENDERING
 		RenderObjectsPicking();
-		PickingObject::UpdateClickIds();
 
 		// NORMAL RENDERING
 		Map::Render(false);

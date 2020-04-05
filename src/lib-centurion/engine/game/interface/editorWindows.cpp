@@ -131,13 +131,13 @@ void EditorWindows::Create(void)
 
 			int id = _it_wind->IntAttribute("id");
 
-			string isOpenedStr = string(_it_wind->Attribute("isOpened"));
+			string isOpenedStr = _it_wind->Attribute("isOpened");
 			bool isOpened = (isOpenedStr == "true");
-			string luaOpeningCMD = string(_it_wind->FirstChildElement("openingScript")->GetText());
-			string luaConditionCMD = string(_it_wind->FirstChildElement("conditionScript")->GetText());
-			string luaConditionFun = string(_it_wind->FirstChildElement("conditionScript")->Attribute("function"));
+			string luaOpeningCMD = _it_wind->FirstChildElement("openingScript")->GetText();
+			string luaConditionCMD = _it_wind->FirstChildElement("conditionScript")->GetText();
+			string luaConditionFun = _it_wind->FirstChildElement("conditionScript")->Attribute("function");
 
-			gui::Iframe iframe = gui::Iframe(string(_it_wind->Attribute("iframe")));
+			gui::Iframe iframe = gui::Iframe(_it_wind->Attribute("iframe"));
 
 			string sizeScript = _it_wind->Attribute("size");
 			string positionScript = _it_wind->Attribute("position");

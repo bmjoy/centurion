@@ -23,14 +23,17 @@ public:
 		/// </summary>
 		/// <returns>True if it is opened; false otherwise.</returns>
 		bool IsOpened(void);
+		
 		/// <summary>
 		/// This function opens the editor menu.
 		/// </summary>
 		void Open(void);
+		
 		/// <summary>
 		/// This function closes the editor menu.
 		/// </summary>
 		void Close(void);
+		
 		/// <summary>
 		/// This function creates an editor menu.
 		/// </summary>
@@ -38,7 +41,9 @@ public:
 		/// <param name="_titleText"></param>
 		/// <param name="_optionsBack"></param>
 		/// <param name="_optionsText"></param>
-		void Create(gui::Rectangle _titleBack, gui::SimpleText _titleText, std::vector<gui::Rectangle> _optionsBack, std::vector<gui::SimpleText> _optionsText);
+		/// <param name="_optionsLuaCondition"></param>
+		void Create(gui::Rectangle _titleBack, gui::SimpleText _titleText, std::vector<gui::Rectangle> _optionsBack, std::vector<gui::SimpleText> _optionsText, std::vector<std::string> _optionsLuaCondition);
+		
 		/// <summary>
 		/// This function performs the rendering of the editor menu.
 		/// </summary>
@@ -50,6 +55,8 @@ public:
 		gui::SimpleText titleText;
 		std::vector<gui::Rectangle> optionsBack;
 		std::vector<gui::SimpleText> optionsText;
+		std::vector<std::string> optionsLuaCondition;
+		std::vector<bool> optionsBooleans;
 		bool isOpened;
 	};
 
@@ -66,6 +73,7 @@ public:
 	/// This function creates an editor menu bar.
 	/// </summary>
 	static void Create(void);
+
 	/// <summary>
 	/// This function performs the rendering of an editor menu bar.
 	/// </summary>
@@ -105,6 +113,7 @@ private:
 	/// <param name="id">The id that corresponds to the editor menu bar.</param>
 	/// <param name="menu">The editor menu</param>
 	static void AddMenu(const unsigned int id, EditorMenu* menu);
+
 	static unsigned int minPickingId, maxPickingId;
 	static std::string font;
 	static float height, width;

@@ -139,7 +139,13 @@
     </openingScript>
     <simpleTextArray></simpleTextArray>
     <buttonArray>
-      <button text="WORD_Add" xOffset="500" yOffset="30">
+      <button text="WORD_Close" xOffset="400" yOffset="30">
+        <onclickScript>
+          --lua script
+          Editor.CloseWindow(4)
+        </onclickScript>
+      </button>
+      <button text="WORD_Add" xOffset="520" yOffset="30">
         <onclickScript>
           Editor.InsertObject(TextList.GetListById(1):GetSelectedOption(), TextList.GetListById(3):GetSelectedOption())
         </onclickScript>

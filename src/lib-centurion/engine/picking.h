@@ -64,7 +64,6 @@ public:
 	/// </summary>
 	~Picking(void);
 
-protected:
 	/// <summary>
 	/// This function returns the picking ID of an object when you click on it.
 	/// </summary>
@@ -82,7 +81,7 @@ private:
 /// <summary>
 /// This function handles the picking ID of an element belongs to UI.
 /// </summary>
-class PickingUI : public Picking
+class PickingUI
 {
 public:
 	/// <summary>
@@ -151,7 +150,7 @@ private:
 /// <summary>
 /// This function handles the picking ID of an element belongs to objects.
 /// </summary>
-class PickingObject : public Picking
+class PickingObject
 {
 public:
 	/// <summary>

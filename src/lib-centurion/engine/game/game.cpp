@@ -547,7 +547,7 @@ void Game::RenderObjectsPicking() {
 	if (!Engine::Mouse::RightClick && !Engine::Mouse::LeftClick) return;
 
  	if (PickingUI::GetLeftClickId() != 0) {
-		PickingObject::ResetClickIds();
+		//PickingObject::ResetClickIds();
 		return;
 	}
 
@@ -556,6 +556,8 @@ void Game::RenderObjectsPicking() {
 			GObject::GetObjectByID(i)->Render(true);
 		}
 	}
+
+	PickingObject::UpdateClickIds();
 }
 
 void Game::RenderObjects() 

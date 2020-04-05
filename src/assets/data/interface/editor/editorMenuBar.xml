@@ -45,10 +45,19 @@
         </onclickScript>
       </command>
       <command id="1" name="EDITOR_Edit_Properties" hotkey1="CTRL" hotkey2="N" hotkey3="">
+        <conditionScript function="ConditionEditProperties">
+          -- lua script
+          function ConditionEditProperties()
+          condition1 = Game.IsObjectSelected(Mouse.GetLeftClickId())
+          return condition1
+          end
+        </conditionScript>
         <onclickScript>
           -- Lua Script
-          Editor.OpenWindow(3)
-          Editor.ToggleMenu(1)
+          if (ConditionEditProperties()) then
+            Editor.OpenWindow(3)
+            Editor.ToggleMenu(1)
+          end
         </onclickScript>
       </command>
     </editorMenu>
