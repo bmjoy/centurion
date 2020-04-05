@@ -187,8 +187,9 @@ public:
 	/// if the is a existing  settlement close to the current building: if not, the building cannot be created.
 	/// </summary>
 	/// <param name="objData">The object in which are stored the properties of the current building.</param>
+	/// <param name="_temporary">Boolean: true = the object is temporary (e.g. an object that is being inserted in the editor)</param>
 	/// <returns>True if the building can be created; false otherwise.</returns>
-	bool SetBuildingProperties(ObjectData::ObjectXMLClassData &objData);
+	bool SetBuildingProperties(ObjectData::ObjectXMLClassData &objData, const bool _temporary = false);
 
 	/// <summary>
 	/// This function performs the rendering of the current building.
@@ -211,8 +212,8 @@ public:
 	/// <returns></returns>
 	bool getWaitingToBeErased() { return waitingToBeErased; }
 
-	Building();
-	~Building();
+	Building(void);
+	~Building(void);
 private:
 	//game::ObjectUI* buildingUI;
 	bool waitingToBeErased;
@@ -242,8 +243,9 @@ private:
 	/// to the current building.
 	/// </summary>
 	/// <param name="b">The building that has invoked the method Building::SetBuildingProperties.</param>
+	/// <param name="_temporary">Boolean: true = the object is temporary (e.g. an object that is being inserted in the editor)</param>
 	/// <returns>True if there is a settlement; false otherwise.</returns>
-	static bool FindASettlement(Building* b);
+	static bool FindASettlement(Building* b, const bool _temporary = false);
 	//static properties
 	/*/
 	class SettlementSet

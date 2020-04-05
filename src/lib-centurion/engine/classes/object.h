@@ -342,11 +342,11 @@ public:
 	/// <summary>
 	/// Public constructor.
 	/// </summary>
-	GObject();
+	GObject(void);
 	/// <summary>
 	/// The destructor.
 	/// </summary>
-	~GObject();
+	~GObject(void);
 protected:
 	ObjectSprite::SpriteData spriteData;
 	Player *player;
@@ -399,6 +399,7 @@ private:
 	/// from an XML file and they are now stored into a ObjectData::ObjectXMLClassData object.
 	/// </summary>
 	/// <param name="objData">The object in which are stored the properties of the current object.</param>
-	void SetObjectProperties(ObjectData::ObjectXMLClassData &objData);
+	/// <param name="_temporary">Boolean: true = the object is temporary (e.g. an object that is being inserted in the editor)</param>
+	void SetObjectProperties(ObjectData::ObjectXMLClassData &objData, const bool _temporary = false);
 	#pragma endregion
 };

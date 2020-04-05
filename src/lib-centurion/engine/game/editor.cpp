@@ -134,6 +134,7 @@ void Editor::InsertingObject(std::string type, std::string className)
 
 		if (Editor::tmpObject->Create(className, true) == false)
 		{
+			Logger::Info("Object cannot be created!");
 			delete Editor::tmpObject;
 			Editor::tmpObject = nullptr;
 			return;
@@ -145,7 +146,8 @@ void Editor::InsertingObject(std::string type, std::string className)
 	}
 
 	if (Editor::tmpObject == nullptr) return;
-
+	EditorMenuBar::Show();
+	EditorWindows::Show();
 	if (Engine::Mouse::RightClick)
 	{
 		delete Editor::tmpObject;

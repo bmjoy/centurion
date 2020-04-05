@@ -213,7 +213,7 @@ void Building::prepare()
 //}
 */
 
-bool Building::SetBuildingProperties(ObjectData::ObjectXMLClassData &objData)
+bool Building::SetBuildingProperties(ObjectData::ObjectXMLClassData &objData, const bool _temporary)
 {
 	bool bBuildingCreated = false;
 	// TryParseFloat, TryParseInteger, TryParseString
@@ -227,8 +227,11 @@ bool Building::SetBuildingProperties(ObjectData::ObjectXMLClassData &objData)
 	ObjectData::TryParseString(objData.GetPropertiesMap(), "pass_path", &strProperty);
 	this->pass_path = strProperty;
 	this->SetPass(strProperty);
-	UpdatePass();
-	bBuildingCreated = this->FindASettlement(this);
+	
+	bBuildingCreated = this->FindASettlement(this, _temporary);
+	if (_temporary == true)
+		return bBuildingCreated;
+	this->UpdatePass();
 	if (bBuildingCreated == true)
 	{
 		ObjectData::TryParseInteger(objData.GetPropertiesMap(), "maxHealth", &iProperty);
@@ -346,11 +349,12 @@ Building::~Building(void)
 
 #pragma region Private members
 vector<Settlement*> Building::settlementsList;
-bool Building::FindASettlement(Building* b)
+bool Building::FindASettlement(Building* b, const bool _temporary)
 {
 	bool bSettlementDiscovered = false;
 
-	if (b->IsPlaceable() == false) return bSettlementDiscovered;
+	if (b->IsPlaceable() == false) 
+		return bSettlementDiscovered;
 
 	if (b->bIsCentralBuilding == false)
 	{
@@ -369,7 +373,6 @@ bool Building::FindASettlement(Building* b)
 				return bSettlementDiscovered;
 			}
 
-			bool bValidSettlement = true;
 			const vector<Building*> settBuildings = Building::settlementsList[settlementsCounter]->GetBuildingsBelongToSettlement();
 			size_t numOfBuildings = settBuildings.size();
 			for (unsigned int buildingsCounter = 0; buildingsCounter < numOfBuildings && bSettlementDiscovered == false; buildingsCounter++)
@@ -381,34 +384,28 @@ bool Building::FindASettlement(Building* b)
 				float distance = sqrt( pow(b_xPos - xPos, 2) + pow(b_yPos - yPos, 2) );
 
 				//If the two buildings are close enough 
-				bValidSettlement = (distance <= MAX_DISTANCE);
-				if (bValidSettlement == true)
-				{
-					bValidSettlement = true;
-					const float radius1 = b->GetRadius();
-					const float radius2 = settBuildings[buildingsCounter]->GetRadius();
-					//If the two buildings don't intersect each others
-					if (distance <= radius1 + radius2)
-					{
-						bValidSettlement = false;
-						break;
-					}
-				}
+				bSettlementDiscovered = (distance <= MAX_DISTANCE);
 			}
-			if (bValidSettlement == true)
+			if (bSettlementDiscovered == true)
 			{
 				//The settlement is valid
-				b->settlement = Building::settlementsList[settlementsCounter];
-				bSettlementDiscovered = true;
-				bSettlementDiscovered = bSettlementDiscovered = b->settlement->AddBuildingToSettlement(b); //Here, it should be return always true.
+				if (_temporary == false)
+				{
+					b->settlement = Building::settlementsList[settlementsCounter];
+					bSettlementDiscovered = bSettlementDiscovered = b->settlement->AddBuildingToSettlement(b); //Here, it should be return always true.
+				}
 			}
 		}
 	}
 	else
 	{
-		b->settlement = new Settlement(b->GetPlayer());
-		Building::settlementsList.push_back(b->settlement);
-		bSettlementDiscovered = b->settlement->AddBuildingToSettlement(b); //Here, it should be return always true.
+		bSettlementDiscovered = true;
+		if (_temporary == false)
+		{
+			b->settlement = new Settlement(b->GetPlayer());
+			Building::settlementsList.push_back(b->settlement);
+			bSettlementDiscovered = b->settlement->AddBuildingToSettlement(b); //Here, it should be return always true.
+		}
 	}
 	return bSettlementDiscovered;
 }

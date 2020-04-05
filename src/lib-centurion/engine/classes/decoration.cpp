@@ -16,6 +16,7 @@ Decoration::Decoration()
 	this->SetType("cpp_decorationclass");
 	settlementName = "N/A";
 	settlID = 0;
+	this->SetPosition(vec3(Engine::Mouse::GetXMapCoordinate(), Engine::Mouse::GetYMapCoordinate(), 10.f));
 }
 
 void Decoration::prepare() {

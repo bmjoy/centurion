@@ -226,12 +226,11 @@ bool GObject::Create(const string _className, const bool _temporary)
 	this->spriteData.pickingId = this->GetPickingID();
 	this->spriteData.pickingColor = Picking::GetPickingColorFromID(this->GetPickingID());
 
-	this->SetObjectProperties(objData);
-	if (_temporary == true) return bObjectCreated;
-	
+	//if (_temporary == true) return bObjectCreated;
+	this->SetObjectProperties(objData, _temporary);
 	if (this->IsBuilding() == true)
 	{
-		bObjectCreated = this->AsBuilding()->SetBuildingProperties(objData);
+		bObjectCreated = this->AsBuilding()->SetBuildingProperties(objData, _temporary);
 	}
 	else if (this->IsDecoration() == true)
 	{
@@ -241,7 +240,7 @@ bool GObject::Create(const string _className, const bool _temporary)
 	{
 		;
 	}
-	if (bObjectCreated == true)
+	if (bObjectCreated == true && _temporary == false)
 	{
 		GObject::AddGameObject(this->GetPickingID(), this);
 	}
@@ -426,7 +425,7 @@ void GObject::MarkAsSelected(const bool par_selected)
 #pragma endregion
 
 #pragma region Private members
-void GObject::SetObjectProperties(ObjectData::ObjectXMLClassData &objData)
+void GObject::SetObjectProperties(ObjectData::ObjectXMLClassData &objData, const bool _temporary)
 {
 	// TryParseFloat, TryParseInteger, TryParseString
 	float fProperty = 0.f;
@@ -434,14 +433,16 @@ void GObject::SetObjectProperties(ObjectData::ObjectXMLClassData &objData)
 	string strProperty = "";
 
 	//Object's properties:
+	ObjectData::TryParseFloat(objData.GetPropertiesMap(), "radius", &fProperty);
+	this->radius = fProperty;
+	if (_temporary == true) 
+		return;
 	ObjectData::TryParseString(objData.GetPropertiesMap(), "singularName", &strProperty);
 	this->singularName = strProperty;
 	ObjectData::TryParseString(objData.GetPropertiesMap(), "pluralName", &strProperty);
 	this->pluralName = strProperty;
 	ObjectData::TryParseString(objData.GetPropertiesMap(), "race", &strProperty);
 	this->raceName = strProperty;
-	ObjectData::TryParseFloat(objData.GetPropertiesMap(), "radius", &fProperty);
-	this->radius = fProperty;
 	ObjectData::TryParseInteger(objData.GetPropertiesMap(), "sight", &iProperty);
 	this->sight = iProperty;
 	ObjectData::TryParseFloat(objData.GetPropertiesMap(), "selectionRadius", &fProperty);

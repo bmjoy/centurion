@@ -823,7 +823,6 @@ bool Game::CreateObject(const string className, const float x, const float y, co
 		if (type == "cpp_buildingclass")
 		{
 			Building* newBuilding = new Building();
-			newBuilding->SetPosition(vec3(x, y, 10));
 			newBuilding->SetPlayer(player);			
 			bObjectCreated = newBuilding->Create(className);
 			if (bObjectCreated == false)
@@ -832,9 +831,9 @@ bool Game::CreateObject(const string className, const float x, const float y, co
 				newBuilding = nullptr;
 			}
 		}
-		if (type == "cpp_decorationclass") {
+		if (type == "cpp_decorationclass")
+		{
 			Decoration* newDecoration = new Decoration();
-			newDecoration->SetPosition(vec3(x, y, 10));
 			bObjectCreated = newDecoration->Create(className);
 			if (bObjectCreated == false)
 			{

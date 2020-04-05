@@ -38,19 +38,25 @@ namespace astar {
 		}
 		return mat;
 	}
-	bool checkAvailability(vector<vector<unsigned int>> &building_grid, vec3 &position) {
+	bool checkAvailability(vector<vector<unsigned int>> &building_grid, vec3 &position) 
+	{
 		bool b = true;
 		vec2 pos = vec2((int)position.x / astar::cellGridSize - building_grid[0].size() / 2, (int)position.y / astar::cellGridSize - building_grid.size() / 2);
-		for (int i = 0; i < building_grid.size(); i++) {
-			for (int j = 0; j < building_grid[0].size(); j++) {
+		for (int i = 0; i < building_grid.size(); i++) 
+		{
+			for (int j = 0; j < building_grid[0].size(); j++) 
+			{
 				int k = ((int)building_grid.size() - i + (int)pos.y) * gridWidth + j + (int)pos.x;
-				if (k >= 0 && k < gridWidth * gridHeight){
-					if (GridMatrix()[k] == 1 && building_grid[i][j] == 1){
+				if (k >= 0 && k < gridWidth * gridHeight)
+				{
+					if (GridMatrix()[k] == 1 && building_grid[i][j] == 1)
+					{
 						b = false;
 						break;
 					}
 				}
-				else {
+				else 
+				{
 					b = false;
 					break;
 				}
@@ -58,10 +64,13 @@ namespace astar {
 		}
 		return b;
 	}
-	void updatePassMatrix(vector<vector<unsigned int>> &building_grid, vec3 &position) {
+	void updatePassMatrix(vector<vector<unsigned int>> &building_grid, vec3 &position) 
+	{
 		vec2 pos = vec2((int)position.x / astar::cellGridSize - building_grid[0].size() / 2, (int)position.y / astar::cellGridSize - building_grid.size() / 2);
-		for (int i = 0; i < building_grid.size(); i++) {
-			for (int j = 0; j < building_grid[0].size(); j++) {
+		for (int i = 0; i < building_grid.size(); i++) 
+		{
+			for (int j = 0; j < building_grid[0].size(); j++)
+			{
 				int k = ((int)building_grid.size() - i + (int)pos.y) * gridWidth + j + (int)pos.x;
 				if (GridMatrix()[k] == 0) {
 					GridMatrix()[k] = building_grid[i][j];
@@ -70,10 +79,13 @@ namespace astar {
 		}
 	}
 
-	void clearPassMatrix(vector<vector<unsigned int>> &building_grid, vec3 &position) {
+	void clearPassMatrix(vector<vector<unsigned int>> &building_grid, vec3 &position)
+	{
 		vec2 pos = vec2((int)position.x / astar::cellGridSize - building_grid[0].size() / 2, (int)position.y / astar::cellGridSize - building_grid.size() / 2);
-		for (int i = 0; i < building_grid.size(); i++) {
-			for (int j = 0; j < building_grid[0].size(); j++) {
+		for (int i = 0; i < building_grid.size(); i++) 
+		{
+			for (int j = 0; j < building_grid[0].size(); j++) 
+			{
 				int k = ((int)building_grid.size() - i + (int)pos.y) * gridWidth + j + (int)pos.x;
 				GridMatrix()[k] = 0;
 			}
