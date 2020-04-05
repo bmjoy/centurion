@@ -13,7 +13,7 @@
       <simpleText name="EDITOR_newScenarioName" xOffset="20" yOffset="80" />
     </simpleTextArray>
     <buttonArray>
-      <button text="Ok" xOffset="320" yOffset="30">
+      <button text="EDITOR_File_Save" xOffset="320" yOffset="30">
         <onclickScript>
           --lua script
         </onclickScript>
@@ -55,16 +55,18 @@
 
   <!-- SAVE SCENARIO WINDOW -->
 
-  <editorWindow id="2" name="Save scenario" iframe="editor" position="x=Engine.WindowWidth/2-w/2; y=Engine.WindowHeight/2-h/2;" size="w=400; h=150;" isOpened="false">
+  <editorWindow id="2" name="EDITOR_newScenario" iframe="editor" position="x=Engine.WindowWidth/2-w/2; y=Engine.WindowHeight/2-h/2;" size="w=400; h=150;" isOpened="false">
     <conditionScript function="">
       -- lua script
     </conditionScript>
     <openingScript>
       -- lua script
     </openingScript>
-    <simpleTextArray></simpleTextArray>
+    <simpleTextArray>
+      <simpleText name="EDITOR_newScenarioName" xOffset="20" yOffset="80" />
+    </simpleTextArray>
     <buttonArray>
-      <button text="Ok" xOffset="200" yOffset="60">
+      <button text="EDITOR_File_Save" xOffset="320" yOffset="30">
         <onclickScript>
           --lua script
         </onclickScript>
@@ -72,7 +74,7 @@
     </buttonArray>
     <textListArray></textListArray>
     <textInputArray>
-      <textInput textInputId="0" xOffset="50" yOffset="75" width="100" placeholder="Untitled" />
+      <textInput textInputId="0" xOffset="20" yOffset="60" width="200" placeholder="EDITOR_defaultMapName" />
     </textInputArray>
   </editorWindow>
 
