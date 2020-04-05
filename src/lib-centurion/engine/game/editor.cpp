@@ -365,6 +365,7 @@ void Editor::handleKeyboardControls(void)
 	{
 		if (Minimap::IsActive()) Minimap::Disable();
 		else Minimap::Enable();
+		Minimap::IsActive() ? EditorMenuBar::Hide() : EditorMenuBar::Show();
 		Minimap::IsActive() ? Logger::Info("Minimap ON!") : Logger::Info("Minimap OFF!");
 	}
 	
