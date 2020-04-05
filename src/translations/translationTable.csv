@@ -17,13 +17,15 @@ GAME_pauseMenuButtonClose,Close,Chiudi il menù,Fermer le menu,Cerrar
 EDITOR_File,File,File,Fichier,Archivo
 EDITOR_Edit,Edit,Modifica,Éditer,Editar
 EDITOR_Edit_UpdateNormals,Update Normals,Ricalcola Normali,Recalculer les normales,Actualizar Normales
+EDITOR_Edit_Properties,Edit object properties,Modifica proprietà oggetto,Éditer propriétés de l'objet,Editar propiedades de objeto
 EDITOR_Tools,Tools,Strumenti,Outils,Herramientas
 EDITOR_Tools_AddObject,Toggle Add Object window,Attiva/Disattiva la finestra Aggiungi oggetto,Activer/Désactiver la fenêtre Ajouter un objet,Activar / Desactivar la ventana Agregar objeto
 EDITOR_Tools_TerrainBrush,Toggle terrain brushes,Attiva/Disattiva i pennelli dei terreni,Activer/Désactiver les brosses de terrain,Activar / Desactivar pinceles de terreno
-EDITOR_newScenario,Create new scenario,Crea nuovo scenario,Créer a nouveau scénario,Crear nuevo escenario
+EDITOR_newScenario,Create new scenario,Crea nuovo scenario,Créer nouveau scénario,Crear nuevo escenario
 EDITOR_newScenarioName,Choose a name (max 30 characters).,Scegli un nome (max 30 caratteri).,Choisir un nom (30 caractères maximum).,Elegir un nombre (máximo 30 caracteres).
 EDITOR_openScenario,Open scenario,Apri uno scenario,Ouvrir a scénario,Abrir un escenario
 EDITOR_saveAs,Save scenario as...,Salva scenario come...,Sauve scénario comme...,Guardar el escenario como...
+EDITOR_addObject,Add object,Aggiungi oggetto,Ajouter objet,Añadir objeto
 EDITOR_properties,Object properties,Proprietà dell'oggetto,Propriétés de l'objet,Propiedades del objeto
 EDITOR_propertiesName,Object name:,Nome dell'oggetto:,Nom de l'objet,Nombre del objeto:
 EDITOR_propertiesSettlement,Settlement name:,Nome dell'insediamento:,Nom de l'installation:,Nombre del asentamiento:
@@ -64,8 +66,8 @@ WORD_RTavern,Tavern,Taverna,Auberge,Taberna
 WORD_RTemple,Temple,Tempio,Temple,Templo
 WORD_RTownhall,Townhall,Foro,Mairie,Foro
 WORD_ROutpost,Roman outpost,Avamposto romano,Avant-poste romain,Puesto de Avanzada romano
-WORD_Broadleaf_1,Broadleaf 1,Latifoglie 1,À feuilles caduques 1,--
-WORD_Broadleaf_2,Broadleaf 2,Latifoglie 2,À feuilles caduques 2,--
+WORD_Broadleaf_1,Broadleaf 1,Latifoglie 1,À feuilles caduques 1,De hoja ancha 1
+WORD_Broadleaf_2,Broadleaf 2,Latifoglie 2,À feuilles caduques 2,De hoja ancha 2
 WORD_Cypress,Cypress,Cipresso,Cyprès,Ciprès
 WORD_Jasmimmanga,Tropical tree 1,Pianta tropicale 1,Plante tropicale 1,Planta tropical 1
 WORD_Palm_1,Palm 1,Palma 1,Palmier 1,Palmera 1
@@ -83,6 +85,7 @@ WORD_errorCode,Error code,Codice errore,Code d'erreur,Código de error
 WORD_yes,Yes,Sì,Oui,Sí
 WORD_no,No,No,Non,No
 WORD_Close,Close,Chiudi,Fermer,Cerrar
+WORD_Save,Save,Salva,Sauver,Guardar
 WORD_Save,Save,Salva,Sauver,Guardar
 WORD_Open,Open,Apri,Ouvrir,Abrir
 WORD_Create,Create,Crea,Créer,Crear
