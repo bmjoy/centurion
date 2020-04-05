@@ -1,3 +1,11 @@
+/*
+* ---------------------------
+* CENTURION
+* [2019] - [2020] Rattlesmake
+* All Rights Reserved.
+* ---------------------------
+*/
+
 #ifndef GUI_H
 #define GUI_H
 

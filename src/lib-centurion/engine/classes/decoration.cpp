@@ -13,7 +13,7 @@ using namespace glm;
 
 Decoration::Decoration() 
 {
-	this->SetType("decoration");
+	this->SetType("cpp_decorationclass");
 	settlementName = "N/A";
 	settlID = 0;
 }

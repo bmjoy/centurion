@@ -209,7 +209,7 @@ void Hector::Console::Create()
 	iframe = gui::Iframe("console");
 	iframe.Create(30, 30, (int)Engine::myWindow::Width - 60, 30);
 	txtinput = gui::TextInput();
-	txtinput.create("", 35, 35, 200);
+	txtinput.Create(MAX_NUMBER_OF_TEXT_INPUTS - 1, 35, 35, 200);
 	isOpened = false;
 }
 
@@ -217,17 +217,19 @@ void Hector::Console::Render()
 {
 	if (Engine::Keyboard::IsKeyPressed(GLFW_KEY_F1)) {
 		isOpened = !isOpened;
-		txtinput.active(isOpened);
+		isOpened ? EditorWindows::Hide() : EditorWindows::Show();
+		isOpened ? EditorMenuBar::Hide() : EditorMenuBar::Show();
+		txtinput.Enable();
 	}
 	if (isOpened) {		
 		iframe.Render();
-		txtinput.render();
+		txtinput.Render();
 
-		string cmd = txtinput.get_text();
+		string cmd = txtinput.GetText();
 		if (Engine::Keyboard::IsKeyPressed(GLFW_KEY_ENTER)) {
 			if (cmd.size() > 0) {
 				ExecuteCommand(cmd);
-				txtinput.create("", 35, 35, 200);
+				txtinput.Create(MAX_NUMBER_OF_TEXT_INPUTS - 1, 35, 35, 200);
 			}
 		}
 	}

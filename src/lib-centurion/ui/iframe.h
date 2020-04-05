@@ -25,6 +25,11 @@ namespace gui {
 		Iframe(std::string _name);
 
 		/// <summary>
+		/// This function clears the entire texts list. 
+		/// </summary>
+		void Clear();
+
+		/// <summary>
 		/// This function adds an image to the iframe window.
 		/// </summary>
 		/// <param name="img">Image that would be added. It only supports Image classes.</param>
@@ -46,11 +51,6 @@ namespace gui {
 		void AddText(SimpleText txt) { listOfTexts.push_back(txt); }
 
 		/// <summary>
-		/// This function clears the entire texts list. 
-		/// </summary>
-		void Clear();
-
-		/// <summary>
 		/// This function adds a specific texts list to the iframe.
 		/// </summary>
 		/// <param name="textListId">The text list id</param>
@@ -60,20 +60,24 @@ namespace gui {
 		/// <param name="maxOptions">The maximum number of options to display</param>
 		void AddTextList(const int textListId, const int xPos, const int yPos, const std::string & luaCmd = "", const unsigned int maxOptions = MAX_OPTIONS_DEFAULT, const unsigned int borderWidth = BORDERWIDTH_DEFAULT);
 
+		void AddTextInput(const int textInputId, const int xPos, const int yPos, const int maxChars = TEXT_INPUT_MAX_CHARS_DEFAULT, std::wstring placeholderText = L"");
+
 		/// <summary>
 		/// This function creates an instance of Iframe.
 		/// </summary>
-		/// <param name="xPos">X postition of the Iframe. It only supports integers.</param>
-		/// <param name="yPos">Y postition of the Iframe. It only supports integers.</param>
+		/// <param name="xPos">X position of the Iframe. It only supports integers.</param>
+		/// <param name="yPos">Y position of the Iframe. It only supports integers.</param>
 		/// <param name="width">Width of the Iframe. It only supports integers.</param>
 		/// <param name="height">Height of the Iframe. It only supports integers.</param>
-		void Create(int xPos, int yPos, int width, int height);
+		/// <param name="iframe_title">The iframe main title.</param>
+		void Create(int xPos, int yPos, int width, int height, std::wstring iframe_title = L"");
 		
 		/// <summary>
 		/// This function creates an instance of Iframe using a lua command to define size and position
 		/// </summary>
 		/// <param name="LuaCommand">This command must contain the following variables "x, y, w, h" with their values (e.g. "x=1; y=1; w=1; h=1")</param>
-		void Create(const std::string &LuaCommand);
+		/// /// <param name="iframe_title">The iframe main title.</param>
+		void Create(const std::string &LuaCommand, std::wstring iframe_title = L"");
 
 		/// <summary>
 		/// This function starts the rendering process of the Iframe.
@@ -87,24 +91,30 @@ namespace gui {
 		/// This function starts the rendering process of images within the Iframe.
 		/// </summary>
 		/// <param name="picking">This boolean parameter enables or disables render picking. Default value is false.</param>
-		void RenderImages(bool picking);
+		void RenderImages(bool picking = false);
 		
 		/// <summary>
 		/// This function starts the rendering process of buttons within the Iframe.
 		/// </summary>
 		/// <param name="picking">This boolean parameter enables or disables render picking. Default value is false.</param>
-		void RenderButtons(bool picking);
+		void RenderButtons(bool picking = false);
 
 		/// <summary>
 		/// This function starts the rendering process of texts within the Iframe text list.
 		/// </summary>
-		void RenderTexts();
+		void RenderTexts(bool picking = false);
 
 		/// <summary>
 		/// This function starts the rendering process of text lists within the Iframe.
 		/// </summary>
 		/// <param name="picking">This boolean parameter enables or disables render picking. Default value is false.</param>
-		void RenderTextLists(bool picking);
+		void RenderTextLists(bool picking = false);
+
+		/// <summary>
+		/// This function starts the rendering process of text inputs within the Iframe.
+		/// </summary>
+		/// <param name="picking">This boolean parameter enables or disables render picking. Default value is false.</param>
+		void RenderTextInputs(bool picking = false);
 
 		/// <summary>
 		/// This method reads the data contained in the XML file of the selected iframe
@@ -120,6 +130,7 @@ namespace gui {
 		std::vector<Button> listOfButtons;
 		std::vector<SimpleText> listOfTexts;
 		std::vector<TextList*> listOfTextLists;
+		std::vector<TextInput*> listOfTextInputs;
 		Image back;
 		Image topleft;
 		Image topright;
@@ -141,6 +152,9 @@ namespace gui {
 		std::string name;
 		int x, y, w, h;
 		bool backgroundIsCreated;
+
+		// iframe title
+		gui::SimpleText iframeTitle;
 
 		// button data
 		std::string button_img_name, button_font;

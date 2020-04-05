@@ -1,3 +1,11 @@
+/*
+* ---------------------------
+* CENTURION
+* [2019] - [2020] Rattlesmake
+* All Rights Reserved.
+* ---------------------------
+*/
+
 #ifndef LIST_H
 #define LIST_H
 
@@ -30,41 +38,19 @@ namespace gui {
 		TextList();
 
 		/// <summary>
-		/// This function Add a text list to array
+		/// This function gets the TextList Id
 		/// </summary>
-		/// <param name="id">Id of the list/array</param>
-		/// <param name="txtList">Text list</param>
-		static void AddTextListToArray(int id, TextList* txtList);
-
-		/// <summary>
-		/// This funtion get the list text from array
-		/// </summary>
-		/// <param name="id">Id of the array</param>
-		/// <returns>return text list</returns>
-		static TextList* GetTextListById(int id);
-
-		/// <summary>
-		/// This function update text list by id (ma va?)
-		/// </summary>
-		/// <param name="id">return id(from array)</param>
-		/// <param name="_options">???Option to give for update</param>
-		/// <param name="prefix">??? prefix of text</param>
-		static void UpdateTextListById(int id, std::vector<std::string> *_options, const std::string prefix = "");
-
-		/// <summary>
-		/// This function get Id
-		/// </summary>
-		/// <returns>Id</returns>
+		/// <returns>The ID</returns>
 		int GetId() { return id; }
 
 		/// <summary>
-		/// This function get selected option
+		/// This function gets the selected option
 		/// </summary>
-		/// <returns>Return a strig with selected option</returns>
+		/// <returns>Returns the selected option, an element of type std::string.</returns>
 		std::string GetSelectedOption() { return selectedOption; }
 
 		/// <summary>
-		/// This function create the text list
+		/// This function creates the text list
 		/// </summary>
 		/// <param name="_id">id of array that contain the list</param>
 		/// <param name="_x">x position of the list</param>
@@ -79,17 +65,45 @@ namespace gui {
 		void Create(int _id, int _x, int _y, std::string _font, glm::vec4 _color, glm::vec4 _backColor, int _pickingId, const std::string & luaCmd = "", const unsigned int _maxOptions = MAX_OPTIONS_DEFAULT, const unsigned int _borderWidth =  BORDERWIDTH_DEFAULT);
 
 		/// <summary>
-		/// This function update the text list
+		/// This function updates the text list
 		/// </summary>
 		/// <param name="_options">refresh option</param>
 		/// <param name="prefix">refresh prefix</param>
 		void Update(std::vector<std::string> *_options, const std::string prefix = "");
 
 		/// <summary>
-		/// This function render the text list.
+		/// This function renders the text list.
 		/// </summary>
-		/// <param name="picking">Defautl value 0.</param>
+		/// <param name="picking">Boolean: true = picking, false = normal rendering.</param>
 		void Render(bool picking);
+
+#pragma region Static methods
+
+		/// <summary>
+		/// This function adds a text list to the array
+		/// </summary>
+		/// <param name="id">Id of the text list</param>
+		/// <param name="txtList">The TextList element to add</param>
+		static void AddTextListToArray(int id, TextList* txtList);
+
+		/// <summary>
+		/// This funtion gets the list text from the array
+		/// </summary>
+		/// <param name="id">Id of the text list</param>
+		/// <returns>Returns an element of type TextList</returns>
+		static TextList* GetTextListById(int id);
+
+		/// <summary>
+		/// This function updates an arbitrary TextList using its ID
+		/// </summary>
+		/// <param name="id">The id of the text list to update</param>
+		/// <param name="_options">List of options</param>
+		/// <param name="prefix">The prefix of the text (e.g. "WORD_" if the word has a translation with this prefix)</param>
+		static void UpdateTextListById(int id, std::vector<std::string> *_options, const std::string prefix = "");
+
+#pragma endregion
+
+
 		~TextList();
 
 	private:

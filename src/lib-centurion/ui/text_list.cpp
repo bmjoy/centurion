@@ -36,9 +36,7 @@ namespace gui {
 	TextList * TextList::GetTextListById(int id)
 	{
 		if (id < 0 || id > MAX_NUMBER_OF_TEXT_LISTS) return nullptr;
-
 		return TextLists[id];
-
 	}
 
 	void TextList::UpdateTextListById(int id, vector<string>* _options, const std::string prefix)
@@ -96,10 +94,10 @@ namespace gui {
 
 		if (borderWidth == BORDERWIDTH_DEFAULT)
 		{
-			borderWidth = borderwidthvar;
+			borderWidth = (int)borderwidthvar;
 		}
 
-		border.create("border", x - 2.f, y, borderWidth + 4.f, borderheight, "top-left", 0);
+		border.create("border", x - 2.f, (float)y, (float)borderWidth + 4.f, borderheight, "top-left", 0);
 
 		minX = x;
 		maxX = x + (int)borderWidth;

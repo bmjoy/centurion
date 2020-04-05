@@ -291,83 +291,101 @@ void Editor::Run(void)
 
 void Editor::handleKeyboardControls(void)
 {
-	//CTRL Hotkeys
-	//if (!IsWindowOpened) 
+	if (Hector::ConsoleIsActive()) return;
+
+	if (EditorWindows::AnyWindowIsOpened() == false) {
+		if (Engine::Keyboard::IsKeyPressed(GLFW_KEY_ESCAPE))
+		{
+			//(???)Da sistermare! Rimangono i riferimenti ai settlement quando si esce dall'editor e poi si rientra.
+			GObject::ResetGameObjects();
+			Close();
+			return;
+		}
+	}
+	
+	if (EditorWindows::AnyWindowIsOpened() == true) {
+
+		if (Engine::Keyboard::IsKeyPressed(GLFW_KEY_ESCAPE))
+		{
+			EditorWindows::CloseEveryWindow();
+		}
+		return;
+	}
+
+
+
+	if (Engine::Keyboard::IsKeyPressed(GLFW_KEY_LEFT_CONTROL) || Engine::Keyboard::IsKeyPressed(GLFW_KEY_RIGHT_CONTROL))
 	{
-		if (Engine::Keyboard::IsKeyPressed(GLFW_KEY_LEFT_CONTROL) || Engine::Keyboard::IsKeyPressed(GLFW_KEY_RIGHT_CONTROL))
+		if (Minimap::IsActive() == false)
 		{
-			if (!Minimap::IsActive())
-			{
-				//if (Engine::Keyboard::IsKeyPressed(GLFW_KEY_N)) { NewMapWindowIsOpen = true; NewMapResetText = true; IsWindowOpened = true; }
-				//if (Engine::Keyboard::IsKeyPressed(GLFW_KEY_O)) { OpenMapWindowIsOpen = true; OpenMapWindowUpdate = true; IsWindowOpened = true; }
-				//if (Engine::Keyboard::IsKeyPressed(GLFW_KEY_A)) { TerrainBrushIsActive = false; TerrainBrushWindowIsOpen = false; AddObjectWindowIsOpen = !AddObjectWindowIsOpen; }
-				//if (Engine::Keyboard::IsKeyPressed(GLFW_KEY_T)) { AddObjectWindowIsOpen = false; TerrainBrushIsActive = !TerrainBrushWindowIsOpen; TerrainBrushWindowIsOpen = !TerrainBrushWindowIsOpen; }
-			}
-			else
-			{
-				if (Engine::Keyboard::IsKeyPressed(GLFW_KEY_S))
-				{
-					//Game::Map::SaveScenario(currentMapName); 
-				}
-			}
+			//if (Engine::Keyboard::IsKeyPressed(GLFW_KEY_N)) { NewMapWindowIsOpen = true; NewMapResetText = true; IsWindowOpened = true; }
+			//if (Engine::Keyboard::IsKeyPressed(GLFW_KEY_O)) { OpenMapWindowIsOpen = true; OpenMapWindowUpdate = true; IsWindowOpened = true; }
+			//if (Engine::Keyboard::IsKeyPressed(GLFW_KEY_A)) { TerrainBrushIsActive = false; TerrainBrushWindowIsOpen = false; AddObjectWindowIsOpen = !AddObjectWindowIsOpen; }
+			//if (Engine::Keyboard::IsKeyPressed(GLFW_KEY_T)) { AddObjectWindowIsOpen = false; TerrainBrushIsActive = !TerrainBrushWindowIsOpen; TerrainBrushWindowIsOpen = !TerrainBrushWindowIsOpen; }
 		}
-		if (Engine::Keyboard::IsKeyPressed(GLFW_KEY_DELETE))
+		else
 		{
-			if (Game::IsGameObjectNotNull(Picking::leftClickID))
+			if (Engine::Keyboard::IsKeyPressed(GLFW_KEY_S))
 			{
-				Building* b = GObject::GObject::GetObjectByID(Picking::leftClickID)->AsBuilding();
-				if (b->IsSelected())
-				{
-					if (b->GetSettlement()->IsIndipendent())
-					{
-						/*
-						if (b->buildingsInSettlementCount() > 0) {
-							b->setWaitingToBeErased(true);
-							Q_WINDOW()->setQuestion("QUESTION_deleteAll");
-						}
-						else {
-							cout << "[DEBUG] Settlement " << b->GetName() << " deleted!\n";
-							b->clear_pass();
-							GObject::RemoveGameObject(Picking::leftClickID);
-						}
-						*/
-					}
-					else {
-						cout << "[DEBUG] Building " << b->GetSingularName() << " deleted!\n";
-						b->clear_pass();
-						GObject::RemoveGameObject(Picking::leftClickID);
-					}
-				}
-			}
-		}
-		if (Hector::ConsoleIsActive() == false)
-		{
-			if (Engine::Keyboard::IsKeyPressed(GLFW_KEY_SPACE) || Engine::Mouse::MiddleClick)
-			{
-				if (Minimap::IsActive()) Minimap::Disable();
-				else Minimap::Enable();
-				Minimap::IsActive() ? Logger::Info("Minimap ON!") : Logger::Info("Minimap OFF!");
-			}
-		}
-		if (Hector::ConsoleIsActive() == false)
-		{
-			if (Engine::Keyboard::IsKeyPressed(GLFW_KEY_Z))
-			{
-				Map::Wireframe = !Map::Wireframe;
-				Map::Wireframe ? Logger::Info("Wireframe ON!") : Logger::Info("Wireframe OFF!");
-			}
-		}
-		// Grid
-		if (Hector::ConsoleIsActive() == false)
-		{
-			if (Engine::Keyboard::IsKeyPressed(GLFW_KEY_G))
-			{
-				if (Map::IsGridEnabled()) Map::DisableGrid();
-				else Map::EnableGrid();
-				Map::IsGridEnabled() ? Logger::Info("Grid ON!") : Logger::Info("Grid OFF!");
+				//Game::Map::SaveScenario(currentMapName); 
 			}
 		}
 	}
+
+	if (Engine::Keyboard::IsKeyPressed(GLFW_KEY_DELETE))
+	{
+		if (Game::IsGameObjectNotNull(Picking::leftClickID))
+		{
+			Building* b = GObject::GObject::GetObjectByID(Picking::leftClickID)->AsBuilding();
+			if (b->IsSelected())
+			{
+				if (b->GetSettlement()->IsIndipendent())
+				{
+					/*
+					if (b->buildingsInSettlementCount() > 0) {
+						b->setWaitingToBeErased(true);
+						Q_WINDOW()->setQuestion("QUESTION_deleteAll");
+					}
+					else {
+						cout << "[DEBUG] Settlement " << b->GetName() << " deleted!\n";
+						b->clear_pass();
+						GObject::RemoveGameObject(Picking::leftClickID);
+					}
+					*/
+				}
+				else {
+					cout << "[DEBUG] Building " << b->GetSingularName() << " deleted!\n";
+					b->clear_pass();
+					GObject::RemoveGameObject(Picking::leftClickID);
+				}
+			}
+		}
+	}
+
+	if (Engine::Keyboard::IsKeyPressed(GLFW_KEY_SPACE) || Engine::Mouse::MiddleClick)
+	{
+		if (Minimap::IsActive()) Minimap::Disable();
+		else Minimap::Enable();
+		Minimap::IsActive() ? Logger::Info("Minimap ON!") : Logger::Info("Minimap OFF!");
+	}
+	
+
+	if (Engine::Keyboard::IsKeyPressed(GLFW_KEY_Z))
+	{
+		Map::Wireframe = !Map::Wireframe;
+		Map::Wireframe ? Logger::Info("Wireframe ON!") : Logger::Info("Wireframe OFF!");
+	}
+	
+	// Grid
+
+	if (Engine::Keyboard::IsKeyPressed(GLFW_KEY_G))
+	{
+		if (Map::IsGridEnabled()) Map::DisableGrid();
+		else Map::EnableGrid();
+		Map::IsGridEnabled() ? Logger::Info("Grid ON!") : Logger::Info("Grid OFF!");
+	}
+	
+
 	if (Engine::Keyboard::IsKeyPressed(GLFW_KEY_ESCAPE))
 	{
 		//(???)Da sistermare! Rimangono i riferimenti ai settlement quando si esce dall'editor e poi si rientra.

@@ -671,4 +671,12 @@
       <Filter>Header Files\ui</Filter>
     </None>
   </ItemGroup>
+  <ItemGroup>
+    <Xml Include="assets\data\interface\editor\editorMenuBar.xml">
+      <Filter>Resource Files</Filter>
+    </Xml>
+    <Xml Include="assets\data\interface\editor\editorWindows.xml">
+      <Filter>Resource Files</Filter>
+    </Xml>
+  </ItemGroup>
 </Project>

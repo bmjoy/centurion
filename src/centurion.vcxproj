@@ -454,6 +454,16 @@ XCOPY "$(ProjectDir)lua53.dll" "$(ProjectDir)$(OutDir)"</Command>
     <ClInclude Include="lib-centurion\audio\sound.h" />
     <ClInclude Include="lib-centurion\audio\sound_buffer.h" />
   </ItemGroup>
+  <ItemGroup>
+    <Xml Include="assets\data\interface\editor\editorMenuBar.xml">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
+    </Xml>
+    <Xml Include="assets\data\interface\editor\editorWindows.xml">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
+    </Xml>
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>

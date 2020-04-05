@@ -105,6 +105,22 @@ public:
 	/// This method shows the editor windows
 	/// </summary>
 	static void Show(void) { isHidden = false; }
+
+	/// <summary>
+	/// This method returns true if any window is opened
+	/// </summary>
+	static bool AnyWindowIsOpened(void);
+
+	/// <summary>
+	/// This method closes every opened window
+	/// </summary>
+	static void CloseEveryWindow(void);
+
+	/// <summary>
+	/// This method returns true editor windows are hidden
+	/// </summary>
+	static bool IsHidden(void) { return isHidden; }
+
 	~EditorWindows(void);
 private:
 	EditorWindows(void);	

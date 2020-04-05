@@ -1,8 +1,4 @@
 #include <ui.h>
-//#include <codecvt>
-//#include <locale>
-//
-//#include <cwchar>
 #include <engine.h>
 
 #include <GLFW/glfw3.h>
@@ -12,22 +8,29 @@ using namespace glm;
 
 namespace gui {
 
+	std::array<TextInput*, MAX_NUMBER_OF_TEXT_INPUTS> TextInput::TextInputs = { nullptr };
+
 	TextInput::TextInput() {}
 	
-	void TextInput::create(string text, float x, float y, int maxChars) {
-		xPos = x; yPos = y; max_chars = maxChars;
-		
+	void TextInput::Create(const int _id, float x, float y, int maxChars, wstring placeholderText) {
+		xPos = x; 
+		yPos = y; 
+		max_chars = maxChars;
+		id = _id;
+
 		static_text = gui::SimpleText("static");
-		static_text.create_static(text, "tahoma_15px", xPos, yPos, "left", "normal", vec4(255.f));
+		static_text.create_static(placeholderText, "tahoma_15px", xPos, yPos, "left", "normal", vec4(255.f));
 
 		text_cursor.create("filled", 0, 0, 2.f, 15.f, "bottom-left", 0);
-		cursorPosition = (int)text.size();
+		cursorPosition = (int)placeholderText.size();
 
 		for (int i = 0; i < 100; i++) currentText[i] = 0;
+
+		TextInput::AddTextInputToArray(id, this);
 	}
 
-	void TextInput::render() {
-		if (is_active) {
+	void TextInput::Render() {
+		if (isActive) {
 
 			if (Engine::Keyboard::GetCharCodepointPressed() != -1 && cursorPosition <= max_chars) {
 				currentText[cursorPosition] = Engine::Keyboard::GetCharCodepointPressed();
@@ -47,7 +50,7 @@ namespace gui {
 		static_text.render_static();
 	}
 
-	std::string TextInput::get_text()
+	std::string TextInput::GetText(void)
 	{
 		std::string text;
 		for (int i = 0; i < 100; i++) {
@@ -56,6 +59,18 @@ namespace gui {
 			}
 		}
 		return text;
+	}
+
+	void TextInput::AddTextInputToArray(int id, TextInput * txtInput)
+	{
+		if (id < 0 || id > MAX_NUMBER_OF_TEXT_INPUTS) return;
+		TextInputs[id] = txtInput;
+	}
+
+	TextInput * TextInput::GetTextInputById(int id)
+	{
+		if (id < 0 || id > MAX_NUMBER_OF_TEXT_INPUTS) return nullptr;
+		return TextInputs[id];
 	}
 
 	TextInput::~TextInput() {}

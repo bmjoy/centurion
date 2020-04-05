@@ -21,14 +21,6 @@ gui::Iframe::Iframe(string _name)
 	backgroundIsCreated = false;
 }
 
-void gui::Iframe::AddButton(const std::wstring &text, const int xBtn, const int yBtn, const std::string &luaCmd)
-{
-	gui::Button btn = gui::Button();
-	int btnId = PickingUI::ObtainPickingID();
-	btn.create(button_img_name, text, x + xBtn, y + yBtn, btnId, button_txt_color, luaCmd);
-	listOfButtons.push_back(btn);
-}
-
 void gui::Iframe::Clear()
 {
 	for (int i = 0; i < listOfTextLists.size(); i++) {
@@ -37,6 +29,20 @@ void gui::Iframe::Clear()
 		}
 		listOfTextLists[i] = nullptr;
 	}
+	for (int i = 0; i < listOfTextInputs.size(); i++) {
+		if (listOfTextInputs[i] != nullptr) {
+			delete listOfTextInputs[i];
+		}
+		listOfTextInputs[i] = nullptr;
+	}
+}
+
+void gui::Iframe::AddButton(const std::wstring &text, const int xBtn, const int yBtn, const std::string &luaCmd)
+{
+	gui::Button btn = gui::Button();
+	int btnId = PickingUI::ObtainPickingID();
+	btn.create(button_img_name, text, x + xBtn, y + yBtn, btnId, button_txt_color, luaCmd);
+	listOfButtons.push_back(btn);
 }
 
 void gui::Iframe::AddTextList(const int textListId, const int xPos, const int yPos, const std::string & luaCmd, const unsigned int maxOptions, const unsigned int borderWidth)
@@ -47,23 +53,37 @@ void gui::Iframe::AddTextList(const int textListId, const int xPos, const int yP
 	listOfTextLists.push_back(_list);
 }
 
-void gui::Iframe::Create(int xPos, int yPos, int width, int height)
+void gui::Iframe::AddTextInput(const int textInputId, const int xPos, const int yPos, const int maxChars, std::wstring placeholderText)
+{
+	gui::TextInput* _input = new gui::TextInput();
+	_input->Create(textInputId, 1.f * x + xPos, 1.f * y + yPos, maxChars, placeholderText);
+	_input->Enable();
+	listOfTextInputs.push_back(_input);
+}
+
+void gui::Iframe::Create(int xPos, int yPos, int width, int height, std::wstring iframe_title)
 {
 	w = width;
 	h = height;
 	x = xPos;
 	y = yPos;
-
+	
+	iframeTitle = gui::SimpleText("static");
+	iframeTitle.create_static(iframe_title, "tahoma_15px", xPos + 10.f, yPos + h - 15.f, "left", "middle", glm::vec4(255.f), "bold");
+	
 	ReadXml();
 }
 
-void gui::Iframe::Create(const std::string & LuaCommand)
+void gui::Iframe::Create(const std::string & LuaCommand, std::wstring iframe_title)
 {
 	Hector::ExecuteCommand(LuaCommand);
 	Hector::GetIntegerVariable("x", &x);
 	Hector::GetIntegerVariable("y", &y);
 	Hector::GetIntegerVariable("w", &w);
 	Hector::GetIntegerVariable("h", &h);
+
+	iframeTitle = gui::SimpleText("static");
+	iframeTitle.create_static(iframe_title, "tahoma_15px", x + 10.f, y + h - 15.f, "left", "middle", glm::vec4(255.f), "bold");
 
 	ReadXml();
 }
@@ -87,8 +107,11 @@ void gui::Iframe::Render(bool picking)
 
 	RenderImages(picking);
 	RenderButtons(picking);
-	RenderTexts();
+	RenderTexts(picking);
 	RenderTextLists(picking);
+	RenderTextInputs(picking);
+
+	iframeTitle.render_static();
 }
 
 void gui::Iframe::RenderImages(bool picking)
@@ -105,8 +128,10 @@ void gui::Iframe::RenderButtons(bool picking)
 	}
 }
 
-void gui::Iframe::RenderTexts()
+void gui::Iframe::RenderTexts(bool picking)
 {
+	if (picking == true) return;
+
 	for (int i = 0; i < listOfTexts.size(); i++) {
 		listOfTexts[i].render_static();
 	}
@@ -116,6 +141,16 @@ void gui::Iframe::RenderTextLists(bool picking)
 {
 	for (int i = 0; i < listOfTextLists.size(); i++) {
 		listOfTextLists[i]->Render(picking);
+	}
+}
+
+void gui::Iframe::RenderTextInputs(bool picking)
+{
+	if (picking == true) return;
+
+	for (auto ti : listOfTextInputs)
+	{
+		ti->Render();
 	}
 }
 

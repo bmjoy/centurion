@@ -9,6 +9,8 @@
 #include <tinyxml2.h>
 #include <translationsTable.h>
 
+#include <encoding.hpp>
+
 using namespace std;
 using namespace glm;
 
@@ -120,7 +122,6 @@ void EditorWindows::Create(void)
 		tinyxml2::XMLDocument xmlFile;
 		xmlFile.LoadFile(path.c_str());
 
-
 		for (tinyxml2::XMLElement* _it_wind = xmlFile.FirstChildElement("editorWindows")->FirstChildElement(); _it_wind != NULL; _it_wind = _it_wind->NextSiblingElement())
 		{
 			EditorWindow* eWind = new EditorWindow();
@@ -135,10 +136,22 @@ void EditorWindows::Create(void)
 
 			gui::Iframe iframe = gui::Iframe(string(_it_wind->Attribute("iframe")));
 
-			string sizeScript = string(_it_wind->Attribute("size"));
-			string positionScript = string(_it_wind->Attribute("position"));
+			string sizeScript = _it_wind->Attribute("size");
+			string positionScript = _it_wind->Attribute("position");
+			wstring iframeTitle = encode::GetWideString(_it_wind->Attribute("name"));
 
-			iframe.Create(sizeScript + positionScript);
+
+			iframe.Create(sizeScript + positionScript, iframeTitle);
+
+			// buttons
+			for (tinyxml2::XMLElement* _it_btn = _it_wind->FirstChildElement("buttonArray")->FirstChildElement(); _it_btn != NULL; _it_btn = _it_btn->NextSiblingElement())
+			{
+				wstring btnText = TranslationsTable::GetWTranslation(_it_btn->Attribute("text"));
+				string btnLuaCmd = _it_btn->FirstChildElement("onclickScript")->GetText();
+				int btnX = _it_btn->IntAttribute("xOffset");
+				int btnY = _it_btn->IntAttribute("yOffset");
+				iframe.AddButton(btnText, btnX, btnY, btnLuaCmd);
+			}
 
 			// text lists 
 			for (tinyxml2::XMLElement* _it_txtlist = _it_wind->FirstChildElement("textListArray")->FirstChildElement(); _it_txtlist != NULL; _it_txtlist = _it_txtlist->NextSiblingElement())
@@ -155,14 +168,15 @@ void EditorWindows::Create(void)
 				iframe.AddTextList(textListID, xOffset, yOffset, txtListLuaCmd, maxOpt, tlWidth);
 			}
 
-			// buttons
-			for (tinyxml2::XMLElement* _it_btn = _it_wind->FirstChildElement("buttonArray")->FirstChildElement(); _it_btn != NULL; _it_btn = _it_btn->NextSiblingElement())
+			// text inputs
+			for (tinyxml2::XMLElement* _it_txtinput = _it_wind->FirstChildElement("textInputArray")->FirstChildElement(); _it_txtinput != NULL; _it_txtinput = _it_txtinput->NextSiblingElement())
 			{
-				wstring btnText = TranslationsTable::GetWTranslation(_it_btn->Attribute("text"));
-				string btnLuaCmd = _it_btn->FirstChildElement("onclickScript")->GetText();
-				int btnX = _it_btn->IntAttribute("xOffset");
-				int btnY = _it_btn->IntAttribute("yOffset");
-				iframe.AddButton(btnText, btnX, btnY, btnLuaCmd);
+				int textInputId = _it_txtinput->IntAttribute("textInputId");
+				int xOffset = _it_txtinput->IntAttribute("xOffset");
+				int yOffset = _it_txtinput->IntAttribute("yOffset");
+				int maxChars = _it_txtinput->IntAttribute("maxChars");
+				wstring placeholder = encode::GetWideString(_it_txtinput->Attribute("placeholder"));
+				iframe.AddTextInput(textInputId, xOffset, yOffset, maxChars, placeholder);
 			}
 
 			eWind->Create(luaOpeningCMD, luaConditionCMD, luaConditionFun, iframe);
@@ -203,11 +217,35 @@ void EditorWindows::Clear(void)
 	}
 }
 
-EditorWindows::~EditorWindows(void)
+bool EditorWindows::AnyWindowIsOpened(void)
 {
+	for (int i = 0; i < MAX_NUMBER_OF_EDITOR_WINDOWS; i++)
+	{
+		if (listOfWindows[i] != nullptr)
+		{
+			if (listOfWindows[i]->IsOpened()) return true;
+		}
+	}
+	return false;
+}
+
+void EditorWindows::CloseEveryWindow(void)
+{
+	for (int i = 0; i < MAX_NUMBER_OF_EDITOR_WINDOWS; i++)
+	{
+		if (listOfWindows[i] != nullptr)
+		{
+			listOfWindows[i]->Close();
+		}
+	}
 }
 
 void EditorWindows::AddWindow(const unsigned int id, EditorWindow * win)
 {
 	EditorWindows::listOfWindows[id] = win;
 }
+
+EditorWindows::~EditorWindows(void)
+{
+}
+
