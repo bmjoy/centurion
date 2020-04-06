@@ -288,7 +288,7 @@ void gui::Iframe::ReadXml()
 	}
 	catch (...)
 	{
-		Logger::LogMessage msg = Logger::LogMessage("An error occurred reading the iframe data of \"" + name + "\"", "gui", "Iframe", "Create");
+		Logger::LogMessage msg = Logger::LogMessage("An error occurred reading the iframe data of \"" + name + "\"", "Error", "gui", "Iframe", "Create");
 		Logger::Error(msg);
 		Engine::GameClose();
 	}

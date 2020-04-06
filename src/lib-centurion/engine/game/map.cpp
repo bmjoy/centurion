@@ -31,7 +31,7 @@ void Game::Map::LoadScenario(const string scenarioName)
 	}
 	catch (...)
 	{
-		Logger::LogMessage msg = Logger::LogMessage("An error occurred loading the following scenario: \"" + scenarioName + "\"", "", "Game::Map", "LoadScenario");
+		Logger::LogMessage msg = Logger::LogMessage("An error occurred loading the following scenario: \"" + scenarioName + "\"", "Error", "Game", "Map", "LoadScenario");
 		Logger::Error(msg);
 		Engine::GameClose();
 	}
@@ -53,12 +53,12 @@ void Game::Map::SaveScenario(const string scenarioName)
 		SaveMapObjectsToXml(scenarioPath + "/mapObjects.xml");
 
 
-		Logger::LogMessage msg = Logger::LogMessage("The scenario is saved with the following name: \"" + scenarioName + "\"", "", "Game::Map", "SaveScenario");
+		Logger::LogMessage msg = Logger::LogMessage("The scenario is saved with the following name: \"" + scenarioName + "\"", "Info", "Game", "Map", "SaveScenario");
 		Logger::Info(msg);
 	}
 	catch (...)
 	{
-		Logger::LogMessage msg = Logger::LogMessage("An error occurred creating the following scenario: \"" + scenarioName + "\"", "", "Game::Map", "SaveScenario");
+		Logger::LogMessage msg = Logger::LogMessage("An error occurred creating the following scenario: \"" + scenarioName + "\"", "Info", "Game", "Map", "SaveScenario");
 		Logger::Error(msg);
 		Engine::GameClose();
 	}

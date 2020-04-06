@@ -12,14 +12,14 @@
 using namespace std;
 using namespace glm;
 
-Terrain::Terrain(){
+Terrain::Terrain() {
 	vPath = "assets/shaders/terrain/vertex.glsl";
 	fPath = "assets/shaders/terrain/fragment.glsl";
 }
 
 void Terrain::create() {
 	mapgen::init();
-	
+
 	// Read and store indices and vertices position information //
 
 	ReadIndicesData();
@@ -65,9 +65,9 @@ void Terrain::create() {
 		textureInfoList.push_back(glm::ivec3(0, 0, 0));
 		unsigned char *data = stbi_load(texturePath.c_str(), &textureInfoList[k].x, &textureInfoList[k].y, &textureInfoList[k].z, 0);
 		if (!data) { std::cout << "Failed to load texture" << std::endl; }
-		
+
 		width = float(textureInfoList[k].x); height = float(textureInfoList[k].y);
-			
+
 		glGenTextures(1, &textureIdList[k]);
 		glBindTexture(GL_TEXTURE_2D, textureIdList[k]);
 		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
@@ -76,7 +76,7 @@ void Terrain::create() {
 		glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, textureInfoList[k].x, textureInfoList[k].y, 0, GL_RGBA, GL_UNSIGNED_BYTE, data);
 		glGenerateMipmap(GL_TEXTURE_2D);
 		stbi_image_free(data);
-		
+
 		k++;
 	}
 }
@@ -99,14 +99,14 @@ void Terrain::render(bool tracing) {
 
 	// Minimap
 	glUniform1i(glGetUniformLocation(shaderId, "minimap"), int(Game::Minimap::IsActive()));
-	
+
 	//-------------------------------------//
 	/*               DRAWING               */
 	//-------------------------------------//
-	
+
 	glBindVertexArray(VAO);
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, IBO);
-	
+
 
 	/* TRACING */
 
@@ -114,7 +114,7 @@ void Terrain::render(bool tracing) {
 		glUniform1f(glGetUniformLocation(shaderId, "minZ"), mapgen::minZ);
 		glUniform1f(glGetUniformLocation(shaderId, "maxZ"), mapgen::maxZ);
 
-		/* Draw */	
+		/* Draw */
 		glDrawElements(GL_TRIANGLES, mapgen::nIndices, GL_UNSIGNED_INT, 0);
 	}
 
@@ -149,8 +149,8 @@ void Terrain::render(bool tracing) {
 		glDrawElements(GL_TRIANGLES, mapgen::nIndices, GL_UNSIGNED_INT, 0);
 		glDisable(GL_DEPTH_TEST);
 	}
-		
-	
+
+
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
 	glBindVertexArray(0);
 	glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
@@ -213,11 +213,11 @@ void Terrain::ReadIndicesData(void)
 	}
 	catch (...)
 	{
-		Logger::LogMessage msg = Logger::LogMessage("An error occurred reading the indices data", "", "Terrain", "ReadIndicesData");
+		Logger::LogMessage msg = Logger::LogMessage("An error occurred reading the indices data", "Error", "", "Terrain", "ReadIndicesData");
 		Logger::Error(msg);
 		Engine::GameClose();
 	}
-	
+
 }
 
 void Terrain::ReadVerticesData(void)
@@ -237,7 +237,7 @@ void Terrain::ReadVerticesData(void)
 	}
 	catch (...)
 	{
-		Logger::LogMessage msg = Logger::LogMessage("An error occurred reading the vertices data", "", "Terrain", "ReadVerticesData");
+		Logger::LogMessage msg = Logger::LogMessage("An error occurred reading the vertices data", "Error", "", "Terrain", "ReadVerticesData");
 		Logger::Error(msg);
 		Engine::GameClose();
 	}
@@ -259,7 +259,7 @@ void Terrain::ReadVerticesPosData(void)
 	}
 	catch (...)
 	{
-		Logger::LogMessage msg = Logger::LogMessage("An error occurred reading the vertices pos data", "", "Terrain", "ReadVerticesPosData");
+		Logger::LogMessage msg = Logger::LogMessage("An error occurred reading the vertices pos data", "Error", "", "Terrain", "ReadVerticesPosData");
 		Logger::Error(msg);
 		Engine::GameClose();
 	}
