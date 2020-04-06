@@ -38,44 +38,44 @@ namespace Engine
 			}
 		};
 
-		int GetCurrentZoom(void)
+		int Engine::Camera::GetCurrentZoom(void)
 		{
 			return currentZoom;
 		}
 
-		void SetCurrentZoom(const int z)
+		void Engine::Camera::SetCurrentZoom(const int z)
 		{
 			currentZoom = z;
 		}
 
-		float GetZoomFactor(void)
+		float Engine::Camera::GetZoomFactor(void)
 		{
 			return zoomCameraFactor;
 		}
 
-		void SetZoomFactor(const float f)
+		void Engine::Camera::SetZoomFactor(const float f)
 		{
 			zoomCameraFactor = f;
 		}
 
-		float GetXPosition(void)
+		float Engine::Camera::GetXPosition(void)
 		{
 			return position.x;
 		}
 
-		float GetYPosition(void)
+		float Engine::Camera::GetYPosition(void)
 		{
 			return position.y;
 		}
 
-		vec2 GetZoomedCoords(const float xCoord, const float yCoord)
+		vec2 Engine::Camera::GetZoomedCoords(const float xCoord, const float yCoord)
 		{
 			float x = xCoord * myWindow::WidthZoomed / myWindow::Width + Camera::GetXPosition();
 			float y = yCoord * myWindow::HeightZoomed / myWindow::Height + Camera::GetYPosition();
 			return vec2(x, y);
 		}
 
-		void Init(const glm::vec3 startPosition, const glm::vec3 startUp, const GLfloat startYaw, const GLfloat startPitch) {
+		void Engine::Camera::Init(const glm::vec3 startPosition, const glm::vec3 startUp, const GLfloat startYaw, const GLfloat startPitch) {
 			position = startPosition;
 
 			worldUp = startUp;
@@ -86,8 +86,7 @@ namespace Engine
 			update();
 		}
 
-		void mouseControl(void) {
-
+		void Engine::Camera::mouseControl(void) {
 			// Conditions for NOT moving
 
 			// 1. Block the movement if the mouse is hovering the editor menu bar
@@ -159,10 +158,8 @@ namespace Engine
 			myWindow::HeightZoomed = myWindow::Height + (currentZoom - 1) *  zoomCameraFactor / myWindow::Ratio;
 		}
 
-		void keyboardControl(void) {
-
+		void Engine::Camera::keyboardControl(void) {
 			// Conditions for NOT moving
-
 
 			//Left margin
 			if (Keyboard::IsKeyPressed(GLFW_KEY_LEFT) && position.x > 0) {
@@ -182,7 +179,7 @@ namespace Engine
 			}
 		}
 
-		void GoToPoint(const GLfloat x, const GLfloat y) {
+		void Engine::Camera::GoToPoint(const GLfloat x, const GLfloat y) {
 			position.x = x;
 			position.y = y;
 			if (position.x < 0.0) { position.x = 0; }
@@ -191,12 +188,12 @@ namespace Engine
 			else if (position.y > MEDIUM_MAP_HEIGHT - myWindow::HeightZoomed) { position.y = MEDIUM_MAP_HEIGHT - myWindow::HeightZoomed; }
 		}
 
-		glm::mat4 calculateViewMatrix(void)
+		glm::mat4 Engine::Camera::calculateViewMatrix(void)
 		{
 			return glm::lookAt(position, position + front, up);
 		}
 
-		float GetYMinimapCoordinate(const float y)
+		float Engine::Camera::GetYMinimapCoordinate(const float y)
 		{
 			return myWindow::Height * (y - myWindow::BottomBarHeight) / (myWindow::Height - myWindow::BottomBarHeight - myWindow::TopBarHeight);
 		}

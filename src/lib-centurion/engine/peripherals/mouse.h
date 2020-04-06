@@ -1,3 +1,11 @@
+/*
+* ---------------------------
+* CENTURION
+* [2019] - [2020] Rattlesmake
+* All Rights Reserved.
+* ---------------------------
+*/
+
 #ifndef MOUSE_H
 #define MOUSE_H
 
@@ -7,25 +15,29 @@
 
 namespace Engine 
 {
+	/// <summary>
+	/// This namespace handles the mouse.
+	/// </summary>
 	namespace Mouse
 	{
 		/// <summary>
-		/// 
+		/// This function creates an instance of the mouse class.
 		/// </summary>
 		void Create(void);
 
 		/// <summary>
-		/// 
+		/// This function performs the render of the cursor.
 		/// </summary>
 		void Render(void);
 
 		/// <summary>
-		/// 
+		/// This function gets the x coordinate of the mouse.
 		/// </summary>
+		/// <returns>This value it's true if the specified button is begin released; it's false otherwise</returns>
 		float GetXPosition(void);
 
 		/// <summary>
-		/// 
+		/// This function gets the y coordinate of the mouse.
 		/// </summary>
 		float GetYPosition(void);
 

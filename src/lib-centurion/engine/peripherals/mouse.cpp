@@ -44,7 +44,7 @@ namespace Engine
 
 		};
 
-		void Create(void) {
+		void Engine::Mouse::Create(void) {
 			img = gui::Image("circle_pos");
 			img.create("center", 0.f, 0.f, 0, 0, 0);
 		}
@@ -59,62 +59,62 @@ namespace Engine
 			}
 		}
 
-		float GetXMapCoordinate(void)
+		float Engine::Mouse::GetXMapCoordinate(void)
 		{
 			return round(Engine::Mouse::GetXPosition() * Engine::myWindow::WidthZoomed / Engine::myWindow::Width + Engine::Camera::GetXPosition());
 		}
 
-		float GetYMapCoordinate(void)
+		float Engine::Mouse::GetYMapCoordinate(void)
 		{
 			return round(Engine::Mouse::GetYPosition() * Engine::myWindow::HeightZoomed / Engine::myWindow::Height + Engine::Camera::GetYPosition());
 		}
 
-		bool IsCursorInGameScreen(void)
+		bool Engine::Mouse::IsCursorInGameScreen(void)
 		{
 			return (GetYLeftClick() > myWindow::BottomBarHeight) && (GetYLeftClick() < (myWindow::Height - myWindow::TopBarHeight));
 		}
 
-		float GetXPosition(void)
+		float Engine::Mouse::GetXPosition(void)
 		{
 			return position.x;
 		}
 
-		float GetYPosition(void)
+		float Engine::Mouse::GetYPosition(void)
 		{
 			return position.y;
 		}
 
-		float GetY2DPosition(void)
+		float Engine::Mouse::GetY2DPosition(void)
 		{
 			return y2DPosition;
 		}
 
-		float GetXLeftClick(void)
+		float Engine::Mouse::GetXLeftClick(void)
 		{
 			return xLeftClick;
 		}
 
-		float GetYLeftClick(void)
+		float Engine::Mouse::GetYLeftClick(void)
 		{
 			return yLeftClick;
 		}
 
-		float GetXRightClick(void)
+		float Engine::Mouse::GetXRightClick(void)
 		{
 			return xRightClick;
 		}
 
-		float GetYRightClick(void)
+		float Engine::Mouse::GetYRightClick(void)
 		{
 			return yRightClick;
 		}
 
-		float GetY2DRightClick(void)
+		float Engine::Mouse::GetY2DRightClick(void)
 		{
 			return y2DRightClick;
 		}
 
-		void Control(const int lastX, const int lastY) {
+		void Engine::Mouse::Control(const int lastX, const int lastY) {
 			position.x = (GLfloat)lastX;
 			position.y = (GLfloat)lastY;
 
@@ -154,7 +154,7 @@ namespace Engine
 			}
 		}
 
-		void IsHolding(void)
+		void Engine::Mouse::IsHolding(void)
 		{
 			if (glfwGetTime() - leftHoldClickData.lastTime > TIME_LEFT_HOLD && leftHoldClickData.bIsTimeSaved) {
 				LeftHold = true;
@@ -167,7 +167,7 @@ namespace Engine
 			}
 		}
 
-		void Input(const int button, const int action)
+		void Engine::Mouse::Input(const int button, const int action)
 		{
 			if (button == GLFW_MOUSE_BUTTON_LEFT) {
 				if (action == GLFW_PRESS) {
@@ -218,10 +218,5 @@ namespace Engine
 				}
 			}
 		}
-
-
 	};
-
 };
-
-

@@ -18,37 +18,37 @@ namespace Engine
 
 		};
 
-		void SetKeyStatus(unsigned int key_code, int action)
+		void Engine::Keyboard::SetKeyStatus(unsigned int key_code, int action)
 		{
 			keyCode[key_code] = action;
 		}
 
-		bool IsKeyReleased(unsigned int key_code)
+		bool Engine::Keyboard::IsKeyReleased(unsigned int key_code)
 		{
 			return keyCode[key_code] == 0;
 		}
 
-		bool IsKeyPressed(unsigned int key_code)
+		bool Engine::Keyboard::IsKeyPressed(unsigned int key_code)
 		{
 			return keyCode[key_code] == 1;
 		}
 
-		bool IsKeyHold(unsigned int key_code)
+		bool Engine::Keyboard::IsKeyHold(unsigned int key_code)
 		{
 			return keyCode[key_code] == 2;
 		}
 
-		bool IsKeyNotReleased(unsigned int key_code)
+		bool Engine::Keyboard::IsKeyNotReleased(unsigned int key_code)
 		{
 			return keyCode[key_code] != 0;
 		}
 
-		int GetCharCodepointPressed(void)
+		int Engine::Keyboard::GetCharCodepointPressed(void)
 		{
 			return charCodepointPressed;
 		}
 
-		void SetCharCodepointPressed(unsigned int codepoint)
+		void Engine::Keyboard::SetCharCodepointPressed(unsigned int codepoint)
 		{
 			if (codepoint > 0) {
 				charCodepointPressed = codepoint;
@@ -58,7 +58,7 @@ namespace Engine
 			}
 		}
 
-		void ResetKeys(void)
+		void Engine::Keyboard::ResetKeys(void)
 		{
 			for (int key = 0; key < GLFW_KEY_LAST; key++) {
 				if (key == GLFW_KEY_LEFT_CONTROL) continue;
@@ -75,7 +75,6 @@ namespace Engine
 				keyCode[key] = GLFW_RELEASE;
 			}
 		}
-
 	};
 };
 
