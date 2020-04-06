@@ -103,18 +103,7 @@ namespace Game
 		/// </summary>
 		void Close(void);
 
-		extern std::vector<std::array<std::string, 3>> editorTree;
-		extern std::vector<std::string> editorTreeList1;
-		extern std::vector<std::string> editorTreeList2;
-		extern std::vector<std::string> editorTreeList3;
 
-		extern GObject* tmpObject;
-
-		extern bool isMovingObject;
-		extern float movingObjectXPos;
-		extern float movingObjectYPos;
-		extern float movingObjectStartXMouse;
-		extern float movingObjectStartYMouse;
 	};
 };
 
