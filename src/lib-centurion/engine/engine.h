@@ -30,22 +30,16 @@
 
 namespace Engine 
 {
-	#pragma region Variables
-	extern int ENVIRONMENT;
-
 	/// <summary>
-	/// This class handles the game FPS.
+	/// This namespace handles the game FPS.
 	/// </summary>
-	class Fps
+	namespace Fps
 	{
-	public:
-		Fps(void);
-
 		/// <summary>
 		/// This function determines the last time a frame was calculated, by using in-game seconds.
 		/// </summary>
 		/// <param name="lastTime">This parameter sets the current moment. It's recommended to use glfwGetTime() function</param>
-		void SetLastTime(const double lastTime);
+		void SetLastTime(const double _lastTime);
 
 		/// <summary>
 		/// This function returns the game Frames Per Second.
@@ -68,15 +62,7 @@ namespace Engine
 		/// This function pauses frames execution to lock in game FPS.
 		/// </summary>
 		void SleepFps(void);
-
-		~Fps(void);
-	private:
-		int nbFrames, _Fps, Mpfs;
-		double currentTime, lastTime, finalTime;
 	};
-	#pragma endregion
-
-	#pragma region TO-LUA Functions
 
 	/// <summary>
 	/// This function closes the game.
@@ -102,10 +88,6 @@ namespace Engine
 	/// <returns>A list of folders; null if there are no folders.</returns>
 	std::vector<std::string> *GetListOfFolders(const std::string s);
 
-	extern std::vector<std::string> listOfFoldersTemp;
-	#pragma endregion
-
-	#pragma region Functions
 	/// <summary>
 	/// Thois function initializes the game; it thorws an exception if it wasn't able to process the game.
 	/// </summary>
@@ -138,5 +120,4 @@ namespace Engine
 	/// This function returns the Cpp compiler version.
 	/// </summary>
 	std::string GetCppVersion();
-	#pragma endregion
 };
