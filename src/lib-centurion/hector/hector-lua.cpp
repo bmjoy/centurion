@@ -77,9 +77,9 @@ void Hector::Initialize()
 		.endNamespace();
 
 	getGlobalNamespace(L)
-		.beginClass<Menu>("Menu")
-		.addStaticFunction("OpenMenuPage", &Menu::OpenMenuPage)
-		.endClass();
+		.beginNamespace("Menu")
+		.addFunction("OpenMenuPage", &Menu::OpenMenuPage)
+		.endNamespace();
 	
 	getGlobalNamespace(L)
 		.beginClass<GObject>("Object")

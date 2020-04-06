@@ -12,9 +12,8 @@
 
 #include <ui.h>
 
-class Menu 
+namespace Menu 
 {
-public:
 	/// <summary>
 	/// A specific page of the menu.
 	/// </summary>
@@ -25,32 +24,38 @@ public:
 		/// Public constructor. 
 		/// </summary>
 		MenuPage(void);
+
 		/// <summary>
 		/// This function return the name of the page.
 		/// </summary>
 		/// <returns>The name of the page.</returns>
 		std::string GetPageName(void);
+
 		/// <summary>
 		/// This function creates a new page.
 		/// </summary>
 		/// <param name="name">The name to be assigned to the new page.</param>
 		/// <returns>The ID assigned to the new page</returns>
 		unsigned int Create(const std::string name);
+
 		/// <summary>
 		/// This function adds a new button to the page.
 		/// </summary>
 		/// <param name="btn">The button to add.</param>
 		void AddButton(const gui::Button btn);
+
 		/// <summary>
 		/// This function adds a new image to the page.
 		/// </summary>
 		/// <param name="img">The image to add.</param>
 		void AddImage(const gui::Image img);
+
 		/// <summary>
 		/// This function performs the rendering of the page of the menu.
 		/// </summary>
 		/// <param name="picking">Checks if it's the picking phase (true) or not (false).</param>
 		void Render(const bool picking);
+
 		~MenuPage(void);
 	private:
 		std::string pageName;
@@ -58,59 +63,50 @@ public:
 		std::vector<gui::Image> listOfImages;
 	};
 
-
-#pragma region TO-LUA Methods
-	
 	/// <summary>
 	/// This function opens a specific menu page
 	/// </summary>
 	/// <param name="id">The ID of the menu page.</param>
-	static void OpenMenuPage(const unsigned int id);
-
-#pragma endregion
+	void OpenMenuPage(const unsigned int id);
 
 	/// <summary>
 	/// This function checks if a menu was created.
 	/// </summary>
 	/// <returns>True if it was created; false otherwise.</returns>
-	static bool IsCreated(void);
+	bool IsCreated(void);
+
 	/// <summary>
 	/// This function adds a new page to the menu.
 	/// </summary>
 	/// <param name="id">The page ID.</param>
 	/// <param name="mp">The menu page to add.</param>
-	static void AddMenuPage(const unsigned int id, MenuPage* mp);
+	void AddMenuPage(const unsigned int id, MenuPage* mp);
+
 	/// <summary>
 	/// This function resets the menu (implies to create everything at first run)
 	/// </summary>
-	static void Reset(void);
+	void Reset(void);
+
 	/// <summary>
 	/// This function removes all the pages from the menu.
 	/// </summary>
-	static void Clear(void);
+	void Clear(void);
+
 	/// <summary>
 	/// Thos function creates a new menu using a XML file. It throws an exception if an error occurs.
 	/// </summary>
-	static void Create(void);
+	void Create(void);
+
 	/// <summary>
 	/// This function performs the picking assignment and the rendering of the menu.
 	/// </summary>
-	static void Run(void);
-	/// <summary>
-	/// The destructor. 
-	/// </summary>
-	~Menu(void);
-private:
-	Menu(void);
+	void Run(void);
+
 	/// <summary>
 	/// This function performs the rendering of a specific menu page.
 	/// </summary>
 	/// <param name="id">The ID of the menu page.</param>
 	/// <param name="picking">Checks if it's the picking phase (true) or not (false).</param>
-	static void RenderPage(const unsigned int id, const bool picking);
-
-	static std::array<MenuPage*, MAX_NUMBER_OF_PAGES> listOfPages;
-	static bool isCreated;
-	static int currentPageId;
+	void RenderPage(const unsigned int id, const bool picking);
 
 };
