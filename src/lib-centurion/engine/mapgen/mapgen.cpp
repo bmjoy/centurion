@@ -1,5 +1,5 @@
 #include "mapgen.h"
-#include <maths.h>
+#include <maths.hpp>
 
 #include <game/game.h>
 #include <game/strategy.h>
@@ -369,14 +369,14 @@ namespace mapgen {
 					(b >= mapMeshHeight - TOWNHALL_RADIUS * 1.1) || (b <= TOWNHALL_RADIUS * 1.1)) continue;
 
 				if (n == 0) { // 1 PLAYER
-					if (math::euclidean_distance(a, b, mapMeshWidth / 2.0f, mapMeshHeight / 2.0f) > mapMeshHeight / 2.0f) {
+					if (Math::euclidean_distance(a, b, mapMeshWidth / 2.0f, mapMeshHeight / 2.0f) > mapMeshHeight / 2.0f) {
 						townhallPos[n].x = a;
 						townhallPos[n].y = b;
 						c = true;
 					}
 				}
 				if (n == 1) { // 2 PLAYERS
-					float d = math::euclidean_distance(a, b, townhallPos[0].x, townhallPos[0].y);
+					float d = Math::euclidean_distance(a, b, townhallPos[0].x, townhallPos[0].y);
 					if (d > mapMeshHeight * 0.5) {
 						townhallPos[n].x = a;
 						townhallPos[n].y = b;
@@ -386,7 +386,7 @@ namespace mapgen {
 				if (n == 2 || n == 3) { // 3 & 4 PLAYERS
 					bool c2 = true;
 					for (int m = n - 1; m >= 0; m--) {
-						float d = math::euclidean_distance(a, b, townhallPos[m].x, townhallPos[m].y);
+						float d = Math::euclidean_distance(a, b, townhallPos[m].x, townhallPos[m].y);
 						if (d <= mapMeshHeight * 0.5) {
 							c2 = c2 * false;
 						}
@@ -401,7 +401,7 @@ namespace mapgen {
 
 					bool c2 = true;
 					for (int m = n - 1; m >= 0; m--) {
-						float d = math::euclidean_distance(a, b, townhallPos[m].x, townhallPos[m].y);
+						float d = Math::euclidean_distance(a, b, townhallPos[m].x, townhallPos[m].y);
 						if (d <= mapMeshHeight * 0.25) {
 							c2 = c2 * false;
 						}
@@ -420,7 +420,7 @@ namespace mapgen {
 
 		for (int i = 0; i < locGrid.size(); i++) {
 			for (int j = 0; j < townhallPos.size(); j++) {
-				float d = math::euclidean_distance(locGrid[i].x, locGrid[i].y, townhallPos[j].x, townhallPos[j].y);
+				float d = Math::euclidean_distance(locGrid[i].x, locGrid[i].y, townhallPos[j].x, townhallPos[j].y);
 				if (d <= TOWNHALL_RADIUS * 1.25f)
 					locGrid.erase(locGrid.begin() + i);
 			}
@@ -442,12 +442,12 @@ namespace mapgen {
 
 				bool c2 = true;
 				for (int m = 0; m < townhallPos.size(); m++) {
-					if (math::euclidean_distance(a, b, townhallPos[m].x, townhallPos[m].y) < TOWNHALL_RADIUS + 2 * OUTPOST_RADIUS){
+					if (Math::euclidean_distance(a, b, townhallPos[m].x, townhallPos[m].y) < TOWNHALL_RADIUS + 2 * OUTPOST_RADIUS){
 						c2 = c2 * false;
 					}
 				}
 				for (int m = n - 1; m >= 0; m--) {
-					if (math::euclidean_distance(a, b, outpostsPos[m].x, outpostsPos[m].y) <= OUTPOST_RADIUS * 4){
+					if (Math::euclidean_distance(a, b, outpostsPos[m].x, outpostsPos[m].y) <= OUTPOST_RADIUS * 4){
 						c2 = c2 * false;
 					}
 				}
@@ -481,7 +481,7 @@ namespace mapgen {
 
 				float rnoise = distribution(gen);
 
-				float dist = math::euclidean_distance(p.x, p.y, b->GetPosition().x, b->GetPosition().y);
+				float dist = Math::euclidean_distance(p.x, p.y, b->GetPosition().x, b->GetPosition().y);
 				dist += rnoise;
 				if (dist <= d) {
 					d = dist;

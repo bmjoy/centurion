@@ -79,7 +79,7 @@ namespace gui {
 			wstring option;
 			if (prefix == "")
 			{
-				option = encode::GetWideString(options[i].c_str());
+				option = Encode::GetWideString(options[i].c_str());
 			}
 			else {
 				option = TranslationsTable::GetWTranslation(prefix + options[i]);

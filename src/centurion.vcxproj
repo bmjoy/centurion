@@ -262,7 +262,6 @@ XCOPY "$(ProjectDir)lua53.dll" "$(ProjectDir)$(OutDir)"</Command>
     <ClCompile Include="lib-centurion\ui\text_input.cpp" />
     <ClCompile Include="lib-centurion\util\file_manager.cpp" />
     <ClCompile Include="lib-centurion\util\logger.cpp" />
-    <ClCompile Include="lib-centurion\util\maths.cpp" />
     <ClInclude Include="lib-centurion\audio\audio_manager.h" />
     <ClInclude Include="lib-centurion\engine\classes\building.h" />
     <ClInclude Include="lib-centurion\engine\classes\decoration.h" />
@@ -328,7 +327,7 @@ XCOPY "$(ProjectDir)lua53.dll" "$(ProjectDir)$(OutDir)"</Command>
     <ClInclude Include="lib-centurion\util\encoding.hpp" />
     <ClInclude Include="lib-centurion\util\file_manager.h" />
     <ClInclude Include="lib-centurion\util\logger.h" />
-    <ClInclude Include="lib-centurion\util\maths.h" />
+    <ClInclude Include="lib-centurion\util\maths.hpp" />
     <None Include="assets\shaders\bsprite\fragment.glsl">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
       <FileType>Document</FileType>

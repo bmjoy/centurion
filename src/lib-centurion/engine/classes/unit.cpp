@@ -1,5 +1,5 @@
 #include "unit.h"
-#include <maths.h>
+#include <maths.hpp>
 #include <game/strategy.h>
 #include <game/game.h>
 #include <stb_image.h>
@@ -14,7 +14,7 @@
 
 using namespace std;
 using namespace glm;
-using namespace math;
+using namespace Math;
 
 int Unit::unitsCounter = 0;
 

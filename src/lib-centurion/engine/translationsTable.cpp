@@ -117,7 +117,7 @@ namespace TranslationsTable
 			for (tinyxml2::XMLElement* child = levelElement->FirstChildElement(); child != NULL; child = child->NextSiblingElement())
 			{
 				string stringName = string(child->Attribute("stringName"));
-				wstring result = encode::GetWideString(child->Attribute("result"));
+				wstring result = Encode::GetWideString(child->Attribute("result"));
 				translationsTable[stringName] = result;
 			}
 		}

@@ -195,9 +195,6 @@
     <ClCompile Include="lib-centurion\util\logger.cpp">
       <Filter>Source Files\util</Filter>
     </ClCompile>
-    <ClCompile Include="lib-centurion\util\maths.cpp">
-      <Filter>Source Files\util</Filter>
-    </ClCompile>
     <ClCompile Include="lib-centurion\engine\classes\building.cpp">
       <Filter>Source Files\engine\classes</Filter>
     </ClCompile>
@@ -437,9 +434,6 @@
     <ClInclude Include="lib-centurion\util\logger.h">
       <Filter>Header Files\util</Filter>
     </ClInclude>
-    <ClInclude Include="lib-centurion\util\maths.h">
-      <Filter>Header Files\util</Filter>
-    </ClInclude>
     <ClInclude Include="lib-centurion\engine\engine.h">
       <Filter>Header Files\engine</Filter>
     </ClInclude>
@@ -628,6 +622,9 @@
     </ClInclude>
     <ClInclude Include="lib-centurion\engine\game\selection_rectangle.h">
       <Filter>Header Files\engine\game</Filter>
+    </ClInclude>
+    <ClInclude Include="lib-centurion\util\maths.hpp">
+      <Filter>Header Files\util</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

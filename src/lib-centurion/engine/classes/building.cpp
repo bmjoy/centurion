@@ -3,7 +3,6 @@
 #include <pathfinding/pathfinding.h>
 #include <building_sprite.h>
 #include <logger.h>
-#include <math.h>
 #include <engine.h>
 
 using namespace std;

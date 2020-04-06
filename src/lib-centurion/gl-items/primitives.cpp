@@ -15,7 +15,6 @@
 
 #include <game/game.h>
 #include <engine.h>
-#include <maths.h>
 
 using namespace std;
 using namespace glm;

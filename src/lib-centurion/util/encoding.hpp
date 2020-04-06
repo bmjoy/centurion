@@ -11,7 +11,7 @@
 
 #include <string>
 
-namespace encode {
+namespace Encode {
 
 	static std::size_t GetStringSize(const char* src)
 	{
