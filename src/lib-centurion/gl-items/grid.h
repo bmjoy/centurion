@@ -10,6 +10,20 @@
 #define GRID_H
 
 #include "shader.h"
+#include <game/game.h>
+
+#ifndef CELLGRIDSIZE
+#define CELLGRIDSIZE 20
+#endif
+
+
+#ifndef GRIDSIZE_X
+#define GRIDSIZE_X MEDIUM_MAP_WIDTH / CELLGRIDSIZE
+#endif 
+
+#ifndef GRIDSIZE_Y
+#define GRIDSIZE_Y MEDIUM_MAP_HEIGHT / CELLGRIDSIZE
+#endif 
 
 /// <summary>
 /// This class is used to render the PASS grid.
@@ -42,13 +56,17 @@ public:
 	/// </summary>
 	void render();
 
+
+	void SetGridDataCell(const unsigned int idx, const unsigned int val);
+
 	/// <summary>
 	/// Destructor
 	/// </summary>
 	~Grid();
 private:
 	GLuint textureID;
-	int gridSizeX, gridSizeY;
+	std::vector<unsigned char> gridData;
+	
 };
 
 static Grid grid;

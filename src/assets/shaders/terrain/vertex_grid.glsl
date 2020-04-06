@@ -3,7 +3,7 @@ layout (location = 0) in vec3 pos;
 layout (location = 1) in vec2 tex;
 
 out vec2 FragTex;
-out vec2 FragTexGrid;
+//out vec2 FragTexGrid;
 
 uniform float gridX;
 uniform float gridY;
@@ -15,8 +15,7 @@ out vec3 fragPos;
 
 void main()
 {
-    gl_Position = projection * view * vec4(pos.xyz, 1.0);
-	FragTex = tex;
-    FragTexGrid = vec2(tex.x*gridX, tex.y*gridY);
+    gl_Position = projection * view * vec4(pos.x, pos.y, pos.z, 1.0);
+	FragTex = vec2(tex.x, 1 - tex.y);
 	fragPos = pos;
 }  

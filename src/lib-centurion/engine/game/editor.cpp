@@ -203,6 +203,13 @@ bool Editor::IsMovingObject(void)
 	return isMovingObject;
 }
 
+void Editor::ToggleGrid(void)
+{
+	if (Map::IsGridEnabled()) Map::DisableGrid();
+	else Map::EnableGrid();
+	Map::IsGridEnabled() ? Logger::Info("Grid ON!") : Logger::Info("Grid OFF!");
+}
+
 void Editor::Close(void)
 {
 	isCreated = false;
@@ -268,17 +275,10 @@ void Editor::Run(void)
 		// apply game matrices
 		applyGameMatrices(&projectionMatrix, &viewMatrix);
 
-		// PICKING OBJECTS RENDERING
-		RenderObjectsPicking(); //RIVEDERE QUESTA FUNZIONE
-
 		// NORMAL RENDERING 
 		Minimap::RenderMapAndObjects();
+		Map::Render(false); 
 		PickingObject::UpdateClickIds();
-
-		Minimap::Unblock();
-		if (PickingObject::GetLeftClickId() > 0) {
-			Minimap::Block();
-		}
 
 		// apply menu matrices
 		applyMenuMatrices();
@@ -380,16 +380,6 @@ void Editor::handleKeyboardControls(void)
 		Map::Wireframe ? Logger::Info("Wireframe ON!") : Logger::Info("Wireframe OFF!");
 	}
 	
-	// Grid
-
-	if (Engine::Keyboard::IsKeyPressed(GLFW_KEY_G))
-	{
-		if (Map::IsGridEnabled()) Map::DisableGrid();
-		else Map::EnableGrid();
-		Map::IsGridEnabled() ? Logger::Info("Grid ON!") : Logger::Info("Grid OFF!");
-	}
-	
-
 	if (Engine::Keyboard::IsKeyPressed(GLFW_KEY_ESCAPE))
 	{
 		//(???)Da sistermare! Rimangono i riferimenti ai settlement quando si esce dall'editor e poi si rientra.

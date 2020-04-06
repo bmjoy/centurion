@@ -4,6 +4,7 @@
 
 #include <logger.h>
 #include <settings.h>
+#include <grid.h>
 
 using namespace std;
 using namespace glm;
@@ -74,9 +75,12 @@ namespace astar {
 				int k = ((int)building_grid.size() - i + (int)pos.y) * gridWidth + j + (int)pos.x;
 				if (GridMatrix()[k] == 0) {
 					GridMatrix()[k] = building_grid[i][j];
+
+					MapGrid()->SetGridDataCell(k, building_grid[i][j]);
 				}
 			}
 		}
+		MapGrid()->update();
 	}
 
 	void clearPassMatrix(vector<vector<unsigned int>> &building_grid, vec3 &position)

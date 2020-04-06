@@ -66,6 +66,7 @@ void Hector::Initialize()
 		.addStaticFunction("OpenWindow", &EditorWindows::OpenWindow)
 		.addStaticFunction("CloseWindow", &EditorWindows::CloseWindow)
 		.addStaticFunction("ToggleWindow", &EditorWindows::ToggleWindow)
+		.addStaticFunction("ToggleGrid", &Editor::ToggleGrid)
 		.addStaticFunction("GetTreeList1", Editor::GetEditorTreeList1)
 		.addStaticFunction("GetTreeList2", Editor::GetEditorTreeList2)
 		.addStaticFunction("GetTreeList3", Editor::GetEditorTreeList3)
@@ -250,16 +251,11 @@ void Hector::CreateConsole()
 
 void Hector::RenderConsole(bool picking)
 {
-	if (C.IsOpened())
+	if (Engine::Mouse::LeftClick)
 	{
-		Picking::ResetAllClickIds();
-		if (Engine::Mouse::LeftClick)
-		{
-			C.Render(true);
-			PickingUI::UpdateClickIds();
-		}
-
-		C.Render(false);
+		PickingUI::ResetClickIds();
+		C.Render(true);
+		PickingUI::UpdateClickIds();
 	}
-	
+	C.Render(false);
 }
