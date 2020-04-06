@@ -12,9 +12,8 @@
 
 #define MAX_NUMBER_OF_EDITOR_MENUS 10
 
-class EditorMenuBar 
+namespace EditorMenuBar 
 {
-public:
 	class EditorMenu 
 	{
 	public:
@@ -60,66 +59,54 @@ public:
 		bool isOpened;
 	};
 
-#pragma region TO-LUA Methods
-
 	/// <summary>
 	/// This function enables/disables the editor menu.
 	/// </summary>
 	/// <param name="id">The id that corresponds to the editor menu.</param>
-	static void ToggleEditorMenu(const unsigned int id);
-#pragma endregion
+	void ToggleEditorMenu(const unsigned int id);
 
 	/// <summary>
 	/// This function creates an editor menu bar.
 	/// </summary>
-	static void Create(void);
+	void Create(void);
 
 	/// <summary>
 	/// This function performs the rendering of an editor menu bar.
 	/// </summary>
 	/// <param name="picking"></param>
-	static void Render(const bool picking);
+	void Render(const bool picking);
 
 	/// <summary>
 	/// This function returns the editor menu bar height
 	/// </summary>
-	static float GetHeight(void) { return height; }
+	float GetHeight(void);
 
 	/// <summary>
 	/// This function hides the menu bar
 	/// </summary>
-	static void Hide(void);
+	void Hide(void);
 
 	/// <summary>
 	/// This function displays the menu bar
 	/// </summary>
-	static void Show(void);
+	void Show(void);
 
 	/// <summary>
 	/// This function says if the menubar is hidden or not.
 	/// </summary>
-	static bool IsHidden(void) { return isHidden; }
+	bool IsHidden(void);
 
 	/// <summary>
 	/// This function says if the menubar is opened or not
 	/// </summary>
 	/// <returns></returns>
-	static bool IsOpened(void);
+	bool IsOpened(void);
 
-private:
 	/// <summary>
 	/// This function adds a EditorMenu object to the editor menu bar.
 	/// </summary>
 	/// <param name="id">The id that corresponds to the editor menu bar.</param>
 	/// <param name="menu">The editor menu</param>
-	static void AddMenu(const unsigned int id, EditorMenu* menu);
+	void AddMenu(const unsigned int id, EditorMenu* menu);
 
-	static unsigned int minPickingId, maxPickingId;
-	static std::string font;
-	static float height, width;
-	static glm::vec4 color;
-	static gui::Rectangle topBar;
-	static std::array<EditorMenu*, MAX_NUMBER_OF_EDITOR_MENUS> listOfMenus;
-
-	static bool isHidden;
 };

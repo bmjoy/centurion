@@ -13,11 +13,10 @@
 #define MAX_NUMBER_OF_EDITOR_WINDOWS 20
 
 /// <summary>
-/// This class corresponds to all the windows of the editor.
+/// This namespace contains all the windows of the editor.
 /// </summary>
-class EditorWindows 
+namespace EditorWindows 
 {
-public:
 	/// <summary>
 	/// This class corresponds to a generic window of the editor.
 	/// </summary>
@@ -70,67 +69,67 @@ public:
 	/// <summary>
 	/// This function clears all the windows of the editor.
 	/// </summary>
-	static void Clear(void);
+	void Clear(void);
+
 	/// <summary>
 	/// This function opens a specific window of the editor.
 	/// </summary>
 	/// <param name="id"></param>
-	static void OpenWindow(const unsigned int id);
+	void OpenWindow(const unsigned int id);
+
 	/// <summary>
 	/// This function closes a specific window of the editor.
 	/// </summary>
 	/// <param name="id"></param>
-	static void CloseWindow(const unsigned int id);
+	void CloseWindow(const unsigned int id);
+
 	/// <summary>
 	/// This function toggles a specific window of the editor.
 	/// </summary>
 	/// <param name="id"></param>
-	static void ToggleWindow(const unsigned int id);
+	void ToggleWindow(const unsigned int id);
+
 	/// <summary>
 	/// This function creates an editor set of windows from an XML file. 
 	/// </summary>
-	static void Create(void);
+	void Create(void);
+
 	/// <summary>
 	/// This function performs the rendering of all the windows of the editor.
 	/// </summary>
 	/// <param name="picking"></param>
-	static void Render(const bool picking);
+	void Render(const bool picking);
 
 	/// <summary>
 	/// This method hides the editor windows
 	/// </summary>
-	static void Hide(void) { isHidden = true; }
+	void Hide(void);
 	
 	/// <summary>
 	/// This method shows the editor windows
 	/// </summary>
-	static void Show(void) { isHidden = false; }
+	void Show(void);
 
 	/// <summary>
 	/// This method returns true if any window is opened
 	/// </summary>
-	static bool AnyWindowIsOpened(void);
+	bool AnyWindowIsOpened(void);
 
 	/// <summary>
 	/// This method closes every opened window
 	/// </summary>
-	static void CloseEveryWindow(void);
+	void CloseEveryWindow(void);
 
 	/// <summary>
 	/// This method returns true editor windows are hidden
 	/// </summary>
-	static bool IsHidden(void) { return isHidden; }
+	bool IsHidden(void);
 
-	~EditorWindows(void);
-private:
-	EditorWindows(void);	
 	/// <summary>
 	/// (???) Cosa succede se la finestra non esiste?
 	/// This function adds a window.
 	/// </summary>
 	/// <param name="id">The id of the window.</param>
 	/// <param name="win">The window.</param>
-	static void AddWindow(const unsigned int id, EditorWindow* win);
-	static std::array<EditorWindow*, MAX_NUMBER_OF_EDITOR_WINDOWS> listOfWindows;
-	static bool isHidden;
+	void AddWindow(const unsigned int id, EditorWindow* win);
 };

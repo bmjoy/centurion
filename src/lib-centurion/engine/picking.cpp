@@ -28,7 +28,7 @@ namespace Picking
 		DoubleClickData doubleClickData;
 	};
 
-	unsigned int GetIdFromClick(const unsigned short int LeftRight)
+	unsigned int Picking::GetIdFromClick(const unsigned short int LeftRight)
 	{
 		unsigned char data[4];
 		//Edit the following line because you can get id with both left and right click
@@ -43,7 +43,7 @@ namespace Picking
 		return pickedID;
 	}
 
-	vec3 GetPickingColorFromID(const unsigned int par_pickingID)
+	vec3 Picking::GetPickingColorFromID(const unsigned int par_pickingID)
 	{
 		unsigned int r = (par_pickingID & 0x000000FF) >> 0;
 		unsigned int g = (par_pickingID & 0x0000FF00) >> 8;
@@ -51,12 +51,12 @@ namespace Picking
 		return vec3(r, g, b);
 	}
 
-	void ResetDoubleClickTime(void)
+	void Picking::ResetDoubleClickTime(void)
 	{
 		doubleClickData.lastTime = glfwGetTime();
 	}
 
-	bool HasDoubleClicked(void)
+	bool Picking::HasDoubleClicked(void)
 	{
 		bool output = false;
 
@@ -98,23 +98,23 @@ namespace Picking
 			Picking::PickingData data = PickingData();
 		};
 
-		void ResetClickIds(void)
+		void Picking::UI::ResetClickIds(void)
 		{
 			data.leftclickID = 0;
 			data.rightclickID = 0;
 		}
 
-		unsigned int GetLeftClickId(void)
+		unsigned int Picking::UI::GetLeftClickId(void)
 		{
 			return data.leftclickID;
 		}
 
-		unsigned int GetRightClickId(void)
+		unsigned int Picking::UI::GetRightClickId(void)
 		{
 			return data.rightclickID;
 		}
 
-		void UpdateClickIds(void)
+		void Picking::UI::UpdateClickIds(void)
 		{
 			if (Engine::Mouse::LeftClick)
 			{
@@ -128,19 +128,19 @@ namespace Picking
 			}
 		}
 
-		unsigned int ObtainPickingID(void)
+		unsigned int Picking::UI::ObtainPickingID(void)
 		{
 			unsigned int newPickingID = data.pickingID;
 			data.pickingID--;
 			return newPickingID;
 		}
 
-		unsigned int GetLastPickingID(void)
+		unsigned int Picking::UI::GetLastPickingID(void)
 		{
 			return data.pickingID;
 		}
 
-		void ResetPicking(void)
+		void Picking::UI::ResetPicking(void)
 		{
 			data.pickingID = PICKING_ID_MAX;
 		}
@@ -155,23 +155,23 @@ namespace Picking
 			vector<unsigned int> unsedPickingID = vector<unsigned int>();
 		};
 
-		void ResetClickIds(void)
+		void Picking::Obj::ResetClickIds(void)
 		{
 			data.leftclickID = 0;
 			data.rightclickID = 0;
 		}
 
-		unsigned int GetLeftClickId(void)
+		unsigned int Picking::Obj::GetLeftClickId(void)
 		{
 			return data.leftclickID;
 		}
 
-		unsigned int GetRightClickId(void)
+		unsigned int Picking::Obj::GetRightClickId(void)
 		{
 			return data.rightclickID;
 		}
 
-		void UpdateClickIds(void)
+		void Picking::Obj::UpdateClickIds(void)
 		{
 			if (Engine::Mouse::LeftClick)
 			{
@@ -185,7 +185,7 @@ namespace Picking
 			}
 		}
 
-		unsigned int ObtainPickingID(void)
+		unsigned int Picking::Obj::ObtainPickingID(void)
 		{
 			unsigned int pickingID = data.pickingID;
 
@@ -201,17 +201,17 @@ namespace Picking
 			return pickingID;
 		}
 
-		void AddUnsedPickingID(const unsigned int par_pickingID)
+		void Picking::Obj::AddUnsedPickingID(const unsigned int par_pickingID)
 		{
 			unsedPickingID.push_back(par_pickingID);
 		}
 
-		unsigned int GetLastPickingID(void)
+		unsigned int Picking::Obj::GetLastPickingID(void)
 		{
 			return data.pickingID;
 		}
 
-		void ResetPicking(void)
+		void Picking::Obj::ResetPicking(void)
 		{
 			data.pickingID = PICKING_ID_MIN;
 			unsedPickingID.clear();

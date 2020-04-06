@@ -11,31 +11,16 @@
 #include <ui.h>
 
 /// <summary>
-/// This STATIC class contains methods and variables of the UI of any match
+/// This namespace contains methods and variables of the UI of any match
 /// and also the ObjectUI and the MatchMenu class
 /// </summary>
-class MatchUI {
-
-public:
-
+namespace MatchUI {
 
 	/// <summary>
 	/// This STATIC class contains the match Menu interface methods and variables
 	/// </summary>
-	class MatchMenu {
-	
-	public:
-	
-		/// <summary>
-		/// Destructor
-		/// </summary>
-		~MatchMenu();
+	namespace MatchMenu {
 
-	private:
-		/// <summary>
-		/// Private constructor
-		/// </summary>
-		MatchMenu();
 	};
 
 
@@ -45,7 +30,7 @@ public:
 	/// This class contains the object interface methods and variables
 	/// It could take information from "GetSelectedObject" 
 	/// </summary>
-	class ObjectUI {
+	namespace ObjectUI {
 		
 	};
 
@@ -55,22 +40,12 @@ public:
 	/// <summary>
 	/// Create function
 	/// </summary>
-	static void Create();
+	void Create();
 
 	/// <summary>
 	/// Render function
 	/// </summary>
 	/// <param name="picking">Boolean: true = picking phase, false = normal rendering</param>
-	static void Render(bool picking = false);
-
-	/// <summary>
-	/// Destruptor
-	/// </summary>
-	~MatchUI();
-private:
-	/// <summary>
-	/// Private constructor
-	/// </summary>
-	MatchUI();
+	void Render(bool picking = false);
 
 };

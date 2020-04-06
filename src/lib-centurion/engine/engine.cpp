@@ -52,7 +52,7 @@ namespace Engine {
 		std::vector<std::string> listOfFoldersTemp = std::vector<std::string>();
 	};
 
-	int Launch(void)
+	int Engine::Launch(void)
 	{
 		myWindow window = myWindow::GetInstance();
 		init();
@@ -153,12 +153,12 @@ namespace Engine {
 	}
 
 
-	void GameClose(void)
+	void Engine::GameClose(void)
 	{
 		myWindow::ShouldClose = true;
 	}
 
-	void SetEnvironment(const string s)
+	void Engine::SetEnvironment(const string s)
 	{
 		if (s == "menu")
 		{
@@ -178,12 +178,12 @@ namespace Engine {
 		}
 	}
 
-	void PrintToConsole(const string s)
+	void Engine::PrintToConsole(const string s)
 	{
 		cout << s << endl;
 	}
 
-	vector<string>* GetListOfFolders(const string s)
+	vector<string>* Engine::GetListOfFolders(const string s)
 	{
 		if (FileManager::CheckIfFolderExists(s))
 		{
@@ -194,7 +194,7 @@ namespace Engine {
 		return nullptr;
 	}
 
-	void Init(const char* exe_root)
+	void Engine::Init(const char* exe_root)
 	{
 		// old initParams (global)
 		try
@@ -255,12 +255,12 @@ namespace Engine {
 		SetEnvironment("menu");
 	}
 
-	unsigned int GetEnvironment(void)
+	unsigned int Engine::GetEnvironment(void)
 	{
 		return ENVIRONMENT;
 	}
 
-	void read_data(void)
+	void Engine::read_data(void)
 	{
 		/* images */
 
@@ -270,7 +270,7 @@ namespace Engine {
 			Img()->addPath(imagesInfoList[i].name, imagesInfoList[i].path);
 	}
 
-	void ResetperipheralsInput(void)
+	void Engine::ResetperipheralsInput(void)
 	{
 		//Keyboard buttons
 		Keyboard::ResetKeys();
@@ -283,7 +283,7 @@ namespace Engine {
 		Mouse::ScrollBool = false;
 	}
 
-	string GetCppVersion()
+	string Engine::GetCppVersion()
 	{
 		string version;
 		if (__cplusplus == 201703L) version = "C++17";
@@ -308,22 +308,22 @@ namespace Engine {
 		};
 
 
-		void SetLastTime(const double _lastTime)
+		void Engine::Fps::SetLastTime(const double _lastTime)
 		{
 			lastTime = _lastTime;
 		}
 
-		int Fps::GetFps(void)
+		int Engine::Fps::GetFps(void)
 		{
 			return _Fps;;
 		}
 
-		int Fps::GetMpfs(void)
+		int Engine::Fps::GetMpfs(void)
 		{
 			return Mpfs;
 		}
 
-		void Fps::Update(void)
+		void Engine::Fps::Update(void)
 		{
 			currentTime = glfwGetTime();
 			nbFrames++;
@@ -337,7 +337,7 @@ namespace Engine {
 			}
 		}
 
-		void Fps::SleepFps(void)
+		void Engine::Fps::SleepFps(void)
 		{
 			finalTime = glfwGetTime();
 			double delta = finalTime - currentTime;

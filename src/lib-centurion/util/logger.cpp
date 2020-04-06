@@ -48,46 +48,46 @@ namespace Logger
 	}
 	LogMessage::~LogMessage(void) { }
 
-	void Info(LogMessage msg) {
-		AddMessage(msg);
-		PrintLogMessage(msg);
-		SaveDebugXML();
+	void Logger::Info(LogMessage msg) {
+		Logger::AddMessage(msg);
+		Logger::PrintLogMessage(msg);
+		Logger::SaveDebugXML();
 	}
 
-	void Info(string msg) {
+	void Logger::Info(string msg) {
 		LogMessage message = LogMessage(msg, "Info", "", "", "");
-		AddMessage(message);
-		PrintLogMessage(message);
-		SaveDebugXML();
+		Logger::AddMessage(message);
+		Logger::PrintLogMessage(message);
+		Logger::SaveDebugXML();
 	}
 
-	void Warn(LogMessage msg) {
-		AddMessage(msg);
-		PrintLogMessage(msg);
-		SaveDebugXML();
+	void Logger::Warn(LogMessage msg) {
+		Logger::AddMessage(msg);
+		Logger::PrintLogMessage(msg);
+		Logger::SaveDebugXML();
 	}
 
-	void Warn(string msg) {
+	void Logger::Warn(string msg) {
 		LogMessage message = LogMessage(msg, "Warn", "", "", "");
-		AddMessage(message);
-		PrintLogMessage(message);
-		SaveDebugXML();
+		Logger::AddMessage(message);
+		Logger::PrintLogMessage(message);
+		Logger::SaveDebugXML();
 	}
 
-	void Error(LogMessage msg) {
-		AddMessage(msg);
-		PrintLogMessage(msg);
-		SaveDebugXML();
+	void Logger::Error(LogMessage msg) {
+		Logger::AddMessage(msg);
+		Logger::PrintLogMessage(msg);
+		Logger::SaveDebugXML();
 	}
 
-	void Error(string msg) {
+	void Logger::Error(string msg) {
 		LogMessage message = LogMessage(msg, "Error", "", "", "");
-		AddMessage(message);
-		PrintLogMessage(message);
-		SaveDebugXML();
+		Logger::AddMessage(message);
+		Logger::PrintLogMessage(message);
+		Logger::SaveDebugXML();
 	}
 
-	void CleanLogs(void)
+	void Logger::CleanLogs(void)
 	{
 		try
 		{
@@ -108,7 +108,7 @@ namespace Logger
 		}
 	}
 
-	void SaveDebugXML(void)
+	void Logger::SaveDebugXML(void)
 	{
 		//Saving all debug informations
 		ofstream logFile(fileDebugName);
@@ -132,7 +132,7 @@ namespace Logger
 		logFile.close();
 	}
 
-	void SaveParamsXML(void)
+	void Logger::SaveParamsXML(void)
 	{
 		//Saving all parameters
 		ofstream logFile(fileParamsName);

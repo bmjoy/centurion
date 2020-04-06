@@ -11,31 +11,18 @@
 #include <ui.h>
 
 /// <summary>
-/// This STATIC class contains methods and variables of the editor UI
+/// This namespace contains methods and variables of the editor UI
 /// </summary>
-class EditorUI {
-	
-public:
-
+namespace EditorUI 
+{
 	/// <summary>
 	/// Create function
 	/// </summary>
-	static void Create();
+	void Create();
 
 	/// <summary>
 	/// Render function
 	/// </summary>
 	/// <param name="picking">Boolean: true = picking phase, false = normal rendering</param>
-	static void Render(bool picking);
-
-	/// <summary>
-	/// Destructor
-	/// </summary>
-	~EditorUI();
-
-private:
-	/// <summary>
-	/// Private constructor
-	/// </summary>
-	EditorUI();
+	void Render(bool picking);
 };

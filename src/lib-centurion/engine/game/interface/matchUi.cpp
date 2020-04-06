@@ -10,7 +10,3 @@ void MatchUI::Create()
 void MatchUI::Render(bool picking)
 {
 }
-
-MatchUI::~MatchUI(){}
-
-MatchUI::MatchMenu::~MatchMenu() {}

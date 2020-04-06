@@ -68,9 +68,6 @@ vector<Building*> Game::GetListOfIndipendentBuildings(void)
 	return indipBuildings;
 }
 
-
-
-
 void Game::RenderObjectsPicking() {
 
 	// Various exceptions

@@ -19,7 +19,7 @@ namespace TranslationsTable
 		std::map<std::string, std::wstring> translationsTable = std::map<std::string, std::wstring>();
 	};
 
-	unsigned int GetLanguageId(const string lan)
+	unsigned int TranslationsTable::GetLanguageId(const string lan)
 	{
 		try
 		{
@@ -38,12 +38,12 @@ namespace TranslationsTable
 		}
 	}
 
-	map<string, unsigned int> GetLanguagesMap(void)
+	map<string, unsigned int> TranslationsTable::GetLanguagesMap(void)
 	{
 		return TranslationsTable::languagesMap;
 	}
 
-	string GetTranslation(const string string_name)
+	string TranslationsTable::GetTranslation(const string string_name)
 	{
 		try
 		{
@@ -66,7 +66,7 @@ namespace TranslationsTable
 		}
 	}
 
-	std::wstring GetWTranslation(std::string string_name)
+	std::wstring TranslationsTable::GetWTranslation(std::string string_name)
 	{
 		try
 		{
@@ -89,7 +89,7 @@ namespace TranslationsTable
 		}
 	}
 
-	void ReadTranslationsTableXml(const string lang)
+	void TranslationsTable::ReadTranslationsTableXml(const string lang)
 	{
 		try
 		{

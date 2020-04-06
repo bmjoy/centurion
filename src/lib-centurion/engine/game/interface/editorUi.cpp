@@ -31,5 +31,3 @@ void EditorUI::Render(bool picking)
 		EditorMenuBar::Render(false);
 	}
 }
-
-EditorUI::~EditorUI() {}

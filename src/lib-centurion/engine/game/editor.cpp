@@ -47,7 +47,7 @@ namespace Game
 			MovingObject movingObject = MovingObject();
 		}
 
-		void Create(void)
+		void Game::Editor::Create(void)
 		{
 			Picking::UI::ResetPicking();
 			Picking::Obj::ResetPicking();
@@ -76,7 +76,7 @@ namespace Game
 			Minimap::Update();
 		}
 
-		void Run(void)
+		void Game::Editor::Run(void)
 		{
 			if (IsCreated() == false)
 			{
@@ -151,13 +151,13 @@ namespace Game
 			setCameraProjectionMatrix(glm::ortho(0.0f, Engine::myWindow::WidthZoomed, 0.0f, Engine::myWindow::HeightZoomed, -(float)MEDIUM_MAP_WIDTH, (float)MEDIUM_MAP_WIDTH));
 		}
 
-		void AddEditorTreeElement(const std::string& filter1, const std::string& filter2, const std::string& filter3)
+		void Game::Editor::AddEditorTreeElement(const std::string& filter1, const std::string& filter2, const std::string& filter3)
 		{
 			std::array<std::string, 3> element = { filter1, filter2, filter3 };
 			Editor::editorTree.push_back(element);
 		}
 
-		std::vector<std::string>* GetEditorTreeList1(void)
+		std::vector<std::string>* Game::Editor::GetEditorTreeList1(void)
 		{
 			Editor::editorTreeList1.clear();
 			for (auto i : Editor::editorTree)
@@ -170,7 +170,7 @@ namespace Game
 			return &Editor::editorTreeList1;
 		}
 
-		std::vector<std::string>* GetEditorTreeList2(const std::string filter1)
+		std::vector<std::string>* Game::Editor::GetEditorTreeList2(const std::string filter1)
 		{
 			Editor::editorTreeList2.clear();
 			for (auto i : Editor::editorTree)
@@ -184,7 +184,7 @@ namespace Game
 			return &Editor::editorTreeList2;
 		}
 
-		std::vector<std::string>* GetEditorTreeList3(const std::string filter1, const std::string filter2)
+		std::vector<std::string>* Game::Editor::GetEditorTreeList3(const std::string filter1, const std::string filter2)
 		{
 			Editor::editorTreeList3.clear();
 			for (auto i : Editor::editorTree)
@@ -198,7 +198,7 @@ namespace Game
 			return &Editor::editorTreeList3;
 		}
 
-		void InsertingObject(std::string type, std::string className)
+		void Game::Editor::InsertingObject(std::string type, std::string className)
 		{
 			if (type.empty() == false && className.empty() == false)
 			{
@@ -257,7 +257,7 @@ namespace Game
 			Editor::tmpObject->Render(false, 0, true);
 		}
 
-		void ShiftSelectedObject(void)
+		void Game::Editor::ShiftSelectedObject(void)
 		{
 			Editor::movingObject.isActive = false;
 			GObject *obj = Game::GetSelectedObject();
@@ -278,31 +278,31 @@ namespace Game
 			Editor::movingObject.isActive = true;
 		}
 
-		bool IsInsertingObject(void)
+		bool Game::Editor::IsInsertingObject(void)
 		{
 			return (Editor::tmpObject != nullptr);
 		}
 
-		bool IsMovingObject(void)
+		bool Game::Editor::IsMovingObject(void)
 		{
 			return Editor::movingObject.isActive;
 		}
 
-		void ToggleGrid(void)
+		void Game::Editor::ToggleGrid(void)
 		{
 			if (Map::IsGridEnabled()) Map::DisableGrid();
 			else Map::EnableGrid();
 			Map::IsGridEnabled() ? Logger::Info("Grid ON!") : Logger::Info("Grid OFF!");
 		}
 
-		void Close(void)
+		void Game::Editor::Close(void)
 		{
 			isCreated = false;
 			Engine::SetEnvironment("menu");
 			Menu::Reset();
 		}
 
-		void handleKeyboardControls(void)
+		void Game::Editor::handleKeyboardControls(void)
 		{
 			if (Hector::ConsoleIsActive()) return;
 
