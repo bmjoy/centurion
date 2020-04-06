@@ -80,8 +80,8 @@ void Game::RenderObjectsPicking() {
 	if (SelectionRectangle::IsActive()) return;
 	if (!Engine::Mouse::RightClick && !Engine::Mouse::LeftClick) return;
 
- 	if (PickingUI::GetLeftClickId() != 0) {
-		//PickingObject::ResetClickIds();
+ 	if (Picking::UI::GetLeftClickId() != 0) {
+		//Picking::Obj::ResetClickIds();
 		return;
 	}
 
@@ -91,7 +91,7 @@ void Game::RenderObjectsPicking() {
 		}
 	}
 
-	PickingObject::UpdateClickIds();
+	Picking::Obj::UpdateClickIds();
 }
 
 void Game::RenderObjects() 
@@ -100,11 +100,11 @@ void Game::RenderObjects()
 	{
 		if (GObject::GetObjectByID(i) != nullptr) 
 		{
-			GObject::GetObjectByID(i)->Render(false, PickingObject::GetLeftClickId());
+			GObject::GetObjectByID(i)->Render(false, Picking::Obj::GetLeftClickId());
 		}
 	}
 
-	if (!Minimap::IsActive() && PickingUI::GetLeftClickId() == 0) 
+	if (!Minimap::IsActive() && Picking::UI::GetLeftClickId() == 0) 
 		SelectionRectangle::Render(); //&& !editor::movingObject
 }
 
@@ -114,9 +114,9 @@ void Game::GoToPointFromMinimap() {
 		cameraToY = Engine::Camera::GetYMinimapCoordinate(Engine::Mouse::GetYLeftClick()) / Engine::myWindow::Height*(float)MEDIUM_MAP_HEIGHT - Engine::myWindow::HeightZoomed / 2.f;
 		// if you are clicking on a townhall you have to double click 
 		// to move the camera there and quit minimap
-		if (PickingObject::GetLeftClickId() > 0 && Picking::HasDoubleClicked()) {
-			cameraToX = GObject::GetObjectByID(PickingObject::GetLeftClickId())->AsBuilding()->get_xPos() - Engine::myWindow::WidthZoomed / 2.f;
-			cameraToY = GObject::GetObjectByID(PickingObject::GetLeftClickId())->AsBuilding()->get_yPos() - Engine::myWindow::HeightZoomed / 2.f;
+		if (Picking::Obj::GetLeftClickId() > 0 && Picking::HasDoubleClicked()) {
+			cameraToX = GObject::GetObjectByID(Picking::Obj::GetLeftClickId())->AsBuilding()->get_xPos() - Engine::myWindow::WidthZoomed / 2.f;
+			cameraToY = GObject::GetObjectByID(Picking::Obj::GetLeftClickId())->AsBuilding()->get_yPos() - Engine::myWindow::HeightZoomed / 2.f;
 			Minimap::Unblock();
 		}
 		//------------------------------------------------
@@ -178,7 +178,7 @@ void Game::GenerateOutposts(vector<vec2> &locs) {
 		b->SetType("building");
 		b->SetPlayer(0);
 		b->SetPosition(vec3(locs[i].x, locs[i].y, 0.f));
-		b->SetPickingID(PickingObject::ObtainPickingID());
+		b->SetPickingID(Picking::Obj::ObtainPickingID());
 		b->GetSettlement().SetSettlementName("Outpost_" + i);
 		b->create();
 		GameObjects[b->GetPickingID()] = b;
@@ -255,7 +255,7 @@ void Game::GenerateSettlements(vector<vec2> &locs) {
 						//b->SetType(type);
 						//b->SetPlayer(i);
 						//b->SetPosition(vec3(origin.x + xOffset, origin.y + yOffset, 0.f));
-						//b->SetPickingID(PickingObject::ObtainPickingID());
+						//b->SetPickingID(Picking::Obj::ObtainPickingID());
 						//b->GetSettlement().SetSettlementName("Settlement_player_" + i);
 						//b->create();
 						//GameObjects[b->GetPickingID()] = b;
@@ -291,7 +291,7 @@ void Game::GenerateSettlements(vector<vec2> &locs) {
 						d->SetClassName(className);
 						d->SetPlayer(0);
 						d->SetPosition(vec3(origin.x + xOffset, origin.y + yOffset, 0.f));
-						d->SetPickingID(PickingObject::ObtainPickingID());
+						d->SetPickingID(Picking::Obj::ObtainPickingID());
 						d->create();
 						GameObjects[d->GetPickingID()] = d;*/
 					//}

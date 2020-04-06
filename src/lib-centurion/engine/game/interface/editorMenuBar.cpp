@@ -60,7 +60,7 @@ void EditorMenuBar::EditorMenu::Create(gui::Rectangle _titleBack, gui::SimpleTex
 
 void EditorMenuBar::EditorMenu::Render(const bool picking, const vec4 &color)
 {
-	titleBack.render(color, vec4(), picking, PickingUI::GetLeftClickId());
+	titleBack.render(color, vec4(), picking, Picking::UI::GetLeftClickId());
 	if (picking == false) {
 		titleText.render_static();
 	}
@@ -68,7 +68,7 @@ void EditorMenuBar::EditorMenu::Render(const bool picking, const vec4 &color)
 	if (isOpened == false) return;
 
 	for (int i = 0; i < optionsBack.size(); i++) {
-		optionsBack[i].render(color, vec4(), picking, PickingUI::GetLeftClickId());
+		optionsBack[i].render(color, vec4(), picking, Picking::UI::GetLeftClickId());
 		if (picking == false) {
 			
 			bool bCond = true;
@@ -136,7 +136,7 @@ void EditorMenuBar::Create(void)
 		float titlePosX = 0.f;
 		float titlePosY = Engine::myWindow::Height - height;
 
-		minPickingId = PickingUI::GetLastPickingID();
+		minPickingId = Picking::UI::GetLastPickingID();
 
 		tinyxml2::XMLElement *levelElement = xmlFile.FirstChildElement("editorMenuBar")->FirstChildElement("editorMenuArray");
 		for (tinyxml2::XMLElement* _it_menu = levelElement->FirstChildElement(); _it_menu != NULL; _it_menu = _it_menu->NextSiblingElement())
@@ -149,7 +149,7 @@ void EditorMenuBar::Create(void)
 			float titleWidth = std::max(gui::SimpleText::CalculateTextWidth(title, font) + 20.f, 60.f);
 
 			gui::Rectangle titleBack = gui::Rectangle();
-			titleBack.create("filled", titlePosX, titlePosY, titleWidth, height, "bottom-left", PickingUI::ObtainPickingID(), luaCmd);
+			titleBack.create("filled", titlePosX, titlePosY, titleWidth, height, "bottom-left", Picking::UI::ObtainPickingID(), luaCmd);
 			gui::SimpleText titleText = gui::SimpleText("static");
 			titleText.create_static(title, font, titlePosX + 0.5f * titleWidth, titlePosY + 0.5f * height, "center", "middle", vec4(255.f), "normal");
 
@@ -177,7 +177,7 @@ void EditorMenuBar::Create(void)
 				int j = stoi(_it_cmd->Attribute("id"));
 
 				gui::Rectangle optionback = gui::Rectangle();
-				optionback.create("filled", titlePosX, titlePosY - height * (j + 1), optionsWidth, height, "bottom-left", PickingUI::ObtainPickingID(), optionLuaCmd);
+				optionback.create("filled", titlePosX, titlePosY - height * (j + 1), optionsWidth, height, "bottom-left", Picking::UI::ObtainPickingID(), optionLuaCmd);
 
 				gui::SimpleText optiontext = gui::SimpleText("static");
 				optiontext.create_static(optionstring, font, titlePosX + offSetX, titlePosY - height * (j + 1) + height * 0.5f, "left", "middle", vec4(255.f), "normal");
@@ -202,7 +202,7 @@ void EditorMenuBar::Create(void)
 			AddMenu(_menu_id, _menu);
 			titlePosX += titleWidth;
 		}
-		maxPickingId = PickingUI::GetLastPickingID() + 1;
+		maxPickingId = Picking::UI::GetLastPickingID() + 1;
 		Engine::myWindow::TopBarHeight = height;
 	}
 	catch (const std::exception&)
@@ -220,7 +220,7 @@ void EditorMenuBar::Render(const bool picking)
 		if (listOfMenus[i] != nullptr) {
 			if (picking == false) {
 				if (Engine::Mouse::LeftClick && Engine::Mouse::GetYPosition() < Engine::myWindow::Height - height) {
-					if (PickingUI::GetLeftClickId() > minPickingId || PickingUI::GetLeftClickId() < maxPickingId) {
+					if (Picking::UI::GetLeftClickId() > minPickingId || Picking::UI::GetLeftClickId() < maxPickingId) {
 						listOfMenus[i]->Close();
 					}
 				}

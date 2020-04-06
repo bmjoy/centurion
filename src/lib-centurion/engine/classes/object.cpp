@@ -220,7 +220,7 @@ bool GObject::Create(const string _className, const bool _temporary)
 
 	// class data
 	this->SetClassName(_className);
-	(_temporary) ? this->SetPickingID(0) : this->SetPickingID(PickingObject::ObtainPickingID());
+	(_temporary) ? this->SetPickingID(0) : this->SetPickingID(Picking::Obj::ObtainPickingID());
 
 	// entity data
 	this->spriteData = objData.GetSpriteData();
@@ -324,7 +324,7 @@ void GObject::RemoveGameObject(const unsigned int index)
 	{
 		if (GameObjects[index] != nullptr)
 		{
-			PickingObject::AddUnsedPickingID(GameObjects[index]->GetPickingID());
+			Picking::Obj::AddUnsedPickingID(GameObjects[index]->GetPickingID());
 			if (GameObjects[index]->IsBuilding() == true)
 			{
 				GObject::numberOfBuildings -= 1;
@@ -418,7 +418,7 @@ void GObject::MarkAsSelected(const bool par_selected)
 	{
 		Game::SetSelectedObject(this);
 	}
-	else if(PickingObject::GetLeftClickId() == PICKING_TERRAIN_ID)
+	else if(Picking::Obj::GetLeftClickId() == PICKING_TERRAIN_ID)
 	{
 		Game::SetSelectedObject(nullptr);
 	}

@@ -121,7 +121,7 @@ namespace gui {
 			ScrollOptions();
 		}
 
-		if (Engine::Mouse::LeftClick && PickingUI::GetLeftClickId() == pickingId) {
+		if (Engine::Mouse::LeftClick && Picking::UI::GetLeftClickId() == pickingId) {
 			selectedOption = options[GetIdFromClick()];
 			Engine::Mouse::LeftClick = false;
 

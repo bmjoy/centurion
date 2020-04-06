@@ -81,8 +81,8 @@ void DebugUI::render(int fps, int mpfs, int selUnits) {
 		dynamicTextList[4] = to_string((int)Engine::Camera::GetZoomedCoords(Engine::Mouse::GetXPosition(), Engine::Mouse::GetYPosition()).y);
 		dynamicTextList[5] = to_string((int)Engine::Camera::GetZoomedCoords(Engine::Mouse::GetXPosition(), Engine::Mouse::GetYPosition()).x);
 		dynamicTextList[6] = to_string(selUnits);
-		dynamicTextList[7] = to_string(PickingObject::GetLastPickingID());
-		dynamicTextList[8] = to_string(PICKING_ID_MAX - PickingUI::GetLastPickingID());
+		dynamicTextList[7] = to_string(Picking::Obj::GetLastPickingID());
+		dynamicTextList[8] = to_string(PICKING_ID_MAX - Picking::UI::GetLastPickingID());
 
 		//!(Engine::getEnvironment() == "game") ? n = 2 : n = (int)dynamicTextList.size();
 		n = (int)dynamicTextList.size();

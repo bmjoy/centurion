@@ -50,7 +50,7 @@ namespace gui {
 		{
 			if (Engine::Mouse::LeftClick)
 			{
-				if (rectangle.IsClicked(PickingUI::GetLeftClickId()))
+				if (rectangle.IsClicked(Picking::UI::GetLeftClickId()))
 				{
 					this->Enable();
 				}

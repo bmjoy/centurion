@@ -41,8 +41,8 @@ namespace Game
 
 	void Editor::Create(void)
 	{
-		PickingUI::ResetPicking();
-		PickingObject::ResetPicking();
+		Picking::UI::ResetPicking();
+		Picking::Obj::ResetPicking();
 
 		ResetGame();
 		Engine::myWindow::BottomBarHeight = 0.f;
@@ -77,7 +77,7 @@ namespace Game
 			Logger::Info("Editor has been created!");
 		}
 
-		PickingUI::ResetClickIds();
+		Picking::UI::ResetClickIds();
 
 		/* Keyboard control */
 		handleKeyboardControls();
@@ -93,7 +93,7 @@ namespace Game
 
 			// PICKING UI RENDERING
 			EditorUI::Render(true);
-			PickingUI::UpdateClickIds();
+			Picking::UI::UpdateClickIds();
 
 			// apply game matrices
 			applyGameMatrices(&projectionMatrix, &viewMatrix);
@@ -121,7 +121,7 @@ namespace Game
 
 			// PICKING RENDERING
 			EditorUI::Render(true);
-			PickingUI::UpdateClickIds();
+			Picking::UI::UpdateClickIds();
 
 			// apply game matrices
 			applyGameMatrices(&projectionMatrix, &viewMatrix);
@@ -129,7 +129,7 @@ namespace Game
 			// NORMAL RENDERING 
 			Minimap::RenderMapAndObjects();
 			Map::Render(false);
-			PickingObject::UpdateClickIds();
+			Picking::Obj::UpdateClickIds();
 
 			// apply menu matrices
 			applyMenuMatrices();
@@ -137,7 +137,7 @@ namespace Game
 			Minimap::RenderRectangle();
 			EditorUI::Render(false);
 
-			if (PickingUI::GetLeftClickId() == 0) GoToPointFromMinimap();
+			if (Picking::UI::GetLeftClickId() == 0) GoToPointFromMinimap();
 		}
 
 		setCameraProjectionMatrix(glm::ortho(0.0f, Engine::myWindow::WidthZoomed, 0.0f, Engine::myWindow::HeightZoomed, -(float)MEDIUM_MAP_WIDTH, (float)MEDIUM_MAP_WIDTH));
@@ -339,9 +339,9 @@ namespace Game
 
 		if (Engine::Keyboard::IsKeyPressed(GLFW_KEY_DELETE))
 		{
-			if (Game::IsGameObjectNotNull(PickingObject::GetLeftClickId()))
+			if (Game::IsGameObjectNotNull(Picking::Obj::GetLeftClickId()))
 			{
-				Building* b = GObject::GObject::GetObjectByID(PickingObject::GetLeftClickId())->AsBuilding();
+				Building* b = GObject::GObject::GetObjectByID(Picking::Obj::GetLeftClickId())->AsBuilding();
 				if (b->IsSelected())
 				{
 					if (b->GetSettlement()->IsIndipendent())
@@ -354,14 +354,14 @@ namespace Game
 						else {
 							cout << "[DEBUG] Settlement " << b->GetName() << " deleted!\n";
 							b->ClearPass();
-							GObject::RemoveGameObject(PickingObject::GetLeftClickId());
+							GObject::RemoveGameObject(Picking::Obj::GetLeftClickId());
 						}
 						*/
 					}
 					else {
 						cout << "[DEBUG] Building " << b->GetSingularName() << " deleted!\n";
 						b->ClearPass();
-						GObject::RemoveGameObject(PickingObject::GetLeftClickId());
+						GObject::RemoveGameObject(Picking::Obj::GetLeftClickId());
 					}
 				}
 			}

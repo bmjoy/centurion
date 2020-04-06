@@ -30,8 +30,8 @@ using namespace glm;
 //
 //void Strategy::Create(void) 
 //{
-//	PickingObject::ResetPicking();
-//	PickingUI::ResetPicking();
+//	Picking::Obj::ResetPicking();
+//	Picking::UI::ResetPicking();
 //
 //	ResetGame();
 //	Engine::myWindow::BottomBarHeight = 100.f;
@@ -71,7 +71,7 @@ using namespace glm;
 //		for (int j = 0; j < 5; j++) {
 //			Unit* u = new Unit();
 //			u->SetClassName("hmyrmidon");
-//			u->SetPickingID(PickingObject::ObtainPickingID());
+//			u->SetPickingID(Picking::Obj::ObtainPickingID());
 //			u->SetPlayer(0);
 //			u->SetPosition(playersList[0].GetStartPoint().x + i * 50, playersList[0].GetStartPoint().y - 1000 - j * 50);
 //			u->create();

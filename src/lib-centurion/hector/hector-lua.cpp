@@ -36,8 +36,8 @@ void Hector::Initialize()
 		.beginNamespace("Mouse")
 		.addVariable("RightClick", &Engine::Mouse::RightClick)
 		.addVariable("LeftClick", &Engine::Mouse::LeftClick)
-		.addFunction("GetLeftClickId", &PickingObject::GetLeftClickId)
-		.addFunction("GetRightClickId", &PickingObject::GetRightClickId)
+		.addFunction("GetLeftClickId", &Picking::Obj::GetLeftClickId)
+		.addFunction("GetRightClickId", &Picking::Obj::GetRightClickId)
 		.endNamespace();
 
 	// types 
@@ -259,9 +259,9 @@ void Hector::RenderConsole(bool picking)
 {
 	if (Engine::Mouse::LeftClick)
 	{
-		PickingUI::ResetClickIds();
+		Picking::UI::ResetClickIds();
 		C.Render(true);
-		PickingUI::UpdateClickIds();
+		Picking::UI::UpdateClickIds();
 	}
 	C.Render(false);
 }

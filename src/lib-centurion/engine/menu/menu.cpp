@@ -53,7 +53,7 @@ unsigned int Menu::MenuPage::Create(const string name)
 			string onclick = string(child->Attribute("onclick"));
 
 			gui::Button btn = gui::Button();
-			btn.create(image_name, TranslationsTable::GetWTranslation(btn_name), stoi(x), stoi(y), PickingUI::ObtainPickingID(), glm::vec4(0.f, 0.f, 0.f, 255.f), onclick);
+			btn.create(image_name, TranslationsTable::GetWTranslation(btn_name), stoi(x), stoi(y), Picking::UI::ObtainPickingID(), glm::vec4(0.f, 0.f, 0.f, 255.f), onclick);
 			this->AddButton(btn);
 		}
 		catch (const std::exception&)
@@ -81,10 +81,10 @@ unsigned int Menu::MenuPage::Create(const string name)
 			int clickable = int(onclick != "");
 			gui::Image img = gui::Image(image_name);
 			if (size == "auto") {
-				img.create(align, stof(x), stof(y), 0.f, 0.f, PickingUI::ObtainPickingID() * clickable);
+				img.create(align, stof(x), stof(y), 0.f, 0.f, Picking::UI::ObtainPickingID() * clickable);
 			}
 			else if (size == "max") {
-				img.create(align, stof(x), stof(y), Engine::myWindow::Width, Engine::myWindow::Height, PickingUI::ObtainPickingID() * clickable);
+				img.create(align, stof(x), stof(y), Engine::myWindow::Width, Engine::myWindow::Height, Picking::UI::ObtainPickingID() * clickable);
 			}
 			this->AddImage(img);
 		}
@@ -121,7 +121,7 @@ void Menu::MenuPage::Render(const bool picking)
 	}
 	for (int i = 0; i < listOfButtons.size(); i++)
 	{
-		listOfButtons[i].render(picking, PickingUI::GetLeftClickId());
+		listOfButtons[i].render(picking, Picking::UI::GetLeftClickId());
 	}
 }
 
@@ -181,7 +181,7 @@ void Menu::Clear(void)
 
 void Menu::Create(void)
 {
-	PickingUI::ResetPicking();
+	Picking::UI::ResetPicking();
 	try
 	{
 		vector<string> files = FileManager::GetAllFilesNamesWithinFolder(Folders::INTERFACE_MENU, "xml");
@@ -213,11 +213,11 @@ void Menu::Run(void)
 	}
 
 	// picking
-	Picking::ResetAllClickIds();
+	Picking::UI::ResetClickIds();
 	if (Engine::Mouse::LeftClick)
 	{
 		RenderPage(currentPageId, true);
-		PickingUI::UpdateClickIds();
+		Picking::UI::UpdateClickIds();
 	}
 	
 	// rendering

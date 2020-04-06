@@ -45,7 +45,7 @@ void gui::Iframe::Clear()
 void gui::Iframe::AddButton(const std::wstring &text, const int xBtn, const int yBtn, const std::string &luaCmd)
 {
 	gui::Button btn = gui::Button();
-	int btnId = PickingUI::ObtainPickingID();
+	int btnId = Picking::UI::ObtainPickingID();
 	btn.create(button_img_name, text, x + xBtn, y + yBtn, btnId, button_txt_color, luaCmd);
 	listOfButtons.push_back(btn);
 }
@@ -60,7 +60,7 @@ void gui::Iframe::AddText(const std::wstring & wtext, const int xPos, const int 
 void gui::Iframe::AddTextList(const int textListId, const int xPos, const int yPos, const std::string & luaCmd, const unsigned int maxOptions, const unsigned int borderWidth)
 {
 	gui::TextList* _list = new gui::TextList();
-	int txtListPickingId = PickingUI::ObtainPickingID();
+	int txtListPickingId = Picking::UI::ObtainPickingID();
 	_list->Create(textListId, x + xPos, y + yPos, text_list_font, text_list_color, text_list_background, txtListPickingId, luaCmd, maxOptions, borderWidth);
 	listOfTextLists.push_back(_list);
 }
@@ -68,7 +68,7 @@ void gui::Iframe::AddTextList(const int textListId, const int xPos, const int yP
 void gui::Iframe::AddTextInput(const int textInputId, const int xPos, const int yPos, const int width, std::wstring placeholderText)
 {
 	gui::TextInput* _input = new gui::TextInput();
-	_input->Create(textInputId, PickingUI::ObtainPickingID(), x + xPos, y + yPos, width, text_input_font, text_input_has_background, text_input_background, text_input_border, text_input_fontweight, placeholderText);
+	_input->Create(textInputId, Picking::UI::ObtainPickingID(), x + xPos, y + yPos, width, text_input_font, text_input_has_background, text_input_background, text_input_border, text_input_fontweight, placeholderText);
 	_input->Enable();
 	listOfTextInputs.push_back(_input);
 }
@@ -136,7 +136,7 @@ void gui::Iframe::RenderImages(bool picking)
 void gui::Iframe::RenderButtons(bool picking)
 {
 	for (int i = 0; i < listOfButtons.size(); i++) {
-		listOfButtons[i].render(picking, PickingUI::GetLeftClickId());
+		listOfButtons[i].render(picking, Picking::UI::GetLeftClickId());
 	}
 }
 
@@ -296,7 +296,7 @@ void gui::Iframe::ReadXml()
 
 void gui::Iframe::CreateBackgroundImage()
 {
-	int commonPickingId = PickingUI::ObtainPickingID();
+	int commonPickingId = Picking::UI::ObtainPickingID();
 
 	back = gui::Image(back_name);
 	back.create("bottom-left", (float)x, (float)y, (float)w, (float)h, commonPickingId);
