@@ -351,6 +351,18 @@
     <ClCompile Include="lib-centurion\engine\debugUi.cpp">
       <Filter>Source Files\engine</Filter>
     </ClCompile>
+    <ClCompile Include="lib-centurion\engine\game\map.cpp">
+      <Filter>Source Files\engine\game</Filter>
+    </ClCompile>
+    <ClCompile Include="lib-centurion\engine\game\race.cpp">
+      <Filter>Source Files\engine\game</Filter>
+    </ClCompile>
+    <ClCompile Include="lib-centurion\engine\game\minimap.cpp">
+      <Filter>Source Files\engine\game</Filter>
+    </ClCompile>
+    <ClCompile Include="lib-centurion\engine\game\selection_rectangle.cpp">
+      <Filter>Source Files\engine\game</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="lib-centurion\audio\sndfile.hh">
@@ -604,6 +616,18 @@
     </ClInclude>
     <ClInclude Include="lib-centurion\util\encoding.hpp">
       <Filter>Header Files\util</Filter>
+    </ClInclude>
+    <ClInclude Include="lib-centurion\engine\game\map.h">
+      <Filter>Header Files\engine\game</Filter>
+    </ClInclude>
+    <ClInclude Include="lib-centurion\engine\game\race.h">
+      <Filter>Header Files\engine\game</Filter>
+    </ClInclude>
+    <ClInclude Include="lib-centurion\engine\game\minimap.h">
+      <Filter>Header Files\engine\game</Filter>
+    </ClInclude>
+    <ClInclude Include="lib-centurion\engine\game\selection_rectangle.h">
+      <Filter>Header Files\engine\game</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

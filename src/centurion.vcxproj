@@ -216,7 +216,11 @@ XCOPY "$(ProjectDir)lua53.dll" "$(ProjectDir)$(OutDir)"</Command>
     <ClCompile Include="lib-centurion\engine\game\interface\editorUi.cpp" />
     <ClCompile Include="lib-centurion\engine\game\interface\editorWindows.cpp" />
     <ClCompile Include="lib-centurion\engine\game\interface\matchUi.cpp" />
+    <ClCompile Include="lib-centurion\engine\game\map.cpp" />
     <ClCompile Include="lib-centurion\engine\game\match.cpp" />
+    <ClCompile Include="lib-centurion\engine\game\minimap.cpp" />
+    <ClCompile Include="lib-centurion\engine\game\race.cpp" />
+    <ClCompile Include="lib-centurion\engine\game\selection_rectangle.cpp" />
     <ClCompile Include="lib-centurion\engine\game\strategy.cpp" />
     <ClCompile Include="lib-centurion\engine\mapgen\mapgen.cpp" />
     <ClCompile Include="lib-centurion\engine\menu\menu.cpp" />
@@ -276,7 +280,11 @@ XCOPY "$(ProjectDir)lua53.dll" "$(ProjectDir)$(OutDir)"</Command>
     <ClInclude Include="lib-centurion\engine\game\interface\editorUi.h" />
     <ClInclude Include="lib-centurion\engine\game\interface\editorWindows.h" />
     <ClInclude Include="lib-centurion\engine\game\interface\matchUi.h" />
+    <ClInclude Include="lib-centurion\engine\game\map.h" />
     <ClInclude Include="lib-centurion\engine\game\match.h" />
+    <ClInclude Include="lib-centurion\engine\game\minimap.h" />
+    <ClInclude Include="lib-centurion\engine\game\race.h" />
+    <ClInclude Include="lib-centurion\engine\game\selection_rectangle.h" />
     <ClInclude Include="lib-centurion\engine\game\strategy.h" />
     <ClInclude Include="lib-centurion\engine\header.h" />
     <ClInclude Include="lib-centurion\engine\mapgen\mapgen.h" />
