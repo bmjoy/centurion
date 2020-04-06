@@ -10,6 +10,8 @@
 
 #include <header.h>
 
+// N.B. IN FONDO PLAYERLIST
+
 class Player
 {
 public:
@@ -64,3 +66,5 @@ private:
 	std::string startRace;
 	glm::vec2 startPoint;
 };
+
+extern std::array<Player, 8> playersList;

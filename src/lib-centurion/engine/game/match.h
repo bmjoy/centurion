@@ -10,15 +10,14 @@
 
 #include "game.h"
 
-class Match : public Game 
+namespace Game
 {
-public:
-	Match(void);
-	~Match(void);
+	namespace Match
+	{
+		/// <summary>
+		/// (???) Cosa fa?
+		/// </summary>
+		void Tracing(void);
+	};
+}
 
-protected:
-	/// <summary>
-	/// (???) Cosa fa?
-	/// </summary>
-	static void Tracing(void);
-};

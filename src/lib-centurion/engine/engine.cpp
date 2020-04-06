@@ -101,7 +101,7 @@ int Engine::Launch(void)
 
 		if (GetEnvironment() == EDITOR_ENV) 
 		{
-			Editor::Run();
+			Game::Editor::Run();
 		}
 
 		// -------------- //

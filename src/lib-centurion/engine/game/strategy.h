@@ -21,21 +21,21 @@
 /// <summary>
 /// (???) Da rivedere --> le variabili extern non sono il massimo nella programmazione.
 /// </summary>
-extern std::vector<std::string> outposts;
-extern std::array<Player, 8> playersList;
-
-/// <summary>
-/// (???) Classe probabilmente da rivedere, completare.
-/// </summary>
-class Strategy : public Match 
-{
-public:
-	static void HandleKeyboardControls(void);
-	static void Create(void);
-	static void Run(void);
-	
-	~Strategy(void);
-private:
-	Strategy(void);
-};
+//extern std::vector<std::string> outposts;
+//extern std::array<Player, 8> playersList;
+//
+///// <summary>
+///// (???) Classe probabilmente da rivedere, completare.
+///// </summary>
+//class Strategy : public Match 
+//{
+//public:
+//	static void HandleKeyboardControls(void);
+//	static void Create(void);
+//	static void Run(void);
+//	
+//	~Strategy(void);
+//private:
+//	Strategy(void);
+//};
 

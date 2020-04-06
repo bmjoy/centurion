@@ -32,7 +32,8 @@ void Hector::Initialize()
 
 	// global variables
 
-	getGlobalNamespace(L).beginNamespace("Mouse")
+	getGlobalNamespace(L)
+		.beginNamespace("Mouse")
 		.addVariable("RightClick", &Engine::Mouse::RightClick)
 		.addVariable("LeftClick", &Engine::Mouse::LeftClick)
 		.addFunction("GetLeftClickId", &PickingObject::GetLeftClickId)
@@ -51,7 +52,8 @@ void Hector::Initialize()
 
 	// functions
 
-	getGlobalNamespace(L).beginNamespace("Engine")
+	getGlobalNamespace(L)
+		.beginNamespace("Engine")
 		.addFunction("GameClose", &Engine::GameClose)
 		.addFunction("PrintToConsole", &Engine::PrintToConsole)
 		.addFunction("SetEnvironment", &Engine::SetEnvironment)
@@ -60,33 +62,37 @@ void Hector::Initialize()
 		.addVariable("WindowHeight", &Engine::myWindow::Height)
 		.endNamespace();
 
-	getGlobalNamespace(L).beginClass<Editor>("Editor")
-		.addStaticFunction("Close", &Editor::Close)
-		.addStaticFunction("ToggleMenu", &EditorMenuBar::ToggleEditorMenu)
-		.addStaticFunction("OpenWindow", &EditorWindows::OpenWindow)
-		.addStaticFunction("CloseWindow", &EditorWindows::CloseWindow)
-		.addStaticFunction("ToggleWindow", &EditorWindows::ToggleWindow)
-		.addStaticFunction("ToggleGrid", &Editor::ToggleGrid)
-		.addStaticFunction("GetTreeList1", Editor::GetEditorTreeList1)
-		.addStaticFunction("GetTreeList2", Editor::GetEditorTreeList2)
-		.addStaticFunction("GetTreeList3", Editor::GetEditorTreeList3)
-		.addStaticFunction("InsertObject", Editor::InsertingObject)
-		.endClass();
+	getGlobalNamespace(L)
+		.beginNamespace("Editor")
+		.addFunction("Close", &Game::Editor::Close)
+		.addFunction("ToggleMenu", &EditorMenuBar::ToggleEditorMenu)
+		.addFunction("OpenWindow", &EditorWindows::OpenWindow)
+		.addFunction("CloseWindow", &EditorWindows::CloseWindow)
+		.addFunction("ToggleWindow", &EditorWindows::ToggleWindow)
+		.addFunction("ToggleGrid", &Game::Editor::ToggleGrid)
+		.addFunction("GetTreeList1", Game::Editor::GetEditorTreeList1)
+		.addFunction("GetTreeList2", Game::Editor::GetEditorTreeList2)
+		.addFunction("GetTreeList3", Game::Editor::GetEditorTreeList3)
+		.addFunction("InsertObject", Game::Editor::InsertingObject)
+		.endNamespace();
 
-	getGlobalNamespace(L).beginClass<Menu>("Menu")
+	getGlobalNamespace(L)
+		.beginClass<Menu>("Menu")
 		.addStaticFunction("OpenMenuPage", &Menu::OpenMenuPage)
 		.endClass();
 	
-	getGlobalNamespace(L).beginClass<GObject>("Object")
+	getGlobalNamespace(L)
+		.beginClass<GObject>("Object")
 		.addFunction("GetClassName", &GObject::GetClassName)
 		.endClass();
 
-	getGlobalNamespace(L).beginClass<Game>("Game")
-		.addStaticFunction("GetSelectedObject", &Game::GetSelectedObject)
-		.addStaticFunction("IsObjectSelected", &Game::IsGameObjectSelected)
-		.addStaticFunction("IsObjectNotNull", &Game::IsGameObjectNotNull)
-		.addStaticFunction("CreateObject", &Game::CreateObject)
-		.endClass();
+	getGlobalNamespace(L)
+		.beginNamespace("Game")
+		.addFunction("GetSelectedObject", &Game::GetSelectedObject)
+		.addFunction("IsObjectSelected", &Game::IsGameObjectSelected)
+		.addFunction("IsObjectNotNull", &Game::IsGameObjectNotNull)
+		.addFunction("CreateObject", &Game::CreateObject)
+		.endNamespace();
 
 	getGlobalNamespace(L)
 		.beginClass<gui::TextList>("TextList")

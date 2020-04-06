@@ -21,11 +21,20 @@ class GObject;
 class Building;
 class Decoration;
 class Unit;
-//class PickingObject;
 
-class Game 
+namespace Game
 {
-public:
+	/// <summary>
+	/// Extern variables
+	/// </summary>
+	extern glm::mat4 projectionMatrix, viewMatrix;
+	extern bool isCreated;
+	extern int numberOfPlayers;
+	extern std::vector<glm::vec3> listOfColors;
+	extern float cameraToX, cameraToY;
+	extern GObject* selectedObject;
+
+
 	class Map 
 	{
 	public:
@@ -260,6 +269,9 @@ public:
 		std::string t_class;
 	};
 
+	extern std::vector<std::string> racesName;
+	extern std::map<std::string, Race> races;
+
 #pragma region TO-LUA Methods
 
 	/// <summary>
@@ -267,14 +279,14 @@ public:
 	/// </summary>
 	/// <returns>The current selected object.</returns>
 	/// 
-	static GObject* GetSelectedObject(void);
+	GObject* GetSelectedObject(void);
 	/// <summary>
 	/// (???) Metodi da rivedere/spostare?
 	/// </summary>
 	/// <returns></returns>
-	static bool IsGameObjectSelected(const unsigned int id);
-	static bool IsGameObjectNotNull(const unsigned int id);
-	static bool CreateObject(const std::string className, const float x, const float y, const unsigned int player);
+	bool IsGameObjectSelected(const unsigned int id);
+	bool IsGameObjectNotNull(const unsigned int id);
+	bool CreateObject(const std::string className, const float x, const float y, const unsigned int player);
 
 #pragma endregion
 
@@ -286,7 +298,7 @@ public:
 	/// This function returns a list of all the indipendent buildings in the game.
 	/// </summary>
 	/// <returns>A list of buildings.</returns>
-	static std::vector<Building*> GetListOfIndipendentBuildings(void);
+	std::vector<Building*> GetListOfIndipendentBuildings(void);
 
 	//static void UpdateSettlementBuildings();
 
@@ -294,7 +306,7 @@ public:
 	/// This function sets the current selected object. 
 	/// </summary>
 	/// <param name="o">The selected object.</param>
-	static void SetSelectedObject(GObject* o);
+	void SetSelectedObject(GObject* o);
 
 #pragma endregion
 
@@ -305,9 +317,9 @@ public:
 	/// </summary>
 	/// <param name="race_name"></param>
 	/// <param name="r"></param>
-	static void AddRace(std::string race_name, Race r);
-	static std::vector<std::string> GetListOfRacesNames() { return racesName; }
-	static Race* GetRace(std::string race_name);
+	void AddRace(std::string race_name, Race r);
+	std::vector<std::string> GetListOfRacesNames();
+	Race* GetRace(std::string race_name);
 
 #pragma endregion
 
@@ -318,51 +330,39 @@ public:
 	/// This function add a new color.
 	/// </summary>
 	/// <param name="col">A new color.</param>
-	static void AddColor(const glm::vec3 col);
+	void AddColor(const glm::vec3 col);
+
 	/// <summary>
 	/// This function returns all the available colors.
 	/// </summary>
 	/// <returns>A list of color.</returns>
-	static std::vector<glm::vec3> GetListOfColors(void);
+	std::vector<glm::vec3> GetListOfColors(void);
+
 	/// <summary>
 	/// (???) Cosa succede se il colore non e presente nella lista?
 	/// This function returns a specific color.
 	/// </summary>
 	/// <param name="i">The index of the color.</param>
 	/// <returns>A color.</returns>
-	static glm::vec3 GetColor(const unsigned int i);
+	glm::vec3 GetColor(const unsigned int i);
+
 	/// <summary>
 	/// This function return the number of available colors.
 	/// </summary>
 	/// <returns>The number of available colors.</returns>
-	static unsigned int GetNumberOfColors(void);
+	unsigned int GetNumberOfColors(void);
 
 #pragma endregion
 
 	//(???) Tutti i metodi a seguire potrebbero essere da rivedere.
 
-	static bool IsCreated() { return isCreated; }
-	static void SetNumberOfPlayers(int n) { numberOfPlayers = n; }
-	static void ResetGame(void);
+	bool IsCreated();
+	void SetNumberOfPlayers(int n);
+	void ResetGame(void);
 
-	~Game();
-
-protected:
-	Game();
-	static glm::mat4 projectionMatrix, viewMatrix;
-	static bool isCreated;
-	static int numberOfPlayers;
-	static std::vector<std::string> racesName;
-	static std::map<std::string, Race> races;
-	static std::vector<glm::vec3> listOfColors;
-
-	static void GenerateSettlements(std::vector<glm::vec2> &locs);
-	static void GenerateOutposts(std::vector<glm::vec2> &locs);
-	static void GoToPointFromMinimap();
-	static void RenderObjectsPicking();
-	static void RenderObjects();
-
-private:
-	static float cameraToX, cameraToY;
-	static GObject* selectedObject;
+	void GenerateSettlements(std::vector<glm::vec2> &locs);
+	void GenerateOutposts(std::vector<glm::vec2> &locs);
+	void GoToPointFromMinimap();
+	void RenderObjectsPicking();
+	void RenderObjects();
 };

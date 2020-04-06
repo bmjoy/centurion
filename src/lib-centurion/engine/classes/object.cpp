@@ -21,6 +21,7 @@ unsigned short int GObject::GetPlayer(void)
 }
 void GObject::SetPlayer(const unsigned short int par_playerID)
 {
+	// DA SISTEMARE !
 	this->player = &playersList[par_playerID];
 }
 
@@ -413,7 +414,7 @@ bool GObject::CheckIfSelected(const unsigned int par_clickID)
 void GObject::MarkAsSelected(const bool par_selected)
 {
 	this->bSelected = par_selected;
-	if (par_selected == true && Editor::IsInsertingObject() == false)
+	if (par_selected == true && Game::Editor::IsInsertingObject() == false)
 	{
 		Game::SetSelectedObject(this);
 	}

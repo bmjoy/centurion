@@ -3,6 +3,8 @@
 using namespace std;
 using namespace glm;
 
+std::array<Player, 8> playersList;
+
 Player::Player(void)
 {
 	id = 0;

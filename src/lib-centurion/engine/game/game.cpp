@@ -472,7 +472,7 @@ Game::Race::~Race() { };
 #pragma endregion
 
 
-#pragma region Static variables
+#pragma region Extern variables
 
 glm::mat4 Game::projectionMatrix;
 glm::mat4 Game::viewMatrix;
@@ -487,7 +487,15 @@ GObject* Game::selectedObject = nullptr;
 
 #pragma endregion
 
-Game::Game() {}
+bool Game::IsCreated()
+{
+	return isCreated;
+}
+
+void Game::SetNumberOfPlayers(int n)
+{
+	numberOfPlayers = n;
+}
 
 void Game::ResetGame()
 {
@@ -497,8 +505,6 @@ void Game::ResetGame()
 	Minimap::Unblock();
 	Minimap::Disable();
 }
-
-Game::~Game(void) {};
 
 void Game::SetSelectedObject(GObject* o)
 {
@@ -599,6 +605,11 @@ void Game::AddRace(string race_name, Race r)
 {
 	races[race_name] = r;
 	racesName.push_back("RACE_" + race_name);
+}
+
+std::vector<std::string> Game::GetListOfRacesNames()
+{
+	return racesName;
 }
 
 Game::Race *Game::GetRace(string race_name)

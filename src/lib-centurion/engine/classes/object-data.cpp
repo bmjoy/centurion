@@ -234,7 +234,7 @@ void ObjectData::ReadDataClassesFromXml(void)
 				std::string editorFilter3 = objData.GetClassName();
 				if (objData.GetClassType() == "cpp_buildingclass" || objData.GetClassType() == "cpp_decorationclass" || objData.GetClassType() == "cpp_unitclass")
 				{
-					Editor::AddEditorTreeElement(editorFilter1, editorFilter2, editorFilter3);
+					Game::Editor::AddEditorTreeElement(editorFilter1, editorFilter2, editorFilter3);
 				}
 			}
 		}
