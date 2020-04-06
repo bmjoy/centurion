@@ -155,54 +155,7 @@ void Engine::myWindow::handle_mouse(GLFWwindow* window, double xPos, double yPos
 }
 
 void Engine::myWindow::mouse_button_callback(GLFWwindow* window, int button, int action, int mods) {
-	if (button == GLFW_MOUSE_BUTTON_LEFT) {
-		if (action == GLFW_PRESS) {
-			Mouse::LeftClick = true;
-			if (Mouse::leftHoldClickData.bIsTimeSaved == false) {
-				Mouse::leftHoldClickData.lastTime = glfwGetTime();
-				Mouse::leftHoldClickData.bIsTimeSaved = true;
-			}
-		}
-		else if (action == GLFW_RELEASE) {
-			Mouse::Release = true;
-			if (Mouse::leftHoldClickData.bIsTimeSaved) {
-				Mouse::leftHoldClickData.bIsTimeSaved = false;
-				Mouse::LeftHold = false;
-			}
-		}
-	}
-	if (button == GLFW_MOUSE_BUTTON_RIGHT) {
-		if (action == GLFW_PRESS) {
-			Mouse::RightClick = true;
-			if (Mouse::rightHoldClickData.bIsTimeSaved == false) {
-				Mouse::rightHoldClickData.lastTime = glfwGetTime();
-				Mouse::rightHoldClickData.bIsTimeSaved = true;
-			}
-		}
-		else if (action == GLFW_RELEASE) {
-			Mouse::Release = true;
-			if (Mouse::rightHoldClickData.bIsTimeSaved) {
-				Mouse::rightHoldClickData.bIsTimeSaved = false;
-				Mouse::RightHold = false;
-			}
-		}
-	}
-	if (button == GLFW_MOUSE_BUTTON_MIDDLE) {
-		if (action == GLFW_PRESS) {
-			Mouse::MiddleClick = true;
-			if (Mouse::middleHoldClickData.bIsTimeSaved == false) {
-				Mouse::middleHoldClickData.lastTime = glfwGetTime();
-				Mouse::middleHoldClickData.bIsTimeSaved = true;
-			}
-		}
-		else if (action == GLFW_RELEASE) {
-			Mouse::MiddleClick = false;
-			if (Mouse::middleHoldClickData.bIsTimeSaved) {
-				Mouse::middleHoldClickData.bIsTimeSaved = false;
-				Mouse::MiddleHold = false;
-			}
-		}
-	}
+	Engine::Mouse::Input(button, action);
 }
 
 void Engine::myWindow::scroll_callback(GLFWwindow* window, double xoffset, double yoffset) {

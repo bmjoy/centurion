@@ -64,7 +64,7 @@ namespace Engine {
 		primitives::create();
 
 		Camera::Init(vec3(0.0f, 0.0f, 0.0f), vec3(0.0f, 1.0f, 0.0f), -90.0f, 0.0f);
-		Mouse::create();
+		Mouse::Create();
 
 		DebugUI debugUI = DebugUI();
 		debugUI.create();
@@ -87,7 +87,7 @@ namespace Engine {
 			Mouse::IsHolding();
 			window.ClearBuffers();
 			Fps::Update();
-			Mouse::mouse_control(window.get_mouse_x(), window.get_mouse_y());
+			Mouse::Control(window.get_mouse_x(), window.get_mouse_y());
 
 			// ---- MENU ---- //
 
@@ -121,7 +121,7 @@ namespace Engine {
 			Hector::RenderConsole();
 
 			// mouse
-			Mouse::render();
+			Mouse::Render();
 
 			if (Hector::ConsoleIsActive() == false)
 			{

@@ -5,38 +5,101 @@
 #define CAMERA_THRESHOLD 20
 #endif
 
-#include <ui.h>
+#include <GL/glew.h>
+#include <glm/glm.hpp>
 
-namespace Engine {
+namespace Engine 
+{
+	namespace Camera 
+	{
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <returns></returns>
+		int GetCurrentZoom(void);
 
-	class Camera {
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="z"></param>
+		void SetCurrentZoom(const int z);
 
-	public:
-		static float MaxZoom;
-		static float MovementSpeed;
-		static int GetCurrentZoom() { return currentZoom; }
-		static void SetCurrentZoom(int z) { currentZoom = z; }
-		static float GetZoomFactor() { return zoomCameraFactor; }
-		static void SetZoomFactor(float f) { zoomCameraFactor = f; }
-		static float GetXPosition() { return position.x; }
-		static float GetYPosition() { return position.y; }
-		static glm::vec2 GetZoomedCoords(float xCoord, float yCoord);
-		static float GetYMinimapCoordinate(float y);
-		static void Init(glm::vec3 startPosition, glm::vec3 startUp, GLfloat startYaw, GLfloat startPitch);
-		static void mouseControl();
-		static void keyboardControl();
-		static void GoToPoint(GLfloat x, GLfloat y);
-		static glm::mat4 calculateViewMatrix();
-	private:
-		Camera();
-		~Camera();
-		static glm::vec3 position;
-		static glm::vec3 front, up, right, worldUp;
-		static GLfloat yaw, pitch;
-		static float threshold_x, threshold_y, abs_x, abs_y;
-		static float zoomCameraFactor;
-		static int currentZoom;
-		static void update();
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <returns></returns>
+		float GetZoomFactor(void);
+
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="f"></param>
+		void SetZoomFactor(const float f);
+
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <returns></returns>
+		float GetXPosition();
+
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <returns></returns>
+		float GetYPosition();
+
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="xCoord"></param>
+		/// <param name="yCoord"></param>
+		/// <returns></returns>
+		glm::vec2 GetZoomedCoords(const float xCoord, const float yCoord);
+
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="y"></param>
+		/// <returns></returns>
+		float GetYMinimapCoordinate(const float y);
+
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="startPosition"></param>
+		/// <param name="startUp"></param>
+		/// <param name="startYaw"></param>
+		/// <param name="startPitch"></param>
+		void Init(const glm::vec3 startPosition, const glm::vec3 startUp, const GLfloat startYaw, const GLfloat startPitch);
+
+		/// <summary>
+		/// 
+		/// </summary>
+		void mouseControl(void);
+
+		/// <summary>
+		/// 
+		/// </summary>
+		void keyboardControl(void);
+
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="x"></param>
+		/// <param name="y"></param>
+		void GoToPoint(const GLfloat x, const  GLfloat y);
+
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <returns></returns>
+		glm::mat4 calculateViewMatrix(void);
+
+
+		// Properties
+		extern float MaxZoom;
+		extern float MovementSpeed;
+
 	};
 
 };

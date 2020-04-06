@@ -5,34 +5,77 @@
 using namespace std;
 using namespace glm;
 
-// static variables
-int Engine::Keyboard::keyCode[348] = { 0 };
-int Engine::Keyboard::charCodepointPressed = -1;
-
-void Engine::Keyboard::SetCharCodepointPressed(int codepoint)
+namespace Engine
 {
-	if (codepoint > 0) {
-		charCodepointPressed = codepoint;
-	}
-	else {
-		charCodepointPressed = -1;
-	}
-}
+	namespace Keyboard 
+	{
 
-void Engine::Keyboard::ResetKeys()
-{
-	for (int key = 0; key < GLFW_KEY_LAST; key++) {
-		if (key == GLFW_KEY_LEFT_CONTROL) continue;
-		if (key == GLFW_KEY_RIGHT_CONTROL) continue;
-		if (key == GLFW_KEY_LEFT_SHIFT) continue;
-		if (key == GLFW_KEY_RIGHT_SHIFT) continue;
-		if (key == GLFW_KEY_LEFT_ALT) continue;
-		if (key == GLFW_KEY_RIGHT_ALT) continue;
-		if (key == GLFW_KEY_RIGHT) continue;
-		if (key == GLFW_KEY_LEFT) continue;
-		if (key == GLFW_KEY_UP) continue;
-		if (key == GLFW_KEY_DOWN) continue;
+		// Private variables
+		namespace 
+		{
+			int keyCode[348] = { 0 };
+			int charCodepointPressed = -1;
 
-		keyCode[key] = GLFW_RELEASE;
-	}
-}
+		};
+
+		void SetKeyStatus(unsigned int key_code, int action)
+		{
+			keyCode[key_code] = action;
+		}
+
+		bool IsKeyReleased(unsigned int key_code)
+		{
+			return keyCode[key_code] == 0;
+		}
+
+		bool IsKeyPressed(unsigned int key_code)
+		{
+			return keyCode[key_code] == 1;
+		}
+
+		bool IsKeyHold(unsigned int key_code)
+		{
+			return keyCode[key_code] == 2;
+		}
+
+		bool IsKeyNotReleased(unsigned int key_code)
+		{
+			return keyCode[key_code] != 0;
+		}
+
+		int GetCharCodepointPressed(void)
+		{
+			return charCodepointPressed;
+		}
+
+		void SetCharCodepointPressed(unsigned int codepoint)
+		{
+			if (codepoint > 0) {
+				charCodepointPressed = codepoint;
+			}
+			else {
+				charCodepointPressed = -1;
+			}
+		}
+
+		void ResetKeys(void)
+		{
+			for (int key = 0; key < GLFW_KEY_LAST; key++) {
+				if (key == GLFW_KEY_LEFT_CONTROL) continue;
+				if (key == GLFW_KEY_RIGHT_CONTROL) continue;
+				if (key == GLFW_KEY_LEFT_SHIFT) continue;
+				if (key == GLFW_KEY_RIGHT_SHIFT) continue;
+				if (key == GLFW_KEY_LEFT_ALT) continue;
+				if (key == GLFW_KEY_RIGHT_ALT) continue;
+				if (key == GLFW_KEY_RIGHT) continue;
+				if (key == GLFW_KEY_LEFT) continue;
+				if (key == GLFW_KEY_UP) continue;
+				if (key == GLFW_KEY_DOWN) continue;
+
+				keyCode[key] = GLFW_RELEASE;
+			}
+		}
+
+	};
+};
+

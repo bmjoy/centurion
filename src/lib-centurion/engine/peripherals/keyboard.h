@@ -5,21 +5,61 @@
 
 namespace Engine {
 
-	class Keyboard {
-	public:
-		static void SetKeyStatus(unsigned int key_code, int action) { keyCode[key_code] = action; }
-		static bool IsKeyReleased(unsigned int key_code) { return keyCode[key_code] == 0; }
-		static bool IsKeyPressed(unsigned int key_code) { return keyCode[key_code] == 1; }
-		static bool IsKeyHold(unsigned int key_code) { return keyCode[key_code] == 2; }
-		static bool IsKeyNotReleased(unsigned int key_code) { return keyCode[key_code] != 0; }
-		static int GetCharCodepointPressed(void) { return charCodepointPressed; }
-		static void SetCharCodepointPressed(int codepoint);
-		static void ResetKeys();
-	private:
-		static int keyCode[348];
-		static int charCodepointPressed;
-	};
+	namespace Keyboard {
 
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="key_code"></param>
+		/// <param name="action"></param>
+		void SetKeyStatus(unsigned int key_code, int action);
+
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="key_code"></param>
+		/// <returns></returns>
+		bool IsKeyReleased(unsigned int key_code);
+
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="key_code"></param>
+		/// <returns></returns>
+		bool IsKeyPressed(unsigned int key_code);
+
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="key_code"></param>
+		/// <returns></returns>
+		bool IsKeyHold(unsigned int key_code);
+
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="key_code"></param>
+		/// <returns></returns>
+		bool IsKeyNotReleased(unsigned int key_code);
+
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <returns></returns>
+		int GetCharCodepointPressed(void);
+
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="codepoint"></param>
+		void SetCharCodepointPressed(unsigned int codepoint);
+
+		/// <summary>
+		/// 
+		/// </summary>
+		void ResetKeys(void);
+	
+	};
 };
 
 #endif // !KEYBOARD_H

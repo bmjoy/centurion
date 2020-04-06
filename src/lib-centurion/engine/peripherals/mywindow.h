@@ -49,8 +49,6 @@ namespace Engine {
 		static void scroll_callback(GLFWwindow* window, double xoffset, double yoffset);
 		static void character_callback(GLFWwindow* window, unsigned int codepoint);
 	};
-
-
 };
 
 #endif // !MYWINDOW_H

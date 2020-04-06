@@ -5,57 +5,106 @@
 #define TIME_LEFT_HOLD 0.10f
 #endif
 
-#include <ui.h>
-
-namespace Engine {
-
-	struct HoldClickData
+namespace Engine 
+{
+	namespace Mouse
 	{
-		double lastTime = 0;
-		bool bIsTimeSaved = false;
+		/// <summary>
+		/// 
+		/// </summary>
+		void Create(void);
+
+		/// <summary>
+		/// 
+		/// </summary>
+		void Render(void);
+
+		/// <summary>
+		/// 
+		/// </summary>
+		float GetXPosition(void);
+
+		/// <summary>
+		/// 
+		/// </summary>
+		float GetYPosition(void);
+
+		/// <summary>
+		/// 
+		/// </summary>
+		float GetY2DPosition(void);
+
+		/// <summary>
+		/// 
+		/// </summary>
+		float GetXLeftClick(void);
+
+		/// <summary>
+		/// 
+		/// </summary>
+		float GetYLeftClick(void);
+
+		/// <summary>
+		/// 
+		/// </summary>
+		float GetXRightClick(void);
+
+		/// <summary>
+		/// 
+		/// </summary>
+		float GetYRightClick(void);
+
+		/// <summary>
+		/// 
+		/// </summary>
+		float GetY2DRightClick(void);
+
+		/// <summary>
+		/// 
+		/// </summary>
+		float GetXMapCoordinate(void);
+
+		/// <summary>
+		/// 
+		/// </summary>
+		float GetYMapCoordinate(void);
+
+		/// <summary>
+		/// 
+		/// </summary>
+		bool IsCursorInGameScreen(void);
+
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="lastX"></param>
+		/// <param name="lastY"></param>
+		void Control(const int lastX, const int lastY);
+
+		/// <summary>
+		/// 
+		/// </summary>
+		void IsHolding(void);
+
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="button"></param>
+		/// <param name="action"></param>
+		void Input(const int button, const int action);
+
+		// Properties
+		extern bool LeftClick;
+		extern bool RightClick;
+		extern bool MiddleClick;
+		extern bool LeftHold;
+		extern bool RightHold;
+		extern bool MiddleHold;
+		extern bool Release;
+		extern float ScrollValue;
+		extern bool ScrollBool;
+
 	};
-
-	class Mouse
-	{
-	public:
-		static HoldClickData leftHoldClickData;
-		static HoldClickData rightHoldClickData;
-		static HoldClickData middleHoldClickData;
-
-		Mouse();
-		static float ScrollValue;
-		static bool ScrollBool;
-		static float GetXPosition() { return position.x; }
-		static float GetYPosition() { return position.y; }
-		static float GetY2DPosition() { return y2DPosition; }
-		static float GetXLeftClick() { return xLeftClick; }
-		static float GetYLeftClick() { return yLeftClick; }
-		static float GetXRightClick() { return xRightClick; }
-		static float GetYRightClick() { return yRightClick; }
-		static float GetY2DRightClick() { return y2DRightClick; }
-		static float GetXMapCoordinate();
-		static float GetYMapCoordinate();
-		static bool IsCursorInGameScreen();
-		static bool LeftClick;
-		static bool RightClick;
-		static bool MiddleClick;
-		static bool LeftHold;
-		static bool RightHold;
-		static bool MiddleHold;
-		static bool Release;
-		static void create();
-		static void render();
-		static void mouse_control(int lastX, int lastY);
-		static void IsHolding(void);
-		~Mouse();
-
-	private:
-		static gui::Image img;
-		static glm::vec3 position;
-		static int currentState;
-		static float znoise, yzoomed, xPosGrid, yPosGrid, xLeftClick, yLeftClick, xRightClick, yRightClick, y2DPosition, y2DRightClick;
-	};
-
 };
 
 #endif // !MOUSE_H
