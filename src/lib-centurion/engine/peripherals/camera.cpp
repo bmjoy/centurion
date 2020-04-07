@@ -26,16 +26,6 @@ namespace Engine
 			float threshold_x, threshold_y, abs_x, abs_y;
 			float zoomCameraFactor = 100.f;
 			int currentZoom = 8;
-
-			void update() {
-				front.x = cos(glm::radians(yaw)) * cos(glm::radians(pitch));
-				front.y = sin(glm::radians(pitch));
-				front.z = sin(glm::radians(yaw)) * cos(glm::radians(pitch));
-				front = glm::normalize(front);
-
-				right = glm::normalize(glm::cross(front, worldUp));
-				up = glm::normalize(glm::cross(right, front));
-			}
 		};
 
 		int Engine::Camera::GetCurrentZoom(void)
@@ -75,15 +65,20 @@ namespace Engine
 			return vec2(x, y);
 		}
 
-		void Engine::Camera::Init(const glm::vec3 startPosition, const glm::vec3 startUp, const GLfloat startYaw, const GLfloat startPitch) {
-			position = startPosition;
-
-			worldUp = startUp;
-			yaw = startYaw;
-			pitch = startPitch;
+		void Engine::Camera::Init() {
+			position = vec3(0.0f, 0.0f, 0.0f); // Starting position coordinates (x, y and z)
+			worldUp = vec3(0.0f, 1.0f, 0.0f); // Relative position (x, y and z) from the world
+			yaw = -90.0f; // Degrees of rotation along the vertical axis
+			pitch = 0.0f; // Degrees of rotation along the transversal axis
 			front = glm::vec3(0.0f, 0.0f, 1.0f);
 
-			update();
+			front.x = cos(glm::radians(yaw)) * cos(glm::radians(pitch));
+			front.y = sin(glm::radians(pitch));
+			front.z = sin(glm::radians(yaw)) * cos(glm::radians(pitch));
+			front = glm::normalize(front);
+
+			right = glm::normalize(glm::cross(front, worldUp));
+			up = glm::normalize(glm::cross(right, front));
 		}
 
 		void Engine::Camera::mouseControl(void) {

@@ -78,11 +78,7 @@ namespace Engine
 		/// <summary>
 		/// This function intializes camera.
 		/// </summary>
-		/// <param name="startPosition">Starting position coordinates (x, y and z). It supports only const glm::vec3</param>
-		/// <param name="startUp">Relative position (x, y and z) from the world. It supports only const glm::vec3</param>
-		/// <param name="startYaw">Degrees of rotation along the vertical axis</param>
-		/// <param name="startPitch">Degrees of rotation along the transversal axis</param>
-		void Init(const glm::vec3 startPosition, const glm::vec3 startUp, const GLfloat startYaw, const GLfloat startPitch);
+		void Init();
 
 		/// <summary>
 		/// This function manages camera behavior resulting from mouse interactions.

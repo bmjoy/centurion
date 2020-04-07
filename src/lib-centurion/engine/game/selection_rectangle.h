@@ -17,8 +17,6 @@ namespace Game {
 	/// </summary>
 	namespace SelectionRectangle
 	{
-		
-
 		/// <summary>
 		/// (???) Cosa fa?
 		/// </summary>
@@ -66,10 +64,6 @@ namespace Game {
 		/// This method calculates the size and the origin of the rectangle
 		/// </summary>
 		void CalculateSizeAndOrigin(float *width, float *height, int *origin);
-
 		
 	};
-
-
-
 };

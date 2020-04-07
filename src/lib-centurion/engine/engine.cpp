@@ -42,12 +42,11 @@
 using namespace std;
 using namespace glm;
 
-
-// Private variables
-namespace Engine {
-
-	namespace {
-
+namespace Engine 
+{
+	// Private variables
+	namespace 
+	{
 		int ENVIRONMENT = MENU_ENV;
 		std::vector<std::string> listOfFoldersTemp = std::vector<std::string>();
 	};
@@ -55,15 +54,15 @@ namespace Engine {
 	int Engine::Launch(void)
 	{
 		myWindow window = myWindow::GetInstance();
-		init();
+		primitives::init();
 
 		ObjectData::ReadDataClassesFromXml();
-		read_data();
+		Engine::read_data();
 
 		primitives::compile();
 		primitives::create();
 
-		Camera::Init(vec3(0.0f, 0.0f, 0.0f), vec3(0.0f, 1.0f, 0.0f), -90.0f, 0.0f);
+		Camera::Init();
 		Mouse::Create();
 
 		DebugUI debugUI = DebugUI();
@@ -210,8 +209,8 @@ namespace Engine {
 			Engine::myWindow::WidthZoomed = Engine::myWindow::Width + (Engine::Camera::GetCurrentZoom() - 1) * Engine::Camera::GetZoomFactor();
 			Engine::myWindow::HeightZoomed = Engine::myWindow::Height + (Engine::Camera::GetCurrentZoom() - 1) * Engine::Camera::GetZoomFactor() / Engine::myWindow::Ratio;
 
-			setMenuProjectionMatrix(glm::ortho(0.0f, Engine::myWindow::Width, 0.0f, Engine::myWindow::Height, -100.0f, 100.0f));
-			setCameraProjectionMatrix(glm::ortho(0.0f, Engine::myWindow::WidthZoomed, 0.0f, Engine::myWindow::HeightZoomed, -(float)MEDIUM_MAP_WIDTH, (float)MEDIUM_MAP_WIDTH));
+			primitives::setMenuProjectionMatrix(glm::ortho(0.0f, Engine::myWindow::Width, 0.0f, Engine::myWindow::Height, -100.0f, 100.0f));
+			primitives::setCameraProjectionMatrix(glm::ortho(0.0f, Engine::myWindow::WidthZoomed, 0.0f, Engine::myWindow::HeightZoomed, -(float)MEDIUM_MAP_WIDTH, (float)MEDIUM_MAP_WIDTH));
 
 			// read data.xml
 
@@ -252,7 +251,7 @@ namespace Engine {
 
 		//------------------------------
 
-		SetEnvironment("menu");
+		Engine::SetEnvironment("menu");
 	}
 
 	unsigned int Engine::GetEnvironment(void)
