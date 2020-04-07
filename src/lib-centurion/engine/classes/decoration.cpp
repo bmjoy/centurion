@@ -49,7 +49,7 @@ void Decoration::CheckIfPlaceable(void)
 	bIsPlaceable = true;
 	vec3 var_position = this->GetPosition();
 	std::vector<std::vector<unsigned int>> passGrid = this->GetPass();
-	bIsPlaceable = astar::checkAvailability(passGrid, var_position);
+	bIsPlaceable = astar::CheckObjectPassAvailability(passGrid, var_position);
 }
 
 void Decoration::Render(const bool picking, const unsigned int clickID)

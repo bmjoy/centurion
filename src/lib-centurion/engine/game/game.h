@@ -33,7 +33,7 @@ namespace Game
 	/// Extern variables
 	/// </summary>
 	extern glm::mat4 projectionMatrix, viewMatrix;
-	extern bool isCreated;
+	//extern bool isCreated;
 	extern int numberOfPlayers;
 	extern std::vector<glm::vec3> listOfColors;
 	extern float cameraToX, cameraToY;
@@ -122,8 +122,6 @@ namespace Game
 #pragma endregion
 
 	//(???) Tutti i metodi a seguire potrebbero essere da rivedere.
-
-	bool IsCreated();
 	void SetNumberOfPlayers(int n);
 	void ResetGame(void);
 

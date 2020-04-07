@@ -103,7 +103,7 @@ void Building::CheckIfPlaceable(void)
 	this->bIsPlaceable = true;
 	vec3 var_position = this->GetPosition();
 	std::vector<std::vector<unsigned int>> passGrid = this->GetPass();
-	this->bIsPlaceable = astar::checkAvailability(passGrid, var_position);
+	this->bIsPlaceable = astar::CheckObjectPassAvailability(passGrid, var_position);
 	//string indCategory = "";
 	//bool nearToIndependent = is_near_to_independent(&indCategory);
 	//if (!this->settlement.IsIndipendent())

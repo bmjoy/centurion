@@ -101,6 +101,7 @@ namespace gui {
 				currentText[i] = 0;
 			}
 		}
+		static_text.create_static(currentText, cursorPosition + 1, "tahoma_15px", xPos, yPos, "left", "normal", vec4(255.f));
 	}
 
 	void TextInput::AddTextInputToArray(int id, TextInput * txtInput)

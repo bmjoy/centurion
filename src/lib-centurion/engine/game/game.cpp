@@ -16,7 +16,7 @@ using namespace glm;
 
 glm::mat4 Game::projectionMatrix;
 glm::mat4 Game::viewMatrix;
-bool Game::isCreated = false;
+//bool Game::isCreated = false;
 float Game::cameraToX;
 float Game::cameraToY;
 int Game::numberOfPlayers = 1;
@@ -26,13 +26,6 @@ vector<vec3> Game::listOfColors;
 GObject* Game::selectedObject = nullptr;
 
 #pragma endregion
-
-
-
-bool Game::IsCreated()
-{
-	return isCreated;
-}
 
 void Game::SetNumberOfPlayers(int n)
 {

@@ -8,6 +8,7 @@
 #include <mapgen/mapgen.h>
 #include <terrain.h>
 #include <grid.h>
+#include <pathfinding/pathfinding.h>
 
 using namespace std;
 using namespace glm;
@@ -203,7 +204,7 @@ namespace Game
 		{
 			Game::Map::isGridEnabled = false;
 			mapgen::reset_map();
-			MapGrid()->reset();
+			astar::ClearPassMatrix();
 			MapTerrain()->updateHeightsBuffer();
 			MapTerrain()->updateTextureBuffer();
 		}

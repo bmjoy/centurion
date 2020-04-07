@@ -39,7 +39,20 @@ namespace astar {
 		}
 		return mat;
 	}
-	bool checkAvailability(vector<vector<unsigned int>> &building_grid, vec3 &position)
+
+	void ClearPassMatrix(void)
+	{
+		for (int i = 0; i < gridWidth * gridHeight; i++)
+		{
+			GridMatrix()[i] = 0;
+			GridMatrix2D()[i] = 0;
+			MapGrid()->SetGridDataCell(i, 0);
+		}
+		MapGrid()->update();
+	}
+
+
+	bool CheckObjectPassAvailability(vector<vector<unsigned int>> &building_grid, vec3 &position)
 	{
 		bool b = true;
 		vec2 pos = vec2((int)position.x / astar::cellGridSize - building_grid[0].size() / 2, (int)position.y / astar::cellGridSize - building_grid.size() / 2);
@@ -65,7 +78,7 @@ namespace astar {
 		}
 		return b;
 	}
-	void updatePassMatrix(vector<vector<unsigned int>> &building_grid, vec3 &position)
+	void UpdateObjectPassMatrix(vector<vector<unsigned int>> &building_grid, vec3 &position)
 	{
 		vec2 pos = vec2((int)position.x / astar::cellGridSize - building_grid[0].size() / 2, (int)position.y / astar::cellGridSize - building_grid.size() / 2);
 		for (int i = 0; i < building_grid.size(); i++)
@@ -83,7 +96,7 @@ namespace astar {
 		MapGrid()->update();
 	}
 
-	void clearPassMatrix(vector<vector<unsigned int>> &building_grid, vec3 &position)
+	void ClearObjectPassMatrix(vector<vector<unsigned int>> &building_grid, vec3 &position)
 	{
 		vec2 pos = vec2((int)position.x / astar::cellGridSize - building_grid[0].size() / 2, (int)position.y / astar::cellGridSize - building_grid.size() / 2);
 		for (int i = 0; i < building_grid.size(); i++)

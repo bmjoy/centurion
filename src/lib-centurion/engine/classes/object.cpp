@@ -201,17 +201,17 @@ std::vector<std::vector<unsigned int>> GObject::GetPass(void) const
 
 void GObject::UpdatePass(void)
 {
-	astar::updatePassMatrix(this->pass_grid, this->position);
+	astar::UpdateObjectPassMatrix(this->pass_grid, this->position);
 }
 
 void GObject::ClearPass(void) 
 {
-	astar::clearPassMatrix(this->pass_grid, this->position);
+	astar::ClearObjectPassMatrix(this->pass_grid, this->position);
 }
 
 bool GObject::CheckPass(void)
 {
-	return astar::checkAvailability(this->pass_grid, this->position);
+	return astar::CheckObjectPassAvailability(this->pass_grid, this->position);
 }
 
 bool GObject::Create(const string _className, const bool _temporary)

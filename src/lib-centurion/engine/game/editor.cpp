@@ -45,6 +45,8 @@ namespace Game
 			GObject* tmpObject = nullptr;
 
 			MovingObject movingObject = MovingObject();
+
+			bool isCreated = false;
 		}
 
 		void Game::Editor::Create(void)
@@ -52,13 +54,13 @@ namespace Game
 			Picking::UI::ResetPicking();
 			Picking::Obj::ResetPicking();
 
-			ResetGame();
+			Game::ResetGame();
+			Map::Reset();
 			Engine::myWindow::BottomBarHeight = 0.f;
 			Engine::myWindow::TopBarHeight = 0.f;
 
-			setMinimapProjectionMatrix();
-
-			Map::Reset();
+			primitives::setMinimapProjectionMatrix();
+			
 			EditorUI::Create();
 
 			SelectionRectangle::Create();
@@ -71,17 +73,17 @@ namespace Game
 
 			Engine::Camera::GoToPoint(1.f, 1.f);
 
-			isCreated = true;
+			Editor::isCreated = true;
 			Editor::movingObject.isActive = false;
 			Minimap::Update();
 		}
 
 		void Game::Editor::Run(void)
 		{
-			if (IsCreated() == false)
+			if (Editor::isCreated == false)
 			{
 				//Audio()->MusicStop();
-				Create();
+				Editor::Create();
 				Logger::Info("Editor has been created!");
 			}
 
@@ -320,9 +322,10 @@ namespace Game
 
 		void Game::Editor::Close(void)
 		{
-			isCreated = false;
+			Editor::isCreated = false;
 			Engine::SetEnvironment("menu");
 			Menu::Reset();
+
 		}
 
 		void Game::Editor::handleKeyboardControls(void)
