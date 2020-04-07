@@ -31,8 +31,8 @@ public:
 	/// <param name="picking">Boolean; true = picking is active;</param>
 	/// <param name="selected">Boolean; true = the building is selected;</param>
 	/// <param name="playerColor">The player's color, 3D vector (255-RGB);</param>
-	/// <param name="not_placeable">Boolean; true = the building is not placeable.</param>
-	void Render(SpriteData &data, float x, float y, bool picking, bool selected, glm::vec3 playerColor, bool not_placeable = false);
+	/// <param name="not_placeable">Boolean; true = the building is placeable.</param>
+	void Render(SpriteData &data, float x, float y, bool picking, bool selected, glm::vec3 playerColor, bool placeable = true);
 
 	/// <summary>
 	/// Destructor

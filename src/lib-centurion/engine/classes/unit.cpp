@@ -31,6 +31,7 @@ Unit::Unit() {
 	creationTime = 0.f;
 	clickSelection = false;
 	rectangleSelection = false;
+	this->bIsBeingMoved = false;
 	this->SetType("cpp_unitclass");
 }
 
@@ -42,43 +43,7 @@ void Unit::SetPosition(const float x, const float y)
 	position3D.y = y;
 }
 
-void Unit::create() {
-
-	/* store data from entity json */
-	//std::string state;
-	//std::ifstream path(data["ent_path"].get<std::string>());
-	//entityData = json::parse(path);
-
-	//unitData.maxDirections = entityData["directions"];
-	//for (int i = 0; i < entityData["spriteList"].size(); i++) {
-	//	state = entityData["spriteList"][i].get<std::string>();
-	//	unitData.States[state] = i;
-	//	unitData.Frames[i] = entityData["sprites"][state]["frames"].get<int>();
-	//	unitData.Durations[i] = entityData["sprites"][state]["duration"].get<int>();
-	//}
-	//unitData.hitBox[0] = entityData["hitbox"][0].get<int>();
-	//unitData.hitBox[1] = entityData["hitbox"][1].get<int>();
-	//unitData.yOffset = entityData["yOffset"].get<int>();
-	//unitData.playerColor = *(player->GetPlayerColor());
-	//unitData.pickingColor = pickingColor;
-	//unitData.className = this->GetClassName();
-	//USprite()->getTextureInfo(&unitData);
-
-	//selectionCircle = gui::Circle();
-	//selectionCircle.create(0.f, 0.f, 35.f, 23.f, 8.f, "center");
-
-	//// hitbox 
-	//hitbox.rectangle = gui::Rectangle();
-	//hitbox.rectangle.create("border", 0.0f, 0.0f, (float)unitData.hitBox[0], (float)unitData.hitBox[1], "center", 0);
-
-	////Show circle position under the unit (Debug only)
-	//circlePos = gui::Image("circle_pos");
-	//circlePos.create("center", 0, 0, 0, 0, 0);
-
-	//creationTime = (float)glfwGetTime();
-}
-
-void Unit::Render(const bool picking, const unsigned int clickID, const bool not_placeable)
+void Unit::Render(const bool picking, const unsigned int clickID)
 {
 	clickSelection = (this->GetPickingID() == clickID);
 	if (Game::SelectionRectangle::IsActive()) rectangleSelection = Game::SelectionRectangle::IsInRectangle(hitbox.coords);

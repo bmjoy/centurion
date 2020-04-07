@@ -16,7 +16,7 @@ BuildingSprite::BuildingSprite(){
 	fPath = "assets/shaders/bsprite/fragment.glsl";
 }
 
-void BuildingSprite::Render(SpriteData &data, float x, float y, bool picking, bool selected, vec3 playerColor, bool not_placeable) {
+void BuildingSprite::Render(SpriteData &data, float x, float y, bool picking, bool selected, vec3 playerColor, bool placeable) {
 	glUseProgram(shaderId);
 
 	/* Uniform Variables */
@@ -25,7 +25,7 @@ void BuildingSprite::Render(SpriteData &data, float x, float y, bool picking, bo
 	glUniform1i(glGetUniformLocation(shaderId, "isLayerColor"), 0);
 	glUniform1i(glGetUniformLocation(shaderId, "isBorder"), 0);
 	glUniform1i(glGetUniformLocation(shaderId, "picking"), picking); // enable/disable picking
-	glUniform1i(glGetUniformLocation(shaderId, "not_placeable"), not_placeable); // enable/disable picking
+	glUniform1i(glGetUniformLocation(shaderId, "not_placeable"), !placeable); 
 
 	glUniform1f(glGetUniformLocation(shaderId, "x"), x);
 	glUniform1f(glGetUniformLocation(shaderId, "y"), y);

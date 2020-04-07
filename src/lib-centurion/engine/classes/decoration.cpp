@@ -12,64 +12,12 @@ using namespace glm;
 
 Decoration::Decoration() 
 {
+	this->bIsBeingMoved = false;
+	this->bIsPlaceable = true;
 	this->SetType("cpp_decorationclass");
 	settlementName = "N/A";
 	settlID = 0;
 	this->SetPosition(vec3(Engine::Mouse::GetXMapCoordinate(), Engine::Mouse::GetYMapCoordinate(), 10.f));
-}
-
-void Decoration::prepare() {
-	//string pass_path = data["pass_path"].get<string>();
-	//string str_className = this->GetClassName();
-	//pass_grid = astar::readPassMatrix(pass_path, str_className);
-
-	//int w, h, nrChannels;
-
-	//ifstream path_ent(data["ent_path"].get<string>());
-	//if (!path_ent.good()) {
-	//	//showGameWarning("Error code 0x00000002\n\n  Unable to find (or communicate with) the audio device.\n  No sound will be played as long as the error persists.");
-	//}
-	//json ent_data = json::parse(path_ent);
-	//string texturePath = ent_data["path"].get<string>() + ent_data["sprite"].get<string>();
-
-	//unsigned char *texture = stbi_load(texturePath.c_str(), &w, &h, &nrChannels, 0);
-	//stbi_image_free(texture);
-
-
-	//decorData.width = w;
-	//decorData.height = h;
-	//decorData.className = this->GetClassName();
-	//decorData.textureID = DSprite()->getTextureID(this->GetClassName());
-}
-
-void Decoration::create() {
-
-	//string pass_path = data["pass_path"].get<string>();
-	//string str_className = this->GetClassName();
-	//if (pass_grid.size() == 0) pass_grid = astar::readPassMatrix(pass_path, str_className);
-	//UpdatePass();
-
-	//int w, h, nrChannels;
-
-	//ifstream path_ent(data["ent_path"].get<string>());
-	//if (!path_ent.good()) {
-	//	//showGameWarning("Error code 0x00000002\n\n  Unable to find (or communicate with) the audio device.\n  No sound will be played as long as the error persists.");
-	//}
-	//json ent_data = json::parse(path_ent);
-	//string texturePath = ent_data["path"].get<string>() + ent_data["sprite"].get<string>();
-
-	//unsigned char *texture = stbi_load(texturePath.c_str(), &w, &h, &nrChannels, 0);
-	//stbi_image_free(texture);
-
-	//decorData.width = w;
-	//decorData.height = h;
-	//decorData.className = this->GetClassName();
-	//decorData.textureID = DSprite()->getTextureID(this->GetClassName());
-
-	//settlementName = "N/A";
-	//checkSettlement();
-	//oldX = this->GetPosition().x;
-	//oldY = this->GetPosition().y;
 }
 
 void Decoration::checkSettlement() {
@@ -96,16 +44,19 @@ void Decoration::checkSettlement() {
 	}*/
 }
 
-bool Decoration::is_placeable()
+void Decoration::CheckIfPlaceable(void)
 {
+	bIsPlaceable = true;
 	vec3 var_position = this->GetPosition();
 	std::vector<std::vector<unsigned int>> passGrid = this->GetPass();
-	return astar::checkAvailability(passGrid, var_position);
+	bIsPlaceable = astar::checkAvailability(passGrid, var_position);
 }
 
-void Decoration::Render(const bool picking, const unsigned int clickID, const bool not_placeable)
+void Decoration::Render(const bool picking, const unsigned int clickID)
 {
 	if (picking) return;
+
+	this->CheckIfPlaceable();
 
 	if (Engine::GetEnvironment() == EDITOR_ENV) {
 		if (Game::IsGameObjectNotNull(settlID)) {
@@ -114,7 +65,7 @@ void Decoration::Render(const bool picking, const unsigned int clickID, const bo
 			}
 		}
 	}
-	DSprite()->Render(spriteData, this->GetPosition().x, this->GetPosition().y, not_placeable);
+	DSprite()->Render(spriteData, this->GetPosition().x, this->GetPosition().y, bIsPlaceable);
 }
 
 Decoration::~Decoration() {}

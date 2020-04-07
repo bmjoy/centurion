@@ -119,11 +119,9 @@ namespace Picking
 			if (Engine::Mouse::LeftClick)
 			{
 				data.leftclickID = GetIdFromClick(PICKING_LEFT);
-				data.rightclickID = 0;
 			}
 			else if (Engine::Mouse::RightClick)
 			{
-				data.leftclickID = 0;
 				data.rightclickID = GetIdFromClick(PICKING_RIGHT);
 			}
 		}
@@ -176,11 +174,9 @@ namespace Picking
 			if (Engine::Mouse::LeftClick)
 			{
 				data.leftclickID = GetIdFromClick(PICKING_LEFT);
-				data.rightclickID = 0;
 			}
 			else if (Engine::Mouse::RightClick)
 			{
-				data.leftclickID = 0;
 				data.rightclickID = GetIdFromClick(PICKING_RIGHT);
 			}
 		}

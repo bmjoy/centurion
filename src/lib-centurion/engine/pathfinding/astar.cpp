@@ -29,7 +29,7 @@ namespace astar {
 		else {
 			string line, value;
 			while (getline(fin, line)) {
-				if (line.length() > 0){
+				if (line.length() > 0) {
 					vector<unsigned int> line_values;
 					stringstream s(line);
 					while (getline(s, value, ',')) line_values.push_back(stoi(value));
@@ -39,13 +39,13 @@ namespace astar {
 		}
 		return mat;
 	}
-	bool checkAvailability(vector<vector<unsigned int>> &building_grid, vec3 &position) 
+	bool checkAvailability(vector<vector<unsigned int>> &building_grid, vec3 &position)
 	{
 		bool b = true;
 		vec2 pos = vec2((int)position.x / astar::cellGridSize - building_grid[0].size() / 2, (int)position.y / astar::cellGridSize - building_grid.size() / 2);
-		for (int i = 0; i < building_grid.size(); i++) 
+		for (int i = 0; i < building_grid.size(); i++)
 		{
-			for (int j = 0; j < building_grid[0].size(); j++) 
+			for (int j = 0; j < building_grid[0].size(); j++)
 			{
 				int k = ((int)building_grid.size() - i + (int)pos.y) * gridWidth + j + (int)pos.x;
 				if (k >= 0 && k < gridWidth * gridHeight)
@@ -56,7 +56,7 @@ namespace astar {
 						break;
 					}
 				}
-				else 
+				else
 				{
 					b = false;
 					break;
@@ -65,18 +65,18 @@ namespace astar {
 		}
 		return b;
 	}
-	void updatePassMatrix(vector<vector<unsigned int>> &building_grid, vec3 &position) 
+	void updatePassMatrix(vector<vector<unsigned int>> &building_grid, vec3 &position)
 	{
 		vec2 pos = vec2((int)position.x / astar::cellGridSize - building_grid[0].size() / 2, (int)position.y / astar::cellGridSize - building_grid.size() / 2);
-		for (int i = 0; i < building_grid.size(); i++) 
+		for (int i = 0; i < building_grid.size(); i++)
 		{
 			for (int j = 0; j < building_grid[0].size(); j++)
 			{
 				int k = ((int)building_grid.size() - i + (int)pos.y) * gridWidth + j + (int)pos.x;
-				if (GridMatrix()[k] == 0) {
-					GridMatrix()[k] = building_grid[i][j];
-
-					MapGrid()->SetGridDataCell(k, building_grid[i][j]);
+				if (building_grid[i][j] == 1)
+				{
+					GridMatrix()[k] = 1;
+					MapGrid()->SetGridDataCell(k, 1);
 				}
 			}
 		}
@@ -86,21 +86,27 @@ namespace astar {
 	void clearPassMatrix(vector<vector<unsigned int>> &building_grid, vec3 &position)
 	{
 		vec2 pos = vec2((int)position.x / astar::cellGridSize - building_grid[0].size() / 2, (int)position.y / astar::cellGridSize - building_grid.size() / 2);
-		for (int i = 0; i < building_grid.size(); i++) 
+		for (int i = 0; i < building_grid.size(); i++)
 		{
-			for (int j = 0; j < building_grid[0].size(); j++) 
+			for (int j = 0; j < building_grid[0].size(); j++)
 			{
 				int k = ((int)building_grid.size() - i + (int)pos.y) * gridWidth + j + (int)pos.x;
-				GridMatrix()[k] = 0;
+				
+				if (building_grid[i][j] == 1)
+				{
+					GridMatrix()[k] = 0;
+					MapGrid()->SetGridDataCell(k, 0);
+				}
 			}
 		}
+		MapGrid()->update();
 	}
 
 	int getGridInfoFromPoint(float x, float y) {
 		return GridMatrix()[(int)y / cellGridSize * gridWidth + (int)x / cellGridSize];
 	}
 
-	vector<ivec2> pathFind(const Location &locStart, const Location &locFinish){
+	vector<ivec2> pathFind(const Location &locStart, const Location &locFinish) {
 
 		// list of open (not-yet-checked-out) nodes
 		static priority_queue<Node> q[2];
@@ -154,12 +160,12 @@ namespace astar {
 			if (row == locFinish.row && col == locFinish.col) {
 
 				// generate the path from finish to start from dirMap
-			
-				int pCount = 2; 
+
+				int pCount = 2;
 				bool addPoint;
 				int i;
 				while (!(row == locStart.row && col == locStart.col)) {
-					i = 0; 
+					i = 0;
 					addPoint = false;
 					j = DirMap()[row * gridWidth + col];
 					row += iDir[j];
@@ -170,14 +176,14 @@ namespace astar {
 							addPoint = true;
 						}
 						i++;
-					}	
-					if (addPoint){
+					}
+					if (addPoint) {
 						if (pCount == 2) {
 							finalPath.push_back(ivec2(col * cellGridSize, row * cellGridSize));
 							pCount = 0;
 						}
 						pCount++;
-					}	
+					}
 				}
 
 				// push start location
@@ -253,7 +259,7 @@ namespace astar {
 			}
 			delete pNode1;
 		}
-	
+
 		// no path found
 		vector<ivec2> emptyPath;
 		return emptyPath;

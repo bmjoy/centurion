@@ -132,17 +132,6 @@ public:
 	bool IsShipyard(void);
 	
 	/// <summary>
-	/// (???) Da rivedere 
-	/// </summary>
-	/// <param name="placeable"></param>
-	void SetPlaceable(const bool placeable);
-	/// <summary>
-	/// (???) DA RIVEDERE
-	/// </summary>
-	/// <returns></returns>
-	bool IsPlaceable(void);
-	
-	/// <summary>
 	/// This function allows the current building to produce gold if it couldn't previously. 
 	/// </summary>
 	void StartGoldProduction(void);
@@ -173,11 +162,6 @@ public:
 	/// </summary>
 	/// <param name="par_ent_path">The path og the pass table.</param>
 	void SetPassPath(const std::string par_pass_path);
-
-	/// <summary>
-	/// (???) Da rivedere
-	/// </summary>
-	void prepare() override;
 	
 	/// <summary>
 	/// This functions sets the properties of the current building when it is being created. 
@@ -197,7 +181,9 @@ public:
 	/// <param name="picking">Checks if it's the picking phase.</param>
 	/// <param name="clickID"></param>
 	/// <param name="not_placeable"></param>
-	void Render(const bool picking, const unsigned int clickID = 0, const bool not_placeable = false) override;
+	void Render(const bool picking, const unsigned int clickID = 0) override;
+
+
 	void SetStatus(const bool bIsCreated);
 
 	/// <summary>
@@ -214,6 +200,12 @@ public:
 
 	Building(void);
 	~Building(void);
+protected:
+	/// <summary>
+	/// Protected method that checks if the object is placeable and sets the relative protected boolean
+	/// </summary>
+	void CheckIfPlaceable(void) override;
+
 private:
 	//game::ObjectUI* buildingUI;
 	bool waitingToBeErased;
@@ -228,7 +220,6 @@ private:
 	bool bIsTownhall = false;
 	bool bIsVillageHall = false;
 	bool bIsShipyard = false;
-	bool bIsPlaceable = false;
 	bool bAutoRepair = false;
 	bool bCanProduceGold = false;
 	bool bCanProduceFood = false;

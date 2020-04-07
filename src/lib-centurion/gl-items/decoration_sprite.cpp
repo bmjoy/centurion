@@ -10,7 +10,7 @@ DecorationSprite::DecorationSprite(){
 	fPath = "assets/shaders/dsprite/fragment.glsl";
 }
 
-void DecorationSprite::Render(SpriteData &data, float x, float y, bool not_placeable) {
+void DecorationSprite::Render(SpriteData &data, float x, float y, bool placeable) {
 
 	glUseProgram(shaderId);
 
@@ -21,7 +21,7 @@ void DecorationSprite::Render(SpriteData &data, float x, float y, bool not_place
 	glUniform1f(glGetUniformLocation(shaderId, "z"), 10.f);
 	glUniform1f(glGetUniformLocation(shaderId, "w"), data.width);
 	glUniform1f(glGetUniformLocation(shaderId, "h"), data.height);
-	glUniform1i(glGetUniformLocation(shaderId, "not_placeable"), (int)not_placeable);
+	glUniform1i(glGetUniformLocation(shaderId, "not_placeable"), (int)!placeable);
 	glUniform1i(glGetUniformLocation(shaderId, "texture1"), 0); // texture
 
 	/* Draw */

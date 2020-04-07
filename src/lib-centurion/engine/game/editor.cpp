@@ -244,27 +244,44 @@ namespace Game
 
 			if (Engine::Mouse::LeftClick)
 			{
-				Game::CreateObject(tmpObject->GetClassName(), tmpObject->GetPosition().x, tmpObject->GetPosition().y, 1);
-				delete Editor::tmpObject;
-				Editor::tmpObject = nullptr;
-				EditorMenuBar::Show();
-				EditorWindows::Show();
-				Engine::Mouse::LeftClick = false;
+				if (Editor::tmpObject->IsPlaceable() == true)
+				{
+					Game::CreateObject(tmpObject->GetClassName(), tmpObject->GetPosition().x, tmpObject->GetPosition().y, 1);
+					delete Editor::tmpObject;
+					Editor::tmpObject = nullptr;
+					EditorMenuBar::Show();
+					EditorWindows::Show();
+					Engine::Mouse::LeftClick = false;
+				}
 			}
 
 			if (Editor::tmpObject == nullptr) return;
+			if (Editor::tmpObject->IsBeingMoved() == false) Editor::tmpObject->MarkAsMoving();
 			Editor::tmpObject->SetPosition(vec3(Engine::Mouse::GetXMapCoordinate(), Engine::Mouse::GetYMapCoordinate(), 0.f));
-			Editor::tmpObject->Render(false, 0, true);
+			Editor::tmpObject->Render(false, 0);
 		}
 
 		void Game::Editor::ShiftSelectedObject(void)
 		{
-			Editor::movingObject.isActive = false;
 			GObject *obj = Game::GetSelectedObject();
 			if (obj == nullptr) return;
 
 			if (Engine::Mouse::LeftHold == false)
 			{
+				obj->MarkAsNotMoving();
+				if (Editor::movingObject.isActive == true)
+				{
+					if (obj->IsPlaceable() == true)
+					{
+						obj->UpdatePass();
+					}
+					else
+					{
+						obj->SetPosition(vec3(Editor::movingObject.ObjectXPos, Editor::movingObject.ObjectYPos, 0.f));
+						obj->UpdatePass();
+					}
+					Editor::movingObject.isActive = false;
+				}
 				Editor::movingObject.ObjectXPos = obj->GetPosition().x;
 				Editor::movingObject.ObjectYPos = obj->GetPosition().y;
 				Editor::movingObject.StartXMouse = Engine::Mouse::GetXMapCoordinate();
@@ -272,10 +289,16 @@ namespace Game
 				return;
 			}
 
+			if (Editor::movingObject.isActive == false)
+			{
+				obj->MarkAsMoving();
+				obj->ClearPass();
+				Editor::movingObject.isActive = true;
+			}
+
 			float dx = Engine::Mouse::GetXMapCoordinate() - Editor::movingObject.StartXMouse;
 			float dy = Engine::Mouse::GetYMapCoordinate() - Editor::movingObject.StartYMouse;
 			obj->SetPosition(vec3(Editor::movingObject.ObjectXPos + dx, Editor::movingObject.ObjectYPos + dy, 0.f));
-			Editor::movingObject.isActive = true;
 		}
 
 		bool Game::Editor::IsInsertingObject(void)
