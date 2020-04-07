@@ -1,9 +1,10 @@
 #include "pass.h"
 
-
 #include <map>
 
 #include <grid.h>
+
+#include <logger.h>
 
 using namespace std;
 using namespace glm;
@@ -78,10 +79,10 @@ namespace Pass
 		MapGrid()->update();
 	}
 
-	void Pass::UpdateObjectPass(std::vector<std::vector<unsigned int>>& building_grid, glm::vec3 & position, const int method)
+	void Pass::UpdateObjectPass(PassGrid *pg, glm::vec3 & position, const int method)
 	{
-		int horizontal_size = (int)building_grid[0].size();
-		int vertical_size = (int)building_grid.size();
+		int horizontal_size = pg->GetSizeX();
+		int vertical_size = pg->GetSizeY();
 		vec2 pos = GetGridCellPosition(position, horizontal_size, vertical_size);
 
 		for (int iy = 0; iy < vertical_size; ++iy)
@@ -90,7 +91,7 @@ namespace Pass
 			{
 				int idx = (vertical_size - iy + (int)pos.y) * GRID_SIZE_X + ix + (int)pos.x;
 
-				if (building_grid[iy][ix] == 1)
+				if (pg->GetValueByCoordinates(ix, iy) == 1)
 				{
 					if (idx >= 0 && idx < GRID_SIZE_X * GRID_SIZE_Y)
 					{
@@ -109,10 +110,10 @@ namespace Pass
 		MapGrid()->update();
 	}
 
-	bool CheckObjectPassAvailability(std::vector<std::vector<unsigned int>>& building_grid, glm::vec3 & position)
+	bool CheckObjectPassAvailability(PassGrid *pg, glm::vec3 & position)
 	{
-		int horizontal_size = (int)building_grid[0].size();
-		int vertical_size = (int)building_grid.size();
+		int horizontal_size = pg->GetSizeX();
+		int vertical_size = pg->GetSizeY();
 		vec2 pos = GetGridCellPosition(position, horizontal_size, vertical_size);
 
 		bool bAvailable = true;
@@ -121,10 +122,10 @@ namespace Pass
 		{
 			for (int ix = 0; ix < horizontal_size; ix++)
 			{
-				int idx = ((int)building_grid.size() - iy + (int)pos.y) * GRID_SIZE_X + ix + (int)pos.x;
+				int idx = (vertical_size - iy + (int)pos.y) * GRID_SIZE_X + ix + (int)pos.x;
 				if (idx >= 0 && idx < GRID_SIZE_X * GRID_SIZE_Y)
 				{
-					if (PASS_MATRIX[idx] == 1 && building_grid[iy][ix] == 1)
+					if (PASS_MATRIX[idx] == 1 && pg->GetValueByCoordinates(ix, iy) == 1)
 					{
 						bAvailable = false;
 						break;
@@ -140,9 +141,68 @@ namespace Pass
 		return bAvailable;
 	}
 
+	void AddPassGrid(const std::string path, const std::string className)
+	{
+		PassGrid pg{};
+		pg.Create(path, className);
+		PASS_DATABASE[className] = pg;
+	}
 
-	Pass::PassGrid::PassGrid() {}
+	PassGrid * GetPassGridPtr(const std::string className)
+	{
+		if (PASS_DATABASE.count(className) >= 1)
+		{
+			return &(PASS_DATABASE[className]);
+		}
+		return nullptr;
+	}
 
-	Pass::PassGrid::~PassGrid() {}
 
+	Pass::PassGrid::PassGrid(void) {}
+
+	Pass::PassGrid::~PassGrid(void) {}
+
+	unsigned int PassGrid::GetSizeX(void)
+	{
+		return (unsigned int)data[0].size();
+	}
+
+	unsigned int PassGrid::GetSizeY(void)
+	{
+		return (unsigned int)data.size();
+	}
+
+	unsigned char PassGrid::GetValueByCoordinates(const unsigned int X, const unsigned int Y)
+	{
+		return data[Y][X];
+	}
+
+	void PassGrid::Create(const std::string path, const std::string className)
+	{
+		ifstream fin(path);
+		if (!fin.good()) 
+		{
+			stringstream ss;
+			ss << "A problem occurred while reading " + className + " PASS file.";
+			Logger::Warn(ss.str());
+		}
+		else 
+		{
+			string line, value;
+			while (getline(fin, line)) 
+			{
+				if (line.length() > 0) 
+				{
+					vector<unsigned char> line_values;
+					stringstream s(line);
+					while (getline(s, value, ','))
+					{
+						unsigned char charValue = (unsigned char) stoi(value);
+						line_values.push_back(charValue);
+					}
+					this->data.push_back(line_values);
+				}
+			}
+		}
+	}
 };

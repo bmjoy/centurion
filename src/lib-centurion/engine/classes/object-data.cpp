@@ -7,6 +7,7 @@
 #include <unit_sprite.h>
 #include <logger.h>
 #include <game/editor.h>
+#include <game/pass.h>
 
 #include <tinyxml2.h>
 
@@ -178,7 +179,8 @@ void ObjectData::ReadDataClassesFromXml(void)
 
 		string path = dataClassesPath + files[i];
 
-		try {
+		try 
+		{
 			XMLDocument xmlFile;
 			xmlFile.LoadFile(path.c_str());
 			XMLElement *_objectXml = xmlFile.FirstChildElement("object");
@@ -237,8 +239,16 @@ void ObjectData::ReadDataClassesFromXml(void)
 					Game::Editor::AddEditorTreeElement(editorFilter1, editorFilter2, editorFilter3);
 				}
 			}
+
+			// SAVING OBJECT PASS
+			std::string passPath = objData.GetPropertyValue("pass_path");
+			if (passPath != PROPERTY_NOT_VALID)
+			{
+				Pass::AddPassGrid(passPath, objData.GetClassName());
+			}
 		}
-		catch (...) {
+		catch (...) 
+		{
 			std::cout << "An error occurred" << std::endl;
 		}
 	}

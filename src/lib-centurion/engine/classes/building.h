@@ -224,7 +224,6 @@ private:
 	bool bCanProduceGold = false;
 	bool bCanProduceFood = false;
 	std::string ent_path;
-	std::string pass_path;
 	std::vector<Unit> holdUnits;
 	Settlement *settlement;
 	//Private members:

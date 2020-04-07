@@ -186,20 +186,6 @@ Decoration* GObject::AsDecoration()
 	return (Decoration*)this;
 }
 
-void GObject::SetPass(string & path)
-{
-	if (this->pass_grid.size() == 0)
-	{
-		string str_className = this->GetClassName();
-		this->pass_grid = astar::readPassMatrix(path, str_className);
-	}
-}
-
-std::vector<std::vector<unsigned int>> GObject::GetPass(void) const
-{
-	return this->pass_grid;
-}
-
 void GObject::UpdatePass(void)
 {
 	Pass::UpdateObjectPass(this->pass_grid, this->position, PASS_OVERLAP);
@@ -226,6 +212,9 @@ bool GObject::Create(const string _className, const bool _temporary)
 	this->spriteData = objData.GetSpriteData();
 	this->spriteData.pickingId = this->GetPickingID();
 	this->spriteData.pickingColor = Picking::GetPickingColorFromID(this->GetPickingID());
+
+	// pass data
+	this->pass_grid = Pass::GetPassGridPtr(this->className);
 
 	//if (_temporary == true) return bObjectCreated;
 	this->SetObjectProperties(objData, _temporary);

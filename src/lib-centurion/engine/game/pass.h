@@ -63,11 +63,18 @@ namespace Pass
 	class PassGrid
 	{
 	public:
-		PassGrid();
-		~PassGrid();
+		PassGrid(void);
+		~PassGrid(void);
+
+		unsigned int GetSizeX(void);
+
+		unsigned int GetSizeY(void);
+
+		unsigned char GetValueByCoordinates(const unsigned int X, const unsigned int Y);
+
+		void Create(const std::string path, const std::string className);
 	private:
-		std::string path;
-		std::vector<unsigned char> data;
+		std::vector<std::vector<unsigned char>> data;
 	};
 
 	unsigned int GetGridSizeX(void);
@@ -87,9 +94,12 @@ namespace Pass
 
 	void ClearGrid(void);
 
-	void UpdateObjectPass(std::vector<std::vector<unsigned int>> &building_grid, glm::vec3 &position, const int method);
+	void UpdateObjectPass(PassGrid *pg, glm::vec3 &position, const int method);
 
-	bool CheckObjectPassAvailability(std::vector<std::vector<unsigned int>> &building_grid, glm::vec3 &position);
+	bool CheckObjectPassAvailability(PassGrid *pg, glm::vec3 &position);
 
+	void AddPassGrid(const std::string path, const std::string className);
+
+	PassGrid *GetPassGridPtr(const std::string className);
 };
 

@@ -103,8 +103,7 @@ void Building::CheckIfPlaceable(void)
 {
 	this->bIsPlaceable = true;
 	vec3 var_position = this->GetPosition();
-	std::vector<std::vector<unsigned int>> passGrid = this->GetPass();
-	this->bIsPlaceable = Pass::CheckObjectPassAvailability(passGrid, var_position);
+	this->bIsPlaceable = Pass::CheckObjectPassAvailability(this->pass_grid, var_position);
 	//string indCategory = "";
 	//bool nearToIndependent = is_near_to_independent(&indCategory);
 	//if (!this->settlement.IsIndipendent())
@@ -139,10 +138,6 @@ void Building::SetEntPath(const string par_ent_path)
 	this->ent_path = par_ent_path;
 }
 
-void Building::SetPassPath(const string par_pass_path)
-{
-	this->pass_path = par_pass_path;
-}
 
 bool Building::SetBuildingProperties(ObjectData::ObjectXMLClassData &objData, const bool _temporary)
 {
@@ -156,8 +151,6 @@ bool Building::SetBuildingProperties(ObjectData::ObjectXMLClassData &objData, co
 	ObjectData::TryParseString(objData.GetPropertiesMap(), "isCentralBuilding", &strProperty);
 	this->bIsCentralBuilding = strProperty == "true" ? true : false;
 	ObjectData::TryParseString(objData.GetPropertiesMap(), "pass_path", &strProperty);
-	this->pass_path = strProperty;
-	this->SetPass(strProperty);
 	
 	bBuildingCreated = this->FindASettlement(this, _temporary);
 	if (_temporary == true)

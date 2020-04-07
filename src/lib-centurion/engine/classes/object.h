@@ -11,10 +11,13 @@
 #include <ui.h>
 #include <object_sprite.h>
 #include "object-data.h"
+#include <game/pass.h>
 
 class Unit;
 class Building;
 class Decoration;
+
+namespace Pass { class PassGrid; }
 
 class Player;
 
@@ -281,8 +284,6 @@ public:
 	float get_yPos(void);
 
 	//Pass methods
-	void SetPass(std::string & path);
-	std::vector<std::vector<unsigned int>> GetPass(void) const;
 	void UpdatePass(void);
 	void ClearPass(void);
 
@@ -394,14 +395,13 @@ protected:
 	virtual void CheckIfPlaceable(void) {}
 	
 	bool bIsPlaceable = false;
-
+	Pass::PassGrid* pass_grid;
 	ObjectSprite::SpriteData spriteData;
 	Player *player;
 	glm::vec3 pickingColor;
 	std::map<std::string, std::string> methods;
 	std::map<std::string, std::string> sounds;
 	bool bIsBeingMoved = false;
-
 
 	/// <summary>
 	/// This function checks if the current object is the selected object (namely, if the user has done left click on it).
@@ -425,8 +425,6 @@ private:
 	unsigned int sight;
 	float selectionRadius;
 	float radius;
-	// PassGrid * pass_grid;
-	std::vector<std::vector<unsigned int>> pass_grid;
 	glm::vec3 position;
 	std::string singularName;
 	std::string pluralName;
