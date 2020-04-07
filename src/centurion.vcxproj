@@ -219,6 +219,7 @@ XCOPY "$(ProjectDir)lua53.dll" "$(ProjectDir)$(OutDir)"</Command>
     <ClCompile Include="lib-centurion\engine\game\map.cpp" />
     <ClCompile Include="lib-centurion\engine\game\match.cpp" />
     <ClCompile Include="lib-centurion\engine\game\minimap.cpp" />
+    <ClCompile Include="lib-centurion\engine\game\pass.cpp" />
     <ClCompile Include="lib-centurion\engine\game\race.cpp" />
     <ClCompile Include="lib-centurion\engine\game\selection_rectangle.cpp" />
     <ClCompile Include="lib-centurion\engine\game\strategy.cpp" />
@@ -282,6 +283,7 @@ XCOPY "$(ProjectDir)lua53.dll" "$(ProjectDir)$(OutDir)"</Command>
     <ClInclude Include="lib-centurion\engine\game\map.h" />
     <ClInclude Include="lib-centurion\engine\game\match.h" />
     <ClInclude Include="lib-centurion\engine\game\minimap.h" />
+    <ClInclude Include="lib-centurion\engine\game\pass.h" />
     <ClInclude Include="lib-centurion\engine\game\race.h" />
     <ClInclude Include="lib-centurion\engine\game\selection_rectangle.h" />
     <ClInclude Include="lib-centurion\engine\game\strategy.h" />

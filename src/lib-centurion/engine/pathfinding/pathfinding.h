@@ -5,19 +5,6 @@
 namespace astar {
 
 	//
-	//	These variables contain the GRID information to generate pathfinding
-	//
-
-	static const int cellGridSize = 20;
-	static const int gridWidth = 1500;
-	static const int gridHeight = 1000;
-	static int gridMatrix[gridWidth * gridHeight] = { 0 };
-	static int gridMatrix2D[gridWidth * gridHeight] = { 0 };
-	static int closedNodes[gridWidth * gridHeight] = { 0 };
-	static int openNodes[gridWidth * gridHeight] = { 0 };
-	static int dirMap[gridWidth * gridHeight] = { 0 };
-
-	//
 	//	ASTAR FUNCTIONS --> source/pathfinding/astar.cpp
 	// 
 	
@@ -32,23 +19,7 @@ namespace astar {
 		};
 	};
 
-	int *GridMatrix();
-	int *GridMatrix2D();
-	int *ClosedNodes();
-	int *OpenNodes();
-	int *DirMap();
-
 	std::vector<std::vector<unsigned int>> readPassMatrix(std::string &path, std::string &classname);
-
-	void ClearPassMatrix(void);
-
-	void UpdateObjectPassMatrix(std::vector<std::vector<unsigned int>> &building_grid, glm::vec3 &position);
-
-	void ClearObjectPassMatrix(std::vector<std::vector<unsigned int>> &building_grid, glm::vec3 &position);
-
-	bool CheckObjectPassAvailability(std::vector<std::vector<unsigned int>> &building_grid, glm::vec3 &position);
-
-	int getGridInfoFromPoint(float x, float y);
 
 	static int JDIM = 1500;
 	static int IDIM = 1000;

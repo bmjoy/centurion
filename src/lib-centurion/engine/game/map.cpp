@@ -1,4 +1,5 @@
 #include "map.h"
+#include "pass.h"
 
 #include <fstream>
 
@@ -203,8 +204,8 @@ namespace Game
 		void Game::Map::Reset(void)
 		{
 			Game::Map::isGridEnabled = false;
+			Pass::ClearGrid();
 			mapgen::reset_map();
-			astar::ClearPassMatrix();
 			MapTerrain()->updateHeightsBuffer();
 			MapTerrain()->updateTextureBuffer();
 		}

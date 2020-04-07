@@ -6,16 +6,19 @@
 #include <settings.h>
 #include <grid.h>
 
+#include <game/pass.h>
+
 using namespace std;
 using namespace glm;
 
 namespace astar {
 
-	int *GridMatrix() { return gridMatrix; }
-	int *GridMatrix2D() { return gridMatrix2D; }
-	int *ClosedNodes() { return closedNodes; }
-	int *OpenNodes() { return openNodes; }
-	int *DirMap() { return dirMap; }
+	namespace 
+	{
+		int closedNodes[GRID_ARRAY_SIZE] = { 0 };
+		int openNodes[GRID_ARRAY_SIZE] = { 0 };
+		int dirMap[GRID_ARRAY_SIZE] = { 0 };
+	};
 
 	vector<vector<unsigned int>> readPassMatrix(string &path, string &classname) {
 		vector<vector<unsigned int>> mat;
@@ -40,84 +43,7 @@ namespace astar {
 		return mat;
 	}
 
-	void ClearPassMatrix(void)
-	{
-		for (int i = 0; i < gridWidth * gridHeight; i++)
-		{
-			GridMatrix()[i] = 0;
-			GridMatrix2D()[i] = 0;
-			MapGrid()->SetGridDataCell(i, 0);
-		}
-		MapGrid()->update();
-	}
-
-
-	bool CheckObjectPassAvailability(vector<vector<unsigned int>> &building_grid, vec3 &position)
-	{
-		bool b = true;
-		vec2 pos = vec2((int)position.x / astar::cellGridSize - building_grid[0].size() / 2, (int)position.y / astar::cellGridSize - building_grid.size() / 2);
-		for (int i = 0; i < building_grid.size(); i++)
-		{
-			for (int j = 0; j < building_grid[0].size(); j++)
-			{
-				int k = ((int)building_grid.size() - i + (int)pos.y) * gridWidth + j + (int)pos.x;
-				if (k >= 0 && k < gridWidth * gridHeight)
-				{
-					if (GridMatrix()[k] == 1 && building_grid[i][j] == 1)
-					{
-						b = false;
-						break;
-					}
-				}
-				else
-				{
-					b = false;
-					break;
-				}
-			}
-		}
-		return b;
-	}
-	void UpdateObjectPassMatrix(vector<vector<unsigned int>> &building_grid, vec3 &position)
-	{
-		vec2 pos = vec2((int)position.x / astar::cellGridSize - building_grid[0].size() / 2, (int)position.y / astar::cellGridSize - building_grid.size() / 2);
-		for (int i = 0; i < building_grid.size(); i++)
-		{
-			for (int j = 0; j < building_grid[0].size(); j++)
-			{
-				int k = ((int)building_grid.size() - i + (int)pos.y) * gridWidth + j + (int)pos.x;
-				if (building_grid[i][j] == 1)
-				{
-					GridMatrix()[k] = 1;
-					MapGrid()->SetGridDataCell(k, 1);
-				}
-			}
-		}
-		MapGrid()->update();
-	}
-
-	void ClearObjectPassMatrix(vector<vector<unsigned int>> &building_grid, vec3 &position)
-	{
-		vec2 pos = vec2((int)position.x / astar::cellGridSize - building_grid[0].size() / 2, (int)position.y / astar::cellGridSize - building_grid.size() / 2);
-		for (int i = 0; i < building_grid.size(); i++)
-		{
-			for (int j = 0; j < building_grid[0].size(); j++)
-			{
-				int k = ((int)building_grid.size() - i + (int)pos.y) * gridWidth + j + (int)pos.x;
-				
-				if (building_grid[i][j] == 1)
-				{
-					GridMatrix()[k] = 0;
-					MapGrid()->SetGridDataCell(k, 0);
-				}
-			}
-		}
-		MapGrid()->update();
-	}
-
-	int getGridInfoFromPoint(float x, float y) {
-		return GridMatrix()[(int)y / cellGridSize * gridWidth + (int)x / cellGridSize];
-	}
+	
 
 	vector<ivec2> pathFind(const Location &locStart, const Location &locFinish) {
 
@@ -136,9 +62,9 @@ namespace astar {
 		// reset the Node lists (0 = ".")
 		for (i = 0; i < IDIM; i++) {
 			for (j = 0; j < JDIM; j++) {
-				DirMap()[i * gridWidth + j] = 0;
-				ClosedNodes()[i * gridWidth + j] = 0;
-				OpenNodes()[i * gridWidth + j] = 0;
+				dirMap[i * GRID_SIZE_X + j] = 0;
+				closedNodes[i * GRID_SIZE_X + j] = 0;
+				openNodes[i * GRID_SIZE_X + j] = 0;
 			}
 		}
 
@@ -149,8 +75,8 @@ namespace astar {
 
 		vector<ivec2> finalPath;
 
-		finalPath.push_back(ivec2(locFinish.col * cellGridSize, locFinish.row * cellGridSize));
-		finalPath.push_back(ivec2(locFinish.col * cellGridSize, locFinish.row * cellGridSize));
+		finalPath.push_back(ivec2(locFinish.col * GRID_CELL_SIZE, locFinish.row * GRID_CELL_SIZE));
+		finalPath.push_back(ivec2(locFinish.col * GRID_CELL_SIZE, locFinish.row * GRID_CELL_SIZE));
 
 		// A* search
 		while (!q[qi].empty()) {
@@ -164,10 +90,10 @@ namespace astar {
 
 			// remove the node from the open list
 			q[qi].pop();
-			OpenNodes()[row * gridWidth + col] = 0;
+			openNodes[row * GRID_SIZE_X + col] = 0;
 
 			// mark it on the closed nodes list
-			ClosedNodes()[row * gridWidth + col] = 1;
+			closedNodes[row * GRID_SIZE_X + col] = 1;
 
 			// stop searching when the goal state is reached
 			if (row == locFinish.row && col == locFinish.col) {
@@ -180,19 +106,20 @@ namespace astar {
 				while (!(row == locStart.row && col == locStart.col)) {
 					i = 0;
 					addPoint = false;
-					j = DirMap()[row * gridWidth + col];
+					j = dirMap[row * GRID_SIZE_X + col];
 					row += iDir[j];
 					col += jDir[j];
 
 					while (!addPoint && i != NDIR) {
-						if (GridMatrix2D()[(row + iDir[i]) * gridWidth + col + jDir[i]] == 1) {
+						unsigned int idx = (row + iDir[i]) * GRID_SIZE_X + col + jDir[i];
+						if (Pass::GetGrid2DValueByIndex(idx) == 1){
 							addPoint = true;
 						}
 						i++;
 					}
 					if (addPoint) {
 						if (pCount == 2) {
-							finalPath.push_back(ivec2(col * cellGridSize, row * cellGridSize));
+							finalPath.push_back(ivec2(col * GRID_CELL_SIZE, row * GRID_CELL_SIZE));
 							pCount = 0;
 						}
 						pCount++;
@@ -200,7 +127,7 @@ namespace astar {
 				}
 
 				// push start location
-				finalPath.push_back(ivec2(locStart.col* cellGridSize, locStart.row * cellGridSize));
+				finalPath.push_back(ivec2(locStart.col* GRID_CELL_SIZE, locStart.row * GRID_CELL_SIZE));
 
 				// reverse vector
 				reverse(finalPath.begin(), finalPath.end());
@@ -220,8 +147,11 @@ namespace astar {
 				jNext = col + jDir[i];
 
 				// if not wall (obstacle) nor in the closed list
+				unsigned int idx = iNext * GRID_SIZE_X + jNext;
+				unsigned int grid2dValue = Pass::GetGrid2DValueByIndex(idx);
+
 				if (!(iNext < 0 || iNext > IDIM - 1 || jNext < 0 || jNext > JDIM - 1 ||
-					GridMatrix2D()[iNext * gridWidth + jNext] == 1 || ClosedNodes()[iNext * gridWidth + jNext] == 1)) {
+					grid2dValue == 1 || closedNodes[iNext * GRID_SIZE_X + jNext] == 1)) {
 
 					// generate a child node
 					pNode2 = new Node(Location(iNext, jNext), pNode1->getGValue(), pNode1->getFValue());
@@ -229,20 +159,20 @@ namespace astar {
 					pNode2->calculateFValue(locFinish);
 
 					// if it is not in the open list then add into that
-					if (OpenNodes()[iNext * gridWidth + jNext] == 0) {
-						OpenNodes()[iNext * gridWidth + jNext] = pNode2->getFValue();
+					if (openNodes[iNext * GRID_SIZE_X + jNext] == 0) {
+						openNodes[iNext * GRID_SIZE_X + jNext] = pNode2->getFValue();
 						q[qi].push(*pNode2);
 						// mark its parent node direction
-						DirMap()[iNext * gridWidth + jNext] = (i + NDIR / 2) % NDIR;
+						dirMap[iNext * GRID_SIZE_X + jNext] = (i + NDIR / 2) % NDIR;
 					}
 
 					// already in the open list
-					else if (OpenNodes()[iNext * gridWidth + jNext] > pNode2->getFValue()) {
+					else if (openNodes[iNext * GRID_SIZE_X + jNext] > pNode2->getFValue()) {
 						// update the FValue info
-						OpenNodes()[iNext * gridWidth + jNext] = pNode2->getFValue();
+						openNodes[iNext * GRID_SIZE_X + jNext] = pNode2->getFValue();
 
 						// update the parent direction info,  mark its parent node direction
-						DirMap()[iNext * gridWidth + jNext] = (i + NDIR / 2) % NDIR;
+						dirMap[iNext * GRID_SIZE_X + jNext] = (i + NDIR / 2) % NDIR;
 
 						// replace the node by emptying one q to the other one
 						// except the node to be replaced will be ignored

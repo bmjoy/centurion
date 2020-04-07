@@ -5,6 +5,7 @@
 #include <game/strategy.h>
 #include <pathfinding/pathfinding.h>
 #include <game/editor.h>
+#include <game/pass.h>
 
 using namespace std;
 using namespace glm;
@@ -201,17 +202,12 @@ std::vector<std::vector<unsigned int>> GObject::GetPass(void) const
 
 void GObject::UpdatePass(void)
 {
-	astar::UpdateObjectPassMatrix(this->pass_grid, this->position);
+	Pass::UpdateObjectPass(this->pass_grid, this->position, PASS_OVERLAP);
 }
 
 void GObject::ClearPass(void) 
 {
-	astar::ClearObjectPassMatrix(this->pass_grid, this->position);
-}
-
-bool GObject::CheckPass(void)
-{
-	return astar::CheckObjectPassAvailability(this->pass_grid, this->position);
+	Pass::UpdateObjectPass(this->pass_grid, this->position, PASS_CLEAR);
 }
 
 bool GObject::Create(const string _className, const bool _temporary)

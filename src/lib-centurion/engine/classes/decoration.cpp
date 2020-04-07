@@ -4,6 +4,7 @@
 #include <player/player.h>
 #include <pathfinding/pathfinding.h>
 #include <game/strategy.h>
+#include <game/pass.h>
 
 #include <decoration_sprite.h>
 
@@ -49,7 +50,7 @@ void Decoration::CheckIfPlaceable(void)
 	bIsPlaceable = true;
 	vec3 var_position = this->GetPosition();
 	std::vector<std::vector<unsigned int>> passGrid = this->GetPass();
-	bIsPlaceable = astar::CheckObjectPassAvailability(passGrid, var_position);
+	bIsPlaceable = Pass::CheckObjectPassAvailability(passGrid, var_position);
 }
 
 void Decoration::Render(const bool picking, const unsigned int clickID)

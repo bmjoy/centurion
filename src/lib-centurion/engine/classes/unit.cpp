@@ -9,6 +9,7 @@
 #include <mapgen/mapgen.h>
 #include <settings.h>
 #include <logger.h>
+#include <game/pass.h>
 
 #include <GLFW/glfw3.h>
 
@@ -135,7 +136,7 @@ void Unit::walk_behaviour() {
 
 		is_Moving = true;
 
-		startPoint = glm::vec2((int)position2D.x / astar::cellGridSize * astar::cellGridSize, (int)position2D.y / astar::cellGridSize * astar::cellGridSize);
+		startPoint = glm::vec2((int)position2D.x / GRID_CELL_SIZE * GRID_CELL_SIZE, (int)position2D.y / GRID_CELL_SIZE * GRID_CELL_SIZE);
 		endPoint = Engine::Camera::GetZoomedCoords(Engine::Mouse::GetXRightClick(), Engine::Mouse::GetY2DRightClick());
 
 		// pathfinding
@@ -188,19 +189,19 @@ float getDistance(vector<ivec2> &path, int &n) {
 }
 
 float getResDistance(vector<ivec2> &path, int &n, vec3 &pos2d) {
-	float deltaX = (float)path[n + 1].x - (int)pos2d.x / astar::cellGridSize * astar::cellGridSize;
-	float deltaY = (float)path[n + 1].y - (int)pos2d.y / astar::cellGridSize * astar::cellGridSize;
+	float deltaX = (float)path[n + 1].x - (int)pos2d.x / GRID_CELL_SIZE * GRID_CELL_SIZE;
+	float deltaY = (float)path[n + 1].y - (int)pos2d.y / GRID_CELL_SIZE * GRID_CELL_SIZE;
 	return sqrt(deltaX * deltaX + deltaY * deltaY);
 }
 
 vector<ivec2> getPath(vec2 &start, vec2 &end) {
-	int jStart = (int)start.x / astar::cellGridSize;
-	int iStart = (int)start.y / astar::cellGridSize;
-	int jEnd = (int)end.x / astar::cellGridSize;
-	int iEnd = (int)end.y / astar::cellGridSize;
+	int jStart = (int)start.x / GRID_CELL_SIZE;
+	int iStart = (int)start.y / GRID_CELL_SIZE;
+	int jEnd = (int)end.x / GRID_CELL_SIZE;
+	int iEnd = (int)end.y / GRID_CELL_SIZE;
 
 	//fix pathfinding click to 1
-	while (astar::GridMatrix2D()[iEnd * astar::gridWidth + jEnd] != 0) {
+	while (Pass::GetGrid2DValueByIndex(iEnd * GRID_SIZE_X + jEnd) != 0) {
 		iEnd--;
 		jEnd--;
 	}

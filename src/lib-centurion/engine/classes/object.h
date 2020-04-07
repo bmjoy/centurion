@@ -285,8 +285,6 @@ public:
 	std::vector<std::vector<unsigned int>> GetPass(void) const;
 	void UpdatePass(void);
 	void ClearPass(void);
-	bool CheckPass(void);
-
 
 	void MarkAsMoving(void) { bIsBeingMoved = true; }
 	void MarkAsNotMoving(void) { bIsBeingMoved = false; }
@@ -427,6 +425,7 @@ private:
 	unsigned int sight;
 	float selectionRadius;
 	float radius;
+	// PassGrid * pass_grid;
 	std::vector<std::vector<unsigned int>> pass_grid;
 	glm::vec3 position;
 	std::string singularName;

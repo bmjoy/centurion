@@ -12,22 +12,10 @@
 #include "shader.h"
 #include <game/game.h>
 
-#ifndef CELLGRIDSIZE
-#define CELLGRIDSIZE 20
-#endif
-
-
-#ifndef GRIDSIZE_X
-#define GRIDSIZE_X MEDIUM_MAP_WIDTH / CELLGRIDSIZE
-#endif 
-
-#ifndef GRIDSIZE_Y
-#define GRIDSIZE_Y MEDIUM_MAP_HEIGHT / CELLGRIDSIZE
-#endif 
-
 /// <summary>
 /// This class is used to render the PASS grid.
 /// </summary>
+
 class Grid : public Shader
 {
 public:
@@ -40,11 +28,6 @@ public:
 	/// This function creates an empty grid texture based on the size of the pass grid;
 	/// </summary>
 	void create();
-	
-	/// <summary>
-	/// This function resets the grid texture;
-	/// </summary>
-	void reset();
 
 	/// <summary>
 	/// This function updates the grid taking the data from astar::GridMatrix2D();
@@ -56,17 +39,13 @@ public:
 	/// </summary>
 	void render();
 
-
-	void SetGridDataCell(const unsigned int idx, const unsigned int val);
-
 	/// <summary>
 	/// Destructor
 	/// </summary>
 	~Grid();
+
 private:
 	GLuint textureID;
-	std::vector<unsigned char> gridData;
-	
 };
 
 static Grid grid;

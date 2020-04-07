@@ -11,8 +11,6 @@
 #define MAX_NUMBER_OF_PLAYERS 8
 #define TOWNHALL_RADIUS 1875
 #define OUTPOST_RADIUS 700
-#define MEDIUM_MAP_WIDTH 30000
-#define MEDIUM_MAP_HEIGHT 20000
 
 #include <ui.h>
 #include <classes/object.h>

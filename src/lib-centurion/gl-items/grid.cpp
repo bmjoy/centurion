@@ -1,8 +1,5 @@
 #include "grid.h"
-
-#include <game/strategy.h>
-#include <mapgen/mapgen.h>
-#include <pathfinding/pathfinding.h>
+#include <game/pass.h>
 
 using namespace std;
 using namespace glm;
@@ -50,55 +47,11 @@ void Grid::create() {
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
 	glBindVertexArray(0);
 
-	for (int y = 0; y < GRIDSIZE_Y; ++y) {
-		for (int x = 0; x < GRIDSIZE_X; ++x) {
-			gridData.push_back(0);
-			gridData.push_back(0);
-			gridData.push_back(0);
-			gridData.push_back(0);
-		}
-	}
-
 	glGenTextures(1, &textureID);
 	glBindTexture(GL_TEXTURE_2D, textureID);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
-	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA8, GRIDSIZE_X, GRIDSIZE_Y, 0, GL_RGBA, GL_UNSIGNED_BYTE, (GLvoid*)&gridData[0]);
-}
-
-void Grid::SetGridDataCell(const unsigned int idx, const unsigned int val)
-{
-	if (val == 1)
-	{
-		gridData[idx * 4 + 0] = 0;
-		gridData[idx * 4 + 1] = 0;
-		gridData[idx * 4 + 2] = 0;
-		gridData[idx * 4 + 3] = 100;
-	}
-	else
-	{
-		gridData[idx * 4 + 0] = 255;
-		gridData[idx * 4 + 1] = 255;
-		gridData[idx * 4 + 2] = 255;
-		gridData[idx * 4 + 3] = 100;
-	}
-}
-
-void Grid::reset() {
-	glUseProgram(shaderId);
-	//unsigned char* gridData = new unsigned char[GRIDSIZE_X * GRIDSIZE_Y * 4];
-	for (int y = 0; y < GRIDSIZE_Y; ++y) {
-		for (int x = 0; x < GRIDSIZE_X; ++x) {
-			gridData[(GRIDSIZE_X * y + x) * 4 + 0] = 255;
-			gridData[(GRIDSIZE_X * y + x) * 4 + 1] = 255;
-			gridData[(GRIDSIZE_X * y + x) * 4 + 2] = 255;
-			gridData[(GRIDSIZE_X * y + x) * 4 + 3] = 100;
-		}
-	}
-	glBindTexture(GL_TEXTURE_2D, textureID);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
-	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA8, GRIDSIZE_X, GRIDSIZE_Y, 0, GL_RGBA, GL_UNSIGNED_BYTE, (GLvoid*)&gridData[0]);
+	glTexImage2D(GL_TEXTURE_2D, 0, GL_R8, Pass::GetGridSizeX(), Pass::GetGridSizeY(), 0, GL_RED, GL_UNSIGNED_BYTE, (GLvoid*)Pass::GetGridPtr());
 }
 
 void Grid::update() {
@@ -106,7 +59,7 @@ void Grid::update() {
 	glBindTexture(GL_TEXTURE_2D, textureID);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
-	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA8, GRIDSIZE_X, GRIDSIZE_Y, 0, GL_RGBA, GL_UNSIGNED_BYTE, (GLvoid*)&gridData[0]);
+	glTexImage2D(GL_TEXTURE_2D, 0, GL_R8, Pass::GetGridSizeX(), Pass::GetGridSizeY(), 0, GL_RED, GL_UNSIGNED_BYTE, (GLvoid*)Pass::GetGridPtr());
 }
 
 void Grid::render() {
@@ -115,7 +68,7 @@ void Grid::render() {
 
 	glBindVertexArray(VAO);
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, IBO);
-	glUniform1i(glGetUniformLocation(shaderId, "grid_color"), 0);
+	glUniform1i(glGetUniformLocation(shaderId, "grid"), 0);
 	glActiveTexture(GL_TEXTURE0);
 	glBindTexture(GL_TEXTURE_2D, textureID);
 	glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);

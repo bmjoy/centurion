@@ -360,6 +360,9 @@
     <ClCompile Include="lib-centurion\engine\game\selection_rectangle.cpp">
       <Filter>Source Files\engine\game</Filter>
     </ClCompile>
+    <ClCompile Include="lib-centurion\engine\game\pass.cpp">
+      <Filter>Source Files\engine\game</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="lib-centurion\audio\sndfile.hh">
@@ -625,6 +628,9 @@
     </ClInclude>
     <ClInclude Include="lib-centurion\util\maths.hpp">
       <Filter>Header Files\util</Filter>
+    </ClInclude>
+    <ClInclude Include="lib-centurion\engine\game\pass.h">
+      <Filter>Header Files\engine\game</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

@@ -8,6 +8,14 @@
 
 #pragma once
 
+#ifndef MEDIUM_MAP_WIDTH
+#define MEDIUM_MAP_WIDTH 30000
+#endif
+
+#ifndef MEDIUM_MAP_HEIGHT
+#define MEDIUM_MAP_HEIGHT 20000
+#endif
+
 #include <string>
 
 namespace Game 

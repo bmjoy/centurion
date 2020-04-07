@@ -4,6 +4,7 @@
 #include <building_sprite.h>
 #include <logger.h>
 #include <engine.h>
+#include <game/pass.h>
 
 using namespace std;
 using namespace glm;
@@ -103,7 +104,7 @@ void Building::CheckIfPlaceable(void)
 	this->bIsPlaceable = true;
 	vec3 var_position = this->GetPosition();
 	std::vector<std::vector<unsigned int>> passGrid = this->GetPass();
-	this->bIsPlaceable = astar::CheckObjectPassAvailability(passGrid, var_position);
+	this->bIsPlaceable = Pass::CheckObjectPassAvailability(passGrid, var_position);
 	//string indCategory = "";
 	//bool nearToIndependent = is_near_to_independent(&indCategory);
 	//if (!this->settlement.IsIndipendent())
