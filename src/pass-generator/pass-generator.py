@@ -1,3 +1,9 @@
+# ---------------------------
+# CENTURION
+# [2019] - [2020] Rattlesmake
+# All Rights Reserved.
+# ---------------------------
+
 from PIL import Image
 import numpy as np
 import os
@@ -40,10 +46,12 @@ def passCreate():
                     
                     f = open(name+".xml", "w")
                     
-                    f.write("<pass>\n")
-                    f.write("\t<xSize>" + str(xSize) + "</xSize>\n")
-                    f.write("\t<ySize>" + str(ySize) + "</ySize>\n")
-                    f.write("\t<passGrid>")
+                    f.write("<!-- Centurion -->\n")
+                    f.write("<!-- [2019] - [2020] Rattlesmake -->\n")
+                    f.write("<!-- Object PASS - For more info read here 'assets/pass.txt' -->\n")
+                    
+                    f.write("<pass x='" + str(xSize) + "' y='" + str(ySize) + "'>")
+                    f.write("<grid>")
                     
                     fourBinaries = ""
                     for iy in range(ySize):
@@ -59,7 +67,7 @@ def passCreate():
                                 fourBinaries = ""
                                 f.write(hstr)
                     
-                    f.write("</passGrid>\n")
+                    f.write("</grid>")
                     f.write("</pass>")
                     f.close()
     

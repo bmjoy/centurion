@@ -21,8 +21,8 @@ namespace Pass
 		unsigned char PASS_MATRIX[GRID_ARRAY_SIZE] = { 0 };
 		unsigned char PASS_MATRIX_2D[GRID_ARRAY_SIZE] = { 0 };
 
-		unsigned char PASSABLE = (unsigned char)'0';
-		unsigned char NOT_PASSABLE = (unsigned char)'1';
+		unsigned char PASSABLE = 0;
+		unsigned char NOT_PASSABLE = 1;
 
 		vec2 GetGridCellPosition(glm::vec3 & objectPosition, int horizontal_size, int vertical_size)
 		{
@@ -35,7 +35,6 @@ namespace Pass
 		unsigned char getGridValueFromPoint(float x, float y) {
 			int idx = (int)y / GRID_CELL_SIZE * GRID_SIZE_X + (int)x / GRID_CELL_SIZE;
 			if (idx < 0 || idx >= GRID_ARRAY_SIZE) return 0;
-			
 			return PASS_MATRIX[idx];
 		}
 	};
@@ -180,13 +179,12 @@ namespace Pass
 	unsigned char PassGrid::GetValueByCoordinates(const unsigned int X, const unsigned int Y)
 	{
 		unsigned int idx = (sizeX * Y + X);
-		unsigned int val = (unsigned int)gridData[idx];
-		if (idx == 1502)
+
+		if (gridData[idx] == (unsigned char)'1')
 		{
-			bool b1 = (gridData[idx] == 1);
-			bool b2 = (gridData[idx] == NOT_PASSABLE);
+			return 1;
 		}
-		return gridData[idx];
+		else return 0;
 	}
 
 	void PassGrid::ReadPass(const std::string path, const std::string className)
@@ -198,13 +196,9 @@ namespace Pass
 			tinyxml2::XMLDocument xmlFile(true, tinyxml2::COLLAPSE_WHITESPACE);
 			xmlFile.LoadFile(path.c_str());
 
-			auto x_size = xmlFile.FirstChildElement("pass")->FirstChildElement("xSize");
-			x_size->QueryIntText(&sizeX);
-
-			auto y_size = xmlFile.FirstChildElement("pass")->FirstChildElement("ySize");
-			y_size->QueryIntText(&sizeY);
-
-			string hexString = xmlFile.FirstChildElement("pass")->FirstChildElement("passGrid")->GetText();
+			xmlFile.FirstChildElement("pass")->QueryIntAttribute("x", &sizeX);
+			xmlFile.FirstChildElement("pass")->QueryIntAttribute("y", &sizeY);
+			string hexString = xmlFile.FirstChildElement("pass")->FirstChildElement("grid")->GetText();
 			string binString = Encode::HexStrToBinStr(hexString);
 
 			gridData = vector<unsigned char>(binString.begin(), binString.end());

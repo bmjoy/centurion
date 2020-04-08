@@ -16,12 +16,12 @@ void main()
 	// Passable
 	if (value == 0)
 	{
-		FragColor = vec4(1.f, 1.f, 1.f, 0.25f);
+		FragColor = vec4(0.f, 1.f, 0.f, 0.25f);
 	}
 	
 	// Not Passable
-	else if (value == 1)
+	else if (value == 1.f/255.f)
 	{
-		FragColor = vec4(0.f, 0.f, 0.f, 0.25f);
+		FragColor = vec4(1.f, 0.f, 0.f, 0.25f);
 	}
 }
