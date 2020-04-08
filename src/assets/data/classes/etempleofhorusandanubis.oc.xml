@@ -7,7 +7,7 @@
     <property name="editorFilter1" value="buildings"/>
  	<property name="editorFilter2" value="egyptianstronghold"/>
     <property name="ent_path" value="assets/buildings/egypt/templeofhorusandanubis/etempleofhorusandanubis.oe.xml"/>
-    <property name="pass_path" value="assets/buildings/egypt/templeofhorusandanubis/etempleofhorusandanubis.pass"/>
+    <property name="pass_path" value="assets/buildings/egypt/templeofhorusandanubis/etempleofhorusandanubis_pass.xml"/>
   </properties>
   <methods>
     <method name="" script=""/>

@@ -5,6 +5,8 @@
 #include <grid.h>
 
 #include <logger.h>
+#include <tinyxml2.h>
+#include <encoding.hpp>
 
 using namespace std;
 using namespace glm;
@@ -18,6 +20,9 @@ namespace Pass
 
 		unsigned char PASS_MATRIX[GRID_ARRAY_SIZE] = { 0 };
 		unsigned char PASS_MATRIX_2D[GRID_ARRAY_SIZE] = { 0 };
+
+		unsigned char PASSABLE = (unsigned char)'0';
+		unsigned char NOT_PASSABLE = (unsigned char)'1';
 
 		vec2 GetGridCellPosition(glm::vec3 & objectPosition, int horizontal_size, int vertical_size)
 		{
@@ -91,7 +96,7 @@ namespace Pass
 			{
 				int idx = (vertical_size - iy + (int)pos.y) * GRID_SIZE_X + ix + (int)pos.x;
 
-				if (pg->GetValueByCoordinates(ix, iy) == 1)
+				if (pg->GetValueByCoordinates(ix, iy) == NOT_PASSABLE)
 				{
 					if (idx >= 0 && idx < GRID_SIZE_X * GRID_SIZE_Y)
 					{
@@ -125,7 +130,7 @@ namespace Pass
 				int idx = (vertical_size - iy + (int)pos.y) * GRID_SIZE_X + ix + (int)pos.x;
 				if (idx >= 0 && idx < GRID_SIZE_X * GRID_SIZE_Y)
 				{
-					if (PASS_MATRIX[idx] == 1 && pg->GetValueByCoordinates(ix, iy) == 1)
+					if (PASS_MATRIX[idx] == NOT_PASSABLE && pg->GetValueByCoordinates(ix, iy) == NOT_PASSABLE)
 					{
 						bAvailable = false;
 						break;
@@ -144,7 +149,7 @@ namespace Pass
 	void AddPassGrid(const std::string path, const std::string className)
 	{
 		PassGrid pg{};
-		pg.Create(path, className);
+		pg.ReadPass(path, className);
 		PASS_DATABASE[className] = pg;
 	}
 
@@ -164,45 +169,50 @@ namespace Pass
 
 	unsigned int PassGrid::GetSizeX(void)
 	{
-		return (unsigned int)data[0].size();
+		return sizeX;
 	}
 
 	unsigned int PassGrid::GetSizeY(void)
 	{
-		return (unsigned int)data.size();
+		return sizeY;
 	}
 
 	unsigned char PassGrid::GetValueByCoordinates(const unsigned int X, const unsigned int Y)
 	{
-		return data[Y][X];
+		unsigned int idx = (sizeX * Y + X);
+		unsigned int val = (unsigned int)gridData[idx];
+		if (idx == 1502)
+		{
+			bool b1 = (gridData[idx] == 1);
+			bool b2 = (gridData[idx] == NOT_PASSABLE);
+		}
+		return gridData[idx];
 	}
 
-	void PassGrid::Create(const std::string path, const std::string className)
+	void PassGrid::ReadPass(const std::string path, const std::string className)
 	{
-		ifstream fin(path);
-		if (!fin.good()) 
+		sizeX = 0;
+		sizeY = 0;
+		try
 		{
-			stringstream ss;
-			ss << "A problem occurred while reading " + className + " PASS file.";
-			Logger::Warn(ss.str());
+			tinyxml2::XMLDocument xmlFile(true, tinyxml2::COLLAPSE_WHITESPACE);
+			xmlFile.LoadFile(path.c_str());
+
+			auto x_size = xmlFile.FirstChildElement("pass")->FirstChildElement("xSize");
+			x_size->QueryIntText(&sizeX);
+
+			auto y_size = xmlFile.FirstChildElement("pass")->FirstChildElement("ySize");
+			y_size->QueryIntText(&sizeY);
+
+			string hexString = xmlFile.FirstChildElement("pass")->FirstChildElement("passGrid")->GetText();
+			string binString = Encode::HexStrToBinStr(hexString);
+
+			gridData = vector<unsigned char>(binString.begin(), binString.end());
 		}
-		else 
+		catch (const std::exception&)
 		{
-			string line, value;
-			while (getline(fin, line)) 
-			{
-				if (line.length() > 0) 
-				{
-					vector<unsigned char> line_values;
-					stringstream s(line);
-					while (getline(s, value, ','))
-					{
-						unsigned char charValue = (unsigned char) stoi(value);
-						line_values.push_back(charValue);
-					}
-					this->data.push_back(line_values);
-				}
-			}
+			;
 		}
 	}
+
 };

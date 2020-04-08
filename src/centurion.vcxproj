@@ -442,6 +442,10 @@ XCOPY "$(ProjectDir)lua53.dll" "$(ProjectDir)$(OutDir)"</Command>
     <ClInclude Include="lib-centurion\audio\vorbis\os_types.h" />
     <ClInclude Include="lib-centurion\audio\vorbis\vorbis_file.h" />
     <None Include="lib-centurion\ui\ui.h" />
+    <None Include="pass-generator\pass-generator.py">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="lib-centurion\audio\audio_context.h" />

@@ -697,6 +697,9 @@
     <None Include="lib-centurion\ui\ui.h">
       <Filter>Header Files\ui</Filter>
     </None>
+    <None Include="pass-generator\pass-generator.py">
+      <Filter>Resource Files</Filter>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <Xml Include="assets\data\interface\editor\editorMenuBar.xml">

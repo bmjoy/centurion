@@ -73,8 +73,13 @@ namespace Pass
 		unsigned char GetValueByCoordinates(const unsigned int X, const unsigned int Y);
 
 		void Create(const std::string path, const std::string className);
+		
+		void ReadPass(const std::string path, const std::string className);
 	private:
 		std::vector<std::vector<unsigned char>> data;
+		std::vector<unsigned char> gridData;
+		int sizeX;
+		int sizeY;
 	};
 
 	unsigned int GetGridSizeX(void);
