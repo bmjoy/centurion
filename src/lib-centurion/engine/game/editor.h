@@ -103,7 +103,6 @@ namespace Game
 		/// </summary>
 		void Close(void);
 
-
 	};
 };
 

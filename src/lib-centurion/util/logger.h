@@ -9,6 +9,10 @@
 #ifndef LOGGER_H
 #define LOGGER_H
 
+#ifndef MAX_LOGGER_SIZE
+#define MAX_LOGGER_SIZE 50
+#endif
+
 #include <string>
 #include <vector>
 

@@ -1,5 +1,6 @@
 #include <logger.h>
 #include <fstream>
+#include <deque>
 #include <settings.h>
 #include <iostream>
 #include <engine.h>
@@ -13,7 +14,7 @@ namespace Logger
 	// Private members
 	namespace {
 
-		std::vector<LogMessage> Messages = std::vector<LogMessage>();
+		std::deque<LogMessage> Messages = std::deque<LogMessage>();
 		std::string fileDebugName = "logs/logmessages/Debug " + FileManager::CurrentDateTime("%Y%m%d-%H%M%S") + ".xml";
 		std::string fileParamsName = "logs/params/Params " + FileManager::CurrentDateTime("%Y%m%d-%H%M%S") + ".xml";
 
@@ -23,7 +24,13 @@ namespace Logger
 		/// <param name="msg">This parameter adds a LogMessage into a LogMessages array.</param>
 		void AddMessage(LogMessage msg)
 		{
-			Messages.push_back(msg);
+			if (Messages.size() >= MAX_LOGGER_SIZE) {
+				Messages.erase(Messages.begin() + MAX_LOGGER_SIZE - 1);
+				Messages.push_front(msg);
+			}
+			else {
+				Messages.push_back(msg);
+			}
 		};
 
 		/// <summary>
