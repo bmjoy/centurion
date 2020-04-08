@@ -37,6 +37,4 @@ public:
 	~DecorationSprite();
 };
 
-static DecorationSprite dsprite;
-
 #endif

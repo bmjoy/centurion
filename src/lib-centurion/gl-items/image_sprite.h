@@ -90,6 +90,4 @@ private:
 	void GenerateBuffers();
 };
 
-static ImageSprite img;
-
 #endif

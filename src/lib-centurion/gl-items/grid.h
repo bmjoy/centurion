@@ -48,6 +48,4 @@ private:
 	GLuint textureID;
 };
 
-static Grid grid;
-
 #endif

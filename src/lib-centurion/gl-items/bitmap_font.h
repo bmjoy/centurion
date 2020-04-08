@@ -113,9 +113,6 @@ private:
 	int offset_x;
 	std::map<std::string, int> hAlignMap;
 	std::map<std::string, int> vAlignMap;
-
 };
-
-static BitmapFont _txt;
 
 #endif

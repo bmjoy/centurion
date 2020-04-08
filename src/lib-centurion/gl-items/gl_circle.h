@@ -49,6 +49,4 @@ public:
 	~glCircle();
 };
 
-static glCircle eCircle;
-
 #endif

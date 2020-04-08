@@ -43,6 +43,4 @@ private:
 
 };
 
-static UnitSprite usprite;
-
 #endif

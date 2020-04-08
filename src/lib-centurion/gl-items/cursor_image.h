@@ -58,6 +58,4 @@ private:
 	GLuint textureIds[3];
 };
 
-static CursorImage cursor;
-
 #endif

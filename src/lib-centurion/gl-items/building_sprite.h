@@ -40,6 +40,4 @@ public:
 	~BuildingSprite();
 };
 
-static BuildingSprite bsprite;
-
 #endif

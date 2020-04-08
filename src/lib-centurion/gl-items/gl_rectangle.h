@@ -114,7 +114,4 @@ public:
 	~FilledRectangle();
 };
 
-static EmptyRectangle eRect;
-static FilledRectangle fRect;
-
 #endif

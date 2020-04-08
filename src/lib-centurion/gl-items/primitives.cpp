@@ -21,6 +21,22 @@ using namespace glm;
 
 namespace primitives {
 
+	namespace
+	{
+		BitmapFont _txt;
+		BuildingSprite bsprite;
+		CursorImage cursor;
+		DecorationSprite dsprite;
+		glCircle eCircle;
+		EmptyRectangle eRect;
+		FilledRectangle fRect;
+		Grid grid;
+		ImageSprite img;
+		MinimapRectangle mmRect;
+		Terrain terrain;
+		UnitSprite usprite;
+	};
+
 	AudioManager *Audio() { return &audioM; }
 	BitmapFont *Text() { return &_txt; }
 	BuildingSprite *BSprite() { return &bsprite; }
