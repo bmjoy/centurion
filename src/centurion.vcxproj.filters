@@ -240,16 +240,7 @@
     <ClCompile Include="lib-centurion\engine\translationsTable.cpp">
       <Filter>Source Files\engine</Filter>
     </ClCompile>
-    <ClCompile Include="lib-centurion\gl-items\bitmap_font.cpp">
-      <Filter>Source Files\gl-items</Filter>
-    </ClCompile>
-    <ClCompile Include="lib-centurion\gl-items\building_sprite.cpp">
-      <Filter>Source Files\gl-items</Filter>
-    </ClCompile>
     <ClCompile Include="lib-centurion\gl-items\cursor_image.cpp">
-      <Filter>Source Files\gl-items</Filter>
-    </ClCompile>
-    <ClCompile Include="lib-centurion\gl-items\decoration_sprite.cpp">
       <Filter>Source Files\gl-items</Filter>
     </ClCompile>
     <ClCompile Include="lib-centurion\gl-items\grid.cpp">
@@ -264,16 +255,10 @@
     <ClCompile Include="lib-centurion\gl-items\minimap_rectangle.cpp">
       <Filter>Source Files\gl-items</Filter>
     </ClCompile>
-    <ClCompile Include="lib-centurion\gl-items\primitives.cpp">
-      <Filter>Source Files\gl-items</Filter>
-    </ClCompile>
     <ClCompile Include="lib-centurion\gl-items\shader.cpp">
       <Filter>Source Files\gl-items</Filter>
     </ClCompile>
     <ClCompile Include="lib-centurion\gl-items\terrain.cpp">
-      <Filter>Source Files\gl-items</Filter>
-    </ClCompile>
-    <ClCompile Include="lib-centurion\gl-items\unit_sprite.cpp">
       <Filter>Source Files\gl-items</Filter>
     </ClCompile>
     <ClCompile Include="lib-centurion\engine\pathfinding\astar.cpp">
@@ -362,6 +347,21 @@
     </ClCompile>
     <ClCompile Include="lib-centurion\engine\game\pass.cpp">
       <Filter>Source Files\engine\game</Filter>
+    </ClCompile>
+    <ClCompile Include="lib-centurion\gl-items\gl_items.cpp">
+      <Filter>Source Files\gl-items</Filter>
+    </ClCompile>
+    <ClCompile Include="lib-centurion\gl-items\gl_unit_sprite.cpp">
+      <Filter>Source Files\gl-items</Filter>
+    </ClCompile>
+    <ClCompile Include="lib-centurion\gl-items\gl_decoration_sprite.cpp">
+      <Filter>Source Files\gl-items</Filter>
+    </ClCompile>
+    <ClCompile Include="lib-centurion\gl-items\gl_building_sprite.cpp">
+      <Filter>Source Files\gl-items</Filter>
+    </ClCompile>
+    <ClCompile Include="lib-centurion\gl-items\gl_bitmap_font.cpp">
+      <Filter>Source Files\gl-items</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -482,22 +482,10 @@
     <ClInclude Include="lib-centurion\engine\game\strategy.h">
       <Filter>Header Files\engine\game</Filter>
     </ClInclude>
-    <ClInclude Include="lib-centurion\gl-items\bitmap_font.h">
-      <Filter>Header Files\gl-items</Filter>
-    </ClInclude>
-    <ClInclude Include="lib-centurion\gl-items\building_sprite.h">
-      <Filter>Header Files\gl-items</Filter>
-    </ClInclude>
     <ClInclude Include="lib-centurion\gl-items\cursor_image.h">
       <Filter>Header Files\gl-items</Filter>
     </ClInclude>
-    <ClInclude Include="lib-centurion\gl-items\decoration_sprite.h">
-      <Filter>Header Files\gl-items</Filter>
-    </ClInclude>
     <ClInclude Include="lib-centurion\gl-items\grid.h">
-      <Filter>Header Files\gl-items</Filter>
-    </ClInclude>
-    <ClInclude Include="lib-centurion\gl-items\header_primitives.h">
       <Filter>Header Files\gl-items</Filter>
     </ClInclude>
     <ClInclude Include="lib-centurion\gl-items\image_sprite.h">
@@ -509,16 +497,10 @@
     <ClInclude Include="lib-centurion\gl-items\minimap_rectangle.h">
       <Filter>Header Files\gl-items</Filter>
     </ClInclude>
-    <ClInclude Include="lib-centurion\gl-items\primitives.h">
-      <Filter>Header Files\gl-items</Filter>
-    </ClInclude>
     <ClInclude Include="lib-centurion\gl-items\shader.h">
       <Filter>Header Files\gl-items</Filter>
     </ClInclude>
     <ClInclude Include="lib-centurion\gl-items\terrain.h">
-      <Filter>Header Files\gl-items</Filter>
-    </ClInclude>
-    <ClInclude Include="lib-centurion\gl-items\unit_sprite.h">
       <Filter>Header Files\gl-items</Filter>
     </ClInclude>
     <ClInclude Include="lib-centurion\engine\pathfinding\pathfinding.h">
@@ -631,6 +613,21 @@
     </ClInclude>
     <ClInclude Include="lib-centurion\engine\game\pass.h">
       <Filter>Header Files\engine\game</Filter>
+    </ClInclude>
+    <ClInclude Include="lib-centurion\gl-items\gl_bitmap_font.h">
+      <Filter>Header Files\gl-items</Filter>
+    </ClInclude>
+    <ClInclude Include="lib-centurion\gl-items\gl_building_sprite.h">
+      <Filter>Header Files\gl-items</Filter>
+    </ClInclude>
+    <ClInclude Include="lib-centurion\gl-items\gl_unit_sprite.h">
+      <Filter>Header Files\gl-items</Filter>
+    </ClInclude>
+    <ClInclude Include="lib-centurion\gl-items\gl_decoration_sprite.h">
+      <Filter>Header Files\gl-items</Filter>
+    </ClInclude>
+    <ClInclude Include="lib-centurion\gl-items\gl_items.h">
+      <Filter>Header Files\gl-items</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

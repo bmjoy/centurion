@@ -1,10 +1,10 @@
 #include "object-data.h"
 
 #include <file_manager.h>
-#include <primitives.h>
-#include <building_sprite.h>
-#include <decoration_sprite.h>
-#include <unit_sprite.h>
+#include <gl_items.h>
+#include <gl_building_sprite.h>
+#include <gl_decoration_sprite.h>
+#include <gl_unit_sprite.h>
 #include <logger.h>
 #include <game/editor.h>
 #include <game/pass.h>
@@ -216,15 +216,15 @@ void ObjectData::ReadDataClassesFromXml(void)
 			{
 				if (objData.GetClassType() == "cpp_buildingclass")
 				{
-					primitives::BSprite()->AddEntityPath(path);
+					GLItems::BSprite()->AddEntityPath(path);
 				}
 				else if (objData.GetClassType() == "cpp_decorationclass")
 				{
-					primitives::DSprite()->AddEntityPath(path);
+					GLItems::DSprite()->AddEntityPath(path);
 				}
 				else if (objData.GetClassType() == "cpp_unitclass")
 				{
-					primitives::USprite()->AddEntityPath(path);
+					GLItems::USprite()->AddEntityPath(path);
 				}
 			}
 

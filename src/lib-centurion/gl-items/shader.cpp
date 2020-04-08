@@ -11,7 +11,7 @@ using namespace glm;
 Shader::Shader() {
 	VAO = 0; VBO = 0; IBO = 0;
 	shaderId = 0;
-};
+}
 
 void Shader::compile() {
 	// Compile and setup the shader

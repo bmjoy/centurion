@@ -14,13 +14,13 @@
 /// <summary>
 /// This class is used to hold Building-specific methods for graphic rendering
 /// </summary>
-class BuildingSprite : public ObjectSprite
+class glBuildingSprite : public ObjectSprite
 {
 public:
 	/// <summary>
 	/// Constructor
 	/// </summary>
-	BuildingSprite();
+	glBuildingSprite();
 
 	/// <summary>
 	/// Render function.
@@ -37,7 +37,7 @@ public:
 	/// <summary>
 	/// Destructor
 	/// </summary>
-	~BuildingSprite();
+	~glBuildingSprite();
 };
 
 #endif

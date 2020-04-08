@@ -10,7 +10,7 @@
 
 #include "object.h"
 #include <ui.h>
-#include <unit_sprite.h>
+#include <gl_unit_sprite.h>
 
 class Building;
 class Player;
@@ -29,7 +29,7 @@ public:
 	void Render(const bool picking, const unsigned int clickID = 0) override;
 	~Unit();
 private:
-	UnitSprite::UnitData unitData;
+	glUnitSprite::UnitData unitData;
 
 	static int unitsCounter;
 

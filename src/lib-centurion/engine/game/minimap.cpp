@@ -23,10 +23,10 @@ namespace Game
 
 		void Game::Minimap::Create(void)
 		{
-			applyGameMatrices(&projectionMatrix, &viewMatrix);
+			GLItems::applyGameMatrices(&projectionMatrix, &viewMatrix);
 			Map::Render(false);
 			RenderObjects();
-			MMRectangle()->update();
+			GLItems::MMRectangle()->update();
 			Minimap::isCreated = true;
 		}
 
@@ -35,7 +35,7 @@ namespace Game
 			if (IsCreated() == false) {
 				Minimap::Create();
 			}
-			MMRectangle()->render();
+			GLItems::MMRectangle()->render();
 		}
 
 		void Game::Minimap::RenderRectangle(void)

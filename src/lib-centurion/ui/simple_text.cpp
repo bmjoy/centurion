@@ -3,7 +3,6 @@
 #include <engine.h>
 
 #include <logger.h>
-#include "bitmap_font.h"
 
 using namespace std;
 using namespace glm;
@@ -38,7 +37,7 @@ namespace gui {
 			fontName = fontName + "_bold";
 			isBold = true;
 		}
-		staticData = Text()->create_static(fontName, text.c_str(), x, y, isBold);
+		staticData = GLItems::Text()->create_static(fontName, text.c_str(), x, y, isBold);
 		staticData.y = y;
 		staticData.color = color;
 		staticData.shadow = shadow;
@@ -59,7 +58,7 @@ namespace gui {
 			fontName = fontName + "_bold";
 			isBold = true;
 		}
-		staticData = Text()->create_static(fontName, wtext.c_str(), x, y, isBold);
+		staticData = GLItems::Text()->create_static(fontName, wtext.c_str(), x, y, isBold);
 		staticData.y = y;
 		staticData.color = color;
 		staticData.shadow = shadow;
@@ -80,7 +79,7 @@ namespace gui {
 			fontName = fontName + "_bold";
 			isBold = true;
 		}
-		staticData = Text()->create_static(fontName, codepoints, textSize, x, y, isBold);
+		staticData = GLItems::Text()->create_static(fontName, codepoints, textSize, x, y, isBold);
 		staticData.y = y;
 		staticData.color = color;
 		staticData.shadow = shadow;
@@ -88,17 +87,17 @@ namespace gui {
 
 	void SimpleText::render_static() {
 		if (type == "dynamic") Logger::Info("Dynamic text rendered with static option");
-		Text()->set_align(hAlign, vAlign);		
-		Text()->render_static(staticData);
+		GLItems::Text()->set_align(hAlign, vAlign);
+		GLItems::Text()->render_static(staticData);
 	}
 	void SimpleText::render_dynamic(string text, string Font, float x, float y, vec4 color, string halign, string valign, string fontWeight) {
 		if (type == "static") Logger::Info("Static text rendered with dynamic option");
-		Text()->set_align(halign, valign);
+		GLItems::Text()->set_align(halign, valign);
 		if (fontWeight == "normal") {
-			Text()->render_dynamic(Font, x, y, text, color, shadow, false);
+			GLItems::Text()->render_dynamic(Font, x, y, text, color, shadow, false);
 		}
 		else {
-			Text()->render_dynamic(Font, x, y, text, color, shadow, true);
+			GLItems::Text()->render_dynamic(Font, x, y, text, color, shadow, true);
 		}
 	}
 

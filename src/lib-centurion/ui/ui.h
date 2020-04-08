@@ -20,6 +20,4 @@
 #include "iframe.h"
 #include "text_list.h"
 
-using namespace primitives;
-
 #endif

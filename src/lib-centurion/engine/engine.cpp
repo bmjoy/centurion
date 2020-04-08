@@ -29,9 +29,6 @@
 #include "audio_manager.h"
 
 // read data (temporary: waiting for xml reading system)
-#include "building_sprite.h"
-#include "unit_sprite.h"
-#include "decoration_sprite.h"
 #include "terrain.h"
 #include "image_sprite.h"
 // 
@@ -54,13 +51,13 @@ namespace Engine
 	int Engine::Launch(void)
 	{
 		myWindow window = myWindow::GetInstance();
-		primitives::init();
+		GLItems::init();
 
 		ObjectData::ReadDataClassesFromXml();
 		Engine::read_data();
 
-		primitives::compile();
-		primitives::create();
+		GLItems::compile();
+		GLItems::create();
 
 		Camera::Init();
 		Mouse::Create();
@@ -209,8 +206,8 @@ namespace Engine
 			Engine::myWindow::WidthZoomed = Engine::myWindow::Width + (Engine::Camera::GetCurrentZoom() - 1) * Engine::Camera::GetZoomFactor();
 			Engine::myWindow::HeightZoomed = Engine::myWindow::Height + (Engine::Camera::GetCurrentZoom() - 1) * Engine::Camera::GetZoomFactor() / Engine::myWindow::Ratio;
 
-			primitives::setMenuProjectionMatrix(glm::ortho(0.0f, Engine::myWindow::Width, 0.0f, Engine::myWindow::Height, -100.0f, 100.0f));
-			primitives::setCameraProjectionMatrix(glm::ortho(0.0f, Engine::myWindow::WidthZoomed, 0.0f, Engine::myWindow::HeightZoomed, -(float)MEDIUM_MAP_WIDTH, (float)MEDIUM_MAP_WIDTH));
+			GLItems::setMenuProjectionMatrix(glm::ortho(0.0f, Engine::myWindow::Width, 0.0f, Engine::myWindow::Height, -100.0f, 100.0f));
+			GLItems::setCameraProjectionMatrix(glm::ortho(0.0f, Engine::myWindow::WidthZoomed, 0.0f, Engine::myWindow::HeightZoomed, -(float)MEDIUM_MAP_WIDTH, (float)MEDIUM_MAP_WIDTH));
 
 			// read data.xml
 
@@ -266,7 +263,7 @@ namespace Engine
 		vector<FileManager::file_info> imagesInfoList = FileManager::GetAllFilesNamesWithinSubfolders("assets\\ui", "png");
 
 		for (int i = 0; i < imagesInfoList.size(); i++)
-			Img()->addPath(imagesInfoList[i].name, imagesInfoList[i].path);
+			GLItems::Img()->addPath(imagesInfoList[i].name, imagesInfoList[i].path);
 	}
 
 	void Engine::ResetperipheralsInput(void)

@@ -17,7 +17,7 @@
 #define MAX_NUMBER_OF_TEXT_INPUTS 100
 #endif 
 
-#include <primitives.h>
+#include <gl_items.h>
 
 namespace gui {
 

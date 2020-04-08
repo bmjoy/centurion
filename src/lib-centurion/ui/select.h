@@ -9,7 +9,7 @@
 #ifndef SELECT_H
 #define SELECT_H
 
-#include <primitives.h>
+#include <gl_items.h>
 
 #include "rectangle.h"
 #include "simple_text.h"

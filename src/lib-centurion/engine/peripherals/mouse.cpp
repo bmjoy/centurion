@@ -50,7 +50,7 @@ namespace Engine
 		}
 
 		void Render(void) {
-			Cursor()->render(position.x, position.y, currentState);
+			GLItems::Cursor()->render(position.x, position.y, currentState);
 
 			if (Engine::GetEnvironment() == STRATEGY_ENV) {
 				if (Game::Minimap::IsActive() == false) {

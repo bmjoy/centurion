@@ -9,18 +9,26 @@
 #ifndef PRIMITIVES_H
 #define PRIMITIVES_H
 
-#include <header_primitives.h>
+#include <iostream>
+#include <string>
+#include <vector>
+#include <map>
+#include <array>
+#include <GL/glew.h>
+#include <glm/glm.hpp>
+#include <glm/gtc/matrix_transform.hpp>
+#include <glm/gtc/type_ptr.hpp>
 
 class AudioManager;
-class BitmapFont;
-class BuildingSprite;
+class glBitmapFont;
+class glBuildingSprite;
 class CursorImage;
-class DecorationSprite;
+class glDecorationSprite;
 class EmptyRectangle;
 class glCircle;
 class FilledRectangle;
 class ImageSprite;
-class UnitSprite;
+class glUnitSprite;
 class Terrain;
 class Grid;
 class MinimapRectangle;
@@ -29,25 +37,21 @@ class MinimapRectangle;
 /// This namespace contains all the pointers to primitives istances (that are static)
 /// You can find the static instance in the .h of that class
 /// </summary>
-namespace primitives {
+namespace GLItems {
 
 	AudioManager *Audio();
-	BitmapFont *Text();
-	BuildingSprite *BSprite();
+	glBitmapFont *Text();
+	glBuildingSprite *BSprite();
 	CursorImage *Cursor();
-	DecorationSprite *DSprite();
+	glDecorationSprite *DSprite();
 	EmptyRectangle *ERectangle();
 	glCircle *ECircle();
 	FilledRectangle *FRectangle();
 	ImageSprite *Img();
-	UnitSprite *USprite();
+	glUnitSprite *USprite();
 	Terrain *MapTerrain();
 	Grid *MapGrid();
 	MinimapRectangle *MMRectangle();
-
-	static glm::mat4 MENU_PROJECTION_MATRIX = glm::mat4(0);
-	static glm::mat4 CAMERA_PROJECTION_MATRIX = glm::mat4(0);
-	static glm::mat4 MINIMAP_PROJECTION_MATRIX = glm::mat4(0);
 
 	/// <summary>
 	/// This function sets the menu projection matrix

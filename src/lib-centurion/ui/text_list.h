@@ -21,7 +21,7 @@
 #define BORDERWIDTH_DEFAULT 0
 #endif
 
-#include <primitives.h>
+#include <gl_items.h>
 
 #include "simple_text.h"
 #include "rectangle.h"

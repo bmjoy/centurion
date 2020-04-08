@@ -32,7 +32,7 @@ namespace gui {
 		if (h != 0.f) data.h = h;
 		if (origin != -1) data.origin = origin;
 		data.borderColor = Color;
-		ECircle()->render(data);
+		GLItems::ECircle()->render(data);
 	}
 
 	Circle::~Circle() {}

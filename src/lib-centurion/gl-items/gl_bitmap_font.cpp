@@ -1,4 +1,4 @@
-#include "bitmap_font.h"
+#include "gl_bitmap_font.h"
 
 #include <settings.h>
 #include <stb_image.h>
@@ -11,11 +11,11 @@
 using namespace std;
 using namespace glm;
 
-bool BitmapFont::isArabic(int codepoint) {
+bool glBitmapFont::isArabic(int codepoint) {
 	return ((codepoint >= 1536 && codepoint <= 1919) || (codepoint >= 2208 && codepoint <= 2303) || (codepoint >= 64336 && codepoint <= 64831) || (codepoint >= 65010 && codepoint <= 65276) || (codepoint == 32));
 }
 
-BitmapFont::BitmapFont() {
+glBitmapFont::glBitmapFont() {
 	vPath = "assets/shaders/font/vertex.glsl";
 	fPath = "assets/shaders/font/fragment.glsl";
 	h_align = "left";
@@ -26,14 +26,14 @@ BitmapFont::BitmapFont() {
 	vAlignMap["middle"] = 1;
 }
 
-void BitmapFont::set_align(string hAlign, string vAlign) {
+void glBitmapFont::set_align(string hAlign, string vAlign) {
 	h_align = hAlign;
 	v_align = vAlign;
 }
 
 /* Dynamic text */
 
-void BitmapFont::create() {
+void glBitmapFont::create() {
 
 	glUseProgram(shaderId);
 
@@ -143,7 +143,7 @@ void BitmapFont::create() {
 	}
 }
 
-void BitmapFont::render_dynamic(string &font, float xPos, float yPos, string &text, vec4 &color, bool shadow, bool bold) {
+void glBitmapFont::render_dynamic(string &font, float xPos, float yPos, string &text, vec4 &color, bool shadow, bool bold) {
 	
 	int fontID;
 	GLint textureID;
@@ -219,7 +219,7 @@ void BitmapFont::render_dynamic(string &font, float xPos, float yPos, string &te
 
 /* Static text */
 
-BitmapFont::StaticTextData BitmapFont::create_static(string &font, const char* text, float x, float y, bool bold, int line_number) {
+glBitmapFont::StaticTextData glBitmapFont::create_static(string &font, const char* text, float x, float y, bool bold, int line_number) {
 	StaticTextData static_data = StaticTextData();
 	int fontID, letterspacing = 0;
 	fontID = fontIdMap[font];
@@ -262,7 +262,7 @@ BitmapFont::StaticTextData BitmapFont::create_static(string &font, const char* t
 	return static_data;
 }
 
-BitmapFont::StaticTextData BitmapFont::create_static(std::string & font, const wchar_t * text, float x, float y, bool bold, int line_number)
+glBitmapFont::StaticTextData glBitmapFont::create_static(std::string & font, const wchar_t * text, float x, float y, bool bold, int line_number)
 {
 	StaticTextData static_data = StaticTextData();
 	int fontID, letterspacing = 0;
@@ -292,7 +292,7 @@ BitmapFont::StaticTextData BitmapFont::create_static(std::string & font, const w
 	return static_data;
 }
 
-BitmapFont::StaticTextData BitmapFont::create_static(string &font, const int* codepoints, int textSize, float x, float y, bool bold, int line_number) {
+glBitmapFont::StaticTextData glBitmapFont::create_static(string &font, const int* codepoints, int textSize, float x, float y, bool bold, int line_number) {
 	StaticTextData static_data = StaticTextData();
 
 	int fontID, letterspacing = 0;
@@ -318,7 +318,7 @@ BitmapFont::StaticTextData BitmapFont::create_static(string &font, const int* co
 	return static_data;
 }
 
-void BitmapFont::render_static(StaticTextData &data) {
+void glBitmapFont::render_static(StaticTextData &data) {
 
 	glUseProgram(shaderId);
 	glUniform4f(glGetUniformLocation(shaderId, "color"), data.color.x / 255.f, data.color.y / 255.f, data.color.z / 255.f, data.color.w / 255.f);
@@ -354,4 +354,4 @@ void BitmapFont::render_static(StaticTextData &data) {
 	glBindVertexArray(0);
 }
 
-BitmapFont::~BitmapFont() {}
+glBitmapFont::~glBitmapFont() {}

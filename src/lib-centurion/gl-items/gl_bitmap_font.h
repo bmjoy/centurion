@@ -14,7 +14,7 @@
 /// <summary>
 /// This class is used by UI objects which have to render static or dynamic text.
 /// </summary>
-class BitmapFont : public Shader
+class glBitmapFont : public Shader
 {
 public:
 	
@@ -46,7 +46,7 @@ public:
 	/// <summary>
 	/// Public constructor.
 	/// </summary>
-	BitmapFont();
+	glBitmapFont();
 
 	/// <summary>
 	/// This function sets the text align.
@@ -96,7 +96,7 @@ public:
 	/// <summary>
 	/// The destructor.
 	/// </summary>
-	~BitmapFont();
+	~glBitmapFont();
 
 private:
 	/// <summary>

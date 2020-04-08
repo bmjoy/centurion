@@ -59,7 +59,7 @@ namespace Game
 			Engine::myWindow::BottomBarHeight = 0.f;
 			Engine::myWindow::TopBarHeight = 0.f;
 
-			primitives::setMinimapProjectionMatrix();
+			GLItems::setMinimapProjectionMatrix();
 			
 			EditorUI::Create();
 
@@ -99,14 +99,14 @@ namespace Game
 				Engine::Camera::keyboardControl();
 
 				viewMatrix = Engine::Camera::calculateViewMatrix();
-				projectionMatrix = getCameraProjectionMatrix();
+				projectionMatrix = GLItems::getCameraProjectionMatrix();
 
 				// PICKING UI RENDERING
 				EditorUI::Render(true);
 				Picking::UI::UpdateClickIds();
 
 				// apply game matrices
-				applyGameMatrices(&projectionMatrix, &viewMatrix);
+				GLItems::applyGameMatrices(&projectionMatrix, &viewMatrix);
 
 				// PICKING OBJECTS RENDERING
 				RenderObjectsPicking();
@@ -118,7 +118,7 @@ namespace Game
 				Editor::InsertingObject();
 
 				// apply menu matrices
-				applyMenuMatrices();
+				GLItems::applyMenuMatrices();
 
 				EditorUI::Render(false);
 			}
@@ -127,14 +127,14 @@ namespace Game
 			else
 			{
 				viewMatrix = mat4(1.0f);
-				projectionMatrix = getMinimapProjectionMatrix();
+				projectionMatrix = GLItems::getMinimapProjectionMatrix();
 
 				// PICKING RENDERING
 				EditorUI::Render(true);
 				Picking::UI::UpdateClickIds();
 
 				// apply game matrices
-				applyGameMatrices(&projectionMatrix, &viewMatrix);
+				GLItems::applyGameMatrices(&projectionMatrix, &viewMatrix);
 
 				// NORMAL RENDERING 
 				Minimap::RenderMapAndObjects();
@@ -142,7 +142,7 @@ namespace Game
 				Picking::Obj::UpdateClickIds();
 
 				// apply menu matrices
-				applyMenuMatrices();
+				GLItems::applyMenuMatrices();
 
 				Minimap::RenderRectangle();
 				EditorUI::Render(false);
@@ -150,7 +150,7 @@ namespace Game
 				if (Picking::UI::GetLeftClickId() == 0) GoToPointFromMinimap();
 			}
 
-			setCameraProjectionMatrix(glm::ortho(0.0f, Engine::myWindow::WidthZoomed, 0.0f, Engine::myWindow::HeightZoomed, -(float)MEDIUM_MAP_WIDTH, (float)MEDIUM_MAP_WIDTH));
+			GLItems::setCameraProjectionMatrix(glm::ortho(0.0f, Engine::myWindow::WidthZoomed, 0.0f, Engine::myWindow::HeightZoomed, -(float)MEDIUM_MAP_WIDTH, (float)MEDIUM_MAP_WIDTH));
 		}
 
 		void Game::Editor::AddEditorTreeElement(const std::string& filter1, const std::string& filter2, const std::string& filter3)

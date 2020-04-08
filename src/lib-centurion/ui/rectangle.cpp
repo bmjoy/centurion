@@ -71,17 +71,17 @@ namespace gui {
 
 		if (data.type == FILLED_RECTANGLE) {
 			data.backColor = backColor;
-			FRectangle()->render(data, picking);
+			GLItems::FRectangle()->render(data, picking);
 		}
 		if (data.type == BORDER_RECTANGLE) {
 			data.borderColor = borderColor;
-			ERectangle()->render(data);
+			GLItems::ERectangle()->render(data);
 		}
 		if (data.type == BORDER_FILLED_RECTANGLE) {
 			data.backColor = backColor;
 			data.borderColor = borderColor;
-			FRectangle()->render(data, picking);
-			ERectangle()->render(data);
+			GLItems::FRectangle()->render(data, picking);
+			GLItems::ERectangle()->render(data);
 		}
 
 		

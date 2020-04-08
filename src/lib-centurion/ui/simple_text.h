@@ -9,7 +9,7 @@
 #ifndef SIMPLE_TEXT_H
 #define SIMPLE_TEXT_H
 
-#include <bitmap_font.h>
+#include <gl_bitmap_font.h>
 
 namespace gui {
 
@@ -80,7 +80,7 @@ namespace gui {
 		~SimpleText();
 	private:
 		std::string type;
-		BitmapFont::StaticTextData staticData;
+		glBitmapFont::StaticTextData staticData;
 		std::string hAlign, vAlign;
 		bool shadow;
 	};

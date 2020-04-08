@@ -2,8 +2,6 @@
 
 #include <engine.h>
 
-#include "bitmap_font.h"
-
 using namespace std;
 using namespace glm;
 
@@ -61,7 +59,7 @@ namespace gui {
 						//cout << TEXT << " [IF]" << endl;
 					}
 					else {
-						lines_data.push_back(Text()->create_static(fontName, TEXT.c_str(), x, y, isBold, line_number));
+						lines_data.push_back(GLItems::Text()->create_static(fontName, TEXT.c_str(), x, y, isBold, line_number));
 						line_width = tempWidth;
 						TEXT.clear();
 						TEXT = TEXT + word;
@@ -71,7 +69,7 @@ namespace gui {
 					k = j + 1;
 				}
 				if (j == line.size() - 1) {
-					lines_data.push_back(Text()->create_static(fontName, TEXT.c_str(), x, y, isBold, line_number));
+					lines_data.push_back(GLItems::Text()->create_static(fontName, TEXT.c_str(), x, y, isBold, line_number));
 					line_number++;
 					//cout << "      " << TEXT << " [LAST]" << endl;
 				}
@@ -85,9 +83,9 @@ namespace gui {
 	}
 
 	void TextBox::render() {
-		Text()->set_align(hAlign, vAlign);	
+		GLItems::Text()->set_align(hAlign, vAlign);
 		for(int i = 0; i < lines_data.size(); i++)
-			Text()->render_static(lines_data[i]);
+			GLItems::Text()->render_static(lines_data[i]);
 	}
 
 	TextBox::~TextBox(){}

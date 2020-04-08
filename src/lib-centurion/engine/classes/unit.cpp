@@ -20,7 +20,7 @@ using namespace Math;
 int Unit::unitsCounter = 0;
 
 Unit::Unit() {
-	unitData = UnitSprite::UnitData();
+	unitData = glUnitSprite::UnitData();
 	unitData.currentDir = 0;
 	unitData.currentFrame = 0;
 
@@ -67,7 +67,7 @@ void Unit::Render(const bool picking, const unsigned int clickID)
 		{
 			selectionCircle.render(glm::vec4(255.f, 255.f, 255.f, 0.8f), position3D.x, position3D.y);
 		}
-		USprite()->render(unitData, position3D, picking);
+		GLItems::USprite()->render(unitData, position3D, picking);
 
 	}
 

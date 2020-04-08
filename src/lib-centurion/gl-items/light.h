@@ -9,7 +9,8 @@
 #ifndef LIGHT_H
 #define LIGHT_H
 
-#include "header_primitives.h"
+#include <GL/glew.h>
+#include <glm/glm.hpp>
 
 /// <summary>
 /// This class is used to generate light for the terrain

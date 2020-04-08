@@ -80,7 +80,7 @@ namespace Pass
 		{
 			PASS_MATRIX[i] = 0;
 		}
-		MapGrid()->update();
+		GLItems::MapGrid()->update();
 	}
 
 	void Pass::UpdateObjectPass(PassGrid *pg, glm::vec3 & position, const int method)
@@ -111,7 +111,7 @@ namespace Pass
 				}
 			}
 		}
-		MapGrid()->update();
+		GLItems::MapGrid()->update();
 	}
 
 	bool CheckObjectPassAvailability(PassGrid *pg, glm::vec3 & position)

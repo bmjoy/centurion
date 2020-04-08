@@ -6,7 +6,7 @@
 #include <game/strategy.h>
 #include <game/pass.h>
 
-#include <decoration_sprite.h>
+#include <gl_decoration_sprite.h>
 
 using namespace std;
 using namespace glm;
@@ -65,7 +65,7 @@ void Decoration::Render(const bool picking, const unsigned int clickID)
 			}
 		}
 	}
-	DSprite()->Render(spriteData, this->GetPosition().x, this->GetPosition().y, bIsPlaceable);
+	GLItems::DSprite()->Render(spriteData, this->GetPosition().x, this->GetPosition().y, bIsPlaceable);
 }
 
 Decoration::~Decoration() {}

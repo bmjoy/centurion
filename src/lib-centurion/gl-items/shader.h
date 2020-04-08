@@ -9,7 +9,15 @@
 #ifndef SHADER_H
 #define SHADER_H
 
-#include <header_primitives.h>
+#include <iostream>
+#include <string>
+#include <vector>
+#include <map>
+#include <array>
+#include <GL/glew.h>
+#include <glm/glm.hpp>
+#include <glm/gtc/matrix_transform.hpp>
+#include <glm/gtc/type_ptr.hpp>
 
 class Shader {
 public:

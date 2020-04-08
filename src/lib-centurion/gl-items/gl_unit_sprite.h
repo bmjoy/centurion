@@ -11,7 +11,7 @@
 
 #include "object_sprite.h"
 
-class UnitSprite : public ObjectSprite
+class glUnitSprite : public ObjectSprite
 {
 public:
 
@@ -32,11 +32,11 @@ public:
 		GLuint textureID;
 	};
 
-	UnitSprite();
+	glUnitSprite();
 	void create();
 	void getTextureInfo(UnitData *uData);
 	void render(UnitData d, glm::vec3 &pos, bool picking);
-	~UnitSprite();
+	~glUnitSprite();
 
 private:
 	std::map<std::string, int[2]> spriteSize;

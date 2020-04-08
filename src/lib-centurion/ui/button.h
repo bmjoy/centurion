@@ -1,7 +1,7 @@
 #ifndef BUTTON_H
 #define BUTTON_H
 
-#include <primitives.h>
+#include <gl_items.h>
 
 namespace gui {
 

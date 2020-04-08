@@ -1,16 +1,16 @@
-#include "decoration_sprite.h"
+#include "gl_decoration_sprite.h"
 #include <stb_image.h>
 #include <fstream>
 
 using namespace std;
 using namespace glm;
 
-DecorationSprite::DecorationSprite(){
+glDecorationSprite::glDecorationSprite(){
 	vPath = "assets/shaders/dsprite/vertex.glsl";
 	fPath = "assets/shaders/dsprite/fragment.glsl";
 }
 
-void DecorationSprite::Render(SpriteData &data, float x, float y, bool placeable) {
+void glDecorationSprite::Render(SpriteData &data, float x, float y, bool placeable) {
 
 	glUseProgram(shaderId);
 
@@ -37,6 +37,6 @@ void DecorationSprite::Render(SpriteData &data, float x, float y, bool placeable
 	glDisable(GL_DEPTH_TEST);
 }
 
-DecorationSprite::~DecorationSprite()
+glDecorationSprite::~glDecorationSprite()
 {
 }

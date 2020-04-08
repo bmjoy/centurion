@@ -206,14 +206,14 @@ namespace Game
 			Game::Map::isGridEnabled = false;
 			Pass::ClearGrid();
 			mapgen::reset_map();
-			MapTerrain()->updateHeightsBuffer();
-			MapTerrain()->updateTextureBuffer();
+			GLItems::MapTerrain()->updateHeightsBuffer();
+			GLItems::MapTerrain()->updateTextureBuffer();
 		}
 
 		void Game::Map::CreateNoise(void)
 		{
 			mapgen::generateRandomMap();
-			MapTerrain()->updateHeightsBuffer();
+			GLItems::MapTerrain()->updateHeightsBuffer();
 
 			stringstream ss;
 			ss << "Min(z) = " << mapgen::minZ << "; Max(z) = " << mapgen::maxZ;
@@ -224,15 +224,15 @@ namespace Game
 
 		void Game::Map::UpdateGrid(void)
 		{
-			MapGrid()->update();
+			GLItems::MapGrid()->update();
 		}
 
 		void Game::Map::Render(const bool tracing)
 		{
-			MapTerrain()->render(tracing);
+			GLItems::MapTerrain()->render(tracing);
 			if (Game::Map::isGridEnabled && !tracing)
 			{
-				MapGrid()->render();
+				GLItems::MapGrid()->render();
 			}
 		}
 	};

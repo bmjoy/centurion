@@ -1,4 +1,4 @@
-#include "building_sprite.h"
+#include "gl_building_sprite.h"
 
 #include <stb_image.h>
 
@@ -11,12 +11,12 @@
 using namespace std;
 using namespace glm;
 
-BuildingSprite::BuildingSprite(){
+glBuildingSprite::glBuildingSprite(){
 	vPath = "assets/shaders/bsprite/vertex.glsl";
 	fPath = "assets/shaders/bsprite/fragment.glsl";
 }
 
-void BuildingSprite::Render(SpriteData &data, float x, float y, bool picking, bool selected, vec3 playerColor, bool placeable) {
+void glBuildingSprite::Render(SpriteData &data, float x, float y, bool picking, bool selected, vec3 playerColor, bool placeable) {
 	glUseProgram(shaderId);
 
 	/* Uniform Variables */
@@ -104,6 +104,6 @@ void BuildingSprite::Render(SpriteData &data, float x, float y, bool picking, bo
 	glBindVertexArray(0);
 }
 
-BuildingSprite::~BuildingSprite()
+glBuildingSprite::~glBuildingSprite()
 {
 }

@@ -1,14 +1,14 @@
-#include "primitives.h"
+#include "gl_items.h"
 
 #include "audio_manager.h"
-#include "bitmap_font.h"
-#include "building_sprite.h"
-#include "decoration_sprite.h"
+#include "gl_bitmap_font.h"
+#include "gl_building_sprite.h"
+#include "gl_decoration_sprite.h"
 #include "cursor_image.h"
 #include "gl_circle.h"
 #include "gl_rectangle.h"
 #include "image_sprite.h"
-#include "unit_sprite.h"
+#include "gl_unit_sprite.h"
 #include "terrain.h"
 #include "grid.h"
 #include "minimap_rectangle.h"
@@ -19,37 +19,41 @@
 using namespace std;
 using namespace glm;
 
-namespace primitives {
+namespace GLItems {
 
 	namespace
 	{
-		BitmapFont _txt;
-		BuildingSprite bsprite;
-		CursorImage cursor;
-		DecorationSprite dsprite;
-		glCircle eCircle;
-		EmptyRectangle eRect;
-		FilledRectangle fRect;
+		glBitmapFont bitmapFont;
+		glBuildingSprite buildingSprite;
+		CursorImage cursorImage;
+		glDecorationSprite decorationSprite;
+		glCircle glcircle;
+		EmptyRectangle emptyRectangle;
+		FilledRectangle filledRectangle;
 		Grid grid;
-		ImageSprite img;
-		MinimapRectangle mmRect;
+		ImageSprite imageSprite;
+		MinimapRectangle minimapRectangle;
 		Terrain terrain;
-		UnitSprite usprite;
+		glUnitSprite unitSprite;
+
+		mat4 MENU_PROJECTION_MATRIX = mat4(0);
+		mat4 CAMERA_PROJECTION_MATRIX = mat4(0);
+		mat4 MINIMAP_PROJECTION_MATRIX = mat4(0);
 	};
 
 	AudioManager *Audio() { return &audioM; }
-	BitmapFont *Text() { return &_txt; }
-	BuildingSprite *BSprite() { return &bsprite; }
-	DecorationSprite *DSprite() { return &dsprite; }
-	CursorImage *Cursor() { return &cursor; }
-	glCircle *ECircle() { return &eCircle; }
-	EmptyRectangle *ERectangle() { return &eRect; }
-	FilledRectangle *FRectangle() { return &fRect; }
-	ImageSprite *Img() { return &img; }
-	UnitSprite *USprite() { return &usprite; }
+	glBitmapFont *Text() { return &bitmapFont; }
+	glBuildingSprite *BSprite() { return &buildingSprite; }
+	glDecorationSprite *DSprite() { return &decorationSprite; }
+	CursorImage *Cursor() { return &cursorImage; }
+	glCircle *ECircle() { return &glcircle; }
+	EmptyRectangle *ERectangle() { return &emptyRectangle; }
+	FilledRectangle *FRectangle() { return &filledRectangle; }
+	ImageSprite *Img() { return &imageSprite; }
+	glUnitSprite *USprite() { return &unitSprite; }
 	Terrain *MapTerrain() { return &terrain; }
 	Grid *MapGrid() { return &grid; }
-	MinimapRectangle *MMRectangle() { return &mmRect; }
+	MinimapRectangle *MMRectangle() { return &minimapRectangle; }
 
 	mat4 getCameraProjectionMatrix(void)
 	{ 
@@ -82,16 +86,15 @@ namespace primitives {
 
 
 	void init() {
-		//*Audio() = AudioManager();
-		*Text() = BitmapFont();
-		*BSprite() = BuildingSprite();
-		*DSprite() = DecorationSprite();
+		*Text() = glBitmapFont();
+		*BSprite() = glBuildingSprite();
+		*DSprite() = glDecorationSprite();
 		*Cursor() = CursorImage();
 		*ECircle() = glCircle();
 		*ERectangle() = EmptyRectangle();
 		*FRectangle() = FilledRectangle();
 		*Img() = ImageSprite();
-		*USprite() = UnitSprite();
+		*USprite() = glUnitSprite();
 		*MapTerrain() = Terrain();
 		*MapGrid() = Grid();
 		*MMRectangle() = MinimapRectangle();

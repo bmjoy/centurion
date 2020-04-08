@@ -39,7 +39,7 @@ namespace Menu
 
 			isCreated = true;
 			currentPageId = 0;
-			applyMenuMatrices();
+			GLItems::applyMenuMatrices();
 		}
 		catch (const std::exception&)
 		{

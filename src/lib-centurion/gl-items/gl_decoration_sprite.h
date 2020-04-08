@@ -14,13 +14,13 @@
 /// <summary>
 /// This class is used to hold Decoration-specific methods for graphic rendering
 /// </summary>
-class DecorationSprite : public ObjectSprite
+class glDecorationSprite : public ObjectSprite
 {
 public:
 	/// <summary>
 	/// Constructor
 	/// </summary>
-	DecorationSprite();
+	glDecorationSprite();
 
 	/// <summary>
 	/// Render function
@@ -34,7 +34,7 @@ public:
 	/// <summary>
 	/// Destructor
 	/// </summary>
-	~DecorationSprite();
+	~glDecorationSprite();
 };
 
 #endif

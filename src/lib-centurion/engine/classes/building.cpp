@@ -1,7 +1,7 @@
 #include "building.h"
 #include "Unit.h"
 #include <pathfinding/pathfinding.h>
-#include <building_sprite.h>
+#include <gl_building_sprite.h>
 #include <logger.h>
 #include <engine.h>
 #include <game/pass.h>
@@ -188,7 +188,7 @@ void Building::Render(const bool picking, const unsigned int clickID)
 		this->CheckIfPlaceable();
 	}
 
-	BSprite()->Render(spriteData, GetPosition().x, GetPosition().y, picking, bCurrentlySelected, vec3(0), this->bIsPlaceable);
+	GLItems::BSprite()->Render(spriteData, GetPosition().x, GetPosition().y, picking, bCurrentlySelected, vec3(0), this->bIsPlaceable);
 }
 
 void Building::SetStatus(const bool bIsCreated)

@@ -509,6 +509,6 @@ namespace mapgen {
 			}
 		}
 		// update texture buffer
-		MapTerrain()->updateTextureBuffer();
+		GLItems::MapTerrain()->updateTextureBuffer();
 	}
 };

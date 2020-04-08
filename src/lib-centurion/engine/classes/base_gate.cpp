@@ -4,7 +4,7 @@
 #include <player/player.h>
 #include <pathfinding/pathfinding.h>
 #include <game/strategy.h>
-#include <building_sprite.h>
+#include <gl_building_sprite.h>
 #include <logger.h>
 
 using namespace std;

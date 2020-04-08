@@ -9,7 +9,7 @@
 #ifndef TEXT_BOX_H
 #define TEXT_BOX_H
 
-#include <bitmap_font.h>
+#include <gl_bitmap_font.h>
 
 namespace gui {
 
@@ -41,7 +41,7 @@ namespace gui {
 		void render();
 		~TextBox();
 	private:
-		std::vector<BitmapFont::StaticTextData> lines_data;
+		std::vector<glBitmapFont::StaticTextData> lines_data;
 		std::vector<std::string> lines;
 		std::string hAlign, vAlign;
 	};

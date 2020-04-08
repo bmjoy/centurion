@@ -9,7 +9,7 @@
 #ifndef IFRAME_H
 #define IFRAME_H
 
-#include <primitives.h>
+#include <gl_items.h>
 
 #include "button.h"
 #include "text_list.h"

@@ -1,4 +1,4 @@
-#include "unit_sprite.h"
+#include "gl_unit_sprite.h"
 
 #include <stb_image.h>
 #include <fstream>
@@ -6,12 +6,12 @@
 using namespace std;
 using namespace glm;
 
-UnitSprite::UnitSprite(){
+glUnitSprite::glUnitSprite(){
 	vPath = "assets/shaders/usprite/vertex.glsl";
 	fPath = "assets/shaders/usprite/fragment.glsl";
 }
 
-void UnitSprite::create() {
+void glUnitSprite::create() {
 	
 	//glUseProgram(shaderId);
 	//GenerateBuffers();
@@ -62,7 +62,7 @@ void UnitSprite::create() {
 	//}	
 }
 
-void UnitSprite::getTextureInfo(UnitData *uData) {
+void glUnitSprite::getTextureInfo(UnitData *uData) {
 
 	(*uData).textureID = textureIdMap[uData->className + "_idle"];
 	
@@ -73,7 +73,7 @@ void UnitSprite::getTextureInfo(UnitData *uData) {
 	}
 }
 
-void UnitSprite::render(UnitData d, glm::vec3 &pos, bool picking) {
+void glUnitSprite::render(UnitData d, glm::vec3 &pos, bool picking) {
 
 	glUseProgram(shaderId);
 
@@ -104,6 +104,6 @@ void UnitSprite::render(UnitData d, glm::vec3 &pos, bool picking) {
 	glBindVertexArray(0);
 }
 
-UnitSprite::~UnitSprite()
+glUnitSprite::~glUnitSprite()
 {
 }
