@@ -282,14 +282,14 @@ namespace Engine
 	string Engine::GetCppVersion()
 	{
 		string version;
-		if (__cplusplus == 201703L) version = "C++17";
+		if (__cplusplus > 201703L) version = "C++20";
+		else if (__cplusplus == 201703L) version = "C++17";
 		else if (__cplusplus == 201402L) version = "C++14";
 		else if (__cplusplus == 201103L) version = "C++11";
 		else if (__cplusplus == 199711L) version = "C++98";
 		else version = "pre-standard C++";
 		return version;
 	}
-
 
 	namespace Fps
 	{

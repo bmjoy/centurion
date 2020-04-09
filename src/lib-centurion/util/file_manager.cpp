@@ -62,7 +62,7 @@ vector<string> FileManager::GetAllFilesNamesWithinFolder(string folder, string t
 
 			if (entry.is_directory()) continue;
 
-			string fileName = string(entry.path().filename().u8string());
+			string fileName = entry.path().filename().string();
 			if (type == "*") {
 				names.push_back(fileName);
 			}
@@ -89,7 +89,7 @@ vector<string> FileManager::GetAllFoldersNamesWithinFolder(string folder) {
 		for (const auto & entry : std::filesystem::directory_iterator(folder)) {
 			if (!entry.is_directory()) continue;
 
-			string fileName = string(entry.path().filename().u8string());
+			string fileName = entry.path().filename().string();
 			names.push_back(fileName);
 		}
 		return names;
@@ -110,9 +110,9 @@ vector<FileManager::file_info> FileManager::GetAllFilesNamesWithinSubfolders(str
 			if (entry.is_directory()) continue;
 
 			file_info fi = file_info();
-			fi.path = string(entry.path().u8string());
+			fi.path = entry.path().string();
 
-			string fullName = string(entry.path().filename().u8string());
+			string fullName = entry.path().filename().string();
 
 			if (type == "*") {
 				fi.name = fullName.substr(0, fullName.find_last_of("."));
