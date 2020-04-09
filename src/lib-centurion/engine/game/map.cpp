@@ -6,10 +6,17 @@
 #include <logger.h>
 #include <engine.h>
 #include <file_manager.h>
-#include <mapgen/mapgen.h>
 #include <gl_terrain.h>
 #include <gl_grid.h>
 #include <pathfinding/pathfinding.h>
+
+#include <maths.hpp>
+
+#include <game/game.h>
+#include <game/strategy.h>
+#include <player/player.h>
+
+#include <gl_terrain.h>
 
 using namespace std;
 using namespace glm;
@@ -21,7 +28,7 @@ namespace Game
 	namespace Map
 	{
 		// Private variables
-		namespace 
+		namespace
 		{
 			bool isGridEnabled = false;
 		}
@@ -91,12 +98,12 @@ namespace Game
 			{
 				ofstream heightsFile(path);
 				if (heightsFile.is_open()) {
-					for (int i = 0; i < mapgen::nVertices * 4; i += 4)
+					for (int i = 0; i < Game::Mapgen::GetNumberOfVertices() * 4; i += 4)
 						if (i == 0) {
-							heightsFile << mapgen::MapHeights()[i] << "," << mapgen::MapHeights()[i + 1] << "," << mapgen::MapHeights()[i + 2] << "," << mapgen::MapHeights()[i + 3];
+							heightsFile << Game::Mapgen::MapHeights()[i] << "," << Game::Mapgen::MapHeights()[i + 1] << "," << Game::Mapgen::MapHeights()[i + 2] << "," << Game::Mapgen::MapHeights()[i + 3];
 						}
 						else {
-							heightsFile << "," << mapgen::MapHeights()[i] << "," << mapgen::MapHeights()[i + 1] << "," << mapgen::MapHeights()[i + 2] << "," << mapgen::MapHeights()[i + 3];
+							heightsFile << "," << Game::Mapgen::MapHeights()[i] << "," << Game::Mapgen::MapHeights()[i + 1] << "," << Game::Mapgen::MapHeights()[i + 2] << "," << Game::Mapgen::MapHeights()[i + 3];
 						}
 				}
 				heightsFile.close();
@@ -114,12 +121,12 @@ namespace Game
 			{
 				ofstream textureFile(path);
 				if (textureFile.is_open()) {
-					for (int i = 0; i < mapgen::nVertices; i++)
+					for (int i = 0; i < Game::Mapgen::GetNumberOfVertices(); i++)
 						if (i == 0) {
-							textureFile << mapgen::MapTextures()[i];
+							textureFile << Game::Mapgen::MapTextures()[i];
 						}
 						else {
-							textureFile << "," << mapgen::MapTextures()[i];
+							textureFile << "," << Game::Mapgen::MapTextures()[i];
 						}
 				}
 				textureFile.close();
@@ -155,7 +162,7 @@ namespace Game
 				stringstream s(line);
 				int i = 0;
 				while (getline(s, number, ',')) {
-					mapgen::MapHeights()[i] = stof(number);
+					Game::Mapgen::MapHeights()[i] = stof(number);
 					i++;
 				}
 			}
@@ -176,7 +183,7 @@ namespace Game
 				stringstream s(line);
 				int i = 0;
 				while (getline(s, number, ',')) {
-					mapgen::MapTextures()[i] = stof(number);
+					Game::Mapgen::MapTextures()[i] = stof(number);
 					i++;
 				}
 			}
@@ -205,18 +212,18 @@ namespace Game
 		{
 			Game::Map::isGridEnabled = false;
 			Pass::ClearGrid();
-			mapgen::reset_map();
+			Game::Mapgen::ResetTexturesAndHeights();
 			GLItems::MapTerrain()->updateHeightsBuffer();
 			GLItems::MapTerrain()->updateTextureBuffer();
 		}
 
 		void Game::Map::CreateNoise(void)
 		{
-			mapgen::generateRandomMap();
+			Game::Mapgen::generateRandomMap();
 			GLItems::MapTerrain()->updateHeightsBuffer();
 
 			stringstream ss;
-			ss << "Min(z) = " << mapgen::minZ << "; Max(z) = " << mapgen::maxZ;
+			ss << "Min(z) = " << Game::Mapgen::GetMinZ() << "; Max(z) = " << Game::Mapgen::GetMaxZ();
 
 			Logger::Info("Terrain has been generated!");
 			Logger::Info(ss.str());

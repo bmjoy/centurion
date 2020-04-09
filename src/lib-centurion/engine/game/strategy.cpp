@@ -1,7 +1,6 @@
 #include <game/strategy.h>
 
 #include <engine.h>
-#include <mapgen/mapgen.h>
 #include <player/player.h>
 #include <picking.h>
 #include <classes/unit.h>

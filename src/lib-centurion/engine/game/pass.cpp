@@ -3,6 +3,7 @@
 #include <map>
 
 #include <gl_grid.h>
+#include <gl_items.h>
 
 #include <logger.h>
 #include <tinyxml2.h>

@@ -2,7 +2,6 @@
 
 #include "interface/editorUi.h"
 
-#include <mapgen/mapgen.h>
 #include <game/strategy.h>
 #include <picking.h>
 #include <engine.h>
@@ -407,13 +406,13 @@ namespace Game
 			float yPos = Engine::Mouse::GetYMapCoordinate();
 			
 
-			int x = int(round(xPos / mapgen::grid_size)) * mapgen::grid_size + mapgen::grid_size * 2;
-			int y = int(round(yPos / mapgen::grid_size)) * mapgen::grid_size + mapgen::grid_size * 2;
+			int x = int(round(xPos / Game::Mapgen::GetTriangleWidth())) * Game::Mapgen::GetTriangleWidth() + Game::Mapgen::GetTriangleWidth() * 2;
+			int y = int(round(yPos / Game::Mapgen::GetTriangleWidth())) * Game::Mapgen::GetTriangleWidth() + Game::Mapgen::GetTriangleWidth() * 2;
 
-			int j = mapgen::getVertexPos(x, y);
+			int j = Game::Mapgen::getVertexPos(x, y);
 
-			if (mapgen::MapTextures()[j] != changingTerrain.type) {
-				mapgen::MapTextures()[j] = changingTerrain.type;
+			if (Game::Mapgen::MapTextures()[j] != changingTerrain.type) {
+				Game::Mapgen::MapTextures()[j] = changingTerrain.type;
 				GLItems::MapTerrain()->updateTextureBuffer();
 			}
 		}

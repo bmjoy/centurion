@@ -95,6 +95,11 @@ namespace Engine
 		bool IsCursorInGameScreen(void);
 
 		/// <summary>
+		/// This function sets the mouse Z noise, useful for mouse-Y-2D-position calculation
+		/// </summary>
+		void SetMouseZNoise(float z);
+
+		/// <summary>
 		/// 
 		/// </summary>
 		/// <param name="lastX"></param>

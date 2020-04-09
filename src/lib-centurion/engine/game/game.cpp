@@ -8,6 +8,9 @@
 #include <classes/decoration.h>
 #include <player/player.h>
 #include <game/interface/editorWindows.h>
+#include <game/interface/editorMenuBar.h>
+
+
 
 using namespace std;
 using namespace glm;
@@ -121,6 +124,7 @@ namespace Game
 			if (Game::Minimap::IsBlocked() == false) {
 				Engine::Camera::GoToPoint(cameraToX, cameraToY);
 				Minimap::Disable();
+				EditorMenuBar::Show();
 				Engine::Mouse::LeftClick = false;
 				Engine::Mouse::LeftHold = false;
 			}

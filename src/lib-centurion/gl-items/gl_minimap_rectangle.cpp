@@ -1,7 +1,6 @@
 #include "gl_minimap_rectangle.h"
 
 #include <game/strategy.h>
-#include <mapgen/mapgen.h>
 #include <pathfinding/pathfinding.h>
 #include <engine.h>
 

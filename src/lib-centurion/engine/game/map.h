@@ -16,7 +16,10 @@
 #define MEDIUM_MAP_HEIGHT 20000
 #endif
 
-#include <string>
+#include "mapgen.h"
+#include <header.h>
+
+struct terrainTexture;
 
 namespace Game 
 {

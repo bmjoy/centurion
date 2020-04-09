@@ -91,12 +91,6 @@
     <Filter Include="Source Files\engine\pathfinding">
       <UniqueIdentifier>{98b01d10-21a7-4af9-9624-3fd2abc2e9d1}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Header Files\engine\mapgen">
-      <UniqueIdentifier>{d0f8a00c-a28b-4abd-b638-587eaac7a6a8}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source Files\engine\mapgen">
-      <UniqueIdentifier>{46ef0344-0449-44b5-824e-b0590527147c}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Header Files\engine\player">
       <UniqueIdentifier>{db993349-7059-4cdc-9495-17f04d758ed3}</UniqueIdentifier>
     </Filter>
@@ -246,9 +240,6 @@
     <ClCompile Include="lib-centurion\engine\pathfinding\node.cpp">
       <Filter>Source Files\engine\pathfinding</Filter>
     </ClCompile>
-    <ClCompile Include="lib-centurion\engine\mapgen\mapgen.cpp">
-      <Filter>Source Files\engine\mapgen</Filter>
-    </ClCompile>
     <ClCompile Include="lib-centurion\engine\player\player.cpp">
       <Filter>Source Files\engine\player</Filter>
     </ClCompile>
@@ -362,6 +353,9 @@
     </ClCompile>
     <ClCompile Include="lib-centurion\gl-items\gl_object_sprite.cpp">
       <Filter>Source Files\gl-items</Filter>
+    </ClCompile>
+    <ClCompile Include="lib-centurion\engine\game\mapgen.cpp">
+      <Filter>Source Files\engine\game</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -484,9 +478,6 @@
     </ClInclude>
     <ClInclude Include="lib-centurion\engine\pathfinding\pathfinding.h">
       <Filter>Header Files\engine\pathfinding</Filter>
-    </ClInclude>
-    <ClInclude Include="lib-centurion\engine\mapgen\mapgen.h">
-      <Filter>Header Files\engine\mapgen</Filter>
     </ClInclude>
     <ClInclude Include="lib-centurion\engine\header.h">
       <Filter>Header Files\engine</Filter>
@@ -628,6 +619,9 @@
     </ClInclude>
     <ClInclude Include="lib-centurion\gl-items\gl_object_sprite.h">
       <Filter>Header Files\gl-items</Filter>
+    </ClInclude>
+    <ClInclude Include="lib-centurion\engine\game\mapgen.h">
+      <Filter>Header Files\engine\game</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

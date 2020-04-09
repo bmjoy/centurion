@@ -6,7 +6,6 @@
 #include <player/player.h>
 #include <pathfinding/pathfinding.h>
 #include <engine.h>
-#include <mapgen/mapgen.h>
 #include <settings.h>
 #include <logger.h>
 #include <game/pass.h>
@@ -163,7 +162,7 @@ void Unit::walk_behaviour() {
 Unit::~Unit() {}
 
 void updateZ(vec3 &pos2d, vec3 *pos3d) {
-	float zNoise = mapgen::getNoiseEstimate(pos2d.x, pos2d.y);
+	float zNoise = Game::Mapgen::getNoiseEstimate(pos2d.x, pos2d.y);
 	(*pos3d).x = pos2d.x;
 	(*pos3d).y = pos2d.y + zNoise;
 }

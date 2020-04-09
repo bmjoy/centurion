@@ -1,8 +1,8 @@
 #include "gl_terrain.h"
 
-#include <mapgen/mapgen.h>
 #include <stb_image.h>
 #include <game/strategy.h>
+#include <game/map.h>
 #include <logger.h>
 #include <engine.h>
 
@@ -19,15 +19,13 @@ glTerrain::glTerrain() {
 }
 
 void glTerrain::create() {
-	mapgen::init();
-
 	// Read and store indices and vertices position information //
 
 	ReadIndicesData();
 	ReadVerticesData();
 	ReadVerticesPosData();
 
-	mapgen::reset_map();
+	Game::Mapgen::ResetTexturesAndHeights();
 
 	// Textures
 	glUseProgram(shaderId);
@@ -55,9 +53,9 @@ void glTerrain::create() {
 			tData.zones.push_back(string(_zone->Attribute("name")));
 			tData.frequencies.push_back(stof(string(_zone->Attribute("frequency"))));
 
-			mapgen::zonesMap[string(_zone->Attribute("name"))].push_back(tData.name);
+			Game::Mapgen::zonesMap[string(_zone->Attribute("name"))].push_back(tData.name);
 		}
-		mapgen::terrainsMap[tData.name] = tData;
+		Game::Mapgen::terrainsMap[tData.name] = tData;
 		texturesName.push_back(tData.name);
 
 		// send data to editor terrain tree 
@@ -113,11 +111,11 @@ void glTerrain::render(bool tracing) {
 	/* TRACING */
 
 	if (tracing) {
-		glUniform1f(glGetUniformLocation(shaderId, "minZ"), mapgen::minZ);
-		glUniform1f(glGetUniformLocation(shaderId, "maxZ"), mapgen::maxZ);
+		glUniform1f(glGetUniformLocation(shaderId, "minZ"), Game::Mapgen::GetMinZ());
+		glUniform1f(glGetUniformLocation(shaderId, "maxZ"), Game::Mapgen::GetMaxZ());
 
 		/* Draw */
-		glDrawElements(GL_TRIANGLES, mapgen::nIndices, GL_UNSIGNED_INT, 0);
+		glDrawElements(GL_TRIANGLES, Game::Mapgen::GetNumberOfIndices(), GL_UNSIGNED_INT, 0);
 	}
 
 	/* NORMAL RENDERING */
@@ -148,7 +146,7 @@ void glTerrain::render(bool tracing) {
 		}
 
 		/* Draw */
-		glDrawElements(GL_TRIANGLES, mapgen::nIndices, GL_UNSIGNED_INT, 0);
+		glDrawElements(GL_TRIANGLES, Game::Mapgen::GetNumberOfIndices(), GL_UNSIGNED_INT, 0);
 		glDisable(GL_DEPTH_TEST);
 	}
 
@@ -163,11 +161,11 @@ void glTerrain::genBuffers() {
 	glBindVertexArray(VAO);
 	glGenBuffers(1, &IBO);
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, IBO);
-	glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(*mapgen::Indices()) * mapgen::nIndices, mapgen::Indices(), GL_STATIC_DRAW);
+	glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(*Game::Mapgen::Indices()) * Game::Mapgen::GetNumberOfIndices(), Game::Mapgen::Indices(), GL_STATIC_DRAW);
 	/* Vertices VBO */
 	glGenBuffers(1, &VerticesVBO);
 	glBindBuffer(GL_ARRAY_BUFFER, VerticesVBO);
-	glBufferData(GL_ARRAY_BUFFER, sizeof(*mapgen::MapVertices()) * mapgen::nVertices * 4, mapgen::MapVertices(), GL_STATIC_DRAW);
+	glBufferData(GL_ARRAY_BUFFER, sizeof(*Game::Mapgen::MapVertices()) * Game::Mapgen::GetNumberOfVertices() * 4, Game::Mapgen::MapVertices(), GL_STATIC_DRAW);
 	// xCoord, yCoord 
 	glVertexAttribPointer(0, 2, GL_FLOAT, GL_FALSE, 4 * sizeof(float), (void*)0);
 	glEnableVertexAttribArray(0);
@@ -178,7 +176,7 @@ void glTerrain::genBuffers() {
 	/* Heights VBO */
 	glGenBuffers(1, &HeightsVBO);
 	glBindBuffer(GL_ARRAY_BUFFER, HeightsVBO);
-	glBufferData(GL_ARRAY_BUFFER, sizeof(*mapgen::MapHeights()) * mapgen::nVertices * 4, mapgen::MapHeights(), GL_STATIC_DRAW);
+	glBufferData(GL_ARRAY_BUFFER, sizeof(*Game::Mapgen::MapHeights()) * Game::Mapgen::GetNumberOfVertices() * 4, Game::Mapgen::MapHeights(), GL_STATIC_DRAW);
 	// zNoise
 	glVertexAttribPointer(2, 1, GL_FLOAT, GL_FALSE, 4 * sizeof(float), (void*)0);
 	glEnableVertexAttribArray(2);
@@ -189,7 +187,7 @@ void glTerrain::genBuffers() {
 	/* Textures VBO */
 	glGenBuffers(1, &TexturesVBO);
 	glBindBuffer(GL_ARRAY_BUFFER, TexturesVBO);
-	glBufferData(GL_ARRAY_BUFFER, sizeof(*mapgen::MapTextures()) * mapgen::nVertices, mapgen::MapTextures(), GL_STATIC_DRAW);
+	glBufferData(GL_ARRAY_BUFFER, sizeof(*Game::Mapgen::MapTextures()) * Game::Mapgen::GetNumberOfVertices(), Game::Mapgen::MapTextures(), GL_STATIC_DRAW);
 	// textureType
 	glVertexAttribPointer(4, 1, GL_FLOAT, GL_FALSE, sizeof(float), (void*)0);
 	glEnableVertexAttribArray(4);
@@ -209,7 +207,7 @@ void glTerrain::ReadIndicesData(void)
 		stringstream s(line);
 		int i = 0;
 		while (getline(s, number, ',')) {
-			mapgen::Indices()[i] = (unsigned int)stoi(number);
+			Game::Mapgen::Indices()[i] = (unsigned int)stoi(number);
 			i++;
 		}
 	}
@@ -233,7 +231,7 @@ void glTerrain::ReadVerticesData(void)
 		stringstream s(line);
 		int i = 0;
 		while (getline(s, number, ',')) {
-			mapgen::MapVertices()[i] = stof(number);
+			Game::Mapgen::MapVertices()[i] = stof(number);
 			i++;
 		}
 	}
@@ -255,7 +253,7 @@ void glTerrain::ReadVerticesPosData(void)
 		stringstream s(line);
 		int i = 0;
 		while (getline(s, number, ',')) {
-			mapgen::VerticesPos()[i] = stoi(number);
+			Game::Mapgen::VerticesPos()[i] = stoi(number);
 			i++;
 		}
 	}
@@ -270,7 +268,7 @@ void glTerrain::ReadVerticesPosData(void)
 void glTerrain::updateHeightsBuffer() {
 	glBindVertexArray(VAO);
 	glBindBuffer(GL_ARRAY_BUFFER, HeightsVBO);
-	glBufferData(GL_ARRAY_BUFFER, sizeof(*mapgen::MapHeights()) * mapgen::nVertices * 4, mapgen::MapHeights(), GL_STATIC_DRAW);
+	glBufferData(GL_ARRAY_BUFFER, sizeof(*Game::Mapgen::MapHeights()) * Game::Mapgen::GetNumberOfVertices() * 4, Game::Mapgen::MapHeights(), GL_STATIC_DRAW);
 	// zNoise
 	glVertexAttribPointer(2, 1, GL_FLOAT, GL_FALSE, 4 * sizeof(float), (void*)0);
 	glEnableVertexAttribArray(2);
@@ -284,7 +282,7 @@ void glTerrain::updateHeightsBuffer() {
 void glTerrain::updateTextureBuffer() {
 	glBindVertexArray(VAO);
 	glBindBuffer(GL_ARRAY_BUFFER, TexturesVBO);
-	glBufferData(GL_ARRAY_BUFFER, sizeof(*mapgen::MapTextures()) * mapgen::nVertices, mapgen::MapTextures(), GL_STATIC_DRAW);
+	glBufferData(GL_ARRAY_BUFFER, sizeof(*Game::Mapgen::MapTextures()) * Game::Mapgen::GetNumberOfVertices(), Game::Mapgen::MapTextures(), GL_STATIC_DRAW);
 	// textureType
 	glVertexAttribPointer(4, 1, GL_FLOAT, GL_FALSE, sizeof(float), (void*)0);
 	glEnableVertexAttribArray(4);

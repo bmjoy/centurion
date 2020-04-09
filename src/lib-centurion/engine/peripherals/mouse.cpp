@@ -1,8 +1,10 @@
 #include <engine.h>
 
 #include <ui.h>
+#include <maths.hpp>
 #include <game/game.h>
-#include <mapgen/mapgen.h>
+#include <game/map.h>
+
 #include <logger.h>
 #include <Settings.h>
 #include <gl_cursor_image.h>
@@ -40,7 +42,7 @@ namespace Engine
 			gui::Image cursorImage = gui::Image();
 			glm::vec3 position = glm::vec3();
 			int currentState = CURSOR_DEFAULT;
-			float znoise = 0, yzoomed = 0, xPosGrid = 0, yPosGrid = 0, xLeftClick = 0, yLeftClick = 0, xRightClick = 0, yRightClick = 0, y2DPosition = 0, y2DRightClick = 0;
+			float mouseZNoise = 0, xPosGrid = 0, yPosGrid = 0, xLeftClick = 0, yLeftClick = 0, xRightClick = 0, yRightClick = 0, y2DPosition = 0, y2DRightClick = 0;
 
 			gui::Circle cursorCircle = gui::Circle();
 
@@ -84,6 +86,11 @@ namespace Engine
 		bool Engine::Mouse::IsCursorInGameScreen(void)
 		{
 			return (GetYLeftClick() > myWindow::BottomBarHeight) && (GetYLeftClick() < (myWindow::Height - myWindow::TopBarHeight));
+		}
+
+		void SetMouseZNoise(float z)
+		{
+			mouseZNoise = z;
 		}
 
 		float Engine::Mouse::GetXPosition(void)
@@ -130,8 +137,8 @@ namespace Engine
 			position.x = (GLfloat)lastX;
 			position.y = (GLfloat)lastY;
 
-			yzoomed = Camera::GetZoomedCoords(position.x, Mouse::GetYPosition()).y;
-			znoise = mapgen::smoothNoise(yzoomed, mapgen::mouseZNoise);
+			float yzoomed = Camera::GetZoomedCoords(position.x, Mouse::GetYPosition()).y;
+			float znoise = Math::smooth_noise(yzoomed, mouseZNoise, Game::Mapgen::GetMapMeshHeight());
 			znoise /= myWindow::HeightZoomed / myWindow::Height;
 
 			y2DPosition = Mouse::GetYPosition() - znoise;
