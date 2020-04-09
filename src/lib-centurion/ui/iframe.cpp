@@ -117,7 +117,7 @@ gui::TextList* gui::Iframe::GetTextListById(int id)
 
 void gui::Iframe::UpdateTextListById(int id, std::vector<std::string>* _options, const std::string prefix)
 {
-	listOfTextLists[id]->Update(_options, prefix);
+	Iframe::GetTextListById(id)->Update(_options, prefix);
 }
 
 void gui::Iframe::AddTextInput(const int textInputId, int xPos, int yPos, const int width, std::wstring placeholderText)
@@ -134,6 +134,11 @@ gui::TextInput* gui::Iframe::GetTextInputById(int id)
 {
 	if (id < 0 || id > MAX_NUMBER_OF_TEXT_INPUTS) return nullptr;
 	return listOfTextInputs[id];
+}
+
+void gui::Iframe::UpdateTextInputPlaceholder(int id, std::string newPlaceholder)
+{
+	Iframe::GetTextInputById(id)->UpdatePlaceholder(newPlaceholder);
 }
 
 void gui::Iframe::Create(const unsigned int _iframeId, int xPos, int yPos, int width, int height, std::wstring iframe_title)

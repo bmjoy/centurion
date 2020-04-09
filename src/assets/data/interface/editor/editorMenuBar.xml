@@ -72,6 +72,8 @@
       <command id="1" name="EDITOR_Tools_TerrainBrush" hotkey1="CTRL" hotkey2="N" hotkey3="">
         <onclickScript>
           -- Lua Script
+          Editor.ToggleWindow(5)
+          Editor.ToggleMenu(2)
         </onclickScript>
       </command>
     </editorMenu>

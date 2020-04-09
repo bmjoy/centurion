@@ -67,6 +67,12 @@ namespace gui {
 		/// <returns></returns>
 		std::string GetText(void);
 
+		/// <summary>
+		/// This method updates the text input placeholder with a new one
+		/// </summary>
+		/// <param name="newPlaceholder">A std::string indicating the new placeholder text</param>
+		void UpdatePlaceholder(std::string newPlaceholder);
+
 		~TextInput();
 	private:
 		gui::Rectangle rectangle;

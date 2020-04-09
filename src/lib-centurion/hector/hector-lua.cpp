@@ -30,7 +30,13 @@ void Hector::Initialize()
 	L = luaL_newstate();
 	luaL_openlibs(L);
 
-	// global variables
+	// no namespace functions
+
+	getGlobalNamespace(L)
+		.addFunction("PrCmd", &Engine::PrintToConsole)
+		.addFunction("Selo", Game::GetSelectedObject);
+
+	// variables
 
 	getGlobalNamespace(L)
 		.beginNamespace("Mouse")
@@ -70,10 +76,13 @@ void Hector::Initialize()
 		.addFunction("CloseWindow", &EditorWindows::CloseWindow)
 		.addFunction("ToggleWindow", &EditorWindows::ToggleWindow)
 		.addFunction("ToggleGrid", &Game::Editor::ToggleGrid)
-		.addFunction("GetTreeList1", Game::Editor::GetEditorTreeList1)
-		.addFunction("GetTreeList2", Game::Editor::GetEditorTreeList2)
-		.addFunction("GetTreeList3", Game::Editor::GetEditorTreeList3)
+		.addFunction("GetObjectTreeList1", Game::Editor::GetEditorObjectTreeList1)
+		.addFunction("GetObjectTreeList2", Game::Editor::GetEditorObjectTreeList2)
+		.addFunction("GetObjectTreeList3", Game::Editor::GetEditorObjectTreeList3)
+		.addFunction("GetTerrainTreeList1", Game::Editor::GetEditorTerrainTreeList1)
+		.addFunction("GetTerrainTreeList2", Game::Editor::GetEditorTerrainTreeList2)
 		.addFunction("InsertObject", Game::Editor::InsertingObject)
+		.addFunction("ChangeTerrain", Game::Editor::ChangeTerrainType)
 		.endNamespace();
 
 	getGlobalNamespace(L)
@@ -88,7 +97,6 @@ void Hector::Initialize()
 
 	getGlobalNamespace(L)
 		.beginNamespace("Game")
-		.addFunction("Selo", &Game::GetSelectedObject)
 		.addFunction("IsObjectSelected", &Game::IsGameObjectSelected)
 		.addFunction("IsObjectNotNull", &Game::IsGameObjectNotNull)
 		.addFunction("CreateObject", &Game::CreateObject)
@@ -107,6 +115,7 @@ void Hector::Initialize()
 		.addFunction("UpdateTextListById", &gui::Iframe::UpdateTextListById)
 		.addFunction("GetStringBySimpleTextId", &gui::Iframe::GetStringBySimpleTextId)
 		.addFunction("UpdateStringBySimpleTextId", &gui::Iframe::UpdateStringBySimpleTextId)
+		.addFunction("UpdateTextInputPlaceholder", &gui::Iframe::UpdateTextInputPlaceholder)
 		.endClass();
 }
 

@@ -25,4 +25,10 @@ namespace EditorUI
 	/// </summary>
 	/// <param name="picking">Boolean: true = picking phase, false = normal rendering</param>
 	void Render(bool picking);
+
+	/// <summary>
+	/// This function updates the info text shown in the top left of the screen
+	/// </summary>
+	/// <param name="infotext">A std::string indicating the new info text</param>
+	void UpdateInfoText(std::string infotext);
 };

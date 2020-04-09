@@ -98,6 +98,7 @@ namespace Game
 		void Game::SelectionRectangle::Render(void)
 		{
 			if (Editor::IsMovingObject()) return;
+			if (Editor::IsChangingTerrain()) return;
 
 			if (Engine::Mouse::LeftClick) {
 				if (SelectionRectangle::IsActive() == false) {

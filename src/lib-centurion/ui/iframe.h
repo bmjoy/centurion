@@ -144,6 +144,12 @@ namespace gui {
 		TextInput* GetTextInputById(int id);
 
 		/// <summary>
+		/// This method updates the placeholder of the required text input, identified with its id
+		/// </summary>
+		/// <param name="newPlaceholder">A std::string indicating the new placeholder text</param>
+		void UpdateTextInputPlaceholder(int id, std::string newPlaceholder);
+
+		/// <summary>
 		/// This function creates an instance of Iframe.
 		/// </summary>
 		/// <param name="_iframeId">The iframe id (a positive integer)</param>

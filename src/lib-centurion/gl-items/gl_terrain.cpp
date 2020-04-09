@@ -8,6 +8,7 @@
 
 #include <tinyxml2.h>
 #include <file_manager.h>
+#include <game/editor.h>
 
 using namespace std;
 using namespace glm;
@@ -44,7 +45,7 @@ void glTerrain::create() {
 	{
 		//Terrain data
 		terrainTexture tData = terrainTexture();
-		tData.id = stoi(_terr->Attribute("id"));
+		tData.id = _terr->IntAttribute("id");
 		tData.name = _terr->Attribute("name");
 		tData.zones = vector<string>();
 		tData.frequencies = vector<float>();
@@ -58,6 +59,10 @@ void glTerrain::create() {
 		}
 		mapgen::terrainsMap[tData.name] = tData;
 		texturesName.push_back(tData.name);
+
+		// send data to editor terrain tree 
+		std::string editorTreeListName = _terr->Attribute("editorTreeList");
+		Game::Editor::AddEditorTerrainTreeElement(editorTreeListName, tData.name);
 
 		// load image
 		string texturePath = Folders::GAME + "assets\\terrain\\Textures\\" + tData.name + ".png";

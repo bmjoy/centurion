@@ -11,6 +11,8 @@
 #include <settings.h>
 #include <translationsTable.h>
 
+#include <gl_terrain.h>
+#include <gl_items.h>
 #include <game/interface/editorMenuBar.h>
 #include <game/interface/editorWindows.h>
 
@@ -34,17 +36,29 @@ namespace Game
 			float StartYMouse = 0.f;
 		};
 
+		struct ChangingTerrain
+		{
+			bool isActive = false;
+			float type = -1.f;
+		};
+
 		// Private variables
 		namespace
 		{
-			std::vector<std::array<std::string, 3>> editorTree = std::vector<std::array<std::string, 3>>();
-			std::vector<std::string> editorTreeList1 = std::vector<std::string>();
-			std::vector<std::string> editorTreeList2 = std::vector<std::string>();
-			std::vector<std::string> editorTreeList3 = std::vector<std::string>();
+			std::vector<std::array<std::string, 3>> editorObjectTree = std::vector<std::array<std::string, 3>>();
+			std::vector<std::string> editorObjectTreeList1 = std::vector<std::string>();
+			std::vector<std::string> editorObjectTreeList2 = std::vector<std::string>();
+			std::vector<std::string> editorObjectTreeList3 = std::vector<std::string>();
+
+			std::vector<std::array<std::string, 2>> editorTerrainTree = std::vector<std::array<std::string, 2>>();
+			std::map<std::string, int> editorTerrainMap = std::map<std::string, int>();
+			std::vector<std::string> editorTerrainTreeList1 = std::vector<std::string>();
+			std::vector<std::string> editorTerrainTreeList2 = std::vector<std::string>();
 
 			GObject* tmpObject = nullptr;
 
 			MovingObject movingObject = MovingObject();
+			ChangingTerrain changingTerrain = ChangingTerrain();
 
 			bool isCreated = false;
 		}
@@ -75,6 +89,7 @@ namespace Game
 
 			Editor::isCreated = true;
 			Editor::movingObject.isActive = false;
+			Editor::changingTerrain.isActive = false;
 			Minimap::Update();
 		}
 
@@ -113,6 +128,7 @@ namespace Game
 
 				// NORMAL RENDERING
 				Map::Render(false);
+				Editor::ChangeTerrainType();
 				Editor::ShiftSelectedObject();
 				Game::RenderObjects();
 				Editor::InsertingObject();
@@ -153,51 +169,87 @@ namespace Game
 			GLItems::setCameraProjectionMatrix(glm::ortho(0.0f, Engine::myWindow::WidthZoomed, 0.0f, Engine::myWindow::HeightZoomed, -(float)MEDIUM_MAP_WIDTH, (float)MEDIUM_MAP_WIDTH));
 		}
 
-		void Game::Editor::AddEditorTreeElement(const std::string& filter1, const std::string& filter2, const std::string& filter3)
+		void Game::Editor::AddEditorObjectTreeElement(const std::string& filter1, const std::string& filter2, const std::string& filter3)
 		{
 			std::array<std::string, 3> element = { filter1, filter2, filter3 };
-			Editor::editorTree.push_back(element);
+			Editor::editorObjectTree.push_back(element);
 		}
 
-		std::vector<std::string>* Game::Editor::GetEditorTreeList1(void)
+		std::vector<std::string>* Game::Editor::GetEditorObjectTreeList1(void)
 		{
-			Editor::editorTreeList1.clear();
-			for (auto i : Editor::editorTree)
+			Editor::editorObjectTreeList1.clear();
+			for (auto i : Editor::editorObjectTree)
 			{
-				if (std::find(Editor::editorTreeList1.begin(), Editor::editorTreeList1.end(), i[0]) != Editor::editorTreeList1.end())
+				if (std::find(Editor::editorObjectTreeList1.begin(), Editor::editorObjectTreeList1.end(), i[0]) != Editor::editorObjectTreeList1.end())
 					continue;
-				Editor::editorTreeList1.push_back(i[0]);
+				Editor::editorObjectTreeList1.push_back(i[0]);
 			}
-			std::sort(Editor::editorTreeList1.begin(), Editor::editorTreeList1.end());
-			return &Editor::editorTreeList1;
+			std::sort(Editor::editorObjectTreeList1.begin(), Editor::editorObjectTreeList1.end());
+			return &Editor::editorObjectTreeList1;
 		}
 
-		std::vector<std::string>* Game::Editor::GetEditorTreeList2(const std::string filter1)
+		std::vector<std::string>* Game::Editor::GetEditorObjectTreeList2(const std::string filter1)
 		{
-			Editor::editorTreeList2.clear();
-			for (auto i : Editor::editorTree)
+			Editor::editorObjectTreeList2.clear();
+			for (auto i : Editor::editorObjectTree)
 			{
-				if (std::find(Editor::editorTreeList2.begin(), Editor::editorTreeList2.end(), i[1]) != Editor::editorTreeList2.end())
+				if (std::find(Editor::editorObjectTreeList2.begin(), Editor::editorObjectTreeList2.end(), i[1]) != Editor::editorObjectTreeList2.end())
 					continue;
 				if (i[0] != filter1) continue;
-				Editor::editorTreeList2.push_back(i[1]);
+				Editor::editorObjectTreeList2.push_back(i[1]);
 			}
-			std::sort(Editor::editorTreeList2.begin(), Editor::editorTreeList2.end());
-			return &Editor::editorTreeList2;
+			std::sort(Editor::editorObjectTreeList2.begin(), Editor::editorObjectTreeList2.end());
+			return &Editor::editorObjectTreeList2;
 		}
 
-		std::vector<std::string>* Game::Editor::GetEditorTreeList3(const std::string filter1, const std::string filter2)
+		std::vector<std::string>* Game::Editor::GetEditorObjectTreeList3(const std::string filter1, const std::string filter2)
 		{
-			Editor::editorTreeList3.clear();
-			for (auto i : Editor::editorTree)
+			Editor::editorObjectTreeList3.clear();
+			for (auto i : Editor::editorObjectTree)
 			{
-				if (std::find(Editor::editorTreeList3.begin(), Editor::editorTreeList3.end(), i[1]) != Editor::editorTreeList3.end())
+				if (std::find(Editor::editorObjectTreeList3.begin(), Editor::editorObjectTreeList3.end(), i[1]) != Editor::editorObjectTreeList3.end())
 					continue;
 				if (i[0] != filter1 || i[1] != filter2) continue;
-				Editor::editorTreeList3.push_back(i[2]);
+				Editor::editorObjectTreeList3.push_back(i[2]);
 			}
-			std::sort(Editor::editorTreeList3.begin(), Editor::editorTreeList3.end());
-			return &Editor::editorTreeList3;
+			std::sort(Editor::editorObjectTreeList3.begin(), Editor::editorObjectTreeList3.end());
+			return &Editor::editorObjectTreeList3;
+		}
+
+		void AddEditorTerrainTreeElement(const std::string& filter1, const std::string& filter2)
+		{
+			std::array<std::string, 2> element = { filter1, filter2 };
+			Editor::editorTerrainTree.push_back(element);
+
+			int n = (int)editorTerrainMap.size() + 1;
+			editorTerrainMap[filter2] = n;
+		}
+
+		std::vector<std::string>* GetEditorTerrainTreeList1(void)
+		{
+			Editor::editorTerrainTreeList1.clear();
+			for (auto i : Editor::editorTerrainTree)
+			{
+				if (std::find(Editor::editorTerrainTreeList1.begin(), Editor::editorTerrainTreeList1.end(), i[0]) != Editor::editorTerrainTreeList1.end())
+					continue;
+				Editor::editorTerrainTreeList1.push_back(i[0]);
+			}
+			std::sort(Editor::editorTerrainTreeList1.begin(), Editor::editorTerrainTreeList1.end());
+			return &Editor::editorTerrainTreeList1;
+		}
+
+		std::vector<std::string>* GetEditorTerrainTreeList2(const std::string filter1)
+		{
+			Editor::editorTerrainTreeList2.clear();
+			for (auto i : Editor::editorTerrainTree)
+			{
+				if (std::find(Editor::editorTerrainTreeList2.begin(), Editor::editorTerrainTreeList2.end(), i[1]) != Editor::editorTerrainTreeList2.end())
+					continue;
+				if (i[0] != filter1) continue;
+				Editor::editorTerrainTreeList2.push_back(i[1]);
+			}
+			std::sort(Editor::editorTerrainTreeList2.begin(), Editor::editorTerrainTreeList2.end());
+			return &Editor::editorTerrainTreeList2;
 		}
 
 		void Game::Editor::InsertingObject(std::string type, std::string className)
@@ -311,6 +363,55 @@ namespace Game
 		bool Game::Editor::IsMovingObject(void)
 		{
 			return Editor::movingObject.isActive;
+		}
+
+		void ChangeTerrainType(std::string type)
+		{
+			if (type.empty() == false) {
+				changingTerrain.isActive = true;
+				if (editorTerrainMap.count(type) == 0) {
+					changingTerrain.type = -1.f;
+					return;
+				}
+				changingTerrain.type = (float)editorTerrainMap[type];
+				EditorMenuBar::Hide();
+				EditorWindows::Hide();
+				EditorUI::UpdateInfoText("Press the mouse right button to cancel the operation");
+				return;
+			}
+
+			if (changingTerrain.type == -1.f) return;
+
+			if (Engine::Mouse::RightClick == true)
+			{
+				changingTerrain.isActive = false;
+				EditorMenuBar::Show();
+				EditorWindows::Show();
+				EditorUI::UpdateInfoText("");
+				return;
+			}
+
+			if (Engine::Mouse::LeftClick == false && Engine::Mouse::LeftHold == false) return;
+
+			float xPos = Engine::Mouse::GetXMapCoordinate();
+			float yPos = Engine::Mouse::GetYMapCoordinate();
+			
+
+			int x = int(round(xPos / mapgen::grid_size)) * mapgen::grid_size + mapgen::grid_size * 2;
+			int y = int(round(yPos / mapgen::grid_size)) * mapgen::grid_size + mapgen::grid_size * 2;
+
+			int j = mapgen::getVertexPos(x, y);
+
+			if (mapgen::MapTextures()[j] != changingTerrain.type) {
+				mapgen::MapTextures()[j] = changingTerrain.type;
+				GLItems::MapTerrain()->updateTextureBuffer();
+				//Game::Minimap::Update();
+			}
+		}
+
+		bool IsChangingTerrain(void)
+		{
+			return changingTerrain.isActive;
 		}
 
 		void Game::Editor::ToggleGrid(void)

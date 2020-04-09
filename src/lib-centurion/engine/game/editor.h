@@ -39,18 +39,18 @@ namespace Game
 		void handleKeyboardControls(void);
 
 		/// <summary>
-		/// This function adds an element into the editor tree.
+		/// This function adds an element into the editor object tree.
 		/// </summary>
 		/// <param name="filter1">The Type of the element (building, decoration, unit).</param>
 		/// <param name="filter2">The Category of the element (for instance: outpost, stronghold, trees).</param>
 		/// <param name="filter2">The Class of the element (for instance: Etownhall, EArcher).</param>
-		void AddEditorTreeElement(const std::string& filter1, const std::string& filter2, const std::string& filter3);
+		void AddEditorObjectTreeElement(const std::string& filter1, const std::string& filter2, const std::string& filter3);
 
 		/// <summary>
 		/// This function returns the list of all the types of objects that can be placed into editor (building, decoration, unit).
 		/// </summary>
 		/// <returns>The list of all the types of objects that can be placed into editor</returns>
-		std::vector<std::string>* GetEditorTreeList1(void);
+		std::vector<std::string>* GetEditorObjectTreeList1(void);
 
 		/// <summary>
 		/// This function returns the list of all the categories of objects that can be placed into editor 
@@ -58,7 +58,7 @@ namespace Game
 		/// </summary>
 		/// <param name="filter1">The type of the object (building, decoration, unit).</param>
 		/// <returns>The list of all the categories of objects that can be placed into editor for a specific type.</returns>
-		std::vector<std::string>* GetEditorTreeList2(const std::string filter1);
+		std::vector<std::string>* GetEditorObjectTreeList2(const std::string filter1);
 
 		/// <summary>
 		/// This function returns the list of all the classes of objects that can be placed into editor 
@@ -67,7 +67,28 @@ namespace Game
 		/// <param name="filter1">The type of the object (building, decoration, unit).</param>
 		/// <param name="filter2">The category of the object (for instance: outpost, stronghold, trees).</param>
 		/// <returns>The list of all the classes of objects that can be placed into editor for a specific type and for a specific category. </returns>
-		std::vector<std::string>* GetEditorTreeList3(const std::string filter1, const std::string filter2);
+		std::vector<std::string>* GetEditorObjectTreeList3(const std::string filter1, const std::string filter2);
+
+
+		/// <summary>
+		/// This function adds an element into the editor terrain tree.
+		/// </summary>
+		/// <param name="filter1">The Type of the terrain (grass, ground, sand,...).</param>
+		/// <param name="filter2">The name the terrain (for instance: GRASS_1, GRASS_2, SAND_1, ...).</param>
+		void AddEditorTerrainTreeElement(const std::string& filter1, const std::string& filter2);
+
+		/// <summary>
+		/// This function returns the list of all the types of terrains that can be placed in the map (grass, ground, sand...).
+		/// </summary>
+		/// <returns>The list of all the types of terrains that can be placed in the map</returns>
+		std::vector<std::string>* GetEditorTerrainTreeList1(void);
+
+		/// <summary>
+		/// This function returns the list of all the terrains that can be placed in the map 
+		/// </summary>
+		/// <param name="filter1">The type of the terrain (grass, ground, ...).</param>
+		/// <returns>The list of all the terrains that can be placed into the map for a specific type.</returns>
+		std::vector<std::string>* GetEditorTerrainTreeList2(const std::string filter1);
 
 		/// <summary>
 		/// This function adds a specific object, selected from the object menu, into the editor map.
@@ -90,8 +111,17 @@ namespace Game
 		/// <summary>
 		/// This function returns a boolean that indicates if an object is being moved
 		/// </summary>
-		/// <returns></returns>
 		bool IsMovingObject(void);
+
+		/// <summary>
+		/// This function changes the type of the terrain using the mouse cursor
+		/// </summary>
+		void ChangeTerrainType(std::string type = "");
+
+		/// <summary>
+		/// This function returns a boolean that indicates if terrain is being changed
+		/// </summary>
+		bool IsChangingTerrain(void);
 
 		/// <summary>
 		/// This method will toggle the pass grid (via Lua)

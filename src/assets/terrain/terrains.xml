@@ -1,50 +1,50 @@
 <terrains>
-	<terrain id="1" name="GRASS_1">
+	<terrain id="1" name="GRASS_1" editorTreeList="grass">
 		<zoneArray>
 			<zone name="mediterranean" frequency="2" />
 		</zoneArray>
 	</terrain>
-	<terrain id="2" name="GRASS_2">
+	<terrain id="2" name="GRASS_2" editorTreeList="grass">
 		<zoneArray>
 			<zone name="mediterranean" frequency="1" />
 		</zoneArray>
 	</terrain>
-	<terrain id="3" name="GRASS_3">
+	<terrain id="3" name="GRASS_3" editorTreeList="grass"> 
 		<zoneArray>
 			<zone name="mediterranean" frequency="1" />
 		</zoneArray>
 	</terrain>
-	<terrain id="4" name="GROUND_1">
+	<terrain id="4" name="GROUND_1" editorTreeList="ground">
 		<zoneArray>
 			<zone name="mediterranean" frequency="1" />
 		</zoneArray>
 	</terrain>
-	<terrain id="5" name="GROUND_2">
+	<terrain id="5" name="GROUND_2" editorTreeList="ground">
 		<zoneArray>
 			<zone name="mediterranean" frequency="1" />
 		</zoneArray>
 	</terrain>
-	<terrain id="6" name="GROUND_3">
+	<terrain id="6" name="GROUND_3" editorTreeList="ground">
 		<zoneArray>
 			<zone name="mediterranean" frequency="1" />
 		</zoneArray>
 	</terrain>
-	<terrain id="7" name="ROAD_1">
+	<terrain id="7" name="ROAD_1" editorTreeList="road">
 		<zoneArray>
 			<zone name="mediterranean" frequency="0" />
 		</zoneArray>
 	</terrain>
-	<terrain id="8" name="ROAD_2">
+	<terrain id="8" name="ROAD_2" editorTreeList="road">
 		<zoneArray>
 			<zone name="mediterranean" frequency="0" />
 		</zoneArray>
 	</terrain>
-	<terrain id="9" name="ROAD_3">
+	<terrain id="9" name="ROAD_3" editorTreeList="road">
 		<zoneArray>
 			<zone name="mediterranean" frequency="0" />
 		</zoneArray>
 	</terrain>
-	<terrain id="10" name="SAND_1">
+	<terrain id="10" name="SAND_1" editorTreeList="sand">
 		<zoneArray>
 			<zone name="desertic" frequency="1" />
 		</zoneArray>

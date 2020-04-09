@@ -9,25 +9,41 @@
 using namespace std;
 using namespace glm;
 
-void EditorUI::Create()
+namespace EditorUI
 {
-	EditorMenuBar::Create();
-	EditorWindows::Create();
-}
-
-void EditorUI::Render(bool picking)
-{
-	if (picking)
+	namespace
 	{
-		if (Engine::Mouse::LeftClick || Engine::Mouse::RightClick)
+		gui::SimpleText infoText = gui::SimpleText("static");
+	};
+
+	void EditorUI::Create()
+	{
+		EditorMenuBar::Create();
+		EditorWindows::Create();
+		infoText.create_static("", "tahoma_15px", 10.f, -40.f, "left", "middle", glm::vec4(255.f));
+	}
+
+	void EditorUI::Render(bool picking)
+	{
+		if (picking)
 		{
-			EditorWindows::Render(true);
-			EditorMenuBar::Render(true); 
+			if (Engine::Mouse::LeftClick || Engine::Mouse::RightClick)
+			{
+				EditorWindows::Render(true);
+				EditorMenuBar::Render(true);
+			}
+		}
+		else
+		{
+			EditorWindows::Render(false);
+			EditorMenuBar::Render(false);
+			infoText.render_static();
 		}
 	}
-	else
+	void UpdateInfoText(std::string infotext)
 	{
-		EditorWindows::Render(false);
-		EditorMenuBar::Render(false);
+		infoText.SetNewText(infotext);
 	}
-}
+};
+
+

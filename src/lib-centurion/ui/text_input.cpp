@@ -33,10 +33,9 @@ namespace gui {
 		rectangle = gui::Rectangle();
 		rectangle.create("border-filled", xPos, yPos, (float)width, rectHeight, "bottom-left", picking_id);
 
-		for (int i = 0; i < TEXT_INPUT_MAX_CHARS_DEFAULT; i++)
-		{
-			currentText[i] = 0;
-		}
+		for (int i = 0; i < TEXT_INPUT_MAX_CHARS_DEFAULT; i++) currentText[i] = 0;
+		for (int i = 0; i < placeholderText.size(); i++) currentText[i] = (int)placeholderText[i];
+
 	}
 
 	void TextInput::Render(bool picking) {
@@ -101,6 +100,13 @@ namespace gui {
 			}
 		}
 		static_text.create_static(currentText, cursorPosition + 1, "tahoma_15px", xPos, yPos, "left", "normal", vec4(255.f));
+	}
+
+	void TextInput::UpdatePlaceholder(std::string newPlaceholder)
+	{
+		static_text.SetNewText(newPlaceholder);
+		for (int i = 0; i < TEXT_INPUT_MAX_CHARS_DEFAULT; i++) currentText[i] = 0;
+		for (int i = 0; i < newPlaceholder.size(); i++) currentText[i] = (int)newPlaceholder[i];
 	}
 
 	TextInput::~TextInput() {}

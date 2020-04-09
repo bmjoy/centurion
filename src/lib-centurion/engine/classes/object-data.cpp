@@ -239,7 +239,7 @@ namespace ObjectData
 					std::string editorFilter3 = objData.GetClassName();
 					if (objData.GetClassType() == "cpp_buildingclass" || objData.GetClassType() == "cpp_decorationclass" || objData.GetClassType() == "cpp_unitclass")
 					{
-						Game::Editor::AddEditorTreeElement(editorFilter1, editorFilter2, editorFilter3);
+						Game::Editor::AddEditorObjectTreeElement(editorFilter1, editorFilter2, editorFilter3);
 					}
 				}
 
