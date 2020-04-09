@@ -261,7 +261,7 @@ namespace Game
 				}
 				else if (type == "units")
 				{
-					Editor::tmpObject = new Unit();
+					//Editor::tmpObject = new Unit();
 				}
 				else if (type == "decorations")
 				{

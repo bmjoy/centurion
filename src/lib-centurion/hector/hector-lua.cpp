@@ -93,6 +93,8 @@ void Hector::Initialize()
 	getGlobalNamespace(L)
 		.beginClass<GObject>("Object")
 		.addFunction("GetClassName", &GObject::GetClassName)
+		.addFunction("GetScriptName", &GObject::GetScriptName)
+		.addFunction("SetScriptName", &GObject::SetScriptName)
 		.endClass();
 
 	getGlobalNamespace(L)
@@ -106,6 +108,11 @@ void Hector::Initialize()
 		.beginClass<gui::TextList>("TextList")
 		.addFunction("GetSelectedOption", &gui::TextList::GetSelectedOption)
 		.endClass();	
+
+	getGlobalNamespace(L)
+		.beginClass<gui::TextInput>("TextInput")
+		.addFunction("GetText", &gui::TextInput::GetText)
+		.endClass();
 
 	getGlobalNamespace(L)
 		.beginClass<gui::Iframe>("Iframe")

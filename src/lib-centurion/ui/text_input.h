@@ -80,7 +80,9 @@ namespace gui {
 		bool displayRectangle;
 
 		gui::Rectangle text_cursor;
-		gui::SimpleText static_text;
+		gui::SimpleText placeholder_text;
+		std::string placeholder_font;
+		std::string placeholder_font_weight;
 		bool isActive;
 		float xPos, yPos;
 		int cursorPosition;

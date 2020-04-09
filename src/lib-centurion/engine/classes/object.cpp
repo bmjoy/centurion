@@ -11,15 +11,17 @@ using namespace std;
 using namespace glm;
 
 
-GObject::GObject()
+GObject::GObject(void)
 {
-	bSelected = false;
+	this->bSelected = false;
+	this->scriptName = "Clarissa";
 }
 
 unsigned short int GObject::GetPlayer(void)
 {
 	return this->playerID;
 }
+
 void GObject::SetPlayer(const unsigned short int par_playerID)
 {
 	// DA SISTEMARE !
@@ -30,6 +32,7 @@ bool GObject::IsSelected(void)
 {
 	return this->bSelected;
 }
+
 void GObject::Select(void)
 {
 	this->bSelected = true;
@@ -39,6 +42,7 @@ unsigned int GObject::GetPickingID(void)
 {
 	return this->pickingID;
 }
+
 void GObject::SetPickingID(const unsigned int par_pickingID)
 {
 	this->pickingID = par_pickingID;
@@ -52,6 +56,7 @@ float GObject::GetRadius(void)
 {
 	return this->radius;
 }
+
 void GObject::SetRadius(const float par_radius)
 {
 	this->radius = par_radius;
@@ -61,6 +66,7 @@ float GObject::GetSelectionRadius(void)
 {
 	return this->selectionRadius;
 }
+
 void GObject::SetSelectionRadius(const float par_selectionRadius)
 {
 	this->selectionRadius = par_selectionRadius >= 0 ? par_selectionRadius : 0;
@@ -70,6 +76,7 @@ string GObject::GetClassName(void) const
 {
 	return this->className;
 }
+
 void GObject::SetClassName(string parClassName) 
 {
 	this->className = parClassName;
@@ -79,6 +86,7 @@ string GObject::GetType(void)
 {
 	return this->type;
 }
+
 void GObject::SetType(const string par_type)
 {
 	this->type = par_type;
@@ -88,6 +96,7 @@ void GObject::SetSingularName(const string par_singularName)
 {
 	this->singularName = par_singularName;
 }
+
 string GObject::GetSingularName(void)
 {
 	return this->singularName;
@@ -97,9 +106,21 @@ void GObject::SetPluralName(const string par_pluralName)
 {
 	this->pluralName = par_pluralName;
 }
+
 string GObject::GetPluralName(void)
 {
 	return this->pluralName;
+}
+
+void GObject::SetScriptName(const std::string _scriptName)
+{
+	//(???) TODO: verifica univocita' stringa.
+	this->scriptName = _scriptName;
+}
+
+std::string GObject::GetScriptName(void)
+{
+	return this->scriptName;
 }
 
 unsigned int GObject::GetRace(void)
@@ -194,6 +215,11 @@ void GObject::UpdatePass(void)
 void GObject::ClearPass(void) 
 {
 	Pass::UpdateObjectPass(this->pass_grid, this->position, PASS_CLEAR);
+}
+
+bool GObject::IsPlaceable(void)
+{
+	return this->bIsPlaceable;
 }
 
 bool GObject::Create(const string _className, const bool _temporary)

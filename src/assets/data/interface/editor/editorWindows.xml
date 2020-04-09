@@ -111,17 +111,26 @@
     <openingScript>
       -- lua script
       Iframe.GetIframeById(3):UpdateStringBySimpleTextId(1, Selo():GetClassName())
-      Iframe.GetIframeById(3):UpdateTextInputPlaceholder(0, "ciao")
+      Iframe.GetIframeById(3):UpdateTextInputPlaceholder(0, Selo():GetScriptName())
     </openingScript>
     <simpleTextArray>
       <simpleText id="0" name="Class name: " xOffset="20" yOffset="-80" />
       <simpleText id="1" name="" xOffset="150" yOffset="-80" />
       <simpleText id="2" name="Object name: " xOffset="20" yOffset="-110" />
     </simpleTextArray>
-    <buttonArray></buttonArray>
+    <buttonArray>
+	  <button text="WORD_Save" xOffset="520" yOffset="30">
+	    <onclickScript>
+		 -- lua script
+		 Selo():SetScriptName(Iframe.GetIframeById(3):GetTextInputById(0):GetText())
+		 PrCmd(Iframe.GetIframeById(3):GetTextInputById(0):GetText())
+		 Editor.CloseWindow(3)
+	    </onclickScript>
+	  </button>
+	</buttonArray>
     <textListArray></textListArray>
     <textInputArray>
-      <textInput textInputId="0" xOffset="150" yOffset="-110" width="200" placeholder="Ciao" />
+      <textInput textInputId="0" xOffset="150" yOffset="-110" width="200" placeholder=""/>
     </textInputArray>
   </editorWindow>
 

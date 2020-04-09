@@ -136,6 +136,18 @@ public:
 	std::string GetPluralName(void);
 
 	/// <summary>
+	/// This function sets the script name of the current object. If the script name is already used, it will be setted using empty string.
+	/// </summary>
+	/// <param name="_scriptName">The script name of the current object. It must be univocal. </param>
+	void SetScriptName(const std::string _scriptName);
+
+	/// <summary>
+	/// This function return the univocal script name of the current object.
+	/// </summary>
+	/// <returns>The script name of the current object; if the current object doesn't have a script name, an empty string will be returned.</returns>
+	std::string GetScriptName(void);
+	
+	/// <summary>
 	/// This function returns the race ID of the current object.
 	/// </summary>
 	/// <returns>The race Id of the current object.</returns>
@@ -290,7 +302,7 @@ public:
 	void MarkAsMoving(void) { bIsBeingMoved = true; }
 	void MarkAsNotMoving(void) { bIsBeingMoved = false; }
 	bool IsBeingMoved(void) { return bIsBeingMoved; }
-	bool IsPlaceable(void) { return bIsPlaceable; }
+	bool IsPlaceable(void);
 
 	/// <summary>
 	/// This function create a specific object.
@@ -301,9 +313,9 @@ public:
 	bool Create(const std::string _className, const bool _temporary = false);
 
 	/// <summary>
-	/// This function perfoms the rendering of the current object. It must be overread.
+	/// This abstract function perfoms the rendering of the current object. It must be overread.
 	/// </summary>
-	virtual void Render(const bool picking, const unsigned int clickID = 0) {};
+	virtual void Render(const bool picking, const unsigned int clickID = 0) = 0;
 
 #pragma region Static members
 
@@ -390,9 +402,9 @@ protected:
 #pragma region Protected members
 	
 	/// /// <summary>
-	/// Protected method that checks if the object is placeable and sets the relative protected boolean
+	/// Protected and abstract method that checks if the object is placeable and sets the relative protected boolean
 	/// </summary>
-	virtual void CheckIfPlaceable(void) {}
+	virtual void CheckIfPlaceable(void) = 0;
 	
 	bool bIsPlaceable = false;
 	Pass::PassGrid* pass_grid;
@@ -428,10 +440,11 @@ private:
 	glm::vec3 position;
 	std::string singularName;
 	std::string pluralName;
+	std::string scriptName;
 	std::string raceName;
 	std::string className;
 	std::string type;
-	bool bSelected = false;
+	bool bSelected;
 	bool bIsWaterObject = false;
 	bool canBeClonedInEditor = false;
 	bool bAlwaysVisibleInGameMinimap = false;
