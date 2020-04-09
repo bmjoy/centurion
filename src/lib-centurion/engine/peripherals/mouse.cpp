@@ -37,24 +37,36 @@ namespace Engine
 				bool bIsTimeSaved = false;
 			} leftHoldClickData, rightHoldClickData, middleHoldClickData;
 
-			gui::Image img = gui::Image();
+			gui::Image cursorImage = gui::Image();
 			glm::vec3 position = glm::vec3();
 			int currentState = CURSOR_DEFAULT;
 			float znoise = 0, yzoomed = 0, xPosGrid = 0, yPosGrid = 0, xLeftClick = 0, yLeftClick = 0, xRightClick = 0, yRightClick = 0, y2DPosition = 0, y2DRightClick = 0;
 
+			gui::Circle cursorCircle = gui::Circle();
+
+			int CURSOR_TYPE = CURSOR_TYPE_DEFAULT;
 		};
 
 		void Engine::Mouse::Create(void) {
-			img = gui::Image("circle_pos");
-			img.create("center", 0.f, 0.f, 0, 0, 0);
+			cursorImage = gui::Image("circle_pos");
+			cursorImage.create("center", 0.f, 0.f, 0, 0, 0);
+
+			cursorCircle.create(0, 0, 80, 50, 3, "bottom-left");
 		}
 
 		void Render(void) {
-			GLItems::Cursor()->render(position.x, position.y, currentState);
+			if (CURSOR_TYPE == CURSOR_TYPE_DEFAULT)
+			{
+				GLItems::Cursor()->render(position.x, position.y, currentState);
+			}
+			else if (CURSOR_TYPE == CURSOR_TYPE_CIRCLE)
+			{
+				cursorCircle.render(glm::vec4(255.f), position.x, position.y);
+			}
 
 			if (Engine::GetEnvironment() == STRATEGY_ENV) {
 				if (Game::Minimap::IsActive() == false) {
-					img.render(false, position.x, y2DPosition);
+					cursorImage.render(false, position.x, y2DPosition);
 				}
 			}
 		}
@@ -216,6 +228,13 @@ namespace Engine
 						Mouse::MiddleHold = false;
 					}
 				}
+			}
+		}
+		void ChangeCursorType(const int type)
+		{
+			if (type == CURSOR_TYPE_DEFAULT || type == CURSOR_TYPE_CIRCLE)
+			{
+				CURSOR_TYPE = type;
 			}
 		}
 	};

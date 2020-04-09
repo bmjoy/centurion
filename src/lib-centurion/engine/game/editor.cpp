@@ -373,10 +373,14 @@ namespace Game
 					changingTerrain.type = -1.f;
 					return;
 				}
+
+				// This part of code is executed when you are BEGINNING the terrain change
+				Game::Minimap::Update();
 				changingTerrain.type = (float)editorTerrainMap[type];
 				EditorMenuBar::Hide();
 				EditorWindows::Hide();
 				EditorUI::UpdateInfoText("Press the mouse right button to cancel the operation");
+				Engine::Mouse::ChangeCursorType(CURSOR_TYPE_CIRCLE);
 				return;
 			}
 
@@ -384,14 +388,20 @@ namespace Game
 
 			if (Engine::Mouse::RightClick == true)
 			{
+				// This part of code is executed when you are FINISHING the terrain change
 				changingTerrain.isActive = false;
 				EditorMenuBar::Show();
 				EditorWindows::Show();
 				EditorUI::UpdateInfoText("");
+				Engine::Mouse::ChangeCursorType(CURSOR_TYPE_DEFAULT);
 				return;
 			}
 
+			if (changingTerrain.isActive == false) return;
+
 			if (Engine::Mouse::LeftClick == false && Engine::Mouse::LeftHold == false) return;
+
+			// This part of code is executed when you are DOING the terrain change
 
 			float xPos = Engine::Mouse::GetXMapCoordinate();
 			float yPos = Engine::Mouse::GetYMapCoordinate();
@@ -405,7 +415,6 @@ namespace Game
 			if (mapgen::MapTextures()[j] != changingTerrain.type) {
 				mapgen::MapTextures()[j] = changingTerrain.type;
 				GLItems::MapTerrain()->updateTextureBuffer();
-				//Game::Minimap::Update();
 			}
 		}
 

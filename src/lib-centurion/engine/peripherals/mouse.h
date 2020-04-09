@@ -13,6 +13,14 @@
 #define TIME_LEFT_HOLD 0.10f
 #endif
 
+#ifndef CURSOR_TYPE_DEFAULT
+#define CURSOR_TYPE_DEFAULT 0
+#endif
+
+#ifndef CURSOR_TYPE_CIRCLE
+#define CURSOR_TYPE_CIRCLE 1
+#endif
+
 namespace Engine 
 {
 	/// <summary>
@@ -104,6 +112,12 @@ namespace Engine
 		/// <param name="button"></param>
 		/// <param name="action"></param>
 		void Input(const int button, const int action);
+
+		/// <summary>
+		///  This method changes the cursor type
+		/// </summary>
+		/// <param name="type">This value indicates the type. Accepted values are CURSOR_TYPE_DEFAULT or CURSOR_TYPE_CIRCLE</param>
+		void ChangeCursorType(const int type = CURSOR_TYPE_DEFAULT);
 
 		// Properties
 		extern bool LeftClick;
