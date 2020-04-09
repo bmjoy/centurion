@@ -21,8 +21,7 @@ layout (location = 4) in float terrain;
 uniform mat4 projection;
 uniform mat4 view;
 uniform float scaleTextX;
-uniform float scaleTextY ;
-uniform int minimap;
+uniform float scaleTextY;
 
 /* Tracing */
 

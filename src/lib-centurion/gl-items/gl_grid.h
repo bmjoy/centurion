@@ -10,7 +10,6 @@
 #define GL_GRID_H
 
 #include "gl_shader.h"
-#include <game/game.h>
 
 /// <summary>
 /// This class is used to render the PASS grid.

@@ -29,7 +29,6 @@ in float terrainType;
 uniform int nTerrains;
 uniform DirectionalLight directionalLight;
 uniform int wireframe;
-uniform int minimap;
 
 /* Tracing */
 
