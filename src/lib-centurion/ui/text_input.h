@@ -10,11 +10,7 @@
 #define TEXT_INPUT_H
 
 #ifndef TEXT_INPUT_MAX_CHARS_DEFAULT
-#define TEXT_INPUT_MAX_CHARS_DEFAULT 100
-#endif 
-
-#ifndef MAX_NUMBER_OF_TEXT_INPUTS
-#define MAX_NUMBER_OF_TEXT_INPUTS 100
+#define TEXT_INPUT_MAX_CHARS_DEFAULT 200
 #endif 
 
 #include <gl_items.h>
@@ -71,24 +67,6 @@ namespace gui {
 		/// <returns></returns>
 		std::string GetText(void);
 
-#pragma region Static methods
-
-		/// <summary>
-		/// This function adds a text input to the static array
-		/// </summary>
-		/// <param name="id">The TextInput Id</param>
-		/// <param name="txtList">The Text input</param>
-		static void AddTextInputToArray(int id, TextInput* txtInput);
-
-		/// <summary>
-		/// This funtion gets the text input from the array using its ID.
-		/// </summary>
-		/// <param name="id">The TextInput Id</param>
-		/// <returns>Returns a pointer to the required TextInput.</returns>
-		static TextInput* GetTextInputById(int id);
-
-#pragma endregion
-
 		~TextInput();
 	private:
 		gui::Rectangle rectangle;
@@ -101,10 +79,8 @@ namespace gui {
 		float xPos, yPos;
 		int cursorPosition;
 		int max_chars;
-		int currentText[100];
+		int currentText[TEXT_INPUT_MAX_CHARS_DEFAULT];
 		unsigned int id;
-
-		static std::array<TextInput*, MAX_NUMBER_OF_TEXT_INPUTS> TextInputs;
 	};
 };
 

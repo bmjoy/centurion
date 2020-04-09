@@ -13,7 +13,6 @@ using namespace std;
 using namespace glm;
 
 namespace gui {
-	array<TextList*, MAX_NUMBER_OF_TEXT_LISTS> TextList::TextLists = { nullptr };
 
 	TextList::TextList() {
 		optionsHeight = 25.f;
@@ -29,23 +28,6 @@ namespace gui {
 		deltaY = 0;
 	}
 
-	void TextList::AddTextListToArray(int id, TextList * txtList)
-	{
-		if (id < 0 || id > MAX_NUMBER_OF_TEXT_LISTS) return;
-		TextLists[id] = txtList;
-	}
-
-	TextList * TextList::GetTextListById(int id)
-	{
-		if (id < 0 || id > MAX_NUMBER_OF_TEXT_LISTS) return nullptr;
-		return TextLists[id];
-	}
-
-	void TextList::UpdateTextListById(int id, vector<string>* _options, const std::string prefix)
-	{
-		TextLists[id]->Update(_options, prefix);
-	}
-
 	void TextList::Create(int _id, int _x, int _y, string _font, vec4 _color, vec4 _backColor, int _pickingId, const std::string & luaCmd, const unsigned int _maxOptions, const unsigned int _borderWidth) {
 		id = _id;
 		x = _x;
@@ -57,7 +39,6 @@ namespace gui {
 		luaCommand = luaCmd;
 		maxOptions = _maxOptions;
 		borderWidth = _borderWidth;
-		AddTextListToArray(this->id, this);
 	}
 
 	void TextList::Update(vector<string> *_options, const std::string prefix)

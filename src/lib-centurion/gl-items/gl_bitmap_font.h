@@ -33,9 +33,12 @@ public:
 		std::vector<float> Y; // Vector with all Y-coordinates of each letter
 		std::vector<Character> charList;
 		std::vector<int> charsWidth;
+		std::string fontName;
+		std::string text;
 		GLint textureID;
 		glm::vec4 color;
 		float y;
+		float startX, startY;
 		int textSize;
 		int totalWidth;
 		int startChar;
@@ -59,6 +62,11 @@ public:
 	/// This function initializes and creates the BitmapFont shader with all fonts and settings.
 	/// </summary>
 	void create();
+
+	/// <summary>
+	/// This function updates the character list of a given static text data
+	/// </summary>
+	void UpdateText(StaticTextData* data, std::string new_text);
 
 	/// <summary>
 	/// This function provides static data for static text. 

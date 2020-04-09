@@ -32,7 +32,4 @@ namespace Game {
 		std::string zone;
 		std::string t_class;
 	};
-
-	extern std::vector<std::string> racesName;
-	extern std::map<std::string, Race> races;
 };

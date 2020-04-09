@@ -143,6 +143,31 @@ void glBitmapFont::create() {
 	}
 }
 
+void glBitmapFont::UpdateText(StaticTextData* data, std::string new_text)
+{
+	int fontID, letterspacing = 0;
+	fontID = fontIdMap[data->fontName];
+
+	int totw = 0;
+	(*data).text = "";
+	(*data).X.clear();
+	(*data).Y.clear();
+	(*data).charList.clear();
+	(*data).charsWidth.clear();
+	(*data).textSize = (int)new_text.size();
+	for (int i = 0; i < (*data).textSize; i++) {
+
+		GLint codepoint = GLint(new_text[i]);
+
+		(*data).X.push_back(data->startX + totw);
+		(*data).Y.push_back(data->startY - fontData[fontID][codepoint].line_height);
+		(*data).charList.push_back(fontData[fontID][codepoint]);
+		(*data).charsWidth.push_back(fontData[fontID][codepoint].xadvance + letterspacing);
+		(*data).text += (char)new_text[i];
+		totw += (fontData[fontID][codepoint].xadvance + letterspacing);
+	}
+}
+
 void glBitmapFont::render_dynamic(string &font, float xPos, float yPos, string &text, vec4 &color, bool shadow, bool bold) {
 	
 	int fontID;
@@ -224,7 +249,9 @@ glBitmapFont::StaticTextData glBitmapFont::create_static(string &font, const cha
 	int fontID, letterspacing = 0;
 	fontID = fontIdMap[font];
 	static_data.textureID = textureIdMap[font];
-
+	static_data.fontName = font;
+	static_data.startX = x;
+	static_data.startY = y;
 	/*if (Settings::Language == "arabic" && this->isArabic((GLint)wtext[0])) {
 		if (!bold) {
 			fontID = fontIdMap["arabic_16px"];
@@ -242,6 +269,7 @@ glBitmapFont::StaticTextData glBitmapFont::create_static(string &font, const cha
 	size_t textSize = string(text).size();
 
 	int totw = 0;
+	static_data.text = "";
 	for (int i = 0; i < textSize; i++) {
 
 		GLint codepoint;
@@ -252,6 +280,7 @@ glBitmapFont::StaticTextData glBitmapFont::create_static(string &font, const cha
 		static_data.Y.push_back(y - line_number * fontData[fontID][codepoint].line_height);
 		static_data.charList.push_back(fontData[fontID][codepoint]);
 		static_data.charsWidth.push_back(fontData[fontID][codepoint].xadvance + letterspacing);
+		static_data.text += (char)text[i];
 		totw += (fontData[fontID][codepoint].xadvance + letterspacing);
 	}
 	static_data.totalWidth = totw;
@@ -268,10 +297,14 @@ glBitmapFont::StaticTextData glBitmapFont::create_static(std::string & font, con
 	int fontID, letterspacing = 0;
 	fontID = fontIdMap[font];
 	static_data.textureID = textureIdMap[font];
+	static_data.fontName = font;
+	static_data.startX = x;
+	static_data.startY = y;
 
 	size_t textSize = wstring(text).size();
 
 	int totw = 0;
+	static_data.text = "";
 	for (int i = 0; i < textSize; i++) {
 
 		GLint codepoint;
@@ -282,6 +315,7 @@ glBitmapFont::StaticTextData glBitmapFont::create_static(std::string & font, con
 		static_data.Y.push_back(y - line_number * fontData[fontID][codepoint].line_height);
 		static_data.charList.push_back(fontData[fontID][codepoint]);
 		static_data.charsWidth.push_back(fontData[fontID][codepoint].xadvance + letterspacing);
+		static_data.text += (char)text[i];
 		totw += (fontData[fontID][codepoint].xadvance + letterspacing);
 	}
 	static_data.totalWidth = totw;
@@ -289,6 +323,7 @@ glBitmapFont::StaticTextData glBitmapFont::create_static(std::string & font, con
 	// other information
 	static_data.textSize = (int)textSize;
 	static_data.fontHeight = 18;
+
 	return static_data;
 }
 
@@ -298,16 +333,21 @@ glBitmapFont::StaticTextData glBitmapFont::create_static(string &font, const int
 	int fontID, letterspacing = 0;
 	fontID = fontIdMap[font];
 	static_data.textureID = textureIdMap[font];
-	
+	static_data.fontName = font;
+	static_data.startX = x;
+	static_data.startY = y;
+
 	// x positions, chars and total width
 	
 	int totw = 0;
+	static_data.text = "";
 	for (int i = 0; i < textSize; i++) {
 		GLint codepoint = GLint(codepoints[i]);
 		static_data.X.push_back(x + totw);
 		static_data.Y.push_back(y - line_number * fontData[fontID][codepoint].line_height);
 		static_data.charList.push_back(fontData[fontID][codepoint]);
 		static_data.charsWidth.push_back(fontData[fontID][codepoint].xadvance + letterspacing);
+		static_data.text += (char)codepoint;
 		totw += (fontData[fontID][codepoint].xadvance + letterspacing);
 	}	
 	static_data.totalWidth = totw;

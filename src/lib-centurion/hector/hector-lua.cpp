@@ -88,7 +88,7 @@ void Hector::Initialize()
 
 	getGlobalNamespace(L)
 		.beginNamespace("Game")
-		.addFunction("GetSelectedObject", &Game::GetSelectedObject)
+		.addFunction("Selo", &Game::GetSelectedObject)
 		.addFunction("IsObjectSelected", &Game::IsGameObjectSelected)
 		.addFunction("IsObjectNotNull", &Game::IsGameObjectNotNull)
 		.addFunction("CreateObject", &Game::CreateObject)
@@ -97,9 +97,17 @@ void Hector::Initialize()
 	getGlobalNamespace(L)
 		.beginClass<gui::TextList>("TextList")
 		.addFunction("GetSelectedOption", &gui::TextList::GetSelectedOption)
-		.addStaticFunction("GetListById", gui::TextList::GetTextListById)
-		.addStaticFunction("UpdateListById", &gui::TextList::UpdateTextListById)
 		.endClass();	
+
+	getGlobalNamespace(L)
+		.beginClass<gui::Iframe>("Iframe")
+		.addStaticFunction("GetIframeById", &gui::Iframe::GetIframeById)
+		.addFunction("GetTextListById", &gui::Iframe::GetTextListById)
+		.addFunction("GetTextInputById", &gui::Iframe::GetTextInputById)
+		.addFunction("UpdateTextListById", &gui::Iframe::UpdateTextListById)
+		.addFunction("GetStringBySimpleTextId", &gui::Iframe::GetStringBySimpleTextId)
+		.addFunction("UpdateStringBySimpleTextId", &gui::Iframe::UpdateStringBySimpleTextId)
+		.endClass();
 }
 
 void Hector::ExecuteCommand(string cmd)
@@ -216,9 +224,9 @@ void Hector::Console::Create()
 {
 	TEXTINPUT_ID = MAX_NUMBER_OF_TEXT_INPUTS - 1;
 	iframe = gui::Iframe("console");
-	iframe.Create(30, 30, (int)Engine::myWindow::Width - 60, 30);
+	iframe.Create(MAX_NUMBER_OF_IFRAMES - 1, 30, 30, (int)Engine::myWindow::Width - 60, 30);
 	iframe.AddTextInput(TEXTINPUT_ID, 5, 5, (int)Engine::myWindow::Width - 60);
-	gui::TextInput::GetTextInputById(TEXTINPUT_ID)->Enable();
+	iframe.GetTextInputById(TEXTINPUT_ID)->Enable();
 	isOpened = false;
 }
 
@@ -239,11 +247,11 @@ void Hector::Console::Render(bool picking)
 	}
 	
 	iframe.Render();
-	string cmd = gui::TextInput::GetTextInputById(TEXTINPUT_ID)->GetText();
+	string cmd = iframe.GetTextInputById(TEXTINPUT_ID)->GetText();
 	if (Engine::Keyboard::IsKeyPressed(GLFW_KEY_ENTER)) {
 		if (cmd.size() > 0) {
 			ExecuteCommand(cmd);
-			gui::TextInput::GetTextInputById(TEXTINPUT_ID)->Reset();
+			iframe.GetTextInputById(TEXTINPUT_ID)->Reset();
 		}
 	}
 	

@@ -23,6 +23,11 @@ namespace gui {
 		shadow = Shadow;
 	}
 
+	void SimpleText::SetNewText(std::string newText)
+	{
+		GLItems::Text()->UpdateText(&staticData, newText);
+	}
+
 	void SimpleText::create_static(string text, string font, float x, float y, string halign, string valign, vec4 color, string fontWeight) {
 		if (type == "dynamic") Logger::Info("Dynamic text created with static option");
 		if (x < 0) x += Engine::myWindow::Width;

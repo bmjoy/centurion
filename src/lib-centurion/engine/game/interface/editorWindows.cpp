@@ -129,8 +129,10 @@ namespace EditorWindows
 			for (tinyxml2::XMLElement* _it_wind = xmlFile.FirstChildElement("editorWindows")->FirstChildElement(); _it_wind != NULL; _it_wind = _it_wind->NextSiblingElement())
 			{
 				EditorWindow* eWind = new EditorWindow();
+				gui::Iframe iframe = gui::Iframe(_it_wind->Attribute("iframe"));
 
 				int id = _it_wind->IntAttribute("id");
+				int iframe_id = _it_wind->IntAttribute("iframe_id");
 
 				string isOpenedStr = _it_wind->Attribute("isOpened");
 				bool isOpened = (isOpenedStr == "true");
@@ -138,14 +140,13 @@ namespace EditorWindows
 				string luaConditionCMD = _it_wind->FirstChildElement("conditionScript")->GetText();
 				string luaConditionFun = _it_wind->FirstChildElement("conditionScript")->Attribute("function");
 
-				gui::Iframe iframe = gui::Iframe(_it_wind->Attribute("iframe"));
 
 				string sizeScript = _it_wind->Attribute("size");
 				string positionScript = _it_wind->Attribute("position");
 				wstring iframeTitle = TranslationsTable::GetWTranslation(_it_wind->Attribute("name"));
 
-
-				iframe.Create(sizeScript + positionScript, iframeTitle);
+				iframe.Create(iframe_id, sizeScript + positionScript, iframeTitle);
+				
 
 				// buttons
 				for (tinyxml2::XMLElement* _it_btn = _it_wind->FirstChildElement("buttonArray")->FirstChildElement(); _it_btn != NULL; _it_btn = _it_btn->NextSiblingElement())
@@ -186,16 +187,20 @@ namespace EditorWindows
 				// simple texts
 				for (tinyxml2::XMLElement* _it_txt = _it_wind->FirstChildElement("simpleTextArray")->FirstChildElement(); _it_txt != NULL; _it_txt = _it_txt->NextSiblingElement())
 				{
+					int textId = _it_txt->IntAttribute("id");
 					int xOffset = _it_txt->IntAttribute("xOffset");
 					int yOffset = _it_txt->IntAttribute("yOffset");
 					std::wstring wtext = TranslationsTable::GetWTranslation(_it_txt->Attribute("name"));
-					iframe.AddText(wtext, xOffset, yOffset);
+					iframe.AddText(textId, wtext, xOffset, yOffset);
 				}
 
 				eWind->Create(luaOpeningCMD, luaConditionCMD, luaConditionFun, iframe);
+				gui::Iframe::AddIframe(iframe_id, eWind->GetIframePtr());
+
 				if (isOpened) eWind->Open();
 
 				AddWindow(id, eWind);
+
 			}
 			isHidden = false;
 		}
@@ -270,7 +275,13 @@ namespace EditorWindows
 
 	void EditorWindows::AddWindow(const unsigned int id, EditorWindow * win)
 	{
+		if (id < 0 || id >= MAX_NUMBER_OF_EDITOR_WINDOWS) return;
 		EditorWindows::listOfWindows[id] = win;
+	}
+	EditorWindow* GetWindowById(const unsigned int id)
+	{
+		if (id < 0 || id >= MAX_NUMBER_OF_EDITOR_WINDOWS) return nullptr;
+		return EditorWindows::listOfWindows[id];
 	}
 };
 

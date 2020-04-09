@@ -10,10 +10,17 @@
 using namespace std;
 using namespace glm;
 
+std::array<gui::Iframe*, MAX_NUMBER_OF_IFRAMES> gui::Iframe::iframes = { nullptr };
+
 gui::Iframe::Iframe()
 {
 	backgroundIsCreated = false;
 	text_input_has_background = false;
+
+	listOfTextLists = { nullptr };
+	listOfTextInputs = { nullptr };
+	listOfTexts = { nullptr };
+	
 }
 
 gui::Iframe::Iframe(string _name)
@@ -21,59 +28,115 @@ gui::Iframe::Iframe(string _name)
 	name = _name;
 	backgroundIsCreated = false;
 	text_input_has_background = false;
+
+	listOfTextLists = { nullptr };
+	listOfTextInputs = { nullptr };
+	listOfTexts = { nullptr };
+}
+
+gui::Iframe* gui::Iframe::GetIframeById(const unsigned int _iframeId)
+{
+	if (_iframeId < 0 || _iframeId > MAX_NUMBER_OF_IFRAMES) return nullptr;
+	return iframes[_iframeId];
+}
+
+void gui::Iframe::AddIframe(const unsigned int _iframeId, Iframe* _iframe_ptr)
+{
+	if (_iframeId < 0 || _iframeId > MAX_NUMBER_OF_IFRAMES) return;
+	iframes[_iframeId] = _iframe_ptr;
 }
 
 void gui::Iframe::Clear()
 {
-	for (int i = 0; i < listOfTextLists.size(); i++) {
+	for (int i = 0; i < MAX_NUMBER_OF_TEXT_LISTS; i++) {
 		if (listOfTextLists[i] != nullptr) {
 			delete listOfTextLists[i];
 		}
 		listOfTextLists[i] = nullptr;
 	}
-	for (int i = 0; i < listOfTextInputs.size(); i++) {
+	for (int i = 0; i < MAX_NUMBER_OF_TEXT_INPUTS; i++) {
 		if (listOfTextInputs[i] != nullptr) {
 			delete listOfTextInputs[i];
 		}
 		listOfTextInputs[i] = nullptr;
 	}
-	listOfTexts.clear();
-	listOfButtons.clear();
-	listOfImages.clear();
+	for (int i = 0; i < MAX_NUMBER_OF_SIMPLE_TEXT; i++) {
+		if (listOfTexts[i] != nullptr) {
+			delete listOfTexts[i];
+		}
+		listOfTexts[i] = nullptr;
+	}
 }
 
-void gui::Iframe::AddButton(const std::wstring &text, const int xBtn, const int yBtn, const std::string &luaCmd)
+void gui::Iframe::AddButton(const std::wstring &text, int xBtn, int yBtn, const std::string &luaCmd)
 {
 	gui::Button btn = gui::Button();
 	int btnId = Picking::UI::ObtainPickingID();
+	if (xBtn < 0) xBtn = w + xBtn;
+	if (yBtn < 0) yBtn = h + yBtn;
 	btn.create(button_img_name, text, x + xBtn, y + yBtn, btnId, button_txt_color, luaCmd);
 	listOfButtons.push_back(btn);
 }
 
-void gui::Iframe::AddText(const std::wstring & wtext, const int xPos, const int yPos)
+void gui::Iframe::AddText(const unsigned int _textId, const std::wstring & wtext, int xPos, int yPos)
 {
-	gui::SimpleText txt = gui::SimpleText("static");
-	txt.create_static(wtext, "tahoma_13px", 1.f * x + xPos, 1.f * y + yPos, "left", "normal", glm::vec4(255.f));
-	listOfTexts.push_back(txt);
+	gui::SimpleText * txt = new gui::SimpleText("static");
+	if (xPos < 0) xPos = w + xPos;
+	if (yPos < 0) yPos = h + yPos;
+	txt->create_static(wtext, "tahoma_13px", 1.f * x + xPos, 1.f * y + yPos, "left", "normal", glm::vec4(255.f));
+	listOfTexts[_textId] = txt;
 }
 
-void gui::Iframe::AddTextList(const int textListId, const int xPos, const int yPos, const std::string & luaCmd, const unsigned int maxOptions, const unsigned int borderWidth)
+std::string gui::Iframe::GetStringBySimpleTextId(const unsigned int _textId)
+{
+	if (_textId < 0 || _textId > MAX_NUMBER_OF_SIMPLE_TEXT) return "";
+	return listOfTexts[_textId]->GetString();
+}
+
+void gui::Iframe::UpdateStringBySimpleTextId(const unsigned int _textId, std::string _newText)
+{
+	if (_textId < 0 || _textId > MAX_NUMBER_OF_SIMPLE_TEXT) return;
+	listOfTexts[_textId]->SetNewText(_newText);
+}
+
+void gui::Iframe::AddTextList(const int textListId, int xPos, int yPos, const std::string & luaCmd, const unsigned int maxOptions, const unsigned int borderWidth)
 {
 	gui::TextList* _list = new gui::TextList();
 	int txtListPickingId = Picking::UI::ObtainPickingID();
+	if (xPos < 0) xPos = w + xPos;
+	if (yPos < 0) yPos = h + yPos;
 	_list->Create(textListId, x + xPos, y + yPos, text_list_font, text_list_color, text_list_background, txtListPickingId, luaCmd, maxOptions, borderWidth);
-	listOfTextLists.push_back(_list);
+	listOfTextLists[textListId] = _list;
 }
 
-void gui::Iframe::AddTextInput(const int textInputId, const int xPos, const int yPos, const int width, std::wstring placeholderText)
+gui::TextList* gui::Iframe::GetTextListById(int id)
+{
+	if (id < 0 || id > MAX_NUMBER_OF_TEXT_LISTS) return nullptr;
+	return listOfTextLists[id];
+}
+
+void gui::Iframe::UpdateTextListById(int id, std::vector<std::string>* _options, const std::string prefix)
+{
+	listOfTextLists[id]->Update(_options, prefix);
+}
+
+void gui::Iframe::AddTextInput(const int textInputId, int xPos, int yPos, const int width, std::wstring placeholderText)
 {
 	gui::TextInput* _input = new gui::TextInput();
+	if (xPos < 0) xPos = w + xPos;
+	if (yPos < 0) yPos = h + yPos;
 	_input->Create(textInputId, Picking::UI::ObtainPickingID(), x + xPos, y + yPos, width, text_input_font, text_input_has_background, text_input_background, text_input_border, text_input_fontweight, placeholderText);
 	_input->Enable();
-	listOfTextInputs.push_back(_input);
+	listOfTextInputs[textInputId] = _input;
 }
 
-void gui::Iframe::Create(int xPos, int yPos, int width, int height, std::wstring iframe_title)
+gui::TextInput* gui::Iframe::GetTextInputById(int id)
+{
+	if (id < 0 || id > MAX_NUMBER_OF_TEXT_INPUTS) return nullptr;
+	return listOfTextInputs[id];
+}
+
+void gui::Iframe::Create(const unsigned int _iframeId, int xPos, int yPos, int width, int height, std::wstring iframe_title)
 {
 	w = width;
 	h = height;
@@ -86,7 +149,7 @@ void gui::Iframe::Create(int xPos, int yPos, int width, int height, std::wstring
 	ReadXml();
 }
 
-void gui::Iframe::Create(const std::string & LuaCommand, std::wstring iframe_title)
+void gui::Iframe::Create(const unsigned int _iframeId, const std::string & LuaCommand, std::wstring iframe_title)
 {
 	Hector::ExecuteCommand(LuaCommand);
 	Hector::GetIntegerVariable("x", &x);
@@ -144,15 +207,17 @@ void gui::Iframe::RenderTexts(bool picking)
 {
 	if (picking == true) return;
 
-	for (int i = 0; i < listOfTexts.size(); i++) {
-		listOfTexts[i].render_static();
+	for (auto t : listOfTexts) {
+		if (t == nullptr) continue;
+		t->render_static();
 	}
 }
 
 void gui::Iframe::RenderTextLists(bool picking)
 {
-	for (int i = 0; i < listOfTextLists.size(); i++) {
-		listOfTextLists[i]->Render(picking);
+	for (auto tl : listOfTextLists) {
+		if (tl == nullptr) continue;
+		tl->Render(picking);
 	}
 }
 
@@ -160,6 +225,7 @@ void gui::Iframe::RenderTextInputs(bool picking)
 {
 	for (auto ti : listOfTextInputs)
 	{
+		if (ti == nullptr) continue;
 		ti->Render(picking);
 	}
 }

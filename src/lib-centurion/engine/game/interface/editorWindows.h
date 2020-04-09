@@ -28,22 +28,27 @@ namespace EditorWindows
 		/// </summary>
 		/// <returns>True if it's opened; false otherwise.</returns>
 		bool IsOpened(void);
+
 		/// <summary>
 		/// This function opens a generic window.
 		/// </summary>
 		void Open(void); 
+
 		/// <summary>
 		/// This function toggles a generic window.
 		/// </summary>
 		void Toggle(void);
+
 		/// <summary>
 		/// This function closes a generic window.
 		/// </summary>
 		void Close(void);
+
 		/// <summary>
 		/// This function clears a genric window.
 		/// </summary>
 		void Clear(void);
+
 		/// <summary>
 		/// This funtio creates a generic window.
 		/// </summary>
@@ -52,11 +57,17 @@ namespace EditorWindows
 		/// <param name="_luaConditionFunction"></param>
 		/// <param name="_iframe"></param>
 		void Create(std::string _luaOpeningScript, std::string _luaConditionScript, std::string _luaConditionFunction, gui::Iframe _iframe);
+
 		/// <summary>
 		/// This function performs the rendiring of a generic window.
 		/// </summary>
 		/// <param name="picking">Checks if it's the picking phase.</param>
 		void Render(const bool picking);
+
+		/// <summary>
+		/// This function returns the iframe pointer
+		/// </summary>
+		gui::Iframe* GetIframePtr(void) { return &iframe; }
 	private:
 		gui::Iframe iframe;
 		bool isOpened;
@@ -132,4 +143,6 @@ namespace EditorWindows
 	/// <param name="id">The id of the window.</param>
 	/// <param name="win">The window.</param>
 	void AddWindow(const unsigned int id, EditorWindow* win);
+
+	EditorWindow* GetWindowById(const unsigned int id);
 };

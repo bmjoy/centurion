@@ -9,9 +9,7 @@
 #ifndef LIST_H
 #define LIST_H
 
-#ifndef MAX_NUMBER_OF_TEXT_LISTS
-#define MAX_NUMBER_OF_TEXT_LISTS 100
-#endif 
+
 
 #ifndef MAX_OPTIONS_DEFAULT
 #define MAX_OPTIONS_DEFAULT 0
@@ -75,30 +73,6 @@ namespace gui {
 		/// <param name="picking">Boolean: true = picking, false = normal rendering.</param>
 		void Render(bool picking);
 
-	#pragma region Static methods
-		/// <summary>
-		/// This function adds a text list to the array
-		/// </summary>
-		/// <param name="id">Id of the text list</param>
-		/// <param name="txtList">The TextList element to add</param>
-		static void AddTextListToArray(int id, TextList* txtList);
-
-		/// <summary>
-		/// This funtion gets the list text from the array
-		/// </summary>
-		/// <param name="id">Id of the text list</param>
-		/// <returns>Returns an element of type TextList</returns>
-		static TextList* GetTextListById(int id);
-
-		/// <summary>
-		/// This function updates an arbitrary TextList using its ID
-		/// </summary>
-		/// <param name="id">The id of the text list to update</param>
-		/// <param name="_options">List of options</param>
-		/// <param name="prefix">The prefix of the text (e.g. "WORD_" if the word has a translation with this prefix)</param>
-		static void UpdateTextListById(int id, std::vector<std::string> *_options, const std::string prefix = "");
-	#pragma endregion
-
 		~TextList();
 
 	private:
@@ -126,11 +100,7 @@ namespace gui {
 		// variables for scroll
 		int minX, maxX, minY, maxY;
 		float deltaY;
-
-		static std::array<TextList*, MAX_NUMBER_OF_TEXT_LISTS> TextLists;
 	};
 };
-
-
 
 #endif

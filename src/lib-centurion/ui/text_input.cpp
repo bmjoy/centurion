@@ -9,8 +9,6 @@ using namespace glm;
 
 namespace gui {
 
-	std::array<TextInput*, MAX_NUMBER_OF_TEXT_INPUTS> TextInput::TextInputs = { nullptr };
-
 	TextInput::TextInput() {
 		displayRectangle = true;
 	}
@@ -18,7 +16,7 @@ namespace gui {
 	void TextInput::Create(const int _id, const int picking_id, const int x, const int y, const int width, const std::string font, const bool hasBackground, glm::vec4 backCol, const glm::vec4 borderCol, const std::string fontWeight, const std::wstring placeholderText) {
 		xPos = (float)x; 
 		yPos = (float)y; 
-		max_chars = 100;
+		max_chars = TEXT_INPUT_MAX_CHARS_DEFAULT;
 		id = _id;
 		backColor = backCol;
 		borderColor = borderCol;
@@ -35,9 +33,10 @@ namespace gui {
 		rectangle = gui::Rectangle();
 		rectangle.create("border-filled", xPos, yPos, (float)width, rectHeight, "bottom-left", picking_id);
 
-		for (int i = 0; i < 100; i++) currentText[i] = 0;
-
-		TextInput::AddTextInputToArray(id, this);
+		for (int i = 0; i < TEXT_INPUT_MAX_CHARS_DEFAULT; i++)
+		{
+			currentText[i] = 0;
+		}
 	}
 
 	void TextInput::Render(bool picking) {
@@ -86,7 +85,7 @@ namespace gui {
 	std::string TextInput::GetText(void)
 	{
 		std::string text;
-		for (int i = 0; i < 100; i++) {
+		for (int i = 0; i < TEXT_INPUT_MAX_CHARS_DEFAULT; i++) {
 			if (currentText[i] != 0) {
 				text += (char)currentText[i];
 			}
@@ -96,24 +95,12 @@ namespace gui {
 
 	void TextInput::Reset(void)
 	{
-		for (int i = 0; i < 100; i++) {
+		for (int i = 0; i < TEXT_INPUT_MAX_CHARS_DEFAULT; i++) {
 			if (currentText[i] != 0) {
 				currentText[i] = 0;
 			}
 		}
 		static_text.create_static(currentText, cursorPosition + 1, "tahoma_15px", xPos, yPos, "left", "normal", vec4(255.f));
-	}
-
-	void TextInput::AddTextInputToArray(int id, TextInput * txtInput)
-	{
-		if (id < 0 || id > MAX_NUMBER_OF_TEXT_INPUTS) return;
-		TextInputs[id] = txtInput;
-	}
-
-	TextInput * TextInput::GetTextInputById(int id)
-	{
-		if (id < 0 || id > MAX_NUMBER_OF_TEXT_INPUTS) return nullptr;
-		return TextInputs[id];
 	}
 
 	TextInput::~TextInput() {}

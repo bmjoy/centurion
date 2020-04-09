@@ -31,11 +31,7 @@ namespace Game
 	/// Extern variables
 	/// </summary>
 	extern glm::mat4 projectionMatrix, viewMatrix;
-	//extern bool isCreated;
-	extern int numberOfPlayers;
 	extern std::vector<glm::vec3> listOfColors;
-	extern float cameraToX, cameraToY;
-	extern GObject* selectedObject;
 
 #pragma region TO-LUA Methods
 
@@ -45,6 +41,7 @@ namespace Game
 	/// <returns>The current selected object.</returns>
 	/// 
 	GObject* GetSelectedObject(void);
+
 	/// <summary>
 	/// (???) Metodi da rivedere/spostare?
 	/// </summary>
@@ -83,7 +80,9 @@ namespace Game
 	/// <param name="race_name"></param>
 	/// <param name="r"></param>
 	void AddRace(std::string race_name, Race r);
+
 	std::vector<std::string> GetListOfRacesNames();
+
 	Race* GetRace(std::string race_name);
 
 #pragma endregion
@@ -122,9 +121,6 @@ namespace Game
 	//(???) Tutti i metodi a seguire potrebbero essere da rivedere.
 	void SetNumberOfPlayers(int n);
 	void ResetGame(void);
-
-	void GenerateSettlements(std::vector<glm::vec2> &locs);
-	void GenerateOutposts(std::vector<glm::vec2> &locs);
 	void GoToPointFromMinimap();
 	void RenderObjectsPicking();
 	void RenderObjects();
