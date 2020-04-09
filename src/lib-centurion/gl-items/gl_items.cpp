@@ -4,14 +4,14 @@
 #include "gl_bitmap_font.h"
 #include "gl_building_sprite.h"
 #include "gl_decoration_sprite.h"
-#include "cursor_image.h"
+#include "gl_cursor_image.h"
 #include "gl_circle.h"
 #include "gl_rectangle.h"
-#include "image_sprite.h"
+#include "gl_image_sprite.h"
 #include "gl_unit_sprite.h"
-#include "terrain.h"
-#include "grid.h"
-#include "minimap_rectangle.h"
+#include "gl_terrain.h"
+#include "gl_grid.h"
+#include "gl_minimap_rectangle.h"
 
 #include <game/game.h>
 #include <engine.h>
@@ -25,15 +25,15 @@ namespace GLItems {
 	{
 		glBitmapFont bitmapFont;
 		glBuildingSprite buildingSprite;
-		CursorImage cursorImage;
+		glCursorImage cursorImage;
 		glDecorationSprite decorationSprite;
 		glCircle glcircle;
 		EmptyRectangle emptyRectangle;
 		FilledRectangle filledRectangle;
-		Grid grid;
-		ImageSprite imageSprite;
-		MinimapRectangle minimapRectangle;
-		Terrain terrain;
+		glGrid grid;
+		glImageSprite imageSprite;
+		glMinimapRectangle minimapRectangle;
+		glTerrain terrain;
 		glUnitSprite unitSprite;
 
 		mat4 MENU_PROJECTION_MATRIX = mat4(0);
@@ -45,15 +45,15 @@ namespace GLItems {
 	glBitmapFont *Text() { return &bitmapFont; }
 	glBuildingSprite *BSprite() { return &buildingSprite; }
 	glDecorationSprite *DSprite() { return &decorationSprite; }
-	CursorImage *Cursor() { return &cursorImage; }
+	glCursorImage *Cursor() { return &cursorImage; }
 	glCircle *ECircle() { return &glcircle; }
 	EmptyRectangle *ERectangle() { return &emptyRectangle; }
 	FilledRectangle *FRectangle() { return &filledRectangle; }
-	ImageSprite *Img() { return &imageSprite; }
+	glImageSprite *Img() { return &imageSprite; }
 	glUnitSprite *USprite() { return &unitSprite; }
-	Terrain *MapTerrain() { return &terrain; }
-	Grid *MapGrid() { return &grid; }
-	MinimapRectangle *MMRectangle() { return &minimapRectangle; }
+	glTerrain *MapTerrain() { return &terrain; }
+	glGrid *MapGrid() { return &grid; }
+	glMinimapRectangle *MMRectangle() { return &minimapRectangle; }
 
 	mat4 getCameraProjectionMatrix(void)
 	{ 
@@ -89,15 +89,15 @@ namespace GLItems {
 		*Text() = glBitmapFont();
 		*BSprite() = glBuildingSprite();
 		*DSprite() = glDecorationSprite();
-		*Cursor() = CursorImage();
+		*Cursor() = glCursorImage();
 		*ECircle() = glCircle();
 		*ERectangle() = EmptyRectangle();
 		*FRectangle() = FilledRectangle();
-		*Img() = ImageSprite();
+		*Img() = glImageSprite();
 		*USprite() = glUnitSprite();
-		*MapTerrain() = Terrain();
-		*MapGrid() = Grid();
-		*MMRectangle() = MinimapRectangle();
+		*MapTerrain() = glTerrain();
+		*MapGrid() = glGrid();
+		*MMRectangle() = glMinimapRectangle();
 
 
 	}

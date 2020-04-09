@@ -6,45 +6,45 @@
 * ---------------------------
 */
 
-#ifndef MINIMAPRECTANGLE_H
-#define MINIMAPRECTANGLE_H
+#ifndef GL_GRID_H
+#define GL_GRID_H
 
-#include "shader.h"
+#include "gl_shader.h"
+#include <game/game.h>
 
 /// <summary>
-/// This class is used to pre-render the minimap when the game starts 
-/// In the editor, it updates every time you add a building or decoration
+/// This class is used to render the PASS grid.
 /// </summary>
-class MinimapRectangle : public Shader
+
+class glGrid : public glShader
 {
 public:
 	/// <summary>
 	/// Constructor
 	/// </summary>
-	MinimapRectangle();
+	glGrid();
 
 	/// <summary>
-	/// Creates the texture of the minimap
+	/// This function creates an empty grid texture based on the size of the pass grid;
 	/// </summary>
 	void create();
 
 	/// <summary>
-	/// Update the texture
+	/// This function updates the grid taking the data from astar::GridMatrix2D();
 	/// </summary>
 	void update();
 
 	/// <summary>
-	/// Render the texture, like an image
+	/// Render function;
 	/// </summary>
 	void render();
 
 	/// <summary>
 	/// Destructor
 	/// </summary>
-	~MinimapRectangle();
+	~glGrid();
 
 private:
-	int textureWidth, textureHeight;
 	GLuint textureID;
 };
 

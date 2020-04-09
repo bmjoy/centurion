@@ -1,17 +1,17 @@
-#include "grid.h"
+#include "gl_grid.h"
 #include <game/pass.h>
 
 using namespace std;
 using namespace glm;
 
-Grid::Grid()
+glGrid::glGrid()
 {
 	vPath = "assets/shaders/terrain/vertex_grid.glsl";
 	fPath = "assets/shaders/terrain/fragment_grid.glsl";
 	textureID = 0;
 }
 
-void Grid::create() {
+void glGrid::create() {
 	glUseProgram(shaderId);
 
 	unsigned int indices[] = {
@@ -54,7 +54,7 @@ void Grid::create() {
 	glTexImage2D(GL_TEXTURE_2D, 0, GL_R8, Pass::GetGridSizeX(), Pass::GetGridSizeY(), 0, GL_RED, GL_UNSIGNED_BYTE, (GLvoid*)Pass::GetGridPtr());
 }
 
-void Grid::update() {
+void glGrid::update() {
 	glUseProgram(shaderId);
 	glBindTexture(GL_TEXTURE_2D, textureID);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
@@ -62,7 +62,7 @@ void Grid::update() {
 	glTexImage2D(GL_TEXTURE_2D, 0, GL_R8, Pass::GetGridSizeX(), Pass::GetGridSizeY(), 0, GL_RED, GL_UNSIGNED_BYTE, (GLvoid*)Pass::GetGridPtr());
 }
 
-void Grid::render() {
+void glGrid::render() {
 
 	glUseProgram(shaderId);
 
@@ -79,6 +79,6 @@ void Grid::render() {
 
 
 
-Grid::~Grid()
+glGrid::~glGrid()
 {
 }

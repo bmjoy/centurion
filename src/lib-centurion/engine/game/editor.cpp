@@ -10,7 +10,7 @@
 #include <logger.h>
 #include <settings.h>
 #include <translationsTable.h>
-#include <terrain.h>
+
 #include <game/interface/editorMenuBar.h>
 #include <game/interface/editorWindows.h>
 

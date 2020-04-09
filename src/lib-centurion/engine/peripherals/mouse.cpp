@@ -5,7 +5,7 @@
 #include <mapgen/mapgen.h>
 #include <logger.h>
 #include <Settings.h>
-#include <cursor_image.h>
+#include <gl_cursor_image.h>
 
 #include <GLFW/glfw3.h>
 

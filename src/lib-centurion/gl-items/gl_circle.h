@@ -6,15 +6,15 @@
 * ---------------------------
 */
 
-#ifndef GLCIRCLE_H
-#define GLCIRCLE_H
+#ifndef GL_CIRCLE_H
+#define GL_CIRCLE_H
 
-#include "shader.h"
+#include "gl_shader.h"
 
 /// <summary>
 /// This class is used to render empty circles (or border circles).
 /// </summary>
-class glCircle : public Shader
+class glCircle : public glShader
 {
 public:
 	/// <summary>

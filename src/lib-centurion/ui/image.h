@@ -9,7 +9,7 @@
 #ifndef IMAGE_H
 #define IMAGE_H
 
-#include <image_sprite.h>
+#include <gl_image_sprite.h>
 
 namespace gui {
 
@@ -52,7 +52,7 @@ namespace gui {
 		glm::vec2 getImageSize() { return glm::vec2(imgData.w, imgData.h); }
 		~Image();
 	private:
-		ImageSprite::ImageData imgData;
+		glImageSprite::ImageData imgData;
 		std::string imageName;
 		std::map<std::string, int> originMap;
 	};

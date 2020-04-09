@@ -6,15 +6,15 @@
 * ---------------------------
 */
 
-#ifndef IMAGESPRITE_H
-#define IMAGESPRITE_H
+#ifndef GL_IMAGESPRITE_H
+#define GL_IMAGESPRITE_H
 
-#include "shader.h"
+#include "gl_shader.h"
 
 /// <summary>
 /// This class is used to render any image to the screen.
 /// </summary>
-class ImageSprite : public Shader
+class glImageSprite : public glShader
 {
 public:
 	/// <summary>
@@ -33,7 +33,7 @@ public:
 	/// <summary>
 	/// Constructor.
 	/// </summary>
-	ImageSprite();
+	glImageSprite();
 
 	/// <summary>
 	/// This method adds images paths to the list of paths. They will be used in the create function to 
@@ -65,7 +65,7 @@ public:
 	/// <summary>
 	/// Destructor
 	/// </summary>
-	~ImageSprite();
+	~glImageSprite();
 
 private:
 	std::map<std::string, std::string> imagesPathMap;

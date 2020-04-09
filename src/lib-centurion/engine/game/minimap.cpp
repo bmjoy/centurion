@@ -1,7 +1,7 @@
 #include "minimap.h"
 
 #include "game.h"
-#include <minimap_rectangle.h>
+#include <gl_minimap_rectangle.h>
 #include <engine.h>
 
 #include <ui.h>

@@ -6,15 +6,15 @@
 * ---------------------------
 */
 
-#ifndef BUILDINGSPRITE_H
-#define BUILDINGSPRITE_H
+#ifndef GL_BUILDINGSPRITE_H
+#define GL_BUILDINGSPRITE_H
 
-#include "object_sprite.h"
+#include "gl_object_sprite.h"
 
 /// <summary>
 /// This class is used to hold Building-specific methods for graphic rendering
 /// </summary>
-class glBuildingSprite : public ObjectSprite
+class glBuildingSprite : public glObjectSprite
 {
 public:
 	/// <summary>

@@ -6,8 +6,8 @@
 * ---------------------------
 */
 
-#ifndef LIGHT_H
-#define LIGHT_H
+#ifndef GL_LIGHT_H
+#define GL_LIGHT_H
 
 #include <GL/glew.h>
 #include <glm/glm.hpp>
@@ -15,14 +15,14 @@
 /// <summary>
 /// This class is used to generate light for the terrain
 /// </summary>
-class Light
+class glLight
 {
 public:
 	/// <summary>
 	/// Constructors
 	/// </summary>
-	Light();
-	Light(GLfloat red, GLfloat green, GLfloat blue, GLfloat aIntensity,  //ambient
+	glLight();
+	glLight(GLfloat red, GLfloat green, GLfloat blue, GLfloat aIntensity,  //ambient
 		GLfloat xDir, GLfloat yDir, GLfloat zDir, GLfloat dIntensity); //diffuse
 
 	/// <summary>
@@ -34,7 +34,7 @@ public:
 	/// <summary>
 	/// Destructor
 	/// </summary>
-	~Light();
+	~glLight();
 private:
 	// ambient light
 	glm::vec3 colour;

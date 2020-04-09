@@ -1,4 +1,4 @@
-#include "object_sprite.h"
+#include "gl_object_sprite.h"
 
 #include <stb_image.h>
 #include <classes/object-data.h>
@@ -11,11 +11,11 @@ using namespace tinyxml2;
 using namespace std;
 using namespace glm;
 
-ObjectSprite::ObjectSprite() {}
+glObjectSprite::glObjectSprite() {}
 
-ObjectSprite::~ObjectSprite() {}
+glObjectSprite::~glObjectSprite() {}
 
-void ObjectSprite::Create() {
+void glObjectSprite::Create() {
 	string spritePath = "";
 	try
 	{
@@ -86,11 +86,11 @@ void ObjectSprite::Create() {
 	}
 }
 
-void ObjectSprite::Render()
+void glObjectSprite::Render()
 {
 }
 
-void ObjectSprite::GenerateBuffers()
+void glObjectSprite::GenerateBuffers()
 {
 	glGenVertexArrays(1, &VAO);
 	glBindVertexArray(VAO);

@@ -6,8 +6,8 @@
 * ---------------------------
 */
 
-#ifndef PRIMITIVES_H
-#define PRIMITIVES_H
+#ifndef GL_ITEMS_H
+#define GL_ITEMS_H
 
 #include <iostream>
 #include <string>
@@ -22,16 +22,16 @@
 class AudioManager;
 class glBitmapFont;
 class glBuildingSprite;
-class CursorImage;
+class glCursorImage;
 class glDecorationSprite;
 class EmptyRectangle;
 class glCircle;
 class FilledRectangle;
-class ImageSprite;
+class glImageSprite;
 class glUnitSprite;
-class Terrain;
-class Grid;
-class MinimapRectangle;
+class glTerrain;
+class glGrid;
+class glMinimapRectangle;
 
 /// <summary>
 /// This namespace contains all the pointers to primitives istances (that are static)
@@ -42,16 +42,16 @@ namespace GLItems {
 	AudioManager *Audio();
 	glBitmapFont *Text();
 	glBuildingSprite *BSprite();
-	CursorImage *Cursor();
+	glCursorImage *Cursor();
 	glDecorationSprite *DSprite();
 	EmptyRectangle *ERectangle();
 	glCircle *ECircle();
 	FilledRectangle *FRectangle();
-	ImageSprite *Img();
+	glImageSprite *Img();
 	glUnitSprite *USprite();
-	Terrain *MapTerrain();
-	Grid *MapGrid();
-	MinimapRectangle *MMRectangle();
+	glTerrain *MapTerrain();
+	glGrid *MapGrid();
+	glMinimapRectangle *MMRectangle();
 
 	/// <summary>
 	/// This function sets the menu projection matrix

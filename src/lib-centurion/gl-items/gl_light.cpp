@@ -1,9 +1,9 @@
-#include "light.h"
+#include "gl_light.h"
 
 using namespace std;
 using namespace glm;
 
-Light::Light(){
+glLight::glLight(){
 	colour = glm::vec3(1.0f, 1.0f, 1.0f);
 	ambientIntensity = 1.0f;
 
@@ -11,7 +11,7 @@ Light::Light(){
 	diffuseIntensity = 0.0f;
 }
 
-Light::Light(GLfloat red, GLfloat green, GLfloat blue, GLfloat aIntensity, GLfloat xDir, GLfloat yDir, GLfloat zDir, GLfloat dIntensity) {
+glLight::glLight(GLfloat red, GLfloat green, GLfloat blue, GLfloat aIntensity, GLfloat xDir, GLfloat yDir, GLfloat zDir, GLfloat dIntensity) {
 	colour = glm::vec3(red, green, blue);
 	ambientIntensity = aIntensity;
 
@@ -19,7 +19,7 @@ Light::Light(GLfloat red, GLfloat green, GLfloat blue, GLfloat aIntensity, GLflo
 	diffuseIntensity = dIntensity * 1.25f;
 }
 
-void Light::use_light(GLfloat ambientIntensityLocation, GLfloat ambientColorLocation, GLfloat diffuseIntensityLocation, GLfloat directionLocation) {
+void glLight::use_light(GLfloat ambientIntensityLocation, GLfloat ambientColorLocation, GLfloat diffuseIntensityLocation, GLfloat directionLocation) {
 	//ambient
 	glUniform3f((GLint)ambientColorLocation, colour.x , colour.y, colour.z);
 	glUniform1f((GLint)ambientIntensityLocation, ambientIntensity);
@@ -29,4 +29,4 @@ void Light::use_light(GLfloat ambientIntensityLocation, GLfloat ambientColorLoca
 	glUniform1f((GLint)diffuseIntensityLocation, diffuseIntensity);
 }
 
-Light::~Light(){}
+glLight::~glLight(){}

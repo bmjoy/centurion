@@ -6,12 +6,12 @@
 * ---------------------------
 */
 
-#ifndef SPRITE_H
-#define SPRITE_H
+#ifndef GL_SPRITE_H
+#define GL_SPRITE_H
 
-#include "shader.h"
+#include "gl_shader.h"
 
-class ObjectSprite : public Shader {
+class glObjectSprite : public glShader {
 
 public:
 
@@ -34,7 +34,7 @@ public:
 	/// <summary>
 	/// Constructor
 	/// </summary>
-	ObjectSprite();
+	glObjectSprite();
 
 	/// <summary>
 	/// Create function. It reads all the information of the .eo.xml files (Entity Object) 
@@ -57,7 +57,7 @@ public:
 	/// <summary>
 	/// Destructor
 	/// </summary>
-	~ObjectSprite();
+	~glObjectSprite();
 
 protected:
 

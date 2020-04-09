@@ -7,8 +7,8 @@
 #include <engine.h>
 #include <file_manager.h>
 #include <mapgen/mapgen.h>
-#include <terrain.h>
-#include <grid.h>
+#include <gl_terrain.h>
+#include <gl_grid.h>
 #include <pathfinding/pathfinding.h>
 
 using namespace std;

@@ -7,7 +7,7 @@
 #include <random>
 #include <ctime>
 
-#include <terrain.h>
+#include <gl_terrain.h>
 
 using namespace std;
 using namespace glm;

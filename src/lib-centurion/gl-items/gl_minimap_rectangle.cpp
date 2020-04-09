@@ -1,4 +1,4 @@
-#include "minimap_rectangle.h"
+#include "gl_minimap_rectangle.h"
 
 #include <game/strategy.h>
 #include <mapgen/mapgen.h>
@@ -8,14 +8,14 @@
 using namespace std;
 using namespace glm;
 
-MinimapRectangle::MinimapRectangle()
+glMinimapRectangle::glMinimapRectangle()
 {
 	vPath = "assets/shaders/minimap/vertex.glsl";
 	fPath = "assets/shaders/minimap/fragment.glsl";
 	textureID = 0;
 }
 
-void MinimapRectangle::create() {
+void glMinimapRectangle::create() {
 	glUseProgram(shaderId);
 	unsigned int indices[] = {
 		0, 1, 3,   // first triangle
@@ -63,7 +63,7 @@ void MinimapRectangle::create() {
 	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA8, textureWidth, textureHeight, 0, GL_RGBA, GL_UNSIGNED_BYTE, (GLvoid*)imageData);
 }
 
-void MinimapRectangle::update() {
+void glMinimapRectangle::update() {
 	glUseProgram(shaderId);
 	
 	/* This texture comes from the minimap */
@@ -77,7 +77,7 @@ void MinimapRectangle::update() {
 	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA8, textureWidth, textureHeight, 0, GL_RGBA, GL_UNSIGNED_BYTE, (GLvoid*)imageData);
 }
 
-void MinimapRectangle::render() {
+void glMinimapRectangle::render() {
 
 	glUseProgram(shaderId);
 	/* Draw */
@@ -91,6 +91,6 @@ void MinimapRectangle::render() {
 	glBindVertexArray(0);
 }
 
-MinimapRectangle::~MinimapRectangle()
+glMinimapRectangle::~glMinimapRectangle()
 {
 }

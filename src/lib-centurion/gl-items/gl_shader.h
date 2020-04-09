@@ -6,8 +6,8 @@
 * ---------------------------
 */
 
-#ifndef SHADER_H
-#define SHADER_H
+#ifndef GL_SHADER_H
+#define GL_SHADER_H
 
 #include <iostream>
 #include <string>
@@ -19,12 +19,12 @@
 #include <glm/gtc/matrix_transform.hpp>
 #include <glm/gtc/type_ptr.hpp>
 
-class Shader {
+class glShader {
 public:
 	/// <summary>
 	/// Constructor
 	/// </summary>
-	Shader();
+	glShader();
 
 	/// <summary>
 	/// This method compiles the vertex and fragment shaders
@@ -49,7 +49,7 @@ public:
 	/// <summary>
 	/// Destructor
 	/// </summary>
-	~Shader();
+	~glShader();
 
 protected:
 	const char* vPath;

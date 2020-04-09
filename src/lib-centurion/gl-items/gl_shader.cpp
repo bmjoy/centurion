@@ -1,4 +1,4 @@
-#include "shader.h"
+#include "gl_shader.h"
 
 #include <sstream>
 
@@ -8,12 +8,12 @@
 using namespace std;
 using namespace glm;
 
-Shader::Shader() {
+glShader::glShader() {
 	VAO = 0; VBO = 0; IBO = 0;
 	shaderId = 0;
 }
 
-void Shader::compile() {
+void glShader::compile() {
 	// Compile and setup the shader
 	std::string vertexString = FileManager::ReadFile(vPath);
 	std::string fragmentString = FileManager::ReadFile(fPath);
@@ -66,19 +66,19 @@ void Shader::compile() {
 	glDeleteShader(fragmentShader);
 }
 
-void Shader::apply_projection_matrix(glm::mat4 mat) {
+void glShader::apply_projection_matrix(glm::mat4 mat) {
 	glUseProgram(shaderId);
 	glUniformMatrix4fv(glGetUniformLocation(shaderId, "projection"), 1, GL_FALSE, glm::value_ptr(mat));
 }
 
-void Shader::apply_view_matrix(glm::mat4 mat) {
+void glShader::apply_view_matrix(glm::mat4 mat) {
 	glUseProgram(shaderId);
 	glUniformMatrix4fv(glGetUniformLocation(shaderId, "view"), 1, GL_FALSE, glm::value_ptr(mat));
 }
 
-void Shader::apply_model_matrix(glm::mat4 mat) {
+void glShader::apply_model_matrix(glm::mat4 mat) {
 	glUseProgram(shaderId);
 	glUniformMatrix4fv(glGetUniformLocation(shaderId, "model"), 1, GL_FALSE, glm::value_ptr(mat));
 }
 
-Shader::~Shader() {}
+glShader::~glShader() {}

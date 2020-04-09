@@ -6,15 +6,15 @@
 * ---------------------------
 */
 
-#ifndef BITMAPFONT_H
-#define BITMAPFONT_H
+#ifndef GL_BITMAPFONT_H
+#define GL_BITMAPFONT_H
 
-#include "shader.h"
+#include "gl_shader.h"
 
 /// <summary>
 /// This class is used by UI objects which have to render static or dynamic text.
 /// </summary>
-class glBitmapFont : public Shader
+class glBitmapFont : public glShader
 {
 public:
 	

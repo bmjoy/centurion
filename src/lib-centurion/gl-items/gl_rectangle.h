@@ -6,15 +6,15 @@
 * ---------------------------
 */
 
-#ifndef GLRECTANGLE_H
-#define GLRECTANGLE_H
+#ifndef GL_RECTANGLE_H
+#define GL_RECTANGLE_H
 
-#include "shader.h"
+#include "gl_shader.h"
 
 /// <summary>
 /// This class is used to render empty (or border) and filled rectangles.
 /// </summary>
-class glRectangle : public Shader {
+class glRectangle : public glShader {
 public:
 
 	/// <summary>

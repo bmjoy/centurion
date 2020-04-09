@@ -1,4 +1,4 @@
-#include "terrain.h"
+#include "gl_terrain.h"
 
 #include <mapgen/mapgen.h>
 #include <stb_image.h>
@@ -12,12 +12,12 @@
 using namespace std;
 using namespace glm;
 
-Terrain::Terrain() {
+glTerrain::glTerrain() {
 	vPath = "assets/shaders/terrain/vertex.glsl";
 	fPath = "assets/shaders/terrain/fragment.glsl";
 }
 
-void Terrain::create() {
+void glTerrain::create() {
 	mapgen::init();
 
 	// Read and store indices and vertices position information //
@@ -82,7 +82,7 @@ void Terrain::create() {
 }
 
 
-void Terrain::render(bool tracing) {
+void glTerrain::render(bool tracing) {
 	glUseProgram(shaderId);
 
 	// Wireframe
@@ -156,7 +156,7 @@ void Terrain::render(bool tracing) {
 	glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
 }
 
-void Terrain::genBuffers() {
+void glTerrain::genBuffers() {
 	glGenVertexArrays(1, &VAO);
 	glBindVertexArray(VAO);
 	glGenBuffers(1, &IBO);
@@ -196,7 +196,7 @@ void Terrain::genBuffers() {
 	glBindVertexArray(0);
 }
 
-void Terrain::ReadIndicesData(void)
+void glTerrain::ReadIndicesData(void)
 {
 	try
 	{
@@ -220,7 +220,7 @@ void Terrain::ReadIndicesData(void)
 
 }
 
-void Terrain::ReadVerticesData(void)
+void glTerrain::ReadVerticesData(void)
 {
 	try
 	{
@@ -243,7 +243,7 @@ void Terrain::ReadVerticesData(void)
 	}
 }
 
-void Terrain::ReadVerticesPosData(void)
+void glTerrain::ReadVerticesPosData(void)
 {
 	try {
 		fstream fin;
@@ -265,7 +265,7 @@ void Terrain::ReadVerticesPosData(void)
 	}
 }
 
-void Terrain::updateHeightsBuffer() {
+void glTerrain::updateHeightsBuffer() {
 	glBindVertexArray(VAO);
 	glBindBuffer(GL_ARRAY_BUFFER, HeightsVBO);
 	glBufferData(GL_ARRAY_BUFFER, sizeof(*mapgen::MapHeights()) * mapgen::nVertices * 4, mapgen::MapHeights(), GL_STATIC_DRAW);
@@ -279,7 +279,7 @@ void Terrain::updateHeightsBuffer() {
 	glBindVertexArray(0);
 }
 
-void Terrain::updateTextureBuffer() {
+void glTerrain::updateTextureBuffer() {
 	glBindVertexArray(VAO);
 	glBindBuffer(GL_ARRAY_BUFFER, TexturesVBO);
 	glBufferData(GL_ARRAY_BUFFER, sizeof(*mapgen::MapTextures()) * mapgen::nVertices, mapgen::MapTextures(), GL_STATIC_DRAW);
@@ -290,6 +290,6 @@ void Terrain::updateTextureBuffer() {
 	glBindVertexArray(0);
 }
 
-Terrain::~Terrain()
+glTerrain::~glTerrain()
 {
 }

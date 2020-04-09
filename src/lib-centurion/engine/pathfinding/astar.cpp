@@ -4,7 +4,6 @@
 
 #include <logger.h>
 #include <settings.h>
-#include <grid.h>
 
 #include <game/pass.h>
 

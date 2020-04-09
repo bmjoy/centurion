@@ -1,11 +1,11 @@
-#include "cursor_image.h"
+#include "gl_cursor_image.h"
 
 #include <stb_image.h>
 
 using namespace std;
 using namespace glm;
 
-CursorImage::CursorImage(){
+glCursorImage::glCursorImage(){
 	vPath = "assets/shaders/mouse/vertex.glsl";
 	fPath = "assets/shaders/mouse/fragment.glsl";
 	cursorImgWidth = 36.0; cursorImgHeight = 36.0;
@@ -14,7 +14,7 @@ CursorImage::CursorImage(){
 	textureIds[3] = { 0 };
 }
 
-void CursorImage::create() {
+void glCursorImage::create() {
 
 	for (int i = 0; i < 3; ++i) {
 
@@ -68,7 +68,7 @@ void CursorImage::create() {
 	}
 }
 
-void CursorImage::render(float x, float y, int currentState) {
+void glCursorImage::render(float x, float y, int currentState) {
 
 	glUseProgram(shaderId);
 
@@ -87,6 +87,6 @@ void CursorImage::render(float x, float y, int currentState) {
 	glBindVertexArray(0);
 }
 
-CursorImage::~CursorImage()
+glCursorImage::~glCursorImage()
 {
 }

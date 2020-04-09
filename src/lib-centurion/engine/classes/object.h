@@ -9,7 +9,7 @@
 #pragma once
 
 #include <ui.h>
-#include <object_sprite.h>
+#include <gl_object_sprite.h>
 #include "object-data.h"
 #include <game/pass.h>
 
@@ -396,7 +396,7 @@ protected:
 	
 	bool bIsPlaceable = false;
 	Pass::PassGrid* pass_grid;
-	ObjectSprite::SpriteData spriteData;
+	glObjectSprite::SpriteData spriteData;
 	Player *player;
 	glm::vec3 pickingColor;
 	std::map<std::string, std::string> methods;

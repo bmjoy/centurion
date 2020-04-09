@@ -97,7 +97,7 @@
       <SDLCheck>true</SDLCheck>
       <ConformanceMode>true</ConformanceMode>
       <AdditionalIncludeDirectories>$(ProjectDir)lib-centurion\common;$(ProjectDir)lib-centurion\engine;$(ProjectDir)lib-centurion\util;$(ProjectDir)lib-centurion\gl-items;$(ProjectDir)lib-centurion\ui;$(ProjectDir)lib-centurion\hector;$(ProjectDir)lib-centurion\audio;$(ProjectDir)lib-extern\opengl;$(ProjectDir)lib-extern\openal;$(ProjectDir)lib-extern\lua;$(ProjectDir)lib-extern\etc</AdditionalIncludeDirectories>
-      <DisableSpecificWarnings>4250;6319;26495;4244;26812</DisableSpecificWarnings>
+      <DisableSpecificWarnings>4250;6319;26495;4244;26812;26451;6262;6011</DisableSpecificWarnings>
       <AdditionalOptions>/Zc:__cplusplus %(AdditionalOptions)</AdditionalOptions>
       <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <LanguageStandard>stdcpplatest</LanguageStandard>
@@ -159,7 +159,7 @@ XCOPY "$(ProjectDir)lua53.dll" "$(ProjectDir)$(OutDir)"</Command>
       <SDLCheck>true</SDLCheck>
       <ConformanceMode>true</ConformanceMode>
       <AdditionalIncludeDirectories>$(ProjectDir)lib-centurion\common;$(ProjectDir)lib-centurion\engine;$(ProjectDir)lib-centurion\util;$(ProjectDir)lib-centurion\gl-items;$(ProjectDir)lib-centurion\ui;$(ProjectDir)lib-centurion\hector;$(ProjectDir)lib-centurion\audio;$(ProjectDir)lib-extern\opengl;$(ProjectDir)lib-extern\openal;$(ProjectDir)lib-extern\lua;$(ProjectDir)lib-extern\etc</AdditionalIncludeDirectories>
-      <DisableSpecificWarnings>4250;6319;26495;4244;26812</DisableSpecificWarnings>
+      <DisableSpecificWarnings>4250;6319;26495;4244;26812;26451;6262;6011</DisableSpecificWarnings>
       <AdditionalOptions>/Zc:__cplusplus %(AdditionalOptions)</AdditionalOptions>
       <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <LanguageStandard>stdcpplatest</LanguageStandard>
@@ -237,18 +237,18 @@ XCOPY "$(ProjectDir)lua53.dll" "$(ProjectDir)$(OutDir)"</Command>
     <ClCompile Include="lib-centurion\engine\translationsTable.cpp" />
     <ClCompile Include="lib-centurion\gl-items\gl_bitmap_font.cpp" />
     <ClCompile Include="lib-centurion\gl-items\gl_building_sprite.cpp" />
-    <ClCompile Include="lib-centurion\gl-items\cursor_image.cpp" />
+    <ClCompile Include="lib-centurion\gl-items\gl_cursor_image.cpp" />
     <ClCompile Include="lib-centurion\gl-items\gl_decoration_sprite.cpp" />
     <ClCompile Include="lib-centurion\gl-items\gl_circle.cpp" />
     <ClCompile Include="lib-centurion\gl-items\gl_rectangle.cpp" />
-    <ClCompile Include="lib-centurion\gl-items\grid.cpp" />
-    <ClCompile Include="lib-centurion\gl-items\image_sprite.cpp" />
-    <ClCompile Include="lib-centurion\gl-items\light.cpp" />
-    <ClCompile Include="lib-centurion\gl-items\minimap_rectangle.cpp" />
+    <ClCompile Include="lib-centurion\gl-items\gl_grid.cpp" />
+    <ClCompile Include="lib-centurion\gl-items\gl_image_sprite.cpp" />
+    <ClCompile Include="lib-centurion\gl-items\gl_light.cpp" />
+    <ClCompile Include="lib-centurion\gl-items\gl_minimap_rectangle.cpp" />
     <ClCompile Include="lib-centurion\gl-items\gl_items.cpp" />
-    <ClCompile Include="lib-centurion\gl-items\shader.cpp" />
-    <ClCompile Include="lib-centurion\gl-items\object_sprite.cpp" />
-    <ClCompile Include="lib-centurion\gl-items\terrain.cpp" />
+    <ClCompile Include="lib-centurion\gl-items\gl_shader.cpp" />
+    <ClCompile Include="lib-centurion\gl-items\gl_object_sprite.cpp" />
+    <ClCompile Include="lib-centurion\gl-items\gl_terrain.cpp" />
     <ClCompile Include="lib-centurion\gl-items\gl_unit_sprite.cpp" />
     <ClCompile Include="lib-centurion\hector\hector-lua.cpp" />
     <ClCompile Include="lib-centurion\ui\button.cpp" />
@@ -301,18 +301,18 @@ XCOPY "$(ProjectDir)lua53.dll" "$(ProjectDir)$(OutDir)"</Command>
     <ClInclude Include="lib-centurion\engine\translationsTable.h" />
     <ClInclude Include="lib-centurion\gl-items\gl_bitmap_font.h" />
     <ClInclude Include="lib-centurion\gl-items\gl_building_sprite.h" />
-    <ClInclude Include="lib-centurion\gl-items\cursor_image.h" />
+    <ClInclude Include="lib-centurion\gl-items\gl_cursor_image.h" />
     <ClInclude Include="lib-centurion\gl-items\gl_decoration_sprite.h" />
     <ClInclude Include="lib-centurion\gl-items\gl_circle.h" />
     <ClInclude Include="lib-centurion\gl-items\gl_rectangle.h" />
-    <ClInclude Include="lib-centurion\gl-items\grid.h" />
-    <ClInclude Include="lib-centurion\gl-items\image_sprite.h" />
-    <ClInclude Include="lib-centurion\gl-items\light.h" />
-    <ClInclude Include="lib-centurion\gl-items\minimap_rectangle.h" />
+    <ClInclude Include="lib-centurion\gl-items\gl_grid.h" />
+    <ClInclude Include="lib-centurion\gl-items\gl_image_sprite.h" />
+    <ClInclude Include="lib-centurion\gl-items\gl_light.h" />
+    <ClInclude Include="lib-centurion\gl-items\gl_minimap_rectangle.h" />
     <ClInclude Include="lib-centurion\gl-items\gl_items.h" />
-    <ClInclude Include="lib-centurion\gl-items\shader.h" />
-    <ClInclude Include="lib-centurion\gl-items\object_sprite.h" />
-    <ClInclude Include="lib-centurion\gl-items\terrain.h" />
+    <ClInclude Include="lib-centurion\gl-items\gl_shader.h" />
+    <ClInclude Include="lib-centurion\gl-items\gl_object_sprite.h" />
+    <ClInclude Include="lib-centurion\gl-items\gl_terrain.h" />
     <ClInclude Include="lib-centurion\gl-items\gl_unit_sprite.h" />
     <ClInclude Include="lib-centurion\hector\hector-lua.h" />
     <ClInclude Include="lib-centurion\ui\button.h" />

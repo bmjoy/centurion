@@ -1,4 +1,4 @@
-#include "image_sprite.h"
+#include "gl_image_sprite.h"
 
 #define STB_IMAGE_IMPLEMENTATION  
 #include <stb_image.h>  // manip. texture
@@ -6,13 +6,13 @@
 using namespace std;
 using namespace glm;
 
-ImageSprite::ImageSprite(){
+glImageSprite::glImageSprite(){
 	vPath = "assets/shaders/image/vertex.glsl";
 	fPath = "assets/shaders/image/fragment.glsl";
 	imagesPathMap = std::map<std::string, std::string>();
 }
 
-void ImageSprite::create() {
+void glImageSprite::create() {
 
 	glUseProgram(shaderId);
 
@@ -55,7 +55,7 @@ void ImageSprite::create() {
 	}
 }
 
-void ImageSprite::getImageData(ImageData *d) {
+void glImageSprite::getImageData(ImageData *d) {
 	(*d).textureID = textureIdMap[d->imageName];
 	(*d).w = (float)imageSize[textureIdMap[d->imageName]][0];
 	(*d).h = (float)imageSize[textureIdMap[d->imageName]][1];
@@ -63,7 +63,7 @@ void ImageSprite::getImageData(ImageData *d) {
 	(*d).texH = (float)imageSize[textureIdMap[d->imageName]][1];
 }
 
-void ImageSprite::render(ImageData &imageData, bool picking, bool repeat) {
+void glImageSprite::render(ImageData &imageData, bool picking, bool repeat) {
 
 	glUseProgram(shaderId);
 
@@ -100,7 +100,7 @@ void ImageSprite::render(ImageData &imageData, bool picking, bool repeat) {
 	glBindVertexArray(0);
 }
 
-void ImageSprite::GenerateBuffers() {
+void glImageSprite::GenerateBuffers() {
 	glGenVertexArrays(1, &VAO);
 	glBindVertexArray(VAO);
 
@@ -122,6 +122,6 @@ void ImageSprite::GenerateBuffers() {
 	glBindVertexArray(0);
 }
 
-ImageSprite::~ImageSprite()
+glImageSprite::~glImageSprite()
 {
 }

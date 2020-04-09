@@ -11,7 +11,7 @@ namespace gui {
 	Image::Image(){}
 
 	Image::Image(string ImageName) {
-		imgData = ImageSprite::ImageData();
+		imgData = glImageSprite::ImageData();
 		imageName = ImageName;
 		originMap["bottom-left"] = 0;
 		originMap["center"] = 1;

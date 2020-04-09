@@ -6,15 +6,15 @@
 * ---------------------------
 */
 
-#ifndef DECORATIONSPRITE_H
-#define DECORATIONSPRITE_H
+#ifndef GL_DECORATIONSPRITE_H
+#define GL_DECORATIONSPRITE_H
 
-#include "object_sprite.h"
+#include "gl_object_sprite.h"
 
 /// <summary>
 /// This class is used to hold Decoration-specific methods for graphic rendering
 /// </summary>
-class glDecorationSprite : public ObjectSprite
+class glDecorationSprite : public glObjectSprite
 {
 public:
 	/// <summary>

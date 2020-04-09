@@ -6,12 +6,12 @@
 * ---------------------------
 */
 
-#ifndef UNIT_SPRITE_H
-#define UNIT_SPRITE_H
+#ifndef GL_UNIT_SPRITE_H
+#define GL_UNIT_SPRITE_H
 
-#include "object_sprite.h"
+#include "gl_object_sprite.h"
 
-class glUnitSprite : public ObjectSprite
+class glUnitSprite : public glObjectSprite
 {
 public:
 

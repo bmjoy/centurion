@@ -2,7 +2,7 @@
 
 #include <map>
 
-#include <grid.h>
+#include <gl_grid.h>
 
 #include <logger.h>
 #include <tinyxml2.h>

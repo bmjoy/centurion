@@ -29,8 +29,8 @@
 #include "audio_manager.h"
 
 // read data (temporary: waiting for xml reading system)
-#include "terrain.h"
-#include "image_sprite.h"
+#include <gl_terrain.h>
+#include <gl_image_sprite.h>
 // 
 
 #include <chrono>

@@ -6,8 +6,8 @@
 * ---------------------------
 */
 
-#ifndef CURSORIMAGE_H
-#define CURSORIMAGE_H
+#ifndef GL_CURSORIMAGE_H
+#define GL_CURSORIMAGE_H
 
 #ifndef CURSOR_DEFAULT
 #define CURSOR_DEFAULT 0
@@ -21,18 +21,18 @@
 #define CURSOR_LEFT_CLICK 2
 #endif // !CURSOR_RIGHT_CLICK
 
-#include "shader.h"
+#include "gl_shader.h"
 
 /// <summary>
 /// This class contains the methods and properties used to create and render the mouse cursor.
 /// </summary>
-class CursorImage : public Shader
+class glCursorImage : public glShader
 {
 public:
 	/// <summary>
 	/// Constructor
 	/// </summary>
-	CursorImage();
+	glCursorImage();
 
 	/// <summary>
 	/// Create function
@@ -50,7 +50,7 @@ public:
 	/// <summary>
 	/// Destructor
 	/// </summary>
-	~CursorImage();
+	~glCursorImage();
 private:
 	float cursorImgWidth, cursorImgHeight;
 	std::string initPath;

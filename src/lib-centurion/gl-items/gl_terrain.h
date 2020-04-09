@@ -6,11 +6,11 @@
 * ---------------------------
 */
 
-#ifndef TERRAIN_H
-#define TERRAIN_H
+#ifndef GL_TERRAIN_H
+#define GL_TERRAIN_H
 
-#include "shader.h"
-#include "light.h"
+#include "gl_shader.h"
+#include "gl_light.h"
 
 struct terrainTexture {
 	std::vector<std::string> zones;
@@ -22,13 +22,13 @@ struct terrainTexture {
 /// <summary>
 /// This class is used to create and render the terrain, that's a 3d plane 
 /// </summary>
-class Terrain : public Shader
+class glTerrain : public glShader
 {
 public:
 	/// <summary>
 	/// Constructor
 	/// </summary>
-	Terrain();
+	glTerrain();
 
 	/// <summary>
 	/// This function returns the list of textures names
@@ -59,7 +59,7 @@ public:
 	/// <summary>
 	/// Destructor
 	/// </summary>
-	~Terrain();
+	~glTerrain();
 private:
 	float randomX, randomY;
 	GLuint VerticesVBO, HeightsVBO, TexturesVBO;
@@ -84,7 +84,7 @@ private:
 	float width, height;
 
 	// light 
-	Light light = Light(1.0f, 1.0f, 1.0f, 0.0f,   // ambient light
+	glLight light = glLight(1.0f, 1.0f, 1.0f, 0.0f,   // ambient light
 		0.0f, 0.0f, 1.0f, 1.0f);  // diffuse light (important for pseudo shadows)
 };
 
