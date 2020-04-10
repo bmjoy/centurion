@@ -12,7 +12,7 @@ using namespace std;
 using namespace glm;
 
 #pragma region Static GObject properties:
-map<const unsigned int, std::string> GObject::scriptNamesMap;
+unordered_map<std::string, unsigned int> GObject::scriptNamesMap;
 #pragma endregion
 
 GObject::GObject(void)
@@ -118,27 +118,20 @@ string GObject::GetPluralName(void)
 
 void GObject::SetScriptName(const std::string _scriptName)
 {
-	const unsigned int pickingID = this->GetPickingID();
-
 	//Check if script name belogs to an other existing object.
-	if (_scriptName != "")
+	if (_scriptName != "" && GObject::scriptNamesMap.count(_scriptName) >= 1)
 	{
-		for (auto& i : GObject::scriptNamesMap)
+		if(GObject::scriptNamesMap[_scriptName] != this->GetPickingID())
 		{
-			if (i.second == _scriptName)
-			{
-				if (i.first != pickingID)
-				{
-					Logger::Warn("Script name " + _scriptName + " belongs to another object (ID = " + to_string(pickingID) + ")");
-					return;
-				}
-				break;
-			}
+			Logger::Warn("Script name " + _scriptName + " belongs to another object (ID = " + to_string(pickingID) + ")");
+			return;
 		}
 	}
+	GObject::scriptNamesMap.erase(this->GetScriptName()); //Avoid object with two different keys.
 
 	this->scriptName = _scriptName;
-	GObject::scriptNamesMap[pickingID] = _scriptName; //Assign or replace script name.
+	if(_scriptName != "")
+		GObject::scriptNamesMap[_scriptName] = this->GetPickingID();; //Assign or replace script name.
 }
 
 std::string GObject::GetScriptName(void)

@@ -450,7 +450,7 @@ private:
 	static unsigned int numberOfUnits;
 	static unsigned int numberOfDecorations;
 	static GObject* GameObjects[MAX_NUMBER_OF_OBJECTS];
-	static std::map<const unsigned int, std::string> scriptNamesMap;
+	static std::unordered_map<std::string, unsigned int> scriptNamesMap;
 	#pragma endregion
 
 	#pragma region Private members
