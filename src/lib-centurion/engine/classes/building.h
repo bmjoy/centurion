@@ -188,6 +188,11 @@ public:
 	/// <param name="clickID"></param>
 	void Render(const bool picking, const unsigned int clickID = 0) override;
 
+	/// <summary>
+	/// This static function cleans common settlements list using in the editor.
+	/// </summary>
+	static void ResetSettlementsList(void);
+
 	void SetStatus(const bool bIsCreated);
 
 	/// <summary>

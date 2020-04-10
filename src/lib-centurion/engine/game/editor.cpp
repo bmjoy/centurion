@@ -436,7 +436,6 @@ namespace Game
 			if (EditorWindows::AnyWindowIsOpened() == false) {
 				if (Engine::Keyboard::IsKeyPressed(GLFW_KEY_ESCAPE))
 				{
-					//(???)Da sistermare! Rimangono i riferimenti ai settlement quando si esce dall'editor e poi si rientra.
 					GObject::ResetGameObjects();
 					Close();
 					return;
@@ -519,7 +518,6 @@ namespace Game
 
 			if (Engine::Keyboard::IsKeyPressed(GLFW_KEY_ESCAPE))
 			{
-				//(???)Da sistermare! Rimangono i riferimenti ai settlement quando si esce dall'editor e poi si rientra.
 				GObject::ResetGameObjects();
 				Close();
 			}

@@ -9,6 +9,10 @@
 using namespace std;
 using namespace glm;
 
+#pragma region Static Properties:
+vector<Settlement*> Building::settlementsList;
+#pragma endregion
+
 Building::Building(void) 
 {
 	this->bIsBeingMoved = false;
@@ -201,6 +205,11 @@ void Building::Render(const bool picking, const unsigned int clickID)
 	GLItems::BSprite()->Render(spriteData, GetPosition().x, GetPosition().y, picking, bCurrentlySelected, vec3(0), this->bIsPlaceable);
 }
 
+void Building::ResetSettlementsList(void)
+{
+	Building::settlementsList.clear();
+}
+
 void Building::SetStatus(const bool bIsCreated)
 {
 	this->bIsCreated = bIsCreated;
@@ -216,7 +225,6 @@ Building::~Building(void)
 }
 
 #pragma region Private members
-vector<Settlement*> Building::settlementsList;
 std::tuple<bool, Settlement*> Building::IsNearToFriendSettlement(void)
 {
 	bool bSettlementDiscovered = false;
