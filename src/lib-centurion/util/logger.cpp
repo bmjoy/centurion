@@ -24,14 +24,12 @@ namespace Logger
 		/// <param name="msg">This parameter adds a LogMessage into a LogMessages array.</param>
 		void AddMessage(LogMessage msg)
 		{
+			Messages.push_back(msg);
+
 			if (Messages.size() >= MAX_LOGGER_SIZE) {
-				Messages.erase(Messages.begin() + MAX_LOGGER_SIZE - 1);
-				Messages.push_front(msg);
+				Messages.pop_front();
 			}
-			else {
-				Messages.push_back(msg);
-			}
-		};
+		}
 
 		/// <summary>
 		/// This function prints a LogMessage text into debug console.
