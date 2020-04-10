@@ -189,6 +189,7 @@ public:
 	/// </summary>
 	/// <returns>True if it can be positionated; false otherwise.</returns>
 	bool CanBePositionedIntoWater(void);
+
 	/// <summary>
 	/// This function allows to place the current object into water.
 	/// </summary>
@@ -216,6 +217,7 @@ public:
 	/// </summary>
 	/// <returns>True if it is always visible; false otherwise.</returns>
 	bool GetAlwaysVisibleInGameMinimap(void);
+
 	/// <summary>
 	/// This function sets if the current object is always visible in the game minimap.
 	/// </summary>
@@ -299,9 +301,9 @@ public:
 	void UpdatePass(void);
 	void ClearPass(void);
 
-	void MarkAsMoving(void) { bIsBeingMoved = true; }
-	void MarkAsNotMoving(void) { bIsBeingMoved = false; }
-	bool IsBeingMoved(void) { return bIsBeingMoved; }
+	void MarkAsMoving(void);
+	void MarkAsNotMoving(void);
+	bool IsBeingMoved(void);
 	bool IsPlaceable(void);
 
 	/// <summary>
@@ -310,7 +312,7 @@ public:
 	/// <param name="_className">The class of the object.</param>
 	/// <param name="_temporary">Boolean: true = the object is temporary (e.g. an object that is being inserted in the editor)</param>
 	/// <returns>Trye if the object has been created; false otherwise.</returns>
-	bool Create(const std::string _className, const bool _temporary = false);
+	void Create(const std::string _className, const bool _temporary = false);
 
 	/// <summary>
 	/// This abstract function perfoms the rendering of the current object. It must be overread.

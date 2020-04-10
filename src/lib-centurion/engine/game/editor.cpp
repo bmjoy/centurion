@@ -266,13 +266,7 @@ namespace Game
 				else
 					return;
 
-				if (Editor::tmpObject->Create(className, true) == false)
-				{
-					Logger::Info("Object cannot be created!");
-					delete Editor::tmpObject;
-					Editor::tmpObject = nullptr;
-					return;
-				}
+				Editor::tmpObject->Create(className, true);
 				Editor::tmpObject->SetPlayer(1);
 				EditorMenuBar::Hide();
 				EditorWindows::Hide();

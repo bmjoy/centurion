@@ -210,22 +210,13 @@ namespace Game
 			{
 				Building* newBuilding = new Building();
 				newBuilding->SetPlayer(player);
-				bObjectCreated = newBuilding->Create(className);
-				if (bObjectCreated == false)
-				{
-					delete newBuilding;
-					newBuilding = nullptr;
-				}
+				newBuilding->Create(className);
+
 			}
 			if (type == "cpp_decorationclass")
 			{
 				Decoration* newDecoration = new Decoration();
-				bObjectCreated = newDecoration->Create(className);
-				if (bObjectCreated == false)
-				{
-					delete newDecoration;
-					newDecoration = nullptr;
-				}
+				newDecoration->Create(className);
 			}
 		}
 		return bObjectCreated;

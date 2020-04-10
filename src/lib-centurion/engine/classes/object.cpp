@@ -233,14 +233,28 @@ void GObject::ClearPass(void)
 	Pass::UpdateObjectPass(this->pass_grid, this->position, PASS_CLEAR);
 }
 
+void GObject::MarkAsMoving(void)
+{
+	this->bIsBeingMoved = true;
+}
+
+void GObject::MarkAsNotMoving(void)
+{
+	this->bIsBeingMoved = false;
+}
+
+bool GObject::IsBeingMoved(void)
+{
+	return this->bIsBeingMoved;
+}
+
 bool GObject::IsPlaceable(void)
 {
 	return this->bIsPlaceable;
 }
 
-bool GObject::Create(const string _className, const bool _temporary)
+void GObject::Create(const string _className, const bool _temporary)
 {
-	bool bObjectCreated = true;
 	ObjectData::ObjectXMLClassData objData = *ObjectData::GetObjectData(_className);
 	ObjectData::SetFixedPtr(&objData);
 	objData.GetParentData(objData.GetParentClass());
@@ -262,21 +276,24 @@ bool GObject::Create(const string _className, const bool _temporary)
 	this->SetObjectProperties(objData, _temporary);
 	if (this->IsBuilding() == true)
 	{
-		bObjectCreated = this->AsBuilding()->SetBuildingProperties(objData, _temporary);
+		this->AsBuilding()->SetBuildingProperties(objData, _temporary);
+		if (_temporary == false)
+		{
+			this->AsBuilding()->AssignSettlement();
+		}
 	}
 	else if (this->IsDecoration() == true)
 	{
-		bObjectCreated = true;
+		;
 	}
 	else if (this->IsUnit() == true)
 	{
 		;
 	}
-	if (bObjectCreated == true && _temporary == false)
+	if (_temporary == false)
 	{
 		GObject::AddGameObject(this->GetPickingID(), this);
 	}
-	return bObjectCreated;
 }
 
 void GObject::SetPosition(const vec3 pos)
@@ -300,7 +317,6 @@ float GObject::get_yPos(void)
 GObject::~GObject(void) 
 {
 }
-
 
 #pragma region Static variables
 unsigned int GObject::numberOfObjects = 0;

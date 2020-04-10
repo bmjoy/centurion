@@ -8,6 +8,7 @@ using namespace glm;
 Settlement::Settlement(const unsigned int par_player)
 {
 	this->player = par_player;
+	this->scriptName = "";
 	this->bIsIndipendent = false;
 	//READ THOSE VALUES FROM SETTLEMENT.OC.XML
 	this->population = 10;
@@ -18,12 +19,12 @@ Settlement::Settlement(const unsigned int par_player)
 
 string Settlement::GetSettlementName(void)
 {
-	return this->name;
+	return this->scriptName;
 }
 
 void Settlement::SetSettlementName(const string par_settlementName)
 {
-	this->name = par_settlementName;
+	this->scriptName = par_settlementName;
 }
 
 bool Settlement::IsIndipendent(void)

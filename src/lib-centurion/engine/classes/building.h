@@ -18,7 +18,7 @@
 #define RADIUS_OFFSET 100
 #endif
 
-#define MAX_DISTANCE  2000
+#define MAX_DISTANCE  1000
 
 class Unit;
 namespace game { class ObjectUI; };
@@ -172,17 +172,21 @@ public:
 	/// </summary>
 	/// <param name="objData">The object in which are stored the properties of the current building.</param>
 	/// <param name="_temporary">Boolean: true = the object is temporary (e.g. an object that is being inserted in the editor)</param>
-	/// <returns>True if the building can be created; false otherwise.</returns>
-	bool SetBuildingProperties(ObjectData::ObjectXMLClassData &objData, const bool _temporary = false);
+	void SetBuildingProperties(ObjectData::ObjectXMLClassData &objData, const bool _temporary = false);
+
+	/// <summary>
+	/// This function assigns an existing settlement if the current object isn't a central building;
+	/// otherwise, if the current object is a central building, it create a new settlement.
+	/// If a settlement can be assigned, the settlement pointer of the current building will be nullptr.
+	/// </summary>
+	void AssignSettlement(void);
 
 	/// <summary>
 	/// This function performs the rendering of the current building.
 	/// </summary>
 	/// <param name="picking">Checks if it's the picking phase.</param>
 	/// <param name="clickID"></param>
-	/// <param name="not_placeable"></param>
 	void Render(const bool picking, const unsigned int clickID = 0) override;
-
 
 	void SetStatus(const bool bIsCreated);
 
@@ -226,27 +230,13 @@ private:
 	std::string ent_path;
 	std::vector<Unit> holdUnits;
 	Settlement *settlement;
-	//Private members:
-	/// <summary>
-	/// (???) Da rivedere, non funziona correttamente. 
-	/// This function, called by the method Building::SetBuildingProperties, checks if there is an existing settlement close 
-	/// to the current building.
-	/// </summary>
-	/// <param name="b">The building that has invoked the method Building::SetBuildingProperties.</param>
-	/// <param name="_temporary">Boolean: true = the object is temporary (e.g. an object that is being inserted in the editor)</param>
-	/// <returns>True if there is a settlement; false otherwise.</returns>
-	static bool FindASettlement(Building* b, const bool _temporary = false);
-	//static properties
-	/*/
-	class SettlementSet
-	{
-	public:
-		Settlement *set;
-		std::vector<float> xPoint;
-		std::vector<float> yPoint;
-		std::vector<float> radius;
-	};
-	*/
 	static std::vector<Settlement*> settlementsList;
+	#pragma region Private Members:
+	/// <summary>
+	/// This function checks if the current building is near to a friend (same player or allied player) settlement.
+	/// </summary>
+	/// <returns>True if it is near; false otherwise.</returns>
+	std::tuple<bool, Settlement*> IsNearToFriendSettlement(void);
+	#pragma endregion
 	//sound selectionSound; TODO
 };

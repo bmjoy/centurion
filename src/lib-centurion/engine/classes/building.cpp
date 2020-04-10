@@ -104,13 +104,11 @@ void Building::CheckIfPlaceable(void)
 	this->bIsPlaceable = true;
 	vec3 var_position = this->GetPosition();
 	this->bIsPlaceable = Pass::CheckObjectPassAvailability(this->pass_grid, var_position);
-	//string indCategory = "";
-	//bool nearToIndependent = is_near_to_independent(&indCategory);
-	//if (!this->settlement.IsIndipendent())
-	//{
-	//	//placeable = placeable && nearToIndependent && indCategory == this->category;
-	//	placeable = placeable && indCategory == this->category;
-	//}
+	if (this->bIsPlaceable == true)
+	{
+		std::tuple near = IsNearToFriendSettlement();
+		this->bIsPlaceable = std::get<0>(near);
+	}
 }
 
 void Building::StartGoldProduction(void)
@@ -138,10 +136,8 @@ void Building::SetEntPath(const string par_ent_path)
 	this->ent_path = par_ent_path;
 }
 
-
-bool Building::SetBuildingProperties(ObjectData::ObjectXMLClassData &objData, const bool _temporary)
+void Building::SetBuildingProperties(ObjectData::ObjectXMLClassData &objData, const bool _temporary)
 {
-	bool bBuildingCreated = false;
 	// TryParseFloat, TryParseInteger, TryParseString
 	float fProperty = 0.f;
 	int iProperty = 0;
@@ -151,31 +147,45 @@ bool Building::SetBuildingProperties(ObjectData::ObjectXMLClassData &objData, co
 	ObjectData::TryParseString(objData.GetPropertiesMap(), "isCentralBuilding", &strProperty);
 	this->bIsCentralBuilding = strProperty == "true" ? true : false;
 	ObjectData::TryParseString(objData.GetPropertiesMap(), "pass_path", &strProperty);
-	
-	bBuildingCreated = this->FindASettlement(this, _temporary);
-	if (_temporary == true)
-		return bBuildingCreated;
 	this->UpdatePass();
-	if (bBuildingCreated == true)
+	if (_temporary == true)
+		return;
+	ObjectData::TryParseInteger(objData.GetPropertiesMap(), "maxHealth", &iProperty);
+	this->maxHealth = iProperty;
+	ObjectData::TryParseInteger(objData.GetPropertiesMap(), "repairRate", &iProperty);
+	this->repairRate = iProperty;
+	ObjectData::TryParseInteger(objData.GetPropertiesMap(), "loyaltyFearHealthPercent", &iProperty);
+	this->loyaltyFearHealthPercent = iProperty;
+	ObjectData::TryParseString(objData.GetPropertiesMap(), "clickable_in_minimap", &strProperty);
+	this->bIsClickableInMimimap = strProperty == "true" ? true : false;
+	ObjectData::TryParseString(objData.GetPropertiesMap(), "autoRepair", &strProperty);
+	this->bAutoRepair = strProperty == "true" ? true : false;
+	ObjectData::TryParseString(objData.GetPropertiesMap(), "canProduceGold", &strProperty);
+	this->bCanProduceGold = strProperty == "true" ? true : false;
+	ObjectData::TryParseString(objData.GetPropertiesMap(), "canProduceFood", &strProperty);
+	this->bCanProduceFood = strProperty == "true" ? true : false; 
+	ObjectData::TryParseString(objData.GetPropertiesMap(), "ent_path", &strProperty);
+	this->ent_path = strProperty;
+}
+
+void Building::AssignSettlement(void)
+{
+	if (this->bIsPlaceable == true)
 	{
-		ObjectData::TryParseInteger(objData.GetPropertiesMap(), "maxHealth", &iProperty);
-		this->maxHealth = iProperty;
-		ObjectData::TryParseInteger(objData.GetPropertiesMap(), "repairRate", &iProperty);
-		this->repairRate = iProperty;
-		ObjectData::TryParseInteger(objData.GetPropertiesMap(), "loyaltyFearHealthPercent", &iProperty);
-		this->loyaltyFearHealthPercent = iProperty;
-		ObjectData::TryParseString(objData.GetPropertiesMap(), "clickable_in_minimap", &strProperty);
-		this->bIsClickableInMimimap = strProperty == "true" ? true : false;
-		ObjectData::TryParseString(objData.GetPropertiesMap(), "autoRepair", &strProperty);
-		this->bAutoRepair = strProperty == "true" ? true : false;
-		ObjectData::TryParseString(objData.GetPropertiesMap(), "canProduceGold", &strProperty);
-		this->bCanProduceGold = strProperty == "true" ? true : false;
-		ObjectData::TryParseString(objData.GetPropertiesMap(), "canProduceFood", &strProperty);
-		this->bCanProduceFood = strProperty == "true" ? true : false; 
-		ObjectData::TryParseString(objData.GetPropertiesMap(), "ent_path", &strProperty);
-		this->ent_path = strProperty;
+		std::tuple near = IsNearToFriendSettlement();
+		bool bFound = std::get<0>(near);
+		if (bFound == true)
+		{
+			this->settlement = std::get<1>(near);
+			if (this->settlement == nullptr)
+			{
+				this->settlement = new Settlement(this->GetPlayer());
+				Building::settlementsList.push_back(this->settlement);
+			}
+			this->settlement->AddBuildingToSettlement(this); //Here, it should be return always true.
+			//(???) Gestire eccezione se AddBuildingToSettlement restituisce false! 
+		}
 	}
-	return bBuildingCreated;
 }
 
 void Building::Render(const bool picking, const unsigned int clickID)
@@ -207,64 +217,48 @@ Building::~Building(void)
 
 #pragma region Private members
 vector<Settlement*> Building::settlementsList;
-bool Building::FindASettlement(Building* b, const bool _temporary)
+std::tuple<bool, Settlement*> Building::IsNearToFriendSettlement(void)
 {
 	bool bSettlementDiscovered = false;
+	Settlement* s = nullptr;
+	const size_t numOfSettlements = Building::settlementsList.size();
 
-	if (b->IsPlaceable() == false) 
-		return bSettlementDiscovered;
-
-	if (b->bIsCentralBuilding == false)
+	if (numOfSettlements == 0)
 	{
-		const size_t numOfSettlements = Building::settlementsList.size();
-
-		if (numOfSettlements == 0)
+		bSettlementDiscovered = this->bIsCentralBuilding;
+		return std::make_tuple(bSettlementDiscovered, nullptr);
+	}
+	for (unsigned int settlementsCounter = 0; settlementsCounter < numOfSettlements && bSettlementDiscovered == false; settlementsCounter++)
+	{
+		//Check if the building and the settlement belong to the same player and if the settlement is not indipendent.
+		if ((this->GetPlayer() != Building::settlementsList[settlementsCounter]->GetPlayer())
+			|| (Building::settlementsList[settlementsCounter]->IsIndipendent() == true))
 		{
-			return bSettlementDiscovered;
+			return std::make_tuple(false, nullptr);
 		}
-		for (unsigned int settlementsCounter = 0; settlementsCounter < numOfSettlements && bSettlementDiscovered == false; settlementsCounter++)
+
+		const vector<Building*> settBuildings = Building::settlementsList[settlementsCounter]->GetBuildingsBelongToSettlement();
+		size_t numOfBuildings = settBuildings.size();
+		for (unsigned int buildingsCounter = 0; buildingsCounter < numOfBuildings && bSettlementDiscovered == false; buildingsCounter++)
 		{
-			//Check if the building and the settlement belong to the same player and if the settlement is not indipendent.
-			if ((b->GetPlayer() != Building::settlementsList[settlementsCounter]->GetPlayer())
-				|| (Building::settlementsList[settlementsCounter]->IsIndipendent() == true))
-			{
-				return bSettlementDiscovered;
-			}
-
-			const vector<Building*> settBuildings = Building::settlementsList[settlementsCounter]->GetBuildingsBelongToSettlement();
-			size_t numOfBuildings = settBuildings.size();
-			for (unsigned int buildingsCounter = 0; buildingsCounter < numOfBuildings && bSettlementDiscovered == false; buildingsCounter++)
-			{
-				float b_xPos = b->get_xPos();
-				float b_yPos = b->get_yPos();
-				float xPos = settBuildings[buildingsCounter]->get_xPos();
-				float yPos = settBuildings[buildingsCounter]->get_yPos();
-				float distance = sqrt( pow(b_xPos - xPos, 2) + pow(b_yPos - yPos, 2) );
-
-				//If the two buildings are close enough 
-				bSettlementDiscovered = (distance <= MAX_DISTANCE);
-			}
-			if (bSettlementDiscovered == true)
-			{
-				//The settlement is valid
-				if (_temporary == false)
-				{
-					b->settlement = Building::settlementsList[settlementsCounter];
-					bSettlementDiscovered = bSettlementDiscovered = b->settlement->AddBuildingToSettlement(b); //Here, it should be return always true.
-				}
-			}
+			//Calculate distance beetwen the two buildings
+			const float b_xPos = this->get_xPos();
+			const float b_yPos = this->get_yPos();
+			const float xPos = settBuildings[buildingsCounter]->get_xPos();
+			const float yPos = settBuildings[buildingsCounter]->get_yPos();
+			const float distance = sqrt(pow(b_xPos - xPos, 2) + pow(b_yPos - yPos, 2));
+			//If the two buildings are close enough 
+			bSettlementDiscovered = (distance <= MAX_DISTANCE);
+		}
+		if (bSettlementDiscovered == true)
+		{
+			s = Building::settlementsList[settlementsCounter];
 		}
 	}
-	else
+	if (this->bIsCentralBuilding == true)
 	{
 		bSettlementDiscovered = true;
-		if (_temporary == false)
-		{
-			b->settlement = new Settlement(b->GetPlayer());
-			Building::settlementsList.push_back(b->settlement);
-			bSettlementDiscovered = b->settlement->AddBuildingToSettlement(b); //Here, it should be return always true.
-		}
 	}
-	return bSettlementDiscovered;
+	return std::make_tuple(bSettlementDiscovered, s);
 }
 #pragma endregion

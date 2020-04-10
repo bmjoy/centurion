@@ -125,7 +125,7 @@ public:
 	~Settlement() {};
 private:
 	bool bIsIndipendent = false;
-	std::string name;
+	std::string scriptName;
 	unsigned int food;
 	int gold;
 	unsigned int player;
