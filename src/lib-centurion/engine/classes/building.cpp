@@ -205,6 +205,12 @@ void Building::Render(const bool picking, const unsigned int clickID)
 	GLItems::BSprite()->Render(spriteData, GetPosition().x, GetPosition().y, picking, bCurrentlySelected, vec3(0), this->bIsPlaceable);
 }
 
+void Building::RemoveElementFromSettlementsList(Settlement* set)
+{
+	if(set != nullptr)
+		Building::settlementsList.erase(std::remove(Building::settlementsList.begin(), Building::settlementsList.end(), set), Building::settlementsList.end());
+}
+
 void Building::ResetSettlementsList(void)
 {
 	Building::settlementsList.clear();

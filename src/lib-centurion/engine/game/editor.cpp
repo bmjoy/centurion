@@ -336,6 +336,7 @@ namespace Game
 			{
 				obj->MarkAsMoving();
 				obj->ClearPass();
+				obj->UpdatePass();
 				Editor::movingObject.isActive = true;
 			}
 
@@ -475,28 +476,13 @@ namespace Game
 			{
 				if (Game::IsGameObjectNotNull(Picking::Obj::GetLeftClickId()))
 				{
-					Building* b = GObject::GObject::GetObjectByID(Picking::Obj::GetLeftClickId())->AsBuilding();
+					Building* b = GObject::GetObjectByID(Picking::Obj::GetLeftClickId())->AsBuilding();
 					if (b->IsSelected())
 					{
-						if (b->GetSettlement()->IsIndipendent())
-						{
-							/*
-							if (b->buildingsInSettlementCount() > 0) {
-								b->setWaitingToBeErased(true);
-								Q_WINDOW()->setQuestion("QUESTION_deleteAll");
-							}
-							else {
-								cout << "[DEBUG] Settlement " << b->GetName() << " deleted!\n";
-								b->ClearPass();
-								GObject::RemoveGameObject(Picking::Obj::GetLeftClickId());
-							}
-							*/
-						}
-						else {
-							cout << "[DEBUG] Building " << b->GetSingularName() << " deleted!\n";
-							b->ClearPass();
-							GObject::RemoveGameObject(Picking::Obj::GetLeftClickId());
-						}
+						cout << "[DEBUG] Building " << b->GetSingularName() << " deleted!\n";
+						b->ClearPass();
+						b->UpdatePass();
+						GObject::RemoveGameObject(b->GetPickingID());
 					}
 				}
 			}

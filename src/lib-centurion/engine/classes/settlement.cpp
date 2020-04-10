@@ -122,13 +122,13 @@ bool Settlement::AddBuildingToSettlement(Building* b)
 	return bAddCorrectly;
 }
 
-bool Settlement::RemoveBuildingFromSettlement(Building& b)
+bool Settlement::RemoveBuildingFromSettlement(Building* b)
 {
 	bool bRemovedCorrectly = false;
 	//The building can be removed only if it is present in the map.
-	if (this->buildingsOfSettlement.count(b.GetPickingID()) > 0)
+	if (this->buildingsOfSettlement.count(b->GetPickingID()) > 0)
 	{
-		this->buildingsOfSettlement.erase(b.GetPickingID());
+		this->buildingsOfSettlement.erase(b->GetPickingID());
 		bRemovedCorrectly = true;
 	}
 	return bRemovedCorrectly;

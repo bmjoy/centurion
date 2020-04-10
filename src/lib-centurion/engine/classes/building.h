@@ -189,6 +189,12 @@ public:
 	void Render(const bool picking, const unsigned int clickID = 0) override;
 
 	/// <summary>
+	/// This function remove a settlement from the settlement list using in the editor.
+	/// </summary>
+	/// <param name="set"></param>
+	void RemoveElementFromSettlementsList(Settlement* set);
+
+	/// <summary>
 	/// This static function cleans common settlements list using in the editor.
 	/// </summary>
 	static void ResetSettlementsList(void);

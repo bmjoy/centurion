@@ -379,12 +379,28 @@ void GObject::RemoveGameObject(const unsigned int index)
 {
 	if (index >= 1 && index < MAX_NUMBER_OF_OBJECTS) 
 	{
-		if (GameObjects[index] != nullptr)
+		if (GObject::GameObjects[index] != nullptr)
 		{
+			//The picking ID and the script name of the object can be reused:
 			Picking::Obj::AddUnsedPickingID(GameObjects[index]->GetPickingID());
+			GObject::scriptNamesMap.erase(GObject::GameObjects[index]->GetScriptName());
+
 			if (GameObjects[index]->IsBuilding() == true)
 			{
 				GObject::numberOfBuildings -= 1;
+				Building* b = GameObjects[index]->AsBuilding();
+				b->GetSettlement()->RemoveBuildingFromSettlement(b);
+				if (b->IsCentralBuilding() == true)
+				{
+					//Remove all the building belong to the settlement by recursive call.
+					vector<Building*> buildings = b->GetSettlement()->GetBuildingsBelongToSettlement();
+					for (auto element : buildings)
+					{
+						GObject::RemoveGameObject(element->GetPickingID());
+					}
+					//Remove the settlement from the list of the settlemet used in the editor.
+					b->RemoveElementFromSettlementsList(b->GetSettlement());
+				}
 			}
 			else if (GameObjects[index]->IsDecoration() == true)
 			{
@@ -403,20 +419,27 @@ void GObject::RemoveGameObject(const unsigned int index)
 
 void GObject::ResetGameObjects(void)
 {
-	for (unsigned int i = 0; i < MAX_NUMBER_OF_OBJECTS; i++) 
+	//for (unsigned int i = 0; i < MAX_NUMBER_OF_OBJECTS; i++) 
+	//{
+	//	if (GObject::GameObjects[i] != nullptr)
+	//	{
+	//		delete GObject::GetObjectByID(i);
+	//	}
+	//	GObject::GameObjects[i] = nullptr;
+	//}
+	//GObject::numberOfObjects = 0;
+	//GObject::numberOfBuildings = 0;
+	//GObject::numberOfDecorations = 0;
+	//GObject::numberOfUnits = 0;
+	for (unsigned int i = 0; i < MAX_NUMBER_OF_OBJECTS; i++)
 	{
 		if (GObject::GameObjects[i] != nullptr)
 		{
-			delete GObject::GetObjectByID(i);
+			GObject::RemoveGameObject(GObject::GameObjects[i]->GetPickingID());
 		}
-		GObject::GameObjects[i] = nullptr;
 	}
-	GObject::numberOfObjects = 0;
-	GObject::numberOfBuildings = 0;
-	GObject::numberOfDecorations = 0;
-	GObject::numberOfUnits = 0;
 	GObject::scriptNamesMap.clear(); //All script names can now reusable.
-	Building::ResetSettlementsList();
+	Building::ResetSettlementsList(); //No settlement.
 }
 
 GObject* GObject::GetObjectByID(const unsigned int ID)

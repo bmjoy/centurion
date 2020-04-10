@@ -112,7 +112,7 @@ public:
 	/// </summary>
 	/// <param name="b">A pointer to the building that you want to remove to the crrent settlement.</param>
 	/// <returns>True if the building was correctly removed; false otherwise (namely if the building was never added to the current settleemnt).</returns>
-	bool RemoveBuildingFromSettlement(Building& b);
+	bool RemoveBuildingFromSettlement(Building* b);
 
 	/// <summary>
 	/// Public constructor.
