@@ -38,7 +38,7 @@
             // 
             // buttonSave
             // 
-            this.buttonSave.Location = new System.Drawing.Point(854, 656);
+            this.buttonSave.Location = new System.Drawing.Point(450, 656);
             this.buttonSave.Name = "buttonSave";
             this.buttonSave.Size = new System.Drawing.Size(140, 23);
             this.buttonSave.TabIndex = 2;
@@ -48,7 +48,7 @@
             // 
             // buttonNew
             // 
-            this.buttonNew.Location = new System.Drawing.Point(708, 656);
+            this.buttonNew.Location = new System.Drawing.Point(304, 656);
             this.buttonNew.Name = "buttonNew";
             this.buttonNew.Size = new System.Drawing.Size(140, 23);
             this.buttonNew.TabIndex = 3;
@@ -58,6 +58,7 @@
             // 
             // dataGridView1
             // 
+            this.dataGridView1.BackgroundColor = System.Drawing.SystemColors.ControlDarkDark;
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView1.Location = new System.Drawing.Point(12, 12);
             this.dataGridView1.Name = "dataGridView1";
@@ -66,7 +67,7 @@
             // 
             // buttonNewEntry
             // 
-            this.buttonNewEntry.Location = new System.Drawing.Point(562, 656);
+            this.buttonNewEntry.Location = new System.Drawing.Point(158, 656);
             this.buttonNewEntry.Name = "buttonNewEntry";
             this.buttonNewEntry.Size = new System.Drawing.Size(140, 23);
             this.buttonNewEntry.TabIndex = 8;
@@ -76,7 +77,7 @@
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(416, 656);
+            this.button1.Location = new System.Drawing.Point(12, 656);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(140, 23);
             this.button1.TabIndex = 9;
@@ -88,15 +89,16 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.SystemColors.ControlDarkDark;
             this.ClientSize = new System.Drawing.Size(1006, 691);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.buttonNewEntry);
             this.Controls.Add(this.dataGridView1);
             this.Controls.Add(this.buttonNew);
             this.Controls.Add(this.buttonSave);
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.Name = "Form1";
             this.Text = "Centurion Translator Tool";
+            this.Resize += new System.EventHandler(this.Form1_Resize);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.ResumeLayout(false);
 
