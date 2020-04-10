@@ -133,9 +133,10 @@ namespace Engine
 			return y2DRightClick;
 		}
 
-		void Engine::Mouse::Control(const int lastX, const int lastY) {
-			position.x = (GLfloat)lastX;
-			position.y = (GLfloat)lastY;
+		void Engine::Mouse::Control() {
+
+			position.x = Engine::myWindow::GetMousePositionInWindowX();
+			position.y = Engine::myWindow::GetMousePositionInWindowY();
 
 			float yzoomed = Camera::GetZoomedCoords(position.x, Mouse::GetYPosition()).y;
 			float znoise = Math::smooth_noise(yzoomed, mouseZNoise, Game::Mapgen::GetMapMeshHeight());
