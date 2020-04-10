@@ -317,7 +317,7 @@ public:
 	/// </summary>
 	virtual void Render(const bool picking, const unsigned int clickID = 0) = 0;
 
-#pragma region Static members
+	#pragma region Static members
 
 	/// <summary>
 	/// This function return the total number of objects that the game has been created.
@@ -386,7 +386,7 @@ public:
 	/// <returns>A list of decoration</returns>
 	static std::vector<Decoration*> GetListOfDecorations(void);
 
-#pragma endregion
+	#pragma endregion
 
 	/// <summary>
 	/// Public constructor.
@@ -399,10 +399,10 @@ public:
 	~GObject(void);
 
 protected:
-#pragma region Protected members
+	#pragma region Protected members
 	
 	/// /// <summary>
-	/// Protected and abstract method that checks if the object is placeable and sets the relative protected boolean
+	/// Protected and abstract method that checks if the object is placeable and sets the relative boolean.
 	/// </summary>
 	virtual void CheckIfPlaceable(void) = 0;
 	
@@ -428,7 +428,7 @@ protected:
 	/// <param name="par_selected">If the current objects must be marked as selected or not selected.</param>
 	void MarkAsSelected(const bool par_selected);
 
-#pragma endregion
+	#pragma endregion
 
 private:
 	unsigned short int playerID;
@@ -449,14 +449,16 @@ private:
 	bool canBeClonedInEditor = false;
 	bool bAlwaysVisibleInGameMinimap = false;
 
-	//Properties for static methods:
+	#pragma region Static Properties
 	static unsigned int numberOfObjects;
 	static unsigned int numberOfBuildings;
 	static unsigned int numberOfUnits;
 	static unsigned int numberOfDecorations;
 	static GObject* GameObjects[MAX_NUMBER_OF_OBJECTS];
+	static std::map<const unsigned int, std::string> scriptNamesMap;
+	#pragma endregion
 
-#pragma region Private members
+	#pragma region Private members
 	/// <summary>
 	/// This functions sets the properties of the current object when it is being created. 
 	/// The values of these properties were previously read 
@@ -465,5 +467,5 @@ private:
 	/// <param name="objData">The object in which are stored the properties of the current object.</param>
 	/// <param name="_temporary">Boolean: true = the object is temporary (e.g. an object that is being inserted in the editor)</param>
 	void SetObjectProperties(ObjectData::ObjectXMLClassData &objData, const bool _temporary = false);
-#pragma endregion
+	#pragma endregion
 };

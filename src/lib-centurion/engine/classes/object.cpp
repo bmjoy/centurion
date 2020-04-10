@@ -6,15 +6,19 @@
 #include <pathfinding/pathfinding.h>
 #include <game/editor.h>
 #include <game/pass.h>
+#include <logger.h>
 
 using namespace std;
 using namespace glm;
 
+#pragma region Static GObject properties:
+map<const unsigned int, std::string> GObject::scriptNamesMap;
+#pragma endregion
 
 GObject::GObject(void)
 {
 	this->bSelected = false;
-	this->scriptName = "Clarissa";
+	this->scriptName = "";
 }
 
 unsigned short int GObject::GetPlayer(void)
@@ -114,8 +118,27 @@ string GObject::GetPluralName(void)
 
 void GObject::SetScriptName(const std::string _scriptName)
 {
-	//(???) TODO: verifica univocita' stringa.
+	const unsigned int pickingID = this->GetPickingID();
+
+	//Check if script name belogs to an other existing object.
+	if (_scriptName != "")
+	{
+		for (auto& i : GObject::scriptNamesMap)
+		{
+			if (i.second == _scriptName)
+			{
+				if (i.first != pickingID)
+				{
+					Logger::Warn("Script name " + _scriptName + " belongs to another object (ID = " + to_string(pickingID) + ")");
+					return;
+				}
+				break;
+			}
+		}
+	}
+
 	this->scriptName = _scriptName;
+	GObject::scriptNamesMap[pickingID] = _scriptName; //Assign or replace script name.
 }
 
 std::string GObject::GetScriptName(void)
