@@ -14,6 +14,7 @@
 #include <sstream>
 #include <vector>
 #include <map>
+#include <unordered_map>
 #include <array>
 #include <GL/glew.h>
 #include <glm/glm.hpp>

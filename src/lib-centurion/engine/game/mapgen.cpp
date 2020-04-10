@@ -40,7 +40,7 @@ namespace Game
 			float MAX_Z_REACHED = 0.f;
 
 			array<TerrainTexture, MAX_NUMBER_OF_TEXTURES> TERRAIN_TEXTURES = array<TerrainTexture, MAX_NUMBER_OF_TEXTURES>();
-			map<string, TerrainTexture*> TERRAIN_TEXTURES_MAP = map<string, TerrainTexture*>();
+			unordered_map<string, TerrainTexture*> TERRAIN_TEXTURES_MAP = unordered_map<string, TerrainTexture*>();
 		};
 
 		void InitializeTerrain(void)
