@@ -116,6 +116,16 @@ string GObject::GetPluralName(void)
 	return this->pluralName;
 }
 
+void GObject::SetDisplayedName(const std::string _displayedName)
+{
+	this->displayedName = _displayedName;
+}
+
+std::string GObject::GetDisplayedName(void)
+{
+	return (this->displayedName != singularName) ? displayedName : "";
+}
+
 void GObject::SetScriptName(const std::string _scriptName)
 {
 	//Check if script name belogs to an other existing object.
@@ -489,6 +499,7 @@ void GObject::SetObjectProperties(ObjectData::ObjectXMLClassData &objData, const
 		return;
 	ObjectData::TryParseString(objData.GetPropertiesMap(), "singularName", &strProperty);
 	this->singularName = strProperty;
+	this->displayedName = strProperty;
 	ObjectData::TryParseString(objData.GetPropertiesMap(), "pluralName", &strProperty);
 	this->pluralName = strProperty;
 	ObjectData::TryParseString(objData.GetPropertiesMap(), "race", &strProperty);

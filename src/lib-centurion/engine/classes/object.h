@@ -136,6 +136,18 @@ public:
 	std::string GetPluralName(void);
 
 	/// <summary>
+	/// This function sets the displayed name of the current object. 
+	/// </summary>
+	/// <param name="_scriptName">The displayed name of the current object. </param>
+	void SetDisplayedName(const std::string _displayedName);
+
+	/// <summary>
+	/// This function return the dislayed name of the current object.
+	/// </summary>
+	/// <returns>The displayed name of the current object; if the current object doesn't have a script name, it singular name will be returned.</returns>
+	std::string GetDisplayedName(void);
+
+	/// <summary>
 	/// This function sets the script name of the current object. If the script name is already used, it will be setted using empty string.
 	/// </summary>
 	/// <param name="_scriptName">The script name of the current object. It must be univocal. </param>
@@ -437,6 +449,7 @@ private:
 	glm::vec3 position;
 	std::string singularName;
 	std::string pluralName;
+	std::string displayedName;
 	std::string scriptName;
 	std::string raceName;
 	std::string className;

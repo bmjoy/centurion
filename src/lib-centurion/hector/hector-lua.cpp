@@ -95,6 +95,8 @@ void Hector::Initialize()
 		.addFunction("GetClassName", &GObject::GetClassName)
 		.addFunction("GetScriptName", &GObject::GetScriptName)
 		.addFunction("SetScriptName", &GObject::SetScriptName)
+		.addFunction("GetDisplayedName", &GObject::GetDisplayedName)
+		.addFunction("SetDisplayedName", &GObject::SetDisplayedName)
 		.endClass();
 
 	getGlobalNamespace(L)
