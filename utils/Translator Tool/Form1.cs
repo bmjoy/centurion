@@ -22,11 +22,11 @@ namespace CenturionTranslatorTool
 
         public void LoadTables()
         {
-            xmlFiles = GetFileNames("input/", "*.xml");
+            xmlFiles = GetFileNames("tables/", "*.xml");
 
             foreach (string xmlFile in xmlFiles)
             {
-                string fileContent = File.ReadAllText("input/" + xmlFile);
+                string fileContent = File.ReadAllText("tables/" + xmlFile);
                 string language = xmlFile.Split('_')[1].Split('.')[0];
                 languages.Add(language);
                 TranslationTable table = new TranslationTable();
@@ -169,7 +169,7 @@ namespace CenturionTranslatorTool
             settings.OmitXmlDeclaration = true;
             settings.Indent = true;
 
-            using (StreamWriter stream = new StreamWriter("output/translationTable_" + lan + ".xml"))
+            using (StreamWriter stream = new StreamWriter("tables/translationTable_" + lan + ".xml"))
             {
                 using (var writer = XmlWriter.Create(stream, settings))
                 {
