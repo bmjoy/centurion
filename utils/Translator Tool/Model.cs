@@ -4,17 +4,17 @@ using System.Xml.Serialization;
 namespace CenturionTranslatorTool
 {
     [XmlRoot("translationTable")]
-    public class Model
+    public class TranslationTable
     {
         [XmlAttribute("language")]
-        public string Attribute1 { get; set; }
+        public string Language { get; set; }
 
         [XmlElement("entry")]
-        public List<MyItem> Items { get; set; }
+        public List<Entry> Entries { get; set; }
 
     }
 
-    public class MyItem
+    public class Entry
     {
         [XmlAttribute("stringName")]
         public string StringName { get; set; }
