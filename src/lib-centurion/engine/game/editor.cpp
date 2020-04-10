@@ -50,7 +50,6 @@ namespace Game
 			std::vector<std::string> editorObjectTreeList3 = std::vector<std::string>();
 
 			std::vector<std::array<std::string, 2>> editorTerrainTree = std::vector<std::array<std::string, 2>>();
-			std::map<std::string, int> editorTerrainMap = std::map<std::string, int>();
 			std::vector<std::string> editorTerrainTreeList1 = std::vector<std::string>();
 			std::vector<std::string> editorTerrainTreeList2 = std::vector<std::string>();
 
@@ -219,9 +218,6 @@ namespace Game
 		{
 			std::array<std::string, 2> element = { filter1, filter2 };
 			Editor::editorTerrainTree.push_back(element);
-
-			int n = (int)editorTerrainMap.size() + 1;
-			editorTerrainMap[filter2] = n;
 		}
 
 		std::vector<std::string>* GetEditorTerrainTreeList1(void)
@@ -368,14 +364,16 @@ namespace Game
 		{
 			if (type.empty() == false) {
 				changingTerrain.isActive = true;
-				if (editorTerrainMap.count(type) == 0) {
+				Mapgen::TerrainTexture * tt = Mapgen::GetTerrainTexturePtrByName(type);
+				if (tt == nullptr) {
+					changingTerrain.isActive = false;
 					changingTerrain.type = -1.f;
 					return;
 				}
 
 				// This part of code is executed when you are BEGINNING the terrain change
 				Game::Minimap::Update();
-				changingTerrain.type = (float)editorTerrainMap[type];
+				changingTerrain.type = (float)tt->GetId();
 				EditorMenuBar::Hide();
 				EditorWindows::Hide();
 				EditorUI::UpdateInfoText("Press the mouse right button to cancel the operation");

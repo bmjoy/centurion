@@ -40,6 +40,7 @@ namespace Game
 			float MAX_Z_REACHED = 0.f;
 
 			array<TerrainTexture, MAX_NUMBER_OF_TEXTURES> TERRAIN_TEXTURES = array<TerrainTexture, MAX_NUMBER_OF_TEXTURES>();
+			map<string, TerrainTexture*> TERRAIN_TEXTURES_MAP = map<string, TerrainTexture*>();
 		};
 
 		void InitializeTerrain(void)
@@ -549,8 +550,20 @@ namespace Game
 		{
 			if (id < 0 || id >= MAX_NUMBER_OF_TEXTURES) return;
 			TERRAIN_TEXTURES[id] = tt;
+			TERRAIN_TEXTURES_MAP[tt.GetName()] = &(TERRAIN_TEXTURES[id]);
 			Editor::AddEditorTerrainTreeElement(tt.GetEditorTree(), tt.GetName());
 			GLItems::MapTerrain()->AddTerrainTexturePath(tt.GetPath());
+		}
+
+		Mapgen::TerrainTexture* GetTerrainTexturePtrById(const unsigned int id)
+		{
+			if (id < 0 || id >= MAX_NUMBER_OF_TEXTURES) return nullptr;
+			return &(TERRAIN_TEXTURES[id]);
+		}
+
+		Mapgen::TerrainTexture* GetTerrainTexturePtrByName(const std::string _name)
+		{
+			return TERRAIN_TEXTURES_MAP[_name];
 		}
 
 		void ReadIndicesData(void)

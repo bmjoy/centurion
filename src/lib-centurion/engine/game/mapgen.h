@@ -67,6 +67,18 @@ namespace Game
 		void AddTerrainTexture(const unsigned int id, TerrainTexture tt);
 
 		/// <summary>
+		/// This function returns a pointer to the required terrain texture
+		/// </summary>
+		/// <param name="id">The texture id</param>
+		Mapgen::TerrainTexture* GetTerrainTexturePtrById(const unsigned int id);
+
+		/// <summary>
+		/// This function returns a pointer to the required terrain texture
+		/// </summary>
+		/// <param name="id">The texture name</param>
+		Mapgen::TerrainTexture* GetTerrainTexturePtrByName(const std::string _name);
+
+		/// <summary>
 		/// This function read the "indices" file that contains information about the indices of plane vertices
 		/// </summary>
 		void ReadIndicesData(void);
