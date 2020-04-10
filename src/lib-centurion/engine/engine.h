@@ -89,9 +89,9 @@ namespace Engine
 	std::vector<std::string> *GetListOfFolders(const std::string s);
 
 	/// <summary>
-	/// Thois function initializes the game; it thorws an exception if it wasn't able to process the game.
+	/// This function initializes the game; it returns false if it wasn't able to process the game.
 	/// </summary>
-	void Init (const char* exe_root);
+	bool Initialize (const char* exe_root);
 
 	/// <summary>
 	/// This functions returns the environment in which the game is (for instance editor, strategy, menu). 
@@ -109,7 +109,7 @@ namespace Engine
 	/// (???) Da rivedere. 
 	/// This function reads all the data needed for the game.
 	/// </summary>
-	void read_data(void);
+	void InitializeImages(void);
 
 	/// <summary>
 	/// This function resets mouse and keyboard restoring their default status. 
@@ -120,4 +120,9 @@ namespace Engine
 	/// This function returns the Cpp compiler version.
 	/// </summary>
 	std::string GetCppVersion();
+
+	/// <summary>
+	/// This function returns the Opengl version.
+	/// </summary>
+	std::string GetOpenglVersion();
 };

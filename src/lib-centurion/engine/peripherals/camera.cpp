@@ -65,7 +65,7 @@ namespace Engine
 			return vec2(x, y);
 		}
 
-		void Engine::Camera::Init() {
+		void Engine::Camera::Create() {
 			position = vec3(0.0f, 0.0f, 0.0f); // Starting position coordinates (x, y and z)
 			worldUp = vec3(0.0f, 1.0f, 0.0f); // Relative position (x, y and z) from the world
 			yaw = -90.0f; // Degrees of rotation along the vertical axis

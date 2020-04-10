@@ -6,6 +6,7 @@
 
 #define STB_IMAGE_WRITE_IMPLEMENTATION
 #include <stb_image_write.h>
+#include <stb_image.h>
 
 #include <GLFW/glfw3.h>
 
@@ -13,7 +14,6 @@ using namespace std;
 using namespace glm;
 
 // Define static variables (default values)
-bool Engine::myWindow::ShouldClose = false;
 float Engine::myWindow::WidthZoomed = 1366.f;
 float Engine::myWindow::HeightZoomed = 768.f;
 float Engine::myWindow::Width = 1366.f;
@@ -26,12 +26,14 @@ GLfloat Engine::myWindow::lastY = 0;
 Engine::myWindow* Engine::myWindow::window;
 // ------------ End definition
 
-Engine::myWindow::myWindow() {}
+Engine::myWindow::myWindow() 
+{
+	this->shouldClose = false;
+}
 
 Engine::myWindow Engine::myWindow::GetInstance(void) {
 	if (window == nullptr) {
 		window = new myWindow();
-		window->init();
 	}
 	return (*window);
 }
@@ -61,7 +63,7 @@ void Engine::myWindow::TakeScreenshot(void)
 		glReadPixels(0, 0, w, h, GL_RGB, GL_UNSIGNED_BYTE, imageData);
 
 		int saved = stbi_write_png(filename, w, h, 3, imageData, 0);
-		free(imageData);
+		stbi_image_free(imageData);
 	}
 	catch (const std::exception&)
 	{
@@ -69,7 +71,7 @@ void Engine::myWindow::TakeScreenshot(void)
 	}
 }
 
-void Engine::myWindow::init() {
+void Engine::myWindow::Create() {
 	glfwInit();
 	glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
 	glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
@@ -101,7 +103,7 @@ void Engine::myWindow::ClearBuffers() {
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
 	if (glfwWindowShouldClose(glfwWindow)) {
-		ShouldClose = true;
+		shouldClose = true;
 	}
 }
 
@@ -152,6 +154,7 @@ void Engine::myWindow::handle_mouse(GLFWwindow* window, double xPos, double yPos
 	lastX = (GLfloat)xPos;
 	double y = fabs(yPos - Height);
 	lastY = (GLfloat)y;
+	Engine::Mouse::Control(lastX, lastY);
 }
 
 void Engine::myWindow::mouse_button_callback(GLFWwindow* window, int button, int action, int mods) {

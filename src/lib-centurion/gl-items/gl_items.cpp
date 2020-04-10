@@ -85,7 +85,7 @@ namespace GLItems {
 	}
 
 
-	void init() {
+	void InitializeVariables() {
 		*Text() = glBitmapFont();
 		*BSprite() = glBuildingSprite();
 		*DSprite() = glDecorationSprite();
@@ -101,7 +101,7 @@ namespace GLItems {
 
 
 	}
-	void compile() {
+	void Compile() {
 		Text()->compile();
 		BSprite()->compile();
 		DSprite()->compile();
@@ -115,7 +115,7 @@ namespace GLItems {
 		MapGrid()->compile();
 		MMRectangle()->compile();
 	}
-	void create() {
+	void Create() {
 		Text()->apply_projection_matrix(MENU_PROJECTION_MATRIX);
 		Cursor()->apply_projection_matrix(MENU_PROJECTION_MATRIX);
 

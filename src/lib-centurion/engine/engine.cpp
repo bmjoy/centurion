@@ -46,112 +46,96 @@ namespace Engine
 	{
 		int ENVIRONMENT = MENU_ENV;
 		std::vector<std::string> listOfFoldersTemp = std::vector<std::string>();
+		myWindow WINDOW = myWindow::GetInstance();
+		DebugUI DEBUG_UI = DebugUI();
 	};
 
 	int Engine::Launch(void)
 	{
-		myWindow window = myWindow::GetInstance();
-		GLItems::init();
-
-		ObjectData::ReadDataClassesFromXml();
-		Engine::read_data();
-
-		GLItems::compile();
-		GLItems::create();
-
-		Camera::Init();
-		Mouse::Create();
-
-		DebugUI debugUI = DebugUI();
-		debugUI.create();
-
-		std::ostringstream ss;
-		ss << glGetString(GL_VERSION);
-		Logger::Info("Running OpenGL Version " + ss.str());
-
-		Logger::Info("C++ Compiler Version: " + GetCppVersion());
-
-		// Hector - Lua interpreter
-		Hector::Initialize();
-		Hector::CreateConsole();
-
-		Fps::SetLastTime(glfwGetTime());
-
-		while (myWindow::ShouldClose == false)
+		try
 		{
-			glfwPollEvents();
-			Mouse::IsHolding();
-			window.ClearBuffers();
-			Fps::Update();
-			Mouse::Control(window.get_mouse_x(), window.get_mouse_y());
+			Logger::Info("Running OpenGL Version " + GetOpenglVersion());
+			Logger::Info("C++ Compiler Version: " + GetCppVersion());
 
-			// ---- MENU ---- //
-
-			if (GetEnvironment() == MENU_ENV)
+			while (WINDOW.ShouldClose() == false)
 			{
-				Menu::Run();
-			}
+				glfwPollEvents();
+				Mouse::IsHolding();
+				WINDOW.ClearBuffers();
+				Fps::Update();
 
-			// ---- STRATEGY ---- //
+				// ---- MENU ---- //
 
-			if (GetEnvironment() == STRATEGY_ENV)
-			{
-				//Strategy::Run();
-			}
-
-			// ---- EDITOR ---- //
-
-			if (GetEnvironment() == EDITOR_ENV)
-			{
-				Game::Editor::Run();
-			}
-
-			// -------------- //
-
-			// debug ui
-			if (Settings::DebugIsActive)
-			{
-				debugUI.render(Fps::GetFps(), Fps::GetMpfs(), Unit::GetCounter());
-			}
-
-			Hector::RenderConsole();
-
-			// mouse
-			Mouse::Render();
-
-			if (Hector::ConsoleIsActive() == false)
-			{
-				if ((Keyboard::IsKeyNotReleased(GLFW_KEY_LEFT_SHIFT) || Keyboard::IsKeyNotReleased(GLFW_KEY_RIGHT_SHIFT)) && Keyboard::IsKeyNotReleased(GLFW_KEY_S))
+				if (GetEnvironment() == MENU_ENV)
 				{
-					Logger::Info("Screenshot taken!");
-					myWindow::TakeScreenshot();
+					Menu::Run();
 				}
+
+				// ---- STRATEGY ---- //
+
+				if (GetEnvironment() == STRATEGY_ENV)
+				{
+					//Strategy::Run();
+				}
+
+				// ---- EDITOR ---- //
+
+				if (GetEnvironment() == EDITOR_ENV)
+				{
+					Game::Editor::Run();
+				}
+
+				// -------------- //
+
+				// debug ui
+				if (Settings::DebugIsActive)
+				{
+					DEBUG_UI.Render();
+				}
+
+				Hector::RenderConsole();
+
+				// mouse
+				Mouse::Render();
+
+				if (Hector::ConsoleIsActive() == false)
+				{
+					if ((Keyboard::IsKeyNotReleased(GLFW_KEY_LEFT_SHIFT) || Keyboard::IsKeyNotReleased(GLFW_KEY_RIGHT_SHIFT)) && Keyboard::IsKeyNotReleased(GLFW_KEY_S))
+					{
+						Logger::Info("Screenshot taken!");
+						myWindow::TakeScreenshot();
+					}
+				}
+
+				Keyboard::SetCharCodepointPressed(-1);
+				ResetperipheralsInput();
+
+				WINDOW.SwapBuffers();
+
+				Fps::SleepFps();
 			}
 
-			Keyboard::SetCharCodepointPressed(-1);
-			ResetperipheralsInput();
+			//if (MENU()->menu_is_created()) MENU()->reset();
+			Logger::SaveParamsXML();
 
-			window.SwapBuffers();
+			GObject::ResetGameObjects();
+			Menu::Clear();
+			myWindow::DeleteInstance();
+			EditorWindows::Clear();
 
-			Fps::SleepFps();
+			glfwTerminate();
+			return 0;
 		}
-
-		//if (MENU()->menu_is_created()) MENU()->reset();
-		Logger::SaveParamsXML();
-
-		GObject::ResetGameObjects();
-		Menu::Clear();
-		myWindow::DeleteInstance();
-		EditorWindows::Clear();
-
-		glfwTerminate();
-		return 0;
+		catch (...)
+		{
+			return 1;
+		}
 	}
 
 
 	void Engine::GameClose(void)
 	{
-		myWindow::ShouldClose = true;
+		WINDOW.SetShouldClose();
 	}
 
 	void Engine::SetEnvironment(const string s)
@@ -190,7 +174,7 @@ namespace Engine
 		return nullptr;
 	}
 
-	void Engine::Init(const char* exe_root)
+	bool Engine::Initialize(const char* exe_root)
 	{
 		// old initParams (global)
 		try
@@ -240,15 +224,35 @@ namespace Engine
 				r.setRaceProperties(id, name, zone, food_transport_class);
 				Game::AddRace(name, r);
 			}
+
+			GLItems::InitializeVariables();
+			WINDOW.Create();
+
+			ObjectData::ReadDataClassesFromXml();
+			Game::Mapgen::InitializeTerrain();
+			Engine::InitializeImages();
+
+			GLItems::Compile();
+			GLItems::Create();
+
+			Camera::Create();
+			Mouse::Create();
+
+			// Hector - Lua interpreter
+			Hector::Initialize();
+			Hector::CreateConsole();
+
+			Fps::SetLastTime(glfwGetTime());
+
+			Engine::SetEnvironment("menu");
+
+			return true;
 		}
 		catch (...)
 		{
 			std::cout << "An error occurred" << std::endl;
-		}
-
-		//------------------------------
-
-		Engine::SetEnvironment("menu");
+			return false;
+		}	
 	}
 
 	unsigned int Engine::GetEnvironment(void)
@@ -256,7 +260,7 @@ namespace Engine
 		return ENVIRONMENT;
 	}
 
-	void Engine::read_data(void)
+	void Engine::InitializeImages(void)
 	{
 		/* images */
 
@@ -289,6 +293,13 @@ namespace Engine
 		else if (__cplusplus == 199711L) version = "C++98";
 		else version = "pre-standard C++";
 		return version;
+	}
+
+	std::string Engine::GetOpenglVersion()
+	{
+		std::ostringstream ss;
+		ss << glGetString(GL_VERSION);
+		return ss.str();
 	}
 
 	namespace Fps

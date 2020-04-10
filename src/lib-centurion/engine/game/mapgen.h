@@ -10,6 +10,11 @@
 
 #include <header.h>
 
+#ifndef MAX_NUMBER_OF_TEXTURES
+#define MAX_NUMBER_OF_TEXTURES 50
+#endif // !MAX_NUMBER_OF_TEXTURES
+
+
 namespace Math { struct Triangle; }
 struct terrainTexture;
 
@@ -17,8 +22,64 @@ namespace Game
 {
 	namespace Mapgen
 	{
-		extern std::map<std::string, std::vector<std::string>> zonesMap;
-		extern std::map<std::string, terrainTexture> terrainsMap;
+		class TerrainTexture
+		{
+		public:
+
+			struct TerrainZone
+			{
+				std::string name;
+				float frequency;
+				int zoneId;
+			};
+
+			TerrainTexture();
+			TerrainTexture(int _id, std::string _name, std::string _path, std::vector<TerrainZone> _zones, std::string _editortree);
+			std::string GetName(void) { return name; }
+			std::string GetPath(void) { return path; }
+			std::string GetEditorTree(void) { return editortree; }
+			int GetId(void) { return terrainId; }
+			~TerrainTexture();
+		private:
+			std::vector<TerrainZone> zones;
+			std::string name;
+			std::string editortree;
+			std::string path;
+			//float width, height; TO DO
+			int terrainId;
+		};
+
+		/// <summary>
+		/// This function prepares the terrain arrays and textures.
+		/// </summary>
+		void InitializeTerrain(void);
+
+		/// <summary>
+		/// This function reads the file XML that contains the texture information
+		/// </summary>
+		void ReadTexturesXml(void);
+
+		/// <summary>
+		/// This function adds an element of type TerrainTexture to the array of textures of size MAX_NUMBER_OF_TEXTURES
+		/// </summary>
+		/// <param name="id">The texture id</param>
+		/// <param name="TerrainTexture">An element of type TerrainTexture</param>
+		void AddTerrainTexture(const unsigned int id, TerrainTexture tt);
+
+		/// <summary>
+		/// This function read the "indices" file that contains information about the indices of plane vertices
+		/// </summary>
+		void ReadIndicesData(void);
+
+		/// <summary>
+		/// This function read the "vertices" file that contains information about plane vertices
+		/// </summary>
+		void ReadVerticesData(void);
+
+		/// <summary>
+		/// This function read the "vertices_pos" file that contains information about the position of plane vertices
+		/// </summary>
+		void ReadVerticesPosData(void);
 
 		/// <summary>
 		/// This function returns the width of the triangles that compose the map mesh.

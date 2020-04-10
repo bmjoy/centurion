@@ -31,9 +31,9 @@ public:
 	glTerrain();
 
 	/// <summary>
-	/// This function returns the list of textures names
+	/// This function adds a path to the textures list path
 	/// </summary>
-	std::vector<std::string> getTerrainList() { return texturesName; }
+	void AddTerrainTexturePath(std::string path) { texturesPathList.push_back(path); }
 
 	/// <summary>
 	/// Create function.
@@ -66,21 +66,8 @@ private:
 	int randomPos;
 	void genBuffers();
 
-	/// <summary>
-	/// TODO
-	/// </summary>
-	void ReadIndicesData(void);
-
-	/// <summary>
-	/// TODO
-	/// </summary>
-	void ReadVerticesData(void);
-
-	/// <summary>
-	/// TODO
-	/// </summary>
-	void ReadVerticesPosData(void);
-	std::vector<std::string> texturesName;
+	std::vector<std::string> texturesPathList;
+	unsigned int nTextures;
 	float width, height;
 
 	// light 

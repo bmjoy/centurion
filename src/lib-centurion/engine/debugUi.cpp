@@ -24,10 +24,11 @@ DebugUI::DebugUI()
 		"picking ui: ",
 	};
 	dynamicTextList = { "0" };
-	debuguiIsActive = true;
+	this->debuguiIsActive = true;
+	this->isCreated = false;
 }
 
-void DebugUI::create() {
+void DebugUI::Create() {
 	startX = 14.f;
 	startY = Engine::myWindow::BottomBarHeight + 12.f;
 	deltaY = 15.f;
@@ -51,9 +52,15 @@ void DebugUI::create() {
 	back.create("border-filled", 10.f, Engine::myWindow::BottomBarHeight + 10.f, 200.f, 200.f, "bottom-left", 0);
 
 	currentLan = Settings::Language;
+	this->isCreated = true;
 }
 
-void DebugUI::render(int fps, int mpfs, int selUnits) {
+void DebugUI::Render() {
+
+	if (this->isCreated == false)
+	{
+		this->Create();
+	}
 
 	if (Engine::Keyboard::IsKeyPressed(GLFW_KEY_F10))
 	{
@@ -74,13 +81,13 @@ void DebugUI::render(int fps, int mpfs, int selUnits) {
 		debugText[1].render_static();
 		debugText[2].render_static();
 
-		dynamicTextList[0] = to_string(fps);
-		dynamicTextList[1] = to_string(mpfs);
+		dynamicTextList[0] = to_string(Engine::Fps::GetFps());
+		dynamicTextList[1] = to_string(Engine::Fps::GetMpfs());
 		dynamicTextList[2] = to_string((int)Engine::Mouse::GetYPosition());
 		dynamicTextList[3] = to_string((int)Engine::Mouse::GetXPosition());
 		dynamicTextList[4] = to_string((int)Engine::Camera::GetZoomedCoords(Engine::Mouse::GetXPosition(), Engine::Mouse::GetYPosition()).y);
 		dynamicTextList[5] = to_string((int)Engine::Camera::GetZoomedCoords(Engine::Mouse::GetXPosition(), Engine::Mouse::GetYPosition()).x);
-		dynamicTextList[6] = to_string(selUnits);
+		dynamicTextList[6] = "na";
 		dynamicTextList[7] = to_string(Picking::Obj::GetLastPickingID());
 		dynamicTextList[8] = to_string(PICKING_ID_MAX - Picking::UI::GetLastPickingID());
 

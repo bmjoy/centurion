@@ -169,7 +169,6 @@ namespace Logger
 				"\t\t\t<heightZoomed>" << Engine::myWindow::HeightZoomed << "</heightZoomed>\n" <<
 				"\t\t\t<ratio>" << Engine::myWindow::Ratio << "</ratio>\n" <<
 				"\t\t\t<widthZoomed>" << Engine::myWindow::WidthZoomed << "</widthZoomed>\n" <<
-				"\t\t\t<shouldClose>" << Engine::myWindow::ShouldClose << "</shouldClose>\n" <<
 				"\t\t\t<bottomBarHeight>" << Engine::myWindow::BottomBarHeight << "</bottomBarHeight>\n" <<
 				"\t\t\t<topBarHeight>" << Engine::myWindow::TopBarHeight << "</topBarHeight>\n" <<
 				"\t\t</Window>\n\t</Params>\n" <<

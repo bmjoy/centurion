@@ -15,8 +15,8 @@ public:
 	DebugUI();
 	void setStatus(bool b) { debuguiIsActive = b; }
 	bool getStatus() { return debuguiIsActive; }
-	void create();
-	void render(int fps, int mpfs, int selUnits);
+	void Create();
+	void Render();
 	~DebugUI();
 private:
 	// text
@@ -28,6 +28,7 @@ private:
 	float startX, startY, deltaY;
 	int n;
 	bool debuguiIsActive;
+	bool isCreated;
 	// background
 	gui::Rectangle back;
 	std::string currentLan;

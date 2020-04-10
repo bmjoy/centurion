@@ -19,69 +19,39 @@ glTerrain::glTerrain() {
 }
 
 void glTerrain::create() {
-	// Read and store indices and vertices position information //
-
-	ReadIndicesData();
-	ReadVerticesData();
-	ReadVerticesPosData();
-
-	Game::Mapgen::ResetTexturesAndHeights();
-
-	// Textures
 	glUseProgram(shaderId);
 
 	genBuffers();
 
 	int k = 0;
-
-	string path = Folders::GAME + "assets\\terrain\\terrains.xml";
-	tinyxml2::XMLDocument xmlFile;
-	xmlFile.LoadFile(path.c_str());
-
-	tinyxml2::XMLElement *_terrains = xmlFile.FirstChildElement("terrains");
-	for (tinyxml2::XMLElement* _terr = _terrains->FirstChildElement(); _terr != NULL; _terr = _terr->NextSiblingElement())
+	for (auto tex : texturesPathList)
 	{
-		//Terrain data
-		terrainTexture tData = terrainTexture();
-		tData.id = _terr->IntAttribute("id");
-		tData.name = _terr->Attribute("name");
-		tData.zones = vector<string>();
-		tData.frequencies = vector<float>();
-		tinyxml2::XMLElement *_zones = _terr->FirstChildElement("zoneArray");
-		for (tinyxml2::XMLElement* _zone = _zones->FirstChildElement(); _zone != NULL; _zone = _zone->NextSiblingElement())
-		{
-			tData.zones.push_back(string(_zone->Attribute("name")));
-			tData.frequencies.push_back(stof(string(_zone->Attribute("frequency"))));
-
-			Game::Mapgen::zonesMap[string(_zone->Attribute("name"))].push_back(tData.name);
-		}
-		Game::Mapgen::terrainsMap[tData.name] = tData;
-		texturesName.push_back(tData.name);
-
-		// send data to editor terrain tree 
-		std::string editorTreeListName = _terr->Attribute("editorTreeList");
-		Game::Editor::AddEditorTerrainTreeElement(editorTreeListName, tData.name);
-
 		// load image
-		string texturePath = Folders::GAME + "assets\\terrain\\Textures\\" + tData.name + ".png";
+		string texturePath = tex;
 		textureIdList.push_back(0);
-		textureInfoList.push_back(glm::ivec3(0, 0, 0));
-		unsigned char *data = stbi_load(texturePath.c_str(), &textureInfoList[k].x, &textureInfoList[k].y, &textureInfoList[k].z, 0);
-		if (!data) { std::cout << "Failed to load texture" << std::endl; }
+		int iWidth, iHeight, iNrChannels;
+		unsigned char *data = stbi_load(texturePath.c_str(), &iWidth, &iHeight, &iNrChannels, 0);
+		if (!data) 
+		{ 
+			std::cout << "Failed to load texture" << std::endl; 
+			continue;
+		}
 
-		width = float(textureInfoList[k].x); height = float(textureInfoList[k].y);
+		width = float(iWidth);
+		height = float(iHeight);
 
 		glGenTextures(1, &textureIdList[k]);
 		glBindTexture(GL_TEXTURE_2D, textureIdList[k]);
 		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
 		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
 		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST_MIPMAP_LINEAR);
-		glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, textureInfoList[k].x, textureInfoList[k].y, 0, GL_RGBA, GL_UNSIGNED_BYTE, data);
+		glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, iWidth, iHeight, 0, GL_RGBA, GL_UNSIGNED_BYTE, data);
 		glGenerateMipmap(GL_TEXTURE_2D);
 		stbi_image_free(data);
 
 		k++;
 	}
+	nTextures = k;
 }
 
 
@@ -119,8 +89,6 @@ void glTerrain::render(bool tracing) {
 	}
 
 	/* NORMAL RENDERING */
-
-
 	else {
 		glEnable(GL_DEPTH_TEST);
 		// Light
@@ -136,9 +104,9 @@ void glTerrain::render(bool tracing) {
 		float scaleTexY = (float)MEDIUM_MAP_HEIGHT / height;
 		glUniform1f(glGetUniformLocation(shaderId, "scaleTextX"), scaleTexX);
 		glUniform1f(glGetUniformLocation(shaderId, "scaleTextY"), scaleTexY);
-		glUniform1i(glGetUniformLocation(shaderId, "nTerrains"), int(texturesName.size()));
+		glUniform1i(glGetUniformLocation(shaderId, "nTerrains"), nTextures);
 
-		for (int j = 0; j < texturesName.size(); j++) {
+		for (int j = 0; j < nTextures; j++) {
 			string sample = "sampleTex[" + to_string(j) + "]";
 			glUniform1i(glGetUniformLocation(shaderId, sample.c_str()), j);
 			glActiveTexture(GL_TEXTURE0 + j);
@@ -194,75 +162,6 @@ void glTerrain::genBuffers() {
 	glBindBuffer(GL_ARRAY_BUFFER, 0);
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
 	glBindVertexArray(0);
-}
-
-void glTerrain::ReadIndicesData(void)
-{
-	try
-	{
-		fstream fin;
-		fin.open("assets/terrain/emptymap/indices");
-		string line, number;
-		getline(fin, line);
-		stringstream s(line);
-		int i = 0;
-		while (getline(s, number, ',')) {
-			Game::Mapgen::Indices()[i] = (unsigned int)stoi(number);
-			i++;
-		}
-	}
-	catch (...)
-	{
-		Logger::LogMessage msg = Logger::LogMessage("An error occurred reading the indices data", "Error", "", "Terrain", "ReadIndicesData");
-		Logger::Error(msg);
-		Engine::GameClose();
-	}
-
-}
-
-void glTerrain::ReadVerticesData(void)
-{
-	try
-	{
-		fstream fin;
-		fin.open("assets/terrain/emptymap/vertices");
-		string line, number;
-		getline(fin, line);
-		stringstream s(line);
-		int i = 0;
-		while (getline(s, number, ',')) {
-			Game::Mapgen::MapVertices()[i] = stof(number);
-			i++;
-		}
-	}
-	catch (...)
-	{
-		Logger::LogMessage msg = Logger::LogMessage("An error occurred reading the vertices data", "Error", "", "Terrain", "ReadVerticesData");
-		Logger::Error(msg);
-		Engine::GameClose();
-	}
-}
-
-void glTerrain::ReadVerticesPosData(void)
-{
-	try {
-		fstream fin;
-		fin.open("assets/terrain/emptymap/vertices_pos");
-		string line, number;
-		getline(fin, line);
-		stringstream s(line);
-		int i = 0;
-		while (getline(s, number, ',')) {
-			Game::Mapgen::VerticesPos()[i] = stoi(number);
-			i++;
-		}
-	}
-	catch (...)
-	{
-		Logger::LogMessage msg = Logger::LogMessage("An error occurred reading the vertices pos data", "Error", "", "Terrain", "ReadVerticesPosData");
-		Logger::Error(msg);
-		Engine::GameClose();
-	}
 }
 
 void glTerrain::updateHeightsBuffer() {

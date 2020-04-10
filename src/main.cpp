@@ -7,18 +7,13 @@
 
 int main(int numArgs, char *args[]) {
 
-	Engine::Init(args[0]);
+	if (Engine::Initialize(args[0]))
+	{
+		return Engine::Launch();
+	}
+	else
+	{
+		return 1;
+	}
 	
-	if (Engine::myWindow::ShouldClose == false) {
-		try {
-			return Engine::Launch();
-		}
-		catch (...) {
-			Engine::GameClose();
-		}
-	}
-
-	else {
-		return 0;
-	}
 }

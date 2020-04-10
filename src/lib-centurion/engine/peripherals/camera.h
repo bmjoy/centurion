@@ -76,9 +76,9 @@ namespace Engine
 		float GetYMinimapCoordinate(const float y);
 
 		/// <summary>
-		/// This function intializes camera.
+		/// This function creates the camera, initialising all the values
 		/// </summary>
-		void Init();
+		void Create();
 
 		/// <summary>
 		/// This function manages camera behavior resulting from mouse interactions.

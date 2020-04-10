@@ -97,7 +97,7 @@
       <SDLCheck>true</SDLCheck>
       <ConformanceMode>true</ConformanceMode>
       <AdditionalIncludeDirectories>$(ProjectDir)lib-centurion\common;$(ProjectDir)lib-centurion\engine;$(ProjectDir)lib-centurion\util;$(ProjectDir)lib-centurion\gl-items;$(ProjectDir)lib-centurion\ui;$(ProjectDir)lib-centurion\hector;$(ProjectDir)lib-centurion\audio;$(ProjectDir)lib-extern\opengl;$(ProjectDir)lib-extern\openal;$(ProjectDir)lib-extern\lua;$(ProjectDir)lib-extern\etc</AdditionalIncludeDirectories>
-      <DisableSpecificWarnings>4250;6319;26495;4244;26812;26451;6262;6011</DisableSpecificWarnings>
+      <DisableSpecificWarnings>4250;6319;26495;4244;26812;26451;6262;6011;4018</DisableSpecificWarnings>
       <AdditionalOptions>/Zc:__cplusplus %(AdditionalOptions)</AdditionalOptions>
       <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <LanguageStandard>stdcpplatest</LanguageStandard>
@@ -159,7 +159,7 @@ XCOPY "$(ProjectDir)lua53.dll" "$(ProjectDir)$(OutDir)"</Command>
       <SDLCheck>true</SDLCheck>
       <ConformanceMode>true</ConformanceMode>
       <AdditionalIncludeDirectories>$(ProjectDir)lib-centurion\common;$(ProjectDir)lib-centurion\engine;$(ProjectDir)lib-centurion\util;$(ProjectDir)lib-centurion\gl-items;$(ProjectDir)lib-centurion\ui;$(ProjectDir)lib-centurion\hector;$(ProjectDir)lib-centurion\audio;$(ProjectDir)lib-extern\opengl;$(ProjectDir)lib-extern\openal;$(ProjectDir)lib-extern\lua;$(ProjectDir)lib-extern\etc</AdditionalIncludeDirectories>
-      <DisableSpecificWarnings>4250;6319;26495;4244;26812;26451;6262;6011</DisableSpecificWarnings>
+      <DisableSpecificWarnings>4250;6319;26495;4244;26812;26451;6262;6011;4018</DisableSpecificWarnings>
       <AdditionalOptions>/Zc:__cplusplus %(AdditionalOptions)</AdditionalOptions>
       <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <LanguageStandard>stdcpplatest</LanguageStandard>

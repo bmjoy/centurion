@@ -91,17 +91,17 @@ namespace GLItems {
 	/// <summary>
 	/// This function launches the constructors of each primitive
 	/// </summary>
-	void init();
+	void InitializeVariables();
 
 	/// <summary>
 	/// This function compiles all the primitives
 	/// </summary>
-	void compile();
+	void Compile();
 
 	/// <summary>
 	/// This function creates all the primitives
 	/// </summary>	
-	void create();
+	void Create();
 };
 
 #endif

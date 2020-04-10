@@ -1,6 +1,5 @@
 #include "mapgen.h"
-
-#include <game/game.h>
+#include "editor.h"
 
 #include <random>
 #include <ctime>
@@ -8,6 +7,9 @@
 #include <maths.hpp>
 #include <classes/building.h>
 #include <gl_terrain.h>
+#include <logger.h>
+#include <file_manager.h>
+#include <tinyxml2.h>
 
 
 using namespace std;
@@ -33,13 +35,21 @@ namespace Game
 			float map_heights[NUMBER_OF_VERTICES * 4] = { 0.f };
 			unsigned int indices[NUMBER_OF_INDICES] = { 0 };
 			int vertices_pos[NUMBER_OF_VERTICES] = { 0 };
-			
+
 			float MIN_Z_REACHED = 0.f;
 			float MAX_Z_REACHED = 0.f;
+
+			array<TerrainTexture, MAX_NUMBER_OF_TEXTURES> TERRAIN_TEXTURES = array<TerrainTexture, MAX_NUMBER_OF_TEXTURES>();
 		};
 
-		map<string, vector<string>> zonesMap;
-		map<string, terrainTexture> terrainsMap;
+		void InitializeTerrain(void)
+		{
+			Mapgen::ReadIndicesData();
+			Mapgen::ReadVerticesData();
+			Mapgen::ReadVerticesPosData();
+			Mapgen::ResetTexturesAndHeights();
+			Mapgen::ReadTexturesXml();
+		}		
 
 		int GetTriangleWidth(void)
 		{
@@ -448,7 +458,7 @@ namespace Game
 			uniform_real_distribution<float> distribution(-500.f, 500.f);
 
 
-			for (int i = 0; i < NUMBER_OF_VERTICES; i++) {
+			/*for (int i = 0; i < NUMBER_OF_VERTICES; i++) {
 
 				string zoneType = "none";
 
@@ -488,10 +498,140 @@ namespace Game
 					int j = distribution(gen);
 					MapTextures()[i] = weightedTerrainsId[j];
 				}
-			}
+			}*/
 			// update texture buffer
 			GLItems::MapTerrain()->updateTextureBuffer();
 		}
 
+		void ReadTexturesXml(void)
+		{
+			try
+			{
+				string path = Folders::GAME + "assets\\terrain\\terrains.xml";
+				tinyxml2::XMLDocument xmlFile;
+				xmlFile.LoadFile(path.c_str());
+
+				tinyxml2::XMLElement* _terrains = xmlFile.FirstChildElement("terrains");
+				for (tinyxml2::XMLElement* _terr = _terrains->FirstChildElement(); _terr != NULL; _terr = _terr->NextSiblingElement())
+				{
+					int _id = _terr->IntAttribute("id");
+					string _name = _terr->Attribute("name");
+					string _path = _terr->Attribute("path");
+					string _editorTree = _terr->Attribute("editorTreeList");
+
+					vector<TerrainTexture::TerrainZone> _zonesList = vector<TerrainTexture::TerrainZone>();
+
+					tinyxml2::XMLElement* _zones = _terr->FirstChildElement("zoneArray");
+					for (tinyxml2::XMLElement* _zone = _zones->FirstChildElement(); _zone != NULL; _zone = _zone->NextSiblingElement())
+					{
+						TerrainTexture::TerrainZone terrainZone = TerrainTexture::TerrainZone();
+						terrainZone.frequency = _zone->FloatAttribute("frequency");
+						terrainZone.name = _zone->Attribute("name");
+						terrainZone.zoneId = _zone->IntAttribute("id");
+						_zonesList.push_back(terrainZone);
+					}
+
+					TerrainTexture tt = TerrainTexture(_id, _name, _path, _zonesList, _editorTree);
+					Mapgen::AddTerrainTexture(_id, tt);
+				}
+			}
+			catch (const std::exception&)
+			{
+				Logger::LogMessage msg = Logger::LogMessage("An error occurred reading the textures XML", "Error", "Game::Mapgen", "", "ReadTexturesXml");
+				Logger::Error(msg);
+				throw;
+			}
+
+
+		}
+
+		void AddTerrainTexture(const unsigned int id, TerrainTexture tt)
+		{
+			if (id < 0 || id >= MAX_NUMBER_OF_TEXTURES) return;
+			TERRAIN_TEXTURES[id] = tt;
+			Editor::AddEditorTerrainTreeElement(tt.GetEditorTree(), tt.GetName());
+			GLItems::MapTerrain()->AddTerrainTexturePath(tt.GetPath());
+		}
+
+		void ReadIndicesData(void)
+		{
+			try
+			{
+				fstream fin;
+				fin.open("assets/terrain/emptymap/indices");
+				string line, number;
+				getline(fin, line);
+				stringstream s(line);
+				int i = 0;
+				while (getline(s, number, ',')) {
+					Game::Mapgen::Indices()[i] = (unsigned int)stoi(number);
+					i++;
+				}
+			}
+			catch (...)
+			{
+				Logger::LogMessage msg = Logger::LogMessage("An error occurred reading the indices data", "Error", "", "Terrain", "ReadIndicesData");
+				Logger::Error(msg);
+				throw;
+			}
+		}
+
+		void ReadVerticesData(void)
+		{
+			try
+			{
+				fstream fin;
+				fin.open("assets/terrain/emptymap/vertices");
+				string line, number;
+				getline(fin, line);
+				stringstream s(line);
+				int i = 0;
+				while (getline(s, number, ',')) {
+					Game::Mapgen::MapVertices()[i] = stof(number);
+					i++;
+				}
+			}
+			catch (...)
+			{
+				Logger::LogMessage msg = Logger::LogMessage("An error occurred reading the vertices data", "Error", "", "Terrain", "ReadVerticesData");
+				Logger::Error(msg);
+				throw;
+			}
+		}
+
+		void ReadVerticesPosData(void)
+		{
+			try {
+				fstream fin;
+				fin.open("assets/terrain/emptymap/vertices_pos");
+				string line, number;
+				getline(fin, line);
+				stringstream s(line);
+				int i = 0;
+				while (getline(s, number, ',')) {
+					Game::Mapgen::VerticesPos()[i] = stoi(number);
+					i++;
+				}
+			}
+			catch (...)
+			{
+				Logger::LogMessage msg = Logger::LogMessage("An error occurred reading the vertices pos data", "Error", "", "Terrain", "ReadVerticesPosData");
+				Logger::Error(msg);
+				throw;
+			}
+		}
+
+		TerrainTexture::TerrainTexture() {}
+
+		TerrainTexture::TerrainTexture(int _id, std::string _name, std::string _path, std::vector<TerrainTexture::TerrainZone> _zones, std::string _editortree)
+		{
+			terrainId = _id;
+			name = _name;
+			path = Folders::GAME + _path;
+			zones = _zones;
+			editortree = _editortree;
+		}
+
+		TerrainTexture::~TerrainTexture() {}
 	};
 };
