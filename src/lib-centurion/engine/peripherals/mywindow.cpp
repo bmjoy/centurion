@@ -123,8 +123,8 @@ void Engine::myWindow::SwapBuffers(void)
 
 void Engine::myWindow::create_callbacks() { // important for taking the keyboard / mouse input 
 	glfwSetKeyCallback(glfwWindow, handle_keys);
-	glfwSetCursorPosCallback(glfwWindow, handle_mouse);
 	glfwSetMouseButtonCallback(glfwWindow, mouse_button_callback);
+	glfwSetCursorPosCallback(glfwWindow, handle_mouse);
 	glfwSetScrollCallback(glfwWindow, scroll_callback);
 	glfwSetCharCallback(glfwWindow, character_callback);
 }
@@ -154,7 +154,6 @@ void Engine::myWindow::handle_mouse(GLFWwindow* window, double xPos, double yPos
 	lastX = (GLfloat)xPos;
 	double y = fabs(yPos - Height);
 	lastY = (GLfloat)y;
-	Engine::Mouse::Control(lastX, lastY);
 }
 
 void Engine::myWindow::mouse_button_callback(GLFWwindow* window, int button, int action, int mods) {

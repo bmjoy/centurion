@@ -60,6 +60,7 @@ namespace Engine
 			while (WINDOW.ShouldClose() == false)
 			{
 				glfwPollEvents();
+				Engine::Mouse::Control();
 				Mouse::IsHolding();
 				WINDOW.ClearBuffers();
 				Fps::Update();

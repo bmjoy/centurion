@@ -157,19 +157,19 @@ namespace Engine
 			// Conditions for NOT moving
 
 			//Left margin
-			if (Keyboard::IsKeyPressed(GLFW_KEY_LEFT) && position.x > 0) {
+			if (Keyboard::IsKeyNotReleased(GLFW_KEY_LEFT) && position.x > 0) {
 				position -= right * MovementSpeed;
 			}
 			//Right margin 
-			if (Keyboard::IsKeyPressed(GLFW_KEY_RIGHT) && position.x < MEDIUM_MAP_WIDTH - myWindow::WidthZoomed) {
+			if (Keyboard::IsKeyNotReleased(GLFW_KEY_RIGHT) && position.x < MEDIUM_MAP_WIDTH - myWindow::WidthZoomed) {
 				position += right * MovementSpeed;
 			}
 			//Top margin 
-			if (Keyboard::IsKeyPressed(GLFW_KEY_UP) && (position.y < (MEDIUM_MAP_HEIGHT - myWindow::HeightZoomed + myWindow::TopBarHeight* myWindow::HeightZoomed / myWindow::Height))) {
+			if (Keyboard::IsKeyNotReleased(GLFW_KEY_UP) && (position.y < (MEDIUM_MAP_HEIGHT - myWindow::HeightZoomed + myWindow::TopBarHeight* myWindow::HeightZoomed / myWindow::Height))) {
 				position += up * MovementSpeed;
 			}
 			//Bottom margin 
-			if (Keyboard::IsKeyPressed(GLFW_KEY_DOWN) && (position.y > (0 - myWindow::BottomBarHeight* myWindow::HeightZoomed / myWindow::Height))) {
+			if (Keyboard::IsKeyNotReleased(GLFW_KEY_DOWN) && (position.y > (0 - myWindow::BottomBarHeight* myWindow::HeightZoomed / myWindow::Height))) {
 				position -= up * MovementSpeed;
 			}
 		}

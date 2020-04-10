@@ -104,7 +104,7 @@ namespace Engine
 		/// </summary>
 		/// <param name="lastX"></param>
 		/// <param name="lastY"></param>
-		void Control(const int lastX, const int lastY);
+		void Control();
 
 		/// <summary>
 		/// 

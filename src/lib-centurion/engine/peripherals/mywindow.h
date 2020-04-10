@@ -21,6 +21,8 @@ namespace Engine {
 		static myWindow GetInstance(void);
 		static void DeleteInstance(void);
 		static void TakeScreenshot(void);
+		static GLfloat GetMousePositionInWindowX() { return lastX; }
+		static GLfloat GetMousePositionInWindowY() { return lastY; }
 
 
 		GLFWwindow* GetGlfwWindow() { return glfwWindow; }
