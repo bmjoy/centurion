@@ -11,13 +11,13 @@ namespace CenturionTranslatorTool
 
         [XmlElement("entry")]
         public List<Entry> Entries { get; set; }
-
     }
 
     public class Entry
     {
         [XmlAttribute("stringName")]
         public string StringName { get; set; }
+
         [XmlAttribute("result")]
         public string Result { get; set; }
     }
