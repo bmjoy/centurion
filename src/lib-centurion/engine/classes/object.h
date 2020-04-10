@@ -318,7 +318,6 @@ public:
 	virtual void Render(const bool picking, const unsigned int clickID = 0) = 0;
 
 	#pragma region Static members
-
 	/// <summary>
 	/// This function return the total number of objects that the game has been created.
 	/// </summary>
@@ -357,7 +356,7 @@ public:
 	static void RemoveGameObject(const unsigned int index);
 
 	/// <summary>
-	/// This function deletes all the objects from the game.
+	/// This function deletes all the objects from the game and so it even allow to reuse all script names.
 	/// </summary>
 	static void ResetGameObjects(void);
 
@@ -365,7 +364,7 @@ public:
 	/// This functions returns an existing object by its unique picking ID.
 	/// </summary>
 	/// <param name="ID">The picking ID of the object.</param>
-	/// <returns></returns>
+	/// <returns>A pointer to an object; if the object doesn't exist, nullptr will be returned.</returns>
 	static GObject* GetObjectByID(const unsigned int ID);
 
 	/// <summary>
@@ -385,7 +384,6 @@ public:
 	/// </summary>
 	/// <returns>A list of decoration</returns>
 	static std::vector<Decoration*> GetListOfDecorations(void);
-
 	#pragma endregion
 
 	/// <summary>
@@ -399,22 +397,21 @@ public:
 	~GObject(void);
 
 protected:
-	#pragma region Protected members
-	
-	/// /// <summary>
-	/// Protected and abstract method that checks if the object is placeable and sets the relative boolean.
-	/// </summary>
-	virtual void CheckIfPlaceable(void) = 0;
-	
 	bool bIsPlaceable = false;
 	Pass::PassGrid* pass_grid;
 	glObjectSprite::SpriteData spriteData;
-	Player *player;
+	Player* player;
 	glm::vec3 pickingColor;
 	std::map<std::string, std::string> methods;
 	std::map<std::string, std::string> sounds;
 	bool bIsBeingMoved = false;
 
+	#pragma region Protected members
+	/// /// <summary>
+	/// Protected and abstract method that checks if the object is placeable and sets the relative boolean.
+	/// </summary>
+	virtual void CheckIfPlaceable(void) = 0;
+	
 	/// <summary>
 	/// This function checks if the current object is the selected object (namely, if the user has done left click on it).
 	/// </summary>
@@ -427,9 +424,7 @@ protected:
 	/// </summary>
 	/// <param name="par_selected">If the current objects must be marked as selected or not selected.</param>
 	void MarkAsSelected(const bool par_selected);
-
 	#pragma endregion
-
 private:
 	unsigned short int playerID;
 	unsigned int pickingID;

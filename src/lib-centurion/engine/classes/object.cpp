@@ -396,6 +396,7 @@ void GObject::ResetGameObjects(void)
 	GObject::numberOfBuildings = 0;
 	GObject::numberOfDecorations = 0;
 	GObject::numberOfUnits = 0;
+	GObject::scriptNamesMap.clear(); //All script names can now reusable.
 }
 
 GObject* GObject::GetObjectByID(const unsigned int ID)
