@@ -20,7 +20,7 @@ namespace EditorUI
 	{
 		EditorMenuBar::Create();
 		EditorWindows::Create();
-		infoText.create_static("", "tahoma_15px", 10.f, -40.f, "left", "middle", glm::vec4(255.f));
+		infoText.create_static("", "tahoma_15px", 10.f, -15.f, "left", "middle", glm::vec4(255.f));
 	}
 
 	void EditorUI::Render(bool picking)

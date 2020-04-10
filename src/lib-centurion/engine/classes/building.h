@@ -213,6 +213,12 @@ public:
 	/// <returns></returns>
 	bool getWaitingToBeErased() { return waitingToBeErased; }
 
+	/// <summary>
+	/// This function checks if the current building is near to a friend (same player or allied player) settlement.
+	/// </summary>
+	/// <returns>True if it is near; false otherwise.</returns>
+	std::tuple<bool, Settlement*> IsNearToFriendlySettlement(void);
+
 	Building(void);
 	~Building(void);
 protected:
@@ -221,6 +227,7 @@ protected:
 	/// </summary>
 	void CheckIfPlaceable(void) override;
 
+#pragma region Private Members:
 private:
 	//game::ObjectUI* buildingUI;
 	bool waitingToBeErased;
@@ -242,12 +249,7 @@ private:
 	std::vector<Unit> holdUnits;
 	Settlement *settlement;
 	static std::vector<Settlement*> settlementsList;
-	#pragma region Private Members:
-	/// <summary>
-	/// This function checks if the current building is near to a friend (same player or allied player) settlement.
-	/// </summary>
-	/// <returns>True if it is near; false otherwise.</returns>
-	std::tuple<bool, Settlement*> IsNearToFriendSettlement(void);
 	#pragma endregion
 	//sound selectionSound; TODO
+#pragma endregion
 };

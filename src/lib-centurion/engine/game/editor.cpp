@@ -273,15 +273,20 @@ namespace Game
 				return;
 			}
 
-			if (Editor::tmpObject == nullptr) return;
-			EditorMenuBar::Show();
-			EditorWindows::Show();
+			if (Editor::tmpObject == nullptr) {
+				EditorMenuBar::Show();
+				EditorWindows::Show();
+				EditorUI::UpdateInfoText("");
+				return;
+			}
+			
 			if (Engine::Mouse::RightClick)
 			{
 				delete Editor::tmpObject;
 				Editor::tmpObject = nullptr;
 				EditorMenuBar::Show();
 				EditorWindows::Show();
+				EditorUI::UpdateInfoText("");
 				Engine::Mouse::RightClick = false;
 			}
 
@@ -302,6 +307,29 @@ namespace Game
 			if (Editor::tmpObject->IsBeingMoved() == false) Editor::tmpObject->MarkAsMoving();
 			Editor::tmpObject->SetPosition(vec3(Engine::Mouse::GetXMapCoordinate(), Engine::Mouse::GetYMapCoordinate(), 0.f));
 			Editor::tmpObject->Render(false, 0);
+
+			if (Editor::tmpObject->AsBuilding()->IsCentralBuilding())
+			{
+				if (Editor::tmpObject->IsPlaceable() == true)
+					EditorUI::UpdateInfoText(TranslationsTable::GetTranslation("EDITOR_canAddStructure"));
+				else
+					EditorUI::UpdateInfoText(TranslationsTable::GetTranslation("EDITOR_impassablePoint"));
+			}
+			else
+			{
+				std::tuple near = Editor::tmpObject->AsBuilding()->IsNearToFriendlySettlement();
+				if (std::get<0>(near) == false)
+				{
+					EditorUI::UpdateInfoText(TranslationsTable::GetTranslation("EDITOR_noSettlementsAround"));
+				}
+				else
+				{
+					if (Editor::tmpObject->IsPlaceable() == true)
+						EditorUI::UpdateInfoText(TranslationsTable::GetTranslation("EDITOR_canAddStructure"));
+					else
+						EditorUI::UpdateInfoText(TranslationsTable::GetTranslation("EDITOR_impassablePoint"));
+				}
+			}
 		}
 
 		void Game::Editor::ShiftSelectedObject(void)
@@ -371,7 +399,7 @@ namespace Game
 				changingTerrain.type = (float)tt->GetId();
 				EditorMenuBar::Hide();
 				EditorWindows::Hide();
-				EditorUI::UpdateInfoText("Press the mouse right button to cancel the operation");
+				EditorUI::UpdateInfoText(TranslationsTable::GetTranslation("EDITOR_cancelBrush"));
 				Engine::Mouse::ChangeCursorType(CURSOR_TYPE_CIRCLE);
 				return;
 			}
@@ -479,7 +507,7 @@ namespace Game
 					Building* b = GObject::GetObjectByID(Picking::Obj::GetLeftClickId())->AsBuilding();
 					if (b->IsSelected())
 					{
-						cout << "[DEBUG] Building " << b->GetSingularName() << " deleted!\n";
+						Logger::Info("Building " + b->GetSingularName() + " deleted!");
 						b->ClearPass();
 						b->UpdatePass();
 						GObject::RemoveGameObject(b->GetPickingID());

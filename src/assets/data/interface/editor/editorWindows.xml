@@ -191,7 +191,7 @@
 
   <!-- TERRAIN BRUSH WINDOW -->
 
-  <editorWindow id="5" iframe_id="5" name="Terrain brush" iframe="editor" position="x=Engine.WindowWidth/2-w/2; y=0" size="w=400; h=250;" isOpened="false">
+  <editorWindow id="5" iframe_id="5" name="EDITOR_terrainBrush" iframe="editor" position="x=Engine.WindowWidth/2-w/2; y=0" size="w=400; h=250;" isOpened="false">
     <conditionScript function="">
       -- lua script
 
@@ -211,7 +211,7 @@
           Editor.CloseWindow(5)
         </onclickScript>
       </button>
-      <button text="Select" xOffset="320" yOffset="30">
+      <button text="WORD_Select" xOffset="320" yOffset="30">
         <onclickScript>
           --lua script
           Editor.ChangeTerrain(Iframe.GetIframeById(5):GetTextListById(1):GetSelectedOption())

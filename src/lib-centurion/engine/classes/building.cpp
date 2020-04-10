@@ -110,7 +110,7 @@ void Building::CheckIfPlaceable(void)
 	this->bIsPlaceable = Pass::CheckObjectPassAvailability(this->pass_grid, var_position);
 	if (this->bIsPlaceable == true)
 	{
-		std::tuple near = IsNearToFriendSettlement();
+		std::tuple near = IsNearToFriendlySettlement();
 		this->bIsPlaceable = std::get<0>(near);
 	}
 }
@@ -176,7 +176,7 @@ void Building::AssignSettlement(void)
 {
 	if (this->bIsPlaceable == true)
 	{
-		std::tuple near = IsNearToFriendSettlement();
+		std::tuple near = IsNearToFriendlySettlement();
 		bool bFound = std::get<0>(near);
 		if (bFound == true)
 		{
@@ -231,7 +231,7 @@ Building::~Building(void)
 }
 
 #pragma region Private members
-std::tuple<bool, Settlement*> Building::IsNearToFriendSettlement(void)
+std::tuple<bool, Settlement*> Building::IsNearToFriendlySettlement(void)
 {
 	bool bSettlementDiscovered = false;
 	Settlement* s = nullptr;
