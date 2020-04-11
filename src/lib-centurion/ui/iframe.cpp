@@ -126,7 +126,6 @@ void gui::Iframe::AddTextInput(const int textInputId, int xPos, int yPos, const 
 	if (xPos < 0) xPos = w + xPos;
 	if (yPos < 0) yPos = h + yPos;
 	_input->Create(textInputId, Picking::UI::ObtainPickingID(), x + xPos, y + yPos, width, text_input_font, text_input_has_background, text_input_background, text_input_border, text_input_fontweight, placeholderText);
-	_input->Enable();
 	listOfTextInputs[textInputId] = _input;
 }
 
@@ -231,7 +230,7 @@ void gui::Iframe::RenderTextInputs(bool picking)
 	for (auto ti : listOfTextInputs)
 	{
 		if (ti == nullptr) continue;
-		ti->Render(picking);
+		ti->RenderTextInput(picking);
 	}
 }
 

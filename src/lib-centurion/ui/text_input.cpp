@@ -7,15 +7,17 @@
 using namespace std;
 using namespace glm;
 
-namespace gui {
-
-	TextInput::TextInput() 
+namespace gui 
+{
+	TextInput::TextInput(void) 
 	{
 		placeholder_font_weight = "normal";
 		displayRectangle = true;
+		this->isActive = false;
 	}
 	
-	void TextInput::Create(const int _id, const int picking_id, const int x, const int y, const int width, const std::string font, const bool hasBackground, glm::vec4 backCol, const glm::vec4 borderCol, const std::string fontWeight, const std::wstring placeholderText) {
+	void TextInput::Create(const int _id, const int picking_id, const int x, const int y, const int width, const std::string font, const bool hasBackground, glm::vec4 backCol, const glm::vec4 borderCol, const std::string fontWeight, const std::wstring placeholderText) 
+	{
 		xPos = (float)x; 
 		yPos = (float)y; 
 		max_chars = TEXT_INPUT_MAX_CHARS_DEFAULT;
@@ -42,8 +44,8 @@ namespace gui {
 
 	}
 
-	void TextInput::Render(bool picking) {
-
+	void TextInput::RenderTextInput(bool picking) 
+	{
 		if (picking)
 		{
 			rectangle.render(vec4(), vec4(), true);
@@ -54,25 +56,28 @@ namespace gui {
 			{
 				if (rectangle.IsClicked(Picking::UI::GetLeftClickId()))
 				{
-					this->Enable();
+					this->EnableTextInput();
+					placeholder_text.create_static(currentText, cursorPosition + 1, placeholder_font, xPos, yPos, "left", "normal", vec4(255.f), placeholder_font_weight);
 				}
 				else
 				{
-					this->Disable();
+					this->DisableTextInput();
 				}
 			}
 
 			if (displayRectangle) rectangle.render(backColor, borderColor, false);
 
-			if (isActive) {
-
-				if (Engine::Keyboard::GetCharCodepointPressed() != -1 && cursorPosition <= max_chars) {
+			if (isActive) 
+			{
+				if (Engine::Keyboard::GetCharCodepointPressed() != -1 && cursorPosition <= max_chars) 
+				{
 					currentText[cursorPosition] = Engine::Keyboard::GetCharCodepointPressed();
 					cursorPosition++;
 					placeholder_text.create_static(currentText, cursorPosition + 1, placeholder_font, xPos, yPos, "left", "normal", vec4(255.f), placeholder_font_weight);
 				}
 
-				if (Engine::Keyboard::IsKeyNotReleased(GLFW_KEY_BACKSPACE) && cursorPosition > 0) {
+				if (Engine::Keyboard::IsKeyNotReleased(GLFW_KEY_BACKSPACE) && cursorPosition > 0) 
+				{
 					currentText[cursorPosition - 1] = 0;
 					cursorPosition--;
 					placeholder_text.create_static(currentText, cursorPosition + 1, placeholder_font, xPos, yPos, "left", "normal", vec4(255.f), placeholder_font_weight);
@@ -85,11 +90,23 @@ namespace gui {
 		
 	}
 
+	void TextInput::EnableTextInput(void)
+	{
+		this->isActive = true;
+	}
+
+	void TextInput::DisableTextInput(void)
+	{
+		this->isActive = false;
+	}
+
 	std::string TextInput::GetText(void)
 	{
 		std::string text;
-		for (int i = 0; i < TEXT_INPUT_MAX_CHARS_DEFAULT; i++) {
-			if (currentText[i] != 0) {
+		for (int i = 0; i < TEXT_INPUT_MAX_CHARS_DEFAULT; i++) 
+		{
+			if (currentText[i] != 0)
+			{
 				text += (char)currentText[i];
 			}
 		}
@@ -111,10 +128,12 @@ namespace gui {
 	void TextInput::UpdatePlaceholder(std::string newPlaceholder)
 	{
 		placeholder_text.SetNewText(newPlaceholder);
-		for (int i = 0; i < TEXT_INPUT_MAX_CHARS_DEFAULT; i++) currentText[i] = 0;
-		for (int i = 0; i < newPlaceholder.size(); i++) currentText[i] = (int)newPlaceholder[i];
+		for (int i = 0; i < TEXT_INPUT_MAX_CHARS_DEFAULT; i++) 
+			currentText[i] = 0;
+		for (int i = 0; i < newPlaceholder.size(); i++) 
+			currentText[i] = (int)newPlaceholder[i];
 		cursorPosition = (int)newPlaceholder.size();
 	}
 
-	TextInput::~TextInput() {}
+	TextInput::~TextInput(void) {}
 };

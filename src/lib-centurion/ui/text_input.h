@@ -6,8 +6,7 @@
 * ---------------------------
 */
 
-#ifndef TEXT_INPUT_H
-#define TEXT_INPUT_H
+#pragma once
 
 #ifndef TEXT_INPUT_MAX_CHARS_DEFAULT
 #define TEXT_INPUT_MAX_CHARS_DEFAULT 200
@@ -15,12 +14,13 @@
 
 #include <gl_items.h>
 
-namespace gui {
-
+namespace gui 
+{
 	/// <summary>
 	/// Class of TextInput
 	/// </summary>
-	class TextInput {
+	class TextInput 
+	{
 	public:
 		TextInput();
 
@@ -44,17 +44,17 @@ namespace gui {
 		/// This function renders the Input text
 		/// </summary>
 		/// <param name="picking">Boolean: true = picking is active, false = normal rendering</param>
-		void Render(bool picking = false);
+		void RenderTextInput(bool picking = false);
 
 		/// <summary>
 		/// This function enables the text input
 		/// </summary>
-		void Enable(void) { isActive = true; }
+		void EnableTextInput(void);
 
 		/// <summary>
 		/// This function disables the text input
 		/// </summary>
-		void Disable(void) { isActive = false; }
+		void DisableTextInput(void);
 
 		/// <summary>
 		/// This method resets the whole TextInput
@@ -83,7 +83,7 @@ namespace gui {
 		gui::SimpleText placeholder_text;
 		std::string placeholder_font;
 		std::string placeholder_font_weight;
-		bool isActive;
+		bool isActive = false;
 		float xPos, yPos;
 		int cursorPosition;
 		int max_chars;
@@ -91,5 +91,3 @@ namespace gui {
 		unsigned int id;
 	};
 };
-
-#endif

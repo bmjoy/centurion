@@ -244,7 +244,6 @@ void Hector::Console::Create()
 	iframe = gui::Iframe("console");
 	iframe.Create(MAX_NUMBER_OF_IFRAMES - 1, 30, 30, (int)Engine::myWindow::Width - 60, 30);
 	iframe.AddTextInput(TEXTINPUT_ID, 5, 5, (int)Engine::myWindow::Width - 60);
-	iframe.GetTextInputById(TEXTINPUT_ID)->Enable();
 	isOpened = false;
 }
 
