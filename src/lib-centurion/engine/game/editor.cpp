@@ -346,7 +346,6 @@ namespace Game
 			{
 				obj->MarkAsMoving();
 				obj->ClearPass();
-				obj->UpdatePass();
 				Editor::movingObject.isActive = true;
 			}
 

@@ -283,7 +283,9 @@ void GObject::Create(const string _className, const bool _temporary)
 
 	// pass data
 	this->pass_grid = Pass::GetPassGridPtr(this->className);
-	this->UpdatePass();
+	if (_temporary == false) {
+		this->UpdatePass();
+	}
 
 	//if (_temporary == true) return bObjectCreated;
 	this->SetObjectProperties(objData, _temporary);
