@@ -433,10 +433,8 @@ protected:
 	bool CheckIfSelected(const unsigned int par_clickID);
 
 	/// <summary>
-	/// This function checks if the current object is the selected object (namely, if the user has done left click on it).
+	/// This function sends to editor a message that will shown in the top left of the screen.
 	/// </summary>
-	/// <param name="par_clickID">The click.</param>
-	/// <returns>True if the current object is selected; false otherwise.</returns>
 	void SendInfoText(void);
 
 	/// <summary>

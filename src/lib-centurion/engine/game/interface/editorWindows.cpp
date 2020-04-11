@@ -35,6 +35,7 @@ namespace EditorWindows
 		EditorWindows::CloseEveryWindow();
 		this->isOpened = true;
 		this->opening = true;
+		EditorWindows::bWindowsOpened = true;
 	}
 
 	void EditorWindows::EditorWindow::Toggle(void)
@@ -43,11 +44,9 @@ namespace EditorWindows
 		{
 			EditorWindows::CloseEveryWindow();
 			this->Open();
-			bWindowsOpened = true;
 		}
 		else
 		{
-			bWindowsOpened = false;
 			this->Close();
 		}
 	}
@@ -55,11 +54,13 @@ namespace EditorWindows
 	void EditorWindows::EditorWindow::Close(void)
 	{
 		this->isOpened = false;
+		EditorWindows::bWindowsOpened = false;
 	}
 
 	void EditorWindows::EditorWindow::Clear(void)
 	{
 		iframe.Clear();
+		EditorWindows::bWindowsOpened = false;
 	}
 
 	void EditorWindows::EditorWindow::Create(string _luaOpeningScript, string _luaConditionScript, string _luaConditionFunction, gui::Iframe _iframe)
@@ -274,7 +275,6 @@ namespace EditorWindows
 				listOfWindows[i]->Close();
 			}
 		}
-		bWindowsOpened = false;
 	}
 
 	bool IsHidden(void)

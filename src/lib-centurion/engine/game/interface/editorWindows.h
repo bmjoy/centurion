@@ -125,7 +125,7 @@ namespace EditorWindows
 	void Show(void);
 
 	/// <summary>
-	/// This method returns true if any window is opened
+	/// (DEPRECATED) This method returns true if any window is opened
 	/// </summary>
 	bool AnyWindowIsOpened(void);
 
