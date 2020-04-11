@@ -196,15 +196,29 @@ namespace CenturionTranslatorTool
 
         private void SetFontAndColors()
         {
-            dataGridView1.BackgroundColor = Color.LightGray;
-            dataGridView1.DefaultCellStyle.SelectionBackColor = Color.White;
-            dataGridView1.DefaultCellStyle.SelectionForeColor = Color.Black;
-            dataGridView1.RowHeadersDefaultCellStyle.SelectionBackColor = Color.Empty;
-            dataGridView1.RowsDefaultCellStyle.BackColor = Color.LightGray;
-            dataGridView1.AlternatingRowsDefaultCellStyle.BackColor = Color.DarkGray;
+            Color background = Color.FromArgb(14, 22, 33);
+            Color selected_background = Color.FromArgb(43, 82, 120);
+            Color header_background = Color.FromArgb(100, 0, 0);
+
+            // background
+            dataGridView1.BackgroundColor = background;
+            dataGridView1.RowsDefaultCellStyle.BackColor = background;
+            dataGridView1.DefaultCellStyle.SelectionBackColor = selected_background;
+            dataGridView1.ColumnHeadersDefaultCellStyle.BackColor = header_background;
+
+            dataGridView1.DefaultCellStyle.SelectionForeColor = Color.FromArgb(230, 230, 230);
+            dataGridView1.DefaultCellStyle.ForeColor = Color.FromArgb(200, 200, 200);
+            dataGridView1.RowHeadersDefaultCellStyle.SelectionBackColor = Color.Black;
+            dataGridView1.AlternatingRowsDefaultCellStyle.BackColor = Color.Black;
             dataGridView1.ColumnHeadersDefaultCellStyle.ForeColor = Color.White;
-            dataGridView1.ColumnHeadersDefaultCellStyle.BackColor = Color.Black;
             dataGridView1.RowHeadersDefaultCellStyle.BackColor = Color.Black;
+
+            dataGridView1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
+            dataGridView1.ColumnHeadersHeight = 25;
+            dataGridView1.ColumnHeadersDefaultCellStyle.Font = new Font("Consolas", 11);
+            dataGridView1.DefaultCellStyle.Font = new Font("Consolas", 11);
+            dataGridView1.RowTemplate.Height = 25;
+            dataGridView1.EnableHeadersVisualStyles = false;
         }
     }
 }
