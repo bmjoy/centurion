@@ -13,7 +13,9 @@
   <entry stringName="EDITOR_noSettlementsAround" result="--" />
   <entry stringName="EDITOR_openScenario" result="Abrir un escenario" />
   <entry stringName="EDITOR_properties" result="Propiedades del objeto" />
-  <entry stringName="EDITOR_propertiesName" result="Nombre del objeto:" />
+  <entry stringName="EDITOR_propertiesClassName" result="Nombre de la clase:" />
+  <entry stringName="EDITOR_propertiesDisplayedName" result="Nombre mostrado:" />
+  <entry stringName="EDITOR_propertiesIDName" result="Nombre identificativo:" />
   <entry stringName="EDITOR_propertiesSettlement" result="Nombre del asentamiento:" />
   <entry stringName="EDITOR_saveAs" result="Guardar el escenario como..." />
   <entry stringName="EDITOR_terrainBrush" result="Pinceles de terreno" />

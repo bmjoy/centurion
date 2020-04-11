@@ -307,29 +307,6 @@ namespace Game
 			if (Editor::tmpObject->IsBeingMoved() == false) Editor::tmpObject->MarkAsMoving();
 			Editor::tmpObject->SetPosition(vec3(Engine::Mouse::GetXMapCoordinate(), Engine::Mouse::GetYMapCoordinate(), 0.f));
 			Editor::tmpObject->Render(false, 0);
-
-			if (Editor::tmpObject->AsBuilding()->IsCentralBuilding())
-			{
-				if (Editor::tmpObject->IsPlaceable() == true)
-					EditorUI::UpdateInfoText(TranslationsTable::GetTranslation("EDITOR_canAddStructure"));
-				else
-					EditorUI::UpdateInfoText(TranslationsTable::GetTranslation("EDITOR_impassablePoint"));
-			}
-			else
-			{
-				std::tuple near = Editor::tmpObject->AsBuilding()->IsNearToFriendlySettlement();
-				if (std::get<0>(near) == false)
-				{
-					EditorUI::UpdateInfoText(TranslationsTable::GetTranslation("EDITOR_noSettlementsAround"));
-				}
-				else
-				{
-					if (Editor::tmpObject->IsPlaceable() == true)
-						EditorUI::UpdateInfoText(TranslationsTable::GetTranslation("EDITOR_canAddStructure"));
-					else
-						EditorUI::UpdateInfoText(TranslationsTable::GetTranslation("EDITOR_impassablePoint"));
-				}
-			}
 		}
 
 		void Game::Editor::ShiftSelectedObject(void)

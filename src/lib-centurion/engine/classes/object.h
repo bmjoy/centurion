@@ -22,7 +22,7 @@ namespace Pass { class PassGrid; }
 class Player;
 
 /// <summary>
-/// (???) Tutte costanti da rivedere.
+/// (???) Tutte costanti da rivedere. Infatti dovranno essere acquisite da un file.
 /// </summary>
 #ifndef MAX_NUMBER_OF_OBJECTS
 #define MAX_NUMBER_OF_OBJECTS 100
@@ -36,7 +36,6 @@ class Player;
 #ifndef EGYPTIAN_RACE
 #define EGYPTIAN_RACE    2
 #endif 
-
 
 class GObject
 {
@@ -138,7 +137,7 @@ public:
 	/// <summary>
 	/// This function sets the displayed name of the current object. 
 	/// </summary>
-	/// <param name="_scriptName">The displayed name of the current object. </param>
+	/// <param name="_displayedName">The displayed name of the current object. </param>
 	void SetDisplayedName(const std::string _displayedName);
 
 	/// <summary>
@@ -148,16 +147,16 @@ public:
 	std::string GetDisplayedName(void);
 
 	/// <summary>
-	/// This function sets the script name of the current object. If the script name is already used, it will be setted using empty string.
+	/// This function sets the identification name of the current object. If the script name is already used, it will be setted using an empty string.
 	/// </summary>
-	/// <param name="_scriptName">The script name of the current object. It must be univocal. </param>
-	void SetScriptName(const std::string _scriptName);
+	/// <param name="_IDName">The identification name of the current object. It must be univocal. </param>
+	void SetIDName(const std::string _idName);
 
 	/// <summary>
-	/// This function return the univocal script name of the current object.
+	/// This function returns the univocal identification name of the current object.
 	/// </summary>
-	/// <returns>The script name of the current object; if the current object doesn't have a script name, an empty string will be returned.</returns>
-	std::string GetScriptName(void);
+	/// <returns>The identification name of the current object; if the current object doesn't have a script name, an empty string will be returned.</returns>
+	std::string GetIDName(void);
 	
 	/// <summary>
 	/// This function returns the race ID of the current object.
@@ -434,11 +433,19 @@ protected:
 	bool CheckIfSelected(const unsigned int par_clickID);
 
 	/// <summary>
+	/// This function checks if the current object is the selected object (namely, if the user has done left click on it).
+	/// </summary>
+	/// <param name="par_clickID">The click.</param>
+	/// <returns>True if the current object is selected; false otherwise.</returns>
+	void SendInfoText(void);
+
+	/// <summary>
 	/// This function marks the current object as selected (true) or not selected (false).
 	/// </summary>
 	/// <param name="par_selected">If the current objects must be marked as selected or not selected.</param>
 	void MarkAsSelected(const bool par_selected);
 	#pragma endregion
+
 private:
 	unsigned short int playerID;
 	unsigned int pickingID;
@@ -450,7 +457,7 @@ private:
 	std::string singularName;
 	std::string pluralName;
 	std::string displayedName;
-	std::string scriptName;
+	std::string idName;
 	std::string raceName;
 	std::string className;
 	std::string type;
@@ -465,7 +472,7 @@ private:
 	static unsigned int numberOfUnits;
 	static unsigned int numberOfDecorations;
 	static GObject* GameObjects[MAX_NUMBER_OF_OBJECTS];
-	static std::unordered_map<std::string, unsigned int> scriptNamesMap;
+	static std::unordered_map<std::string, unsigned int> idNamesMap;
 	#pragma endregion
 
 	#pragma region Private members

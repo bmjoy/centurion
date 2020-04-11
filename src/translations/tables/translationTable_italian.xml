@@ -13,7 +13,9 @@
   <entry stringName="EDITOR_noSettlementsAround" result="Impossibile posizionare la struttura nel punto selezionato, poiché non vi sono insediamenti nelle vicinanze." />
   <entry stringName="EDITOR_openScenario" result="Apri uno scenario" />
   <entry stringName="EDITOR_properties" result="Proprietà dell'oggetto" />
-  <entry stringName="EDITOR_propertiesName" result="Nome dell'oggetto:" />
+  <entry stringName="EDITOR_propertiesClassName" result="Nome della classe:" />
+  <entry stringName="EDITOR_propertiesDisplayedName" result="Nome visualizzato:" />
+  <entry stringName="EDITOR_propertiesIDName" result="Nome identificativo:" />
   <entry stringName="EDITOR_propertiesSettlement" result="Nome dell'insediamento:" />
   <entry stringName="EDITOR_saveAs" result="Salva scenario come..." />
   <entry stringName="EDITOR_terrainBrush" result="Pennelli terreno" />

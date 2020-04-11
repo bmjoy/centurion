@@ -7,18 +7,20 @@
 #include <game/editor.h>
 #include <game/pass.h>
 #include <logger.h>
+#include "game/interface/editorUi.h"
+#include <translationsTable.h>
 
 using namespace std;
 using namespace glm;
 
 #pragma region Static GObject properties:
-unordered_map<std::string, unsigned int> GObject::scriptNamesMap;
+unordered_map<std::string, unsigned int> GObject::idNamesMap;
 #pragma endregion
 
 GObject::GObject(void)
 {
 	this->bSelected = false;
-	this->scriptName = "";
+	this->idName = "";
 }
 
 unsigned short int GObject::GetPlayer(void)
@@ -126,27 +128,27 @@ std::string GObject::GetDisplayedName(void)
 	return (this->displayedName != singularName) ? displayedName : "";
 }
 
-void GObject::SetScriptName(const std::string _scriptName)
+void GObject::SetIDName(const std::string _idName)
 {
-	//Check if script name belogs to an other existing object.
-	if (_scriptName != "" && GObject::scriptNamesMap.count(_scriptName) >= 1)
+	//Checks if identifcation name belogs to an other existing object.
+	if (_idName != "" && GObject::idNamesMap.count(_idName) >= 1)
 	{
-		if(GObject::scriptNamesMap[_scriptName] != this->GetPickingID())
+		if(GObject::idNamesMap[_idName] != this->GetPickingID())
 		{
-			Logger::Warn("Script name " + _scriptName + " belongs to another object (ID = " + to_string(pickingID) + ")");
+			Logger::Warn("Identification name " + _idName + " belongs to another object (ID = " + to_string(pickingID) + ")");
 			return;
 		}
 	}
-	GObject::scriptNamesMap.erase(this->GetScriptName()); //Avoid object with two different keys.
+	GObject::idNamesMap.erase(this->GetIDName()); //Avoid object with two different keys.
 
-	this->scriptName = _scriptName;
-	if(_scriptName != "")
-		GObject::scriptNamesMap[_scriptName] = this->GetPickingID();; //Assign or replace script name.
+	this->idName = _idName;
+	if(_idName != "")
+		GObject::idNamesMap[_idName] = this->GetPickingID();; //Assign or replace identification name.
 }
 
-std::string GObject::GetScriptName(void)
+std::string GObject::GetIDName(void)
 {
-	return this->scriptName;
+	return this->idName;
 }
 
 unsigned int GObject::GetRace(void)
@@ -383,7 +385,7 @@ void GObject::RemoveGameObject(const unsigned int index)
 		{
 			//The picking ID and the script name of the object can be reused:
 			Picking::Obj::AddUnsedPickingID(GameObjects[index]->GetPickingID());
-			GObject::scriptNamesMap.erase(GObject::GameObjects[index]->GetScriptName());
+			GObject::idNamesMap.erase(GObject::GameObjects[index]->GetIDName());
 
 			if (GameObjects[index]->IsBuilding() == true)
 			{
@@ -438,7 +440,7 @@ void GObject::ResetGameObjects(void)
 			GObject::RemoveGameObject(GObject::GameObjects[i]->GetPickingID());
 		}
 	}
-	GObject::scriptNamesMap.clear(); //All script names can now reusable.
+	GObject::idNamesMap.clear(); //All script names can now reusable.
 	Building::ResetSettlementsList(); //No settlement.
 }
 
@@ -491,6 +493,32 @@ bool GObject::CheckIfSelected(const unsigned int par_clickID)
 	bool bSelected = (this->GetPickingID() == par_clickID);
 	MarkAsSelected(bSelected);
 	return bSelected;
+}
+
+void GObject::SendInfoText(void)
+{
+	if (this->AsBuilding()->IsCentralBuilding())
+	{
+		if (this->IsPlaceable() == true)
+			EditorUI::UpdateInfoText(TranslationsTable::GetTranslation("EDITOR_canAddStructure"));
+		else
+			EditorUI::UpdateInfoText(TranslationsTable::GetTranslation("EDITOR_impassablePoint"));
+	}
+	else
+	{
+		std::tuple near = this->AsBuilding()->IsNearToFriendlySettlement();
+		if (std::get<0>(near) == false)
+		{
+			EditorUI::UpdateInfoText(TranslationsTable::GetTranslation("EDITOR_noSettlementsAround"));
+		}
+		else
+		{
+			if (this->IsPlaceable() == true)
+				EditorUI::UpdateInfoText(TranslationsTable::GetTranslation("EDITOR_canAddStructure"));
+			else
+				EditorUI::UpdateInfoText(TranslationsTable::GetTranslation("EDITOR_impassablePoint"));
+		}
+	}
 }
 
 void GObject::MarkAsSelected(const bool par_selected)

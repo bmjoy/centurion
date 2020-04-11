@@ -13,7 +13,9 @@
   <entry stringName="EDITOR_noSettlementsAround" result="La structure ne peut pas être positionnée au point sélectionné, car il n'y a pas de installations à proximité." />
   <entry stringName="EDITOR_openScenario" result="Ouvrir a scénario" />
   <entry stringName="EDITOR_properties" result="Propriétés de l'objet" />
-  <entry stringName="EDITOR_propertiesName" result="Nom de l'objet" />
+  <entry stringName="EDITOR_propertiesClassName" result="Nom de la classe:" />
+  <entry stringName="EDITOR_propertiesDisplayedName" result="Nom affiché:" />
+  <entry stringName="EDITOR_propertiesIDName" result="Nom d'identification:" />
   <entry stringName="EDITOR_propertiesSettlement" result="Nom de l'installation:" />
   <entry stringName="EDITOR_saveAs" result="Sauve scénario comme..." />
   <entry stringName="EDITOR_terrainBrush" result="Brosses de terrain" />

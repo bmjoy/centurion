@@ -13,7 +13,9 @@
   <entry stringName="EDITOR_noSettlementsAround" result="Unable to place the building at the selected point, as there are no nearby settlements." />
   <entry stringName="EDITOR_openScenario" result="Open scenario" />
   <entry stringName="EDITOR_properties" result="Object properties" />
-  <entry stringName="EDITOR_propertiesName" result="Object name:" />
+  <entry stringName="EDITOR_propertiesClassName" result="Class name:" />
+  <entry stringName="EDITOR_propertiesDisplayedName" result="Displayed name:" />
+  <entry stringName="EDITOR_propertiesIDName" result="Identification name:" />
   <entry stringName="EDITOR_propertiesSettlement" result="Settlement name:" />
   <entry stringName="EDITOR_saveAs" result="Save scenario as..." />
   <entry stringName="EDITOR_terrainBrush" result="Terrain brushes" />

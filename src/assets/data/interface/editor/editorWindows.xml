@@ -111,20 +111,26 @@
     <openingScript>
       -- lua script
       Iframe.GetIframeById(3):UpdateStringBySimpleTextId(1, Selo():GetClassName())
-      Iframe.GetIframeById(3):UpdateTextInputPlaceholder(0, Selo():GetScriptName())
+      Iframe.GetIframeById(3):UpdateTextInputPlaceholder(0, Selo():GetIDName())
 	  Iframe.GetIframeById(3):UpdateTextInputPlaceholder(1, Selo():GetDisplayedName())
     </openingScript>
     <simpleTextArray>
-      <simpleText id="0" name="Class name: " xOffset="20" yOffset="-80" />
+      <simpleText id="0" name="EDITOR_propertiesClassName" xOffset="20" yOffset="-80" />
       <simpleText id="1" name="" xOffset="150" yOffset="-80" />
-      <simpleText id="2" name="Script name: " xOffset="20" yOffset="-110" />
-	  <simpleText id="3" name="Displayed name: " xOffset="20" yOffset="-140" />
+      <simpleText id="2" name="EDITOR_propertiesIDName" xOffset="20" yOffset="-110" />
+	  <simpleText id="3" name="EDITOR_propertiesDisplayedName" xOffset="20" yOffset="-140" />
     </simpleTextArray>
     <buttonArray>
+		<button text="WORD_Close" xOffset="400" yOffset="30">
+	    <onclickScript>
+		  -- lua script
+		  Editor.CloseWindow(3)
+	    </onclickScript>
+	  </button>
 	  <button text="WORD_Save" xOffset="520" yOffset="30">
 	    <onclickScript>
 		  -- lua script
-		  Selo():SetScriptName(Iframe.GetIframeById(3):GetTextInputById(0):GetText())
+		  Selo():SetIDName(Iframe.GetIframeById(3):GetTextInputById(0):GetText())
 		  Selo():SetDisplayedName(Iframe.GetIframeById(3):GetTextInputById(1):GetText())
 		  Editor.CloseWindow(3)
 	    </onclickScript>
