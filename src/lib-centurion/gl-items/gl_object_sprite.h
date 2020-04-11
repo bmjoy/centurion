@@ -39,7 +39,7 @@ public:
 	/// <summary>
 	/// Create function. It reads all the information of the .eo.xml files (Entity Object) 
 	/// and adds it to SpriteData variables. Then these variables are sent to 
-	/// their relative ObjectXMLClassData using the classname as key.
+	/// their relative XMLClassData using the classname as key.
 	/// </summary>
 	void Create();
 

@@ -3,7 +3,7 @@
 #include <stb_image.h>
 
 #include <game/strategy.h>
-#include <classes/object-data.h>
+#include <classes/classes-data.h>
 
 #include <file_manager.h>
 #include <logger.h>

@@ -10,7 +10,7 @@
 
 #include <ui.h>
 #include <gl_object_sprite.h>
-#include "object-data.h"
+#include "classes-data.h"
 #include <game/pass.h>
 
 class Unit;
@@ -477,10 +477,10 @@ private:
 	/// <summary>
 	/// This functions sets the properties of the current object when it is being created. 
 	/// The values of these properties were previously read 
-	/// from an XML file and they are now stored into a ObjectData::ObjectXMLClassData object.
+	/// from an XML file and they are now stored into a ClassesData::XMLClassData object.
 	/// </summary>
 	/// <param name="objData">The object in which are stored the properties of the current object.</param>
 	/// <param name="_temporary">Boolean: true = the object is temporary (e.g. an object that is being inserted in the editor)</param>
-	void SetObjectProperties(ObjectData::ObjectXMLClassData &objData, const bool _temporary = false);
+	void SetObjectProperties(ClassesData::XMLClassData &objData, const bool _temporary = false);
 	#pragma endregion
 };

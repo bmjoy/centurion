@@ -1,4 +1,4 @@
-#include "object-data.h"
+#include "classes-data.h"
 
 #include <file_manager.h>
 #include <gl_items.h>
@@ -15,26 +15,25 @@ using namespace std;
 using namespace glm;
 using namespace tinyxml2;
 
-namespace ObjectData
+namespace ClassesData
 {
 	// Private variables
 	namespace
 	{
-		ObjectXMLClassData* objDataXmlFixedPtr = nullptr;
-		std::map<std::string, ObjectXMLClassData> objectsData = std::map<std::string, ObjectXMLClassData>();
+		XMLClassData* objDataXmlFixedPtr = nullptr;
+		std::map<std::string, XMLClassData> objectsData = std::map<std::string, XMLClassData>();
 		std::string dataClassesPath = "assets/data/classes/";
 		std::string PROPERTY_NOT_VALID = "NA";
 	};
 
+	ClassesData::XMLClassData::XMLClassData(void) {}
 
-	ObjectData::ObjectXMLClassData::ObjectXMLClassData() {}
-
-	void ObjectData::ObjectXMLClassData::GetParentData(string _parent)
+	void ClassesData::XMLClassData::GetParentData(string _parent)
 	{
 		if (objDataXmlFixedPtr == nullptr) return;
 		if (_parent == "") return;
 
-		ObjectXMLClassData* objData = GetObjectData(_parent);
+		XMLClassData* objData = GetClassesData(_parent);
 		if (objData == nullptr) return;
 		for (map<string, string>::iterator _prop = objData->propertiesMap.begin(); _prop != objData->propertiesMap.end(); _prop++)
 		{
@@ -60,66 +59,75 @@ namespace ObjectData
 		GetParentData(p);
 	}
 
-	void ObjectData::ObjectXMLClassData::AddPropertyIfMissing(const string k, const string v)
+	void ClassesData::XMLClassData::AddPropertyIfMissing(const string k, const string v)
 	{
 		if (this->HasProperty(k)) return;
 		this->AddProperty(k, v);
 	}
 
-	void ObjectData::ObjectXMLClassData::AddSoundIfMissing(const string k, const string v)
+	void ClassesData::XMLClassData::AddSoundIfMissing(const string k, const string v)
 	{
 		if (this->HasMethod(k)) return;
 		this->AddMethod(k, v);
 	}
 
-	void ObjectData::ObjectXMLClassData::AddMethodIfMissing(const string k, const string v)
+	void ClassesData::XMLClassData::AddMethodIfMissing(const string k, const string v)
 	{
 		if (this->HasSound(k)) return;
 		this->AddSound(k, v);
 	}
 
-	string ObjectData::ObjectXMLClassData::GetPropertyValue(const string _property)
+	string ClassesData::XMLClassData::GetPropertyValue(const string _property)
 	{
-		if (propertiesMap.count(_property) > 0) {
+		if (propertiesMap.count(_property) > 0) 
+		{
 			return propertiesMap[_property];
 		}
-		else {
+		else 
+		{
 			return PROPERTY_NOT_VALID;
 		}
 	}
 
-	string ObjectData::ObjectXMLClassData::GetSoundPath(const string _sound)
+	string ClassesData::XMLClassData::GetSoundPath(const string _sound)
 	{
-		if (soundsMap.count(_sound) > 0) {
+		if (soundsMap.count(_sound) > 0) 
+		{
 			return soundsMap[_sound];
 		}
-		else {
+		else 
+		{
 			return PROPERTY_NOT_VALID;
 		}
 	}
 
-	string ObjectData::ObjectXMLClassData::GetMethodScript(const string _method)
+	string ClassesData::XMLClassData::GetMethodScript(const string _method)
 	{
-		if (methodsMap.count(_method) > 0) {
+		if (methodsMap.count(_method) > 0)
+		{
 			return methodsMap[_method];
 		}
-		else {
+		else 
+		{
 			return PROPERTY_NOT_VALID;
 		}
 	}
 
-	ObjectData::ObjectXMLClassData::~ObjectXMLClassData() {}
+	ClassesData::XMLClassData::~XMLClassData(void) {}
 
-	void ObjectData::TryParseInteger(map<string, string> _map, string _name, int* variable_ptr)
+	void ClassesData::TryParseInteger(map<string, string> _map, string _name, int* variable_ptr)
 	{
-		if (_map.count(_name) > 0) {
+		if (_map.count(_name) > 0) 
+		{
 			string value = _map[_name];
-			try {
+			try 
+			{
 				int value_int = std::stoi(value);
 				(*variable_ptr) = value_int;
 			}
-			catch (...) {
-				Logger::LogMessage msg = Logger::LogMessage("The value of variable \"" + _name + "\" is not an integer", "Warn", "", "ObjectData", "TryParseFloat");
+			catch (...) 
+			{
+				Logger::LogMessage msg = Logger::LogMessage("The value of variable \"" + _name + "\" is not an integer", "Warn", "", "ClassesData", "TryParseFloat");
 				Logger::Warn(msg);
 				(*variable_ptr) = -1;
 			}
@@ -129,57 +137,64 @@ namespace ObjectData
 		}
 	}
 
-	void ObjectData::TryParseFloat(map<string, string> _map, string _name, float* variable_ptr)
+	void ClassesData::TryParseFloat(map<string, string> _map, string _name, float* variable_ptr)
 	{
-		if (_map.count(_name) > 0) {
+		if (_map.count(_name) > 0) 
+		{
 			string value = _map[_name];
 			try {
 				float value_int = std::stof(value);
 				(*variable_ptr) = value_int;
 			}
-			catch (...) {
-				Logger::LogMessage msg = Logger::LogMessage("The value of variable \"" + _name + "\" is not a float", "Warn", "", "ObjectData", "TryParseFloat");
+			catch (...) 
+			{
+				Logger::LogMessage msg = Logger::LogMessage("The value of variable \"" + _name + "\" is not a float", "Warn", "", "ClassesData", "TryParseFloat");
 				Logger::Warn(msg);
 				(*variable_ptr) = -1;
 			}
 		}
-		else {
+		else 
+		{
 			(*variable_ptr) = -1;
 		}
 	}
 
-	void ObjectData::TryParseString(map<string, string> _map, string _name, string* variable_ptr)
+	void ClassesData::TryParseString(map<string, string> _map, string _name, string* variable_ptr)
 	{
-		if (_map.count(_name) > 0) {
+		if (_map.count(_name) > 0)
+		{
 			string value = _map[_name];
 			(*variable_ptr) = value;
 		}
-		else {
+		else 
+		{
 			(*variable_ptr) = "";
 		}
 	}
 
-	void ObjectData::SetFixedPtr(ObjectXMLClassData* _ptr)
+	void ClassesData::SetFixedPtr(XMLClassData* _ptr)
 	{
 		objDataXmlFixedPtr = _ptr;
 	}
 
-	ObjectData::ObjectXMLClassData* ObjectData::GetObjectData(string _class)
+	ClassesData::XMLClassData* ClassesData::GetClassesData(string _class)
 	{
-		if (objectsData.count(_class) > 0) {
+		if (objectsData.count(_class) > 0) 
+		{
 			return &(objectsData[_class]);
 		}
-		else {
+		else 
+		{
 			return nullptr;
 		}
 	}
 
-	void ObjectData::ReadDataClassesFromXml(void)
+	void ClassesData::ReadDataClassesFromXml(void)
 	{
 		vector<string> files = FileManager::GetAllFilesNamesWithinFolder(dataClassesPath, "xml");
 
-		for (int i = 0; i < files.size(); ++i) {
-
+		for (int i = 0; i < files.size(); ++i) 
+		{
 			string path = dataClassesPath + files[i];
 
 			try
@@ -188,7 +203,7 @@ namespace ObjectData
 				xmlFile.LoadFile(path.c_str());
 				XMLElement* _objectXml = xmlFile.FirstChildElement("object");
 
-				ObjectXMLClassData objData = ObjectXMLClassData();
+				XMLClassData objData = XMLClassData();
 
 				objData.SetClassName(string(_objectXml->Attribute("class_name")));
 				objData.SetClassType(string(_objectXml->Attribute("type")));
@@ -210,7 +225,7 @@ namespace ObjectData
 					objData.AddSound(string(_it_snd->Attribute("name")), string(_it_snd->Attribute("path")));
 				}
 
-				AddObjectXMLClassData(objData.GetClassName(), objData);
+				AddXMLClassData(objData.GetClassName(), objData);
 
 				// READ THE ENTITY.XML FILES AND PREPARE THE PRIMITIVES
 
@@ -257,10 +272,8 @@ namespace ObjectData
 		}
 	}
 
-	void ObjectData::AddObjectXMLClassData(std::string _class, ObjectXMLClassData objData)
+	void ClassesData::AddXMLClassData(std::string _class, XMLClassData objData)
 	{
 		objectsData[_class] = objData;
 	}
-
 };
-

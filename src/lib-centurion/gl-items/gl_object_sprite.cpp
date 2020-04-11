@@ -1,7 +1,7 @@
 #include "gl_object_sprite.h"
 
 #include <stb_image.h>
-#include <classes/object-data.h>
+#include <classes/classes-data.h>
 #include <file_manager.h>
 #include <logger.h>
 
@@ -67,8 +67,8 @@ void glObjectSprite::Create() {
 					spriteData.height = float(height);
 					spriteData.textureId = textureID;
 
-					// send data to objectData via classname
-					ObjectData::GetObjectData(_className)->SetSpriteData(spriteData);
+					// send data to ClassesData via classname
+					ClassesData::GetClassesData(_className)->SetSpriteData(spriteData);
 
 					stbi_image_free(data);
 				}

@@ -21,15 +21,15 @@
 /// (???) Forse alcune di queste funzioni dovrebbero essere private e i metodi andrebbero tutti implementati nel file cpp per rispettare
 /// i principi della programmazione modulare e ad oggetti.
 /// </summary>
-namespace ObjectData 
+namespace ClassesData 
 {
-	class ObjectXMLClassData 
+	class XMLClassData 
 	{
 	public:
 		/// <summary>
 		/// Public constructor.
 		/// </summary>
-		ObjectXMLClassData();
+		XMLClassData(void);
 
 		void GetParentData(std::string _parent);
 
@@ -180,7 +180,7 @@ namespace ObjectData
 		/// <returns></returns>
 		std::map<std::string, std::string> GetSoundsMap(void) { return soundsMap; }
 
-		~ObjectXMLClassData();
+		~XMLClassData(void);
 	private:
 		std::map<std::string, std::string> propertiesMap;
 		std::map<std::string, std::string> soundsMap;
@@ -220,15 +220,15 @@ namespace ObjectData
 	/// This function sets a fixed ptr.
 	/// </summary>
 	/// <param name="_ptr">A ficed ptr.</param>
-	void SetFixedPtr(ObjectXMLClassData* _ptr);
+	void SetFixedPtr(XMLClassData* _ptr);
 
-	ObjectXMLClassData* GetObjectData(std::string _class);
+	XMLClassData* GetClassesData(std::string _class);
 
 	/// <summary>
 	/// This function reads the information about a class from an xml file.
 	/// </summary>
 	void ReadDataClassesFromXml(void);
 	
-	void AddObjectXMLClassData(std::string _class, ObjectXMLClassData objData);
+	void AddXMLClassData(std::string _class, XMLClassData objData);
 
 };

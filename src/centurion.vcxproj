@@ -203,7 +203,7 @@ XCOPY "$(ProjectDir)lua53.dll" "$(ProjectDir)$(OutDir)"</Command>
     <ClCompile Include="lib-centurion\engine\classes\building.cpp" />
     <ClCompile Include="lib-centurion\engine\classes\decoration.cpp" />
     <ClCompile Include="lib-centurion\engine\classes\base_gate.cpp" />
-    <ClCompile Include="lib-centurion\engine\classes\object-data.cpp" />
+    <ClCompile Include="lib-centurion\engine\classes\classes-data.cpp" />
     <ClCompile Include="lib-centurion\engine\classes\object.cpp" />
     <ClCompile Include="lib-centurion\engine\classes\settlement.cpp" />
     <ClCompile Include="lib-centurion\engine\classes\unit.cpp" />
@@ -267,7 +267,7 @@ XCOPY "$(ProjectDir)lua53.dll" "$(ProjectDir)$(OutDir)"</Command>
     <ClInclude Include="lib-centurion\engine\classes\building.h" />
     <ClInclude Include="lib-centurion\engine\classes\decoration.h" />
     <ClInclude Include="lib-centurion\engine\classes\base_gate.h" />
-    <ClInclude Include="lib-centurion\engine\classes\object-data.h" />
+    <ClInclude Include="lib-centurion\engine\classes\classes-data.h" />
     <ClInclude Include="lib-centurion\engine\classes\object.h" />
     <ClInclude Include="lib-centurion\engine\classes\settlement.h" />
     <ClInclude Include="lib-centurion\engine\classes\unit.h" />

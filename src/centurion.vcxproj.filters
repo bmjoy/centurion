@@ -198,9 +198,6 @@
     <ClCompile Include="lib-centurion\engine\classes\object.cpp">
       <Filter>Source Files\engine\classes</Filter>
     </ClCompile>
-    <ClCompile Include="lib-centurion\engine\classes\object-data.cpp">
-      <Filter>Source Files\engine\classes</Filter>
-    </ClCompile>
     <ClCompile Include="lib-centurion\engine\classes\settlement.cpp">
       <Filter>Source Files\engine\classes</Filter>
     </ClCompile>
@@ -357,6 +354,9 @@
     <ClCompile Include="lib-centurion\engine\game\mapgen.cpp">
       <Filter>Source Files\engine\game</Filter>
     </ClCompile>
+    <ClCompile Include="lib-centurion\engine\classes\classes-data.cpp">
+      <Filter>Source Files\engine\classes</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="lib-centurion\audio\sndfile.hh">
@@ -453,9 +453,6 @@
       <Filter>Header Files\engine\classes</Filter>
     </ClInclude>
     <ClInclude Include="lib-centurion\engine\classes\object.h">
-      <Filter>Header Files\engine\classes</Filter>
-    </ClInclude>
-    <ClInclude Include="lib-centurion\engine\classes\object-data.h">
       <Filter>Header Files\engine\classes</Filter>
     </ClInclude>
     <ClInclude Include="lib-centurion\engine\classes\settlement.h">
@@ -622,6 +619,9 @@
     </ClInclude>
     <ClInclude Include="lib-centurion\engine\game\mapgen.h">
       <Filter>Header Files\engine\game</Filter>
+    </ClInclude>
+    <ClInclude Include="lib-centurion\engine\classes\classes-data.h">
+      <Filter>Header Files\engine\classes</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

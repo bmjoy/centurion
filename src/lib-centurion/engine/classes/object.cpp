@@ -267,10 +267,10 @@ bool GObject::IsPlaceable(void)
 
 void GObject::Create(const string _className, const bool _temporary)
 {
-	ObjectData::ObjectXMLClassData objData = *ObjectData::GetObjectData(_className);
-	ObjectData::SetFixedPtr(&objData);
+	ClassesData::XMLClassData objData = *ClassesData::GetClassesData(_className);
+	ClassesData::SetFixedPtr(&objData);
 	objData.GetParentData(objData.GetParentClass());
-	ObjectData::SetFixedPtr(nullptr);
+	ClassesData::SetFixedPtr(nullptr);
 
 	// class data
 	this->SetClassName(_className);
@@ -540,7 +540,7 @@ void GObject::MarkAsSelected(const bool par_selected)
 #pragma endregion
 
 #pragma region Private members
-void GObject::SetObjectProperties(ObjectData::ObjectXMLClassData &objData, const bool _temporary)
+void GObject::SetObjectProperties(ClassesData::XMLClassData &objData, const bool _temporary)
 {
 	// TryParseFloat, TryParseInteger, TryParseString
 	float fProperty = 0.f;
@@ -548,26 +548,26 @@ void GObject::SetObjectProperties(ObjectData::ObjectXMLClassData &objData, const
 	string strProperty = "";
 
 	//Object's properties:
-	ObjectData::TryParseFloat(objData.GetPropertiesMap(), "radius", &fProperty);
+	ClassesData::TryParseFloat(objData.GetPropertiesMap(), "radius", &fProperty);
 	this->radius = fProperty;
 	if (_temporary == true) 
 		return;
-	ObjectData::TryParseString(objData.GetPropertiesMap(), "singularName", &strProperty);
+	ClassesData::TryParseString(objData.GetPropertiesMap(), "singularName", &strProperty);
 	this->singularName = strProperty;
 	this->displayedName = strProperty;
-	ObjectData::TryParseString(objData.GetPropertiesMap(), "pluralName", &strProperty);
+	ClassesData::TryParseString(objData.GetPropertiesMap(), "pluralName", &strProperty);
 	this->pluralName = strProperty;
-	ObjectData::TryParseString(objData.GetPropertiesMap(), "race", &strProperty);
+	ClassesData::TryParseString(objData.GetPropertiesMap(), "race", &strProperty);
 	this->raceName = strProperty;
-	ObjectData::TryParseInteger(objData.GetPropertiesMap(), "sight", &iProperty);
+	ClassesData::TryParseInteger(objData.GetPropertiesMap(), "sight", &iProperty);
 	this->sight = iProperty;
-	ObjectData::TryParseFloat(objData.GetPropertiesMap(), "selectionRadius", &fProperty);
+	ClassesData::TryParseFloat(objData.GetPropertiesMap(), "selectionRadius", &fProperty);
 	this->selectionRadius = fProperty;
-	ObjectData::TryParseString(objData.GetPropertiesMap(), "canBeClonedInEditor", &strProperty);
+	ClassesData::TryParseString(objData.GetPropertiesMap(), "canBeClonedInEditor", &strProperty);
 	this->canBeClonedInEditor = strProperty == "true" ? true : false;
-	ObjectData::TryParseString(objData.GetPropertiesMap(), "isWaterObject", &strProperty);
+	ClassesData::TryParseString(objData.GetPropertiesMap(), "isWaterObject", &strProperty);
 	this->bIsWaterObject = strProperty == "true" ? true : false;
-	ObjectData::TryParseString(objData.GetPropertiesMap(), "alwaysVisibleInGameMinimap", &strProperty);
+	ClassesData::TryParseString(objData.GetPropertiesMap(), "alwaysVisibleInGameMinimap", &strProperty);
 	this->bAlwaysVisibleInGameMinimap = strProperty == "true" ? true : false;
 }
 #pragma endregion

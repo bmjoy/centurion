@@ -5,7 +5,7 @@
 #include <file_manager.h>
 
 #include <translationsTable.h>
-#include <classes/object-data.h>
+#include <classes/classes-data.h>
 
 #include <GLFW/glfw3.h>
 
@@ -229,7 +229,7 @@ namespace Engine
 			GLItems::InitializeVariables();
 			WINDOW.Create();
 
-			ObjectData::ReadDataClassesFromXml();
+			ClassesData::ReadDataClassesFromXml();
 			Game::Mapgen::InitializeTerrain();
 			Engine::InitializeImages();
 

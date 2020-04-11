@@ -155,13 +155,13 @@ public:
 	/// <summary>
 	/// This functions sets the properties of the current building when it is being created. 
 	/// The values of these properties were previously read 
-	/// from an XML file and they are now stored into a ObjectData::ObjectXMLClassData object.
+	/// from an XML file and they are now stored into a ClassesData::XMLClassData object.
 	/// In addition, if the building is a central building, a new settlement is also created; otherwise, the function checks
 	/// if the is a existing  settlement close to the current building: if not, the building cannot be created.
 	/// </summary>
 	/// <param name="objData">The object in which are stored the properties of the current building.</param>
 	/// <param name="_temporary">Boolean: true = the object is temporary (e.g. an object that is being inserted in the editor)</param>
-	void SetBuildingProperties(ObjectData::ObjectXMLClassData &objData, const bool _temporary = false);
+	void SetBuildingProperties(ClassesData::XMLClassData &objData, const bool _temporary = false);
 
 	/// <summary>
 	/// This function assigns an existing settlement if the current object isn't a central building;

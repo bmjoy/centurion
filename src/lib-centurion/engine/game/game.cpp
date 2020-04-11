@@ -198,7 +198,7 @@ namespace Game
 
 		if (player <= MAX_NUMBER_OF_PLAYERS)
 		{
-			ObjectData::ObjectXMLClassData* objData = ObjectData::GetObjectData(className);
+			ClassesData::XMLClassData* objData = ClassesData::GetClassesData(className);
 			if (objData == nullptr)
 			{
 				return bObjectCreated;

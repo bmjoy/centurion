@@ -140,7 +140,7 @@ void Building::SetEntPath(const string par_ent_path)
 	this->ent_path = par_ent_path;
 }
 
-void Building::SetBuildingProperties(ObjectData::ObjectXMLClassData &objData, const bool _temporary)
+void Building::SetBuildingProperties(ClassesData::XMLClassData &objData, const bool _temporary)
 {
 	// TryParseFloat, TryParseInteger, TryParseString
 	float fProperty = 0.f;
@@ -148,25 +148,25 @@ void Building::SetBuildingProperties(ObjectData::ObjectXMLClassData &objData, co
 	string strProperty = "";
 
 	//Building's properties:
-	ObjectData::TryParseString(objData.GetPropertiesMap(), "isCentralBuilding", &strProperty);
+	ClassesData::TryParseString(objData.GetPropertiesMap(), "isCentralBuilding", &strProperty);
 	this->bIsCentralBuilding = strProperty == "true" ? true : false;
 	if (_temporary == true)
 		return;
-	ObjectData::TryParseInteger(objData.GetPropertiesMap(), "maxHealth", &iProperty);
+	ClassesData::TryParseInteger(objData.GetPropertiesMap(), "maxHealth", &iProperty);
 	this->maxHealth = iProperty;
-	ObjectData::TryParseInteger(objData.GetPropertiesMap(), "repairRate", &iProperty);
+	ClassesData::TryParseInteger(objData.GetPropertiesMap(), "repairRate", &iProperty);
 	this->repairRate = iProperty;
-	ObjectData::TryParseInteger(objData.GetPropertiesMap(), "loyaltyFearHealthPercent", &iProperty);
+	ClassesData::TryParseInteger(objData.GetPropertiesMap(), "loyaltyFearHealthPercent", &iProperty);
 	this->loyaltyFearHealthPercent = iProperty;
-	ObjectData::TryParseString(objData.GetPropertiesMap(), "clickable_in_minimap", &strProperty);
+	ClassesData::TryParseString(objData.GetPropertiesMap(), "clickable_in_minimap", &strProperty);
 	this->bIsClickableInMimimap = strProperty == "true" ? true : false;
-	ObjectData::TryParseString(objData.GetPropertiesMap(), "autoRepair", &strProperty);
+	ClassesData::TryParseString(objData.GetPropertiesMap(), "autoRepair", &strProperty);
 	this->bAutoRepair = strProperty == "true" ? true : false;
-	ObjectData::TryParseString(objData.GetPropertiesMap(), "canProduceGold", &strProperty);
+	ClassesData::TryParseString(objData.GetPropertiesMap(), "canProduceGold", &strProperty);
 	this->bCanProduceGold = strProperty == "true" ? true : false;
-	ObjectData::TryParseString(objData.GetPropertiesMap(), "canProduceFood", &strProperty);
+	ClassesData::TryParseString(objData.GetPropertiesMap(), "canProduceFood", &strProperty);
 	this->bCanProduceFood = strProperty == "true" ? true : false; 
-	ObjectData::TryParseString(objData.GetPropertiesMap(), "ent_path", &strProperty);
+	ClassesData::TryParseString(objData.GetPropertiesMap(), "ent_path", &strProperty);
 	this->ent_path = strProperty;
 }
 
