@@ -1,5 +1,6 @@
 #include <game/strategy.h>
 #include <classes/settlement.h>
+#include "classes-data.h"
 
 using namespace std;
 using namespace glm;
@@ -8,23 +9,23 @@ using namespace glm;
 Settlement::Settlement(const unsigned int par_player)
 {
 	this->player = par_player;
-	this->scriptName = "";
+	this->idName = "";
 	this->bIsIndipendent = false;
-	//READ THOSE VALUES FROM SETTLEMENT.OC.XML
-	this->population = 10;
-	this->max_population = 100;
-	this->food = 1000;
-	this->gold = 1000;
+	this->SetSettlementProperties();
+}
+
+Settlement::~Settlement(void)
+{
 }
 
 string Settlement::GetSettlementName(void)
 {
-	return this->scriptName;
+	return this->idName;
 }
 
 void Settlement::SetSettlementName(const string par_settlementName)
 {
-	this->scriptName = par_settlementName;
+	this->idName = par_settlementName;
 }
 
 bool Settlement::IsIndipendent(void)
@@ -67,20 +68,20 @@ unsigned int Settlement::GetPopulation(void)
 void Settlement::SetPopulation(const unsigned int par_population)
 {
 	this->population = par_population <= POPULATION_LIMIT ? par_population : POPULATION_LIMIT;
-	if (this->population > this->max_population)
+	if (this->population > this->maxPopulation)
 	{
-		this->population = this->max_population;
+		this->population = this->maxPopulation;
 	}
 }
 
 unsigned int Settlement::GetMaxPopulation(void)
 {
-	return this->max_population;
+	return this->maxPopulation;
 }
 
 void Settlement::SetMaxPopulation(const unsigned int par_max_population)
 {
-	this->max_population = par_max_population <= POPULATION_LIMIT ? par_max_population : POPULATION_LIMIT;
+	this->maxPopulation = par_max_population <= POPULATION_LIMIT ? par_max_population : POPULATION_LIMIT;
 }
 
 unsigned int Settlement::GetPlayer(void)
@@ -133,3 +134,22 @@ bool Settlement::RemoveBuildingFromSettlement(Building* b)
 	}
 	return bRemovedCorrectly;
 }
+
+#pragma region Private members:
+void Settlement::SetSettlementProperties(void)
+{
+	int iProperty = 0;
+
+	ClassesData::XMLClassData setData = *ClassesData::GetClassesData("Settlement");
+	ClassesData::SetFixedPtr(&setData);
+	setData.GetParentData(setData.GetParentClass());
+	ClassesData::SetFixedPtr(nullptr);
+
+	ClassesData::TryParseInteger(setData.GetPropertiesMap(), "gold", &iProperty);
+	this->gold = iProperty;
+	ClassesData::TryParseInteger(setData.GetPropertiesMap(), "food", &iProperty);
+	this->food = iProperty;
+	ClassesData::TryParseInteger(setData.GetPropertiesMap(), "maxPopulation", &iProperty);
+	this->maxPopulation = iProperty;
+}
+#pragma endregion

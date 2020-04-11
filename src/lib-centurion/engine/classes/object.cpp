@@ -222,15 +222,15 @@ bool GObject::IsDecoration(void)
 	return (this->type == "decoration");
 }
 
-Building* GObject::AsBuilding()
+Building* GObject::AsBuilding(void)
 { 
 	return (Building*)this; 
 }
-Unit* GObject::AsUnit()
+Unit* GObject::AsUnit(void)
 { 
 	return (Unit*)this; 
 }
-Decoration* GObject::AsDecoration()
+Decoration* GObject::AsDecoration(void)
 { 
 	return (Decoration*)this;
 }

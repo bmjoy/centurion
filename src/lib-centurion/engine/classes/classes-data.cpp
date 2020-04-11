@@ -132,7 +132,8 @@ namespace ClassesData
 				(*variable_ptr) = -1;
 			}
 		}
-		else {
+		else 
+		{
 			(*variable_ptr) = -1;
 		}
 	}
@@ -142,7 +143,8 @@ namespace ClassesData
 		if (_map.count(_name) > 0) 
 		{
 			string value = _map[_name];
-			try {
+			try 
+			{
 				float value_int = std::stof(value);
 				(*variable_ptr) = value_int;
 			}
@@ -196,7 +198,6 @@ namespace ClassesData
 		for (int i = 0; i < files.size(); ++i) 
 		{
 			string path = dataClassesPath + files[i];
-
 			try
 			{
 				XMLDocument xmlFile;
@@ -208,7 +209,6 @@ namespace ClassesData
 				objData.SetClassName(string(_objectXml->Attribute("class_name")));
 				objData.SetClassType(string(_objectXml->Attribute("type")));
 				objData.SetParentClass(string(_objectXml->Attribute("parent")));
-
 
 				for (XMLElement* _it_prop = _objectXml->FirstChildElement("properties")->FirstChildElement(); _it_prop != NULL; _it_prop = _it_prop->NextSiblingElement())
 				{
