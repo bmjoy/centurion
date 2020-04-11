@@ -207,7 +207,8 @@ namespace Game
 			{
 				if (std::find(Editor::editorObjectTreeList3.begin(), Editor::editorObjectTreeList3.end(), i[1]) != Editor::editorObjectTreeList3.end())
 					continue;
-				if (i[0] != filter1 || i[1] != filter2) continue;
+				if (i[0] != filter1 || i[1] != filter2) 
+					continue;
 				Editor::editorObjectTreeList3.push_back(i[2]);
 			}
 			std::sort(Editor::editorObjectTreeList3.begin(), Editor::editorObjectTreeList3.end());
@@ -273,7 +274,8 @@ namespace Game
 				return;
 			}
 
-			if (Editor::tmpObject == nullptr) {
+			if (Editor::tmpObject == nullptr) 
+			{
 				EditorMenuBar::Show();
 				EditorWindows::Show();
 				EditorUI::UpdateInfoText("");
@@ -313,6 +315,9 @@ namespace Game
 		{
 			GObject *obj = Game::GetSelectedObject();
 			if (obj == nullptr) return;
+
+			if (EditorWindows::IsThereAnyWindowOpen() == true)
+				return;
 
 			if (Engine::Mouse::LeftHold == false)
 			{
@@ -362,7 +367,8 @@ namespace Game
 
 		void ChangeTerrainType(std::string type)
 		{
-			if (type.empty() == false) {
+			if (type.empty() == false) 
+			{
 				changingTerrain.isActive = true;
 				Mapgen::TerrainTexture * tt = Mapgen::GetTerrainTexturePtrByName(type);
 				if (tt == nullptr) {
@@ -381,8 +387,8 @@ namespace Game
 				return;
 			}
 
-			if (changingTerrain.type == -1.f) return;
-
+			if (changingTerrain.type == -1.f) 
+				return;
 			if (Engine::Mouse::RightClick == true)
 			{
 				// This part of code is executed when you are FINISHING the terrain change
@@ -409,7 +415,8 @@ namespace Game
 
 			int j = Game::Mapgen::getVertexPos(x, y);
 
-			if (Game::Mapgen::MapTextures()[j] != changingTerrain.type) {
+			if (Game::Mapgen::MapTextures()[j] != changingTerrain.type) 
+			{
 				Game::Mapgen::MapTextures()[j] = changingTerrain.type;
 				GLItems::MapTerrain()->updateTextureBuffer();
 			}
@@ -481,12 +488,9 @@ namespace Game
 			{
 				if (Game::IsGameObjectNotNull(Picking::Obj::GetLeftClickId()))
 				{
-					Building* b = GObject::GetObjectByID(Picking::Obj::GetLeftClickId())->AsBuilding();
-					if (b->IsSelected())
+					GObject* b = Game::GetSelectedObject();
+					if (b != nullptr && b->IsBuilding() == true)
 					{
-						Logger::Info("Building " + b->GetSingularName() + " deleted!");
-						b->ClearPass();
-						b->UpdatePass();
 						GObject::RemoveGameObject(b->GetPickingID());
 					}
 				}

@@ -283,6 +283,7 @@ void GObject::Create(const string _className, const bool _temporary)
 
 	// pass data
 	this->pass_grid = Pass::GetPassGridPtr(this->className);
+	this->UpdatePass();
 
 	//if (_temporary == true) return bObjectCreated;
 	this->SetObjectProperties(objData, _temporary);
@@ -312,6 +313,7 @@ void GObject::SetPosition(const vec3 pos)
 {
 	this->position = pos;
 }
+
 vec3 GObject::GetPosition(void)
 {
 	return this->position;
@@ -383,6 +385,7 @@ void GObject::RemoveGameObject(const unsigned int index)
 	{
 		if (GObject::GameObjects[index] != nullptr)
 		{
+			Logger::Info("Building " + GameObjects[index]->GetSingularName() + " deleted!");
 			//The picking ID and the script name of the object can be reused:
 			Picking::Obj::AddUnsedPickingID(GameObjects[index]->GetPickingID());
 			GObject::idNamesMap.erase(GObject::GameObjects[index]->GetIDName());
@@ -403,6 +406,7 @@ void GObject::RemoveGameObject(const unsigned int index)
 					//Remove the settlement from the list of the settlemet used in the editor.
 					b->RemoveElementFromSettlementsList(b->GetSettlement());
 				}
+				GameObjects[index]->ClearPass();
 			}
 			else if (GameObjects[index]->IsDecoration() == true)
 			{

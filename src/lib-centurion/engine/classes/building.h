@@ -11,14 +11,9 @@
 #include "object.h"
 #include "settlement.h"
 
-/// <summary>
-/// (???)Avoid overlap beetwen two buildings when a new building is about to be created.
-/// </summary>
-#ifndef RADIUS_OFFSET
-#define RADIUS_OFFSET 100
-#endif
-
+#ifndef MAX_DISTANCE
 #define MAX_DISTANCE  1000
+#endif 
 
 class Unit;
 namespace game { class ObjectUI; };
@@ -158,12 +153,6 @@ public:
 	void SetEntPath(const std::string par_ent_path);
 
 	/// <summary>
-	/// This function sets the path in which can be found the pass table of the current building.
-	/// </summary>
-	/// <param name="par_ent_path">The path og the pass table.</param>
-	void SetPassPath(const std::string par_pass_path);
-	
-	/// <summary>
 	/// This functions sets the properties of the current building when it is being created. 
 	/// The values of these properties were previously read 
 	/// from an XML file and they are now stored into a ObjectData::ObjectXMLClassData object.
@@ -226,8 +215,6 @@ protected:
 	/// Protected method that checks if the object is placeable and sets the relative protected boolean
 	/// </summary>
 	void CheckIfPlaceable(void) override;
-
-#pragma region Private Members:
 private:
 	//game::ObjectUI* buildingUI;
 	bool waitingToBeErased;
@@ -251,5 +238,4 @@ private:
 	static std::vector<Settlement*> settlementsList;
 	#pragma endregion
 	//sound selectionSound; TODO
-#pragma endregion
 };

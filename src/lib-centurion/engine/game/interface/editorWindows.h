@@ -10,7 +10,10 @@
 
 #include <ui.h>
 
+#ifndef MAX_NUMBER_OF_EDITOR_WINDOWS
 #define MAX_NUMBER_OF_EDITOR_WINDOWS 20
+#endif 
+
 
 /// <summary>
 /// This namespace contains all the windows of the editor.
@@ -144,5 +147,14 @@ namespace EditorWindows
 	/// <param name="win">The window.</param>
 	void AddWindow(const unsigned int id, EditorWindow* win);
 
+	/// <summary>
+	/// This function returns a windows by ID.
+	/// </summary>
 	EditorWindow* GetWindowById(const unsigned int id);
+
+	/// <summary>
+	/// This function check if there ins any editor window opened.
+	/// </summary>
+	/// <returns>True or false.</returns>
+	bool IsThereAnyWindowOpen(void);
 };

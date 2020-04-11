@@ -21,6 +21,7 @@ namespace EditorWindows
 	{
 		std::array<EditorWindow*, MAX_NUMBER_OF_EDITOR_WINDOWS> listOfWindows = { nullptr };
 		bool isHidden = false;
+		bool bWindowsOpened = false;
 	};
 
 
@@ -42,8 +43,11 @@ namespace EditorWindows
 		{
 			EditorWindows::CloseEveryWindow();
 			this->Open();
+			bWindowsOpened = true;
 		}
-		else {
+		else
+		{
+			bWindowsOpened = false;
 			this->Close();
 		}
 	}
@@ -72,21 +76,24 @@ namespace EditorWindows
 
 	void EditorWindows::EditorWindow::Render(const bool picking)
 	{
-		if (isOpened == false) {
-
+		if (isOpened == false) 
+		{
 			bool conditionResult = false;
 			Hector::ExecuteBooleanMethod(luaConditionFunction, &conditionResult);
-			if (conditionResult) {
+			if (conditionResult) 
+			{
 				this->Open();
 			}
 		}
 
-		if (opening) {
+		if (opening) 
+		{
 			Hector::ExecuteCommand(luaOpeningScript);
 			opening = false;
 		}
 
-		if (isOpened) {
+		if (isOpened) 
+		{
 			iframe.Render(picking);
 		}
 	}
@@ -97,7 +104,6 @@ namespace EditorWindows
 	{
 		if (id < 0 || id > MAX_NUMBER_OF_EDITOR_WINDOWS) return;
 		if (listOfWindows[id] == nullptr) return;
-
 
 		listOfWindows[id]->Open();
 	}
@@ -268,6 +274,7 @@ namespace EditorWindows
 				listOfWindows[i]->Close();
 			}
 		}
+		bWindowsOpened = false;
 	}
 
 	bool IsHidden(void)
@@ -284,6 +291,11 @@ namespace EditorWindows
 	{
 		if (id < 0 || id >= MAX_NUMBER_OF_EDITOR_WINDOWS) return nullptr;
 		return EditorWindows::listOfWindows[id];
+	}
+
+	bool IsThereAnyWindowOpen(void)
+	{
+		return bWindowsOpened;
 	}
 };
 

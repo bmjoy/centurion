@@ -33,9 +33,11 @@ namespace Pass
 			return vec2(x, y);
 		}
 
-		unsigned char getGridValueFromPoint(float x, float y) {
+		unsigned char getGridValueFromPoint(float x, float y) 
+		{
 			int idx = (int)y / GRID_CELL_SIZE * GRID_SIZE_X + (int)x / GRID_CELL_SIZE;
-			if (idx < 0 || idx >= GRID_ARRAY_SIZE) return 0;
+			if (idx < 0 || idx >= GRID_ARRAY_SIZE) 
+				return 0;
 			return PASS_MATRIX[idx];
 		}
 	};
@@ -159,7 +161,7 @@ namespace Pass
 		{
 			return &(PASS_DATABASE[className]);
 		}
-		return nullptr;
+		return new PassGrid();
 	}
 
 

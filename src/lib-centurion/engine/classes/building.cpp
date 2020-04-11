@@ -150,8 +150,6 @@ void Building::SetBuildingProperties(ObjectData::ObjectXMLClassData &objData, co
 	//Building's properties:
 	ObjectData::TryParseString(objData.GetPropertiesMap(), "isCentralBuilding", &strProperty);
 	this->bIsCentralBuilding = strProperty == "true" ? true : false;
-	ObjectData::TryParseString(objData.GetPropertiesMap(), "pass_path", &strProperty);
-	this->UpdatePass();
 	if (_temporary == true)
 		return;
 	ObjectData::TryParseInteger(objData.GetPropertiesMap(), "maxHealth", &iProperty);
@@ -222,16 +220,6 @@ void Building::SetStatus(const bool bIsCreated)
 	this->bIsCreated = bIsCreated;
 }
 
-Building::~Building(void) 
-{
-	if (this->settlement != nullptr)
-	{
-		delete this->settlement;
-		this->settlement = nullptr;
-	}
-}
-
-#pragma region Private members
 std::tuple<bool, Settlement*> Building::IsNearToFriendlySettlement(void)
 {
 	bool bSettlementDiscovered = false;
@@ -276,4 +264,12 @@ std::tuple<bool, Settlement*> Building::IsNearToFriendlySettlement(void)
 	}
 	return std::make_tuple(bSettlementDiscovered, s);
 }
-#pragma endregion
+
+Building::~Building(void) 
+{
+	if (this->settlement != nullptr)
+	{
+		delete this->settlement;
+		this->settlement = nullptr;
+	}
+}
