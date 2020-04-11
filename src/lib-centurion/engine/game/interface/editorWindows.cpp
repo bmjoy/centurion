@@ -180,7 +180,8 @@ namespace EditorWindows
 					int xOffset = _it_txtinput->IntAttribute("xOffset");
 					int yOffset = _it_txtinput->IntAttribute("yOffset");
 					int tiWidth = _it_txtinput->IntAttribute("width");
-					wstring placeholder = TranslationsTable::GetWTranslation(_it_txtinput->Attribute("placeholder"));
+					std::string _ph = _it_txtinput->Attribute("placeholder");
+					wstring placeholder = (_ph.empty()) ? L"" : TranslationsTable::GetWTranslation(_ph);
 					iframe.AddTextInput(textInputId, xOffset, yOffset, tiWidth, placeholder);
 				}
 
@@ -190,7 +191,8 @@ namespace EditorWindows
 					int textId = _it_txt->IntAttribute("id");
 					int xOffset = _it_txt->IntAttribute("xOffset");
 					int yOffset = _it_txt->IntAttribute("yOffset");
-					std::wstring wtext = TranslationsTable::GetWTranslation(_it_txt->Attribute("name"));
+					std::string _name = _it_txt->Attribute("name");
+					std::wstring wtext = (_name.empty()) ? L"" : TranslationsTable::GetWTranslation(_name);
 					iframe.AddText(textId, wtext, xOffset, yOffset);
 				}
 
