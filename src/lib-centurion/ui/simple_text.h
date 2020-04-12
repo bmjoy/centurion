@@ -51,7 +51,7 @@ namespace gui {
 		/// This function sets a new text 
 		/// </summary>
 		/// <param name="newText">A std::string indicating the new string</param>
-		void SetNewText(std::string newText);
+		void SetNewText(std::wstring newText);
 
 		/// <summary>
 		/// This function create a static text.

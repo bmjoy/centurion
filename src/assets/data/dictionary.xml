@@ -1,0 +1,12 @@
+<!-- 
+	This dictionary contains words that are directly read by the engine;
+	this means that in the C++ core there will be a call to Data::ReadWordFromDictionaryById()
+	and then the word will be translated with TranslationTable::GetTranslation (or, better, GetWTranslation).
+-->
+
+<dictionary>
+   <word id="0" value="EDITOR_canAddStructure"/>
+   <word id="1" value="EDITOR_impassablePoint"/>
+   <word id="2" value="EDITOR_noSettlementsAround"/>
+   <word id="3" value="EDITOR_cancelBrush"/>
+</dictionary>

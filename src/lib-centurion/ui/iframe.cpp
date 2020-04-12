@@ -4,7 +4,7 @@
 #include <picking.h>
 
 #include <engine.h>
-#include <tinyxml2.h>
+#include <encoding.hpp>
 #include <hector-lua.h>
 
 using namespace std;
@@ -96,7 +96,8 @@ std::string gui::Iframe::GetStringBySimpleTextId(const unsigned int _textId)
 void gui::Iframe::UpdateStringBySimpleTextId(const unsigned int _textId, std::string _newText)
 {
 	if (_textId < 0 || _textId > MAX_NUMBER_OF_SIMPLE_TEXT) return;
-	listOfTexts[_textId]->SetNewText(_newText);
+	std::wstring newWText = Encode::GetWideString(_newText.c_str());
+	listOfTexts[_textId]->SetNewText(newWText);
 }
 
 void gui::Iframe::AddTextList(const int textListId, int xPos, int yPos, const std::string & luaCmd, const unsigned int maxOptions, const unsigned int borderWidth)

@@ -40,7 +40,7 @@ namespace EditorUI
 			infoText.render_static();
 		}
 	}
-	void UpdateInfoText(std::string infotext)
+	void EditorUI::UpdateInfoText(std::wstring infotext)
 	{
 		infoText.SetNewText(infotext);
 	}

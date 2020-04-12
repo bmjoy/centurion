@@ -219,9 +219,6 @@
     <ClCompile Include="lib-centurion\engine\engine.cpp">
       <Filter>Source Files\engine</Filter>
     </ClCompile>
-    <ClCompile Include="lib-centurion\engine\errorCodes.cpp">
-      <Filter>Source Files\engine</Filter>
-    </ClCompile>
     <ClCompile Include="lib-centurion\engine\picking.cpp">
       <Filter>Source Files\engine</Filter>
     </ClCompile>
@@ -357,6 +354,9 @@
     <ClCompile Include="lib-centurion\engine\classes\classes-data.cpp">
       <Filter>Source Files\engine\classes</Filter>
     </ClCompile>
+    <ClCompile Include="lib-centurion\engine\data.cpp">
+      <Filter>Source Files\engine</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="lib-centurion\audio\sndfile.hh">
@@ -432,9 +432,6 @@
       <Filter>Header Files\util</Filter>
     </ClInclude>
     <ClInclude Include="lib-centurion\engine\engine.h">
-      <Filter>Header Files\engine</Filter>
-    </ClInclude>
-    <ClInclude Include="lib-centurion\engine\errorCodes.h">
       <Filter>Header Files\engine</Filter>
     </ClInclude>
     <ClInclude Include="lib-centurion\engine\picking.h">
@@ -622,6 +619,9 @@
     </ClInclude>
     <ClInclude Include="lib-centurion\engine\classes\classes-data.h">
       <Filter>Header Files\engine\classes</Filter>
+    </ClInclude>
+    <ClInclude Include="lib-centurion\engine\data.h">
+      <Filter>Header Files\engine</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

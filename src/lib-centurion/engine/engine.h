@@ -8,6 +8,7 @@
 
 #pragma once
 
+#include <header.h>
 #include <ui.h>
 
 #include <peripherals/camera.h>

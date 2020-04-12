@@ -207,9 +207,9 @@ XCOPY "$(ProjectDir)lua53.dll" "$(ProjectDir)$(OutDir)"</Command>
     <ClCompile Include="lib-centurion\engine\classes\object.cpp" />
     <ClCompile Include="lib-centurion\engine\classes\settlement.cpp" />
     <ClCompile Include="lib-centurion\engine\classes\unit.cpp" />
+    <ClCompile Include="lib-centurion\engine\data.cpp" />
     <ClCompile Include="lib-centurion\engine\debugUi.cpp" />
     <ClCompile Include="lib-centurion\engine\engine.cpp" />
-    <ClCompile Include="lib-centurion\engine\errorCodes.cpp" />
     <ClCompile Include="lib-centurion\engine\game\editor.cpp" />
     <ClCompile Include="lib-centurion\engine\game\game.cpp" />
     <ClCompile Include="lib-centurion\engine\game\interface\editorMenuBar.cpp" />
@@ -271,9 +271,9 @@ XCOPY "$(ProjectDir)lua53.dll" "$(ProjectDir)$(OutDir)"</Command>
     <ClInclude Include="lib-centurion\engine\classes\object.h" />
     <ClInclude Include="lib-centurion\engine\classes\settlement.h" />
     <ClInclude Include="lib-centurion\engine\classes\unit.h" />
+    <ClInclude Include="lib-centurion\engine\data.h" />
     <ClInclude Include="lib-centurion\engine\debugUi.h" />
     <ClInclude Include="lib-centurion\engine\engine.h" />
-    <ClInclude Include="lib-centurion\engine\errorCodes.h" />
     <ClInclude Include="lib-centurion\engine\game\editor.h" />
     <ClInclude Include="lib-centurion\engine\game\game.h" />
     <ClInclude Include="lib-centurion\engine\game\interface\editorMenuBar.h" />

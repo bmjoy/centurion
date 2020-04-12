@@ -7,6 +7,7 @@
 #include <engine.h>
 #include <menu/menu.h>
 #include <logger.h>
+#include <data.h>
 #include <settings.h>
 #include <translationsTable.h>
 
@@ -278,7 +279,7 @@ namespace Game
 			{
 				EditorMenuBar::Show();
 				EditorWindows::Show();
-				EditorUI::UpdateInfoText("");
+				EditorUI::UpdateInfoText(L"");
 				return;
 			}
 			
@@ -288,7 +289,7 @@ namespace Game
 				Editor::tmpObject = nullptr;
 				EditorMenuBar::Show();
 				EditorWindows::Show();
-				EditorUI::UpdateInfoText("");
+				EditorUI::UpdateInfoText(L"");
 				Engine::Mouse::RightClick = false;
 			}
 
@@ -382,7 +383,8 @@ namespace Game
 				changingTerrain.type = (float)tt->GetId();
 				EditorMenuBar::Hide();
 				EditorWindows::Hide();
-				EditorUI::UpdateInfoText(TranslationsTable::GetTranslation("EDITOR_cancelBrush"));
+				std::wstring infoText = TranslationsTable::GetWTranslation(Engine::Data::GetWordFromDictionaryById(3));
+				EditorUI::UpdateInfoText(infoText);
 				Engine::Mouse::ChangeCursorType(CURSOR_TYPE_CIRCLE);
 				return;
 			}
@@ -395,7 +397,7 @@ namespace Game
 				changingTerrain.isActive = false;
 				EditorMenuBar::Show();
 				EditorWindows::Show();
-				EditorUI::UpdateInfoText("");
+				EditorUI::UpdateInfoText(L"");
 				Engine::Mouse::ChangeCursorType(CURSOR_TYPE_DEFAULT);
 				return;
 			}

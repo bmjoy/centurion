@@ -23,3 +23,4 @@
 #include <iomanip>
 #include <algorithm>
 #include <iterator>
+#include <tinyxml2.h>

@@ -9,7 +9,6 @@
 #include <gl_terrain.h>
 #include <logger.h>
 #include <file_manager.h>
-#include <tinyxml2.h>
 
 
 using namespace std;

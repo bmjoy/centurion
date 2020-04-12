@@ -1,6 +1,7 @@
 #include <ui.h>
 #include <engine.h>
 #include <picking.h>
+#include <encoding.hpp>
 
 #include <GLFW/glfw3.h>
 
@@ -127,7 +128,8 @@ namespace gui
 
 	void TextInput::UpdatePlaceholder(std::string newPlaceholder)
 	{
-		placeholder_text.SetNewText(newPlaceholder);
+		std::wstring widestring = Encode::GetWideString(newPlaceholder.c_str());
+		placeholder_text.SetNewText(widestring);
 		for (int i = 0; i < TEXT_INPUT_MAX_CHARS_DEFAULT; i++) 
 			currentText[i] = 0;
 		for (int i = 0; i < newPlaceholder.size(); i++) 

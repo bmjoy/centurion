@@ -2,11 +2,7 @@
 
 #include <settings.h>
 #include <stb_image.h>
-//#include <codecvt>
-//#include <locale>
 #include <file_manager.h>
-
-#include <tinyxml2.h>
 
 using namespace std;
 using namespace glm;
@@ -143,7 +139,7 @@ void glBitmapFont::create() {
 	}
 }
 
-void glBitmapFont::UpdateText(StaticTextData* data, std::string new_text)
+void glBitmapFont::UpdateText(StaticTextData* data, std::wstring new_text)
 {
 	int fontID, letterspacing = 0;
 	fontID = fontIdMap[data->fontName];

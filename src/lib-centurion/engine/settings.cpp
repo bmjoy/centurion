@@ -7,8 +7,6 @@
 #include <fstream>
 #include <file_manager.h>
 
-#include <tinyxml2.h>
-
 using namespace std;
 using namespace glm;
 

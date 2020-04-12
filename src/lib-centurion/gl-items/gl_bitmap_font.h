@@ -66,7 +66,7 @@ public:
 	/// <summary>
 	/// This function updates the character list of a given static text data
 	/// </summary>
-	void UpdateText(StaticTextData* data, std::string new_text);
+	void UpdateText(StaticTextData* data, std::wstring new_text);
 
 	/// <summary>
 	/// This function provides static data for static text. 

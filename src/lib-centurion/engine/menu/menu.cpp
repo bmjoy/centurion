@@ -7,8 +7,6 @@
 #include <engine.h>
 #include <translationsTable.h>
 
-#include <tinyxml2.h>
-
 using namespace std;
 using namespace glm;
 

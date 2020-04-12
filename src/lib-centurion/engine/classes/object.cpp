@@ -1,5 +1,6 @@
 #include "object.h"
 
+#include <data.h>
 #include <player/player.h>
 #include <picking.h>
 #include <game/strategy.h>
@@ -504,23 +505,36 @@ void GObject::SendInfoText(void)
 	if (this->AsBuilding()->IsCentralBuilding())
 	{
 		if (this->IsPlaceable() == true)
-			EditorUI::UpdateInfoText(TranslationsTable::GetTranslation("EDITOR_canAddStructure"));
+		{
+			std::wstring infoText = TranslationsTable::GetWTranslation(Engine::Data::GetWordFromDictionaryById(0));
+			EditorUI::UpdateInfoText(infoText);
+		}
 		else
-			EditorUI::UpdateInfoText(TranslationsTable::GetTranslation("EDITOR_impassablePoint"));
+		{
+			std::wstring infoText = TranslationsTable::GetWTranslation(Engine::Data::GetWordFromDictionaryById(1));
+			EditorUI::UpdateInfoText(infoText);
+		}
 	}
 	else
 	{
 		std::tuple near = this->AsBuilding()->IsNearToFriendlySettlement();
 		if (std::get<0>(near) == false)
 		{
-			EditorUI::UpdateInfoText(TranslationsTable::GetTranslation("EDITOR_noSettlementsAround"));
+			std::wstring infoText = TranslationsTable::GetWTranslation(Engine::Data::GetWordFromDictionaryById(2));
+			EditorUI::UpdateInfoText(infoText);
 		}
 		else
 		{
 			if (this->IsPlaceable() == true)
-				EditorUI::UpdateInfoText(TranslationsTable::GetTranslation("EDITOR_canAddStructure"));
+			{
+				std::wstring infoText = TranslationsTable::GetWTranslation(Engine::Data::GetWordFromDictionaryById(0));
+				EditorUI::UpdateInfoText(infoText);
+			}
 			else
-				EditorUI::UpdateInfoText(TranslationsTable::GetTranslation("EDITOR_impassablePoint"));
+			{
+				std::wstring infoText = TranslationsTable::GetWTranslation(Engine::Data::GetWordFromDictionaryById(1));
+				EditorUI::UpdateInfoText(infoText);
+			}
 		}
 	}
 }

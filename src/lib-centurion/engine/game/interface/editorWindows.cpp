@@ -6,7 +6,6 @@
 #include <hector-lua.h>
 
 #include <engine.h>
-#include <tinyxml2.h>
 #include <translationsTable.h>
 
 #include <encoding.hpp>

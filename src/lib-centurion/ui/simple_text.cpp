@@ -23,7 +23,7 @@ namespace gui {
 		shadow = Shadow;
 	}
 
-	void SimpleText::SetNewText(std::string newText)
+	void SimpleText::SetNewText(std::wstring newText)
 	{
 		GLItems::Text()->UpdateText(&staticData, newText);
 	}

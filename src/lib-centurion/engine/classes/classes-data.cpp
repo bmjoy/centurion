@@ -9,8 +9,6 @@
 #include <game/editor.h>
 #include <game/pass.h>
 
-#include <tinyxml2.h>
-
 using namespace std;
 using namespace glm;
 using namespace tinyxml2;

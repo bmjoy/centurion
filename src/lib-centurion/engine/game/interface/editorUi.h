@@ -30,5 +30,5 @@ namespace EditorUI
 	/// This function updates the info text shown in the top left of the screen
 	/// </summary>
 	/// <param name="infotext">A std::string indicating the new info text</param>
-	void UpdateInfoText(std::string infotext);
+	void UpdateInfoText(std::wstring infotext);
 };

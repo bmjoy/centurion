@@ -6,7 +6,6 @@
 #include <logger.h>
 #include <engine.h>
 
-#include <tinyxml2.h>
 #include <file_manager.h>
 #include <game/editor.h>
 

@@ -7,7 +7,6 @@
 #include <peripherals/mywindow.h>
 #include <picking.h>
 #include <translationsTable.h>
-#include <tinyxml2.h>
 #include <hector-lua.h>
 
 using namespace std;

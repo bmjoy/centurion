@@ -3,7 +3,6 @@
 #include <logger.h>
 #include <file_manager.h>
 #include <engine.h>
-#include <tinyxml2.h>
 #include <sstream>
 
 #include <encoding.hpp>

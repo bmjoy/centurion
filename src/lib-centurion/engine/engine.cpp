@@ -1,6 +1,6 @@
 #include "engine.h"
-
 #include "debugUi.h"
+#include "data.h"
 
 #include <file_manager.h>
 
@@ -8,8 +8,6 @@
 #include <classes/classes-data.h>
 
 #include <GLFW/glfw3.h>
-
-#include <tinyxml2.h>
 
 #include <game/game.h>
 #include <game/editor.h>
@@ -21,7 +19,6 @@
 
 #include <classes/unit.h>
 #include <settings.h>
-#include <errorCodes.h>
 #include <logger.h>
 #include <hector-lua.h>
 
@@ -181,7 +178,7 @@ namespace Engine
 		try
 		{
 			Settings::SetFolders(FileManager::GetFileFolderPath(exe_root));
-			ErrorCodes::ReadErrorCodesXml();
+			Engine::Data::Read();
 			Logger::CleanLogs();
 
 			Settings::Init();

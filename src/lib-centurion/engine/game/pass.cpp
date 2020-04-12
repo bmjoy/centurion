@@ -6,7 +6,6 @@
 #include <gl_items.h>
 
 #include <logger.h>
-#include <tinyxml2.h>
 #include <encoding.hpp>
 
 using namespace std;
