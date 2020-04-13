@@ -303,11 +303,6 @@ namespace Game
 				if (Editor::tmpObject->IsPlaceable() == true)
 				{
 					Game::CreateObject(tmpObject->GetClassName(), tmpObject->GetPosition().x, tmpObject->GetPosition().y, 1);
-					delete Editor::tmpObject;
-					Editor::tmpObject = nullptr;
-					EditorUI::UpdateInfoText(L"");
-					EditorMenuBar::Show();
-					EditorWindows::Show();
 					Engine::Mouse::LeftClick = false;
 					return;
 				}
