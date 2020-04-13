@@ -89,8 +89,9 @@ namespace Hector
 			.addFunction("GetObjectTreeList3", Game::Editor::GetEditorObjectTreeList3)
 			.addFunction("GetTerrainTreeList1", Game::Editor::GetEditorTerrainTreeList1)
 			.addFunction("GetTerrainTreeList2", Game::Editor::GetEditorTerrainTreeList2)
-			.addFunction("InsertObject", Game::Editor::InsertingObject)
-			.addFunction("ChangeTerrain", Game::Editor::ChangeTerrainType)
+			.addFunction("InsertObject", &Game::Editor::InsertingObject)
+			.addFunction("ChangeTerrain", &Game::Editor::ChangeTerrainType)
+			.addFunction("SaveScenario", &Game::Map::SaveScenario)
 			.endNamespace();
 
 		getGlobalNamespace(L)

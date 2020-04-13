@@ -18,6 +18,8 @@
 
 #include <gl_terrain.h>
 
+#include <classes/building.h>
+
 using namespace std;
 using namespace glm;
 
@@ -84,7 +86,33 @@ namespace Game
 		{
 			try
 			{
-				// save buildings, settlements, decorations, units
+				ofstream mapobjs(xmlPath);
+
+				mapobjs << "<mapObjects>\n";
+
+				// SETTLEMENTS
+				mapobjs << "\t<settlements>\n";
+				
+				std::vector<Settlement*>* settlList = Building::GetSettlementListPtr();
+				for (int i = 0; i < settlList->size(); i++)
+				{
+					Settlement* settl = (*settlList)[i];
+
+					mapobjs << "\t\t<settlement name=\"" << settl->GetSettlementName() <<"\">\n";
+					std::vector<Building*> bldInSettlList = settl->GetBuildingsBelongToSettlement();
+					for (auto bld : bldInSettlList)
+					{
+						mapobjs << "\t\t\t<building class=\"" << bld->GetClassName() << "\" />\n";
+						bld->MarkAsSaved();
+					}
+					mapobjs << "\t\t</settlement>\n";
+				}
+				mapobjs << "\t</settlements>\n";
+
+
+				mapobjs << "</mapObjects>\n";
+				mapobjs.close();
+
 			}
 			catch (...)
 			{

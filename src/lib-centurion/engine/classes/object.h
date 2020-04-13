@@ -328,6 +328,10 @@ public:
 	bool IsBeingMoved(void);
 	bool IsPlaceable(void);
 
+	void MarkAsSaved(void);
+	void MarkAsNotSaved(void);
+	bool IsSaved(void);
+
 	/// <summary>
 	/// This function sends to editor a message that will shown in the top left of the screen.
 	/// Allowed values are OBJ_INFOTEXT_MOVING and OBJ_INFOTEXT_INSERTING.
@@ -436,6 +440,7 @@ protected:
 	std::map<std::string, std::string> methods;
 	std::map<std::string, std::string> sounds;
 	bool bIsBeingMoved = false;
+	bool bIsSaved = false;
 
 	#pragma region Protected members
 	/// /// <summary>

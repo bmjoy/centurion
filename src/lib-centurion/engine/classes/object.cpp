@@ -266,6 +266,21 @@ bool GObject::IsPlaceable(void)
 	return this->bIsPlaceable;
 }
 
+bool GObject::IsSaved(void)
+{
+	return bIsSaved;
+}
+
+void GObject::MarkAsSaved(void)
+{
+	bIsSaved = true;
+}
+
+void GObject::MarkAsNotSaved(void)
+{
+	bIsSaved = false;
+}
+
 void GObject::Create(const string _className, const bool _temporary)
 {
 	ClassesData::XMLClassData objData = *ClassesData::GetClassesData(_className);

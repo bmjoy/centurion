@@ -84,9 +84,11 @@
 		<buttonArray>
 		  <button text="WORD_Save" xOffset="335" yOffset="30">
 			<onclickScript>
-			  --lua script
-			  Editor.CloseWindow(2)
-			</onclickScript>
+        --lua script
+        _scenarioName = Iframe.GetIframeById(2):GetTextInputById(0):GetText()
+        Editor.SaveScenario(_scenarioName)
+        Editor.CloseWindow(2)
+      </onclickScript>
 		  </button>
 		  <button text="WORD_Close" xOffset="220" yOffset="30">
 			<onclickScript>

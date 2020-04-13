@@ -208,6 +208,8 @@ public:
 	/// <returns>True if it is near; false otherwise.</returns>
 	std::tuple<bool, Settlement*> IsNearToFriendlySettlement(void);
 
+	static std::vector<Settlement*>* GetSettlementListPtr(void) { return &settlementsList; }
+
 	Building(void);
 	~Building(void);
 protected:
