@@ -473,8 +473,8 @@ namespace Game
 					}
 				}
 
-				if (EditorWindows::AnyWindowIsOpened() == true) {
-
+				if (EditorWindows::AnyWindowIsOpened() == true)
+				{
 					if (Engine::Keyboard::IsKeyPressed(GLFW_KEY_ESCAPE))
 					{
 						EditorWindows::CloseEveryWindow();
