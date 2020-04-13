@@ -6,6 +6,7 @@
 #include <engine.h>
 #include <encoding.hpp>
 #include <hector-lua.h>
+#include <translationsTable.h>
 
 using namespace std;
 using namespace glm;
@@ -20,7 +21,9 @@ gui::Iframe::Iframe()
 	listOfTextLists = { nullptr };
 	listOfTextInputs = { nullptr };
 	listOfTexts = { nullptr };
-	
+
+	isOpened = false;
+	opening = false;
 }
 
 gui::Iframe::Iframe(string _name)
@@ -32,6 +35,9 @@ gui::Iframe::Iframe(string _name)
 	listOfTextLists = { nullptr };
 	listOfTextInputs = { nullptr };
 	listOfTexts = { nullptr };
+
+	isOpened = false;
+	opening = false;
 }
 
 gui::Iframe* gui::Iframe::GetIframeById(const unsigned int _iframeId)
@@ -68,7 +74,7 @@ void gui::Iframe::Clear()
 	}
 }
 
-void gui::Iframe::AddButton(const std::wstring &text, int xBtn, int yBtn, const std::string &luaCmd)
+void gui::Iframe::AddButton(const std::wstring& text, int xBtn, int yBtn, const std::string& luaCmd)
 {
 	gui::Button btn = gui::Button();
 	int btnId = Picking::UI::ObtainPickingID();
@@ -78,9 +84,9 @@ void gui::Iframe::AddButton(const std::wstring &text, int xBtn, int yBtn, const 
 	listOfButtons.push_back(btn);
 }
 
-void gui::Iframe::AddText(const unsigned int _textId, const std::wstring & wtext, int xPos, int yPos)
+void gui::Iframe::AddText(const unsigned int _textId, const std::wstring& wtext, int xPos, int yPos)
 {
-	gui::SimpleText * txt = new gui::SimpleText("static");
+	gui::SimpleText* txt = new gui::SimpleText("static");
 	if (xPos < 0) xPos = w + xPos;
 	if (yPos < 0) yPos = h + yPos;
 	txt->create_static(wtext, "tahoma_13px", 1.f * x + xPos, 1.f * y + yPos, "left", "normal", glm::vec4(255.f));
@@ -100,7 +106,7 @@ void gui::Iframe::UpdateStringBySimpleTextId(const unsigned int _textId, std::st
 	listOfTexts[_textId]->SetNewText(newWText);
 }
 
-void gui::Iframe::AddTextList(const int textListId, int xPos, int yPos, const std::string & luaCmd, const unsigned int maxOptions, const unsigned int borderWidth)
+void gui::Iframe::AddTextList(const int textListId, int xPos, int yPos, const std::string& luaCmd, const unsigned int maxOptions, const unsigned int borderWidth)
 {
 	gui::TextList* _list = new gui::TextList();
 	int txtListPickingId = Picking::UI::ObtainPickingID();
@@ -147,14 +153,88 @@ void gui::Iframe::Create(const unsigned int _iframeId, int xPos, int yPos, int w
 	h = height;
 	x = xPos;
 	y = yPos;
-	
+
 	iframeTitle = gui::SimpleText("static");
 	iframeTitle.create_static(iframe_title, "tahoma_15px", xPos + 10.f, yPos + h - 15.f, "left", "middle", glm::vec4(255.f), "bold");
-	
+
 	ReadXml();
 }
 
-void gui::Iframe::Create(const unsigned int _iframeId, const std::string & LuaCommand, std::wstring iframe_title)
+bool gui::Iframe::CreateFromXmlElement(tinyxml2::XMLElement* iframe)
+{
+	try
+	{
+		iframeId = iframe->IntAttribute("id");
+
+		name = iframe->Attribute("type");
+
+		string isOpenedStr = iframe->Attribute("isOpened");
+		isOpened = (isOpenedStr == "true");
+		luaOpeningCMD = iframe->FirstChildElement("openingScript")->GetText();
+		luaConditionCMD = iframe->FirstChildElement("conditionScript")->GetText();
+		luaConditionFUN = iframe->FirstChildElement("conditionScript")->Attribute("function");
+
+		string sizeScript = iframe->Attribute("size");
+		string positionScript = iframe->Attribute("position");
+		wstring iframeTitle = TranslationsTable::GetWTranslation(iframe->Attribute("title"));
+
+		this->Create(iframeId, sizeScript + positionScript, iframeTitle);
+
+		for (tinyxml2::XMLElement* _it_btn = iframe->FirstChildElement("buttonArray")->FirstChildElement(); _it_btn != NULL; _it_btn = _it_btn->NextSiblingElement())
+		{
+			wstring btnText = TranslationsTable::GetWTranslation(_it_btn->Attribute("text"));
+			string btnLuaCmd = _it_btn->FirstChildElement("onclickScript")->GetText();
+			int btnX = _it_btn->IntAttribute("xOffset");
+			int btnY = _it_btn->IntAttribute("yOffset");
+			this->AddButton(btnText, btnX, btnY, btnLuaCmd);
+		}
+
+		// text lists 
+		for (tinyxml2::XMLElement* _it_txtlist = iframe->FirstChildElement("textListArray")->FirstChildElement(); _it_txtlist != NULL; _it_txtlist = _it_txtlist->NextSiblingElement())
+		{
+			int textListID = _it_txtlist->IntAttribute("textListId");
+			int xOffset = _it_txtlist->IntAttribute("xOffset");
+			int yOffset = _it_txtlist->IntAttribute("yOffset");
+			int maxOpt = _it_txtlist->IntAttribute("maxOptions");
+			int tlWidth = _it_txtlist->IntAttribute("width");
+			string txtListLuaCmd = "";
+			if (_it_txtlist->FirstChildElement("onclickScript") != NULL) {
+				txtListLuaCmd = _it_txtlist->FirstChildElement("onclickScript")->GetText();
+			}
+			this->AddTextList(textListID, xOffset, yOffset, txtListLuaCmd, maxOpt, tlWidth);
+		}
+
+		// text inputs
+		for (tinyxml2::XMLElement* _it_txtinput = iframe->FirstChildElement("textInputArray")->FirstChildElement(); _it_txtinput != NULL; _it_txtinput = _it_txtinput->NextSiblingElement())
+		{
+			int textInputId = _it_txtinput->IntAttribute("textInputId");
+			int xOffset = _it_txtinput->IntAttribute("xOffset");
+			int yOffset = _it_txtinput->IntAttribute("yOffset");
+			int tiWidth = _it_txtinput->IntAttribute("width");
+			std::string _ph = _it_txtinput->Attribute("placeholder");
+			wstring placeholder = (_ph.empty()) ? L"" : TranslationsTable::GetWTranslation(_ph);
+			this->AddTextInput(textInputId, xOffset, yOffset, tiWidth, placeholder);
+		}
+
+		// simple texts
+		for (tinyxml2::XMLElement* _it_txt = iframe->FirstChildElement("simpleTextArray")->FirstChildElement(); _it_txt != NULL; _it_txt = _it_txt->NextSiblingElement())
+		{
+			int textId = _it_txt->IntAttribute("id");
+			int xOffset = _it_txt->IntAttribute("xOffset");
+			int yOffset = _it_txt->IntAttribute("yOffset");
+			std::string _name = _it_txt->Attribute("name");
+			std::wstring wtext = (_name.empty()) ? L"" : TranslationsTable::GetWTranslation(_name);
+			this->AddText(textId, wtext, xOffset, yOffset);
+		}
+		return true;
+	}
+	catch (...)
+	{
+		return false;
+	}
+}
+
+void gui::Iframe::Create(const unsigned int _iframeId, const std::string& LuaCommand, std::wstring iframe_title)
 {
 	Hector::ExecuteCommand(LuaCommand);
 	Hector::GetIntegerVariable("x", &x);
@@ -175,23 +255,29 @@ void gui::Iframe::Render(bool picking)
 		backgroundIsCreated = true;
 	}
 
-	back.render(picking, 0, 0, true);
-	left.render(picking, 0, 0, true);
-	top.render(picking, 0, 0, true);
-	right.render(picking, 0, 0, true);
-	bottom.render(picking, 0, 0, true);
-	topleft.render(picking);
-	topright.render(picking);
-	bottomright.render(picking);
-	bottomleft.render(picking);
-
-	RenderImages(picking);
-	RenderButtons(picking);
-	RenderTexts(picking);
-	RenderTextLists(picking);
-	RenderTextInputs(picking);
-
-	iframeTitle.render_static();
+	if (isOpened == false) {
+		bool conditionResult = false;
+		Hector::ExecuteBooleanMethod(this->GetLuaConditionFUN(), &conditionResult);
+		if (conditionResult)
+		{
+			this->Open();
+		}
+	}
+	if (opening)
+	{
+		Hector::ExecuteCommand(this->GetLuaOpeningCMD());
+		opening = false;
+	}
+	if (isOpened)
+	{
+		RenderBackgroundImages(picking);
+		RenderImages(picking);
+		RenderButtons(picking);
+		RenderTexts(picking);
+		RenderTextLists(picking);
+		RenderTextInputs(picking);
+		iframeTitle.render_static();
+	}
 }
 
 void gui::Iframe::RenderImages(bool picking)
@@ -233,6 +319,19 @@ void gui::Iframe::RenderTextInputs(bool picking)
 		if (ti == nullptr) continue;
 		ti->RenderTextInput(picking);
 	}
+}
+
+void gui::Iframe::RenderBackgroundImages(bool picking)
+{
+	back.render(picking, 0, 0, true);
+	left.render(picking, 0, 0, true);
+	top.render(picking, 0, 0, true);
+	right.render(picking, 0, 0, true);
+	bottom.render(picking, 0, 0, true);
+	topleft.render(picking);
+	topright.render(picking);
+	bottomright.render(picking);
+	bottomleft.render(picking);
 }
 
 void gui::Iframe::ReadXml()
@@ -356,6 +455,7 @@ void gui::Iframe::ReadXml()
 			text_input_font = xmlFile.FirstChildElement("iframe")->FirstChildElement("textInput")->FirstChildElement("font")->Attribute("name");
 			text_input_fontweight = xmlFile.FirstChildElement("iframe")->FirstChildElement("textInput")->FirstChildElement("font")->Attribute("weight");
 		}
+		Hector::ExecuteCommand(this->GetLuaConditionCMD());
 	}
 	catch (...)
 	{

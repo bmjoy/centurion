@@ -160,6 +160,8 @@ namespace gui {
 		/// <param name="iframe_title">The iframe main title.</param>
 		void Create(const unsigned int _iframeId, int xPos, int yPos, int width, int height, std::wstring iframe_title = L"");
 		
+		bool CreateFromXmlElement(tinyxml2::XMLElement * iframe);
+
 		/// <summary>
 		/// This function creates an instance of Iframe using a lua command to define size and position
 		/// </summary>
@@ -173,6 +175,23 @@ namespace gui {
 		/// </summary>
 		/// <param name="picking">This boolean parameter enables or disables render picking. Default value is false.</param>
 		void Render(bool picking = false);
+
+		/// <summary>
+		/// This function returns the iframe id
+		/// </summary>
+		unsigned int GetId(void) { return iframeId; }
+
+		std::string GetLuaOpeningCMD(void) { return luaOpeningCMD; }
+
+		std::string GetLuaConditionCMD(void) { return luaConditionCMD; }
+
+		std::string GetLuaConditionFUN(void) { return luaConditionFUN; }
+
+		bool IsOpened(void) { return isOpened; }
+
+		void Open(void) { isOpened = true; opening = true; }
+
+		void Close(void) { isOpened = false; }
 
 		~Iframe();
 	private:
@@ -204,6 +223,8 @@ namespace gui {
 		/// </summary>
 		/// <param name="picking">This boolean parameter enables or disables render picking. Default value is false.</param>
 		void RenderTextInputs(bool picking = false);
+
+		void RenderBackgroundImages(bool picking);
 
 		/// <summary>
 		/// This method reads the data contained in the XML file of the selected iframe
@@ -259,6 +280,13 @@ namespace gui {
 		glm::vec4 text_input_background, text_input_border, text_input_color;
 		bool text_input_has_background;
 
+		// lua 
+		std::string luaOpeningCMD;
+		std::string luaConditionCMD;
+		std::string luaConditionFUN;
+
+		bool isOpened;
+		bool opening;
 
 		static std::array<Iframe*, MAX_NUMBER_OF_IFRAMES> iframes;
 	};

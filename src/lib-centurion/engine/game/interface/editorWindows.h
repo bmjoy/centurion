@@ -55,11 +55,8 @@ namespace EditorWindows
 		/// <summary>
 		/// This funtio creates a generic window.
 		/// </summary>
-		/// <param name="_luaOpeningScript"></param>
-		/// <param name="_luaConditionScript"></param>
-		/// <param name="_luaConditionFunction"></param>
 		/// <param name="_iframe"></param>
-		void Create(std::string _luaOpeningScript, std::string _luaConditionScript, std::string _luaConditionFunction, gui::Iframe _iframe);
+		void Create(gui::Iframe _iframe);
 
 		/// <summary>
 		/// This function performs the rendiring of a generic window.
@@ -74,10 +71,6 @@ namespace EditorWindows
 	private:
 		gui::Iframe iframe;
 		bool isOpened;
-		bool opening;
-		std::string luaOpeningScript;
-		std::string luaConditionScript;
-		std::string luaConditionFunction;
 	};
 
 	/// <summary>
