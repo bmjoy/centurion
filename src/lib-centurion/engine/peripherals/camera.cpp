@@ -4,6 +4,7 @@
 #include <game/interface/editorMenuBar.h>
 
 #include <GLFW/glfw3.h>
+#include <../hector/hector-lua.h>
 
 using namespace std;
 using namespace glm;
@@ -154,7 +155,7 @@ namespace Engine
 		}
 
 		void Engine::Camera::keyboardControl(void) {
-			// Conditions for NOT moving
+			if (Hector::ConsoleIsActive()) return;
 
 			//Left margin
 			if (Keyboard::IsKeyNotReleased(GLFW_KEY_LEFT) && position.x > 0) {
