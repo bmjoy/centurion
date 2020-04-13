@@ -71,6 +71,10 @@ namespace EditorWindows
 
 	void EditorWindows::EditorWindow::Render(const bool picking)
 	{
+		if (iframe.IsOpened() == true) {
+			isOpened = true;
+			bWindowsOpened = true;
+		}
 		iframe.Render(picking);
 	}
 

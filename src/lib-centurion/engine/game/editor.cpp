@@ -322,10 +322,11 @@ namespace Game
 
 		void Game::Editor::ShiftSelectedObject(void)
 		{
+			if (EditorWindows::IsThereAnyWindowOpen() == true) return;
+
 			GObject* obj = Game::GetSelectedObject();
 			if (obj == nullptr) return;
 
-			if (EditorWindows::IsThereAnyWindowOpen() == true) return;
 
 			if (Engine::Mouse::LeftHold == false)
 			{
@@ -465,8 +466,10 @@ namespace Game
 		void Game::Editor::handleKeyboardControls(void)
 		{
 			if (Hector::ConsoleIsActive()) return;
+			if (Editor::IsMovingObject()) return;
+			if (Editor::IsInsertingObject()) return;
 
-			if (Editor::IsChangingTerrain() == false && Editor::IsInsertingObject() == false)
+			if (Editor::IsChangingTerrain() == false)
 			{
 				if (EditorWindows::AnyWindowIsOpened() == false) {
 					if (Engine::Keyboard::IsKeyPressed(GLFW_KEY_ESCAPE))

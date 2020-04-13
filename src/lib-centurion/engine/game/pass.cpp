@@ -122,13 +122,18 @@ namespace Pass
 		int vertical_size = pg->GetSizeY();
 		vec2 pos = GetGridCellPosition(position, horizontal_size, vertical_size);
 
-		bool bAvailable = true;
+		if (pos.x < 0 || pos.y < 0 || pos.x + horizontal_size >= GRID_SIZE_X || pos.y >= GRID_SIZE_Y)
+		{
+			return false;
+		}
 
+		bool bAvailable = true;
 		for (int iy = 0; iy < vertical_size; iy++)
 		{
 			for (int ix = 0; ix < horizontal_size; ix++)
 			{
 				int idx = (vertical_size - iy + (int)pos.y) * GRID_SIZE_X + ix + (int)pos.x;
+				
 				if (idx >= 0 && idx < GRID_SIZE_X * GRID_SIZE_Y)
 				{
 					if (PASS_MATRIX[idx] == NOT_PASSABLE && pg->GetValueByCoordinates(ix, iy) == NOT_PASSABLE)

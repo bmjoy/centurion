@@ -89,7 +89,7 @@ void Hector::Initialize()
 		.beginNamespace("Menu")
 		.addFunction("OpenMenuPage", &Menu::OpenMenuPage)
 		.endNamespace();
-	
+
 	getGlobalNamespace(L)
 		.beginClass<GObject>("Object")
 		.addFunction("GetClassName", &GObject::GetClassName)
@@ -109,7 +109,7 @@ void Hector::Initialize()
 	getGlobalNamespace(L)
 		.beginClass<gui::TextList>("TextList")
 		.addFunction("GetSelectedOption", &gui::TextList::GetSelectedOption)
-		.endClass();	
+		.endClass();
 
 	getGlobalNamespace(L)
 		.beginClass<gui::TextInput>("TextInput")
@@ -140,7 +140,7 @@ void Hector::ExecuteCommand(string cmd)
 	}
 }
 
-void Hector::ExecuteBooleanMethod(string cmd, bool *boolean)
+void Hector::ExecuteBooleanMethod(string cmd, bool* boolean)
 {
 	if (cmd != "") {
 
@@ -163,7 +163,7 @@ void Hector::ExecuteBooleanMethod(string cmd, bool *boolean)
 	}
 }
 
-void Hector::ExecuteStringMethod(string cmd, string *_string)
+void Hector::ExecuteStringMethod(string cmd, string* _string)
 {
 	if (cmd != "") {
 
@@ -184,7 +184,7 @@ void Hector::ExecuteStringMethod(string cmd, string *_string)
 	}
 }
 
-void Hector::ExecuteIntegerMethod(string cmd, int *integer)
+void Hector::ExecuteIntegerMethod(string cmd, int* integer)
 {
 	if (cmd != "") {
 
@@ -205,7 +205,7 @@ void Hector::ExecuteIntegerMethod(string cmd, int *integer)
 	}
 }
 
-void Hector::ExecuteFloatMethod(string cmd, float *_float)
+void Hector::ExecuteFloatMethod(string cmd, float* _float)
 {
 	if (cmd != "") {
 
@@ -226,7 +226,7 @@ void Hector::ExecuteFloatMethod(string cmd, float *_float)
 	}
 }
 
-void Hector::GetIntegerVariable(string name, int * integer)
+void Hector::GetIntegerVariable(string name, int* integer)
 {
 	lua_getglobal(L, name.c_str());
 	if (lua_isnil(L, -1)) {
@@ -250,9 +250,19 @@ void Hector::Console::Create()
 void Hector::Console::Render(bool picking)
 {
 	if (Engine::Keyboard::IsKeyPressed(GLFW_KEY_F1) && picking == false) {
-		isOpened = !isOpened;
-		isOpened ? EditorWindows::Hide() : EditorWindows::Show();
-		isOpened ? EditorMenuBar::Hide() : EditorMenuBar::Show();
+		if (isOpened == false)
+		{
+			isOpened = true;
+			iframe.Open();
+			EditorWindows::Hide();
+			EditorMenuBar::Hide();
+		}
+		else {
+			isOpened = false;
+			iframe.Close();
+			EditorWindows::Show();
+			EditorMenuBar::Show();
+		}
 	}
 
 	if (isOpened == false) return;
@@ -262,7 +272,7 @@ void Hector::Console::Render(bool picking)
 		iframe.Render(true);
 		return;
 	}
-	
+
 	iframe.Render();
 	string cmd = iframe.GetTextInputById(TEXTINPUT_ID)->GetText();
 	if (Engine::Keyboard::IsKeyPressed(GLFW_KEY_ENTER)) {
@@ -271,7 +281,7 @@ void Hector::Console::Render(bool picking)
 			iframe.GetTextInputById(TEXTINPUT_ID)->Reset();
 		}
 	}
-	
+
 }
 
 
