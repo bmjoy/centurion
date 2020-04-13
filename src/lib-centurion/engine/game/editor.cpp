@@ -127,10 +127,12 @@ namespace Game
 
 				// NORMAL RENDERING
 				Map::Render(false);
+				
 				Editor::ChangeTerrainType();
 				Editor::ShiftSelectedObject();
-				Game::RenderObjects();
 				Editor::InsertingObject();
+
+				Game::RenderObjects();
 
 				// apply menu matrices
 				GLItems::applyMenuMatrices();
@@ -153,7 +155,6 @@ namespace Game
 
 				// NORMAL RENDERING 
 				Minimap::RenderMapAndObjects();
-				Map::Render(false);
 				Picking::Obj::UpdateClickIds();
 
 				// apply menu matrices
@@ -275,6 +276,7 @@ namespace Game
 				Editor::tmpObject->SetPlayer(1);
 				Editor::tmpObject->MarkAsMoving();
 				EditorWindows::Hide();
+				EditorMenuBar::Hide();
 				return;
 			}
 
@@ -303,13 +305,13 @@ namespace Game
 				if (Editor::tmpObject->IsPlaceable() == true)
 				{
 					Game::CreateObject(tmpObject->GetClassName(), tmpObject->GetPosition().x, tmpObject->GetPosition().y, 1);
+					Minimap::Update();
 					Engine::Mouse::LeftClick = false;
 					return;
 				}
 			}
 
 			// if i'm here it means that i'm not placing or aborting and i'm choosing the object position
-			if (EditorMenuBar::IsHidden() == false) EditorMenuBar::Hide();
 			Editor::tmpObject->SetPosition(vec3(Engine::Mouse::GetXMapCoordinate(), Engine::Mouse::GetYMapCoordinate(), 0.f));
 			Editor::tmpObject->Render(false, 0);
 			Editor::tmpObject->SendInfoText(OBJ_INFOTEXT_INSERTING);
@@ -317,48 +319,62 @@ namespace Game
 
 		void Game::Editor::ShiftSelectedObject(void)
 		{
+			// this function IS RUN EVERY FRAME (see Editor::Run)
+
 			if (EditorWindows::IsThereAnyWindowOpen() == true) return;
 
+
+			// if no object is selected --> exit
 			GObject* obj = Game::GetSelectedObject();
 			if (obj == nullptr) return;
 
-
+			// if an object is selected --> 
 			if (Engine::Mouse::LeftHold == false)
 			{
 				obj->MarkAsNotMoving();
+
+				// if i'm releasing the left hold and i want to place the object
 				if (Editor::movingObject.isActive == true)
 				{
+					// check placeability
 					if (obj->IsPlaceable() == true)
 					{
 						obj->UpdatePass();
+						Minimap::Update();
 					}
 					else
 					{
 						obj->SetPosition(vec3(Editor::movingObject.ObjectXPos, Editor::movingObject.ObjectYPos, 0.f));
 						obj->UpdatePass();
 					}
+
+					// reset values
+					EditorUI::UpdateInfoText(L"");
+					EditorWindows::Show();
+					EditorMenuBar::Show();
 					Editor::movingObject.isActive = false;
 				}
+
+				// every frame i save information about the object beginning position
 				Editor::movingObject.ObjectXPos = obj->GetPosition().x;
 				Editor::movingObject.ObjectYPos = obj->GetPosition().y;
 				Editor::movingObject.StartXMouse = Engine::Mouse::GetXMapCoordinate();
 				Editor::movingObject.StartYMouse = Engine::Mouse::GetYMapCoordinate();
-				EditorUI::UpdateInfoText(L"");
-				EditorWindows::Show();
-				EditorMenuBar::Show();
+
 				return;
 			}
 
+			// i'm beginning to move the object, i clear the pass and hide things
 			if (Editor::movingObject.isActive == false)
 			{
 				obj->MarkAsMoving();
 				obj->ClearPass();
 				EditorWindows::Hide();
+				EditorMenuBar::Hide();
 				Editor::movingObject.isActive = true;
 			}
 
-			if (EditorMenuBar::IsHidden() == false) EditorMenuBar::Hide();
-
+			// new position calculation
 			float dx = Engine::Mouse::GetXMapCoordinate() - Editor::movingObject.StartXMouse;
 			float dy = Engine::Mouse::GetYMapCoordinate() - Editor::movingObject.StartYMouse;
 			obj->SetPosition(vec3(Editor::movingObject.ObjectXPos + dx, Editor::movingObject.ObjectYPos + dy, 0.f));
@@ -409,7 +425,7 @@ namespace Game
 				EditorWindows::Show();
 				EditorUI::UpdateInfoText(L"");
 				Engine::Mouse::ChangeCursorType(CURSOR_TYPE_DEFAULT);
-				Engine::Keyboard::SetKeyStatus(GLFW_KEY_ESCAPE, 0);
+				Engine::Keyboard::SetKeyStatus(GLFW_KEY_ESCAPE, 0);				
 				return;
 			}
 
@@ -435,6 +451,7 @@ namespace Game
 			{
 				Game::Mapgen::MapTextures()[j] = changingTerrain.type;
 				GLItems::MapTerrain()->updateTextureBuffer();
+				Minimap::Update();
 			}
 		}
 
