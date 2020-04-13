@@ -1,7 +1,8 @@
 <translationTable language="english">
   <entry stringName="EDITOR_addObject" result="Add object" />
   <entry stringName="EDITOR_canAddStructure" result="Press the LEFT mouse button to position the structure in the desired point. Press the RIGHT mouse button to abort this operation." />
-  <entry stringName="EDITOR_cancelBrush" result="Press the RIGHT mouse button to abort the operation." />
+  <entry stringName="EDITOR_cancelBrush" result="Press the RIGHT mouse button or ESC to abort the operation." />
+  <entry stringName="EDITOR_canMoveStructure" result="Hold the LEFT mouse button to move the building. Release the LEFT mouse button to abort the operation." />
   <entry stringName="EDITOR_defaultMapName" result="Untitled" />
   <entry stringName="EDITOR_Edit" result="Edit" />
   <entry stringName="EDITOR_Edit_Properties" result="Edit object properties" />
