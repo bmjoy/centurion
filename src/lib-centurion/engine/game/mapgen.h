@@ -128,6 +128,14 @@ namespace Game
 		/// </summary>
 		void ResetTexturesAndHeights(void);
 
+		/// <summary>
+		/// This function resets the Heights and Textures arrays to empty map standard values
+		/// </summary>
+		/// <param name="type">The texture type. It must be a float value, equal to 1.f, 2.f, ... and represents the terrain ID in float format.</param>
+		/// <param name="x">The point X-position, expressed with pixel-map-coordinates, where apply the terrain change</param>
+		/// <param name="y">The point Y-position, expressed with pixel-map-coordinates, where apply the terrain change</param>
+		void ChangeTerrainTexture(const float type, const float x, const float y);
+
 		float* MapVertices();
 		float* MapTextures();
 		float* MapHeights();

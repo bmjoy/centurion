@@ -1,6 +1,5 @@
 #include <logger.h>
 #include <fstream>
-#include <deque>
 #include <settings.h>
 #include <iostream>
 #include <engine.h>

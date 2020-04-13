@@ -13,6 +13,7 @@
 #include <fstream>
 #include <sstream>
 #include <vector>
+#include <deque>
 #include <map>
 #include <unordered_map>
 #include <array>

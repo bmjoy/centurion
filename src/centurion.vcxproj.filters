@@ -623,6 +623,9 @@
     <ClInclude Include="lib-centurion\engine\data.h">
       <Filter>Header Files\engine</Filter>
     </ClInclude>
+    <ClInclude Include="lib-centurion\hector\hector-misc.hpp">
+      <Filter>Header Files\hector</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="assets\shaders\bsprite\fragment.glsl">

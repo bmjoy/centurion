@@ -315,6 +315,7 @@ XCOPY "$(ProjectDir)lua53.dll" "$(ProjectDir)$(OutDir)"</Command>
     <ClInclude Include="lib-centurion\gl-items\gl_terrain.h" />
     <ClInclude Include="lib-centurion\gl-items\gl_unit_sprite.h" />
     <ClInclude Include="lib-centurion\hector\hector-lua.h" />
+    <ClInclude Include="lib-centurion\hector\hector-misc.hpp" />
     <ClInclude Include="lib-centurion\ui\button.h" />
     <ClInclude Include="lib-centurion\ui\circle.h" />
     <ClInclude Include="lib-centurion\ui\iframe.h" />

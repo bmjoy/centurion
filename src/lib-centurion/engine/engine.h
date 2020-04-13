@@ -77,12 +77,6 @@ namespace Engine
 	void SetEnvironment(const std::string s);
 	
 	/// <summary>
-	/// This functions displays a text to the console.
-	/// </summary>
-	/// <param name="s">The text you want to print to the console.</param>
-	void PrintToConsole(const std::string s);
-
-	/// <summary>
 	/// This functions searches all the directories starting from a path.
 	/// </summary>
 	/// <param name="s">The path.</param>

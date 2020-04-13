@@ -438,33 +438,14 @@ namespace Game
 
 			if (Engine::Mouse::LeftClick == false && Engine::Mouse::LeftHold == false) return;
 
-			float xPos = Engine::Mouse::GetXMapCoordinate();
-			float yPos = Engine::Mouse::GetYMapCoordinate();
-
-
-			int x = round(xPos / Game::Mapgen::GetTriangleWidth()) * Game::Mapgen::GetTriangleWidth() + Game::Mapgen::GetTriangleWidth() * 2;
-			int y = round(yPos / Game::Mapgen::GetTriangleWidth()) * Game::Mapgen::GetTriangleWidth() + Game::Mapgen::GetTriangleWidth() * 2;
-
-			int j = Game::Mapgen::getVertexPos(x, y);
-
-			if (Game::Mapgen::MapTextures()[j] != changingTerrain.type)
-			{
-				Game::Mapgen::MapTextures()[j] = changingTerrain.type;
-				GLItems::MapTerrain()->updateTextureBuffer();
-				Minimap::Update();
-			}
+			Game::Mapgen::ChangeTerrainTexture(changingTerrain.type, Engine::Mouse::GetXMapCoordinate(), Engine::Mouse::GetYMapCoordinate());
+			Minimap::Update();
+			
 		}
 
 		bool IsChangingTerrain(void)
 		{
 			return changingTerrain.isActive;
-		}
-
-		void Game::Editor::ToggleGrid(void)
-		{
-			if (Map::IsGridEnabled()) Map::DisableGrid();
-			else Map::EnableGrid();
-			Map::IsGridEnabled() ? Logger::Info("Grid ON!") : Logger::Info("Grid OFF!");
 		}
 
 		void Game::Editor::Close(void)
@@ -545,15 +526,7 @@ namespace Game
 				Minimap::IsActive() ? EditorMenuBar::Hide() : EditorMenuBar::Show();
 				Minimap::IsActive() ? Logger::Info("Minimap ON!") : Logger::Info("Minimap OFF!");
 			}
-
-
-			if (Engine::Keyboard::IsKeyPressed(GLFW_KEY_Z))
-			{
-				Map::Wireframe = !Map::Wireframe;
-				Map::Wireframe ? Logger::Info("Wireframe ON!") : Logger::Info("Wireframe OFF!");
-			}
 		}
-
 	};
 };
 

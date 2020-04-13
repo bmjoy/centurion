@@ -84,6 +84,12 @@ namespace gui
 					placeholder_text.create_static(currentText, cursorPosition + 1, placeholder_font, xPos, yPos, "left", "normal", vec4(255.f), placeholder_font_weight);
 				}
 
+				//if (Engine::Keyboard::IsKeyNotReleased(GLFW_KEY_LEFT) && cursorPosition > 0)
+				//{
+				//	cursorPosition--;
+				//	Engine::Keyboard::SetKeyStatus(GLFW_KEY_LEFT, 0);
+				//}
+
 				text_cursor.render(vec4(255.f), vec4(), false, 0, xPos + placeholder_text.get_width(cursorPosition) + 1, yPos + 1);
 			}
 			placeholder_text.render_static();

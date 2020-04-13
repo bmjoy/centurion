@@ -9,6 +9,8 @@
 #ifndef GUI_H
 #define GUI_H
 
+#include "header.h"
+
 #include "button.h"
 #include "circle.h"
 #include "select.h"

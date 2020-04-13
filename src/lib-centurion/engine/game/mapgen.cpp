@@ -120,6 +120,20 @@ namespace Game
 			}
 		}
 
+		void ChangeTerrainTexture(const float type, const float x, const float y)
+		{
+			int ix = round(x / TRIANGLE_WIDTH) * TRIANGLE_WIDTH + TRIANGLE_WIDTH * 2;
+			int iy = round(y / TRIANGLE_WIDTH) * TRIANGLE_WIDTH + TRIANGLE_WIDTH * 2;
+
+			int j = Game::Mapgen::getVertexPos(ix, iy);
+
+			if (Game::Mapgen::MapTextures()[j] != type)
+			{
+				Game::Mapgen::MapTextures()[j] = type;
+				GLItems::MapTerrain()->updateTextureBuffer();
+			}
+		}
+
 		//-------------
 
 		float generateNoise(vec2 coords, string type) {

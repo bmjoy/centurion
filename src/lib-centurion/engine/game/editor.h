@@ -124,11 +124,6 @@ namespace Game
 		bool IsChangingTerrain(void);
 
 		/// <summary>
-		/// This method will toggle the pass grid (via Lua)
-		/// </summary>
-		void ToggleGrid(void);
-
-		/// <summary>
 		/// This method closes and resets the editor, and sets the environment to "menu"
 		/// </summary>
 		void Close(void);

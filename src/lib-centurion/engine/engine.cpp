@@ -156,11 +156,6 @@ namespace Engine
 		}
 	}
 
-	void Engine::PrintToConsole(const string s)
-	{
-		cout << s << endl;
-	}
-
 	vector<string>* Engine::GetListOfFolders(const string s)
 	{
 		if (FileManager::CheckIfFolderExists(s))
