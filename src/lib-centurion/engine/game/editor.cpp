@@ -277,13 +277,10 @@ namespace Game
 
 			if (Editor::tmpObject == nullptr) 
 			{
-				EditorMenuBar::Show();
-				EditorWindows::Show();
-				EditorUI::UpdateInfoText(L"");
 				return;
 			}
 			
-			if (Engine::Mouse::RightClick)
+			if (Engine::Mouse::RightClick || Engine::Keyboard::IsKeyPressed(GLFW_KEY_ESCAPE))
 			{
 				delete Editor::tmpObject;
 				Editor::tmpObject = nullptr;
@@ -291,6 +288,7 @@ namespace Game
 				EditorWindows::Show();
 				EditorUI::UpdateInfoText(L"");
 				Engine::Mouse::RightClick = false;
+				Engine::Keyboard::SetKeyStatus(GLFW_KEY_ESCAPE, 0);
 			}
 
 			if (Engine::Mouse::LeftClick)
@@ -300,6 +298,7 @@ namespace Game
 					Game::CreateObject(tmpObject->GetClassName(), tmpObject->GetPosition().x, tmpObject->GetPosition().y, 1);
 					delete Editor::tmpObject;
 					Editor::tmpObject = nullptr;
+					EditorUI::UpdateInfoText(L"");
 					EditorMenuBar::Show();
 					EditorWindows::Show();
 					Engine::Mouse::LeftClick = false;
@@ -378,26 +377,29 @@ namespace Game
 				}
 
 				// This part of code is executed when you are BEGINNING the terrain change
-				Game::Minimap::Update();
+				//Game::Minimap::Update();
 				changingTerrain.type = (float)tt->GetId();
 				EditorMenuBar::Hide();
 				EditorWindows::Hide();
 				std::wstring infoText = TranslationsTable::GetWTranslation(Engine::Data::GetWordFromDictionaryById(3));
 				EditorUI::UpdateInfoText(infoText);
+				Engine::Mouse::RightClick = false;
 				Engine::Mouse::ChangeCursorType(CURSOR_TYPE_CIRCLE);
 				return;
 			}
 
-			if (changingTerrain.type == -1.f) 
-				return;
-			if (Engine::Mouse::RightClick == true)
+			if (changingTerrain.type == -1.f) return;
+
+			if (Engine::Mouse::RightClick == true || Engine::Keyboard::IsKeyPressed(GLFW_KEY_ESCAPE))
 			{
 				// This part of code is executed when you are FINISHING the terrain change
 				changingTerrain.isActive = false;
+				changingTerrain.type = -1.f;
 				EditorMenuBar::Show();
 				EditorWindows::Show();
 				EditorUI::UpdateInfoText(L"");
 				Engine::Mouse::ChangeCursorType(CURSOR_TYPE_DEFAULT);
+				Engine::Keyboard::SetKeyStatus(GLFW_KEY_ESCAPE, 0);
 				return;
 			}
 
@@ -447,24 +449,26 @@ namespace Game
 		{
 			if (Hector::ConsoleIsActive()) return;
 
-			if (EditorWindows::AnyWindowIsOpened() == false) {
-				if (Engine::Keyboard::IsKeyPressed(GLFW_KEY_ESCAPE))
-				{
-					GObject::ResetGameObjects();
-					Close();
+			if (Editor::IsChangingTerrain() == false && Editor::IsInsertingObject() == false)
+			{
+				if (EditorWindows::AnyWindowIsOpened() == false) {
+					if (Engine::Keyboard::IsKeyPressed(GLFW_KEY_ESCAPE))
+					{
+						GObject::ResetGameObjects();
+						Close();
+						return;
+					}
+				}
+
+				if (EditorWindows::AnyWindowIsOpened() == true) {
+
+					if (Engine::Keyboard::IsKeyPressed(GLFW_KEY_ESCAPE))
+					{
+						EditorWindows::CloseEveryWindow();
+					}
 					return;
 				}
 			}
-
-			if (EditorWindows::AnyWindowIsOpened() == true) {
-
-				if (Engine::Keyboard::IsKeyPressed(GLFW_KEY_ESCAPE))
-				{
-					EditorWindows::CloseEveryWindow();
-				}
-				return;
-			}
-
 
 
 			if (Engine::Keyboard::IsKeyPressed(GLFW_KEY_LEFT_CONTROL) || Engine::Keyboard::IsKeyPressed(GLFW_KEY_RIGHT_CONTROL))
@@ -510,12 +514,6 @@ namespace Game
 			{
 				Map::Wireframe = !Map::Wireframe;
 				Map::Wireframe ? Logger::Info("Wireframe ON!") : Logger::Info("Wireframe OFF!");
-			}
-
-			if (Engine::Keyboard::IsKeyPressed(GLFW_KEY_ESCAPE))
-			{
-				GObject::ResetGameObjects();
-				Close();
 			}
 		}
 
