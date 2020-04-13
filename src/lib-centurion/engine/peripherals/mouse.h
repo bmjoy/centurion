@@ -124,6 +124,11 @@ namespace Engine
 		/// <param name="type">This value indicates the type. Accepted values are CURSOR_TYPE_DEFAULT or CURSOR_TYPE_CIRCLE</param>
 		void ChangeCursorType(const int type = CURSOR_TYPE_DEFAULT);
 
+		/// <summary>
+		///  This method returns the cursor type
+		/// </summary>
+		int GetCursorType(void);
+
 		// Properties
 		extern bool LeftClick;
 		extern bool RightClick;

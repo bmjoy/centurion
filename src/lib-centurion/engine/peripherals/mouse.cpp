@@ -245,5 +245,9 @@ namespace Engine
 				CURSOR_TYPE = type;
 			}
 		}
+		int GetCursorType(void)
+		{
+			return CURSOR_TYPE;
+		}
 	};
 };

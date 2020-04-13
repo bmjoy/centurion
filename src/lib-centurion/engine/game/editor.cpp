@@ -25,7 +25,7 @@ using namespace glm;
 
 namespace Game
 {
-	namespace Editor 
+	namespace Editor
 	{
 		struct MovingObject
 		{
@@ -73,7 +73,7 @@ namespace Game
 			Engine::myWindow::TopBarHeight = 0.f;
 
 			GLItems::setMinimapProjectionMatrix();
-			
+
 			EditorUI::Create();
 
 			SelectionRectangle::Create();
@@ -208,7 +208,7 @@ namespace Game
 			{
 				if (std::find(Editor::editorObjectTreeList3.begin(), Editor::editorObjectTreeList3.end(), i[1]) != Editor::editorObjectTreeList3.end())
 					continue;
-				if (i[0] != filter1 || i[1] != filter2) 
+				if (i[0] != filter1 || i[1] != filter2)
 					continue;
 				Editor::editorObjectTreeList3.push_back(i[2]);
 			}
@@ -251,6 +251,9 @@ namespace Game
 
 		void Game::Editor::InsertingObject(std::string type, std::string className)
 		{
+			// this function IS RUN EVERY FRAME (see Editor::Run)
+
+			// This if is true when information is passed by LUA
 			if (type.empty() == false && className.empty() == false)
 			{
 				if (type == "buildings")
@@ -270,16 +273,18 @@ namespace Game
 
 				Editor::tmpObject->Create(className, true);
 				Editor::tmpObject->SetPlayer(1);
-				EditorMenuBar::Hide();
+				Editor::tmpObject->MarkAsMoving();
 				EditorWindows::Hide();
 				return;
 			}
 
-			if (Editor::tmpObject == nullptr) 
+			// this if is the one that is run every frame!!
+			if (Editor::tmpObject == nullptr)
 			{
 				return;
 			}
-			
+
+			// if i'm here it means that i selected to insert an object but i want to abort the operation
 			if (Engine::Mouse::RightClick || Engine::Keyboard::IsKeyPressed(GLFW_KEY_ESCAPE))
 			{
 				delete Editor::tmpObject;
@@ -289,8 +294,10 @@ namespace Game
 				EditorUI::UpdateInfoText(L"");
 				Engine::Mouse::RightClick = false;
 				Engine::Keyboard::SetKeyStatus(GLFW_KEY_ESCAPE, 0);
+				return;
 			}
 
+			// if i'm here it means that i selected to insert an object and i want to place and create it
 			if (Engine::Mouse::LeftClick)
 			{
 				if (Editor::tmpObject->IsPlaceable() == true)
@@ -302,22 +309,23 @@ namespace Game
 					EditorMenuBar::Show();
 					EditorWindows::Show();
 					Engine::Mouse::LeftClick = false;
+					return;
 				}
 			}
 
-			if (Editor::tmpObject == nullptr) return;
-			if (Editor::tmpObject->IsBeingMoved() == false) Editor::tmpObject->MarkAsMoving();
+			// if i'm here it means that i'm not placing or aborting and i'm choosing the object position
+			if (EditorMenuBar::IsHidden() == false) EditorMenuBar::Hide();
 			Editor::tmpObject->SetPosition(vec3(Engine::Mouse::GetXMapCoordinate(), Engine::Mouse::GetYMapCoordinate(), 0.f));
 			Editor::tmpObject->Render(false, 0);
+			Editor::tmpObject->SendInfoText(OBJ_INFOTEXT_INSERTING);
 		}
 
 		void Game::Editor::ShiftSelectedObject(void)
 		{
-			GObject *obj = Game::GetSelectedObject();
+			GObject* obj = Game::GetSelectedObject();
 			if (obj == nullptr) return;
 
-			if (EditorWindows::IsThereAnyWindowOpen() == true)
-				return;
+			if (EditorWindows::IsThereAnyWindowOpen() == true) return;
 
 			if (Engine::Mouse::LeftHold == false)
 			{
@@ -339,6 +347,9 @@ namespace Game
 				Editor::movingObject.ObjectYPos = obj->GetPosition().y;
 				Editor::movingObject.StartXMouse = Engine::Mouse::GetXMapCoordinate();
 				Editor::movingObject.StartYMouse = Engine::Mouse::GetYMapCoordinate();
+				EditorUI::UpdateInfoText(L"");
+				EditorWindows::Show();
+				EditorMenuBar::Show();
 				return;
 			}
 
@@ -346,12 +357,16 @@ namespace Game
 			{
 				obj->MarkAsMoving();
 				obj->ClearPass();
+				EditorWindows::Hide();
 				Editor::movingObject.isActive = true;
 			}
+
+			if (EditorMenuBar::IsHidden() == false) EditorMenuBar::Hide();
 
 			float dx = Engine::Mouse::GetXMapCoordinate() - Editor::movingObject.StartXMouse;
 			float dy = Engine::Mouse::GetYMapCoordinate() - Editor::movingObject.StartYMouse;
 			obj->SetPosition(vec3(Editor::movingObject.ObjectXPos + dx, Editor::movingObject.ObjectYPos + dy, 0.f));
+			obj->SendInfoText(OBJ_INFOTEXT_MOVING);
 		}
 
 		bool Game::Editor::IsInsertingObject(void)
@@ -366,10 +381,11 @@ namespace Game
 
 		void ChangeTerrainType(std::string type)
 		{
-			if (type.empty() == false) 
+			if (Minimap::IsActive() == true) return;
+			if (type.empty() == false)
 			{
 				changingTerrain.isActive = true;
-				Mapgen::TerrainTexture * tt = Mapgen::GetTerrainTexturePtrByName(type);
+				Mapgen::TerrainTexture* tt = Mapgen::GetTerrainTexturePtrByName(type);
 				if (tt == nullptr) {
 					changingTerrain.isActive = false;
 					changingTerrain.type = -1.f;
@@ -379,12 +395,10 @@ namespace Game
 				// This part of code is executed when you are BEGINNING the terrain change
 				//Game::Minimap::Update();
 				changingTerrain.type = (float)tt->GetId();
-				EditorMenuBar::Hide();
 				EditorWindows::Hide();
 				std::wstring infoText = TranslationsTable::GetWTranslation(Engine::Data::GetWordFromDictionaryById(3));
 				EditorUI::UpdateInfoText(infoText);
 				Engine::Mouse::RightClick = false;
-				Engine::Mouse::ChangeCursorType(CURSOR_TYPE_CIRCLE);
 				return;
 			}
 
@@ -405,20 +419,23 @@ namespace Game
 
 			if (changingTerrain.isActive == false) return;
 
-			if (Engine::Mouse::LeftClick == false && Engine::Mouse::LeftHold == false) return;
-
 			// This part of code is executed when you are DOING the terrain change
+
+			if (EditorMenuBar::IsHidden() == false) EditorMenuBar::Hide();
+			if (Engine::Mouse::GetCursorType() != CURSOR_TYPE_CIRCLE) Engine::Mouse::ChangeCursorType(CURSOR_TYPE_CIRCLE);
+
+			if (Engine::Mouse::LeftClick == false && Engine::Mouse::LeftHold == false) return;
 
 			float xPos = Engine::Mouse::GetXMapCoordinate();
 			float yPos = Engine::Mouse::GetYMapCoordinate();
-			
 
-			int x = int(round(xPos / Game::Mapgen::GetTriangleWidth())) * Game::Mapgen::GetTriangleWidth() + Game::Mapgen::GetTriangleWidth() * 2;
-			int y = int(round(yPos / Game::Mapgen::GetTriangleWidth())) * Game::Mapgen::GetTriangleWidth() + Game::Mapgen::GetTriangleWidth() * 2;
+
+			int x = round(xPos / Game::Mapgen::GetTriangleWidth()) * Game::Mapgen::GetTriangleWidth() + Game::Mapgen::GetTriangleWidth() * 2;
+			int y = round(yPos / Game::Mapgen::GetTriangleWidth()) * Game::Mapgen::GetTriangleWidth() + Game::Mapgen::GetTriangleWidth() * 2;
 
 			int j = Game::Mapgen::getVertexPos(x, y);
 
-			if (Game::Mapgen::MapTextures()[j] != changingTerrain.type) 
+			if (Game::Mapgen::MapTextures()[j] != changingTerrain.type)
 			{
 				Game::Mapgen::MapTextures()[j] = changingTerrain.type;
 				GLItems::MapTerrain()->updateTextureBuffer();
@@ -503,8 +520,13 @@ namespace Game
 
 			if (Engine::Keyboard::IsKeyPressed(GLFW_KEY_SPACE) || Engine::Mouse::MiddleClick)
 			{
-				if (Minimap::IsActive()) Minimap::Disable();
-				else Minimap::Enable();
+				if (Minimap::IsActive()) {
+					Minimap::Disable();
+				}
+				else {
+					Minimap::Enable();
+					if (Engine::Mouse::GetCursorType() != CURSOR_TYPE_DEFAULT) Engine::Mouse::ChangeCursorType(CURSOR_TYPE_DEFAULT);
+				}
 				Minimap::IsActive() ? EditorMenuBar::Hide() : EditorMenuBar::Show();
 				Minimap::IsActive() ? Logger::Info("Minimap ON!") : Logger::Info("Minimap OFF!");
 			}

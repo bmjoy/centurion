@@ -27,14 +27,25 @@ class Player;
 #ifndef MAX_NUMBER_OF_OBJECTS
 #define MAX_NUMBER_OF_OBJECTS 100
 #endif
+
 #ifndef UNDEFINED_RACE
 #define UNDEFINED_RACE    0
 #endif 
+
 #ifndef ROMAN_RACE
 #define ROMAN_RACE    1
 #endif 
+
 #ifndef EGYPTIAN_RACE
 #define EGYPTIAN_RACE    2
+#endif 
+
+#ifndef OBJ_INFOTEXT_INSERTING
+#define OBJ_INFOTEXT_INSERTING 0
+#endif 
+
+#ifndef OBJ_INFOTEXT_MOVING
+#define OBJ_INFOTEXT_MOVING 1
 #endif 
 
 class GObject
@@ -318,6 +329,13 @@ public:
 	bool IsPlaceable(void);
 
 	/// <summary>
+	/// This function sends to editor a message that will shown in the top left of the screen.
+	/// Allowed values are OBJ_INFOTEXT_MOVING and OBJ_INFOTEXT_INSERTING.
+	/// </summary>
+	/// <param name="_className">Unsigned int representing the method; allowed values are OBJ_INFOTEXT_MOVING and OBJ_INFOTEXT_INSERTING</param>
+	void SendInfoText(const unsigned int method);
+	
+	/// <summary>
 	/// This function create a specific object.
 	/// </summary>
 	/// <param name="_className">The class of the object.</param>
@@ -431,11 +449,6 @@ protected:
 	/// <param name="par_clickID">The click.</param>
 	/// <returns>True if the current object is selected; false otherwise.</returns>
 	bool CheckIfSelected(const unsigned int par_clickID);
-
-	/// <summary>
-	/// This function sends to editor a message that will shown in the top left of the screen.
-	/// </summary>
-	void SendInfoText(void);
 
 	/// <summary>
 	/// This function marks the current object as selected (true) or not selected (false).

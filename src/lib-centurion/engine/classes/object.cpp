@@ -502,7 +502,7 @@ bool GObject::CheckIfSelected(const unsigned int par_clickID)
 	return bSelected;
 }
 
-void GObject::SendInfoText(void)
+void GObject::SendInfoText(const unsigned int method)
 {
 	if (this->AsBuilding()->IsCentralBuilding())
 	{

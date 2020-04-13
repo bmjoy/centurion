@@ -200,7 +200,6 @@ void Building::Render(const bool picking, const unsigned int clickID)
 		this->CheckIfPlaceable();
 	}
 
-	SendInfoText();
 	GLItems::BSprite()->Render(spriteData, GetPosition().x, GetPosition().y, picking, bCurrentlySelected, vec3(0), this->bIsPlaceable);
 }
 
