@@ -1,7 +1,8 @@
 <translationTable language="italian">
   <entry stringName="EDITOR_addObject" result="Aggiungi oggetto" />
   <entry stringName="EDITOR_canAddStructure" result="Clicca con il tasto SINISTRO del mouse per posizionare la struttura nel punto desiderato. Premi il tastro DESTRO per annullare l'operazione." />
-  <entry stringName="EDITOR_cancelBrush" result="Clicca con il tasto DESTRO del mouse per annullare l'operazione." />
+  <entry stringName="EDITOR_cancelBrush" result="Clicca con il tasto DESTRO del mouse o ESC per annullare l'operazione." />
+  <entry stringName="EDITOR_canMoveStructure" result="Tieni premuto il tasto SINISTRO del mouse per spostare la struttura. Rilascia il tasto SINISTRO del mouse per annullare l'operazione." />
   <entry stringName="EDITOR_defaultMapName" result="Senza titolo" />
   <entry stringName="EDITOR_Edit" result="Modifica" />
   <entry stringName="EDITOR_Edit_Properties" result="Modifica proprietà oggetto" />

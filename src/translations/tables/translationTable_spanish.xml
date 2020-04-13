@@ -2,6 +2,7 @@
   <entry stringName="EDITOR_addObject" result="Añadir objeto" />
   <entry stringName="EDITOR_canAddStructure" result="--" />
   <entry stringName="EDITOR_cancelBrush" result="--" />
+  <entry stringName="EDITOR_canMoveStructure" result="--" />
   <entry stringName="EDITOR_defaultMapName" result="Intitulado" />
   <entry stringName="EDITOR_Edit" result="Editar" />
   <entry stringName="EDITOR_Edit_Properties" result="Editar propiedades de objeto" />

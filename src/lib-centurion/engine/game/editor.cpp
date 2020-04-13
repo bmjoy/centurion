@@ -483,7 +483,6 @@ namespace Game
 				}
 			}
 
-
 			if (Engine::Keyboard::IsKeyPressed(GLFW_KEY_LEFT_CONTROL) || Engine::Keyboard::IsKeyPressed(GLFW_KEY_RIGHT_CONTROL))
 			{
 				if (Minimap::IsActive() == false)
@@ -529,4 +528,3 @@ namespace Game
 		}
 	};
 };
-

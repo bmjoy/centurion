@@ -504,28 +504,9 @@ bool GObject::CheckIfSelected(const unsigned int par_clickID)
 
 void GObject::SendInfoText(const unsigned int method)
 {
-	if (this->AsBuilding()->IsCentralBuilding())
+	if (method == OBJ_INFOTEXT_INSERTING)
 	{
-		if (this->IsPlaceable() == true)
-		{
-			std::wstring infoText = TranslationsTable::GetWTranslation(Engine::Data::GetWordFromDictionaryById(0));
-			EditorUI::UpdateInfoText(infoText);
-		}
-		else
-		{
-			std::wstring infoText = TranslationsTable::GetWTranslation(Engine::Data::GetWordFromDictionaryById(1));
-			EditorUI::UpdateInfoText(infoText);
-		}
-	}
-	else
-	{
-		std::tuple near = this->AsBuilding()->IsNearToFriendlySettlement();
-		if (std::get<0>(near) == false)
-		{
-			std::wstring infoText = TranslationsTable::GetWTranslation(Engine::Data::GetWordFromDictionaryById(2));
-			EditorUI::UpdateInfoText(infoText);
-		}
-		else
+		if (this->AsBuilding()->IsCentralBuilding())
 		{
 			if (this->IsPlaceable() == true)
 			{
@@ -536,6 +517,68 @@ void GObject::SendInfoText(const unsigned int method)
 			{
 				std::wstring infoText = TranslationsTable::GetWTranslation(Engine::Data::GetWordFromDictionaryById(1));
 				EditorUI::UpdateInfoText(infoText);
+			}
+		}
+		else
+		{
+			std::tuple near = this->AsBuilding()->IsNearToFriendlySettlement();
+			if (std::get<0>(near) == false)
+			{
+				std::wstring infoText = TranslationsTable::GetWTranslation(Engine::Data::GetWordFromDictionaryById(2));
+				EditorUI::UpdateInfoText(infoText);
+			}
+			else
+			{
+				if (this->IsPlaceable() == true)
+				{
+					std::wstring infoText = TranslationsTable::GetWTranslation(Engine::Data::GetWordFromDictionaryById(0));
+					EditorUI::UpdateInfoText(infoText);
+				}
+				else
+				{
+					std::wstring infoText = TranslationsTable::GetWTranslation(Engine::Data::GetWordFromDictionaryById(1));
+					EditorUI::UpdateInfoText(infoText);
+				}
+			}
+		}
+	}
+
+	if (method == OBJ_INFOTEXT_MOVING)
+	{
+		if (this->AsBuilding()->IsCentralBuilding())
+		{
+			if (this->IsPlaceable() == true)
+			{
+				std::wstring infoText = TranslationsTable::GetWTranslation(Engine::Data::GetWordFromDictionaryById(4));
+				EditorUI::UpdateInfoText(infoText);
+			}
+			else
+			{
+				std::wstring infoText = TranslationsTable::GetWTranslation(Engine::Data::GetWordFromDictionaryById(1));
+				EditorUI::UpdateInfoText(infoText);
+			}
+			//TO DO = IsNearToFriendlySettlement(); anche per le strutture centrali (VEDI GITHUB)
+		}
+		else
+		{
+			std::tuple near = this->AsBuilding()->IsNearToFriendlySettlement();
+			if (std::get<0>(near) == false)
+			{
+				std::wstring infoText = TranslationsTable::GetWTranslation(Engine::Data::GetWordFromDictionaryById(2));
+				EditorUI::UpdateInfoText(infoText);
+			}
+			else
+			{
+				if (this->IsPlaceable() == true)
+				{
+					std::wstring infoText = TranslationsTable::GetWTranslation(Engine::Data::GetWordFromDictionaryById(4));
+					EditorUI::UpdateInfoText(infoText);
+				}
+				else
+				{
+					std::wstring infoText = TranslationsTable::GetWTranslation(Engine::Data::GetWordFromDictionaryById(1));
+					EditorUI::UpdateInfoText(infoText);
+				}
 			}
 		}
 	}
