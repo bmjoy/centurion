@@ -76,6 +76,13 @@
           Editor.ToggleMenu(2)
         </onclickScript>
       </command>
+      <command id="2" name="EDITOR_RandomMap" hotkey1="CTRL" hotkey2="N" hotkey3="">
+        <onclickScript>
+          -- Lua Script
+          Editor.ToggleWindow(6)
+          Editor.ToggleMenu(2)
+        </onclickScript>
+      </command>
     </editorMenu>
   </editorMenuArray>
 </editorMenuBar>

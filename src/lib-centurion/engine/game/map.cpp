@@ -186,7 +186,14 @@ namespace Game
 						glm::vec3 posAbs = glm::vec3(pos.x - posOffset.x, pos.y - posOffset.y, 0);
 						std::string className = _bld->Attribute("class");
 
-						if (Game::CreateObject(className, posAbs.x, posAbs.y, 1) == nullptr) throw;
+						GObject* thisBuilding = Game::CreateObject(className, posAbs.x, posAbs.y, 1);
+						if (thisBuilding == nullptr) throw;
+
+						std::string idName = _bld->Attribute("idName");
+						thisBuilding->SetIDName(idName);
+
+						// ...
+
 					}
 				}
 			}
@@ -212,6 +219,7 @@ namespace Game
 					Game::Mapgen::MapHeights()[i] = stof(number);
 					i++;
 				}
+				GLItems::MapTerrain()->updateHeightsBuffer();
 			}
 			catch (...)
 			{
@@ -233,6 +241,7 @@ namespace Game
 					Game::Mapgen::MapTextures()[i] = stof(number);
 					i++;
 				}
+				GLItems::MapTerrain()->updateTextureBuffer();
 			}
 			catch (...)
 			{
@@ -266,7 +275,7 @@ namespace Game
 
 		void Game::Map::CreateNoise(void)
 		{
-			Game::Mapgen::generateRandomMap();
+			Game::Mapgen::GenerateRandomHeights();
 			GLItems::MapTerrain()->updateHeightsBuffer();
 
 			stringstream ss;

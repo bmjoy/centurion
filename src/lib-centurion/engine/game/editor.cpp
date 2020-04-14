@@ -387,6 +387,11 @@ namespace Game
 			obj->SendInfoText(OBJ_INFOTEXT_MOVING);
 		}
 
+		void GenerateRandomMap(const int nPlayers)
+		{
+			Game::Map::CreateNoise();
+		}
+
 		bool Game::Editor::IsInsertingObject(void)
 		{
 			return (Editor::tmpObject != nullptr);

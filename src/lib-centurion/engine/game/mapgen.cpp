@@ -237,7 +237,7 @@ namespace Game
 			}
 		}
 
-		void updateAllNormals() {
+		void UpdateAllNormals() {
 			for (int i = 0; i < NUMBER_OF_VERTICES; i++) {
 				float xCoord = MapVertices()[i * 4];
 				float yCoord = MapVertices()[i * 4 + 1];
@@ -264,7 +264,7 @@ namespace Game
 			}
 		}
 
-		void generateRandomMap() {
+		void GenerateRandomHeights() {
 			//random_device rd;
 			//mt19937 gen(rd());
 			//uniform_real_distribution<float> distribution(0, 3);
@@ -295,7 +295,7 @@ namespace Game
 				//if (zTex > 1000)
 					//MapTextures()[i] = 10.f;
 			}
-			updateAllNormals();
+			UpdateAllNormals();
 		}
 
 		float getNoiseEstimate(float x, float y) {

@@ -121,7 +121,7 @@ MD "$(ProjectDir)$(OutDir)scenarios"
 MD "$(ProjectDir)$(OutDir)screenshots"
 MD "$(ProjectDir)$(OutDir)scenarios\RandomMapSettlements"
 XCOPY "$(ProjectDir)assets\*" "$(ProjectDir)$(OutDir)assets" /S
-XCOPY "$(ProjectDir)scenarios\RandomMapSettlements\*" "$(ProjectDir)$(OutDir)scenarios\RandomMapSettlements" /S
+XCOPY "$(ProjectDir)scenarios\*" "$(ProjectDir)$(OutDir)scenarios" /S
 XCOPY "$(ProjectDir)glew32.dll" "$(ProjectDir)$(OutDir)"
 XCOPY "$(ProjectDir)libsndfile-1.dll" "$(ProjectDir)$(OutDir)"
 XCOPY "$(ProjectDir)ogg.dll" "$(ProjectDir)$(OutDir)"
@@ -185,7 +185,7 @@ MD "$(ProjectDir)$(OutDir)scenarios"
 MD "$(ProjectDir)$(OutDir)screenshots"
 MD "$(ProjectDir)$(OutDir)scenarios\RandomMapSettlements"
 XCOPY "$(ProjectDir)assets\*" "$(ProjectDir)$(OutDir)assets" /S
-XCOPY "$(ProjectDir)scenarios\RandomMapSettlements\*" "$(ProjectDir)$(OutDir)scenarios\RandomMapSettlements" /S
+XCOPY "$(ProjectDir)scenarios\*" "$(ProjectDir)$(OutDir)scenarios" /S
 XCOPY "$(ProjectDir)glew32.dll" "$(ProjectDir)$(OutDir)"
 XCOPY "$(ProjectDir)libsndfile-1.dll" "$(ProjectDir)$(OutDir)"
 XCOPY "$(ProjectDir)ogg.dll" "$(ProjectDir)$(OutDir)"

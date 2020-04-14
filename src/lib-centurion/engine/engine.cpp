@@ -161,7 +161,7 @@ namespace Engine
 		if (FileManager::CheckIfFolderExists(s))
 		{
 			listOfFoldersTemp.clear();
-			listOfFoldersTemp = FileManager::GetAllFoldersNamesWithinFolder(s);
+			listOfFoldersTemp = FileManager::GetAllFoldersNamesWithinFolder(Folders::GAME + s);
 			return &listOfFoldersTemp;
 		}
 		return nullptr;

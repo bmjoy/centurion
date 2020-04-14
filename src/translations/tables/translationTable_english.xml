@@ -19,6 +19,7 @@
   <entry stringName="EDITOR_propertiesDisplayedName" result="Displayed name:" />
   <entry stringName="EDITOR_propertiesIDName" result="Identification name:" />
   <entry stringName="EDITOR_propertiesSettlement" result="Settlement name:" />
+  <entry stringName="EDITOR_RandomMap" result="Generate random map" />
   <entry stringName="EDITOR_saveAs" result="Save scenario as..." />
   <entry stringName="EDITOR_saveBeforeNewOperation" result="The current map has been modified. Do you want to save it?" />
   <entry stringName="EDITOR_saveOverwrite" result="A map with the specified name already exists. Do you want to overwrite it?" />

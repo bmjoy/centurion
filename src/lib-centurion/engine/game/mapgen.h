@@ -136,6 +136,18 @@ namespace Game
 		/// <param name="y">The point Y-position, expressed with pixel-map-coordinates, where apply the terrain change</param>
 		void ChangeTerrainTexture(const float type, const float x, const float y);
 
+		/// <summary>
+		/// This function generate a surface with pseudo-random noise
+		/// </summary>
+		void GenerateRandomHeights(void);
+
+		/// <summary>
+		/// This function reset all the vertices normals to obtain the right shadows
+		/// </summary>
+		void UpdateAllNormals(void);
+
+
+
 		float* MapVertices();
 		float* MapTextures();
 		float* MapHeights();
@@ -147,14 +159,13 @@ namespace Game
 		int getVertexPos(int x, int y);
 		glm::vec2 getVertexCoords(int j);
 		glm::vec3 getVertex(int x, int y, bool isNormal);
-		void updateAllNormals();
 		void updateNormal(int x, int y);
 		
 		//
 		//	MAP GENERATION FUNCTIONS
 		//
 
-		void generateRandomMap();
+		
 		float generateNoise(glm::vec2 coords, std::string type);
 		void define_buildings_location(int num_players, int num_outposts, std::vector<glm::vec2>* outpostslocation, std::vector<glm::vec2>* townhallslocation);
 		void defineTerrainZones();

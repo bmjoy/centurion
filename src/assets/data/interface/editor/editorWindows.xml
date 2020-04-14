@@ -252,4 +252,38 @@
     </iframe>
   </editorWindow>
 
+  <!-- GENERATE RANDOM MAP WINDOW-->
+
+  <editorWindow id="6">
+    <iframe id="6" type="editor" title="EDITOR_RandomMap" position="x=Engine.WindowWidth/2-w/2; y=Engine.WindowHeight/2-h/2;" size="w=400; h=150;" isOpened="false">
+      <conditionScript function="">
+        -- lua script
+      </conditionScript>
+      <openingScript>
+        -- lua script
+      </openingScript>
+      <simpleTextArray>
+      </simpleTextArray>
+      <buttonArray>
+        <button text="WORD_Apply" xOffset="335" yOffset="30">
+          <onclickScript>
+            --lua script
+            Editor.GenerateRandomMap(0)
+            Editor.CloseWindow(6)
+          </onclickScript>
+        </button>
+        <button text="WORD_Close" xOffset="220" yOffset="30">
+          <onclickScript>
+            --lua script
+            Editor.CloseWindow(6)
+          </onclickScript>
+        </button>
+      </buttonArray>
+      <textListArray></textListArray>
+      <textInputArray>
+      </textInputArray>
+    </iframe>
+  </editorWindow>
+  
+  
 </editorWindows>

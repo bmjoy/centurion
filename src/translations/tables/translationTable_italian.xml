@@ -19,6 +19,7 @@
   <entry stringName="EDITOR_propertiesDisplayedName" result="Nome visualizzato:" />
   <entry stringName="EDITOR_propertiesIDName" result="Nome identificativo:" />
   <entry stringName="EDITOR_propertiesSettlement" result="Nome dell'insediamento:" />
+  <entry stringName="EDITOR_RandomMap" result="Genera una mappa casuale" />
   <entry stringName="EDITOR_saveAs" result="Salva scenario come..." />
   <entry stringName="EDITOR_saveBeforeNewOperation" result="La mappa attuale è stata modificata. Vuoi salvarla?" />
   <entry stringName="EDITOR_saveOverwrite" result="Esiste già una mappa con il nome specificato. Vuoi sovrascriverla?" />

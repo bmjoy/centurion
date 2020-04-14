@@ -19,6 +19,7 @@
   <entry stringName="EDITOR_propertiesDisplayedName" result="Nombre mostrado:" />
   <entry stringName="EDITOR_propertiesIDName" result="Nombre identificativo:" />
   <entry stringName="EDITOR_propertiesSettlement" result="Nombre del asentamiento:" />
+  <entry stringName="EDITOR_RandomMap" result="Generar una mapa aleatoria" />
   <entry stringName="EDITOR_saveAs" result="Guardar el escenario como..." />
   <entry stringName="EDITOR_saveBeforeNewOperation" result="--" />
   <entry stringName="EDITOR_saveOverwrite" result="--" />
