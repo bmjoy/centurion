@@ -210,8 +210,8 @@ namespace Game
 			{
 				Building* newBuilding = new Building();
 				newBuilding->SetPlayer(player);
-				newBuilding->Create(className);
 				newBuilding->SetPosition(glm::vec3(x, y, 0));
+				newBuilding->Create(className);
 
 			}
 			if (type == "cpp_decorationclass")

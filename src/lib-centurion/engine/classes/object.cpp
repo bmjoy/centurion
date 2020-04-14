@@ -1,5 +1,6 @@
 #include "object.h"
 
+#include <engine.h>
 #include <data.h>
 #include <player/player.h>
 #include <picking.h>
@@ -456,11 +457,12 @@ void GObject::ResetGameObjects(void)
 	//GObject::numberOfBuildings = 0;
 	//GObject::numberOfDecorations = 0;
 	//GObject::numberOfUnits = 0;
-	for (unsigned int i = 0; i < MAX_NUMBER_OF_OBJECTS; i++)
+	for (unsigned int i = 1; i < MAX_NUMBER_OF_OBJECTS; i++)
 	{
 		if (GObject::GameObjects[i] != nullptr)
 		{
-			GObject::RemoveGameObject(GObject::GameObjects[i]->GetPickingID());
+			//GObject::RemoveGameObject(GObject::GameObjects[i]->GetPickingID());
+			GObject::RemoveGameObject(i);
 		}
 	}
 	GObject::idNamesMap.clear(); //All script names can now reusable.

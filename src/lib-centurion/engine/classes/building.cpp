@@ -26,7 +26,7 @@ Building::Building(void)
 	this->bIsShipyard = false;
 	this->settlement = nullptr;
 	this->SetType("cpp_buildingclass");
-	this->SetPosition(vec3(Engine::Mouse::GetXMapCoordinate(), Engine::Mouse::GetYMapCoordinate(), 10.f));
+	//this->SetPosition(vec3(Engine::Mouse::GetXMapCoordinate(), Engine::Mouse::GetYMapCoordinate(), 10.f));
 }
 
 Settlement *Building::GetSettlement(void) const
