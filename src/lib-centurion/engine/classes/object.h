@@ -441,6 +441,7 @@ protected:
 	std::map<std::string, std::string> sounds;
 	bool bIsBeingMoved = false;
 	bool bIsSaved = false;
+	glm::vec3 position;
 
 	#pragma region Protected members
 	/// /// <summary>
@@ -469,7 +470,6 @@ private:
 	unsigned int sight;
 	float selectionRadius;
 	float radius;
-	glm::vec3 position;
 	std::string singularName;
 	std::string pluralName;
 	std::string displayedName;

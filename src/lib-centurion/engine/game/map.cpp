@@ -98,11 +98,13 @@ namespace Game
 				{
 					Settlement* settl = (*settlList)[i];
 
-					mapobjs << "\t\t<settlement name=\"" << settl->GetSettlementName() <<"\">\n";
+					mapobjs << "\t\t<settlement name=\"" << settl->GetSettlementName() <<"\" x=\"" << settl->GetPosition().x << "\" y=\""<< settl->GetPosition().y << "\">\n";
 					std::vector<Building*> bldInSettlList = settl->GetBuildingsBelongToSettlement();
 					for (auto bld : bldInSettlList)
 					{
-						mapobjs << "\t\t\t<building class=\"" << bld->GetClassName() << "\" />\n";
+						int xOffset = int(settl->GetPosition().x - bld->GetPosition().x);
+						int yOffset = int(settl->GetPosition().y - bld->GetPosition().y);
+						mapobjs << "\t\t\t<building class=\"" << bld->GetClassName() << "\" xOffset=\"" << xOffset << "\" yOffset=\"" << yOffset << "\" />\n";
 						bld->MarkAsSaved();
 					}
 					mapobjs << "\t\t</settlement>\n";

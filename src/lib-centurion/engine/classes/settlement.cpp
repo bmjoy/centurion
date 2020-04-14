@@ -6,7 +6,7 @@ using namespace std;
 using namespace glm;
 
 
-Settlement::Settlement(const unsigned int par_player, glm::vec2 pos): player(par_player), position(&pos)
+Settlement::Settlement(const unsigned int par_player, glm::vec3 * pos): player(par_player), position(pos)
 {
 	this->idName = "";
 	this->bIsIndipendent = false;
@@ -100,7 +100,7 @@ void Settlement::SetPlayer(const unsigned int par_player)
 	}
 }
 
-glm::vec2 Settlement::GetPosition(void) const
+glm::vec3 Settlement::GetPosition(void) const
 {
 	return (*this->position);
 }

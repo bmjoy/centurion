@@ -330,7 +330,7 @@ void GObject::Create(const string _className, const bool _temporary)
 
 void GObject::SetPosition(const vec3 pos)
 {
-	this->position = pos;
+	this->position = vec3(int(pos.x), int(pos.y), int(pos.z));
 }
 
 vec3 GObject::GetPosition(void) const
