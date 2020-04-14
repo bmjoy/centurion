@@ -124,12 +124,14 @@
         Iframe.GetIframeById(3):UpdateStringBySimpleTextId(1, Selo():GetClassName())
         Iframe.GetIframeById(3):UpdateTextInputPlaceholder(0, Selo():GetIDName())
         Iframe.GetIframeById(3):UpdateTextInputPlaceholder(1, Selo():GetDisplayedName())
+        Iframe.GetIframeById(3):UpdateTextInputPlaceholder(2, Selo():GetSettlementName())
       </openingScript>
       <simpleTextArray>
         <simpleText id="0" name="EDITOR_propertiesClassName" xOffset="20" yOffset="-80" />
         <simpleText id="1" name="" xOffset="150" yOffset="-80" />
         <simpleText id="2" name="EDITOR_propertiesIDName" xOffset="20" yOffset="-110" />
         <simpleText id="3" name="EDITOR_propertiesDisplayedName" xOffset="20" yOffset="-140" />
+        <simpleText id="4" name="EDITOR_propertiesSettlement" xOffset="20" yOffset="-170" />
       </simpleTextArray>
       <buttonArray>
         <button text="WORD_Close" xOffset="400" yOffset="30">
@@ -143,14 +145,16 @@
             -- lua script
             Selo():SetIDName(Iframe.GetIframeById(3):GetTextInputById(0):GetText())
             Selo():SetDisplayedName(Iframe.GetIframeById(3):GetTextInputById(1):GetText())
+            Selo():SetSettlementName(Iframe.GetIframeById(3):GetTextInputById(2):GetText())
             Editor.CloseWindow(3)
           </onclickScript>
         </button>
       </buttonArray>
       <textListArray></textListArray>
       <textInputArray>
-        <textInput textInputId="0" xOffset="150" yOffset="-110" width="200" placeholder=""/>
-        <textInput textInputId="1" xOffset="150" yOffset="-140" width="200" placeholder=""/>
+        <textInput textInputId="0" xOffset="180" yOffset="-110" width="200" placeholder=""/>
+        <textInput textInputId="1" xOffset="180" yOffset="-140" width="200" placeholder=""/>
+        <textInput textInputId="2" xOffset="180" yOffset="-170" width="200" placeholder=""/>
       </textInputArray>
     </iframe>
   </editorWindow>

@@ -75,6 +75,7 @@
   <entry stringName="WORD_Close" result="Fermer" />
   <entry stringName="WORD_Create" result="Créer" />
   <entry stringName="WORD_Cypress" result="Cyprès" />
+  <entry stringName="WORD_Delete" result="Supprimer" />
   <entry stringName="WORD_EBarracks" result="Caserne" />
   <entry stringName="WORD_EBlacksmith" result="Forge" />
   <entry stringName="WORD_EOsiristemple" result="Temple de Osiris" />

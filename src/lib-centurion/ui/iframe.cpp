@@ -142,7 +142,7 @@ gui::TextInput* gui::Iframe::GetTextInputById(int id)
 	return listOfTextInputs[id];
 }
 
-void gui::Iframe::UpdateTextInputPlaceholder(int id, std::string newPlaceholder)
+void gui::Iframe::UpdateTextInputPlaceholder(unsigned int id, std::string newPlaceholder)
 {
 	Iframe::GetTextInputById(id)->UpdatePlaceholder(newPlaceholder);
 }

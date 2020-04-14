@@ -102,7 +102,7 @@ namespace Game
 					{
 						int xOffset = int(settl->GetPosition().x - bld->GetPosition().x);
 						int yOffset = int(settl->GetPosition().y - bld->GetPosition().y);
-						mapobjs << "\t\t\t<building class=\"" << bld->GetClassName() << "\" xOffset=\"" << xOffset << "\" yOffset=\"" << yOffset << "\" name=\"" << bld->GetDisplayedName() << "\" idName=\"" << bld->GetIDName() << "\" healthPerc=\"" << bld->GetPercentHealth() << "\" />\n";
+						mapobjs << "\t\t\t<building class=\"" << bld->GetClassName() << "\" idName=\"" << bld->GetIDName() << "\" xOffset=\"" << xOffset << "\" yOffset=\"" << yOffset << "\" name=\"" << bld->GetDisplayedName() << "\" healthPerc=\"" << bld->GetPercentHealth() << "\" />\n";
 						bld->MarkAsSaved();
 					}
 					mapobjs << "\t\t</settlement>\n";
@@ -191,9 +191,10 @@ namespace Game
 
 						std::string idName = _bld->Attribute("idName");
 						thisBuilding->SetIDName(idName);
-
-						// ...
-
+						std::string name = _bld->Attribute("name");
+						thisBuilding->SetDisplayedName(name);
+						unsigned int healthPerc = _bld->IntAttribute("healthPerc");
+						thisBuilding->AsBuilding()->SetPercentHealth(healthPerc);
 					}
 				}
 			}
@@ -202,8 +203,6 @@ namespace Game
 				throw;
 			}
 		}
-
-
 
 		void Game::Map::LoadHeights(const string path)
 		{

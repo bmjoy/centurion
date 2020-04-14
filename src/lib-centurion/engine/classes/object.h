@@ -146,7 +146,7 @@ public:
 	/// <summary>
 	/// This function return the dislayed name of the current object.
 	/// </summary>
-	/// <returns>The displayed name of the current object; if the current object doesn't have a script name, it singular name will be returned.</returns>
+	/// <returns>The displayed name of the current object; if the current object doesn't have a name, it singular name will be returned.</returns>
 	std::string GetDisplayedName(void) const;
 
 	/// <summary>
@@ -158,7 +158,7 @@ public:
 	/// <summary>
 	/// This function returns the univocal identification name of the current object.
 	/// </summary>
-	/// <returns>The identification name of the current object; if the current object doesn't have a script name, an empty string will be returned.</returns>
+	/// <returns>The identification name of the current object; if the current object doesn't have an ID name, an empty string will be returned.</returns>
 	std::string GetIDName(void) const;
 	
 	/// <summary>

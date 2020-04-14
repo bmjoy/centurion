@@ -75,6 +75,7 @@
   <entry stringName="WORD_Close" result="Chiudi" />
   <entry stringName="WORD_Create" result="Crea" />
   <entry stringName="WORD_Cypress" result="Cipresso" />
+  <entry stringName="WORD_Delete" result="Cancella" />
   <entry stringName="WORD_EBarracks" result="Caserma" />
   <entry stringName="WORD_EBlacksmith" result="Fucina" />
   <entry stringName="WORD_EOsiristemple" result="Tempio di Osiris" />

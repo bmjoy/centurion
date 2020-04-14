@@ -25,19 +25,19 @@ class Building : public GObject
 public:
 
 	/// <summary>
-	/// This function sets a settlement to whom the current building will belong to.
+	/// This function sets a settlement to whom the current building will belongs to.
 	/// </summary>
 	/// <param name="par_settlement">The settlement.</param>
 	void SetSettlement(Settlement *par_settlement);
 
 	/// <summary>
-	/// This funtion returns the settlement to whom the current building belong to. 
+	/// This function returns the settlement to whom the current building belongs to.
 	/// </summary>
 	/// <returns>A pointer to the settlement.</returns>
 	Settlement *GetSettlement(void) const;
 
 	/// <summary>
-	/// This functions set the max health of the current building.
+	/// This functions sets the max health of the current building.
 	/// </summary>
 	/// <param name="par_maxHealth">The max health of the building.</param>
 	void SetMaxHealth(const unsigned int par_maxHealth);
@@ -49,7 +49,7 @@ public:
 	unsigned int GetMaxHealth(void) const;
 
 	/// <summary>
-	/// This functions set the health's percentage of the current building over the max health, to save informations about partial damages.
+	/// This functions sets the health's percentage of the current building over the max health, to save informations about partial damages.
 	/// </summary>
 	/// <param name="par_maxHealth">The health's percentage of the building.</param>
 	void SetPercentHealth(const unsigned int par_hPercent);

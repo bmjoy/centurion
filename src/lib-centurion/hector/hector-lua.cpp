@@ -106,6 +106,8 @@ namespace Hector
 			.addFunction("GetClassName", &GObject::GetClassName)
 			.addFunction("GetIDName", &GObject::GetIDName)
 			.addFunction("SetIDName", &GObject::SetIDName)
+			.addFunction("GetSettlementName", &GObject::GetDisplayedName) //QUESTA FUNZIONE DEVE ESSERE SOSTITUITA DA GETSETTLEMENTNAME
+			.addFunction("SetSettlementName", &GObject::SetDisplayedName) //QUESTA FUNZIONE DEVE ESSERE SOSTITUITA DA SETSETTLEMENTNAME
 			.addFunction("GetDisplayedName", &GObject::GetDisplayedName)
 			.addFunction("SetDisplayedName", &GObject::SetDisplayedName)
 			.endClass();

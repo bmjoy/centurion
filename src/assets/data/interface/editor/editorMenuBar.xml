@@ -31,7 +31,14 @@
           Editor.ToggleMenu(0)
         </onclickScript>
       </command>
-      <command id="4" name="WORD_Exit" hotkey1="CTRL" hotkey2="N" hotkey3="">
+	  <command id="4" name="WORD_Delete" hotkey1="CTRL" hotkey2="N" hotkey3="">
+        <onclickScript>
+          -- Lua Script
+          -- Editor.SaveScenario()
+          Editor.ToggleMenu(0)
+        </onclickScript>
+      </command>
+      <command id="5" name="WORD_Exit" hotkey1="CTRL" hotkey2="N" hotkey3="">
         <onclickScript>
           -- Lua Script
           Editor.Close()
