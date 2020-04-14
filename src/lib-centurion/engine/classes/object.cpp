@@ -136,6 +136,7 @@ void GObject::SetIDName(const std::string _idName)
 	this->idName = _idName;
 	if(_idName != "")
 		GObject::idNamesMap[_idName] = this->GetPickingID();; //Assign or replace identification name.
+
 }
 
 std::string GObject::GetIDName(void) const

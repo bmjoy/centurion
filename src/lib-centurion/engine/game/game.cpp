@@ -56,6 +56,12 @@ namespace Game
 		Game::SELO = o;
 	}
 
+	void ResetSelectedObject(void)
+	{
+		Game::SELO = nullptr;
+		Picking::Obj::ResetClickIds();
+	}
+
 	vector<Building*> Game::GetListOfIndipendentBuildings(void)
 	{
 		vector<Building*> indipBuildings = vector<Building*>();
@@ -104,9 +110,6 @@ namespace Game
 				GObject::GetObjectByID(i)->Render(false, Picking::Obj::GetLeftClickId());
 			}
 		}
-
-		if (!Minimap::IsActive() && Picking::UI::GetLeftClickId() == 0)
-			SelectionRectangle::Render(); //&& !editor::movingObject
 	}
 
 	void Game::GoToPointFromMinimap() {

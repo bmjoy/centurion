@@ -166,6 +166,7 @@
       </conditionScript>
       <openingScript>
         -- lua script
+        Game.ResetSelectedObject()
         _editorList1 = Editor.GetObjectTreeList1()
         Iframe.GetIframeById(4):UpdateTextListById(0, _editorList1, "EDITORTREE_")
         _editorList2 = Editor.GetObjectTreeList2(Iframe.GetIframeById(4):GetTextListById(0):GetSelectedOption())

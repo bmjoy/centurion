@@ -124,7 +124,7 @@ namespace EditorMenuBar
 			height = stof(height_str);
 
 			topBar = gui::Rectangle();
-			topBar.create("filled", 0.0f, (float)-height, Engine::myWindow::Width, (float)height, "bottom-left", 0);
+			topBar.create("filled", 0.0f, (float)-height, Engine::myWindow::Width, (float)height, "bottom-left", Picking::UI::ObtainPickingID());
 
 			/* menus properties */
 

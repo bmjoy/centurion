@@ -30,6 +30,7 @@ namespace Game
 		struct MovingObject
 		{
 			bool isActive = false;
+			bool clickedOnUIElement = false;
 			float ObjectXPos = 0.f;
 			float ObjectYPos = 0.f;
 			float StartXMouse = 0.f;
@@ -133,6 +134,7 @@ namespace Game
 				Editor::InsertingObject();
 
 				Game::RenderObjects();
+				SelectionRectangle::Render();
 
 				// apply menu matrices
 				GLItems::applyMenuMatrices();
@@ -327,12 +329,17 @@ namespace Game
 		void Game::Editor::ShiftSelectedObject(void)
 		{
 			// this function IS RUN EVERY FRAME (see Editor::Run)
-
 			if (EditorWindows::IsThereAnyWindowOpen() == true) return;
 
 			// if no object is selected --> exit
 			GObject* obj = Game::GetSelectedObject();
 			if (obj == nullptr) return;
+
+			if (Engine::Mouse::LeftClick)
+			{
+				Editor::movingObject.clickedOnUIElement = (Picking::UI::GetLeftClickId() != 0);
+			}
+			if (Editor::movingObject.clickedOnUIElement) return;
 
 			// if an object is selected --> 
 			if (Engine::Mouse::LeftHold == false)

@@ -1,8 +1,10 @@
 #include "selection_rectangle.h"
 
 #include "editor.h"
+#include "interface/editorWindows.h"
 #include <engine.h>
 #include <logger.h>
+#include <picking.h>
 #include <ui.h>
 
 using namespace std;
@@ -24,6 +26,7 @@ namespace Game
 			float cameraLastX = 0, cameraLastY = 0;
 			gui::Rectangle selRectangle = gui::Rectangle();
 			bool isActive = false;
+			bool ClickedOnUIElement = false;
 		};
 
 		void Game::SelectionRectangle::Disable(void)
@@ -97,8 +100,13 @@ namespace Game
 
 		void Game::SelectionRectangle::Render(void)
 		{
+			// all the exceptions
+			if (Minimap::IsActive()) return;
 			if (Editor::IsMovingObject()) return;
 			if (Editor::IsChangingTerrain()) return;
+			if (EditorWindows::IsThereAnyWindowOpen()) return;
+			//if (ClickedOnUIElement) return;
+			// ------------
 
 			if (Engine::Mouse::LeftClick) {
 				if (SelectionRectangle::IsActive() == false) {
@@ -106,8 +114,9 @@ namespace Game
 					Coordinates.startX = Engine::Mouse::GetXLeftClick() * Engine::myWindow::WidthZoomed / Engine::myWindow::Width + cameraLastX;
 					Coordinates.startY = Engine::Mouse::GetYLeftClick() * Engine::myWindow::HeightZoomed / Engine::myWindow::Height + cameraLastY;
 				}
+				ClickedOnUIElement = (Picking::UI::GetLeftClickId() != 0);
 			}
-			if (Engine::Mouse::LeftHold) {
+			if (Engine::Mouse::LeftHold && ClickedOnUIElement == false) {
 				Coordinates.lastX = Engine::Mouse::GetXMapCoordinate();
 				Coordinates.lastY = Engine::Mouse::GetYMapCoordinate();
 				if (Engine::Mouse::GetYPosition() < Engine::myWindow::BottomBarHeight) {

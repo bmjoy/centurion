@@ -70,6 +70,8 @@ namespace Game
 	/// <param name="o">The selected object.</param>
 	void SetSelectedObject(GObject* o);
 
+	void ResetSelectedObject(void);
+
 #pragma endregion
 
 #pragma region Race methods

@@ -114,6 +114,7 @@ namespace Hector
 			.beginNamespace("Game")
 			.addFunction("IsObjectSelected", &Game::IsGameObjectSelected)
 			.addFunction("IsObjectNotNull", &Game::IsGameObjectNotNull)
+			.addFunction("ResetSelectedObject", &Game::ResetSelectedObject)
 			.endNamespace();
 
 		getGlobalNamespace(L)
