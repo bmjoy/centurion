@@ -224,11 +224,12 @@ public:
 
 	Building(void);
 	~Building(void);
-protected:
 	/// <summary>
-	/// Protected method that checks if the object is placeable and sets the relative protected boolean
-	/// </summary>
+/// Protected method that checks if the object is placeable and sets the relative protected boolean
+/// </summary>
 	void CheckIfPlaceable(void) override;
+protected:
+
 private:
 	//game::ObjectUI* buildingUI;
 	bool waitingToBeErased;

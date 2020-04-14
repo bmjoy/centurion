@@ -254,6 +254,10 @@ std::tuple<bool, Settlement*> Building::IsNearToFriendlySettlement(void)
 		size_t numOfBuildings = settBuildings.size();
 		for (unsigned int buildingsCounter = 0; buildingsCounter < numOfBuildings && bSettlementDiscovered == false; buildingsCounter++)
 		{
+			//Avoid confrontation with itself during shifting
+			if (this->GetPickingID() == settBuildings[buildingsCounter]->GetPickingID())
+				continue;
+
 			//Calculate distance beetwen the two buildings
 			const float b_xPos = this->get_xPos();
 			const float b_yPos = this->get_yPos();

@@ -126,9 +126,9 @@ public:
 	const std::vector<Building*> GetBuildingsBelongToSettlement(void);
 
 	/// <summary>
-	/// This function returns the central building of the current settlement.
+	/// This function returns the central building pointer of the current settlement.
 	/// </summary>
-	/// <returns>A list of pointers to buildings; this list can be empty if the settlement hasn't got any building.</returns>
+	/// <returns>A pointer to the central building of the settlement.</returns>
 	Building* GetCentralBuilding(void);
 
 	/// <summary>
