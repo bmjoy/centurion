@@ -190,10 +190,10 @@ namespace Game
 			return (GObject::GetObjectByID(id) != nullptr);
 	}
 
-	bool Game::CreateObject(const string className, const float x, const float y, const unsigned int player)
+	GObject * Game::CreateObject(const string className, const float x, const float y, const unsigned int player)
 	{
-		bool bObjectCreated = false;
-		if (Engine::GetEnvironment() == MENU_ENV) return bObjectCreated;
+		GObject* gobj = nullptr;
+		if (Engine::GetEnvironment() == MENU_ENV) return gobj;
 		Game::Minimap::Update();
 
 		if (player <= MAX_NUMBER_OF_PLAYERS)
@@ -201,7 +201,7 @@ namespace Game
 			ClassesData::XMLClassData* objData = ClassesData::GetClassesData(className);
 			if (objData == nullptr)
 			{
-				return bObjectCreated;
+				return gobj;
 			}
 
 			string type = objData->GetClassType();
@@ -212,6 +212,7 @@ namespace Game
 				newBuilding->SetPlayer(player);
 				newBuilding->SetPosition(glm::vec3(x, y, 0));
 				newBuilding->Create(className);
+				gobj = newBuilding;
 
 			}
 			if (type == "cpp_decorationclass")
@@ -219,9 +220,10 @@ namespace Game
 				Decoration* newDecoration = new Decoration();
 				newDecoration->Create(className);
 				newDecoration->SetPosition(glm::vec3(x, y, 0));
+				gobj = newDecoration;
 			}
 		}
-		return bObjectCreated;
+		return gobj;
 	}
 };
 

@@ -186,7 +186,7 @@ namespace Game
 						glm::vec3 posAbs = glm::vec3(pos.x - posOffset.x, pos.y - posOffset.y, 0);
 						std::string className = _bld->Attribute("class");
 
-						Game::CreateObject(className, posAbs.x, posAbs.y, 1);
+						if (Game::CreateObject(className, posAbs.x, posAbs.y, 1) == nullptr) throw;
 					}
 				}
 			}

@@ -20,7 +20,7 @@
   <entry stringName="EDITOR_propertiesIDName" result="Nome identificativo:" />
   <entry stringName="EDITOR_propertiesSettlement" result="Nome dell'insediamento:" />
   <entry stringName="EDITOR_saveAs" result="Salva scenario come..." />
-  <entry stringName="EDITOR_saveBeforeNewOperation" result="La mappa attuale è stata modificata. Vuoi salvarla prima di uscire?" />
+  <entry stringName="EDITOR_saveBeforeNewOperation" result="La mappa attuale è stata modificata. Vuoi salvarla?" />
   <entry stringName="EDITOR_saveOverwrite" result="Esiste già una mappa con il nome specificato. Vuoi sovrascriverla?" />
   <entry stringName="EDITOR_terrainBrush" result="Pennelli terreno" />
   <entry stringName="EDITOR_Tools" result="Strumenti" />

@@ -103,6 +103,11 @@ namespace Game
 		void ShiftSelectedObject(void);
 
 		/// <summary>
+		/// This function moves an object in the editor map. 
+		/// </summary>
+		void GenerateRandomMap();
+
+		/// <summary>
 		/// This function returns a boolean that indicates if an object is being inserted
 		/// </summary>
 		/// <returns></returns>

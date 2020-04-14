@@ -48,7 +48,7 @@ namespace Game
 	/// <returns></returns>
 	bool IsGameObjectSelected(const unsigned int id);
 	bool IsGameObjectNotNull(const unsigned int id);
-	bool CreateObject(const std::string className, const float x, const float y, const unsigned int player);
+	GObject* CreateObject(const std::string className, const float x, const float y, const unsigned int player);
 
 #pragma endregion
 

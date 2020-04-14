@@ -252,69 +252,76 @@ namespace Game
 
 		void Game::Editor::InsertingObject(std::string type, std::string className)
 		{
-			// this function IS RUN EVERY FRAME (see Editor::Run)
-
-			// This if is true when information is passed by LUA
-			if (type.empty() == false && className.empty() == false)
+			try
 			{
-				if (type == "buildings")
+				// this function IS RUN EVERY FRAME (see Editor::Run)
+				// This if is true when information is passed by LUA
+				if (type.empty() == false && className.empty() == false)
 				{
-					Editor::tmpObject = new Building();
-				}
-				else if (type == "units")
-				{
-					//Editor::tmpObject = new Unit();
-				}
-				else if (type == "decorations")
-				{
-					Editor::tmpObject = new Decoration();
-				}
-				else
-					return;
+					if (type == "buildings")
+					{
+						Editor::tmpObject = new Building();
+					}
+					else if (type == "units")
+					{
+						//Editor::tmpObject = new Unit();
+					}
+					else if (type == "decorations")
+					{
+						Editor::tmpObject = new Decoration();
+					}
+					else
+						return;
 
-				Editor::tmpObject->Create(className, true);
-				Editor::tmpObject->SetPlayer(1);
-				Editor::tmpObject->MarkAsMoving();
-				EditorWindows::Hide();
-				EditorMenuBar::Hide();
-				return;
-			}
-
-			// this if is the one that is run every frame!!
-			if (Editor::tmpObject == nullptr)
-			{
-				return;
-			}
-
-			// if i'm here it means that i selected to insert an object but i want to abort the operation
-			if (Engine::Mouse::RightClick || Engine::Keyboard::IsKeyPressed(GLFW_KEY_ESCAPE))
-			{
-				delete Editor::tmpObject;
-				Editor::tmpObject = nullptr;
-				EditorMenuBar::Show();
-				EditorWindows::Show();
-				EditorUI::UpdateInfoText(L"");
-				Engine::Mouse::RightClick = false;
-				Engine::Keyboard::SetKeyStatus(GLFW_KEY_ESCAPE, 0);
-				return;
-			}
-
-			// if i'm here it means that i selected to insert an object and i want to place and create it
-			if (Engine::Mouse::LeftClick)
-			{
-				if (Editor::tmpObject->IsPlaceable() == true)
-				{
-					Game::CreateObject(tmpObject->GetClassName(), tmpObject->GetPosition().x, tmpObject->GetPosition().y, 1);
-					Minimap::Update();
-					Engine::Mouse::LeftClick = false;
+					Editor::tmpObject->Create(className, true);
+					Editor::tmpObject->SetPlayer(1);
+					Editor::tmpObject->MarkAsMoving();
+					EditorWindows::Hide();
+					EditorMenuBar::Hide();
 					return;
 				}
-			}
 
-			// if i'm here it means that i'm not placing or aborting and i'm choosing the object position
-			Editor::tmpObject->SetPosition(vec3(Engine::Mouse::GetXMapCoordinate(), Engine::Mouse::GetYMapCoordinate(), 0.f));
-			Editor::tmpObject->Render(false, 0);
-			Editor::tmpObject->SendInfoText(OBJ_INFOTEXT_INSERTING);
+				// this if is the one that is run every frame!!
+				if (Editor::tmpObject == nullptr)
+				{
+					return;
+				}
+
+				// if i'm here it means that i selected to insert an object but i want to abort the operation
+				if (Engine::Mouse::RightClick || Engine::Keyboard::IsKeyPressed(GLFW_KEY_ESCAPE))
+				{
+					delete Editor::tmpObject;
+					Editor::tmpObject = nullptr;
+					EditorMenuBar::Show();
+					EditorWindows::Show();
+					EditorUI::UpdateInfoText(L"");
+					Engine::Mouse::RightClick = false;
+					Engine::Keyboard::SetKeyStatus(GLFW_KEY_ESCAPE, 0);
+					return;
+				}
+
+				// if i'm here it means that i selected to insert an object and i want to place and create it
+				if (Engine::Mouse::LeftClick)
+				{
+					if (Editor::tmpObject->IsPlaceable() == true)
+					{
+						if (Game::CreateObject(tmpObject->GetClassName(), tmpObject->GetPosition().x, tmpObject->GetPosition().y, 1) == nullptr) throw;
+						Minimap::Update();
+						Engine::Mouse::LeftClick = false;
+						return;
+					}
+				}
+
+				// if i'm here it means that i'm not placing or aborting and i'm choosing the object position
+				Editor::tmpObject->SetPosition(vec3(Engine::Mouse::GetXMapCoordinate(), Engine::Mouse::GetYMapCoordinate(), 0.f));
+				Editor::tmpObject->Render(false, 0);
+				Editor::tmpObject->SendInfoText(OBJ_INFOTEXT_INSERTING);
+			}
+			catch (...)
+			{
+				throw;
+			}
+			
 		}
 
 		void Game::Editor::ShiftSelectedObject(void)
