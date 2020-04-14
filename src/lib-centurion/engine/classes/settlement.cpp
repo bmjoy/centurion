@@ -6,9 +6,8 @@ using namespace std;
 using namespace glm;
 
 
-Settlement::Settlement(const unsigned int par_player)
+Settlement::Settlement(const unsigned int par_player, const float x, const float y): player(par_player), position(x,y)
 {
-	this->player = par_player;
 	this->idName = "";
 	this->bIsIndipendent = false;
 	this->SetSettlementProperties();
@@ -18,7 +17,7 @@ Settlement::~Settlement(void)
 {
 }
 
-string Settlement::GetSettlementName(void)
+string Settlement::GetSettlementName(void) const
 {
 	return this->idName;
 }
@@ -28,12 +27,12 @@ void Settlement::SetSettlementName(const string par_settlementName)
 	this->idName = par_settlementName;
 }
 
-bool Settlement::IsIndipendent(void)
+bool Settlement::IsIndipendent(void) const
 {
 	return this->bIsIndipendent;
 }
 
-unsigned int Settlement::GetFood(void)
+unsigned int Settlement::GetFood(void) const
 {
 	return this->food;
 }
@@ -43,7 +42,7 @@ void Settlement::SetFood(const unsigned int par_food)
 	this->food = par_food <= FOOD_LIMIT ? par_food : FOOD_LIMIT;
 }
 
-int Settlement::GetGold(void)
+int Settlement::GetGold(void) const
 {
 	return this->gold;
 }
@@ -60,7 +59,7 @@ void Settlement::SetGold(int par_gold)
 	}
 }
 
-unsigned int Settlement::GetPopulation(void)
+unsigned int Settlement::GetPopulation(void) const
 {
 	return this->population;
 }
@@ -74,7 +73,7 @@ void Settlement::SetPopulation(const unsigned int par_population)
 	}
 }
 
-unsigned int Settlement::GetMaxPopulation(void)
+unsigned int Settlement::GetMaxPopulation(void) const
 {
 	return this->maxPopulation;
 }
@@ -84,7 +83,7 @@ void Settlement::SetMaxPopulation(const unsigned int par_max_population)
 	this->maxPopulation = par_max_population <= POPULATION_LIMIT ? par_max_population : POPULATION_LIMIT;
 }
 
-unsigned int Settlement::GetPlayer(void)
+unsigned int Settlement::GetPlayer(void) const
 {
 	return this->player;
 }
@@ -99,6 +98,11 @@ void Settlement::SetPlayer(const unsigned int par_player)
 			mapIterator->second->SetPlayer(par_player);
 		}
 	}
+}
+
+glm::vec2 Settlement::GetPosition(void) const
+{
+	return this->position;
 }
 
 const vector<Building*> Settlement::GetBuildingsBelongToSettlement(void)

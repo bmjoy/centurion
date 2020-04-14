@@ -55,7 +55,7 @@ public:
 	/// This function returns the player of the current object.
 	/// </summary>
 	/// <returns>The number of the player.</returns>
-	unsigned short int GetPlayer(void);
+	unsigned short int GetPlayer(void) const;
 
 	/// <summary>
 	/// (???) Da rivedere se l'object e una struttura.
@@ -81,7 +81,7 @@ public:
 	/// This function retrieves the unique picking ID of the current object.
 	/// </summary>
 	/// <returns></returns>
-	unsigned int GetPickingID(void);
+	unsigned int GetPickingID(void) const;
 
 	/// <summary>
 	/// (???) Da cancellare, forse.
@@ -93,7 +93,7 @@ public:
 	/// This function returns the radius of the current object.
 	/// </summary>
 	/// <returns>The radius of the current object.</returns>
-	float GetRadius(void);
+	float GetRadius(void) const;
 
 	/// <summary>
 	/// This function sets the radius of the current object.
@@ -105,7 +105,7 @@ public:
 	/// (???) Da cancellare perche un duplicato -> Da cancellare soprattutto nei vari XML.
 	/// </summary>
 	/// <returns></returns>
-	float GetSelectionRadius(void);
+	float GetSelectionRadius(void) const;
 
 	void SetSelectionRadius(const float par_selectionRadius);
 
@@ -131,7 +131,7 @@ public:
 	/// This function returns the name of the current object that will be shown when a single object is selected.
 	/// </summary>
 	/// <returns>The singular name of the object.</returns>
-	std::string GetSingularName(void);
+	std::string GetSingularName(void) const;
 
 	/// <summary>
 	/// This function sets the prural of the current object that will be shown when more objects belong to the same class are selected at the same time.
@@ -143,7 +143,7 @@ public:
 	/// This function returns the prural of the current object that will be shown when more objects belong to the same class are selected at the same time.
 	/// </summary>
 	/// <returns>The prural name.</returns>
-	std::string GetPluralName(void);
+	std::string GetPluralName(void) const;
 
 	/// <summary>
 	/// This function sets the displayed name of the current object. 
@@ -155,7 +155,7 @@ public:
 	/// This function return the dislayed name of the current object.
 	/// </summary>
 	/// <returns>The displayed name of the current object; if the current object doesn't have a script name, it singular name will be returned.</returns>
-	std::string GetDisplayedName(void);
+	std::string GetDisplayedName(void) const;
 
 	/// <summary>
 	/// This function sets the identification name of the current object. If the script name is already used, it will be setted using an empty string.
@@ -167,13 +167,13 @@ public:
 	/// This function returns the univocal identification name of the current object.
 	/// </summary>
 	/// <returns>The identification name of the current object; if the current object doesn't have a script name, an empty string will be returned.</returns>
-	std::string GetIDName(void);
+	std::string GetIDName(void) const;
 	
 	/// <summary>
 	/// This function returns the race ID of the current object.
 	/// </summary>
 	/// <returns>The race Id of the current object.</returns>
-	unsigned int GetRace(void);
+	unsigned int GetRace(void) const;
 
 	/// <summary>
 	/// (???) Da rivedere --> bisogna fare una corrispondenza nome razza ID (es. Rome = 0, Egypt = 1, ecc).
@@ -186,7 +186,7 @@ public:
 	/// This function return the race name of the current object.
 	/// </summary>
 	/// <returns>The race name of the current object.</returns>
-	std::string GetRaceName(void);
+	std::string GetRaceName(void) const;
 
 	/// <summary>
 	/// This function sets the race name of the current object.
@@ -198,7 +198,7 @@ public:
 	/// This function returns the sight og the current object.
 	/// </summary>
 	/// <returns>The sight of the current object.</returns>
-	unsigned int GetSight(void);
+	unsigned int GetSight(void) const;
 
 	/// <summary>
 	/// This function sets the sight of the current object.
@@ -210,7 +210,7 @@ public:
 	/// This function checks if the current object can be positioned into water or not.
 	/// </summary>
 	/// <returns>True if it can be positionated; false otherwise.</returns>
-	bool CanBePositionedIntoWater(void);
+	bool CanBePositionedIntoWater(void) const;
 
 	/// <summary>
 	/// This function allows to place the current object into water.
@@ -226,7 +226,7 @@ public:
 	/// This function checks if the the current object can be cloned in the editor.
 	/// </summary>
 	/// <returns>True if it can be cloned; false otherwise.</returns>
-	bool GetCanBeClonedInEditor(void);
+	bool GetCanBeClonedInEditor(void) const;
 
 	/// <summary>
 	/// This function sets if the current object can be cloned in the editor.
@@ -238,7 +238,7 @@ public:
 	/// This function checks if the current object is alway visibile in the game minimap.
 	/// </summary>
 	/// <returns>True if it is always visible; false otherwise.</returns>
-	bool GetAlwaysVisibleInGameMinimap(void);
+	bool GetAlwaysVisibleInGameMinimap(void) const;
 
 	/// <summary>
 	/// This function sets if the current object is always visible in the game minimap.
@@ -250,7 +250,7 @@ public:
 	/// This function return the type of the current object.
 	/// </summary>
 	/// <returns>The type of the current object.</returns>
-	std::string GetType(void);
+	std::string GetType(void) const;
 
 	/// <summary>
 	/// This function sets the type of the current object.
@@ -305,19 +305,19 @@ public:
 	/// This function returns the position of the current object.
 	/// </summary>
 	/// <returns></returns>
-	glm::vec3 GetPosition(void);
+	glm::vec3 GetPosition(void) const;
 
 	/// <summary>
 	/// This function returns only the x position of the current object.
 	/// </summary>
 	/// <returns>The x position.</returns>
-	float get_xPos(void);
+	float get_xPos(void) const;
 
 	/// <summary>
 	/// This function return the y position of the current object.
 	/// </summary>
 	/// <returns>The y position.</returns>
-	float get_yPos(void);
+	float get_yPos(void) const;
 
 	//Pass methods
 	void UpdatePass(void);

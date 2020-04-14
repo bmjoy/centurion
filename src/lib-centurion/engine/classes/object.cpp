@@ -24,7 +24,7 @@ GObject::GObject(void)
 	this->idName = "";
 }
 
-unsigned short int GObject::GetPlayer(void)
+unsigned short int GObject::GetPlayer(void) const
 {
 	return this->playerID;
 }
@@ -45,7 +45,7 @@ void GObject::Select(void)
 	this->bSelected = true;
 }
 
-unsigned int GObject::GetPickingID(void)
+unsigned int GObject::GetPickingID(void) const
 {
 	return this->pickingID;
 }
@@ -59,7 +59,7 @@ void GObject::SetPickingID(const unsigned int par_pickingID)
 	pickingColor = vec3(r / 255.f, g / 255.f, b / 255.f);
 }
 
-float GObject::GetRadius(void)
+float GObject::GetRadius(void) const
 {
 	return this->radius;
 }
@@ -69,7 +69,7 @@ void GObject::SetRadius(const float par_radius)
 	this->radius = par_radius;
 }
 
-float GObject::GetSelectionRadius(void)
+float GObject::GetSelectionRadius(void) const
 {
 	return this->selectionRadius;
 }
@@ -79,7 +79,7 @@ void GObject::SetSelectionRadius(const float par_selectionRadius)
 	this->selectionRadius = par_selectionRadius >= 0 ? par_selectionRadius : 0;
 }
 
-string GObject::GetClassName(void) const
+string GObject::GetClassName(void) const 
 {
 	return this->className;
 }
@@ -89,7 +89,7 @@ void GObject::SetClassName(string parClassName)
 	this->className = parClassName;
 }
 
-string GObject::GetType(void)
+string GObject::GetType(void) const
 {
 	return this->type;
 }
@@ -104,7 +104,7 @@ void GObject::SetSingularName(const string par_singularName)
 	this->singularName = par_singularName;
 }
 
-string GObject::GetSingularName(void)
+string GObject::GetSingularName(void) const
 {
 	return this->singularName;
 }
@@ -114,7 +114,7 @@ void GObject::SetPluralName(const string par_pluralName)
 	this->pluralName = par_pluralName;
 }
 
-string GObject::GetPluralName(void)
+string GObject::GetPluralName(void) const
 {
 	return this->pluralName;
 }
@@ -124,7 +124,7 @@ void GObject::SetDisplayedName(const std::string _displayedName)
 	this->displayedName = _displayedName;
 }
 
-std::string GObject::GetDisplayedName(void)
+std::string GObject::GetDisplayedName(void) const
 {
 	return (this->displayedName != singularName) ? displayedName : "";
 }
@@ -147,16 +147,16 @@ void GObject::SetIDName(const std::string _idName)
 		GObject::idNamesMap[_idName] = this->GetPickingID();; //Assign or replace identification name.
 }
 
-std::string GObject::GetIDName(void)
+std::string GObject::GetIDName(void) const
 {
 	return this->idName;
 }
 
-unsigned int GObject::GetRace(void)
+unsigned int GObject::GetRace(void) const
 {
 	return this->race;
 }
-string GObject::GetRaceName(void)
+string GObject::GetRaceName(void) const
 {
 	return this->raceName;
 }
@@ -170,7 +170,7 @@ void GObject::SetRace(const unsigned short int par_race)
 	this->race = par_race;
 }
 
-unsigned int GObject::GetSight(void)
+unsigned int GObject::GetSight(void) const
 {
 	return this->sight;
 }
@@ -179,7 +179,7 @@ void GObject::SetSight(const unsigned short int par_sight)
 	this-> sight = par_sight;
 }
 
-bool GObject::CanBePositionedIntoWater(void)
+bool GObject::CanBePositionedIntoWater(void) const
 {
 	return this->bIsWaterObject;
 }
@@ -192,7 +192,7 @@ void GObject::DenyPositioningIntoWater(void)
 	this->bIsWaterObject = false;
 }
 
-bool GObject::GetCanBeClonedInEditor(void)
+bool GObject::GetCanBeClonedInEditor(void) const
 {
 	return this->canBeClonedInEditor;
 }
@@ -201,7 +201,7 @@ void GObject::SetCanBeClonedInEditor(const bool par_canBeClonedInEditor)
 	this->canBeClonedInEditor = par_canBeClonedInEditor;
 }
 
-bool GObject::GetAlwaysVisibleInGameMinimap(void)
+bool GObject::GetAlwaysVisibleInGameMinimap(void) const
 {
 	return this->bAlwaysVisibleInGameMinimap;
 }
@@ -299,7 +299,8 @@ void GObject::Create(const string _className, const bool _temporary)
 
 	// pass data
 	this->pass_grid = Pass::GetPassGridPtr(this->className);
-	if (_temporary == false) {
+	if (_temporary == false) 
+	{
 		this->UpdatePass();
 	}
 
@@ -332,16 +333,16 @@ void GObject::SetPosition(const vec3 pos)
 	this->position = pos;
 }
 
-vec3 GObject::GetPosition(void)
+vec3 GObject::GetPosition(void) const
 {
 	return this->position;
 }
 
-float GObject::get_xPos(void)
+float GObject::get_xPos(void) const
 {
 	return (float)position.x;
 }
-float GObject::get_yPos(void)
+float GObject::get_yPos(void) const
 {
 	return (float)position.y;
 }

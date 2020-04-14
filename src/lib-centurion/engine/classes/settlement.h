@@ -32,8 +32,8 @@ public:
 	/// <summary>
 	/// This function return the name of the current settlement.
 	/// </summary>
-	/// <returns>The name of the current settlement.</returns>
-	std::string GetSettlementName(void);
+	/// <returns>The name of the current settlement. An empty string if the settlement hasn't hot a name.</returns>
+	std::string GetSettlementName(void) const;
 
 	/// <summary>
 	/// This function sets the name of the current settlement. This name can be usad into the scripts.
@@ -45,13 +45,13 @@ public:
 	/// This function checks if the settlement belong to a player that is not a human player or a player drived by the AI.
 	/// </summary>
 	/// <returns>True if it is indipendet; false otherwise.</returns>
-	bool IsIndipendent(void);
+	bool IsIndipendent(void) const;
 
 	/// <summary>
 	/// This functions returns the amount of food currently owned by the current settlement.
 	/// </summary>
 	/// <returns>The amount of food.</returns>
-	unsigned int GetFood(void);
+	unsigned int GetFood(void) const;
 
 	/// <summary>
 	/// This functions sets the amount of food currently owned by the current settlement.
@@ -63,7 +63,7 @@ public:
 	/// This function returns the amount of gold currently owned by the current settlement.
 	/// </summary>
 	/// <returns>A negative value if the current settlement has a debit; a value greater than or equal to 0 otherwise.</returns>
-	int GetGold(void);
+	int GetGold(void) const;
 
 	/// <summary>
 	/// This function sets the amount of gold currently owned by the current settlement.
@@ -75,7 +75,7 @@ public:
 	/// This function returns the population currentlyowned by the crrent settlement.
 	/// </summary>
 	/// <returns>The population value.</returns>
-	unsigned int GetPopulation(void);
+	unsigned int GetPopulation(void) const;
 
 	/// <summary>
 	/// This function sets the population currentlyowned by the crrent settlement.
@@ -87,7 +87,7 @@ public:
 	/// This function returns the max number of population that the current settlement can at most have.
 	/// </summary>
 	/// <returns>The max number of population.</returns>
-	unsigned int GetMaxPopulation(void);
+	unsigned int GetMaxPopulation(void) const;
 
 	/// <summary>
 	/// /// This function sets the max number of population that the current settlement can at most have.
@@ -99,13 +99,20 @@ public:
 	/// This function return the player to whom the current settlement belongs to.
 	/// </summary>
 	/// <returns>The playner number.</returns>
-	unsigned int GetPlayer(void);
+	unsigned int GetPlayer(void) const;
 
 	/// <summary>
 	/// This function sets the player to whom the current settlement belongs to.
 	/// </summary>
 	/// <param name="par_player">The number of the player.</param>
 	void SetPlayer(const unsigned int par_player);
+
+	/// <summary>
+	/// This function returns the position of the current settlement. 
+	/// The position corresponds to the position of the first central building previously created. 
+	/// </summary>
+	/// <returns>The position (x, y) of the current settlement.</returns>
+	glm::vec2 GetPosition(void) const;
 
 	/// <summary>
 	/// This function provides a list of all the buildings belonging to the current settlement.
@@ -131,7 +138,9 @@ public:
 	/// Public constructor.
 	/// </summary>
 	/// <param name="par_player">The player to whom the settlement belongs to.</param>
-	Settlement(const unsigned int par_player);
+	/// <param name="x">X position. It corresponds to the X position of the first central building previously created.</param>
+	/// <param name="y">Y position. It corresponds to the Y position of the first central building previously created.</param>
+	Settlement(const unsigned int par_player, const float x, const float y);
 
 	/// <summary>
 	/// The destructor.
@@ -140,6 +149,7 @@ public:
 private:
 	bool bIsIndipendent = false;
 	std::string idName;
+	glm::vec2 position;
 	unsigned int food;
 	int gold;
 	unsigned int player;

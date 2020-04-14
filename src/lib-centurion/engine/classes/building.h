@@ -34,7 +34,7 @@ public:
 	/// This funtion returns the settlement to whom the current building belong to. 
 	/// </summary>
 	/// <returns>A pointer to the settlement.</returns>
-	Settlement *GetSettlement(void);
+	Settlement *GetSettlement(void) const;
 
 	/// <summary>
 	/// This functions set the max health of the current building..
@@ -46,7 +46,7 @@ public:
 	/// This function returns the max health of the current building..
 	/// </summary>
 	/// <returns>The value of the max health of the current building</returns>
-	unsigned int GetMaxHealth(void);
+	unsigned int GetMaxHealth(void) const;
 
 	/// <summary>
 	/// This function sets a repair rate with which the repair building will be repaired 
@@ -60,7 +60,7 @@ public:
 	/// when its health is less than its max health.
 	/// </summary>
 	/// <returns>The value of the repair rate of the current building.</returns>
-	unsigned int GetRepairRate(void);
+	unsigned int GetRepairRate(void) const;
 
 	/// <summary>
 	/// This function sets the loyalty fear health percent of the current building.
@@ -76,7 +76,7 @@ public:
 	/// then the loyolty of the building will get down faster.
 	/// </summary>
 	/// <returns>The value of loyalty fear health percent of the current buuilding.</returns>
-	unsigned int GetLoyaltyFearHealthPercent(void);
+	unsigned int GetLoyaltyFearHealthPercent(void) const;
 
 	/// <summary>
 	/// Through this function it's possible to indicate if the current building can be
@@ -89,42 +89,42 @@ public:
 	/// This function checks if the current building can be clickable in minimap.
 	/// </summary>
 	/// <returns>True if it can be clickable; false otherwise.</returns>
-	bool IsClickableInMimimap(void);
+	bool IsClickableInMimimap(void) const;
 
 	/// <summary>
 	/// This function checks if the current building is a central building,
 	/// that is if it generate a new settlement,
 	/// </summary>
 	/// <returns>True if it is centra building; false otherwise.</returns>
-	bool IsCentralBuilding(void);
+	bool IsCentralBuilding(void) const;
 	
 	/// <summary>
 	/// This functionc checks if the the class of the current building is an heir of Village Hall class,
 	/// and consequently if it is a central building.
 	/// </summary>
 	/// <returns>True if it is an heir of VillageHall class; false otherwise.</returns>
-	bool IsVillageHall(void);
+	bool IsVillageHall(void) const;
 	
 	/// <summary>
 	/// This functionc checks if the the class of the current building is an heir of Townhall class,
 	/// and consequently if it is a central building.
 	/// </summary>
 	/// <returns>True if it is an heir of Townhall class; false otherwise.</returns>
-	bool IsTownhall(void);
+	bool IsTownhall(void) const;
 	
 	/// <summary>
 	/// This functionc checks if the the class of the current building is an heir of Outpost class,
 	/// and consequently if it is a central building.
 	/// </summary>
 	/// <returns>True if it is an heir of Outpost class; false otherwise.</returns>
-	bool IsOutpost(void);
+	bool IsOutpost(void) const;
 	
 	/// <summary>
 	/// This functionc checks if the the class of the current building is an heir of Shipyward class,
 	/// and consequently if it is a central building.
 	/// </summary>
 	/// <returns>True if it is an heir of Shipyard class; false otherwise.</returns>
-	bool IsShipyard(void);
+	bool IsShipyard(void) const;
 	
 	/// <summary>
 	/// This function allows the current building to produce gold if it couldn't previously. 
@@ -208,7 +208,7 @@ public:
 	/// <returns>True if it is near; false otherwise.</returns>
 	std::tuple<bool, Settlement*> IsNearToFriendlySettlement(void);
 
-	static std::vector<Settlement*>* GetSettlementListPtr(void) { return &settlementsList; }
+	static std::vector<Settlement*>* GetSettlementListPtr(void);
 
 	Building(void);
 	~Building(void);

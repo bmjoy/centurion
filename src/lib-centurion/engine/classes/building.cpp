@@ -29,7 +29,7 @@ Building::Building(void)
 	this->SetPosition(vec3(Engine::Mouse::GetXMapCoordinate(), Engine::Mouse::GetYMapCoordinate(), 10.f));
 }
 
-Settlement *Building::GetSettlement(void)
+Settlement *Building::GetSettlement(void) const
 {
 	return this->settlement;
 }
@@ -43,7 +43,7 @@ void Building::SetMaxHealth(const unsigned int par_maxHealth)
 	this->maxHealth = par_maxHealth;
 }
 
-unsigned int Building::GetMaxHealth(void)
+unsigned int Building::GetMaxHealth(void) const
 {
 	return this->maxHealth;
 }
@@ -53,7 +53,7 @@ void Building::SetRepairRate(const unsigned int par_repairRate)
 	this->repairRate = par_repairRate;
 }
 
-unsigned int Building::GetRepairRate(void)
+unsigned int Building::GetRepairRate(void) const
 {
 	return this->repairRate;
 }
@@ -63,7 +63,7 @@ void Building::SetLoyaltyFearHealthPercent(const unsigned int par_loyaltyFearHea
 	this->loyaltyFearHealthPercent = par_loyaltyFearHealthPercent;
 }
 
-unsigned int Building::GetLoyaltyFearHealthPercent(void)
+unsigned int Building::GetLoyaltyFearHealthPercent(void) const
 {
 	return this->loyaltyFearHealthPercent;
 }
@@ -73,32 +73,32 @@ void Building::CanBeClickableInMimimap(const bool par_clickable)
 	this->bIsClickableInMimimap = par_clickable;
 }
 
-bool Building::IsClickableInMimimap(void)
+bool Building::IsClickableInMimimap(void) const
 {
 	return this->bIsClickableInMimimap;
 }
 
-bool Building::IsCentralBuilding(void)
+bool Building::IsCentralBuilding(void) const
 {
 	return this->bIsCentralBuilding;
 }
 
-bool Building::IsVillageHall(void)
+bool Building::IsVillageHall(void) const
 {
 	return this->bIsVillageHall;
 }
 
-bool Building::IsTownhall(void)
+bool Building::IsTownhall(void) const
 {
 	return this->bIsTownhall;
 }
 
-bool Building::IsOutpost(void)
+bool Building::IsOutpost(void) const
 {
 	return this->bIsOutpost;
 }
 
-bool Building::IsShipyard(void)
+bool Building::IsShipyard(void) const
 {
 	return this->bIsShipyard;
 }
@@ -181,7 +181,7 @@ void Building::AssignSettlement(void)
 			this->settlement = std::get<1>(near);
 			if (this->settlement == nullptr)
 			{
-				this->settlement = new Settlement(this->GetPlayer());
+				this->settlement = new Settlement(this->GetPlayer(), this->get_xPos(), this->get_yPos());
 				Building::settlementsList.push_back(this->settlement);
 			}
 			this->settlement->AddBuildingToSettlement(this); //Here, it should be return always true.
@@ -262,6 +262,11 @@ std::tuple<bool, Settlement*> Building::IsNearToFriendlySettlement(void)
 		bSettlementDiscovered = true;
 	}
 	return std::make_tuple(bSettlementDiscovered, s);
+}
+
+std::vector<Settlement*>* Building::GetSettlementListPtr(void)
+{
+	return &(Building::settlementsList);
 }
 
 Building::~Building(void) 
