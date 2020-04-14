@@ -13,6 +13,13 @@ Settlement::Settlement(const unsigned int par_player, glm::vec3 * pos): player(p
 	this->SetSettlementProperties();
 }
 
+Settlement::Settlement()
+{
+	this->idName = "";
+	this->bIsIndipendent = false;
+	this->SetSettlementProperties();
+}
+
 Settlement::~Settlement(void)
 {
 }
@@ -103,6 +110,11 @@ void Settlement::SetPlayer(const unsigned int par_player)
 glm::vec3 Settlement::GetPosition(void) const
 {
 	return (*this->position);
+}
+
+void Settlement::SetPosition(glm::vec3* pos)
+{
+	position = pos;
 }
 
 const vector<Building*> Settlement::GetBuildingsBelongToSettlement(void)

@@ -39,13 +39,11 @@ namespace Game
 		{
 			try
 			{
-				string scenarioPath = "scenarios/" + scenarioName;
+				string scenarioPath = Folders::SCENARIOS + scenarioName;
 
 				Game::Map::LoadHeights(scenarioPath + "/heights");
 				Game::Map::LoadTexture(scenarioPath + "/texture");
 				Game::Map::LoadMapObjectsFromXml(scenarioPath + "/mapObjects.xml");
-
-				//UpdateSettlementBuildings();
 			}
 			catch (...)
 			{
@@ -163,7 +161,7 @@ namespace Game
 			}
 			catch (...)
 			{
-				Engine::GameClose();
+				throw;
 			}
 		}
 
@@ -172,10 +170,30 @@ namespace Game
 			try
 			{
 				// load buildings, settlements, decorations, units
+				tinyxml2::XMLDocument mapobjs;
+				mapobjs.LoadFile(xmlPath.c_str());
+
+				tinyxml2::XMLElement *_mapobjs = mapobjs.FirstChildElement("mapObjects");
+
+				// SETTLEMENTS
+				tinyxml2::XMLElement * _settls = _mapobjs->FirstChildElement("settlements");
+
+				for (tinyxml2::XMLElement* _settl = _settls->FirstChildElement("settlement"); _settl != NULL; _settl = _settl->NextSiblingElement())
+				{
+					glm::vec3 pos = glm::vec3(_settl->IntAttribute("x"), _settl->IntAttribute("y"), 0);
+					for (tinyxml2::XMLElement* _bld = _settl->FirstChildElement("building"); _bld != NULL; _bld = _bld->NextSiblingElement())
+					{
+						glm::vec3 posOffset = glm::vec3(_bld->IntAttribute("xOffset"), _bld->IntAttribute("yOffset"), 0);
+						glm::vec3 posAbs = glm::vec3(pos.x - posOffset.x, pos.y - posOffset.y, 0);
+						std::string className = _bld->Attribute("class");
+
+						Game::CreateObject(className, posAbs.x, posAbs.y, 1);
+					}
+				}
 			}
 			catch (...)
 			{
-				Engine::GameClose();
+				throw;
 			}
 		}
 

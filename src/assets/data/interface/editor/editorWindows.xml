@@ -3,251 +3,253 @@
   <!-- NEW SCENARIO WINDOW -->
 
   <editorWindow id="0">
-	<iframe id="0" type="editor" title="EDITOR_newScenario" position="x=Engine.WindowWidth/2-w/2; y=Engine.WindowHeight/2-h/2;" size="w=400; h=150;" isOpened="false">
-		<conditionScript function="">
-		  -- lua script
-		</conditionScript>
-		<openingScript>
-		  -- lua script
-		</openingScript>
-		<simpleTextArray>
-		  <simpleText id="0" name="EDITOR_newScenarioName" xOffset="20" yOffset="80" />
-		</simpleTextArray>
-		<buttonArray>
-		  <button text="WORD_Create" xOffset="335" yOffset="30">
-			<onclickScript>
-			  --lua script
-			  Editor.CloseWindow(0)
-			</onclickScript>
-		  </button>
-		  <button text="WORD_Close" xOffset="220" yOffset="30">
-			<onclickScript>
-			  --lua script
-			  Editor.CloseWindow(0)
-			</onclickScript>
-		  </button>
-		</buttonArray>
-		<textListArray></textListArray>
-		<textInputArray>
-		  <textInput textInputId="0" xOffset="20" yOffset="60" width="200" placeholder="EDITOR_defaultMapName" />
-		</textInputArray>
-	</iframe>
+    <iframe id="0" type="editor" title="EDITOR_newScenario" position="x=Engine.WindowWidth/2-w/2; y=Engine.WindowHeight/2-h/2;" size="w=400; h=150;" isOpened="false">
+      <conditionScript function="">
+        -- lua script
+      </conditionScript>
+      <openingScript>
+        -- lua script
+      </openingScript>
+      <simpleTextArray>
+        <simpleText id="0" name="EDITOR_newScenarioName" xOffset="20" yOffset="80" />
+      </simpleTextArray>
+      <buttonArray>
+        <button text="WORD_Create" xOffset="335" yOffset="30">
+          <onclickScript>
+            --lua script
+            Editor.CloseWindow(0)
+          </onclickScript>
+        </button>
+        <button text="WORD_Close" xOffset="220" yOffset="30">
+          <onclickScript>
+            --lua script
+            Editor.CloseWindow(0)
+          </onclickScript>
+        </button>
+      </buttonArray>
+      <textListArray></textListArray>
+      <textInputArray>
+        <textInput textInputId="0" xOffset="20" yOffset="60" width="200" placeholder="EDITOR_defaultMapName" />
+      </textInputArray>
+    </iframe>
   </editorWindow>
 
   <!-- OPEN SCENARIO WINDOW -->
 
   <editorWindow id="1">
-	<iframe id="1" type="editor" title="EDITOR_openScenario" position="x=Engine.WindowWidth/2-w/2; y=Engine.WindowHeight/2-h/2;" size="w=400; h=370;" isOpened="false">
-		<conditionScript function="">
-		  -- lua script
+    <iframe id="1" type="editor" title="EDITOR_openScenario" position="x=Engine.WindowWidth/2-w/2; y=Engine.WindowHeight/2-h/2;" size="w=400; h=370;" isOpened="false">
+      <conditionScript function="">
+        -- lua script
 
-		</conditionScript>
-		<openingScript>
-		  -- lua script
-		  _folderList = Engine.GetListOfFolders("scenarios")
-		  Iframe.GetIframeById(1):UpdateTextListById(0, _folderList)
-		</openingScript>
-		<simpleTextArray></simpleTextArray>
-		<buttonArray>
-		  <button text="WORD_Open" xOffset="335" yOffset="30">
-			<onclickScript>
-			  Editor.CloseWindow(1)
-			</onclickScript>
-		  </button>
-		  <button text="WORD_Close" xOffset="220" yOffset="30">
-			<onclickScript>
-			  Editor.CloseWindow(1)
-			</onclickScript>
-		  </button>
-		</buttonArray>
-		<textListArray>
-		  <textList textListId="0" xOffset="50" yOffset="320" maxOptions="10" width="270">
-		  </textList>
-		</textListArray>
-		<textInputArray></textInputArray>
-	</iframe>
+      </conditionScript>
+      <openingScript>
+        -- lua script
+        _folderList = Engine.GetListOfFolders("scenarios")
+        Iframe.GetIframeById(1):UpdateTextListById(0, _folderList)
+      </openingScript>
+      <simpleTextArray></simpleTextArray>
+      <buttonArray>
+        <button text="WORD_Open" xOffset="335" yOffset="30">
+          <onclickScript>
+            _scenarioName = Iframe.GetIframeById(1):GetTextListById(0):GetSelectedOption()
+            Editor.LoadScenario(_scenarioName)
+            Editor.CloseWindow(1)
+          </onclickScript>
+        </button>
+        <button text="WORD_Close" xOffset="220" yOffset="30">
+          <onclickScript>
+            Editor.CloseWindow(1)
+          </onclickScript>
+        </button>
+      </buttonArray>
+      <textListArray>
+        <textList textListId="0" xOffset="50" yOffset="320" maxOptions="10" width="270">
+        </textList>
+      </textListArray>
+      <textInputArray></textInputArray>
+    </iframe>
   </editorWindow>
 
   <!-- SAVE SCENARIO WINDOW -->
 
   <editorWindow id="2">
-	<iframe id="2" type="editor" title="EDITOR_saveAs" position="x=Engine.WindowWidth/2-w/2; y=Engine.WindowHeight/2-h/2;" size="w=400; h=150;" isOpened="false">
-		<conditionScript function="">
-		  -- lua script
-		</conditionScript>
-		<openingScript>
-		  -- lua script
-		</openingScript>
-		<simpleTextArray>
-		  <simpleText id="0" name="EDITOR_newScenarioName" xOffset="20" yOffset="80" />
-		</simpleTextArray>
-		<buttonArray>
-		  <button text="WORD_Save" xOffset="335" yOffset="30">
-			<onclickScript>
-        --lua script
-        _scenarioName = Iframe.GetIframeById(2):GetTextInputById(0):GetText()
-        Editor.SaveScenario(_scenarioName)
-        Editor.CloseWindow(2)
-      </onclickScript>
-		  </button>
-		  <button text="WORD_Close" xOffset="220" yOffset="30">
-			<onclickScript>
-			  --lua script
-			  Editor.CloseWindow(2)
-			</onclickScript>
-		  </button>
-		</buttonArray>
-		<textListArray></textListArray>
-		<textInputArray>
-		  <textInput textInputId="0" xOffset="20" yOffset="60" width="200" placeholder="EDITOR_defaultMapName" />
-		</textInputArray>
-	</iframe>
+    <iframe id="2" type="editor" title="EDITOR_saveAs" position="x=Engine.WindowWidth/2-w/2; y=Engine.WindowHeight/2-h/2;" size="w=400; h=150;" isOpened="false">
+      <conditionScript function="">
+        -- lua script
+      </conditionScript>
+      <openingScript>
+        -- lua script
+      </openingScript>
+      <simpleTextArray>
+        <simpleText id="0" name="EDITOR_newScenarioName" xOffset="20" yOffset="80" />
+      </simpleTextArray>
+      <buttonArray>
+        <button text="WORD_Save" xOffset="335" yOffset="30">
+          <onclickScript>
+            --lua script
+            _scenarioName = Iframe.GetIframeById(2):GetTextInputById(0):GetText()
+            Editor.SaveScenario(_scenarioName)
+            Editor.CloseWindow(2)
+          </onclickScript>
+        </button>
+        <button text="WORD_Close" xOffset="220" yOffset="30">
+          <onclickScript>
+            --lua script
+            Editor.CloseWindow(2)
+          </onclickScript>
+        </button>
+      </buttonArray>
+      <textListArray></textListArray>
+      <textInputArray>
+        <textInput textInputId="0" xOffset="20" yOffset="60" width="200" placeholder="EDITOR_defaultMapName" />
+      </textInputArray>
+    </iframe>
   </editorWindow>
 
   <!-- OBJECT PROPERTIES WINDOW -->
 
   <editorWindow id="3">
     <iframe id="3" type="editor" title="EDITOR_properties" position="x=Engine.WindowWidth/2-w/2; y=Engine.WindowHeight/2-h/2;" size="w=600; h=450;" isOpened="false">
-		<conditionScript function="ConditionProperties">
-		  -- lua script
-		  function ConditionProperties()
-		  condition1 = Mouse.RightClick
-		  condition2 = Game.IsObjectNotNull(Mouse.GetRightClickId())
-		  condition3 = Game.IsObjectSelected(Mouse.GetRightClickId())
-		  return condition1 and condition2 and condition3
-		  end
-		</conditionScript>
-		<openingScript>
-		  -- lua script
-		  Iframe.GetIframeById(3):UpdateStringBySimpleTextId(1, Selo():GetClassName())
-		  Iframe.GetIframeById(3):UpdateTextInputPlaceholder(0, Selo():GetIDName())
-		  Iframe.GetIframeById(3):UpdateTextInputPlaceholder(1, Selo():GetDisplayedName())
-		</openingScript>
-		<simpleTextArray>
-		  <simpleText id="0" name="EDITOR_propertiesClassName" xOffset="20" yOffset="-80" />
-		  <simpleText id="1" name="" xOffset="150" yOffset="-80" />
-		  <simpleText id="2" name="EDITOR_propertiesIDName" xOffset="20" yOffset="-110" />
-		  <simpleText id="3" name="EDITOR_propertiesDisplayedName" xOffset="20" yOffset="-140" />
-		</simpleTextArray>
-		<buttonArray>
-			<button text="WORD_Close" xOffset="400" yOffset="30">
-			<onclickScript>
-			  -- lua script
-			  Editor.CloseWindow(3)
-			</onclickScript>
-		  </button>
-		  <button text="WORD_Save" xOffset="520" yOffset="30">
-			<onclickScript>
-			  -- lua script
-			  Selo():SetIDName(Iframe.GetIframeById(3):GetTextInputById(0):GetText())
-			  Selo():SetDisplayedName(Iframe.GetIframeById(3):GetTextInputById(1):GetText())
-			  Editor.CloseWindow(3)
-			</onclickScript>
-		  </button>
-		</buttonArray>
-		<textListArray></textListArray>
-		<textInputArray>
-		  <textInput textInputId="0" xOffset="150" yOffset="-110" width="200" placeholder=""/>
-		  <textInput textInputId="1" xOffset="150" yOffset="-140" width="200" placeholder=""/>
-		</textInputArray>
-	</iframe>
+      <conditionScript function="ConditionProperties">
+        -- lua script
+        function ConditionProperties()
+        condition1 = Mouse.RightClick
+        condition2 = Game.IsObjectNotNull(Mouse.GetRightClickId())
+        condition3 = Game.IsObjectSelected(Mouse.GetRightClickId())
+        return condition1 and condition2 and condition3
+        end
+      </conditionScript>
+      <openingScript>
+        -- lua script
+        Iframe.GetIframeById(3):UpdateStringBySimpleTextId(1, Selo():GetClassName())
+        Iframe.GetIframeById(3):UpdateTextInputPlaceholder(0, Selo():GetIDName())
+        Iframe.GetIframeById(3):UpdateTextInputPlaceholder(1, Selo():GetDisplayedName())
+      </openingScript>
+      <simpleTextArray>
+        <simpleText id="0" name="EDITOR_propertiesClassName" xOffset="20" yOffset="-80" />
+        <simpleText id="1" name="" xOffset="150" yOffset="-80" />
+        <simpleText id="2" name="EDITOR_propertiesIDName" xOffset="20" yOffset="-110" />
+        <simpleText id="3" name="EDITOR_propertiesDisplayedName" xOffset="20" yOffset="-140" />
+      </simpleTextArray>
+      <buttonArray>
+        <button text="WORD_Close" xOffset="400" yOffset="30">
+          <onclickScript>
+            -- lua script
+            Editor.CloseWindow(3)
+          </onclickScript>
+        </button>
+        <button text="WORD_Save" xOffset="520" yOffset="30">
+          <onclickScript>
+            -- lua script
+            Selo():SetIDName(Iframe.GetIframeById(3):GetTextInputById(0):GetText())
+            Selo():SetDisplayedName(Iframe.GetIframeById(3):GetTextInputById(1):GetText())
+            Editor.CloseWindow(3)
+          </onclickScript>
+        </button>
+      </buttonArray>
+      <textListArray></textListArray>
+      <textInputArray>
+        <textInput textInputId="0" xOffset="150" yOffset="-110" width="200" placeholder=""/>
+        <textInput textInputId="1" xOffset="150" yOffset="-140" width="200" placeholder=""/>
+      </textInputArray>
+    </iframe>
   </editorWindow>
 
 
   <!-- ADD OBJECT WINDOW -->
 
   <editorWindow id="4">
-	<iframe id="4" type="editor" title="EDITOR_addObject" position="x=Engine.WindowWidth/2-w/2; y=0" size="w=600; h=250;" isOpened="false">
-		<conditionScript function="">
-		  -- lua script
+    <iframe id="4" type="editor" title="EDITOR_addObject" position="x=Engine.WindowWidth/2-w/2; y=0" size="w=600; h=250;" isOpened="false">
+      <conditionScript function="">
+        -- lua script
 
-		</conditionScript>
-		<openingScript>
-		  -- lua script
-		  _editorList1 = Editor.GetObjectTreeList1()
-		  Iframe.GetIframeById(4):UpdateTextListById(0, _editorList1, "EDITORTREE_")
-		  _editorList2 = Editor.GetObjectTreeList2(Iframe.GetIframeById(4):GetTextListById(0):GetSelectedOption())
-		  Iframe.GetIframeById(4):UpdateTextListById(1, _editorList2, "EDITORTREE_")
-		  _editorList3 = Editor.GetObjectTreeList3(Iframe.GetIframeById(4):GetTextListById(0):GetSelectedOption(), Iframe.GetIframeById(4):GetTextListById(1):GetSelectedOption())
-		  Iframe.GetIframeById(4):UpdateTextListById(2, _editorList3, "WORD_")
-		</openingScript>
-		<simpleTextArray></simpleTextArray>
-		<buttonArray>
-		  <button text="WORD_Close" xOffset="400" yOffset="30">
-			<onclickScript>
-			  --lua script
-			  Editor.CloseWindow(4)
-			</onclickScript>
-		  </button>
-		  <button text="WORD_Add" xOffset="520" yOffset="30">
-			<onclickScript>
-			  Editor.InsertObject(Iframe.GetIframeById(4):GetTextListById(0):GetSelectedOption(), Iframe.GetIframeById(4):GetTextListById(2):GetSelectedOption())
-			</onclickScript>
-		  </button>
-		</buttonArray>
-		<textListArray>
-		  <textList textListId="0" xOffset="20" yOffset="185" maxOptions="5" width="163">
-			<onclickScript>
-			  _editorList2 = Editor.GetObjectTreeList2(Iframe.GetIframeById(4):GetTextListById(0):GetSelectedOption())
-			  Iframe.GetIframeById(4):UpdateTextListById(1, _editorList2, "EDITORTREE_")
-			  _editorList3 = Editor.GetObjectTreeList3(Iframe.GetIframeById(4):GetTextListById(0):GetSelectedOption(), Iframe.GetIframeById(4):GetTextListById(1):GetSelectedOption())
-			  Iframe.GetIframeById(4):UpdateTextListById(2, _editorList3, "WORD_")
-			</onclickScript>
-		  </textList>
-		  <textList textListId="1" xOffset="220" yOffset="185" maxOptions="5" width="163">
-			<onclickScript>
-			  _editorList3 = Editor.GetObjectTreeList3(Iframe.GetIframeById(4):GetTextListById(0):GetSelectedOption(), Iframe.GetIframeById(4):GetTextListById(1):GetSelectedOption())
-			  Iframe.GetIframeById(4):UpdateTextListById(2, _editorList3, "WORD_")
-			</onclickScript>
-		  </textList>
-		  <textList textListId="2" xOffset="420" yOffset="185" maxOptions="5" width="163">
-		  </textList>
-		</textListArray>
-		<textInputArray></textInputArray>
-	</iframe>
+      </conditionScript>
+      <openingScript>
+        -- lua script
+        _editorList1 = Editor.GetObjectTreeList1()
+        Iframe.GetIframeById(4):UpdateTextListById(0, _editorList1, "EDITORTREE_")
+        _editorList2 = Editor.GetObjectTreeList2(Iframe.GetIframeById(4):GetTextListById(0):GetSelectedOption())
+        Iframe.GetIframeById(4):UpdateTextListById(1, _editorList2, "EDITORTREE_")
+        _editorList3 = Editor.GetObjectTreeList3(Iframe.GetIframeById(4):GetTextListById(0):GetSelectedOption(), Iframe.GetIframeById(4):GetTextListById(1):GetSelectedOption())
+        Iframe.GetIframeById(4):UpdateTextListById(2, _editorList3, "WORD_")
+      </openingScript>
+      <simpleTextArray></simpleTextArray>
+      <buttonArray>
+        <button text="WORD_Close" xOffset="400" yOffset="30">
+          <onclickScript>
+            --lua script
+            Editor.CloseWindow(4)
+          </onclickScript>
+        </button>
+        <button text="WORD_Add" xOffset="520" yOffset="30">
+          <onclickScript>
+            Editor.InsertObject(Iframe.GetIframeById(4):GetTextListById(0):GetSelectedOption(), Iframe.GetIframeById(4):GetTextListById(2):GetSelectedOption())
+          </onclickScript>
+        </button>
+      </buttonArray>
+      <textListArray>
+        <textList textListId="0" xOffset="20" yOffset="185" maxOptions="5" width="163">
+          <onclickScript>
+            _editorList2 = Editor.GetObjectTreeList2(Iframe.GetIframeById(4):GetTextListById(0):GetSelectedOption())
+            Iframe.GetIframeById(4):UpdateTextListById(1, _editorList2, "EDITORTREE_")
+            _editorList3 = Editor.GetObjectTreeList3(Iframe.GetIframeById(4):GetTextListById(0):GetSelectedOption(), Iframe.GetIframeById(4):GetTextListById(1):GetSelectedOption())
+            Iframe.GetIframeById(4):UpdateTextListById(2, _editorList3, "WORD_")
+          </onclickScript>
+        </textList>
+        <textList textListId="1" xOffset="220" yOffset="185" maxOptions="5" width="163">
+          <onclickScript>
+            _editorList3 = Editor.GetObjectTreeList3(Iframe.GetIframeById(4):GetTextListById(0):GetSelectedOption(), Iframe.GetIframeById(4):GetTextListById(1):GetSelectedOption())
+            Iframe.GetIframeById(4):UpdateTextListById(2, _editorList3, "WORD_")
+          </onclickScript>
+        </textList>
+        <textList textListId="2" xOffset="420" yOffset="185" maxOptions="5" width="163">
+        </textList>
+      </textListArray>
+      <textInputArray></textInputArray>
+    </iframe>
   </editorWindow>
 
   <!-- TERRAIN BRUSH WINDOW -->
 
   <editorWindow id="5">
-	<iframe id="5" type="editor" title="EDITOR_terrainBrush" position="x=Engine.WindowWidth/2-w/2; y=0" size="w=400; h=250;" isOpened="false">
-		<conditionScript function="">
-		  -- lua script
+    <iframe id="5" type="editor" title="EDITOR_terrainBrush" position="x=Engine.WindowWidth/2-w/2; y=0" size="w=400; h=250;" isOpened="false">
+      <conditionScript function="">
+        -- lua script
 
-		</conditionScript>
-		<openingScript>
-		  -- lua script
-		  _editorList1 = Editor.GetTerrainTreeList1()
-		  Iframe.GetIframeById(5):UpdateTextListById(0, _editorList1, "EDITORTREE_")
-		  _editorList2 = Editor.GetTerrainTreeList2(Iframe.GetIframeById(5):GetTextListById(0):GetSelectedOption())
-		  Iframe.GetIframeById(5):UpdateTextListById(1, _editorList2, "EDITORTREE_")
-		</openingScript>
-		<simpleTextArray></simpleTextArray>
-		<buttonArray>
-		  <button text="WORD_Close" xOffset="200" yOffset="30">
-			<onclickScript>
-			  --lua script
-			  Editor.CloseWindow(5)
-			</onclickScript>
-		  </button>
-		  <button text="WORD_Select" xOffset="320" yOffset="30">
-			<onclickScript>
-			  --lua script
-			  Editor.ChangeTerrain(Iframe.GetIframeById(5):GetTextListById(1):GetSelectedOption())
-			</onclickScript>
-		  </button>
-		</buttonArray>
-		<textListArray>
-		  <textList textListId="0" xOffset="20" yOffset="185" maxOptions="5" width="163">
-			<onclickScript>
-			  _editorList2 = Editor.GetTerrainTreeList2(Iframe.GetIframeById(5):GetTextListById(0):GetSelectedOption())
-			  Iframe.GetIframeById(5):UpdateTextListById(1, _editorList2, "EDITORTREE_")
-			</onclickScript>
-		  </textList>
-		  <textList textListId="1" xOffset="220" yOffset="185" maxOptions="5" width="163"></textList>
-		</textListArray>
-		<textInputArray></textInputArray>
-	</iframe>
+      </conditionScript>
+      <openingScript>
+        -- lua script
+        _editorList1 = Editor.GetTerrainTreeList1()
+        Iframe.GetIframeById(5):UpdateTextListById(0, _editorList1, "EDITORTREE_")
+        _editorList2 = Editor.GetTerrainTreeList2(Iframe.GetIframeById(5):GetTextListById(0):GetSelectedOption())
+        Iframe.GetIframeById(5):UpdateTextListById(1, _editorList2, "EDITORTREE_")
+      </openingScript>
+      <simpleTextArray></simpleTextArray>
+      <buttonArray>
+        <button text="WORD_Close" xOffset="200" yOffset="30">
+          <onclickScript>
+            --lua script
+            Editor.CloseWindow(5)
+          </onclickScript>
+        </button>
+        <button text="WORD_Select" xOffset="320" yOffset="30">
+          <onclickScript>
+            --lua script
+            Editor.ChangeTerrain(Iframe.GetIframeById(5):GetTextListById(1):GetSelectedOption())
+          </onclickScript>
+        </button>
+      </buttonArray>
+      <textListArray>
+        <textList textListId="0" xOffset="20" yOffset="185" maxOptions="5" width="163">
+          <onclickScript>
+            _editorList2 = Editor.GetTerrainTreeList2(Iframe.GetIframeById(5):GetTextListById(0):GetSelectedOption())
+            Iframe.GetIframeById(5):UpdateTextListById(1, _editorList2, "EDITORTREE_")
+          </onclickScript>
+        </textList>
+        <textList textListId="1" xOffset="220" yOffset="185" maxOptions="5" width="163"></textList>
+      </textListArray>
+      <textInputArray></textInputArray>
+    </iframe>
   </editorWindow>
 
 </editorWindows>

@@ -211,12 +211,14 @@ namespace Game
 				Building* newBuilding = new Building();
 				newBuilding->SetPlayer(player);
 				newBuilding->Create(className);
+				newBuilding->SetPosition(glm::vec3(x, y, 0));
 
 			}
 			if (type == "cpp_decorationclass")
 			{
 				Decoration* newDecoration = new Decoration();
 				newDecoration->Create(className);
+				newDecoration->SetPosition(glm::vec3(x, y, 0));
 			}
 		}
 		return bObjectCreated;

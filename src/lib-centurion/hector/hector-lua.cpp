@@ -92,6 +92,7 @@ namespace Hector
 			.addFunction("InsertObject", &Game::Editor::InsertingObject)
 			.addFunction("ChangeTerrain", &Game::Editor::ChangeTerrainType)
 			.addFunction("SaveScenario", &Game::Map::SaveScenario)
+			.addFunction("LoadScenario", &Game::Map::LoadScenario)
 			.endNamespace();
 
 		getGlobalNamespace(L)

@@ -115,6 +115,11 @@ public:
 	glm::vec3 GetPosition(void) const;
 
 	/// <summary>
+	/// This function sets the position of the current settlement using a pointer to the central building.
+	/// </summary>
+	void SetPosition(glm::vec3* pos);
+
+	/// <summary>
 	/// This function provides a list of all the buildings belonging to the current settlement.
 	/// </summary>
 	/// <returns>A list of pointers to buildings; this list can be empty if the settlement hasn't got any building.</returns>
@@ -141,6 +146,11 @@ public:
 	/// <param name="x">X position. It corresponds to the X position of the first central building previously created.</param>
 	/// <param name="y">Y position. It corresponds to the Y position of the first central building previously created.</param>
 	Settlement(const unsigned int par_player, glm::vec3 * pos);
+
+	/// <summary>
+	/// Public constructor.
+	/// </summary>
+	Settlement();
 
 	/// <summary>
 	/// The destructor.
