@@ -5,9 +5,8 @@
     <property name="pluralName" value="Objects"/>
     <property name="race" value="Egypt"/>
     <property name="player" value="1"/>
-    <property name="radius" value="1000"/>
     <property name="sight" value="600"/>
-    <property name="selectionRadius" value="600"/>
+    <property name="selectionselectionRadius" value="600"/>
     <property name="canBeClonedInEditor" value="true"/>
     <property name="isWaterObject" value="false"/>
     <property name="alwaysVisibleInGameMinimap" value="true"/> <!-- Fishes can't be seen in game minimap -->

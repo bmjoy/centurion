@@ -60,16 +60,6 @@ void GObject::SetPickingID(const unsigned int par_pickingID)
 	pickingColor = vec3(r / 255.f, g / 255.f, b / 255.f);
 }
 
-float GObject::GetRadius(void) const
-{
-	return this->radius;
-}
-
-void GObject::SetRadius(const float par_radius)
-{
-	this->radius = par_radius;
-}
-
 float GObject::GetSelectionRadius(void) const
 {
 	return this->selectionRadius;
@@ -625,8 +615,6 @@ void GObject::SetObjectProperties(ClassesData::XMLClassData &objData, const bool
 	string strProperty = "";
 
 	//Object's properties:
-	ClassesData::TryParseFloat(objData.GetPropertiesMap(), "radius", &fProperty);
-	this->radius = fProperty;
 	if (_temporary == true) 
 		return;
 	ClassesData::TryParseString(objData.GetPropertiesMap(), "singularName", &strProperty);

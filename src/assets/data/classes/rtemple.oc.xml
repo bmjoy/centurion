@@ -3,7 +3,7 @@
     <property name="singularName" value="Roman temple"/>
     <property name="pluralName" value="Roman temples"/>
     <property name="race" value="Rome"/>
-    <property name="radius" value="165"/>
+    <property name="selectionRadius" value="165"/>
     <property name="editorFilter1" value="buildings"/>
  	<property name="editorFilter2" value="romanstronghold"/>
     <property name="ent_path" value="assets/buildings/rome/temple/rtemple.oe.xml"/>

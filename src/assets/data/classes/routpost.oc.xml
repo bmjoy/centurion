@@ -3,7 +3,7 @@
     <property name="singularName" value="Roman outpost"/>
     <property name="pluralName" value="Roman outposts"/>
     <property name="race" value="Rome"/>
-    <property name="radius" value="500"/>
+    <property name="selectionRadius" value="500"/>
     <property name="editorFilter1" value="buildings"/>
  	<property name="editorFilter2" value="outposts"/>
     <property name="ent_path" value="assets/buildings/rome/outpost/routpost.oe.xml"/>

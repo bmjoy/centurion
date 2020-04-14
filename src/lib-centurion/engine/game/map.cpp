@@ -96,19 +96,18 @@ namespace Game
 				{
 					Settlement* settl = (*settlList)[i];
 
-					mapobjs << "\t\t<settlement name=\"" << settl->GetSettlementName() <<"\" x=\"" << settl->GetPosition().x << "\" y=\""<< settl->GetPosition().y << "\">\n";
+					mapobjs << "\t\t<settlement name=\"" << settl->GetSettlementName() <<"\" x=\"" << settl->GetPosition().x << "\" y=\""<< settl->GetPosition().y << "\" player=\"" << settl->GetPlayer() << "\" gold=\"" << settl->GetGold() << "\" food=\"" << settl->GetFood() << "\" pop=\"" << settl->GetPopulation() << "\" maxPop=\"" << settl->GetMaxPopulation() << "\">\n";
 					std::vector<Building*> bldInSettlList = settl->GetBuildingsBelongToSettlement();
 					for (auto bld : bldInSettlList)
 					{
 						int xOffset = int(settl->GetPosition().x - bld->GetPosition().x);
 						int yOffset = int(settl->GetPosition().y - bld->GetPosition().y);
-						mapobjs << "\t\t\t<building class=\"" << bld->GetClassName() << "\" xOffset=\"" << xOffset << "\" yOffset=\"" << yOffset << "\" />\n";
+						mapobjs << "\t\t\t<building class=\"" << bld->GetClassName() << "\" xOffset=\"" << xOffset << "\" yOffset=\"" << yOffset << "\" name=\"" << bld->GetDisplayedName() << "\" idName=\"" << bld->GetIDName() << "\" healthPerc=\"" << bld->GetPercentHealth() << "\" />\n";
 						bld->MarkAsSaved();
 					}
 					mapobjs << "\t\t</settlement>\n";
 				}
 				mapobjs << "\t</settlements>\n";
-
 
 				mapobjs << "</mapObjects>\n";
 				mapobjs.close();

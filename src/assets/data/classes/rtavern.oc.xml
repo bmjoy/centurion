@@ -3,7 +3,7 @@
     <property name="singularName" value="Roman tavern"/>
     <property name="pluralName" value="Roman taverns"/>
     <property name="race" value="Rome"/>
-    <property name="radius" value="190"/>
+    <property name="selectionRadius" value="190"/>
     <property name="editorFilter1" value="buildings"/>
  	<property name="editorFilter2" value="romanstronghold"/>
     <property name="ent_path" value="assets/buildings/rome/tavern/rtavern.oe.xml"/>

@@ -3,7 +3,7 @@
     <property name="singularName" value="Temple of Horus and Anubis"/>
     <property name="pluralName" value="Temples of Horus and Anubis"/>
     <property name="race" value="Egypt"/>
-    <property name="radius" value="165"/>
+    <property name="selectionRadius" value="165"/>
     <property name="editorFilter1" value="buildings"/>
  	<property name="editorFilter2" value="egyptianstronghold"/>
     <property name="ent_path" value="assets/buildings/egypt/templeofhorusandanubis/etempleofhorusandanubis.oe.xml"/>

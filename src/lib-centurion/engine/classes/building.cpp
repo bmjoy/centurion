@@ -48,6 +48,16 @@ unsigned int Building::GetMaxHealth(void) const
 	return this->maxHealth;
 }
 
+void Building::SetPercentHealth(const unsigned int par_hPercent)
+{
+	this->hPercent = par_hPercent;
+}
+
+unsigned int Building::GetPercentHealth(void) const
+{
+	return this->hPercent;
+}
+
 void Building::SetRepairRate(const unsigned int par_repairRate)
 {
 	this->repairRate = par_repairRate;

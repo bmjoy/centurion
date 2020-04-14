@@ -3,7 +3,7 @@
     <property name="singularName" value="Roman townhall"/>
     <property name="pluralName" value="Roman townhalls"/>
     <property name="race" value="Rome"/>
-    <property name="radius" value="170"/>
+    <property name="selectionRadius" value="170"/>
     <property name="editorFilter1" value="buildings"/>
  	<property name="editorFilter2" value="romanstronghold"/>
     <property name="ent_path" value="assets/buildings/rome/townhall/rtownhall.oe.xml"/>

@@ -4,6 +4,7 @@
   <entry stringName="EDITOR_cancelBrush" result="--" />
   <entry stringName="EDITOR_canMoveStructure" result="--" />
   <entry stringName="EDITOR_defaultMapName" result="Intitulado" />
+  <entry stringName="EDITOR_deleteSettlement" result="--" />
   <entry stringName="EDITOR_Edit" result="Editar" />
   <entry stringName="EDITOR_Edit_Properties" result="Editar propiedades de objeto" />
   <entry stringName="EDITOR_Edit_UpdateNormals" result="Actualizar Normales" />
@@ -19,6 +20,8 @@
   <entry stringName="EDITOR_propertiesIDName" result="Nombre identificativo:" />
   <entry stringName="EDITOR_propertiesSettlement" result="Nombre del asentamiento:" />
   <entry stringName="EDITOR_saveAs" result="Guardar el escenario como..." />
+  <entry stringName="EDITOR_saveBeforeNewOperation" result="--" />
+  <entry stringName="EDITOR_saveOverwrite" result="--" />
   <entry stringName="EDITOR_terrainBrush" result="Pinceles de terreno" />
   <entry stringName="EDITOR_Tools" result="Herramientas" />
   <entry stringName="EDITOR_Tools_AddObject" result="Activar / Desactivar la ventana Agregar objeto" />
@@ -103,6 +106,6 @@
   <entry stringName="WORD_RTownhall" result="Foro" />
   <entry stringName="WORD_Save" result="Guardar" />
   <entry stringName="WORD_SaveAs" result="Guardar como..." />
-  <entry stringName="WORD_Select" result="--" />
+  <entry stringName="WORD_Select" result="Seleccione" />
   <entry stringName="WORD_yes" result="Sí" />
 </translationTable>

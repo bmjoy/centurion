@@ -37,16 +37,28 @@ public:
 	Settlement *GetSettlement(void) const;
 
 	/// <summary>
-	/// This functions set the max health of the current building..
+	/// This functions set the max health of the current building.
 	/// </summary>
 	/// <param name="par_maxHealth">The max health of the building.</param>
 	void SetMaxHealth(const unsigned int par_maxHealth);
 
 	/// <summary>
-	/// This function returns the max health of the current building..
+	/// This function returns the max health of the current building.
 	/// </summary>
 	/// <returns>The value of the max health of the current building</returns>
 	unsigned int GetMaxHealth(void) const;
+
+	/// <summary>
+	/// This functions set the health's percentage of the current building over the max health, to save informations about partial damages.
+	/// </summary>
+	/// <param name="par_maxHealth">The health's percentage of the building.</param>
+	void SetPercentHealth(const unsigned int par_hPercent);
+
+	/// <summary>
+	/// This function returns the health's percentage value of the current building.
+	/// </summary>
+	/// <returns>The value of the health's percentage of the current building</returns>
+	unsigned int GetPercentHealth(void) const;
 
 	/// <summary>
 	/// This function sets a repair rate with which the repair building will be repaired 
@@ -65,7 +77,7 @@ public:
 	/// <summary>
 	/// This function sets the loyalty fear health percent of the current building.
 	/// If the health of the current building is less than the value of this parameter, 
-	/// then the loyolty of the building will get down faster.
+	/// then the loyalty of the building will get down faster.
 	/// </summary>
 	/// <param name="par_loyaltyFearHealthPercent"></param>
 	void SetLoyaltyFearHealthPercent(const unsigned int par_loyaltyFearHealthPercent);
@@ -223,6 +235,7 @@ private:
 	bool bIsCreated;
 	gui::Circle circle[2];
 	unsigned int maxHealth;
+	unsigned int hPercent;
 	unsigned int repairRate;
 	unsigned int loyaltyFearHealthPercent;
 	bool bIsClickableInMimimap = false;

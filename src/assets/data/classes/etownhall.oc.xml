@@ -3,7 +3,7 @@
     <property name="singularName" value="Egyptian townhall"/>
     <property name="pluralName" value="Egyptian townhalls"/>
     <property name="race" value="Egypt"/>
-    <property name="radius" value="170"/>
+    <property name="selectionRadius" value="170"/>
     <property name="editorFilter1" value="buildings"/>
  	<property name="editorFilter2" value="egyptianstronghold"/>
     <property name="ent_path" value="assets/buildings/egypt/townhall/etownhall.oe.xml"/>

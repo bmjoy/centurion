@@ -3,7 +3,7 @@
     <property name="singularName" value="Roman arena"/>
     <property name="pluralName" value="Roman arenas"/>
     <property name="race" value="Rome"/>
-    <property name="radius" value="360"/>
+    <property name="selectionRadius" value="360"/>
     <property name="editorFilter1" value="buildings"/>
  	<property name="editorFilter2" value="romanstronghold"/>
     <property name="ent_path" value="assets/buildings/rome/arena/rarena.oe.xml"/>

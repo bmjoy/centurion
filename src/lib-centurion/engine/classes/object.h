@@ -93,20 +93,12 @@ public:
 	/// This function returns the radius of the current object.
 	/// </summary>
 	/// <returns>The radius of the current object.</returns>
-	float GetRadius(void) const;
+	float GetSelectionRadius(void) const;
 
 	/// <summary>
 	/// This function sets the radius of the current object.
 	/// </summary>
 	/// <param name="par_radius">The radius of the current object. It should be a value greater than 0.</param>
-	void SetRadius(const float par_radius);
-
-	/// <summary>
-	/// (???) Da cancellare perche un duplicato -> Da cancellare soprattutto nei vari XML.
-	/// </summary>
-	/// <returns></returns>
-	float GetSelectionRadius(void) const;
-
 	void SetSelectionRadius(const float par_selectionRadius);
 
 	/// <summary>
@@ -469,7 +461,6 @@ private:
 	unsigned int race;
 	unsigned int sight;
 	float selectionRadius;
-	float radius;
 	std::string singularName;
 	std::string pluralName;
 	std::string displayedName;

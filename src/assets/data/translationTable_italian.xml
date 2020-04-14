@@ -4,6 +4,7 @@
   <entry stringName="EDITOR_cancelBrush" result="Clicca con il tasto DESTRO del mouse o ESC per annullare l'operazione." />
   <entry stringName="EDITOR_canMoveStructure" result="Tieni premuto il tasto SINISTRO del mouse per spostare la struttura. Rilascia il tasto SINISTRO del mouse per annullare l'operazione." />
   <entry stringName="EDITOR_defaultMapName" result="Senza titolo" />
+  <entry stringName="EDITOR_deleteSettlement" result="L'eliminazione di questa struttura comporta anche la cancellazione del resto dell'insediamento. Vuoi procedere?" />
   <entry stringName="EDITOR_Edit" result="Modifica" />
   <entry stringName="EDITOR_Edit_Properties" result="Modifica proprietà oggetto" />
   <entry stringName="EDITOR_Edit_UpdateNormals" result="Ricalcola Normali" />
@@ -19,6 +20,8 @@
   <entry stringName="EDITOR_propertiesIDName" result="Nome identificativo:" />
   <entry stringName="EDITOR_propertiesSettlement" result="Nome dell'insediamento:" />
   <entry stringName="EDITOR_saveAs" result="Salva scenario come..." />
+  <entry stringName="EDITOR_saveBeforeNewOperation" result="La mappa attuale è stata modificata. Vuoi salvarla prima di uscire?" />
+  <entry stringName="EDITOR_saveOverwrite" result="Esiste già una mappa con il nome specificato. Vuoi sovrascriverla?" />
   <entry stringName="EDITOR_terrainBrush" result="Pennelli terreno" />
   <entry stringName="EDITOR_Tools" result="Strumenti" />
   <entry stringName="EDITOR_Tools_AddObject" result="Attiva/Disattiva la finestra Aggiungi oggetto" />
