@@ -140,7 +140,7 @@ public:
 	/// <param name="par_player">The player to whom the settlement belongs to.</param>
 	/// <param name="x">X position. It corresponds to the X position of the first central building previously created.</param>
 	/// <param name="y">Y position. It corresponds to the Y position of the first central building previously created.</param>
-	Settlement(const unsigned int par_player, const float x, const float y);
+	Settlement(const unsigned int par_player, glm::vec2 pos);
 
 	/// <summary>
 	/// The destructor.
@@ -149,7 +149,7 @@ public:
 private:
 	bool bIsIndipendent = false;
 	std::string idName;
-	glm::vec2 position;
+	glm::vec2 *position;
 	unsigned int food;
 	int gold;
 	unsigned int player;

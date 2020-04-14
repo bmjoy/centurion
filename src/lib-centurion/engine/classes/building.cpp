@@ -181,7 +181,7 @@ void Building::AssignSettlement(void)
 			this->settlement = std::get<1>(near);
 			if (this->settlement == nullptr)
 			{
-				this->settlement = new Settlement(this->GetPlayer(), this->get_xPos(), this->get_yPos());
+				this->settlement = new Settlement(this->GetPlayer(), this->GetPosition());
 				Building::settlementsList.push_back(this->settlement);
 			}
 			this->settlement->AddBuildingToSettlement(this); //Here, it should be return always true.
