@@ -323,7 +323,6 @@ namespace Game
 
 			if (EditorWindows::IsThereAnyWindowOpen() == true) return;
 
-
 			// if no object is selected --> exit
 			GObject* obj = Game::GetSelectedObject();
 			if (obj == nullptr) return;

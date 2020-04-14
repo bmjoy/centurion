@@ -33,6 +33,7 @@ Settlement *Building::GetSettlement(void) const
 {
 	return this->settlement;
 }
+
 void Building::SetSettlement(Settlement *par_settlement)
 {
 	this->settlement = par_settlement;

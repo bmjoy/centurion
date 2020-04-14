@@ -127,6 +127,11 @@ const vector<Building*> Settlement::GetBuildingsBelongToSettlement(void)
 	return list;
 }
 
+Building* Settlement::GetCentralBuilding(void)
+{
+	return GetBuildingsBelongToSettlement()[0];
+}
+
 bool Settlement::AddBuildingToSettlement(Building* b)
 {
 	bool bAddCorrectly = false;

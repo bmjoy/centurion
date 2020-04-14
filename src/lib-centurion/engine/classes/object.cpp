@@ -553,7 +553,19 @@ void GObject::SendInfoText(const unsigned int method)
 
 	if (method == OBJ_INFOTEXT_MOVING)
 	{
-		if (this->AsBuilding()->IsCentralBuilding())
+		//Calculate distance beetwen the two buildings
+		const float b_xPos = this->get_xPos();
+		const float b_yPos = this->get_yPos();
+		const float xPos = this->AsBuilding()->GetSettlement()->GetCentralBuilding()->get_xPos();
+		const float yPos = this->AsBuilding()->GetSettlement()->GetCentralBuilding()->get_yPos();
+		const float distance = sqrt(pow(b_xPos - xPos, 2) + pow(b_yPos - yPos, 2));
+		//If the two buildings are close enough
+		if (distance >= MAX_DISTANCE)
+		{
+			std::wstring infoText = TranslationsTable::GetWTranslation(Engine::Data::GetWordFromDictionaryById(2));
+			EditorUI::UpdateInfoText(infoText);
+		}
+		else
 		{
 			if (this->IsPlaceable() == true)
 			{
@@ -564,29 +576,6 @@ void GObject::SendInfoText(const unsigned int method)
 			{
 				std::wstring infoText = TranslationsTable::GetWTranslation(Engine::Data::GetWordFromDictionaryById(1));
 				EditorUI::UpdateInfoText(infoText);
-			}
-			//TO DO = IsNearToFriendlySettlement(); anche per le strutture centrali (VEDI GITHUB)
-		}
-		else
-		{
-			std::tuple near = this->AsBuilding()->IsNearToFriendlySettlement();
-			if (std::get<0>(near) == false)
-			{
-				std::wstring infoText = TranslationsTable::GetWTranslation(Engine::Data::GetWordFromDictionaryById(2));
-				EditorUI::UpdateInfoText(infoText);
-			}
-			else
-			{
-				if (this->IsPlaceable() == true)
-				{
-					std::wstring infoText = TranslationsTable::GetWTranslation(Engine::Data::GetWordFromDictionaryById(4));
-					EditorUI::UpdateInfoText(infoText);
-				}
-				else
-				{
-					std::wstring infoText = TranslationsTable::GetWTranslation(Engine::Data::GetWordFromDictionaryById(1));
-					EditorUI::UpdateInfoText(infoText);
-				}
 			}
 		}
 	}

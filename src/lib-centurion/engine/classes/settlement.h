@@ -12,15 +12,15 @@
 #include "building.h"
 
 #ifndef POPULATION_LIMIT
-#define POPULATION_LIMIT   10000
+#define POPULATION_LIMIT 10000
 #endif 
 
 #ifndef GOLD_LIMIT
-#define GOLD_LIMIT   1000000000
+#define GOLD_LIMIT 1000000000
 #endif 
 
 #ifndef FOOD_LIMIT
-#define FOOD_LIMIT   1000000000
+#define FOOD_LIMIT 1000000000
 #endif 
 
 /// <summary>
@@ -124,6 +124,12 @@ public:
 	/// </summary>
 	/// <returns>A list of pointers to buildings; this list can be empty if the settlement hasn't got any building.</returns>
 	const std::vector<Building*> GetBuildingsBelongToSettlement(void);
+
+	/// <summary>
+	/// This function returns the central building of the current settlement.
+	/// </summary>
+	/// <returns>A list of pointers to buildings; this list can be empty if the settlement hasn't got any building.</returns>
+	Building* GetCentralBuilding(void);
 
 	/// <summary>
 	/// This function allows to add a new building to the current settlement.
