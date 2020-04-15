@@ -32,8 +32,9 @@ namespace Game
 		// Private variables
 		namespace
 		{
-			bool isGridEnabled = false;
-			string MapName = "";
+			std::string MAP_NAME = "";
+			bool IS_MAP_EDITED = false;
+			bool IS_GRID_ENABLED = false;
 		}
 
 		void Game::Map::LoadScenario(const string scenarioName)
@@ -69,6 +70,7 @@ namespace Game
 				Game::Map::SaveTexture(scenarioPath + "/texture");
 				Game::Map::SaveMapObjectsToXml(scenarioPath + "/mapObjects.xml");
 				Game::Map::SetName(scenarioName); //This would be saved into a specific file among other properties
+				Game::Map::MarkAsNotEdited();
 
 				Logger::LogMessage msg = Logger::LogMessage("The scenario is saved with the following name: \"" + scenarioName + "\"", "Info", "Game", "Map", "SaveScenario");
 				Logger::Info(msg);
@@ -279,32 +281,47 @@ namespace Game
 
 		void SetName(const std::string name)
 		{
-			Game::Map::MapName = name;
+			Game::Map::MAP_NAME = name;
 		}
 
 		const std::string GetName()
 		{
-			return Game::Map::MapName;
+			return Game::Map::MAP_NAME;
+		}
+
+		void MarkAsEdited(void)
+		{
+			IS_MAP_EDITED = true;
+		}
+
+		void MarkAsNotEdited(void)
+		{
+			IS_MAP_EDITED = false;
+		}
+
+		bool IsMapEdited(void)
+		{
+			return IS_MAP_EDITED;
 		}
 
 		bool Game::Map::IsGridEnabled(void)
 		{
-			return Game::Map::isGridEnabled;
+			return Game::Map::IS_GRID_ENABLED;
 		}
 
 		void Game::Map::EnableGrid(void)
 		{
-			Game::Map::isGridEnabled = true;
+			Game::Map::IS_GRID_ENABLED = true;
 		}
 
 		void Game::Map::DisableGrid(void)
 		{
-			Game::Map::isGridEnabled = false;
+			Game::Map::IS_GRID_ENABLED = false;
 		}
 
 		void Game::Map::Reset(void)
 		{
-			Game::Map::isGridEnabled = false;
+			Game::Map::IS_GRID_ENABLED = false;
 			Pass::ClearGrid();
 			Game::Mapgen::ResetTexturesAndHeights();
 			GLItems::MapTerrain()->updateHeightsBuffer();
@@ -331,7 +348,7 @@ namespace Game
 		void Game::Map::Render(const bool tracing)
 		{
 			GLItems::MapTerrain()->render(tracing);
-			if (Game::Map::isGridEnabled && !tracing)
+			if (Game::Map::IS_GRID_ENABLED && !tracing)
 			{
 				GLItems::MapGrid()->render();
 			}

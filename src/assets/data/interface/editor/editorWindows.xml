@@ -155,10 +155,11 @@
       </conditionScript>
       <openingScript>
         -- lua script
-        Iframe.GetIframeById(4):UpdateStringBySimpleTextId(1, Selo():GetClassName())
-        Iframe.GetIframeById(4):UpdateTextInputPlaceholder(0, Selo():GetIDName())
-        Iframe.GetIframeById(4):UpdateTextInputPlaceholder(1, Selo():GetDisplayedName())
-        Iframe.GetIframeById(4):UpdateTextInputPlaceholder(2, Selo():AsBuilding():GetSettlement():GetSettlementName())
+        thisIframe = Iframe.GetIframeById(4)
+        thisIframe:UpdateStringBySimpleTextId(1, Selo():GetClassName())
+        thisIframe:UpdateTextInputPlaceholder(0, Selo():GetIDName())
+        thisIframe:UpdateTextInputPlaceholder(1, Selo():GetDisplayedName())
+        thisIframe:UpdateTextInputPlaceholder(2, Selo():AsBuilding():GetSettlement():GetSettlementName())
       </openingScript>
       <simpleTextArray>
         <simpleText id="0" name="EDITOR_propertiesClassName" xOffset="20" yOffset="-80" />
@@ -198,9 +199,13 @@
 
   <editorWindow id="5" closeOtherWindowsWhenOpen="true">
     <iframe id="5" type="editor" title="EDITOR_addObject" position="x=Engine.WindowWidth/2-w/2; y=0" size="w=600; h=250;" isOpened="false">
-      <conditionScript function="">
+      <conditionScript function="ConditionAddObject">
         -- lua script
-
+        function ConditionAddObject()
+        condition1 = Keyboard.IsKeyPressed(Keyboard.KEY_LEFT_CONTROL)
+        print(condition1)
+        return false
+        end
       </conditionScript>
       <openingScript>
         -- lua script

@@ -34,7 +34,7 @@ namespace Hector
 		Console C;
 	};
 
-	void Hector::AddGlfwKeysToNamespace(void);
+	void AddGlfwKeysToNamespace(void);
 
 	void Hector::Initialize()
 	{
@@ -118,9 +118,11 @@ namespace Hector
 			.addFunction("GetClassName", &GObject::GetClassName)
 			.addFunction("GetIDName", &GObject::GetIDName)
 			.addFunction("SetIDName", &GObject::SetIDName)
+			.addFunction("GetID", &GObject::GetPickingID)
 			.addFunction("GetDisplayedName", &GObject::GetDisplayedName)
 			.addFunction("SetDisplayedName", &GObject::SetDisplayedName)
 			.addFunction("AsBuilding", &GObject::AsBuilding)
+			.addStaticFunction("Remove", &GObject::RemoveGameObject)
 			.endClass();
 
 		getGlobalNamespace(L)
@@ -372,6 +374,7 @@ namespace Hector
 	{
 		getGlobalNamespace(L)
 			.beginNamespace("Keyboard")
+			.addFunction("IsKeyPressed", &Engine::Keyboard::IsKeyPressed)
 			.addVariable("KEY_SPACE", &Engine::Keyboard::KEY_SPACE)
 			.addVariable("KEY_APOSTROPHE", &Engine::Keyboard::KEY_APOSTROPHE)
 			.addVariable("KEY_COMMA", &Engine::Keyboard::KEY_COMMA)

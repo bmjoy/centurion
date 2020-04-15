@@ -130,6 +130,21 @@ namespace Game
 		/// <returns>The name of the map</returns>
 		const std::string GetName();
 
+		/// <summary>
+		/// Mark the current map as edited 
+		/// </summary>
+		void MarkAsEdited(void);
+
+		/// <summary>
+		/// Mark the current map as not edited 
+		/// </summary>
+		void MarkAsNotEdited(void);
+
+		/// <summary>
+		/// Return a boolean that returns if the current map has been edited 
+		/// </summary>
+		bool IsMapEdited(void);
+
 		extern bool Wireframe;
 
 	};
