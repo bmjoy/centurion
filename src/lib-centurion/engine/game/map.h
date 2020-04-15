@@ -28,14 +28,20 @@ namespace Game
 		/// <summary>
 		/// This function loads a new scenario. It can throw an exception if an error occurs during the loading of the scenario.
 		/// </summary>
-		/// <param name="scenarioName">The name of the scanario (not the path!).</param>
+		/// <param name="scenarioName">The name of the scenario (not the path!).</param>
 		void LoadScenario(const std::string scenarioName);
 
 		/// <summary>
 		/// This function saves a scenario. 
 		/// </summary>
-		/// <param name="scenarioName">The name of the scanario (not the path!).</param>
+		/// <param name="scenarioName">The name of the scenario (not the path!).</param>
 		void SaveScenario(const std::string scenarioName);
+
+		/// <summary>
+		/// This function deletes a scenario. 
+		/// </summary>
+		/// <param name="scenarioName">The name of the scenario (not the path!).</param>
+		void DeleteScenario(const std::string scenarioName);
 
 		/// <summary>
 		/// This function checks if the grid in the game map is enabled or not.
@@ -111,6 +117,18 @@ namespace Game
 		/// </summary>
 		/// <param name="path">The path of the file.</param>
 		void LoadTexture(const std::string path);
+
+		/// <summary>
+		/// This function sets the name of the map between its property.
+		/// </summary>
+		/// <param name="name">The name of the map</param>
+		void SetName(const std::string name);
+
+		/// <summary>
+		/// This function returns the name of the map.
+		/// </summary>
+		/// <returns>The name of the map</returns>
+		const std::string GetName();
 
 		extern bool Wireframe;
 

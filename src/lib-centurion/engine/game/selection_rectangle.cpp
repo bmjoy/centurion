@@ -50,6 +50,14 @@ namespace Game
 			Coordinates.maxY = std::max(Coordinates.startY, Coordinates.lastY);
 		}
 
+		void ResetCoordinates(void)
+		{
+			Coordinates.startX = Engine::Mouse::GetXMapCoordinate();
+			Coordinates.startY = Engine::Mouse::GetYMapCoordinate();
+			Coordinates.lastX = Engine::Mouse::GetXMapCoordinate();
+			Coordinates.lastY = Engine::Mouse::GetYMapCoordinate();
+		}
+
 		void Game::SelectionRectangle::CalculateSizeAndOrigin(float * width, float * height, int * origin)
 		{
 			float _width = Coordinates.lastX - Coordinates.startX;
@@ -114,7 +122,6 @@ namespace Game
 			if (Editor::IsMovingObject()) return;
 			if (Editor::IsChangingTerrain()) return;
 			if (EditorWindows::IsThereAnyWindowOpen()) return;
-			//if (ClickedOnUIElement) return;
 			// ------------
 
 			if (Engine::Mouse::LeftHold && ClickedOnUIElement == false) {

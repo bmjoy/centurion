@@ -156,6 +156,16 @@ bool Settlement::RemoveBuildingFromSettlement(Building* b)
 	return bRemovedCorrectly;
 }
 
+void Settlement::SettlementDestroy(void)
+{
+	std::vector<Building*> buildings = this->GetBuildingsBelongToSettlement();
+	for (int i = 0; i < buildings.size(); i++)
+	{
+		GObject::RemoveGameObject(buildings[i]->GetPickingID());
+	}
+	this->~Settlement();
+}
+
 #pragma region Private members:
 void Settlement::SetSettlementProperties(void)
 {

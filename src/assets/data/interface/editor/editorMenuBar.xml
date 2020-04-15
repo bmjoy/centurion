@@ -34,7 +34,7 @@
 	  <command id="4" name="WORD_Delete" hotkey1="CTRL" hotkey2="N" hotkey3="">
         <onclickScript>
           -- Lua Script
-          -- Editor.SaveScenario()
+          Editor.OpenWindow(3)
           Editor.ToggleMenu(0)
         </onclickScript>
       </command>
@@ -63,7 +63,7 @@
         <onclickScript>
           -- Lua Script
           if (ConditionEditProperties()) then
-            Editor.OpenWindow(3)
+            Editor.OpenWindow(4)
             Editor.ToggleMenu(1)
           end
         </onclickScript>
@@ -73,21 +73,21 @@
       <command id="0" name="EDITOR_Tools_AddObject" hotkey1="CTRL" hotkey2="N" hotkey3="">
         <onclickScript>
           -- Lua Script
-          Editor.ToggleWindow(4)
+          Editor.ToggleWindow(5)
           Editor.ToggleMenu(2)
         </onclickScript>
       </command>
       <command id="1" name="EDITOR_Tools_TerrainBrush" hotkey1="CTRL" hotkey2="N" hotkey3="">
         <onclickScript>
           -- Lua Script
-          Editor.ToggleWindow(5)
+          Editor.ToggleWindow(6)
           Editor.ToggleMenu(2)
         </onclickScript>
       </command>
       <command id="2" name="EDITOR_RandomMap" hotkey1="CTRL" hotkey2="N" hotkey3="">
         <onclickScript>
           -- Lua Script
-          Editor.ToggleWindow(6)
+          Editor.ToggleWindow(7)
           Editor.ToggleMenu(2)
         </onclickScript>
       </command>

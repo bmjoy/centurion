@@ -484,6 +484,19 @@ namespace Game
 			Hector::SetMessageWindowYesCmd("Editor.Close()");
 			Hector::SetMessageWindowNoCmd("");
 		}
+		
+		void AskForSettlementDeleting(void)
+		{
+			GObject* b = Game::GetSelectedObject();
+			if (b == nullptr) return;
+			Settlement* s = b->AsBuilding()->GetSettlement();
+			if (s == nullptr) return;
+
+			Hector::EnableMessageWindow();
+			Hector::ExposeMessageWindowText(TranslationsTable::GetTranslation("EDITOR_deleteSettlement"));
+			Hector::SetMessageWindowYesCmd("s.SettlementDestroy()");
+			Hector::SetMessageWindowNoCmd("");
+		}
 
 		void Game::Editor::handleKeyboardControls(void)
 		{
@@ -537,7 +550,19 @@ namespace Game
 					GObject* b = Game::GetSelectedObject();
 					if (b != nullptr && b->IsBuilding() == true)
 					{
-						GObject::RemoveGameObject(b->GetPickingID());
+						if (b->AsBuilding()->IsCentralBuilding())
+						{
+							Settlement* s = b->AsBuilding()->GetSettlement();
+
+							if(s->GetBuildingsBelongToSettlement().size() > 1)
+								AskForSettlementDeleting();
+							else
+								GObject::RemoveGameObject(b->GetPickingID());
+						}
+						else
+						{
+							GObject::RemoveGameObject(b->GetPickingID());
+						}
 					}
 				}
 			}
@@ -546,6 +571,7 @@ namespace Game
 			{
 				if (Minimap::IsActive()) {
 					Minimap::Disable();
+					SelectionRectangle::ResetCoordinates();
 				}
 				else {
 					Minimap::Enable();

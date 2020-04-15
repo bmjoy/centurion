@@ -119,8 +119,9 @@ namespace Game
 			// if you are clicking on a townhall you have to double click 
 			// to move the camera there and quit minimap
 			if (Picking::Obj::GetLeftClickId() > 0 && Picking::HasDoubleClicked()) {
-				cameraToX = GObject::GetObjectByID(Picking::Obj::GetLeftClickId())->AsBuilding()->get_xPos() - Engine::myWindow::WidthZoomed / 2.f;
-				cameraToY = GObject::GetObjectByID(Picking::Obj::GetLeftClickId())->AsBuilding()->get_yPos() - Engine::myWindow::HeightZoomed / 2.f;
+				if (Game::GetSelectedObject() == nullptr) return;
+				cameraToX = Game::GetSelectedObject()->AsBuilding()->get_xPos() - Engine::myWindow::WidthZoomed / 2.f;
+				cameraToY = Game::GetSelectedObject()->AsBuilding()->get_yPos() - Engine::myWindow::HeightZoomed / 2.f;
 				Minimap::Unblock();
 			}
 			//------------------------------------------------
@@ -130,6 +131,7 @@ namespace Game
 				EditorMenuBar::Show();
 				Engine::Mouse::LeftClick = false;
 				Engine::Mouse::LeftHold = false;
+				SelectionRectangle::ResetCoordinates();
 			}
 		}
 	}

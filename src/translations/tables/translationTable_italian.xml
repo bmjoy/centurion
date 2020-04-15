@@ -4,6 +4,7 @@
   <entry stringName="EDITOR_cancelBrush" result="Clicca con il tasto DESTRO del mouse o ESC per annullare l'operazione." />
   <entry stringName="EDITOR_canMoveStructure" result="Tieni premuto il tasto SINISTRO del mouse per spostare la struttura. Rilascia il tasto SINISTRO del mouse per annullare l'operazione." />
   <entry stringName="EDITOR_defaultMapName" result="Senza titolo" />
+  <entry stringName="EDITOR_deleteScenario" result="Elimina scenario" />
   <entry stringName="EDITOR_deleteSettlement" result="L'eliminazione di questa struttura comporta anche la cancellazione del resto dell'insediamento. Vuoi procedere?" />
   <entry stringName="EDITOR_Edit" result="Modifica" />
   <entry stringName="EDITOR_Edit_Properties" result="Modifica proprietà oggetto" />
@@ -19,6 +20,7 @@
   <entry stringName="EDITOR_propertiesDisplayedName" result="Nome visualizzato:" />
   <entry stringName="EDITOR_propertiesIDName" result="Nome identificativo:" />
   <entry stringName="EDITOR_propertiesSettlement" result="Nome dell'insediamento:" />
+  <entry stringName="EDITOR_questionWindow" result="Editor - Attenzione" />
   <entry stringName="EDITOR_RandomMap" result="Genera una mappa casuale" />
   <entry stringName="EDITOR_saveAs" result="Salva scenario come..." />
   <entry stringName="EDITOR_saveBeforeNewOperation" result="La mappa attuale è stata modificata. Vuoi salvarla?" />
@@ -75,7 +77,7 @@
   <entry stringName="WORD_Close" result="Chiudi" />
   <entry stringName="WORD_Create" result="Crea" />
   <entry stringName="WORD_Cypress" result="Cipresso" />
-  <entry stringName="WORD_Delete" result="Cancella" />
+  <entry stringName="WORD_Delete" result="Elimina" />
   <entry stringName="WORD_EBarracks" result="Caserma" />
   <entry stringName="WORD_EBlacksmith" result="Fucina" />
   <entry stringName="WORD_EOsiristemple" result="Tempio di Osiris" />

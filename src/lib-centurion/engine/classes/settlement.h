@@ -146,6 +146,11 @@ public:
 	bool RemoveBuildingFromSettlement(Building* b);
 
 	/// <summary>
+	/// This function erases all buildings into the settlement and remove the settlement itself.
+	/// </summary>
+	void SettlementDestroy(void);
+
+	/// <summary>
 	/// Public constructor.
 	/// </summary>
 	/// <param name="par_player">The player to whom the settlement belongs to.</param>

@@ -4,6 +4,7 @@
   <entry stringName="EDITOR_cancelBrush" result="Appuyez sur le bouton DROITE de la souris ou ESC pour abandonner cette opération." />
   <entry stringName="EDITOR_canMoveStructure" result="Maintenez le bouton GAUCHE de la souris pour déplacer la structure. Relâchez le bouton GAUCHE de la souris pour abandonner l'opération." />
   <entry stringName="EDITOR_defaultMapName" result="Sans titre" />
+  <entry stringName="EDITOR_deleteScenario" result="Supprimer scénario" />
   <entry stringName="EDITOR_deleteSettlement" result="La suppression de cette structure élimine également le reste de l'installation. Voulez-vous continuer?" />
   <entry stringName="EDITOR_Edit" result="Éditer" />
   <entry stringName="EDITOR_Edit_Properties" result="Éditer propriétés de l'objet" />
@@ -19,6 +20,7 @@
   <entry stringName="EDITOR_propertiesDisplayedName" result="Nom affiché:" />
   <entry stringName="EDITOR_propertiesIDName" result="Nom d'identification:" />
   <entry stringName="EDITOR_propertiesSettlement" result="Nom de l'installation:" />
+  <entry stringName="EDITOR_questionWindow" result="Éditeur - Attention" />
   <entry stringName="EDITOR_RandomMap" result="Générer une map aléatoire" />
   <entry stringName="EDITOR_saveAs" result="Sauve scénario comme..." />
   <entry stringName="EDITOR_saveBeforeNewOperation" result="La map actuelle a été modifiée. Voulez-vous l'enregistrer?" />

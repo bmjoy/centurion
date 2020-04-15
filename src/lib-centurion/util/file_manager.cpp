@@ -197,6 +197,20 @@ void FileManager::CreateFolder(string folderPath)
 	}
 }
 
+void FileManager::DeleteFolder(std::string folderPath)
+{
+	try
+	{
+		std::filesystem::remove_all(folderPath);
+	}
+	catch (...)
+	{
+		Logger::LogMessage msg = Logger::LogMessage("An error occurred deleting the folder with the following path: \"" + folderPath + "\"", "Error", "Utils", "", "DeleteFolder");
+		Logger::Error(msg);
+		Engine::GameClose();
+	}
+}
+
 string FileManager::GetFileFolderPath(const char *path) {
 	try
 	{

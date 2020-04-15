@@ -61,6 +61,11 @@ namespace Game {
 		void SetExtremeValues(void);
 
 		/// <summary>
+		/// This method sets the startX, startY, lastX and lastY
+		/// </summary>
+		void ResetCoordinates(void);
+
+		/// <summary>
 		/// This method calculates the size and the origin of the rectangle
 		/// </summary>
 		void CalculateSizeAndOrigin(float *width, float *height, int *origin);

@@ -334,6 +334,7 @@ float GObject::get_xPos(void) const
 {
 	return (float)position.x;
 }
+
 float GObject::get_yPos(void) const
 {
 	return (float)position.y;

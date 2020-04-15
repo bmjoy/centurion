@@ -96,6 +96,12 @@ namespace FileManager {
 	void CreateFolder(std::string folderPath);
 
 	/// <summary>
+	/// This function deletes a folder from a specified path.
+	/// </summary>
+	/// <param name="folderPth">Folder path. Supports std::strings.</param>
+	void DeleteFolder(std::string folderPath);
+
+	/// <summary>
 	/// This function returns the relative file folder path.
 	/// </summary>
 	/// <param name="*path">Folder path. Supports only referenced char variables or std::strings converted to c_str.</param>

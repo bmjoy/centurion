@@ -4,6 +4,7 @@
   <entry stringName="EDITOR_cancelBrush" result="Press the RIGHT mouse button or ESC to abort the operation." />
   <entry stringName="EDITOR_canMoveStructure" result="Hold the LEFT mouse button to move the building. Release the LEFT mouse button to abort the operation." />
   <entry stringName="EDITOR_defaultMapName" result="Untitled" />
+  <entry stringName="EDITOR_deleteScenario" result="Delete scenario" />
   <entry stringName="EDITOR_deleteSettlement" result="Deleting this structure causes the cancellation of the rest of the settlement as well. Do you want to proceed?" />
   <entry stringName="EDITOR_Edit" result="Edit" />
   <entry stringName="EDITOR_Edit_Properties" result="Edit object properties" />
@@ -19,6 +20,7 @@
   <entry stringName="EDITOR_propertiesDisplayedName" result="Displayed name:" />
   <entry stringName="EDITOR_propertiesIDName" result="Identification name:" />
   <entry stringName="EDITOR_propertiesSettlement" result="Settlement name:" />
+  <entry stringName="EDITOR_questionWindow" result="Editor - Warning" />
   <entry stringName="EDITOR_RandomMap" result="Generate random map" />
   <entry stringName="EDITOR_saveAs" result="Save scenario as..." />
   <entry stringName="EDITOR_saveBeforeNewOperation" result="The current map has been modified. Do you want to save it?" />

@@ -33,6 +33,7 @@ namespace Game
 		namespace
 		{
 			bool isGridEnabled = false;
+			string MapName = "";
 		}
 
 		void Game::Map::LoadScenario(const string scenarioName)
@@ -67,7 +68,7 @@ namespace Game
 				Game::Map::SaveHeights(scenarioPath + "/heights");
 				Game::Map::SaveTexture(scenarioPath + "/texture");
 				Game::Map::SaveMapObjectsToXml(scenarioPath + "/mapObjects.xml");
-
+				Game::Map::SetName(scenarioName); //This would be saved into a specific file among other properties
 
 				Logger::LogMessage msg = Logger::LogMessage("The scenario is saved with the following name: \"" + scenarioName + "\"", "Info", "Game", "Map", "SaveScenario");
 				Logger::Info(msg);
@@ -75,6 +76,34 @@ namespace Game
 			catch (...)
 			{
 				Logger::LogMessage msg = Logger::LogMessage("An error occurred creating the following scenario: \"" + scenarioName + "\"", "Info", "Game", "Map", "SaveScenario");
+				Logger::Error(msg);
+				Engine::GameClose();
+			}
+		}
+
+		void Game::Map::DeleteScenario(const string scenarioName)
+		{
+			try
+			{
+				string scenarioPath = Folders::SCENARIOS + scenarioName;
+
+				if (scenarioName == Game::Map::GetName())
+				{
+					//Impossibile cancellare la mappa attualmente in uso
+					return;
+				}
+
+				if (FileManager::CheckIfFolderExists(scenarioPath) == true)
+				{
+					FileManager::DeleteFolder(scenarioPath);
+				}
+
+				Logger::LogMessage msg = Logger::LogMessage("The scenario \"" + scenarioName + "\"" + " has been deleted!", "Info", "Game", "Map", "DeleteScenario");
+				Logger::Info(msg);
+			}
+			catch (...)
+			{
+				Logger::LogMessage msg = Logger::LogMessage("An error occurred deleting the following scenario: \"" + scenarioName + "\"", "Info", "Game", "Map", "DeleteScenario");
 				Logger::Error(msg);
 				Engine::GameClose();
 			}
@@ -246,6 +275,16 @@ namespace Game
 			{
 				Engine::GameClose();
 			}
+		}
+
+		void SetName(const std::string name)
+		{
+			Game::Map::MapName = name;
+		}
+
+		const std::string GetName()
+		{
+			return Game::Map::MapName;
 		}
 
 		bool Game::Map::IsGridEnabled(void)
