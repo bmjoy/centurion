@@ -1,5 +1,5 @@
 #include "hector-lua.h"
-#include "hector-misc.hpp"
+#include "hector-misc.h"
 
 #include <LUA/lua.hpp>
 #include <LuaBridge/LuaBridge.h>
@@ -44,6 +44,11 @@ namespace Hector
 			.addFunction("ToggleWireframe", &Hector::ToggleWireframe)
 			.addFunction("ToggleGrid", &Hector::ToggleGrid)
 			.addFunction("Selo", Hector::Selo)
+			.addFunction("IsMessageWindowActive", &Hector::IsMessageWindowActive)
+			.addFunction("GetMessageWindowText", &Hector::GetMessageWindowText)
+			.addFunction("ResetMessageWindow", &Hector::ResetMessageWindow)
+			.addFunction("ExecuteYesCmdOfMessageWindow", &Hector::ExecuteYesCmdOfMessageWindow)
+			.addFunction("ExecuteNoCmdOfMessageWindow", &Hector::ExecuteNoCmdOfMessageWindow)
 			;
 
 		// variables
@@ -80,6 +85,7 @@ namespace Hector
 		getGlobalNamespace(L)
 			.beginNamespace("Editor")
 			.addFunction("Close", &Game::Editor::Close)
+			.addFunction("AskForClosing", &Game::Editor::AskForClosing)
 			.addFunction("GetObjectTreeList1", Game::Editor::GetEditorObjectTreeList1)
 			.addFunction("GetObjectTreeList2", Game::Editor::GetEditorObjectTreeList2)
 			.addFunction("GetObjectTreeList3", Game::Editor::GetEditorObjectTreeList3)

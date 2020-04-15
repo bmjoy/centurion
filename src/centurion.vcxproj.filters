@@ -357,6 +357,9 @@
     <ClCompile Include="lib-centurion\engine\data.cpp">
       <Filter>Source Files\engine</Filter>
     </ClCompile>
+    <ClCompile Include="lib-centurion\hector\hector-misc.cpp">
+      <Filter>Source Files\hector</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="lib-centurion\audio\sndfile.hh">
@@ -623,7 +626,7 @@
     <ClInclude Include="lib-centurion\engine\data.h">
       <Filter>Header Files\engine</Filter>
     </ClInclude>
-    <ClInclude Include="lib-centurion\hector\hector-misc.hpp">
+    <ClInclude Include="lib-centurion\hector\hector-misc.h">
       <Filter>Header Files\hector</Filter>
     </ClInclude>
   </ItemGroup>

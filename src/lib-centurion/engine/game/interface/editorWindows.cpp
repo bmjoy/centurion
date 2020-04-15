@@ -31,7 +31,7 @@ namespace EditorWindows
 
 	void EditorWindows::EditorWindow::Open(void)
 	{
-		EditorWindows::CloseEveryWindow();
+		if(closeOtherWindowsWhenOpen) EditorWindows::CloseEveryWindow();
 		this->isOpened = true;
 		this->iframe.Open();
 		EditorWindows::bWindowsOpened = true;
@@ -63,10 +63,11 @@ namespace EditorWindows
 		EditorWindows::bWindowsOpened = false;
 	}
 
-	void EditorWindows::EditorWindow::Create(gui::Iframe _iframe)
+	void EditorWindows::EditorWindow::Create(gui::Iframe _iframe, bool _closeOtherWindowsWhenOpen)
 	{
 		iframe = _iframe;
 		isOpened = false;
+		closeOtherWindowsWhenOpen = _closeOtherWindowsWhenOpen;
 	}
 
 	void EditorWindows::EditorWindow::Render(const bool picking)
@@ -116,7 +117,7 @@ namespace EditorWindows
 			{
 				EditorWindow* eWind = new EditorWindow();
 				int id = _it_wind->IntAttribute("id");
-
+				bool closeOtherWindowsWhenOpen = _it_wind->BoolAttribute("closeOtherWindowsWhenOpen");
 				gui::Iframe iframe = gui::Iframe();
 
 				tinyxml2::XMLElement* iframeXML = _it_wind->FirstChildElement("iframe");
@@ -124,7 +125,7 @@ namespace EditorWindows
 
 				if (bIframeSuccess)
 				{
-					eWind->Create(iframe);
+					eWind->Create(iframe, closeOtherWindowsWhenOpen);
 					gui::Iframe::AddIframe(iframe.GetId(), eWind->GetIframePtr());
 					if (iframe.IsOpened()) eWind->Open();
 					AddWindow(id, eWind);

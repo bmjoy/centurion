@@ -17,6 +17,7 @@
 #include <game/interface/editorWindows.h>
 
 #include <hector-lua.h>
+#include <hector-misc.h>
 
 #include <GLFW/glfw3.h>
 
@@ -472,6 +473,14 @@ namespace Game
 			Engine::SetEnvironment("menu");
 			Menu::Reset();
 
+		}
+
+		void AskForClosing(void)
+		{
+			Hector::EnableMessageWindow();
+			Hector::ExposeMessageWindowText("Close?");
+			Hector::SetMessageWindowYesCmd("Editor.Close()");
+			Hector::SetMessageWindowNoCmd("");
 		}
 
 		void Game::Editor::handleKeyboardControls(void)

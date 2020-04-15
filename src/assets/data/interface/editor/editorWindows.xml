@@ -2,7 +2,7 @@
 
   <!-- NEW SCENARIO WINDOW -->
 
-  <editorWindow id="0">
+  <editorWindow id="0" closeOtherWindowsWhenOpen="true">
     <iframe id="0" type="editor" title="EDITOR_newScenario" position="x=Engine.WindowWidth/2-w/2; y=Engine.WindowHeight/2-h/2;" size="w=400; h=150;" isOpened="false">
       <conditionScript function="">
         -- lua script
@@ -36,7 +36,7 @@
 
   <!-- OPEN SCENARIO WINDOW -->
 
-  <editorWindow id="1">
+  <editorWindow id="1" closeOtherWindowsWhenOpen="true">
     <iframe id="1" type="editor" title="EDITOR_openScenario" position="x=Engine.WindowWidth/2-w/2; y=Engine.WindowHeight/2-h/2;" size="w=400; h=370;" isOpened="false">
       <conditionScript function="">
         -- lua script
@@ -72,7 +72,7 @@
 
   <!-- SAVE SCENARIO WINDOW -->
 
-  <editorWindow id="2">
+  <editorWindow id="2" closeOtherWindowsWhenOpen="true">
     <iframe id="2" type="editor" title="EDITOR_saveAs" position="x=Engine.WindowWidth/2-w/2; y=Engine.WindowHeight/2-h/2;" size="w=400; h=150;" isOpened="false">
       <conditionScript function="">
         -- lua script
@@ -108,7 +108,7 @@
 
   <!-- OBJECT PROPERTIES WINDOW -->
 
-  <editorWindow id="3">
+  <editorWindow id="3" closeOtherWindowsWhenOpen="true">
     <iframe id="3" type="editor" title="EDITOR_properties" position="x=Engine.WindowWidth/2-w/2; y=Engine.WindowHeight/2-h/2;" size="w=600; h=450;" isOpened="false">
       <conditionScript function="ConditionProperties">
         -- lua script
@@ -162,7 +162,7 @@
 
   <!-- ADD OBJECT WINDOW -->
 
-  <editorWindow id="4">
+  <editorWindow id="4" closeOtherWindowsWhenOpen="true">
     <iframe id="4" type="editor" title="EDITOR_addObject" position="x=Engine.WindowWidth/2-w/2; y=0" size="w=600; h=250;" isOpened="false">
       <conditionScript function="">
         -- lua script
@@ -216,7 +216,7 @@
 
   <!-- TERRAIN BRUSH WINDOW -->
 
-  <editorWindow id="5">
+  <editorWindow id="5" closeOtherWindowsWhenOpen="true">
     <iframe id="5" type="editor" title="EDITOR_terrainBrush" position="x=Engine.WindowWidth/2-w/2; y=0" size="w=400; h=250;" isOpened="false">
       <conditionScript function="">
         -- lua script
@@ -259,7 +259,7 @@
 
   <!-- GENERATE RANDOM MAP WINDOW-->
 
-  <editorWindow id="6">
+  <editorWindow id="6" closeOtherWindowsWhenOpen="true">
     <iframe id="6" type="editor" title="EDITOR_RandomMap" position="x=Engine.WindowWidth/2-w/2; y=Engine.WindowHeight/2-h/2;" size="w=400; h=150;" isOpened="false">
       <conditionScript function="">
         -- lua script
@@ -290,5 +290,55 @@
     </iframe>
   </editorWindow>
   
+  
+  
+  <!-- MESSAGE WINDOW -->
+
+  <editorWindow id="99" closeOtherWindowsWhenOpen="false">
+    <iframe id="99" type="editor" title="EDITOR_MessageWindow" position="x=Engine.WindowWidth/2-w/2; y=Engine.WindowHeight/2-h/2;" size="w=400; h=150;" isOpened="false">
+      <conditionScript function="conditionMessageWindow">
+        -- lua script
+        function conditionMessageWindow()
+        condition1 = IsMessageWindowActive()
+        return condition1
+        end
+      </conditionScript>
+      <openingScript>
+        -- lua script
+        Iframe.GetIframeById(99):UpdateStringBySimpleTextId(0, GetMessageWindowText())
+      </openingScript>
+      <simpleTextArray>
+        <simpleText id="0" name="EDITOR_propertiesClassName" xOffset="20" yOffset="-80" />
+      </simpleTextArray>
+      <buttonArray>
+        <button text="WORD_Yes" xOffset="335" yOffset="30">
+          <onclickScript>
+            --lua script
+            ExecuteYesCmdOfMessageWindow()
+            ResetMessageWindow()
+            Editor.CloseWindow(99)
+          </onclickScript>
+        </button>
+        <button text="WORD_No" xOffset="220" yOffset="30">
+          <onclickScript>
+            --lua script
+            ExecuteNoCmdOfMessageWindow()
+            ResetMessageWindow()
+            Editor.CloseWindow(99)
+          </onclickScript>
+        </button>
+        <button text="WORD_Cancel" xOffset="105" yOffset="30">
+          <onclickScript>
+            --lua script
+            ResetMessageWindow()
+            Editor.CloseWindow(99)
+          </onclickScript>
+        </button>
+      </buttonArray>
+      <textListArray></textListArray>
+      <textInputArray>
+      </textInputArray>
+    </iframe>
+  </editorWindow>
   
 </editorWindows>

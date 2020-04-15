@@ -41,7 +41,8 @@
       <command id="5" name="WORD_Exit" hotkey1="CTRL" hotkey2="N" hotkey3="">
         <onclickScript>
           -- Lua Script
-          Editor.Close()
+          Editor.AskForClosing()
+          Editor.ToggleMenu(0)
         </onclickScript>
       </command>
     </editorMenu>

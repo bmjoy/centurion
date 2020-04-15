@@ -133,6 +133,10 @@ namespace Game
 		/// </summary>
 		void Close(void);
 
+		/// <summary>
+		/// This method ask for closing the editor, opening a message window
+		/// </summary>
+		void AskForClosing(void);
 	};
 };
 

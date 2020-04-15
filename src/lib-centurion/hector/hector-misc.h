@@ -17,45 +17,43 @@
 
 namespace Hector
 {
-
 	/// <summary>
 	/// This function prints a string to the windows cmd console
 	/// </summary>
-	static void PrCmd(const std::string s)
-	{
-		std::cout << s << std::endl;
-	}
+	void PrCmd(const std::string s);
 
 	/// <summary>
 	/// This function toggles the wireframe view mode
 	/// </summary>
-	static void ToggleWireframe(void)
-	{
-		if (Engine::GetEnvironment() == MENU_ENV) return;
-
-		Game::Map::Wireframe = !Game::Map::Wireframe;
-		Game::Map::Wireframe ? Logger::Info("Wireframe ON!") : Logger::Info("Wireframe OFF!");
-	}
+	void ToggleWireframe(void);
 
 	/// <summary>
 	/// This function toggles the PASS grid view mode
 	/// </summary>
-	static void ToggleGrid(void)
-	{
-		if (Engine::GetEnvironment() == MENU_ENV) return;
-
-		if (Game::Map::IsGridEnabled()) Game::Map::DisableGrid();
-		else Game::Map::EnableGrid();
-		Game::Map::IsGridEnabled() ? Logger::Info("Grid ON!") : Logger::Info("Grid OFF!");
-	}
+	void ToggleGrid(void);
 
 	/// <summary>
 	/// This function returns the selected object
 	/// </summary>
-	static GObject * Selo(void)
-	{
-		return Game::GetSelectedObject();
-	}
+	GObject* Selo(void);
+
+	void EnableMessageWindow(void);
+
+	void ExposeMessageWindowText(std::string text);
+
+	bool IsMessageWindowActive(void);
+
+	std::string GetMessageWindowText(void);
+
+	void ResetMessageWindow(void);
+
+	void SetMessageWindowYesCmd(std::string cmd);
+
+	void SetMessageWindowNoCmd(std::string cmd);
+
+	void ExecuteYesCmdOfMessageWindow(void);
+
+	void ExecuteNoCmdOfMessageWindow(void);
 }
 
 #endif

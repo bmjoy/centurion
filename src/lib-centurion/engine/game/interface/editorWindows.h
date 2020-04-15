@@ -11,7 +11,7 @@
 #include <ui.h>
 
 #ifndef MAX_NUMBER_OF_EDITOR_WINDOWS
-#define MAX_NUMBER_OF_EDITOR_WINDOWS 20
+#define MAX_NUMBER_OF_EDITOR_WINDOWS 100
 #endif 
 
 
@@ -56,7 +56,7 @@ namespace EditorWindows
 		/// This funtio creates a generic window.
 		/// </summary>
 		/// <param name="_iframe"></param>
-		void Create(gui::Iframe _iframe);
+		void Create(gui::Iframe _iframe, bool _closeOtherWindowsWhenOpen);
 
 		/// <summary>
 		/// This function performs the rendiring of a generic window.
@@ -70,7 +70,8 @@ namespace EditorWindows
 		gui::Iframe* GetIframePtr(void) { return &iframe; }
 	private:
 		gui::Iframe iframe;
-		bool isOpened;
+		bool isOpened = false;
+		bool closeOtherWindowsWhenOpen = false;
 	};
 
 	/// <summary>

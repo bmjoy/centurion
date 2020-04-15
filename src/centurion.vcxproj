@@ -251,6 +251,7 @@ XCOPY "$(ProjectDir)lua53.dll" "$(ProjectDir)$(OutDir)"</Command>
     <ClCompile Include="lib-centurion\gl-items\gl_terrain.cpp" />
     <ClCompile Include="lib-centurion\gl-items\gl_unit_sprite.cpp" />
     <ClCompile Include="lib-centurion\hector\hector-lua.cpp" />
+    <ClCompile Include="lib-centurion\hector\hector-misc.cpp" />
     <ClCompile Include="lib-centurion\ui\button.cpp" />
     <ClCompile Include="lib-centurion\ui\circle.cpp" />
     <ClCompile Include="lib-centurion\ui\iframe.cpp" />
@@ -315,7 +316,7 @@ XCOPY "$(ProjectDir)lua53.dll" "$(ProjectDir)$(OutDir)"</Command>
     <ClInclude Include="lib-centurion\gl-items\gl_terrain.h" />
     <ClInclude Include="lib-centurion\gl-items\gl_unit_sprite.h" />
     <ClInclude Include="lib-centurion\hector\hector-lua.h" />
-    <ClInclude Include="lib-centurion\hector\hector-misc.hpp" />
+    <ClInclude Include="lib-centurion\hector\hector-misc.h" />
     <ClInclude Include="lib-centurion\ui\button.h" />
     <ClInclude Include="lib-centurion\ui\circle.h" />
     <ClInclude Include="lib-centurion\ui\iframe.h" />
