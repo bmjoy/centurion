@@ -330,7 +330,6 @@ namespace Game
 		void Game::Editor::ShiftSelectedObject(void)
 		{
 			// this function IS RUN EVERY FRAME (see Editor::Run)
-			if (EditorWindows::IsThereAnyWindowOpen() == true) return;
 
 			// if no object is selected --> exit
 			GObject* obj = Game::GetSelectedObject();
@@ -340,6 +339,9 @@ namespace Game
 			{
 				Editor::movingObject.clickedOnUIElement = (Picking::UI::GetLeftClickId() != 0);
 			}
+
+			// all the exceptions
+			if (EditorWindows::IsThereAnyWindowOpen() == true) return;
 			if (Editor::movingObject.clickedOnUIElement) return;
 
 			// if an object is selected --> 

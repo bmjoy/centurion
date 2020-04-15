@@ -100,14 +100,6 @@ namespace Game
 
 		void Game::SelectionRectangle::Render(void)
 		{
-			// all the exceptions
-			if (Minimap::IsActive()) return;
-			if (Editor::IsMovingObject()) return;
-			if (Editor::IsChangingTerrain()) return;
-			if (EditorWindows::IsThereAnyWindowOpen()) return;
-			//if (ClickedOnUIElement) return;
-			// ------------
-
 			if (Engine::Mouse::LeftClick) {
 				if (SelectionRectangle::IsActive() == false) {
 					Logger::Info("Selection rectangle enabled.");
@@ -116,6 +108,15 @@ namespace Game
 				}
 				ClickedOnUIElement = (Picking::UI::GetLeftClickId() != 0);
 			}
+
+			// all the exceptions
+			if (Minimap::IsActive()) return;
+			if (Editor::IsMovingObject()) return;
+			if (Editor::IsChangingTerrain()) return;
+			if (EditorWindows::IsThereAnyWindowOpen()) return;
+			//if (ClickedOnUIElement) return;
+			// ------------
+
 			if (Engine::Mouse::LeftHold && ClickedOnUIElement == false) {
 				Coordinates.lastX = Engine::Mouse::GetXMapCoordinate();
 				Coordinates.lastY = Engine::Mouse::GetYMapCoordinate();
