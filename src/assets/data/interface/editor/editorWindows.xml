@@ -1,4 +1,4 @@
-﻿<editorWindows>
+<editorWindows>
 
   <!-- NEW MAP WINDOW -->
 
@@ -202,9 +202,9 @@
       <conditionScript function="ConditionAddObject">
         -- lua script
         function ConditionAddObject()
-        condition1 = Keyboard.IsKeyPressed(Keyboard.KEY_LEFT_CONTROL)
-        print(condition1)
-        return false
+        condition1 = Keyboard.IsKeyPressed(Keyboard.KEY_LEFT_CONTROL) or Keyboard.IsKeyPressed(Keyboard.KEY_RIGHT_CONTROL)
+		    condition2 = Keyboard.IsKeyPressed(Keyboard.KEY_A)
+        return condition1 and condition2
         end
       </conditionScript>
       <openingScript>
