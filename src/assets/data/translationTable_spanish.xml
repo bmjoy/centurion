@@ -3,6 +3,7 @@
   <entry stringName="EDITOR_canAddStructure" result="--" />
   <entry stringName="EDITOR_cancelBrush" result="--" />
   <entry stringName="EDITOR_canMoveStructure" result="--" />
+  <entry stringName="EDITOR_closingConfirmation" result="--" />
   <entry stringName="EDITOR_defaultMapName" result="Intitulado" />
   <entry stringName="EDITOR_deleteScenario" result="Borrar escenario" />
   <entry stringName="EDITOR_deleteSettlement" result="--" />
@@ -27,8 +28,8 @@
   <entry stringName="EDITOR_saveOverwrite" result="--" />
   <entry stringName="EDITOR_terrainBrush" result="Pinceles de terreno" />
   <entry stringName="EDITOR_Tools" result="Herramientas" />
-  <entry stringName="EDITOR_Tools_AddObject" result="Activar / Desactivar la ventana Agregar objeto" />
-  <entry stringName="EDITOR_Tools_TerrainBrush" result="Activar / Desactivar pinceles de terreno" />
+  <entry stringName="EDITOR_Tools_AddObject" result="Abrir la ventana 'Agregar objeto'" />
+  <entry stringName="EDITOR_Tools_TerrainBrush" result="Abrir la ventana 'Pinceles de terreno'" />
   <entry stringName="EDITORTREE_buildings" result="Edificios" />
   <entry stringName="EDITORTREE_decorations" result="Decoraciones" />
   <entry stringName="EDITORTREE_egyptianstronghold" result="Fortaleza egipcia" />

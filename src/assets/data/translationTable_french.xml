@@ -3,6 +3,7 @@
   <entry stringName="EDITOR_canAddStructure" result="Appuyez sur le bouton GAUCHE de la souris pour positionner la structure au point souhaité. Appuyez sur le bouton DROITE de la souris pour abandonner cette opération." />
   <entry stringName="EDITOR_cancelBrush" result="Appuyez sur le bouton DROITE de la souris ou ESC pour abandonner cette opération." />
   <entry stringName="EDITOR_canMoveStructure" result="Maintenez le bouton GAUCHE de la souris pour déplacer la structure. Relâchez le bouton GAUCHE de la souris pour abandonner l'opération." />
+  <entry stringName="EDITOR_closingConfirmation" result="Voulez-vous vraiment fermer l'éditeur et revenir au menu principal?" />
   <entry stringName="EDITOR_defaultMapName" result="Sans titre" />
   <entry stringName="EDITOR_deleteScenario" result="Supprimer scénario" />
   <entry stringName="EDITOR_deleteSettlement" result="La suppression de cette structure élimine également le reste de l'installation. Voulez-vous continuer?" />
@@ -20,15 +21,15 @@
   <entry stringName="EDITOR_propertiesDisplayedName" result="Nom affiché:" />
   <entry stringName="EDITOR_propertiesIDName" result="Nom d'identification:" />
   <entry stringName="EDITOR_propertiesSettlement" result="Nom de l'installation:" />
-  <entry stringName="EDITOR_questionWindow" result="Éditeur - Attention" />
+  <entry stringName="EDITOR_questionWindow" result="Éditeur - Avertissement" />
   <entry stringName="EDITOR_RandomMap" result="Générer une map aléatoire" />
   <entry stringName="EDITOR_saveAs" result="Sauve scénario comme..." />
-  <entry stringName="EDITOR_saveBeforeNewOperation" result="La map actuelle a été modifiée. Voulez-vous l'enregistrer?" />
+  <entry stringName="EDITOR_saveBeforeNewOperation" result="La map actuelle a été modifiée. Voulez-vous l'enregistrer avant de procéder?" />
   <entry stringName="EDITOR_saveOverwrite" result="Une map avec le nom spécifié existe déjà. Voulez-vous l'écraser?" />
   <entry stringName="EDITOR_terrainBrush" result="Brosses de terrain" />
   <entry stringName="EDITOR_Tools" result="Outils" />
-  <entry stringName="EDITOR_Tools_AddObject" result="Activer/Désactiver la fenêtre Ajouter un objet" />
-  <entry stringName="EDITOR_Tools_TerrainBrush" result="Activer/Désactiver les brosses de terrain" />
+  <entry stringName="EDITOR_Tools_AddObject" result="Ouvrir la fenêtre 'Ajouter un objet'" />
+  <entry stringName="EDITOR_Tools_TerrainBrush" result="Ouvrir la fenêtre 'Brosses de terrain'" />
   <entry stringName="EDITORTREE_buildings" result="Édifices" />
   <entry stringName="EDITORTREE_decorations" result="Décorations" />
   <entry stringName="EDITORTREE_egyptianstronghold" result="Forteresse égyptienne" />
@@ -108,7 +109,7 @@
   <entry stringName="WORD_RTavern" result="Auberge" />
   <entry stringName="WORD_RTemple" result="Temple" />
   <entry stringName="WORD_RTownhall" result="Mairie" />
-  <entry stringName="WORD_Save" result="Sauver" />
+  <entry stringName="WORD_Save" result="Enregistrer" />
   <entry stringName="WORD_SaveAs" result="Sauver comme..." />
   <entry stringName="WORD_Select" result="Sélectionne" />
   <entry stringName="WORD_yes" result="Oui" />

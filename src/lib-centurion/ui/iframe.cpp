@@ -106,7 +106,7 @@ void gui::Iframe::UpdateStringBySimpleTextId(const unsigned int _textId, std::st
 	listOfTexts[_textId]->SetNewText(newWText);
 }
 
-void gui::Iframe::AddTextList(const int textListId, int xPos, int yPos, const std::string& luaCmd, const unsigned int maxOptions, const unsigned int borderWidth)
+void gui::Iframe::AddTextList(const unsigned int textListId, int xPos, int yPos, const std::string& luaCmd, const unsigned int maxOptions, const unsigned int borderWidth)
 {
 	gui::TextList* _list = new gui::TextList();
 	int txtListPickingId = Picking::UI::ObtainPickingID();
@@ -116,13 +116,13 @@ void gui::Iframe::AddTextList(const int textListId, int xPos, int yPos, const st
 	listOfTextLists[textListId] = _list;
 }
 
-gui::TextList* gui::Iframe::GetTextListById(int id)
+gui::TextList* gui::Iframe::GetTextListById(unsigned int id)
 {
-	if (id < 0 || id > MAX_NUMBER_OF_TEXT_LISTS) return nullptr;
+	if (id > MAX_NUMBER_OF_TEXT_LISTS) return nullptr;
 	return listOfTextLists[id];
 }
 
-void gui::Iframe::UpdateTextListById(int id, std::vector<std::string>* _options, const std::string prefix)
+void gui::Iframe::UpdateTextListById(unsigned int id, std::vector<std::string>* _options, const std::string prefix)
 {
 	Iframe::GetTextListById(id)->Update(_options, prefix);
 }
@@ -136,9 +136,9 @@ void gui::Iframe::AddTextInput(const int textInputId, int xPos, int yPos, const 
 	listOfTextInputs[textInputId] = _input;
 }
 
-gui::TextInput* gui::Iframe::GetTextInputById(int id)
+gui::TextInput* gui::Iframe::GetTextInputById(unsigned int id)
 {
-	if (id < 0 || id > MAX_NUMBER_OF_TEXT_INPUTS) return nullptr;
+	if (id > MAX_NUMBER_OF_TEXT_INPUTS) return nullptr;
 	return listOfTextInputs[id];
 }
 

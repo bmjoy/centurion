@@ -5,7 +5,7 @@ namespace Hector
 {
 	namespace
 	{
-		struct MessageWindowInfo
+		struct QuestionWindowInfo
 		{
 			bool isOpened = false;
 			std::string text = "";
@@ -13,7 +13,7 @@ namespace Hector
 			std::string luaCmdNo = "";
 		};
 
-		MessageWindowInfo messageWindowInfo = MessageWindowInfo();
+		QuestionWindowInfo questionWindowInfo = QuestionWindowInfo();
 	};
 
 	void PrCmd(const std::string s)
@@ -43,51 +43,51 @@ namespace Hector
 		return Game::GetSelectedObject();
 	}
 
-	void EnableMessageWindow(void)
+	void EnableQuestionWindow(void)
 	{
-		messageWindowInfo.isOpened = true;
+		questionWindowInfo.isOpened = true;
 	}
 
-	void ExposeMessageWindowText(std::string text)
+	void ExposeQuestionWindowText(std::string text)
 	{
-		messageWindowInfo.text = text;
+		questionWindowInfo.text = text;
 	}
 
-	bool IsMessageWindowActive(void)
+	bool IsQuestionWindowActive(void)
 	{
-		return messageWindowInfo.isOpened;
+		return questionWindowInfo.isOpened;
 	}
 
-	std::string GetMessageWindowText(void)
+	std::string GetQuestionWindowText(void)
 	{
-		return messageWindowInfo.text;
+		return questionWindowInfo.text;
 	}
 
-	void ResetMessageWindow(void)
+	void ResetQuestionWindow(void)
 	{
-		messageWindowInfo.isOpened = false;
-		messageWindowInfo.text = "";
-		messageWindowInfo.luaCmdYes = "";
-		messageWindowInfo.luaCmdNo = "";
+		questionWindowInfo.isOpened = false;
+		questionWindowInfo.text = "";
+		questionWindowInfo.luaCmdYes = "";
+		questionWindowInfo.luaCmdNo = "";
 	}
 
-	void SetMessageWindowYesCmd(std::string cmd)
+	void SetQuestionWindowYesCmd(std::string cmd)
 	{
-		messageWindowInfo.luaCmdYes = cmd;
+		questionWindowInfo.luaCmdYes = cmd;
 	}
 
-	void SetMessageWindowNoCmd(std::string cmd)
+	void SetQuestionWindowNoCmd(std::string cmd)
 	{
-		messageWindowInfo.luaCmdNo = cmd;
+		questionWindowInfo.luaCmdNo = cmd;
 	}
 
-	void ExecuteYesCmdOfMessageWindow(void)
+	void ExecuteYesCmdOfQuestionWindow(void)
 	{
-		Hector::ExecuteCommand(messageWindowInfo.luaCmdYes);
+		Hector::ExecuteCommand(questionWindowInfo.luaCmdYes);
 	}
 
-	void ExecuteNoCmdOfMessageWindow(void)
+	void ExecuteNoCmdOfQuestionWindow(void)
 	{
-		Hector::ExecuteCommand(messageWindowInfo.luaCmdNo);
+		Hector::ExecuteCommand(questionWindowInfo.luaCmdNo);
 	}
 }

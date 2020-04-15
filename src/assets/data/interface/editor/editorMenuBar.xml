@@ -70,7 +70,7 @@
       </command>
     </editorMenu>
     <editorMenu id="2" name="EDITOR_Tools" onclick='Editor.ToggleMenu(2)'>
-      <command id="0" name="EDITOR_Tools_AddObject" hotkey1="CTRL" hotkey2="N" hotkey3="">
+      <command id="0" name="EDITOR_Tools_AddObject" hotkey1="CTRL" hotkey2="A" hotkey3="">
         <onclickScript>
           -- Lua Script
           Editor.ToggleWindow(5)

@@ -3,6 +3,7 @@
   <entry stringName="EDITOR_canAddStructure" result="Clicca con il tasto SINISTRO del mouse per posizionare la struttura nel punto desiderato. Premi il tastro DESTRO per annullare l'operazione." />
   <entry stringName="EDITOR_cancelBrush" result="Clicca con il tasto DESTRO del mouse o ESC per annullare l'operazione." />
   <entry stringName="EDITOR_canMoveStructure" result="Tieni premuto il tasto SINISTRO del mouse per spostare la struttura. Rilascia il tasto SINISTRO del mouse per annullare l'operazione." />
+  <entry stringName="EDITOR_closingConfirmation" result="Vuoi davvero chiudere l'editor e tornare al menù principale?" />
   <entry stringName="EDITOR_defaultMapName" result="Senza titolo" />
   <entry stringName="EDITOR_deleteScenario" result="Elimina scenario" />
   <entry stringName="EDITOR_deleteSettlement" result="L'eliminazione di questa struttura comporta anche la cancellazione del resto dell'insediamento. Vuoi procedere?" />
@@ -20,15 +21,15 @@
   <entry stringName="EDITOR_propertiesDisplayedName" result="Nome visualizzato:" />
   <entry stringName="EDITOR_propertiesIDName" result="Nome identificativo:" />
   <entry stringName="EDITOR_propertiesSettlement" result="Nome dell'insediamento:" />
-  <entry stringName="EDITOR_questionWindow" result="Editor - Attenzione" />
+  <entry stringName="EDITOR_questionWindow" result="Editor - Avvertenza" />
   <entry stringName="EDITOR_RandomMap" result="Genera una mappa casuale" />
   <entry stringName="EDITOR_saveAs" result="Salva scenario come..." />
-  <entry stringName="EDITOR_saveBeforeNewOperation" result="La mappa attuale è stata modificata. Vuoi salvarla?" />
+  <entry stringName="EDITOR_saveBeforeNewOperation" result="La mappa attuale è stata modificata. Vuoi salvarla prima di procedere?" />
   <entry stringName="EDITOR_saveOverwrite" result="Esiste già una mappa con il nome specificato. Vuoi sovrascriverla?" />
   <entry stringName="EDITOR_terrainBrush" result="Pennelli terreno" />
   <entry stringName="EDITOR_Tools" result="Strumenti" />
-  <entry stringName="EDITOR_Tools_AddObject" result="Attiva/Disattiva la finestra Aggiungi oggetto" />
-  <entry stringName="EDITOR_Tools_TerrainBrush" result="Attiva/Disattiva i pennelli dei terreni" />
+  <entry stringName="EDITOR_Tools_AddObject" result="Apri la finestra 'Aggiungi oggetto'" />
+  <entry stringName="EDITOR_Tools_TerrainBrush" result="Apri la finestra 'Pennelli del terreno'" />
   <entry stringName="EDITORTREE_buildings" result="Strutture" />
   <entry stringName="EDITORTREE_decorations" result="Decorazioni" />
   <entry stringName="EDITORTREE_egyptianstronghold" result="Fortezza egizia" />

@@ -311,6 +311,7 @@ namespace Game
 						if (Game::CreateObject(tmpObject->GetClassName(), tmpObject->GetPosition().x, tmpObject->GetPosition().y, 1) == nullptr) throw;
 						Minimap::Update();
 						Engine::Mouse::LeftClick = false;
+						Game::Map::MarkAsEdited();
 						return;
 					}
 				}
@@ -357,6 +358,7 @@ namespace Game
 					{
 						obj->UpdatePass();
 						Minimap::Update();
+						Game::Map::MarkAsEdited();
 					}
 					else
 					{
@@ -400,6 +402,7 @@ namespace Game
 		void GenerateRandomMap(const int nPlayers)
 		{
 			Game::Map::CreateNoise();
+			Game::Map::MarkAsEdited();
 		}
 
 		bool Game::Editor::IsInsertingObject(void)
@@ -426,7 +429,6 @@ namespace Game
 				}
 
 				// This part of code is executed when you are BEGINNING the terrain change
-				//Game::Minimap::Update();
 				changingTerrain.type = (float)tt->GetId();
 				EditorWindows::Hide();
 				std::wstring infoText = TranslationsTable::GetWTranslation(Engine::Data::GetWordFromDictionaryById(3));
@@ -460,8 +462,8 @@ namespace Game
 			if (Engine::Mouse::LeftClick == false && Engine::Mouse::LeftHold == false) return;
 
 			Game::Mapgen::ChangeTerrainTexture(changingTerrain.type, Engine::Mouse::GetXMapCoordinate(), Engine::Mouse::GetYMapCoordinate());
+			Game::Map::MarkAsEdited();
 			Minimap::Update();
-			
 		}
 
 		bool IsChangingTerrain(void)
@@ -471,18 +473,38 @@ namespace Game
 
 		void Game::Editor::Close(void)
 		{
-			Editor::isCreated = false;
-			Engine::SetEnvironment("menu");
-			Menu::Reset();
-
+			if (Game::Map::IsMapEdited() == false)
+			{
+				AskForSaving(); //QUESTA PARTE DI CODICE E LA RELATIVA FUNZIONE DEVONO ESSERE RIVISTI
+			}
+			else
+			{
+				Editor::isCreated = false;
+				Engine::SetEnvironment("menu");
+				Menu::Reset();
+			}
 		}
 
 		void AskForClosing(void)
 		{
-			Hector::EnableMessageWindow();
-			Hector::ExposeMessageWindowText("Close?");
-			Hector::SetMessageWindowYesCmd("Editor.Close()");
-			Hector::SetMessageWindowNoCmd("");
+			Hector::EnableQuestionWindow();
+			Hector::ExposeQuestionWindowText(TranslationsTable::GetTranslation("EDITOR_closingConfirmation"));
+			Hector::SetQuestionWindowYesCmd("Editor.Close()");
+			Hector::SetQuestionWindowNoCmd("");
+		}
+
+		void AskForSaving(void)
+		{
+			Hector::EnableQuestionWindow();
+			Hector::ExposeQuestionWindowText(TranslationsTable::GetTranslation("EDITOR_saveBeforeNewOperation"));
+			if (Game::Map::GetName() == "") {
+				Hector::SetQuestionWindowYesCmd("OpenWindow(2)");
+			}
+			else
+			{
+				Hector::SetQuestionWindowYesCmd("Editor.SaveScenario()");
+			}
+			Hector::SetQuestionWindowNoCmd("");
 		}
 		
 		void AskForSettlementDeleting(void)
@@ -490,10 +512,10 @@ namespace Game
 			if (Game::GetSelectedObject() == nullptr) return;
 			if (Game::GetSelectedObject()->AsBuilding()->GetSettlement() == nullptr) return;
 
-			Hector::EnableMessageWindow();
-			Hector::ExposeMessageWindowText(TranslationsTable::GetTranslation("EDITOR_deleteSettlement"));
-			Hector::SetMessageWindowYesCmd("Object.Remove(Selo():GetID())");
-			Hector::SetMessageWindowNoCmd("");
+			Hector::EnableQuestionWindow();
+			Hector::ExposeQuestionWindowText(TranslationsTable::GetTranslation("EDITOR_deleteSettlement"));
+			Hector::SetQuestionWindowYesCmd("Object.Remove(Selo():GetID())");
+			Hector::SetQuestionWindowNoCmd("");
 		}
 
 		void Game::Editor::handleKeyboardControls(void)

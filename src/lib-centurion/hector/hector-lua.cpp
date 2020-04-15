@@ -48,11 +48,11 @@ namespace Hector
 			.addFunction("ToggleWireframe", &Hector::ToggleWireframe)
 			.addFunction("ToggleGrid", &Hector::ToggleGrid)
 			.addFunction("Selo", Hector::Selo)
-			.addFunction("IsMessageWindowActive", &Hector::IsMessageWindowActive)
-			.addFunction("GetMessageWindowText", &Hector::GetMessageWindowText)
-			.addFunction("ResetMessageWindow", &Hector::ResetMessageWindow)
-			.addFunction("ExecuteYesCmdOfMessageWindow", &Hector::ExecuteYesCmdOfMessageWindow)
-			.addFunction("ExecuteNoCmdOfMessageWindow", &Hector::ExecuteNoCmdOfMessageWindow)
+			.addFunction("IsQuestionWindowActive", &Hector::IsQuestionWindowActive)
+			.addFunction("GetQuestionWindowText", &Hector::GetQuestionWindowText)
+			.addFunction("ResetQuestionWindow", &Hector::ResetQuestionWindow)
+			.addFunction("ExecuteYesCmdOfQuestionWindow", &Hector::ExecuteYesCmdOfQuestionWindow)
+			.addFunction("ExecuteNoCmdOfQuestionWindow", &Hector::ExecuteNoCmdOfQuestionWindow)
 			;
 
 		// variables

@@ -75,7 +75,7 @@ namespace Game
 		/// <summary>
 		/// This function returns a pointer to the required terrain texture
 		/// </summary>
-		/// <param name="id">The texture name</param>
+		/// <param name="_name">The texture name. It supports only const string values</param>
 		Mapgen::TerrainTexture* GetTerrainTexturePtrByName(const std::string _name);
 
 		/// <summary>

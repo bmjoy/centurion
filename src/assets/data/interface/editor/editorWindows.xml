@@ -333,16 +333,16 @@
 
   <editorWindow id="99" closeOtherWindowsWhenOpen="false">
     <iframe id="99" type="editor" title="EDITOR_questionWindow" position="x=Engine.WindowWidth/2-w/2; y=Engine.WindowHeight/2-h/2;" size="w=400; h=150;" isOpened="false">
-      <conditionScript function="conditionMessageWindow">
+      <conditionScript function="conditionQuestionWindow">
         -- lua script
-        function conditionMessageWindow()
-        condition1 = IsMessageWindowActive()
+        function conditionQuestionWindow()
+        condition1 = IsQuestionWindowActive()
         return condition1
         end
       </conditionScript>
       <openingScript>
         -- lua script
-        Iframe.GetIframeById(99):UpdateStringBySimpleTextId(0, GetMessageWindowText())
+        Iframe.GetIframeById(99):UpdateStringBySimpleTextId(0, GetQuestionWindowText())
       </openingScript>
       <simpleTextArray>
         <simpleText id="0" name="EDITOR_propertiesClassName" xOffset="20" yOffset="-80" />
@@ -351,23 +351,23 @@
         <button text="WORD_yes" xOffset="335" yOffset="30">
           <onclickScript>
             --lua script
-            ExecuteYesCmdOfMessageWindow()
-            ResetMessageWindow()
+            ExecuteYesCmdOfQuestionWindow()
+            ResetQuestionWindow()
             Editor.CloseWindow(99)
           </onclickScript>
         </button>
         <button text="WORD_no" xOffset="220" yOffset="30">
           <onclickScript>
             --lua script
-            ExecuteNoCmdOfMessageWindow()
-            ResetMessageWindow()
+            ExecuteNoCmdOfQuestionWindow()
+            ResetQuestionWindow()
             Editor.CloseWindow(99)
           </onclickScript>
         </button>
         <button text="WORD_Cancel" xOffset="105" yOffset="30">
           <onclickScript>
             --lua script
-            ResetMessageWindow()
+            ResetQuestionWindow()
             Editor.CloseWindow(99)
           </onclickScript>
         </button>

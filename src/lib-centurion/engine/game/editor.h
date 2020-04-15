@@ -97,7 +97,7 @@ namespace Game
 		void InsertingObject(std::string type = "", std::string className = "");
 
 		/// <summary>
-		/// This function moves an object in the editor map. 
+		/// This function drags an object in the editor map with the mouse. 
 		/// </summary>
 		void ShiftSelectedObject(void);
 
@@ -136,6 +136,11 @@ namespace Game
 		/// This method asks for closing the editor, opening a message window.
 		/// </summary>
 		void AskForClosing(void);
+
+		/// <summary>
+		/// This method asks for saving the current map, opening a message window.
+		/// </summary>
+		void AskForSaving(void);
 
 		/// <summary>
 		/// This method asks for deleting an entire settlement, if consisting in more than one building.

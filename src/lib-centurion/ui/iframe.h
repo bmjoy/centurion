@@ -109,14 +109,14 @@ namespace gui {
 		/// <param name="yPos">The text list y-position, relative to the iframe y-position</param>
 		/// <param name="luaCmd">The Lua command to execute when you click on one option</param>
 		/// <param name="maxOptions">The maximum number of options to display</param>
-		void AddTextList(const int textListId, int xPos, int yPos, const std::string & luaCmd = "", const unsigned int maxOptions = MAX_OPTIONS_DEFAULT, const unsigned int borderWidth = BORDERWIDTH_DEFAULT);
+		void AddTextList(const unsigned int textListId, int xPos, int yPos, const std::string & luaCmd = "", const unsigned int maxOptions = MAX_OPTIONS_DEFAULT, const unsigned int borderWidth = BORDERWIDTH_DEFAULT);
 
 		/// <summary>
 		/// This funtion gets the list text from the array
 		/// </summary>
 		/// <param name="id">Id of the text list</param>
 		/// <returns>Returns an element of type TextList</returns>
-		TextList* GetTextListById(int id);
+		TextList* GetTextListById(unsigned int id);
 
 		/// <summary>
 		/// This function updates an arbitrary TextList using its ID
@@ -124,7 +124,7 @@ namespace gui {
 		/// <param name="id">The id of the text list to update</param>
 		/// <param name="_options">List of options</param>
 		/// <param name="prefix">The prefix of the text (e.g. "WORD_" if the word has a translation with this prefix)</param>
-		void UpdateTextListById(int id, std::vector<std::string>* _options, const std::string prefix = "");
+		void UpdateTextListById(unsigned int id, std::vector<std::string>* _options, const std::string prefix = "");
 
 		/// <summary>
 		/// This function adds a specific text input to the iframe.
@@ -141,7 +141,7 @@ namespace gui {
 		/// </summary>
 		/// <param name="id">The TextInput Id</param>
 		/// <returns>Returns a pointer to the required TextInput.</returns>
-		TextInput* GetTextInputById(int id);
+		TextInput* GetTextInputById(unsigned int id);
 
 		/// <summary>
 		/// This method updates the placeholder of the required text input, identified with its id
