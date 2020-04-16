@@ -43,6 +43,11 @@ namespace Engine
 			return keyCode[key_code] != 0;
 		}
 
+		bool Engine::Keyboard::IsAnyDirectionalButtonNotReleased(void)
+		{
+			return keyCode[GLFW_KEY_RIGHT] != 0 && keyCode[GLFW_KEY_LEFT] != 0 && keyCode[GLFW_KEY_UP] != 0 && keyCode[GLFW_KEY_DOWN] != 0;
+		}
+
 		int Engine::Keyboard::GetCharCodepointPressed(void)
 		{
 			return charCodepointPressed;

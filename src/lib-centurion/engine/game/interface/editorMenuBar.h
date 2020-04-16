@@ -60,6 +60,12 @@ namespace EditorMenuBar
 	};
 
 	/// <summary>
+	/// This function checks if the editor menu is blocked or not.
+	/// </summary>
+	/// <returns>True if it is blocked; false otherwise.</returns>
+	bool IsBlocked(void);
+
+	/// <summary>
 	/// This function enables/disables the editor menu.
 	/// </summary>
 	/// <param name="id">The id that corresponds to the editor menu.</param>

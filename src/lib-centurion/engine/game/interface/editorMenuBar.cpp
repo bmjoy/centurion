@@ -36,6 +36,11 @@ namespace EditorMenuBar
 		return false;
 	}
 
+	bool EditorMenuBar::IsBlocked(void)
+	{
+		return isBlocked;
+	}
+
 	void EditorMenuBar::EditorMenu::Open(void)
 	{
 		EditorMenu::isOpened = true;

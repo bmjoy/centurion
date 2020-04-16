@@ -168,7 +168,6 @@ namespace EditorWindows
 		isHidden = false;
 	}
 
-
 	void EditorWindows::Clear(void)
 	{
 		for (int i = 0; i < MAX_NUMBER_OF_EDITOR_WINDOWS; i++)

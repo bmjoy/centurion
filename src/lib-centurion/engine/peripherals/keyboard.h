@@ -54,6 +54,12 @@ namespace Engine {
 		bool IsKeyNotReleased(unsigned int key_code);
 
 		/// <summary>
+		/// This function detects whenever any directional button is not being pressed or hold.
+		/// </summary>
+		/// <returns>This value it's true if any directional button is not being pressed or hold; it's false otherwise</returns>
+		bool IsAnyDirectionalButtonNotReleased(void);
+
+		/// <summary>
 		/// This function gets the char codepoint whenever is being pressed
 		/// </summary>
 		/// <returns>Char codepoint that should be returned, expressed in integer</returns>

@@ -93,6 +93,9 @@ namespace Engine
 					if (Mouse::GetYPosition() >= Engine::myWindow::Height - EditorMenuBar::GetHeight()) return;
 					if (EditorMenuBar::IsOpened()) return;
 				}
+
+				if (EditorMenuBar::IsBlocked()) return;
+				if (Engine::Keyboard::IsAnyDirectionalButtonNotReleased()) return;
 			}
 
 			abs_x = Mouse::GetXPosition() + position.x;
@@ -128,7 +131,6 @@ namespace Engine
 			}
 
 			/* MOUSE SCROLLING --> CAMERA ZOOM */
-			//!game::GameMenu::IsActive() && 
 			if ((Keyboard::IsKeyNotReleased(GLFW_KEY_LEFT_CONTROL) || Keyboard::IsKeyNotReleased(GLFW_KEY_RIGHT_CONTROL)) && Mouse::ScrollBool) {
 				if (Mouse::ScrollValue > 0 && currentZoom > 1.0f) {
 					currentZoom -= (int)Mouse::ScrollValue;
@@ -156,6 +158,7 @@ namespace Engine
 
 		void Engine::Camera::keyboardControl(void) {
 			if (Hector::ConsoleIsActive()) return;
+			if (EditorMenuBar::IsBlocked()) return;
 
 			//Left margin
 			if (Keyboard::IsKeyNotReleased(GLFW_KEY_LEFT) && position.x > 0) {
