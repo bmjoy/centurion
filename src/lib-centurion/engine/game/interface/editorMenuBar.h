@@ -103,6 +103,16 @@ namespace EditorMenuBar
 	bool IsOpened(void);
 
 	/// <summary>
+	/// This function makes the menubar unclickable
+	/// </summary>
+	void Block(void);
+
+	/// <summary>
+	/// This function unblocks the menubar
+	/// </summary>
+	void Unblock(void);
+
+	/// <summary>
 	/// This function adds a EditorMenu object to the editor menu bar.
 	/// </summary>
 	/// <param name="id">The id that corresponds to the editor menu bar.</param>

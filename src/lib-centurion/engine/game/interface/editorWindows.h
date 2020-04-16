@@ -56,7 +56,7 @@ namespace EditorWindows
 		/// This funtio creates a generic window.
 		/// </summary>
 		/// <param name="_iframe"></param>
-		void Create(gui::Iframe _iframe, bool _closeOtherWindowsWhenOpen);
+		void Create(gui::Iframe _iframe, bool _closeOtherWindowsWhenOpen, bool _blocksMenubar);
 
 		/// <summary>
 		/// This function performs the rendiring of a generic window.
@@ -72,6 +72,7 @@ namespace EditorWindows
 		gui::Iframe iframe;
 		bool isOpened = false;
 		bool closeOtherWindowsWhenOpen = false;
+		bool blocksMenubar = false;
 	};
 
 	/// <summary>

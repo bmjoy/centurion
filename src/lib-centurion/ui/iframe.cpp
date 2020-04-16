@@ -209,64 +209,80 @@ bool gui::Iframe::CreateFromXmlElement(tinyxml2::XMLElement* iframe)
 
 		this->Create(iframeId, sizeScript + positionScript, iframeTitle);
 
-		for (tinyxml2::XMLElement* _it_btn = iframe->FirstChildElement("buttonArray")->FirstChildElement(); _it_btn != NULL; _it_btn = _it_btn->NextSiblingElement())
+		if (iframe->FirstChildElement("buttonArray") != NULL) 
 		{
-			wstring btnText = TranslationsTable::GetWTranslation(_it_btn->Attribute("text"));
-			string btnLuaCmd = _it_btn->FirstChildElement("onclickScript")->GetText();
-			int btnX = _it_btn->IntAttribute("xOffset");
-			int btnY = _it_btn->IntAttribute("yOffset");
-			this->AddButton(btnText, btnX, btnY, btnLuaCmd);
+			for (tinyxml2::XMLElement* _it_btn = iframe->FirstChildElement("buttonArray")->FirstChildElement(); _it_btn != NULL; _it_btn = _it_btn->NextSiblingElement())
+			{
+				wstring btnText = TranslationsTable::GetWTranslation(_it_btn->Attribute("text"));
+				string btnLuaCmd = _it_btn->FirstChildElement("onclickScript")->GetText();
+				int btnX = _it_btn->IntAttribute("xOffset");
+				int btnY = _it_btn->IntAttribute("yOffset");
+				this->AddButton(btnText, btnX, btnY, btnLuaCmd);
+			}
 		}
 
 		// text lists 
-		for (tinyxml2::XMLElement* _it_txtlist = iframe->FirstChildElement("textListArray")->FirstChildElement(); _it_txtlist != NULL; _it_txtlist = _it_txtlist->NextSiblingElement())
+		if (iframe->FirstChildElement("textListArray") != NULL) 
 		{
-			int textListID = _it_txtlist->IntAttribute("textListId");
-			int xOffset = _it_txtlist->IntAttribute("xOffset");
-			int yOffset = _it_txtlist->IntAttribute("yOffset");
-			int maxOpt = _it_txtlist->IntAttribute("maxOptions");
-			int tlWidth = _it_txtlist->IntAttribute("width");
-			string txtListLuaCmd = "";
-			if (_it_txtlist->FirstChildElement("onclickScript") != NULL) {
-				txtListLuaCmd = _it_txtlist->FirstChildElement("onclickScript")->GetText();
+			for (tinyxml2::XMLElement* _it_txtlist = iframe->FirstChildElement("textListArray")->FirstChildElement(); _it_txtlist != NULL; _it_txtlist = _it_txtlist->NextSiblingElement())
+			{
+				int textListID = _it_txtlist->IntAttribute("textListId");
+				int xOffset = _it_txtlist->IntAttribute("xOffset");
+				int yOffset = _it_txtlist->IntAttribute("yOffset");
+				int maxOpt = _it_txtlist->IntAttribute("maxOptions");
+				int tlWidth = _it_txtlist->IntAttribute("width");
+				string txtListLuaCmd = "";
+				if (_it_txtlist->FirstChildElement("onclickScript") != NULL) {
+					txtListLuaCmd = _it_txtlist->FirstChildElement("onclickScript")->GetText();
+				}
+				this->AddTextList(textListID, xOffset, yOffset, txtListLuaCmd, maxOpt, tlWidth);
 			}
-			this->AddTextList(textListID, xOffset, yOffset, txtListLuaCmd, maxOpt, tlWidth);
 		}
 
 		// text inputs
-		for (tinyxml2::XMLElement* _it_txtinput = iframe->FirstChildElement("textInputArray")->FirstChildElement(); _it_txtinput != NULL; _it_txtinput = _it_txtinput->NextSiblingElement())
+		if (iframe->FirstChildElement("textInputArray") != NULL)
 		{
-			int textInputId = _it_txtinput->IntAttribute("textInputId");
-			int xOffset = _it_txtinput->IntAttribute("xOffset");
-			int yOffset = _it_txtinput->IntAttribute("yOffset");
-			int tiWidth = _it_txtinput->IntAttribute("width");
-			std::string _ph = _it_txtinput->Attribute("placeholder");
-			wstring placeholder = (_ph.empty()) ? L"" : TranslationsTable::GetWTranslation(_ph);
-			this->AddTextInput(textInputId, xOffset, yOffset, tiWidth, placeholder);
+			for (tinyxml2::XMLElement* _it_txtinput = iframe->FirstChildElement("textInputArray")->FirstChildElement(); _it_txtinput != NULL; _it_txtinput = _it_txtinput->NextSiblingElement())
+			{
+				int textInputId = _it_txtinput->IntAttribute("textInputId");
+				int xOffset = _it_txtinput->IntAttribute("xOffset");
+				int yOffset = _it_txtinput->IntAttribute("yOffset");
+				int tiWidth = _it_txtinput->IntAttribute("width");
+				std::string _ph = _it_txtinput->Attribute("placeholder");
+				wstring placeholder = (_ph.empty()) ? L"" : TranslationsTable::GetWTranslation(_ph);
+				this->AddTextInput(textInputId, xOffset, yOffset, tiWidth, placeholder);
+			}
 		}
 
+
 		// simple texts
-		for (tinyxml2::XMLElement* _it_txt = iframe->FirstChildElement("simpleTextArray")->FirstChildElement(); _it_txt != NULL; _it_txt = _it_txt->NextSiblingElement())
+		if (iframe->FirstChildElement("simpleTextArray") != NULL)
 		{
-			int textId = _it_txt->IntAttribute("id");
-			int xOffset = _it_txt->IntAttribute("xOffset");
-			int yOffset = _it_txt->IntAttribute("yOffset");
-			std::string _name = _it_txt->Attribute("name");
-			std::wstring wtext = (_name.empty()) ? L"" : TranslationsTable::GetWTranslation(_name);
-			this->AddText(textId, wtext, xOffset, yOffset);
+			for (tinyxml2::XMLElement* _it_txt = iframe->FirstChildElement("simpleTextArray")->FirstChildElement(); _it_txt != NULL; _it_txt = _it_txt->NextSiblingElement())
+			{
+				int textId = _it_txt->IntAttribute("id");
+				int xOffset = _it_txt->IntAttribute("xOffset");
+				int yOffset = _it_txt->IntAttribute("yOffset");
+				std::string _name = _it_txt->Attribute("name");
+				std::wstring wtext = (_name.empty()) ? L"" : TranslationsTable::GetWTranslation(_name);
+				this->AddText(textId, wtext, xOffset, yOffset);
+			}
 		}
 
 		// textboxes
-		for (tinyxml2::XMLElement* _it_txtBox = iframe->FirstChildElement("textBoxArray")->FirstChildElement(); _it_txtBox != NULL; _it_txtBox = _it_txtBox->NextSiblingElement())
+		if (iframe->FirstChildElement("textBoxArray") != NULL)
 		{
-			int textboxId = _it_txtBox->IntAttribute("id");
-			int xOffset = _it_txtBox->IntAttribute("xOffset");
-			int yOffset = _it_txtBox->IntAttribute("yOffset");
-			int width = _it_txtBox->IntAttribute("width");
-			int height = _it_txtBox->IntAttribute("height");
-			std::string _name = _it_txtBox->Attribute("name");
-			std::wstring wtext = (_name.empty()) ? L"" : TranslationsTable::GetWTranslation(_name);
-			this->AddTextBox(textboxId, wtext, xOffset, yOffset, width, height);
+			for (tinyxml2::XMLElement* _it_txtBox = iframe->FirstChildElement("textBoxArray")->FirstChildElement(); _it_txtBox != NULL; _it_txtBox = _it_txtBox->NextSiblingElement())
+			{
+				int textboxId = _it_txtBox->IntAttribute("id");
+				int xOffset = _it_txtBox->IntAttribute("xOffset");
+				int yOffset = _it_txtBox->IntAttribute("yOffset");
+				int width = _it_txtBox->IntAttribute("width");
+				int height = _it_txtBox->IntAttribute("height");
+				std::string _name = _it_txtBox->Attribute("name");
+				std::wstring wtext = (_name.empty()) ? L"" : TranslationsTable::GetWTranslation(_name);
+				this->AddTextBox(textboxId, wtext, xOffset, yOffset, width, height);
+			}
 		}
 
 

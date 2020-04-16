@@ -25,6 +25,7 @@ namespace EditorMenuBar
 		std::array<EditorMenu*, MAX_NUMBER_OF_EDITOR_MENUS> listOfMenus = { nullptr };
 
 		bool isHidden = false;
+		bool isBlocked = false;
 	};
 
 	bool EditorMenuBar::EditorMenu::IsOpened(void)
@@ -87,6 +88,7 @@ namespace EditorMenuBar
 
 	void EditorMenuBar::ToggleEditorMenu(const unsigned int id)
 	{
+		if (isBlocked) return;
 		if (Engine::Mouse::LeftClick) {
 			if (listOfMenus[id]->IsOpened()) {
 				listOfMenus[id]->Close();
@@ -209,6 +211,7 @@ namespace EditorMenuBar
 	void EditorMenuBar::Render(const bool picking)
 	{
 		if (isHidden) return;
+		if (isBlocked && picking) return;
 
 		topBar.render(color, vec4(), picking);
 		for (int i = 0; i < MAX_NUMBER_OF_EDITOR_MENUS; i++) {
@@ -254,6 +257,16 @@ namespace EditorMenuBar
 			if (i->IsOpened()) return true;
 		}
 		return false;
+	}
+
+	void EditorMenuBar::Block(void)
+	{
+		isBlocked = true;
+	}
+
+	void EditorMenuBar::Unblock(void)
+	{
+		isBlocked = false;
 	}
 
 	void EditorMenuBar::AddMenu(const unsigned int id, EditorMenu * menu)

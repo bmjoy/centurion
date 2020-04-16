@@ -2,7 +2,7 @@
 
   <!-- NEW MAP WINDOW -->
 
-  <editorWindow id="0" closeOtherWindowsWhenOpen="true">
+  <editorWindow id="0" closeOtherWindowsWhenOpen="true" blocksMenubar="false">
     <iframe id="0" type="editor" title="EDITOR_newScenario" position="x=Engine.WindowWidth/2-w/2; y=Engine.WindowHeight/2-h/2;" size="w=400; h=150;" isOpened="false">
       <conditionScript function="">
         -- lua script
@@ -13,7 +13,6 @@
       <simpleTextArray>
         <simpleText id="0" name="EDITOR_newScenarioName" xOffset="20" yOffset="80" />
       </simpleTextArray>
-      <textBoxArray></textBoxArray>
       <buttonArray>
         <button text="WORD_Create" xOffset="335" yOffset="30">
           <onclickScript>
@@ -28,7 +27,6 @@
           </onclickScript>
         </button>
       </buttonArray>
-      <textListArray></textListArray>
       <textInputArray>
         <textInput textInputId="0" xOffset="20" yOffset="60" width="200" placeholder="EDITOR_defaultMapName" />
       </textInputArray>
@@ -37,7 +35,7 @@
 
   <!-- OPEN MAP WINDOW -->
 
-  <editorWindow id="1" closeOtherWindowsWhenOpen="true">
+  <editorWindow id="1" closeOtherWindowsWhenOpen="true" blocksMenubar="false">
     <iframe id="1" type="editor" title="EDITOR_openScenario" position="x=Engine.WindowWidth/2-w/2; y=Engine.WindowHeight/2-h/2;" size="w=400; h=370;" isOpened="false">
       <conditionScript function="">
         -- lua script
@@ -47,8 +45,6 @@
         _folderList = Engine.GetListOfFolders("scenarios")
         Iframe.GetIframeById(1):UpdateTextListById(0, _folderList)
       </openingScript>
-      <simpleTextArray></simpleTextArray>
-      <textBoxArray></textBoxArray>
       <buttonArray>
         <button text="WORD_Open" xOffset="335" yOffset="30">
           <onclickScript>
@@ -67,13 +63,12 @@
         <textList textListId="0" xOffset="50" yOffset="320" maxOptions="10" width="270">
         </textList>
       </textListArray>
-      <textInputArray></textInputArray>
     </iframe>
   </editorWindow>
 
   <!-- SAVE MAP WINDOW -->
 
-  <editorWindow id="2" closeOtherWindowsWhenOpen="true">
+  <editorWindow id="2" closeOtherWindowsWhenOpen="true" blocksMenubar="false">
     <iframe id="2" type="editor" title="EDITOR_saveAs" position="x=Engine.WindowWidth/2-w/2; y=Engine.WindowHeight/2-h/2;" size="w=400; h=150;" isOpened="false">
       <conditionScript function="">
         -- lua script
@@ -84,7 +79,6 @@
       <simpleTextArray>
         <simpleText id="0" name="EDITOR_newScenarioName" xOffset="20" yOffset="80" />
       </simpleTextArray>
-      <textBoxArray></textBoxArray>
       <buttonArray>
         <button text="WORD_Save" xOffset="335" yOffset="30">
           <onclickScript>
@@ -101,7 +95,6 @@
           </onclickScript>
         </button>
       </buttonArray>
-      <textListArray></textListArray>
       <textInputArray>
         <textInput textInputId="0" xOffset="20" yOffset="60" width="200" placeholder="EDITOR_defaultMapName" />
       </textInputArray>
@@ -110,7 +103,7 @@
 
   <!-- DELETE MAP WINDOW -->
 
-  <editorWindow id="3" closeOtherWindowsWhenOpen="true">
+  <editorWindow id="3" closeOtherWindowsWhenOpen="true" blocksMenubar="false">
     <iframe id="3" type="editor" title="EDITOR_deleteScenario" position="x=Engine.WindowWidth/2-w/2; y=Engine.WindowHeight/2-h/2;" size="w=400; h=370;" isOpened="false">
       <conditionScript function="">
         -- lua script
@@ -120,8 +113,6 @@
         _folderList = Engine.GetListOfFolders("scenarios")
         Iframe.GetIframeById(3):UpdateTextListById(0, _folderList)
       </openingScript>
-      <simpleTextArray></simpleTextArray>
-      <textBoxArray></textBoxArray>
       <buttonArray>
         <button text="WORD_Delete" xOffset="335" yOffset="30">
           <onclickScript>
@@ -140,13 +131,12 @@
         <textList textListId="0" xOffset="50" yOffset="320" maxOptions="10" width="270">
         </textList>
       </textListArray>
-      <textInputArray></textInputArray>
     </iframe>
   </editorWindow>
 
   <!-- OBJECT PROPERTIES WINDOW -->
 
-  <editorWindow id="4" closeOtherWindowsWhenOpen="true">
+  <editorWindow id="4" closeOtherWindowsWhenOpen="true" blocksMenubar="false">
     <iframe id="4" type="editor" title="EDITOR_properties" position="x=Engine.WindowWidth/2-w/2; y=Engine.WindowHeight/2-h/2;" size="w=600; h=450;" isOpened="false">
       <conditionScript function="ConditionProperties">
         -- lua script
@@ -172,7 +162,6 @@
         <simpleText id="3" name="EDITOR_propertiesDisplayedName" xOffset="20" yOffset="-140" />
         <simpleText id="4" name="EDITOR_propertiesSettlement" xOffset="20" yOffset="-170" />
       </simpleTextArray>
-      <textBoxArray></textBoxArray>
       <buttonArray>
         <button text="WORD_Close" xOffset="400" yOffset="30">
           <onclickScript>
@@ -191,7 +180,6 @@
           </onclickScript>
         </button>
       </buttonArray>
-      <textListArray></textListArray>
       <textInputArray>
         <textInput textInputId="0" xOffset="180" yOffset="-110" width="200" placeholder=""/>
         <textInput textInputId="1" xOffset="180" yOffset="-140" width="200" placeholder=""/>
@@ -203,7 +191,7 @@
 
   <!-- ADD OBJECT WINDOW -->
 
-  <editorWindow id="5" closeOtherWindowsWhenOpen="true">
+  <editorWindow id="5" closeOtherWindowsWhenOpen="true" blocksMenubar="false">
     <iframe id="5" type="editor" title="EDITOR_addObject" position="x=Engine.WindowWidth/2-w/2; y=0" size="w=600; h=250;" isOpened="false">
       <conditionScript function="ConditionAddObject">
         -- lua script
@@ -223,8 +211,6 @@
         _editorList3 = Editor.GetObjectTreeList3(Iframe.GetIframeById(5):GetTextListById(0):GetSelectedOption(), Iframe.GetIframeById(5):GetTextListById(1):GetSelectedOption())
         Iframe.GetIframeById(5):UpdateTextListById(2, _editorList3, "WORD_")
       </openingScript>
-      <simpleTextArray></simpleTextArray>
-      <textBoxArray></textBoxArray>
       <buttonArray>
         <button text="WORD_Close" xOffset="400" yOffset="30">
           <onclickScript>
@@ -256,13 +242,12 @@
         <textList textListId="2" xOffset="420" yOffset="185" maxOptions="5" width="163">
         </textList>
       </textListArray>
-      <textInputArray></textInputArray>
     </iframe>
   </editorWindow>
 
   <!-- TERRAIN BRUSH WINDOW -->
 
-  <editorWindow id="6" closeOtherWindowsWhenOpen="true">
+  <editorWindow id="6" closeOtherWindowsWhenOpen="true" blocksMenubar="false">
     <iframe id="6" type="editor" title="EDITOR_terrainBrush" position="x=Engine.WindowWidth/2-w/2; y=0" size="w=400; h=250;" isOpened="false">
       <conditionScript function="">
         -- lua script
@@ -275,8 +260,6 @@
         _editorList2 = Editor.GetTerrainTreeList2(Iframe.GetIframeById(6):GetTextListById(0):GetSelectedOption())
         Iframe.GetIframeById(6):UpdateTextListById(1, _editorList2, "EDITORTREE_")
       </openingScript>
-      <simpleTextArray></simpleTextArray>
-      <textBoxArray></textBoxArray>
       <buttonArray>
         <button text="WORD_Close" xOffset="200" yOffset="30">
           <onclickScript>
@@ -300,13 +283,12 @@
         </textList>
         <textList textListId="1" xOffset="220" yOffset="185" maxOptions="5" width="163"></textList>
       </textListArray>
-      <textInputArray></textInputArray>
     </iframe>
   </editorWindow>
 
   <!-- GENERATE RANDOM MAP WINDOW-->
 
-  <editorWindow id="7" closeOtherWindowsWhenOpen="true">
+  <editorWindow id="7" closeOtherWindowsWhenOpen="true" blocksMenubar="false">
     <iframe id="7" type="editor" title="EDITOR_RandomMap" position="x=Engine.WindowWidth/2-w/2; y=Engine.WindowHeight/2-h/2;" size="w=400; h=150;" isOpened="false">
       <conditionScript function="">
         -- lua script
@@ -314,9 +296,6 @@
       <openingScript>
         -- lua script
       </openingScript>
-      <simpleTextArray>
-      </simpleTextArray>
-      <textBoxArray></textBoxArray>
       <buttonArray>
         <button text="WORD_Apply" xOffset="335" yOffset="30">
           <onclickScript>
@@ -332,15 +311,12 @@
           </onclickScript>
         </button>
       </buttonArray>
-      <textListArray></textListArray>
-      <textInputArray>
-      </textInputArray>
     </iframe>
   </editorWindow>
 
   <!-- INFOBOX WINDOW -->
 
-  <editorWindow id="98" closeOtherWindowsWhenOpen="false">
+  <editorWindow id="98" closeOtherWindowsWhenOpen="false" blocksMenubar="true">
     <iframe id="98" type="editor" title="EDITOR_infoboxWindow" position="x=Engine.WindowWidth/2-w/2; y=Engine.WindowHeight/2-h/2;" size="w=400; h=150;" isOpened="false">
       <conditionScript function="conditionInfoBoxWindow">
         -- lua script
@@ -353,8 +329,6 @@
         -- lua script
         Iframe.GetIframeById(98):UpdateTextBoxById(0, GetInfoBoxWindowText())
       </openingScript>
-      <simpleTextArray>
-      </simpleTextArray>
       <textBoxArray>
         <textBox id="0" name="" xOffset="20" yOffset="-60" width="380" height="80"/>
       </textBoxArray>
@@ -367,15 +341,12 @@
           </onclickScript>
         </button>
       </buttonArray>
-      <textListArray></textListArray>
-      <textInputArray>
-      </textInputArray>
     </iframe>
   </editorWindow>
 
   <!-- QUESTION WINDOW -->
 
-  <editorWindow id="99" closeOtherWindowsWhenOpen="false">
+  <editorWindow id="99" closeOtherWindowsWhenOpen="false" blocksMenubar="true">
     <iframe id="99" type="editor" title="EDITOR_questionWindow" position="x=Engine.WindowWidth/2-w/2; y=Engine.WindowHeight/2-h/2;" size="w=400; h=150;" isOpened="false">
       <conditionScript function="conditionQuestionWindow">
         -- lua script
@@ -388,8 +359,6 @@
         -- lua script
         Iframe.GetIframeById(99):UpdateTextBoxById(0, GetQuestionWindowText())
       </openingScript>
-      <simpleTextArray>
-      </simpleTextArray>
       <textBoxArray>
         <textBox id="0" name="" xOffset="20" yOffset="-60" width="380" height="80"/>
       </textBoxArray>
@@ -418,9 +387,6 @@
           </onclickScript>
         </button>
       </buttonArray>
-      <textListArray></textListArray>
-      <textInputArray>
-      </textInputArray>
     </iframe>
   </editorWindow>
 

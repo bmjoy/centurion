@@ -1,4 +1,5 @@
 #include "editorWindows.h"
+#include "editorMenuBar.h"
 #include <file_manager.h>
 #include <logger.h>
 #include <settings.h>
@@ -32,6 +33,7 @@ namespace EditorWindows
 	void EditorWindows::EditorWindow::Open(void)
 	{
 		if(closeOtherWindowsWhenOpen) EditorWindows::CloseEveryWindow();
+		if (blocksMenubar) EditorMenuBar::Block();
 		this->isOpened = true;
 		this->iframe.Open();
 		EditorWindows::bWindowsOpened = true;
@@ -41,7 +43,6 @@ namespace EditorWindows
 	{
 		if (this->isOpened == false)
 		{
-			EditorWindows::CloseEveryWindow();
 			this->Open();
 		}
 		else
@@ -54,6 +55,7 @@ namespace EditorWindows
 	{
 		this->iframe.Close();
 		this->isOpened = false;
+		EditorMenuBar::Unblock();
 		EditorWindows::bWindowsOpened = false;
 	}
 
@@ -63,18 +65,22 @@ namespace EditorWindows
 		EditorWindows::bWindowsOpened = false;
 	}
 
-	void EditorWindows::EditorWindow::Create(gui::Iframe _iframe, bool _closeOtherWindowsWhenOpen)
+	void EditorWindows::EditorWindow::Create(gui::Iframe _iframe, bool _closeOtherWindowsWhenOpen, bool _blocksMenubar)
 	{
 		iframe = _iframe;
 		isOpened = false;
 		closeOtherWindowsWhenOpen = _closeOtherWindowsWhenOpen;
+		blocksMenubar = _blocksMenubar;
 	}
 
 	void EditorWindows::EditorWindow::Render(const bool picking)
 	{
 		if (iframe.IsOpened() == true) {
-			isOpened = true;
-			bWindowsOpened = true;
+			if (this->isOpened == false) this->Open();
+		}
+		else
+		{
+			if (this->isOpened == true) this->Close();
 		}
 		iframe.Render(picking);
 	}
@@ -118,6 +124,7 @@ namespace EditorWindows
 				EditorWindow* eWind = new EditorWindow();
 				int id = _it_wind->IntAttribute("id");
 				bool closeOtherWindowsWhenOpen = _it_wind->BoolAttribute("closeOtherWindowsWhenOpen");
+				bool blocksMenubar = _it_wind->BoolAttribute("blocksMenubar");
 				gui::Iframe iframe = gui::Iframe();
 
 				tinyxml2::XMLElement* iframeXML = _it_wind->FirstChildElement("iframe");
@@ -125,7 +132,7 @@ namespace EditorWindows
 
 				if (bIframeSuccess)
 				{
-					eWind->Create(iframe, closeOtherWindowsWhenOpen);
+					eWind->Create(iframe, closeOtherWindowsWhenOpen, blocksMenubar);
 					gui::Iframe::AddIframe(iframe.GetId(), eWind->GetIframePtr());
 					if (iframe.IsOpened()) eWind->Open();
 					AddWindow(id, eWind);
