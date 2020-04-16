@@ -389,17 +389,17 @@ void GObject::SendInfoText()
 		switch (code)
 		{
 			case 0:
-				//Inaccessibile.
+				//Impassable point
 				infoText = TranslationsTable::GetWTranslation(Engine::Data::GetWordFromDictionaryById(1));
 				EditorUI::UpdateInfoText(infoText);
 				break;
 			case 1:
-				//Troppo lontano.
+				//No settlements around
 				infoText = TranslationsTable::GetWTranslation(Engine::Data::GetWordFromDictionaryById(2));
 				EditorUI::UpdateInfoText(infoText);
 				break;
 			case 2:
-				//Troppo vicino.
+				//Other nearby settlements around
 				infoText = TranslationsTable::GetWTranslation(Engine::Data::GetWordFromDictionaryById(5));
 				EditorUI::UpdateInfoText(infoText);
 				break;

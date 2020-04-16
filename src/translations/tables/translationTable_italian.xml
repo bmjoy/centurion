@@ -1,5 +1,6 @@
 <translationTable language="italian">
   <entry stringName="EDITOR_addObject" result="Aggiungi oggetto" />
+  <entry stringName="EDITOR_anotherSettlementAround" result="Impossibile posizionare la struttura nel punto selezionato, poiché è troppo vicina ad un altro insediamento." />
   <entry stringName="EDITOR_canAddStructure" result="Clicca con il tasto SINISTRO del mouse per posizionare la struttura nel punto desiderato. Premi il tastro DESTRO per annullare l'operazione." />
   <entry stringName="EDITOR_cancelBrush" result="Clicca con il tasto DESTRO del mouse o ESC per annullare l'operazione." />
   <entry stringName="EDITOR_canMoveStructure" result="Tieni premuto il tasto SINISTRO del mouse per spostare la struttura. Rilascia il tasto SINISTRO del mouse per annullare l'operazione." />
@@ -9,6 +10,7 @@
   <entry stringName="EDITOR_deleteSettlement" result="L'eliminazione di questa struttura comporta anche la cancellazione del resto dell'insediamento. Vuoi procedere?" />
   <entry stringName="EDITOR_Edit" result="Modifica" />
   <entry stringName="EDITOR_Edit_Properties" result="Modifica proprietà oggetto" />
+  <entry stringName="EDITOR_enemySettlementAround" result="Impossibile posizionare la struttura nel punto selezionato, poiché vi sono insediamenti nemici nelle vicinanze." />
   <entry stringName="EDITOR_File" result="File" />
   <entry stringName="EDITOR_impassablePoint" result="Impossibile posizionare la struttura nel punto selezionato, in quanto si tratta di un luogo scosceso o inaccessibile, come il mare." />
   <entry stringName="EDITOR_infoboxWindow" result="Editor - Informazione" />

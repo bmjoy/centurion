@@ -10,5 +10,6 @@
    <word id="2" value="EDITOR_noSettlementsAround"/>
    <word id="3" value="EDITOR_cancelBrush"/>
    <word id="4" value="EDITOR_canMoveStructure"/>
-   <word id="5" value="EDITOR_settlementsAroundWhenMoving"/>
+   <word id="5" value="EDITOR_anotherSettlementAround"/>
+   <word id="6" value="EDITOR_enemySettlementAround"/>
 </dictionary>

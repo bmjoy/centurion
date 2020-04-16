@@ -1,5 +1,6 @@
 <translationTable language="english">
   <entry stringName="EDITOR_addObject" result="Add object" />
+  <entry stringName="EDITOR_anotherSettlementAround" result="Unable to place the building at the selected point, as it is too close to another settlement." />
   <entry stringName="EDITOR_canAddStructure" result="Press the LEFT mouse button to position the structure in the desired point. Press the RIGHT mouse button to abort this operation." />
   <entry stringName="EDITOR_cancelBrush" result="Press the RIGHT mouse button or ESC to abort the operation." />
   <entry stringName="EDITOR_canMoveStructure" result="Hold the LEFT mouse button to move the building. Release the LEFT mouse button to abort the operation." />
@@ -9,12 +10,12 @@
   <entry stringName="EDITOR_deleteSettlement" result="Deleting this structure causes the cancellation of the rest of the settlement as well. Do you want to proceed?" />
   <entry stringName="EDITOR_Edit" result="Edit" />
   <entry stringName="EDITOR_Edit_Properties" result="Edit object properties" />
+  <entry stringName="EDITOR_enemySettlementAround" result="Unable to place the building at the selected point, as there are nearby enemy settlements." />
   <entry stringName="EDITOR_File" result="File" />
   <entry stringName="EDITOR_impassablePoint" result="Unable to place the building at the selected point, as it is a steep or inaccessible place, like the sea." />
   <entry stringName="EDITOR_infoboxWindow" result="Editor - Information" />
   <entry stringName="EDITOR_newScenario" result="Create new scenario" />
   <entry stringName="EDITOR_newScenarioName" result="Choose a name (max 30 characters)." />
-  <entry stringName="EDITOR_settlementsAroundWhenMoving" result="Impossibile posizionare la struttura nel punto selezionato, poiché non vi sono insediamenti nelle vicinanze." />
   <entry stringName="EDITOR_noSettlementsAround" result="Unable to place the building at the selected point, as there are no nearby settlements." />
   <entry stringName="EDITOR_openScenario" result="Open scenario" />
   <entry stringName="EDITOR_properties" result="Object properties" />

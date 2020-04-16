@@ -1,5 +1,6 @@
 <translationTable language="french">
   <entry stringName="EDITOR_addObject" result="Ajouter objet" />
+  <entry stringName="EDITOR_anotherSettlementAround" result="La structure ne peut pas être positionnée au point sélectionné, car il est trop proche d'une autre installation." />
   <entry stringName="EDITOR_canAddStructure" result="Appuyez sur le bouton GAUCHE de la souris pour positionner la structure au point souhaité. Appuyez sur le bouton DROITE de la souris pour abandonner cette opération." />
   <entry stringName="EDITOR_cancelBrush" result="Appuyez sur le bouton DROITE de la souris ou ESC pour abandonner cette opération." />
   <entry stringName="EDITOR_canMoveStructure" result="Maintenez le bouton GAUCHE de la souris pour déplacer la structure. Relâchez le bouton GAUCHE de la souris pour abandonner l'opération." />
@@ -9,6 +10,7 @@
   <entry stringName="EDITOR_deleteSettlement" result="La suppression de cette structure élimine également le reste de l'installation. Voulez-vous continuer?" />
   <entry stringName="EDITOR_Edit" result="Éditer" />
   <entry stringName="EDITOR_Edit_Properties" result="Éditer propriétés de l'objet" />
+  <entry stringName="EDITOR_enemySettlementAround" result="La structure ne peut pas être positionnée au point sélectionné, car il y a des installations ennemies à proximité." />
   <entry stringName="EDITOR_File" result="Fichier" />
   <entry stringName="EDITOR_impassablePoint" result="La structure ne peut pas être positionnée au point sélectionné, comme c'est un endroit raide ou inaccessible, comme la mer." />
   <entry stringName="EDITOR_infoboxWindow" result="Éditeur - Information" />

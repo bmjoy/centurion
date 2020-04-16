@@ -1,5 +1,6 @@
 <translationTable language="spanish">
   <entry stringName="EDITOR_addObject" result="Añadir objeto" />
+  <entry stringName="EDITOR_anotherSettlementAround" result="--" />
   <entry stringName="EDITOR_canAddStructure" result="--" />
   <entry stringName="EDITOR_cancelBrush" result="--" />
   <entry stringName="EDITOR_canMoveStructure" result="--" />
@@ -9,12 +10,12 @@
   <entry stringName="EDITOR_deleteSettlement" result="--" />
   <entry stringName="EDITOR_Edit" result="Editar" />
   <entry stringName="EDITOR_Edit_Properties" result="Editar propiedades de objeto" />
+  <entry stringName="EDITOR_enemySettlementAround" result="--" />
   <entry stringName="EDITOR_File" result="Archivo" />
   <entry stringName="EDITOR_impassablePoint" result="--" />
   <entry stringName="EDITOR_infoboxWindow" result="Editor - Información" />
   <entry stringName="EDITOR_newScenario" result="Crear nuevo escenario" />
   <entry stringName="EDITOR_newScenarioName" result="Elegir un nombre (máximo 30 caracteres)." />
-  <entry stringName="EDITOR_settlementsAroundWhenMoving" result="Impossibile posizionare la struttura nel punto selezionato, poiché non vi sono insediamenti nelle vicinanze." />
   <entry stringName="EDITOR_noSettlementsAround" result="--" />
   <entry stringName="EDITOR_openScenario" result="Abrir un escenario" />
   <entry stringName="EDITOR_properties" result="Propiedades del objeto" />
@@ -43,7 +44,7 @@
   <entry stringName="EDITORTREE_GROUND_1" result="Terreno 1" />
   <entry stringName="EDITORTREE_GROUND_2" result="Terreno 2" />
   <entry stringName="EDITORTREE_GROUND_3" result="Terreno 3" />
-  <entry stringName="EDITORTREE_outposts" result="Puesto de Avanzada" />
+  <entry stringName="EDITORTREE_outposts" result="Puestos de Avanzada" />
   <entry stringName="EDITORTREE_road" result="Carretera" />
   <entry stringName="EDITORTREE_ROAD_1" result="Carretera 1" />
   <entry stringName="EDITORTREE_ROAD_2" result="Carretera 2" />
