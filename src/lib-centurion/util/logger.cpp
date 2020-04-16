@@ -95,13 +95,26 @@ namespace Logger
 	{
 		try
 		{
-			vector<string> debugFiles = FileManager::GetAllFilesNamesWithinFolder("logs/logmessages/");
-			if (debugFiles.size() >= 10) {
-				FileManager::RemoveFile("logs/logmessages/" + debugFiles[0]);
+			std::string path1 = Folders::GAME + "logs/logmessages";
+			std::string path2 = Folders::GAME + "logs/params";
+
+			// checks if folders exist --> if not, create them
+			if (FileManager::CheckIfFolderExists(path1) == false)
+			{
+				FileManager::CreateFolder(path1);
 			}
-			vector<string> paramsFiles = FileManager::GetAllFilesNamesWithinFolder("logs/params/");
+			if (FileManager::CheckIfFolderExists(path2) == false)
+			{
+				FileManager::CreateFolder(path2);
+			}
+
+			vector<string> debugFiles = FileManager::GetAllFilesNamesWithinFolder(path1);
+			if (debugFiles.size() >= 10) {
+				FileManager::RemoveFile(path1 + debugFiles[0]);
+			}
+			vector<string> paramsFiles = FileManager::GetAllFilesNamesWithinFolder(path2);
 			if (paramsFiles.size() >= 10) {
-				FileManager::RemoveFile("logs/params/" + paramsFiles[0]);
+				FileManager::RemoveFile(path2 + paramsFiles[0]);
 			}
 		}
 		catch (...)
