@@ -12,6 +12,7 @@
   <entry stringName="EDITOR_Edit_UpdateNormals" result="Ricalcola Normali" />
   <entry stringName="EDITOR_File" result="File" />
   <entry stringName="EDITOR_impassablePoint" result="Impossibile posizionare la struttura nel punto selezionato, in quanto si tratta di un luogo scosceso o inaccessibile, come il mare." />
+  <entry stringName="EDITOR_infoboxWindow" result="Editor - Informazione" />
   <entry stringName="EDITOR_newScenario" result="Crea nuovo scenario" />
   <entry stringName="EDITOR_newScenarioName" result="Scegli un nome (max 30 caratteri)." />
   <entry stringName="EDITOR_noSettlementsAround" result="Impossibile posizionare la struttura nel punto selezionato, poiché non vi sono insediamenti nelle vicinanze." />
@@ -30,6 +31,7 @@
   <entry stringName="EDITOR_Tools" result="Strumenti" />
   <entry stringName="EDITOR_Tools_AddObject" result="Apri la finestra 'Aggiungi oggetto'" />
   <entry stringName="EDITOR_Tools_TerrainBrush" result="Apri la finestra 'Pennelli del terreno'" />
+  <entry stringName="EDITOR_unableToDelete" result="Impossibile cancellare la mappa attualmente in uso." />
   <entry stringName="EDITORTREE_buildings" result="Strutture" />
   <entry stringName="EDITORTREE_decorations" result="Decorazioni" />
   <entry stringName="EDITORTREE_egyptianstronghold" result="Fortezza egizia" />

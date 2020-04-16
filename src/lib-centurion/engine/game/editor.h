@@ -132,21 +132,22 @@ namespace Game
 		/// </summary>
 		void Close(void);
 
+		#pragma region Popup Windows
 		/// <summary>
-		/// This method asks for closing the editor, opening a message window.
+		/// This method asks for closing the editor, opening a Question Window.
 		/// </summary>
 		void AskForClosing(void);
 
 		/// <summary>
-		/// This method asks for saving the current map, opening a message window.
+		/// This method asks for saving the current map, opening a Question Window.
 		/// </summary>
 		void AskForSaving(void);
 
 		/// <summary>
 		/// This method asks for deleting an entire settlement, if consisting in more than one building.
 		/// </summary>
-		/// <param name="set">The settlement to delete</param>
 		void AskForSettlementDeleting(void);
+		#pragma endregion
 	};
 };
 

@@ -53,9 +53,13 @@ namespace Hector
 			.addFunction("ResetQuestionWindow", &Hector::ResetQuestionWindow)
 			.addFunction("ExecuteYesCmdOfQuestionWindow", &Hector::ExecuteYesCmdOfQuestionWindow)
 			.addFunction("ExecuteNoCmdOfQuestionWindow", &Hector::ExecuteNoCmdOfQuestionWindow)
+			.addFunction("IsInfoBoxWindowActive", &Hector::IsInfoBoxWindowActive)
+			.addFunction("GetInfoBoxWindowText", &Hector::GetInfoBoxWindowText)
+			.addFunction("ResetInfoBoxWindow", &Hector::ResetInfoBoxWindow)
 			;
 
 		// variables
+
 		AddGlfwKeysToNamespace();
 
 		getGlobalNamespace(L)
@@ -106,6 +110,7 @@ namespace Hector
 			.addFunction("SaveScenario", &Game::Map::SaveScenario)
 			.addFunction("LoadScenario", &Game::Map::LoadScenario)
 			.addFunction("DeleteScenario", &Game::Map::DeleteScenario)
+			.addFunction("MarkAsEdited", &Game::Map::MarkAsEdited)
 			.endNamespace();
 
 		getGlobalNamespace(L)

@@ -12,6 +12,7 @@
   <entry stringName="EDITOR_Edit_UpdateNormals" result="Actualizar Normales" />
   <entry stringName="EDITOR_File" result="Archivo" />
   <entry stringName="EDITOR_impassablePoint" result="--" />
+  <entry stringName="EDITOR_infoboxWindow" result="Editor - Información" />
   <entry stringName="EDITOR_newScenario" result="Crear nuevo escenario" />
   <entry stringName="EDITOR_newScenarioName" result="Elegir un nombre (máximo 30 caracteres)." />
   <entry stringName="EDITOR_noSettlementsAround" result="--" />
@@ -30,6 +31,7 @@
   <entry stringName="EDITOR_Tools" result="Herramientas" />
   <entry stringName="EDITOR_Tools_AddObject" result="Abrir la ventana 'Agregar objeto'" />
   <entry stringName="EDITOR_Tools_TerrainBrush" result="Abrir la ventana 'Pinceles de terreno'" />
+  <entry stringName="EDITOR_unableToDelete" result="No se puede eliminar el mapa utilizado actualmente." />
   <entry stringName="EDITORTREE_buildings" result="Edificios" />
   <entry stringName="EDITORTREE_decorations" result="Decoraciones" />
   <entry stringName="EDITORTREE_egyptianstronghold" result="Fortaleza egipcia" />

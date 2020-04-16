@@ -12,6 +12,7 @@
   <entry stringName="EDITOR_Edit_UpdateNormals" result="Update Normals" />
   <entry stringName="EDITOR_File" result="File" />
   <entry stringName="EDITOR_impassablePoint" result="Unable to place the building at the selected point, as it is a steep or inaccessible place, like the sea." />
+  <entry stringName="EDITOR_infoboxWindow" result="Editor - Information" />
   <entry stringName="EDITOR_newScenario" result="Create new scenario" />
   <entry stringName="EDITOR_newScenarioName" result="Choose a name (max 30 characters)." />
   <entry stringName="EDITOR_noSettlementsAround" result="Unable to place the building at the selected point, as there are no nearby settlements." />
@@ -30,6 +31,7 @@
   <entry stringName="EDITOR_Tools" result="Tools" />
   <entry stringName="EDITOR_Tools_AddObject" result="Open 'Add object' window" />
   <entry stringName="EDITOR_Tools_TerrainBrush" result="Open 'Terrain brushes' window" />
+  <entry stringName="EDITOR_unableToDelete" result="Unable to delete currently used map." />
   <entry stringName="EDITORTREE_buildings" result="Buildings" />
   <entry stringName="EDITORTREE_decorations" result="Decorations" />
   <entry stringName="EDITORTREE_egyptianstronghold" result="Egyptian stronghold" />

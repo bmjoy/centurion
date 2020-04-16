@@ -13,7 +13,14 @@ namespace Hector
 			std::string luaCmdNo = "";
 		};
 
+		struct InfoBoxWindowInfo
+		{
+			bool isOpened = false;
+			std::string text = "";
+		};
+
 		QuestionWindowInfo questionWindowInfo = QuestionWindowInfo();
+		InfoBoxWindowInfo infoboxWindowInfo = InfoBoxWindowInfo();
 	};
 
 	void PrCmd(const std::string s)
@@ -89,5 +96,31 @@ namespace Hector
 	void ExecuteNoCmdOfQuestionWindow(void)
 	{
 		Hector::ExecuteCommand(questionWindowInfo.luaCmdNo);
+	}
+
+	void EnableInfoBoxWindow(void)
+	{
+		infoboxWindowInfo.isOpened = true;
+	}
+
+	void ExposeInfoBoxWindowText(std::string text)
+	{
+		infoboxWindowInfo.text = text;
+	}
+
+	bool IsInfoBoxWindowActive(void)
+	{
+		return infoboxWindowInfo.isOpened;
+	}
+
+	std::string GetInfoBoxWindowText(void)
+	{
+		return infoboxWindowInfo.text;
+	}
+
+	void ResetInfoBoxWindow(void)
+	{
+		infoboxWindowInfo.isOpened = false;
+		infoboxWindowInfo.text = "";
 	}
 }

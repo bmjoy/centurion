@@ -87,6 +87,32 @@ namespace Hector
 	/// This function executes the commands list when "No" is choosed.
 	/// </summary>
 	void ExecuteNoCmdOfQuestionWindow(void);
-}
 
+	/// <summary>
+	/// This function enables and pops-up the Infobox Window.
+	/// </summary>
+	void EnableInfoBoxWindow(void);
+
+	/// <summary>
+	/// This function exposes the Infobox Window text message.
+	/// </summary>
+	/// <param name="text">Text of the message that should be contained into the Infobox Window. It supports only strings.</param> 
+	void ExposeInfoBoxWindowText(std::string text);
+
+	/// <summary>
+	/// This boolean function returns true whenever a Infobox Window is shown.
+	/// </summary>
+	bool IsInfoBoxWindowActive(void);
+
+	/// <summary>
+	/// This function returns the message text of the Infobox Window.
+	/// </summary>
+	/// <returns>Text message of the Infobox Window, expressed in std::string</returns>
+	std::string GetInfoBoxWindowText(void);
+
+	/// <summary>
+	/// This function peforms a reset of the Infobox Window, clearing all variables.
+	/// </summary>
+	void ResetInfoBoxWindow(void);
+}
 #endif

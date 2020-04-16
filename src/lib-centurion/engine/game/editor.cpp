@@ -129,7 +129,7 @@ namespace Game
 
 				// NORMAL RENDERING
 				Map::Render(false);
-				
+
 				Editor::ChangeTerrainType();
 				Editor::ShiftSelectedObject();
 				Editor::InsertingObject();
@@ -325,7 +325,7 @@ namespace Game
 			{
 				throw;
 			}
-			
+
 		}
 
 		void Game::Editor::ShiftSelectedObject(void)
@@ -448,14 +448,13 @@ namespace Game
 				EditorWindows::Show();
 				EditorUI::UpdateInfoText(L"");
 				Engine::Mouse::ChangeCursorType(CURSOR_TYPE_DEFAULT);
-				Engine::Keyboard::SetKeyStatus(GLFW_KEY_ESCAPE, 0);				
+				Engine::Keyboard::SetKeyStatus(GLFW_KEY_ESCAPE, 0);
 				return;
 			}
 
 			if (changingTerrain.isActive == false) return;
 
 			// This part of code is executed when you are DOING the terrain change
-
 			if (EditorMenuBar::IsHidden() == false) EditorMenuBar::Hide();
 			if (Engine::Mouse::GetCursorType() != CURSOR_TYPE_CIRCLE) Engine::Mouse::ChangeCursorType(CURSOR_TYPE_CIRCLE);
 
@@ -473,7 +472,7 @@ namespace Game
 
 		void Game::Editor::Close(void)
 		{
-			if (Game::Map::IsMapEdited() == false)
+			if (Game::Map::IsMapEdited())
 			{
 				AskForSaving(); //QUESTA PARTE DI CODICE E LA RELATIVA FUNZIONE DEVONO ESSERE RIVISTI
 			}
@@ -485,6 +484,7 @@ namespace Game
 			}
 		}
 
+		#pragma region Popup Windows
 		void AskForClosing(void)
 		{
 			Hector::EnableQuestionWindow();
@@ -506,7 +506,7 @@ namespace Game
 			}
 			Hector::SetQuestionWindowNoCmd("");
 		}
-		
+
 		void AskForSettlementDeleting(void)
 		{
 			if (Game::GetSelectedObject() == nullptr) return;
@@ -517,6 +517,7 @@ namespace Game
 			Hector::SetQuestionWindowYesCmd("Object.Remove(Selo():GetID())");
 			Hector::SetQuestionWindowNoCmd("");
 		}
+		#pragma endregion
 
 		void Game::Editor::handleKeyboardControls(void)
 		{
@@ -542,24 +543,6 @@ namespace Game
 						EditorWindows::CloseEveryWindow();
 					}
 					return;
-				}
-			}
-
-			if (Engine::Keyboard::IsKeyPressed(GLFW_KEY_LEFT_CONTROL) || Engine::Keyboard::IsKeyPressed(GLFW_KEY_RIGHT_CONTROL))
-			{
-				if (Minimap::IsActive() == false)
-				{
-					//if (Engine::Keyboard::IsKeyPressed(GLFW_KEY_N)) { NewMapWindowIsOpen = true; NewMapResetText = true; IsWindowOpened = true; }
-					//if (Engine::Keyboard::IsKeyPressed(GLFW_KEY_O)) { OpenMapWindowIsOpen = true; OpenMapWindowUpdate = true; IsWindowOpened = true; }
-					//if (Engine::Keyboard::IsKeyPressed(GLFW_KEY_A)) { TerrainBrushIsActive = false; TerrainBrushWindowIsOpen = false; AddObjectWindowIsOpen = !AddObjectWindowIsOpen; }
-					//if (Engine::Keyboard::IsKeyPressed(GLFW_KEY_T)) { AddObjectWindowIsOpen = false; TerrainBrushIsActive = !TerrainBrushWindowIsOpen; TerrainBrushWindowIsOpen = !TerrainBrushWindowIsOpen; }
-				}
-				else
-				{
-					if (Engine::Keyboard::IsKeyPressed(GLFW_KEY_S))
-					{
-						//Game::Map::SaveScenario(currentMapName); 
-					}
 				}
 			}
 

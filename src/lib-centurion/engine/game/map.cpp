@@ -19,6 +19,9 @@
 #include <gl_terrain.h>
 
 #include <classes/building.h>
+#include <../hector/hector-lua.h>
+#include <../hector/hector-misc.h>
+#include <translationsTable.h>
 
 using namespace std;
 using namespace glm;
@@ -91,7 +94,7 @@ namespace Game
 
 				if (scenarioName == Game::Map::GetName())
 				{
-					//Impossibile cancellare la mappa attualmente in uso
+					Game::Map::UnableToDeleteScenario();
 					return;
 				}
 
@@ -109,6 +112,12 @@ namespace Game
 				Logger::Error(msg);
 				Engine::GameClose();
 			}
+		}
+
+		void UnableToDeleteScenario(void)
+		{
+			Hector::EnableInfoBoxWindow();
+			Hector::ExposeInfoBoxWindowText(TranslationsTable::GetTranslation("EDITOR_unableToDelete"));
 		}
 
 		void Game::Map::SaveMapObjectsToXml(const string xmlPath)

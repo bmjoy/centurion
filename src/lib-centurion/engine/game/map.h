@@ -44,6 +44,11 @@ namespace Game
 		void DeleteScenario(const std::string scenarioName);
 
 		/// <summary>
+		/// This method shows that can't be delete the currently used map, opening an Infobox Window.
+		/// </summary>
+		void UnableToDeleteScenario(void);
+
+		/// <summary>
 		/// This function checks if the grid in the game map is enabled or not.
 		/// </summary>
 		/// <returns>True if it is enabled; false otherwise.</returns>
