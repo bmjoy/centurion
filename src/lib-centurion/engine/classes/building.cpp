@@ -274,7 +274,8 @@ std::tuple<bool, Settlement*> Building::IsNearToFriendlySettlement(void)
 	}
 	if (this->bIsCentralBuilding == true)
 	{
-		bSettlementDiscovered = true;
+		if( (this->settlement == nullptr) || (this->settlement != nullptr && this->settlement->GetNumberOfBuildings() == 1 ) )
+			bSettlementDiscovered = true; 
 	}
 	return std::make_tuple(bSettlementDiscovered, s);
 }

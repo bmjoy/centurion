@@ -10,13 +10,15 @@ Settlement::Settlement(const unsigned int par_player, glm::vec3 * pos): player(p
 {
 	this->idName = "";
 	this->bIsIndipendent = false;
+	this->ownedBuildings = 0;
 	this->SetSettlementProperties();
 }
 
-Settlement::Settlement()
+Settlement::Settlement(void)
 {
 	this->idName = "";
 	this->bIsIndipendent = false;
+	this->ownedBuildings = 0;
 	this->SetSettlementProperties();
 }
 
@@ -132,6 +134,11 @@ Building* Settlement::GetCentralBuilding(void)
 	return GetBuildingsBelongToSettlement()[0];
 }
 
+unsigned int Settlement::GetNumberOfBuildings(void)
+{
+	return this->ownedBuildings;
+}
+
 bool Settlement::AddBuildingToSettlement(Building* b)
 {
 	bool bAddCorrectly = false;
@@ -139,6 +146,7 @@ bool Settlement::AddBuildingToSettlement(Building* b)
 	if(this->buildingsOfSettlement.count(b->GetPickingID()) == 0)
 	{
 		this->buildingsOfSettlement.insert(std::pair<unsigned int, Building*>(b->GetPickingID(), b));
+		this->ownedBuildings += 1;
 		bAddCorrectly = true;
 	}
 	return bAddCorrectly;
@@ -151,6 +159,7 @@ bool Settlement::RemoveBuildingFromSettlement(Building* b)
 	if (this->buildingsOfSettlement.count(b->GetPickingID()) > 0)
 	{
 		this->buildingsOfSettlement.erase(b->GetPickingID());
+		this->ownedBuildings -= 1;
 		bRemovedCorrectly = true;
 	}
 	return bRemovedCorrectly;

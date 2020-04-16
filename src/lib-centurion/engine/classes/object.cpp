@@ -409,7 +409,7 @@ void GObject::RemoveGameObject(const unsigned int index)
 				b->GetSettlement()->RemoveBuildingFromSettlement(b);
 				if (b->IsCentralBuilding() == true)
 				{
-					//Remove all the building belong to the settlement by recursive call.
+					//Remove all the buildings belonging to the settlement by RECURSIVE call.
 					vector<Building*> buildings = b->GetSettlement()->GetBuildingsBelongToSettlement();
 					for (auto element : buildings)
 					{

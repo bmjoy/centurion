@@ -132,6 +132,12 @@ public:
 	Building* GetCentralBuilding(void);
 
 	/// <summary>
+	/// THis function returns the number of buildings owned by the current settlement.
+	/// </summary>
+	/// <returns>The number of buildings owned by the current settlement.</returns>
+	unsigned int GetNumberOfBuildings(void);
+
+	/// <summary>
 	/// This function allows to add a new building to the current settlement.
 	/// </summary>
 	/// <param name="b">A pointer to the building that you want to add to the crrent settlement.</param>
@@ -161,7 +167,7 @@ public:
 	/// <summary>
 	/// Public constructor.
 	/// </summary>
-	Settlement();
+	Settlement(void);
 
 	/// <summary>
 	/// The destructor.
@@ -177,6 +183,7 @@ private:
 	unsigned int population;
 	unsigned int maxPopulation;
 	std::map<unsigned int, Building*> buildingsOfSettlement;
+	unsigned int ownedBuildings;
 
 	#pragma region Private members:
 	void SetSettlementProperties(void);
