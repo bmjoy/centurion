@@ -9,7 +9,6 @@
   <entry stringName="EDITOR_deleteSettlement" result="La suppression de cette structure élimine également le reste de l'installation. Voulez-vous continuer?" />
   <entry stringName="EDITOR_Edit" result="Éditer" />
   <entry stringName="EDITOR_Edit_Properties" result="Éditer propriétés de l'objet" />
-  <entry stringName="EDITOR_Edit_UpdateNormals" result="Recalculer les normales" />
   <entry stringName="EDITOR_File" result="Fichier" />
   <entry stringName="EDITOR_impassablePoint" result="La structure ne peut pas être positionnée au point sélectionné, comme c'est un endroit raide ou inaccessible, comme la mer." />
   <entry stringName="EDITOR_infoboxWindow" result="Éditeur - Information" />

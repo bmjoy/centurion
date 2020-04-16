@@ -68,6 +68,14 @@ namespace CenturionTranslatorTool
             dataGridView1.Rows.Add(newRow);
         }
 
+        private void buttonRemove_Click(object sender, EventArgs e)
+        {
+            foreach (DataGridViewRow item in this.dataGridView1.SelectedRows)
+            {
+                dataGridView1.Rows.RemoveAt(item.Index);
+            }
+        }
+
         private void buttonSort_Click(object sender, EventArgs e)
         {
             dataGridView1.Sort(dataGridView1.Columns["stringName"], ListSortDirection.Ascending);
@@ -189,6 +197,7 @@ namespace CenturionTranslatorTool
             dataGridView1.Width = this.Width - 40;
             dataGridView1.Height = this.Height - 100;
             button1.Location = new Point(button1.Location.X, this.Height - 75);
+            button2.Location = new Point(button2.Location.X, this.Height - 75);
             buttonNewEntry.Location = new Point(buttonNewEntry.Location.X, this.Height - 75);
             buttonSave.Location = new Point(buttonSave.Location.X, this.Height - 75);
             buttonNew.Location = new Point(buttonNew.Location.X, this.Height - 75);
@@ -220,5 +229,7 @@ namespace CenturionTranslatorTool
             dataGridView1.RowTemplate.Height = 25;
             dataGridView1.EnableHeadersVisualStyles = false;
         }
+
+
     }
 }

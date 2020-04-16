@@ -9,7 +9,6 @@
   <entry stringName="EDITOR_deleteSettlement" result="Deleting this structure causes the cancellation of the rest of the settlement as well. Do you want to proceed?" />
   <entry stringName="EDITOR_Edit" result="Edit" />
   <entry stringName="EDITOR_Edit_Properties" result="Edit object properties" />
-  <entry stringName="EDITOR_Edit_UpdateNormals" result="Update Normals" />
   <entry stringName="EDITOR_File" result="File" />
   <entry stringName="EDITOR_impassablePoint" result="Unable to place the building at the selected point, as it is a steep or inaccessible place, like the sea." />
   <entry stringName="EDITOR_infoboxWindow" result="Editor - Information" />

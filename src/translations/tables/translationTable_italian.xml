@@ -9,7 +9,6 @@
   <entry stringName="EDITOR_deleteSettlement" result="L'eliminazione di questa struttura comporta anche la cancellazione del resto dell'insediamento. Vuoi procedere?" />
   <entry stringName="EDITOR_Edit" result="Modifica" />
   <entry stringName="EDITOR_Edit_Properties" result="Modifica proprietà oggetto" />
-  <entry stringName="EDITOR_Edit_UpdateNormals" result="Ricalcola Normali" />
   <entry stringName="EDITOR_File" result="File" />
   <entry stringName="EDITOR_impassablePoint" result="Impossibile posizionare la struttura nel punto selezionato, in quanto si tratta di un luogo scosceso o inaccessibile, come il mare." />
   <entry stringName="EDITOR_infoboxWindow" result="Editor - Informazione" />

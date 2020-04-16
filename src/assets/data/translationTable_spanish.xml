@@ -9,7 +9,6 @@
   <entry stringName="EDITOR_deleteSettlement" result="--" />
   <entry stringName="EDITOR_Edit" result="Editar" />
   <entry stringName="EDITOR_Edit_Properties" result="Editar propiedades de objeto" />
-  <entry stringName="EDITOR_Edit_UpdateNormals" result="Actualizar Normales" />
   <entry stringName="EDITOR_File" result="Archivo" />
   <entry stringName="EDITOR_impassablePoint" result="--" />
   <entry stringName="EDITOR_infoboxWindow" result="Editor - Información" />
