@@ -1,5 +1,6 @@
 #include "building.h"
 #include "Unit.h"
+#include "settlementArray.h"
 #include <pathfinding/pathfinding.h>
 #include <gl_building_sprite.h>
 #include <logger.h>
@@ -8,10 +9,6 @@
 
 using namespace std;
 using namespace glm;
-
-#pragma region Static Properties:
-vector<Settlement*> Building::settlementsList;
-#pragma endregion
 
 Building::Building(void) 
 {
@@ -193,7 +190,7 @@ void Building::AssignSettlement(void)
 			if (this->settlement == nullptr)
 			{
 				this->settlement = new Settlement(this->GetPlayer(), &(this->position));
-				Building::settlementsList.push_back(this->settlement);
+				SettlementArray::PushSettlement(this->settlement);
 			}
 			this->settlement->AddBuildingToSettlement(this); //Here, it should be return always true.
 			//(???) Gestire eccezione se AddBuildingToSettlement restituisce false! 
@@ -216,13 +213,10 @@ void Building::Render(const bool picking, const unsigned int clickID)
 
 void Building::RemoveElementFromSettlementsList(Settlement* set)
 {
-	if(set != nullptr)
-		Building::settlementsList.erase(std::remove(Building::settlementsList.begin(), Building::settlementsList.end(), set), Building::settlementsList.end());
-}
-
-void Building::ResetSettlementsList(void)
-{
-	Building::settlementsList.clear();
+	if (set != nullptr)
+	{
+		SettlementArray::EraseSettlement(set);
+	}
 }
 
 void Building::SetStatus(const bool bIsCreated)
@@ -234,7 +228,7 @@ std::tuple<bool, Settlement*> Building::IsNearToFriendlySettlement(void)
 {
 	bool bSettlementDiscovered = false;
 	Settlement* s = nullptr;
-	const size_t numOfSettlements = Building::settlementsList.size();
+	const unsigned int numOfSettlements = SettlementArray::Size();
 
 	if (numOfSettlements == 0)
 	{
@@ -243,14 +237,15 @@ std::tuple<bool, Settlement*> Building::IsNearToFriendlySettlement(void)
 	}
 	for (unsigned int settlementsCounter = 0; settlementsCounter < numOfSettlements && bSettlementDiscovered == false; settlementsCounter++)
 	{
+		Settlement* settlTemp = SettlementArray::GetSettlementById(settlementsCounter);
 		//Check if the building and the settlement belong to the same player and if the settlement is not indipendent.
-		if ((this->GetPlayer() != Building::settlementsList[settlementsCounter]->GetPlayer())
-			|| (Building::settlementsList[settlementsCounter]->IsIndipendent() == true))
+		if ((this->GetPlayer() != settlTemp->GetPlayer())
+			|| (settlTemp->IsIndipendent() == true))
 		{
 			return std::make_tuple(false, nullptr);
 		}
 
-		const vector<Building*> settBuildings = Building::settlementsList[settlementsCounter]->GetBuildingsBelongToSettlement();
+		const vector<Building*> settBuildings = settlTemp->GetBuildingsBelongToSettlement();
 		size_t numOfBuildings = settBuildings.size();
 		for (unsigned int buildingsCounter = 0; buildingsCounter < numOfBuildings && bSettlementDiscovered == false; buildingsCounter++)
 		{
@@ -269,7 +264,7 @@ std::tuple<bool, Settlement*> Building::IsNearToFriendlySettlement(void)
 		}
 		if (bSettlementDiscovered == true)
 		{
-			s = Building::settlementsList[settlementsCounter];
+			s = settlTemp;
 		}
 	}
 	if (this->bIsCentralBuilding == true)
@@ -278,11 +273,6 @@ std::tuple<bool, Settlement*> Building::IsNearToFriendlySettlement(void)
 			bSettlementDiscovered = true; 
 	}
 	return std::make_tuple(bSettlementDiscovered, s);
-}
-
-std::vector<Settlement*>* Building::GetSettlementListPtr(void)
-{
-	return &(Building::settlementsList);
 }
 
 Building::~Building(void) 

@@ -58,13 +58,13 @@ void Decoration::Render(const bool picking, const unsigned int clickID)
 
 	this->CheckIfPlaceable();
 
-	if (Engine::GetEnvironment() == EDITOR_ENV) {
-		if (Game::IsGameObjectNotNull(settlID)) {
-			if (oldX != this->GetPosition().x || oldY != this->GetPosition().y || oldSettlX != GObject::GetObjectByID(settlID)->GetPosition().x || oldSettlY != GObject::GetObjectByID(settlID)->GetPosition().y) {
-				checkSettlement();
-			}
-		}
-	}
+	//if (Engine::GetEnvironment() == EDITOR_ENV) {
+	//	if (Game::IsGameObjectNotNull(settlID)) {
+	//		if (oldX != this->GetPosition().x || oldY != this->GetPosition().y || oldSettlX != GObject::GetObjectByID(settlID)->GetPosition().x || oldSettlY != GObject::GetObjectByID(settlID)->GetPosition().y) {
+	//			checkSettlement();
+	//		}
+	//	}
+	//}
 	GLItems::DSprite()->Render(spriteData, this->GetPosition().x, this->GetPosition().y, bIsPlaceable);
 }
 

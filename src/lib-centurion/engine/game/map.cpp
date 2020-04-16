@@ -19,6 +19,7 @@
 #include <gl_terrain.h>
 
 #include <classes/building.h>
+#include <classes/settlementArray.h>
 #include <../hector/hector-lua.h>
 #include <../hector/hector-misc.h>
 #include <translationsTable.h>
@@ -131,7 +132,7 @@ namespace Game
 				// SETTLEMENTS
 				mapobjs << "\t<settlements>\n";
 				
-				std::vector<Settlement*>* settlList = Building::GetSettlementListPtr();
+				std::vector<Settlement*>* settlList = SettlementArray::GetSettlementListPtr();
 				for (int i = 0; i < settlList->size(); i++)
 				{
 					Settlement* settl = (*settlList)[i];

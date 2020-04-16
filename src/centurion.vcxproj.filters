@@ -360,6 +360,12 @@
     <ClCompile Include="lib-centurion\hector\hector-misc.cpp">
       <Filter>Source Files\hector</Filter>
     </ClCompile>
+    <ClCompile Include="lib-centurion\engine\classes\settlementArray.cpp">
+      <Filter>Source Files\engine\classes</Filter>
+    </ClCompile>
+    <ClCompile Include="lib-centurion\engine\classes\objectArray.cpp">
+      <Filter>Source Files\engine\classes</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="lib-centurion\audio\sndfile.hh">
@@ -628,6 +634,12 @@
     </ClInclude>
     <ClInclude Include="lib-centurion\hector\hector-misc.h">
       <Filter>Header Files\hector</Filter>
+    </ClInclude>
+    <ClInclude Include="lib-centurion\engine\classes\objectArray.h">
+      <Filter>Header Files\engine\classes</Filter>
+    </ClInclude>
+    <ClInclude Include="lib-centurion\engine\classes\settlementArray.h">
+      <Filter>Header Files\engine\classes</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

@@ -10,7 +10,7 @@
 #include <game/interface/editorWindows.h>
 #include <game/interface/editorMenuBar.h>
 
-
+#include <classes/objectArray.h>
 
 using namespace std;
 using namespace glm;
@@ -45,7 +45,7 @@ namespace Game
 
 	void Game::ResetGame()
 	{
-		GObject::ResetGameObjects();
+		ObjectArray::ResetGameObjects();
 		Map::DisableGrid();
 		Minimap::Unblock();
 		Minimap::Disable();
@@ -62,22 +62,6 @@ namespace Game
 		Picking::Obj::ResetClickIds();
 	}
 
-	vector<Building*> Game::GetListOfIndipendentBuildings(void)
-	{
-		vector<Building*> indipBuildings = vector<Building*>();
-		for (int i = 0; i < MAX_NUMBER_OF_OBJECTS; i++)
-		{
-			if (GObject::GetObjectByID(i) != nullptr && GObject::GetObjectByID(i)->IsBuilding())
-			{
-				if (GObject::GetObjectByID(i)->AsBuilding()->GetSettlement()->IsIndipendent())
-				{
-					indipBuildings.push_back(GObject::GetObjectByID(i)->AsBuilding());
-				}
-			}
-		}
-		return indipBuildings;
-	}
-
 	void Game::RenderObjectsPicking() {
 
 		// Various exceptions
@@ -92,24 +76,14 @@ namespace Game
 			return;
 		}
 
-		for (int i = 1; i < MAX_NUMBER_OF_OBJECTS; i++) {
-			if (GObject::GetObjectByID(i) != nullptr) {
-				GObject::GetObjectByID(i)->Render(true);
-			}
-		}
+		ObjectArray::Render(true, 0);
 
 		Picking::Obj::UpdateClickIds();
 	}
 
 	void Game::RenderObjects()
 	{
-		for (unsigned int i = 1; i < MAX_NUMBER_OF_OBJECTS; i++)
-		{
-			if (GObject::GetObjectByID(i) != nullptr)
-			{
-				GObject::GetObjectByID(i)->Render(false, Picking::Obj::GetLeftClickId());
-			}
-		}
+		ObjectArray::Render(false, Picking::Obj::GetLeftClickId());
 	}
 
 	void Game::GoToPointFromMinimap() {
@@ -184,15 +158,12 @@ namespace Game
 	{
 		if (IsGameObjectNotNull(id) == false)
 			return false;
-		return GObject::GetObjectByID(id)->IsSelected();
+		return ObjectArray::GetObjectByID(id)->IsSelected();
 	}
 
 	bool Game::IsGameObjectNotNull(const unsigned int id)
 	{
-		if (id > MAX_NUMBER_OF_OBJECTS)
-			return false;
-		else
-			return (GObject::GetObjectByID(id) != nullptr);
+		return (ObjectArray::GetObjectByID(id) != nullptr);
 	}
 
 	GObject * Game::CreateObject(const string className, const float x, const float y, const unsigned int player)

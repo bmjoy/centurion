@@ -1,4 +1,5 @@
 #include "object.h"
+#include "objectArray.h"
 
 #include <engine.h>
 #include <data.h>
@@ -14,10 +15,6 @@
 
 using namespace std;
 using namespace glm;
-
-#pragma region Static GObject properties:
-unordered_map<std::string, unsigned int> GObject::idNamesMap;
-#pragma endregion
 
 GObject::GObject(void)
 {
@@ -123,20 +120,21 @@ std::string GObject::GetDisplayedName(void) const
 void GObject::SetIDName(const std::string _idName)
 {
 	//Checks if identifcation name belogs to an other existing object.
-	if (_idName != "" && GObject::idNamesMap.count(_idName) >= 1)
+	if (_idName != "" && ObjectArray::CheckIfIdNameExists(_idName))
 	{
-		if(GObject::idNamesMap[_idName] != this->GetPickingID())
+		if(ObjectArray::GetPickingIdByIdName(_idName) != this->GetPickingID())
 		{
 			Logger::Warn("Identification name " + _idName + " belongs to another object (ID = " + to_string(pickingID) + ")");
 			return;
 		}
 	}
-	GObject::idNamesMap.erase(this->GetIDName()); //Avoid object with two different keys.
-
+	ObjectArray::RemoveIdName(this->GetIDName());//Avoid object with two different keys.
+	
 	this->idName = _idName;
-	if(_idName != "")
-		GObject::idNamesMap[_idName] = this->GetPickingID();; //Assign or replace identification name.
-
+	if (_idName != "")
+	{
+		ObjectArray::AssignIdName(this->GetPickingID(), _idName); //Assign or replace identification name.
+	}
 }
 
 std::string GObject::GetIDName(void) const
@@ -316,7 +314,7 @@ void GObject::Create(const string _className, const bool _temporary)
 	}
 	if (_temporary == false)
 	{
-		GObject::AddGameObject(this->GetPickingID(), this);
+		ObjectArray::AddGameObject(this->GetPickingID(), this);
 	}
 }
 
@@ -343,166 +341,6 @@ float GObject::get_yPos(void) const
 GObject::~GObject(void) 
 {
 }
-
-#pragma region Static variables
-unsigned int GObject::numberOfObjects = 0;
-unsigned int GObject::numberOfBuildings = 0;
-unsigned int GObject::numberOfDecorations = 0;
-unsigned int GObject::numberOfUnits = 0;
-GObject* GObject::GameObjects[MAX_NUMBER_OF_OBJECTS] = { nullptr };
-#pragma endregion
-
-#pragma region Static Members
-unsigned int GObject::GetNumberOfObjects(void)
-{
-	return GObject::numberOfObjects;
-}
-
-unsigned int GObject::GetNumberOfBuildings(void)
-{
-	return GObject::numberOfBuildings;
-}
-
-unsigned int GObject::GetNumberOfUnits(void)
-{
-	return GObject::numberOfUnits;
-}
-
-unsigned int GObject::GetNumberOfDecorations(void)
-{
-	return GObject::numberOfDecorations;
-}
-
-void GObject::AddGameObject(const unsigned int index, GObject* object)
-{
-	GObject::GameObjects[index] = object;
-	if (object->IsBuilding() == true)
-	{
-		GObject::numberOfBuildings += 1;
-	}
-	else if (object->IsDecoration() == true)
-	{
-		GObject::numberOfDecorations += 1;
-	}
-	else if (object->IsUnit() == true)
-	{
-		GObject::numberOfUnits += 1;
-	}
-	GObject::numberOfObjects += 1;
-}
-
-void GObject::RemoveGameObject(const unsigned int index)
-{
-	if (index >= 1 && index < MAX_NUMBER_OF_OBJECTS) 
-	{
-		if (GObject::GameObjects[index] != nullptr)
-		{
-			Logger::Info("Building " + GameObjects[index]->GetSingularName() + " deleted!");
-			//The picking ID and the script name of the object can be reused:
-			Picking::Obj::AddUnsedPickingID(GameObjects[index]->GetPickingID());
-			GObject::idNamesMap.erase(GObject::GameObjects[index]->GetIDName());
-
-			if (GameObjects[index]->IsBuilding() == true)
-			{
-				GObject::numberOfBuildings -= 1;
-				Building* b = GameObjects[index]->AsBuilding();
-				b->GetSettlement()->RemoveBuildingFromSettlement(b);
-				if (b->IsCentralBuilding() == true)
-				{
-					//Remove all the buildings belonging to the settlement by RECURSIVE call.
-					vector<Building*> buildings = b->GetSettlement()->GetBuildingsBelongToSettlement();
-					for (auto element : buildings)
-					{
-						GObject::RemoveGameObject(element->GetPickingID());
-					}
-					//Remove the settlement from the list of the settlemet used in the editor.
-					b->RemoveElementFromSettlementsList(b->GetSettlement());
-				}
-				GameObjects[index]->ClearPass();
-			}
-			else if (GameObjects[index]->IsDecoration() == true)
-			{
-				GObject::numberOfDecorations -= 1;
-			}
-			else if (GameObjects[index]->IsUnit() == true)
-			{
-				GObject::numberOfUnits -= 1;
-			}
-			GObject::numberOfObjects -= 1;
-			delete GameObjects[index];
-		}
-		GameObjects[index] = nullptr;
-	}
-}
-
-void GObject::ResetGameObjects(void)
-{
-	//for (unsigned int i = 0; i < MAX_NUMBER_OF_OBJECTS; i++) 
-	//{
-	//	if (GObject::GameObjects[i] != nullptr)
-	//	{
-	//		delete GObject::GetObjectByID(i);
-	//	}
-	//	GObject::GameObjects[i] = nullptr;
-	//}
-	//GObject::numberOfObjects = 0;
-	//GObject::numberOfBuildings = 0;
-	//GObject::numberOfDecorations = 0;
-	//GObject::numberOfUnits = 0;
-	for (unsigned int i = 1; i < MAX_NUMBER_OF_OBJECTS; i++)
-	{
-		if (GObject::GameObjects[i] != nullptr)
-		{
-			//GObject::RemoveGameObject(GObject::GameObjects[i]->GetPickingID());
-			GObject::RemoveGameObject(i);
-		}
-	}
-	GObject::idNamesMap.clear(); //All script names can now reusable.
-	Building::ResetSettlementsList(); //No settlement.
-}
-
-GObject* GObject::GetObjectByID(const unsigned int ID)
-{
-	return (ID >= 1 && ID < MAX_NUMBER_OF_OBJECTS) ? GObject::GameObjects[ID] : nullptr;
-}
-
-vector<Building*> GObject::GetListOfBuildings(void)
-{
-	vector<Building*> buildingsList = vector<Building*>();
-	for (size_t i = 0; i < MAX_NUMBER_OF_OBJECTS; i++) 
-	{
-		if (GObject::GameObjects[i] != nullptr && GObject::GameObjects[i]->IsBuilding() == true)
-		{
-			buildingsList.push_back(GObject::GameObjects[i]->AsBuilding());
-		}
-	}
-	return buildingsList;
-}
-vector<Unit*> GObject::GetListOfUnits(void)
-{
-	vector<Unit*> unitsList = vector<Unit*>();
-	for (size_t i = 0; i < MAX_NUMBER_OF_OBJECTS; i++)
-	{
-		if (GObject::GameObjects[i] != nullptr && GObject::GameObjects[i]->IsUnit() == true)
-		{
-			unitsList.push_back(GameObjects[i]->AsUnit());
-		}
-	}
-	return unitsList;
-}
-vector<Decoration*> GObject::GetListOfDecorations(void)
-{
-	vector<Decoration*> decorationsList = vector<Decoration*>();
-	for (size_t i = 0; i < MAX_NUMBER_OF_OBJECTS; i++)
-	{
-		if (GObject::GameObjects[i] != nullptr && GObject::GameObjects[i]->IsDecoration())
-		{
-			decorationsList.push_back(GObject::GameObjects[i]->AsDecoration());
-		}
-	}
-	return decorationsList;
-}
-#pragma endregion
 
 #pragma region Protected Members
 bool GObject::CheckIfSelected(const unsigned int par_clickID)

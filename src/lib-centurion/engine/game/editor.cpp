@@ -1,5 +1,5 @@
 #include "editor.h"
-
+#include "classes/objectArray.h"
 #include "interface/editorUi.h"
 
 #include <game/strategy.h>
@@ -530,7 +530,7 @@ namespace Game
 				if (EditorWindows::AnyWindowIsOpened() == false) {
 					if (Engine::Keyboard::IsKeyPressed(GLFW_KEY_ESCAPE))
 					{
-						GObject::ResetGameObjects();
+						ObjectArray::ResetGameObjects();
 						Close();
 						return;
 					}
@@ -561,12 +561,12 @@ namespace Game
 							}
 							else
 							{
-								GObject::RemoveGameObject(b->GetPickingID());
+								ObjectArray::RemoveGameObject(b->GetPickingID());
 							}
 						}
 						else
 						{
-							GObject::RemoveGameObject(b->GetPickingID());
+							ObjectArray::RemoveGameObject(b->GetPickingID());
 						}
 					}
 				}

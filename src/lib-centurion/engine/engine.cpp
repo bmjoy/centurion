@@ -18,6 +18,7 @@
 #include <game/interface/editorWindows.h>
 
 #include <classes/unit.h>
+#include <classes/objectArray.h>
 #include <settings.h>
 #include <logger.h>
 #include <hector-lua.h>
@@ -116,7 +117,7 @@ namespace Engine
 			//if (MENU()->menu_is_created()) MENU()->reset();
 			Logger::SaveParamsXML();
 
-			GObject::ResetGameObjects();
+			ObjectArray::ResetGameObjects();
 			Menu::Clear();
 			myWindow::DeleteInstance();
 			EditorWindows::Clear();

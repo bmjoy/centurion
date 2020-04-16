@@ -24,9 +24,6 @@ class Player;
 /// <summary>
 /// (???) Tutte costanti da rivedere. Infatti dovranno essere acquisite da un file.
 /// </summary>
-#ifndef MAX_NUMBER_OF_OBJECTS
-#define MAX_NUMBER_OF_OBJECTS 100
-#endif
 
 #ifndef UNDEFINED_RACE
 #define UNDEFINED_RACE    0
@@ -344,75 +341,6 @@ public:
 	/// </summary>
 	virtual void Render(const bool picking, const unsigned int clickID = 0) = 0;
 
-	#pragma region Static members
-	/// <summary>
-	/// This function return the total number of objects that the game has been created.
-	/// </summary>
-	/// <returns>The total number of objects.</returns>
-	static unsigned int GetNumberOfObjects(void);
-
-	/// <summary>
-	/// This function return the total number of buildings that the game has been created.
-	/// </summary>
-	/// <returns>The total number of buildings.</returns>
-	static unsigned int GetNumberOfBuildings(void);
-
-	/// <summary>
-	/// This function return the total number of units that the game has been created.
-	/// </summary>
-	/// <returns>The total number of units.</returns>
-	static unsigned int GetNumberOfUnits(void);
-
-	/// <summary>
-	/// This function return the total number of decorations that the game has been created.
-	/// </summary>
-	/// <returns>The total number of decorations.</returns>
-	static unsigned int GetNumberOfDecorations(void);
-
-	/// <summary>
-	/// This function adds an object to the game.
-	/// </summary>
-	/// <param name="index">The index of the object.</param>
-	/// <param name="object">A pointer to the object.</param>
-	static void AddGameObject(const unsigned int index, GObject* object);
-
-	/// <summary>
-	/// This function removes an object from the game.
-	/// </summary>
-	/// <param name="index">The index of the objet that is waiting for its removal.</param>
-	static void RemoveGameObject(const unsigned int index);
-
-	/// <summary>
-	/// This function deletes all the objects from the game and so it even allow to reuse all script names.
-	/// </summary>
-	static void ResetGameObjects(void);
-
-	/// <summary>
-	/// This functions returns an existing object by its unique picking ID.
-	/// </summary>
-	/// <param name="ID">The picking ID of the object.</param>
-	/// <returns>A pointer to an object; if the object doesn't exist, nullptr will be returned.</returns>
-	static GObject* GetObjectByID(const unsigned int ID);
-
-	/// <summary>
-	/// This function return a list of all the buildings of the game.
-	/// </summary>
-	/// <returns>A list of buildings.</returns>
-	static std::vector<Building*> GetListOfBuildings(void);
-
-	/// <summary>
-	/// This function returns a list of all the units of the game.
-	/// </summary>
-	/// <returns>A list of units.</returns>
-	static std::vector<Unit*> GetListOfUnits(void);
-
-	/// <summary>
-	/// This function returns a list of all the decoration of the game.
-	/// </summary>
-	/// <returns>A list of decoration</returns>
-	static std::vector<Decoration*> GetListOfDecorations(void);
-	#pragma endregion
-
 	/// <summary>
 	/// Public constructor.
 	/// </summary>
@@ -472,15 +400,6 @@ private:
 	bool bIsWaterObject = false;
 	bool canBeClonedInEditor = false;
 	bool bAlwaysVisibleInGameMinimap = false;
-
-	#pragma region Static Properties
-	static unsigned int numberOfObjects;
-	static unsigned int numberOfBuildings;
-	static unsigned int numberOfUnits;
-	static unsigned int numberOfDecorations;
-	static GObject* GameObjects[MAX_NUMBER_OF_OBJECTS];
-	static std::unordered_map<std::string, unsigned int> idNamesMap;
-	#pragma endregion
 
 	#pragma region Private members
 	/// <summary>

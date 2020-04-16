@@ -195,11 +195,6 @@ public:
 	/// <param name="set"></param>
 	void RemoveElementFromSettlementsList(Settlement* set);
 
-	/// <summary>
-	/// This static function cleans common settlements list using in the editor.
-	/// </summary>
-	static void ResetSettlementsList(void);
-
 	void SetStatus(const bool bIsCreated);
 
 	/// <summary>
@@ -219,8 +214,6 @@ public:
 	/// </summary>
 	/// <returns>True if it is near; false otherwise.</returns>
 	std::tuple<bool, Settlement*> IsNearToFriendlySettlement(void);
-
-	static std::vector<Settlement*>* GetSettlementListPtr(void);
 
 	Building(void);
 	~Building(void);
@@ -251,7 +244,6 @@ private:
 	std::string ent_path;
 	std::vector<Unit> holdUnits;
 	Settlement *settlement;
-	static std::vector<Settlement*> settlementsList;
 	#pragma endregion
 	//sound selectionSound; TODO
 };

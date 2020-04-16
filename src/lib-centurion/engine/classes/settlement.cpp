@@ -1,6 +1,7 @@
 #include <game/strategy.h>
 #include <classes/settlement.h>
 #include "classes-data.h"
+#include "objectArray.h"
 
 using namespace std;
 using namespace glm;
@@ -163,16 +164,6 @@ bool Settlement::RemoveBuildingFromSettlement(Building* b)
 		bRemovedCorrectly = true;
 	}
 	return bRemovedCorrectly;
-}
-
-void Settlement::SettlementDestroy(void)
-{
-	std::vector<Building*> buildings = this->GetBuildingsBelongToSettlement();
-	for (int i = 0; i < buildings.size(); i++)
-	{
-		GObject::RemoveGameObject(buildings[i]->GetPickingID());
-	}
-	this->~Settlement();
 }
 
 #pragma region Private members:

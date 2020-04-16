@@ -12,6 +12,7 @@
 #include <game/interface/editorMenuBar.h>
 #include <game/interface/editorWindows.h>
 #include <game/game.h>
+#include <classes/objectArray.h>
 #include <classes/object.h>
 #include <classes/building.h>
 #include <classes/settlement.h>
@@ -131,7 +132,7 @@ namespace Hector
 			.addFunction("GetDisplayedName", &GObject::GetDisplayedName)
 			.addFunction("SetDisplayedName", &GObject::SetDisplayedName)
 			.addFunction("AsBuilding", &GObject::AsBuilding)
-			.addStaticFunction("Remove", &GObject::RemoveGameObject)
+			.addStaticFunction("Remove", &ObjectArray::RemoveGameObject)
 			.endClass();
 
 		getGlobalNamespace(L)
@@ -143,7 +144,6 @@ namespace Hector
 			.beginClass<Settlement>("Settlement")
 			.addFunction("GetSettlementName", &Settlement::GetSettlementName)
 			.addFunction("SetSettlementName", &Settlement::SetSettlementName)
-			.addFunction("SettlementDestroy", &Settlement::SettlementDestroy)
 			.endClass();
 
 		getGlobalNamespace(L)

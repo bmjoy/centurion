@@ -4,7 +4,8 @@
 #include <game/interface/editorMenuBar.h>
 
 #include <GLFW/glfw3.h>
-#include <../hector/hector-lua.h>
+#include <hector-lua.h>
+#include <hector-misc.h>
 
 using namespace std;
 using namespace glm;
@@ -94,7 +95,7 @@ namespace Engine
 					if (EditorMenuBar::IsOpened()) return;
 				}
 
-				if (EditorMenuBar::IsBlocked()) return;
+				if (Hector::IsInfoBoxWindowActive() || Hector::IsQuestionWindowActive()) return;
 				if (Engine::Keyboard::IsAnyDirectionalButtonNotReleased()) return;
 			}
 
