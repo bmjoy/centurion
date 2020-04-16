@@ -14,6 +14,7 @@
   <entry stringName="EDITOR_infoboxWindow" result="Editor - Information" />
   <entry stringName="EDITOR_newScenario" result="Create new scenario" />
   <entry stringName="EDITOR_newScenarioName" result="Choose a name (max 30 characters)." />
+  <entry stringName="EDITOR_settlementsAroundWhenMoving" result="Impossibile posizionare la struttura nel punto selezionato, poiché non vi sono insediamenti nelle vicinanze." />
   <entry stringName="EDITOR_noSettlementsAround" result="Unable to place the building at the selected point, as there are no nearby settlements." />
   <entry stringName="EDITOR_openScenario" result="Open scenario" />
   <entry stringName="EDITOR_properties" result="Object properties" />

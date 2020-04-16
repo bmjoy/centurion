@@ -41,6 +41,4 @@ namespace SettlementArray
 	{
 		return (unsigned int)SettlementArray::settlementsList.size();
 	}
-
-
 };

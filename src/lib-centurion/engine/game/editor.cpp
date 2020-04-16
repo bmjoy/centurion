@@ -319,7 +319,7 @@ namespace Game
 				// if i'm here it means that i'm not placing or aborting and i'm choosing the object position
 				Editor::tmpObject->SetPosition(vec3(Engine::Mouse::GetXMapCoordinate(), Engine::Mouse::GetYMapCoordinate(), 0.f));
 				Editor::tmpObject->Render(false, 0);
-				Editor::tmpObject->SendInfoText(OBJ_INFOTEXT_INSERTING);
+				Editor::tmpObject->SendInfoText();
 			}
 			catch (...)
 			{
@@ -396,7 +396,7 @@ namespace Game
 			float dx = Engine::Mouse::GetXMapCoordinate() - Editor::movingObject.StartXMouse;
 			float dy = Engine::Mouse::GetYMapCoordinate() - Editor::movingObject.StartYMouse;
 			obj->SetPosition(vec3(Editor::movingObject.ObjectXPos + dx, Editor::movingObject.ObjectYPos + dy, 0.f));
-			obj->SendInfoText(OBJ_INFOTEXT_MOVING);
+			obj->SendInfoText();
 		}
 
 		void GenerateRandomMap(const int nPlayers)

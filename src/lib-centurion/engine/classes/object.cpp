@@ -16,12 +16,6 @@
 using namespace std;
 using namespace glm;
 
-GObject::GObject(void)
-{
-	this->bSelected = false;
-	this->idName = "";
-}
-
 unsigned short int GObject::GetPlayer(void) const
 {
 	return this->playerID;
@@ -33,7 +27,7 @@ void GObject::SetPlayer(const unsigned short int par_playerID)
 	this->player = &playersList[par_playerID];
 }
 
-bool GObject::IsSelected(void)
+bool GObject::IsSelected(void) const
 {
 	return this->bSelected;
 }
@@ -246,29 +240,29 @@ void GObject::MarkAsNotMoving(void)
 	this->bIsBeingMoved = false;
 }
 
-bool GObject::IsBeingMoved(void)
+bool GObject::IsBeingMoved(void) const
 {
 	return this->bIsBeingMoved;
 }
 
-bool GObject::IsPlaceable(void)
+bool GObject::IsPlaceable(void) const
 {
 	return this->bIsPlaceable;
 }
 
-bool GObject::IsSaved(void)
+bool GObject::IsSaved(void) const
 {
-	return bIsSaved;
+	return this->bIsSaved;
 }
 
 void GObject::MarkAsSaved(void)
 {
-	bIsSaved = true;
+	this->bIsSaved = true;
 }
 
 void GObject::MarkAsNotSaved(void)
 {
-	bIsSaved = false;
+	this->bIsSaved = false;
 }
 
 void GObject::Create(const string _className, const bool _temporary)
@@ -277,6 +271,8 @@ void GObject::Create(const string _className, const bool _temporary)
 	ClassesData::SetFixedPtr(&objData);
 	objData.GetParentData(objData.GetParentClass());
 	ClassesData::SetFixedPtr(nullptr);
+	
+	this->bIsTemporary = _temporary;
 
 	// class data
 	this->SetClassName(_className);
@@ -294,7 +290,6 @@ void GObject::Create(const string _className, const bool _temporary)
 		this->UpdatePass();
 	}
 
-	//if (_temporary == true) return bObjectCreated;
 	this->SetObjectProperties(objData, _temporary);
 	if (this->IsBuilding() == true)
 	{
@@ -338,69 +333,78 @@ float GObject::get_yPos(void) const
 	return (float)position.y;
 }
 
-GObject::~GObject(void) 
+#pragma region Constructors and destructors:
+GObject::GObject(void)
 {
+	this->bSelected = false;
+	this->bIsBeingMoved = false;
+	this->idName = "";
+	this->bIsTemporary = false;
+	this->bIsPlaceable = true;
 }
 
+GObject::~GObject(void)
+{
+}
+#pragma endregion
+
 #pragma region Protected Members
+bool GObject::IsTemporary(void)
+{
+	return this->bIsTemporary;
+}
+
 bool GObject::CheckIfSelected(const unsigned int par_clickID)
 {
 	bool bSelected = (this->GetPickingID() == par_clickID);
-	MarkAsSelected(bSelected);
+	this->MarkAsSelected(bSelected);
 	return bSelected;
 }
 
-void GObject::SendInfoText(const unsigned int method)
+void GObject::SendInfoText()
 {
-	if (this->AsBuilding()->IsCentralBuilding() == true)
+	std::wstring infoText;
+	if (this->IsPlaceable() == true)
 	{
-		if (this->IsPlaceable() == true)
+		if (this->bIsTemporary == true)
 		{
-			std::wstring infoText;
-			if (method == OBJ_INFOTEXT_INSERTING)
-			{
-				infoText = TranslationsTable::GetWTranslation(Engine::Data::GetWordFromDictionaryById(0));
-			}
-			else if (method == OBJ_INFOTEXT_MOVING)
-			{
-				infoText = TranslationsTable::GetWTranslation(Engine::Data::GetWordFromDictionaryById(4));
-			}
+			infoText = TranslationsTable::GetWTranslation(Engine::Data::GetWordFromDictionaryById(0));
 			EditorUI::UpdateInfoText(infoText);
 		}
 		else
 		{
-			std::wstring infoText = TranslationsTable::GetWTranslation(Engine::Data::GetWordFromDictionaryById(1));
+			infoText = TranslationsTable::GetWTranslation(Engine::Data::GetWordFromDictionaryById(4));
 			EditorUI::UpdateInfoText(infoText);
 		}
+		
 	}
 	else
 	{
-		std::tuple near = this->AsBuilding()->IsNearToFriendlySettlement();
-		if (std::get<0>(near) == false)
+		unsigned int code = 0;
+		if (this->AsBuilding()->IsCentralBuilding() == false)
 		{
-			std::wstring infoText = TranslationsTable::GetWTranslation(Engine::Data::GetWordFromDictionaryById(2));
-			EditorUI::UpdateInfoText(infoText);
+			std::tuple near = this->AsBuilding()->IsNearToFriendlySettlement();
+			code = std::get<2>(near);
 		}
-		else
+		switch (code)
 		{
-			if (this->IsPlaceable() == true)
-			{
-				std::wstring infoText;
-				if (method == OBJ_INFOTEXT_INSERTING)
-				{
-					infoText = TranslationsTable::GetWTranslation(Engine::Data::GetWordFromDictionaryById(0));
-				}
-				else if (method == OBJ_INFOTEXT_MOVING)
-				{
-					infoText = TranslationsTable::GetWTranslation(Engine::Data::GetWordFromDictionaryById(4));
-				}
+			case 0:
+				//Inaccessibile.
+				infoText = TranslationsTable::GetWTranslation(Engine::Data::GetWordFromDictionaryById(1));
 				EditorUI::UpdateInfoText(infoText);
-			}
-			else
-			{
-				std::wstring infoText = TranslationsTable::GetWTranslation(Engine::Data::GetWordFromDictionaryById(1));
+				break;
+			case 1:
+				//Troppo lontano.
+				infoText = TranslationsTable::GetWTranslation(Engine::Data::GetWordFromDictionaryById(2));
 				EditorUI::UpdateInfoText(infoText);
-			}
+				break;
+			case 2:
+				//Troppo vicino.
+				infoText = TranslationsTable::GetWTranslation(Engine::Data::GetWordFromDictionaryById(5));
+				EditorUI::UpdateInfoText(infoText);
+				break;
+			default:
+				break;
 		}
 	}
 }

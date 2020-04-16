@@ -213,16 +213,15 @@ public:
 	/// This function checks if the current building is near to a friend (same player or allied player) settlement.
 	/// </summary>
 	/// <returns>True if it is near; false otherwise.</returns>
-	std::tuple<bool, Settlement*> IsNearToFriendlySettlement(void);
+	std::tuple<bool, Settlement*, unsigned int> IsNearToFriendlySettlement(void);
 
 	Building(void);
 	~Building(void);
-	/// <summary>
-/// Protected method that checks if the object is placeable and sets the relative protected boolean
-/// </summary>
-	void CheckIfPlaceable(void) override;
 protected:
-
+	/// <summary>
+	/// Protected method that checks if the object is placeable and sets the relative protected boolean
+	/// </summary>
+	void CheckIfPlaceable(void) override;
 private:
 	//game::ObjectUI* buildingUI;
 	bool waitingToBeErased;

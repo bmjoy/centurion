@@ -115,18 +115,6 @@ namespace ObjectArray
 
 	void ObjectArray::ResetGameObjects(void)
 	{
-		//for (unsigned int i = 0; i < MAX_NUMBER_OF_OBJECTS; i++) 
-		//{
-		//	if (ObjectArray::GameObjects[i] != nullptr)
-		//	{
-		//		delete ObjectArray::GetObjectByID(i);
-		//	}
-		//	ObjectArray::GameObjects[i] = nullptr;
-		//}
-		//ObjectArray::numberOfObjects = 0;
-		//ObjectArray::numberOfBuildings = 0;
-		//ObjectArray::numberOfDecorations = 0;
-		//ObjectArray::numberOfUnits = 0;
 		for (unsigned int i = 1; i < MAX_NUMBER_OF_OBJECTS; i++)
 		{
 			if (ObjectArray::GameObjects[i] != nullptr)
@@ -227,7 +215,8 @@ namespace ObjectArray
 
 	void Render(const bool picking, const unsigned int clickid)
 	{
-		for (int i = 1; i < MAX_NUMBER_OF_OBJECTS; i++) {
+		for (int i = 1; i < MAX_NUMBER_OF_OBJECTS; i++)
+		{
 			if (GameObjects[i] != nullptr)
 			{
 				GameObjects[i]->Render(picking, clickid);

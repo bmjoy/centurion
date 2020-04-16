@@ -28,5 +28,4 @@ namespace SettlementArray
 	void EraseSettlement(Settlement* settlPtr);
 
 	unsigned int Size(void);
-
 };

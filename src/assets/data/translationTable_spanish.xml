@@ -14,6 +14,7 @@
   <entry stringName="EDITOR_infoboxWindow" result="Editor - Información" />
   <entry stringName="EDITOR_newScenario" result="Crear nuevo escenario" />
   <entry stringName="EDITOR_newScenarioName" result="Elegir un nombre (máximo 30 caracteres)." />
+  <entry stringName="EDITOR_settlementsAroundWhenMoving" result="Impossibile posizionare la struttura nel punto selezionato, poiché non vi sono insediamenti nelle vicinanze." />
   <entry stringName="EDITOR_noSettlementsAround" result="--" />
   <entry stringName="EDITOR_openScenario" result="Abrir un escenario" />
   <entry stringName="EDITOR_properties" result="Propiedades del objeto" />

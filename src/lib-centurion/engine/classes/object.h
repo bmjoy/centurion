@@ -30,20 +30,13 @@ class Player;
 #endif 
 
 #ifndef ROMAN_RACE
-#define ROMAN_RACE    1
+#define ROMAN_RACE        1
 #endif 
 
 #ifndef EGYPTIAN_RACE
-#define EGYPTIAN_RACE    2
+#define EGYPTIAN_RACE     2
 #endif 
 
-#ifndef OBJ_INFOTEXT_INSERTING
-#define OBJ_INFOTEXT_INSERTING 0
-#endif 
-
-#ifndef OBJ_INFOTEXT_MOVING
-#define OBJ_INFOTEXT_MOVING 1
-#endif 
 
 class GObject
 {
@@ -65,7 +58,7 @@ public:
 	/// This function checks if the current object is selected.
 	/// </summary>
 	/// <returns>True if the object is selected; false otherwise.</returns>
-	bool IsSelected(void);
+	bool IsSelected(void) const;
 
 	/// <summary>
 	/// <summary>
@@ -314,22 +307,22 @@ public:
 
 	void MarkAsMoving(void);
 	void MarkAsNotMoving(void);
-	bool IsBeingMoved(void);
-	bool IsPlaceable(void);
+	bool IsBeingMoved(void) const;
+	bool IsPlaceable(void) const;
 
 	void MarkAsSaved(void);
 	void MarkAsNotSaved(void);
-	bool IsSaved(void);
+	bool IsSaved(void) const ;
 
 	/// <summary>
 	/// This function sends to editor a message that will shown in the top left of the screen.
 	/// Allowed values are OBJ_INFOTEXT_MOVING and OBJ_INFOTEXT_INSERTING.
 	/// </summary>
 	/// <param name="_className">Unsigned int representing the method; allowed values are OBJ_INFOTEXT_MOVING and OBJ_INFOTEXT_INSERTING</param>
-	void SendInfoText(const unsigned int method);
+	void SendInfoText();
 	
 	/// <summary>
-	/// This function create a specific object.
+	/// This function creates a specific object.
 	/// </summary>
 	/// <param name="_className">The class of the object.</param>
 	/// <param name="_temporary">Boolean: true = the object is temporary (e.g. an object that is being inserted in the editor)</param>
@@ -368,6 +361,8 @@ protected:
 	/// Protected and abstract method that checks if the object is placeable and sets the relative boolean.
 	/// </summary>
 	virtual void CheckIfPlaceable(void) = 0;
+
+	bool IsTemporary(void);
 	
 	/// <summary>
 	/// This function checks if the current object is the selected object (namely, if the user has done left click on it).
@@ -400,7 +395,8 @@ private:
 	bool bIsWaterObject = false;
 	bool canBeClonedInEditor = false;
 	bool bAlwaysVisibleInGameMinimap = false;
-
+	bool bIsTemporary;
+	
 	#pragma region Private members
 	/// <summary>
 	/// This functions sets the properties of the current object when it is being created. 

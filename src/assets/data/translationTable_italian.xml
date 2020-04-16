@@ -3,6 +3,7 @@
   <entry stringName="EDITOR_canAddStructure" result="Clicca con il tasto SINISTRO del mouse per posizionare la struttura nel punto desiderato. Premi il tastro DESTRO per annullare l'operazione." />
   <entry stringName="EDITOR_cancelBrush" result="Clicca con il tasto DESTRO del mouse o ESC per annullare l'operazione." />
   <entry stringName="EDITOR_canMoveStructure" result="Tieni premuto il tasto SINISTRO del mouse per spostare la struttura. Rilascia il tasto SINISTRO del mouse per annullare l'operazione." />
+
   <entry stringName="EDITOR_closingConfirmation" result="Vuoi davvero chiudere l'editor e tornare al menù principale?" />
   <entry stringName="EDITOR_defaultMapName" result="Senza titolo" />
   <entry stringName="EDITOR_deleteScenario" result="Elimina scenario" />
@@ -14,6 +15,7 @@
   <entry stringName="EDITOR_infoboxWindow" result="Editor - Informazione" />
   <entry stringName="EDITOR_newScenario" result="Crea nuovo scenario" />
   <entry stringName="EDITOR_newScenarioName" result="Scegli un nome (max 30 caratteri)." />
+  <entry stringName="EDITOR_settlementsAroundWhenMoving" result="Impossibile posizionare la struttura nel punto selezionato, poiché vicino a un altro insediamento." />
   <entry stringName="EDITOR_noSettlementsAround" result="Impossibile posizionare la struttura nel punto selezionato, poiché non vi sono insediamenti nelle vicinanze." />
   <entry stringName="EDITOR_openScenario" result="Apri uno scenario" />
   <entry stringName="EDITOR_properties" result="Proprietà dell'oggetto" />

@@ -23,7 +23,6 @@ Building::Building(void)
 	this->bIsShipyard = false;
 	this->settlement = nullptr;
 	this->SetType("cpp_buildingclass");
-	//this->SetPosition(vec3(Engine::Mouse::GetXMapCoordinate(), Engine::Mouse::GetYMapCoordinate(), 10.f));
 }
 
 Settlement *Building::GetSettlement(void) const
@@ -224,7 +223,7 @@ void Building::SetStatus(const bool bIsCreated)
 	this->bIsCreated = bIsCreated;
 }
 
-std::tuple<bool, Settlement*> Building::IsNearToFriendlySettlement(void)
+std::tuple<bool, Settlement*, unsigned int> Building::IsNearToFriendlySettlement(void)
 {
 	bool bSettlementDiscovered = false;
 	Settlement* s = nullptr;
@@ -233,16 +232,17 @@ std::tuple<bool, Settlement*> Building::IsNearToFriendlySettlement(void)
 	if (numOfSettlements == 0)
 	{
 		bSettlementDiscovered = this->bIsCentralBuilding;
-		return std::make_tuple(bSettlementDiscovered, nullptr);
+		return std::make_tuple(bSettlementDiscovered, nullptr, 0);
 	}
 	for (unsigned int settlementsCounter = 0; settlementsCounter < numOfSettlements && bSettlementDiscovered == false; settlementsCounter++)
 	{
 		Settlement* settlTemp = SettlementArray::GetSettlementById(settlementsCounter);
+
 		//Check if the building and the settlement belong to the same player and if the settlement is not indipendent.
 		if ((this->GetPlayer() != settlTemp->GetPlayer())
 			|| (settlTemp->IsIndipendent() == true))
 		{
-			return std::make_tuple(false, nullptr);
+			return std::make_tuple(false, nullptr, 3);
 		}
 
 		const vector<Building*> settBuildings = settlTemp->GetBuildingsBelongToSettlement();
@@ -264,15 +264,19 @@ std::tuple<bool, Settlement*> Building::IsNearToFriendlySettlement(void)
 		}
 		if (bSettlementDiscovered == true)
 		{
+			if (this->settlement != nullptr && this->settlement != settlTemp)
+				return std::make_tuple(false, nullptr, 2);
 			s = settlTemp;
 		}
 	}
 	if (this->bIsCentralBuilding == true)
 	{
-		if( (this->settlement == nullptr) || (this->settlement != nullptr && this->settlement->GetNumberOfBuildings() == 1 ) )
-			bSettlementDiscovered = true; 
+		if ((this->settlement == nullptr) || (this->settlement != nullptr && this->settlement->GetNumberOfBuildings() == 1))
+		{
+			bSettlementDiscovered = true;
+		}
 	}
-	return std::make_tuple(bSettlementDiscovered, s);
+	return std::make_tuple(bSettlementDiscovered, s, (unsigned int) !bSettlementDiscovered);
 }
 
 Building::~Building(void) 
