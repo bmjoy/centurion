@@ -21,6 +21,10 @@
 #define MAX_NUMBER_OF_SIMPLE_TEXT 100
 #endif 
 
+#ifndef MAX_NUMBER_OF_TEXT_BOX
+#define MAX_NUMBER_OF_TEXT_BOX 100
+#endif 
+
 #ifndef MAX_NUMBER_OF_IFRAMES
 #define MAX_NUMBER_OF_IFRAMES 100
 #endif 
@@ -116,7 +120,7 @@ namespace gui {
 		/// </summary>
 		/// <param name="id">Id of the text list</param>
 		/// <returns>Returns an element of type TextList</returns>
-		TextList* GetTextListById(unsigned int id);
+		TextList* GetTextListById(const unsigned int id);
 
 		/// <summary>
 		/// This function updates an arbitrary TextList using its ID
@@ -124,7 +128,7 @@ namespace gui {
 		/// <param name="id">The id of the text list to update</param>
 		/// <param name="_options">List of options</param>
 		/// <param name="prefix">The prefix of the text (e.g. "WORD_" if the word has a translation with this prefix)</param>
-		void UpdateTextListById(unsigned int id, std::vector<std::string>* _options, const std::string prefix = "");
+		void UpdateTextListById(const unsigned int id, std::vector<std::string>* _options, const std::string prefix = "");
 
 		/// <summary>
 		/// This function adds a specific text input to the iframe.
@@ -134,21 +138,27 @@ namespace gui {
 		/// <param name="yPos">The text input y-position, relative to the iframe y-position</param>
 		/// <param name="width">The text input width</param>
 		/// <param name="placeholderText">The placeholder text; default value is an empty string</param>
-		void AddTextInput(const int textInputId, int xPos, int yPos, const int width, std::wstring placeholderText = L"");
+		void AddTextInput(const unsigned int textInputId, int xPos, int yPos, const int width, std::wstring placeholderText = L"");
 
 		/// <summary>
 		/// This funtion gets the text input from the array using its ID.
 		/// </summary>
 		/// <param name="id">The TextInput Id</param>
 		/// <returns>Returns a pointer to the required TextInput.</returns>
-		TextInput* GetTextInputById(unsigned int id);
+		TextInput* GetTextInputById(const unsigned int id);
 
 		/// <summary>
 		/// This method updates the placeholder of the required text input, identified with its id
 		/// </summary>
 		/// <param name="id">The personal idendification value</param>
 		/// <param name="newPlaceholder">A std::string indicating the new placeholder text</param>
-		void UpdateTextInputPlaceholder(unsigned int id, std::string newPlaceholder);
+		void UpdateTextInputPlaceholder(const unsigned int id, std::string newPlaceholder);
+
+		void AddTextBox(const unsigned int textBoxId, const std::wstring& wtext, int xPos, int yPos, const int width, const int height);
+
+		TextBox* GetTextBoxById(const unsigned int id);
+
+		void UpdateTextBoxById(const unsigned int id, const std::wstring * newText);
 
 		/// <summary>
 		/// This function creates an instance of Iframe.
@@ -225,6 +235,8 @@ namespace gui {
 		/// <param name="picking">This boolean parameter enables or disables render picking. Default value is false.</param>
 		void RenderTextInputs(bool picking = false);
 
+		void RenderTextBoxes(bool picking = false);
+
 		void RenderBackgroundImages(bool picking);
 
 		/// <summary>
@@ -242,6 +254,7 @@ namespace gui {
 		std::array<SimpleText*, MAX_NUMBER_OF_SIMPLE_TEXT> listOfTexts;
 		std::array<TextList*, MAX_NUMBER_OF_TEXT_LISTS> listOfTextLists;
 		std::array<TextInput*, MAX_NUMBER_OF_TEXT_INPUTS> listOfTextInputs;
+		std::array<TextBox*, MAX_NUMBER_OF_TEXT_BOX> listOfTextBoxes;
 		Image back;
 		Image topleft;
 		Image topright;

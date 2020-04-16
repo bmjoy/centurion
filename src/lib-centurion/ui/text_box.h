@@ -33,7 +33,9 @@ namespace gui {
 		/// <param name="valign">vertical align of textbox</param>
 		/// <param name="color">color of the textbox</param>
 		/// <param name="fontWeight">font weight in textbox</param>
-		void create(std::string text, std::string font, float x, float y, float width, float height, std::string halign, std::string valign, glm::vec4 color, std::string fontWeight);
+		void create(std::wstring text, std::string font, int _x, int _y, int _width, int _height, std::string halign, std::string valign, glm::vec4 _color, std::string fontWeight);
+
+		void UpdateText(std::wstring text);
 
 		/// <summary>
 		/// this function rendere the textbox
@@ -42,8 +44,11 @@ namespace gui {
 		~TextBox();
 	private:
 		std::vector<glBitmapFont::StaticTextData> lines_data;
-		std::vector<std::string> lines;
+		std::vector<std::wstring> lines;
 		std::string hAlign, vAlign;
+		std::string fontName;
+		glm::vec4 color;
+		float x, y, width, height;
 	};
 };
 

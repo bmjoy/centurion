@@ -8,7 +8,7 @@ namespace Hector
 		struct QuestionWindowInfo
 		{
 			bool isOpened = false;
-			std::string text = "";
+			std::wstring text = L"";
 			std::string luaCmdYes = "";
 			std::string luaCmdNo = "";
 		};
@@ -16,7 +16,7 @@ namespace Hector
 		struct InfoBoxWindowInfo
 		{
 			bool isOpened = false;
-			std::string text = "";
+			std::wstring text = L"";
 		};
 
 		QuestionWindowInfo questionWindowInfo = QuestionWindowInfo();
@@ -55,7 +55,7 @@ namespace Hector
 		questionWindowInfo.isOpened = true;
 	}
 
-	void ExposeQuestionWindowText(std::string text)
+	void ExposeQuestionWindowText(std::wstring text)
 	{
 		questionWindowInfo.text = text;
 	}
@@ -65,15 +65,15 @@ namespace Hector
 		return questionWindowInfo.isOpened;
 	}
 
-	std::string GetQuestionWindowText(void)
+	std::wstring * GetQuestionWindowText(void)
 	{
-		return questionWindowInfo.text;
+		return &questionWindowInfo.text;
 	}
 
 	void ResetQuestionWindow(void)
 	{
 		questionWindowInfo.isOpened = false;
-		questionWindowInfo.text = "";
+		questionWindowInfo.text = L"";
 		questionWindowInfo.luaCmdYes = "";
 		questionWindowInfo.luaCmdNo = "";
 	}
@@ -103,7 +103,7 @@ namespace Hector
 		infoboxWindowInfo.isOpened = true;
 	}
 
-	void ExposeInfoBoxWindowText(std::string text)
+	void ExposeInfoBoxWindowText(std::wstring text)
 	{
 		infoboxWindowInfo.text = text;
 	}
@@ -113,14 +113,14 @@ namespace Hector
 		return infoboxWindowInfo.isOpened;
 	}
 
-	std::string GetInfoBoxWindowText(void)
+	std::wstring *GetInfoBoxWindowText(void)
 	{
-		return infoboxWindowInfo.text;
+		return &infoboxWindowInfo.text;
 	}
 
 	void ResetInfoBoxWindow(void)
 	{
 		infoboxWindowInfo.isOpened = false;
-		infoboxWindowInfo.text = "";
+		infoboxWindowInfo.text = L"";
 	}
 }

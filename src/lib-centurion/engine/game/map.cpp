@@ -117,7 +117,7 @@ namespace Game
 		void UnableToDeleteScenario(void)
 		{
 			Hector::EnableInfoBoxWindow();
-			Hector::ExposeInfoBoxWindowText(TranslationsTable::GetTranslation("EDITOR_unableToDelete"));
+			Hector::ExposeInfoBoxWindowText(TranslationsTable::GetWTranslation("EDITOR_unableToDelete"));
 		}
 
 		void Game::Map::SaveMapObjectsToXml(const string xmlPath)

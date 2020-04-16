@@ -48,7 +48,7 @@ namespace Hector
 	/// This function exposes the Question Window text message.
 	/// </summary>
 	/// <param name="text">Text of the message that should be contained into the Question Window. It supports only strings.</param> 
-	void ExposeQuestionWindowText(std::string text);
+	void ExposeQuestionWindowText(std::wstring text);
 
 	/// <summary>
 	/// This boolean function returns true whenever a Question Window is shown.
@@ -59,7 +59,7 @@ namespace Hector
 	/// This function returns the message text of the Question Window.
 	/// </summary>
 	/// <returns>Text message of the Question Window, expressed in std::string</returns>
-	std::string GetQuestionWindowText(void);
+	std::wstring* GetQuestionWindowText(void);
 
 	/// <summary>
 	/// This function peforms a reset of the Question Window, clearing all variables.
@@ -97,7 +97,7 @@ namespace Hector
 	/// This function exposes the Infobox Window text message.
 	/// </summary>
 	/// <param name="text">Text of the message that should be contained into the Infobox Window. It supports only strings.</param> 
-	void ExposeInfoBoxWindowText(std::string text);
+	void ExposeInfoBoxWindowText(std::wstring text);
 
 	/// <summary>
 	/// This boolean function returns true whenever a Infobox Window is shown.
@@ -108,7 +108,7 @@ namespace Hector
 	/// This function returns the message text of the Infobox Window.
 	/// </summary>
 	/// <returns>Text message of the Infobox Window, expressed in std::string</returns>
-	std::string GetInfoBoxWindowText(void);
+	std::wstring* GetInfoBoxWindowText(void);
 
 	/// <summary>
 	/// This function peforms a reset of the Infobox Window, clearing all variables.

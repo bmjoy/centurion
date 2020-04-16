@@ -13,6 +13,7 @@
       <simpleTextArray>
         <simpleText id="0" name="EDITOR_newScenarioName" xOffset="20" yOffset="80" />
       </simpleTextArray>
+      <textBoxArray></textBoxArray>
       <buttonArray>
         <button text="WORD_Create" xOffset="335" yOffset="30">
           <onclickScript>
@@ -47,6 +48,7 @@
         Iframe.GetIframeById(1):UpdateTextListById(0, _folderList)
       </openingScript>
       <simpleTextArray></simpleTextArray>
+      <textBoxArray></textBoxArray>
       <buttonArray>
         <button text="WORD_Open" xOffset="335" yOffset="30">
           <onclickScript>
@@ -82,6 +84,7 @@
       <simpleTextArray>
         <simpleText id="0" name="EDITOR_newScenarioName" xOffset="20" yOffset="80" />
       </simpleTextArray>
+      <textBoxArray></textBoxArray>
       <buttonArray>
         <button text="WORD_Save" xOffset="335" yOffset="30">
           <onclickScript>
@@ -104,8 +107,8 @@
       </textInputArray>
     </iframe>
   </editorWindow>
-  
-    <!-- DELETE MAP WINDOW -->
+
+  <!-- DELETE MAP WINDOW -->
 
   <editorWindow id="3" closeOtherWindowsWhenOpen="true">
     <iframe id="3" type="editor" title="EDITOR_deleteScenario" position="x=Engine.WindowWidth/2-w/2; y=Engine.WindowHeight/2-h/2;" size="w=400; h=370;" isOpened="false">
@@ -118,6 +121,7 @@
         Iframe.GetIframeById(3):UpdateTextListById(0, _folderList)
       </openingScript>
       <simpleTextArray></simpleTextArray>
+      <textBoxArray></textBoxArray>
       <buttonArray>
         <button text="WORD_Delete" xOffset="335" yOffset="30">
           <onclickScript>
@@ -168,6 +172,7 @@
         <simpleText id="3" name="EDITOR_propertiesDisplayedName" xOffset="20" yOffset="-140" />
         <simpleText id="4" name="EDITOR_propertiesSettlement" xOffset="20" yOffset="-170" />
       </simpleTextArray>
+      <textBoxArray></textBoxArray>
       <buttonArray>
         <button text="WORD_Close" xOffset="400" yOffset="30">
           <onclickScript>
@@ -181,7 +186,7 @@
             Selo():SetIDName(Iframe.GetIframeById(4):GetTextInputById(0):GetText())
             Selo():SetDisplayedName(Iframe.GetIframeById(4):GetTextInputById(1):GetText())
             Selo():AsBuilding():GetSettlement():SetSettlementName(Iframe.GetIframeById(4):GetTextInputById(2):GetText())
-			Editor.MarkAsEdited()
+            Editor.MarkAsEdited()
             Editor.CloseWindow(4)
           </onclickScript>
         </button>
@@ -204,7 +209,7 @@
         -- lua script
         function ConditionAddObject()
         condition1 = Keyboard.IsKeyPressed(Keyboard.KEY_LEFT_CONTROL) or Keyboard.IsKeyPressed(Keyboard.KEY_RIGHT_CONTROL)
-		    condition2 = Keyboard.IsKeyPressed(Keyboard.KEY_A)
+        condition2 = Keyboard.IsKeyPressed(Keyboard.KEY_A)
         return condition1 and condition2
         end
       </conditionScript>
@@ -219,6 +224,7 @@
         Iframe.GetIframeById(5):UpdateTextListById(2, _editorList3, "WORD_")
       </openingScript>
       <simpleTextArray></simpleTextArray>
+      <textBoxArray></textBoxArray>
       <buttonArray>
         <button text="WORD_Close" xOffset="400" yOffset="30">
           <onclickScript>
@@ -270,6 +276,7 @@
         Iframe.GetIframeById(6):UpdateTextListById(1, _editorList2, "EDITORTREE_")
       </openingScript>
       <simpleTextArray></simpleTextArray>
+      <textBoxArray></textBoxArray>
       <buttonArray>
         <button text="WORD_Close" xOffset="200" yOffset="30">
           <onclickScript>
@@ -309,6 +316,7 @@
       </openingScript>
       <simpleTextArray>
       </simpleTextArray>
+      <textBoxArray></textBoxArray>
       <buttonArray>
         <button text="WORD_Apply" xOffset="335" yOffset="30">
           <onclickScript>
@@ -329,7 +337,7 @@
       </textInputArray>
     </iframe>
   </editorWindow>
-  
+
   <!-- INFOBOX WINDOW -->
 
   <editorWindow id="98" closeOtherWindowsWhenOpen="false">
@@ -343,11 +351,13 @@
       </conditionScript>
       <openingScript>
         -- lua script
-        Iframe.GetIframeById(98):UpdateStringBySimpleTextId(0, GetInfoBoxWindowText())
+        Iframe.GetIframeById(98):UpdateTextBoxById(0, GetInfoBoxWindowText())
       </openingScript>
       <simpleTextArray>
-        <simpleText id="0" name="EDITOR_propertiesClassName" xOffset="20" yOffset="-80" />
       </simpleTextArray>
+      <textBoxArray>
+        <textBox id="0" name="" xOffset="20" yOffset="-60" width="380" height="80"/>
+      </textBoxArray>
       <buttonArray>
         <button text="WORD_Close" xOffset="335" yOffset="30">
           <onclickScript>
@@ -362,7 +372,7 @@
       </textInputArray>
     </iframe>
   </editorWindow>
-  
+
   <!-- QUESTION WINDOW -->
 
   <editorWindow id="99" closeOtherWindowsWhenOpen="false">
@@ -376,11 +386,13 @@
       </conditionScript>
       <openingScript>
         -- lua script
-        Iframe.GetIframeById(99):UpdateStringBySimpleTextId(0, GetQuestionWindowText())
+        Iframe.GetIframeById(99):UpdateTextBoxById(0, GetQuestionWindowText())
       </openingScript>
       <simpleTextArray>
-        <simpleText id="0" name="EDITOR_propertiesClassName" xOffset="20" yOffset="-80" />
       </simpleTextArray>
+      <textBoxArray>
+        <textBox id="0" name="" xOffset="20" yOffset="-60" width="380" height="80"/>
+      </textBoxArray>
       <buttonArray>
         <button text="WORD_yes" xOffset="105" yOffset="30">
           <onclickScript>
@@ -411,5 +423,5 @@
       </textInputArray>
     </iframe>
   </editorWindow>
-  
+
 </editorWindows>

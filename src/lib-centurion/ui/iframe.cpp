@@ -21,6 +21,7 @@ gui::Iframe::Iframe()
 	listOfTextLists = { nullptr };
 	listOfTextInputs = { nullptr };
 	listOfTexts = { nullptr };
+	listOfTextBoxes = { nullptr };
 
 	isOpened = false;
 	opening = false;
@@ -35,6 +36,7 @@ gui::Iframe::Iframe(string _name)
 	listOfTextLists = { nullptr };
 	listOfTextInputs = { nullptr };
 	listOfTexts = { nullptr };
+	listOfTextBoxes = { nullptr };
 
 	isOpened = false;
 	opening = false;
@@ -71,6 +73,12 @@ void gui::Iframe::Clear()
 			delete listOfTexts[i];
 		}
 		listOfTexts[i] = nullptr;
+	}
+	for (int i = 0; i < MAX_NUMBER_OF_TEXT_BOX; i++) {
+		if (listOfTextBoxes[i] != nullptr) {
+			delete listOfTextBoxes[i];
+		}
+		listOfTextBoxes[i] = nullptr;
 	}
 }
 
@@ -116,18 +124,18 @@ void gui::Iframe::AddTextList(const unsigned int textListId, int xPos, int yPos,
 	listOfTextLists[textListId] = _list;
 }
 
-gui::TextList* gui::Iframe::GetTextListById(unsigned int id)
+gui::TextList* gui::Iframe::GetTextListById(const unsigned int id)
 {
 	if (id > MAX_NUMBER_OF_TEXT_LISTS) return nullptr;
 	return listOfTextLists[id];
 }
 
-void gui::Iframe::UpdateTextListById(unsigned int id, std::vector<std::string>* _options, const std::string prefix)
+void gui::Iframe::UpdateTextListById(const unsigned int id, std::vector<std::string>* _options, const std::string prefix)
 {
 	Iframe::GetTextListById(id)->Update(_options, prefix);
 }
 
-void gui::Iframe::AddTextInput(const int textInputId, int xPos, int yPos, const int width, std::wstring placeholderText)
+void gui::Iframe::AddTextInput(const unsigned int textInputId, int xPos, int yPos, const int width, std::wstring placeholderText)
 {
 	gui::TextInput* _input = new gui::TextInput();
 	if (xPos < 0) xPos = w + xPos;
@@ -145,6 +153,27 @@ gui::TextInput* gui::Iframe::GetTextInputById(unsigned int id)
 void gui::Iframe::UpdateTextInputPlaceholder(unsigned int id, std::string newPlaceholder)
 {
 	Iframe::GetTextInputById(id)->UpdatePlaceholder(newPlaceholder);
+}
+
+void gui::Iframe::AddTextBox(const unsigned int textBoxId, const std::wstring& wtext, int xPos, int yPos, const int width, const int height)
+{
+	gui::TextBox* _tb = new gui::TextBox();
+	if (xPos < 0) xPos = w + xPos;
+	if (yPos < 0) yPos = h + yPos;
+	_tb->create(wtext, "tahoma_13px", x + xPos, y + yPos, width, height, "left", "normal", glm::vec4(255.f), "normal");
+	listOfTextBoxes[textBoxId] = _tb;
+}
+
+gui::TextBox* gui::Iframe::GetTextBoxById(const unsigned int id)
+{
+	if (id > MAX_NUMBER_OF_TEXT_BOX) return nullptr;
+	return listOfTextBoxes[id];
+}
+
+void gui::Iframe::UpdateTextBoxById(const unsigned int id, const std::wstring * newText)
+{
+	if (id > MAX_NUMBER_OF_TEXT_BOX) return;
+	listOfTextBoxes[id]->UpdateText(*newText);
 }
 
 void gui::Iframe::Create(const unsigned int _iframeId, int xPos, int yPos, int width, int height, std::wstring iframe_title)
@@ -226,6 +255,21 @@ bool gui::Iframe::CreateFromXmlElement(tinyxml2::XMLElement* iframe)
 			std::wstring wtext = (_name.empty()) ? L"" : TranslationsTable::GetWTranslation(_name);
 			this->AddText(textId, wtext, xOffset, yOffset);
 		}
+
+		// textboxes
+		for (tinyxml2::XMLElement* _it_txtBox = iframe->FirstChildElement("textBoxArray")->FirstChildElement(); _it_txtBox != NULL; _it_txtBox = _it_txtBox->NextSiblingElement())
+		{
+			int textboxId = _it_txtBox->IntAttribute("id");
+			int xOffset = _it_txtBox->IntAttribute("xOffset");
+			int yOffset = _it_txtBox->IntAttribute("yOffset");
+			int width = _it_txtBox->IntAttribute("width");
+			int height = _it_txtBox->IntAttribute("height");
+			std::string _name = _it_txtBox->Attribute("name");
+			std::wstring wtext = (_name.empty()) ? L"" : TranslationsTable::GetWTranslation(_name);
+			this->AddTextBox(textboxId, wtext, xOffset, yOffset, width, height);
+		}
+
+
 		return true;
 	}
 	catch (...)
@@ -274,6 +318,7 @@ void gui::Iframe::Render(bool picking)
 		RenderImages(picking);
 		RenderButtons(picking);
 		RenderTexts(picking);
+		RenderTextBoxes(picking);
 		RenderTextLists(picking);
 		RenderTextInputs(picking);
 		iframeTitle.render_static();
@@ -318,6 +363,16 @@ void gui::Iframe::RenderTextInputs(bool picking)
 	{
 		if (ti == nullptr) continue;
 		ti->RenderTextInput(picking);
+	}
+}
+
+void gui::Iframe::RenderTextBoxes(bool picking)
+{
+	if (picking == true) return;
+	for (auto tb : listOfTextBoxes)
+	{
+		if (tb == nullptr) continue;
+		tb->render();
 	}
 }
 

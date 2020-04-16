@@ -41,23 +41,6 @@ namespace Hector
 		L = luaL_newstate();
 		luaL_openlibs(L);
 
-		// no namespace functions
-
-		getGlobalNamespace(L)
-			.addFunction("PrCmd", &Hector::PrCmd)
-			.addFunction("ToggleWireframe", &Hector::ToggleWireframe)
-			.addFunction("ToggleGrid", &Hector::ToggleGrid)
-			.addFunction("Selo", Hector::Selo)
-			.addFunction("IsQuestionWindowActive", &Hector::IsQuestionWindowActive)
-			.addFunction("GetQuestionWindowText", &Hector::GetQuestionWindowText)
-			.addFunction("ResetQuestionWindow", &Hector::ResetQuestionWindow)
-			.addFunction("ExecuteYesCmdOfQuestionWindow", &Hector::ExecuteYesCmdOfQuestionWindow)
-			.addFunction("ExecuteNoCmdOfQuestionWindow", &Hector::ExecuteNoCmdOfQuestionWindow)
-			.addFunction("IsInfoBoxWindowActive", &Hector::IsInfoBoxWindowActive)
-			.addFunction("GetInfoBoxWindowText", &Hector::GetInfoBoxWindowText)
-			.addFunction("ResetInfoBoxWindow", &Hector::ResetInfoBoxWindow)
-			;
-
 		// variables
 
 		AddGlfwKeysToNamespace();
@@ -79,6 +62,27 @@ namespace Hector
 		getGlobalNamespace(L)
 			.beginClass<vec3>("vec3")
 			.endClass();
+
+		getGlobalNamespace(L)
+			.beginClass<wstring>("wstring")
+			.endClass();
+
+		// no namespace functions
+
+		getGlobalNamespace(L)
+			.addFunction("PrCmd", &Hector::PrCmd)
+			.addFunction("ToggleWireframe", &Hector::ToggleWireframe)
+			.addFunction("ToggleGrid", &Hector::ToggleGrid)
+			.addFunction("Selo", Hector::Selo)
+			.addFunction("IsQuestionWindowActive", &Hector::IsQuestionWindowActive)
+			.addFunction("GetQuestionWindowText", Hector::GetQuestionWindowText)
+			.addFunction("ResetQuestionWindow", &Hector::ResetQuestionWindow)
+			.addFunction("ExecuteYesCmdOfQuestionWindow", &Hector::ExecuteYesCmdOfQuestionWindow)
+			.addFunction("ExecuteNoCmdOfQuestionWindow", &Hector::ExecuteNoCmdOfQuestionWindow)
+			.addFunction("IsInfoBoxWindowActive", &Hector::IsInfoBoxWindowActive)
+			.addFunction("GetInfoBoxWindowText", Hector::GetInfoBoxWindowText)
+			.addFunction("ResetInfoBoxWindow", &Hector::ResetInfoBoxWindow)
+			;
 
 		// functions
 
@@ -168,6 +172,7 @@ namespace Hector
 			.addFunction("GetStringBySimpleTextId", &gui::Iframe::GetStringBySimpleTextId)
 			.addFunction("UpdateStringBySimpleTextId", &gui::Iframe::UpdateStringBySimpleTextId)
 			.addFunction("UpdateTextInputPlaceholder", &gui::Iframe::UpdateTextInputPlaceholder)
+			.addFunction("UpdateTextBoxById", &gui::Iframe::UpdateTextBoxById)
 			.endClass();
 	}
 

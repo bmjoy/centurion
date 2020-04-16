@@ -488,7 +488,7 @@ namespace Game
 		void AskForClosing(void)
 		{
 			Hector::EnableQuestionWindow();
-			Hector::ExposeQuestionWindowText(TranslationsTable::GetTranslation("EDITOR_closingConfirmation"));
+			Hector::ExposeQuestionWindowText(TranslationsTable::GetWTranslation("EDITOR_closingConfirmation"));
 			Hector::SetQuestionWindowYesCmd("Editor.Close()");
 			Hector::SetQuestionWindowNoCmd("");
 		}
@@ -496,7 +496,7 @@ namespace Game
 		void AskForSaving(void)
 		{
 			Hector::EnableQuestionWindow();
-			Hector::ExposeQuestionWindowText(TranslationsTable::GetTranslation("EDITOR_saveBeforeNewOperation"));
+			Hector::ExposeQuestionWindowText(TranslationsTable::GetWTranslation("EDITOR_saveBeforeNewOperation"));
 			if (Game::Map::GetName() == "") {
 				Hector::SetQuestionWindowYesCmd("OpenWindow(2)");
 			}
@@ -513,7 +513,7 @@ namespace Game
 			if (Game::GetSelectedObject()->AsBuilding()->GetSettlement() == nullptr) return;
 
 			Hector::EnableQuestionWindow();
-			Hector::ExposeQuestionWindowText(TranslationsTable::GetTranslation("EDITOR_deleteSettlement"));
+			Hector::ExposeQuestionWindowText(TranslationsTable::GetWTranslation("EDITOR_deleteSettlement"));
 			Hector::SetQuestionWindowYesCmd("Object.Remove(Selo():GetID())");
 			Hector::SetQuestionWindowNoCmd("");
 		}
