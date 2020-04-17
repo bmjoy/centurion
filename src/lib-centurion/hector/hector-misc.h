@@ -13,6 +13,7 @@
 #include <game/game.h>
 #include <logger.h>
 #include <engine.h>
+#include <vector>
 #include <string>
 
 namespace Hector
@@ -38,6 +39,11 @@ namespace Hector
 	/// </summary>
 	/// <returns>Selected game object that should be returned if is not a null pointer</returns>
 	GObject* Selo(void);
+
+	/// <summary>
+	/// This function returns the pointer to a list of races
+	/// </summary>
+	std::vector<std::string>* GetListOfRaces(void);
 
 	/// <summary>
 	/// This function enables and pops-up the Question Window.

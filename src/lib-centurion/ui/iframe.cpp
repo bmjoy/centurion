@@ -22,6 +22,7 @@ gui::Iframe::Iframe()
 	listOfTextInputs = { nullptr };
 	listOfTexts = { nullptr };
 	listOfTextBoxes = { nullptr };
+	listOfFormOptions = { nullptr };
 
 	isOpened = false;
 	opening = false;
@@ -37,6 +38,7 @@ gui::Iframe::Iframe(string _name)
 	listOfTextInputs = { nullptr };
 	listOfTexts = { nullptr };
 	listOfTextBoxes = { nullptr };
+	listOfFormOptions = { nullptr };
 
 	isOpened = false;
 	opening = false;
@@ -80,6 +82,12 @@ void gui::Iframe::Clear()
 		}
 		listOfTextBoxes[i] = nullptr;
 	}
+	for (int i = 0; i < MAX_NUMBER_OF_FORM_OPTIONS; i++) {
+		if (listOfFormOptions[i] != nullptr) {
+			delete listOfFormOptions[i];
+		}
+		listOfFormOptions[i] = nullptr;
+	}
 }
 
 void gui::Iframe::AddButton(const std::wstring& text, int xBtn, int yBtn, const std::string& luaCmd)
@@ -120,7 +128,7 @@ void gui::Iframe::AddTextList(const unsigned int textListId, int xPos, int yPos,
 	int txtListPickingId = Picking::UI::ObtainPickingID();
 	if (xPos < 0) xPos = w + xPos;
 	if (yPos < 0) yPos = h + yPos;
-	_list->Create(textListId, x + xPos, y + yPos, text_list_font, text_list_color, text_list_background, txtListPickingId, luaCmd, maxOptions, borderWidth);
+	_list->Create(x + xPos, y + yPos, text_list_font, text_list_color, text_list_background, txtListPickingId, luaCmd, maxOptions, borderWidth);
 	listOfTextLists[textListId] = _list;
 }
 
@@ -174,6 +182,28 @@ void gui::Iframe::UpdateTextBoxById(const unsigned int id, const std::wstring * 
 {
 	if (id > MAX_NUMBER_OF_TEXT_BOX) return;
 	listOfTextBoxes[id]->UpdateText(*newText);
+}
+
+void gui::Iframe::AddFormOptions(const unsigned int formOptionsId, int xPos, int yPos, const int width, const int height)
+{
+	gui::FormOptions* _fo = new gui::FormOptions();
+	int foPickingId = Picking::UI::ObtainPickingID();
+	if (xPos < 0) xPos = w + xPos;
+	if (yPos < 0) yPos = h + yPos;
+	_fo->Create(foPickingId, x + xPos, y + yPos, width, height, "tahoma_13px", glm::vec4(255), glm::vec4(0, 0, 0, 255));
+	listOfFormOptions[formOptionsId] = _fo;
+}
+
+gui::FormOptions* gui::Iframe::GetFormOptionsById(const unsigned int id)
+{
+	if (id > MAX_NUMBER_OF_FORM_OPTIONS) return nullptr;
+	return listOfFormOptions[id];
+}
+
+void gui::Iframe::UpdateFormOptionsById(const unsigned int id, std::vector<std::string>* _options, const std::string prefix)
+{
+	if (id > MAX_NUMBER_OF_FORM_OPTIONS) return;
+	listOfFormOptions[id]->UpdateOptions(_options, prefix);
 }
 
 void gui::Iframe::Create(const unsigned int _iframeId, int xPos, int yPos, int width, int height, std::wstring iframe_title)
@@ -285,6 +315,19 @@ bool gui::Iframe::CreateFromXmlElement(tinyxml2::XMLElement* iframe)
 			}
 		}
 
+		// form options
+		if (iframe->FirstChildElement("formOptionsArray") != NULL)
+		{
+			for (tinyxml2::XMLElement* _it_fopt = iframe->FirstChildElement("formOptionsArray")->FirstChildElement(); _it_fopt != NULL; _it_fopt = _it_fopt->NextSiblingElement())
+			{
+				int foId = _it_fopt->IntAttribute("id");
+				int xOffset = _it_fopt->IntAttribute("xOffset");
+				int yOffset = _it_fopt->IntAttribute("yOffset");
+				int width = _it_fopt->IntAttribute("width");
+				int height = _it_fopt->IntAttribute("height");
+				this->AddFormOptions(foId, xOffset, yOffset, width, height);
+			}
+		}
 
 		return true;
 	}
@@ -337,6 +380,7 @@ void gui::Iframe::Render(bool picking)
 		RenderTextBoxes(picking);
 		RenderTextLists(picking);
 		RenderTextInputs(picking);
+		RenderFormOptions(picking);
 		iframeTitle.render_static();
 	}
 }
@@ -392,6 +436,15 @@ void gui::Iframe::RenderTextBoxes(bool picking)
 	}
 }
 
+void gui::Iframe::RenderFormOptions(bool picking)
+{
+	for (auto fo : listOfFormOptions)
+	{
+		if (fo == nullptr) continue;
+		fo->Render(picking);
+	}
+}
+
 void gui::Iframe::RenderBackgroundImages(bool picking)
 {
 	back.render(picking, 0, 0, true);
@@ -404,6 +457,7 @@ void gui::Iframe::RenderBackgroundImages(bool picking)
 	bottomright.render(picking);
 	bottomleft.render(picking);
 }
+
 
 void gui::Iframe::ReadXml()
 {

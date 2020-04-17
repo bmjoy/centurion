@@ -83,6 +83,7 @@ namespace Hector
 			.addFunction("IsInfoBoxWindowActive", &Hector::IsInfoBoxWindowActive)
 			.addFunction("GetInfoBoxWindowText", Hector::GetInfoBoxWindowText)
 			.addFunction("ResetInfoBoxWindow", &Hector::ResetInfoBoxWindow)
+			.addFunction("GetListOfRaces", Hector::GetListOfRaces)
 			;
 
 		// functions
@@ -164,6 +165,11 @@ namespace Hector
 			.endClass();
 
 		getGlobalNamespace(L)
+			.beginClass<gui::FormOptions>("FormOptions")
+			.addFunction("GetSelectedOption", &gui::FormOptions::GetSelectedOption)
+			.endClass();
+
+		getGlobalNamespace(L)
 			.beginClass<gui::Iframe>("Iframe")
 			.addStaticFunction("GetIframeById", &gui::Iframe::GetIframeById)
 			.addFunction("GetTextListById", &gui::Iframe::GetTextListById)
@@ -173,6 +179,7 @@ namespace Hector
 			.addFunction("UpdateStringBySimpleTextId", &gui::Iframe::UpdateStringBySimpleTextId)
 			.addFunction("UpdateTextInputPlaceholder", &gui::Iframe::UpdateTextInputPlaceholder)
 			.addFunction("UpdateTextBoxById", &gui::Iframe::UpdateTextBoxById)
+			.addFunction("UpdateFormOptionsById", &gui::Iframe::UpdateFormOptionsById)
 			.endClass();
 	}
 

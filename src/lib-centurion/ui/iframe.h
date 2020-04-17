@@ -29,6 +29,10 @@
 #define MAX_NUMBER_OF_IFRAMES 100
 #endif 
 
+#ifndef MAX_NUMBER_OF_FORM_OPTIONS
+#define MAX_NUMBER_OF_FORM_OPTIONS 100
+#endif 
+
 #include <gl_items.h>
 
 #include "button.h"
@@ -160,6 +164,13 @@ namespace gui {
 
 		void UpdateTextBoxById(const unsigned int id, const std::wstring * newText);
 
+
+		void AddFormOptions(const unsigned int formOptionsId, int xPos, int yPos, const int width, const int height);
+
+		FormOptions* GetFormOptionsById(const unsigned int id);
+
+		void UpdateFormOptionsById(const unsigned int id, std::vector<std::string>* _options, const std::string prefix = "");
+
 		/// <summary>
 		/// This function creates an instance of Iframe.
 		/// </summary>
@@ -237,7 +248,10 @@ namespace gui {
 
 		void RenderTextBoxes(bool picking = false);
 
+		void RenderFormOptions(bool picking);
+
 		void RenderBackgroundImages(bool picking);
+
 
 		/// <summary>
 		/// This method reads the data contained in the XML file of the selected iframe
@@ -255,6 +269,7 @@ namespace gui {
 		std::array<TextList*, MAX_NUMBER_OF_TEXT_LISTS> listOfTextLists;
 		std::array<TextInput*, MAX_NUMBER_OF_TEXT_INPUTS> listOfTextInputs;
 		std::array<TextBox*, MAX_NUMBER_OF_TEXT_BOX> listOfTextBoxes;
+		std::array<FormOptions*, MAX_NUMBER_OF_FORM_OPTIONS> listOfFormOptions;
 		Image back;
 		Image topleft;
 		Image topright;

@@ -26,10 +26,11 @@ namespace gui {
 		minY = 0;
 		maxY = 0;
 		deltaY = 0;
+		isHidden = false;
+		isClicked = false;
 	}
 
-	void TextList::Create(int _id, int _x, int _y, string _font, vec4 _color, vec4 _backColor, int _pickingId, const std::string & luaCmd, const unsigned int _maxOptions, const unsigned int _borderWidth) {
-		id = _id;
+	void TextList::Create(int _x, int _y, string _font, vec4 _color, vec4 _backColor, int _pickingId, const std::string& luaCmd, const unsigned int _maxOptions, const unsigned int _borderWidth) {
 		x = _x;
 		y = _y;
 		font = _font;
@@ -38,10 +39,12 @@ namespace gui {
 		backColor = _backColor;
 		luaCommand = luaCmd;
 		maxOptions = _maxOptions;
-		borderWidth = _borderWidth;
+		(_borderWidth == BORDERWIDTH_DEFAULT) ? borderWidth = 50.f : borderWidth = _borderWidth;
+		isHidden = false;
+		isClicked = false;
 	}
 
-	void TextList::Update(vector<string> *_options, const std::string prefix)
+	void TextList::Update(vector<string>* _options, const std::string prefix)
 	{
 		optionsBack.clear();
 		optionsText.clear();
@@ -54,7 +57,6 @@ namespace gui {
 		border = gui::Rectangle();
 
 		float borderheight = optionsHeight * maxOptions;
-		float borderwidthvar = 0.f;
 		selectedOption = options[0];
 		for (int i = 0; i < options.size(); i++) {
 			wstring option;
@@ -71,23 +73,14 @@ namespace gui {
 			SimpleText optiontext = SimpleText("static");
 			optiontext.create_static(option, font, (float)x, _y, "left", "normal", color, "normal");
 
-			float _w = optiontext.get_width() + 10.f;
-
 			Rectangle optionback = Rectangle();
-			optionback.create("filled", (float)x - 2.f, _y, _w + 4.f, optionsHeight, "bottom-left", pickingId);
+			optionback.create("filled", (float)x - 2.f, _y, borderWidth, optionsHeight, "bottom-left", pickingId);
 
 			optionsBack.push_back(optionback);
 			optionsText.push_back(optiontext);
-
-			borderwidthvar = std::max(borderwidthvar, _w);
 		}
 
-		if (borderWidth == BORDERWIDTH_DEFAULT)
-		{
-			borderWidth = (int)borderwidthvar;
-		}
-
-		border.create("border", x - 2.f, (float)y, (float)borderWidth + 4.f, borderheight, "top-left", 0);
+		border.create("border", x - 2.f, (float)y, (float)borderWidth, borderheight, "top-left", 0);
 
 		minX = x;
 		maxX = x + (int)borderWidth;
@@ -97,17 +90,14 @@ namespace gui {
 
 	void TextList::Render(bool picking)
 	{
+		if (isHidden) return;
+
 		deltaY = 0.f;
 		if (MouseIsHover() && !picking) {
 			ScrollOptions();
 		}
 
-		if (Engine::Mouse::LeftClick && Picking::UI::GetLeftClickId() == pickingId) {
-			selectedOption = options[GetIdFromClick()];
-			Engine::Mouse::LeftClick = false;
-
-			Hector::ExecuteCommand(luaCommand);
-		}
+		IsClicked();
 
 		for (int i = 0; i < nOptions; i++) {
 
@@ -121,11 +111,11 @@ namespace gui {
 			}
 
 			else {
-				if (options[i] == selectedOption) {
-					if (i >= firstOption && i <= lastOption) {
-						optionsBack[i].render(backColor, vec4(), false);
-					}
+
+				if (i >= firstOption && i <= lastOption) {
+					optionsBack[i].render(backColor, vec4(), false);
 				}
+
 				if (i >= firstOption && i <= lastOption) {
 					optionsText[i].render_static();
 				}
@@ -162,6 +152,19 @@ namespace gui {
 		if (Engine::Mouse::GetXPosition() > maxX || Engine::Mouse::GetXPosition() < minX) return false;
 		if (Engine::Mouse::GetYPosition() > maxY || Engine::Mouse::GetYPosition() < minY) return false;
 		return true;
+	}
+
+	bool TextList::IsClicked(void)
+	{
+		if (Engine::Mouse::LeftClick && Picking::UI::GetLeftClickId() == pickingId)
+		{
+			selectedOption = options[GetIdFromClick()];
+			Hector::ExecuteCommand(luaCommand);
+			return true;
+		}
+		else {
+			return false;
+		}
 	}
 
 	TextList::~TextList() {}

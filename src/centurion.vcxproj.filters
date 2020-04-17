@@ -243,9 +243,6 @@
     <ClCompile Include="lib-centurion\engine\menu\menu.cpp">
       <Filter>Source Files\engine\menu</Filter>
     </ClCompile>
-    <ClCompile Include="lib-centurion\ui\select.cpp">
-      <Filter>Source Files\ui</Filter>
-    </ClCompile>
     <ClCompile Include="lib-centurion\ui\iframe.cpp">
       <Filter>Source Files\ui</Filter>
     </ClCompile>
@@ -365,6 +362,9 @@
     </ClCompile>
     <ClCompile Include="lib-centurion\engine\classes\objectArray.cpp">
       <Filter>Source Files\engine\classes</Filter>
+    </ClCompile>
+    <ClCompile Include="lib-centurion\ui\form_options.cpp">
+      <Filter>Source Files\ui</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -515,9 +515,6 @@
     <ClInclude Include="lib-centurion\ui\text_input.h">
       <Filter>Header Files\ui</Filter>
     </ClInclude>
-    <ClInclude Include="lib-centurion\ui\select.h">
-      <Filter>Header Files\ui</Filter>
-    </ClInclude>
     <ClInclude Include="lib-centurion\ui\iframe.h">
       <Filter>Header Files\ui</Filter>
     </ClInclude>
@@ -640,6 +637,9 @@
     </ClInclude>
     <ClInclude Include="lib-centurion\engine\classes\settlementArray.h">
       <Filter>Header Files\engine\classes</Filter>
+    </ClInclude>
+    <ClInclude Include="lib-centurion\ui\form_options.h">
+      <Filter>Header Files\ui</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

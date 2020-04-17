@@ -1,6 +1,9 @@
 #include "hector-misc.h"
 #include "hector-lua.h"
 
+using namespace std;
+using namespace glm;
+
 namespace Hector
 {
 	namespace
@@ -19,6 +22,7 @@ namespace Hector
 			std::wstring text = L"";
 		};
 
+		vector<string> listOfStrings = vector<string>();
 		QuestionWindowInfo questionWindowInfo = QuestionWindowInfo();
 		InfoBoxWindowInfo infoboxWindowInfo = InfoBoxWindowInfo();
 	};
@@ -48,6 +52,14 @@ namespace Hector
 	GObject * Selo(void)
 	{
 		return Game::GetSelectedObject();
+	}
+
+	vector<string>* GetListOfRaces(void)
+	{
+		listOfStrings.clear();
+		listOfStrings.push_back("Egypt");
+		listOfStrings.push_back("Rome");
+		return &listOfStrings;
 	}
 
 	void EnableQuestionWindow(void)

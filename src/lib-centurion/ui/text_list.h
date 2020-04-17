@@ -34,12 +34,6 @@ namespace gui {
 		TextList();
 
 		/// <summary>
-		/// This function gets the TextList Id
-		/// </summary>
-		/// <returns>The ID</returns>
-		int GetId() { return id; }
-
-		/// <summary>
 		/// This function gets the selected option
 		/// </summary>
 		/// <returns>Returns the selected option, a std::string.</returns>
@@ -48,7 +42,6 @@ namespace gui {
 		/// <summary>
 		/// This function creates the text list
 		/// </summary>
-		/// <param name="_id">Array ID that contains the list</param>
 		/// <param name="_x">X position of the list</param>
 		/// <param name="_y">Y position of the list</param>
 		/// <param name="_font">Font of the text in the list</param>
@@ -58,7 +51,7 @@ namespace gui {
 		/// <param name="luaCmd">LUA command that should be executed. It supports only const string and the default value is empty</param>
 		/// <param name="_maxOptions">Max number of options in the list</param>
 		/// <param name="_borderWidth">Border thickness of the list</param>
-		void Create(int _id, int _x, int _y, std::string _font, glm::vec4 _color, glm::vec4 _backColor, int _pickingId, const std::string & luaCmd = "", const unsigned int _maxOptions = MAX_OPTIONS_DEFAULT, const unsigned int _borderWidth =  BORDERWIDTH_DEFAULT);
+		void Create(int _x, int _y, std::string _font, glm::vec4 _color, glm::vec4 _backColor, int _pickingId, const std::string & luaCmd = "", const unsigned int _maxOptions = MAX_OPTIONS_DEFAULT, const unsigned int _borderWidth =  BORDERWIDTH_DEFAULT);
 
 		/// <summary>
 		/// This function updates the text list
@@ -72,6 +65,14 @@ namespace gui {
 		/// </summary>
 		/// <param name="picking">Boolean: true = picking, false = normal rendering.</param>
 		void Render(bool picking);
+
+		void Hide(void) { isHidden = true; }
+
+		void Show(void) { isHidden = false; }
+
+		bool IsHidden(void) { return isHidden; }
+
+		bool IsClicked(void);
 
 		~TextList();
 
@@ -95,7 +96,9 @@ namespace gui {
 		int nOptions;
 		int maxOptions;
 		int firstOption, lastOption;
-		int id;
+
+		bool isHidden;
+		bool isClicked;
 
 		// variables for scroll
 		int minX, maxX, minY, maxY;

@@ -295,6 +295,8 @@
       </conditionScript>
       <openingScript>
         -- lua script
+        _listOfRaces = GetListOfRaces();
+        Iframe.GetIframeById(7):UpdateFormOptionsById(0, _listOfRaces, "RACE_")
       </openingScript>
       <buttonArray>
         <button text="WORD_Apply" xOffset="335" yOffset="30">
@@ -311,6 +313,9 @@
           </onclickScript>
         </button>
       </buttonArray>
+      <formOptionsArray>
+        <formOptions id="0" xOffset="20" yOffset="-30" width="50" height="20" />
+      </formOptionsArray>
     </iframe>
   </editorWindow>
 

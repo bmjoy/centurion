@@ -13,7 +13,7 @@
 
 #include "button.h"
 #include "circle.h"
-#include "select.h"
+#include "form_options.h"
 #include "image.h"
 #include "rectangle.h"
 #include "simple_text.h"

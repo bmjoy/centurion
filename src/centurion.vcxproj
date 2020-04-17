@@ -258,7 +258,7 @@ XCOPY "$(ProjectDir)lua53.dll" "$(ProjectDir)$(OutDir)"</Command>
     <ClCompile Include="lib-centurion\ui\circle.cpp" />
     <ClCompile Include="lib-centurion\ui\iframe.cpp" />
     <ClCompile Include="lib-centurion\ui\text_list.cpp" />
-    <ClCompile Include="lib-centurion\ui\select.cpp" />
+    <ClCompile Include="lib-centurion\ui\form_options.cpp" />
     <ClCompile Include="lib-centurion\ui\image.cpp" />
     <ClCompile Include="lib-centurion\ui\rectangle.cpp" />
     <ClCompile Include="lib-centurion\ui\simple_text.cpp" />
@@ -325,7 +325,7 @@ XCOPY "$(ProjectDir)lua53.dll" "$(ProjectDir)$(OutDir)"</Command>
     <ClInclude Include="lib-centurion\ui\circle.h" />
     <ClInclude Include="lib-centurion\ui\iframe.h" />
     <ClInclude Include="lib-centurion\ui\text_list.h" />
-    <ClInclude Include="lib-centurion\ui\select.h" />
+    <ClInclude Include="lib-centurion\ui\form_options.h" />
     <ClInclude Include="lib-centurion\ui\image.h" />
     <ClInclude Include="lib-centurion\ui\rectangle.h" />
     <ClInclude Include="lib-centurion\ui\simple_text.h" />
